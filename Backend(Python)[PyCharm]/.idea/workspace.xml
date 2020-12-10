@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab526c90-b1ea-403e-abf8-96e1a93bc1fa" name="Default Changelist" comment="" />
+    <list default="true" id="ab526c90-b1ea-403e-abf8-96e1a93bc1fa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Backend(Python)[PyCharm].iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Backend(Python)[PyCharm].iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Code.exe.lnk" beforeDir="false" afterPath="$PROJECT_DIR$/../Code.exe.lnk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PyCharm Community Edition 2020.3 x64.lnk" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
