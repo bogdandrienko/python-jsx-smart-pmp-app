@@ -1,0 +1,31 @@
+# Visual Studio Code
+ # addons:  
+    atishay-jain.all-autocomplete      
+    formulahendry.auto-close-tag
+    formulahendry.auto-complete-tag
+    formulahendry.auto-rename-tag
+    hookyqr.beautify
+    formulahendry.code-runner
+    ms-azuretools.vscode-docker
+    mrcrowl.easy-less
+    dbaeumer.vscode-eslint
+    wix.vscode-import-cost
+    xabikos.javascriptsnippets
+    dbaeumer.jshint
+    ritwickdey.liveserver
+    slevesque.vscode-multiclip
+    eg2.vscode-npm-script
+    ionutvmi.path-autocomplete
+    esbenp.prettier-vscode
+    xabikos.reactsnippets
+    syler.sass-indented
+    vscode-icons-team.vscode-icons
+    
+        npm; 
+        node.js;
+
+#Git
+#GithubDesktop
+
+#Операторы: "https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table"
+#Сборник HTML, CSS, JavaScript/jQuery компонентов "https://nisnom.com/"

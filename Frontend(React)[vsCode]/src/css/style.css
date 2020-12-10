@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+body {
+  font: 12px/18px Arial, sans-serif;
+  height: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  min-width: 360px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+.header {
+  height: 200px;
+  background: #FFE680;
+}
+
+.middle {
+  width: 100%;
+  padding: 0 0 100px;
+  position: relative;
+}
+
+.middle:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+.container {
+  width: 100%;
+  float: left;
+  overflow: hidden;
+}
+
+.content {
+  padding: 0 0 0 220px;
+}
+
+.left-sidebar {
+  float: left;
+  width: 200px;
+  margin-left: 0 auto;
+  position: relative;
+  background: #B5E3FF;
+}
+
+.right-sidebar {
+  float: right;
+  width: 200px;
+  margin-left: auto;
+  position: relative;
+  background: #B5E3FF;
+}
+
+.footer {
+  margin: -100px auto 0;
+  min-width: 360px;
+  height: 100px;
+  background: #BFF08E;
+  position: relative;
+}
+
+.text-area {
+  margin: 0 auto 0;
+  min-width: 200px;
+  min-height: 100px;
+  background: #fff;
+  position: relative;
+}
+
+.btn {
+  margin: 0 auto 0;
+  min-width: 100px;
+  min-height: 50px;
+  background: #000;
+  position: relative;
+}
