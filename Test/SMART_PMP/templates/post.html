@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>SMART-PMP</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type="text/css">
@@ -28,7 +28,7 @@
         align-items: center;     /*Центрирование по вертикали */
     }
     textarea {
-        width: 300px;
+        width: 200px;
         margin: 2em;
         padding: 2em;
         background-color: #fdfdff;
@@ -45,7 +45,7 @@
         display: flex;
         justify-content: center; /*Центрирование по горизонтали*/
         align-items: center;     /*Центрирование по вертикали */
-        font-size: 30px;
+        font-size: 20px;
     }    
     a:link, a:visited {
         color: #38488f;
@@ -60,13 +60,14 @@
     }
     </style>
 </head>
-<body>
-<div>
-    <textarea placeholder="Введите что-нибудь"></textarea>
-</div>
-<div>
-<button>Click me!</button>
-</div>
 
+<body>
+<form action="{% url 'get' %}">
+    <div>
+        <textarea placeholder="Введите что-нибудь" name="usertext"></textarea>
+        <br><br>
+        <input type="submit" value="get"></input>
+    </div>
+</form>
 </body>
 </html>
