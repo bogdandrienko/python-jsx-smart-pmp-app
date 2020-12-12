@@ -2,25 +2,42 @@
 <html lang="en">
     {% load static %}
 
+    <!-- Head -->
     <head>
+
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>SMART Project Manager Platform (PMP)</title>
+
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+        <!-- Not Optimizated Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">       
+
+        <!-- Not Optimizated Bootstrap CSS -->
+        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.css' %}">  -->
+
+        <!-- Optimizated Bootstrap CSS -->
+        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.min.css' %}">  -->
     </head>
 
     <body>
-        <div>
-            <p>{{ user_text }}</p>
-            <button id="btn">Alarm!</button>
+        <div class="container-fluid">
+            <div>
+                <p>{{ user_text }}</p>
+                <button id="btn">Alarm!</button>
+            </div>
         </div>
 
-        <!-- Custom JavaScript -->
+        <!-- Not Optimizated Custom JavaScript -->
         <script src="{% static 'js/custom.js' %}"></script>
-    </body>
 
+        <!-- Not Optimizated Bootstrap JavaScript -->
+        <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.js' %}"></script> -->
+
+        <!-- Optimizated Bootstrap JavaScript -->
+        <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.min.js' %}"></script>        -->
+    </body>
 </html>
