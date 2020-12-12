@@ -9,12 +9,12 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
 from pathlib import Path
+
+from django.urls.conf import path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -123,8 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-MEDIA_ROOT = 'media'
-
 MEDIA_URL = '/media/'
-
+STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
+#STATIC_ROOT = Path(BASE_DIR, 'static/css')
+MEDIA_ROOT = Path(BASE_DIR, 'media')

@@ -16,11 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from polls import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('about/', views.about),
-    path('', views.home),
+    path('admin/', admin.site.urls, name='admin'),
+    path('', views.home, name='home'),
     path('post/', views.post, name='post'),
-    path('post/get', views.get, name='get'),
-]
+    path('post/get/', views.get, name='get'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

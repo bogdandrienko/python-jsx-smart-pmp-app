@@ -1,91 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SMART-PMP</title>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style type="text/css">
-    body {
-        background-color: #f0f0f2;
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-    }
-    div {
-        width: 600px;
-        margin: 5em auto;
-        padding: 2em;
-        background-color: #fdfdff;
-        border-radius: 1.5em;
-        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
-    }
-    a:link, a:visited {
-        color: #38488f;
-        text-decoration: none;
-    }
-    @media (max-width: 700px) {
-        div {
-            margin: 0 auto;
-            width: auto;
-        }
-    }
-    </style>
-</head>
-<body>
-<div>
-    <h1>Example Domain</h1>
-    <p>This domain is for use in illustrative examples in documents. You may use this
-    domain in literature without prior coordination or asking for permission.</p>
-    <p><a href="https://trello.com/eeveecycle/boards">More information...</a></p>
-</div>
-<div class="my-div">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus massa id est tincidunt laoreet. 
-        Pellentesque a viverra est. Phasellus lobortis scelerisque diam dictum scelerisque. Praesent elit sapien, 
-        suscipit at augue ac, ultrices sagittis felis. Aliquam id vehicula erat. Mauris pretium neque eget convallis congue. 
-        Curabitur blandit libero et gravida porttitor. Mauris ut felis a mi pharetra placerat. Pellentesque id placerat elit, 
-        nec vehicula libero. Etiam ut consequat diam, ac commodo lectus. Pellentesque hendrerit neque a pharetra placerat. 
-        Nullam quis elementum mi. Nam pellentesque at ligula in ultricies. Nullam eu sagittis ligula, ac aliquet mi. 
-        Pellentesque non justo orci.</p>
-    <p>Duis imperdiet porta arcu. Nunc justo lorem, ornare dictum pulvinar a, ultricies ut nibh. In hendrerit urna malesuada 
-        feugiat fermentum. Vivamus porttitor, lacus eget accumsan dapibus, mauris lectus facilisis tortor, elementum luctus 
-        tortor est ac augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nunc vel 
-        nisl est. Suspendisse fermentum, risus sed volutpat lacinia, diam ex suscipit tortor, ac scelerisque nibh felis ut nibh. 
-        Mauris bibendum, magna et hendrerit ullamcorper, mauris urna finibus nunc, non aliquam metus nisi et nulla. Fusce semper 
-        feugiat interdum.</p>
-    <p>Sed maximus sollicitudin eros ut commodo. Phasellus rutrum tortor nec diam eleifend, ac consequat orci tempus. Quisque 
-        efficitur, sem sit amet ullamcorper faucibus, tellus sapien pharetra leo, consequat auctor mauris justo ac orci. 
-        Vestibulum vulputate, mauris in congue cursus, arcu nunc laoreet enim, in maximus purus turpis sit amet libero. 
-        Suspendisse interdum fermentum fringilla. In hac habitasse platea dictumst. Sed viverra risus id nisi mattis, nec 
-        pulvinar leo varius. Quisque bibendum dignissim nisl nec iaculis. Vivamus in interdum lorem. Praesent tempus a tortor 
-        et venenatis. Aenean dignissim dignissim gravida. Nam interdum lobortis orci, vel cursus nulla dignissim ut. Nulla 
-        facilisi.</p>
-    <p>Aenean condimentum, enim in finibus varius, nibh lectus malesuada tortor, in pellentesque velit nisl quis orci. 
-        Vestibulum eget convallis tellus. Nam finibus risus sit amet dui ultricies, quis malesuada magna sagittis. Sed accumsan 
-        dignissim molestie. Sed sollicitudin sollicitudin risus, sit amet tincidunt ante congue ac. Pellentesque fermentum 
-        tincidunt felis, eget fringilla lectus hendrerit sit amet. Aenean vitae ante rutrum, maximus dolor non, imperdiet eros. 
-        Quisque sapien dolor, pulvinar nec volutpat vitae, accumsan eu elit. Praesent vehicula consequat libero ac egestas. 
-        Curabitur eu condimentum lorem, vitae tincidunt magna. Proin in sapien leo. Ut tempor, urna quis sodales laoreet, nibh 
-        tellus blandit ligula, quis congue felis quam luctus metus. In hac habitasse platea dictumst. Suspendisse in accumsan 
-        leo, id volutpat orci. Proin lacinia ex a molestie molestie.</p>
-    <p>Nunc et ullamcorper libero, et accumsan est. Ut id elementum est, vel imperdiet massa. Maecenas sodales rutrum erat, a 
-        finibus mi posuere vitae. Fusce et tincidunt ante. Cras at lacinia urna. Nullam a ligula sed dolor vulputate dignissim 
-        ac eu nibh. Mauris egestas elementum lacus, nec cursus ligula fermentum id. Vivamus elementum diam id ligula volutpat, 
-        ac posuere lorem maximus. Aliquam in pharetra metus. Duis volutpat turpis sed nisl accumsan consectetur. In elit risus, 
-        laoreet ac molestie vel, iaculis ac velit. Nulla facilisi. Phasellus et ultricies ligula, vitae suscipit nibh. Quisque 
-        in lectus quis magna elementum laoreet ut vel ipsum.</p>
+    {% load static %}
+    
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SMART Project Manager Platform (PMP)</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap_5/bootstrap.css' %}">
+    </head>
 
 
-    <h1>Header</h1>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">PMP</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Домой</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Связь</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Выпадающее окно
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Действие</a></li>
+                        <li><a class="dropdown-item" href="#">Другое действие</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Тут может что-то быть</a></li>
+                    </ul>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Отключено</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-3" type="search" placeholder="Что ищем?" aria-label="Что ищем?">
+                    <button class="btn btn-outline-light" type="submit">Поиск</button>
+                </form>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Bootstrap JavaScript -->
+        <script src="{% static 'js/bootstrap_5/bootstrap.js' %}"></script>
+    </body>
 
-    <ol reversed class="intro"; type="a">
-        <li>first</li>
-        <li>second</li>
-        <li>third</li>
-        <li>fourth</li>
-        <li>fifth</li>
-    </ol>
-</div>
-</body>
 </html>
