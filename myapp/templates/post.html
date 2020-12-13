@@ -1,46 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}
+{% extends "base_third.html" %}
+{% load static %}
 
-    <!-- Head -->
-    <head>
+<!-- Title -->
+{% block second_title %}Страница отправки запроса{% endblock second_title %}
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SMART Project Manager Platform (PMP)</title>
+<!-- Btn-Group -->
+{% block second_btn-group %}
+<a href="#" class="btn btn-light active" aria-current="page">Активно</a>
+<a href="#" class="btn btn-secondary">Переключить</a>
+<a href="#" class="btn btn-secondary">Переключить</a>
+{% endblock second_btn-group %}
 
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
-
-        <!-- Not Optimizated Custom CSS -->
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}">       
-
-        <!-- Not Optimizated Bootstrap CSS -->
-        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.css' %}">  -->
-
-        <!-- Optimizated Bootstrap CSS -->
-        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.min.css' %}">  -->
-    </head>
-
-    <body>
-        <div class="container-fluid">
-            <form action="{% url 'get' %}">
-                <div>
-                    <textarea placeholder="Введите что-нибудь" name="usertext"></textarea>
-                    <br><br>
-                    <input type="submit" value="get"></input>
-                </div>
-            </form>
+<!-- Main -->
+{% block second_main %}
+<div class="container-fluid">
+    <form action="{% url 'get' %}">
+        <div class="m-4 p-4">
+            <textarea placeholder="Введите что-нибудь" name="usertext"></textarea>
+            <br><br>
+            <input type="submit" value="отправить"></input>
         </div>
-
-        <!-- Not Optimizated Custom JavaScript -->
-        <script src="{% static 'js/custom.js' %}"></script>
-
-        <!-- Not Optimizated Bootstrap JavaScript -->
-        <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.js' %}"></script> -->
-
-        <!-- Optimizated Bootstrap JavaScript -->
-        <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.min.js' %}"></script>        -->
-    </body>
-</html>
+    </form>
+</div>
+{% endblock second_main %}
