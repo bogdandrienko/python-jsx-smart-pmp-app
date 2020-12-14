@@ -1,4 +1,4 @@
-{% extends "base_second.html" %}
+{% extends "base/base_second.html" %}
 {% load static %}
 
 <!-- Head -->
@@ -14,7 +14,7 @@
 {% block second_header %} 
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
-      <a class="navbar-brand" href="#">PMP</a>
+      <a class="navbar-brand" href="{% url 'home' %}">ГЛАВНАЯ</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -22,13 +22,28 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Домой</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'personal' %}">ЛИЧНЫЙ КАБИНЕТ</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Связь</a>
+                    <a class="nav-link" href="{% url 'news' %}">НОВОСТИ</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">В разработке</a>
+                    <a class="nav-link" href="{% url 'human_resources_management_service' %}">СЛУЖБА УПРАВЛЕНИЯ ПЕРСОНАЛОМ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'project_managment' %}">УПРАВЛЕНИЕ ПРОЕКТАМИ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">СТАНДАРТЫ ПРЕДПРИЯТИЯ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">ЧАТ-БОТ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">ЧАТ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted" href="http://127.0.0.1:8000/admin/" tabindex="-1" aria-disabled="true">administration</a>
                 </li>
           </ul>
             <!-- Btn-Group -->
