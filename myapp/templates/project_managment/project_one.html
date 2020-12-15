@@ -24,6 +24,7 @@
 </div>
 
 {% for event in events.all %}
+{% if forloop.first %}
 <hr>
 <div class="row">
     <div class="col-md-auto mx-auto">
@@ -40,5 +41,8 @@
         </div>
     </div>
 </div>
+{% else %}
+{% endif %}
 {% endfor %}
+
 {% endblock second_main %}
