@@ -1,0 +1,40 @@
+{% extends "base/base_third.html" %}
+{% load static %}
+
+<!-- Title -->
+{% block second_title %}Страница отправки запроса{% endblock second_title %}
+
+<!-- Btn-Group -->
+{% block second_btn-group %}
+<a href="http://127.0.0.1:8000/admin/" class="btn btn-light active" aria-current="page">Добавить</a>
+<a href="{% url 'project_one' %}" class="btn btn-secondary">Показать один</a>
+<a href="{% url 'project_all' %}" class="btn btn-secondary">Показать все</a>
+{% endblock second_btn-group %}
+
+<!-- Main -->
+{% block second_main %}
+<div class="container-fluid">
+    <div class="m-4 p-4">
+        <p class="text-dark">{{ user_text }}</p>
+        <button id="button">Получено!</button>
+    </div>
+</div>
+{% for event in events.all %}
+<hr>
+<div class="row">
+    <div class="col-md-auto mx-auto">
+        <div class="container-fluid">
+            <article class="blog-post">
+                <h2 class="blog-post-title">{{ event.title }}</h2>
+                <p class="blog-post-meta">{{ event.date }}</p>
+                <ul>
+                    <li>{{ event.text }}</г>
+                    <li>{{ event.text }}</li>
+                </ul>
+                <img src="{{ event.image.url }}" width="500" alt="{{ event.image.url }}">
+            </article>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock second_main %}

@@ -1,0 +1,48 @@
+{% extends "base/base_third.html" %}
+{% load static %}
+
+<!-- Title -->
+{% block second_title %}Страница получения запроса{% endblock second_title %}
+
+<!-- Btn-Group -->
+{% block second_btn-group %}
+<a href="http://127.0.0.1:8000/admin/" class="btn btn-light active" aria-current="page">Добавить</a>
+<a href="{% url 'project_one' %}" class="btn btn-secondary">Показать один</a>
+<a href="{% url 'project_all' %}" class="btn btn-secondary">Показать все</a>
+{% endblock second_btn-group %}
+
+<!-- Main -->
+{% block second_main %}
+<div class="container-fluid">
+    <form action="{% url 'project_all' %}">
+        <div class="m-4 p-4">
+            <textarea placeholder="Введите что-нибудь" name="usertext"></textarea>
+            <br><br>
+            <input type="submit" value="отправить"></input>
+        </div>
+    </form>
+</div>
+
+{% for event in events.all %}
+{% if forloop.first %}
+<hr>
+<div class="row">
+    <div class="col-md-auto mx-auto">
+        <div class="container-fluid">
+            <article class="blog-post">
+                <h2 class="blog-post-title">{{ event.title }}</h2>
+                <p class="blog-post-meta">{{ event.date }}</p>
+                <ul>
+                    <li>{{ event.text }}</li>
+                    <li>{{ event.text }}</li>
+                </ul>
+                <img src="{{ event.image.url }}" width="500" alt="">
+            </article>
+        </div>
+    </div>
+</div>
+{% else %}
+{% endif %}
+{% endfor %}
+
+{% endblock second_main %}
