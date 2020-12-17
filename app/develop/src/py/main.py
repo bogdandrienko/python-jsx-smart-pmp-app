@@ -131,11 +131,8 @@
 # print(circle_1.circle_reference)
 # print(circle_1.get_circle_reference())
 #
-
-def i_am_a_loop(value, multiplayer):
-    while value > multiplayer:
-        value = value - multiplayer
-    return value
-
-
-print(i_am_a_loop(29, 3))
+# def i_am_a_loop(value, multiplayer):
+#     while value > multiplayer:
+#         value = value - multiplayer
+#     return value
+# print(i_am_a_loop(29, 3))

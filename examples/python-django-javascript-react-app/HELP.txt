@@ -1,0 +1,4 @@
+Установить Python (https://www.python.org/) и все настройки при установке в директорию C:\Projects\Python\Python-{% Версия пайтона %}.
+Установить Pip installer(https://pypi.org/), если не был установлен при предыдущих установках.
+Установить Django (https://www.djangoproject.com/).
+Установить IDE: Visual Studio Code(https://code.visualstudio.com/).
