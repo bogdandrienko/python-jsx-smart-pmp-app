@@ -1,0 +1,30 @@
+Установить IDE: Visual Studio Code(https://code.visualstudio.com/), зарегистрироваться и подключить все расширения.
+Установить Python (https://www.python.org/) и все настройки при установке в директорию C:\Projects\Python\Python- "версия_пайтона".
+Установить Nodejs (https://nodejs.org/)
+Установить Pip installer(https://pypi.org/), если не был установлен при предыдущих установках.
+Установить Расширение pip 'env'(виртуальное окружение)- 'pip install env'. 
+Установить PostgreSQL(https://www.postgresql.org/) и все настройки и пароль при установке в директорию C:\Project\Envire\PostgreSQL- "версия_postgre".
+
+Django: 
+Активировать виртуальное окружение в нужной папке - 'python -m venv env'
+Установить Django и Django REST Framework - 'pip install django djangorestframework'.
+Установить дополниения - 'pip install psycopg2 Pillow'
+Создать новый проект Django - 'django-admin startproject "имя_нового_проекта"'.
+Создать дополнительное приложение Django - 'django-admin startapp "имя_нового_приложения"'.
+Настроить, создать и установить миграции в проект - 'python manage.py makemigrations "имя_приложения"'. Применить миграции - 'python manage.py migrate'.
+Создать пользователя - 'python manage.py createsuperuser'.
+
+React:
+Создать виртуальное окружение в нужной папке - 'npm init -y'
+
+npm i webpack webpack-cli --save-dev
+
+npm i @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
+
+npm i react react-dom --save-dev
+
+Команды django server: 
+Start server: 'python manage.py runserver'
+Make migrate changes: 'python manage.py makemigrations'
+Migrate changes: 'python manage.py migrate'
+Stop server: 'Ctrl+c'
