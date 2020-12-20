@@ -4,6 +4,7 @@
 Установить Pip installer(https://pypi.org/), если не был установлен при предыдущих установках.
 Установить Расширение pip 'env'(виртуальное окружение)- 'pip install env'. 
 Установить PostgreSQL(https://www.postgresql.org/) и все настройки и пароль при установке в директорию C:\Project\Envire\PostgreSQL- "версия_postgre".
+СОздать базу данных postgresql: 'CREATE DATABASE "имя_базы_данных";'
 
 Django: 
 Активировать виртуальное окружение в нужной папке - 'python -m venv env'
