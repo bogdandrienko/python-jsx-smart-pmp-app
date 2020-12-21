@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django REST with React</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    </head>
+
+    <body>
+        <div id="app">
+            <!-- React will load here -->
+        </div>
+    <!-- Not Optimizated Custom JavaScript -->
+    <script src="{% static 'js/index.js' %}"></script>
+    </body>
+</html>
