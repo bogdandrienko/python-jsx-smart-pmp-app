@@ -6,18 +6,16 @@
 
 <!-- Btn-Group -->
 {% block second_btn-group %}
-<a href="#" class="btn btn-light active" aria-current="page">Основа</a>
-<a href="#" class="btn btn-secondary">Подменю#1</a>
-<a href="#" class="btn btn-secondary">Подменю#2</a>
+<a href="{% url 'personal' %}" class="btn btn-light active" aria-current="page">Основа</a>
+<a href="{% url 'personal_sub_first' %}" class="btn btn-secondary">Подменю#1</a>
+<a href="{% url 'personal_sub_second' %}" class="btn btn-secondary">Подменю#2</a>
 {% endblock second_btn-group %}
 
 <!-- Main -->
 {% block second_main %}
 <div class="container-fluid">
-  <p class="text-muted">тут будет</p>
   <hr>
   <h1>Личный кабинет - Основа</h1>
   <hr>
-  <p class="text-muted">а пока что этот текст</p>
 </div>
 {% endblock second_main %}

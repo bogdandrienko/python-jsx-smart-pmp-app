@@ -8,7 +8,7 @@
 Django: 
 Активировать виртуальное окружение в нужной папке - 'python -m venv env'
 Установить Django и Django REST Framework - 'pip install django djangorestframework'.
-Установить дополниения - 'pip install psycopg2 Pillow'
+Установить дополниения - 'pip install psycopg2 Pillow django-rest-knox'
 Создать новый проект Django - 'django-admin startproject "имя_нового_проекта"'.
 Создать дополнительное приложение Django - 'django-admin startapp "имя_нового_приложения"'.
 Настроить, создать и установить миграции в проект - 'python manage.py makemigrations "имя_приложения"'. Применить миграции - 'python manage.py migrate'.

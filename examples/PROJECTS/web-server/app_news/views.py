@@ -2,8 +2,11 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def personal_sub_first(request):
-    return render(request, 'personal/personal_sub_first.html')
+def news(request):
+    return render(request, 'navbar/news.html')
 
-def personal_sub_second(request):
-    return render(request, 'personal/personal_sub_second.html')
+def news_sub_first(request):
+    return render(request, 'news/news_sub_first.html')
+
+def news_sub_second(request):
+    return render(request, 'news/news_sub_second.html')

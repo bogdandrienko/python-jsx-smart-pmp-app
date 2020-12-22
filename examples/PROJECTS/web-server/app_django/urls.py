@@ -18,16 +18,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from app_django import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('project_managment/', views.project_managment, name='project_managment'),
-    path('project_managment/project_one/', views.project_one, name='project_one'),
-    path('project_managment/project_all/', views.project_all, name='project_all'),
-
-    # path('personal/', include('app_news.urls')),
+    
+    path('', include('app_api.urls')),
+    path('', include('app_react.urls')),  
+    path('', include('app_news.urls')),
+    path('', include('app_personal.urls')), 
+    path('', include('app_project_managment.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
