@@ -16,8 +16,11 @@
 <!-- Style -->
 {% block first_style %}
     {% block second_style %}{% endblock second_style %} 
-    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}"/>
+    <!-- Not Optimizated Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.css' %}">
+    <!-- Optimizated Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.min.css' %}"> -->
 {% endblock first_style %}      
 
 <!-- Header -->

@@ -10,5 +10,5 @@ router.register('todo', TodoViewSet, 'todo')
 # urlpatterns = router.urls
 
 urlpatterns = [
-    path(r'api/', include(router.urls), name='api')
+    path('api/', include(router.urls)),
     ]
