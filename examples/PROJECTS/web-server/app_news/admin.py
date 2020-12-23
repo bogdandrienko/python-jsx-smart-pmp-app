@@ -1,7 +1,7 @@
 
-from app_news.models import News
+from app_news.models import Events as Model
 from django.contrib import admin
 
 # Register your models here.
 
-admin.site.register(News)
+admin.site.register(Model)

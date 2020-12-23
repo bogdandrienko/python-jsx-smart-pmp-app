@@ -18,4 +18,14 @@
   <h1>Раздел новостей - Подменю 2</h1>
   <hr>
 </div>
+
+<div class="container-fluid">
+  {% for News in News.all %}
+    <hr>
+    <h1>{{ News.title }}</h1>
+    <h5>{{ News.description }}</h5>
+    <br>
+  {% endfor %}
+</div>
+
 {% endblock second_main %}
