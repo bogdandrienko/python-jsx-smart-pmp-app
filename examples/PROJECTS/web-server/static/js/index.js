@@ -27,10 +27,9 @@ let btn = document.getElementById("btn");
 
 btn.addEventListener('click', () => {
     let service =new CustomServise();
-    service.voidAlarm('Угроза жизни!');
+    // service.voidAlarm('Угроза жизни!');
     // service.voidPrint('Угроза смерти!');
-    // service.getPromt('Угроза жизни!', ['Подтверждаю']);
+    service.getPromt('Угроза жизни!', ['Подтверждаю']);
     // service.getСonfirm('Угроза смерти!');
     // service.voidConsoleLog('Угроза жизни!');
 })
-
