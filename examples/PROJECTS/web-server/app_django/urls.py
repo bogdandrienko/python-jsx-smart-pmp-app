@@ -26,7 +26,6 @@ urlpatterns = [
     path('', include('app_news.urls')),
     path('', include('app_personal.urls')), 
     path('', include('app_project_managment.urls')),
-
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
