@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Project_managment as JSON
+from .models import Product as JSON
 
 # Create your views here.
 

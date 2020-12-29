@@ -27,14 +27,20 @@
         <div class="card mb-4 shadow-sm">
           <div class="card-header">
             <h4 class="my-0 fw-normal">{{ Project_managment.name }}</h4>
-            <h6 class="my-0 fw-normal">дата создания</h6>
+            <h6 class="my-0 fw-normal">{{ Project_managment.created }}</h6>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$цена<small class="text-muted"> / затраты</small></h1>
+            <h1 class="card-title pricing-card-title">${{ Project_managment.price }}<small class="text-muted"> / затраты</small></h1>
+            <h1 class="card-title pricing-card-title">${{ Project_managment.stock }}<small class="text-muted"> / прибыль</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>{{ Project_managment.description }}</li>
             </ul>
-            <img src="{{ Project_managment.image.url }}" class="img-fluid" alt="{{ Project.image.url }}">
+            <img src="{{ Project_managment.image.url }}" class="img-fluid" alt="{{ Project_managment.name }}">
+            {% if Project_managment.available %}
+              <h1 class="card-title pricing-card-title"><small class="text-muted">Принято</small></h1>
+            {% else %}
+              <h1 class="card-title pricing-card-title"><small class="text-muted">Отклонено</small></h1>
+            {% endif %}
           </div>
         </div>
       </div>
