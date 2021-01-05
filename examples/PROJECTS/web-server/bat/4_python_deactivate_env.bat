@@ -1,4 +1,4 @@
-call %~dp0env\Scripts\deactivate.bat
+call %~dp0\env\..\Scripts\deactivate.bat
 @echo _
 @echo __________________________________
 @echo Деактивация виртуального окружения

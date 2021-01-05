@@ -23,6 +23,13 @@ Make migrate changes: 'python manage.py makemigrations'
 Migrate changes: 'python manage.py migrate'
 
 
+python -m pip freeze > requirements.txt
+
+python -m pip install -r requirements.txt
+
+
+
+
 React:
 Создать виртуальное окружение в нужной папке - 'npm init -y'
 
