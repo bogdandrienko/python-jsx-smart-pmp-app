@@ -11,8 +11,9 @@ router.register('todo', TodoViewSet, 'todo')
 # urlpatterns = router.urls
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('home/', views.home),
+    # path('', views.home, name='home'),
+    
+    path('home/', views.home, name='home'),
     path('api/', include(router.urls)),
-    path('api_react/', views.api_react, name='api_react'),
+    path('', views.api_react, name='api_react'),
     ]
