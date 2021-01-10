@@ -1,40 +1,80 @@
+.......................................................................................................................
 Установить IDE: Visual Studio Code(https://code.visualstudio.com/), зарегистрироваться и подключить все расширения.
 Установить Python (https://www.python.org/) и все настройки при установке в директорию C:\Projects\Python\Python- "версия_пайтона".
-Установить Nodejs (https://nodejs.org/)
 Установить Pip installer(https://pypi.org/), если не был установлен при предыдущих установках.
-Установить Расширение pip 'env'(виртуальное окружение)- 'pip install env'. 
-Установить PostgreSQL(https://www.postgresql.org/) и все настройки и пароль при установке в директорию C:\Project\Envire\PostgreSQL- "версия_postgre".
+Установить Nodejs (https://nodejs.org/)
 
+Установить PostgreSQL(https://www.postgresql.org/) и все настройки и пароль при установке в директорию C:\Project\Envire\PostgreSQL- "версия_postgre".
+.......................................................................................................................
+
+.......................................................................................................................
 Django: 
-Активировать виртуальное окружение в нужной папке - 'python -m venv env'
+Установить Расширение pip 'env'(виртуальное окружение)- 'pip install env'. 
+Создать виртуальное окружение в нужной папке - 'python -m venv env'
+Активировать виртуальное окружение всего проекта.
+Обновить pip 'pip install --upgrade pip'.
 Установить Django и Django REST Framework - 'pip install django djangorestframework'.
 Установить дополниения - 'pip install psycopg2 Pillow django-rest-knox'
 Создать новый проект Django - 'django-admin startproject "имя_нового_проекта"'.
 Создать дополнительное приложение Django - 'django-admin startapp "имя_нового_приложения"'.
 Настроить, создать и установить миграции в проект - 'python manage.py makemigrations "имя_приложения"'. Применить миграции - 'python manage.py migrate'.
-Создать пользователя - 'python manage.py createsuperuser'.
+Создать пользователя - 'createsuperuser'.
+Запустить сервер - ''.
+.......................................................................................................................
 
-
-Команды django server: 
-Start server: 'python manage.py runserver'
-Stop server: 'Ctrl+c'
-
-Make migrate changes: 'python manage.py makemigrations'
-Migrate changes: 'python manage.py migrate'
-
-
-python -m pip freeze > requirements.txt
-
-python -m pip install -r requirements.txt
-
-
-
-
+.......................................................................................................................
 React:
-Создать виртуальное окружение в нужной папке - 'npm init -y'
 
-npm i webpack webpack-cli --save-dev
+Активировать виртуальное окружение всего проекта.
+Создать node.js приложение - 'npm init -y'
+Установить, как зависимость "разработки", дополнения: 'npm install webpack webpack-cli @babel/core  @babel/preset-env @babel/preset-react babel-loader babel-plugin-transform-class-properties --save-dev'
+Установить, как зависимость, дополнения: 'npm install react react-dom react-redux redux redux-devtools-extension redux-thunk prop-types axios --save'
+.......................................................................................................................
 
-npm i @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
 
-npm i react react-dom --save-dev
+
+.......................................................................................................................
+pip:
+
+'python -m venv env_name' - создание виртуального окружения, с названием env_name
+'pip install --upgrade pip' - обновление pip
+'pip install package_name' - установка пакета(ов)
+'pip install -r requirements.txt' (python -m pip install -r requirements.txt) - установка пакетов из файла requirements.txt
+'pip freeze > requirements.txt' (python -m pip freeze > requirements.txt) - сохранение установленных пакетов в файл requirements.txt
+
+'pip help' - помощь по доступным командам
+'pip -V' - узнать версию установленного pip
+'pip uninstall package_name' - удаление пакета(ов)
+'pip list' - список установленных пакетов
+'pip show package_name' - показывает информацию об установленном пакете
+'pip search' - поиск пакетов по имени
+'pip --proxy user:passwd@proxy.server:port' - использование с прокси
+'pip install -U' - обновление пакета(ов)
+'pip install --force-reinstall' - при обновлении, переустановить пакет, даже если он последней версии
+.......................................................................................................................
+
+.......................................................................................................................
+django:
+
+'django-admin startproject _project_name_' - создание проекта, с названием _project_name_
+'django-admin startapp _app_name_' - создание приложения, с названием _app_name_
+'python manage.py makemigrations' - создание миграций всего проекта
+'python manage.py makemigrations _app_name_' - создание миграции приложения _app_name_
+'python manage.py migrate' - применение миграций всего проекта
+'python manage.py migrate _app_name_' - применение миграции приложения _app_name_
+'python manage.py createsuperuser' - создать суперпользователя
+'python manage.py runserver' - запуск сервера
+.......................................................................................................................
+
+.......................................................................................................................
+npm:
+
+'npm init -y' - инициализация приложения или установка пакетов из package.json
+'npm install' - установка пакетов из package.json
+'npm install _package_name_' - установка пакетов
+'npm run dev' - запуск dev скрипта npm
+'npm run build' - запуск build скрипта npm
+
+'node -h' - список всех команд доступных в Node.js
+'node -v' - узнать версию установленного Node.js
+.......................................................................................................................
