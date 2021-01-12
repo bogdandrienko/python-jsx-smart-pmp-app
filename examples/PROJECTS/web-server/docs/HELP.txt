@@ -18,8 +18,8 @@ Django:
 Создать новый проект Django - 'django-admin startproject "имя_нового_проекта"'.
 Создать дополнительное приложение Django - 'django-admin startapp "имя_нового_приложения"'.
 Настроить, создать и установить миграции в проект - 'python manage.py makemigrations "имя_приложения"'. Применить миграции - 'python manage.py migrate'.
-Создать пользователя - 'createsuperuser'.
-Запустить сервер - ''.
+Создать пользователя - 'python manage.py createsuperuser'.
+Запустить сервер - 'python manage.py runserver'.
 .......................................................................................................................
 
 .......................................................................................................................
@@ -77,4 +77,42 @@ npm:
 
 'node -h' - список всех команд доступных в Node.js
 'node -v' - узнать версию установленного Node.js
+.......................................................................................................................
+
+.......................................................................................................................
+скрипты:
+
+'windows_ENVIRE' - активация и вызов окна консоли из под виртуального окружения env, из под него надо запускать django и устанавливать пакеты pip / npm
+'windows_START' - запуск сервера django на localhost, заранее активируется виртуальное окружение 
+
+
+
+'windows_MIGRATIONS' ->     'python manage.py makemigrations' - создание миграций всего проекта
+                            'python manage.py makemigrations _app_name_' - создание миграции приложения _app_name_
+                            'python manage.py migrate' - применение миграций всего проекта
+                            'python manage.py migrate _app_name_' - применение миграции приложения _app_name_
+
+
+'windows_DJANGO' ->         'django-admin startproject _project_name_' - создание проекта, с названием _project_name_
+                            'django-admin startapp _app_name_' - создание приложения, с названием _app_name_
+                            'python manage.py createsuperuser' - создать суперпользователя
+
+
+'windows_PIP' ->            'python -m venv env_name' - создание виртуального окружения, с названием env_name
+                            'pip install --upgrade pip' - обновление pip
+                            'pip install -r requirements.txt' - установка пакетов из файла requirements.txt
+                            'pip freeze > requirements.txt' - сохранение установленных пакетов в файл requirements.txt
+                            'pip install package_name' - установка пакета(ов)
+
+
+'windows_NPM' ->            'npm init -y' - инициализация приложения или установка пакетов из package.json
+                            'npm install' - установка пакетов из package.json
+                            'npm install _package_name_' - установка пакетов
+                            'npm run dev' - запуск dev скрипта npm
+                            'npm run build' - запуск build скрипта npm
+
+
+
+Объединить скрипты?
+Скрипт создания проекта простого?
 .......................................................................................................................
