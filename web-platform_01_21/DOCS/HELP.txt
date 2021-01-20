@@ -56,13 +56,16 @@ React:
                 'python manage.py migrate' - применение миграций всего проекта
                	'python manage.py migrate _app_name_' - применение миграции приложения _app_name_
 		'python manage.py runserver' - запуск сервера
+		'python manage.py collectstatic' - собрать все статические файлы в директорию
+
+		'uvicorn django_project.asgi:application --port 8000 --no-access-log'
 
 
-'pip' ->        'python -m venv env_name' - создание виртуального окружения, с названием env_name
-                'pip install --upgrade pip' - обновление pip
-		'pip install package_name' - установка пакета(ов)
-                'pip install -r requirements.txt' - установка пакетов из файла requirements.txt
-                'pip freeze > requirements.txt' - сохранение установленных пакетов в файл requirements.txt
+'pip' ->	'python -m venv env_name' - создание виртуального окружения, с названием env_name
+            'pip install --upgrade pip' - обновление pip
+			'pip install package_name' - установка пакета(ов)
+            'pip install -r requirements.txt' - установка пакетов из файла requirements.txt
+            'pip freeze > requirements.txt' - сохранение установленных пакетов в файл requirements.txt
 
 		'pip help' - помощь по доступным командам
 		'pip -V' - узнать версию установленного pip

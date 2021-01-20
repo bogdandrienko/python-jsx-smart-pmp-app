@@ -32,10 +32,10 @@ export class Form extends Component {
         const { title, description } = this.state;
         return (
             <div className='card card-body mt-4 mb-4'>
-                <h2>Add todo form</h2>
+                <h2>Добавить запись в журнал</h2>
                 <form onSubmit={this.onSubmit}>
                     <div className='form-group'>
-                        <label>Title</label>
+                        <label>Название</label>
                         <input 
                             type='text' 
                             className='form-control'
@@ -45,7 +45,7 @@ export class Form extends Component {
                     </div>
 
                     <div className='form-group'>
-                        <label>Description</label>
+                        <label>Описание</label>
                         <input 
                             type='text' 
                             className='form-control'
@@ -55,7 +55,7 @@ export class Form extends Component {
                     </div>
 
                     <div className='form-group'>
-                        <button type='submit' className='btn btn-primary'>Add</button>
+                        <button type='submit' className='btn btn-primary'>Добавить</button>
                     </div>
                 </form>
             </div>

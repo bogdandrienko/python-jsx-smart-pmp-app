@@ -20,13 +20,13 @@ export class List extends Component {
     render() {
         return (
             <Fragment>
-                <h2>Todo list</h2>
+                <h2>Лист Задач</h2>
                 <table className='table table-stripe'>
                     <thead>
                         <tr>
-                            <th>title</th>
-                            <th>description</th>
-                            <th>done</th>
+                            <th>название</th>
+                            <th>описание</th>
+                            <th>готовность</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -40,7 +40,7 @@ export class List extends Component {
                                     type='checkbox' defaultChecked={todo.done} /></td>
                                 <td><button 
                                     onClick={this.props.deleteTodo.bind(this, todo.id)} 
-                                    className='btn btn-banger btn-sm'>Delete</button></td>
+                                    className='btn btn-banger btn-sm'>удалить</button></td>
                             </tr>
                         ))}
                     </tbody>
