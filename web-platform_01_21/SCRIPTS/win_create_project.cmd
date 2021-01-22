@@ -1,5 +1,3 @@
-chcp 65001
-
 pip install env
 
 set /p project_folder= "Please enter the 'project_folder':  "
@@ -22,7 +20,7 @@ chdir %project_folder%
 
 python -m venv env_name
 
-call .\env_name\Scripts\activate.bat
+call ./env_name/Scripts/activate.bat
 
 pip install --upgrade pip 
 
