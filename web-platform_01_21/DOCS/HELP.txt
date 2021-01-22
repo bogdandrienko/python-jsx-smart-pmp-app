@@ -26,8 +26,11 @@ linux:
 Накатить все обновления
 Установить тимвивер / radmin / etc
 Установить Chromium и активировать аккаунт гугл
+'wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb' - 
+'sudo apt install ./teamviewer_amd64.deb' - 
 'sudo apt install git' - Установить гит
-'git clone https://github.com/bogdandrienko/python-jsx-smart-pmp-app.git' - Клонировать репозиторий с проектом, ввести имя пользователя 'bogdandrienko' и пароль '3*2*4*o*d*n' 
+'git clone https://github.com/bogdandrienko/python-jsx-smart-pmp-app.git' - Клонировать репозиторий с проектом, ввести имя пользователя 'bogdandrienko' и пароль '3*2*4*o*d*n'
+'pip3 install venv' - 
 'python3 -m venv lin_env' - Создать виртуальное окружение
 'source lin_env/bin/activate' - Активировать виртуальное окружение
 'pip install --upgrade pip' - Обновить pip
