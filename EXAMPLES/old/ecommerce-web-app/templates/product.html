@@ -2,13 +2,13 @@
 {% load static %}
 
 <!-- Title -->
-{% block second_title %}Домашняя страница{% endblock second_title %}
+{% block second_title %}Product страница{% endblock second_title %}
 
 <!-- Main -->
 {% block second_main %}
 <div class="container-fluid">
   <hr>
-  <h1>Домашняя страница</h1>
+  <h1>Product страница</h1>
   <hr>
 </div>
 <div class="container">
@@ -26,7 +26,7 @@
                         <h4 class="text-info font-italic mb-0">
                             {{ product.created_at }}
                         </h4>
-                        <img src="{{ product.image.url }}" class="card-img" alt="{{ product.name }}">
+                        <img src="{{ product.image.url }}" class="card-img" alt="{{ shop.name }}">
                         <h4 class="text-Warning font-italic mb-0">
                             {{ product.description }}
                         </h4>
