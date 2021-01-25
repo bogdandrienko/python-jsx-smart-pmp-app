@@ -1,0 +1,42 @@
+{% extends "base/base_third.html" %}
+{% load static %}
+
+<!-- Title -->
+{% block second_title %}Home страница{% endblock second_title %}
+
+<!-- Main -->
+{% block second_main %}
+<div class="container-fluid">
+  <hr>
+  <h1>Home страница</h1>
+  <hr>
+</div>
+<div class="container">
+    <div class="row">
+        {% for shop in Shop.all %}
+            <div class="col-9 mx-auto col-md-6 col-lg-3">
+                <div class="card-md-4">
+                    <div class="card-footer d-flex-justify-content-between">
+                        <p class="font-weight-bold mb-0">
+                            {{ shop.name }}
+                        </p>
+                        <h1 class="text-primary font-italic mb-0">
+                            Цена: {{ shop.price }} $
+                        </h1>
+                        <h4 class="text-info font-italic mb-0">
+                            {{ shop.created_at }}
+                        </h4>
+                        <img src="{{ shop.image.url }}" class="card-img" alt="{{ shop.name }}">
+                        <h4 class="text-Warning font-italic mb-0">
+                            {{ shop.description }}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock second_main %}

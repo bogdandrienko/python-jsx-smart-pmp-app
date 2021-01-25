@@ -1,14 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Shop as JSON
 
 # Create your views here.
 
 def home(request):
-    return HttpResponse('<h1>HOME</h1>')
+    Shop = JSON.objects
+    return render(request, 'home.html', {'Shop': Shop})
 
 def shop(request):
-    return HttpResponse('<h1>SHOP</h1>')
+    return render(request, 'shop.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+# def project_managment(request):
+#     return render(request, 'navbar/project_managment.html')
 
 # def project_managment_sub_first(request):
 #     Project_managment = JSON.objects

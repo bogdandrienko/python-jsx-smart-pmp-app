@@ -8,7 +8,7 @@ class Shop(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='shop/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    price = models.IntegerField()
     class Meta:
         ordering = ('name',)
 
