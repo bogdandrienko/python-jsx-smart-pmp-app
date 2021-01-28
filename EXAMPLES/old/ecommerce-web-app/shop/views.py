@@ -4,7 +4,7 @@ from .models import Category, Product
 
 # Create your views here.
 
-def home(request, category_slug=None):
+def category(request, category_slug=None):
 	category_page = None
 	products = None
 	if category_slug != None:
@@ -12,11 +12,11 @@ def home(request, category_slug=None):
 		products = Product.objects.filter(category=category_page, available=True)
 	else:
 		products = Product.objects.all().filter(available=True)
-	return render(request, 'home.html', {'category':category_page, 'products': products})
+	return render(request, 'category.html', {'category':category_page, 'products': products})
 
 def product(request, category_slug, product_slug):
 	try:
-		product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+		products = Product.objects.get(category__slug=category_slug, slug=product_slug)
 	except Exception as e:
 		raise e
-	return render(request, 'product.html', {'product': product})
+	return render(request, 'product.html', {'products': products})

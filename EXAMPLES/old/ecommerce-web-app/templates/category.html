@@ -2,13 +2,13 @@
 {% load static %}
 
 <!-- Title -->
-{% block second_title %}Домашняя страница{% endblock second_title %}
+{% block second_title %}Страница товаров{% endblock second_title %}
 
 <!-- Main -->
 {% block second_main %}
 <div class="container-fluid">
   <hr>
-  <h1>Домашняя страница</h1>
+  <h1>Страница товаров</h1>
   <hr>
 </div>
 <div class="container">
@@ -17,9 +17,9 @@
             <div class="col-9 mx-auto col-md-6 col-lg-3">
                 <div class="card-md-4">
                     <div class="card-footer d-flex-justify-content-between">
-                        <p class="font-weight-bold mb-0">
+                        <a class="nav-link text-primary text-uppercase font-weight-bold mb-0" href="{{ product.get_a }}">
                             {{ product.name }}
-                        </p>
+                        </a>
                         <h1 class="text-primary font-italic mb-0">
                             Цена: {{ product.price }} $
                         </h1>

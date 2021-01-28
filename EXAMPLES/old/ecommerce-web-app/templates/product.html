@@ -2,38 +2,36 @@
 {% load static %}
 
 <!-- Title -->
-{% block second_title %}Product страница{% endblock second_title %}
+{% block second_title %}Страница товара{% endblock second_title %}
 
 <!-- Main -->
 {% block second_main %}
 <div class="container-fluid">
   <hr>
-  <h1>Product страница</h1>
+  <h1>Страница товара</h1>
   <hr>
 </div>
 <div class="container">
     <div class="row">
-        {% for product in products %}
             <div class="col-9 mx-auto col-md-6 col-lg-3">
                 <div class="card-md-4">
                     <div class="card-footer d-flex-justify-content-between">
-                        <p class="font-weight-bold mb-0">
-                            {{ product.name }}
-                        </p>
+                        <a class="nav-link text-primary text-uppercase font-weight-bold mb-0" href="{{ products.get_a }}">
+                            {{ products.name }}
+                        </a>
                         <h1 class="text-primary font-italic mb-0">
-                            Цена: {{ product.price }} $
+                            Цена: {{ products.price }} $
                         </h1>
                         <h4 class="text-info font-italic mb-0">
-                            {{ product.created_at }}
+                            {{ products.created_at }}
                         </h4>
-                        <img src="{{ product.image.url }}" class="card-img" alt="{{ shop.name }}">
+                        <img src="{{ products.image.url }}" class="card-img" alt="{{ product.name }}">
                         <h4 class="text-Warning font-italic mb-0">
-                            {{ product.description }}
+                            {{ products.description }}
                         </h4>
                     </div>
                 </div>
             </div>
-        {% endfor %}
     </div>
 </div>
 {% endblock second_main %}
