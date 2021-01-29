@@ -8,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 {% endblock first_head %}
 
+
 <!-- Title -->
 {% block first_title %}
     {% block second_title %}{% endblock second_title %}
 {% endblock first_title %}     
+
 
 <!-- Style -->
 {% block first_style %}
@@ -23,20 +25,18 @@
     <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.min.css' %}"> -->
 {% endblock first_style %}      
 
+
 <!-- Header -->
 {% block first_header %}
     {% block second_header %}{% endblock second_header %}
 {% endblock first_header %}
+
 
 <!-- Main -->
 {% block first_main %}
     {% block second_main %}{% endblock second_main %}
 {% endblock first_main %}
 
-<!-- Footer -->
-{% block first_footer %}
-    {% block second_footer %}{% endblock second_footer %}
-{% endblock first_footer %}
 
 <!-- Scripts -->
 {% block first_script %}
@@ -46,3 +46,9 @@
     <!-- Optimizated Bootstrap JavaScript -->
     <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.min.js' %}"></script> -->
 {% endblock first_script %}
+
+
+<!-- Footer -->
+{% block first_footer %}
+    {% block second_footer %}{% endblock second_footer %}
+{% endblock first_footer %}
