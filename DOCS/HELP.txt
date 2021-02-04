@@ -22,27 +22,29 @@ PREVIEW:
 .......................................................................................................................
 linux:
 
-Установить последнюю LTS версию ubunta
-Накатить все обновления
-Установить тимвивер / radmin / etc
+Установить последнюю LTS версию ubunta и её обновления
 Установить Chromium и активировать аккаунт гугл
-'wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb' - 
-'sudo apt install ./teamviewer_amd64.deb' - 
-'sudo apt install git' - Установить гит
-'git clone https://github.com/bogdandrienko/python-jsx-smart-pmp-app.git' - Клонировать репозиторий с проектом, ввести имя пользователя 'bogdandrienko' и пароль '3*2*4*o*d*n'
-'pip3 install venv' - 
-'python3 -m venv lin_env' - Создать виртуальное окружение
-'source lin_env/bin/activate' - Активировать виртуальное окружение
-'pip install --upgrade pip' - Обновить pip
-'pip install -r requirements_lin.txt' - 
-'python manage.py runserver 192.168.1.62:8000' - запуск сервера на локальной сети
-
+Установить тимвивер / anydesk / radmin / etc
+'wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb' - скачивание тимвивера
+'sudo apt install ./teamviewer_amd64.deb' - установка тимвивера
 
 'htop' - команда для проверки нагрузки на линукс убунта
 
 
-'pip install -r requirements_lin.txt' - requirements_lin.txt
 
+'sudo apt-get update -y' - Получить обновления
+'sudo apt upgrade -y' - Установить обновления
+'sudo apt install git -y' - Установить гит
+'git clone https://github.com/bogdandrienko/python-jsx-smart-pmp-app.git' - Клонировать репозиторий с проектом, ввести имя пользователя "bogdandrienko" и пароль "3*2*4*o*d*n"
+'sudo apt install python3-pip -y' - Установить пакетный менеджер pip
+'sudo apt-get install python3-venv -y' - Установить дополнение для создания виртуального окружения
+'python3 -m venv lin_env' - Создать виртуальное окружение
+'source lin_env/bin/activate' - Активировать виртуальное окружение
+'pip install --upgrade pip' - Обновить pip
+'pip install -r requirements_lin.txt' - Установить все компоненты и дополнения из файла "requirements_lin.txt"
+'python manage.py runserver 192.168.1.62:8000' - запуск сервера на локальной сети "192.168.1.62:8000"
+
+Дополнения:
 asgiref==3.3.1
 Django==3.1.5
 djangorestframework==3.12.2
@@ -50,6 +52,17 @@ Pillow==8.1.0
 pkg-resources==0.0.0
 pytz==2020.5
 sqlparse==0.4.1
+
+Не нужно:
+/.DOCS
+/.node_modules
+/.win_env
+/..babelrc
+/..jshintrc
+/.package.json
+/.package-lock.json
+/.requirements_win.txt
+/.webpack.config.js
 .......................................................................................................................
 
 .......................................................................................................................
@@ -62,6 +75,7 @@ Django:
 'call .\env_name\Scripts\activate.bat' - Активировать виртуальное окружение проекта
 'pip install --upgrade pip' - Обновить pip
 'pip install django' - Установить Django
+'pip install -r requirements_win.txt' - Установить все компоненты и дополнения из файла "requirements_win.txt"
 'django-admin startproject project_name .' - Создать новый проект Django, в текущей директории
 'django-admin startapp app_name' - Создать приложение Django
 'python manage.py makemigrations' - Создать миграции проекта
@@ -70,8 +84,7 @@ Django:
 'python manage.py runserver' - Запустить сервер
 
 
-'pip install -r requirements_win.txt' - requirements_win.txt
-
+Дополнения:
 asgiref==3.3.1
 cffi==1.14.4
 click==7.1.2

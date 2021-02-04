@@ -1,0 +1,33 @@
+{% extends "base/base_third.html" %}
+{% load static %}
+
+<!-- Title -->
+{% block second_title %}Новости{% endblock second_title %}
+
+<!-- Btn-Group -->
+{% block second_btn-group %}
+<a href="{% url 'news' %}" class="btn btn-light active" aria-current="page">Основа</a>
+<a href="{% url 'news_sub_first' %}" class="btn btn-secondary">Подменю#1</a>
+<a href="{% url 'news_sub_second' %}" class="btn btn-secondary">Подменю#2</a>
+{% endblock second_btn-group %}
+
+<!-- Main -->
+{% block second_main %}
+<div class="container-fluid">
+  <hr>
+  <h1>Раздел новостей - Подменю 1</h1>
+  <hr>
+</div>
+<div class="container-fluid">
+  {% for News in News.all %}
+    {% if forloop.first %}
+      <hr>
+      <h1>{{ News.title }}</h1>
+      <h5>{{ News.description }}</h5>
+      <br>
+    {% else %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock second_main %}
