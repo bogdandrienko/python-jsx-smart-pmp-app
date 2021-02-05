@@ -1,0 +1,54 @@
+{% extends "base/base_first.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block first_head %}
+    {% block second_head %}{% endblock second_head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock first_head %}
+
+
+<!-- Title -->
+{% block first_title %}
+    {% block second_title %}{% endblock second_title %}
+{% endblock first_title %}     
+
+
+<!-- Style -->
+{% block first_style %}
+    {% block second_style %}{% endblock second_style %} 
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}"/>
+    <!-- Not Optimizated Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.css' %}">
+    <!-- Optimizated Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.min.css' %}"> -->
+{% endblock first_style %}      
+
+
+<!-- Header -->
+{% block first_header %}
+    {% block second_header %}{% endblock second_header %}
+{% endblock first_header %}
+
+
+<!-- Main -->
+{% block first_main %}
+    {% block second_main %}{% endblock second_main %}
+{% endblock first_main %}
+
+
+<!-- Scripts -->
+{% block first_script %}
+    {% block second_script %}{% endblock second_script %}
+    <!-- Not Optimizated Bootstrap JavaScript -->
+    <script src="{% static 'js/bootstrap_5.0.0/bootstrap.js' %}"></script>
+    <!-- Optimizated Bootstrap JavaScript -->
+    <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.min.js' %}"></script> -->
+{% endblock first_script %}
+
+
+<!-- Footer -->
+{% block first_footer %}
+    {% block second_footer %}{% endblock second_footer %}
+{% endblock first_footer %}
