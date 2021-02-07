@@ -29,6 +29,9 @@
                         <h4 class="text-Warning font-italic mb-0">
                             {{ products.description }}
                         </h4>
+                        <a class="nav-link text-primary text-uppercase font-weight-bold mb-0" href="{% url 'add_cart' products.id %}">
+                            Добавить В Корзину
+                        </a>
                     </div>
                 </div>
             </div>

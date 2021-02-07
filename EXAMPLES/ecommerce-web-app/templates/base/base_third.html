@@ -15,10 +15,13 @@
 <nav class="navbar navbar-expand-md navbar-light bg-dark">
     <button class="navbar-toggler bg-light" data-toggle="collapse" data-target="#navbar"><span class="navbar-toggler-icon"></span></button>
     <nav id="navbar" class="collapse navbar-collapse justify-content-between">
-        <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'category' %}">All products<i class="material-icons cart-icon"></i></a></li>
+        <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'category' %}">Все товары<i class="material-icons cart-icon"></i></a></li>
         {% for category in links %}
-        <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{{category.get_url}}">{{category.name}}<i class="material-icons cart-icon"></i></a></li>
+            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{{category.get_url}}">{{category.name}}<i class="material-icons cart-icon"></i></a></li>
         {% endfor %}
+        {% if item_count > 0 %}
+            <a href="{% url 'cart_detail' %}"><i class="material-icons cart-icon">add_shopping_cart</i>({{item_count}})</a>
+        {% endif %}
     </nav>
 </nav>
 {% endblock second_header %}

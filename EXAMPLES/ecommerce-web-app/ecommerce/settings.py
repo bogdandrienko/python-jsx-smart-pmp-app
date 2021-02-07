@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'crispy_forms',
+
     'shop.apps.ShopConfig',
 ]
 
@@ -65,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'shop.context_processors.menu_links',
+                'shop.context_processors.counter',
             ],
         },
     },
@@ -126,3 +129,5 @@ STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media')
+
+CRISPY_TEMPLATE_PATH = 'bootstrap5'

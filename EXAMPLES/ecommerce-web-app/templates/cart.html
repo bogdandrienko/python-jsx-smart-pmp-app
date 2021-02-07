@@ -17,80 +17,100 @@
         </div>
     </div>
 
-    <div class="row mx-auto">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-            <table class="table cart-table">
-                <thead class="cart-thead">
-                    <tr>
-                        <th class="text-center" colspan="4">
-                            Ваши товары:
-                        </th>
-                    </tr>
-                </thead>
-                {% for i in '12345' %}
-                    <tr>
-                        <td>
-                            <a href="">
-                                <img src="{% static 'media/product/lego.png' %}" alt="" width="100" height="100">
-                            </a>
-                        </td>
-                        <td class="text-left">
-                            Id
-                            <br>
-                            SKU: 7
-                            <br>
-                            Unit Price: 20$
-                            <br>
-                            Quantity: 3
-                        </td>
-                        <td class="text-right">
-                            $60
-                        </td>
-                        <td>
-                            <a href=""><i class="material-icons cart-icon">remove_circle_outline</i></a>
-                            <a href=""><i class="material-icons cart-icon">add_circle_outline</i></a>
-                            <a href=""><i class="material-icons cart-icon">delete</i></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-            <table class="table cart-table">
-                <thead class="cart-thead">
-                    <tr>
-                        <th class="text-center" colspan="4">
-                            Оплата
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-uppercase text-center">
-                            Пожалуйста проверьте вашу корзину перед оплатой
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-end">
-                            Итоговая цена: <strong>$60</strong>
-                        </td>
-                    </tr>
-                </tbody>
+    {% if not cart_items %}
 
-            </table>
-
-            <div class="mx-auto text-end">
-                <a href="{% url 'category' %}">
-                    <button type="button" class="btn btn-lg btn-block bg-dark text-white">
-                        Назад к товарам
-                    </button>
-                </a>
+        <div class="text-center">
+            <br>
+            <div class="text-center">
+                <hr>
+                    <h1>Ваша корзина пуста!</h1>
+                <hr>
             </div>
-
         </div>
-    </div>
 
+    {% else %}
+        <div class="row mx-auto">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <table class="table cart-table">
+                    <thead class="cart-thead">
+                        <tr>
+                            <th class="text-center" colspan="4">
+                                Ваши товары:
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for cart_item in cart_items %}
+                        <tr>
+                            <td>
+                                <a href="cart_item.product.get_url">
+                                    <img src="{{cart_item.product.image.url}}" alt="" width="100" height="100">
+                                </a>
+                            </td>
+                            <td class="text-left">
+                                {{cart_item.product.name}}
+                                <br>
+                                SKU: {{cart_item.product.id}}
+                                <br>
+                                Unit Price: {{cart_item.product.price}}$
+                                <br>
+                                Quantity: {{cart_item.quantity}} * {{cart_item.product.price}}
+                            </td>
+                            <td class="text-right">
+                                ${{cart_item.sub_total}}
+                            </td>
+                            {% if cart_item.quantity < cart_item.product.stock %}
+                                <td>
+                                    <a href="{% url 'add_cart' cart_item.product.id %}"><i class="material-icons cart-icon">add_circle_outline</i></a>
+                                    <a href="{% url 'cart_remove' cart_item.product.id %}"><i class="material-icons cart-icon">remove_circle_outline</i></a>
+                                    <a href="{% url 'cart_remove_product' cart_item.product.id %}"><i class="material-icons cart-icon">delete</i></a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a href="{% url 'cart_remove' cart_item.product.id %}"><i class="material-icons cart-icon">remove_circle_outline</i></a>
+                                    <a href="{% url 'cart_remove_product' cart_item.product.id %}"><i class="material-icons cart-icon">delete</i></a>
+                                </td>
+                            {% endif %}
+
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <table class="table cart-table">
+                    <thead class="cart-thead">
+                        <tr>
+                            <th class="text-center" colspan="4">
+                                Оплата
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-uppercase text-center">
+                                Пожалуйста проверьте вашу корзину перед оплатой
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-end">
+                                Итоговая цена: <strong>${{total}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <div class="mx-auto text-end">
+                    <a href="{% url 'category' %}">
+                        <button type="button" class="btn btn-lg btn-block bg-dark text-white">
+                            Назад к товарам
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock second_main %}
