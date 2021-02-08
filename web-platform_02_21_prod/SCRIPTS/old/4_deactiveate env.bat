@@ -1,1 +1,0 @@
-"C:\Project\Github Projects\python-jsx-smart-pmp-app\examples\django-react-app\env\Scripts\deactivate.bat"

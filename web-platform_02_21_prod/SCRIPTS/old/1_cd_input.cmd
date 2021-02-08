@@ -1,1 +1,0 @@
-cd C:\Project\Github Projects\python-jsx-smart-pmp-app\examples\django-react-app
