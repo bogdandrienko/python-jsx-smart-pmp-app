@@ -1,0 +1,2 @@
+login: 'bogdan'
+password: 'ljcnegyfdt,3'(доступнавеб3)
