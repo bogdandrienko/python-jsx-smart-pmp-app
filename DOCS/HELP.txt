@@ -35,13 +35,14 @@ linux:
 'sudo apt-get update -y' - Получить обновления
 'sudo apt upgrade -y' - Установить обновления
 'sudo apt install git -y' - Установить гит
-'git clone https://github.com/bogdandrienko/python-jsx-smart-pmp-app.git' - Клонировать репозиторий с проектом, ввести имя пользователя "bogdandrienko" и пароль "3*2*4*o*d*n"
+'git clone https://github.com/bogdandrienko/web-app.git' - Клонировать репозиторий с проектом, ввести имя пользователя "bogdandrienko" и пароль "3*2*4*o*d*n"
 'sudo apt install python3-pip -y' - Установить пакетный менеджер pip
 'sudo apt-get install python3-venv -y' - Установить дополнение для создания виртуального окружения
 'python3 -m venv lin_env' - Создать виртуальное окружение
 'source lin_env/bin/activate' - Активировать виртуальное окружение
 'pip install --upgrade pip' - Обновить pip
 'pip install -r requirements_lin.txt' - Установить все компоненты и дополнения из файла "requirements_lin.txt"
+'pip install django Pillow' - Ручная установка компонентов самых свежих.
 'python manage.py runserver 192.168.1.62:8000' - запуск сервера на локальной сети "192.168.1.62:8000"
 
 Дополнения:
