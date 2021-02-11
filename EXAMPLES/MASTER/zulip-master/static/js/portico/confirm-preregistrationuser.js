@@ -1,0 +1,4 @@
+$(() => {
+    $("#register").trigger("submit");
+});
+export {};

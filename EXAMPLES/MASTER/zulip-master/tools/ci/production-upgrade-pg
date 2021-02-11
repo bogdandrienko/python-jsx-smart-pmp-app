@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This tests upgrading PostgreSQL
+set -e
+set -x
+
+ZULIP_PATH=/home/github/zulip
+if [ "$CIRCLECI" = true ]; then
+    ZULIP_PATH=/home/circleci/zulip
+fi
+
+supervisorctl stop all
+"$ZULIP_PATH"/scripts/setup/upgrade-postgresql
+supervisorctl start all
+
+echo "Upgrade of PostgreSQL complete!"
+exit 0
