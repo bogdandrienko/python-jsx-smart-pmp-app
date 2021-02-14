@@ -1,0 +1,50 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}CREATE{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<div class="container-fluid">
+    {% for el in tasks %}
+        <div class="container-fluid">
+            <h1>{{ el.name }}</h1>
+            <br>
+            <p>{{ el.description }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+{{ error }}
+<div class="container">
+    <h1>Создать задачу</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name }}
+        <br>
+        {{ form.description }}
+        <br>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+</div>
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
