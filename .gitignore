@@ -1,0 +1,25 @@
+# Environments
+.env
+.venv
+.lin_env
+.win_env
+.node_modules
+
+env/
+venv/
+lin_env/
+win_env/
+node_modules/
+
+**lin_env/
+**win_env/
+**node_modules/
+
+ENV/
+VENV/
+env.bak/
+venv.bak/
+
+
+
+
