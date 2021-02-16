@@ -3,16 +3,24 @@
 .venv
 .lin_env
 .win_env
+.env_name
 .node_modules
 
 env/
 venv/
 lin_env/
 win_env/
+env_name/
 node_modules/
+
+*lin_env/
+*win_env/
+*env_name/
+*node_modules/
 
 **lin_env/
 **win_env/
+**env_name/
 **node_modules/
 
 ENV/
