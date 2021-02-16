@@ -1,0 +1,40 @@
+{% extends "blog_base.html" %}
+{% load static %}
+
+<!-- Title -->
+{% block title %}{{ article.article_title }}{% endblock title %}
+
+<!-- Main -->
+{% block content %}
+{% if article %}
+    <h2>{{ article.article_title }}</h2>
+    <p>{{ article.article_text }}</p>
+    <em>{{ article.article_pub_date }}</em>
+    <hr>
+
+    {% if latest_comments_list %}
+    {% for c in latest_comments_list %}
+        <p>
+            <strong>{{c.author_name}}</strong>
+            <p>{{c.comment_text}}</p>
+        </p>
+    {% endfor %}
+    {% else %}
+    Комментарии не найдены
+    {% endif %}
+    <hr>
+
+    <form action="{% url 'app_blog:leave_comment' article.id %}" method="POST">
+
+        {% csrf_token %}
+        
+        <input type="text" required="" placeholder="Ваше имя" name="name"><br>
+        <textarea name="text" required="" placeholder="Ваш комментарий" cols="30" rows="10"></textarea><br>
+        <button type="submit">Оставить комментарий</button>
+
+    </form>
+
+{% else %}
+Статьи не найдены
+{% endif %}
+{% endblock content %}

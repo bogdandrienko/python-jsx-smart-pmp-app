@@ -1,0 +1,18 @@
+{% extends "blog_base.html" %}
+{% load static %}
+
+<!-- Title -->
+{% block title %}Последние статьи{% endblock title %}
+
+<!-- Main -->
+{% block content %}
+{% if latest_article_list %}
+    
+    {% for a in latest_article_list %}
+        <a href="{% url 'app_blog:detail' a.id %}">{{a.article_title}}</a><br>
+    {% endfor %}
+
+{% else %}
+Статьи не найдены
+{% endif %}
+{% endblock content %}
