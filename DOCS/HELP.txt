@@ -72,11 +72,11 @@ Django:
 'pip install env' - Установить Расширение pip 'env'(виртуальное окружение)
 'mkdir project_name' - создать папку проекта
 'chdir project_name' - изменить путь на папку проекта
-'python -m venv env_name' - Создать виртуальное окружение, в текущей директории
-'call .\env_name\Scripts\activate.bat' - Активировать виртуальное окружение проекта
+'python -m venv win_env' - Создать виртуальное окружение, в текущей директории
+'call .\win_env\Scripts\activate.bat' - Активировать виртуальное окружение проекта
 'pip install --upgrade pip' - Обновить pip
 'pip install django' - Установить Django
-'pip install -r requirements_win.txt' - Установить все компоненты и дополнения из файла "requirements_win.txt"
+'pip install -r requirements.txt' - Установить все компоненты и дополнения из файла "requirements_win.txt"
 'django-admin startproject project_name .' - Создать новый проект Django, в текущей директории
 'django-admin startapp app_name' - Создать приложение Django
 'python manage.py makemigrations' - Создать миграции проекта
