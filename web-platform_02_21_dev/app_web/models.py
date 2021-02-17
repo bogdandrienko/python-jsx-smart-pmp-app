@@ -45,6 +45,7 @@ class Article(models.Model):
     article_title = models.CharField('название статьи', max_length=200)
     article_text = models.TextField('текст статьи', blank=True)
     article_pub_date = models.DateTimeField(editable=True, auto_created=True)
+    article_image = models.ImageField('картинка статьи', upload_to='news/', blank=True)
 
     class Meta:
         verbose_name = 'Статья'
@@ -52,6 +53,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.article_title
+    
+    def short_text(self):
+        return self.article_text[:100]
 
 
 class Comment(models.Model):

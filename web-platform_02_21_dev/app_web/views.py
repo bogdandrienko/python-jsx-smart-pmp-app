@@ -33,13 +33,16 @@ def project_managment_sub_second(request):
     return render(request, 'project_managment_sub_second.html', {'Project_managment': Project_managment})
 
 
-def index(request):
+
+
+
+def news_list(request):
     latest_article_list = Article.objects.order_by('-article_pub_date')[:5]
 
-    return render(request, 'blog_list.html', {'latest_article_list': latest_article_list})
+    return render(request, 'news_list.html', {'latest_article_list': latest_article_list})
 
 
-def detail(request, article_id):
+def news_detail(request, article_id):
     try:
         a = Article.objects.get(id = article_id)
     except:
@@ -47,7 +50,7 @@ def detail(request, article_id):
 
     latest_comments_list = a.comment_set.order_by('-id')[:10]
 
-    return render(request, 'detail_list.html', {'article': a, 'latest_comments_list': latest_comments_list})
+    return render(request, 'news_detail.html', {'article': a, 'latest_comments_list': latest_comments_list})
 
 
 def leave_comment(request, article_id):
@@ -58,4 +61,4 @@ def leave_comment(request, article_id):
 
     a.comment_set.create(author_name = request.POST['name'], comment_text = request.POST['text'])
 
-    return HttpResponseRedirect( reverse('detail', args = (a.id,)) )
+    return HttpResponseRedirect( reverse('news_detail', args = (a.id,)) )
