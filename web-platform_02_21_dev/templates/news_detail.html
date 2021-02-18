@@ -32,9 +32,18 @@
                                     <div class="btn-group">
                                     <a class="btn btn-sm btn-outline-secondary" href="{% url 'news_list' %}">Все новости</a>
                                     <button type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'news_list' %}">Редактировать</button>
+                                    <form class="form-control" action="{% url 'increase_rating' article.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-primary" type="submit">лайк {{ article.article_rating_positive }}</button>
+                                    </form>
+                                    <form class="form-control" action="{% url 'decrease_rating' article.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-primary" type="submit">дизлайк {{ article.article_rating_negative }}</button>
+                                    </form>
                                     </div>
                                     <small class="text-muted">{{ article.article_pub_date }}</small>
                                 </div>
+                                <p class="card-text text-danger">{{ article.get_article_rating_value }}</p>
                                 </div>
                             </div>
                         </div>

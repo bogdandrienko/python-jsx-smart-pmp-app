@@ -47,6 +47,13 @@ class Article(models.Model):
     article_pub_date = models.DateTimeField(editable=True, auto_created=True)
     article_image = models.ImageField('картинка статьи', upload_to='news/', blank=True)
 
+    
+    article_rating_positive = models.IntegerField('лайки статьи', default=0, blank=False)
+    article_rating_negative = models.IntegerField('дизлайки статьи', default=0, blank=False)
+    article_rating_value = models.IntegerField('рейтинг статьи', default=0, blank=False)
+
+
+
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
@@ -56,6 +63,15 @@ class Article(models.Model):
     
     def short_text(self):
         return self.article_text[:100]
+
+    def get_article_rating_value(self):
+        return self.article_rating_positive - self.article_rating_negative
+
+    def increase(self):
+        self.article_rating_positive = self.article_rating_positive + 1
+
+    def decrease(self):
+        self.article_rating_negative = self.article_rating_negative + 1
 
 
 class Comment(models.Model):
@@ -69,3 +85,26 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.author_name
+
+
+class RatingArticle(models.Model):
+    rating_article = models.ForeignKey(Article, on_delete = models.CASCADE)
+    rating_name = models.CharField('имя рейтинга', max_length=50)
+    rating_value = models.IntegerField('рейтинг')
+
+    class Meta:
+        verbose_name = 'Рейтинги'
+        verbose_name_plural = 'Рейтинг'
+
+    def __str__(self):
+        return self.rating_name
+
+    def get_value(self):
+        return self.rating_value
+
+    def increase(self):
+        pass
+
+    def decrease(self):
+        pass
+    

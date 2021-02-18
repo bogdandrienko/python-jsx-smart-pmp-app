@@ -37,6 +37,7 @@
                   <small class="text-muted">{{ article.article_pub_date }}</small>
                 </div>
               </div>
+              <p class="card-text text-danger">{{ article.get_article_rating_value }}</p>
               </div>
             </div>
             {% endfor %}
