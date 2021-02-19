@@ -13,7 +13,11 @@
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+<a href="{% url 'news' %}" class="btn btn-light active" aria-current="page">Список новостей</a>
+<a href="{% url 'news_create' %}" class="btn btn-secondary">Создать</a>
+<a href="http://127.0.0.1:8000/news/1/" class="btn btn-secondary">Комментировать</a>
+{% endblock header %}
 
 <!-- Main -->
 {% block main %}
@@ -24,18 +28,27 @@
                     <div class="">
                         <div class="">
                             <div class="card shadow-sm">
-                                <img src="{{ article.article_image.url }}" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" alt="{{ article.article_image.url }}">                            
+                                {% if article.article_image %}
+                                    <img src="{{ article.article_image.url }}" class="img-fluid" alt="{{ article.article_title }}">
+                                {% else %}
+                                    <img src="#" class="img-fluid" alt="{{ article.article_title }}">
+                                {% endif %}                           
                                 <div class="card-body">
                                 <strong class="card-text d-inline-block mb-2 text-primary"><a href="{% url 'news_detail' article.id %}">{{ article.article_title }}</a></strong>
                                 <p class="card-text">{{ article.article_text }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'news_list' %}">Все новости</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'news_list' %}">Редактировать</button>
+                                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'news' %}">Все новости</a>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" href="#">Редактировать</button>
                                     <form class="form-control" action="{% url 'increase_rating' article.id %}" method="POST">
                                         {% csrf_token %}
                                         <button class="btn btn-primary" type="submit">лайк {{ article.article_rating_positive }}</button>
                                     </form>
+                                    {% if article.get_article_rating_value > 0 %}                      
+                                        <p class="card-text d-inline-block text-primary">({{ article.get_article_rating_value }})</p>
+                                    {% else %}
+                                        <p class="card-text d-inline-block text-danger">({{ article.get_article_rating_value }})</p>
+                                    {% endif %}    
                                     <form class="form-control" action="{% url 'decrease_rating' article.id %}" method="POST">
                                         {% csrf_token %}
                                         <button class="btn btn-primary" type="submit">дизлайк {{ article.article_rating_negative }}</button>
@@ -43,7 +56,6 @@
                                     </div>
                                     <small class="text-muted">{{ article.article_pub_date }}</small>
                                 </div>
-                                <p class="card-text text-danger">{{ article.get_article_rating_value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +76,7 @@
                         <div class="pb-3 mb-0 small lh-sm w-100">
                         <div class="d-flex justify-content-between">
                             <strong class="text-gray-dark">{{c.comment_text}}</strong>
-                            <a href="#">Подписаться</a>
+                            <a href="#">Пожаловаться</a>
                         </div>
                         <span class="d-block">{{c.author_name}}</span>
                         </div>

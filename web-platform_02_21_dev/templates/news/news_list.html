@@ -1,0 +1,75 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}Все новости{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+<a href="{% url 'news' %}" class="btn btn-light active" aria-current="page">Список новостей</a>
+<a href="{% url 'news_create' %}" class="btn btn-secondary">Создать</a>
+<a href="http://127.0.0.1:8000/news/1/" class="btn btn-secondary">Комментировать</a>
+{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+  {% if latest_article_list %}
+    <main>
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  
+            {% for article in latest_article_list %}
+  
+            <div class="col">
+              <div class="card shadow-sm">
+  
+              {% if article.article_image %}
+                <img src="{{ article.article_image.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="100%" height="225" alt="{{ article.article_title }}">
+              {% else %}
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ article.article_title }}</text></svg>
+              {% endif %}
+
+                <div class="card-body">
+                  <p class="card-text">{{ article.short_text }}...</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'news_detail' article.id %}">Подробнее</a>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Редактировать</button>
+                      </div>
+                      {% if article.get_article_rating_value > 0 %}                      
+                        <p class="card-text d-inline-block text-primary">({{ article.get_article_rating_value }})</p>
+                      {% else %}
+                        <p class="card-text d-inline-block text-danger">({{ article.get_article_rating_value }})</p>
+                      {% endif %}               
+                    </div>
+                    <small class="text-muted">{{ article.article_pub_date }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+    </main>
+
+  {% else %}
+    Статьи не найдены
+  {% endif %}
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
