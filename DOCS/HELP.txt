@@ -76,6 +76,13 @@ Django:
 'call .\win_env\Scripts\activate.bat' - Активировать виртуальное окружение проекта
 'pip install --upgrade pip' - Обновить pip
 'pip install django' - Установить Django
+
+pip install django-crispy-forms
+pip install django-grappelli
+pip install djangorestframework
+pip install requests
+
+
 'pip install -r requirements.txt' - Установить все компоненты и дополнения из файла "requirements_win.txt"
 'django-admin startproject project_name .' - Создать новый проект Django, в текущей директории
 'django-admin startapp app_name' - Создать приложение Django

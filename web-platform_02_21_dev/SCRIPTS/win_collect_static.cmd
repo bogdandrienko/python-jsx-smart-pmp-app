@@ -1,7 +1,17 @@
-cd ../
+@echo OFF
 
-call ./win_env/Scripts/activate.bat
+pip install --upgrade pip
 
-python manage.py makemigrations
+pip install env
 
-python manage.py migrate
+cd ..\
+
+python -m venv env
+
+call .\env\Scripts\activate.bat
+
+pip install --upgrade pip
+
+
+
+django-admin collectstatic
