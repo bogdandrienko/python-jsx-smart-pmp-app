@@ -31,6 +31,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+
+    'grappelli',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,9 +43,11 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-    'app_web',
-    'app_news',
-    'app_ecommerse',
+    'app_web.apps.AppWebConfig',
+    'app_news.apps.AppNewsConfig',
+    'app_ecommerse.apps.AppEcommerseConfig',
+    'app_react.apps.AppReactConfig',
+    'app_wheather.apps.AppWheatherConfig',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +73,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django.template.context_processors.request',
+                'app_ecommerse.context_processors.menu_links',
+                'app_ecommerse.context_processors.counter',
             ],
         },
     },
@@ -130,4 +139,4 @@ STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static', 'media')
 
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

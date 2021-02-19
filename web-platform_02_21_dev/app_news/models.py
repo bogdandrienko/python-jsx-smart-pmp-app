@@ -12,6 +12,7 @@ class Article(models.Model):
 
 
     class Meta:
+        ordering = ('-id',)
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
 
@@ -43,6 +44,7 @@ class Comment(models.Model):
 
 
     class Meta:
+        ordering = ('-id',)
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
 
