@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-
+    
     'grappelli',
 
     'django.contrib.admin',
@@ -42,14 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
-
-    'app_web.apps.AppWebConfig',
-    'app_news.apps.AppNewsConfig',
-    'app_ecommerse.apps.AppEcommerseConfig',
-    'app_react.apps.AppReactConfig',
-    'app_wheather.apps.AppWheatherConfig',
     'app_rest_framework.apps.AppRestFrameworkConfig',
+
     'app_bootstrap_examples.apps.AppBootstrapExamplesConfig',
+    'app_ecommerse.apps.AppEcommerseConfig',
+    'app_news.apps.AppNewsConfig',
+    'app_react.apps.AppReactConfig',
+    'app_web.apps.AppWebConfig',
+    'app_wheather.apps.AppWheatherConfig',
 ]
 
 MIDDLEWARE = [
