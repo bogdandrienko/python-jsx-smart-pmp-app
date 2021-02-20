@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'app_ecommerse.apps.AppEcommerseConfig',
     'app_react.apps.AppReactConfig',
     'app_wheather.apps.AppWheatherConfig',
+    'app_rest_framework.apps.AppRestFrameworkConfig',
+    'app_bootstrap_examples.apps.AppBootstrapExamplesConfig',
 ]
 
 MIDDLEWARE = [

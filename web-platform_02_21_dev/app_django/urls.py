@@ -23,11 +23,15 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('admin/', views.admin, name='admin'),
+    
     path('', include('app_web.urls')),
     path('ecommerse/', include('app_ecommerse.urls')),
     path('news/', include('app_news.urls')),
     path('weather/', include('app_wheather.urls')),
     path('react/', include('app_react.urls')),
+    path('examples/', include('app_bootstrap_examples.urls')),
+
+    path('', include('app_rest_framework.urls')),
 ]
 
 if settings.DEBUG:

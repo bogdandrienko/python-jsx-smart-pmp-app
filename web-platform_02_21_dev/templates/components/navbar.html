@@ -7,33 +7,80 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin' %}" tabindex="-1" aria-disabled="true">administration</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">личный кабинет</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">управление проектами</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">служба управления персоналом</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'custom' %}">custom</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'news' %}">app_news</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ecommerse' %}">app_ecommerse</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'weather' %}">app_weather</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'react' %}">app_react</a>
-                </li>
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" 
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            development
+                                <span class="badge badge-primary badge-pill">
+                                    # 5
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Готовые</h6>
+                                    <a class="dropdown-item" href="{% url 'news' %}">app_news</a>
+                                    <a class="dropdown-item" href="{% url 'ecommerse' %}">app_ecommerse</a>
+                                    <a class="dropdown-item" href="{% url 'weather' %}">app_weather</a>
+                                    <a class="dropdown-item" href="{% url 'react' %}">app_react</a>
+                                    <a class="dropdown-item" href="{% url 'examples' %}">app_bootstrap_examples</a>
+                                </li>
+                                <li><hr class="dropdown-divider text-light"></li>
+                                <li>
+                                    <h6 class="dropdown-header">В разработке</h6>
+                                    <a class="dropdown-item disabled" href="#">none</a>
+                                </li>
+                                <li><hr class="dropdown-divider text-light"></li>
+                                <li>
+                                    <h6 class="dropdown-header">Шаблоны</h6>
+                                    <a class="dropdown-item" href="{% url 'custom' %}">custom</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" 
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            production
+                                <span class="badge badge-primary badge-pill">
+                                    # 0
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Основной функционал</h6>
+                                    <a class="dropdown-item" href="{% url 'home' %}">главная</a>
+                                    <a class="dropdown-item" href="{% url 'admin' %}">админ панель</a>
+                                    <a class="dropdown-item disabled" href="#">личный кабинет</a>
+                                    <a class="dropdown-item disabled" href="#">мои уведомления</a>
+                                    <a class="dropdown-item disabled" href="#">мои достижения</a>
+                                </li>
+                                <li><hr class="dropdown-divider text-light"></li>
+                                <li>
+                                    <h6 class="dropdown-header">Управление проектами</h6>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: основная</a>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: основная</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: шаблоны</a>
+                                </li>
+                                <li><hr class="dropdown-divider text-light"></li>
+                                <li>
+                                    <h6 class="dropdown-header">Служба управления персоналом</h6>
+                                    <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
+                                </li>
+                                <li><hr class="dropdown-divider text-light"></li>
+                                <li>
+                                    <h6 class="dropdown-header">Шаблоны</h6>
+                                    <a class="dropdown-item disabled" href="#">none</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
             </ul>
               <!-- Btn-Group -->
               <div class="btn-group m-1 p-1">

@@ -7,7 +7,7 @@ export class Header extends Component {
                 <nav className="nav nav-pills nav-fill nav-dark">
                     <ul className="nav nav-tabs">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Активный</a>
+                            <a className="nav-link active" aria-current="page" href="/">Главная</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Ссылка</a>

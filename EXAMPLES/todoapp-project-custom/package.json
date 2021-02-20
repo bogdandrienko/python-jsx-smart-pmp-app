@@ -1,32 +1,32 @@
 {
-  "name": "todoapp",
+  "name": "todoapp-project-custom",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --watch --mode development ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
-    "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/frontend/main.js"
+    "dev": "webpack --watch --mode development ./src/js/index.js --output ./static/index.js",
+    "build": "webpack --mode production ./src/js/index.js --output ./static/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-react": "^7.10.1",
-    "babel-loader": "^8.1.0",
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
-  }
+  },
+  "description": ""
 }
