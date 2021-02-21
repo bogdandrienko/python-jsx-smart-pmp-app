@@ -1,1 +1,1 @@
-web: gunicorn kostanay_minerals.wsgi
+web: gunicorn app_django.wsgi

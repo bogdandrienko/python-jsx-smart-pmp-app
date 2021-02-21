@@ -25,7 +25,6 @@ urlpatterns = [
     path('admin/', views.admin, name='admin'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
-    # path('movies/', include('movies.urls')),
     path('movies/', include('app_movies.urls')),
 
     path('', include('app_web.urls')),
