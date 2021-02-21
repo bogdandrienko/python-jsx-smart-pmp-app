@@ -23,7 +23,11 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('admin/', views.admin, name='admin'),
-    
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    # path('movies/', include('movies.urls')),
+    path('movies/', include('app_movies.urls')),
+
     path('', include('app_web.urls')),
     path('ecommerse/', include('app_ecommerse.urls')),
     path('news/', include('app_news.urls')),
