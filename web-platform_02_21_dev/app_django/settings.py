@@ -24,6 +24,7 @@ SECRET_KEY = 'fcol_+n%2i=d7*db5+ohls-!&!3*bav@h!2gm5zwi_do&y_akm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+HEROKU = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -143,11 +144,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = Path(BASE_DIR, 'static/')
-# STATIC_DIR = Path(BASE_DIR, 'static')
 
-# STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if not HEROKU:
+    # Включить для DEVELOPMENT, отключить для PRODUCTION
+    STATIC_DIR = Path(BASE_DIR, 'static')
+    STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
+else:
+    # Включить для PRODUCTION, отключить для DEVELOPMENT
+    STATIC_ROOT = Path(BASE_DIR, 'static/')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media')
