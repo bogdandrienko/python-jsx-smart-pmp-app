@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'app_rest_framework.apps.AppRestFrameworkConfig',
 
+    'app_accounts.apps.AppAccountsConfig',
     'app_bootstrap_examples.apps.AppBootstrapExamplesConfig',
     'app_ecommerse.apps.AppEcommerseConfig',
     'app_news.apps.AppNewsConfig',
