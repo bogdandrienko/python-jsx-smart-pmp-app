@@ -40,6 +40,8 @@
                             </ul>
                         </li>
                     </div>
+                </div>
+                <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" 
@@ -82,15 +84,15 @@
                         </li>
                     </div>
                 </div>
+                <!-- Btn-Group -->
+                <div class="btn-group m-1 p-1">
+                    {% block second_btn-group %}{% endblock second_btn-group %}
+                </div>
+                <form class="d-flex navbar-dark bg-dark">
+                    <input class="form-control me-3" type="search" placeholder="Что ищем?" aria-label="Что ищем?">
+                    <button class="btn btn-outline-light" type="submit">Поиск</button>
+                </form>
             </ul>
-              <!-- Btn-Group -->
-              <div class="btn-group m-1 p-1">
-                  {% block second_btn-group %}{% endblock second_btn-group %}
-              </div>
-            <form class="d-flex navbar-dark bg-dark">
-                <input class="form-control me-3" type="search" placeholder="Что ищем?" aria-label="Что ищем?">
-                <button class="btn btn-outline-light" type="submit">Поиск</button>
-            </form>
         </div>
     </div>
 </nav>

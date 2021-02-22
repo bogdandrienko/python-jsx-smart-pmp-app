@@ -13,59 +13,81 @@
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}
-<a href="{% url 'news' %}" class="btn btn-light active" aria-current="page">Список новостей</a>
-<a href="{% url 'news_create' %}" class="btn btn-secondary">Создать</a>
-<a href="http://127.0.0.1:8000/news/1/" class="btn btn-secondary">Комментировать</a>
-{% endblock header %}
+{% block header %}{% endblock header %}
 
 <!-- Main -->
 {% block main %}
     {% if article %}
-        <main>
-            <div class="album py-1 bg-light">
-                <div class="rounded overflow-hidden position-relative">
-                    <div class="">
-                        <div class="">
-                            <div class="card shadow-sm">
-                                {% if article.article_image %}
-                                    <img src="{{ article.article_image.url }}" class="img-fluid" alt="{{ article.article_title }}">
-                                {% else %}
-                                    <img src="#" class="img-fluid" alt="{{ article.article_title }}">
-                                {% endif %}                           
-                                <div class="card-body">
-                                <strong class="card-text d-inline-block mb-2 text-primary"><a href="{% url 'news_detail' article.id %}">{{ article.article_title }}</a></strong>
-                                <p class="card-text">{{ article.article_text }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'news' %}">Все новости</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" href="#">Редактировать</button>
-                                    <form class="form-control" action="{% url 'increase_rating' article.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <button class="btn btn-primary" type="submit">лайк {{ article.article_rating_positive }}</button>
-                                    </form>
-                                    {% if article.get_article_rating_value > 0 %}                      
-                                        <p class="card-text d-inline-block text-primary">({{ article.get_article_rating_value }})</p>
+    <main class="container-fluid">
+        <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+          <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">Новость</h1>
+                <p class="lead my-3">Тут отображён контент, связанный с выбранной новостью, а также внизу есть возможность проголосовать и оставить комментарий.</p>
+            </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">
+                        Новости
+                    </strong>
+                    <h3 class="mb-0">{{ article.article_title }}</h3>
+                    <hr>
+                    <div class="text-center">
+                        {% if article.article_image %}
+                            <img src="{{ article.article_image.url }}" class="bd-placeholder-img" width="100%" height="100%" alt="{{ article.article_title }}">
+                        {% else %}
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ article.article_title }}</text></svg>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <p class="card-text mb-auto">
+                        {{ article.article_text|safe }}
+                    </p>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-lg btn-outline-primary" href="{% url 'news' %}">Все новости</a>
+
+                            <form class="" action="{% url 'increase_rating' article.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-lg btn-outline-success" type="submit">лайков:<p>{{ article.article_rating_positive }}</p></button>
+                            </form>
+
+                        <h3 class="card-title pricing-card-title card-text">
+                            <div class="d-inline-block border text-center">
+                                <p>рейтинг:</p>
+                                <p>
+                                    {% if 0 > article.get_article_rating_value %}
+                                    <div class="text-danger">
+                                        {{ article.get_article_rating_value }}
+                                    </div>                     
                                     {% else %}
-                                        <p class="card-text d-inline-block text-danger">({{ article.get_article_rating_value }})</p>
-                                    {% endif %}    
-                                    <form class="form-control" action="{% url 'decrease_rating' article.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <button class="btn btn-primary" type="submit">дизлайк {{ article.article_rating_negative }}</button>
-                                    </form>
-                                    </div>
-                                    <small class="text-muted">{{ article.article_pub_date }}</small>
-                                </div>
-                                </div>
+                                    <div class="text-success">
+                                        {{ article.get_article_rating_value }}
+                                    </div>    
+                                    {% endif %}
+                                </p>
                             </div>
+                        </h3>
+
+                            <form class="" action="{% url 'decrease_rating' article.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-lg btn-outline-danger" type="submit">дизлайков:<p>{{ article.article_rating_negative }}</p></button>
+                            </form>
+
                         </div>
+                        <small class="text-muted">{{ article.article_pub_date }}</small>
                     </div>
                 </div>
             </div>
-        </main>
+          </div>
+        </div>
+      </main>
         {% if latest_comments_list %}
             <div class="my-3 p-3 bg-body rounded shadow-sm">
-                <h6 class="border-bottom pb-2 mb-0">Комментарии</h6>
+                <h4 class="border-bottom pb-2 mb-0">Комментарии</h4>
                 {% for c in latest_comments_list %}
                     <div class="d-flex text-muted pt-3 col p-4 d-flex flex-column position-static border rounded overflow-hidden">
                         <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -76,7 +98,7 @@
                         <div class="pb-3 mb-0 small lh-sm w-100">
                         <div class="d-flex justify-content-between">
                             <strong class="text-gray-dark">{{c.comment_text}}</strong>
-                            <a href="#">Пожаловаться</a>
+                            <a class="btn btn-danger" href="#">Пожаловаться</a>
                         </div>
                         <span class="d-block">{{c.author_name}}</span>
                         </div>
@@ -87,11 +109,12 @@
         {% else %}
             Комментарии не найдены
         {% endif %}
+        <h4 class="border-bottom mx-auto mb-auto">Добавить свой комментарий:</h4>
         <form class="form-control" action="{% url 'leave_comment' article.id %}" method="POST">
             {% csrf_token %}
             <input class="form-control" type="text" required="" placeholder="Ваше имя" name="name"><br>
             <textarea class="form-control" name="text" required="" placeholder="Ваш комментарий" cols="30" rows="10"></textarea><br>
-            <button class="btn btn-primary" type="submit">Оставить комментарий</button>
+            <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Оставить комментарий</button>
         </form>
         {% else %}
             Статьи не найдены

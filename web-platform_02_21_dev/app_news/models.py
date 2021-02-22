@@ -27,6 +27,10 @@ class Article(models.Model):
 
     def get_article_rating_value(self):
         return self.article_rating_positive - self.article_rating_negative
+    
+
+    def get_total_rating_value(self):
+        return self.article_rating_positive + self.article_rating_negative
 
 
     def increase(self):

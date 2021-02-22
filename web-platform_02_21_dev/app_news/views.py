@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Article
 from django.http.response import Http404, HttpResponseRedirect
 from django.urls import reverse
-
+from .forms import ArticleEditForm
 # Create your views here.
 
 
@@ -23,7 +23,13 @@ def news_create(request):
 
         return render(request, 'news/news_list.html', {'latest_article_list': latest_article_list})
 
-    return render(request, 'news/news_create.html')
+    post_form= ArticleEditForm(request.POST)
+
+    # context = {
+    #     "post_form" : post_form,
+    # }
+
+    return render(request, 'news/news_create.html', {'post_form': post_form})
 
 
 def news_detail(request, article_id):

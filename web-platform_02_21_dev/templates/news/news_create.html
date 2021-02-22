@@ -13,23 +13,25 @@
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}
-<a href="{% url 'news' %}" class="btn btn-light active" aria-current="page">Список новостей</a>
-<a href="{% url 'news_create' %}" class="btn btn-secondary">Создать</a>
-<a href="http://127.0.0.1:8000/news/1/" class="btn btn-secondary">Комментировать</a>
-{% endblock header %}
+{% block header %}{% endblock header %}
 
 <!-- Main -->
 {% block main %}
 <form class="form-control" action="{% url 'news_create' %}" method="POST">
     {% csrf_token %}
-
     <input class="form-control" name="article_title" type="text" required="" placeholder="Ваше имя"><br>
-    <textarea class="form-control" name="article_text" required="" placeholder="Ваш комментарий" cols="30" rows="10"></textarea><br>
-
-    <button class="btn btn-primary" type="submit">Создать статью</button>
+    <!-- <textarea class="form-control" name="article_text" required="" placeholder="Ваш комментарий" cols="30" rows="10"></textarea><br> -->
+    {{ post_form.media }}
+    {{ post_form.as_p }}
+    <br>
+    <div class="btn-group form-control">
+        <button class="btn btn-lg btn-outline-primary" type="submit">Создать статью</button>
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'news' %}">Все новости</a>
+    </div>
 </form>
+
 {% endblock main %}
+
 
 <!-- Footer -->
 {% block footer %}
