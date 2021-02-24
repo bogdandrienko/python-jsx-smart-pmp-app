@@ -54,10 +54,8 @@ INSTALLED_APPS = [
     'app_react.apps.AppReactConfig',
     'app_web.apps.AppWebConfig',
     'app_wheather.apps.AppWheatherConfig',
-
     'app_movies.apps.AppMoviesConfig',
-
-    
+    'app_rational.apps.AppRationalConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,7 +137,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

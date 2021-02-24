@@ -1,0 +1,41 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}Создать новость{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<form class="form-control" action="{% url 'rational_create' %}" method="POST">
+    {% csrf_token %}
+    <input class="form-control" name="rational_name" type="text" required="" placeholder="название статьи"><br>
+    {{ post_form.media }}
+    {{ post_form.as_p }}
+    <br>
+    <div class="btn-group form-control">
+        <button class="btn btn-lg btn-outline-primary" type="submit">Создать статью</button>
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все новости</a>
+    </div>
+</form>
+
+{% endblock main %}
+
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

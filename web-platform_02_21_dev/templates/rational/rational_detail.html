@@ -1,0 +1,134 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}Предложение: {{ page_name }}{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+    {% if rational %}
+    <main class="container-fluid">
+        <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+          <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">Рационализаторское предложение</h1>
+                <p class="lead my-3">Тут отображён контент, связанный с выбранным предложением, а также внизу есть возможность проголосовать и оставить комментарий.</p>
+            </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">
+                        Рационализаторские предложения
+                    </strong>
+                    <h3 class="mb-0">{{ rational.rational_name }}</h3>
+                    <hr>
+                    <div class="text-center">
+                        {% if rational.rational_addition_image %}
+                            <img src="{{ rational.rational_addition_image.url }}" class="bd-placeholder-img" width="20%" height="100%" alt="{{ rational.article_title }}">
+                        {% else %}
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ article.article_title }}</text></svg>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <p class="card-text mb-auto">
+                        {{ rational.rational_description|safe }}
+                    </p>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все новости</a>
+
+                            <form class="" action="#" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-lg btn-outline-success" type="submit">лайков:<p>{{ rational.article_rating_positive }}</p></button>
+                            </form>
+
+                        <h3 class="card-title pricing-card-title card-text">
+                            <div class="d-inline-block border text-center">
+                                <p>рейтинг:</p>
+                                <p>
+                                    {% if 0 > rational.get_article_rating_value %}
+                                    <div class="text-danger">
+                                        {{ rational.get_article_rating_value }}
+                                    </div>                     
+                                    {% else %}
+                                    <div class="text-success">
+                                        {{ rational.get_article_rating_value }}
+                                    </div>    
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </h3>
+
+                            <form class="" action="#" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-lg btn-outline-danger" type="submit">дизлайков:<p>{{ article.article_rating_negative }}</p></button>
+                            </form>
+
+                        </div>
+                        <small class="text-muted">{{ article.article_pub_date }}</small>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </main>
+        {% if latest_comments_list %}
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <h4 class="border-bottom pb-2 mb-0">Комментарии</h4>
+                {% for c in latest_comments_list %}
+                    <div class="d-flex text-muted pt-3 col p-4 d-flex flex-column position-static border rounded overflow-hidden">
+                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#007bff"/>
+                            <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+                        </svg>
+                        <div class="pb-3 mb-0 small lh-sm w-100">
+                        <div class="d-flex justify-content-between">
+                            <strong class="text-gray-dark">{{c.comment_text}}</strong>
+                            <a class="btn btn-danger" href="#">Пожаловаться</a>
+                        </div>
+                        <span class="d-block">{{c.author_name}}</span>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% else %}
+            Комментарии не найдены
+        {% endif %}
+        <h4 class="border-bottom mx-auto mb-auto">Добавить свой комментарий:</h4>
+        <form class="form-control" action="#" method="POST">
+            {% csrf_token %}
+            <input class="form-control" type="text" required="" placeholder="Ваше имя" name="name"><br>
+            <textarea class="form-control" name="text" required="" placeholder="Ваш комментарий" cols="30" rows="10"></textarea><br>
+            <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Оставить комментарий</button>
+        </form>
+        {% else %}
+            Предложение не найдено
+    {% endif %}
+
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
