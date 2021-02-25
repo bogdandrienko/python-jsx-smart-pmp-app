@@ -7,7 +7,7 @@
 {% endblock head %}
 
 <!-- Title -->
-{% block title %}Предложение: {{ page_name }}{% endblock title %}
+{% block title %}Предложение: {{ rational.rational_name }}{% endblock title %}
 
 <!-- Style -->   
 {% block style %}{% endblock style %}
@@ -45,32 +45,35 @@
                     <p class="card-text mb-auto">
                         {{ rational.rational_description|safe }}
                     </p>
+                    <p class="card-text mb-auto">
+                        {{ rational.rational_description_2|safe }}
+                    </p>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все новости</a>
+                            <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все предложения</a>
 
                             <form class="" action="#" method="POST">
                                 {% csrf_token %}
                                 <button class="btn btn-lg btn-outline-success" type="submit">лайков:<p>{{ rational.article_rating_positive }}</p></button>
                             </form>
 
-                        <h3 class="card-title pricing-card-title card-text">
-                            <div class="d-inline-block border text-center">
-                                <p>рейтинг:</p>
-                                <p>
-                                    {% if 0 > rational.get_article_rating_value %}
-                                    <div class="text-danger">
-                                        {{ rational.get_article_rating_value }}
-                                    </div>                     
-                                    {% else %}
-                                    <div class="text-success">
-                                        {{ rational.get_article_rating_value }}
-                                    </div>    
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </h3>
+                            <h3 class="card-title pricing-card-title card-text">
+                                <div class="d-inline-block border text-center">
+                                    <p>рейтинг:</p>
+                                    <p>
+                                        {% if 0 > rational.get_article_rating_value %}
+                                        <div class="text-danger">
+                                            {{ rational.get_article_rating_value }}
+                                        </div>                     
+                                        {% else %}
+                                        <div class="text-success">
+                                            {{ rational.get_article_rating_value }}
+                                        </div>    
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </h3>
 
                             <form class="" action="#" method="POST">
                                 {% csrf_token %}

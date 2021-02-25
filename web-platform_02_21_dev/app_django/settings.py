@@ -158,7 +158,7 @@ MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -200,7 +200,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
         # 'height': 291,
-        'width': '100%',      
+        'width': '100%',    
         'toolbar': 'Full',
         # 'filebrowserWindowHeight': 725,
         # 'filebrowserWindowWidth': 940,

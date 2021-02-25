@@ -17,7 +17,7 @@
 
 <!-- Main -->
 {% block main %}
-  {% if latest_article_list %}
+  
 
 <main class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -31,49 +31,50 @@
   
 
 
-
-<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-    {% for article in latest_article_list %}
-            <div class="col">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-header">
-                        <h4 class="my-0 fw-normal"><strong>{{ article.article_title }}</strong></h4>
-                    </div>
-                    <div class="card-body">
-                        {% if article.article_image %}
-                            <img src="{{ article.article_image.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ article.article_title }}">
-                        {% else %}
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ article.article_title }}</text></svg>
-                        {% endif %}
-                        <h2 class="card-title pricing-card-title">#{{ forloop.revcounter }} <small class="text-muted">/ id(идентификатор)</small></h2>
-                        <h3 class="card-title pricing-card-title ">
-                            <div class="d-inline-block border">
-                                {% if 0 > article.get_article_rating_value %}
-                                <div class="text-danger ">
-                                    {{ article.get_article_rating_value }}
-                                </div>                     
-                                {% else %}
-                                <div class="text-success">
-                                    {{ article.get_article_rating_value }}
-                                </div>    
-                                {% endif %}
+    {% if latest_article_list %}
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            {% for article in latest_article_list %}
+                    <div class="col">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h4 class="my-0 fw-normal"><strong>{{ article.article_title }}</strong></h4>
                             </div>
-                            (рейтинг)<small class="text-muted">/ {{ article.get_total_rating_value }}(голосов)</small>
-                        </h3>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li><small class="text-muted">{{ article.article_pub_date }}</small></li>   
-                        </ul>
-                        <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'news_detail' article.id %}">Подробнее</a>
+                            <div class="card-body">
+                                {% if article.article_image %}
+                                    <img src="{{ article.article_image.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ article.article_title }}">
+                                {% else %}
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ article.article_title }}</text></svg>
+                                {% endif %}
+                                <h2 class="card-title pricing-card-title">#{{ forloop.revcounter }} <small class="text-muted">/ id(идентификатор)</small></h2>
+                                <h3 class="card-title pricing-card-title ">
+                                    <div class="d-inline-block border">
+                                        {% if 0 > article.get_article_rating_value %}
+                                        <div class="text-danger ">
+                                            {{ article.get_article_rating_value }}
+                                        </div>                     
+                                        {% else %}
+                                        <div class="text-success">
+                                            {{ article.get_article_rating_value }}
+                                        </div>    
+                                        {% endif %}
+                                    </div>
+                                    (рейтинг)<small class="text-muted">/ {{ article.get_total_rating_value }}(голосов)</small>
+                                </h3>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li><small class="text-muted">{{ article.article_pub_date }}</small></li>   
+                                </ul>
+                                <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'news_detail' article.id %}">Подробнее</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-    {% endfor %}
-</div>
-</main>
-
+            {% endfor %}
+        </div>
   {% else %}
     Статьи не найдены
   {% endif %}
+</main>
+
+
 {% endblock main %}
 
 <!-- Footer -->
