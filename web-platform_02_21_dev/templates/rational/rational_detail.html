@@ -53,31 +53,31 @@
                         <div class="btn-group">
                             <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все предложения</a>
 
-                            <form class="" action="#" method="POST">
+                            <form class="" action="{% url 'rational_increase_rating' rational.id %}" method="POST">
                                 {% csrf_token %}
-                                <button class="btn btn-lg btn-outline-success" type="submit">лайков:<p>{{ rational.article_rating_positive }}</p></button>
+                                <button class="btn btn-lg btn-outline-success" type="submit">лайков:<p>{{ rational.rational_rating_positive }}</p></button>
                             </form>
 
                             <h3 class="card-title pricing-card-title card-text">
                                 <div class="d-inline-block border text-center">
                                     <p>рейтинг:</p>
                                     <p>
-                                        {% if 0 > rational.get_article_rating_value %}
+                                        {% if 0 > rational.get_rational_rating_value %}
                                         <div class="text-danger">
-                                            {{ rational.get_article_rating_value }}
+                                            {{ rational.get_rational_rating_value }}
                                         </div>                     
                                         {% else %}
                                         <div class="text-success">
-                                            {{ rational.get_article_rating_value }}
+                                            {{ rational.get_rational_rating_value }}
                                         </div>    
                                         {% endif %}
                                     </p>
                                 </div>
                             </h3>
 
-                            <form class="" action="#" method="POST">
+                            <form class="" action="{% url 'rational_decrease_rating' rational.id %}" method="POST">
                                 {% csrf_token %}
-                                <button class="btn btn-lg btn-outline-danger" type="submit">дизлайков:<p>{{ article.article_rating_negative }}</p></button>
+                                <button class="btn btn-lg btn-outline-danger" type="submit">дизлайков:<p>{{ rational.rational_rating_negative }}</p></button>
                             </form>
 
                         </div>
@@ -88,10 +88,10 @@
           </div>
         </div>
       </main>
-        {% if latest_comments_list %}
+        {% if comments %}
             <div class="my-3 p-3 bg-body rounded shadow-sm">
                 <h4 class="border-bottom pb-2 mb-0">Комментарии</h4>
-                {% for c in latest_comments_list %}
+                {% for comment in comments %}
                     <div class="d-flex text-muted pt-3 col p-4 d-flex flex-column position-static border rounded overflow-hidden">
                         <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
                             <title>Placeholder</title>
@@ -100,10 +100,10 @@
                         </svg>
                         <div class="pb-3 mb-0 small lh-sm w-100">
                         <div class="d-flex justify-content-between">
-                            <strong class="text-gray-dark">{{c.comment_text}}</strong>
+                            <strong class="text-gray-dark">{{comment.comment_text}}</strong>
                             <a class="btn btn-danger" href="#">Пожаловаться</a>
                         </div>
-                        <span class="d-block">{{c.author_name}}</span>
+                        <span class="d-block">{{comment.author_name}}</span>
                         </div>
                     </div>
                     <hr>
@@ -113,7 +113,7 @@
             Комментарии не найдены
         {% endif %}
         <h4 class="border-bottom mx-auto mb-auto">Добавить свой комментарий:</h4>
-        <form class="form-control" action="#" method="POST">
+        <form class="form-control" action="{% url 'rational_leave_comment' rational.id %}" method="POST">
             {% csrf_token %}
             <input class="form-control" type="text" required="" placeholder="Ваше имя" name="name"><br>
             <textarea class="form-control" name="text" required="" placeholder="Ваш комментарий" cols="30" rows="10"></textarea><br>

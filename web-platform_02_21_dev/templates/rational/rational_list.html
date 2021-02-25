@@ -41,6 +41,7 @@
                 {% if forloop_2.slug == 'declared' %}
                     <a class="btn btn-lg btn-outline-secondary" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>
                 {% endif %}
+                    <a class="btn btn-lg btn-outline-primary" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>
             {% endfor %}
         </div>
     </div>
@@ -60,16 +61,16 @@
                                 {% else %}
                                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ forloop_1.rational_name }}</text></svg>
                                 {% endif %}
-                                <h2 class="card-title pricing-card-title">#{{ forloop_2.revcounter }} <small class="text-muted">/ id(идентификатор)</small></h2>
+                                <h2 class="card-title pricing-card-title">#{{ forloop.revcounter }} <small class="text-muted">/ id(идентификатор)</small></h2>
                                 <h3 class="card-title pricing-card-title ">
                                     <div class="d-inline-block border">
-                                        {% if 0 > forloop_2.get_article_rating_value %}
+                                        {% if 0 > forloop_2.get_rational_rating_value %}
                                         <div class="text-danger ">
-                                            {{ forloop_2.get_article_rating_value }}
+                                            {{ forloop_2.get_rational_rating_value }}
                                         </div>                     
                                         {% else %}
                                         <div class="text-success">
-                                            {{ forloop_2.get_article_rating_value }}
+                                            {{ forloop_2.get_rational_rating_value }}
                                         </div>    
                                         {% endif %}
                                     </div>
