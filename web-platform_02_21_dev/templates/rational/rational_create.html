@@ -7,7 +7,7 @@
 {% endblock head %}
 
 <!-- Title -->
-{% block title %}Создать новость{% endblock title %}
+{% block title %}Создать рационализаторское предложение{% endblock title %}
 
 <!-- Style -->
 {% block style %}{% endblock style %}
@@ -20,6 +20,16 @@
 <form class="form-control" action="{% url 'rational_create' %}" method="POST">
     {% csrf_token %}
     <input class="form-control" name="rational_name" type="text" required="" placeholder="название статьи"><br>
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" 
+        name="rational_structure_from" id="rational_structure_from" required>
+        <option selected value=''>Нажмите сюда и выберите из списка</option>
+        {% for forloop_2 in category %}
+            <option>{{ forloop_2.name }}</option>
+        {% endfor %}
+        {% comment %} <option>ЭУ</option>
+        <option>ГТК</option>
+        <option>АТП</option> {% endcomment %}
+    </select>
     {{ post_form.media }}
     {{ post_form.as_p }}
     <br>

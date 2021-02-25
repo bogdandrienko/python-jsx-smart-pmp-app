@@ -37,14 +37,16 @@ def rational_create(request):
         RationalModel.objects.create(
             rational_name = request.POST['rational_name'],
             rational_description = request.POST['rational_description'],
-            rational_category = CategoryRationalModel.objects.get(id='1')
+            rational_structure_from = request.POST['rational_structure_from'],
+            rational_category = CategoryRationalModel.objects.get(name=request.POST['rational_structure_from']),
+            # rational_category = CategoryRationalModel.objects.get(id='1')
             )
         return rational_list(request)
     post_form= RationalCreateForm(request.POST)
-    page_name = 'Создать рационализаторское предложение'
+    category = CategoryRationalModel.objects.order_by('-id')
     context = {
         'post_form': post_form,
-        'page_name': page_name,
+        'category': category
     }
     return render(request, 'rational/rational_create.html', context)
 
