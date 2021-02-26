@@ -1,15 +1,12 @@
-{% extends "components/base.html" %}
-{% load static %}
+{% extends "components/base.html" %} {% load static %}
 
 <!-- Head -->
-{% block head %}
-    {% include 'components/navbar.html' %}
-{% endblock head %}
+{% block head %} {% include 'components/navbar.html' %} {% endblock head %}
 
 <!-- Title -->
 {% block title %}Все рационализаторские предложения{% endblock title %}
 
-<!-- Style -->   
+<!-- Style -->
 {% block style %}{% endblock style %}
 
 <!-- Header -->
@@ -26,68 +23,54 @@
         <div class="d-flex justify-content-between align-items-center btn-group">
             <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'rational_create' %}">Добавить предложение</a>
         </div>
-        <div class="btn-group">
-            <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все предложения</a>
-            {% for forloop_2 in category %}
-                {% if forloop_2.slug == 'completed' %}
-                        <a class="btn btn-lg btn-outline-success" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>
-                {% endif %}
-                {% if forloop_2.slug == 'progress' %}
-                    <a class="btn btn-lg btn-outline-info" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>
-                {% endif %}
-                {% if forloop_2.slug == 'aborted' %}
-                    <a class="btn btn-lg btn-outline-danger" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>
-                {% endif %}
-                {% if forloop_2.slug == 'declared' %}
-                    <a class="btn btn-lg btn-outline-secondary" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>
-                {% endif %}
-                    <a class="btn btn-lg btn-outline-primary" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>
-            {% endfor %}
+        <div class="btn-group m-1">
+            <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все предложения</a> {% for forloop_2 in category %} {% if forloop.counter == 4 %}
+            <a class="btn btn-lg btn-outline-success" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a> {% endif %} {% if forloop.counter == 2 %}
+            <a class="btn btn-lg btn-outline-info" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a> {% endif %} {% if forloop.counter == 3 %}
+            <a class="btn btn-lg btn-outline-danger" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a> {% endif %} {% if forloop.counter == 1 %}
+            <a class="btn btn-lg btn-outline-secondary" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a> {% endif %} {% comment %} <a class="btn btn-lg btn-outline-primary" href="{% url 'rational_by_category' forloop_2.slug %}">{{ forloop_2.name }}</a>            {% endcomment %} {% endfor %}
         </div>
     </div>
 
-    
+
     {% if rational %}
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            {% for forloop_2 in rational %}
-                    <div class="col">
-                        <div class="card mb-4 shadow-sm">
-                            <div class="card-header">
-                                <h4 class="my-0 fw-normal card-header bg-dark text-light"><strong>{{ forloop_2.rational_name }}</strong></h4>
-                            </div>
-                            <div class="card-body">
-                                {% if forloop_2.rational_addition_image %}
-                                    <img src="{{ forloop_2.rational_addition_image.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ forloop_2.rational_name }}">
-                                {% else %}
-                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ forloop_1.rational_name }}</text></svg>
-                                {% endif %}
-                                <h2 class="card-title pricing-card-title">#{{ forloop.revcounter }} <small class="text-muted">/ id(идентификатор)</small></h2>
-                                <h3 class="card-title pricing-card-title ">
-                                    <div class="d-inline-block border">
-                                        {% if 0 > forloop_2.get_rational_rating_value %}
-                                        <div class="text-danger ">
-                                            {{ forloop_2.get_rational_rating_value }}
-                                        </div>                     
-                                        {% else %}
-                                        <div class="text-success">
-                                            {{ forloop_2.get_rational_rating_value }}
-                                        </div>    
-                                        {% endif %}
-                                    </div>
-                                    (рейтинг)<small class="text-muted">/ {{ forloop_2.get_total_rating_value }}(голосов)</small>
-                                </h3>
-                                <ul class="list-unstyled mt-3 mb-4">
-                                    <li><small class="text-muted">{{ forloop_2.article_pub_date }}</small></li>   
-                                </ul>
-                                <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'rational_detail' forloop_2.id %}">Подробнее</a>
-                            </div>
+    <div class="row row-cols-1 row-cols-md-3 text-center">
+        {% for forloop_2 in rational %}
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header m-0 p-1">
+                    <h4 class="fw-normal card-header bg-light text-dark text-decoration-none"><strong>{{ forloop_2.rational_name }}</strong></h4>
+                </div>
+                <div class="card-body m-0 p-1">
+                    <a href="{% url 'rational_detail' forloop_2.id %}">
+                        {% if forloop_2.rational_addition_image %}
+                            <img src="{{ forloop_2.rational_addition_image.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ forloop_2.rational_name }}">
+                        {% else %}
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ forloop_2.rational_name }}</text></svg>
+                        {% endif %}
+                    </a>
+                    <div class="my-1 d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            {% if 1 > forloop_2.get_rational_rating_value %}
+                            <div class="btn btn-sm btn-outline-danger text-link-danger">{{ forloop_2.get_rational_rating_value }}<sup class="text-muted">{{ forloop_2.get_total_rating_value }}</sup></div>
+                            {% else %}
+                            <div class="btn btn-sm btn-outline-success text-link-success">{{ forloop_2.get_rational_rating_value }}<sup class="text-muted">{{ forloop_2.get_total_rating_value }}</sup></div>
+                            {% endif %}
+                            <div class="btn btn-sm btn-outline-secondary text-link-light">{{ forloop_2.get_total_comment_value }}</div>
                         </div>
+                        <small class="text-muted">{{ forloop_2.rational_date_registrated }}</small>
                     </div>
-            {% endfor %}
+                    <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'rational_detail' forloop_2.id %}">Подробнее</a>
+                    <div class="d-flex justify-content-between align-items-center text-muted">
+                        <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">{{ forloop_2.rational_autor_name }}</small>
+                        <small>#{{ forloop.revcounter }}</small>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% else %}
-        Предложения не найдены :(
-    {% endif %}
+        {% endfor %}
+    </div>
+    {% else %} Предложения не найдены :( {% endif %}
 </main>
 
 
@@ -95,9 +78,7 @@
 {% endblock main %}
 
 <!-- Footer -->
-{% block footer %}
-    {% include 'components/footer.html' %}
-{% endblock footer %}
+{% block footer %} {% include 'components/footer.html' %} {% endblock footer %}
 
 <!-- Script -->
 {% block script %}{% endblock script %}

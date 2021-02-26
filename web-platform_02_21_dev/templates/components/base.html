@@ -1,43 +1,45 @@
-<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html> {% load static %}
 <html lang="en">
+<!-- Head -->
+
+<head>
     <!-- Head -->
-    <head>
-        <!-- Head -->
-        {% block head %}{% endblock head %}  
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Title -->
-        <title>
-            {% block title %}{% endblock title %}
-        </title>     
-        <!-- Style -->
-        {% block style %}{% endblock style %}        
-        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}"/>
-        <!-- Not Optimizated Bootstrap CSS -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.css' %}">
-        <!-- Optimizated Bootstrap CSS -->
-        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.min.css' %}"> -->
-    </head>
-    <!-- Body -->
-    <body class="bg-dark">
-        <!-- Header -->
-        <header class="bg-dark">
-            {% block header %}{% endblock header %}
-        </header>
-        <!-- Main -->
-        <main class="bg-light" style="min-height: 60vh;">
-            {% block main %}{% endblock main %}
-        </main>
-        <!-- Footer -->
-        <footer class="bg-darkm-1 p-1">
-            {% block footer %}{% endblock footer %}
-        </footer>
-        <!-- Script -->
-        {% block script %}{% endblock script %}
-        <!-- Not Optimizated Bootstrap JavaScript -->
-        <script src="{% static 'js/bootstrap_5.0.0/bootstrap.js' %}"></script>
-        <!-- Optimizated Bootstrap JavaScript -->
-        <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.min.js' %}"></script> -->
-    </body>
+    {% block head %}{% endblock head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
+    <!-- Style -->
+    {% block style %}{% endblock style %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}" />
+    <!-- Not Optimizated Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.css' %}">
+    <!-- Optimizated Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.0.0/bootstrap.min.css' %}"> -->
+</head>
+<!-- Body -->
+
+<body class="bg-dark">
+    <!-- Header -->
+    <header class="bg-dark">
+        {% block header %}{% endblock header %}
+    </header>
+    <!-- Main -->
+    <main class="bg-light" style="min-height: 60vh;">
+        {% block main %}{% endblock main %}
+    </main>
+    <!-- Footer -->
+    <footer class="bg-dark m-1 p-1">
+        {% block footer %}{% endblock footer %}
+    </footer>
+    <!-- Script -->
+    {% block script %}{% endblock script %}
+    <!-- Not Optimizated Bootstrap JavaScript -->
+    <script src="{% static 'js/bootstrap_5.0.0/bootstrap.js' %}"></script>
+    <!-- Optimizated Bootstrap JavaScript -->
+    <!-- <script src="{% static 'js/bootstrap_5.0.0/bootstrap.min.js' %}"></script> -->
+</body>
+
 </html>
