@@ -18,25 +18,28 @@
 <main class="container-fluid">
     {% if rational %}
         <div class="p-md-4 text-white rounded bg-dark">
-            <div class="col-md-6 ">
-                <h1 class="display-4 fst-italic ">Рационализаторское предложение</h1>
-                <p class="lead ">Тут отображён контент, связанный с выбранным предложением, а также внизу есть возможность проголосовать и оставить комментарий.</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fst-italic ">Рационализаторское предложение</h1>
+                    <p class="lead ">Тут отображён контент, связанный с выбранным предложением, а также внизу есть возможность проголосовать и оставить комментарий.</p>
+                </div>
+                <a class="btn btn-lg btn-outline-light" href="{% url 'rational' %}">Все предложения</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative ">
-                    <div class="col p-4 d-flex flex-column position-static ">
-                        <strong class="d-inline-block text-primary ">
-                            Рационализаторские предложения
-                        </strong>
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <div class="d-flex justify-content-between align-items-center">
+                        <strong class="d-inline-block text-primary">{{ rational.rational_category }}</strong>
+                        <strong class="d-inline-block text-primary">Рационализаторские предложения</strong>
+                        </div>
                         <h3>{{ rational.rational_name }}</h3>
                         <hr>
                         <div class="text-center ">
                             {% if rational.rational_addition_image %}
                             <img src="{{ rational.rational_addition_image.url }} " class="bd-placeholder-img " width="70% " height="100% " alt="{{ rational.article_title }} "> {% else %}
-                            <svg class="bd-placeholder-img card-img-top " width="100% " height="100% " xmlns="http://www.w3.org/2000/svg " role="img " aria-label="Placeholder: Thumbnail " preserveAspectRatio="xMidYMid slice " focusable="false
-        "><title>Placeholder</title><rect width="100% " height="100% " fill="#55595c "/><text x="50% " y="50% " fill="#eceeef " dy=".3em ">{{ article.article_title }}</text></svg> {% endif %}
+                            <svg class="bd-placeholder-img card-img-top " width="100% " height="100% " xmlns="http://www.w3.org/2000/svg " role="img " aria-label="Placeholder: Thumbnail " preserveAspectRatio="xMidYMid slice " focusable="false"><title>Placeholder</title><rect width="100% " height="100% " fill="#55595c "/><text x="50% " y="50% " fill="#eceeef " dy=".3em ">{{ article.article_title }}</text></svg> {% endif %}
                         </div>
                         <hr>
                         <p class="card-text ">
@@ -46,35 +49,24 @@
                             {{ rational.rational_description_2|safe }}
                         </p>
                         <hr>
-                        <div class="d-flex justify-content-between align-items-center ">
-                            <div class="btn-group ">
-                                <a class="btn btn-lg btn-outline-primary " href="{% url 'rational' %} ">Все предложения</a>
-                                <div class="btn-group card-body ">
-                                    <form class=" " action="{% url 'rational_increase_rating' rational.id %} " method="POST ">
-                                        {% csrf_token %}
-                                        <button class="btn btn-lg btn-outline-success " type="submit ">лайков:<p>{{ rational.rational_rating_positive }}</p></button>
-                                    </form>
-                                    <h3 class="card-header ">
-                                        <div class="d-inline-block border text-center ">
-                                            <p>рейтинг:</p>
-                                            <p>
-                                                {% if 1 > rational.get_rational_rating_value %}
-                                                <div class="text-danger ">
-                                                    {{ rational.get_rational_rating_value }}
-                                                </div>
-                                                {% else %}
-                                                <div class="text-success ">
-                                                    {{ rational.get_rational_rating_value }}
-                                                </div>
-                                                {% endif %}
-                                            </p>
-                                        </div>
-                                    </h3>
-                                    <form class=" " action="{% url 'rational_decrease_rating' rational.id %} " method="POST ">
-                                        {% csrf_token %}
-                                        <button class="btn btn-lg btn-outline-danger " type="submit ">дизлайков:<p>{{ rational.rational_rating_negative }}</p></button>
-                                    </form>
-                                </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <form action="{% url 'rational_increase_rating' rational.id %} " method="POST ">
+                                    {% csrf_token %}
+                                    {% if likes.like %}
+                                        <button class="m-md-2 btn btn-xs btn-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
+                                    {% else %}
+                                        <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
+                                    {% endif %}
+                                </form>
+                                <form action="{% url 'rational_decrease_rating' rational.id %}" method="POST ">
+                                    {% csrf_token %}
+                                    {% if likes.dislike %}
+                                        <button class="m-md-2 btn btn-xs btn-danger" type="submit">дизлайков:<p>{{ likes.total_dislike }}</p></button>
+                                    {% else %}
+                                        <button class="m-md-2 btn btn-xs btn-outline-danger" type="submit">дизлайков:<p>{{ likes.total_dislike }}</p></button>
+                                    {% endif %}
+                                </form>
                             </div>
                             {% if rational.rational_addition_file_1 %}
                                 <a class="btn btn-dark" href="{{ rational.rational_addition_file_1.url }}">скачать 1 приложение</a>     
@@ -88,7 +80,7 @@
                 </div>
             </div>
         </div>
-        {% include 'components/comments.html' %}
+        {% include 'rational/comments.html' %}
     {% else %}
         Предложение не найдено 
     {% endif %}

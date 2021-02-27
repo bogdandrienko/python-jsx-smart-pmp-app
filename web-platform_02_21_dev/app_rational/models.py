@@ -1,8 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils import timezone
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import Group, User
+from django.conf import settings
 # Create your models here.
 
 
@@ -62,6 +61,20 @@ class RationalModel(models.Model):
     
     def get_total_comment_value(self):
         return CommentRationalModel.objects.filter(article=self.id).count()
+    
+    def get_like_count(self):
+        return LikeRationalModel.objects.filter(blog_post=self, like=True).count()
+
+    def get_dislike_count(self):
+        return LikeRationalModel.objects.filter(blog_post=self, like=False).count()
+    
+    def get_total_rating_value(self):
+        return LikeRationalModel.objects.filter(blog_post=self, like=True).count() + LikeRationalModel.objects.filter(blog_post=self, like=False).count()
+
+    def get_total_rating(self):
+        return LikeRationalModel.objects.filter(blog_post=self, like=True).count() - LikeRationalModel.objects.filter(blog_post=self, like=False).count()
+    
+
 
 
 class CommentRationalModel(models.Model):
@@ -77,3 +90,18 @@ class CommentRationalModel(models.Model):
 
     def __str__(self):
         return self.author_name
+
+
+class LikeRationalModel(models.Model):
+    blog_post = models.ForeignKey(RationalModel, on_delete = models.CASCADE, null=True, verbose_name='к какому предложению')
+    liked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, null=True, verbose_name='кто поставил лайк')
+    like = models.BooleanField('Лайк', default=False)
+    created = models.DateTimeField('дата создания', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = 'Лайки'
+        verbose_name_plural = 'Лайк'
+
+    def __str__(self):
+        return f'{self.liked_by}: {self.blog_post} |{self.like}'
