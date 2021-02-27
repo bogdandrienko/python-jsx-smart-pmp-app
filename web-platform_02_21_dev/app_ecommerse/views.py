@@ -6,8 +6,6 @@ from .forms import SignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 
-
-
 # Create your views here.
 
 def home(request, category_slug=None):
@@ -114,7 +112,7 @@ def loginView(request):
 				login(request, user)
 				return redirect('home')
 			else:
-				return redirect('signup')
+				return redirect('ecommerse_signup')
 
 	else:
 		form = AuthenticationForm()
@@ -123,11 +121,4 @@ def loginView(request):
 
 def signoutView(request):
 	logout(request)
-	return redirect('login')
-
-
-
-
-
-
-
+	return redirect('ecommerse_login')

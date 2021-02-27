@@ -1,5 +1,8 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.utils import timezone
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import Group, User
 # Create your models here.
 
 
@@ -23,7 +26,7 @@ class RationalModel(models.Model):
     rational_category           = models.ForeignKey(CategoryRationalModel, on_delete=models.CASCADE)
     rational_structure_from     = models.CharField('имя подразделения', max_length=50, blank=True)
     rational_id_registrated     = models.PositiveSmallIntegerField('номер регистрации', blank=True, default=0)
-    rational_date_registrated   = models.DateTimeField('дата регистрации', editable=True, blank=True)
+    rational_date_registrated   = models.DateTimeField('дата регистрации', editable=True, auto_created=True, default=timezone.now, blank=True)
     rational_name               = models.CharField('название статьи', max_length=100, blank=False)
     rational_place_innovation   = models.CharField('место внедрения', max_length=200, blank=True)
     rational_description        = RichTextField('описание', blank=True)
@@ -35,7 +38,7 @@ class RationalModel(models.Model):
     
     rational_rating_positive    = models.IntegerField('лайки', default=0, auto_created=0)
     rational_rating_negative    = models.IntegerField('дизлайки', default=0, auto_created=0)
-    rational_autor_name         = models.CharField('имя автора', max_length=150, editable=True, blank=True)
+    rational_autor_name         = models.CharField('имя автора', max_length=150, editable=True, default=None, blank=True)
 
     class Meta:
         ordering                = ('-id',)
@@ -58,7 +61,7 @@ class RationalModel(models.Model):
         return self.rational_rating_positive + self.rational_rating_negative
     
     def get_total_comment_value(self):
-        return CommentRationalModel.objects.all().count()
+        return CommentRationalModel.objects.filter(article=self.id).count()
 
 
 class CommentRationalModel(models.Model):

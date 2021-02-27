@@ -55,8 +55,21 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Основной функционал</h6>
-                                    <a class="dropdown-item" href="{% url 'home' %}">главная</a>
-                                    <a class="dropdown-item" href="{% url 'admin' %}">админ панель</a>
+                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
+                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item" href="{% url 'signup' %}">Аккаунт: создать</a>
+                                    <a class="dropdown-item" href="{% url 'login' %}">Аккаунт: войти
+                                        {% if request.user.is_authenticated %}
+                                            [вы уже вошли в аккаунт]
+                                        {% endif %}
+                                    </a>
+                                    <a class="dropdown-item" href="{% url 'signout' %}">Аккаунт: выйти 
+                                        {% if request.user.is_authenticated %}
+                                            [{{ request.user.first_name }}]
+                                        {% else %}
+                                            [вы не вошли в аккаунт]    
+                                        {% endif %}
+                                    </a>
                                     <a class="dropdown-item disabled" href="#">личный кабинет</a>
                                     <a class="dropdown-item disabled" href="#">мои уведомления</a>
                                     <a class="dropdown-item disabled" href="#">мои достижения</a>
