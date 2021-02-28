@@ -11,21 +11,16 @@ def rational_list(request, category_slug=None):
         return redirect('login')
     category_page = None
     rational = None
-    if category_slug != None:
-        category_page = get_object_or_404(CategoryRationalModel, slug=category_slug)
-        rational = RationalModel.objects.filter(rational_category=category_page).order_by('-rational_date_registrated')
-    else:
-        rational = RationalModel.objects.order_by('-rational_date_registrated')
+    try:
+        search = request.POST['search_text']
+        rational = RationalModel.objects.filter(rational_name__icontains=search)
+    except:
+        if category_slug != None:
+            category_page = get_object_or_404(CategoryRationalModel, slug=category_slug)
+            rational = RationalModel.objects.filter(rational_category=category_page).order_by('-rational_date_registrated')
+        else:
+            rational = RationalModel.objects.order_by('-rational_date_registrated')
     category = CategoryRationalModel.objects.order_by('-id')
-
-    
-
-
-
-
-
-
-
     context = {
         'rational': rational,
         'category': category
@@ -40,25 +35,20 @@ def rational_detail(request, rational_id):
     except:
         raise Http404('Предложение не найдено')
     comments = rational.commentrationalmodel_set.order_by('-id')
-
     blog = RationalModel.objects.get(id=rational_id)
     user = User.objects.get(id=request.user.id)
-
     try:
         blog_like = LikeRationalModel.objects.get(blog_post=blog, liked_by=user, like=True)
         blog_is_like = True
     except:
         blog_is_like = False
-
     try:
         blog_like = LikeRationalModel.objects.get(blog_post=blog, liked_by=user, like=False)
         blog_is_dislike = True
     except:
         blog_is_dislike = False
-
     like_count = LikeRationalModel.objects.filter(blog_post=blog, like=True).count()
     dislike_count = LikeRationalModel.objects.filter(blog_post=blog, like=False).count()
-
     likes = {
         'like': blog_is_like,
         'dislike': blog_is_dislike,
@@ -66,7 +56,6 @@ def rational_detail(request, rational_id):
         'total_dislike': dislike_count, 
         'total_rating': like_count - dislike_count
     }
-
     context = {
         'rational': rational,
         'comments': comments,
@@ -112,10 +101,8 @@ def rational_leave_comment(request, rational_id):
 def rational_increase_rating(request, rational_id):
     if request.user.is_authenticated is not True:
         return redirect('login')
-    
     blog = RationalModel.objects.get(id=rational_id)
     user = User.objects.get(id=request.user.id)
-
     try:
         blog_like = LikeRationalModel.objects.get(blog_post=blog, liked_by=user, like=True)
         blog_like.delete()
@@ -125,13 +112,11 @@ def rational_increase_rating(request, rational_id):
             liked_by = user,
             like = True
             )
-
     try:
         blog_like = LikeRationalModel.objects.get(blog_post=blog, liked_by=user, like=False)
         blog_like.delete()
     except:
         pass
-
     rational = RationalModel.objects.get(id = rational_id)
     rational.increase()
     rational.save()
@@ -141,10 +126,8 @@ def rational_increase_rating(request, rational_id):
 def rational_decrease_rating(request, rational_id):
     if request.user.is_authenticated is not True:
         return redirect('login')
-
     blog = RationalModel.objects.get(id=rational_id)
     user = User.objects.get(id=request.user.id)
-
     try:
         blog_like = LikeRationalModel.objects.get(blog_post=blog, liked_by=user, like=False)
         blog_like.delete()
@@ -154,13 +137,11 @@ def rational_decrease_rating(request, rational_id):
             liked_by = user,
             like = False
             )
-
     try:
         blog_like = LikeRationalModel.objects.get(blog_post=blog, liked_by=user, like=True)
         blog_like.delete()
     except:
         pass
-
     rational = RationalModel.objects.get(id = rational_id)
     rational.decrease()
     rational.save()

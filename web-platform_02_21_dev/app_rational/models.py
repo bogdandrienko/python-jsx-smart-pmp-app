@@ -34,10 +34,9 @@ class RationalModel(models.Model):
     rational_addition_file_2    = models.FileField('приложение 2 к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
     rational_addition_image     = models.ImageField('картинка к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
 
-    
-    rational_rating_positive    = models.IntegerField('лайки', default=0, auto_created=0)
-    rational_rating_negative    = models.IntegerField('дизлайки', default=0, auto_created=0)
+
     rational_autor_name         = models.CharField('имя автора', max_length=150, editable=True, default=None, blank=True)
+
 
     class Meta:
         ordering                = ('-id',)
@@ -46,19 +45,7 @@ class RationalModel(models.Model):
 
     def __str__(self):
         return self.rational_name
-    
-    def increase(self):
-        self.rational_rating_positive = self.rational_rating_positive + 1
-    
-    def decrease(self):
-        self.rational_rating_negative = self.rational_rating_negative + 1
-
-    def get_rational_rating_value(self):
-        return self.rational_rating_positive - self.rational_rating_negative
-    
-    def get_total_rating_value(self):
-        return self.rational_rating_positive + self.rational_rating_negative
-    
+        
     def get_total_comment_value(self):
         return CommentRationalModel.objects.filter(article=self.id).count()
     
@@ -73,8 +60,6 @@ class RationalModel(models.Model):
 
     def get_total_rating(self):
         return LikeRationalModel.objects.filter(blog_post=self, like=True).count() - LikeRationalModel.objects.filter(blog_post=self, like=False).count()
-    
-
 
 
 class CommentRationalModel(models.Model):
