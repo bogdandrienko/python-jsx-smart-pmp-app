@@ -2,8 +2,10 @@ from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls.base import reverse
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel
 from .forms import RationalCreateForm
+
 # Create your views here.
 
 def rational_list(request, category_slug=None):
@@ -20,10 +22,21 @@ def rational_list(request, category_slug=None):
             rational = RationalModel.objects.filter(rational_category=category_page).order_by('-rational_date_registrated')
         else:
             rational = RationalModel.objects.order_by('-rational_date_registrated')
+    paginator = Paginator(rational, 6) # Show 25 contacts per page
     category = CategoryRationalModel.objects.order_by('-id')
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
     context = {
         'rational': rational,
-        'category': category
+        'category': category,
+        'contacts': contacts
     }
     return render(request, 'rational/rational_list.html', context)
 
@@ -75,7 +88,7 @@ def rational_create(request):
             # rational_category = CategoryRationalModel.objects.get(id='1')
             rational_autor_name = request.user.first_name,
             )
-        return rational_list(request)
+        return redirect('rational')
     post_form= RationalCreateForm(request.POST)
     category = CategoryRationalModel.objects.order_by('-id')
     context = {

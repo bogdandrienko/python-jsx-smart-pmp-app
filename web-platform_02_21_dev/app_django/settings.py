@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+db_from_env = dj_database_url.config()
 
 
 # Quick-start development settings - unsuitable for production
@@ -98,12 +101,24 @@ WSGI_APPLICATION = 'app_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+if not HEROKU:
+    # Включить для DEVELOPMENT, отключить для PRODUCTION
+    DATABASES = {'default': {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
+    }}
+else:
+    # Включить для PRODUCTION, отключить для DEVELOPMENT
+    DATABASES = {'default': {    
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'deinthsv9addbq',
+    'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
+    'PORT': 5432,
+    'USER': 'mayhqhjnyukmmh',
+    'PASSWORD': '4e085cdc07df03952edd34624245b1a69894875064ca6795a977d8b0964bfdec'
+    }}
+
+
 
 
 # Password validation
