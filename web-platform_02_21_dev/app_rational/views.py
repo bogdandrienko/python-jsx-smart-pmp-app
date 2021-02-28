@@ -131,7 +131,6 @@ def rational_increase_rating(request, rational_id):
     except:
         pass
     rational = RationalModel.objects.get(id = rational_id)
-    rational.increase()
     rational.save()
     return HttpResponseRedirect( reverse('rational_detail', args = (rational.id,)) )
 
@@ -156,6 +155,5 @@ def rational_decrease_rating(request, rational_id):
     except:
         pass
     rational = RationalModel.objects.get(id = rational_id)
-    rational.decrease()
     rational.save()
     return HttpResponseRedirect( reverse('rational_detail', args = (rational.id,)) )

@@ -34,8 +34,7 @@ class RationalModel(models.Model):
     rational_addition_file_2    = models.FileField('приложение 2 к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
     rational_addition_image     = models.ImageField('картинка к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
 
-
-    rational_autor_name         = models.CharField('имя автора', max_length=150, editable=True, default=None, blank=True)
+    rational_autor_name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.SET_NULL, null=True, verbose_name='имя автора', editable=True, default=None, blank=True)
 
 
     class Meta:
