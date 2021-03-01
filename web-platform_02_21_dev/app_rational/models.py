@@ -22,19 +22,26 @@ class CategoryRationalModel(models.Model):
 
 
 class RationalModel(models.Model):
-    rational_category           = models.ForeignKey(CategoryRationalModel, on_delete=models.CASCADE)
-    rational_structure_from     = models.CharField('имя подразделения', max_length=50, blank=True)
-    rational_id_registrated     = models.PositiveSmallIntegerField('номер регистрации', blank=True, default=0)
-    rational_date_registrated   = models.DateTimeField('дата регистрации', editable=True, auto_created=True, default=timezone.now, blank=True)
-    rational_name               = models.CharField('название статьи', max_length=100, blank=False)
-    rational_place_innovation   = models.CharField('место внедрения', max_length=200, blank=True)
-    rational_description        = RichTextField('описание', blank=True)
+    rational_structure_from         = models.CharField('1. имя подразделения', max_length=50, blank=True)
+    rational_id_registrated         = models.IntegerField('2. номер регистрации', blank=True)
+    rational_date_registrated       = models.DateTimeField('3. дата регистрации', editable=True, auto_created=True, default=timezone.now, blank=True)
+    rational_name                   = models.CharField('4. название статьи', max_length=100, blank=False)
+    rational_place_innovation       = models.CharField('5. место внедрения', max_length=200, blank=True)
+    rational_description            = RichTextField('6. описание', blank=True)
+    rational_addition_file_1        = models.FileField('7. приложение 1', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
+    rational_addition_file_2        = models.FileField('8. приложение 2', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
+    rational_offering_members       = RichTextField('9. предложившие участники', blank=True)
+    rational_conclusion             = RichTextField('10. заключения по предложению', blank=True)
+    rational_change_documentations  = RichTextField('11. изменение нормативной и тех. документации', blank=True)
+    rational_resolution             = models.CharField('12. принятое решение', max_length=100, blank=True)
+    rational_responsible_members    = RichTextField('13. ответственные участники', blank=True)
+    rational_date_certification     = models.DateTimeField('14. дата получения удостоверения на предложение', editable=True, auto_created=True, default=timezone.now, blank=True)
 
-    rational_addition_file_1    = models.FileField('приложение к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
-    rational_addition_file_2    = models.FileField('приложение 2 к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
-    rational_addition_image     = models.ImageField('картинка к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
-
-    rational_autor_name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.SET_NULL, null=True, verbose_name='имя автора', editable=True, default=None, blank=True)
+    rational_category               = models.ForeignKey(CategoryRationalModel, on_delete=models.CASCADE, verbose_name='15. Категория')
+    rational_autor_name             = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.SET_NULL, verbose_name='16. имя автора', null=True, editable=True, default=None, blank=True)
+    rational_date_create            = models.DateTimeField('17. дата создания', editable=True, auto_created=True, default=timezone.now, blank=True)
+    rational_addition_image         = models.ImageField('18. картинка к предложению', upload_to='uploads/rational/%d_%m_%Y/%H_%M_%S', blank=True)
+    rational_status                 = models.BooleanField('19. статус', default=True, blank=True)
 
 
     class Meta:
@@ -43,7 +50,7 @@ class RationalModel(models.Model):
         verbose_name_plural     = 'Рационализаторские предложения'
 
     def __str__(self):
-        return self.rational_name
+        return f'{self.rational_name} :: {self.rational_id_registrated} :: {self.rational_category} :: {self.rational_autor_name}' 
         
     def get_total_comment_value(self):
         return CommentRationalModel.objects.filter(article=self.id).count()
@@ -81,6 +88,7 @@ class LikeRationalModel(models.Model):
     liked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, null=True, verbose_name='кто поставил лайк')
     like = models.BooleanField('Лайк', default=False)
     created = models.DateTimeField('дата создания', auto_now_add=True)
+
 
     class Meta:
         ordering = ('-id',)
