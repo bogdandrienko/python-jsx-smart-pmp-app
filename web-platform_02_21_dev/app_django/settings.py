@@ -119,12 +119,6 @@ else:
        'PASSWORD': '4e085cdc07df03952edd34624245b1a69894875064ca6795a977d8b0964bfdec'
        }}
 
-# # Включить для DEVELOPMENT, отключить для PRODUCTION
-# DATABASES = {'default': {
-# 'ENGINE': 'django.db.backends.sqlite3',
-# 'NAME': BASE_DIR / 'db.sqlite3',
-# }}
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -181,7 +175,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-        # 'skin': 'moono',
+        'skin': 'moono',
         # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
