@@ -1,0 +1,30 @@
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    {% if comments %}
+        <h2 class="border-bottom pb-2 mb-0">Комментарии</h2>
+        {% for comment in comments %}
+        <div class="shadow-sm">
+            <div class="text-muted pt-3">
+                <div class="d-flex justify-content-between align-items-center mb-0 small lh-smd-blocktext-link-dark">
+                    <p><svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg><small class="btn btn-sm btn-outline-dark">{{ comment.comment_author }}</small></p>
+                    <p><small class="">{{ comment.comment_date }}</small></p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="text-gray-dark border-bottom">{{comment.comment_text}}</p>
+                <a class="btn btn-danger" href="# ">Пожаловаться</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="pb-2 mb-0">Комментарии не найдены</h2>
+    {% endif %}
+</div>
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h2 class="pb-2 mb-0">Добавить свой комментарий:</h2>
+    <form class="" action="{% url 'rational_leave_comment' rational.id %}" method="POST">
+        {% csrf_token %}
+        <textarea class="form-control" type="text" required="" placeholder="Ваш комментарий" cols="30" rows="10" name="comment_text"></textarea><br>
+        <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Оставить комментарий</button>
+    </form>
+</div>

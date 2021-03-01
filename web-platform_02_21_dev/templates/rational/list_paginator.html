@@ -1,0 +1,15 @@
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ contacts.number }} из {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">следующая</a>
+        {% endif %}
+    </span>
+</div>

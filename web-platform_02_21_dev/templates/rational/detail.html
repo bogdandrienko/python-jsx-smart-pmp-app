@@ -2,10 +2,14 @@
 {% load static %}
 
 <!-- Head -->
-{% block head %} {% include 'components/navbar.html' %} {% endblock head %}
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
 
 <!-- Title -->
-{% block title %}Предложение: {{ rational.rational_name }}{% endblock title %}
+{% block title %}
+    {{ rational.rational_name }}
+{% endblock title %}
 
 <!-- Style -->
 {% block style %}{% endblock style %}
@@ -80,15 +84,17 @@
                 </div>
             </div>
         </div>
-        {% include 'rational/comments.html' %}
+        {% include 'rational/detail_comments.html' %}
     {% else %}
-        Предложение не найдено 
+        Предложение не найдено
     {% endif %}
 </main>
 {% endblock main %}
 
 <!-- Footer -->
-{% block footer %} {% include 'components/footer.html' %} {% endblock footer %}
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
 
 <!-- Script -->
 {% block script %}{% endblock script %}
