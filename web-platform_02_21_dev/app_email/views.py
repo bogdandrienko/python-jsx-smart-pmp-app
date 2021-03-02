@@ -1,6 +1,9 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.core.mail import BadHeaderError, send_mail
 from .models import EmailModel
+from ..app_django.settings import HEROKU
+
 
 def email(request):
     if request.user.is_authenticated is not True:
@@ -24,7 +27,9 @@ def send_email(request):
         to_email    = request.POST.get('to_email', '')
         if subject and message and to_email:
             try:
-                send_mail(subject, message, 'bogdandrienko@gmail.com', [to_email,''])
+                if not HEROKU:
+                # Включить для DEVELOPMENT, отключить для PRODUCTION
+                    send_mail(subject, message, 'bogdandrienko@gmail.com', [to_email,''])
 
                 EmailModel.objects.create(
                     Email_subject       = request.POST['subject'],
