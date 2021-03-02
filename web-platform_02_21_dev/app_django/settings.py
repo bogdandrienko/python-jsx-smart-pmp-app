@@ -169,6 +169,28 @@ else:
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 
+
+
+EMAIL_BACKEND           = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST              = 'smtp.gmail.com'
+EMAIL_HOST_USER         = 'bogdandrienko@gmail.com'
+EMAIL_HOST_PASSWORD     = '87776357686cool'
+EMAIL_PORT              = 465
+EMAIL_USE_TLS           = False
+EMAIL_USE_SSL           = True
+
+host: EMAIL_HOST
+port: EMAIL_PORT
+username: EMAIL_HOST_USER
+password: EMAIL_HOST_PASSWORD
+use_tls: EMAIL_USE_TLS
+use_ssl: EMAIL_USE_SSL
+
+FROM_EMAIL              = 'bogdandrienko@gmail.com'
+EMAIL_ADMIN             = 'bogdandrienko@gmail.com'
+
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"

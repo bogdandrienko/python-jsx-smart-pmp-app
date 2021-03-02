@@ -2,6 +2,7 @@ from django import template
 from ..models import LikeRationalModel
 from django.contrib.auth.models import User
 
+
 register = template.Library()
 
 @register.simple_tag(takes_context=True)

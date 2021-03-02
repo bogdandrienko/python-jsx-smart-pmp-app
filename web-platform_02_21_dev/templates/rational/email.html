@@ -1,0 +1,44 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Создать письмо
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<form class="form-control" action="{% url 'send_email' %}" method="POST">
+    {% csrf_token %}
+
+    <input class="form-control" type="text" required="" placeholder="subject" name="subject"><br>
+    <br>
+    <input class="form-control" type="text" required="" placeholder="message" name="message"><br>
+    <br>
+    <input class="form-control" type="text" required="" placeholder="to_email" name="to_email"><br>
+    <br>
+
+    <div class="btn-group form-control">
+        <button class="btn btn-lg btn-outline-primary" type="submit">Отправить письмо</button>
+    </div>
+</form>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

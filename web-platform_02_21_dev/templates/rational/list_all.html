@@ -9,17 +9,6 @@
         <div class="card shadow-sm">
             <div class="card-header m-0 p-1">
                 <h4 class="fw-normal card-header bg-light text-dark text-decoration-none"><strong>{{ LOOP.rational_name }}</strong></h4>
-                {% is_liked LOOP.id as is_liked_bool %}
-                {% if is_liked_bool %}
-                    <p>Лайкнул</p>
-                {% else %}
-                    {% is_disliked LOOP.id as is_disliked_bool %}
-                    {% if is_disliked_bool %}
-                        <p>Дизлайкнул</p>
-                    {% else %}
-                        <p>Нету ничего</p>
-                    {% endif %}
-                {% endif %}
             </div>
             <div class="card-body m-0 p-1">
                 <a href="{% url 'rational_detail' LOOP.id %}">
@@ -32,6 +21,17 @@
                 <div class="my-1 d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">{{ LOOP.rational_autor_name }}</small>
+                        {% is_liked LOOP.id as is_liked_bool %}
+                        {% if is_liked_bool %}
+                            <p><i class="material-icons text-muted md-48">thumb_up</i></p>
+                        {% else %}
+                            {% is_disliked LOOP.id as is_disliked_bool %}
+                            {% if is_disliked_bool %}
+                                <p><i class="material-icons text-muted md-48">thumb_down</i></p>
+                            {% else %}
+                                <p><i class="material-icons text-muted md-48">live_help</i></p>
+                            {% endif %}
+                        {% endif %}
                         {% if 0 > LOOP.get_total_rating %}
                             <div class="m-sm-1 btn btn-sm btn-outline-danger text-link-danger">{{ LOOP.get_total_rating }}<sup class="text-muted">{{ LOOP.get_total_rating_value }}</sup></div>
                         {% else %}

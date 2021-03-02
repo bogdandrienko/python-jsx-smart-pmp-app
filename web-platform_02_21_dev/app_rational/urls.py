@@ -9,4 +9,7 @@ urlpatterns = [
     path('<int:rational_id>/leave_comment/', views.rational_leave_comment, name='rational_leave_comment'),
     path('<int:rational_id>/increase_rating/', views.rational_increase_rating, name='rational_increase_rating'),
     path('<int:rational_id>/decrease_rating/', views.rational_decrease_rating, name='rational_decrease_rating'),
+
+
+    path('send_email/', views.send_email, name='send_email'),
 ]

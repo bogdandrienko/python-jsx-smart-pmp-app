@@ -1,10 +1,12 @@
-from django.http.response import Http404, HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls.base import reverse
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel
 from .forms import RationalCreateForm
+
+from django.core.mail import BadHeaderError, send_mail
 
 
 def rational_list(request, category_slug=None):
@@ -151,3 +153,16 @@ def rational_decrease_rating(request, rational_id):
     rational = RationalModel.objects.get(id = rational_id)
     rational.save()
     return HttpResponseRedirect( reverse('rational_detail', args = (rational.id,)) )
+
+def send_email(request):
+    if request.user.is_authenticated is not True:
+        return redirect('login')
+    if request.method == 'POST':
+        try:
+            subject     = request.POST.get('subject', ''),
+            message     = request.POST.get('message', ''),
+            to_email    = request.POST.get('from_email', ''),
+            send_mail(subject, message, 'bogdandrienko@gmail.com', ['andrienko.1997@list.ru'], fail_silently=False)
+        except:
+            return redirect('home')
+    return render(request, 'rational/email.html')
