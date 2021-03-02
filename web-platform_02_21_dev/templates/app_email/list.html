@@ -22,8 +22,16 @@
 
 {% if mails %}
     <div class="container">
+        <div class="m-lg-5 d-flex justify-content-between align-items-center shadow-sm">
+            <strong class="">#</strong>
+            <strong class="">Тема</strong>
+            <strong class="">Сообщение</strong>
+            <strong class="">Адресат</strong>
+            <strong class="">Дата</strong>
+        </div>
         {% for LOOP in mails %}
-            <div class="my-3 d-flex justify-content-between align-items-center shadow-sm">
+            <div class="m-lg-5 d-flex justify-content-between align-items-center shadow-sm">
+                <small class="">{{ forloop.counter }}</small>
                 <small class="">{{ LOOP.Email_subject }}</small>
                 <small class="">{{ LOOP.Email_message }}</small>
                 <small class="">{{ LOOP.Email_email }}</small>
@@ -32,7 +40,16 @@
         {% endfor %}
     </div>
 {% else %}
-отправленных писем нет
+    <div class="container">
+        <div class="m-lg-5 d-flex justify-content-between align-items-center shadow-sm">
+            <strong class="">#</strong>
+            <strong class="">Тема</strong>
+            <strong class="">Сообщение</strong>
+            <strong class="">Адресат</strong>
+            <strong class="">Дата</strong>
+        </div>
+    </div>
+    <p>отправленных писем нет</p>
 {% endif %}
 
 {% include 'app_email/create.html' %}
