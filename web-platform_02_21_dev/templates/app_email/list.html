@@ -1,0 +1,48 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Создать рационализаторское предложение
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+{% if mails %}
+    <div class="container">
+        {% for LOOP in mails %}
+            <div class="my-3 d-flex justify-content-between align-items-center shadow-sm">
+                <small class="">{{ LOOP.Email_subject }}</small>
+                <small class="">{{ LOOP.Email_message }}</small>
+                <small class="">{{ LOOP.Email_email }}</small>
+                <small class="">{{ LOOP.Email_date }}</small>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+отправленных писем нет
+{% endif %}
+
+{% include 'app_email/create.html' %}
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

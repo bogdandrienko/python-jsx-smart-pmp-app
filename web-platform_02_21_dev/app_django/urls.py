@@ -30,6 +30,7 @@ urlpatterns = [
     path('examples/', include('app_bootstrap_examples.urls')),
     path('movies/', include('app_movies.urls')),
     path('rational/', include('app_rational.urls')),
+    path('email/', include('app_email.urls')),
 
     path('', include('app_rest_framework.urls')),
 ]

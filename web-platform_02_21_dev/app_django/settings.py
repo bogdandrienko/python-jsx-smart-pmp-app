@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'app_wheather.apps.AppWheatherConfig',
     'app_movies.apps.AppMoviesConfig',
     'app_rational.apps.AppRationalConfig',
+    'app_email.apps.AppEmailConfig',
 ]
 
 MIDDLEWARE = [
