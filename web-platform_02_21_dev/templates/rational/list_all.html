@@ -1,3 +1,6 @@
+
+
+{% load likes %}
 {% if rational %}
 <div class="row row-cols-1 row-cols-md-3 text-center">
     {% for LOOP in contacts %}
@@ -6,6 +9,17 @@
         <div class="card shadow-sm">
             <div class="card-header m-0 p-1">
                 <h4 class="fw-normal card-header bg-light text-dark text-decoration-none"><strong>{{ LOOP.rational_name }}</strong></h4>
+                {% is_liked LOOP.id as is_liked_bool %}
+                {% if is_liked_bool %}
+                    <p>Лайкнул</p>
+                {% else %}
+                    {% is_disliked LOOP.id as is_disliked_bool %}
+                    {% if is_disliked_bool %}
+                        <p>Дизлайкнул</p>
+                    {% else %}
+                        <p>Нету ничего</p>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="card-body m-0 p-1">
                 <a href="{% url 'rational_detail' LOOP.id %}">
