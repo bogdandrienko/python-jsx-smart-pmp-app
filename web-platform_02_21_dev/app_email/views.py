@@ -1,8 +1,8 @@
+from app_django.settings import HEROKU
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.core.mail import BadHeaderError, send_mail
 from .models import EmailModel
-from ..app_django.settings import HEROKU
 
 
 def email(request):
