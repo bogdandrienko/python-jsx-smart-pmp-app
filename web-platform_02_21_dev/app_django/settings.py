@@ -190,16 +190,18 @@ use_ssl: EMAIL_USE_SSL
 FROM_EMAIL              = 'bogdandrienko@gmail.com'
 EMAIL_ADMIN             = 'bogdandrienko@gmail.com'
 
-
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
-        # 'skin': 'office2013',
+
+        # 'skin': 'kama',
+        # 'skin': 'moono',
+        # 'skin': 'moono-lisa',
+        'skin': 'moonocolor',
+
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
@@ -225,27 +227,44 @@ CKEDITOR_CONFIGS = {
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
             {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
             {'name': 'about', 'items': ['About']},
-            '/',  # put this to force next toolbar on new line
+            '/',
             {'name': 'yourcustomtools', 'items': [
-                # put the name of your editor.ui.addButton here
                 'Preview',
                 'Maximize',
-                'Youtube'
+                'Youtube',
             ]},
         ],
-        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+
+        # 'toolbar': 'YourCustomToolbarConfig',
+        'toolbar': 'full',
+
         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-        # 'height': 291,
-        'width': '100%',    
-        'toolbar': 'Full',
-        # 'filebrowserWindowHeight': 725,
-        # 'filebrowserWindowWidth': 940,
-        # 'toolbarCanCollapse': True,
-        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        # 'toolbarGroups': [
+        # { 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] },
+        # { 'name': 'clipboard', 'groups': [ 'clipboard', 'undo' ] },
+        # { 'name': 'editing', 'groups': [ 'find', 'selection', 'spellchecker', 'editing' ] },
+        # { 'name': 'forms', 'groups': [ 'forms' ] },
+        # '/',
+        # { 'name': 'basicstyles', 'groups': [ 'basicstyles', 'cleanup' ] },
+        # { 'name': 'paragraph', 'groups': [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+        # { 'name': 'links', 'groups': [ 'links' ] },
+        # { 'name': 'insert', 'groups': [ 'insert' ] },
+        # '/',
+        # { 'name': 'styles', 'groups': [ 'styles' ] },
+        # { 'name': 'colors', 'groups': [ 'colors' ] },
+        # { 'name': 'tools', 'groups': [ 'tools' ] },
+        # { 'name': 'others', 'groups': [ 'others' ] },
+        # { 'name': 'about', 'groups': [ 'about' ] }
+        # ],
+
+        'height': '75',
+        'width': '100%',
+
+        'toolbarCanCollapse': True,
         'tabSpaces': 4,
+
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
-            # your extra plugins here
+            'uploadimage',
             'div',
             'autolink',
             'autoembed',
@@ -258,7 +277,7 @@ CKEDITOR_CONFIGS = {
             'dialog',
             'dialogui',
             'elementspath',
-            'youtube'
+            'youtube',
         ]),
     }
 }
