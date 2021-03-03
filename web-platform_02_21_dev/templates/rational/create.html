@@ -12,31 +12,34 @@
 {% endblock title %}	
 
 <!-- Style -->	
-{% block style %}{% endblock style %}	
+{% block style %}{% endblock style %}
 
-<!-- Header -->	
-{% block header %}{% endblock header %}	
+<!-- Header -->
+{% block header %}{% endblock header %}
 
-<!-- Main -->	
-{% block main %}	
-<form class="form-control" action="{% url 'rational_create' %}" method="POST">	
-    {% csrf_token %}	
-    <input class="form-control" type="text" required="" placeholder="название статьи" name="rational_name"><br>	
-    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category_name" required="">	
-        <option selected value=''>Нажмите сюда и выберите категорию из списка</option>	
-        {% for LOOP in category %}	
-            <option>{{ LOOP.category_name }}</option>	
-        {% endfor %}	
-    </select>	
-    {{ post_form.media }}	
-    {{ post_form.as_p }}	
-    <br>	
-    <div class="btn-group form-control">	
-        <button class="btn btn-lg btn-outline-primary" type="submit">Создать статью</button>	
-        <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все новости</a>	
-    </div>	
-</form>	
-{% endblock main %}	
+<!-- Main -->
+{% block main %}
+<form class="form-control" action="{% url 'rational_create' %}" method="POST">
+    {% csrf_token %}
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category_name" required="">
+        <option selected value=''>Нажмите сюда и выберите категорию из списка</option>
+        {% for LOOP in category %}
+            <option>{{ LOOP.category_name }}</option>
+        {% endfor %}
+    </select>
+    <input class="form-control" type="text" required="" placeholder="название статьи" name="rational_name"><br>
+    <input class="form-control" type="text" required="" placeholder="rational_structure_from" name="rational_structure_from"><br>
+    <input class="form-control" type="text" required="" placeholder="rational_place_innovation" name="rational_place_innovation"><br>
+    <input class="form-control" type="text" required="" placeholder="rational_resolution" name="rational_resolution"><br>
+    {{ post_form.media }}
+    {{ post_form.as_p }}
+    <br>
+    <div class="btn-group form-control">
+        <button class="btn btn-lg btn-outline-primary" type="submit">Создать статью</button>
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все новости</a>
+    </div>
+</form>
+{% endblock main %}
 
 <!-- Footer -->	
 {% block footer %}	
