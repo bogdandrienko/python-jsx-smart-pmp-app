@@ -35,25 +35,74 @@
                 <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative ">
                     <div class="col p-4 d-flex flex-column position-static">
                         <div class="d-flex justify-content-between align-items-center">
-                        <strong class="d-inline-block text-primary">{{ rational.rational_category }}</strong>
+                        <strong class="d-inline-block text-primary">
+                            {{ rational.rational_category }}
+                            <p class="text-secondary">
+                                {% if rational_status %}
+                                    Активный проект
+                                {% else %}
+                                    Неактивный проект
+                                {% endif %}
+                            </p>
+                        </strong>
                         <strong class="d-inline-block text-primary">Рационализаторские предложения</strong>
                         </div>
                         <h3>{{ rational.rational_name }}</h3>
                         <hr>
-                        <div class="text-center ">
+                        <div class="text-center">
                             {% if rational.rational_addition_image %}
                             <img src="{{ rational.rational_addition_image.url }} " class="bd-placeholder-img " width="70% " height="100% " alt="{{ rational.article_title }} "> {% else %}
-                            <svg class="bd-placeholder-img card-img-top " width="100% " height="100% " xmlns="http://www.w3.org/2000/svg " role="img " aria-label="Placeholder: Thumbnail " preserveAspectRatio="xMidYMid slice " focusable="false"><title>Placeholder</title><rect width="100% " height="100% " fill="#55595c "/><text x="50% " y="50% " fill="#eceeef " dy=".3em ">{{ article.article_title }}</text></svg> {% endif %}
+                            <svg class="bd-placeholder-img card-img-top" width="100% " height="100% " xmlns="http://www.w3.org/2000/svg " role="img " aria-label="Placeholder: Thumbnail " preserveAspectRatio="xMidYMid slice " focusable="false"><title>Placeholder</title><rect width="100% " height="100% " fill="#55595c "/><text x="50% " y="50% " fill="#eceeef " dy=".3em ">{{ article.article_title }}</text></svg> {% endif %}
                         </div>
                         <hr>
-                        <p class="card-text ">
+                        <p class="card-text">
+                            {{ rational.rational_structure_from }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_id_registrated }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_date_registrated }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_place_innovation }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
                             {{ rational.rational_description|safe }}
                         </p>
-                        <p class="card-text ">
-                            {{ rational.rational_description_2|safe }}
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_offering_members|safe }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_conclusion|safe }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_change_documentations|safe }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_resolution }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_responsible_members|safe  }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_date_certification }}
                         </p>
                         <hr>
                         <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group m-md-2 btn btn-xs btn-outline-info">
+                                {{ rational.rational_autor_name }}
+                            </div>
                             <div class="btn-group">
                                 <form action="{% url 'rational_increase_rating' rational.id %} " method="POST ">
                                     {% csrf_token %}

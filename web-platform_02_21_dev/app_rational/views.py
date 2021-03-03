@@ -21,7 +21,7 @@ def rational_list(request, category_slug=None):
             rational = RationalModel.objects.filter(rational_category=category_page).order_by('-rational_date_registrated')
         else:
             rational = RationalModel.objects.order_by('-rational_date_registrated')
-    paginator = Paginator(rational, 6)
+    paginator = Paginator(rational, 2)
     category = CategoryRationalModel.objects.order_by('-id')
     page = request.GET.get('page')
     try:
