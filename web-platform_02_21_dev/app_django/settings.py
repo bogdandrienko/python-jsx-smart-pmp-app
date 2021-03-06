@@ -17,7 +17,7 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-db_from_env = dj_database_url.config()
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +29,7 @@ SECRET_KEY = 'fcol_+n%2i=d7*db5+ohls-!&!3*bav@h!2gm5zwi_do&y_akm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 HEROKU = False
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -119,6 +120,8 @@ else:
        'USER': 'mayhqhjnyukmmh',
        'PASSWORD': '4e085cdc07df03952edd34624245b1a69894875064ca6795a977d8b0964bfdec'
        }}
+    
+    db_from_env = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -173,22 +176,9 @@ MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 EMAIL_BACKEND           = 'django.core.mail.backends.smtp.EmailBackend'
 FROM_EMAIL              = 'bogdandrienko@gmail.com'
 EMAIL_ADMIN             = 'bogdandrienko@gmail.com'
-MAILCHIMP_API_KEY       = '6eaf466148abd2c002db65a1d08be7ce-us1'
-MAILCHIMP_DATA_CENTER   = 'us1'
-MAILCHIMP_EMAIL_LIST_ID = '36507b5dcf'
+# send_mail('subject', 'message', settings.EMAIL_HOST_USER, ['andrienko.1997@list.ru'], fail_silently=False)
 
-Sendgrid_EMAIL_LIST_ID = '6eaf466148abd2c002db65a1d08be7ce'
-
-# if not HEROKU:
-#     # Включить для DEVELOPMENT, отключить для PRODUCTION
-# EMAIL_HOST              = 'smtp-pulse.com'
-# EMAIL_HOST_USER         = 'bogdandrienko@gmail.com'
-# EMAIL_HOST_PASSWORD     = 'aNJqk72mtKJtDfG'
-# EMAIL_PORT              = 587
-# EMAIL_USE_TLS           = True
-# EMAIL_USE_SSL           = False
-# else:
-#     # Включить для PRODUCTION, отключить для DEVELOPMENT
+# google
 # EMAIL_HOST              = 'smtp.gmail.com'
 # EMAIL_HOST_USER         = 'bogdandrienko@gmail.com'
 # EMAIL_HOST_PASSWORD     = '87776357686cool'
@@ -196,6 +186,7 @@ Sendgrid_EMAIL_LIST_ID = '6eaf466148abd2c002db65a1d08be7ce'
 # EMAIL_USE_TLS           = True
 # EMAIL_USE_SSL           = False
 
+# yandex
 EMAIL_HOST              = 'smtp.yandex.ru'
 EMAIL_HOST_USER         = 'eevee.cycle'
 EMAIL_HOST_PASSWORD     = '31284bogdan'

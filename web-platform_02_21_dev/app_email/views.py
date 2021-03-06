@@ -1,5 +1,3 @@
-from app_django.settings import HEROKU
-from django.conf import settings
 from django.shortcuts import render, redirect
 from django.core.mail import BadHeaderError, send_mail
 from .models import EmailModel
@@ -23,11 +21,7 @@ def send_email(request):
         to_email    = request.POST.get('to_email', '')
         if subject and message and to_email:
             try:
-                # Включить для DEVELOPMENT, отключить для PRODUCTION
-                # if not HEROKU:
-                    # send_mail('subject', 'message', settings.EMAIL_HOST_USER, ['andrienko.1997@list.ru'], fail_silently=False)
                 send_mail(subject, message, 'eevee.cycle@yandex.ru', [to_email, ''], fail_silently=False)
-
                 EmailModel.objects.create(
                     Email_subject       = subject,
                     Email_message       = message,
