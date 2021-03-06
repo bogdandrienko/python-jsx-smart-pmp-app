@@ -1,6 +1,8 @@
-cd ../
+@echo OFF
 
-call ./win_env/Scripts/activate.bat
+cd ..\
+
+call .\env\Scripts\activate.bat
 
 python manage.py makemigrations
 
