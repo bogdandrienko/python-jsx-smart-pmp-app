@@ -8,35 +8,30 @@ from .models import EmailModel
 def email(request):
     if request.user.is_authenticated is not True:
         return redirect('login')
-
     mails = EmailModel.objects.order_by('-id')
-
     context = {
         'mails': mails
     }
-
     return render(request, 'app_email/list.html', context)
 
 def send_email(request):
     if request.user.is_authenticated is not True:
         return redirect('login')
-    
     if request.method == 'POST':
-        subject     = request.POST.get('subject', '')
-        message     = request.POST.get('message', '')
-        to_email    = request.POST.get('to_email', '')
+        subject     = request.POST['subject'],
+        message     = request.POST['message'],
+        to_email    = request.POST['to_email']
         if subject and message and to_email:
             try:
                 if not HEROKU:
                 # Включить для DEVELOPMENT, отключить для PRODUCTION
-                    send_mail(subject, message, 'bogdandrienko@gmail.com', [to_email,''])
-
+                    # send_mail('subject', 'message', settings.EMAIL_HOST_USER, ['andrienko.1997@list.ru'], fail_silently=False)
+                    send_mail(subject, message, settings.EMAIL_HOST_USER, [to_email], fail_silently=False)
                 EmailModel.objects.create(
-                    Email_subject       = request.POST['subject'],
-                    Email_message       = request.POST['message'],
-                    Email_email         = request.POST['to_email'],
+                    Email_subject       = subject,
+                    Email_message       = message,
+                    Email_email         = to_email
                 )
-                
             except BadHeaderError:
                 return redirect('home')
     return redirect('email')

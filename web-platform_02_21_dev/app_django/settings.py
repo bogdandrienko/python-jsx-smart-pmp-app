@@ -170,25 +170,38 @@ else:
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 
-
-
 EMAIL_BACKEND           = 'django.core.mail.backends.smtp.EmailBackend'
+FROM_EMAIL              = 'bogdandrienko@gmail.com'
+EMAIL_ADMIN             = 'bogdandrienko@gmail.com'
+MAILCHIMP_API_KEY       = '6eaf466148abd2c002db65a1d08be7ce-us1'
+MAILCHIMP_DATA_CENTER   = 'us1'
+MAILCHIMP_EMAIL_LIST_ID = '36507b5dcf'
+
+Sendgrid_EMAIL_LIST_ID = '6eaf466148abd2c002db65a1d08be7ce'
+
+# if not HEROKU:
+#     # Включить для DEVELOPMENT, отключить для PRODUCTION
+# EMAIL_HOST              = 'smtp-pulse.com'
+# EMAIL_HOST_USER         = 'bogdandrienko@gmail.com'
+# EMAIL_HOST_PASSWORD     = 'aNJqk72mtKJtDfG'
+# EMAIL_PORT              = 587
+# EMAIL_USE_TLS           = True
+# EMAIL_USE_SSL           = False
+# else:
+#     # Включить для PRODUCTION, отключить для DEVELOPMENT
 EMAIL_HOST              = 'smtp.gmail.com'
 EMAIL_HOST_USER         = 'bogdandrienko@gmail.com'
 EMAIL_HOST_PASSWORD     = '87776357686cool'
-EMAIL_PORT              = 465
-EMAIL_USE_TLS           = False
-EMAIL_USE_SSL           = True
+EMAIL_PORT              = 587
+EMAIL_USE_TLS           = True
+EMAIL_USE_SSL           = False
 
-host: EMAIL_HOST
-port: EMAIL_PORT
-username: EMAIL_HOST_USER
-password: EMAIL_HOST_PASSWORD
-use_tls: EMAIL_USE_TLS
-use_ssl: EMAIL_USE_SSL
-
-FROM_EMAIL              = 'bogdandrienko@gmail.com'
-EMAIL_ADMIN             = 'bogdandrienko@gmail.com'
+host:       EMAIL_HOST
+port:       EMAIL_PORT
+username:   EMAIL_HOST_USER
+password:   EMAIL_HOST_PASSWORD
+use_tls:    EMAIL_USE_TLS
+use_ssl:    EMAIL_USE_SSL
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
