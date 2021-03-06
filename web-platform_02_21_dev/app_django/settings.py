@@ -189,12 +189,19 @@ Sendgrid_EMAIL_LIST_ID = '6eaf466148abd2c002db65a1d08be7ce'
 # EMAIL_USE_SSL           = False
 # else:
 #     # Включить для PRODUCTION, отключить для DEVELOPMENT
-EMAIL_HOST              = 'smtp.gmail.com'
-EMAIL_HOST_USER         = 'bogdandrienko@gmail.com'
-EMAIL_HOST_PASSWORD     = '87776357686cool'
-EMAIL_PORT              = 587
-EMAIL_USE_TLS           = True
-EMAIL_USE_SSL           = False
+# EMAIL_HOST              = 'smtp.gmail.com'
+# EMAIL_HOST_USER         = 'bogdandrienko@gmail.com'
+# EMAIL_HOST_PASSWORD     = '87776357686cool'
+# EMAIL_PORT              = 587
+# EMAIL_USE_TLS           = True
+# EMAIL_USE_SSL           = False
+
+EMAIL_HOST              = 'smtp.yandex.ru'
+EMAIL_HOST_USER         = 'eevee.cycle'
+EMAIL_HOST_PASSWORD     = '31284bogdan'
+EMAIL_PORT              = 465
+EMAIL_USE_TLS           = False
+EMAIL_USE_SSL           = True
 
 host:       EMAIL_HOST
 port:       EMAIL_PORT
