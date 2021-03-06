@@ -1,5 +1,7 @@
-cd ../
+@echo OFF
 
-call ./win_env/Scripts/activate.bat
+cd ..\
+
+call .\env\Scripts\activate.bat
 
 call cmd

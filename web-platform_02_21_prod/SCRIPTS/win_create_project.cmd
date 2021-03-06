@@ -1,5 +1,7 @@
 @echo OFF
 
+pip install --upgrade pip
+
 pip install env
 
 set /p project_folder= "Please enter the 'project_folder':  "
@@ -10,9 +12,9 @@ mkdir %project_folder%
 
 chdir %project_folder%
 
-python -m venv win_env
+python -m venv env
 
-call ./win_env/Scripts/activate.bat
+call ./env/Scripts/activate.bat
 
 pip install --upgrade pip 
 
@@ -35,5 +37,3 @@ python manage.py makemigrations
 python manage.py migrate
 
 python manage.py createsuperuser
-
-npm init -y
