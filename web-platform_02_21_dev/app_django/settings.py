@@ -11,13 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'fcol_+n%2i=d7*db5+ohls-!&!3*bav@h!2gm5zwi_do&y_akm'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,7 +33,6 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
 INSTALLED_APPS = [
 
     'grappelli',
@@ -103,7 +100,6 @@ WSGI_APPLICATION = 'app_django.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 if not HEROKU:
     # Включить для DEVELOPMENT, отключить для PRODUCTION
     DATABASES = {'default': {
