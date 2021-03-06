@@ -1,5 +1,5 @@
 {% extends "components/base.html" %}	
-{% load static %}	
+{% load static %}
 
 <!-- Head -->	
 {% block head %}	
@@ -47,4 +47,7 @@
 {% endblock footer %}	
 
 <!-- Script -->	
-{% block script %}{% endblock script %} 
+{% block script %}
+    <!-- Not Optimizated Custom JavaScript -->
+    <script src="{% static 'js/rational/copy_buttons.js' %}"></script>
+{% endblock script %} 
