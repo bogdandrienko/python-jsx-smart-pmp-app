@@ -11,7 +11,7 @@
                 <h4 class="fw-normal card-header bg-light text-dark text-decoration-none"><strong>{{ LOOP.rational_name }}</strong></h4>
             </div>
             <div class="card-body m-0 p-1">
-                <a href="{% url 'rational_detail' LOOP.id %}">
+                <a href="{% url 'app_rational:rational_detail' LOOP.id %}">
                     {% if LOOP.rational_addition_image %}
                         <img src="{{ LOOP.rational_addition_image.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ LOOP.rational_name }}">
                     {% else %}
@@ -42,7 +42,7 @@
                     <small class="text-muted">{{ LOOP.rational_date_registrated }}</small>
                     <small>#{{ forloop.revcounter }}</small>
                 </div>
-                <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'rational_detail' LOOP.id %}">Подробнее</a>
+                <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational_detail' LOOP.id %}">Подробнее</a>
             </div>
         </div>
     </div>

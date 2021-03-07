@@ -27,7 +27,7 @@
                     <h1 class="display-4 fst-italic ">Рационализаторское предложение</h1>
                     <p class="lead ">Тут отображён контент, связанный с выбранным предложением, а также внизу есть возможность проголосовать и оставить комментарий.</p>
                 </div>
-                <a class="btn btn-lg btn-outline-light" href="{% url 'rational' %}">Все предложения</a>
+                <a class="btn btn-lg btn-outline-light" href="{% url 'app_rational:rational' %}">Все предложения</a>
             </div>
         </div>
         <div class="row">
@@ -104,7 +104,7 @@
                                 {{ rational.rational_autor_name }}
                             </div>
                             <div class="btn-group">
-                                <form action="{% url 'rational_increase_rating' rational.id %} " method="POST ">
+                                <form action="{% url 'app_rational:rational_increase_rating' rational.id %} " method="POST ">
                                     {% csrf_token %}
                                     {% if likes.like %}
                                         <button class="m-md-2 btn btn-xs btn-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
@@ -112,7 +112,7 @@
                                         <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
                                     {% endif %}
                                 </form>
-                                <form action="{% url 'rational_decrease_rating' rational.id %}" method="POST ">
+                                <form action="{% url 'app_rational:rational_decrease_rating' rational.id %}" method="POST ">
                                     {% csrf_token %}
                                     {% if likes.dislike %}
                                         <button class="m-md-2 btn btn-xs btn-danger" type="submit">дизлайков:<p>{{ likes.total_dislike }}</p></button>
@@ -126,6 +126,9 @@
                             {% endif %}
                             {% if rational.rational_addition_file_2 %}
                                 <a class="btn btn-dark" href="{{ rational.rational_addition_file_2.url }}">скачать 2 приложение</a>     
+                            {% endif %}
+                            {% if rational.rational_addition_file_3 %}
+                                <a class="btn btn-dark" href="{{ rational.rational_addition_file_3.url }}">скачать 3 приложение</a>     
                             {% endif %}
                             <small class="text-muted ">{{ rational.rational_date_registrated }}</small>
                         </div>

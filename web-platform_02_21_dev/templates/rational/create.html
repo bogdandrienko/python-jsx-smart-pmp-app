@@ -19,7 +19,7 @@
 
 <!-- Main -->
 {% block main %}
-<form class="form-control" action="{% url 'rational_create' %}" method="POST">
+<form class="form-control" action="{% url 'app_rational:rational_create' %}" method="POST">
     {% csrf_token %}
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category_name" required="">
         <option selected value=''>Нажмите сюда и выберите категорию из списка</option>
@@ -36,7 +36,7 @@
     <br>
     <div class="btn-group form-control">
         <button class="btn btn-lg btn-outline-primary" type="submit">Создать статью</button>
-        <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все новости</a>
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational' %}">Все новости</a>
     </div>
 </form>
 {% endblock main %}

@@ -13,8 +13,7 @@
 
 <!-- Style -->
 {% block style %}
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock style %}
 
 <!-- Header -->
@@ -27,15 +26,15 @@
         <h1 class="display-4">Рационализаторские Предложения</h1>
         <p class="lead">Эта страница содержит список всех рационализаторских предложений, отсортированных в порядке убывания по добавлению.</p>
         <div class="d-flex justify-content-between align-items-center btn-group">
-            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'rational_create' %}">Добавить предложение</a>
+            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational_create' %}">Добавить предложение</a>
         </div>
         <div class="btn-group m-1">
-            <form class="d-flex mx-5" action="{% url 'rational' %}" method="POST">
+            <form class="d-flex mx-5" action="{% url 'app_rational:rational' %}" method="POST">
                 {% csrf_token %}
                 <input class="form-control" name="search_text" type="text" placeholder="Вводить сюда" aria-label="Что ищем?" required="">
                 <button class="form-control btn btn-lg btn-secondary" type="submit">Найти</button>
             </form> 
-            <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все предложения</a> 
+            <a class="btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational' %}">Все предложения</a> 
             {% include 'rational/list_category.html' %}     
             {% include 'rational/list_paginator.html' %}
         </div>

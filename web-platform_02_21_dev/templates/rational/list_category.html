@@ -1,14 +1,14 @@
 {% for LOOP in category %} 
     {% if forloop.counter == 1 %}
-        <a class="btn btn-lg btn-outline-success" href="{% url 'rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a> 
+        <a class="btn btn-lg btn-outline-success" href="{% url 'app_rational:rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a> 
     {% endif %} 
     {% if forloop.counter == 2 %}
-        <a class="btn btn-lg btn-outline-info" href="{% url 'rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a> 
+        <a class="btn btn-lg btn-outline-info" href="{% url 'app_rational:rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a> 
     {% endif %}
     {% if forloop.counter == 3 %}
-        <a class="btn btn-lg btn-outline-danger" href="{% url 'rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
+        <a class="btn btn-lg btn-outline-danger" href="{% url 'app_rational:rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
     {% endif %}
     {% if forloop.counter == 4 %}
-        <a class="btn btn-lg btn-outline-secondary" href="{% url 'rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
+        <a class="btn btn-lg btn-outline-secondary" href="{% url 'app_rational:rational_by_category' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
     {% endif %}
 {% endfor %}

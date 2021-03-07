@@ -22,7 +22,7 @@
 </div>
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     <h2 class="pb-2 mb-0">Добавить свой комментарий:</h2>
-    <form class="" action="{% url 'rational_leave_comment' rational.id %}" method="POST">
+    <form class="" action="{% url 'app_rational:rational_leave_comment' rational.id %}" method="POST">
         {% csrf_token %}
         <textarea class="form-control" type="text" required="" placeholder="Ваш комментарий" cols="30" rows="10" name="comment_text"></textarea><br>
         <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Оставить комментарий</button>
