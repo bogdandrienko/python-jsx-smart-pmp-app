@@ -1,0 +1,57 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+	Заголовок
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<div class="bd-example">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            {% if contacts %}
+                {% for contact in contacts %}
+                    <div class="card m-1 border shadow-sm">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ contact.contact_image.url }}" class="img-fluid img-thumbnail rounded-circle" width="200" alt="{{ contact.contact_name }}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ contact.contact_name }}</h5>
+                                    <p class="card-text">{{ contact.contact_description }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ contact.contact_slug }}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                Ничего не найдено
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
+

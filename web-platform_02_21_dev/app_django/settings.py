@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'app_movies.apps.AppMoviesConfig',
     'app_rational.apps.AppRationalConfig',
     'app_email.apps.AppEmailConfig',
+    'app_contacts.apps.AppContactsConfig',
 ]
 
 MIDDLEWARE = [

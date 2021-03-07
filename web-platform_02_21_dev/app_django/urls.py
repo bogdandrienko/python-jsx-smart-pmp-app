@@ -32,6 +32,7 @@ urlpatterns = [
     path('movies/', include('app_movies.urls')),
     path('rational/', include('app_rational.urls')),
     path('email/', include('app_email.urls')),
+    path('contacts/', include('app_contacts.urls')),
 
     path('', include('app_rest_framework.urls')),
 ]
