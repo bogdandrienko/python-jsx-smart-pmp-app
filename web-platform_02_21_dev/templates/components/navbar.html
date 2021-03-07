@@ -12,7 +12,7 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             development
                                 <span class="badge badge-primary badge-pill">
-                                    # 6
+                                    # 8
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
@@ -25,6 +25,7 @@
                                     <a class="dropdown-item" href="{% url 'examples' %}">app_bootstrap_examples</a>
                                     <a class="dropdown-item" href="{% url 'movies' %}">app_movies</a>
                                     <a class="dropdown-item" href="{% url 'email' %}">app_email</a>
+                                    <a class="dropdown-item" href="{% url 'app_rational:rational' %}">app_rational</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">
@@ -48,16 +49,14 @@
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            production
+                            testing
                                 <span class="badge badge-primary badge-pill">
-                                    # 0
+                                    # 5
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Основной функционал</h6>
-                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
-                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
                                     <a class="dropdown-item" href="{% url 'signup' %}">Аккаунт: создать</a>
                                     <a class="dropdown-item" href="{% url 'login' %}">Аккаунт: войти
                                         {% if request.user.is_authenticated %}
@@ -82,6 +81,57 @@
                                     <h6 class="dropdown-header">Управление проектами</h6>
                                     <a class="dropdown-item" href="{% url 'app_rational:rational' %}">Рационализаторство: список</a>
                                     <a class="dropdown-item" href="{% url 'app_rational:rational_create' %}">Рационализаторство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: список</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: шаблоны</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Служба управления персоналом</h6>
+                                    <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Шаблоны</h6>
+                                    <a class="dropdown-item disabled" href="#">none</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            productions
+                                <span class="badge badge-primary badge-pill">
+                                    # 2
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Основной функционал</h6>
+                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
+                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item disabled" href="#">Аккаунт: создать</a>
+                                    <a class="dropdown-item disabled" href="#">Аккаунт: войти</a>
+                                    <a class="dropdown-item disabled" href="#">Аккаунт: выйти</a>
+                                    <a class="dropdown-item disabled" href="#">личный кабинет</a>
+                                    <a class="dropdown-item disabled" href="#">мои уведомления</a>
+                                    <a class="dropdown-item disabled" href="#">мои достижения</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Управление проектами</h6>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: список</a>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: добавить</a>
                                     <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
                                     <a class="dropdown-item disabled" href="#">Бережливое производство: список</a>
                                     <a class="dropdown-item disabled" href="#">Бережливое производство: добавить</a>

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel
 from .forms import RationalCreateForm
+from django.utils import timezone
 
 
 def rational_list(request, category_slug=None):
@@ -78,24 +79,35 @@ def rational_create(request):
     if request.user.is_authenticated is not True:
         return redirect('login')
     if request.method == 'POST':
-        RationalModel.objects.create(
-            rational_autor_name = User.objects.get(id=request.user.id),
-            rational_category = CategoryRationalModel.objects.get(category_name=request.POST['category_name']),
-            rational_name = request.POST['rational_name'],
-            rational_description = request.POST['rational_description'],
-            rational_offering_members = request.POST['rational_offering_members'],
-            rational_conclusion = request.POST['rational_conclusion'],
-            rational_change_documentations = request.POST['rational_change_documentations'],
-            rational_responsible_members = request.POST['rational_responsible_members'],
-            rational_structure_from = request.POST['rational_structure_from'],
-            rational_place_innovation = request.POST['rational_place_innovation'],
-            rational_resolution = request.POST['rational_resolution'],
-            )
-        return redirect('rational')
-    post_form= RationalCreateForm(request.POST)
+        form = RationalCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            RationalModel.objects.create(
+                rational_structure_from         = request.POST['rational_structure_from'],
+                rational_uid_registrated        = request.POST['rational_uid_registrated'],
+                rational_date_registrated       = request.POST.get('rational_date_registrated'),
+                rational_name                   = request.POST['rational_name'],
+                rational_place_innovation       = request.POST['rational_place_innovation'],
+                rational_description            = request.POST['rational_description'],
+                rational_addition_file_1        = request.FILES.get('rational_addition_file_1'),
+                rational_addition_file_2        = request.FILES.get('rational_addition_file_2'),
+                rational_addition_file_3        = request.FILES.get('rational_addition_file_3'),
+                rational_offering_members       = request.POST['rational_offering_members'],
+                rational_conclusion             = request.POST['rational_conclusion'],
+                rational_change_documentations  = request.POST['rational_change_documentations'],
+                rational_resolution             = request.POST['rational_resolution'],
+                rational_responsible_members    = request.POST['rational_responsible_members'],
+                rational_date_certification     = request.POST.get('rational_date_certification'),
+                rational_category               = CategoryRationalModel.objects.get(id=request.POST.get('rational_category')),
+                rational_autor_name             = User.objects.get(id=request.user.id),
+                # rational_date_create            = request.POST.get('rational_date_create'),
+                rational_addition_image         = request.FILES.get('rational_addition_image'),
+                # rational_status                 = request.POST['rational_status'],
+                )
+        return redirect('app_rational:rational')
+    form= RationalCreateForm(request.POST, request.FILES)
     category = CategoryRationalModel.objects.order_by('-id')
     context = {
-        'post_form': post_form,
+        'form': form,
         'category': category
     }
     return render(request, 'rational/create.html', context)
@@ -111,7 +123,7 @@ def rational_leave_comment(request, rational_id):
         comment_author = User.objects.get(id=request.user.id),
         comment_text = request.POST['comment_text']
         )
-    return HttpResponseRedirect( reverse('rational_detail', args = (rational.id,)) )
+    return HttpResponseRedirect( reverse('app_rational:rational_detail', args = (rational.id,)) )
 
 def rational_increase_rating(request, rational_id):
     if request.user.is_authenticated is not True:
@@ -134,7 +146,7 @@ def rational_increase_rating(request, rational_id):
         pass
     rational = RationalModel.objects.get(id = rational_id)
     rational.save()
-    return HttpResponseRedirect( reverse('rational_detail', args = (rational.id,)) )
+    return HttpResponseRedirect( reverse('app_rational:rational_detail', args = (rational.id,)) )
 
 def rational_decrease_rating(request, rational_id):
     if request.user.is_authenticated is not True:
@@ -157,4 +169,4 @@ def rational_decrease_rating(request, rational_id):
         pass
     rational = RationalModel.objects.get(id = rational_id)
     rational.save()
-    return HttpResponseRedirect( reverse('rational_detail', args = (rational.id,)) )
+    return HttpResponseRedirect( reverse('app_rational:rational_detail', args = (rational.id,)) )

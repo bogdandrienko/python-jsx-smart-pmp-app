@@ -41,7 +41,7 @@ class CategoryRationalAdmin(admin.ModelAdmin):
         # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
     search_fields   = ['id', 'category_name', 'category_slug', 'category_description']
         # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора | Включать только связанные поля для этой модели(ForeignKey...)
-    inlines         = [RationalModelInline]
+    # inlines         = [RationalModelInline]
 
 
 class CommentRationalAdmin(admin.ModelAdmin):
@@ -91,15 +91,15 @@ class LikeRationalAdmin(admin.ModelAdmin):
 class RationalModelAdmin(admin.ModelAdmin):
     """Настройки 'RationalModel' на панели администратора"""
         # Поля, которые нужно отображать в заголовке, на панели администратора | Не включать массивные поля(Описание, ckeditor...)
-    list_display    = ('id', 'rational_structure_from', 'rational_id_registrated', 'rational_date_registrated', 'rational_name', 'rational_place_innovation', 'rational_addition_file_1', 'rational_addition_file_2', 'rational_addition_file_3', 'rational_resolution', 'rational_date_certification', 'rational_category', 'rational_autor_name', 'rational_date_create', 'rational_addition_image', 'rational_status')
+    list_display    = ('id', 'rational_structure_from', 'rational_uid_registrated', 'rational_date_registrated', 'rational_name', 'rational_place_innovation', 'rational_addition_file_1', 'rational_addition_file_2', 'rational_addition_file_3', 'rational_resolution', 'rational_date_certification', 'rational_category', 'rational_autor_name', 'rational_date_create', 'rational_addition_image', 'rational_status')
         # Поля, которые нужно отображать при фильтрации, на панели администратора | Не включать массивные поля(Описание, ckeditor...)
-    list_filter     = ('id', 'rational_structure_from', 'rational_id_registrated', 'rational_date_registrated', 'rational_name', 'rational_place_innovation', 'rational_addition_file_1', 'rational_addition_file_2', 'rational_addition_file_3', 'rational_resolution', 'rational_date_certification', 'rational_category', 'rational_autor_name', 'rational_date_create', 'rational_addition_image', 'rational_status')
+    list_filter     = ('id', 'rational_structure_from', 'rational_uid_registrated', 'rational_date_registrated', 'rational_name', 'rational_place_innovation', 'rational_addition_file_1', 'rational_addition_file_2', 'rational_addition_file_3', 'rational_resolution', 'rational_date_certification', 'rational_category', 'rational_autor_name', 'rational_date_create', 'rational_addition_image', 'rational_status')
         # Поля, которые нужно отображать при создании модели, на панели администратора | Использовать либо эту настройку, либо 'fieldsets')  
     # fields          = ('id',)
         # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора | Использовать либо эту настройку, либо 'fields')  
     fieldsets       = (
                         ('Даты и время', {'fields': (('rational_date_registrated', 'rational_date_certification'),)}),
-                        ('Основное', {'fields': ('rational_structure_from', 'rational_id_registrated', 'rational_name', 'rational_place_innovation', 'rational_resolution', 'rational_status',)}),
+                        ('Основное', {'fields': ('rational_structure_from', 'rational_uid_registrated', 'rational_name', 'rational_place_innovation', 'rational_resolution', 'rational_status',)}),
                         ('Массивная информация', {'fields': ('rational_description', 'rational_offering_members', 'rational_conclusion', 'rational_change_documentations', 'rational_responsible_members',)}),
                         ('Вспомогательное', {'fields': (('rational_addition_file_1', 'rational_addition_file_2', 'rational_addition_file_3',), 'rational_addition_image',)}),
                         ('Связанные', {'fields': (('rational_autor_name', 'rational_category'),)}),
@@ -107,7 +107,7 @@ class RationalModelAdmin(admin.ModelAdmin):
         # Поля, которые не нужно отображать при создании модели, на панели администратора |  
     # exclude         = ['id',]
         # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields   = ['id', 'rational_structure_from', 'rational_id_registrated', 'rational_date_registrated', 'rational_name', 'rational_place_innovation', 'rational_description', 'rational_addition_file_1', 'rational_addition_file_2', 'rational_addition_file_3', 'rational_offering_members', 'rational_conclusion', 'rational_change_documentations', 'rational_resolution', 'rational_responsible_members', 'rational_date_certification', 'rational_date_create', 'rational_addition_image', 'rational_status']
+    search_fields   = ['id', 'rational_structure_from', 'rational_uid_registrated', 'rational_date_registrated', 'rational_name', 'rational_place_innovation', 'rational_description', 'rational_addition_file_1', 'rational_addition_file_2', 'rational_addition_file_3', 'rational_offering_members', 'rational_conclusion', 'rational_change_documentations', 'rational_resolution', 'rational_responsible_members', 'rational_date_certification', 'rational_date_create', 'rational_addition_image', 'rational_status']
         # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора | Включать только связанные поля для этой модели(ForeignKey...)
     inlines         = [CommentRationalInline, LikeRationalInline]
 

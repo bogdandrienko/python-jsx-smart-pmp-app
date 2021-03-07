@@ -38,7 +38,7 @@
                         <strong class="d-inline-block text-primary">
                             {{ rational.rational_category }}
                             <p class="text-secondary">
-                                {% if rational_status %}
+                                {% if rational.rational_status %}
                                     Активный проект
                                 {% else %}
                                     Неактивный проект
@@ -130,7 +130,7 @@
                             {% if rational.rational_addition_file_3 %}
                                 <a class="btn btn-dark" href="{{ rational.rational_addition_file_3.url }}">скачать 3 приложение</a>     
                             {% endif %}
-                            <small class="text-muted ">{{ rational.rational_date_registrated }}</small>
+                            <small class="text-muted ">{{ rational.rational_date_create }}</small>
                         </div>
                     </div>
                 </div>
