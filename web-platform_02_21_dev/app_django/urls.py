@@ -34,6 +34,7 @@ urlpatterns = [
     path('email/', include('app_email.urls')),
     path('contacts/', include('app_contacts.urls')),
     path('documentations/', include('app_documentations.urls')),
+    path('messages/', include('app_messages.urls')),
 
     path('', include('app_rest_framework.urls')),
 ]
