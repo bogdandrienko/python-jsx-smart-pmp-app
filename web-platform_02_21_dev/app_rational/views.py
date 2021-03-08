@@ -22,7 +22,7 @@ def rational_list(request, category_slug=None):
             rational = RationalModel.objects.filter(rational_category=category_page).order_by('-rational_date_registrated')
         else:
             rational = RationalModel.objects.order_by('-rational_date_registrated')
-    paginator = Paginator(rational, 2)
+    paginator = Paginator(rational, 3)
     category = CategoryRationalModel.objects.order_by('-id')
     page = request.GET.get('page')
     try:
@@ -38,6 +38,19 @@ def rational_list(request, category_slug=None):
         'contacts': contacts
     }
     return render(request, 'rational/list.html', context)
+
+def rational_search(request):
+    if request.user.is_authenticated is not True:
+        return redirect('login')
+    search = request.POST['search_text']
+    rational = RationalModel.objects.filter(rational_name__icontains=search)
+    contacts = rational
+    rational = RationalModel.objects.order_by('-rational_date_registrated')
+    context = {
+        'rational': rational,
+        'contacts': contacts
+    }
+    return render(request, 'rational/list_search.html', context)
 
 def rational_detail(request, rational_id):
     if request.user.is_authenticated is not True:

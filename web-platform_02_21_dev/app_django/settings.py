@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'app_rational.apps.AppRationalConfig',
     'app_email.apps.AppEmailConfig',
     'app_contacts.apps.AppContactsConfig',
+    'app_documentations.apps.AppDocumentationsConfig',
 ]
 
 MIDDLEWARE = [
