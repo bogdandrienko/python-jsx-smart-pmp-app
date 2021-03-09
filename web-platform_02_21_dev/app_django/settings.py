@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'app_ecommerse.apps.AppEcommerseConfig',
     'app_news.apps.AppNewsConfig',
     'app_react.apps.AppReactConfig',
-    'app_web.apps.AppWebConfig',
     'app_wheather.apps.AppWheatherConfig',
     'app_movies.apps.AppMoviesConfig',
     'app_rational.apps.AppRationalConfig',
@@ -62,6 +61,8 @@ INSTALLED_APPS = [
     'app_contacts.apps.AppContactsConfig',
     'app_documentations.apps.AppDocumentationsConfig',
     'app_messages.apps.AppMessagesConfig',
+
+    'app_application.apps.AppApplicationConfig',
 ]
 
 MIDDLEWARE = [

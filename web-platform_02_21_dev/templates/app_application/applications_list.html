@@ -1,0 +1,73 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}Домашняя{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+{% if application %}
+<div class="row row-cols-1 row-cols-md-3">
+    {% for LOOP in application %}
+    <div class="col my-1">
+        <div class="card shadow-sm btn btn-lg">
+
+            <a class="fa-border shadow-lg" href="{% url 'app_application:applications_detail' LOOP.application_slug %}">
+                <div class="card-header">
+                    <h5 class=""><strong class="text-dark text-decoration-underline">{{ LOOP.application_name }}</strong></h5>
+                </div>
+            </a>
+            
+            <a class="fa-border shadow-lg" href="{% url 'app_application:applications_detail' LOOP.application_slug %}">
+                <div class="card-body m-0 p-1">
+                    <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url 'app_application:applications_detail' LOOP.application_slug %}">
+                        <div class="container-fluid p-2">
+                            {% if LOOP.application_image %}
+                                <img src="{{ LOOP.application_image.url }}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="{{ LOOP.application_name }}">
+                            {% else %}
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.application_name }}</text></svg>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <small>{{ LOOP.application_description }}</small>
+                            <small class="text-muted">#{{ forloop.revcounter }}</small>
+                        </div>
+                    </a>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% else %} 
+    Предложения не найдены :( 
+{% endif %}
+
+
+
+
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">ГЛАВНАЯ</a>
+        <a class="navbar-brand" href="{% url 'app_application:home' %}">ГЛАВНАЯ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,7 +42,7 @@
                                 </li>
                                 <li>
                                     <h6 class="dropdown-header">Шаблоны</h6>
-                                    <a class="dropdown-item" href="{% url 'custom' %}">custom</a>
+                                    <a class="dropdown-item" href="#">none</a>
                                 </li>
                             </ul>
                         </li>
@@ -119,7 +119,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Основной функционал</h6>
-                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
+                                    <a class="dropdown-item" href="{% url 'app_application:home' %}">Главная страница</a>
                                     <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
                                     <a class="dropdown-item disabled" href="#">Аккаунт: создать</a>
                                     <a class="dropdown-item disabled" href="#">Аккаунт: войти</a>

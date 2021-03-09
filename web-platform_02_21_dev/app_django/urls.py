@@ -22,8 +22,8 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('app_accounts.urls')),
+    path('', include('app_application.urls')),
 
-    path('', include('app_web.urls')),
     path('ecommerse/', include('app_ecommerse.urls')),
     path('news/', include('app_news.urls')),
     path('weather/', include('app_wheather.urls')),

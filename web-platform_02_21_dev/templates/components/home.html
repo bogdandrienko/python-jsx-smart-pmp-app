@@ -7,7 +7,7 @@
 {% endblock head %}
 
 <!-- Title -->
-{% block title %}Главная страница{% endblock title %}
+{% block title %}Домашняя{% endblock title %}
 
 <!-- Style -->   
 {% block style %}{% endblock style %}
@@ -17,7 +17,15 @@
 
 <!-- Main -->
 {% block main %}
-    {% include 'components/carousel.html' %}
+<div class="container-fluid">
+    <div class="container d-flex text-center">
+        <div class="container">
+            <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url 'app_application:application_list' %}">
+                <img src="{% static 'icons/024-globe.png' %}" class="img-fluid img-thumbnail rounded-circle shadow-sm" width="500"  alt="главное меню">
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock main %}
 
 <!-- Footer -->
