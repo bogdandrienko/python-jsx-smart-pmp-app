@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import ApplicationModel
+from .models import ApplicationModel, ShortcutApplicationModel
 
 
 def home(request):
@@ -16,10 +16,11 @@ def applications_detail(request, application_slug=None):
     if request.user.is_authenticated is not True:
         return redirect('login')
     if application_slug != None:
-        application = get_object_or_404(ApplicationModel, application_slug=application_slug)
+        application = ApplicationModel.objects.get(application_slug=application_slug)
+        shortcut = ShortcutApplicationModel.objects.filter(shortcut_application_article=application).order_by('-id')
     else:
         return redirect('app_application:application_list')
     context = {
-        'LOOP': application,
+        'shortcut': shortcut,
     }
     return render(request, 'app_application/applications_detail.html', context)
