@@ -1,38 +1,38 @@
 from django.db import models
 
 
-class ApplicationModel(models.Model):
-    application_position        = models.IntegerField('позиция в списке приложений', unique=True)
-    application_name            = models.CharField('название приложения', max_length=50, unique=True)
-    application_slug            = models.CharField('ссылка на приложение', max_length=50, unique=True)
-    application_description     = models.TextField('описание в заголовке меню', blank=True)
-    application_image           = models.ImageField('картинка в заголовке меню', upload_to='uploads/application/icons', blank=True)
+class ApplicationModuleModel(models.Model):
+    module_position        = models.IntegerField   ('позиция', blank=False)
+    module_name            = models.CharField      ('название', max_length=50, unique=True)
+    module_slug            = models.CharField      ('ссылка', max_length=50, blank=False)
+    module_image           = models.ImageField     ('картинка', upload_to='uploads/application/module', blank=True)
+    module_description     = models.CharField      ('описание', max_length=100, blank=True)
 
 
     class Meta:
-        ordering                = ('-id', )
-        verbose_name            = 'Приложение'
-        verbose_name_plural     = 'Приложения'
-        db_table                = 'applicationtable'
+        ordering            = ('module_position', )
+        verbose_name        = 'Модуль'
+        verbose_name_plural = 'Модули'
+        db_table            = 'application_module_table'
 
     def __str__(self):
-        return f'{self.application_name}'
+        return f'{self.module_name} :: {self.module_position}'
 
 
-class ShortcutApplicationModel(models.Model):
-    shortcut_application_position       = models.IntegerField('позиция в списке закладок', unique=True)
-    shortcut_application_article        = models.ForeignKey(ApplicationModel, on_delete = models.CASCADE, verbose_name='приложение')
-    shortcut_application_name           = models.TextField('название закладки')
-    shortcut_application_description    = models.TextField('описание закладки')
-    shortcut_application_slug           = models.CharField('ссылка закладки', max_length=50, unique=True)
-    shortcut_application_image          = models.ImageField('картинка закладки', upload_to='uploads/application/icons/shortcut', blank=True)
+class ApplicationComponentModel(models.Model):
+    component_Foreign        = models.ForeignKey     (ApplicationModuleModel, on_delete = models.CASCADE, verbose_name='модуль', blank=False)
+    component_position       = models.IntegerField   ('позиция в списке закладок', blank=False)
+    component_name           = models.CharField      ('название закладки', max_length=50, unique=True)
+    component_slug           = models.CharField      ('ссылка закладки', max_length=50, blank=False)
+    component_image          = models.ImageField     ('картинка закладки', upload_to='uploads/application/component', blank=True)
+    component_description    = models.CharField      ('описание закладки', max_length=100, blank=True)
 
 
     class Meta:
-        ordering                        = ('-id',)
-        verbose_name                    = 'Закладка'
-        verbose_name_plural             = 'Закладки'
-        db_table                        = 'shortcutapplicationtable'
+        ordering                        = ('component_Foreign', 'component_position')
+        verbose_name                    = 'Компонент'
+        verbose_name_plural             = 'Компоненты'
+        db_table                        = 'application_component_table'
 
     def __str__(self):
-        return f'{self.shortcut_application_article} :: {self.shortcut_application_name}'
+        return f'{self.component_Foreign} :: {self.component_position} :: {self.component_name} :: {self.component_slug}'

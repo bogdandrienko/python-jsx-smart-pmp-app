@@ -10,7 +10,7 @@ def email(request):
     context = {
         'mails': mails
     }
-    return render(request, 'app_email/list.html', context)
+    return render(request, 'app_email/index.html', context)
 
 def send_email(request):
     if request.user.is_authenticated is not True:

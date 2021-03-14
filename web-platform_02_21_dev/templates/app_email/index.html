@@ -8,10 +8,10 @@
 
 <!-- Title -->
 {% block title %}
-    Домашняя
+    Создать рационализаторское предложение
 {% endblock title %}
 
-<!-- Style -->   
+<!-- Style -->
 {% block style %}{% endblock style %}
 
 <!-- Header -->
@@ -19,7 +19,11 @@
 
 <!-- Main -->
 {% block main %}
-    {% include 'app_application/home.html' %}
+
+    {% include 'app_email/list.html' %}
+    
+    {% include 'app_email/send.html' %}
+
 {% endblock main %}
 
 <!-- Footer -->

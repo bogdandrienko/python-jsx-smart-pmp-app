@@ -1,0 +1,10 @@
+<form class="form-control" action="{% url 'app_email:send_email' %}" method="POST">
+    {% csrf_token %}
+    <input class="form-control" type="text" required="" placeholder="Тема" name="subject"><br>
+    <br>
+    <input class="form-control" type="text" required="" placeholder="Сообщение" name="message"><br>
+    <br>
+    <input class="form-control" type="email" required="" placeholder="Кому отправить" name="to_email"><br>
+    <br>
+    <button class="btn btn-lg btn-outline-primary form-control" type="submit">Отправить письмо</button>
+</form>

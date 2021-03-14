@@ -7,7 +7,9 @@
 {% endblock head %}
 
 <!-- Title -->
-{% block title %}Домашняя{% endblock title %}
+{% block title %}
+    Домашняя
+{% endblock title %}
 
 <!-- Style -->   
 {% block style %}{% endblock style %}
@@ -42,27 +44,27 @@
         </div>
     </div>
 
-    {% if application %}
-        {% for LOOP in application %}
+    {% if module %}
+        {% for LOOP in module %}
             <div class="col my-1">
                 <div class="card shadow-sm btn btn-lg">
-                    <a class="fa-border shadow-lg" href="{% url 'app_application:applications_detail' LOOP.application_slug %}">
+                    <a class="fa-border shadow-lg" href="{% url 'app_application:list_component' LOOP.module_slug %}">
                         <div class="card-header">
-                            <h5 class=""><strong class="text-dark text-decoration-underline">{{ LOOP.application_name }}</strong></h5>
+                            <h5 class=""><strong class="text-dark text-decoration-underline">{{ LOOP.module_name }}</strong></h5>
                         </div>
                     </a>
-                    <a class="fa-border shadow-lg" href="{% url 'app_application:applications_detail' LOOP.application_slug %}">
+                    <a class="fa-border shadow-lg" href="{% url 'app_application:list_component' LOOP.module_slug %}">
                         <div class="card-body m-0 p-1">
-                            <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url 'app_application:applications_detail' LOOP.application_slug %}">
+                            <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url 'app_application:list_component' LOOP.module_slug %}">
                                 <div class="container-fluid p-2">
-                                    {% if LOOP.application_image %}
-                                        <img src="{{ LOOP.application_image.url }}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="{{ LOOP.application_name }}">
+                                    {% if LOOP.module_image %}
+                                        <img src="{{ LOOP.module_image.url }}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="{{ LOOP.module_name }}">
                                     {% else %}
-                                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.application_name }}</text></svg>
+                                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.module_name }}</text></svg>
                                     {% endif %}
                                 </div>
                                 <div>
-                                    <small>{{ LOOP.application_description }}</small>
+                                    <small>{{ LOOP.module_description }}</small>
                                     <small class="text-muted">#{{ forloop.revcounter }}</small>
                                 </div>
                             </a>
