@@ -50,7 +50,7 @@
     </div>
     <p>отправленных писем нет</p>
 {% endif %}
-<form class="form-control" action="{% url 'send_email' %}" method="POST">
+<form class="form-control" action="{% url 'app_email:send_email' %}" method="POST">
     {% csrf_token %}
     <input class="form-control" type="text" required="" placeholder="Тема" name="subject"><br>
     <br>

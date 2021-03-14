@@ -17,7 +17,7 @@ def applications_detail(request, application_slug=None):
         return redirect('login')
     if application_slug != None:
         application = ApplicationModel.objects.get(application_slug=application_slug)
-        shortcut = ShortcutApplicationModel.objects.filter(shortcut_application_article=application).order_by('-id')
+        shortcut = ShortcutApplicationModel.objects.filter(shortcut_application_article=application).order_by('shortcut_application_position')
     else:
         return redirect('app_application:application_list')
     context = {

@@ -18,43 +18,68 @@
 <!-- Main -->
 {% block main %}
 
-{% if shortcut %}
 <div class="row row-cols-1 row-cols-md-3">
-    {% for LOOP in shortcut %}
+
     <div class="col my-1">
         <div class="card shadow-sm btn btn-lg">
-
-            <a class="fa-border shadow-lg" href="#">
+            <a class="fa-border shadow-lg" href="{% url 'app_application:application_list' %}">
                 <div class="card-header">
-                    <h5 class=""><strong class="text-dark text-decoration-underline">{{ LOOP.shortcut_application_name }}</strong></h5>
+                    <h5 class=""><strong class="text-dark text-decoration-underline">Вернуться</strong></h5>
                 </div>
             </a>
-            
             <a class="fa-border shadow-lg" href="#">
                 <div class="card-body m-0 p-1">
-                    <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="#">
+                    <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url 'app_application:application_list' %}">
                         <div class="container-fluid p-2">
-                            {% if LOOP.shortcut_application_image %}
-                                <img src="{{ LOOP.shortcut_application_image.url }}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="{{ LOOP.shortcut_application_name }}">
-                            {% else %}
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.application_name }}</text></svg>
-                            {% endif %}
+                            <img src="{% static 'icons/025-world.png' %}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="Вернуться">
                         </div>
                         <div>
-                            <small>{{ LOOP.shortcut_application_description }}</small>
-                            <small class="text-muted">#{{ forloop.revcounter }}</small>
+                            <small>вернуться назад</small>
                         </div>
                     </a>
                 </div>
             </a>
-            
         </div>
     </div>
-{% endfor %}
+
+    {% if shortcut %}
+        {% for LOOP in shortcut %}
+            <div class="col my-1">
+                <div class="card shadow-sm btn btn-lg">
+                    <a class="fa-border shadow-lg" href="#">
+                        <div class="card-header">
+                            <h5 class=""><strong class="text-dark text-decoration-underline">{{ LOOP.shortcut_application_name }}</strong></h5>
+                        </div>
+                    </a>
+                    <a class="fa-border shadow-lg" href="#">
+                        <div class="card-body m-0 p-1">
+                            <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url LOOP.shortcut_application_slug %}">
+                                <div class="container-fluid p-2">
+                                    {% if LOOP.shortcut_application_image %}
+                                        <img src="{{ LOOP.shortcut_application_image.url }}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="{{ LOOP.shortcut_application_name }}">
+                                    {% else %}
+                                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.application_name }}</text></svg>
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <small>{{ LOOP.shortcut_application_description }}</small>
+                                    <small class="text-muted">#{{ forloop.revcounter }}</small>
+                                </div>
+                            </a>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="container container-fluid">
+            <h2>
+                Компоненты не найдены
+            </h2>
+        </div>
+    {% endif %}
+
 </div>
-{% else %} 
-    Компоненты не найдены
-{% endif %}
 
 {% endblock main %}
 
