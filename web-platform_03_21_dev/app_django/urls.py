@@ -30,13 +30,12 @@ urlpatterns = [
 
     path('account/', include('app_account.urls')),
     path('application/', include('app_application.urls')),
-
-    path('rational/', include('app_rational.urls')),
     path('email/', include('app_email.urls')),
     path('contact/', include('app_contact.urls')),
     path('documentation/', include('app_documentation.urls')),
     path('message/', include('app_message.urls')),
     path('weather/', include('app_wheather.urls')),
+    path('rational/', include('app_rational.urls')),
 
     path('ecommerse/', include('app_ecommerse.urls')),
     path('news/', include('app_news.urls')),
