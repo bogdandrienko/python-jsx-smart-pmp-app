@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="container-fluid">
+    <div class="container d-flex text-center">
+        <div class="container">
+
+            <div class="shadow-sm btn btn-lg">
+                <a class="" href="{% url 'app_application:list_module' %}">
+                    <div class="">
+                        <h5 class=""><strong class="text-dark text-decoration-underline">Модули</strong></h5>
+                    </div>
+                </a>
+                <a class="" href="{% url 'app_application:list_module' %}">
+                    <div class="m-0 p-1">
+                        <a class="btn btn-lg btn-outline-secondary" href="{% url 'app_application:list_module' %}">
+                            <div class="container-fluid p-2">
+                                <img src="{% static 'icons/024-globe.png' %}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="Вернуться">
+                            </div>
+                            <div>
+                                <small>Перейти к модулям</small>
+                            </div>
+                        </a>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

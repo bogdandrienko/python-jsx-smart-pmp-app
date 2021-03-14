@@ -1,0 +1,42 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}Создать новость{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<form class="form-control" action="{% url 'news_create' %}" method="POST">
+    {% csrf_token %}
+    <input class="form-control" name="article_title" type="text" required="" placeholder="Ваше имя"><br>
+    <!-- <textarea class="form-control" name="article_text" required="" placeholder="Ваш комментарий" cols="30" rows="10"></textarea><br> -->
+    {{ post_form.media }}
+    {{ post_form.as_p }}
+    <br>
+    <div class="btn-group form-control">
+        <button class="btn btn-lg btn-outline-primary" type="submit">Создать статью</button>
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'news' %}">Все новости</a>
+    </div>
+</form>
+
+{% endblock main %}
+
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

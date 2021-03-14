@@ -1,0 +1,128 @@
+{% extends "app_bootstrap_examples/base.html" %}
+{% load static %}
+
+{% block example %}
+<!-- example start -->
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-link" href="{% url 'home' %}">ГЛАВНАЯ</a>
+        <a class="nav-link mx-auto" href="https://getbootstrap.com/docs/5.0/examples/">источник</a>
+        <a class="nav-link mx-auto" href="{% url 'example-album' %}">album</a>
+        <a class="nav-link mx-auto" href="{% url 'example-pricing' %}">pricing</a>
+        <a class="nav-link mx-auto" href="{% url 'example-checkout' %}">checkout</a>
+        <a class="nav-link mx-auto" href="{% url 'example-product' %}">product</a>
+        <a class="nav-link mx-auto" href="{% url 'example-cover' %}">cover</a>
+        <a class="nav-link mx-auto" href="{% url 'example-carousel' %}">carousel</a>
+        <a class="nav-link mx-auto" href="{% url 'example-blog' %}">blog</a>
+        <a class="nav-link mx-auto" href="{% url 'example-dashboard' %}">dashboard</a>
+        <a class="nav-link mx-auto" href="{% url 'example-sign-in' %}">sign-in</a>
+        <a class="nav-link mx-auto" href="{% url 'example-sticky-footer' %}">sticky-footer</a>
+        <a class="nav-link mx-auto" href="{% url 'example-sticky-footer-navbar' %}">sticky-footer-navbar</a>
+        <a class="nav-link mx-auto" href="{% url 'example-starter-template' %}">starter-template</a>
+        <a class="nav-link mx-auto" href="{% url 'example-grid' %}">grid</a>
+        <a class="nav-link mx-auto" href="{% url 'example-cheatsheet' %}">cheatsheet</a>
+        <a class="nav-link mx-auto" href="{% url 'example-navbars' %}">navbars</a>
+        <a class="nav-link mx-auto" href="{% url 'example-offcanvas' %}">offcanvas</a>
+        <a class="nav-link mx-auto" href="{% url 'example-masonry' %}">masonry</a>
+        <a class="nav-link mx-auto" href="{% url 'example-navbar-static' %}">navbar-static</a>
+        <a class="nav-link mx-auto" href="{% url 'example-navbar-fixed' %}">navbar-fixed</a>
+        <a class="nav-link mx-auto" href="{% url 'example-navbar-bottom' %}">navbar-bottom</a>
+    </div>
+</nav>
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-none-tab" data-bs-toggle="tab" data-bs-target="#nav-none" type="button" role="tab" aria-controls="nav-none" aria-selected="true">ГЛАВНАЯ</button>
+        <button class="nav-link mx-auto" id="nav-source-tab" data-bs-toggle="tab" data-bs-target="#nav-source" type="button" role="tab" aria-controls="nav-source" aria-selected="true">источник</button>
+        <button class="nav-link mx-auto" id="nav-album-tab" data-bs-toggle="tab" data-bs-target="#nav-album" type="button" role="tab" aria-controls="nav-album" aria-selected="true">album</button>
+        <button class="nav-link mx-auto" id="nav-pricing-tab" data-bs-toggle="tab" data-bs-target="#nav-pricing" type="button" role="tab" aria-controls="nav-pricing" aria-selected="false">pricing</button>
+        <button class="nav-link mx-auto" id="nav-checkout-tab" data-bs-toggle="tab" data-bs-target="#nav-checkout" type="button" role="tab" aria-controls="nav-checkout" aria-selected="false">checkout</button>
+        <button class="nav-link mx-auto" id="nav-product-tab" data-bs-toggle="tab" data-bs-target="#nav-product" type="button" role="tab" aria-controls="nav-product" aria-selected="false">product</button>
+        <button class="nav-link mx-auto" id="nav-cover-tab" data-bs-toggle="tab" data-bs-target="#nav-cover" type="button" role="tab" aria-controls="nav-cover" aria-selected="false">cover</button>
+        <button class="nav-link mx-auto" id="nav-carousel-tab" data-bs-toggle="tab" data-bs-target="#nav-carousel" type="button" role="tab" aria-controls="nav-carousel" aria-selected="false">carousel</button>
+        <button class="nav-link mx-auto" id="nav-blog-tab" data-bs-toggle="tab" data-bs-target="#nav-blog" type="button" role="tab" aria-controls="nav-blog" aria-selected="false">blog</button>
+        <button class="nav-link mx-auto" id="nav-dashboard-tab" data-bs-toggle="tab" data-bs-target="#nav-dashboard" type="button" role="tab" aria-controls="nav-dashboard" aria-selected="false">dashboard</button>
+        <button class="nav-link mx-auto" id="nav-sign-in-tab" data-bs-toggle="tab" data-bs-target="#nav-sign-in" type="button" role="tab" aria-controls="nav-sign-in" aria-selected="false">sign-in</button>
+        <button class="nav-link mx-auto" id="nav-sticky-footer-tab" data-bs-toggle="tab" data-bs-target="#nav-sticky-footer" type="button" role="tab" aria-controls="nav-sticky-footer" aria-selected="false">sticky-footer</button>
+        <button class="nav-link mx-auto" id="nav-sticky-footer-navbar-tab" data-bs-toggle="tab" data-bs-target="#nav-sticky-footer-navbar" type="button" role="tab" aria-controls="nav-sticky-footer-navbar" aria-selected="false">sticky-footer-navbar</button>
+        <button class="nav-link mx-auto" id="nav-starter-template-tab" data-bs-toggle="tab" data-bs-target="#nav-starter-template" type="button" role="tab" aria-controls="nav-starter-template" aria-selected="false">starter-template</button>
+        <button class="nav-link mx-auto" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="false">grid</button>
+        <button class="nav-link mx-auto" id="nav-cheatsheet-tab" data-bs-toggle="tab" data-bs-target="#nav-cheatsheet" type="button" role="tab" aria-controls="nav-cheatsheet" aria-selected="false">cheatsheet</button>
+        <button class="nav-link mx-auto" id="nav-navbars-tab" data-bs-toggle="tab" data-bs-target="#nav-navbars" type="button" role="tab" aria-controls="nav-navbars" aria-selected="false">navbars</button>
+        <button class="nav-link mx-auto" id="nav-offcanvas-tab" data-bs-toggle="tab" data-bs-target="#nav-offcanvas" type="button" role="tab" aria-controls="nav-offcanvas" aria-selected="false">offcanvas</button>
+        <button class="nav-link mx-auto" id="nav-masonry-tab" data-bs-toggle="tab" data-bs-target="#nav-masonry" type="button" role="tab" aria-controls="nav-masonry" aria-selected="false">masonry</button>
+        <button class="nav-link mx-auto" id="nav-navbar-static-tab" data-bs-toggle="tab" data-bs-target="#nav-navbar-static" type="button" role="tab" aria-controls="nav-navbar-static" aria-selected="false">navbar-static</button>
+        <button class="nav-link mx-auto" id="nav-navbar-fixed-tab" data-bs-toggle="tab" data-bs-target="#nav-navbar-fixed" type="button" role="tab" aria-controls="nav-navbar-fixed" aria-selected="false">navbar-fixed</button>
+        <button class="nav-link mx-auto" id="nav-navbar-bottom-tab" data-bs-toggle="tab" data-bs-target="#nav-navbar-bottom" type="button" role="tab" aria-controls="nav-navbar-bottom" aria-selected="false">navbar-bottom</button>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-none" role="tabpanel" aria-labelledby="nav-home-tab">
+        
+    </div>
+    <div class="tab-pane fade" id="nav-source" role="tabpanel" aria-labelledby="nav-source-tab">
+        
+    </div>
+    <div class="tab-pane fade" id="nav-album" role="tabpanel" aria-labelledby="nav-album-tab">
+        {% include 'examples/album.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-pricing" role="tabpanel" aria-labelledby="nav-profile-tab">
+        {% include 'examples/pricing.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-checkout" role="tabpanel" aria-labelledby="nav-checkout-tab">
+        {% include 'examples/checkout.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+        {% include 'examples/product.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-cover" role="tabpanel" aria-labelledby="nav-cover-tab">
+        {% include 'examples/cover.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-carousel" role="tabpanel" aria-labelledby="nav-carousel-tab">
+        {% include 'examples/carousel.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-blog" role="tabpanel" aria-labelledby="nav-blog-tab">
+        {% include 'examples/blog.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-dashboard" role="tabpanel" aria-labelledby="nav-dashboard-tab">
+        {% include 'examples/dashboard.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-sign-in" role="tabpanel" aria-labelledby="nav-sign-in-tab">
+        {% include 'examples/sign-in.html' %}}
+    </div>
+    <div class="tab-pane fade" id="nav-sticky-footer" role="tabpanel" aria-labelledby="nav-sticky-footer-tab">
+        {% include 'examples/sticky-footer.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-sticky-footer-navbar" role="tabpanel" aria-labelledby="nav-sticky-footer-navbar-tab">
+        {% include 'examples/sticky-footer-navbar.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-starter-template" role="tabpanel" aria-labelledby="nav-starter-template-tab">
+        {% include 'examples/starter-template.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+        {% include 'examples/grid.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-cheatsheet" role="tabpanel" aria-labelledby="nav-cheatsheet-tab">
+        {% include 'examples/cheatsheet.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-navbars" role="tabpanel" aria-labelledby="nav-navbars-tab">
+        {% include 'examples/navbars.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-offcanvas" role="tabpanel" aria-labelledby="nav-offcanvas-tab">
+        {% include 'examples/offcanvas.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-masonry" role="tabpanel" aria-labelledby="nav-masonry-tab">
+        {% include 'examples/masonry.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-navbar-static" role="tabpanel" aria-labelledby="nav-navbar-static-tab">
+        {% include 'examples/navbar-static.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-navbar-fixed" role="tabpanel" aria-labelledby="nav-navbar-fixed-tab">
+        {% include 'examples/navbar-fixed.html' %}
+    </div>
+    <div class="tab-pane fade" id="nav-navbar-bottom" role="tabpanel" aria-labelledby="nav-navbar-bottom-tab">
+        {% include 'examples/navbar-bottom.html' %}
+    </div>
+</div>
+
+<!-- example end -->
+{% endblock example %}
