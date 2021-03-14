@@ -9,8 +9,11 @@ from django.utils import timezone
 
 
 def rational_list(request, category_slug=None):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
     if request.user.is_authenticated is not True:
-        return redirect('login')
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
     category_page = None
     rational = None
     try:
@@ -20,31 +23,34 @@ def rational_list(request, category_slug=None):
         if category_slug != None:
             category_page = get_object_or_404(CategoryRationalModel, category_slug=category_slug)
             rational = RationalModel.objects.filter(rational_category=category_page).order_by('-rational_date_registrated')
-        else:
-            rational = RationalModel.objects.order_by('-rational_date_registrated')
-    paginator = Paginator(rational, 3)
+    rational = RationalModel.objects.order_by('-rational_date_registrated')
     category = CategoryRationalModel.objects.order_by('-id')
+
+    # Начало пагинатора: передать модель и количество объектов на одной странице, объекты будут списком
+    paginator = Paginator(rational, 3)
     page = request.GET.get('page')
     try:
-        contacts = paginator.page(page)
+        page = paginator.page(page)
     except PageNotAnInteger:
-        contacts = paginator.page(1)
+        page = paginator.page(1)
     except EmptyPage:
-        contacts = paginator.page(paginator.num_pages)
-    rational = RationalModel.objects.order_by('-rational_date_registrated')
+        page = paginator.page(paginator.num_pages)
+    # конец пагинатора, объекты под ключом "'page': page"
+
     context = {
-        'rational': rational,
+        'page': page,
         'category': category,
-        'contacts': contacts
     }
     return render(request, 'rational/list.html', context)
 
 def rational_search(request):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
     if request.user.is_authenticated is not True:
-        return redirect('login')
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
     search = request.POST['search_text']
-    rational = RationalModel.objects.filter(rational_name__icontains=search)
-    contacts = rational
+    contacts = RationalModel.objects.filter(rational_name__icontains=search)
     rational = RationalModel.objects.order_by('-rational_date_registrated')
     context = {
         'rational': rational,
@@ -53,8 +59,11 @@ def rational_search(request):
     return render(request, 'rational/list_search.html', context)
 
 def rational_detail(request, rational_id):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
     if request.user.is_authenticated is not True:
-        return redirect('login')
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
     try:
         rational = RationalModel.objects.get(id=rational_id)
     except:
@@ -89,8 +98,11 @@ def rational_detail(request, rational_id):
     return render(request, 'rational/detail.html', context)
 
 def rational_create(request):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
     if request.user.is_authenticated is not True:
-        return redirect('login')
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
     if request.method == 'POST':
         form = RationalCreateForm(request.POST, request.FILES)
         if form.is_valid():
@@ -126,8 +138,11 @@ def rational_create(request):
     return render(request, 'rational/create.html', context)
 
 def rational_leave_comment(request, rational_id):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
     if request.user.is_authenticated is not True:
-        return redirect('login')
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
     try:
         rational = RationalModel.objects.get(id = rational_id)
     except:
@@ -139,8 +154,11 @@ def rational_leave_comment(request, rational_id):
     return HttpResponseRedirect( reverse('app_rational:rational_detail', args = (rational.id,)) )
 
 def rational_increase_rating(request, rational_id):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
     if request.user.is_authenticated is not True:
-        return redirect('login')
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
     blog = RationalModel.objects.get(id=rational_id)
     user = User.objects.get(id=request.user.id)
     try:
@@ -162,8 +180,11 @@ def rational_increase_rating(request, rational_id):
     return HttpResponseRedirect( reverse('app_rational:rational_detail', args = (rational.id,)) )
 
 def rational_decrease_rating(request, rational_id):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
     if request.user.is_authenticated is not True:
-        return redirect('login')
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
     blog = RationalModel.objects.get(id=rational_id)
     user = User.objects.get(id=request.user.id)
     try:

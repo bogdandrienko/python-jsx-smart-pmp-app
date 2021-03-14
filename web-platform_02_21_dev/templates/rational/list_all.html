@@ -1,8 +1,8 @@
 {% load likes %}
 {% if rational %}
 <div class="row row-cols-1 row-cols-md-3 text-center">
-    {% for LOOP in contacts %}
-    {{ contact.full_name|upper }}<br />
+    {% for LOOP in page %}
+    {{ contacts.full_name|upper }}<br />
     <div class="col my-2">
         <div class="card shadow-sm">
             <div class="card-header m-0 p-1">
