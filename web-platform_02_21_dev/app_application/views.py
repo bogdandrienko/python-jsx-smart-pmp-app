@@ -1,26 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import ApplicationModel, ShortcutApplicationModel
+from .models import ApplicationModuleModel, ApplicationComponentModel
 
 
-def home(request):
-    return render(request, 'components/home.html')
-
-def application_list(request):
-    application = ApplicationModel.objects.order_by('application_position')
+def list_module(request):
+    module = ApplicationModuleModel.objects.order_by('module_position')
     context = {
-        'application': application,
+        'module': module,
     }
-    return render(request, 'app_application/applications_list.html', context)
+    return render(request, 'app_application/list_module.html', context)
 
-def applications_detail(request, application_slug=None):
-    if request.user.is_authenticated is not True:
-        return redirect('login')
-    if application_slug != None:
-        application = ApplicationModel.objects.get(application_slug=application_slug)
-        shortcut = ShortcutApplicationModel.objects.filter(shortcut_application_article=application).order_by('-id')
+def list_component(request, module_slug=None):     
+    if module_slug != None:
+        module = ApplicationModuleModel.objects.get(module_slug=module_slug)
+        component = ApplicationComponentModel.objects.filter(component_Foreign=module).order_by('component_position')
     else:
-        return redirect('app_application:application_list')
+        return redirect('app_application:list_module')
     context = {
-        'shortcut': shortcut,
+        'component': component,
     }
-    return render(request, 'app_application/applications_detail.html', context)
+    return render(request, 'app_application/list_component.html', context)

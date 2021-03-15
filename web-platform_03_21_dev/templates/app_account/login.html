@@ -1,0 +1,55 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Войти в аккаунт
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+    <div class="container">
+        <br>
+        <h1 class="product_title text-center">
+            Войти в аккаунт
+        </h1>
+        <div class="row container-fluid">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 bg-light">
+                <div>
+                    <br>
+                    <h2 class="product_title text-center">
+                        Только для уже существующих аккаунтов
+                    </h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <p>{{ form | crispy }}</p>
+                        <button type='submit' class="btn btn-lg btn-secondary">Log in</button>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
