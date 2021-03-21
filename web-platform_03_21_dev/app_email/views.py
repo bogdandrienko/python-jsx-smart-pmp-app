@@ -13,7 +13,7 @@ def email(request):
     mails = EmailModel.objects.order_by('-id')
 
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
-    paginator = Paginator(mails, 3)
+    paginator = Paginator(mails, 10)
     page = request.GET.get('page')
     try:
         page = paginator.page(page)

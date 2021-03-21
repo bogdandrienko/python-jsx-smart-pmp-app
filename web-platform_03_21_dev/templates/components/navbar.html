@@ -66,6 +66,7 @@
                                 <li>
                                     <h6 class="dropdown-header">Аккаунты</h6>
                                     <a class="dropdown-item" href="{% url 'app_account:create' %}">Аккаунт: создать</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:create_many' %}">Аккаунт: создать из файла</a>
                                     <a class="dropdown-item" href="{% url 'app_account:login' %}">Аккаунт: войти
                                         {% if request.user.is_authenticated %}
                                             [вы уже вошли в аккаунт]

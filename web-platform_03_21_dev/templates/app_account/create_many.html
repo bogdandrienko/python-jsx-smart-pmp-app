@@ -1,6 +1,5 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
 
 <!-- Head -->
 {% block head %}
@@ -21,7 +20,7 @@
 <!-- Main -->
 {% block main %}
     <div>
-        {% if not form.is_valid %}
+        {% if form %}
             <div>
                 <br>
                 <h1 class="product_title text-center">
@@ -30,20 +29,24 @@
                 <br>
                 <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
                     <br>
-                    <p>Пожалуйста, введите информацию в поля ниже, для создания аккаунта:</p>
-                    <form method="post">
+                    <div class="d-flex m-1 p-1"><p>Пожалуйста, введите информацию в поля ниже, для создания аккаунта:</p>
+                    <a class="btn btn-dark" href="{% static 'media/tempates/accounts.xlsx' %}">скачать шаблон документа</a>
+                    </div>
+                    <form form class="form-control" action="{% url 'app_account:create_many' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <p>{{ form | crispy }}</p>
-                        <button type="submit" name="button" class="btn btn-lg btn-secondary">Создать</button>
+                        <p>{{ form }}</p>
+                        <br>
+                        <div class="btn-group form-control">
+                            <button class="btn btn-lg btn-outline-primary" type="submit">Отправить</button>
+                        </div>
                     </form>
-                    
                 </div>
             </div>
         {% else %}
         <div class="mx-auto container">
             <br>
             <h1 class="product_title text-center">
-                Аккаунт был успешно создан
+                Аккаунты были успешно созданы
             </h1>
             <br>
             <div class="container-fluid text-center">
