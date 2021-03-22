@@ -20,7 +20,8 @@
 
 <!-- Main -->
 {% block main %}
-    <div>
+
+    <div class="form-control container container-fluid">
         {% if not form.is_valid %}
             <div>
                 <br>
@@ -52,6 +53,79 @@
         </div>
         {% endif %}
     </div>
+
+    <div class="form-control container container-fluid">
+        <div>
+            <br>
+            <h1 class="product_title text-center">
+                Создать новые аккаунты
+            </h1>
+            <br>
+            <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                <br>
+                <div class="d-flex m-1 p-1"><p>Добавьте в форму файл и затем импортируйте персонал, формат добавления можно скачать в шаблоне:</p>
+                <a class="btn btn-dark" href="{% static 'media/tempates/import_account.xlsx' %}">Скачать шаблон</a>
+                </div>
+                <form form class="form-control" action="{% url 'app_account:import' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>{{ form1 }}</p>
+                    <br>
+                    <div class="btn-group form-control">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Импортировать персонал</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control container container-fluid">
+        <div>
+            <br>
+            <h1 class="product_title text-center">
+                Выгрузить все аккаунты
+            </h1>
+            <br>
+            <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                <br>
+                <div class="d-flex m-1 p-1"><p>Сначала эскпортируйте персонал, потом скачайте шаблон:</p>
+                <a class="btn btn-dark" href="{% static 'media/tempates/export_account.xlsx' %}">Скачать шаблон</a>
+                </div>
+                <form form class="form-control" action="{% url 'app_account:export' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <br>
+                    <div class="btn-group form-control">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Экспортировать персонал</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control container container-fluid">
+        <div>
+            <br>
+            <h1 class="product_title text-center">
+                Сгенерировать пароли
+            </h1>
+            <br>
+            <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                <br>
+                <div class="d-flex m-1 p-1">
+                    <p>Сначала сгенерируйте пароли, потом скачайте шаблон:</p>
+                    <a class="btn btn-dark" href="{% static 'media/tempates/generate_password.xlsx' %}">Скачать шаблон</a>
+                </div>
+                <form form class="form-control" action="{% url 'app_account:generate' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>{{ form2 }}</p>
+                    <br>
+                    <div class="btn-group form-control">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Сгенерировать пароли</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 {% endblock main %}
 
 <!-- Footer -->

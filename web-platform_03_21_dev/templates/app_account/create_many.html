@@ -24,12 +24,12 @@
             <div>
                 <br>
                 <h1 class="product_title text-center">
-                    Создать новый аккаунт
+                    Создать новые аккаунты
                 </h1>
                 <br>
                 <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
                     <br>
-                    <div class="d-flex m-1 p-1"><p>Пожалуйста, введите информацию в поля ниже, для создания аккаунта:</p>
+                    <div class="d-flex m-1 p-1"><p>Заполните поля в шаблоне, прикрепите его в форму и отправьте для создания аккаунтов:</p>
                     <a class="btn btn-dark" href="{% static 'media/tempates/accounts.xlsx' %}">скачать шаблон документа</a>
                     </div>
                     <form form class="form-control" action="{% url 'app_account:create_many' %}" method="POST" enctype="multipart/form-data">
