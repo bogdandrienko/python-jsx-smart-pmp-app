@@ -1,12 +1,21 @@
 {% load likes %}
-{% if rational %}
+{% if page %}
 <div class="row row-cols-1 row-cols-md-3 text-center">
     {% for LOOP in page %}
     {{ contacts.full_name|upper }}<br />
     <div class="col my-2">
         <div class="card shadow-sm">
             <div class="card-header m-0 p-1">
-                <h4 class="fw-normal card-header bg-light text-dark text-decoration-none"><strong>{{ LOOP.rational_name }}</strong></h4>
+                <h4 class="fw-normal card-header bg-light text-dark text-decoration-none d-flex">
+                    <strong>{{ LOOP.rational_name }}</strong>
+                    {% if LOOP.rational_autor_name == user %}
+                        <a class="w-25 btn btn-lg" target="_blank" href="{% url 'app_rational:rational_change' LOOP.id %}">
+                            <i class="material-icons cart-icon text-warning">published_with_changes</i>
+                        </a>
+                    {% else %}
+                        Вы не автор, вам недоступно редактирование
+                    {% endif %}
+                </h4>
             </div>
             <div class="card-body m-0 p-1">
                 <a href="{% url 'app_rational:rational_detail' LOOP.id %}">

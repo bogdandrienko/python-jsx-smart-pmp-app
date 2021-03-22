@@ -131,11 +131,54 @@ def rational_create(request):
         return redirect('app_rational:rational')
     form= RationalCreateForm(request.POST, request.FILES)
     category = CategoryRationalModel.objects.order_by('-id')
+    user = User.objects.get(id=request.user.id).username
     context = {
         'form': form,
-        'category': category
+        'category': category,
+        'user': user,
     }
     return render(request, 'rational/create.html', context)
+
+def rational_change(request, rational_id=None):
+    # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа
+    if request.user.is_authenticated is not True:
+        return redirect('app_account:login')
+    # Переадресация пользователя на страницу входа
+
+    if request.method == 'POST':
+        form = RationalCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            object = RationalModel.objects.get(id=rational_id)
+            object.rational_structure_from         = request.POST['rational_structure_from']
+            object.rational_uid_registrated        = request.POST['rational_uid_registrated']
+            object.rational_date_registrated       = request.POST.get('rational_date_registrated')
+            object.rational_name                   = request.POST['rational_name']
+            object.rational_place_innovation       = request.POST['rational_place_innovation']
+            object.rational_description            = request.POST['rational_description']
+            object.rational_addition_file_1        = request.FILES.get('rational_addition_file_1')
+            object.rational_addition_file_2        = request.FILES.get('rational_addition_file_2')
+            object.rational_addition_file_3        = request.FILES.get('rational_addition_file_3')
+            object.rational_offering_members       = request.POST['rational_offering_members']
+            object.rational_conclusion             = request.POST['rational_conclusion']
+            object.rational_change_documentations  = request.POST['rational_change_documentations']
+            object.rational_resolution             = request.POST['rational_resolution']
+            object.rational_responsible_members    = request.POST['rational_responsible_members']
+            object.rational_date_certification     = request.POST.get('rational_date_certification')
+            object.rational_category               = CategoryRationalModel.objects.get(id=request.POST.get('rational_category'))
+            object.rational_autor_name             = User.objects.get(id=request.user.id)
+            # rational_date_create            = request.POST.get('rational_date_create'),
+            object.rational_addition_image         = request.FILES.get('rational_addition_image')
+            # rational_status                 = request.POST['rational_status'],
+            object.save()
+        return redirect('app_rational:rational')
+    form= RationalCreateForm(request.POST, request.FILES)
+    category = CategoryRationalModel.objects.order_by('-id')
+    context = {
+        'form': form,
+        'category': category,
+        'rational_id':rational_id,
+    }
+    return render(request, 'rational/change.html', context)
 
 def rational_leave_comment(request, rational_id):
     # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а его переадресует в форму входа

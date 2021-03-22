@@ -1,0 +1,55 @@
+{% extends "components/base.html" %}	
+{% load static %}
+
+<!-- Head -->	
+{% block head %}	
+    {% include 'components/navbar.html' %}	
+{% endblock head %}	
+
+<!-- Title -->	
+{% block title %}	
+    Изменить рационализаторское предложение	
+{% endblock title %}	
+
+<!-- Style -->	
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<h2  class="fw-normal card-header bg-light text-danger text-decoration-none d-flex">Внимание, вы редактируете уже существующую статью, информацию берите из предыдущей версии статьи</h2>
+<form class="form-control" action="{% url 'app_rational:rational_change' rational_id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% comment %} <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category_name" required="">
+        <option selected value=''>Нажмите сюда и выберите категорию из списка</option>
+        {% for LOOP in category %}
+            <option>{{ LOOP.category_name }}</option>
+        {% endfor %}
+    </select>
+    <input class="form-control" type="text" required="" placeholder="название статьи" name="rational_name"><br>
+    <input class="form-control" type="text" required="" placeholder="rational_structure_from" name="rational_structure_from"><br>
+    <input class="form-control" type="text" required="" placeholder="rational_place_innovation" name="rational_place_innovation"><br>
+    <input class="form-control" type="text" required="" placeholder="rational_resolution" name="rational_resolution"><br> {% endcomment %}
+    {% comment %} <input class="form-control" type="text" required="" placeholder="0" name="rational_uid_registrated" id="rational_uid_registrated"><br> {% endcomment %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <br>
+    <div class="btn-group form-control">
+        <button class="btn btn-lg btn-outline-primary" type="submit">Изменить статью</button>
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational' %}">Все новости</a>
+    </div>
+</form>
+{% endblock main %}
+
+<!-- Footer -->	
+{% block footer %}	
+    {% include 'components/footer.html' %}	
+{% endblock footer %}	
+
+<!-- Script -->	
+{% block script %}
+    <!-- Not Optimizated Custom JavaScript -->
+    <script src="{% static 'js/rational/copy_buttons.js' %}"></script>
+{% endblock script %} 

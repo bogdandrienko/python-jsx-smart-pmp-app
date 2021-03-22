@@ -39,6 +39,3 @@ class RationalCreateForm(forms.Form):
     class Meta:
         model = RationalModel
         fields = '__all__'
-
-    # def __init__(self, data, **kwargs):
-    #     pass
