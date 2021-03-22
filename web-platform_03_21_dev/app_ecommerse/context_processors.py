@@ -16,7 +16,6 @@ def counter(request):
 			item_count = 0
 	return dict(item_count=item_count)
 
-
 def menu_links(request):
 	links = Category.objects.all()
 	return dict(links=links)

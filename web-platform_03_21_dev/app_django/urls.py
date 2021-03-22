@@ -30,6 +30,7 @@ urlpatterns = [
 
     path('account/', include('app_account.urls')),
     path('application/', include('app_application.urls')),
+    path('notification/', include('app_notification.urls')),
     path('email/', include('app_email.urls')),
     path('contact/', include('app_contact.urls')),
     path('documentation/', include('app_documentation.urls')),

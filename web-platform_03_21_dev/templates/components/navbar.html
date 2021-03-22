@@ -48,7 +48,7 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             production: main
                                 <span class="badge badge-primary badge-pill">
-                                    # 7
+                                    # 8
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
@@ -56,9 +56,9 @@
                                     <h6 class="dropdown-header">Основной функционал</h6>
                                     <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
                                     <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
-                                    <a class="dropdown-item disabled" href="#">личный кабинет</a>
-                                    <a class="dropdown-item disabled" href="#">мои уведомления</a>
-                                    <a class="dropdown-item disabled" href="#">мои достижения</a>
+                                    <a class="dropdown-item disabled" href="#">Кабинет</a>
+                                    <a class="dropdown-item" href="{% url 'app_notification:notification' %}">Уведомления [{{notification}}]</a>
+                                    <a class="dropdown-item disabled" href="#">Достижения</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">

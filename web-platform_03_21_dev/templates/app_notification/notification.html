@@ -1,0 +1,137 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+	Уведомления
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Уведомления</h1>
+        <p class="lead">Эта страница содержит уведомления, а также форму для добавления.</p>
+        <div class="d-block">
+            <form class="form-control" action="{% url 'app_notification:create' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <br>
+                <div class="btn-group form-control">
+                    <button class="btn btn-lg btn-outline-primary" type="submit">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+    <article class="my-3" id="accordion">
+        <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+            <h3>Уведомления</h3>
+        </div>
+        <div class="bd-example">
+            <div class="accordion" id="accordionExample">
+                {% if page %}
+                    {% for LOOP in page %}
+                        <div class="accordion-item card border ">
+                            <h4 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ LOOP.id }}" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="d-flex shadow border">
+                                        {% if LOOP.notification_status %}
+                                            <i class="material-icons cart-icon text-success">check_circle_outline</i>
+                                        {% else %}
+                                            <i class="material-icons cart-icon text-danger">report_gmailerrorred</i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="d-flex mx-3">
+                                        {{ LOOP.notification_name }}
+                                    </div>
+                                    <div class="d-flex shadow border">
+                                        {{ LOOP.notification_date }}
+                                    </div>
+                                </button>
+                            </h4>
+                            <div id="collapse{{ LOOP.id }}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="row g-0">
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+
+                                                <div class="bd-example">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Тип</th>
+                                                                <th scope="col">Данные</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <tr class="table-danger">
+                                                                <th scope="row">Описание</th>
+                                                                <td>{{ LOOP.notification_description }}</td>
+                                                            </tr>
+                                                            <tr class="table-warning">
+                                                                <th scope="row">Ссылка</th>
+                                                                <td>{{ LOOP.notification_slug }}</td>
+                                                            </tr>
+                                                            <tr class="table-success">
+                                                                <th scope="row">Автор</th>
+                                                                <td>{{ LOOP.notification_author }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <a class="btn btn-lg btn-outline-success" href="{% url 'app_notification:accept' LOOP.id %}">
+                                                        <i class="material-icons cart-icon text-success">check_circle_outline</i>
+                                                    </a>
+                                                    <a class="btn btn-lg btn-outline-danger" href="{% url 'app_notification:decline' LOOP.id %}">
+                                                        <i class="material-icons cart-icon text-danger">report_gmailerrorred</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    Уведомления не найдены
+                {% endif %}
+            </div>
+        </div>
+    </article>
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
+

@@ -48,8 +48,10 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'crispy_forms',
     'app_rest_framework.apps.AppRestFrameworkConfig',
-
     'app_account.apps.AppAccountConfig',
+    'app_application.apps.AppApplicationConfig',
+    'app_notification.apps.AppNotificationConfig',
+
     'app_bootstrap_examples.apps.AppBootstrapExamplesConfig',
     'app_ecommerse.apps.AppEcommerseConfig',
     'app_news.apps.AppNewsConfig',
@@ -62,7 +64,6 @@ INSTALLED_APPS = [
     'app_documentation.apps.AppDocumentationConfig',
     'app_message.apps.AppMessageConfig',
 
-    'app_application.apps.AppApplicationConfig',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'app_ecommerse.context_processors.menu_links',
                 'app_ecommerse.context_processors.counter',
+                'app_notification.context_processors.notification_counter',
             ],
         },
     },
