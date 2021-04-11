@@ -1,0 +1,167 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">ГЛАВНАЯ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                development
+                                <span class="badge badge-primary badge-pill">
+                                    # 5
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Готовые</h6>
+                                    <a class="dropdown-item" href="{% url 'news' %}">app_news</a>
+                                    <a class="dropdown-item" href="{% url 'ecommerse' %}">app_ecommerse</a>
+                                    <a class="dropdown-item" href="{% url 'react' %}">app_react</a>
+                                    <a class="dropdown-item" href="{% url 'example' %}">app_bootstrap_examples</a>
+                                    <a class="dropdown-item" href="{% url 'movies' %}">app_movies</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">В разработке</h6>
+                                    <a class="dropdown-item disabled" href="#">none</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Шаблоны</h6>
+                                    <a class="dropdown-item" href="#">none</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            production: main
+                                <span class="badge badge-primary badge-pill">
+                                    # 8
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Основной функционал</h6>
+                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
+                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item disabled" href="#">Кабинет</a>
+                                    <a class="dropdown-item" href="{% url 'app_notification:notification' %}">Уведомления [{{notification}}]</a>
+                                    <a class="dropdown-item disabled" href="#">Достижения</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Аккаунты</h6>
+                                    <a class="dropdown-item" href="{% url 'app_account:create' %}">Аккаунт: создать</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:import' %}">Аккаунт: создать из файла</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:export' %}">Аккаунт: выгрузить в файл</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:generate' %}">Аккаунт: создать пароли</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:login' %}">Аккаунт: войти
+                                        {% if request.user.is_authenticated %}
+                                            [вы уже вошли в аккаунт]
+                                        {% endif %}
+                                    </a>
+                                    <a class="dropdown-item" href="{% url 'app_account:logout' %}">Аккаунт: выйти 
+                                        {% if request.user.is_authenticated %}
+                                            [{{ request.user.first_name }}]
+                                        {% else %}
+                                            [вы не вошли в аккаунт]    
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Рационализаторство</h6>
+                                    <a class="dropdown-item" href="{% url 'app_rational:rational' %}">Рационализаторство: список</a>
+                                    <a class="dropdown-item" href="{% url 'app_rational:rational_create' %}">Рационализаторство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Бережливое производство</h6>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: список</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: шаблоны</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Служба управления персоналом</h6>
+                                    <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            production: extra
+                                <span class="badge badge-primary badge-pill">
+                                    # 6
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Электронная почта</h6>
+                                    <a class="dropdown-item" href="{% url 'app_email:email' %}">Электронная почта: общий список</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Сообщения</h6>
+                                    <a class="dropdown-item" href="{% url 'app_message:message' %}">Сообщения: общий список</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Документация</h6>
+                                    <a class="dropdown-item" href="{% url 'app_documentation:documentation' %}">Документация: общий список</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Контакты</h6>
+                                    <a class="dropdown-item" href="{% url 'app_contact:contact' %}">Контакты: общий список</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Погода</h6>
+                                    <a class="dropdown-item" href="{% url 'app_weather:weather' %}">Погода: общий список</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+                <!-- Btn-Group -->
+                <div class="btn-group m-1 p-1">
+                    {% block second_btn-group %}{% endblock second_btn-group %}
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
