@@ -17,3 +17,4 @@ class DataViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = DataSerializer
+    

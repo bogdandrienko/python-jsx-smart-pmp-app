@@ -18,7 +18,16 @@
 {% block header %}{% endblock header %}
 
 <!-- Main -->
-{% block main %}{% endblock main %}
+{% block main %}
+<div class="container container-fluid m-lg-5 p-lg-5">
+    <button id="btn" class="btn-danger btn btn-lg">
+        Click me!
+    </button>
+</div>
+<div class="container container-fluid m-lg-5 p-lg-5">
+    <div id="list"></div>
+</div>
+{% endblock main %}
 
 <!-- Footer -->
 {% block footer %}
@@ -26,4 +35,7 @@
 {% endblock footer %}
 
 <!-- Script -->
-{% block script %}{% endblock script %}
+{% block script %}
+    <!-- Not Optimizated Custom JavaScript -->
+    <script src="{% static 'js/test.js' %}"></script>
+{% endblock script %}

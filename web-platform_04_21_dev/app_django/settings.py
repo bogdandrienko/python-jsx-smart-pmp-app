@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'crispy_forms',
     'app_rest_framework.apps.AppRestFrameworkConfig',
+    'rest_framework',
+    'corsheaders',
     'app_account.apps.AppAccountConfig',
     'app_application.apps.AppApplicationConfig',
     'app_notification.apps.AppNotificationConfig',
@@ -69,6 +71,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -156,6 +160,18 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# django-corsheaders
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS  = [
+    "http://192.168.0.109:8000",
+    "http://localhost:8080",
+    "http://127.0.0.1:8000",
+]
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^https://\w+\.example\.com$",
+# ]
+CORS_URLS_REGEX = r'^.*$'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

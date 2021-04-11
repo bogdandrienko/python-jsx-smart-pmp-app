@@ -7,3 +7,6 @@ def admin(request):
 
 def home(request):
     return render(request, 'components/home.html')
+
+def custom(request):
+    return render(request, 'utils/custom.html')
