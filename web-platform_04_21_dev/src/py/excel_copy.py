@@ -43,3 +43,4 @@ for id_1 in ID_1:
                 print('error')
 sheet['S'+str(1)] = ''
 workbook.save(new_path+new_file)
+workbook.close()
