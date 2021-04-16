@@ -1,9 +1,9 @@
 import openpyxl
 
-old_path = 'C:\\Users\\bogdan\\Desktop\\СКУД\\Добавление и удаление персонала\\'
-old_file = 'Export.xlsx'
-new_path = 'C:\\Users\\bogdan\\Desktop\\СКУД\\Добавление и удаление персонала\\'
-new_file = 'Import.xlsx'
+old_path = r'E:\WORK\Система контроля и учета доступа\СКУД\1. Добавление и удаление персонала'
+old_file = r'\Export.xlsx'
+new_path = r'E:\WORK\Система контроля и учета доступа\СКУД\1. Добавление и удаление персонала'
+new_file = r'\Import.xlsx'
 A_1 = []
 C_1 = []
 ID_1 = []
