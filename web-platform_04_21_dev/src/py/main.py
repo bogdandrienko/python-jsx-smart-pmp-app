@@ -136,3 +136,8 @@
 #         value = value - multiplayer
 #     return value
 # print(i_am_a_loop(29, 3))
+
+
+# text = open('text.txt', 'w')
+# text.write(name + '\n' + '  out_error')
+# text.close()
