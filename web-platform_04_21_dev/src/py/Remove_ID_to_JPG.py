@@ -2,8 +2,8 @@ import os
 from fnmatch import fnmatch
 
 relative_path =  os.path.dirname(os.path.abspath('__file__'))+'\\'
-pattern = '*.JPG'
-jpg = '.JPG'
+pattern = '*.jpg'
+jpg = '.jpg'
 
 for path, ubdirs, files in os.walk(relative_path):
     for name in files:

@@ -5,22 +5,26 @@ from fnmatch import fnmatch
 relative_path =  os.path.dirname(os.path.abspath('__file__'))
 
 try:
-    export_file = relative_path+'\\'+'из 1С'
+    export_file = relative_path+'\\'+'Из 1С'
 except:
     export_file = relative_path+'\\'+str(input(f'Введите название папки с фотографиями для сравнения: '))
+    equal_file = os.makedirs(relative_path+r'\Из 1С')
 
 try:
     equal_file = os.makedirs(relative_path+r'\Есть в базе')
+    equal_file = relative_path+r'\Есть в базе'
 except:
     equal_file = relative_path+r'\Есть в базе'
 
 try:
     not_equal_file = os.makedirs(relative_path+r'\Нет в базе')
+    not_equal_file = relative_path+r'\Нет в базе'
 except:
     not_equal_file = relative_path+r'\Нет в базе'
 
 try:
     error_file = os.makedirs(relative_path+r'\Ошибка')
+    error_file = relative_path+r'\Ошибка'
 except:
     error_file = relative_path+r'\Ошибка'
 
