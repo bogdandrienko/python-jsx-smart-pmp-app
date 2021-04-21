@@ -2,9 +2,8 @@ import os
 from fnmatch import fnmatch
 
 relative_path =  os.path.dirname(os.path.abspath('__file__'))+'\\'
-pattern = '*.JPG'
-jpg = '.JPG'
-
+pattern = '*.jpg'
+jpg = '.jpg'
 def input_integer_value(description):
     while True:
         try:
@@ -22,6 +21,7 @@ for path, ubdirs, files in os.walk(relative_path):
         if fnmatch(name, pattern):
             try:
                 old = name.split('.')[0].strip()
+                jpg = '.'+name.split('.')[1].strip()
                 new = old+'_'+str(identificator)+jpg
                 os.rename(relative_path+name,relative_path+new)
                 identificator += 1
