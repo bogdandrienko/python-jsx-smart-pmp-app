@@ -117,7 +117,7 @@ class Application(tkinter.Frame):
         self.submit_button = tkinter.Button(self.root, text="Запустить", font="100", command=self.insert_data)
         self.submit_button.grid(row=0, column=0, sticky=tkinter.W)
 
-        self.exit_button = tkinter.Button(self.root, text="Выход", font="100", command=self.root.quit)
+        self.exit_button = tkinter.Button(self.root, text="Выход", font="100", command=self.root.quit_button)
         self.exit_button.grid(row=0, column=1, sticky=tkinter.W)
 
         # Define the different GUI widgets
