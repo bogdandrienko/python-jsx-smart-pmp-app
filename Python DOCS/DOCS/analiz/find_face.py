@@ -1,9 +1,9 @@
-import cv2
 import tkinter
 import os
 from fnmatch import fnmatch
 from threading import Thread
 from time import sleep
+import cv2
 
 
 def create_dir(dir_name='new folder', current_path=os.path.dirname(os.path.abspath('__file__'))):
