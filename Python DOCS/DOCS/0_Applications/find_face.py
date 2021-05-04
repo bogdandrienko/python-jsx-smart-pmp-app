@@ -46,6 +46,7 @@ def click_button(input_path='input', output_path='output', width_add='0', height
         haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
         faces = haar_face_cascade.detectMultiScale(gray_img)
         for (x, y, w, h) in faces:
+            # output = cv2.rectangle(src_img, (x-w, y-h), (x + w*2, y + h*2), (0, 255, 0), 2)
             # output = cv2.rectangle(src_img, (x, y), (x + w, y + h), (0, 255, 0), 2)
             print(f'x={x} | y={y} | h={h} | w={w}')
             output = src_img[int(y - int(height_add)):int(y + h + int(height_add)), int(x - int(width_add)):int(x + w + int(width_add))]
