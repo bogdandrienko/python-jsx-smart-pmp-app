@@ -1,6 +1,6 @@
 import cv2
 import tkinter
-from numpy import sum, array, uint8
+from numpy import array, uint8
 from threading import Thread
 from time import sleep
 
