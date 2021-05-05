@@ -23,7 +23,8 @@ Create directory with {dir_name} - name in {current_path} - path. And return thi
         return full_path
 
 
-def click_button(input_path='input', output_path='output', width_add='0', height_add='0', windows='да', width='640', height='480'):
+def click_button(input_path='input', output_path='output', width_add='0', height_add='0', windows='да', width='640',
+                 height='480'):
     global play
     _input_path = create_dir(input_path)
     _output_path = create_dir(output_path)
@@ -31,7 +32,21 @@ def click_button(input_path='input', output_path='output', width_add='0', height
     sleep(0.25)
     play = True
     app.root.config(background="red")
-    pattern = '*.JPG'
+    pattern = '*.jpg'
+    pattern_2 = '*.png'
+
+    # file.open()
+    # try:
+    #     file.read()
+    #     # Тут исполняется код, который может вызвать ошибку
+    #     pass
+    # except:
+    #     file.error()
+    #     # Тут исполняется код, который вызывается если первая часть вызвала ошибку
+    #     print('Тут сработала ошибка')
+    #     pass
+    # finally:
+    #     fille.close()
 
     def crop_img(input_file='input.jpg', output_file='output.jpg'):
         try:
@@ -49,7 +64,9 @@ def click_button(input_path='input', output_path='output', width_add='0', height
             # output = cv2.rectangle(src_img, (x-w, y-h), (x + w*2, y + h*2), (0, 255, 0), 2)
             # output = cv2.rectangle(src_img, (x, y), (x + w, y + h), (0, 255, 0), 2)
             print(f'x={x} | y={y} | h={h} | w={w}')
-            output = src_img[int(y - int(height_add)):int(y + h + int(height_add)), int(x - int(width_add)):int(x + w + int(width_add))]
+            output = src_img[int(y - int(height_add)):int(y + h + int(height_add)),
+                     int(x - int(width_add)):int(x + w + int(width_add))]
+
             # output = src_img[:, :]
         try:
             os.remove(output_file)
@@ -66,11 +83,13 @@ def click_button(input_path='input', output_path='output', width_add='0', height
     def loop():
         for path, subdirs, files in os.walk(_input_path):
             for name in files:
-                if fnmatch(name, pattern) and play:
+                if fnmatch(name, pattern) and play or fnmatch(name, pattern_2) and play:
                     try:
                         crop_img(f'{_input_path}\\{name}', f'{_output_path}\\{name}')
                     except:
                         print(f'{_input_path}\\{name} error to {_output_path}\\{name}')
+                else:
+                    pass
 
     thread_render = Thread(target=loop)
     thread_render.start()

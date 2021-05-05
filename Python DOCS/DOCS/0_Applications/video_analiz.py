@@ -5,8 +5,8 @@ from threading import Thread
 from time import sleep
 
 
-def click_button(video_file='', sens='100', speed=1.0, width='640',
-                 height='480', windows='да', multiplayer='7.0'):
+def click_button(video_file='', sens='115', speed=1.0, width='640',
+                 height='480', windows='да', multiplayer='1.0'):
     global play
     play = False
     sleep(0.25)
