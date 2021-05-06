@@ -1,19 +1,27 @@
 import cv2
 import tkinter
-from numpy import array, uint8
+from numpy import array, uint8, sum
 from threading import Thread
 from time import sleep
 
 
-def click_button(video_file='', sens='115', speed=1.0, width='640',
-                 height='480', windows='да', multiplayer='1.0'):
+def click_button(ip_entry='да', video_file='video.mp4', sens='115', speed='1.0', multiplayer='1.0', windows='да', width='640', height='480'):
     global play
     play = False
     sleep(0.25)
     play = True
     app.root.config(background="red")
 
-    cap = cv2.VideoCapture(video_file)
+    if ip_entry == 'Да' or ip_entry == 'да':
+        cap = cv2.VideoCapture(video_file)
+    else:
+        # ip = '192.168.8.223'
+        ip = video_file
+        port = 554
+        login = 'admin'
+        password = 'nehrfvths123'
+        cam = f'rtsp://{login}:{password}@{ip}:{port}'
+        cap = cv2.VideoCapture(cam)
 
     def whiles():
         while True:
@@ -61,8 +69,7 @@ def click_button(video_file='', sens='115', speed=1.0, width='640',
                     _, src_img = cap.read()
 
                     _cvtcolor = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
-                    _inrange = cv2.inRange(_cvtcolor, array([0, 0, 255 - int(110)],
-                                                            dtype=uint8), array([255, int(110), 255], dtype=uint8))
+                    _inrange = cv2.inRange(_cvtcolor, array([0, 0, 255 - int(110)], dtype=uint8), array([255, int(110), 255], dtype=uint8))
                     render('inrange', _inrange, width, height)
 
                 def threshold():
@@ -89,16 +96,13 @@ def click_button(video_file='', sens='115', speed=1.0, width='640',
 
                     _pre_render_final = cv2.bitwise_and(src_img, src_img, mask=src_white)
                     _cvtcolor = cv2.cvtColor(_pre_render_final, cv2.COLOR_BGR2HSV)
-                    _inrange = cv2.inRange(_cvtcolor, array([0, 0, 255 - int(sens)],
-                                                            dtype=uint8), array([255, int(sens), 255], dtype=uint8))
+                    _inrange = cv2.inRange(_cvtcolor, array([0, 0, 255 - int(sens)], dtype=uint8), array([255, int(sens), 255], dtype=uint8))
                     # print(f'white: {cv2.countNonZero(src_white)}')
                     # print(f'black: {cv2.countNonZero(src_black)}')
                     # result = sum(_inrange > 0) * float(multiplayer) / sum(src_white > 0) * 100
                     result = sum(_inrange > 0) * float(multiplayer) / sum(src_white > 0) * 100
-                    cv2.putText(_inrange, f"{result:0.4f}%", (int(int(1920)/5), int(int(1080)/2)),
-                                cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
-                    cv2.putText(_inrange, f"{sum(_inrange > 0)} | {sum(src_white == 255)}",
-                                (int(int(1920)/5), int(int(1080)/1.5)), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
+                    cv2.putText(_inrange, f"{result:0.4f}%", (int(int(1920) / 5), int(int(1080) / 2)), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
+                    cv2.putText(_inrange, f"{sum(_inrange > 0)} | {sum(src_white == 255)}", (int(int(1920) / 5), int(int(1080) / 1.5)), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
                     # app.log_entry.insert(0, f'{result:0.4f}% |{white_pix}/{all_scope} | ')
                     render('render_final', _inrange, width, height)
 
@@ -130,8 +134,11 @@ def click_button(video_file='', sens='115', speed=1.0, width='640',
 
 
 def render(name='output', source=None, width='640', height='480'):
-    img = cv2.resize(source, (int(width), int(height)), interpolation=cv2.INTER_AREA)
-    cv2.imshow(name, img)
+    try:
+        img = cv2.resize(source, (int(width), int(height)), interpolation=cv2.INTER_AREA)
+        cv2.imshow(name, img)
+    except:
+        pass
 
 
 def quit_button():
@@ -159,7 +166,7 @@ class Application(tkinter.Frame):
         self.exit_button = tkinter.Button(self.root, text="Выход", font="100", command=quit_button)
         self.exit_button.grid(row=0, column=1, sticky=tkinter.W)
 
-        self.export_label = tkinter.Label(self.root, text="Видеофайл для анализа", font="100")
+        self.export_label = tkinter.Label(self.root, text="Видеофайл для анализа/ip для анализа", font="100")
         self.export_label.grid(row=1, column=0, sticky=tkinter.W)
         self.export_entry = tkinter.Entry(self.root, font="100")
         self.export_entry.grid(row=1, column=1, sticky=tkinter.W)
@@ -183,28 +190,34 @@ class Application(tkinter.Frame):
         self.correct_entry.grid(row=4, column=1, sticky=tkinter.W)
         self.correct_entry.insert(0, '1.0')
 
+        self.ip_label = tkinter.Label(self.root, text="Видеофайл(да) или IP камера(нет)? (да/нет)", font="100")
+        self.ip_label.grid(row=5, column=0, sticky=tkinter.W)
+        self.ip_entry = tkinter.Entry(self.root, font="100")
+        self.ip_entry.grid(row=5, column=1, sticky=tkinter.W)
+        self.ip_entry.insert(0, 'да')
+
         self.render_label = tkinter.Label(self.root, text="Рендерить окна (да/нет)", font="100")
-        self.render_label.grid(row=5, column=0, sticky=tkinter.W)
+        self.render_label.grid(row=6, column=0, sticky=tkinter.W)
         self.render_entry = tkinter.Entry(self.root, font="100")
-        self.render_entry.grid(row=5, column=1, sticky=tkinter.W)
+        self.render_entry.grid(row=6, column=1, sticky=tkinter.W)
         self.render_entry.insert(0, 'да')
 
         self.width_label = tkinter.Label(self.root, text="Ширина", font="100")
-        self.width_label.grid(row=6, column=0, sticky=tkinter.W)
+        self.width_label.grid(row=7, column=0, sticky=tkinter.W)
         self.width_entry = tkinter.Entry(self.root, font="100")
-        self.width_entry.grid(row=6, column=1, sticky=tkinter.W)
+        self.width_entry.grid(row=7, column=1, sticky=tkinter.W)
         self.width_entry.insert(0, '640')
 
         self.height_label = tkinter.Label(self.root, text="Высота", font="100")
-        self.height_label.grid(row=7, column=0, sticky=tkinter.W)
+        self.height_label.grid(row=8, column=0, sticky=tkinter.W)
         self.height_entry = tkinter.Entry(self.root, font="100")
-        self.height_entry.grid(row=7, column=1, sticky=tkinter.W)
+        self.height_entry.grid(row=8, column=1, sticky=tkinter.W)
         self.height_entry.insert(0, '480')
 
     def insert_data(self):
-        click_button(self.export_entry.get(), self.sensitivity_entry.get(), self.speed_entry.get(),
-                     self.width_entry.get(), self.height_entry.get(), self.render_entry.get(),
-                     self.correct_entry.get())
+        click_button(self.ip_entry.get(), self.export_entry.get(), self.sensitivity_entry.get(),
+                     self.speed_entry.get(), self.correct_entry.get(), self.render_entry.get(),
+                     self.width_entry.get(), self.height_entry.get())
 
 
 if __name__ == "__main__":
