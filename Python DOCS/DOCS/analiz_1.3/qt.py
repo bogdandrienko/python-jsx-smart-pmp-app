@@ -21,12 +21,13 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
     ip_cams = []
     for x in ip_entry:
         ip_cams.append(f'rtsp://{login}:{password}@192.168.{x}:{port}')
-    ip_cams = ['video_1.mp4', 'video_2.mp4', 'video_3.mp4']
+    # ip_cams = ['video_1.mp4', 'video_2.mp4', 'video_3.mp4']
 
     def render(name='output', source=None):
         try:
-            _img = cv2.resize(source, (width, height), interpolation=cv2.INTER_AREA)
-            cv2.imshow(name, _img)
+            if source is not None:
+                _img = cv2.resize(source, (width, height), interpolation=cv2.INTER_AREA)
+                cv2.imshow(name, _img)
         except Exception as ex:
             print(ex)
             with open('log.txt', 'w') as log:
@@ -122,7 +123,7 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
                         widget.set_data(result)
 
                     if windows:
-                        # origin()
+                        origin()
                         # bitwise_not_white()
                         # bitwise_not_black()
                         # bitwise_and_white()
@@ -130,7 +131,7 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
                         # threshold()
                         # cvtcolor()
                         # inrange()
-                        canny_edges()
+                        # canny_edges()
                         # cropping_image()
                     # render_final(windows)
                 except Exception as ex:
@@ -163,9 +164,9 @@ class MyWidget(QtWidgets.QWidget):
         self.horizontal_box_data_type = QtWidgets.QHBoxLayout()
 
         # Data of analysis
-        # self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223 | 15.137 | 15.138 | 15.139 | 15.140 | 15.141 | 15.142")
-        # self.data_analysis = QtWidgets.QTextEdit("15.137 | 15.138 | 15.139 | 15.140 | 15.141 | 15.142")
-        self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223")
+        # self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223 | 15.137 | 15.138 | 15.139 | 15.140 | 15.141 | 15.142 "
+        #                                          "| 12.209 | 12.210 | 4.254 | 2.254 | 2.8 | 2.9")
+        self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223 | 12.209 | 12.210 | 4.254 | 2.254 | 15.137 | 15.138 | 15.139")
         self.data_analysis.setReadOnly(True)
         self.horizontal_box_data_type.addWidget(self.data_analysis)
 
