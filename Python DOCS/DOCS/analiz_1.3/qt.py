@@ -3,6 +3,7 @@ import sys
 import time
 import cv2
 import numpy
+import asyncio
 from PySide6 import QtWidgets, QtGui
 
 
@@ -20,6 +21,7 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
     ip_cams = []
     for x in ip_entry:
         ip_cams.append(f'rtsp://{login}:{password}@192.168.{x}:{port}')
+    ip_cams = ['video_1.mp4', 'video_2.mp4', 'video_3.mp4']
 
     def render(name='output', source=None):
         try:
@@ -31,134 +33,106 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
                 log.write(f'\n{ex}\n')
             MyWidget.stop_btn_func()
 
-    # def whiles():
-    #     cap = cv2.VideoCapture(ip_cams[0])
-    #     global play
-    #     while True:
-    #         if play:
-    #             def origin():
-    #                 _, src_img = cap.read()
-    #                 render('src_img', src_img)
-    #
-    #             def cropping_image():
-    #                 _, src_img = cap.read()
-    #
-    #                 _cropping_image = src_img[250:1080, 600:1720]
-    #                 render('cropping_image', _cropping_image)
-    #
-    #             def bitwise_not_white():
-    #                 _, src_img = cap.read()
-    #                 _src_white = cv2.imread('mask_white.jpg', 0)
-    #
-    #                 _bitwise_not_white = cv2.bitwise_not(src_img, src_img, mask=_src_white)
-    #                 render('bitwise_not_white', _bitwise_not_white)
-    #
-    #             def bitwise_not_black():
-    #                 _, src_img = cap.read()
-    #                 src_black = cv2.imread('mask_black.jpg', 0)
-    #
-    #                 _bitwise_and_black = cv2.bitwise_and(src_img, src_img, mask=src_black)
-    #                 render('bitwise_not_black', _bitwise_and_black)
-    #
-    #             def bitwise_and_white():
-    #                 _, src_img = cap.read()
-    #                 _src_white = cv2.imread('mask_white.jpg', 0)
-    #
-    #                 _bitwise_and_white = cv2.bitwise_and(src_img, src_img, mask=_src_white)
-    #                 render('bitwise_and_white', _bitwise_and_white)
-    #
-    #             def bitwise_and_black():
-    #                 _, src_img = cap.read()
-    #                 src_black = cv2.imread('mask_black.jpg', 0)
-    #
-    #                 _bitwise_and_black = cv2.bitwise_and(src_img, src_img, mask=src_black)
-    #                 render('bitwise_and_black', _bitwise_and_black)
-    #
-    #             def threshold():
-    #                 _, src_img = cap.read()
-    #
-    #                 _, _threshold = cv2.threshold(src_img, 220, 255, cv2.THRESH_BINARY_INV)
-    #                 render('threshold', _threshold)
-    #
-    #             def cvtcolor():
-    #                 _, src_img = cap.read()
-    #
-    #                 _cvtcolor = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
-    #                 render('cvtcolor', _cvtcolor)
-    #
-    #             def inrange():
-    #                 _, src_img = cap.read()
-    #
-    #                 _cvtcolor = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
-    #                 _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
-    #                                        numpy.array([255, sens, 255], dtype=numpy.uint8))
-    #                 render('inrange', _inrange)
-    #
-    #             def canny_edges():
-    #                 _, src_img = cap.read()
-    #
-    #                 _canny_edges = cv2.Canny(src_img, sens, sens, apertureSize=3, L2gradient=True)
-    #                 render('canny_edges', _canny_edges)
-    #
-    #             def render_final(rendering: bool):
-    #                 _, src_img = cap.read()
-    #                 _src_white = cv2.imread('mask_white.jpg', 0)
-    #
-    #                 _pre_render_final = cv2.bitwise_and(src_img, src_img, mask=_src_white)
-    #                 _cvtcolor = cv2.cvtColor(_pre_render_final, cv2.COLOR_BGR2HSV)
-    #                 _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
-    #                                        numpy.array([255, sens, 255], dtype=numpy.uint8))
-    #                 result = f"{numpy.sum(_inrange > 0) / numpy.sum(_src_white > 0) * 100 * multiplayer:0.4f}%"
-    #                 if rendering:
-    #                     cv2.putText(_inrange, result, (int(1920 / 5), int(1080 / 2)),
-    #                                 cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
-    #                     # cv2.putText(_inrange, f"{numpy.sum(_inrange > 0)} | {numpy.sum(_src_white == 255)}",
-    #                     #             (int(1920 / 5), int(1080 / 1.5)), cv2.FONT_HERSHEY_SIMPLEX, 3,
-    #                     #             (255, 255, 255), 3)
-    #                     render('render_final', _inrange)
-    #                 widget.set_data(result)
-    #
-    #             try:
-    #                 if windows:
-    #                     origin()
-    #                     bitwise_not_white()
-    #                     bitwise_not_black()
-    #                     bitwise_and_white()
-    #                     bitwise_and_black()
-    #                     threshold()
-    #                     cvtcolor()
-    #                     inrange()
-    #                     canny_edges()
-    #                     cropping_image()
-    #                 render_final(windows)
-    #             except Exception as ex:
-    #                 print(ex)
-    #                 with open('log.txt', 'w') as log:
-    #                     log.write(f'\n{ex}\n')
-    #                 MyWidget.stop_btn_func()
-    #             # Delay between two frames = 50 ms * speed (2x when delay from cycle functions)
-    #             cv2.waitKey(int(50 / speed)) & 0xFF
-    #             # Delay between cycle functions = 0.1 sec * speed
-    #             time.sleep(round(0.1 / speed, 2))
-    #         else:
-    #             cap.release()
-    #             cv2.destroyAllWindows()
-    #             break
-
-    def rendering():
+    def render_image(src):
         global play
+        cap = cv2.VideoCapture(src)
         while True:
             if play:
-                def origin(_cap):
-                    _, src_img = _cap.read()
-                    render(f'{_cap}', src_img)
                 try:
+                    def origin():
+                        _, src_img = cap.read()
+                        render(f'{src}_src_img', src_img)
+
+                    def cropping_image():
+                        _, src_img = cap.read()
+
+                        _cropping_image = src_img[250:1080, 600:1720]
+                        render(f'{src}_cropping_image', _cropping_image)
+
+                    def bitwise_not_white():
+                        _, src_img = cap.read()
+                        _src_white = cv2.imread('mask_white.jpg', 0)
+
+                        _bitwise_not_white = cv2.bitwise_not(src_img, src_img, mask=_src_white)
+                        render(f'{src}_bitwise_not_white', _bitwise_not_white)
+
+                    def bitwise_not_black():
+                        _, src_img = cap.read()
+                        src_black = cv2.imread('mask_black.jpg', 0)
+
+                        _bitwise_and_black = cv2.bitwise_and(src_img, src_img, mask=src_black)
+                        render(f'{src}_bitwise_not_black', _bitwise_and_black)
+
+                    def bitwise_and_white():
+                        _, src_img = cap.read()
+                        _src_white = cv2.imread('mask_white.jpg', 0)
+
+                        _bitwise_and_white = cv2.bitwise_and(src_img, src_img, mask=_src_white)
+                        render(f'{src}_bitwise_and_white', _bitwise_and_white)
+
+                    def bitwise_and_black():
+                        _, src_img = cap.read()
+                        src_black = cv2.imread('mask_black.jpg', 0)
+
+                        _bitwise_and_black = cv2.bitwise_and(src_img, src_img, mask=src_black)
+                        render(f'{src}_bitwise_and_black', _bitwise_and_black)
+
+                    def threshold():
+                        _, src_img = cap.read()
+
+                        _, _threshold = cv2.threshold(src_img, 220, 255, cv2.THRESH_BINARY_INV)
+                        render(f'{src}_threshold', _threshold)
+
+                    def cvtcolor():
+                        _, src_img = cap.read()
+
+                        _cvtcolor = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
+                        render(f'{src}_cvtcolor', _cvtcolor)
+
+                    def inrange():
+                        _, src_img = cap.read()
+
+                        _cvtcolor = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
+                        _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
+                                               numpy.array([255, sens, 255], dtype=numpy.uint8))
+                        render(f'{src}_inrange', _inrange)
+
+                    def canny_edges():
+                        _, src_img = cap.read()
+
+                        _canny_edges = cv2.Canny(src_img, sens, sens, apertureSize=3, L2gradient=True)
+                        render(f'{src}_canny_edges', _canny_edges)
+
+                    def render_final(rendering: bool):
+                        _, src_img = cap.read()
+                        _src_white = cv2.imread('mask_white.jpg', 0)
+
+                        _pre_render_final = cv2.bitwise_and(src_img, src_img, mask=_src_white)
+                        _cvtcolor = cv2.cvtColor(_pre_render_final, cv2.COLOR_BGR2HSV)
+                        _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
+                                               numpy.array([255, sens, 255], dtype=numpy.uint8))
+                        result = f"{numpy.sum(_inrange > 0) / numpy.sum(_src_white > 0) * 100 * multiplayer:0.4f}%"
+                        if rendering:
+                            cv2.putText(_inrange, result, (int(1920 / 5), int(1080 / 2)),
+                                        cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
+                            # cv2.putText(_inrange, f"{numpy.sum(_inrange > 0)} | {numpy.sum(_src_white == 255)}",
+                            #             (int(1920 / 5), int(1080 / 1.5)), cv2.FONT_HERSHEY_SIMPLEX, 3,
+                            #             (255, 255, 255), 3)
+                            render(f'{src}_render_final', _inrange)
+                        widget.set_data(result)
+
                     if windows:
-                        # for cap_s in ip_cams:
-                        #     cap = cv2.VideoCapture(cap_s)
-                        #     origin(cap)
-                        cap = cv2.VideoCapture(ip_cams[0])
-                        origin(cap)
+                        # origin()
+                        # bitwise_not_white()
+                        # bitwise_not_black()
+                        # bitwise_and_white()
+                        # bitwise_and_black()
+                        # threshold()
+                        # cvtcolor()
+                        # inrange()
+                        canny_edges()
+                        # cropping_image()
+                    # render_final(windows)
                 except Exception as ex:
                     print(ex)
                     with open('log.txt', 'w') as log:
@@ -169,46 +143,13 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
                 # Delay between cycle functions = 0.1 sec * speed
                 time.sleep(round(0.1 / speed, 2))
             else:
-                for cap_s in ip_cams:
-                    cap = cv2.VideoCapture(cap_s)
-                    cap.release()
+                cap.release()
                 cv2.destroyAllWindows()
                 break
 
-    def rendering_2():
-        def origin(_cap):
-            _, src_img = _cap.read()
-            render(f'{_cap}', src_img)
-        global play
-
-        while True:
-            if play:
-                try:
-                    if windows:
-                        # for cap_s in ip_cams:
-                        #     cap = cv2.VideoCapture(cap_s)
-                        #     origin(cap)
-                        cap = cv2.VideoCapture(ip_cams[2])
-                        origin(cap)
-                except Exception as ex:
-                    print(ex)
-                    with open('log.txt', 'w') as log:
-                        log.write(f'\n{ex}\n')
-                    MyWidget.stop_btn_func()
-                # Delay between two frames = 50 ms * speed (2x when delay from cycle functions)
-                cv2.waitKey(int(50 / speed)) & 0xFF
-                # Delay between cycle functions = 0.1 sec * speed
-                time.sleep(round(0.1 / speed, 2))
-            else:
-                cv2.destroyAllWindows()
-                break
-
-    # thread_render = threading.Thread(target=whiles())
-    thread_render = threading.Thread(target=rendering())
-    thread_render.start()
-
-    thread_render_2 = threading.Thread(target=rendering_2())
-    thread_render_2.start()
+    for cam in ip_cams:
+        thread = threading.Thread(target=render_image, args=(cam, ))
+        thread.start()
 
 
 class MyWidget(QtWidgets.QWidget):
@@ -222,7 +163,9 @@ class MyWidget(QtWidgets.QWidget):
         self.horizontal_box_data_type = QtWidgets.QHBoxLayout()
 
         # Data of analysis
-        self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223 | 15.137 | 15.138 | 15.139 | 15.140 | 15.141 | 15.142")
+        # self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223 | 15.137 | 15.138 | 15.139 | 15.140 | 15.141 | 15.142")
+        # self.data_analysis = QtWidgets.QTextEdit("15.137 | 15.138 | 15.139 | 15.140 | 15.141 | 15.142")
+        self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223")
         self.data_analysis.setReadOnly(True)
         self.horizontal_box_data_type.addWidget(self.data_analysis)
 
