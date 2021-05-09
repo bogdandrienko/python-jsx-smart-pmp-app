@@ -121,7 +121,7 @@ class QueryPage(QtGui.QWidget):
         hitsSpinBox.setMaximum(100)
         hitsSpinBox.setSingleStep(10)
 
-        startQueryButton = QtGui.QPushButton("Start query")
+        startQueryButton = QtGui.QPushButton("Start execute_query")
 
         packagesLayout = QtGui.QGridLayout()
         packagesLayout.addWidget(nameLabel, 0, 0)
@@ -203,7 +203,7 @@ class ConfigDialog(QtGui.QDialog):
         updateButton.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
 
         queryButton = QtGui.QListWidgetItem(self.contentsWidget)
-        queryButton.setIcon(QtGui.QIcon(':/images/query.png'))
+        queryButton.setIcon(QtGui.QIcon(':/images/execute_query.png'))
         queryButton.setText("Query")
         queryButton.setTextAlignment(QtCore.Qt.AlignHCenter)
         queryButton.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)

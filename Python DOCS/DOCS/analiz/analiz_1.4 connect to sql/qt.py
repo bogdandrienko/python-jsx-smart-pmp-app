@@ -7,45 +7,93 @@ import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
 import datetime
 import pyodbc
-import pandas as pd
-
-conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=server_name;'
-                      'Database=database_name;'
-                      'Trusted_Connection=yes;')
-
-cursor = conn.cursor()
+import pandas
 
 
-# cursor.execute('SELECT * FROM database_name.table')
-# for row in cursor:
-#     print(row)
-#
-# sql_query = pd.read_sql_query('SELECT * FROM TestDB.dbo.Person',conn)
-# print(sql_query)
-# print(type(sql_query))
+class SQLclass:
+    def __init__(self, server, database, username, password, table):
+        self.server = server
+        self.database = database
+        self.username = username
+        self.password = password
+        self.table = table
+        self.cursor = self.pyodbc_connect(server=server, database=database, username=username,
+                                          password=password).cursor()
 
-def sql_post(data: list):
-    with open('db.txt', 'a') as log:
-        log.write(f'{data}\n')
+    @staticmethod
+    def pyodbc_connect(server, database, username, password):
+        return pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' +
+                              database + ';UID=' + username + ';PWD=' + password +
+                              ';Trusted_Connection=yes;')
+
+    @staticmethod
+    def pd_read_sql_query(query: str, database: str, table: str, connection):
+        return pandas.read_sql_query(f'{query} {database}.dbo.{table} ORDER BY id', connection)
+
+    @staticmethod
+    def execute_query(connection, table, rows: list, values: list):
+        cursor = connection.cursor()
+        cursor.fast_executemany = True
+        __rows = ''
+        for x in rows:
+            __rows = f"{__rows}{str(x)}, "
+        value = f"INSERT INTO {table} (" + __rows[:-2:] + f") VALUES {tuple(values)}"
+        # value = f"INSERT INTO {table} (" + __rows[:-2:] + f") VALUES {tuple(values)}"
+        # value = f"INSERT INTO {table} (id_row, device_row, percent_row, time_row, data_row, extra_row)
+        # VALUES {tuple(values)}"
+        cursor.execute(value)
+        connection.commit()
 
 
-def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, windows: bool, width: int,
-                height: int):
+def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, windows: bool, width: int, height: int,
+                sql_val: bool, server: str, database: str, username: str, password: str, table: str, rows: list,
+                port: int, login_cam: str, password_cam: str):
     global widget
     global play
     play = False
     time.sleep(0.2)
     play = True
 
-    port = 554
-    login = 'admin'
-    password = 'nehrfvths123'
     ip_cams = []
     for x in ip_entry:
-        ip_cams.append(f'rtsp://{login}:{password}@192.168.{x}:{port}')
+        ip_cams.append(f'rtsp://{login_cam}:{password_cam}@192.168.{x}:{port}')
     # ip_cams = ['video_1.mp4', 'video_2.mp4', 'video_3.mp4']
     ip_cams = ['video_1.mp4']
+
+    def sql_read():
+        # Server variables
+        # _server = 'WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER'
+        # _database = 'ruda_db'
+        # _username = 'ruda_user'
+        # _password = 'ruda_user'
+        # _table = 'ruda_table'
+        # _rows = ['id_row', 'device_row', 'percent_row', 'time_row', 'data_row', 'extra_row']
+        try:
+            sql = SQLclass.pyodbc_connect(server=server, database=database, username=username, password=password)
+            db_data = SQLclass.pd_read_sql_query(query='SELECT * FROM', database=database, table=table, connection=sql)
+            print(db_data)
+            print(type(db_data))
+        except Exception as ex:
+            print(ex)
+            with open('log.txt', 'a') as log:
+                log.write(f'\n{ex}\n')
+
+    def sql_post(data: list):
+        # Server variables
+        # _server = 'WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER'
+        # _database = 'ruda_db'
+        # _username = 'ruda_user'
+        # _password = 'ruda_user'
+        # _table = 'ruda_table'
+        # _rows = ['id_row', 'device_row', 'percent_row', 'time_row', 'data_row', 'extra_row']
+
+        try:
+            sql = SQLclass.pyodbc_connect(server=server, database=database, username=username, password=password)
+            SQLclass.execute_query(connection=sql, table=table, rows=rows, values=data)
+        except Exception as ex:
+            print(ex)
+            with open('log.txt', 'a') as log:
+                log.write(f'\n{ex}\n')
 
     def render(name='output', source=None):
         try:
@@ -150,7 +198,12 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
                             print(_ex)
                             with open('log.txt', 'w') as _log:
                                 _log.write(f'\n{_ex}\n')
-                        sql_post([src, result, datetime.datetime.now()])
+                        _date = f'{str(datetime.datetime.now()).split(" ")[0]}'
+                        _time = f'{str(datetime.datetime.now()).split(" ")[1].split(".")[0]}'
+                        if sql_val:
+                            sql_post([0, src, result, _time, _date, ''])
+                        with open('db.txt', 'a') as db:
+                            db.write(f'{[0, src, result, _time, _date, ""]}\n')
 
                     if windows:
                         pass
@@ -171,9 +224,9 @@ def play_analiz(ip_entry: list, sens: int, speed: float, multiplayer: float, win
                         log.write(f'\n{ex}\n')
                     MyWidget.stop_btn_func()
                 # Delay between two frames = 50 ms * speed (2x when delay from cycle functions)
-                cv2.waitKey(int(50 / speed)) & 0xFF
+                cv2.waitKey(int(100 / speed)) & 0xFF
                 # Delay between cycle functions = 0.1 sec * speed
-                time.sleep(round(0.1 / speed, 2))
+                time.sleep(round(0.2 / speed, 2))
             else:
                 cap.release()
                 cv2.destroyAllWindows()
@@ -278,13 +331,86 @@ class MyWidget(QtWidgets.QWidget):
         self.horizontal_box_renderer.addWidget(self.window_height_4)
         self.window_height_4.toggled.connect(self.set_window_resolution(self.window_height_4, 1920, 1080))
 
+        # renderer
+        self.horizontal_box_sql_server = QtWidgets.QHBoxLayout()
+
+        # Boolean value of rendering the windows
+        self.sql_QCheckBox = QtWidgets.QCheckBox("Save to SQL?")
+        self.sql_QCheckBox.setChecked(False)
+        self.horizontal_box_sql_server.addWidget(self.sql_QCheckBox)
+
+        # Sql server data value
+        self._server = QtWidgets.QTextEdit("WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")
+        self._server.setReadOnly(True)
+        self.horizontal_box_sql_server.addWidget(self._server)
+
+        # Set
+        self.server_QPushButton = QtWidgets.QPushButton("setup server")
+        self.horizontal_box_sql_server.addWidget(self.server_QPushButton)
+        self.server_QPushButton.clicked.connect(self.get_sql_server)
+
+        # Sql server data value
+        self._database = QtWidgets.QTextEdit("ruda_db")
+        self._database.setReadOnly(True)
+        self.horizontal_box_sql_server.addWidget(self._database)
+
+        # Set
+        self.database_QPushButton = QtWidgets.QPushButton("setup database")
+        self.horizontal_box_sql_server.addWidget(self.database_QPushButton)
+        self.database_QPushButton.clicked.connect(self.get_sql_database)
+
+        # renderer
+        self.horizontal_box_sql_user = QtWidgets.QHBoxLayout()
+
+        # Sql server data value
+        self._username = QtWidgets.QTextEdit("ruda_user")
+        self._username.setReadOnly(True)
+        self.horizontal_box_sql_user.addWidget(self._username)
+
+        # Set
+        self.username_QPushButton = QtWidgets.QPushButton("setup username")
+        self.horizontal_box_sql_user.addWidget(self.username_QPushButton)
+        self.username_QPushButton.clicked.connect(self.get_sql_username)
+
+        # Sql server data value
+        self._password = QtWidgets.QTextEdit("ruda_user")
+        self._password.setReadOnly(True)
+        self.horizontal_box_sql_user.addWidget(self._password)
+
+        # Set
+        self.password_QPushButton = QtWidgets.QPushButton("setup password")
+        self.horizontal_box_sql_user.addWidget(self.password_QPushButton)
+        self.password_QPushButton.clicked.connect(self.get_sql_password)
+
+        # renderer
+        self.horizontal_box_sql_table = QtWidgets.QHBoxLayout()
+
+        # Sql server data value
+        self._table = QtWidgets.QTextEdit("ruda_table")
+        self._table.setReadOnly(True)
+        self.horizontal_box_sql_table.addWidget(self._table)
+
+        # Set
+        self.table_QPushButton = QtWidgets.QPushButton("setup table")
+        self.horizontal_box_sql_table.addWidget(self.table_QPushButton)
+        self.table_QPushButton.clicked.connect(self.get_sql_table)
+
+        # Sql server data value
+        self._rows = QtWidgets.QTextEdit("id_row, device_row, percent_row, time_row, data_row, extra_row")
+        self._rows.setReadOnly(True)
+        self.horizontal_box_sql_table.addWidget(self._rows)
+
+        # Set
+        self.rows_QPushButton = QtWidgets.QPushButton("setup rows")
+        self.horizontal_box_sql_table.addWidget(self.rows_QPushButton)
+        self.rows_QPushButton.clicked.connect(self.get_sql_rows)
+
         # data_value
         self.vertical_box_data_value = QtWidgets.QVBoxLayout()
         self.vertical_box_data_value.addStretch(1)
 
         # PlainText data value
         self.data_ruda = QtWidgets.QPlainTextEdit("0.0000%")
-        self.data_ruda.setReadOnly(True)
         self.vertical_box_data_value.addWidget(self.data_ruda)
 
         # psq_btn
@@ -312,8 +438,12 @@ class MyWidget(QtWidgets.QWidget):
         self.vertical_box_main.addLayout(self.horizontal_box_speed_of_analysis)
         self.vertical_box_main.addLayout(self.horizontal_box_multi_of_analysis)
         self.vertical_box_main.addLayout(self.horizontal_box_renderer)
+        self.vertical_box_main.addLayout(self.horizontal_box_sql_server)
+        self.vertical_box_main.addLayout(self.horizontal_box_sql_user)
+        self.vertical_box_main.addLayout(self.horizontal_box_sql_table)
         self.vertical_box_main.addLayout(self.vertical_box_data_value)
         self.vertical_box_main.addLayout(self.horizontal_box_psq_btn)
+
         self.setLayout(self.vertical_box_main)
 
     def get_arr_ip_cam(self):
@@ -331,7 +461,7 @@ class MyWidget(QtWidgets.QWidget):
             self.sens_analysis.setText(f'sensitivity : {str(value)}')
 
     def getdouble_speed(self):
-        value, okpressed = QtWidgets.QInputDialog.getDouble(self, "Set speed", "Speed value:", 1.0, 0.1, 50.0, 2)
+        value, okpressed = QtWidgets.QInputDialog.getDouble(self, "Set speed", "Speed value:", 1.0, 0.05, 100.0, 2)
         if okpressed:
             self.speed_analysis.setText(f'speed analysis : {(round(value, 3))}')
 
@@ -351,15 +481,60 @@ class MyWidget(QtWidgets.QWidget):
             except Exception as ex:
                 print(ex)
 
-    def play_btn_func(self):
+    def get_sql_server(self):
+        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter server name:", "Server name:",
+                                                          text=self._server.toPlainText())
+        if okpressed:
+            self._server.setText(f'{str(value)}')
 
+    def get_sql_database(self):
+        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter database name:", "Database name:",
+                                                          text=self._database.toPlainText())
+        if okpressed:
+            self._database.setText(f'{str(value)}')
+
+    def get_sql_username(self):
+        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter username:", "Username:",
+                                                          text=self._username.toPlainText())
+        if okpressed:
+            self._username.setText(f'{str(value)}')
+
+    def get_sql_password(self):
+        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter password:", "Password:",
+                                                          text=self._password.toPlainText())
+        if okpressed:
+            self._password.setText(f'{str(value)}')
+
+    def get_sql_table(self):
+        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the table:", "Table:",
+                                                          text=self._table.toPlainText())
+        if okpressed:
+            self._table.setText(f'{str(value)}')
+
+    def get_sql_rows(self):
+        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the rows:", "Rows:",
+                                                          text=self._rows.toPlainText())
+        if okpressed:
+            self._rows.setText(f'{str(value)}')
+
+    def play_btn_func(self):
         play_analiz(ip_entry=list(self.get_arr_ip_cam()),
                     sens=int(self.sens_analysis.toPlainText().split(':')[1].strip()),
                     speed=float(self.speed_analysis.toPlainText().split(':')[1].strip()),
                     multiplayer=float(self.multi_analysis.toPlainText().split(':')[1].strip()),
                     windows=bool(self.render_QCheckBox.isChecked()),
                     width=int(self.get_window_resolution()[0]),
-                    height=int(self.get_window_resolution()[1]))
+                    height=int(self.get_window_resolution()[1]),
+                    sql_val=bool(self.sql_QCheckBox.isChecked()),
+                    server=str(self._server.toPlainText()),
+                    database=str(self._database.toPlainText()),
+                    username=str(self._username.toPlainText()),
+                    password=str(self._password.toPlainText()),
+                    table=str(self._table.toPlainText()),
+                    rows=list(self._rows.toPlainText().split(', ')),
+                    port=int(554),
+                    login_cam=str('admin'),
+                    password_cam=str('nehrfvths123'))
 
     def set_data(self, value: str):
         self.data_ruda.clear()
