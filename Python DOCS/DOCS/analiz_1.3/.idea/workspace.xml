@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0bdd9d4-1a13-4036-9af0-03591ca48ba0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/video_analiz.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/video_analiz.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qt.py" beforeDir="false" afterPath="$PROJECT_DIR$/qt.py" afterDir="false" />
-    </list>
+    <list default="true" id="c0bdd9d4-1a13-4036-9af0-03591ca48ba0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
