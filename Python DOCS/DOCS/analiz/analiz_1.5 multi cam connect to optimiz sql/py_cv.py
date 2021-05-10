@@ -128,7 +128,7 @@ class Analizclass:
     @staticmethod
     def render(name: str, source, width: int, height: int):
         try:
-            if source is not None:
+            if source:
                 _img = cv2.resize(source, (width, height), interpolation=cv2.INTER_AREA)
                 cv2.imshow(name, _img)
         except Exception as ex:
