@@ -35,7 +35,7 @@ def quit_func():
 if __name__ == "__main__":
     analiz_container = None
     app_container = AppContainerclass()
-    widget = app_container.create_ui(title="analysis", width=300, height=510, icon="icon.ico",
+    widget = app_container.create_ui(title="analysis", width=760, height=660, icon="icon.ico",
                                      play_f=play_func, stop_f=stop_func, quit_f=quit_func)
     ui_thread = threading.Thread(target=widget.show())
     sys.exit(app_container.app.exec_())

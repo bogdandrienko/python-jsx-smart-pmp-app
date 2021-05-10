@@ -13,7 +13,7 @@ class AppContainerclass:
 
 
 class MainWidgetclass(QtWidgets.QWidget):
-    def __init__(self, title="app", width=640, height=480, icon="", play_f=None, stop_f=None, quit_f=None):
+    def __init__(self, title="APP", width=640, height=480, icon="", play_f=None, stop_f=None, quit_f=None):
         super().__init__()
 
         self.resize(width, height)
@@ -30,7 +30,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         # Data of analysis
         # "8.222 | 8.223 | 15.137 | 15.138 | 15.139 | 15.140 | 15.141
         # | 15.142 | 12.209 | 12.210 | 4.254 | 2.254 | 2.8 | 2.9"
-        self.data_analysis = QtWidgets.QTextEdit("8.222 | 8.223 | 12.209 | 12.210 "
+        self.data_analysis = QtWidgets.QTextEdit("IP-CAM : 8.222 | 8.223 | 12.209 | 12.210 "
                                                  "| 4.254 | 2.254 | 15.137 | 15.138 | 15.139")
         self.data_analysis.setReadOnly(True)
         self.horizontal_box_data_type.addWidget(self.data_analysis)
@@ -44,7 +44,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_box_sens_of_analysis = QtWidgets.QHBoxLayout()
 
         # Sens of analysis
-        self.sens_analysis = QtWidgets.QTextEdit("sensitivity : 115")
+        self.sens_analysis = QtWidgets.QTextEdit("SENSETIVIY : 115")
         self.sens_analysis.setReadOnly(True)
         self.horizontal_box_sens_of_analysis.addWidget(self.sens_analysis)
 
@@ -57,7 +57,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_box_speed_of_analysis = QtWidgets.QHBoxLayout()
 
         # Speed of analysis
-        self.speed_analysis = QtWidgets.QTextEdit("speed analysis : 1.0")
+        self.speed_analysis = QtWidgets.QTextEdit("SPEED ANALYSIS : 1.0")
         self.speed_analysis.setReadOnly(True)
         self.horizontal_box_speed_of_analysis.addWidget(self.speed_analysis)
 
@@ -70,7 +70,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_box_multi_of_analysis = QtWidgets.QHBoxLayout()
 
         # Multi of analysis
-        self.multi_analysis = QtWidgets.QTextEdit("multiplayer analysis : 1.0")
+        self.multi_analysis = QtWidgets.QTextEdit("MULTIPLAYER ANALYSIS : 1.0")
         self.multi_analysis.setReadOnly(True)
         self.horizontal_box_multi_of_analysis.addWidget(self.multi_analysis)
 
@@ -122,7 +122,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_box_sql_server.addWidget(self.sql_QCheckBox)
 
         # Sql server data value
-        self._server = QtWidgets.QTextEdit("WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")
+        self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")
         self._server.setReadOnly(True)
         self.horizontal_box_sql_server.addWidget(self._server)
 
@@ -132,7 +132,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.server_QPushButton.clicked.connect(self.get_sql_server)
 
         # Sql server data value
-        self._database = QtWidgets.QTextEdit("ruda_db")
+        self._database = QtWidgets.QTextEdit("DATABASE NAME : ruda_db")
         self._database.setReadOnly(True)
         self.horizontal_box_sql_server.addWidget(self._database)
 
@@ -145,7 +145,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_box_sql_user = QtWidgets.QHBoxLayout()
 
         # Sql server data value
-        self._username = QtWidgets.QTextEdit("ruda_user")
+        self._username = QtWidgets.QTextEdit("USERNAME : ruda_user")
         self._username.setReadOnly(True)
         self.horizontal_box_sql_user.addWidget(self._username)
 
@@ -155,7 +155,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.username_QPushButton.clicked.connect(self.get_sql_username)
 
         # Sql server data value
-        self._password = QtWidgets.QTextEdit("ruda_user")
+        self._password = QtWidgets.QTextEdit("PASSWORD : ruda_user")
         self._password.setReadOnly(True)
         self.horizontal_box_sql_user.addWidget(self._password)
 
@@ -168,7 +168,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_box_sql_table = QtWidgets.QHBoxLayout()
 
         # Sql server data value
-        self._table = QtWidgets.QTextEdit("ruda_now_table, ruda_data_table")
+        self._table = QtWidgets.QTextEdit("SQL TABLE : ruda_now_table, ruda_data_table")
         self._table.setReadOnly(True)
         self.horizontal_box_sql_table.addWidget(self._table)
 
@@ -178,7 +178,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.table_QPushButton.clicked.connect(self.get_sql_table)
 
         # Sql server data value
-        self._rows = QtWidgets.QTextEdit("device_row, value_row, datetime_row, extra_row")
+        self._rows = QtWidgets.QTextEdit("TABLE ROWS : device_row, value_row, datetime_row, extra_row")
         self._rows.setReadOnly(True)
         self.horizontal_box_sql_table.addWidget(self._rows)
 
@@ -228,29 +228,26 @@ class MainWidgetclass(QtWidgets.QWidget):
 
         self.setLayout(self.vertical_box_main)
 
-    def get_arr_ip_cam(self):
-        return [x.strip() for x in self.data_analysis.toPlainText().split('|')]
-
     def gettext_data(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the IP of cam:", "User name:",
-                                                          text=self.data_analysis.toPlainText())
+                                                          text=self.data_analysis.toPlainText().split(':')[1].strip())
         if okpressed:
-            self.data_analysis.setText(f'{str(value)}')
+            self.data_analysis.setText(f'IP-CAM : {str(value)}')
 
     def getinteger_sens(self):
         value, okpressed = QtWidgets.QInputDialog.getInt(self, "Set speed", "Speed value:", 115, 1, 255, 5)
         if okpressed:
-            self.sens_analysis.setText(f'sensitivity : {str(value)}')
+            self.sens_analysis.setText(f'SENSETIVIY : {str(value)}')
 
     def getdouble_speed(self):
         value, okpressed = QtWidgets.QInputDialog.getDouble(self, "Set speed", "Speed value:", 1.0, 0.05, 100.0, 2)
         if okpressed:
-            self.speed_analysis.setText(f'speed analysis : {(round(value, 3))}')
+            self.speed_analysis.setText(f'SPEED ANALYSIS : {(round(value, 3))}')
 
     def getdouble_sens(self):
         value, okpressed = QtWidgets.QInputDialog.getDouble(self, "Set speed", "Speed value:", 1.0, 0.1, 50.0, 2)
         if okpressed:
-            self.multi_analysis.setText(f'multiplayer analysis : {(round(value, 3))}')
+            self.multi_analysis.setText(f'MULTIPLAYER ANALYSIS : {(round(value, 3))}')
 
     def set_window_resolution(self, radio, widht: int, height: int):
         self.radio_btn_s.append([radio, widht, height])
@@ -265,46 +262,46 @@ class MainWidgetclass(QtWidgets.QWidget):
 
     def get_sql_server(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter server name:", "Server name:",
-                                                          text=self._server.toPlainText())
+                                                          text=self._server.toPlainText().split(':')[1].strip())
         if okpressed:
-            self._server.setText(f'{str(value)}')
+            self._server.setText(f'SERVER NAME : {str(value)}')
 
     def get_sql_database(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter database name:", "Database name:",
-                                                          text=self._database.toPlainText())
+                                                          text=self._database.toPlainText().split(':')[1].strip())
         if okpressed:
-            self._database.setText(f'{str(value)}')
+            self._database.setText(f'DATABASE NAME : {str(value)}')
 
     def get_sql_username(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter username:", "Username:",
-                                                          text=self._username.toPlainText())
+                                                          text=self._username.toPlainText().split(':')[1].strip())
         if okpressed:
-            self._username.setText(f'{str(value)}')
+            self._username.setText(f'USERNAME : {str(value)}')
 
     def get_sql_password(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter password:", "Password:",
-                                                          text=self._password.toPlainText())
+                                                          text=self._password.toPlainText().split(':')[1].strip())
         if okpressed:
-            self._password.setText(f'{str(value)}')
+            self._password.setText(f'PASSWORD : {str(value)}')
 
     def get_sql_table(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the table:", "Table:",
-                                                          text=self._table.toPlainText())
+                                                          text=self._table.toPlainText().split(':')[1].strip())
         if okpressed:
-            self._table.setText(f'{str(value)}')
+            self._table.setText(f'SQL TABLE : {str(value)}')
 
     def get_sql_rows(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the rows:", "Rows:",
-                                                          text=self._rows.toPlainText())
+                                                          text=self._rows.toPlainText().split(':')[1].strip())
         if okpressed:
-            self._rows.setText(f'{str(value)}')
+            self._rows.setText(f'TABLE ROWS : {str(value)}')
 
     def set_data(self, value: str):
         self.data_ruda.setText(f"{value}")
 
     def play_btn_func(self):
         dict_data = {
-            'ip_entry': list(self.get_arr_ip_cam()),
+            'ip_entry': list(self.data_analysis.toPlainText().split(':')[1].strip().split('|')),
             'sens': int(self.sens_analysis.toPlainText().split(':')[1].strip()),
             'speed': float(self.speed_analysis.toPlainText().split(':')[1].strip()),
             'multiplayer': float(self.multi_analysis.toPlainText().split(':')[1].strip()),
@@ -312,12 +309,12 @@ class MainWidgetclass(QtWidgets.QWidget):
             'width': int(self.get_window_resolution()[0]),
             'height': int(self.get_window_resolution()[1]),
             'sql_val': bool(self.sql_QCheckBox.isChecked()),
-            'server': str(self._server.toPlainText()),
-            'database': str(self._database.toPlainText()),
-            'username': str(self._username.toPlainText()),
-            'password': str(self._password.toPlainText()),
-            'table': str(self._table.toPlainText()),
-            'rows': list(self._rows.toPlainText().split(', ')),
+            'server': str(self._server.toPlainText().split(':')[1].strip()),
+            'database': str(self._database.toPlainText().split(':')[1].strip()),
+            'username': str(self._username.toPlainText().split(':')[1].strip()),
+            'password': str(self._password.toPlainText().split(':')[1].strip()),
+            'table': str(self._table.toPlainText().split(':')[1].strip()),
+            'rows': list(self._rows.toPlainText().split(':')[1].strip().split(', ')),
             'port': int(554),
             'login_cam': str('admin'),
             'password_cam': str('nehrfvths123'),

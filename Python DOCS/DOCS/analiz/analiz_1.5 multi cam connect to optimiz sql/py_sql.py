@@ -1,6 +1,5 @@
 import pyodbc
 import pandas
-import datetime
 
 
 class SQLclass:
