@@ -122,8 +122,8 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_box_sql_server.addWidget(self.sql_QCheckBox)
 
         # Sql server data value
-        # self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER") # Home
-        self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-AIK33SUODO5\\SQLEXPRESS") # Work
+        # self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")  # Home
+        self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-AIK33SUODO5\\SQLEXPRESS")  # Work
         self._server.setReadOnly(True)
         self.horizontal_box_sql_server.addWidget(self._server)
 
