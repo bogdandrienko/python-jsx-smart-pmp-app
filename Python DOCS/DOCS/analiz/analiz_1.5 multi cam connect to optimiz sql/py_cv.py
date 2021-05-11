@@ -70,6 +70,7 @@ class Analizclass:
 
         def analiz_thread(src: str):
             cap = cv2.VideoCapture(src)
+            _src_white = cv2.imread('mask_white.jpg', 0)
             while True:
                 if self.play:
                     try:
@@ -98,9 +99,46 @@ class Analizclass:
                                                      height=height)
                         elif windows == 'only source':
                             Analizclass.origin(src=src, cap=cap, width=width, height=height)
+                        else:
+                            # # src_img = Analizclass.read_from_cam(cap)
+                            # _, src_img = cap.read()
+                            # Analizclass.render(f'{src}_src_img', src_img, width, height)
+                            pass
                         result = Analizclass.result_final(cap=cap, sens=sens, multiplayer=multiplayer)
                         write_result(src=src, result=result)
 
+
+                    except Exception as ex:
+                        print(ex)
+                        with open('log.txt', 'w') as log:
+                            log.write(f'\n{ex}\n')
+                    cv2.waitKey(1) & 0xFF
+                    time.sleep(0.05)
+                    # cv2.waitKey(int(100 / speed)) & 0xFF
+                    # time.sleep(round(0.2 / speed, 2))
+                else:
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    break
+
+        def analiz(src: str):
+            _src_white = cv2.imread('mask_white.jpg', 0)
+            while True:
+                cap = cv2.VideoCapture(src)
+                if self.play:
+                    try:
+                        _, src_img = cap.read()
+                        _src_white = cv2.imread('mask_white.jpg', 0)
+
+                        _pre_render_final = cv2.bitwise_and(src_img, src_img, mask=_src_white)
+                        _cvtcolor = cv2.cvtColor(_pre_render_final, cv2.COLOR_BGR2HSV)
+                        _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
+                                               numpy.array([255, sens, 255], dtype=numpy.uint8))
+                        result = round(numpy.sum(_inrange > 0) / numpy.sum(_src_white > 0) * 100 * multiplayer, 4)
+                        cv2.putText(_inrange, f"{result}%", (int(1920 / 5), int(1080 / 2)),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
+                        Analizclass.render(f'{src}_render_final', _inrange, width, height)
+                        write_result(src=src, result=result)
                     except Exception as ex:
                         print(ex)
                         with open('log.txt', 'w') as log:
@@ -119,16 +157,31 @@ class Analizclass:
         ip_cams = []
         for x in ip_entry:
             ip_cams.append(f'rtsp://{login_cam}:{password_cam}@192.168.{x}:{port}')
+
+        # ip_cams = [f'rtsp://{login_cam}:{password_cam}@192.168.8.222:{port}']
+
         if len(ip_entry) <= 2:
             ip_cams = ['video.mp4', 'video_1.mp4', 'video_2.mp4', 'video_3.mp4']
         for cam in ip_cams:
-            thread = threading.Thread(target=analiz_thread, args=(cam,))
+            # thread = threading.Thread(target=analiz_thread, args=(cam,))
+            thread = threading.Thread(target=analiz, args=(cam,))
             thread.start()
+
+    @staticmethod
+    def read_from_cam(cap):
+        i = 1
+        while i < 10:
+            i += 1
+            _, src_img = cap.read()
+            if numpy.sum(src_img) is not None:
+                break
+            print(i)
+        return src_img
 
     @staticmethod
     def render(name: str, source, width: int, height: int):
         try:
-            if source:
+            if source is not None:
                 _img = cv2.resize(source, (width, height), interpolation=cv2.INTER_AREA)
                 cv2.imshow(name, _img)
         except Exception as ex:
@@ -137,8 +190,9 @@ class Analizclass:
                 log.write(f'\n{ex}\n')
 
     @staticmethod
-    def origin(src, cap, width: int, height: int):
-        _, src_img = cap.read()
+    def origin(src: str, cap, width: int, height: int):
+        src_img = Analizclass.read_from_cam(cap)
+        # _, src_img = cap.read()
         Analizclass.render(f'{src}_src_img', src_img, width, height)
 
     @staticmethod

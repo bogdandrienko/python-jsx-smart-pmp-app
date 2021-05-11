@@ -89,18 +89,18 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.render_QComboBox.setCurrentText('not render')
         self.horizontal_box_renderer.addWidget(self.render_QComboBox)
 
-        self.resolution_window = [640, 480]
+        self.resolution_window = [320, 240]
         self.radio_btn_s = []
 
         # Height window renderer
         self.window_height_1 = QtWidgets.QRadioButton("320x240")
         self.horizontal_box_renderer.addWidget(self.window_height_1)
+        self.window_height_1.setChecked(True)
         self.window_height_1.toggled.connect(self.set_window_resolution(self.window_height_1, 320, 240))
 
         # Height window renderer
         self.window_height_2 = QtWidgets.QRadioButton("640x480")
         self.horizontal_box_renderer.addWidget(self.window_height_2)
-        self.window_height_2.setChecked(True)
         self.window_height_2.toggled.connect(self.set_window_resolution(self.window_height_2, 640, 480))
 
         # Height window renderer
@@ -118,11 +118,12 @@ class MainWidgetclass(QtWidgets.QWidget):
 
         # Boolean value of rendering the windows
         self.sql_QCheckBox = QtWidgets.QCheckBox("Save to SQL?")
-        self.sql_QCheckBox.setChecked(False)
+        self.sql_QCheckBox.setChecked(True)
         self.horizontal_box_sql_server.addWidget(self.sql_QCheckBox)
 
         # Sql server data value
-        self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")
+        # self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER") # Home
+        self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-AIK33SUODO5\\SQLEXPRESS") # Work
         self._server.setReadOnly(True)
         self.horizontal_box_sql_server.addWidget(self._server)
 
@@ -228,6 +229,12 @@ class MainWidgetclass(QtWidgets.QWidget):
 
         self.setLayout(self.vertical_box_main)
 
+    def get_ip_cam(self):
+        src = self.data_analysis.toPlainText().strip()
+        _src = src.split(':')[1].strip().split('|')
+        __src = [str(x).strip() for x in _src]
+        return __src
+
     def gettext_data(self):
         value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the IP of cam:", "User name:",
                                                           text=self.data_analysis.toPlainText().split(':')[1].strip())
@@ -301,7 +308,7 @@ class MainWidgetclass(QtWidgets.QWidget):
 
     def play_btn_func(self):
         dict_data = {
-            'ip_entry': list(self.data_analysis.toPlainText().split(':')[1].strip().split('|')),
+            'ip_entry': list(self.get_ip_cam()),
             'sens': int(self.sens_analysis.toPlainText().split(':')[1].strip()),
             'speed': float(self.speed_analysis.toPlainText().split(':')[1].strip()),
             'multiplayer': float(self.multi_analysis.toPlainText().split(':')[1].strip()),
