@@ -126,23 +126,23 @@ class Analizclass:
             while True:
                 cap = cv2.VideoCapture(src)
                 if self.play:
-                    try:
-                        _, src_img = cap.read()
-                        _src_white = cv2.imread('mask_white.jpg', 0)
+                    # try:
+                    _, src_img = cap.read()
+                    _src_white = cv2.imread('mask_white.jpg', 0)
 
-                        _pre_render_final = cv2.bitwise_and(src_img, src_img, mask=_src_white)
-                        _cvtcolor = cv2.cvtColor(_pre_render_final, cv2.COLOR_BGR2HSV)
-                        _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
-                                               numpy.array([255, sens, 255], dtype=numpy.uint8))
-                        result = round(numpy.sum(_inrange > 0) / numpy.sum(_src_white > 0) * 100 * multiplayer, 4)
-                        cv2.putText(_inrange, f"{result}%", (int(1920 / 5), int(1080 / 2)),
-                                    cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
-                        Analizclass.render(f'{src}_render_final', _inrange, width, height)
-                        write_result(src=src, result=result)
-                    except Exception as ex:
-                        print(ex)
-                        with open('log.txt', 'w') as log:
-                            log.write(f'\n{ex}\n')
+                    _pre_render_final = cv2.bitwise_and(src_img, src_img, mask=_src_white)
+                    _cvtcolor = cv2.cvtColor(_pre_render_final, cv2.COLOR_BGR2HSV)
+                    _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
+                                           numpy.array([255, sens, 255], dtype=numpy.uint8))
+                    result = round(numpy.sum(_inrange > 0) / numpy.sum(_src_white > 0) * 100 * multiplayer, 4)
+                    cv2.putText(_inrange, f"{result}%", (int(1920 / 5), int(1080 / 2)),
+                                cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
+                    Analizclass.render(f'{src}_render_final', _inrange, width, height)
+                    write_result(src=src, result=result)
+                    # except Exception as ex:
+                    #     print(ex)
+                    #     with open('log.txt', 'w') as log:
+                    #         log.write(f'\n{ex}\n')
                     cv2.waitKey(int(100 / speed)) & 0xFF
                     time.sleep(round(0.2 / speed, 2))
                 else:
