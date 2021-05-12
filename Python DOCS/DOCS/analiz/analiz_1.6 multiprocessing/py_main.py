@@ -2,6 +2,8 @@ import sys
 import threading
 from py_cv import Analizclass
 from py_ui import AppContainerclass
+from multiprocessing import Pool, Process
+from threading import Thread
 
 
 def play_func(data: dict):
@@ -37,5 +39,6 @@ if __name__ == "__main__":
     app_container = AppContainerclass()
     widget = app_container.create_ui(title="analysis", width=760, height=660, icon="icon.ico",
                                      play_f=play_func, stop_f=stop_func, quit_f=quit_func)
-    ui_thread = threading.Thread(target=widget.show())
+    # ui_process = Process(target=widget.show())
+    ui_thread = Thread(target=widget.show())
     sys.exit(app_container.app.exec_())

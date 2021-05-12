@@ -36,25 +36,30 @@ class Analizclass:
         ip_cams = []
         for x in ip_entry:
             ip_cams.append(f'rtsp://{login_cam}:{password_cam}@192.168.{x}:{port}')
-        if len(ip_entry) <= 2:
+        if len(ip_entry) <= 1:
             ip_cams = ['video.mp4', 'video_1.mp4', 'video_2.mp4', 'video_3.mp4']
+        # ip_cams = ['video.mp4', 'video_1.mp4', 'video_2.mp4', 'video_3.mp4']
 
         if core == 0:
             core = len(ip_cams)
         # for cam in ip_cams:
         #     threading.Thread(target=Analizclass.analiz, args=(cam,)).start()
-        with Pool(len(ip_cams)) as process:
-            process.map(Analizclass.analiz, ip_cams)
+
+        while True:
+            with Pool(core) as process:
+                process.map(Analizclass.analiz, ip_cams)
+                time.sleep(round(0.033 / speed * 10, 2))
 
     @staticmethod
     def analiz(source='video.mp4',
 
-               speed=1.0,
+               speed=0.1,
                sens=115,
                multiplayer=1.0,
 
                sql_val=True,
-               server='WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER',
+               # server='WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER',
+               server='WIN-AIK33SUODO5\\SQLEXPRESS',
                database='ruda_db',
                username='ruda_user',
                password='ruda_user',
@@ -70,46 +75,51 @@ class Analizclass:
             rows = ['device_row', 'value_row', 'datetime_row', 'extra_row']
         _src_white = cv2.imread('mask_white.jpg', 0)
         cap = cv2.VideoCapture(source)
-        while True:
-            try:
-                if windows == 'render all':
-                    Analizclass.origin(source=source, cap=cap, width=width, height=height)
-                    Analizclass.bitwise_not_white(source=source, cap=cap, width=width, height=height)
-                    Analizclass.bitwise_not_black(source=source, cap=cap, width=width, height=height)
-                    Analizclass.bitwise_and_white(source=source, cap=cap, width=width, height=height)
-                    Analizclass.bitwise_and_black(source=source, cap=cap, width=width, height=height)
-                    Analizclass.threshold(source=source, cap=cap, width=width, height=height)
-                    Analizclass.cvtcolor(source=source, cap=cap, width=width, height=height)
-                    Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
-                    Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
-                    Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
-                    Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
-                                             height=height)
-                elif windows == 'extended':
-                    Analizclass.origin(source=source, cap=cap, width=width, height=height)
-                    Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
-                    Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
-                    Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
-                    Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
-                                             height=height)
-                elif windows == 'only final':
-                    Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
-                                             height=height)
-                elif windows == 'only source':
-                    Analizclass.origin(source=source, cap=cap, width=width, height=height)
-                values = Analizclass.result_final(cap=cap, sens=sens, multiplayer=multiplayer)
-                Analizclass.write_result(server=server, database=database, username=username, password=password,
-                                         table=table, rows=rows, values=values, source=source, widget=widget,
-                                         sql_val=sql_val)
-            except Exception as ex:
-                print(ex)
-                with open('log.txt', 'w') as log:
-                    log.write(f'\n{ex}\n')
-            # cv2.waitKey() & 0xFF
-            cv2.waitKey(int(1 / speed)) & 0xFF
-            time.sleep(round(0.033 / speed, 2))
-            # cap.release()
-            # cv2.destroyAllWindows()
+        i = 0
+        # while True:
+        while i < 10:
+            i += 1
+            if i < 10:
+                try:
+                    if windows == 'render all':
+                        Analizclass.origin(source=source, cap=cap, width=width, height=height)
+                        Analizclass.bitwise_not_white(source=source, cap=cap, width=width, height=height)
+                        Analizclass.bitwise_not_black(source=source, cap=cap, width=width, height=height)
+                        Analizclass.bitwise_and_white(source=source, cap=cap, width=width, height=height)
+                        Analizclass.bitwise_and_black(source=source, cap=cap, width=width, height=height)
+                        Analizclass.threshold(source=source, cap=cap, width=width, height=height)
+                        Analizclass.cvtcolor(source=source, cap=cap, width=width, height=height)
+                        Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
+                        Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
+                        Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
+                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
+                                                 height=height)
+                    elif windows == 'extended':
+                        Analizclass.origin(source=source, cap=cap, width=width, height=height)
+                        Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
+                        Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
+                        Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
+                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
+                                                 height=height)
+                    elif windows == 'only final':
+                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
+                                                 height=height)
+                    elif windows == 'only source':
+                        Analizclass.origin(source=source, cap=cap, width=width, height=height)
+                    values = Analizclass.result_final(cap=cap, sens=sens, multiplayer=multiplayer)
+                    Analizclass.write_result(server=server, database=database, username=username, password=password,
+                                             table=table, rows=rows, values=values, source=source, widget=widget,
+                                             sql_val=sql_val)
+                except Exception as ex:
+                    print(ex)
+                    with open('log.txt', 'w') as log:
+                        log.write(f'\n{ex}\n')
+                cv2.waitKey(int(1 / speed)) & 0xFF
+                time.sleep(round(0.033 / speed, 2))
+            else:
+                cap.release()
+                # cv2.destroyWindow()
+                cv2.destroyAllWindows()
 
     @staticmethod
     def origin(cap, source: str, width: int, height: int):
