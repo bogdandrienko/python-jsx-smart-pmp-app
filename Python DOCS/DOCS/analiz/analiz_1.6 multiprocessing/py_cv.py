@@ -36,19 +36,22 @@ class Analizclass:
         ip_cams = []
         for x in ip_entry:
             ip_cams.append(f'rtsp://{login_cam}:{password_cam}@192.168.{x}:{port}')
-        if len(ip_entry) <= 1:
+        if len(ip_entry) <= 2:
             ip_cams = ['video.mp4', 'video_1.mp4', 'video_2.mp4', 'video_3.mp4']
         # ip_cams = ['video.mp4', 'video_1.mp4', 'video_2.mp4', 'video_3.mp4']
 
         if core == 0:
             core = len(ip_cams)
+
         # for cam in ip_cams:
         #     threading.Thread(target=Analizclass.analiz, args=(cam,)).start()
+        def analyse(ip_cams_: list):
+            while True:
+                with Pool(core) as process:
+                    process.map(Analizclass.analiz, ip_cams_)
+                    time.sleep(round(0.033 / speed * 10, 2))
 
-        while True:
-            with Pool(core) as process:
-                process.map(Analizclass.analiz, ip_cams)
-                time.sleep(round(0.033 / speed * 10, 2))
+        threading.Thread(target=analyse, args=(ip_cams,)).start()
 
     @staticmethod
     def analiz(source='video.mp4',
@@ -58,15 +61,15 @@ class Analizclass:
                multiplayer=1.0,
 
                sql_val=True,
-               # server='WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER',
-               server='WIN-AIK33SUODO5\\SQLEXPRESS',
+               server='WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER',
+               # server='WIN-AIK33SUODO5\\SQLEXPRESS',
                database='ruda_db',
                username='ruda_user',
                password='ruda_user',
                table='ruda_now_table, ruda_data_table',
                rows=None,
 
-               windows='only source',
+               windows='only final',
                width=640,
                height=480,
                widget=''
@@ -92,17 +95,20 @@ class Analizclass:
                         Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
                         Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
                         Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
-                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
+                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer,
+                                                 width=width,
                                                  height=height)
                     elif windows == 'extended':
                         Analizclass.origin(source=source, cap=cap, width=width, height=height)
                         Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
                         Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
                         Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
-                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
+                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer,
+                                                 width=width,
                                                  height=height)
                     elif windows == 'only final':
-                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer, width=width,
+                        Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer,
+                                                 width=width,
                                                  height=height)
                     elif windows == 'only source':
                         Analizclass.origin(source=source, cap=cap, width=width, height=height)
@@ -116,6 +122,8 @@ class Analizclass:
                         log.write(f'\n{ex}\n')
                 cv2.waitKey(int(1 / speed)) & 0xFF
                 time.sleep(round(0.033 / speed, 2))
+                # cap.release()
+                # cv2.destroyAllWindows()
             else:
                 cap.release()
                 # cv2.destroyWindow()
