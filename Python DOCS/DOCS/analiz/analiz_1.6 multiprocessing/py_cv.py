@@ -84,7 +84,7 @@ class Analizclass:
             i += 1
             if i < 10:
                 try:
-                    if windows == 'render all':
+                    if windows == 'all':
                         Analizclass.origin(source=source, cap=cap, width=width, height=height)
                         Analizclass.bitwise_not_white(source=source, cap=cap, width=width, height=height)
                         Analizclass.bitwise_not_black(source=source, cap=cap, width=width, height=height)
@@ -106,11 +106,11 @@ class Analizclass:
                         Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer,
                                                  width=width,
                                                  height=height)
-                    elif windows == 'only final':
+                    elif windows == 'final':
                         Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer,
                                                  width=width,
                                                  height=height)
-                    elif windows == 'only source':
+                    elif windows == 'source':
                         Analizclass.origin(source=source, cap=cap, width=width, height=height)
                     values = Analizclass.result_final(cap=cap, sens=sens, multiplayer=multiplayer)
                     Analizclass.write_result(server=server, database=database, username=username, password=password,

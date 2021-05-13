@@ -8,19 +8,20 @@ from threading import Thread
 
 def play_func(data: dict):
     global analiz_container
-    try:
-        if analiz_container:
-            analiz_container.play = False
-            analiz_container = None
-            analiz_container = Analizclass()
-            analiz_container.start_analiz(**data)
-        else:
-            analiz_container = Analizclass()
-            analiz_container.start_analiz(**data)
-    except Exception as ex:
-        print(ex)
-        with open('log.txt', 'a') as log:
-            log.write(f'\n{ex}\n')
+    print(data)
+    # try:
+    #     if analiz_container:
+    #         analiz_container.play = False
+    #         analiz_container = None
+    #         analiz_container = Analizclass()
+    #         analiz_container.start_analiz(**data)
+    #     else:
+    #         analiz_container = Analizclass()
+    #         analiz_container.start_analiz(**data)
+    # except Exception as ex:
+    #     print(ex)
+    #     with open('log.txt', 'a') as log:
+    #         log.write(f'\n{ex}\n')
 
 
 def stop_func():
@@ -37,7 +38,7 @@ def quit_func():
 if __name__ == "__main__":
     analiz_container = None
     app_container = AppContainerclass()
-    widget = app_container.create_ui(title="analysis", width=760, height=660, icon="icon.ico",
+    widget = app_container.create_ui(title="analysis", width=1280, height=720, icon="icon.ico",
                                      play_f=play_func, stop_f=stop_func, quit_f=quit_func)
     # ui_process = Process(target=widget.show())
     ui_thread = Thread(target=widget.show())

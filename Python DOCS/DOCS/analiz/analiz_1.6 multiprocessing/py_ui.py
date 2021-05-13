@@ -16,321 +16,517 @@ class MainWidgetclass(QtWidgets.QWidget):
     def __init__(self, title="APP", width=640, height=480, icon="", play_f=None, stop_f=None, quit_f=None):
         super().__init__()
 
+        self.play_f = play_f
         self.resize(width, height)
         self.setWindowTitle(title)
         self.setWindowIcon(QtGui.QIcon(icon))
 
-        self.play_f = play_f
-        self.stop_f = stop_f
-        self.quit_f = quit_f
+        #####
+        self.horizontal_layout_calibration = QtWidgets.QHBoxLayout()
 
-        # data type
-        self.horizontal_box_data_type = QtWidgets.QHBoxLayout()
+        # global_label_calibration
+        self.global_label_calibration = QtWidgets.QLabel("CALIBRATION")
+        self.global_label_calibration.setAutoFillBackground(True)
+        self.global_label_calibration.setStyleSheet("QLabel { background-color: rgba(0, 0, 0, 255); color : white; }")
+        self.horizontal_layout_calibration.addWidget(self.global_label_calibration)
 
-        # Data of analysis
-        # "8.222 | 8.223 | 15.137 | 15.138 | 15.139 | 15.140 | 15.141
-        # | 15.142 | 12.209 | 12.210 | 4.254 | 2.254 | 2.8 | 2.9"
-        self.data_analysis = QtWidgets.QTextEdit("IP-CAM : 8.222 | 8.223")
-        self.data_analysis.setReadOnly(True)
-        self.horizontal_box_data_type.addWidget(self.data_analysis)
+        # horizontal_layout_calibration_1
+        self.horizontal_layout_calibration_1 = QtWidgets.QHBoxLayout()
 
-        # Set Data of analysis Button
-        self.data_QPushButton = QtWidgets.QPushButton("setup ip cam")
-        self.horizontal_box_data_type.addWidget(self.data_QPushButton)
-        self.data_QPushButton.clicked.connect(self.gettext_data)
+        # speed_analysis
+        self.speed_analysis = QtWidgets.QLabel("SPEED ANALYSIS : 1.0")
+        self.horizontal_layout_calibration_1.addWidget(self.speed_analysis)
 
-        # Sens of analysis
-        self.horizontal_box_sens_of_analysis = QtWidgets.QHBoxLayout()
+        # speed_analysis_button
+        self.speed_analysis_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_calibration_1.addWidget(self.speed_analysis_button)
+        self.speed_analysis_button.clicked.connect(self.get_speed_analysis_button)
 
-        # Sens of analysis
-        self.sens_analysis = QtWidgets.QTextEdit("SENSETIVITY : 115")
-        self.sens_analysis.setReadOnly(True)
-        self.horizontal_box_sens_of_analysis.addWidget(self.sens_analysis)
+        # speed_video_stream
+        self.speed_video_stream = QtWidgets.QLabel("SPEED VIDEO-STREAM : 1.0")
+        self.horizontal_layout_calibration_1.addWidget(self.speed_video_stream)
 
-        # Set sens of analysis Button
-        self.sens_QPushButton = QtWidgets.QPushButton("setup sens")
-        self.horizontal_box_sens_of_analysis.addWidget(self.sens_QPushButton)
-        self.sens_QPushButton.clicked.connect(self.getinteger_sens)
+        # speed_video_stream_button
+        self.speed_video_stream_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_calibration_1.addWidget(self.speed_video_stream_button)
+        self.speed_video_stream_button.clicked.connect(self.get_speed_video_stream_button)
 
-        # Speed of analysis
-        self.horizontal_box_speed_of_analysis = QtWidgets.QHBoxLayout()
+        # sensetivity_analysis
+        self.sensetivity_analysis = QtWidgets.QLabel("SENSETIVITY ANALYSIS : 115")
+        self.horizontal_layout_calibration_1.addWidget(self.sensetivity_analysis)
 
-        # Speed of analysis
-        self.speed_analysis = QtWidgets.QTextEdit("SPEED ANALYSIS : 1.0")
-        self.speed_analysis.setReadOnly(True)
-        self.horizontal_box_speed_of_analysis.addWidget(self.speed_analysis)
+        # sensetivity_analysis_button
+        self.sensetivity_analysis_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_calibration_1.addWidget(self.sensetivity_analysis_button)
+        self.sensetivity_analysis_button.clicked.connect(self.get_sensetivity_analysis_button)
 
-        # Set speed of analysis Button
-        self.speed_QPushButton = QtWidgets.QPushButton("setup speed")
-        self.horizontal_box_speed_of_analysis.addWidget(self.speed_QPushButton)
-        self.speed_QPushButton.clicked.connect(self.getdouble_speed)
+        # correct_coefficient
+        self.correct_coefficient = QtWidgets.QLabel("SPEED CORRECT COEFFICIENT : 1.0")
+        self.horizontal_layout_calibration_1.addWidget(self.correct_coefficient)
 
-        # multi of analysis
-        self.horizontal_box_multi_of_analysis = QtWidgets.QHBoxLayout()
+        # correct_coefficient_button
+        self.correct_coefficient_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_calibration_1.addWidget(self.correct_coefficient_button)
+        self.correct_coefficient_button.clicked.connect(self.get_correct_coefficient_button)
 
-        # Multi of analysis
-        self.multi_analysis = QtWidgets.QTextEdit("MULTIPLAYER ANALYSIS : 1.0")
-        self.multi_analysis.setReadOnly(True)
-        self.horizontal_box_multi_of_analysis.addWidget(self.multi_analysis)
+        #####
+        self.horizontal_layout_cameras = QtWidgets.QHBoxLayout()
 
-        # Set multi of analysis Button
-        self.multi_QPushButton = QtWidgets.QPushButton("setup multi")
-        self.horizontal_box_multi_of_analysis.addWidget(self.multi_QPushButton)
-        self.multi_QPushButton.clicked.connect(self.getdouble_sens)
+        # global_label_cameras
+        self.global_label_cameras = QtWidgets.QLabel("CAMERAS")
+        self.global_label_cameras.setAutoFillBackground(True)
+        self.global_label_cameras.setStyleSheet("QLabel { background-color: rgba(0, 0, 0, 255); color : white; }")
+        self.horizontal_layout_cameras.addWidget(self.global_label_cameras)
 
-        # renderer
-        self.horizontal_box_renderer = QtWidgets.QHBoxLayout()
+        # horizontal_layout_cameras_1
+        self.horizontal_layout_cameras_1 = QtWidgets.QHBoxLayout()
 
-        # Select data type
-        self.render_QComboBox = QtWidgets.QComboBox()
-        self.render_QComboBox.addItems([x for x in ['not render', 'only source', 'only final',
-                                                    'extended', 'render all']])
-        self.render_QComboBox.setCurrentText('not render')
-        self.horizontal_box_renderer.addWidget(self.render_QComboBox)
+        # protocol_cam_type
+        self.protocol_cam_type = QtWidgets.QLabel("PROTOCOL TYPE : rtsp")
+        self.horizontal_layout_cameras_1.addWidget(self.protocol_cam_type)
 
-        self.resolution_window = [320, 240]
-        self.radio_btn_s = []
+        # protocol_cam_type_button
+        self.protocol_cam_type_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_cameras_1.addWidget(self.protocol_cam_type_button)
+        self.protocol_cam_type_button.clicked.connect(self.get_protocol_cam_type_button)
 
-        # Height window renderer
-        self.window_height_1 = QtWidgets.QRadioButton("320x240")
-        self.horizontal_box_renderer.addWidget(self.window_height_1)
-        self.window_height_1.setChecked(True)
-        self.window_height_1.toggled.connect(self.set_window_resolution(self.window_height_1, 320, 240))
+        # port_cam
+        self.port_cam = QtWidgets.QLabel("PORT CAM : 554")
+        self.horizontal_layout_cameras_1.addWidget(self.port_cam)
 
-        # Height window renderer
-        self.window_height_2 = QtWidgets.QRadioButton("640x480")
-        self.horizontal_box_renderer.addWidget(self.window_height_2)
-        self.window_height_2.toggled.connect(self.set_window_resolution(self.window_height_2, 640, 480))
+        # port_cam_button
+        self.port_cam_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_cameras_1.addWidget(self.port_cam_button)
+        self.port_cam_button.clicked.connect(self.get_port_cam_button)
 
-        # Height window renderer
-        self.window_height_3 = QtWidgets.QRadioButton("1280x720")
-        self.horizontal_box_renderer.addWidget(self.window_height_3)
-        self.window_height_3.toggled.connect(self.set_window_resolution(self.window_height_3, 1280, 720))
+        # login_cam
+        self.login_cam = QtWidgets.QLabel("LOGIN CAM : admin")
+        self.horizontal_layout_cameras_1.addWidget(self.login_cam)
 
-        # Height window renderer
-        self.window_height_4 = QtWidgets.QRadioButton("1920x1080")
-        self.horizontal_box_renderer.addWidget(self.window_height_4)
-        self.window_height_4.toggled.connect(self.set_window_resolution(self.window_height_4, 1920, 1080))
+        # login_cam_button
+        self.login_cam_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_cameras_1.addWidget(self.login_cam_button)
+        self.login_cam_button.clicked.connect(self.get_login_cam_button)
 
-        # renderer
-        self.horizontal_box_sql_server = QtWidgets.QHBoxLayout()
+        # password_cam
+        self.password_cam = QtWidgets.QLabel("PASSWORD CAM : q1234567")
+        self.horizontal_layout_cameras_1.addWidget(self.password_cam)
 
-        # Boolean value of rendering the windows
-        self.sql_QCheckBox = QtWidgets.QCheckBox("Save to SQL?")
-        self.sql_QCheckBox.setChecked(True)
-        self.horizontal_box_sql_server.addWidget(self.sql_QCheckBox)
+        # password_cam_button
+        self.password_cam_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_cameras_1.addWidget(self.password_cam_button)
+        self.password_cam_button.clicked.connect(self.get_password_cam_button)
 
-        # Sql server data value
-        self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")  # Home
-        # self._server = QtWidgets.QTextEdit("SERVER NAME : WIN-AIK33SUODO5\\SQLEXPRESS")  # Work
-        self._server.setReadOnly(True)
-        self.horizontal_box_sql_server.addWidget(self._server)
+        # ip_cam
+        self.ip_cam = QtWidgets.QLabel("IP CAM : 15.203 | 15.204 | 15.205")
+        self.horizontal_layout_cameras_1.addWidget(self.ip_cam)
 
-        # Set
-        self.server_QPushButton = QtWidgets.QPushButton("setup server")
-        self.horizontal_box_sql_server.addWidget(self.server_QPushButton)
-        self.server_QPushButton.clicked.connect(self.get_sql_server)
+        # ip_cam_button
+        self.ip_cam_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_cameras_1.addWidget(self.ip_cam_button)
+        self.ip_cam_button.clicked.connect(self.get_ip_cam_button)
 
-        # Sql server data value
-        self._database = QtWidgets.QTextEdit("DATABASE NAME : ruda_db")
-        self._database.setReadOnly(True)
-        self.horizontal_box_sql_server.addWidget(self._database)
+        # mask_cam
+        self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8.jpg | mask_16_9.jpg | mask_16_9.jpg")
+        self.horizontal_layout_cameras_1.addWidget(self.mask_cam)
 
-        # Set
-        self.database_QPushButton = QtWidgets.QPushButton("setup database")
-        self.horizontal_box_sql_server.addWidget(self.database_QPushButton)
-        self.database_QPushButton.clicked.connect(self.get_sql_database)
+        # mask_cam_button
+        self.mask_cam_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_cameras_1.addWidget(self.mask_cam_button)
+        self.mask_cam_button.clicked.connect(self.get_mask_cam_button)
 
-        # renderer
-        self.horizontal_box_sql_user = QtWidgets.QHBoxLayout()
+        #####
+        self.horizontal_layout_sql = QtWidgets.QHBoxLayout()
 
-        # Sql server data value
-        self._username = QtWidgets.QTextEdit("USERNAME : ruda_user")
-        self._username.setReadOnly(True)
-        self.horizontal_box_sql_user.addWidget(self._username)
+        # global_label_sql
+        self.global_label_sql = QtWidgets.QLabel("SQL")
+        self.global_label_sql.setAutoFillBackground(True)
+        self.global_label_sql.setStyleSheet("QLabel { background-color: rgba(0, 0, 0, 255); color : white; }")
+        self.horizontal_layout_sql.addWidget(self.global_label_sql)
 
-        # Set
-        self.username_QPushButton = QtWidgets.QPushButton("setup username")
-        self.horizontal_box_sql_user.addWidget(self.username_QPushButton)
-        self.username_QPushButton.clicked.connect(self.get_sql_username)
+        # horizontal_layout_sql_1
+        self.horizontal_layout_sql_1 = QtWidgets.QHBoxLayout()
 
-        # Sql server data value
-        self._password = QtWidgets.QTextEdit("PASSWORD : ruda_user")
-        self._password.setReadOnly(True)
-        self.horizontal_box_sql_user.addWidget(self._password)
+        # sql_write
+        self.sql_write = QtWidgets.QCheckBox("Write to SQL?")
+        self.sql_write.setChecked(False)
+        self.horizontal_layout_sql_1.addWidget(self.sql_write)
 
-        # Set
-        self.password_QPushButton = QtWidgets.QPushButton("setup password")
-        self.horizontal_box_sql_user.addWidget(self.password_QPushButton)
-        self.password_QPushButton.clicked.connect(self.get_sql_password)
+        # server_sql
+        self.server_sql = QtWidgets.QLabel("SERVER SQL : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")  # Work
+        # self.server_sql = QtWidgets.QLabel("SERVER SQL : WIN-AIK33SUODO5\\SQLEXPRESS")  # Home
+        self.horizontal_layout_sql_1.addWidget(self.server_sql)
 
-        # renderer
-        self.horizontal_box_sql_table = QtWidgets.QHBoxLayout()
+        # database_sql_button
+        self.server_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_1.addWidget(self.server_sql_button)
+        self.server_sql_button.clicked.connect(self.get_server_sql_button)
 
-        # Sql server data value
-        self._table = QtWidgets.QTextEdit("SQL TABLE : ruda_now_table, ruda_data_table")
-        self._table.setReadOnly(True)
-        self.horizontal_box_sql_table.addWidget(self._table)
+        # database_sql
+        self.database_sql = QtWidgets.QLabel("DATABASE SQL : ruda_db")
+        self.horizontal_layout_sql_1.addWidget(self.database_sql)
 
-        # Set
-        self.table_QPushButton = QtWidgets.QPushButton("setup table")
-        self.horizontal_box_sql_table.addWidget(self.table_QPushButton)
-        self.table_QPushButton.clicked.connect(self.get_sql_table)
+        # database_sql_button
+        self.database_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_1.addWidget(self.database_sql_button)
+        self.database_sql_button.clicked.connect(self.get_database_sql_button)
 
-        # Sql server data value
-        self._rows = QtWidgets.QTextEdit("TABLE ROWS : device_row, value_row, datetime_row, extra_row")
-        self._rows.setReadOnly(True)
-        self.horizontal_box_sql_table.addWidget(self._rows)
+        # user_sql
+        self.user_sql = QtWidgets.QLabel("USER SQL : ruda_user")
+        self.horizontal_layout_sql_1.addWidget(self.user_sql)
 
-        # Set
-        self.rows_QPushButton = QtWidgets.QPushButton("setup rows")
-        self.horizontal_box_sql_table.addWidget(self.rows_QPushButton)
-        self.rows_QPushButton.clicked.connect(self.get_sql_rows)
+        # user_sql_button
+        self.user_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_1.addWidget(self.user_sql_button)
+        self.user_sql_button.clicked.connect(self.get_user_sql_button)
 
-        # data_value
-        self.vertical_box_data_value = QtWidgets.QVBoxLayout()
-        self.vertical_box_data_value.addStretch(1)
+        # password_sql
+        self.password_sql = QtWidgets.QLabel("PASSWORD SQL : ruda_user")
+        self.horizontal_layout_sql_1.addWidget(self.password_sql)
 
-        # PlainText data value
-        self.data_ruda = QtWidgets.QLabel("0.0000%")
-        self.vertical_box_data_value.addWidget(self.data_ruda)
+        # password_sql_button
+        self.password_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_1.addWidget(self.password_sql_button)
+        self.password_sql_button.clicked.connect(self.get_password_sql_button)
 
-        # psq_btn
-        self.horizontal_box_psq_btn = QtWidgets.QHBoxLayout()
+        # horizontal_layout_sql_2
+        self.horizontal_layout_sql_2 = QtWidgets.QHBoxLayout()
+
+        # table_now_sql
+        self.table_now_sql = QtWidgets.QLabel("TABLE NOW SQL : ruda_now_table")
+        self.horizontal_layout_sql_2.addWidget(self.table_now_sql)
+
+        # table_now_sql_button
+        self.table_now_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_2.addWidget(self.table_now_sql_button)
+        self.table_now_sql_button.clicked.connect(self.get_table_now_sql_button)
+
+        # rows_now_sql
+        self.rows_now_sql = QtWidgets.QLabel("ROWS NOW SQL : device_row | value_row | datetime_row | extra_row")
+        self.horizontal_layout_sql_2.addWidget(self.rows_now_sql)
+
+        # rows_now_sql_button
+        self.rows_now_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_2.addWidget(self.rows_now_sql_button)
+        self.rows_now_sql_button.clicked.connect(self.get_rows_now_sql_button)
+
+        # table_data_sql
+        self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_data_table")
+        self.horizontal_layout_sql_2.addWidget(self.table_data_sql)
+
+        # table_data_sql_button
+        self.table_data_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_2.addWidget(self.table_data_sql_button)
+        self.table_data_sql_button.clicked.connect(self.get_table_data_sql_button)
+
+        # rows_data_sql
+        self.rows_data_sql = QtWidgets.QLabel("ROWS DATA SQL : device_row | value_row | datetime_row | extra_row")
+        self.horizontal_layout_sql_2.addWidget(self.rows_data_sql)
+
+        # rows_data_sql_button
+        self.rows_data_sql_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_sql_2.addWidget(self.rows_data_sql_button)
+        self.rows_data_sql_button.clicked.connect(self.get_rows_data_sql_button)
+
+        #####
+        self.horizontal_layout_debug = QtWidgets.QHBoxLayout()
+
+        # global_label_sql
+        self.global_label_debug = QtWidgets.QLabel("DEBUG")
+        self.global_label_debug.setAutoFillBackground(True)
+        self.global_label_debug.setStyleSheet("QLabel { background-color: rgba(0, 0, 0, 255); color : white; }")
+        self.horizontal_layout_debug.addWidget(self.global_label_debug)
+
+        # horizontal_layout_debug_1
+        self.horizontal_layout_debug_1 = QtWidgets.QHBoxLayout()
+
+        # widget_data_value
+        self.widget_data_value = QtWidgets.QLabel("0.00%")
+        self.horizontal_layout_debug_1.addWidget(self.widget_data_value)
+        self.horizontal_layout_debug_1.addStretch(1)
+
+        # widget_write
+        self.widget_write = QtWidgets.QCheckBox("Write to Widget?")
+        self.widget_write.setChecked(False)
+        self.horizontal_layout_debug_1.addWidget(self.widget_write)
+
+        # render_debug
+        self.render_debug = QtWidgets.QComboBox()
+        self.render_debug.addItems([x for x in ['none', 'source', 'final', 'extended', 'all']])
+        self.render_debug.setCurrentText('none')
+        self.horizontal_layout_debug_1.addWidget(self.render_debug)
+
+        self.resolution_debug = []
+
+        # resolution_debug
+        self.resolution_debug_1 = QtWidgets.QRadioButton("320x240")
+        self.horizontal_layout_debug_1.addWidget(self.resolution_debug_1)
+        self.resolution_debug_1.setChecked(True)
+        self.resolution_debug_1.toggled.connect(self.set_resolution_debug(self.resolution_debug_1, 320, 240))
+
+        # resolution_debug_2
+        self.resolution_debug_2 = QtWidgets.QRadioButton("640x480")
+        self.horizontal_layout_debug_1.addWidget(self.resolution_debug_2)
+        self.resolution_debug_2.toggled.connect(self.set_resolution_debug(self.resolution_debug_2, 640, 480))
+
+        # resolution_debug_3
+        self.resolution_debug_3 = QtWidgets.QRadioButton("1280x720")
+        self.horizontal_layout_debug_1.addWidget(self.resolution_debug_3)
+        self.resolution_debug_3.toggled.connect(self.set_resolution_debug(self.resolution_debug_3, 1280, 720))
+
+        # resolution_debug_4
+        self.resolution_debug_4 = QtWidgets.QRadioButton("1920x1080")
+        self.horizontal_layout_debug_1.addWidget(self.resolution_debug_4)
+        self.resolution_debug_4.toggled.connect(self.set_resolution_debug(self.resolution_debug_4, 1920, 1080))
+
+        # resolution_debug_5
+        self.resolution_debug_5 = QtWidgets.QRadioButton("2560x1600")
+        self.horizontal_layout_debug_1.addWidget(self.resolution_debug_5)
+        self.resolution_debug_5.toggled.connect(self.set_resolution_debug(self.resolution_debug_5, 2560, 1600))
+
+        # resolution_debug_6
+        self.resolution_debug_6 = QtWidgets.QRadioButton("3840x2160")
+        self.horizontal_layout_debug_1.addWidget(self.resolution_debug_5)
+        self.resolution_debug_6.toggled.connect(self.set_resolution_debug(self.resolution_debug_6, 3840, 2160))
+
+        # process_cores
+        self.process_cores = QtWidgets.QLabel("PROCESS CORES : 4")
+        self.horizontal_layout_debug_1.addWidget(self.process_cores)
+
+        # process_cores_button
+        self.process_cores_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_debug_1.addWidget(self.process_cores_button)
+        self.process_cores_button.clicked.connect(self.get_process_cores_button)
+
+        #####
+        self.horizontal_layout_btns = QtWidgets.QHBoxLayout()
 
         # Play Button
         self.play_QPushButton = QtWidgets.QPushButton("play")
-        self.horizontal_box_psq_btn.addWidget(self.play_QPushButton)
+        self.horizontal_layout_btns.addWidget(self.play_QPushButton)
         self.play_QPushButton.clicked.connect(self.play_btn_func)
 
         # Stop Button
         self.stop_QPushButton = QtWidgets.QPushButton("stop")
-        self.horizontal_box_psq_btn.addWidget(self.stop_QPushButton)
-        self.stop_QPushButton.clicked.connect(self.stop_btn_func)
+        self.horizontal_layout_btns.addWidget(self.stop_QPushButton)
+        self.stop_QPushButton.clicked.connect(stop_f)
 
         # Quit Button
         self.quit_QPushButton = QtWidgets.QPushButton("quit")
-        self.horizontal_box_psq_btn.addWidget(self.quit_QPushButton)
-        self.quit_QPushButton.clicked.connect(self.quit_btn_func)
+        self.horizontal_layout_btns.addWidget(self.quit_QPushButton)
+        self.quit_QPushButton.clicked.connect(quit_f)
 
         # Main vertical Layout
-        self.vertical_box_main = QtWidgets.QVBoxLayout(self)
-        self.vertical_box_main.addLayout(self.horizontal_box_data_type)
-        self.vertical_box_main.addLayout(self.horizontal_box_sens_of_analysis)
-        self.vertical_box_main.addLayout(self.horizontal_box_speed_of_analysis)
-        self.vertical_box_main.addLayout(self.horizontal_box_multi_of_analysis)
-        self.vertical_box_main.addLayout(self.horizontal_box_renderer)
-        self.vertical_box_main.addLayout(self.horizontal_box_sql_server)
-        self.vertical_box_main.addLayout(self.horizontal_box_sql_user)
-        self.vertical_box_main.addLayout(self.horizontal_box_sql_table)
-        self.vertical_box_main.addLayout(self.vertical_box_data_value)
-        self.vertical_box_main.addLayout(self.horizontal_box_psq_btn)
+        self.vertical_layout_main = QtWidgets.QVBoxLayout(self)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_calibration)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_calibration_1)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_cameras)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_cameras_1)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_sql)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_sql_1)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_sql_2)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_debug)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_debug_1)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_btns)
 
-        self.setLayout(self.vertical_box_main)
+        self.setLayout(self.vertical_layout_main)
 
-    def get_ip_cam(self):
-        src = self.data_analysis.toPlainText().strip()
-        _src = src.split(':')[1].strip().split('|')
-        __src = [str(x).strip() for x in _src]
-        return __src
-
-    def gettext_data(self):
-        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the IP of cam:", "User name:",
-                                                          text=self.data_analysis.toPlainText().split(':')[1].strip())
+    def get_speed_analysis_button(self):
+        widget = self.speed_analysis
+        value, okpressed = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                            f'{widget.text().split(":")[0].strip()} value:',
+                                                            1.0, 0.1, 50.0, 2)
         if okpressed:
-            self.data_analysis.setText(f'IP-CAM : {str(value)}')
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
-    def getinteger_sens(self):
-        value, okpressed = QtWidgets.QInputDialog.getInt(self, "Set sensetivity", "Sensetivity value:", 115, 1, 255, 5)
+    def get_speed_video_stream_button(self):
+        widget = self.speed_video_stream
+        value, okpressed = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                            f'{widget.text().split(":")[0].strip()} value:',
+                                                            1.0, 0.1, 50.0, 2)
         if okpressed:
-            self.sens_analysis.setText(f'SENSETIVITY : {str(value)}')
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
-    def getdouble_speed(self):
-        value, okpressed = QtWidgets.QInputDialog.getDouble(self, "Set speed", "Speed value:", 1.0, 0.05, 100.0, 2)
+    def get_sensetivity_analysis_button(self):
+        widget = self.sensetivity_analysis
+        value, okpressed = QtWidgets.QInputDialog.getInt(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                         f'{widget.text().split(":")[0].strip()} value:',
+                                                         115, 1, 255, 5)
         if okpressed:
-            self.speed_analysis.setText(f'SPEED ANALYSIS : {(round(value, 3))}')
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
-    def getdouble_sens(self):
-        value, okpressed = QtWidgets.QInputDialog.getDouble(self, "Set multiplayer", "Multiplayer value:", 1.0, 0.1,
-                                                            50.0, 2)
+    def get_correct_coefficient_button(self):
+        widget = self.correct_coefficient_button
+        value, okpressed = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                            f'{widget.text().split(":")[0].strip()} value:',
+                                                            1.0, 0.1, 50.0, 2)
         if okpressed:
-            self.multi_analysis.setText(f'MULTIPLAYER ANALYSIS : {(round(value, 3))}')
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
-    def set_window_resolution(self, radio, widht: int, height: int):
-        self.radio_btn_s.append([radio, widht, height])
+    def get_protocol_cam_type_button(self):
+        widget = self.protocol_cam_type
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_port_cam_button(self):
+        widget = self.port_cam
+        value, okpressed = QtWidgets.QInputDialog.getInt(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                         f'{widget.text().split(":")[0].strip()} value:',
+                                                         554, 1, 9999, 5)
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_login_cam_button(self):
+        widget = self.login_cam
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_password_cam_button(self):
+        widget = self.password_cam
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_ip_cam_button(self):
+        widget = self.ip_cam
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+        pass
+
+    def get_mask_cam_button(self):
+        widget = self.mask_cam
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+        pass
+
+    def get_server_sql_button(self):
+        widget = self.server_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_database_sql_button(self):
+        widget = self.database_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_user_sql_button(self):
+        widget = self.user_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_password_sql_button(self):
+        widget = self.password_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_table_now_sql_button(self):
+        widget = self.table_now_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_rows_now_sql_button(self):
+        widget = self.rows_now_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_table_data_sql_button(self):
+        widget = self.table_data_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_rows_data_sql_button(self):
+        widget = self.rows_data_sql
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def set_resolution_debug(self, radio, widht: int, height: int):
+        self.resolution_debug.append([radio, widht, height])
 
     def get_window_resolution(self):
-        for radio in self.radio_btn_s:
+        for radio in self.resolution_debug:
             try:
                 if radio[0].isChecked():
-                    return [radio[1], radio[2]]
+                    return [int(radio[1]), int(radio[2])]
             except Exception as ex:
                 print(ex)
 
-    def get_sql_server(self):
-        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter server name:", "Server name:",
-                                                          text=self._server.toPlainText().split(':')[1].strip())
+    def get_process_cores_button(self):
+        widget = self.process_cores
+        value, okpressed = QtWidgets.QInputDialog.getInt(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                         f'{widget.text().split(":")[0].strip()} value:',
+                                                         4, 1, 16, 5)
         if okpressed:
-            self._server.setText(f'SERVER NAME : {str(value)}')
-
-    def get_sql_database(self):
-        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter database name:", "Database name:",
-                                                          text=self._database.toPlainText().split(':')[1].strip())
-        if okpressed:
-            self._database.setText(f'DATABASE NAME : {str(value)}')
-
-    def get_sql_username(self):
-        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter username:", "Username:",
-                                                          text=self._username.toPlainText().split(':')[1].strip())
-        if okpressed:
-            self._username.setText(f'USERNAME : {str(value)}')
-
-    def get_sql_password(self):
-        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter password:", "Password:",
-                                                          text=self._password.toPlainText().split(':')[1].strip())
-        if okpressed:
-            self._password.setText(f'PASSWORD : {str(value)}')
-
-    def get_sql_table(self):
-        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the table:", "Table:",
-                                                          text=self._table.toPlainText().split(':')[1].strip())
-        if okpressed:
-            self._table.setText(f'SQL TABLE : {str(value)}')
-
-    def get_sql_rows(self):
-        value, okpressed = QtWidgets.QInputDialog.getText(self, "Enter the rows:", "Rows:",
-                                                          text=self._rows.toPlainText().split(':')[1].strip())
-        if okpressed:
-            self._rows.setText(f'TABLE ROWS : {str(value)}')
-
-    def set_data(self, value: str):
-        self.data_ruda.setText(f"{value}")
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
     def play_btn_func(self):
         data = {
-            'ip_entry': list(self.get_ip_cam()),
-            'sens': int(self.sens_analysis.toPlainText().split(':')[1].strip()),
-            'speed': float(self.speed_analysis.toPlainText().split(':')[1].strip()),
-            'multiplayer': float(self.multi_analysis.toPlainText().split(':')[1].strip()),
-            'windows': str(self.render_QComboBox.currentText().strip()),
-            'width': int(self.get_window_resolution()[0]),
-            'height': int(self.get_window_resolution()[1]),
-            'sql_val': bool(self.sql_QCheckBox.isChecked()),
-            'server': str(self._server.toPlainText().split(':')[1].strip()),
-            'database': str(self._database.toPlainText().split(':')[1].strip()),
-            'username': str(self._username.toPlainText().split(':')[1].strip()),
-            'password': str(self._password.toPlainText().split(':')[1].strip()),
-            'table': str(self._table.toPlainText().split(':')[1].strip()),
-            'rows': list(self._rows.toPlainText().split(':')[1].strip().split(', ')),
-            'port': int(554),
-            'login_cam': str('admin'),
-            'password_cam': str('nehrfvths123'),
-            'widget': self
+            'process_cores': int(self.process_cores.text().split(':')[1].strip()),
+            'widget_write': bool(self.widget_write.isChecked()),
+            'widget': self,
+            'render_debug': str(self.render_debug.currentText().strip()),
+            'resolution_debug': list(self.get_window_resolution()),
+
+            'speed_analysis': float(self.speed_analysis.text().split(':')[1].strip()),
+            'speed_video_stream': float(self.speed_video_stream.text().split(':')[1].strip()),
+            'sensetivity_analysis': int(self.sensetivity_analysis.text().split(':')[1].strip()),
+            'correct_coefficient': float(self.correct_coefficient.text().split(':')[1].strip()),
+
+            'protocol_cam_type': str(self.protocol_cam_type.text().split(':')[1].strip()),
+            'port_cam': int(self.port_cam.text().split(':')[1].strip()),
+            'login_cam': str(self.login_cam.text().split(':')[1].strip()),
+            'password_cam': str(self.password_cam.text().split(':')[1].strip()),
+            'ip_cam': list([x.strip() for x in self.ip_cam.text().split(':')[1].strip().split('|')]),
+            'mask_cam': list([x.strip() for x in self.mask_cam.text().split(':')[1].strip().split('|')]),
+
+            'sql_write': bool(self.sql_write.isChecked()),
+            'server_sql': str(self.server_sql.text().split(':')[1].strip()),
+            'database_sql': str(self.database_sql.text().split(':')[1].strip()),
+            'user_sql': str(self.user_sql.text().split(':')[1].strip()),
+            'password_sql': str(self.password_sql.text().split(':')[1].strip()),
+            'table_now_sql': str(self.table_now_sql.text().split(':')[1].strip()),
+            'rows_now_sql': list([x.strip() for x in self.rows_now_sql.text().split(':')[1].strip().split('|')]),
+            'table_data_sql': str(self.table_data_sql.text().split(':')[1].strip()),
+            'rows_data_sql': list([x.strip() for x in self.rows_data_sql.text().split(':')[1].strip().split('|')]),
         }
         self.play_f(data=data)
 
-    def stop_btn_func(self):
-        self.stop_f()
-
-    def quit_btn_func(self):
-        self.quit_f()
+    def set_data(self, value: str):
+        self.data_ruda.setText(f"{value}")
