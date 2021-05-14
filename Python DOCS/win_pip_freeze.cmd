@@ -1,7 +1,9 @@
 @echo OFF
 
+python -m pip install --upgrade pip
+
 call .\venv\Scripts\activate.bat
 
-pip install --upgrade pip
+python -m pip install --upgrade pip
 
 pip freeze > requirements.txt

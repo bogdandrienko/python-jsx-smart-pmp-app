@@ -1,0 +1,6 @@
+
+'Analizclass' object has no attribute 'play'
+
+'Analizclass' object has no attribute 'play'
+
+start_analiz() missing 1 required positional argument: 'get_pause'
