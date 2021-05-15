@@ -118,7 +118,7 @@ class Analizclass:
                     source_type: str,
                     sources: list):
         def sync_analyse_image(source):
-            try:
+            # try:
                 Analizclass.analiz(render_debug=render_debug,
                                    resolution_debug=resolution_debug,
                                    sensetivity_analysis=sensetivity_analysis,
@@ -147,10 +147,10 @@ class Analizclass:
                                    table_data_sql=table_data_sql,
                                    rows_data_sql=rows_data_sql,
                                    sources=sources)
-            except Exception as ex:
-                LoggingClass.logging(ex)
-                print(f'sync_analyse_image func error')
-                print(ex)
+            # except Exception as ex:
+            #     LoggingClass.logging(ex)
+            #     print(f'sync_analyse_image func error')
+            #     print(ex)
 
         def loop():
             pause(True)
@@ -220,7 +220,7 @@ class Analizclass:
                source: list,
                source_type: str,
                sources: list):
-        try:
+        # try:
             image = Analizclass.get_source(source_type, source, login_cam, password_cam)
             mask = source[1]
             if render_debug == 'none':
@@ -230,22 +230,31 @@ class Analizclass:
             elif render_debug == 'extended':
                 pass
             elif render_debug == 'final':
-                Analizclass.render(f'render final: {source[0].split("192.168.")[1].strip().split(":")[0].strip()}',
+                if len(source[0]) > 10:
+                    source = source[0].split("192.168.")[1].strip().split(":")[0].strip()
+                else:
+                    source = source[0]
+                Analizclass.render(f'render final: {source}',
                                    Analizclass.render_final(image=image, mask=mask,
                                                             sensetivity_analysis=sensetivity_analysis,
                                                             correct_coefficient=correct_coefficient),
                                    resolution_debug)
             elif render_debug == 'source':
                 pass
+
+            if len(source[0]) > 10:
+                source = source[0].split("192.168.")[1].strip().split(":")[0].strip()
+            else:
+                source = source[0]
             values = Analizclass.result_final(image, mask, sensetivity_analysis, correct_coefficient)
             Analizclass.write_result(server=server_sql, database=database_sql, username=user_sql,
                                      password=password_sql, table=table_data_sql, rows=rows_data_sql, values=values,
-                                     source=source[0].split("192.168.")[1].strip().split(":")[0].strip(), widget=widget,
+                                     source=source, widget=widget,
                                      widget_write=widget_write, sql_val=sql_write)
-        except Exception as ex:
-            LoggingClass.logging(ex)
-            print(f'analiz func error')
-            print(ex)
+        # except Exception as ex:
+        #     LoggingClass.logging(ex)
+        #     print(f'analiz func error')
+        #     print(ex)
 
     @staticmethod
     def get_sources(source_type: str, sources: list, masks: list, protocol: str, login: str, password: str, port: int):
@@ -278,6 +287,7 @@ class Analizclass:
             elif source_type == 'video-rtsp' or 'video-file':
                 cam_stream = cv2.VideoCapture(sources[0])
                 _, image = cam_stream.read()
+                cam_stream.release()
                 return image
             else:
                 LoggingClass.logging(f'source error')
