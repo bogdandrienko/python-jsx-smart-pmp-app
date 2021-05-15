@@ -4,3 +4,36 @@
 'Analizclass' object has no attribute 'play'
 
 start_analiz() missing 1 required positional argument: 'get_pause'
+
+'NoneType' object is not subscriptable
+
+list.append() takes exactly one argument (2 given)
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\highgui\src\window.cpp:404: error: (-215:Assertion failed) size.width>0 && size.height>0 in function 'cv::imshow'
+
+
+'list' object has no attribute 'replace'
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\highgui\src\window.cpp:404: error: (-215:Assertion failed) size.width>0 && size.height>0 in function 'cv::imshow'
+
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\highgui\src\window.cpp:404: error: (-215:Assertion failed) size.width>0 && size.height>0 in function 'cv::imshow'
+
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\highgui\src\window.cpp:404: error: (-215:Assertion failed) size.width>0 && size.height>0 in function 'cv::imshow'
+
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+Only absolute URIs are allowed. uri = h
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\highgui\src\window.cpp:404: error: (-215:Assertion failed) size.width>0 && size.height>0 in function 'cv::imshow'
+

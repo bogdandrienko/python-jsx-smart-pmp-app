@@ -61,19 +61,12 @@ class Analizclass:
         sources = Analizclass.get_sources(source_type=source_type[0], sources=ip_cam, masks=mask_cam,
                                           protocol=protocol_cam_type, login=login_cam, password=password_cam,
                                           port=port_cam)
-
-        print(sources)
         image_and_mask = []
         for x in sources:
-            image_and_mask = [Analizclass.get_source(source_type=source_type[2], sources=x[0], login=login_cam,
-                                                     password=password_cam),
-                              x[1]]
-        i = 0
+            image_and_mask.append([Analizclass.get_source(source_type[0], x, login_cam, password_cam), x[1]])
         for x in image_and_mask:
-            i += 1
-            cv2.imshow(f'image: {i}', x[0])
-            cv2.imshow(f'mask: {i}', x[1])
-        # print(image_and_mask)
+            cv2.imshow(f'image{x[0]}', x[0])
+            cv2.imshow(f'mask{x[1]}', x[1])
 
     @staticmethod
     def sync_method(pause,
@@ -368,7 +361,7 @@ class Analizclass:
                 print(f'source error')
         except Exception as ex:
             LoggingClass.logging(ex)
-            print(f'get_source source error')
+            print(f'get_source func error')
             print(ex)
 
     @staticmethod
