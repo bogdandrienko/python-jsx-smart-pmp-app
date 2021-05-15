@@ -211,7 +211,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.rows_now_sql_button.clicked.connect(self.get_rows_now_sql_button)
 
         # table_data_sql
-        self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_datase_table")
+        self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_now_table")
         self.horizontal_layout_sql_2.addWidget(self.table_data_sql)
 
         # table_data_sql_button

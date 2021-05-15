@@ -230,7 +230,7 @@ class Analizclass:
             elif render_debug == 'extended':
                 pass
             elif render_debug == 'final':
-                Analizclass.render(f'render final: {source[0]}',
+                Analizclass.render(f'render final: {source[0].split("192.168.")[1].strip().split(":")[0].strip()}',
                                    Analizclass.render_final(image=image, mask=mask,
                                                             sensetivity_analysis=sensetivity_analysis,
                                                             correct_coefficient=correct_coefficient),
@@ -240,8 +240,8 @@ class Analizclass:
             values = Analizclass.result_final(image, mask, sensetivity_analysis, correct_coefficient)
             Analizclass.write_result(server=server_sql, database=database_sql, username=user_sql,
                                      password=password_sql, table=table_data_sql, rows=rows_data_sql, values=values,
-                                     source=source[0][15:20:], widget=widget, widget_write=widget_write,
-                                     sql_val=sql_write)
+                                     source=source[0].split("192.168.")[1].strip().split(":")[0].strip(), widget=widget,
+                                     widget_write=widget_write, sql_val=sql_write)
         except Exception as ex:
             LoggingClass.logging(ex)
             print(f'analiz func error')
@@ -359,7 +359,7 @@ class Analizclass:
     @staticmethod
     def write_result(server: str, database: str, username: str, password: str, table: str, rows: list, source: str,
                      values: float, widget, widget_write: bool, sql_val: bool):
-        sql_datetime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        sql_datetime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         _values = [source, values, sql_datetime, '']
         # Write result to widget
         if widget_write:
@@ -371,10 +371,10 @@ class Analizclass:
         # Write result to sql database
         if sql_val:
             try:
-                # SQLclass.sql_post_now(server=server, database=database, username=username, password=password,
-                #                       table=table, rows=rows, values=_values)
-                SQLclass.sql_post_data(server=server, database=database, username=username, password=password,
-                                       table=table, rows=rows, values=_values)
+                SQLclass.sql_post_now(server=server, database=database, username=username, password=password,
+                                      table=table, rows=rows, values=_values)
+                # SQLclass.sql_post_data(server=server, database=database, username=username, password=password,
+                #                        table=table, rows=rows, values=_values)
             except Exception as ex:
                 LoggingClass.logging(ex)
                 print(ex)

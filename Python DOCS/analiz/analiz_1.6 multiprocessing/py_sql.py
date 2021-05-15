@@ -40,12 +40,6 @@ class SQLclass:
         _rows = ''
         for x in rows:
             _rows = f"{_rows}{str(x)}, "
-        # _rows = f"{rows[0]}, {rows[1]}, {rows[2]}, {rows[3]}"
-        # _values = ''
-        # for x in values:
-        #     _values += f"'{x}', "
-        # _values = f"{values[0]}, {values[1]}, '{values[2]}', '{values[3]}'"
-        # value = f"""INSERT INTO {table} ({_rows}) VALUES ({_values})"""
         value = f"INSERT INTO {table} (" + _rows[:-2:] + f") VALUES {tuple(values)}"
         cursor.execute(value)
         connection.commit()
