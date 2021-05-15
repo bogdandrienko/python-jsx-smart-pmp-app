@@ -127,7 +127,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.ip_cam_button.clicked.connect(self.get_ip_cam_button)
 
         # mask_cam
-        self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8.jpg | mask_16_9.jpg | mask_16_9.jpg")
+        self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8.jpg | mask_16_9.jpg | mask_16_10.jpg")
         self.horizontal_layout_cameras_1.addWidget(self.mask_cam)
 
         # mask_cam_button
