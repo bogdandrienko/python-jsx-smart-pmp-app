@@ -38,18 +38,39 @@ class Analizclass:
                      rows_now_sql: list,
                      table_data_sql: str,
                      rows_data_sql: list):
+        source_type = ['image-http', 'video-rtsp', 'video-file']
+        source_type = source_type[0] # Select type for analyse
+
+        compute_type = ['sync', 'async', 'multithread', 'multiprocess']
+        compute_type = compute_type[0]
+
         ip_cams = []
-        for x in ip_cam:
-            # ip_cams.append(f'{protocol_cam_type}://{login_cam}:{password_cam}@192.168.{x}:{port_cam}')
-            ip_cams.append(f'{protocol_cam_type}://192.168.{x}:{port_cam}/'
-                           f'ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG')
-        if len(ip_cam) < 1:
-            ip_cams = ['video.mp4', 'video_1.mp4', 'video_2.mp4', 'video_3.mp4']
+        if source_type == 'video-file':
+            for x in ip_cam:
+                ip_cams.append(f'{x}')
 
-        # ip_cams = ['video.mp4', 'video_1.mp4', 'video_2.mp4', 'video_3.mp4']
 
+        elif source_type == 'image-http':
+            for x in ip_cam:
+                ip_cams.append(f'{protocol_cam_type}://192.168.{x}:{port_cam}/'
+                               f'ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG')
+        elif source_type == 'video-rtsp':
+            for x in ip_cam:
+                ip_cams.append(f'{protocol_cam_type}://{login_cam}:{password_cam}@192.168.{x}:{port_cam}')
+
+        if compute_type == 'sync':
+            pass
+        elif compute_type == 'async':
+            pass
+        elif compute_type == 'multithread':
         # for cam in ip_cams:
         #     threading.Thread(target=Analizclass.analiz, args=(cam,)).start()
+        elif compute_type == 'multiprocess':
+            pass
+
+
+
+
 
         def analyse_image(src):
             try:
@@ -90,12 +111,12 @@ class Analizclass:
         def whilees(src):
             pause(True)
             while True:
-                for y in src:
-                    analyse_image(y)
                 val = pause(None)
                 if not val:
                     cv2.destroyAllWindows()
                     break
+                for y in src:
+                    analyse_image(y)
                 time.sleep(0.2 / speed_analysis)
 
         threading.Thread(target=whilees, args=(ip_cams,)).start()
@@ -140,7 +161,7 @@ class Analizclass:
             if i < 10:
                 try:
                     if windows == 'all':
-                        Analizclass.origin(source=source, cap=cap, width=width, height=height)
+                        Analizclass.origin_video(source=source, cap=cap, width=width, height=height)
                         Analizclass.bitwise_not_white(source=source, cap=cap, width=width, height=height)
                         Analizclass.bitwise_not_black(source=source, cap=cap, width=width, height=height)
                         Analizclass.bitwise_and_white(source=source, cap=cap, width=width, height=height)
@@ -149,15 +170,15 @@ class Analizclass:
                         Analizclass.cvtcolor(source=source, cap=cap, width=width, height=height)
                         Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
                         Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
-                        Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
+                        Analizclass.cropping_source(source=source, cap=cap, width=width, height=height)
                         Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer,
                                                  width=width,
                                                  height=height)
                     elif windows == 'extended':
-                        Analizclass.origin(source=source, cap=cap, width=width, height=height)
+                        Analizclass.origin_video(source=source, cap=cap, width=width, height=height)
                         Analizclass.inrange(source=source, cap=cap, sens=sens, width=width, height=height)
                         Analizclass.canny_edges(source=source, cap=cap, sens=sens, width=width, height=height)
-                        Analizclass.cropping_image(source=source, cap=cap, width=width, height=height)
+                        Analizclass.cropping_source(source=source, cap=cap, width=width, height=height)
                         Analizclass.render_final(source=source, cap=cap, sens=sens, multiplayer=multiplayer,
                                                  width=width,
                                                  height=height)
@@ -166,7 +187,7 @@ class Analizclass:
                                                  width=width,
                                                  height=height)
                     elif windows == 'source':
-                        Analizclass.origin(source=source, cap=cap, width=width, height=height)
+                        Analizclass.origin_video(source=source, cap=cap, width=width, height=height)
                     values = Analizclass.result_final(cap=cap, sens=sens, multiplayer=multiplayer)
                     Analizclass.write_result(server=server, database=database, username=username, password=password,
                                              table=table, rows=rows, values=values, source=source, widget=widget,
@@ -185,12 +206,16 @@ class Analizclass:
                 cv2.destroyAllWindows()
 
     @staticmethod
-    def origin(cap, source: str, width: int, height: int):
+    def origin_image():
+        pass
+
+    @staticmethod
+    def origin_video(cap, source: str, width: int, height: int):
         _, src_img = cap.read()
         Analizclass.render(f'{source}_src_img', src_img, width, height)
 
     @staticmethod
-    def cropping_image(source, cap, width: int, height: int):
+    def cropping_source(source, cap, width: int, height: int):
         _, src_img = cap.read()
 
         _cropping_image = src_img[250:1080, 600:1720]
