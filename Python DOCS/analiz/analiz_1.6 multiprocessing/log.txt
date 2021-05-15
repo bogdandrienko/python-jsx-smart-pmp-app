@@ -37,3 +37,637 @@ Only absolute URIs are allowed. uri = h
 
 OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\highgui\src\window.cpp:404: error: (-215:Assertion failed) size.width>0 && size.height>0 in function 'cv::imshow'
 
+
+name 'ip_cams' is not defined
+
+name 'ip_cams' is not defined
+
+name 'ip_cams' is not defined
+
+name 'ip_cams' is not defined
+Only absolute URIs are allowed. uri = h
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+sync_method() missing 27 required positional arguments: 'pause', 'process_cores', 'widget_write', 'widget', 'render_debug', 'resolution_debug', 'speed_analysis', 'speed_video_stream', 'sensetivity_analysis', 'correct_coefficient', 'protocol_cam_type', 'port_cam', 'login_cam', 'password_cam', 'ip_cam', 'mask_cam', 'sql_write', 'server_sql', 'database_sql', 'user_sql', 'password_sql', 'table_now_sql', 'rows_now_sql', 'table_data_sql', 'rows_data_sql', 'source_type', and 'sources'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+'MainWidgetclass' object has no attribute 'data_ruda'
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+list index out of range
+
+list index out of range
+
+list index out of range
+
+list index out of range
+
+list index out of range
+
+list index out of range
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+tuple expected at most 1 argument, got 4
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "13". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции ")". (102) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Параметры предоставлены для объекта "ruda_data_table", который не является функцией. Если параметры являются табличными указаниями, требуется ключевое слово WITH. (215) (SQLExecDirectW)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+local variable '_rows' referenced before assignment
+
+local variable '_rows' referenced before assignment
+
+local variable '_rows' referenced before assignment
+
+local variable '_rows' referenced before assignment
+
+local variable '_rows' referenced before assignment
+
+local variable '_rows' referenced before assignment
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22001', '[22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Символьные или двоичные данные могут быть усечены. (8152) (SQLExecDirectW); [22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22001', '[22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Символьные или двоичные данные могут быть усечены. (8152) (SQLExecDirectW); [22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22001', '[22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Символьные или двоичные данные могут быть усечены. (8152) (SQLExecDirectW); [22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22001', '[22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Символьные или двоичные данные могут быть усечены. (8152) (SQLExecDirectW); [22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22001', '[22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Символьные или двоичные данные могут быть усечены. (8152) (SQLExecDirectW); [22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22001', '[22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Символьные или двоичные данные могут быть усечены. (8152) (SQLExecDirectW); [22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+isoformat() argument 1 must be a unicode character, not str
+isoformat() argument 1 must be a unicode character, not str
+isoformat() argument 1 must be a unicode character, not str
+isoformat() argument 1 must be a unicode character, not str
+isoformat() argument 1 must be a unicode character, not str
+isoformat() argument 1 must be a unicode character, not str

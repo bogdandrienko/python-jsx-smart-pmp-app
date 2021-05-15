@@ -1,3 +1,51 @@
 
 OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
 
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')
+
+('22007', '[22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Преобразование типа данных varchar в тип данных datetime привело к выходу значения за пределы диапазона. (242) (SQLExecDirectW); [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Выполнение данной инструкции было прервано. (3621)')

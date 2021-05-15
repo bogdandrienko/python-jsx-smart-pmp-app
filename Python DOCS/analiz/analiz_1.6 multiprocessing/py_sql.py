@@ -7,7 +7,7 @@ class SQLclass:
     def sql_post_data(server: str, database: str, username: str, password: str, table: str, rows: list, values: list):
         try:
             sql = SQLclass.pyodbc_connect(server=server, database=database, username=username, password=password)
-            SQLclass.execute_data_query(connection=sql, table=table.split(',')[1].strip(), rows=rows, values=values)
+            SQLclass.execute_data_query(connection=sql, table=table, rows=rows, values=values)
         except Exception as ex:
             print(ex)
             with open('log.txt', 'a') as log:
@@ -17,7 +17,7 @@ class SQLclass:
     def sql_post_now(server: str, database: str, username: str, password: str, table: str, rows: list, values: list):
         try:
             sql = SQLclass.pyodbc_connect(server=server, database=database, username=username, password=password)
-            SQLclass.execute_now_query(connection=sql, table=table.split(',')[0].strip(), rows=rows, values=values)
+            SQLclass.execute_now_query(connection=sql, table=table, rows=rows, values=values)
         except Exception as ex:
             print(ex)
             with open('log.txt', 'a') as log:
@@ -37,10 +37,16 @@ class SQLclass:
     def execute_data_query(connection, table: str, rows: list, values: list):
         cursor = connection.cursor()
         cursor.fast_executemany = True
-        __rows = ''
+        _rows = ''
         for x in rows:
-            __rows = f"{__rows}{str(x)}, "
-        value = f"INSERT INTO {table} (" + __rows[:-2:] + f") VALUES {tuple(values)}"
+            _rows = f"{_rows}{str(x)}, "
+        # _rows = f"{rows[0]}, {rows[1]}, {rows[2]}, {rows[3]}"
+        # _values = ''
+        # for x in values:
+        #     _values += f"'{x}', "
+        # _values = f"{values[0]}, {values[1]}, '{values[2]}', '{values[3]}'"
+        # value = f"""INSERT INTO {table} ({_rows}) VALUES ({_values})"""
+        value = f"INSERT INTO {table} (" + _rows[:-2:] + f") VALUES {tuple(values)}"
         cursor.execute(value)
         connection.commit()
 

@@ -149,12 +149,12 @@ class MainWidgetclass(QtWidgets.QWidget):
 
         # sql_write
         self.sql_write = QtWidgets.QCheckBox("Write to SQL?")
-        self.sql_write.setChecked(False)
+        self.sql_write.setChecked(True)
         self.horizontal_layout_sql_1.addWidget(self.sql_write)
 
         # server_sql
-        self.server_sql = QtWidgets.QLabel("SERVER SQL : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")  # Work
-        # self.server_sql = QtWidgets.QLabel("SERVER SQL : WIN-AIK33SUODO5\\SQLEXPRESS")  # Home
+        # self.server_sql = QtWidgets.QLabel("SERVER SQL : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER")  # Home
+        self.server_sql = QtWidgets.QLabel("SERVER SQL : WIN-AIK33SUODO5\\SQLEXPRESS")  # Work
         self.horizontal_layout_sql_1.addWidget(self.server_sql)
 
         # database_sql_button
@@ -193,7 +193,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_sql_2 = QtWidgets.QHBoxLayout()
 
         # table_now_sql
-        self.table_now_sql = QtWidgets.QLabel("TABLE NOW SQL : ruda_now_table")
+        self.table_now_sql = QtWidgets.QLabel("TABLE NOW SQL : ruda_data_table")
         self.horizontal_layout_sql_2.addWidget(self.table_now_sql)
 
         # table_now_sql_button
@@ -211,7 +211,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.rows_now_sql_button.clicked.connect(self.get_rows_now_sql_button)
 
         # table_data_sql
-        self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_data_table")
+        self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_datase_table")
         self.horizontal_layout_sql_2.addWidget(self.table_data_sql)
 
         # table_data_sql_button
@@ -253,7 +253,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         # render_debug
         self.render_debug = QtWidgets.QComboBox()
         self.render_debug.addItems([x for x in ['none', 'source', 'final', 'extended', 'all']])
-        self.render_debug.setCurrentText('none')
+        self.render_debug.setCurrentText('final')
         self.horizontal_layout_debug_1.addWidget(self.render_debug)
 
         self.resolution_debug = []
