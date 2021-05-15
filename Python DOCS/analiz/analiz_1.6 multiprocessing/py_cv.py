@@ -41,62 +41,40 @@ class Analizclass:
                      rows_data_sql: list):
 
         source_type = ['image-http', 'video-rtsp', 'video-file']
-
         compute_type = ['sync', 'async', 'multithread', 'multiprocess']
         compute_type = compute_type[0]
+        path_image_and_masks = Analizclass.get_sources(source_type=source_type[0], sources=ip_cam, masks=mask_cam,
+                                                       protocol=protocol_cam_type, login=login_cam,
+                                                       password=password_cam,
+                                                       port=port_cam)
+        images_and_masks = []
+        for src in path_image_and_masks:
+            images_and_masks.append([Analizclass.get_source(source_type[0], src, login_cam, password_cam), src[1]])
 
-        # ##########################
-        # if compute_type == 'sync':
-        #     Analizclass.sync_method()
-        # #############################
-        # elif compute_type == 'async':
-        #     Analizclass.async_method()
-        # ###################################
-        # elif compute_type == 'multithread':
-        #     Analizclass.multithread_method()
-        # ####################################
-        # elif compute_type == 'multiprocess':
-        #     Analizclass.multiprocess_method()
+        # for x in images_and_masks:
+        #     cv2.imshow(f'image{x[0]}', x[0])
+        #     cv2.imshow(f'mask{x[1]}', x[1])
 
-        sources = Analizclass.get_sources(source_type=source_type[0], sources=ip_cam, masks=mask_cam,
-                                          protocol=protocol_cam_type, login=login_cam, password=password_cam,
-                                          port=port_cam)
-        image_and_mask = []
-        for x in sources:
-            image_and_mask.append([Analizclass.get_source(source_type[0], x, login_cam, password_cam), x[1]])
-        for x in image_and_mask:
-            cv2.imshow(f'image{x[0]}', x[0])
-            cv2.imshow(f'mask{x[1]}', x[1])
+        Analizclass.analiz(pause, process_cores, widget_write, widget, render_debug, resolution_debug, speed_analysis,
+                           speed_video_stream, sensetivity_analysis, correct_coefficient, protocol_cam_type, port_cam,
+                           login_cam, password_cam, ip_cam, mask_cam, sql_write, server_sql, database_sql, user_sql,
+                           password_sql, table_now_sql, rows_now_sql, table_data_sql, rows_data_sql, images_and_masks,
+                           compute_type)
+        ##########################
+        if compute_type == 'sync':
+            Analizclass.sync_method()
+        #############################
+        elif compute_type == 'async':
+            Analizclass.async_method()
+        ###################################
+        elif compute_type == 'multithread':
+            Analizclass.multithread_method()
+        ####################################
+        elif compute_type == 'multiprocess':
+            Analizclass.multiprocess_method()
 
     @staticmethod
-    def sync_method(pause,
-                    process_cores: int,
-                    widget_write: bool,
-                    widget: object,
-                    render_debug: str,
-                    resolution_debug: list,
-
-                    speed_analysis: float,
-                    speed_video_stream: float,
-                    sensetivity_analysis: int,
-                    correct_coefficient: float,
-
-                    protocol_cam_type: str,
-                    port_cam: int,
-                    login_cam: str,
-                    password_cam: str,
-                    ip_cams: list,
-                    mask_cam: list,
-
-                    sql_write: bool,
-                    server_sql: str,
-                    database_sql: str,
-                    user_sql: str,
-                    password_sql: str,
-                    table_now_sql: str,
-                    rows_now_sql: list,
-                    table_data_sql: str,
-                    rows_data_sql: list):
+    def sync_method():
         def analyse_image(src):
             try:
                 # url = f'http://192.168.15.203:80/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
@@ -149,126 +127,97 @@ class Analizclass:
         threading.Thread(target=whilees, args=(ip_cams, mask_cam)).start()
 
     @staticmethod
-    def async_method(pause,
-                     process_cores: int,
-                     widget_write: bool,
-                     widget: object,
-                     render_debug: str,
-                     resolution_debug: list,
-
-                     speed_analysis: float,
-                     speed_video_stream: float,
-                     sensetivity_analysis: int,
-                     correct_coefficient: float,
-
-                     protocol_cam_type: str,
-                     port_cam: int,
-                     login_cam: str,
-                     password_cam: str,
-                     ip_cams: list,
-                     mask_cam: list,
-
-                     sql_write: bool,
-                     server_sql: str,
-                     database_sql: str,
-                     user_sql: str,
-                     password_sql: str,
-                     table_now_sql: str,
-                     rows_now_sql: list,
-                     table_data_sql: str,
-                     rows_data_sql: list):
+    def async_method():
         pass
 
     @staticmethod
-    def multithread_method(pause,
-                           process_cores: int,
-                           widget_write: bool,
-                           widget: object,
-                           render_debug: str,
-                           resolution_debug: list,
-
-                           speed_analysis: float,
-                           speed_video_stream: float,
-                           sensetivity_analysis: int,
-                           correct_coefficient: float,
-
-                           protocol_cam_type: str,
-                           port_cam: int,
-                           login_cam: str,
-                           password_cam: str,
-                           ip_cams: list,
-                           mask_cam: list,
-
-                           sql_write: bool,
-                           server_sql: str,
-                           database_sql: str,
-                           user_sql: str,
-                           password_sql: str,
-                           table_now_sql: str,
-                           rows_now_sql: list,
-                           table_data_sql: str,
-                           rows_data_sql: list):
+    def multithread_method():
         for cam in ip_cams:
-            threading.Thread(target=Analizclass.analiz, args=(cam,)).start()
+            threading.Thread(target=Analizclass.analiz_image, args=(cam,)).start()
 
     @staticmethod
-    def multiprocess_method(pause,
-                            process_cores: int,
-                            widget_write: bool,
-                            widget: object,
-                            render_debug: str,
-                            resolution_debug: list,
-
-                            speed_analysis: float,
-                            speed_video_stream: float,
-                            sensetivity_analysis: int,
-                            correct_coefficient: float,
-
-                            protocol_cam_type: str,
-                            port_cam: int,
-                            login_cam: str,
-                            password_cam: str,
-                            ip_cams: list,
-                            mask_cam: list,
-
-                            sql_write: bool,
-                            server_sql: str,
-                            database_sql: str,
-                            user_sql: str,
-                            password_sql: str,
-                            table_now_sql: str,
-                            rows_now_sql: list,
-                            table_data_sql: str,
-                            rows_data_sql: list):
+    def multiprocess_method():
         def analyse(ip_cams_: list):
             while True:
                 with Pool(process_cores) as process:
-                    process.map(Analizclass.analiz, ip_cams_)
+                    process.map(Analizclass.analiz_image, ip_cams_)
                     time.sleep(round(0.033 / speed_analysis * 10, 2))
 
         threading.Thread(target=analyse, args=(ip_cams,)).start()
 
     @staticmethod
-    def analiz(source='video.mp4',
+    def analiz(pause,
+               process_cores: int,
+               widget_write: bool,
+               widget: object,
+               render_debug: str,
+               resolution_debug: list,
 
-               speed=0.1,
-               sens=115,
-               multiplayer=1.0,
+               speed_analysis: float,
+               speed_video_stream: float,
+               sensetivity_analysis: int,
+               correct_coefficient: float,
 
-               sql_val=True,
-               server='WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER',
-               # server='WIN-AIK33SUODO5\\SQLEXPRESS',
-               database='ruda_db',
-               username='ruda_user',
-               password='ruda_user',
-               table='ruda_now_table, ruda_data_table',
-               rows=None,
+               protocol_cam_type: str,
+               port_cam: int,
+               login_cam: str,
+               password_cam: str,
+               ip_cam: list,
+               mask_cam: list,
 
-               windows='only final',
-               width=640,
-               height=480,
-               widget=''
-               ):
+               sql_write: bool,
+               server_sql: str,
+               database_sql: str,
+               user_sql: str,
+               password_sql: str,
+               table_now_sql: str,
+               rows_now_sql: list,
+               table_data_sql: str,
+               rows_data_sql: list,
+               source: list,
+               source_type: str):
+        try:
+            if render_debug == 'none':
+                pass
+            else:
+                image = Analizclass.get_source(source_type, source[0], login_cam, password_cam)
+                mask = source[1]
+                if render_debug == 'all':
+                    pass
+                elif render_debug == 'extended':
+                    pass
+                elif render_debug == 'final':
+                    final = Analizclass.render_final(image=image, mask=mask, sensetivity_analysis=sensetivity_analysis,
+                                                     correct_coefficient=correct_coefficient)
+                    Analizclass.render(f'render final: {source[0]}', final, resolution_debug)
+                elif render_debug == 'source':
+                    pass
+        except Exception as ex:
+            LoggingClass.logging(ex)
+            print(f'analiz func error')
+            print(ex)
+
+    @staticmethod
+    def analiz_image(source='video.mp4',
+
+                     speed=0.1,
+                     sens=115,
+                     multiplayer=1.0,
+
+                     sql_val=True,
+                     server='WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER',
+                     # server='WIN-AIK33SUODO5\\SQLEXPRESS',
+                     database='ruda_db',
+                     username='ruda_user',
+                     password='ruda_user',
+                     table='ruda_now_table, ruda_data_table',
+                     rows=None,
+
+                     windows='only final',
+                     width=640,
+                     height=480,
+                     widget=''
+                     ):
         if rows is None:
             rows = ['device_row', 'value_row', 'datetime_row', 'extra_row']
         _src_white = cv2.imread('mask_white.jpg', 0)
@@ -347,10 +296,6 @@ class Analizclass:
                 h.add_credentials(login, password)
                 response, content = h.request(sources[0])
                 image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
-                # # MAKE SCREENSHOOT
-                # with open('SCREENSHOOT.jpg', 'wb') as f:
-                #     f.write(content)
-                # cv2.imwrite('./SCREENSHOOT_cv.jpg', img)
                 return image
             elif source_type == 'video-file' or 'video-rtsp':
                 cam_stream = cv2.VideoCapture(sources[0])
@@ -439,24 +384,20 @@ class Analizclass:
         Analizclass.render(f'{source}_canny_edges', _canny_edges, width, height)
 
     @staticmethod
-    def render_final(source, cap, sens, multiplayer, width: int, height: int):
-        _, src_img = cap.read()
-        _src_white = cv2.imread('mask_white.jpg', 0)
-
-        _pre_render_final = cv2.bitwise_and(src_img, src_img, mask=_src_white)
-        _cvtcolor = cv2.cvtColor(_pre_render_final, cv2.COLOR_BGR2HSV)
-        _inrange = cv2.inRange(_cvtcolor, numpy.array([0, 0, 255 - sens], dtype=numpy.uint8),
-                               numpy.array([255, sens, 255], dtype=numpy.uint8))
-        result = f"{numpy.sum(_inrange > 0) / numpy.sum(_src_white > 0) * 100 * multiplayer:0.2f}%"
-        cv2.putText(_inrange, result, (int(1920 / 5), int(1080 / 2)),
-                    cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
-        Analizclass.render(f'{source}_render_final', _inrange, width, height)
+    def render_final(image, mask, sensetivity_analysis, correct_coefficient):
+        bitwise_and = cv2.bitwise_and(image, image, mask=mask)
+        cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
+        inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - sensetivity_analysis], dtype=numpy.uint8),
+                              numpy.array([255, sensetivity_analysis, 255], dtype=numpy.uint8))
+        cv2.putText(inrange, f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * correct_coefficient:0.2f}%",
+                    (int(1920 / 5), int(1080 / 2)), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
+        return inrange
 
     @staticmethod
-    def render(name: str, source, width: int, height: int):
+    def render(name: str, source, resolution_debug: list):
         try:
             if source is not None:
-                _img = cv2.resize(source, (width, height), interpolation=cv2.INTER_AREA)
+                _img = cv2.resize(source, (resolution_debug[0], resolution_debug[1]), interpolation=cv2.INTER_AREA)
                 cv2.imshow(name, _img)
         except Exception as ex:
             LoggingClass.logging(ex)
@@ -475,26 +416,16 @@ class Analizclass:
         return result
 
     @staticmethod
-    def write_result(server: str,
-                     database: str,
-                     username: str,
-                     password: str,
-                     table: str,
-                     rows: list,
-                     source: str,
-                     values: float,
-                     widget,
-                     sql_val: bool):
+    def write_result(server: str, database: str, username: str, password: str, table: str, rows: list, source: str,
+                     values: float, widget, sql_val: bool):
         sql_datetime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         _values = [source, values, sql_datetime, '']
-
         # Write result to widget
         try:
             widget.set_data(f'{source}: {values}')
         except Exception as ex:
             LoggingClass.logging(ex)
             print(ex)
-
         # Write result to sql database
         try:
             if sql_val:
@@ -505,7 +436,6 @@ class Analizclass:
         except Exception as ex:
             LoggingClass.logging(ex)
             print(ex)
-
         # Write result to text file
         try:
             with open('db.txt', 'a') as db:
