@@ -1,8 +1,8 @@
 import sys
-import threading
+# import threading
 from py_cv import Analizclass
 from py_ui import AppContainerclass
-from multiprocessing import Pool, Process
+# from multiprocessing import Pool, Process
 from threading import Thread
 
 

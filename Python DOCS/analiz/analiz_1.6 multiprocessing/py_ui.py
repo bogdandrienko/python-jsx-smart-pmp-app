@@ -118,7 +118,8 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.password_cam_button.clicked.connect(self.get_password_cam_button)
 
         # ip_cam
-        self.ip_cam = QtWidgets.QLabel("IP CAM : 15.203 | 15.204 | 15.205")
+        self.ip_cam = QtWidgets.QLabel("IP CAM : 15.203 | 15.204 | 15.205 | 15.202 | 15.206 | 15.207 | 15.208 | 15.209 "
+                                       "| 15.210 | 15.211")
         self.horizontal_layout_cameras_1.addWidget(self.ip_cam)
 
         # ip_cam_button
@@ -127,7 +128,9 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.ip_cam_button.clicked.connect(self.get_ip_cam_button)
 
         # mask_cam
-        self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8.jpg | mask_16_9.jpg | mask_16_10.jpg")
+        self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8.jpg | mask_16_9.jpg | mask_16_10.jpg | mask_16_1.jpg "
+                                         "| mask_16_2.jpg | mask_16_3.jpg | mask_16_4.jpg | mask_16_5.jpg "
+                                         "| mask_16_6.jpg | mask_16_7.jpg")
         self.horizontal_layout_cameras_1.addWidget(self.mask_cam)
 
         # mask_cam_button
@@ -149,7 +152,7 @@ class MainWidgetclass(QtWidgets.QWidget):
 
         # sql_write
         self.sql_write = QtWidgets.QCheckBox("Write to SQL?")
-        self.sql_write.setChecked(True)
+        self.sql_write.setChecked(False)
         self.horizontal_layout_sql_1.addWidget(self.sql_write)
 
         # server_sql
@@ -193,7 +196,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_sql_2 = QtWidgets.QHBoxLayout()
 
         # table_now_sql
-        self.table_now_sql = QtWidgets.QLabel("TABLE NOW SQL : ruda_data_table")
+        self.table_now_sql = QtWidgets.QLabel("TABLE NOW SQL : ruda_now_table")
         self.horizontal_layout_sql_2.addWidget(self.table_now_sql)
 
         # table_now_sql_button
@@ -211,7 +214,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.rows_now_sql_button.clicked.connect(self.get_rows_now_sql_button)
 
         # table_data_sql
-        self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_now_table")
+        self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_data_table")
         self.horizontal_layout_sql_2.addWidget(self.table_data_sql)
 
         # table_data_sql_button
@@ -500,7 +503,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         data = {
             'process_cores': int(self.process_cores.text().split(':')[1].strip()),
             'widget_write': bool(self.widget_write.isChecked()),
-            'widget': self,
+            'widget': self.set_data,
             'render_debug': str(self.render_debug.currentText().strip()),
             'resolution_debug': list(self.get_window_resolution()),
 
@@ -529,4 +532,4 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.play_f(data=data)
 
     def set_data(self, value: str):
-        self.data_ruda.setText(f"{value}")
+        self.widget_data_value.setText(f"{value}")
