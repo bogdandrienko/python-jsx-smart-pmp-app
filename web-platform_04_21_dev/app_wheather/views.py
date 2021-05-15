@@ -32,6 +32,7 @@ def index(request):
     for city in cities:
         try:
             res = requests.get(url.format(city.name)).json()
+            print(res)
             city_info = {
                 'city': city.name,
                 'temp': res["main"]["temp"],
