@@ -90,13 +90,13 @@ class Analizclass:
         def whilees(src):
             pause(True)
             while True:
-                for x in src:
-                    analyse_image(x)
+                for y in src:
+                    analyse_image(y)
                 val = pause(None)
                 if not val:
                     cv2.destroyAllWindows()
                     break
-                time.sleep(0.2 / speed_video_stream)
+                time.sleep(0.2 / speed_analysis)
 
         threading.Thread(target=whilees, args=(ip_cams,)).start()
 
@@ -132,16 +132,6 @@ class Analizclass:
         if rows is None:
             rows = ['device_row', 'value_row', 'datetime_row', 'extra_row']
         _src_white = cv2.imread('mask_white.jpg', 0)
-
-        # while True:
-        #     url = f'http://192.168.8.222:80/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
-        #     h = httplib2.Http("/path/to/cache-directory")
-        #     h.add_credentials(f'admin', f'nehrfvths123')
-        #     response, content = h.request(url)
-        #     img = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
-        #     cv2.imshow('img', img)
-        #     cv2.waitKey(1)
-        #     time.sleep(0.5)
 
         cap = cv2.VideoCapture(source)
         i = 0
