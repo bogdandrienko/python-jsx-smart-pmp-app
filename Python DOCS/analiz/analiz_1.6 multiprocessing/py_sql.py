@@ -2,12 +2,12 @@ import pyodbc
 import pandas
 
 
-class SQLclass:
+class SQLClass:
     @staticmethod
     def sql_post_data(server: str, database: str, username: str, password: str, table: str, rows: list, values: list):
         try:
-            sql = SQLclass.pyodbc_connect(server=server, database=database, username=username, password=password)
-            SQLclass.execute_data_query(connection=sql, table=table, rows=rows, values=values)
+            sql = SQLClass.pyodbc_connect(server=server, database=database, username=username, password=password)
+            SQLClass.execute_data_query(connection=sql, table=table, rows=rows, values=values)
         except Exception as ex:
             print(ex)
             with open('log.txt', 'a') as log:
@@ -16,8 +16,8 @@ class SQLclass:
     @staticmethod
     def sql_post_now(server: str, database: str, username: str, password: str, table: str, rows: list, values: list):
         try:
-            sql = SQLclass.pyodbc_connect(server=server, database=database, username=username, password=password)
-            SQLclass.execute_now_query(connection=sql, table=table, rows=rows, values=values)
+            sql = SQLClass.pyodbc_connect(server=server, database=database, username=username, password=password)
+            SQLClass.execute_now_query(connection=sql, table=table, rows=rows, values=values)
         except Exception as ex:
             print(ex)
             with open('log.txt', 'a') as log:

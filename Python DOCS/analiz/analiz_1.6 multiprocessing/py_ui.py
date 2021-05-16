@@ -2,21 +2,23 @@ import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
 
 
-class AppContainerclass:
+class AppContainerClass:
     def __init__(self):
         self.app = QtWidgets.QApplication([])
         self.widget = None
 
-    def create_ui(self, title, width, height, icon, play_f, stop_f, quit_f):
-        self.widget = MainWidgetclass(title, width, height, icon, play_f, stop_f, quit_f)
+    def create_ui(self, title, width, height, icon, play_f, stop_f, quit_f, snapshot_f):
+        self.widget = MainWidgetclass(title, width, height, icon, play_f, stop_f, quit_f, snapshot_f)
         return self.widget
 
 
 class MainWidgetclass(QtWidgets.QWidget):
-    def __init__(self, title="APP", width=640, height=480, icon="", play_f=None, stop_f=None, quit_f=None):
+    def __init__(self, title="APP", width=640, height=480, icon="", play_f=None, stop_f=None, quit_f=None,
+                 snapshot_f=None):
         super().__init__()
 
         self.play_f = play_f
+        self.snapshot_f = snapshot_f
         self.resize(width, height)
         self.setWindowTitle(title)
         self.setWindowIcon(QtGui.QIcon(icon))
@@ -235,6 +237,32 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.rows_data_sql_button.clicked.connect(self.get_rows_data_sql_button)
 
         #####
+        self.horizontal_layout_snapshot = QtWidgets.QHBoxLayout()
+
+        # global_label_sql
+        self.global_label_snapshot = QtWidgets.QLabel("SNAPSHOT")
+        self.global_label_snapshot.setAutoFillBackground(True)
+        self.global_label_snapshot.setStyleSheet("QLabel { background-color: rgba(0, 0, 0, 255); color : white; }")
+        self.horizontal_layout_snapshot.addWidget(self.global_label_snapshot)
+
+        # horizontal_layout_snapshot_1
+        self.horizontal_layout_snapshot_1 = QtWidgets.QHBoxLayout()
+
+        # ip_cam_snapshot
+        self.ip_cam_snapshot = QtWidgets.QLabel("ip-cam : 15.203")
+        self.horizontal_layout_snapshot_1.addWidget(self.ip_cam_snapshot)
+
+        # rows_now_sql_button
+        self.ip_cam_snapshot_button = QtWidgets.QPushButton("set")
+        self.horizontal_layout_snapshot_1.addWidget(self.ip_cam_snapshot_button)
+        self.ip_cam_snapshot_button.clicked.connect(self.get_ip_cam_snapshot_button)
+
+        # Snapshot Button
+        self.snapshot_QPushButton = QtWidgets.QPushButton("snapshot")
+        self.horizontal_layout_snapshot_1.addWidget(self.snapshot_QPushButton)
+        self.snapshot_QPushButton.clicked.connect(self.snapshot_btn_func)
+
+        #####
         self.horizontal_layout_debug = QtWidgets.QHBoxLayout()
 
         # global_label_sql
@@ -344,6 +372,8 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql_2)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_snapshot)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_snapshot_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_debug)
         self.vertical_layout_main.addLayout(self.horizontal_layout_debug_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_btns)
@@ -496,8 +526,8 @@ class MainWidgetclass(QtWidgets.QWidget):
         if okpressed:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
-    def set_resolution_debug(self, radio, widht: int, height: int):
-        self.resolution_debug.append([radio, widht, height])
+    def set_resolution_debug(self, radio, width: int, height: int):
+        self.resolution_debug.append([radio, width, height])
 
     def get_window_resolution(self):
         for radio in self.resolution_debug:
@@ -512,6 +542,14 @@ class MainWidgetclass(QtWidgets.QWidget):
         value, okpressed = QtWidgets.QInputDialog.getInt(self, f'Set {widget.text().split(":")[0].strip()}',
                                                          f'{widget.text().split(":")[0].strip()} value:',
                                                          4, 1, 16, 5)
+        if okpressed:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_ip_cam_snapshot_button(self):
+        widget = self.ip_cam_snapshot
+        value, okpressed = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          text=f'{widget.text().split(":")[1].strip()}')
         if okpressed:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
@@ -548,6 +586,20 @@ class MainWidgetclass(QtWidgets.QWidget):
             'rows_data_sql': list([x.strip() for x in self.rows_data_sql.text().split(':')[1].strip().split('|')]),
         }
         self.play_f(data=data)
+
+    def snapshot_btn_func(self):
+        data = {
+            'source_type': str(self.source_type.currentText().strip()),
+            'mask_cam': list([x.strip() for x in self.mask_cam.text().split(':')[1].strip().split('|')[0]]),
+            'protocol_cam_type': str(self.protocol_cam_type.text().split(':')[1].strip()),
+            'port_cam': int(self.port_cam.text().split(':')[1].strip()),
+            'ip_cam': str(self.ip_cam_snapshot.text().split(":")[1].strip()),
+            'name_photo': str(self.ip_cam_snapshot.text().split(":")[0].strip()),
+            'login_cam': str(self.login_cam.text().split(':')[1].strip()),
+            'password_cam': str(self.password_cam.text().split(':')[1].strip()),
+
+        }
+        self.snapshot_f(data=data)
 
     def set_data(self, value: str):
         self.widget_data_value.setText(f"{value}")
