@@ -51,6 +51,7 @@ class SQLclass:
         __rows = ''
         for x in rows:
             __rows = f"{__rows}{str(x)}, "
-        value = f"""UPDATE {table} SET {rows[1]} = '{values[1]}',{rows[2]} = '{values[2]}' WHERE {rows[0]} = '{values[0]}'"""
+        value = f"UPDATE {table} SET {rows[1]} = '{values[1]}',{rows[2]} = '" \
+                f"{values[2]}' WHERE {rows[0]} = '{values[0]}'"
         cursor.execute(value)
         connection.commit()
