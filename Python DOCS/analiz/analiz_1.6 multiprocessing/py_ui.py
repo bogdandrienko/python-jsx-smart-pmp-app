@@ -307,7 +307,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         # compute_debug
         self.compute_debug = QtWidgets.QComboBox()
         self.compute_debug.addItems([x for x in ['sync', 'async', 'multithread', 'multiprocess']])
-        self.compute_debug.setCurrentText('sync')
+        self.compute_debug.setCurrentText('multiprocess')
         self.horizontal_layout_debug_1.addWidget(self.compute_debug)
 
         #####

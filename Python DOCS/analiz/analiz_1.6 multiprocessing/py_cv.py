@@ -7,6 +7,7 @@ import threading
 from multiprocessing import Pool, Process, freeze_support
 from py_sql import SQLclass
 from py_utilites import LoggingClass
+from itertools import product
 
 
 class Analizclass:
@@ -283,13 +284,13 @@ class Analizclass:
                 print(f'multithread_analyse_image func error')
                 print(ex)
 
-        def thread(src):
+        def thread(_src):
             while True:
                 val = pause(None)
                 if not val:
                     cv2.destroyAllWindows()
                     break
-                analyse_image(src)
+                analyse_image(_src)
                 cv2.waitKey(round(100 / speed_analysis))
                 time.sleep(0.2 / speed_analysis)
 
@@ -327,43 +328,7 @@ class Analizclass:
                             rows_data_sql: list,
                             source_type: str,
                             sources: list):
-        def thread(src):
-            while True:
-                val = pause(None)
-                if not val:
-                    cv2.destroyAllWindows()
-                    break
-                Analizclass.analiz(render_debug=render_debug,
-                                   resolution_debug=resolution_debug,
-                                   sensetivity_analysis=sensetivity_analysis,
-                                   correct_coefficient=correct_coefficient,
-                                   login_cam=login_cam,
-                                   password_cam=password_cam,
-                                   source=src,
-                                   source_type=source_type,
-                                   widget=widget,
-                                   pause=pause,
-                                   process_cores=process_cores,
-                                   widget_write=widget_write,
-                                   speed_analysis=speed_analysis,
-                                   speed_video_stream=speed_video_stream,
-                                   protocol_cam_type=protocol_cam_type,
-                                   port_cam=port_cam,
-                                   ip_cam=ip_cam,
-                                   mask_cam=mask_cam,
-                                   sql_write=sql_write,
-                                   server_sql=server_sql,
-                                   database_sql=database_sql,
-                                   user_sql=user_sql,
-                                   password_sql=password_sql,
-                                   table_now_sql=table_now_sql,
-                                   rows_now_sql=rows_now_sql,
-                                   table_data_sql=table_data_sql,
-                                   rows_data_sql=rows_data_sql,
-                                   sources=sources)
-                cv2.waitKey(round(100 / speed_analysis))
-                time.sleep(0.2 / speed_analysis)
-        def loop():
+        def processes(_data):
             while True:
                 val = pause(None)
                 if not val:
@@ -371,43 +336,80 @@ class Analizclass:
                     break
                 else:
                     with Pool(process_cores) as process:
-                        # process.map(thread, sources)
-                        process.map(Analizclass.multi, sources)
+                        process.map(Analizclass.multi, [*_data])
                 time.sleep(0.2 / speed_analysis)
-        threading.Thread(target=loop, args=()).start()
+
+        datas = {
+            'process_cores': process_cores,
+            'widget_write': widget_write,
+            'render_debug': render_debug,
+            'resolution_debug': resolution_debug,
+            'source_type': source_type,
+
+            'speed_analysis': speed_analysis,
+            'speed_video_stream': speed_video_stream,
+            'sensetivity_analysis': sensetivity_analysis,
+            'correct_coefficient': correct_coefficient,
+
+            'protocol_cam_type': protocol_cam_type,
+            'port_cam': port_cam,
+            'login_cam': login_cam,
+            'password_cam': password_cam,
+            'ip_cam': ip_cam,
+            'mask_cam': mask_cam,
+
+            'sql_write': sql_write,
+            'server_sql': server_sql,
+            'database_sql': database_sql,
+            'user_sql': user_sql,
+            'password_sql': password_sql,
+            'table_now_sql': table_now_sql,
+            'rows_now_sql': rows_now_sql,
+            'table_data_sql': table_data_sql,
+            'rows_data_sql': rows_data_sql,
+        }
+        data = []
+        for _loop in sources:
+            local_dict = datas.copy()
+            local_dict['source'] = _loop
+            data.append(local_dict)
+        threading.Thread(target=processes, args=(data, )).start()
 
     @staticmethod
-    def multi(source):
-        source_type = 'image-http'
-        login_cam = 'admin'
-        password_cam = 'q1234567'
-        sensetivity_analysis = 115
-        correct_coefficient = 1.0
-        resolution_debug = [640, 480]
-        speed_analysis = 0.05
+    def multi(*kwargs):
+        value = [*kwargs][0]
+        source_type = value["source_type"]
+        login_cam = value["login_cam"]
+        password_cam = value["password_cam"]
+        sensetivity_analysis = value["sensetivity_analysis"]
+        correct_coefficient = value["correct_coefficient"]
+        resolution_debug = [value["resolution_debug"][0], value["resolution_debug"][1]]
+        speed_analysis = value["source_type"]
+        server_sql = value["server_sql"]
+        database_sql = value["database_sql"]
+        user_sql = value["user_sql"]
+        password_sql = value["password_sql"]
+        table_now_sql = value["table_now_sql"]
+        rows_now_sql = value["rows_now_sql"]
+        table_data_sql = value["table_data_sql"]
+        rows_data_sql = value["rows_data_sql"]
+        # widget = value["widget"]
+        widget = None
+        widget_write = value["widget_write"]
+        sql_write = value["sql_write"]
+        source = value["source"]
         image = Analizclass.get_source(source_type, source, login_cam, password_cam)
         mask = source[1]
-        server = 'WIN-AIK33SUODO5\\SQLEXPRESS'
-        database = 'ruda_db'
-        username = 'ruda_user'
-        password = 'ruda_user'
-        table_now = 'ruda_now_table'
-        rows_now = ['device_row', 'value_row', 'datetime_row', 'extra_row']
-        table_data = 'ruda_data_table'
-        rows_data = ['device_row', 'value_row', 'datetime_row', 'extra_row']
-        widget = None
-        widget_write = False
-        sql_val = True
-        Analizclass.render(f'render final{str(source)[:30:]}',
+        Analizclass.render(f'render final: {str(source)[:30:]}',
                            Analizclass.render_final(image=image, mask=mask,
                                                     sensetivity_analysis=sensetivity_analysis,
                                                     correct_coefficient=correct_coefficient),
                            resolution_debug)
         values = Analizclass.result_final(image=image, mask=mask, sensetivity_analysis=sensetivity_analysis,
                                           correct_coefficient=correct_coefficient)
-        Analizclass.write_result(server, database, username, password, table_now, rows_now, table_data, rows_data,
-                                 source[0].split("192.168.")[1].strip().split(":")[0].strip(), values, widget,
-                                 widget_write, sql_val)
+        Analizclass.write_result(server_sql, database_sql, user_sql, password_sql, table_now_sql, rows_now_sql,
+                                 table_data_sql, rows_data_sql, source[0].split("192.168.")[1].strip().split(":")[0].
+                                 strip(), values, widget, widget_write, sql_write)
         cv2.waitKey(round(100 / speed_analysis))
 
     @staticmethod
