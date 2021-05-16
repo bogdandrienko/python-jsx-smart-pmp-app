@@ -523,6 +523,7 @@ class MainWidgetclass(QtWidgets.QWidget):
             'render_debug': str(self.render_debug.currentText().strip()),
             'resolution_debug': list(self.get_window_resolution()),
             'compute_debug': str(self.compute_debug.currentText().strip()),
+            'source_type': str(self.source_type.currentText().strip()),
 
             'speed_analysis': float(self.speed_analysis.text().split(':')[1].strip()),
             'speed_video_stream': float(self.speed_video_stream.text().split(':')[1].strip()),

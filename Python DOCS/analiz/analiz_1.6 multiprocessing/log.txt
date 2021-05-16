@@ -198,3 +198,9 @@ Only absolute URIs are allowed. uri = m
 ('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Неправильный синтаксис около конструкции "/". (102) (SQLExecDirectW); [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Незакрытые кавычки в конце символьной строки "". (105)')
 
 ('42S22', '[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя столбца "[\'http://192.168.15.205:80/ISA". (207) (SQLExecDirectW)')
+
+start_analiz() missing 25 required positional arguments: 'widget_write', 'widget', 'render_debug', 'resolution_debug', 'compute_debug', 'source_type', 'speed_analysis', 'speed_video_stream', 'sensetivity_analysis', 'correct_coefficient', 'protocol_cam_type', 'port_cam', 'login_cam', 'password_cam', 'ip_cam', 'mask_cam', 'sql_write', 'server_sql', 'database_sql', 'user_sql', 'password_sql', 'table_now_sql', 'rows_now_sql', 'table_data_sql', and 'rows_data_sql'
+
+start_analiz() missing 25 required positional arguments: 'widget_write', 'widget', 'render_debug', 'resolution_debug', 'compute_debug', 'source_type', 'speed_analysis', 'speed_video_stream', 'sensetivity_analysis', 'correct_coefficient', 'protocol_cam_type', 'port_cam', 'login_cam', 'password_cam', 'ip_cam', 'mask_cam', 'sql_write', 'server_sql', 'database_sql', 'user_sql', 'password_sql', 'table_now_sql', 'rows_now_sql', 'table_data_sql', and 'rows_data_sql'
+
+start_analiz() missing 25 required positional arguments: 'widget_write', 'widget', 'render_debug', 'resolution_debug', 'compute_debug', 'source_type', 'speed_analysis', 'speed_video_stream', 'sensetivity_analysis', 'correct_coefficient', 'protocol_cam_type', 'port_cam', 'login_cam', 'password_cam', 'ip_cam', 'mask_cam', 'sql_write', 'server_sql', 'database_sql', 'user_sql', 'password_sql', 'table_now_sql', 'rows_now_sql', 'table_data_sql', and 'rows_data_sql'

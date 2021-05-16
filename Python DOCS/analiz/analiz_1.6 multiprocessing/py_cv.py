@@ -4,376 +4,147 @@ import httplib2
 import numpy
 import datetime
 import threading
-from multiprocessing import Pool, Process, freeze_support
+from multiprocessing import Pool
 from py_sql import SQLclass
-from py_utilites import LoggingClass
-from itertools import product
+from py_utilites import LoggingClass, CopyDictionary
 
 
 class Analizclass:
     @staticmethod
-    def start_analiz(pause,
-                     process_cores: int,
-                     widget_write: bool,
-                     widget,
-                     render_debug: str,
-                     resolution_debug: list,
-                     compute_debug: str,
-
-                     speed_analysis: float,
-                     speed_video_stream: float,
-                     sensetivity_analysis: int,
-                     correct_coefficient: float,
-
-                     protocol_cam_type: str,
-                     port_cam: int,
-                     login_cam: str,
-                     password_cam: str,
-                     ip_cam: list,
-                     mask_cam: list,
-
-                     sql_write: bool,
-                     server_sql: str,
-                     database_sql: str,
-                     user_sql: str,
-                     password_sql: str,
-                     table_now_sql: str,
-                     rows_now_sql: list,
-                     table_data_sql: str,
-                     rows_data_sql: list):
-
-        source_type = ['image-http', 'video-rtsp', 'video-file']
-        source_type = source_type[0]
-        sources = Analizclass.get_sources(source_type=source_type, sources=ip_cam, masks=mask_cam,
-                                          protocol=protocol_cam_type, login=login_cam, password=password_cam,
-                                          port=port_cam)
-        ##########################
-        if compute_debug == 'sync':
-            Analizclass.sync_method(render_debug=render_debug,
-                                    resolution_debug=resolution_debug,
-                                    sensetivity_analysis=sensetivity_analysis,
-                                    correct_coefficient=correct_coefficient,
-                                    login_cam=login_cam,
-                                    password_cam=password_cam,
-                                    source_type=source_type,
-                                    widget=widget,
-                                    pause=pause,
-                                    process_cores=process_cores,
-                                    widget_write=widget_write,
-                                    speed_analysis=speed_analysis,
-                                    speed_video_stream=speed_video_stream,
-                                    protocol_cam_type=protocol_cam_type,
-                                    port_cam=port_cam,
-                                    ip_cam=ip_cam,
-                                    mask_cam=mask_cam,
-                                    sql_write=sql_write,
-                                    server_sql=server_sql,
-                                    database_sql=database_sql,
-                                    user_sql=user_sql,
-                                    password_sql=password_sql,
-                                    table_now_sql=table_now_sql,
-                                    rows_now_sql=rows_now_sql,
-                                    table_data_sql=table_data_sql,
-                                    rows_data_sql=rows_data_sql,
-                                    sources=sources)
-        #############################
-        elif compute_debug == 'async':
-            Analizclass.async_method()
-        ###################################
-        elif compute_debug == 'multithread':
-            Analizclass.multithread_method(render_debug=render_debug,
-                                           resolution_debug=resolution_debug,
-                                           sensetivity_analysis=sensetivity_analysis,
-                                           correct_coefficient=correct_coefficient,
-                                           login_cam=login_cam,
-                                           password_cam=password_cam,
-                                           source_type=source_type,
-                                           widget=widget,
-                                           pause=pause,
-                                           process_cores=process_cores,
-                                           widget_write=widget_write,
-                                           speed_analysis=speed_analysis,
-                                           speed_video_stream=speed_video_stream,
-                                           protocol_cam_type=protocol_cam_type,
-                                           port_cam=port_cam,
-                                           ip_cam=ip_cam,
-                                           mask_cam=mask_cam,
-                                           sql_write=sql_write,
-                                           server_sql=server_sql,
-                                           database_sql=database_sql,
-                                           user_sql=user_sql,
-                                           password_sql=password_sql,
-                                           table_now_sql=table_now_sql,
-                                           rows_now_sql=rows_now_sql,
-                                           table_data_sql=table_data_sql,
-                                           rows_data_sql=rows_data_sql,
-                                           sources=sources)
-        ####################################
-        elif compute_debug == 'multiprocess':
-            Analizclass.multiprocess_method(render_debug=render_debug,
-                                            resolution_debug=resolution_debug,
-                                            sensetivity_analysis=sensetivity_analysis,
-                                            correct_coefficient=correct_coefficient,
-                                            login_cam=login_cam,
-                                            password_cam=password_cam,
-                                            source_type=source_type,
-                                            widget=widget,
-                                            pause=pause,
-                                            process_cores=process_cores,
-                                            widget_write=widget_write,
-                                            speed_analysis=speed_analysis,
-                                            speed_video_stream=speed_video_stream,
-                                            protocol_cam_type=protocol_cam_type,
-                                            port_cam=port_cam,
-                                            ip_cam=ip_cam,
-                                            mask_cam=mask_cam,
-                                            sql_write=sql_write,
-                                            server_sql=server_sql,
-                                            database_sql=database_sql,
-                                            user_sql=user_sql,
-                                            password_sql=password_sql,
-                                            table_now_sql=table_now_sql,
-                                            rows_now_sql=rows_now_sql,
-                                            table_data_sql=table_data_sql,
-                                            rows_data_sql=rows_data_sql,
-                                            sources=sources)
+    def start_analiz(data: dict):
+        sources = Analizclass.get_sources(source_type=data['source_type'], sources=data['ip_cam'],
+                                          masks=data['mask_cam'], protocol=data['protocol_cam_type'],
+                                          login=data['login_cam'], password=data['password_cam'], port=data['port_cam'])
+        data = CopyDictionary.add_value_and_return(data, {'sources': sources})
+        if data['compute_debug'] == 'sync':
+            Analizclass.sync_method(data)
+        # elif data['compute_debug'] == 'async':
+        #     Analizclass.async_method(data)
+        # elif data['compute_debug'] == 'multithread':
+        #     Analizclass.multithread_method(data)
+        # elif data['compute_debug'] == 'multiprocess':
+        #     Analizclass.multiprocess_method(data)
 
     @staticmethod
-    def sync_method(pause,
-                    process_cores: int,
-                    widget_write: bool,
-                    widget: object,
-                    render_debug: str,
-                    resolution_debug: list,
-
-                    speed_analysis: float,
-                    speed_video_stream: float,
-                    sensetivity_analysis: int,
-                    correct_coefficient: float,
-
-                    protocol_cam_type: str,
-                    port_cam: int,
-                    login_cam: str,
-                    password_cam: str,
-                    ip_cam: list,
-                    mask_cam: list,
-
-                    sql_write: bool,
-                    server_sql: str,
-                    database_sql: str,
-                    user_sql: str,
-                    password_sql: str,
-                    table_now_sql: str,
-                    rows_now_sql: list,
-                    table_data_sql: str,
-                    rows_data_sql: list,
-                    source_type: str,
-                    sources: list):
-        def analyse_image(source):
-            try:
-                Analizclass.analiz(render_debug=render_debug,
-                                   resolution_debug=resolution_debug,
-                                   sensetivity_analysis=sensetivity_analysis,
-                                   correct_coefficient=correct_coefficient,
-                                   login_cam=login_cam,
-                                   password_cam=password_cam,
-                                   source=source,
-                                   source_type=source_type,
-                                   widget=widget,
-                                   pause=pause,
-                                   process_cores=process_cores,
-                                   widget_write=widget_write,
-                                   speed_analysis=speed_analysis,
-                                   speed_video_stream=speed_video_stream,
-                                   protocol_cam_type=protocol_cam_type,
-                                   port_cam=port_cam,
-                                   ip_cam=ip_cam,
-                                   mask_cam=mask_cam,
-                                   sql_write=sql_write,
-                                   server_sql=server_sql,
-                                   database_sql=database_sql,
-                                   user_sql=user_sql,
-                                   password_sql=password_sql,
-                                   table_now_sql=table_now_sql,
-                                   rows_now_sql=rows_now_sql,
-                                   table_data_sql=table_data_sql,
-                                   rows_data_sql=rows_data_sql,
-                                   sources=sources)
-            except Exception as ex:
-                LoggingClass.logging(ex)
-                print(f'sync_analyse_image func error')
-                print(ex)
-
+    def sync_method(data: dict):
         while True:
-            val = pause(None)
-            if not val:
-                cv2.destroyAllWindows()
-                break
-            for x in sources:
-                analyse_image(x)
-            cv2.waitKey(round(100 / speed_analysis))
-            time.sleep(0.2 / speed_analysis)
-
-    @staticmethod
-    def async_method():
-        pass
-
-    @staticmethod
-    def multithread_method(pause,
-                           process_cores: int,
-                           widget_write: bool,
-                           widget: object,
-                           render_debug: str,
-                           resolution_debug: list,
-
-                           speed_analysis: float,
-                           speed_video_stream: float,
-                           sensetivity_analysis: int,
-                           correct_coefficient: float,
-
-                           protocol_cam_type: str,
-                           port_cam: int,
-                           login_cam: str,
-                           password_cam: str,
-                           ip_cam: list,
-                           mask_cam: list,
-
-                           sql_write: bool,
-                           server_sql: str,
-                           database_sql: str,
-                           user_sql: str,
-                           password_sql: str,
-                           table_now_sql: str,
-                           rows_now_sql: list,
-                           table_data_sql: str,
-                           rows_data_sql: list,
-                           source_type: str,
-                           sources: list):
-        def analyse_image(source):
             try:
-                Analizclass.analiz(render_debug=render_debug,
-                                   resolution_debug=resolution_debug,
-                                   sensetivity_analysis=sensetivity_analysis,
-                                   correct_coefficient=correct_coefficient,
-                                   login_cam=login_cam,
-                                   password_cam=password_cam,
-                                   source=source,
-                                   source_type=source_type,
-                                   widget=widget,
-                                   pause=pause,
-                                   process_cores=process_cores,
-                                   widget_write=widget_write,
-                                   speed_analysis=speed_analysis,
-                                   speed_video_stream=speed_video_stream,
-                                   protocol_cam_type=protocol_cam_type,
-                                   port_cam=port_cam,
-                                   ip_cam=ip_cam,
-                                   mask_cam=mask_cam,
-                                   sql_write=sql_write,
-                                   server_sql=server_sql,
-                                   database_sql=database_sql,
-                                   user_sql=user_sql,
-                                   password_sql=password_sql,
-                                   table_now_sql=table_now_sql,
-                                   rows_now_sql=rows_now_sql,
-                                   table_data_sql=table_data_sql,
-                                   rows_data_sql=rows_data_sql,
-                                   sources=sources)
+                val = data['pause']()
+                if not val:
+                    cv2.destroyAllWindows()
+                    break
+                for x in data['sources']:
+                    data = CopyDictionary.add_value_and_return(data, {'source': x})
+                    Analizclass.analiz(data)
+                cv2.waitKey(round(100 / data['speed_analysis']))
+                time.sleep(0.2 / data['speed_analysis'])
             except Exception as ex:
                 LoggingClass.logging(ex)
-                print(f'multithread_analyse_image func error')
+                print(f'sync_method func error')
                 print(ex)
 
-        def thread(_src):
-            while True:
-                val = pause(None)
-                if not val:
-                    cv2.destroyAllWindows()
-                    break
-                analyse_image(_src)
-                cv2.waitKey(round(100 / speed_analysis))
-                time.sleep(0.2 / speed_analysis)
-
-        for src in sources:
-            threading.Thread(target=thread, args=(src,)).start()
-
-    @staticmethod
-    def multiprocess_method(pause,
-                            process_cores: int,
-                            widget_write: bool,
-                            widget: object,
-                            render_debug: str,
-                            resolution_debug: list,
-
-                            speed_analysis: float,
-                            speed_video_stream: float,
-                            sensetivity_analysis: int,
-                            correct_coefficient: float,
-
-                            protocol_cam_type: str,
-                            port_cam: int,
-                            login_cam: str,
-                            password_cam: str,
-                            ip_cam: list,
-                            mask_cam: list,
-
-                            sql_write: bool,
-                            server_sql: str,
-                            database_sql: str,
-                            user_sql: str,
-                            password_sql: str,
-                            table_now_sql: str,
-                            rows_now_sql: list,
-                            table_data_sql: str,
-                            rows_data_sql: list,
-                            source_type: str,
-                            sources: list):
-        def processes(_data):
-            while True:
-                val = pause(None)
-                if not val:
-                    cv2.destroyAllWindows()
-                    break
-                else:
-                    with Pool(process_cores) as process:
-                        process.map(Analizclass.multi, [*_data])
-                time.sleep(0.2 / speed_analysis)
-
-        datas = {
-            'process_cores': process_cores,
-            'widget_write': widget_write,
-            'render_debug': render_debug,
-            'resolution_debug': resolution_debug,
-            'source_type': source_type,
-
-            'speed_analysis': speed_analysis,
-            'speed_video_stream': speed_video_stream,
-            'sensetivity_analysis': sensetivity_analysis,
-            'correct_coefficient': correct_coefficient,
-
-            'protocol_cam_type': protocol_cam_type,
-            'port_cam': port_cam,
-            'login_cam': login_cam,
-            'password_cam': password_cam,
-            'ip_cam': ip_cam,
-            'mask_cam': mask_cam,
-
-            'sql_write': sql_write,
-            'server_sql': server_sql,
-            'database_sql': database_sql,
-            'user_sql': user_sql,
-            'password_sql': password_sql,
-            'table_now_sql': table_now_sql,
-            'rows_now_sql': rows_now_sql,
-            'table_data_sql': table_data_sql,
-            'rows_data_sql': rows_data_sql,
-        }
-        data = []
-        for _loop in sources:
-            local_dict = datas.copy()
-            local_dict['source'] = _loop
-            data.append(local_dict)
-        threading.Thread(target=processes, args=(data, )).start()
+    # @staticmethod
+    # def async_method(data: dict):
+    #     pass
+    #
+    # @staticmethod
+    # def multithread_method(data: dict):
+    #     def analyse_image(source):
+    #         try:
+    #             Analizclass.analiz(render_debug=render_debug,
+    #                                resolution_debug=resolution_debug,
+    #                                sensetivity_analysis=sensetivity_analysis,
+    #                                correct_coefficient=correct_coefficient,
+    #                                login_cam=login_cam,
+    #                                password_cam=password_cam,
+    #                                source=source,
+    #                                source_type=source_type,
+    #                                widget=widget,
+    #                                pause=pause,
+    #                                process_cores=process_cores,
+    #                                widget_write=widget_write,
+    #                                speed_analysis=speed_analysis,
+    #                                speed_video_stream=speed_video_stream,
+    #                                protocol_cam_type=protocol_cam_type,
+    #                                port_cam=port_cam,
+    #                                ip_cam=ip_cam,
+    #                                mask_cam=mask_cam,
+    #                                sql_write=sql_write,
+    #                                server_sql=server_sql,
+    #                                database_sql=database_sql,
+    #                                user_sql=user_sql,
+    #                                password_sql=password_sql,
+    #                                table_now_sql=table_now_sql,
+    #                                rows_now_sql=rows_now_sql,
+    #                                table_data_sql=table_data_sql,
+    #                                rows_data_sql=rows_data_sql,
+    #                                sources=sources)
+    #         except Exception as ex:
+    #             LoggingClass.logging(ex)
+    #             print(f'multithread_analyse_image func error')
+    #             print(ex)
+    #
+    #     def thread(_src):
+    #         while True:
+    #             val = pause(None)
+    #             if not val:
+    #                 cv2.destroyAllWindows()
+    #                 break
+    #             analyse_image(_src)
+    #             cv2.waitKey(round(100 / speed_analysis))
+    #             time.sleep(0.2 / speed_analysis)
+    #
+    #     for src in sources:
+    #         threading.Thread(target=thread, args=(src,)).start()
+    #
+    # @staticmethod
+    # def multiprocess_method(data: dict):
+    #     def processes(_data):
+    #         while True:
+    #             val = pause(None)
+    #             if not val:
+    #                 cv2.destroyAllWindows()
+    #                 break
+    #             else:
+    #                 with Pool(process_cores) as process:
+    #                     process.map(Analizclass.multi, [*_data])
+    #             time.sleep(0.2 / speed_analysis)
+    #
+    #     datas = {
+    #         'process_cores': process_cores,
+    #         'widget_write': widget_write,
+    #         'render_debug': render_debug,
+    #         'resolution_debug': resolution_debug,
+    #         'source_type': source_type,
+    #
+    #         'speed_analysis': speed_analysis,
+    #         'speed_video_stream': speed_video_stream,
+    #         'sensetivity_analysis': sensetivity_analysis,
+    #         'correct_coefficient': correct_coefficient,
+    #
+    #         'protocol_cam_type': protocol_cam_type,
+    #         'port_cam': port_cam,
+    #         'login_cam': login_cam,
+    #         'password_cam': password_cam,
+    #         'ip_cam': ip_cam,
+    #         'mask_cam': mask_cam,
+    #
+    #         'sql_write': sql_write,
+    #         'server_sql': server_sql,
+    #         'database_sql': database_sql,
+    #         'user_sql': user_sql,
+    #         'password_sql': password_sql,
+    #         'table_now_sql': table_now_sql,
+    #         'rows_now_sql': rows_now_sql,
+    #         'table_data_sql': table_data_sql,
+    #         'rows_data_sql': rows_data_sql,
+    #     }
+    #     data = []
+    #     for _loop in sources:
+    #         local_dict = datas.copy()
+    #         local_dict['source'] = _loop
+    #         data.append(local_dict)
+    #     threading.Thread(target=processes, args=(data,)).start()
 
     @staticmethod
     def multi(kwargs):
@@ -402,7 +173,8 @@ class Analizclass:
         Analizclass.render(f'render final: {str(source)[:30:]}',
                            Analizclass.render_final(image=image, mask=mask,
                                                     sensetivity_analysis=sensetivity_analysis,
-                                                    correct_coefficient=correct_coefficient),
+                                                    correct_coefficient=correct_coefficient, name=source,
+                                                    resolution_debug=resolution_debug),
                            resolution_debug)
         values = Analizclass.result_final(image=image, mask=mask, sensetivity_analysis=sensetivity_analysis,
                                           correct_coefficient=correct_coefficient)
@@ -412,75 +184,50 @@ class Analizclass:
         cv2.waitKey(round(100 / speed_analysis))
 
     @staticmethod
-    def analiz(pause,
-               process_cores: int,
-               widget_write: bool,
-               widget: object,
-               render_debug: str,
-               resolution_debug: list,
-
-               speed_analysis: float,
-               speed_video_stream: float,
-               sensetivity_analysis: int,
-               correct_coefficient: float,
-
-               protocol_cam_type: str,
-               port_cam: int,
-               login_cam: str,
-               password_cam: str,
-               ip_cam: list,
-               mask_cam: list,
-
-               sql_write: bool,
-               server_sql: str,
-               database_sql: str,
-               user_sql: str,
-               password_sql: str,
-               table_now_sql: str,
-               rows_now_sql: list,
-               table_data_sql: str,
-               rows_data_sql: list,
-
-               source: list,
-               source_type: str,
-               sources: list):
-        # try:
-        image = Analizclass.get_source(source_type, source, login_cam, password_cam)
-        mask = source[1]
-        if render_debug == 'none':
-            pass
-        elif render_debug == 'all':
-            pass
-        elif render_debug == 'extended':
-            pass
-        elif render_debug == 'final':
+    def analiz(data: dict):
+        try:
+            image = Analizclass.get_source(data['source_type'], data['source'][0], data['login_cam'],
+                                           data['password_cam'])
+            mask = data['source'][1]
+            if data['render_debug'] == 'none':
+                pass
+            elif data['render_debug'] == 'all':
+                pass
+            elif data['render_debug'] == 'extended':
+                pass
+            elif data['render_debug'] == 'final':
+                # if len(source[0]) > 10:
+                #     source = source[0].split("192.168.")[1].strip().split(":")[0].strip()
+                # else:
+                #     source = source[0]
+                Analizclass.render_final(image=image, mask=mask, sensetivity_analysis=data['sensetivity_analysis'],
+                                         correct_coefficient=data['correct_coefficient'], name=data['name'],
+                                         resolution_debug=data['resolution_debug'])
+            elif data['render_debug'] == 'source':
+                pass
             # if len(source[0]) > 10:
             #     source = source[0].split("192.168.")[1].strip().split(":")[0].strip()
             # else:
             #     source = source[0]
-            Analizclass.render(f'render final: {source[0].split("192.168.")[1].strip().split(":")[0].strip()}',
-                               Analizclass.render_final(image=image, mask=mask,
-                                                        sensetivity_analysis=sensetivity_analysis,
-                                                        correct_coefficient=correct_coefficient),
-                               resolution_debug)
-        elif render_debug == 'source':
-            pass
-
-        # if len(source[0]) > 10:
-        #     source = source[0].split("192.168.")[1].strip().split(":")[0].strip()
-        # else:
-        #     source = source[0]
-        values = Analizclass.result_final(image, mask, sensetivity_analysis, correct_coefficient)
-        Analizclass.write_result(server=server_sql, database=database_sql, username=user_sql,
-                                 password=password_sql, table_now=table_now_sql, rows_now=rows_now_sql,
-                                 table_data=table_data_sql, rows_data=rows_data_sql, values=values,
-                                 source=source[0].split("192.168.")[1].strip().split(":")[0].strip(),
-                                 widget=widget, widget_write=widget_write, sql_val=sql_write)
-
-    # except Exception as ex:
-    #     LoggingClass.logging(ex)
-    #     print(f'analiz func error')
-    #     print(ex)
+            values = Analizclass.result_final(image=image, mask=mask, sensetivity_analysis=data['sensetivity_analysis'],
+                                              correct_coefficient=data['correct_coefficient'])
+            Analizclass.write_result(server_sql=data['server_sql'],
+                                     database_sql=data['database_sql'],
+                                     user_sql=data['user_sql'],
+                                     password_sql=data['password_sql'],
+                                     table_now_sql=data['table_now_sql'],
+                                     rows_now_sql=data['rows_now_sql'],
+                                     table_data_sql=data['table_data_sql'],
+                                     rows_data_sql=data['rows_data_sql'],
+                                     values=values,
+                                     source=data['source'][0].split("192.168.")[1].strip().split(":")[0].strip(),
+                                     widget=data['widget'],
+                                     widget_write=data['widget_write'],
+                                     sql_val=data['sql_write'])
+        except Exception as ex:
+            LoggingClass.logging(ex)
+            print(f'analiz func error')
+            print(ex)
 
     @staticmethod
     def get_sources(source_type: str, sources: list, masks: list, protocol: str, login: str, password: str, port: int):
@@ -524,55 +271,55 @@ class Analizclass:
             print(ex)
 
     @staticmethod
-    def origin(image):
-        return image
+    def origin(image, name, resolution_debug):
+        Analizclass.render(name=name, source=image, resolution_debug=resolution_debug)
 
     @staticmethod
-    def cropping_image(image):
+    def cropping_image(image, name, resolution_debug):
         cropping_image = image[250:1080, 600:1720]
-        return cropping_image
+        Analizclass.render(name=name, source=cropping_image, resolution_debug=resolution_debug)
 
     @staticmethod
-    def bitwise_not_white(image, mask):
+    def bitwise_not_white(image, mask, name, resolution_debug):
         bitwise_not = cv2.bitwise_not(image, image, mask=mask)
-        return bitwise_not
+        Analizclass.render(name=name, source=bitwise_not, resolution_debug=resolution_debug)
 
     @staticmethod
-    def bitwise_and(image, mask):
+    def bitwise_and(image, mask, name, resolution_debug):
         bitwise_and = cv2.bitwise_and(image, image, mask=mask)
-        return bitwise_and
+        Analizclass.render(name=name, source=bitwise_and, resolution_debug=resolution_debug)
 
     @staticmethod
-    def threshold(image):
+    def threshold(image, name, resolution_debug):
         _, threshold = cv2.threshold(image, 220, 255, cv2.THRESH_BINARY_INV)
-        return threshold
+        Analizclass.render(name=name, source=threshold, resolution_debug=resolution_debug)
 
     @staticmethod
-    def cvtcolor(image):
+    def cvtcolor(image, name, resolution_debug):
         cvtcolor = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-        return cvtcolor
+        Analizclass.render(name=name, source=cvtcolor, resolution_debug=resolution_debug)
 
     @staticmethod
-    def inrange(image, sensetivity_analysis):
+    def inrange(image, sensetivity_analysis, name, resolution_debug):
         cvtcolor = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - sensetivity_analysis], dtype=numpy.uint8),
                               numpy.array([255, sensetivity_analysis, 255], dtype=numpy.uint8))
-        return inrange
+        Analizclass.render(name=name, source=inrange, resolution_debug=resolution_debug)
 
     @staticmethod
-    def canny_edges(image, sensetivity_analysis):
+    def canny_edges(image, sensetivity_analysis, name, resolution_debug):
         canny = cv2.Canny(image, sensetivity_analysis, sensetivity_analysis, apertureSize=3, L2gradient=True)
-        return canny
+        Analizclass.render(name=name, source=canny, resolution_debug=resolution_debug)
 
     @staticmethod
-    def render_final(image, mask, sensetivity_analysis, correct_coefficient):
+    def render_final(image, mask, sensetivity_analysis, correct_coefficient, name, resolution_debug):
         bitwise_and = cv2.bitwise_and(image, image, mask=mask)
         cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
         inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - sensetivity_analysis], dtype=numpy.uint8),
                               numpy.array([255, sensetivity_analysis, 255], dtype=numpy.uint8))
         cv2.putText(inrange, f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * correct_coefficient:0.2f}%",
                     (int(1920 / 5), int(1080 / 2)), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
-        return inrange
+        Analizclass.render(name=name, source=inrange, resolution_debug=resolution_debug)
 
     @staticmethod
     def render(name: str, source, resolution_debug: list):
@@ -593,9 +340,9 @@ class Analizclass:
         return round(numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * correct_coefficient, 2)
 
     @staticmethod
-    def write_result(server: str, database: str, username: str, password: str, table_now: str, rows_now: list,
-                     table_data: str, rows_data: list, source: str, values: float, widget, widget_write: bool,
-                     sql_val: bool):
+    def write_result(server_sql: str, database_sql: str, user_sql: str, password_sql: str, table_now_sql: str,
+                     rows_now_sql: list, table_data_sql: str, rows_data_sql: list, source: str, values: float, widget,
+                     widget_write: bool, sql_val: bool):
         sql_datetime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         _values = [source, values, sql_datetime, '']
         if widget_write:
@@ -612,10 +359,10 @@ class Analizclass:
                 print(ex)
         if sql_val:
             try:
-                SQLclass.sql_post_now(server=server, database=database, username=username, password=password,
-                                      table=table_now, rows=rows_now, values=_values)
-                SQLclass.sql_post_data(server=server, database=database, username=username, password=password,
-                                       table=table_data, rows=rows_data, values=_values)
+                SQLclass.sql_post_now(server=server_sql, database=database_sql, username=user_sql,
+                                      password=password_sql, table=table_now_sql, rows=rows_now_sql, values=_values)
+                SQLclass.sql_post_data(server=server_sql, database=database_sql, username=user_sql,
+                                       password=password_sql, table=table_data_sql, rows=rows_data_sql, values=_values)
             except Exception as ex:
                 LoggingClass.logging(ex)
                 print(ex)
