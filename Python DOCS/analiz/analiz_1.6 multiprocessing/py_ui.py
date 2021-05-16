@@ -208,7 +208,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.table_now_sql_button.clicked.connect(self.get_table_now_sql_button)
 
         # rows_now_sql
-        self.rows_now_sql = QtWidgets.QLabel("ROWS NOW SQL : device_row | value_row | datetime_row | extra_row")
+        self.rows_now_sql = QtWidgets.QLabel("ROWS NOW SQL : device_row | value_row | datetime_row")
         self.horizontal_layout_sql_2.addWidget(self.rows_now_sql)
 
         # rows_now_sql_button
@@ -226,7 +226,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.table_data_sql_button.clicked.connect(self.get_table_data_sql_button)
 
         # rows_data_sql
-        self.rows_data_sql = QtWidgets.QLabel("ROWS DATA SQL : device_row | value_row | datetime_row | extra_row")
+        self.rows_data_sql = QtWidgets.QLabel("ROWS DATA SQL : device_row | value_row | datetime_row")
         self.horizontal_layout_sql_2.addWidget(self.rows_data_sql)
 
         # rows_data_sql_button
@@ -307,7 +307,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         # compute_debug
         self.compute_debug = QtWidgets.QComboBox()
         self.compute_debug.addItems([x for x in ['sync', 'async', 'multithread', 'multiprocess']])
-        self.compute_debug.setCurrentText('multiprocess')
+        self.compute_debug.setCurrentText('sync')
         self.horizontal_layout_debug_1.addWidget(self.compute_debug)
 
         # source_type
