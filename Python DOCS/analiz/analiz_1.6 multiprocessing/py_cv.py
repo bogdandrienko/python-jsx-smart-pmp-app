@@ -376,28 +376,27 @@ class Analizclass:
         threading.Thread(target=processes, args=(data, )).start()
 
     @staticmethod
-    def multi(*kwargs):
-        value = [*kwargs][0]
-        source_type = value["source_type"]
-        login_cam = value["login_cam"]
-        password_cam = value["password_cam"]
-        sensetivity_analysis = value["sensetivity_analysis"]
-        correct_coefficient = value["correct_coefficient"]
-        resolution_debug = [value["resolution_debug"][0], value["resolution_debug"][1]]
-        speed_analysis = value["source_type"]
-        server_sql = value["server_sql"]
-        database_sql = value["database_sql"]
-        user_sql = value["user_sql"]
-        password_sql = value["password_sql"]
-        table_now_sql = value["table_now_sql"]
-        rows_now_sql = value["rows_now_sql"]
-        table_data_sql = value["table_data_sql"]
-        rows_data_sql = value["rows_data_sql"]
-        # widget = value["widget"]
+    def multi(kwargs):
+        source_type = kwargs["source_type"]
+        login_cam = kwargs["login_cam"]
+        password_cam = kwargs["password_cam"]
+        sensetivity_analysis = kwargs["sensetivity_analysis"]
+        correct_coefficient = kwargs["correct_coefficient"]
+        resolution_debug = [kwargs["resolution_debug"][0], kwargs["resolution_debug"][1]]
+        speed_analysis = kwargs["speed_analysis"]
+        server_sql = kwargs["server_sql"]
+        database_sql = kwargs["database_sql"]
+        user_sql = kwargs["user_sql"]
+        password_sql = kwargs["password_sql"]
+        table_now_sql = kwargs["table_now_sql"]
+        rows_now_sql = kwargs["rows_now_sql"]
+        table_data_sql = kwargs["table_data_sql"]
+        rows_data_sql = kwargs["rows_data_sql"]
+        # widget = kwargs["widget"]
         widget = None
-        widget_write = value["widget_write"]
-        sql_write = value["sql_write"]
-        source = value["source"]
+        widget_write = kwargs["widget_write"]
+        sql_write = kwargs["sql_write"]
+        source = kwargs["source"]
         image = Analizclass.get_source(source_type, source, login_cam, password_cam)
         mask = source[1]
         Analizclass.render(f'render final: {str(source)[:30:]}',

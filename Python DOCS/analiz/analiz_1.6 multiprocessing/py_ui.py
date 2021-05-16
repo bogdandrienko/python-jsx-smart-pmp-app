@@ -310,6 +310,12 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.compute_debug.setCurrentText('multiprocess')
         self.horizontal_layout_debug_1.addWidget(self.compute_debug)
 
+        # source_type
+        self.source_type = QtWidgets.QComboBox()
+        self.source_type.addItems([x for x in ['image-http', 'video-rtsp', 'video-file']])
+        self.source_type.setCurrentText('image-http')
+        self.horizontal_layout_debug_1.addWidget(self.source_type)
+
         #####
         self.horizontal_layout_btns = QtWidgets.QHBoxLayout()
 
