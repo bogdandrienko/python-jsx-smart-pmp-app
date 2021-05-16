@@ -117,25 +117,28 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_cameras_1.addWidget(self.password_cam_button)
         self.password_cam_button.clicked.connect(self.get_password_cam_button)
 
+        # horizontal_layout_cameras_2
+        self.horizontal_layout_cameras_2 = QtWidgets.QHBoxLayout()
+
         # ip_cam
         self.ip_cam = QtWidgets.QLabel("IP CAM : 15.203 | 15.204 | 15.205 | 15.202 | 15.206 | 15.207 | 15.208 | 15.209 "
                                        "| 15.210 | 15.211")
-        self.horizontal_layout_cameras_1.addWidget(self.ip_cam)
+        self.horizontal_layout_cameras_2.addWidget(self.ip_cam)
 
         # ip_cam_button
         self.ip_cam_button = QtWidgets.QPushButton("set")
-        self.horizontal_layout_cameras_1.addWidget(self.ip_cam_button)
+        self.horizontal_layout_cameras_2.addWidget(self.ip_cam_button)
         self.ip_cam_button.clicked.connect(self.get_ip_cam_button)
 
         # mask_cam
         self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8.jpg | mask_16_9.jpg | mask_16_10.jpg | mask_16_1.jpg "
                                          "| mask_16_2.jpg | mask_16_3.jpg | mask_16_4.jpg | mask_16_5.jpg "
                                          "| mask_16_6.jpg | mask_16_7.jpg")
-        self.horizontal_layout_cameras_1.addWidget(self.mask_cam)
+        self.horizontal_layout_cameras_2.addWidget(self.mask_cam)
 
         # mask_cam_button
         self.mask_cam_button = QtWidgets.QPushButton("set")
-        self.horizontal_layout_cameras_1.addWidget(self.mask_cam_button)
+        self.horizontal_layout_cameras_2.addWidget(self.mask_cam_button)
         self.mask_cam_button.clicked.connect(self.get_mask_cam_button)
 
         #####
@@ -301,6 +304,12 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_debug_1.addWidget(self.process_cores_button)
         self.process_cores_button.clicked.connect(self.get_process_cores_button)
 
+        # compute_debug
+        self.compute_debug = QtWidgets.QComboBox()
+        self.compute_debug.addItems([x for x in ['sync', 'async', 'multithread', 'multiprocess']])
+        self.compute_debug.setCurrentText('sync')
+        self.horizontal_layout_debug_1.addWidget(self.compute_debug)
+
         #####
         self.horizontal_layout_btns = QtWidgets.QHBoxLayout()
 
@@ -325,6 +334,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.vertical_layout_main.addLayout(self.horizontal_layout_calibration_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_cameras)
         self.vertical_layout_main.addLayout(self.horizontal_layout_cameras_1)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_cameras_2)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql_2)
@@ -506,6 +516,7 @@ class MainWidgetclass(QtWidgets.QWidget):
             'widget': self.set_data,
             'render_debug': str(self.render_debug.currentText().strip()),
             'resolution_debug': list(self.get_window_resolution()),
+            'compute_debug': str(self.compute_debug.currentText().strip()),
 
             'speed_analysis': float(self.speed_analysis.text().split(':')[1].strip()),
             'speed_video_stream': float(self.speed_video_stream.text().split(':')[1].strip()),

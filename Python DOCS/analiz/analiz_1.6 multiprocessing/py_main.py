@@ -2,7 +2,7 @@ import sys
 # import threading
 from py_cv import Analizclass
 from py_ui import AppContainerclass
-# from multiprocessing import Pool, Process
+from multiprocessing import Pool, Process, freeze_support
 from threading import Thread
 
 
@@ -40,6 +40,7 @@ def quit_func():
 
 
 if __name__ == "__main__":
+    freeze_support()
     analiz_container = None
     play_analiz = True
     app_container = AppContainerclass()

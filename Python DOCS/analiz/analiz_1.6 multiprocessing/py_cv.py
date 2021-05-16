@@ -4,7 +4,7 @@ import httplib2
 import numpy
 import datetime
 import threading
-from multiprocessing import Pool
+from multiprocessing import Pool, Process, freeze_support
 from py_sql import SQLclass
 from py_utilites import LoggingClass
 
@@ -17,6 +17,7 @@ class Analizclass:
                      widget,
                      render_debug: str,
                      resolution_debug: list,
+                     compute_debug: str,
 
                      speed_analysis: float,
                      speed_video_stream: float,
@@ -42,13 +43,11 @@ class Analizclass:
 
         source_type = ['image-http', 'video-rtsp', 'video-file']
         source_type = source_type[0]
-        compute_type = ['sync', 'async', 'multithread', 'multiprocess']
-        compute_type = 'sync'
         sources = Analizclass.get_sources(source_type=source_type, sources=ip_cam, masks=mask_cam,
                                           protocol=protocol_cam_type, login=login_cam, password=password_cam,
                                           port=port_cam)
         ##########################
-        if compute_type == 'sync':
+        if compute_debug == 'sync':
             Analizclass.sync_method(render_debug=render_debug,
                                     resolution_debug=resolution_debug,
                                     sensetivity_analysis=sensetivity_analysis,
@@ -76,67 +75,67 @@ class Analizclass:
                                     table_data_sql=table_data_sql,
                                     rows_data_sql=rows_data_sql,
                                     sources=sources)
-        # #############################
-        # elif compute_type == 'async':
-        #     Analizclass.async_method()
-        # ###################################
-        # elif compute_type == 'multithread':
-        #     Analizclass.multithread_method(render_debug=render_debug,
-        #                                    resolution_debug=resolution_debug,
-        #                                    sensetivity_analysis=sensetivity_analysis,
-        #                                    correct_coefficient=correct_coefficient,
-        #                                    login_cam=login_cam,
-        #                                    password_cam=password_cam,
-        #                                    source_type=source_type,
-        #                                    widget=widget,
-        #                                    pause=pause,
-        #                                    process_cores=process_cores,
-        #                                    widget_write=widget_write,
-        #                                    speed_analysis=speed_analysis,
-        #                                    speed_video_stream=speed_video_stream,
-        #                                    protocol_cam_type=protocol_cam_type,
-        #                                    port_cam=port_cam,
-        #                                    ip_cam=ip_cam,
-        #                                    mask_cam=mask_cam,
-        #                                    sql_write=sql_write,
-        #                                    server_sql=server_sql,
-        #                                    database_sql=database_sql,
-        #                                    user_sql=user_sql,
-        #                                    password_sql=password_sql,
-        #                                    table_now_sql=table_now_sql,
-        #                                    rows_now_sql=rows_now_sql,
-        #                                    table_data_sql=table_data_sql,
-        #                                    rows_data_sql=rows_data_sql,
-        #                                    sources=sources)
-        # ####################################
-        # elif compute_type == 'multiprocess':
-        #     Analizclass.multiprocess_method(render_debug=render_debug,
-        #                                     resolution_debug=resolution_debug,
-        #                                     sensetivity_analysis=sensetivity_analysis,
-        #                                     correct_coefficient=correct_coefficient,
-        #                                     login_cam=login_cam,
-        #                                     password_cam=password_cam,
-        #                                     source_type=source_type,
-        #                                     widget=widget,
-        #                                     pause=pause,
-        #                                     process_cores=process_cores,
-        #                                     widget_write=widget_write,
-        #                                     speed_analysis=speed_analysis,
-        #                                     speed_video_stream=speed_video_stream,
-        #                                     protocol_cam_type=protocol_cam_type,
-        #                                     port_cam=port_cam,
-        #                                     ip_cam=ip_cam,
-        #                                     mask_cam=mask_cam,
-        #                                     sql_write=sql_write,
-        #                                     server_sql=server_sql,
-        #                                     database_sql=database_sql,
-        #                                     user_sql=user_sql,
-        #                                     password_sql=password_sql,
-        #                                     table_now_sql=table_now_sql,
-        #                                     rows_now_sql=rows_now_sql,
-        #                                     table_data_sql=table_data_sql,
-        #                                     rows_data_sql=rows_data_sql,
-        #                                     sources=sources)
+        #############################
+        elif compute_debug == 'async':
+            Analizclass.async_method()
+        ###################################
+        elif compute_debug == 'multithread':
+            Analizclass.multithread_method(render_debug=render_debug,
+                                           resolution_debug=resolution_debug,
+                                           sensetivity_analysis=sensetivity_analysis,
+                                           correct_coefficient=correct_coefficient,
+                                           login_cam=login_cam,
+                                           password_cam=password_cam,
+                                           source_type=source_type,
+                                           widget=widget,
+                                           pause=pause,
+                                           process_cores=process_cores,
+                                           widget_write=widget_write,
+                                           speed_analysis=speed_analysis,
+                                           speed_video_stream=speed_video_stream,
+                                           protocol_cam_type=protocol_cam_type,
+                                           port_cam=port_cam,
+                                           ip_cam=ip_cam,
+                                           mask_cam=mask_cam,
+                                           sql_write=sql_write,
+                                           server_sql=server_sql,
+                                           database_sql=database_sql,
+                                           user_sql=user_sql,
+                                           password_sql=password_sql,
+                                           table_now_sql=table_now_sql,
+                                           rows_now_sql=rows_now_sql,
+                                           table_data_sql=table_data_sql,
+                                           rows_data_sql=rows_data_sql,
+                                           sources=sources)
+        ####################################
+        elif compute_debug == 'multiprocess':
+            Analizclass.multiprocess_method(render_debug=render_debug,
+                                            resolution_debug=resolution_debug,
+                                            sensetivity_analysis=sensetivity_analysis,
+                                            correct_coefficient=correct_coefficient,
+                                            login_cam=login_cam,
+                                            password_cam=password_cam,
+                                            source_type=source_type,
+                                            widget=widget,
+                                            pause=pause,
+                                            process_cores=process_cores,
+                                            widget_write=widget_write,
+                                            speed_analysis=speed_analysis,
+                                            speed_video_stream=speed_video_stream,
+                                            protocol_cam_type=protocol_cam_type,
+                                            port_cam=port_cam,
+                                            ip_cam=ip_cam,
+                                            mask_cam=mask_cam,
+                                            sql_write=sql_write,
+                                            server_sql=server_sql,
+                                            database_sql=database_sql,
+                                            user_sql=user_sql,
+                                            password_sql=password_sql,
+                                            table_now_sql=table_now_sql,
+                                            rows_now_sql=rows_now_sql,
+                                            table_data_sql=table_data_sql,
+                                            rows_data_sql=rows_data_sql,
+                                            sources=sources)
 
     @staticmethod
     def sync_method(pause,
@@ -364,7 +363,6 @@ class Analizclass:
                                    sources=sources)
                 cv2.waitKey(round(100 / speed_analysis))
                 time.sleep(0.2 / speed_analysis)
-
         def loop():
             while True:
                 val = pause(None)
@@ -400,11 +398,11 @@ class Analizclass:
         widget = None
         widget_write = False
         sql_val = True
-        # Analizclass.render(f'render final{str(source)[:30:]}',
-        #                    Analizclass.render_final(image=image, mask=mask,
-        #                                             sensetivity_analysis=sensetivity_analysis,
-        #                                             correct_coefficient=correct_coefficient),
-        #                    resolution_debug)
+        Analizclass.render(f'render final{str(source)[:30:]}',
+                           Analizclass.render_final(image=image, mask=mask,
+                                                    sensetivity_analysis=sensetivity_analysis,
+                                                    correct_coefficient=correct_coefficient),
+                           resolution_debug)
         values = Analizclass.result_final(image=image, mask=mask, sensetivity_analysis=sensetivity_analysis,
                                           correct_coefficient=correct_coefficient)
         Analizclass.write_result(server, database, username, password, table_now, rows_now, table_data, rows_data,
@@ -509,7 +507,6 @@ class Analizclass:
                 h = httplib2.Http("/path/to/cache-directory")
                 h.add_credentials(login, password)
                 response, content = h.request(sources[0])
-                print(content)
                 image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
                 return image
             elif source_type == 'video-rtsp' or 'video-file':
