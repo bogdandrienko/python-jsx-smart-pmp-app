@@ -13,15 +13,15 @@ class Voice:
         self.properties = [self.volume, self.rate, self.voice, self.voices]
 
     @staticmethod
-    def speak(text: str = 'Что я должна говорить?'):
+    def speak(text: str = 'Inicialization successfull.'):
         pyttsx3.speak(text)
 
     @staticmethod
-    async def async_speak(text: str = 'Что я должна говорить?'):
+    async def async_speak(text: str = 'Inicialization successfull.'):
         await pyttsx3.speak(text)
         return text
 
-    def say(self, text: str = 'Что я должна говорить?'):
+    def say(self, text: str = 'Inicialization successfull.'):
         self.engine.say(text)
         self.engine.runAndWait()
 
@@ -42,8 +42,8 @@ class Voice:
 if __name__ == '__main__':
     # Not create class:
     Voice.speak()
-    Voice.speak('Hi')
+    Voice.speak('Приветики!')
     # With create class:
     voice = Voice()
     voice.say()
-    voice.say('Hi')
+    voice.say('Я уничтожу человечество!!!')
