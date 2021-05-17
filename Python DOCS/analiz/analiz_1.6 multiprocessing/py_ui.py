@@ -1,5 +1,6 @@
 import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
+from py_utilites import FileSettings
 
 
 class AppContainerClass:
@@ -132,15 +133,17 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_cameras_2.addWidget(self.ip_cam_button)
         self.ip_cam_button.clicked.connect(self.get_ip_cam_button)
 
+        # horizontal_layout_cameras_3
+        self.horizontal_layout_cameras_3 = QtWidgets.QHBoxLayout()
+
         # mask_cam
-        self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8.jpg | mask_16_9.jpg | mask_16_10.jpg | mask_16_1.jpg "
-                                         "| mask_16_2.jpg | mask_16_3.jpg | mask_16_4.jpg | mask_16_5.jpg "
-                                         "| mask_16_6.jpg | mask_16_7.jpg")
-        self.horizontal_layout_cameras_2.addWidget(self.mask_cam)
+        self.mask_cam = QtWidgets.QLabel("MASK CAM : mask_16_8 | mask_16_9 | mask_16_10 | mask_16_1  | mask_16_2.jpg "
+                                         "| mask_16_3 | mask_16_4 | mask_16_5 | mask_16_6 | mask_16_7")
+        self.horizontal_layout_cameras_3.addWidget(self.mask_cam)
 
         # mask_cam_button
         self.mask_cam_button = QtWidgets.QPushButton("set")
-        self.horizontal_layout_cameras_2.addWidget(self.mask_cam_button)
+        self.horizontal_layout_cameras_3.addWidget(self.mask_cam_button)
         self.mask_cam_button.clicked.connect(self.get_mask_cam_button)
 
         #####
@@ -218,22 +221,25 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_sql_2.addWidget(self.rows_now_sql_button)
         self.rows_now_sql_button.clicked.connect(self.get_rows_now_sql_button)
 
+        # horizontal_layout_sql_3
+        self.horizontal_layout_sql_3 = QtWidgets.QHBoxLayout()
+
         # table_data_sql
         self.table_data_sql = QtWidgets.QLabel("TABLE DATA SQL : ruda_data_table")
-        self.horizontal_layout_sql_2.addWidget(self.table_data_sql)
+        self.horizontal_layout_sql_3.addWidget(self.table_data_sql)
 
         # table_data_sql_button
         self.table_data_sql_button = QtWidgets.QPushButton("set")
-        self.horizontal_layout_sql_2.addWidget(self.table_data_sql_button)
+        self.horizontal_layout_sql_3.addWidget(self.table_data_sql_button)
         self.table_data_sql_button.clicked.connect(self.get_table_data_sql_button)
 
         # rows_data_sql
         self.rows_data_sql = QtWidgets.QLabel("ROWS DATA SQL : device_row | value_row | datetime_row")
-        self.horizontal_layout_sql_2.addWidget(self.rows_data_sql)
+        self.horizontal_layout_sql_3.addWidget(self.rows_data_sql)
 
         # rows_data_sql_button
         self.rows_data_sql_button = QtWidgets.QPushButton("set")
-        self.horizontal_layout_sql_2.addWidget(self.rows_data_sql_button)
+        self.horizontal_layout_sql_3.addWidget(self.rows_data_sql_button)
         self.rows_data_sql_button.clicked.connect(self.get_rows_data_sql_button)
 
         #####
@@ -249,7 +255,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_snapshot_1 = QtWidgets.QHBoxLayout()
 
         # ip_cam_snapshot
-        self.ip_cam_snapshot = QtWidgets.QLabel("ip-cam : 15.203")
+        self.ip_cam_snapshot = QtWidgets.QLabel("ip-cam : 15.204")
         self.horizontal_layout_snapshot_1.addWidget(self.ip_cam_snapshot)
 
         # rows_now_sql_button
@@ -277,7 +283,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         # widget_data_value
         self.widget_data_value = QtWidgets.QLabel("0.00%")
         self.horizontal_layout_debug_1.addWidget(self.widget_data_value)
-        self.horizontal_layout_debug_1.addStretch(1)
+        self.horizontal_layout_debug_1.addStretch(0)
 
         # widget_write
         self.widget_write = QtWidgets.QCheckBox("Write to Widget?")
@@ -287,19 +293,19 @@ class MainWidgetclass(QtWidgets.QWidget):
         # render_debug
         self.render_debug = QtWidgets.QComboBox()
         self.render_debug.addItems([x for x in ['none', 'source', 'final', 'extended', 'all']])
-        self.render_debug.setCurrentText('final')
+        self.render_debug.setCurrentText('none')
         self.horizontal_layout_debug_1.addWidget(self.render_debug)
 
         self.resolution_debug = []
 
         # resolution_debug
         self.resolution_debug_1 = QtWidgets.QRadioButton("320x240")
+        self.resolution_debug_1.setChecked(True)
         self.horizontal_layout_debug_1.addWidget(self.resolution_debug_1)
         self.resolution_debug_1.toggled.connect(self.set_resolution_debug(self.resolution_debug_1, 320, 240))
 
         # resolution_debug_2
         self.resolution_debug_2 = QtWidgets.QRadioButton("640x480")
-        self.resolution_debug_2.setChecked(True)
         self.horizontal_layout_debug_1.addWidget(self.resolution_debug_2)
         self.resolution_debug_2.toggled.connect(self.set_resolution_debug(self.resolution_debug_2, 640, 480))
 
@@ -335,7 +341,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         # compute_debug
         self.compute_debug = QtWidgets.QComboBox()
         self.compute_debug.addItems([x for x in ['sync', 'async', 'multithread', 'multiprocess']])
-        self.compute_debug.setCurrentText('sync')
+        self.compute_debug.setCurrentText('multithread')
         self.horizontal_layout_debug_1.addWidget(self.compute_debug)
 
         # source_type
@@ -343,6 +349,16 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.source_type.addItems([x for x in ['image-http', 'video-rtsp', 'video-file']])
         self.source_type.setCurrentText('image-http')
         self.horizontal_layout_debug_1.addWidget(self.source_type)
+
+        # Export Button
+        self.export_QPushButton = QtWidgets.QPushButton("export")
+        self.horizontal_layout_debug_1.addWidget(self.export_QPushButton)
+        self.export_QPushButton.clicked.connect(self.export_settings)
+
+        # Import Button
+        self.import_QPushButton = QtWidgets.QPushButton("import")
+        self.horizontal_layout_debug_1.addWidget(self.import_QPushButton)
+        self.import_QPushButton.clicked.connect(self.import_settings)
 
         #####
         self.horizontal_layout_btns = QtWidgets.QHBoxLayout()
@@ -369,9 +385,11 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.vertical_layout_main.addLayout(self.horizontal_layout_cameras)
         self.vertical_layout_main.addLayout(self.horizontal_layout_cameras_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_cameras_2)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_cameras_3)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_sql_2)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_sql_3)
         self.vertical_layout_main.addLayout(self.horizontal_layout_snapshot)
         self.vertical_layout_main.addLayout(self.horizontal_layout_snapshot_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_debug)
@@ -405,7 +423,7 @@ class MainWidgetclass(QtWidgets.QWidget):
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
     def get_correct_coefficient_button(self):
-        widget = self.correct_coefficient_button
+        widget = self.correct_coefficient
         value, okpressed = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
                                                             f'{widget.text().split(":")[0].strip()} value:',
                                                             1.0, 0.1, 50.0, 2)
@@ -573,7 +591,7 @@ class MainWidgetclass(QtWidgets.QWidget):
             'login_cam': str(self.login_cam.text().split(':')[1].strip()),
             'password_cam': str(self.password_cam.text().split(':')[1].strip()),
             'ip_cam': list([x.strip() for x in self.ip_cam.text().split(':')[1].strip().split('|')]),
-            'mask_cam': list([x.strip() for x in self.mask_cam.text().split(':')[1].strip().split('|')]),
+            'mask_cam': list([f"{x.strip()}.jpg" for x in self.mask_cam.text().split(':')[1].strip().split('|')]),
 
             'sql_write': bool(self.sql_write.isChecked()),
             'server_sql': str(self.server_sql.text().split(':')[1].strip()),
@@ -600,6 +618,45 @@ class MainWidgetclass(QtWidgets.QWidget):
 
         }
         self.snapshot_f(data=data)
+
+    def export_settings(self):
+        data = {
+            'process_cores': int(self.process_cores.text().split(':')[1].strip()),
+            'widget_write': bool(self.widget_write.isChecked()),
+            'widget': self.set_data,
+            'render_debug': str(self.render_debug.currentText().strip()),
+            'resolution_debug': list(self.get_window_resolution()),
+            'compute_debug': str(self.compute_debug.currentText().strip()),
+            'source_type': str(self.source_type.currentText().strip()),
+
+            'speed_analysis': float(self.speed_analysis.text().split(':')[1].strip()),
+            'speed_video_stream': float(self.speed_video_stream.text().split(':')[1].strip()),
+            'sensetivity_analysis': int(self.sensetivity_analysis.text().split(':')[1].strip()),
+            'correct_coefficient': float(self.correct_coefficient.text().split(':')[1].strip()),
+
+            'protocol_cam_type': str(self.protocol_cam_type.text().split(':')[1].strip()),
+            'port_cam': int(self.port_cam.text().split(':')[1].strip()),
+            'login_cam': str(self.login_cam.text().split(':')[1].strip()),
+            'password_cam': str(self.password_cam.text().split(':')[1].strip()),
+            'ip_cam': list([x.strip() for x in self.ip_cam.text().split(':')[1].strip().split('|')]),
+            'mask_cam': list([f"{x.strip()}.jpg" for x in self.mask_cam.text().split(':')[1].strip().split('|')]),
+
+            'sql_write': bool(self.sql_write.isChecked()),
+            'server_sql': str(self.server_sql.text().split(':')[1].strip()),
+            'database_sql': str(self.database_sql.text().split(':')[1].strip()),
+            'user_sql': str(self.user_sql.text().split(':')[1].strip()),
+            'password_sql': str(self.password_sql.text().split(':')[1].strip()),
+            'table_now_sql': str(self.table_now_sql.text().split(':')[1].strip()),
+            'rows_now_sql': list([x.strip() for x in self.rows_now_sql.text().split(':')[1].strip().split('|')]),
+            'table_data_sql': str(self.table_data_sql.text().split(':')[1].strip()),
+            'rows_data_sql': list([x.strip() for x in self.rows_data_sql.text().split(':')[1].strip().split('|')]),
+        }
+        FileSettings.export_settings(data)
+
+    def import_settings(self):
+        data = FileSettings.import_settings()
+        print(data)
+
 
     def set_data(self, value: str):
         self.widget_data_value.setText(f"{value}")

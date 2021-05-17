@@ -40,7 +40,7 @@ if __name__ == "__main__":
     freeze_support()
     play = True
     app_container = AppContainerClass()
-    widget = app_container.create_ui(title="analysis", width=1280, height=720, icon="icon.ico",
+    widget = app_container.create_ui(title="analysis", width=300, height=300, icon="icon.ico",
                                      play_f=play_func, stop_f=stop_func, quit_f=quit_func, snapshot_f=snapshot_func)
     ui_thread = threading.Thread(target=widget.show())
     sys.exit(app_container.app.exec_())
