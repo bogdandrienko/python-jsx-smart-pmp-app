@@ -1,6 +1,7 @@
 import os
 import json
 
+
 class LoggingClass:
     @staticmethod
     def logging(message, file_name='log.txt', type_write='a'):
