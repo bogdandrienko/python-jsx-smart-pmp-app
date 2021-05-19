@@ -329,53 +329,77 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.horizontal_layout_debug_1.addWidget(self.resolution_debug_5)
         self.resolution_debug_6.toggled.connect(self.set_resolution_debug(self.resolution_debug_6, 3840, 2160))
 
+        # horizontal_layout_debug_2
+        self.horizontal_layout_debug_2 = QtWidgets.QHBoxLayout()
+
         # process_cores
         self.process_cores = QtWidgets.QLabel("PROCESS CORES : 4")
-        self.horizontal_layout_debug_1.addWidget(self.process_cores)
+        self.horizontal_layout_debug_2.addWidget(self.process_cores)
 
         # process_cores_button
         self.process_cores_button = QtWidgets.QPushButton("set")
-        self.horizontal_layout_debug_1.addWidget(self.process_cores_button)
+        self.horizontal_layout_debug_2.addWidget(self.process_cores_button)
         self.process_cores_button.clicked.connect(self.get_process_cores_button)
 
         # compute_debug
         self.compute_debug = QtWidgets.QComboBox()
         self.compute_debug.addItems([x for x in ['sync', 'async', 'multithread', 'multiprocess']])
         self.compute_debug.setCurrentText('multithread')
-        self.horizontal_layout_debug_1.addWidget(self.compute_debug)
+        self.horizontal_layout_debug_2.addWidget(self.compute_debug)
 
         # source_type
         self.source_type = QtWidgets.QComboBox()
         self.source_type.addItems([x for x in ['image-http', 'video-rtsp', 'video-file']])
         self.source_type.setCurrentText('image-http')
-        self.horizontal_layout_debug_1.addWidget(self.source_type)
+        self.horizontal_layout_debug_2.addWidget(self.source_type)
+
+        #####
+        self.horizontal_layout_imports = QtWidgets.QHBoxLayout()
+
+        # global_label_sql
+        self.global_label_imports = QtWidgets.QLabel("IMPORTS")
+        self.global_label_imports.setAutoFillBackground(True)
+        self.global_label_imports.setStyleSheet("QLabel { background-color: rgba(0, 0, 0, 255); color : white; }")
+        self.horizontal_layout_imports.addWidget(self.global_label_imports)
+
+        # horizontal_layout_debug_imports
+        self.horizontal_layout_imports_1 = QtWidgets.QHBoxLayout()
 
         # Export Button
         self.export_QPushButton = QtWidgets.QPushButton("export")
-        self.horizontal_layout_debug_1.addWidget(self.export_QPushButton)
+        self.horizontal_layout_imports_1.addWidget(self.export_QPushButton)
         self.export_QPushButton.clicked.connect(self.export_settings)
 
         # Import Button
         self.import_QPushButton = QtWidgets.QPushButton("import")
-        self.horizontal_layout_debug_1.addWidget(self.import_QPushButton)
+        self.horizontal_layout_imports_1.addWidget(self.import_QPushButton)
         self.import_QPushButton.clicked.connect(self.import_settings)
 
         #####
         self.horizontal_layout_btns = QtWidgets.QHBoxLayout()
 
+        # horizontal_layout_btns
+        self.horizontal_label_btns = QtWidgets.QLabel("MANAGEMENT")
+        self.horizontal_label_btns.setAutoFillBackground(True)
+        self.horizontal_label_btns.setStyleSheet("QLabel { background-color: rgba(0, 0, 0, 255); color : white; }")
+        self.horizontal_layout_btns.addWidget(self.horizontal_label_btns)
+
+        #####
+        self.horizontal_layout_btns_1 = QtWidgets.QHBoxLayout()
+
         # Play Button
         self.play_QPushButton = QtWidgets.QPushButton("play")
-        self.horizontal_layout_btns.addWidget(self.play_QPushButton)
+        self.horizontal_layout_btns_1.addWidget(self.play_QPushButton)
         self.play_QPushButton.clicked.connect(self.play_btn_func)
 
         # Stop Button
         self.stop_QPushButton = QtWidgets.QPushButton("stop")
-        self.horizontal_layout_btns.addWidget(self.stop_QPushButton)
+        self.horizontal_layout_btns_1.addWidget(self.stop_QPushButton)
         self.stop_QPushButton.clicked.connect(stop_f)
 
         # Quit Button
         self.quit_QPushButton = QtWidgets.QPushButton("quit")
-        self.horizontal_layout_btns.addWidget(self.quit_QPushButton)
+        self.horizontal_layout_btns_1.addWidget(self.quit_QPushButton)
         self.quit_QPushButton.clicked.connect(quit_f)
 
         # Main vertical Layout
@@ -394,7 +418,11 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.vertical_layout_main.addLayout(self.horizontal_layout_snapshot_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_debug)
         self.vertical_layout_main.addLayout(self.horizontal_layout_debug_1)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_debug_2)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_imports)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_imports_1)
         self.vertical_layout_main.addLayout(self.horizontal_layout_btns)
+        self.vertical_layout_main.addLayout(self.horizontal_layout_btns_1)
 
         self.setLayout(self.vertical_layout_main)
 
@@ -619,6 +647,9 @@ class MainWidgetclass(QtWidgets.QWidget):
         }
         self.snapshot_f(data=data)
 
+    def set_data(self, value: str):
+        self.widget_data_value.setText(f"{value}")
+
     def export_settings(self):
         data = {
             'process_cores': int(self.process_cores.text().split(':')[1].strip()),
@@ -655,8 +686,11 @@ class MainWidgetclass(QtWidgets.QWidget):
 
     def import_settings(self):
         data = FileSettings.import_settings()
-        print(data)
-
-
-    def set_data(self, value: str):
-        self.widget_data_value.setText(f"{value}")
+        self.speed_analysis.setText(f'{self.speed_analysis.text().split(":")[0].strip()} : '
+                                    f'{str(data["speed_analysis"])}')
+        self.speed_video_stream.setText(f'{self.speed_video_stream.text().split(":")[0].strip()} : '
+                                        f'{str(data["speed_video_stream"])}')
+        self.sensetivity_analysis.setText(f'{self.sensetivity_analysis.text().split(":")[0].strip()} : '
+                                          f'{str(data["sensetivity_analysis"])}')
+        self.correct_coefficient.setText(f'{self.correct_coefficient.text().split(":")[0].strip()} : '
+                                         f'{str(data["correct_coefficient"])}')

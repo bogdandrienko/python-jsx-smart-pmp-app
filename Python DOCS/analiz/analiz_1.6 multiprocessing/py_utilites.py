@@ -24,10 +24,9 @@ class FileSettings:
         del data['widget']
         with open('settings.json', 'w') as file:
             json.dump(data, file)
-            # file.write(f"{data}")
 
     @staticmethod
     def import_settings():
-        with open('settings.json', 'r') as file:
-            data = file.read()
+        with open("settings.json", "r") as read_file:
+            data = json.load(read_file)
         return data
