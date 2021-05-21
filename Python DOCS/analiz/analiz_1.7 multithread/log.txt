@@ -168,3 +168,6 @@ invalid literal for int() with base 10: '115, 115, 115, 115, 115, 115, 115, 115,
 'autoplay_check'
 'autoplay_check'
 'ip_cam_snapshot'
+'set_window_resolution'
+'set_window_resolution'
+'set_window_resolution'

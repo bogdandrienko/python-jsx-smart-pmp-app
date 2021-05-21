@@ -313,5 +313,5 @@ class AnalyzeClass:
         sources = f"{data['protocol_cam_type']}://192.168.{data['ip_cam_shot']}:{data['port_cam']}/" \
                   f"ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG"
         response, content = h.request(sources)
-        with open(f"{data['ip_cam_shot']}.jpg", 'wb') as file:
+        with open(data['name_snapshot'], 'wb') as file:
             file.write(content)
