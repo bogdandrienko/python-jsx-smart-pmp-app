@@ -24,7 +24,7 @@ class FileSettings:
             json.dump(data, file)
 
     @staticmethod
-    def import_settings():
-        with open("settings.json", "r") as read_file:
+    def import_settings(data: dict):
+        with open(f"{data['import_file']}.json", "r") as read_file:
             data = json.load(read_file)
         return data

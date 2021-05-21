@@ -514,7 +514,8 @@ class MainWidgetclass(QtWidgets.QWidget):
 
     def import_settings_func(self):
         try:
-            data = FileSettings.import_settings()
+            data = self.create_data_func()
+            data = FileSettings.import_settings(data)
             self.protocol_cam_type.setText(f'{self.protocol_cam_type.text().split(":")[0].strip()} : '
                                            f'{str(data["protocol_cam_type"])}')
             self.port_cam.setText(f'{self.port_cam.text().split(":")[0].strip()} : '

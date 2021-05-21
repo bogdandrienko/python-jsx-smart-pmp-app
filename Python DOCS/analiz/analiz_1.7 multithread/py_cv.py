@@ -310,7 +310,7 @@ class AnalyzeClass:
     def make_snapshot(data: dict):
         h = httplib2.Http("/path/to/cache-directory")
         h.add_credentials(name=data['login_cam'], password=data['password_cam'])
-        sources = f"{data['protocol_cam_type']}://192.168.{data['ip_cam_shot']}:{data['port_cam']}/" \
+        sources = f"{data['protocol_cam_type']}://192.168.{data['ip_cam_snapshot']}:{data['port_cam']}/" \
                   f"ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG"
         response, content = h.request(sources)
         with open(data['name_snapshot'], 'wb') as file:
