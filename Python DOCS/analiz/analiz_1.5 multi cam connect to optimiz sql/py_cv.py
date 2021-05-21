@@ -39,7 +39,7 @@ class Analizclass:
             _datetime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             sql_data = [src, result, _datetime, '']
             try:
-                widget.set_data(f'{src}: {result}')
+                widget.set_data_func(f'{src}: {result}')
             except Exception as _ex:
                 print(_ex)
                 with open('log.txt', 'w') as _log:
