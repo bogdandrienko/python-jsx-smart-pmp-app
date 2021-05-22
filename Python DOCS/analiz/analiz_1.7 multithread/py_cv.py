@@ -1,3 +1,4 @@
+import os
 import time
 import cv2
 import httplib2
@@ -40,7 +41,62 @@ class AnalyzeClass:
 
     @staticmethod
     def async_method(data: dict):
-        pass
+        while True:
+            if not data['pause']():
+                cv2.destroyAllWindows()
+                break
+            else:
+                for source in data['sources']:
+                    AnalyzeClass.async_analiz(source, data)
+            time.sleep(0.2 / data['speed_analysis'])
+
+    @staticmethod
+    async def async_analiz(source, data: dict):
+        image = await AnalyzeClass.async_get_source(data['source_type'], source[0], data['login_cam'],
+                                                    data['password_cam'])
+        mask = source[1]
+        name = source[0].split("192.168.")[1].strip().split(":")[0].strip()
+        AnalyzeClass.render_final(image=image, mask=mask,
+                                  sensitivity_analysis=source[2],
+                                  correct_coefficient=source[3],
+                                  name=name,
+                                  resolution_debug=data['resolution_debug'])
+        cv2.waitKey(round(100 / data['speed_video_stream']))
+        values = AnalyzeClass.result_final(image=image, mask=mask,
+                                           sensitivity_analysis=source[2],
+                                           correct_coefficient=source[3])
+        AnalyzeClass.write_result(ip_sql=data['ip_sql'],
+                                  server_sql=data['server_sql'],
+                                  port_sql=data['port_sql'],
+                                  database_sql=data['database_sql'],
+                                  user_sql=data['user_sql'],
+                                  password_sql=data['password_sql'],
+                                  sql_now_check=data['sql_now_check'],
+                                  table_now_sql=data['table_now_sql'],
+                                  rows_now_sql=data['rows_now_sql'],
+                                  sql_data_check=data['sql_data_check'],
+                                  table_data_sql=data['table_data_sql'],
+                                  rows_data_sql=data['rows_data_sql'],
+                                  values=values,
+                                  source=name,
+                                  widget=data['widget'],
+                                  widget_write=data['widget_write'],
+                                  sql_val=data['sql_write']
+                                  )
+
+    @staticmethod
+    async def async_get_source(source_type: str, sources: str, login: str, password: str):
+        if source_type == 'image-http':
+            h = httplib2.Http(os.path.abspath('__file__'))
+            h.add_credentials(login, password)
+            response, content = await h.request(sources)
+            image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
+            return image
+        elif source_type == 'video-rtsp' or 'video-file':
+            cam_stream = cv2.VideoCapture(sources)
+            _, image = cam_stream.read()
+            cam_stream.release()
+            return image
 
     @staticmethod
     def multithread_method(data: dict):
