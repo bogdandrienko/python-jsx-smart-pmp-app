@@ -10,7 +10,8 @@ class AppContainerClass:
 
     def create_ui(self, title, width, height, icon, play_f, stop_f, quit_f, snapshot_f):
         self.widget = MainWidgetclass(title, width, height, icon, play_f, stop_f, quit_f, snapshot_f)
-        self.widget.autoplay_func()
+        # self.widget.auto_play_func()
+        # self.widget.auto_import_settings_func()
         return self.widget
 
     @staticmethod
@@ -122,12 +123,14 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.g_sql_set = AppContainerClass.create_qlable('SQL', self.h_layout_g_sql, background=True)
         self.h_layout_sql_1 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_sql_1)
-        self.sql_write = AppContainerClass.create_qcheckbox(self.h_layout_sql_1, 'WRITE TO SQL?')
+        self.sql_write = AppContainerClass.create_qcheckbox(self.h_layout_sql_1, 'CONNECT TO SQL?')
+        self.ip_sql = AppContainerClass.create_qlable('IP SQL SERVER : 192.168.1.68', self.h_layout_sql_1)
+        self.set_ip_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_ip_sql_button)
         self.server_sql = AppContainerClass.create_qlable('SERVER SQL : WIN-AIK33SUODO5\\SQLEXPRESS',
                                                           self.h_layout_sql_1)
-        # self.server_sql = AppContainerClass.create_qlable('SERVER SQL : WIN-P4E9N6ORCNP\\ANALIZ_SQLSERVER',
-        #                                                   self.h_layout_sql_2)
         self.set_server_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_server_sql_button)
+        self.port_sql = AppContainerClass.create_qlable('PORT SQL SERVER : 1434', self.h_layout_sql_1)
+        self.set_port_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_port_sql_button)
         self.h_layout_sql_2 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_sql_2)
         self.database_sql = AppContainerClass.create_qlable('DATABASE SQL : ruda_db', self.h_layout_sql_2)
@@ -138,6 +141,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.v_layout_m.addLayout(self.h_layout_sql_3)
         self.password_sql = AppContainerClass.create_qlable('PASSWORD SQL : ruda_user', self.h_layout_sql_2)
         self.set_password_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2, self.get_password_sql_button)
+        self.sql_now_check = AppContainerClass.create_qcheckbox(self.h_layout_sql_3, 'WRITE NOW SQL?')
         self.table_now_sql = AppContainerClass.create_qlable('TABLE NOW SQL : ruda_now_table', self.h_layout_sql_3)
         self.set_table_now_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_3,
                                                                       self.get_table_now_sql_button)
@@ -146,6 +150,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.set_rows_now_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_3, self.get_rows_now_sql_button)
         self.h_layout_sql_4 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_sql_4)
+        self.sql_data_check = AppContainerClass.create_qcheckbox(self.h_layout_sql_4, 'WRITE DATA SQL?')
         self.table_data_sql = AppContainerClass.create_qlable('TABLE DATA SQL : ruda_data_table', self.h_layout_sql_4)
         self.set_table_data_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_4,
                                                                        self.get_table_data_sql_button)
@@ -159,7 +164,8 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.g_debug_set = AppContainerClass.create_qlable('DEBUG', self.h_layout_g_debug, background=True)
         self.h_layout_debug_1 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_debug_1)
-        self.autoplay_check = AppContainerClass.create_qcheckbox(self.h_layout_debug_1, 'AUTOPLAY?')
+        self.auto_import_check = AppContainerClass.create_qcheckbox(self.h_layout_debug_1, 'AUTO IMPORT?')
+        self.auto_play_check = AppContainerClass.create_qcheckbox(self.h_layout_debug_1, 'AUTO PLAY?')
         self.speed_analysis = AppContainerClass.create_qlable('SPEED ANALYSIS : 1.0', self.h_layout_debug_1)
         self.set_speed_analysis = AppContainerClass.create_qpushbutton(self.h_layout_debug_1,
                                                                        self.get_speed_analysis_button)
@@ -228,6 +234,8 @@ class MainWidgetclass(QtWidgets.QWidget):
                                                                          'snapshot')
 
         self.setLayout(self.v_layout_m)
+        self.auto_play_func()
+        self.auto_import_settings_func()
 
     def get_speed_analysis_button(self):
         widget = self.speed_analysis
@@ -309,10 +317,25 @@ class MainWidgetclass(QtWidgets.QWidget):
                                                         text=f'{widget.text().split(":")[1].strip()}')
         if success:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
-        pass
+
+    def get_ip_sql_button(self):
+        widget = self.ip_sql
+        value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                        f'{widget.text().split(":")[0].strip()} value:',
+                                                        text=f'{widget.text().split(":")[1].strip()}')
+        if success:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
     def get_server_sql_button(self):
         widget = self.server_sql
+        value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                        f'{widget.text().split(":")[0].strip()} value:',
+                                                        text=f'{widget.text().split(":")[1].strip()}')
+        if success:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
+    def get_port_sql_button(self):
+        widget = self.port_sql
         value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
                                                         f'{widget.text().split(":")[0].strip()} value:',
                                                         text=f'{widget.text().split(":")[1].strip()}')
@@ -456,16 +479,21 @@ class MainWidgetclass(QtWidgets.QWidget):
                                              self.correct_coefficient.text().split(':')[1].strip().split('|')]),
 
                 'sql_write': bool(self.sql_write.isChecked()),
+                'ip_sql': str(self.ip_sql.text().split(':')[1].strip()),
                 'server_sql': str(self.server_sql.text().split(':')[1].strip()),
+                'port_sql': str(self.port_sql.text().split(':')[1].strip()),
                 'database_sql': str(self.database_sql.text().split(':')[1].strip()),
                 'user_sql': str(self.user_sql.text().split(':')[1].strip()),
                 'password_sql': str(self.password_sql.text().split(':')[1].strip()),
+                'sql_now_check': bool(self.sql_now_check.isChecked()),
                 'table_now_sql': str(self.table_now_sql.text().split(':')[1].strip()),
                 'rows_now_sql': list([x.strip() for x in self.rows_now_sql.text().split(':')[1].strip().split('|')]),
+                'sql_data_check': bool(self.sql_data_check.isChecked()),
                 'table_data_sql': str(self.table_data_sql.text().split(':')[1].strip()),
                 'rows_data_sql': list([x.strip() for x in self.rows_data_sql.text().split(':')[1].strip().split('|')]),
 
-                'autoplay_check': bool(self.autoplay_check.isChecked()),
+                'auto_import_check': bool(self.auto_import_check.isChecked()),
+                'auto_play_check': bool(self.auto_play_check.isChecked()),
                 'speed_analysis': float(self.speed_analysis.text().split(':')[1].strip()),
                 'speed_video_stream': float(self.speed_video_stream.text().split(':')[1].strip()),
 
@@ -548,7 +576,8 @@ class MainWidgetclass(QtWidgets.QWidget):
                                         f'{str(data["table_data_sql"])}')
             self.rows_data_sql.setText(f'{self.rows_data_sql.text().split(":")[0].strip()} : '
                                        f'{self.get_string_from_list(data["rows_data_sql"])}')
-            self.autoplay_check.setChecked(data["autoplay_check"])
+            self.auto_import_check.setChecked(data["auto_import_check"])
+            self.auto_play_check.setChecked(data["auto_play_check"])
             self.speed_analysis.setText(f'{self.speed_analysis.text().split(":")[0].strip()} : '
                                         f'{str(data["speed_analysis"])}')
             self.speed_video_stream.setText(f'{self.speed_video_stream.text().split(":")[0].strip()} : '
@@ -570,12 +599,24 @@ class MainWidgetclass(QtWidgets.QWidget):
             LoggingClass.logging(ex)
             print(f'import_settings_func error : {ex}')
 
-    def autoplay_func(self):
+    def auto_import_settings_func(self):
         try:
-            data = FileSettings.import_settings()
-            if data['autoplay_check']:
-                self.play_btn_func()
+            data = self.create_data_func()
+            data = FileSettings.import_settings(data)
+            if data['auto_import_check']:
+                self.import_settings_func()
+        except Exception as ex:
+            LoggingClass.logging(ex)
+            print(f'auto_import_settings_func error : {ex}')
+
+    def auto_play_func(self):
+        try:
+            data = self.create_data_func()
+            _data = FileSettings.import_settings(data)
+            _data['widget'] = data['widget']
+            if _data['auto_play_check']:
+                self.play_f(data=_data)
                 self.showMinimized()
         except Exception as ex:
             LoggingClass.logging(ex)
-            print(f'autoplay_func error : {ex}')
+            print(f'auto_play_func error : {ex}')

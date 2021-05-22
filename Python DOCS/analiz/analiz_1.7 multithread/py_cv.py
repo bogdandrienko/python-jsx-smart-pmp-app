@@ -146,19 +146,24 @@ class AnalyzeClass:
             values = AnalyzeClass.result_final(image=image, mask=mask,
                                                sensitivity_analysis=source[2],
                                                correct_coefficient=source[3])
-            AnalyzeClass.write_result(server_sql=data['server_sql'],
+            AnalyzeClass.write_result(ip_sql=data['ip_sql'],
+                                      server_sql=data['server_sql'],
+                                      port_sql=data['port_sql'],
                                       database_sql=data['database_sql'],
                                       user_sql=data['user_sql'],
                                       password_sql=data['password_sql'],
+                                      sql_now_check=data['sql_now_check'],
                                       table_now_sql=data['table_now_sql'],
                                       rows_now_sql=data['rows_now_sql'],
+                                      sql_data_check=data['sql_data_check'],
                                       table_data_sql=data['table_data_sql'],
                                       rows_data_sql=data['rows_data_sql'],
                                       values=values,
                                       source=name,
                                       widget=data['widget'],
                                       widget_write=data['widget_write'],
-                                      sql_val=data['sql_write'])
+                                      sql_val=data['sql_write']
+                                      )
         except Exception as ex:
             LoggingClass.logging(ex)
             print(f'analyze func error')
@@ -279,9 +284,10 @@ class AnalyzeClass:
             return 0.0
 
     @staticmethod
-    def write_result(server_sql: str, database_sql: str, user_sql: str, password_sql: str, table_now_sql: str,
-                     rows_now_sql: list, table_data_sql: str, rows_data_sql: list, source: str, values: float, widget,
-                     widget_write: bool, sql_val: bool):
+    def write_result(ip_sql: str, server_sql: str, port_sql: str, database_sql: str, user_sql: str, password_sql: str,
+                     sql_now_check: bool, table_now_sql: str, rows_now_sql: list, sql_data_check: bool,
+                     table_data_sql: str, rows_data_sql: list, source: str, values: float, widget, widget_write: bool,
+                     sql_val: bool):
         sql_datetime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         _values = [source, values, sql_datetime]
         if widget_write:
@@ -298,10 +304,14 @@ class AnalyzeClass:
                 print(ex)
         if sql_val:
             try:
-                SQLClass.sql_post_now(server=server_sql, database=database_sql, username=user_sql,
-                                      password=password_sql, table=table_now_sql, rows=rows_now_sql, values=_values)
-                SQLClass.sql_post_data(server=server_sql, database=database_sql, username=user_sql,
-                                       password=password_sql, table=table_data_sql, rows=rows_data_sql, values=_values)
+                if sql_now_check:
+                    SQLClass.sql_post_now(ip=ip_sql, server=server_sql, port=port_sql, database=database_sql,
+                                          username=user_sql, password=password_sql, table=table_now_sql,
+                                          rows=rows_now_sql, values=_values)
+                if sql_data_check:
+                    SQLClass.sql_post_data(ip=ip_sql, server=server_sql, port=port_sql, database=database_sql,
+                                           username=user_sql, password=password_sql, table=table_data_sql,
+                                           rows=rows_data_sql, values=_values)
             except Exception as ex:
                 LoggingClass.logging(ex)
                 print(ex)

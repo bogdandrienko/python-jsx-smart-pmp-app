@@ -25,6 +25,10 @@ class FileSettings:
 
     @staticmethod
     def import_settings(data: dict):
-        with open(f"{data['import_file']}.json", "r") as read_file:
-            data = json.load(read_file)
+        try:
+            with open(f"{data['import_file']}.json", "r") as read_file:
+                data = json.load(read_file)
+        except Exception as ex:
+            LoggingClass.logging(ex)
+            print(f'import_settings error : {ex}')
         return data

@@ -4,9 +4,11 @@ import pandas
 
 class SQLClass:
     @staticmethod
-    def sql_post_data(server: str, database: str, username: str, password: str, table: str, rows: list, values: list):
+    def sql_post_data(ip: str, server: str, port: str, database: str, username: str, password: str, table: str,
+                      rows: list, values: list):
         try:
-            sql = SQLClass.pyodbc_connect(server=server, database=database, username=username, password=password)
+            sql = SQLClass.pyodbc_connect(ip=ip, server=server, port=port, database=database, username=username,
+                                          password=password)
             SQLClass.execute_data_query(connection=sql, table=table, rows=rows, values=values)
         except Exception as ex:
             print(ex)
@@ -14,9 +16,11 @@ class SQLClass:
                 log.write(f'\n{ex}\n')
 
     @staticmethod
-    def sql_post_now(server: str, database: str, username: str, password: str, table: str, rows: list, values: list):
+    def sql_post_now(ip: str, server: str, port: str, database: str, username: str, password: str, table: str,
+                     rows: list, values: list):
         try:
-            sql = SQLClass.pyodbc_connect(server=server, database=database, username=username, password=password)
+            sql = SQLClass.pyodbc_connect(ip=ip, server=server, port=port, database=database, username=username,
+                                          password=password)
             SQLClass.execute_now_query(connection=sql, table=table, rows=rows, values=values)
         except Exception as ex:
             print(ex)
@@ -24,10 +28,12 @@ class SQLClass:
                 log.write(f'\n{ex}\n')
 
     @staticmethod
-    def pyodbc_connect(server, database, username, password):
-        return pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' +
-                              database + ';UID=' + username + ';PWD=' + password +
-                              ';Trusted_Connection=yes;')
+    def pyodbc_connect(ip: str, server: str, port: str, database: str, username: str, password: str):
+        conn_str = (
+                r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
+                ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
+        )
+        return pyodbc.connect(conn_str)
 
     @staticmethod
     def pd_read_sql_query(connection, query: str, database: str, table: str):
