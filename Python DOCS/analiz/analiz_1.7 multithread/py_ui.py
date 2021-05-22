@@ -561,17 +561,21 @@ class MainWidgetclass(QtWidgets.QWidget):
             self.correct_coefficient.setText(f'{self.correct_coefficient.text().split(":")[0].strip()} : '
                                              f'{self.get_string_from_list(data["correct_coefficient"])}')
             self.sql_write.setChecked(data["sql_write"])
+            self.ip_sql.setText(f'{self.ip_sql.text().split(":")[0].strip()} : {str(data["ip_sql"])}')
             self.server_sql.setText(f'{self.server_sql.text().split(":")[0].strip()} : {str(data["server_sql"])}')
+            self.port_sql.setText(f'{self.port_sql.text().split(":")[0].strip()} : {str(data["port_sql"])}')
             self.database_sql.setText(f'{self.database_sql.text().split(":")[0].strip()} : '
                                       f'{str(data["database_sql"])}')
             self.user_sql.setText(f'{self.user_sql.text().split(":")[0].strip()} : '
                                   f'{str(data["user_sql"])}')
             self.password_sql.setText(f'{self.password_sql.text().split(":")[0].strip()} : '
                                       f'{str(data["password_sql"])}')
+            self.sql_now_check.setChecked(data["sql_now_check"])
             self.table_now_sql.setText(f'{self.table_now_sql.text().split(":")[0].strip()} : '
                                        f'{str(data["table_now_sql"])}')
             self.rows_now_sql.setText(f'{self.rows_now_sql.text().split(":")[0].strip()} : '
                                       f'{self.get_string_from_list(data["rows_now_sql"])}')
+            self.sql_data_check.setChecked(data["sql_data_check"])
             self.table_data_sql.setText(f'{self.table_data_sql.text().split(":")[0].strip()} : '
                                         f'{str(data["table_data_sql"])}')
             self.rows_data_sql.setText(f'{self.rows_data_sql.text().split(":")[0].strip()} : '
