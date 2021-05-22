@@ -51,7 +51,7 @@ class AnalyzeClass:
                     break
                 else:
                     asyncio.run(AnalyzeClass.async_analiz(source, data))
-                time.sleep(3 / data['speed_analysis'])
+                time.sleep(1 / data['speed_analysis'])
 
         for src in data['sources']:
             threading.Thread(target=thread_loop, args=(src,)).start()
