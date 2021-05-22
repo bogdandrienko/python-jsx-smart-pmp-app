@@ -1,3 +1,4 @@
+import asyncio
 import os
 import time
 import cv2
@@ -27,6 +28,8 @@ class AnalyzeClass:
             AnalyzeClass.multithread_method(data)
         elif data['compute_debug'] == 'multiprocess':
             AnalyzeClass.multiprocess_method(data)
+        elif data['compute_debug'] == 'complex':
+            AnalyzeClass.complex_method(data)
 
     @staticmethod
     def sync_method(data: dict):
@@ -37,18 +40,21 @@ class AnalyzeClass:
             else:
                 for source in data['sources']:
                     AnalyzeClass.analyze(source, data)
-            time.sleep(0.2 / data['speed_analysis'])
+            time.sleep(1 / data['speed_analysis'])
 
     @staticmethod
     def async_method(data: dict):
-        while True:
-            if not data['pause']():
-                cv2.destroyAllWindows()
-                break
-            else:
-                for source in data['sources']:
-                    AnalyzeClass.async_analiz(source, data)
-            time.sleep(0.2 / data['speed_analysis'])
+        def thread_loop(source):
+            while True:
+                if not data['pause']():
+                    cv2.destroyAllWindows()
+                    break
+                else:
+                    asyncio.run(AnalyzeClass.async_analiz(source, data))
+                time.sleep(3 / data['speed_analysis'])
+
+        for src in data['sources']:
+            threading.Thread(target=thread_loop, args=(src,)).start()
 
     @staticmethod
     async def async_analiz(source, data: dict):
@@ -61,7 +67,7 @@ class AnalyzeClass:
                                   correct_coefficient=source[3],
                                   name=name,
                                   resolution_debug=data['resolution_debug'])
-        cv2.waitKey(round(100 / data['speed_video_stream']))
+        cv2.waitKey(round(1000 / data['speed_video_stream']))
         values = AnalyzeClass.result_final(image=image, mask=mask,
                                            sensitivity_analysis=source[2],
                                            correct_coefficient=source[3])
@@ -89,7 +95,7 @@ class AnalyzeClass:
         if source_type == 'image-http':
             h = httplib2.Http(os.path.abspath('__file__'))
             h.add_credentials(login, password)
-            response, content = await h.request(sources)
+            response, content = h.request(sources)
             image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
             return image
         elif source_type == 'video-rtsp' or 'video-file':
@@ -107,7 +113,7 @@ class AnalyzeClass:
                     break
                 else:
                     AnalyzeClass.analyze(source, data)
-                time.sleep(0.2 / data['speed_analysis'])
+                time.sleep(1 / data['speed_analysis'])
 
         for src in data['sources']:
             threading.Thread(target=thread_loop, args=(src,)).start()
@@ -122,7 +128,7 @@ class AnalyzeClass:
                 else:
                     with multiprocessing.Pool(data['process_cores']) as process:
                         process.map(AnalyzeClass.multi, _data)
-                time.sleep(0.2 / data['speed_analysis'])
+                time.sleep(1 / data['speed_analysis'])
 
         _data = []
         for loop in data['sources']:
@@ -137,6 +143,107 @@ class AnalyzeClass:
         source = kwargs['source']
         kwargs['widget'] = None
         AnalyzeClass.analyze(source, kwargs)
+
+    @staticmethod
+    def complex_method(data: dict):
+        def thread_loop(source):
+            while True:
+                if not data['pause']():
+                    cv2.destroyAllWindows()
+                    break
+                else:
+                    asyncio.run(AnalyzeClass.async_complex_analiz(source, data))
+                time.sleep(1 / data['speed_analysis'])
+
+        for src in data['sources']:
+            threading.Thread(target=thread_loop, args=(src,)).start()
+
+    @staticmethod
+    async def async_complex_analiz(source, data: dict):
+        try:
+            image = await AnalyzeClass.async_get_source(data['source_type'], source[0], data['login_cam'],
+                                                        data['password_cam'])
+            mask = source[1]
+            name = source[0].split("192.168.")[1].strip().split(":")[0].strip()
+            if data['render_debug'] == 'all':
+                AnalyzeClass.render_origin(image=image, name=name,
+                                           resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cropping_image(image=image, name=name,
+                                                   resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_bitwise_and(image=image, mask=mask, name=name,
+                                                resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_bitwise_not_white(image=image, mask=mask, name=name,
+                                                      resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cvtcolor(image=image, name=name,
+                                             resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_threshold(image=image, name=name,
+                                              resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
+                                            name=name,
+                                            resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_canny_edges(image=image,
+                                                sensitivity_analysis=source[2],
+                                                name=name,
+                                                resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_final(image=image, mask=mask,
+                                          sensitivity_analysis=source[2],
+                                          correct_coefficient=source[3],
+                                          name=name,
+                                          resolution_debug=data['resolution_debug'])
+            elif data['render_debug'] == 'extended':
+                AnalyzeClass.render_origin(image=image, name=name,
+                                           resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cvtcolor(image=image, name=name,
+                                             resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_threshold(image=image, name=name,
+                                              resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
+                                            name=name,
+                                            resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_canny_edges(image=image,
+                                                sensitivity_analysis=source[2],
+                                                name=name,
+                                                resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_final(image=image, mask=mask,
+                                          sensitivity_analysis=source[2],
+                                          correct_coefficient=source[3],
+                                          name=name,
+                                          resolution_debug=data['resolution_debug'])
+            elif data['render_debug'] == 'final':
+                AnalyzeClass.render_final(image=image, mask=mask,
+                                          sensitivity_analysis=source[2],
+                                          correct_coefficient=source[3],
+                                          name=name,
+                                          resolution_debug=data['resolution_debug'])
+            elif data['render_debug'] == 'source':
+                AnalyzeClass.render_origin(image=image, name=name,
+                                           resolution_debug=data['resolution_debug'])
+            cv2.waitKey(round(1000 / data['speed_video_stream']))
+            values = AnalyzeClass.result_final(image=image, mask=mask,
+                                               sensitivity_analysis=source[2],
+                                               correct_coefficient=source[3])
+            AnalyzeClass.write_result(ip_sql=data['ip_sql'],
+                                      server_sql=data['server_sql'],
+                                      port_sql=data['port_sql'],
+                                      database_sql=data['database_sql'],
+                                      user_sql=data['user_sql'],
+                                      password_sql=data['password_sql'],
+                                      sql_now_check=data['sql_now_check'],
+                                      table_now_sql=data['table_now_sql'],
+                                      rows_now_sql=data['rows_now_sql'],
+                                      sql_data_check=data['sql_data_check'],
+                                      table_data_sql=data['table_data_sql'],
+                                      rows_data_sql=data['rows_data_sql'],
+                                      values=values,
+                                      source=name,
+                                      widget=data['widget'],
+                                      widget_write=data['widget_write'],
+                                      sql_val=data['sql_write']
+                                      )
+        except Exception as ex:
+            LoggingClass.logging(ex)
+            print(f'analyze func error')
+            print(ex)
 
     @staticmethod
     def analyze(source, data: dict):
@@ -198,7 +305,7 @@ class AnalyzeClass:
             elif data['render_debug'] == 'source':
                 AnalyzeClass.render_origin(image=image, name=name,
                                            resolution_debug=data['resolution_debug'])
-            cv2.waitKey(round(100 / data['speed_video_stream']))
+            cv2.waitKey(round(1000 / data['speed_video_stream']))
             values = AnalyzeClass.result_final(image=image, mask=mask,
                                                sensitivity_analysis=source[2],
                                                correct_coefficient=source[3])

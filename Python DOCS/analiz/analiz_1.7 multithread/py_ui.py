@@ -183,7 +183,8 @@ class MainWidgetclass(QtWidgets.QWidget):
                                                               'image-http')
         self.compute_win_debug = AppContainerClass.create_qlable('COMPUTE TYPE :', self.h_layout_debug_2)
         self.compute_debug = AppContainerClass.create_qcombobox(self.h_layout_debug_2, ['sync', 'async', 'multithread',
-                                                                                        'multiprocess'], 'multithread')
+                                                                                        'multiprocess', 'complex'],
+                                                                'complex')
         self.process_cores = AppContainerClass.create_qlable('PROCESS CORES : 4', self.h_layout_debug_2)
         self.set_process_cores = AppContainerClass.create_qpushbutton(self.h_layout_debug_2,
                                                                       self.get_process_cores_button)
@@ -241,7 +242,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         widget = self.speed_analysis
         value, success = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
                                                           f'{widget.text().split(":")[0].strip()} value:',
-                                                          1.0, 0.1, 50.0, 2)
+                                                          1.0, 0.01, 50.0, 2)
         if success:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
@@ -249,7 +250,7 @@ class MainWidgetclass(QtWidgets.QWidget):
         widget = self.speed_video_stream
         value, success = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
                                                           f'{widget.text().split(":")[0].strip()} value:',
-                                                          1.0, 0.1, 50.0, 2)
+                                                          1.0, 0.01, 50.0, 2)
         if success:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 

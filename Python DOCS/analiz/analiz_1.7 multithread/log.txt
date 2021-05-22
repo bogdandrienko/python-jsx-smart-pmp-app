@@ -1249,3 +1249,77 @@ pyodbc_connect() missing 2 required positional arguments: 'ip' and 'port'
 ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Поставщик TCP: Время ожидания операции истекло.\r\n (258) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Время ожидания входа в систему истекло. (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]При установлении соединения с сервером SQL Server произошла ошибка, связанная с сетью или с определенным экземпляром. Сервер не найден или недоступен. Убедитесь, что имя экземпляра указано правильно и на сервере SQL Server разрешены удаленные соединения. Дополнительные сведения см. в электронной документации по SQL Server. (258)')
 
 ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Поставщик TCP: Время ожидания операции истекло.\r\n (258) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Время ожидания входа в систему истекло. (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]При установлении соединения с сервером SQL Server произошла ошибка, связанная с сетью или с определенным экземпляром. Сервер не найден или недоступен. Убедитесь, что имя экземпляра указано правильно и на сервере SQL Server разрешены удаленные соединения. Дополнительные сведения см. в электронной документации по SQL Server. (258)')
+
+object tuple can't be used in 'await' expression
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+object tuple can't be used in 'await' expression
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+
+OpenCV(4.5.2) :-1: error: (-5:Bad argument) in function 'bitwise_and'
+> Overload resolution failed:
+>  - src1 is not a numpy array, neither a scalar
+>  - Expected Ptr<cv::UMat> for argument 'src1'
+
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
+object numpy.ndarray can't be used in 'await' expression
