@@ -10,7 +10,10 @@ def play_func(data: dict):
     global play
     try:
         play = True
-        AnalyzeClass.start_analyze(data=CopyDictionary.get_all_sources(data, {'pause': pause}))
+
+        def play_analyze():
+            AnalyzeClass.start_analyze(data=CopyDictionary.get_all_sources(data, {'pause': pause}))
+        threading.Thread(target=play_analyze, args=()).start()
     except Exception as ex:
         print(ex)
         with open('log.txt', 'a') as log:
