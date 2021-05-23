@@ -493,3 +493,5 @@ class AnalyzeClass:
         response, content = h.request(sources)
         with open(data['name_snapshot'], 'wb') as file:
             file.write(content)
+        # cv2.imwrite('1.png', img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
+        # cv2.imwrite('1.png', img, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])

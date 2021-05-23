@@ -1,5 +1,8 @@
 import sys
 import threading
+
+import cv2
+
 from py_cv import AnalyzeClass
 from py_ui import AppContainerClass
 from py_utilites import CopyDictionary
@@ -14,6 +17,7 @@ def play_func(data: dict):
         def play_analyze():
             AnalyzeClass.start_analyze(data=CopyDictionary.get_all_sources(data, {'pause': pause}))
         threading.Thread(target=play_analyze, args=()).start()
+
     except Exception as ex:
         print(ex)
         with open('log.txt', 'a') as log:
