@@ -1,0 +1,764 @@
+unknown encoding: idna
+unknown encoding: idna
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+
+('42S02', '[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Недопустимое имя объекта "ruda_data_table". (208) (SQLExecDirectW)')
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
+OpenCV(4.5.2) C:\Users\runneradmin\AppData\Local\Temp\pip-req-build-m8us58q4\opencv\modules\core\src\arithm.cpp:230: error: (-215:Assertion failed) (mtype == CV_8U || mtype == CV_8S) && _mask.sameSize(*psrc1) in function 'cv::binary_op'
+
