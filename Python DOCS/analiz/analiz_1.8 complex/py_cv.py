@@ -167,6 +167,10 @@ class AnalyzeClass:
             mask = source[1]
             name = source[0].split("192.168.")[1].strip().split(":")[0].strip()
             if data['render_debug'] == 'all':
+                AnalyzeClass.render_flip(image=image, flipcode=0, name=name, resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cvtcolor(image=image, color_type=cv2.COLOR_RGB2GRAY,  name=name,
+                                             resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_shapes(name=name, resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_origin(image=image, name=name,
                                            resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_cropping_image(image=image, name=name,
@@ -175,8 +179,8 @@ class AnalyzeClass:
                                                 resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_bitwise_not_white(image=image, mask=mask, name=name,
                                                       resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_cvtcolor(image=image, name=name,
-                                             resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cvtcolor_to_hsv(image=image, name=name,
+                                                    resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_threshold(image=image, name=name,
                                               resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
@@ -194,8 +198,8 @@ class AnalyzeClass:
             elif data['render_debug'] == 'extended':
                 AnalyzeClass.render_origin(image=image, name=name,
                                            resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_cvtcolor(image=image, name=name,
-                                             resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cvtcolor_to_hsv(image=image, name=name,
+                                                    resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_threshold(image=image, name=name,
                                               resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
@@ -263,8 +267,8 @@ class AnalyzeClass:
                                                 resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_bitwise_not_white(image=image, mask=mask, name=name,
                                                       resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_cvtcolor(image=image, name=name,
-                                             resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cvtcolor_to_hsv(image=image, name=name,
+                                                    resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_threshold(image=image, name=name,
                                               resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
@@ -282,8 +286,8 @@ class AnalyzeClass:
             elif data['render_debug'] == 'extended':
                 AnalyzeClass.render_origin(image=image, name=name,
                                            resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_cvtcolor(image=image, name=name,
-                                             resolution_debug=data['resolution_debug'])
+                AnalyzeClass.render_cvtcolor_to_hsv(image=image, name=name,
+                                                    resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_threshold(image=image, name=name,
                                               resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
@@ -401,9 +405,9 @@ class AnalyzeClass:
         AnalyzeClass.render(name=f"threshold : {name}", source=threshold, resolution_debug=resolution_debug)
 
     @staticmethod
-    def render_cvtcolor(image, name, resolution_debug):
+    def render_cvtcolor_to_hsv(image, name, resolution_debug):
         cvtcolor = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-        AnalyzeClass.render(name=f"cvtcolor : {name}", source=cvtcolor, resolution_debug=resolution_debug)
+        AnalyzeClass.render(name=f"cvtcolor_to_hsv : {name}", source=cvtcolor, resolution_debug=resolution_debug)
 
     @staticmethod
     def render_inrange(image, sensitivity_analysis, name, resolution_debug):
@@ -416,6 +420,78 @@ class AnalyzeClass:
     def render_canny_edges(image, sensitivity_analysis, name, resolution_debug):
         canny = cv2.Canny(image, sensitivity_analysis, sensitivity_analysis, apertureSize=3, L2gradient=True)
         AnalyzeClass.render(name=f"canny_edges : {name}", source=canny, resolution_debug=resolution_debug)
+
+    @staticmethod
+    def render_shapes(name, resolution_debug):
+        red = (0, 0, 255)
+        green = (0, 255, 0)
+        blue = (255, 0, 0)
+        yellow = (0, 255, 255)
+        numpy.set_printoptions(threshold=0)
+        img = numpy.zeros(shape=(512, 512, 3), dtype=numpy.uint8)
+        cv2.line(
+            img=img,
+            pt1=(0, 0),
+            pt2=(311, 511),
+            color=blue,
+            thickness=10
+        )
+        cv2.rectangle(
+            img=img,
+            pt1=(30, 166),
+            pt2=(130, 266),
+            color=green,
+            thickness=3
+        )
+        cv2.circle(
+            img=img,
+            center=(222, 222),
+            radius=50,
+            color=(255.111, 111),
+            thickness=-1
+        )
+        cv2.ellipse(
+            img=img,
+            center=(333, 333),
+            axes=(50, 20),
+            angle=0,
+            startAngle=0,
+            endAngle=150,
+            color=red,
+            thickness=-1
+        )
+        pts = numpy.array(
+            [[10, 5], [20, 30], [70, 20], [50, 10]],
+            dtype=numpy.int32
+        )
+        pts = pts.reshape((-1, 1, 2,))
+        cv2.polylines(
+            img=img,
+            pts=[pts],
+            isClosed=True,
+            color=yellow,
+            thickness=5
+        )
+        cv2.putText(
+            img=img,
+            text="SOL",
+            org=(10, 400),
+            fontFace=cv2.FONT_ITALIC,
+            fontScale=3.5,
+            color=(255, 255, 255),
+            thickness=2
+        )
+        AnalyzeClass.render(name=f"shapes : {name}", source=img, resolution_debug=resolution_debug)
+
+    @staticmethod
+    def render_cvtcolor(image, color_type, name, resolution_debug):
+        cvtcolor = cv2.cvtColor(image, color_type)
+        AnalyzeClass.render(name=f"cvtcolor : {name}", source=cvtcolor, resolution_debug=resolution_debug)
+
+    @staticmethod
+    def render_flip(image, flipcode, name, resolution_debug):
+        flip = cv2.flip(image, flipcode)
+        AnalyzeClass.render(name=f"flip : {name}", source=flip, resolution_debug=resolution_debug)
 
     @staticmethod
     def render_final(image, mask, sensitivity_analysis, correct_coefficient, name, resolution_debug):

@@ -2,8 +2,8 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 
-def get_sheet_value(column, row, sheet):
-    return str(sheet[str(column) + str(row)].value)
+def get_sheet_value(column, row, _sheet):
+    return str(_sheet[str(column) + str(row)].value)
 
 
 def set_sheet_value(column, row, value):
@@ -17,7 +17,7 @@ id_1c = 9
 workbook = openpyxl.load_workbook(file_1c)
 sheet = workbook.active
 for num in range(1, 2500):
-    workers_id_1c.append(get_sheet_value(get_column_letter(int(id_1c)), num, sheet=sheet))
+    workers_id_1c.append(get_sheet_value(get_column_letter(int(id_1c)), num, _sheet=sheet))
 workbook.close()
 
 file_skud = 'import.xlsx'
