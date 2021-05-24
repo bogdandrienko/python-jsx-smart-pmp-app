@@ -1,9 +1,7 @@
 import sys
 import threading
-
 import cv2
 import numpy as np
-
 from py_cv import AnalyzeClass
 from py_ui import AppContainerClass
 from py_utilites import CopyDictionary
@@ -13,15 +11,14 @@ from multiprocessing import freeze_support
 def play_func(data: dict):
     global play
     try:
-        # play = True
+        play = True
+
+        def play_analyze():
+            AnalyzeClass.start_analyze(data=CopyDictionary.get_all_sources(data, {'pause': pause}))
+        threading.Thread(target=play_analyze, args=()).start()
+        # source_img = cv2.imread('picture.jpg', 1)
         #
-        # def play_analyze():
-        #     AnalyzeClass.start_analyze(data=CopyDictionary.get_all_sources(data, {'pause': pause}))
-        # threading.Thread(target=play_analyze, args=()).start()
-
-        source_img = cv2.imread('picture.jpg', 1)
-
-        AnalyzeClass.render(name=f"source : img", source=source_img, resolution_debug=[640, 480])
+        # AnalyzeClass.render(name=f"source : img", source=source_img, resolution_debug=[640, 480])
     except Exception as ex:
         print(ex)
         with open('log.txt', 'a') as log:

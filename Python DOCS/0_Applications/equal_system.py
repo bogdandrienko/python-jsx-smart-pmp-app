@@ -10,7 +10,7 @@ def set_sheet_value(column, row, value):
     sheet[f'{column}{row}'] = str(value)
 
 
-file_1c = '1c.xlsx'
+file_1c = 'export.xlsx'
 workers_id_1c = []
 id_1c = 9
 
@@ -20,7 +20,7 @@ for num in range(1, 2500):
     workers_id_1c.append(get_sheet_value(get_column_letter(int(id_1c)), num, sheet=sheet))
 workbook.close()
 
-file_skud = 'skud.xlsx'
+file_skud = 'import.xlsx'
 workers_id_skud = []
 id_skud = 3
 
@@ -37,4 +37,4 @@ for x in workers_id_1c:
     for y in workers_id_skud:
         if x == y and x is not None:
             set_sheet_value(column=get_column_letter(int(8)), row=workers_id_1c.index(x)+1, value='+')
-workbook.save('1c.xlsx')
+workbook.save('export.xlsx')
