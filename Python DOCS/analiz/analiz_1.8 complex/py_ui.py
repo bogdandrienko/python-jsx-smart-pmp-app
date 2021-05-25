@@ -10,8 +10,6 @@ class AppContainerClass:
 
     def create_ui(self, title, width, height, icon, play_f, stop_f, quit_f, snapshot_f):
         self.widget = MainWidgetclass(title, width, height, icon, play_f, stop_f, quit_f, snapshot_f)
-        # self.widget.auto_play_func()
-        # self.widget.auto_import_settings_func()
         return self.widget
 
     @staticmethod

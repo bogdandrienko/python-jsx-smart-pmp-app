@@ -8,7 +8,7 @@ import datetime
 import threading
 import multiprocessing
 from py_sql import SQLClass
-from py_utilites import LoggingClass, CopyDictionary, TimeUtils
+from py_utilites import LoggingClass, CopyDictionary, TimeUtils, SendMail
 
 
 class AnalyzeClass:
@@ -250,6 +250,7 @@ class AnalyzeClass:
             LoggingClass.logging(ex)
             print(f'analyze func error')
             print(ex)
+            SendMail.sender_email(subject='error', text='analyze func error')
 
     @staticmethod
     def analyze(source, data: dict):
