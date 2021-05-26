@@ -92,27 +92,39 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.set_password_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_1, self.get_password_cam_button)
         self.h_layout_cam_2 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_cam_2)
-        self.ip_cam = AppContainerClass.create_qlable('IP CAM : 15.202 | 15.206 | 15.207 | 15.208 | 15.209 | 15.210 '
-                                                      '| 15.211 | 15.203 | 15.204 | 15.205', self.h_layout_cam_2)
-        self.set_ip_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_2, self.get_ip_cam_button)
+        self.alias_device = AppContainerClass.create_qlable('ALIAS DEVICE : 16/1 | 16/2 | 16/3 | 16/4 | 16/5 | 16/6 '
+                                                            '| 16/7 | 16/8 | 16/9 | 16/10', self.h_layout_cam_2)
+        self.set_alias_device = AppContainerClass.create_qpushbutton(self.h_layout_cam_2, self.get_alias_device_button)
         self.h_layout_cam_3 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_cam_3)
-        self.mask_cam = AppContainerClass.create_qlable('MASK CAM : m_16_1.jpg | m_16_2.jpg | m_16_3.jpg | m_16_4.jpg '
-                                                        '| m_16_5.jpg | m_16_6.jpg | m_16_7.jpg | m_16_8.jpg '
-                                                        '| m_16_9.jpg | m_16_10.jpg', self.h_layout_cam_3)
-        self.set_mask_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_3, self.get_mask_cam_button)
+        self.ip_cam = AppContainerClass.create_qlable('IP CAM : 15.202 | 15.206 | 15.207 | 15.208 | 15.209 | 15.210 '
+                                                      '| 15.211 | 15.203 | 15.204 | 15.205', self.h_layout_cam_3)
+        self.set_ip_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_3, self.get_ip_cam_button)
         self.h_layout_cam_4 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_cam_4)
-        self.sensitivity_analysis = AppContainerClass.create_qlable('SENSITIVITY ANALYSIS : 115 | 115 | 115 | 115 '
-                                                                    '| 115 | 115 | 115 | 115 | 115 | 115',
-                                                                    self.h_layout_cam_4)
-        self.set_sensitivity_analysis = AppContainerClass.create_qpushbutton(self.h_layout_cam_4,
-                                                                             self.get_sensitivity_analysis_button)
+        self.mask_cam = AppContainerClass.create_qlable('MASK CAM : m_16_1.jpg | m_16_2.jpg | m_16_3.jpg | m_16_4.jpg '
+                                                        '| m_16_5.jpg | m_16_6.jpg | m_16_7.jpg | m_16_8.jpg '
+                                                        '| m_16_9.jpg | m_16_10.jpg', self.h_layout_cam_4)
+        self.set_mask_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_4, self.get_mask_cam_button)
         self.h_layout_cam_5 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_cam_5)
+        self.sensitivity_analysis = AppContainerClass.create_qlable('SENSITIVITY ANALYSIS : 115 | 115 | 115 | 115 '
+                                                                    '| 115 | 115 | 115 | 115 | 115 | 115',
+                                                                    self.h_layout_cam_5)
+        self.set_sensitivity_analysis = AppContainerClass.create_qpushbutton(self.h_layout_cam_5,
+                                                                             self.get_sensitivity_analysis_button)
+        self.h_layout_cam_6 = QtWidgets.QHBoxLayout()
+        self.v_layout_m.addLayout(self.h_layout_cam_6)
+        self.alarm_level = AppContainerClass.create_qlable('ALARM LEVEL : 30 | 30 | 30 | 30 '
+                                                           '| 30 | 30 | 30 | 30 | 30 | 30',
+                                                           self.h_layout_cam_6)
+        self.set_alarm_level = AppContainerClass.create_qpushbutton(self.h_layout_cam_6,
+                                                                    self.get_alarm_level_button)
+        self.h_layout_cam_7 = QtWidgets.QHBoxLayout()
+        self.v_layout_m.addLayout(self.h_layout_cam_7)
         self.correct_coefficient = AppContainerClass.create_qlable('CORRECT COEFFICIENT : 1.0 | 1.0 | 1.0 | 1.0 | 1.0 '
-                                                                   '| 1.0 | 1.0 | 1.0 | 1.0 | 1.0', self.h_layout_cam_5)
-        self.set_correct_coefficient = AppContainerClass.create_qpushbutton(self.h_layout_cam_5,
+                                                                   '| 1.0 | 1.0 | 1.0 | 1.0 | 1.0', self.h_layout_cam_7)
+        self.set_correct_coefficient = AppContainerClass.create_qpushbutton(self.h_layout_cam_7,
                                                                             self.get_correct_coefficient_button)
         # SQL
         self.h_layout_g_sql = QtWidgets.QHBoxLayout()
@@ -121,38 +133,39 @@ class MainWidgetclass(QtWidgets.QWidget):
         self.h_layout_sql_1 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_sql_1)
         self.sql_write = AppContainerClass.create_qcheckbox(self.h_layout_sql_1, 'CONNECT TO SQL?')
-        self.ip_sql = AppContainerClass.create_qlable('IP SQL SERVER : 192.168.1.68', self.h_layout_sql_1)
+        self.ip_sql = AppContainerClass.create_qlable('IP SQL SERVER : 192.168.15.87', self.h_layout_sql_1)
         self.set_ip_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_ip_sql_button)
-        self.server_sql = AppContainerClass.create_qlable('SERVER SQL : WIN-AIK33SUODO5\\SQLEXPRESS',
+        self.server_sql = AppContainerClass.create_qlable(r'SERVER SQL : DESKTOP-SM7K050\COMPUTER_VISION',
                                                           self.h_layout_sql_1)
         self.set_server_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_server_sql_button)
-        self.port_sql = AppContainerClass.create_qlable('PORT SQL SERVER : 1434', self.h_layout_sql_1)
+        self.port_sql = AppContainerClass.create_qlable('PORT SQL SERVER : 1433', self.h_layout_sql_1)
         self.set_port_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_port_sql_button)
         self.h_layout_sql_2 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_sql_2)
-        self.database_sql = AppContainerClass.create_qlable('DATABASE SQL : ruda_db', self.h_layout_sql_2)
+        self.database_sql = AppContainerClass.create_qlable('DATABASE SQL : analiz_16grohot', self.h_layout_sql_2)
         self.set_database_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2, self.get_database_sql_button)
-        self.user_sql = AppContainerClass.create_qlable('USER SQL : ruda_user', self.h_layout_sql_2)
+        self.user_sql = AppContainerClass.create_qlable('USER SQL : computer_vision', self.h_layout_sql_2)
         self.set_user_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2, self.get_user_sql_button)
         self.h_layout_sql_3 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_sql_3)
-        self.password_sql = AppContainerClass.create_qlable('PASSWORD SQL : ruda_user', self.h_layout_sql_2)
+        self.password_sql = AppContainerClass.create_qlable('PASSWORD SQL : vision12345678', self.h_layout_sql_2)
         self.set_password_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2, self.get_password_sql_button)
         self.sql_now_check = AppContainerClass.create_qcheckbox(self.h_layout_sql_3, 'WRITE NOW SQL?')
-        self.table_now_sql = AppContainerClass.create_qlable('TABLE NOW SQL : ruda_now_table', self.h_layout_sql_3)
+        self.table_now_sql = AppContainerClass.create_qlable('TABLE NOW SQL : grohot16_now_table', self.h_layout_sql_3)
         self.set_table_now_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_3,
                                                                       self.get_table_now_sql_button)
-        self.rows_now_sql = AppContainerClass.create_qlable('ROWS NOW SQL : device_row | value_row | datetime_row',
-                                                            self.h_layout_sql_3)
+        self.rows_now_sql = AppContainerClass.create_qlable('ROWS NOW SQL : device_row | value_row | alarm_row '
+                                                            '| datetime_row', self.h_layout_sql_3)
         self.set_rows_now_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_3, self.get_rows_now_sql_button)
         self.h_layout_sql_4 = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_sql_4)
         self.sql_data_check = AppContainerClass.create_qcheckbox(self.h_layout_sql_4, 'WRITE DATA SQL?')
-        self.table_data_sql = AppContainerClass.create_qlable('TABLE DATA SQL : ruda_data_table', self.h_layout_sql_4)
+        self.table_data_sql = AppContainerClass.create_qlable('TABLE DATA SQL : grohot16_data_table',
+                                                              self.h_layout_sql_4)
         self.set_table_data_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_4,
                                                                        self.get_table_data_sql_button)
-        self.rows_data_sql = AppContainerClass.create_qlable('ROWS DATA SQL : device_row | value_row | datetime_row',
-                                                             self.h_layout_sql_4)
+        self.rows_data_sql = AppContainerClass.create_qlable('ROWS DATA SQL : device_row | value_row | alarm_row '
+                                                             '| datetime_row', self.h_layout_sql_4)
         self.set_rows_data_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_4,
                                                                       self.get_rows_data_sql_button)
         # DEBUG
@@ -260,6 +273,14 @@ class MainWidgetclass(QtWidgets.QWidget):
         if success:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
+    def get_alarm_level_button(self):
+        widget = self.alarm_level
+        value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                        f'{widget.text().split(":")[0].strip()} value:',
+                                                        text=f'{widget.text().split(":")[1].strip()}')
+        if success:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
     def get_correct_coefficient_button(self):
         widget = self.correct_coefficient
         value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
@@ -300,6 +321,14 @@ class MainWidgetclass(QtWidgets.QWidget):
         if success:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
+    def get_alias_device_button(self):
+        widget = self.alias_device
+        value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                        f'{widget.text().split(":")[0].strip()} value:',
+                                                        text=f'{widget.text().split(":")[1].strip()}')
+        if success:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
+
     def get_ip_cam_button(self):
         widget = self.ip_cam
         value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
@@ -307,7 +336,6 @@ class MainWidgetclass(QtWidgets.QWidget):
                                                         text=f'{widget.text().split(":")[1].strip()}')
         if success:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
-        pass
 
     def get_mask_cam_button(self):
         widget = self.mask_cam
@@ -470,10 +498,12 @@ class MainWidgetclass(QtWidgets.QWidget):
                 'port_cam': int(self.port_cam.text().split(':')[1].strip()),
                 'login_cam': str(self.login_cam.text().split(':')[1].strip()),
                 'password_cam': str(self.password_cam.text().split(':')[1].strip()),
+                'alias_device': list([x.strip() for x in self.alias_device.text().split(':')[1].strip().split('|')]),
                 'ip_cam': list([x.strip() for x in self.ip_cam.text().split(':')[1].strip().split('|')]),
                 'mask_cam': list([x.strip() for x in self.mask_cam.text().split(':')[1].strip().split('|')]),
                 'sensitivity_analysis': list([int(x.strip()) for x in
                                               self.sensitivity_analysis.text().split(':')[1].strip().split('|')]),
+                'alarm_level': list([int(x.strip()) for x in self.alarm_level.text().split(':')[1].strip().split('|')]),
                 'correct_coefficient': list([float(x.strip()) for x in
                                              self.correct_coefficient.text().split(':')[1].strip().split('|')]),
 
@@ -552,12 +582,16 @@ class MainWidgetclass(QtWidgets.QWidget):
                                    f'{str(data["login_cam"])}')
             self.password_cam.setText(f'{self.password_cam.text().split(":")[0].strip()} : '
                                       f'{str(data["password_cam"])}')
+            self.alias_device.setText(f'{self.alias_device.text().split(":")[0].strip()} : '
+                                      f'{self.get_string_from_list(data["alias_device"])}')
             self.ip_cam.setText(f'{self.ip_cam.text().split(":")[0].strip()} : '
                                 f'{self.get_string_from_list(data["ip_cam"])}')
             self.mask_cam.setText(f'{self.mask_cam.text().split(":")[0].strip()} : '
                                   f'{self.get_string_from_list(data["mask_cam"])}')
             self.sensitivity_analysis.setText(f'{self.sensitivity_analysis.text().split(":")[0].strip()} : '
                                               f'{self.get_string_from_list(data["sensitivity_analysis"])}')
+            self.alarm_level.setText(f'{self.alarm_level.text().split(":")[0].strip()} : '
+                                     f'{self.get_string_from_list(data["alarm_level"])}')
             self.correct_coefficient.setText(f'{self.correct_coefficient.text().split(":")[0].strip()} : '
                                              f'{self.get_string_from_list(data["correct_coefficient"])}')
             self.sql_write.setChecked(data["sql_write"])

@@ -18,7 +18,8 @@ class AnalyzeClass:
                                                 masks=data['mask_cam'], protocol=data['protocol_cam_type'],
                                                 login=data['login_cam'], password=data['password_cam'],
                                                 port=data['port_cam'], sensitivity=data['sensitivity_analysis'],
-                                                correct=data['correct_coefficient'])
+                                                correct=data['correct_coefficient'], alias_device=data['alias_device'],
+                                                alarm_level=data['alarm_level'])
         data = CopyDictionary.get_all_sources(data, {'sources': sources})
         if data['compute_debug'] == 'sync':
             AnalyzeClass.sync_method(data)
@@ -88,7 +89,8 @@ class AnalyzeClass:
                                   widget=data['widget'],
                                   widget_write=data['widget_write'],
                                   text_write=data['text_write'],
-                                  sql_val=data['sql_write']
+                                  sql_val=data['sql_write'],
+                                  alarm_level=source[5]
                                   )
 
     @staticmethod
@@ -165,10 +167,10 @@ class AnalyzeClass:
             image = await AnalyzeClass.async_get_source(data['source_type'], source[0], data['login_cam'],
                                                         data['password_cam'])
             mask = source[1]
-            name = source[0].split("192.168.")[1].strip().split(":")[0].strip()
+            name = source[4]
             if data['render_debug'] == 'all':
                 AnalyzeClass.render_flip(image=image, flipcode=0, name=name, resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_cvtcolor(image=image, color_type=cv2.COLOR_RGB2GRAY,  name=name,
+                AnalyzeClass.render_cvtcolor(image=image, color_type=cv2.COLOR_RGB2GRAY, name=name,
                                              resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_shapes(name=name, resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_origin(image=image, name=name,
@@ -198,17 +200,9 @@ class AnalyzeClass:
             elif data['render_debug'] == 'extended':
                 AnalyzeClass.render_origin(image=image, name=name,
                                            resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_cvtcolor_to_hsv(image=image, name=name,
-                                                    resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_threshold(image=image, name=name,
-                                              resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
                                             name=name,
                                             resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_canny_edges(image=image,
-                                                sensitivity_analysis=source[2],
-                                                name=name,
-                                                resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_final(image=image, mask=mask,
                                           sensitivity_analysis=source[2],
                                           correct_coefficient=source[3],
@@ -244,13 +238,13 @@ class AnalyzeClass:
                                       widget=data['widget'],
                                       widget_write=data['widget_write'],
                                       text_write=data['text_write'],
-                                      sql_val=data['sql_write']
-                                      )
+                                      sql_val=data['sql_write'],
+                                      alarm_level=source[5])
         except Exception as ex:
             LoggingClass.logging(ex)
             print(f'analyze func error')
             print(ex)
-            SendMail.sender_email(subject='error', text='analyze func error')
+            # SendMail.sender_email(subject='error', text='analyze func error')
 
     @staticmethod
     def analyze(source, data: dict):
@@ -287,17 +281,9 @@ class AnalyzeClass:
             elif data['render_debug'] == 'extended':
                 AnalyzeClass.render_origin(image=image, name=name,
                                            resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_cvtcolor_to_hsv(image=image, name=name,
-                                                    resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_threshold(image=image, name=name,
-                                              resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_inrange(image=image, sensitivity_analysis=source[2],
                                             name=name,
                                             resolution_debug=data['resolution_debug'])
-                AnalyzeClass.render_canny_edges(image=image,
-                                                sensitivity_analysis=source[2],
-                                                name=name,
-                                                resolution_debug=data['resolution_debug'])
                 AnalyzeClass.render_final(image=image, mask=mask,
                                           sensitivity_analysis=source[2],
                                           correct_coefficient=source[3],
@@ -334,7 +320,8 @@ class AnalyzeClass:
                 widget=data['widget'],
                 widget_write=data['widget_write'],
                 text_write=data['text_write'],
-                sql_val=data['sql_write']
+                sql_val=data['sql_write'],
+                alarm_level=source[5]
             )
         except Exception as ex:
             LoggingClass.logging(ex)
@@ -343,7 +330,7 @@ class AnalyzeClass:
 
     @staticmethod
     def get_full_sources(source_type: str, sources: list, masks: list, protocol: str, login: str, password: str,
-                         port: int, sensitivity: list, correct: list):
+                         port: int, sensitivity: list, correct: list, alias_device: list, alarm_level: list):
         try:
             _sources = []
             for x in sources:
@@ -351,12 +338,13 @@ class AnalyzeClass:
                 if source_type == 'image-http':
                     _sources.append([f'{protocol}://192.168.{x}:{port}/ISAPI/Streaming/channels/101/'
                                      f'picture?snapShotImageType=JPEG', cv2.imread(masks[index], 0),
-                                     sensitivity[index], correct[index]])
+                                     sensitivity[index], correct[index], alias_device[index], alarm_level[index]])
                 elif source_type == 'video-rtsp':
                     _sources.append([f'{protocol}://{login}:{password}@192.168.{x}:{port}', cv2.imread(masks[index], 0),
-                                     sensitivity[index], correct[index]])
+                                     sensitivity[index], correct[index], alias_device[index], alarm_level[index]])
                 elif source_type == 'video-file':
-                    _sources.append([f'{x}', cv2.imread(masks[index], 0), sensitivity[index], correct[index]])
+                    _sources.append([f'{x}', cv2.imread(masks[index], 0), sensitivity[index], correct[index],
+                                     alias_device[index], alarm_level[index]])
             return _sources
         except Exception as ex:
             LoggingClass.logging(ex)
@@ -531,9 +519,12 @@ class AnalyzeClass:
     def write_result(ip_sql: str, server_sql: str, port_sql: str, database_sql: str, user_sql: str, password_sql: str,
                      sql_now_check: bool, table_now_sql: str, rows_now_sql: list, sql_data_check: bool,
                      table_data_sql: str, rows_data_sql: list, source: str, values: float, widget, widget_write: bool,
-                     text_write: bool, sql_val: bool):
+                     text_write: bool, sql_val: bool, alarm_level: int):
         sql_datetime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-        _values = [source, values, sql_datetime]
+        boolean = 0
+        if values > alarm_level:
+            boolean = 1
+        _values = [source, values, boolean, sql_datetime]
         if widget_write:
             try:
                 widget(f'{_values}')

@@ -1,0 +1,2 @@
+11:37:17 : [WinError 183] Невозможно создать файл, так как он уже существует: 'C:\\Project\\Github_Projects\\python-jsx-smart-pmp-app\\Python DOCS\\output\\analiz_1.8 complex\\__file__'
+11:37:17 : [WinError 183] Невозможно создать файл, так как он уже существует: 'C:\\Project\\Github_Projects\\python-jsx-smart-pmp-app\\Python DOCS\\output\\analiz_1.8 complex\\__file__'
