@@ -733,7 +733,7 @@
 				if (this.enableTopPager) {
 					var $topPager = this.find('div.top');
 					if ($topPager.length == 0)
-						$topPager = this.prepend('<div class="top pagination"></div>').find('div.top');
+						$topPager = this.prepend('<div class="top paginate"></div>').find('div.top');
 					else
 						$topPager.empty();
 
@@ -745,7 +745,7 @@
 				if (this.enableBottomPager) {
 					var $bottomPager = this.find('div.bottom');
 					if ($bottomPager.length == 0)
-						$bottomPager = this.append('<div class="bottom pagination"></div>').find('div.bottom');
+						$bottomPager = this.append('<div class="bottom paginate"></div>').find('div.bottom');
 					else
 						$bottomPager.empty();
 

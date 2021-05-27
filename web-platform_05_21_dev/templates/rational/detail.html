@@ -104,16 +104,21 @@
                                 {{ rational.rational_autor_name }}
                             </div>
                             <div class="btn-group">
-                                <form action="{% url 'app_rational:rational_increase_rating' rational.id %} " method="POST ">
+                                <form action="{% url 'app_rational:rational_change_rating' rational.id %}" method="POST">
                                     {% csrf_token %}
+                                    <input class="form-control " type="hidden" placeholder="+" name="status" value="+">
                                     {% if likes.like %}
                                         <button class="m-md-2 btn btn-xs btn-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
                                     {% else %}
                                         <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
                                     {% endif %}
                                 </form>
-                                <form action="{% url 'app_rational:rational_decrease_rating' rational.id %}" method="POST ">
+                                <div class="btn-group my-4 btn btn-xs btn-outline-info">
+                                    {{ likes.total_rating }}
+                                </div>
+                                <form action="{% url 'app_rational:rational_change_rating' rational.id %}" method="POST">
                                     {% csrf_token %}
+                                    <input class="form-control" type="hidden" placeholder="-" name="status" value="-">
                                     {% if likes.dislike %}
                                         <button class="m-md-2 btn btn-xs btn-danger" type="submit">дизлайков:<p>{{ likes.total_dislike }}</p></button>
                                     {% else %}

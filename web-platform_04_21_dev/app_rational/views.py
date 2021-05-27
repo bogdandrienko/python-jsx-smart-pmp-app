@@ -20,11 +20,13 @@ def rational_list(request, category_slug=None):
         search = request.POST['search_text']
         rational = RationalModel.objects.filter(rational_name__icontains=search)
     except:
-        if category_slug != None:
+        if category_slug != None and category_slug != '':
             category_page = get_object_or_404(CategoryRationalModel, category_slug=category_slug)
             rational = RationalModel.objects.filter(rational_category=category_page).order_by(
                 '-rational_date_registrated')
-    rational = RationalModel.objects.order_by('-rational_date_registrated')
+        else:
+            rational = RationalModel.objects.order_by('-rational_date_registrated')
+    # rational = RationalModel.objects.order_by('-rational_date_registrated')
     category = CategoryRationalModel.objects.order_by('-id')
 
     # Начало пагинатора: передать модель и количество объектов на одной странице, объекты будут списком
@@ -43,7 +45,6 @@ def rational_list(request, category_slug=None):
         'category': category,
     }
     return render(request, 'rational/list.html', context)
-
 
 def rational_search(request):
     # Проверка регистрации: если пользователь не вошёл в аккаунт, действия не срабатают, а переадресует в форму входа

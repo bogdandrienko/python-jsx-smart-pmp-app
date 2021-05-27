@@ -11,6 +11,5 @@ urlpatterns = [
     path('create/', views.rational_create, name='rational_create'),
     path('<int:rational_id>/change/', views.rational_change, name='rational_change'),
     path('<int:rational_id>/leave_comment/', views.rational_leave_comment, name='rational_leave_comment'),
-    path('<int:rational_id>/increase_rating/', views.rational_increase_rating, name='rational_increase_rating'),
-    path('<int:rational_id>/decrease_rating/', views.rational_decrease_rating, name='rational_decrease_rating'),
+    path('<int:rational_id>/rational_change_rating/', views.rational_change_rating, name='rational_change_rating'),
 ]
