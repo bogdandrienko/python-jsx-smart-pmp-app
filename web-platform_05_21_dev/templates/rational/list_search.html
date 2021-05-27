@@ -1,0 +1,50 @@
+{% extends "components/base.html" %} 
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Все рационализаторские предложения
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Рационализаторские Предложения</h1>
+        <p class="lead">Эта страница содержит список всех рационализаторских предложений, отсортированных в порядке убывания по добавлению.</p>
+        <div class="d-flex justify-content-between align-items-center btn-group">
+            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational_create' %}">Добавить предложение</a>
+        </div>
+        <div class="btn-group m-1">
+            <form class="d-flex mx-5" action="{% url 'app_rational:rational_search' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control" name="search_text" type="text" placeholder="Вводить сюда" aria-label="Что ищем?" required="">
+                <button class="form-control btn btn-lg btn-secondary" type="submit">Найти</button>
+            </form> 
+            <a class="btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational' %}">Все предложения</a>
+        </div>
+    </div>
+    {% include 'rational/list_all.html' %}
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %} 
+    {% include 'components/footer.html' %} 
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

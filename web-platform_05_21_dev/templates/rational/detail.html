@@ -1,0 +1,152 @@
+{% extends "components/base.html" %} 
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    {{ rational.rational_name }}
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %} 
+<main class="container-fluid">
+    {% if rational %}
+        <div class="p-md-4 text-white rounded bg-dark">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fst-italic ">Рационализаторское предложение</h1>
+                    <p class="lead ">Тут отображён контент, связанный с выбранным предложением, а также внизу есть возможность проголосовать и оставить комментарий.</p>
+                </div>
+                <a class="btn btn-lg btn-outline-light" href="{% url 'app_rational:rational' %}">Все предложения</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative ">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <div class="d-flex justify-content-between align-items-center">
+                        <strong class="d-inline-block text-primary">
+                            {{ rational.rational_category }}
+                            <p class="text-secondary">
+                                {% if rational.rational_status %}
+                                    Активный проект
+                                {% else %}
+                                    Неактивный проект
+                                {% endif %}
+                            </p>
+                        </strong>
+                        <strong class="d-inline-block text-primary">Рационализаторские предложения</strong>
+                        </div>
+                        <h3>{{ rational.rational_name }}</h3>
+                        <hr>
+                        <div class="text-center">
+                            {% if rational.rational_addition_image %}
+                            <img src="{{ rational.rational_addition_image.url }} " class="bd-placeholder-img " width="70% " height="100% " alt="{{ rational.article_title }} "> {% else %}
+                            <svg class="bd-placeholder-img card-img-top" width="100% " height="100% " xmlns="http://www.w3.org/2000/svg " role="img " aria-label="Placeholder: Thumbnail " preserveAspectRatio="xMidYMid slice " focusable="false"><title>Placeholder</title><rect width="100% " height="100% " fill="#55595c "/><text x="50% " y="50% " fill="#eceeef " dy=".3em ">{{ article.article_title }}</text></svg> {% endif %}
+                        </div>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_structure_from }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_id_registrated }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_date_registrated }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_place_innovation }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_description|safe }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_offering_members|safe }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_conclusion|safe }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_change_documentations|safe }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_resolution }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_responsible_members|safe  }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ rational.rational_date_certification }}
+                        </p>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group m-md-2 btn btn-xs btn-outline-info">
+                                {{ rational.rational_autor_name }}
+                            </div>
+                            <div class="btn-group">
+                                <form action="{% url 'app_rational:rational_increase_rating' rational.id %} " method="POST ">
+                                    {% csrf_token %}
+                                    {% if likes.like %}
+                                        <button class="m-md-2 btn btn-xs btn-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
+                                    {% else %}
+                                        <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">лайков:<p>{{ likes.total_like }}</p></button>
+                                    {% endif %}
+                                </form>
+                                <form action="{% url 'app_rational:rational_decrease_rating' rational.id %}" method="POST ">
+                                    {% csrf_token %}
+                                    {% if likes.dislike %}
+                                        <button class="m-md-2 btn btn-xs btn-danger" type="submit">дизлайков:<p>{{ likes.total_dislike }}</p></button>
+                                    {% else %}
+                                        <button class="m-md-2 btn btn-xs btn-outline-danger" type="submit">дизлайков:<p>{{ likes.total_dislike }}</p></button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                            {% if rational.rational_addition_file_1 %}
+                                <a class="btn btn-dark" href="{{ rational.rational_addition_file_1.url }}">скачать 1 приложение</a>     
+                            {% endif %}
+                            {% if rational.rational_addition_file_2 %}
+                                <a class="btn btn-dark" href="{{ rational.rational_addition_file_2.url }}">скачать 2 приложение</a>     
+                            {% endif %}
+                            {% if rational.rational_addition_file_3 %}
+                                <a class="btn btn-dark" href="{{ rational.rational_addition_file_3.url }}">скачать 3 приложение</a>     
+                            {% endif %}
+                            <small class="text-muted ">{{ rational.rational_date_create }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'rational/detail_comments.html' %}
+    {% else %}
+        Предложение не найдено
+    {% endif %}
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

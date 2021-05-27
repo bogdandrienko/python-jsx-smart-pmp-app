@@ -52,11 +52,10 @@ def rational_search(request):
     # Переадресация пользователя на страницу входа
 
     search = request.POST['search_text']
-    contacts = RationalModel.objects.filter(rational_name__icontains=search)
-    rational = RationalModel.objects.order_by('-rational_date_registrated')
+    contacts = RationalModel.objects.filter(rational_name__icontains=search).order_by('-rational_date_registrated')
+
     context = {
-        'rational': rational,
-        'contacts': contacts
+        'page': contacts
     }
     return render(request, 'rational/list_search.html', context)
 

@@ -1,0 +1,137 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Создать новый аккаунт
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+    <div class="form-control container container-fluid">
+        {% if not form.is_valid %}
+            <div>
+                <br>
+                <h1 class="product_title text-center">
+                    Создать новый аккаунт
+                </h1>
+                <br>
+                <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                    <br>
+                    <p>Пожалуйста, введите информацию в поля ниже, для создания аккаунта:</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <p>{{ form | crispy }}</p>
+                        <button type="submit" name="button" class="btn btn-lg btn-secondary">Создать</button>
+                    </form>
+                    
+                </div>
+            </div>
+        {% else %}
+        <div class="mx-auto container">
+            <br>
+            <h1 class="product_title text-center">
+                Аккаунт был успешно создан
+            </h1>
+            <br>
+            <div class="container-fluid text-center">
+                <a class="btn btn-lg btn-success" href="{% url 'home' %}">Вернуться</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="form-control container container-fluid">
+        <div>
+            <br>
+            <h1 class="product_title text-center">
+                Создать новые аккаунты
+            </h1>
+            <br>
+            <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                <br>
+                <div class="d-flex m-1 p-1"><p>Добавьте в форму файл и затем импортируйте персонал, формат добавления можно скачать в шаблоне:</p>
+                <a class="btn btn-dark" href="{% static 'media/tempates/import_account.xlsx' %}">Скачать шаблон</a>
+                </div>
+                <form form class="form-control" action="{% url 'app_account:import' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>{{ form1 }}</p>
+                    <br>
+                    <div class="btn-group form-control">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Импортировать персонал</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control container container-fluid">
+        <div>
+            <br>
+            <h1 class="product_title text-center">
+                Выгрузить все аккаунты
+            </h1>
+            <br>
+            <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                <br>
+                <div class="d-flex m-1 p-1"><p>Сначала эскпортируйте персонал, потом скачайте шаблон:</p>
+                <a class="btn btn-dark" href="{% static 'media/tempates/export_account.xlsx' %}">Скачать шаблон</a>
+                </div>
+                <form form class="form-control" action="{% url 'app_account:export' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <br>
+                    <div class="btn-group form-control">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Экспортировать персонал</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control container container-fluid">
+        <div>
+            <br>
+            <h1 class="product_title text-center">
+                Сгенерировать пароли
+            </h1>
+            <br>
+            <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                <br>
+                <div class="d-flex m-1 p-1">
+                    <p>Сначала сгенерируйте пароли, потом скачайте шаблон:</p>
+                    <a class="btn btn-dark" href="{% static 'media/tempates/generate_password.xlsx' %}">Скачать шаблон</a>
+                </div>
+                <form form class="form-control" action="{% url 'app_account:generate' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>{{ form2 }}</p>
+                    <br>
+                    <div class="btn-group form-control">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Сгенерировать пароли</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

@@ -1,0 +1,66 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Создать новый аккаунт
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+    <div>
+        {% if form %}
+            <div>
+                <br>
+                <h1 class="product_title text-center">
+                    Создать новые аккаунты
+                </h1>
+                <br>
+                <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+                    <br>
+                    <div class="d-flex m-1 p-1"><p>Заполните поля в шаблоне, прикрепите его в форму и отправьте для создания аккаунтов:</p>
+                    <a class="btn btn-dark" href="{% static 'media/tempates/accounts.xlsx' %}">скачать шаблон документа</a>
+                    </div>
+                    <form form class="form-control" action="{% url 'app_account:create_many' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p>{{ form }}</p>
+                        <br>
+                        <div class="btn-group form-control">
+                            <button class="btn btn-lg btn-outline-primary" type="submit">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+        <div class="mx-auto container">
+            <br>
+            <h1 class="product_title text-center">
+                Аккаунты были успешно созданы
+            </h1>
+            <br>
+            <div class="container-fluid text-center">
+                <a class="btn btn-lg btn-success" href="{% url 'home' %}">Вернуться</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
