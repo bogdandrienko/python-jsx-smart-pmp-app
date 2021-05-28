@@ -1,4 +1,4 @@
-{% extends "components/base.html" %} 
+{% extends 'components/base.html' %}
 {% load static %}
 
 <!-- Head -->
@@ -33,15 +33,16 @@
                 {% csrf_token %}
                 <input class="form-control" name="search_text" type="text" placeholder="Вводить сюда" aria-label="Что ищем?" required="">
                 <button class="form-control btn btn-lg btn-secondary" type="submit">Найти</button>
-            </form> 
-            <a class="btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational' %}">Все предложения</a> 
-            {% include 'rational/list_category.html' %}
+            </form>
+            <a class="btn btn-lg btn-outline-secondary" href="{% url 'app_rational:rational_ratings' %}">Рейтинги</a>
+            <a class="btn btn-lg btn-outline-primary" href="{% url 'app_rational:rational' %}">Все предложения</a>
+            {% include 'app_rational/list_category.html' %}
         </div>
     </div>
     <div class="container d-flex justify-content-center align-self-center">
         {% include 'components/paginator.html' %}
     </div>
-    {% include 'rational/list_all.html' %}
+    {% include 'app_rational/list_all.html' %}
     <div class="container d-flex justify-content-center align-self-center">
         {% include 'components/paginator.html' %}
     </div>
@@ -49,8 +50,8 @@
 {% endblock main %}
 
 <!-- Footer -->
-{% block footer %} 
-    {% include 'components/footer.html' %} 
+{% block footer %}
+    {% include 'components/footer.html' %}
 {% endblock footer %}
 
 <!-- Script -->

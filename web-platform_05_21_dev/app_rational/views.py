@@ -1,5 +1,5 @@
 from src.py.django_utils import AutorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass
-from django.http.response import Http404, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls.base import reverse
 from django.contrib.auth.models import User
@@ -12,7 +12,8 @@ def rational_list(request, category_slug=None):
     try:
         if category_slug is not None:
             category_page = get_object_or_404(CategoryRationalModel, category_slug=category_slug)
-            rational = RationalModel.objects.filter(rational_category=category_page).order_by('-rational_date_registrated')
+            rational = RationalModel.objects.filter(rational_category=category_page).order_by(
+                '-rational_date_registrated')
         else:
             rational = RationalModel.objects.order_by('-rational_date_registrated')
         category = CategoryRationalModel.objects.order_by('-id')
@@ -21,7 +22,7 @@ def rational_list(request, category_slug=None):
             'page': page,
             'category': category,
         }
-        return render(request, 'rational/list.html', context)
+        return render(request, 'app_rational/list.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_list: {ex}')
         HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
@@ -32,11 +33,12 @@ def rational_search(request):
     try:
         if request.method == 'POST':
             search = request.POST['search_text']
-            rational = RationalModel.objects.filter(rational_name__icontains=search).order_by('-rational_date_registrated')
+            rational = RationalModel.objects.filter(rational_name__icontains=search).order_by(
+                '-rational_date_registrated')
             context = {
                 'page': rational
             }
-            return render(request, 'rational/list_search.html', context)
+            return render(request, 'app_rational/list_search.html', context)
         else:
             return redirect('app_rational:rational')
     except Exception as ex:
@@ -75,7 +77,7 @@ def rational_detail(request, rational_id=1):
                 'total_rating': total_like - total_dislike
             }
         }
-        return render(request, 'rational/detail.html', context)
+        return render(request, 'app_rational/detail.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_detail: {ex}')
         HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
@@ -118,7 +120,7 @@ def rational_create(request):
             'category': category,
             'user': user,
         }
-        return render(request, 'rational/create.html', context)
+        return render(request, 'app_rational/create.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_create: {ex}')
         HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
@@ -130,28 +132,28 @@ def rational_change(request, rational_id=None):
         if request.method == 'POST':
             form = RationalCreateForm(request.POST, request.FILES)
             if form.is_valid():
-                object = RationalModel.objects.get(id=rational_id)
-                object.rational_structure_from = request.POST['rational_structure_from']
-                object.rational_uid_registrated = request.POST['rational_uid_registrated']
-                object.rational_date_registrated = request.POST.get('rational_date_registrated')
-                object.rational_name = request.POST['rational_name']
-                object.rational_place_innovation = request.POST['rational_place_innovation']
-                object.rational_description = request.POST['rational_description']
-                object.rational_addition_file_1 = request.FILES.get('rational_addition_file_1')
-                object.rational_addition_file_2 = request.FILES.get('rational_addition_file_2')
-                object.rational_addition_file_3 = request.FILES.get('rational_addition_file_3')
-                object.rational_offering_members = request.POST['rational_offering_members']
-                object.rational_conclusion = request.POST['rational_conclusion']
-                object.rational_change_documentations = request.POST['rational_change_documentations']
-                object.rational_resolution = request.POST['rational_resolution']
-                object.rational_responsible_members = request.POST['rational_responsible_members']
-                object.rational_date_certification = request.POST.get('rational_date_certification')
-                object.rational_category = CategoryRationalModel.objects.get(id=request.POST.get('rational_category'))
-                object.rational_autor_name = User.objects.get(id=request.user.id)
+                _object = RationalModel.objects.get(id=rational_id)
+                _object.rational_structure_from = request.POST['rational_structure_from']
+                _object.rational_uid_registrated = request.POST['rational_uid_registrated']
+                _object.rational_date_registrated = request.POST.get('rational_date_registrated')
+                _object.rational_name = request.POST['rational_name']
+                _object.rational_place_innovation = request.POST['rational_place_innovation']
+                _object.rational_description = request.POST['rational_description']
+                _object.rational_addition_file_1 = request.FILES.get('rational_addition_file_1')
+                _object.rational_addition_file_2 = request.FILES.get('rational_addition_file_2')
+                _object.rational_addition_file_3 = request.FILES.get('rational_addition_file_3')
+                _object.rational_offering_members = request.POST['rational_offering_members']
+                _object.rational_conclusion = request.POST['rational_conclusion']
+                _object.rational_change_documentations = request.POST['rational_change_documentations']
+                _object.rational_resolution = request.POST['rational_resolution']
+                _object.rational_responsible_members = request.POST['rational_responsible_members']
+                _object.rational_date_certification = request.POST.get('rational_date_certification')
+                _object.rational_category = CategoryRationalModel.objects.get(id=request.POST.get('rational_category'))
+                _object.rational_autor_name = User.objects.get(id=request.user.id)
                 # rational_date_create            = request.POST.get('rational_date_create'),
-                object.rational_addition_image = request.FILES.get('rational_addition_image')
+                _object.rational_addition_image = request.FILES.get('rational_addition_image')
                 # rational_status                 = request.POST['rational_status'],
-                object.save()
+                _object.save()
             return redirect('app_rational:rational')
         form = RationalCreateForm(request.POST, request.FILES)
         category = CategoryRationalModel.objects.order_by('-id')
@@ -160,7 +162,7 @@ def rational_change(request, rational_id=None):
             'category': category,
             'rational_id': rational_id,
         }
-        return render(request, 'rational/change.html', context)
+        return render(request, 'app_rational/change.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_change: {ex}')
         HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
@@ -209,6 +211,45 @@ def rational_change_rating(request, rational_id):
             except:
                 pass
         return HttpResponseRedirect(reverse('app_rational:rational_detail', args=(blog.id,)))
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_change_rating: {ex}')
+        HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
+
+
+def rational_ratings(request):
+    AutorizationClass.user_authenticated(request=request)
+    try:
+        rational = RationalModel.objects.order_by('-id')
+        authors = []
+        for query in rational:
+            authors.append(query.rational_autor_name)
+        user_count = {}
+        for author in authors:
+            user_count[author] = authors.count(author)
+        user_counts = []
+        for blog in user_count:
+            rationals = RationalModel.objects.filter(rational_autor_name=blog)
+            total_rating = 0
+            for rating in rationals:
+                total_like = LikeRationalModel.objects.filter(like_article=rating, like_status=True).count()
+                total_dislike = LikeRationalModel.objects.filter(like_article=rating, like_status=False).count()
+                total_rating += total_like - total_dislike
+            user_counts.append({'user': blog, 'count': user_count[blog], 'rating': total_rating})
+        sorted_by_rating = True
+        if request.method == 'POST':
+            if request.POST['sorted'] == 'rating':
+                sorted_by_rating = True
+            if request.POST['sorted'] == 'count':
+                sorted_by_rating = False
+        if sorted_by_rating:
+            page = sorted(user_counts, key=lambda k: k['rating'], reverse=True)
+        else:
+            page = sorted(user_counts, key=lambda k: k['count'], reverse=True)
+        context = {
+            'page': page,
+            'sorted': sorted_by_rating
+        }
+        return render(request, 'app_rational/ratings.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_change_rating: {ex}')
         HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
