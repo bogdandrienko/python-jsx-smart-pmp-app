@@ -9,7 +9,7 @@ class AppContainerClass:
         self.widget = None
 
     def create_ui(self, title, width, height, icon, play_f, stop_f, quit_f, snapshot_f):
-        self.widget = MainWidgetclass(title, width, height, icon, play_f, stop_f, quit_f, snapshot_f)
+        self.widget = MainWidgetClass(title, width, height, icon, play_f, stop_f, quit_f, snapshot_f)
         return self.widget
 
     @staticmethod
@@ -51,7 +51,7 @@ class AppContainerClass:
         return _widget
 
 
-class MainWidgetclass(QtWidgets.QWidget):
+class MainWidgetClass(QtWidgets.QWidget):
     def __init__(self, title="APP", width=640, height=480, icon="", play_f=None, stop_f=None, quit_f=None,
                  snapshot_f=None):
         super().__init__()
