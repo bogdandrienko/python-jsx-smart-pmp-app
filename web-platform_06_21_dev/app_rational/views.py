@@ -85,45 +85,45 @@ def rational_detail(request, rational_id=1):
 
 def rational_create(request):
     AutorizationClass.user_authenticated(request=request)
-    try:
-        if request.method == 'POST':
-            form = RationalCreateForm(request.POST, request.FILES)
-            if form.is_valid():
-                RationalModel.objects.create(
-                    rational_structure_from=request.POST['rational_structure_from'],
-                    rational_uid_registrated=request.POST['rational_uid_registrated'],
-                    rational_date_registrated=request.POST.get('rational_date_registrated'),
-                    rational_name=request.POST['rational_name'],
-                    rational_place_innovation=request.POST['rational_place_innovation'],
-                    rational_description=request.POST['rational_description'],
-                    rational_addition_file_1=request.FILES.get('rational_addition_file_1'),
-                    rational_addition_file_2=request.FILES.get('rational_addition_file_2'),
-                    rational_addition_file_3=request.FILES.get('rational_addition_file_3'),
-                    rational_offering_members=request.POST['rational_offering_members'],
-                    rational_conclusion=request.POST['rational_conclusion'],
-                    rational_change_documentations=request.POST['rational_change_documentations'],
-                    rational_resolution=request.POST['rational_resolution'],
-                    rational_responsible_members=request.POST['rational_responsible_members'],
-                    rational_date_certification=request.POST.get('rational_date_certification'),
-                    rational_category=CategoryRationalModel.objects.get(id=request.POST.get('rational_category')),
-                    rational_autor_name=User.objects.get(id=request.user.id),
-                    # rational_date_create            = request.POST.get('rational_date_create'),
-                    rational_addition_image=request.FILES.get('rational_addition_image'),
-                    # rational_status                 = request.POST['rational_status'],
-                )
-            return redirect('app_rational:rational')
+    # try:
+    if request.method == 'POST':
         form = RationalCreateForm(request.POST, request.FILES)
-        category = CategoryRationalModel.objects.order_by('-id')
-        user = User.objects.get(id=request.user.id).username
-        context = {
-            'form': form,
-            'category': category,
-            'user': user,
-        }
-        return render(request, 'app_rational/create.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_create: {ex}')
-        HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
+        if form.is_valid():
+            RationalModel.objects.create(
+                rational_structure_from=request.POST['rational_structure_from'],
+                rational_uid_registrated=request.POST['rational_uid_registrated'],
+                rational_date_registrated=request.POST.get('rational_date_registrated'),
+                rational_name=request.POST['rational_name'],
+                rational_place_innovation=request.POST['rational_place_innovation'],
+                rational_description=request.POST['rational_description'],
+                rational_addition_file_1=request.FILES.get('rational_addition_file_1'),
+                rational_addition_file_2=request.FILES.get('rational_addition_file_2'),
+                rational_addition_file_3=request.FILES.get('rational_addition_file_3'),
+                rational_offering_members=request.POST['rational_offering_members'],
+                rational_conclusion=request.POST['rational_conclusion'],
+                rational_change_documentations=request.POST['rational_change_documentations'],
+                rational_resolution=request.POST['rational_resolution'],
+                rational_responsible_members=request.POST['rational_responsible_members'],
+                rational_date_certification=request.POST.get('rational_date_certification'),
+                rational_category=CategoryRationalModel.objects.get(id=request.POST.get('rational_category')),
+                rational_autor_name=User.objects.get(id=request.user.id),
+                # rational_date_create            = request.POST.get('rational_date_create'),
+                rational_addition_image=request.FILES.get('rational_addition_image'),
+                # rational_status                 = request.POST['rational_status'],
+            )
+        return redirect('app_rational:rational')
+    form = RationalCreateForm(request.POST, request.FILES)
+    category = CategoryRationalModel.objects.order_by('-id')
+    user = User.objects.get(id=request.user.id).username
+    context = {
+        'form': form,
+        'category': category,
+        'user': user,
+    }
+    return render(request, 'app_rational/create.html', context)
+    # except Exception as ex:
+    #     LoggingClass.logging(message=f'rational_create: {ex}')
+    #     HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ; (')
 
 
 def rational_change(request, rational_id=None):

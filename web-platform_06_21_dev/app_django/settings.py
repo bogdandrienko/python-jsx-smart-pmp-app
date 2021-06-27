@@ -16,21 +16,17 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'fcol_+n%2i=d7*db5+ohls-!&!3*bav@h!2gm5zwi_do&y_akm'
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 HEROKU = False
 
-
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -74,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -108,26 +105,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app_django.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 if not HEROKU:
     # Включить для DEVELOPMENT, отключить для PRODUCTION
     DATABASES = {'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }}
 else:
     # Включить для PRODUCTION, отключить для DEVELOPMENT
     DATABASES = {'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'deinthsv9addbq',
-       'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
-       'PORT': 5432,
-       'USER': 'mayhqhjnyukmmh',
-       'PASSWORD': '4e085cdc07df03952edd34624245b1a69894875064ca6795a977d8b0964bfdec'
-       }}
-    
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'deinthsv9addbq',
+        'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'mayhqhjnyukmmh',
+        'PASSWORD': '4e085cdc07df03952edd34624245b1a69894875064ca6795a977d8b0964bfdec'
+    }}
+
     db_from_env = dj_database_url.config()
 
 # Password validation
@@ -148,7 +144,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -164,7 +159,7 @@ USE_TZ = True
 
 # django-corsheaders
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS  = [
+CORS_ALLOWED_ORIGINS = [
     "http://192.168.0.109:8000",
     "http://localhost:8080",
     "http://127.0.0.1:8000",
@@ -188,30 +183,29 @@ else:
     STATIC_ROOT = Path(BASE_DIR, 'static/')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 
-EMAIL_BACKEND           = 'django.core.mail.backends.smtp.EmailBackend'
-FROM_EMAIL              = 'bogdandrienko@gmail.com'
-EMAIL_ADMIN             = 'bogdandrienko@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+FROM_EMAIL = 'bogdandrienko@gmail.com'
+EMAIL_ADMIN = 'bogdandrienko@gmail.com'
 # send_mail('subject', 'message', settings.EMAIL_HOST_USER, ['andrienko.1997@list.ru'], fail_silently=False)
 
 
 # yandex
-EMAIL_HOST              = 'smtp.yandex.ru'
-EMAIL_HOST_USER         = 'eevee.cycle'
-EMAIL_HOST_PASSWORD     = '31284bogdan'
-EMAIL_PORT              = 465
-EMAIL_USE_TLS           = False
-EMAIL_USE_SSL           = True
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'eevee.cycle'
+EMAIL_HOST_PASSWORD = '31284bogdan'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
-host:       EMAIL_HOST
-port:       EMAIL_PORT
-username:   EMAIL_HOST_USER
-password:   EMAIL_HOST_PASSWORD
-use_tls:    EMAIL_USE_TLS
-use_ssl:    EMAIL_USE_SSL
+host: EMAIL_HOST
+port: EMAIL_PORT
+username: EMAIL_HOST_USER
+password: EMAIL_HOST_PASSWORD
+use_tls: EMAIL_USE_TLS
+use_ssl: EMAIL_USE_SSL
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

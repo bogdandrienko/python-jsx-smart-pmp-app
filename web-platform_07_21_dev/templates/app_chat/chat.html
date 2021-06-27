@@ -1,0 +1,101 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+	Заголовок
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Чат</h1>
+        <p class="lead">Эта страница сообщения пользователей, а также форму для добавления.</p>
+        <div class="d-block">
+            <form class="form-control" action="{% url 'chat' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <br>
+                <div class="btn-group form-control">
+                    <button class="btn btn-lg btn-outline-primary" type="submit">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+    <article class="my-3" id="accordion">
+        <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+            <h3>Контакты</h3>
+        </div>
+        <div class="bd-example">
+            <div class="accordion" id="accordionExample">
+                {% if page %}
+                    {% for LOOP in page %}
+                        {% if LOOP.sms_author == user %}
+                            <div class="shadow-sm bg-secondary">
+                                <div class="text-muted pt-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-0 small lh-smd-blocktext-link-dark">
+                                        <p><svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg><small class="btn btn-sm btn-outline-dark">{{ LOOP.sms_author }}</small></p>
+                                        <p><small class="">{{ LOOP.sms_date }}</small></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="text-gray-dark border-bottom">{{LOOP.sms_description}}</p>
+                                    <a class="btn btn-danger" href="#">Удалить своё сообщение</a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="shadow-sm bg-white">
+                                <div class="text-muted pt-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-0 small lh-smd-blocktext-link-dark">
+                                        <p><svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg><small class="btn btn-sm btn-outline-dark">{{ LOOP.sms_author }}</small></p>
+                                        <p><small class="">{{ LOOP.sms_date }}</small></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="text-gray-dark border-bottom">{{LOOP.sms_description}}</p>
+                                    <a class="btn btn-danger" href="# ">Пожаловаться на чужое сообщение</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    Контакты не найдены
+                {% endif %}
+            </div>
+        </div>
+    </article>
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
+

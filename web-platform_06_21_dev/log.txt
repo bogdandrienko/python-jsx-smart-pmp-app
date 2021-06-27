@@ -74,3 +74,15 @@
 14:25:48 : rational_change_rating: 'QuerySet' object has no attribute 'id'
 14:36:41 : rational_change_rating: Reverse for 'rational_change' with arguments '('',)' not found. 1 pattern(s) tried: ['rational/(?P<rational_id>[0-9]+)/change/$']
 14:36:43 : rational_change_rating: Reverse for 'rational_change' with arguments '('',)' not found. 1 pattern(s) tried: ['rational/(?P<rational_id>[0-9]+)/change/$']
+22:24:24 : rational_detail: User matching query does not exist.
+22:24:29 : rational_detail: User matching query does not exist.
+22:24:32 : rational_detail: User matching query does not exist.
+22:26:23 : rational_detail: User matching query does not exist.
+15:23:52 : rational_create: User matching query does not exist.
+15:24:11 : rational_create: User matching query does not exist.
+15:24:51 : rational_create: User matching query does not exist.
+15:24:52 : rational_create: User matching query does not exist.
+15:25:15 : rational_create: User matching query does not exist.
+15:25:25 : rational_create: User matching query does not exist.
+15:26:52 : rational_create: User matching query does not exist.
+15:26:53 : rational_create: User matching query does not exist.
