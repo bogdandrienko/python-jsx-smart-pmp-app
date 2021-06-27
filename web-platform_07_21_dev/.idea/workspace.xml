@@ -2,151 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app_account/migrations/0002_alter_accounttemplatemodel_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/create_many.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/create_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_application/migrations/0002_auto_20210628_0011.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_application/templates/app_application/home_module.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_application/templates/app_application/list_component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_application/templates/app_application/list_module.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/album.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/blog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/carousel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/cheatsheet.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/checkout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/cover.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/custom.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/example.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/grid.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/masonry.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/navbar-bottom.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/navbar-fixed.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/navbar-static.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/navbars.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/offcanvas.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/pricing.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/product.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/sign-in.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/starter-template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/sticky-footer-navbar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_bootstrap_examples/templates/app_bootstrap_examples/sticky-footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_chat/migrations/0002_alter_smsmodel_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_contact/migrations/0002_alter_contactmodel_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_contact/templates/app_contact/contact.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_documentation/migrations/0002_alter_documentmodel_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_documentation/templates/app_documentation/documentation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/migrations/0002_auto_20210628_0011.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/cart.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/navbar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/product.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_ecommerse/templates/app_ecommerse/signup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_email/migrations/0002_alter_emailmodel_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_email/templates/app_email/email.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_message/migrations/0002_alter_messagemodel_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_message/templates/app_message/message.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/migrations/0002_auto_20210628_0011.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/actor.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/base_1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/include/footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/include/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/include/sidebar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/movie_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/movie_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_movies/templates/app_movies/tags/last_movie.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_news/migrations/0002_auto_20210628_0011.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_notification/migrations/0002_alter_notificationmodel_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_notification/templates/app_notification/notification.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_rational/migrations/0003_auto_20210628_0011.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_react/templates/app_react/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_rest_framework/migrations/0004_auto_20210628_0011.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_wheather/migrations/0002_alter_city_id.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web-platform_07_21_dev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-platform_07_21_dev.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_ecommerse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_ecommerse/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_news/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_news/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_news/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_news/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_news/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_news/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_rational/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_react/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_react/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_rest_framework/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_rest_framework/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_wheather/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_wheather/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_wheather/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_wheather/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/todo/Form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/List.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/todo/List.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/ckeditor/ckeditor/plugins/link/dialogs/link.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/ckeditor/ckeditor/plugins/link/dialogs/link.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/react/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/react/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_account/create.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_account/create_many.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_account/create_password.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_account/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_application/home_module.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_application/list_component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_application/list_module.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/album.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/blog.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/carousel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/cheatsheet.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/checkout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/cover.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/custom.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/example.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/grid.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/masonry.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/navbar-bottom.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/navbar-fixed.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/navbar-static.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/navbars.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/offcanvas.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/pricing.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/product.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/sign-in.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/starter-template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/sticky-footer-navbar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_bootstrap_examples/sticky-footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_chat/chat.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_contact/contact.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_documentation/documentation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_email/email.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_message/message.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/actor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/base_1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/include/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/include/header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/include/sidebar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/movie_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/movie_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_movies/tags/last_movie.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_notification/notification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_weather/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_wheather/templates/app_wheather/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/cart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/navbar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/product.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ecommerse/signup.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/news/news_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_news/templates/app_news/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/news/news_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_news/templates/app_news/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/news/news_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_news/templates/app_news/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/react/index.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,6 +79,7 @@
       <updated>1624786846409</updated>
       <workItem from="1624786848617" duration="1869000" />
       <workItem from="1624817454851" duration="1916000" />
+      <workItem from="1624819509024" duration="1360000" />
     </task>
     <servers />
   </component>
