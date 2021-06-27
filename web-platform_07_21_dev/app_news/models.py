@@ -5,7 +5,7 @@ class Article(models.Model):
     article_title = models.CharField('название статьи', max_length=200)
     article_text = models.TextField('текст статьи', blank=True)
     article_pub_date = models.DateTimeField(auto_now_add=True)
-    article_image = models.ImageField('картинка статьи', upload_to='news/', blank=True)
+    article_image = models.ImageField('картинка статьи', upload_to='app_news/', blank=True)
     article_rating_positive = models.IntegerField('лайки статьи', default=0, blank=False)
     article_rating_negative = models.IntegerField('дизлайки статьи', default=0, blank=False)
     article_rating_value = models.IntegerField('рейтинг статьи', default=0, blank=False)

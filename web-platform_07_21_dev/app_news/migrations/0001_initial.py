@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('article_title', models.CharField(max_length=200, verbose_name='название статьи')),
                 ('article_text', models.TextField(blank=True, verbose_name='текст статьи')),
                 ('article_pub_date', models.DateTimeField(auto_now_add=True)),
-                ('article_image', models.ImageField(blank=True, upload_to='news/', verbose_name='картинка статьи')),
+                ('article_image', models.ImageField(blank=True, upload_to='app_news/', verbose_name='картинка статьи')),
                 ('article_rating_positive', models.IntegerField(default=0, verbose_name='лайки статьи')),
                 ('article_rating_negative', models.IntegerField(default=0, verbose_name='дизлайки статьи')),
                 ('article_rating_value', models.IntegerField(default=0, verbose_name='рейтинг статьи')),

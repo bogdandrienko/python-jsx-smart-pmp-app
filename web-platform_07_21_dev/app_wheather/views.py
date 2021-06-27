@@ -58,5 +58,4 @@ def index(request):
         'form': form,
         'page': page,
     }
-
-    return render(request, 'app_weather/list.html', context)
+    return render(request, 'app_wheather/list.html', context)

@@ -38,9 +38,9 @@ urlpatterns = [
     path('weather/', include('app_wheather.urls')),
     path('rational/', include('app_rational.urls')),
 
-    path('ecommerse/', include('app_ecommerse.urls')),
-    path('news/', include('app_news.urls')),
-    path('react/', include('app_react.urls')),
+    path('app_ecommerse/', include('app_ecommerse.urls')),
+    path('app_news/', include('app_news.urls')),
+    path('app_react/', include('app_react.urls')),
     path('examples/', include('app_bootstrap_examples.urls')),
     path('movies/', include('app_movies.urls')),
     path('chat/', include('app_chat.urls')),

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
+import { connect } from 'app_react-redux';
 import { PropTypes} from 'prop-types';
 import { getTodos, getData, deleteTodo, toggleTodo } from '../../actions/todos';
 

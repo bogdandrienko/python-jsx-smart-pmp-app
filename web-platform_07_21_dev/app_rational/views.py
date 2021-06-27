@@ -131,7 +131,8 @@ def rational_create(request):
 
 
 def rational_change(request, rational_id=None):
-    AutorizationClass.user_authenticated(request=request)
+    if AutorizationClass.user_authenticated(request=request):
+        return redirect(AutorizationClass.user_authenticated(request=request))
     try:
         if request.method == 'POST':
             form = RationalCreateForm(request.POST, request.FILES)
@@ -173,7 +174,8 @@ def rational_change(request, rational_id=None):
 
 
 def rational_leave_comment(request, rational_id):
-    AutorizationClass.user_authenticated(request=request)
+    if AutorizationClass.user_authenticated(request=request):
+        return redirect(AutorizationClass.user_authenticated(request=request))
     try:
         rational = RationalModel.objects.get(id=rational_id)
         CommentRationalModel.objects.create(comment_article=rational,
@@ -188,7 +190,8 @@ def rational_leave_comment(request, rational_id):
 
 
 def rational_change_rating(request, rational_id):
-    AutorizationClass.user_authenticated(request=request)
+    if AutorizationClass.user_authenticated(request=request):
+        return redirect(AutorizationClass.user_authenticated(request=request))
     try:
         blog = RationalModel.objects.get(id=rational_id)
         user = User.objects.get(id=request.user.id)
@@ -221,7 +224,8 @@ def rational_change_rating(request, rational_id):
 
 
 def rational_ratings(request):
-    AutorizationClass.user_authenticated(request=request)
+    if AutorizationClass.user_authenticated(request=request):
+        return redirect(AutorizationClass.user_authenticated(request=request))
     try:
         rational = RationalModel.objects.order_by('-id')
         authors = []

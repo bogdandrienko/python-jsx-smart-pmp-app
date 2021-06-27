@@ -54,7 +54,7 @@ listLoader.addEventListener('readystatechange', () => {
 });
 
 function listLoad() {
-    listLoader.open('GET', domain + 'react/api/todo/', true);
+    listLoader.open('GET', domain + 'app_react/api/todo/', true);
     console.log(listLoader);
     listLoader.send();
 }

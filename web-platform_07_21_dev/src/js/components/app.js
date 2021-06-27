@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import ReactDom from 'react-dom';
+import ReactDom from 'app_react-dom';
 
 import Header from './layout/Header';
 import Dashboard from './todo/Dashboard';
 
-import { Provider } from 'react-redux';
+import { Provider } from 'app_react-redux';
 import store from '../store';
 
 
