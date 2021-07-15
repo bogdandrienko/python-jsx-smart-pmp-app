@@ -7,7 +7,7 @@ from PySide6 import QtCore, QtWidgets
 from threading import Thread
 
 
-def play_analiz(temp=37.0):
+def play_analyse(temp=37.0):
     def whiles():
         def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
                            username="sa",
@@ -18,21 +18,19 @@ def play_analiz(temp=37.0):
             )
             return pyodbc.connect(conn_str)
 
-        sql_select_Query = f"SELECT * " \
+        sql_select_query = f"SELECT * " \
                            f"FROM dbtable " \
                            f"WHERE CAST(temperature AS FLOAT) >= {temp} " \
                            f"ORDER BY date1 DESC, date2 DESC;"
         connect_db = pyodbc_connect()
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
-        cursor.execute(sql_select_Query)
+        cursor.execute(sql_select_query)
 
         wb = Workbook()
         sheet = wb.active
 
-        cols = ["personid/табельный", "accessname/доступ", "date1/дата", "date2/время", "personname/данные",
-                "devicename/точка", "cardno/номер карты", "temperature/температура", "mask/маска"]
-
+        cols = ["табельный", "доступ", "дата", "время", "данные", "точка", "номер карты", "температура", "маска"]
         for col in cols:
             id_s = cols.index(col)
             sheet[f'{get_column_letter(id_s + 1)}1'] = col
@@ -60,7 +58,7 @@ def play_analiz(temp=37.0):
                         print(ex_1)
 
         wb.save('data.xlsx')
-        widget.color_box.setText("готово")
+        widget.color_box.setText("завершено")
         time.sleep(1)
         widget.color_box.setText("ожидание")
 
@@ -80,7 +78,7 @@ class MyWidget(QtWidgets.QWidget):
 
         self.ui_window = QtWidgets.QHBoxLayout(self)
         self.ui_window.addWidget(self.play_button)
-        self.ui_window.addWidget(self.temp_box)
+        # self.ui_window.addWidget(self.temp_box)
         self.ui_window.addWidget(self.color_box)
         self.ui_window.addWidget(self.quit_button)
 
@@ -89,8 +87,8 @@ class MyWidget(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def play_btn_func(self):
-        play_analiz(temp=self.temp_box.value())
-        self.set_text_func("старт")
+        play_analyse(temp=self.temp_box.value())
+        self.set_text_func("в процессе")
 
     @QtCore.Slot()
     def quit_btn_func(self):
@@ -104,11 +102,8 @@ class MyWidget(QtWidgets.QWidget):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-
     widget = MyWidget()
     widget.resize(320, 240)
     thread_main = Thread(target=widget.show())
     thread_main.start()
-
     sys.exit(app.exec_())
-
