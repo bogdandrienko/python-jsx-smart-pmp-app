@@ -92,7 +92,7 @@ class MyWidget(QtWidgets.QWidget):
     @QtCore.Slot()
     def quit_btn_func(self):
         global app
-        sys.exit(app.exec_())
+        sys.exit(app.exec())
 
     @QtCore.Slot()
     def set_text_func(self, text: str):
@@ -105,4 +105,4 @@ if __name__ == "__main__":
     widget.resize(320, 240)
     thread_main = Thread(target=widget.show())
     thread_main.start()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

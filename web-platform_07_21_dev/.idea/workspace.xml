@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/0_Applications/.idea/0_Applications.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/0_Applications/.idea/0_Applications.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/0_Applications/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/0_Applications/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/0_Applications/data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/0_Applications/data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/0_Applications/skud.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/0_Applications/skud.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
@@ -43,7 +47,7 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.skud">
     <configuration name="skud" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -114,6 +118,7 @@
       <workItem from="1625636000444" duration="2775000" />
       <workItem from="1626140991114" duration="7021000" />
       <workItem from="1626238379192" duration="3571000" />
+      <workItem from="1626410665942" duration="1227000" />
     </task>
     <servers />
   </component>
