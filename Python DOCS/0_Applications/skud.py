@@ -10,8 +10,7 @@ from threading import Thread
 def play_analyse(temp=37.0):
     def whiles():
         def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
-                           username="sa",
-                           password="skud12345678"):
+                           username="sa", password="skud12345678"):
             conn_str = (
                     r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
                     ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
