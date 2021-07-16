@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     'app_message.apps.AppMessageConfig',
     'app_chat.apps.AppChatConfig',
 
+    'app_salary.apps.AppSalaryConfig',
+
 ]
 
 MIDDLEWARE = [

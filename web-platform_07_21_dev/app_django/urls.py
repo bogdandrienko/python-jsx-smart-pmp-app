@@ -44,6 +44,7 @@ urlpatterns = [
     path('examples/', include('app_bootstrap_examples.urls')),
     path('movies/', include('app_movies.urls')),
     path('chat/', include('app_chat.urls')),
+    path('salary/', include('app_salary.urls')),
 
     path('custom/', views.custom, name='custom'),
     path('', include('app_rest_framework.urls')),

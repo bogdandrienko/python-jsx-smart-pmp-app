@@ -1,0 +1,16 @@
+16:17:30 : salary: 'search_text'
+16:18:29 : salary: 'search_text'
+16:18:40 : salary: 'search_text'
+16:20:16 : salary: 'search_text'
+16:20:18 : salary: 'search_text'
+16:49:49 : salary: Need 2 values to unpack in for loop; got 8. 
+16:49:52 : salary: Need 2 values to unpack in for loop; got 8. 
+16:49:55 : salary: Need 2 values to unpack in for loop; got 8. 
+16:50:08 : salary: Need 2 values to unpack in for loop; got 8. 
+16:50:10 : salary: Need 2 values to unpack in for loop; got 8. 
+16:50:11 : salary: Need 2 values to unpack in for loop; got 8. 
+16:50:12 : salary: Need 2 values to unpack in for loop; got 8. 
+16:50:13 : salary: Need 2 values to unpack in for loop; got 8. 
+16:57:13 : salary: [Errno 2] No such file or directory: '../zarplata.json'
+16:57:36 : salary: [Errno 2] No such file or directory: '../zarplata.json'
+16:58:14 : salary: [Errno 2] No such file or directory: '../zarplata.json'
