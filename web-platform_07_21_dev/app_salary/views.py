@@ -1,4 +1,4 @@
-import json
+from .json_data import data_s
 from src.py.django_utils import AutorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -14,12 +14,11 @@ def salary(request, request_id=0):
         user = User.objects.get(id=request.user.id)
         if request.method == 'POST':
             request_id = request.POST['transact_id']
+
             # Тут мы получаем json ответ от интерфейса 1С
-            data = {"Зарплата": 100000.00,
-                    "request_id": request_id}
-            with open("../zarplata.json", "r") as read_file:
-                data = json.load(read_file)
+            data = data_s()
             # Тут мы получаем json ответ от интерфейса 1С
+
         context = {
             'user': user,
             'data': data,

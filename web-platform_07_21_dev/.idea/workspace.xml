@@ -2,24 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app_salary/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/zarplata.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/data/zarplata.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/zarplata.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zarplata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/zarplata.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/tempates/zarplata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/data/zarplata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/zarplata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zarplata.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -57,21 +51,26 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/media" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_salary" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media\tempates" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.skud">
+  <component name="RunManager" selected="Python.views">
     <configuration name="skud" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="web-platform_07_21_dev" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -86,6 +85,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Python DOCS/0_Applications/skud.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="web-platform_07_21_dev" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app_rational" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app_rational/views.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -119,6 +140,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.views" />
         <item itemvalue="Python.skud" />
       </list>
     </recent_temporary>
@@ -142,6 +164,22 @@
       <workItem from="1626238379192" duration="3571000" />
       <workItem from="1626410665942" duration="1227000" />
       <workItem from="1626427007192" duration="5794000" />
+      <workItem from="1626456161287" duration="322000" />
+      <workItem from="1626456508818" duration="73000" />
+      <workItem from="1626456605285" duration="97000" />
+      <workItem from="1626456722460" duration="79000" />
+      <workItem from="1626456838332" duration="11000" />
+      <workItem from="1626456859523" duration="149000" />
+      <workItem from="1626457030069" duration="146000" />
+      <workItem from="1626457186958" duration="87000" />
+      <workItem from="1626457284504" duration="155000" />
+      <workItem from="1626457453014" duration="75000" />
+      <workItem from="1626457537531" duration="423000" />
+      <workItem from="1626457973990" duration="24000" />
+      <workItem from="1626458011026" duration="130000" />
+      <workItem from="1626458159131" duration="256000" />
+      <workItem from="1626458656472" duration="9410000" />
+      <workItem from="1626490719321" duration="7519000" />
     </task>
     <servers />
   </component>
@@ -158,11 +196,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/web_platform_07_21_dev$views.coverage" NAME="views Coverage Results" MODIFIED="1626458166663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_rational" />
     <SUITE FILE_PATH="coverage/web_platform_07_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1626238502088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Python DOCS/0_Applications" />
   </component>
 </project>

@@ -43,15 +43,89 @@
             <h1 class="display-4">Прошлый период.</h1>
             <p class="lead">Ниже расположены данные, соответствующие прошлому периоду.</p>
             <div class="d-block">
-                <ol>
-                    {% for key in data %}
-                        <li>{{ key }}</li>
+{#                <ol>#}
+{#                    {% for object_json in data %}#}
+{#                        <li>{{ object_json }} | {{ data.0 }}</li>#}
+{#                    {% endfor %}#}
+{#                </ol>#}
+
+{#<ol>#}
+{#    {% for key in data %}#}
+{#        <ul>#}
+{#            {% for val in key %}#}
+{#                <li>#}
+{#                    {{ val }}#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    {% endfor %}#}
+{#  <li>second item  <!-- closing </li> tag not here! -->#}
+{#    <ul>#}
+{#      <li>second item first subitem</li>#}
+{#      <li>second item second subitem</li>#}
+{#      <li>second item third subitem</li>#}
+{#    </ul>#}
+{#  </li>            <!-- Here's the closing </li> tag -->#}
+{#  <li>third item</li>#}
+{#</ol>#}
+
+
+{#<ol>#}
+{#    {% for arr_1 in data %}#}
+{#        <li>#}
+{#            {% for arr_2 in arr_1 %}#}
+{#                <ul>#}
+{#                    <li>#}
+{#                        {{ arr_2 }}#}
+{#                    </li>#}
+{#                </ul>#}
+{#            {% endfor %}#}
+{#        </li>#}
+{#    {% endfor %}#}
+{#</ol>#}
+
+                <div class="border-dark table-bordered">
+                    {% for arr_1 in data %}
+                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-lg table-sm">
+                            <p class="text-decoration-underline">
+                                {{ arr_1.0 }}
+                            </p>
+                            <thead>
+                                <tr>
+                                    {% for arr_2 in arr_1.1 %}
+                                        {% if forloop.first %}
+                                            <th width="720">{{ arr_2 }}</th>
+                                        {% else %}
+                                            <th>{{ arr_2 }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for arr_2 in arr_1.2 %}
+                                    <tr>
+                                        {% for arr_3 in arr_2 %}
+                                            <td>
+                                                {% if arr_3 %}
+                                                    {{ arr_3 }}
+                                                {% else %}
+                                                    ...
+                                                {% endif %}
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     {% endfor %}
-                </ol>
+                </div>
+
+
+
+
 
             </div>
         </div>
-        {{ data.Зарплата }} | {{ data.request_id }}
     {% endif %}
 </main>
 {% endblock main %}

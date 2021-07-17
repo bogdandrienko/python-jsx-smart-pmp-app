@@ -14,3 +14,41 @@
 16:57:13 : salary: [Errno 2] No such file or directory: '../zarplata.json'
 16:57:36 : salary: [Errno 2] No such file or directory: '../zarplata.json'
 16:58:14 : salary: [Errno 2] No such file or directory: '../zarplata.json'
+00:07:10 : salary: [Errno 2] No such file or directory: '../zarplata.json'
+00:14:11 : salary: [Errno 2] No such file or directory: '/static/zarplata.json'
+00:15:57 : salary: [Errno 2] No such file or directory: '/static/media/zarplata.json'
+00:21:30 : salary: [Errno 2] No such file or directory: '/static/media/zarplata.json'
+00:21:37 : salary: 'charmap' codec can't decode byte 0x98 in position 175: character maps to <undefined>
+00:22:15 : salary: 'charmap' codec can't decode byte 0x98 in position 175: character maps to <undefined>
+00:26:34 : salary: [Errno 2] No such file or directory: 'zarplata.json'
+00:26:42 : salary: [Errno 2] No such file or directory: 'zarplata.json'
+00:33:12 : salary: 'charmap' codec can't decode byte 0x98 in position 175: character maps to <undefined>
+00:34:51 : salary: 'charmap' codec can't decode byte 0x98 in position 175: character maps to <undefined>
+01:48:11 : salary: Malformed template tag at line 111: "else arr_2"
+01:48:16 : salary: Malformed template tag at line 111: "else arr_2"
+09:14:51 : salary: 'dict' object has no attribute 'Начислено'
+09:15:54 : salary: 'dict' object has no attribute 'key'
+09:16:03 : salary: 'dict' object has no attribute 'value'
+09:26:20 : salary: 'dict' object has no attribute 'x'
+09:27:10 : salary: 'dict' object has no attribute 'x'
+09:31:21 : salary: 'оклад по часам'
+09:31:28 : salary: 'оклад по часам'
+09:37:05 : salary: 'dict' object has no attribute 'append'
+09:41:01 : salary: 'NoneType' object is not iterable
+09:42:01 : salary: 'float' object is not iterable
+09:43:24 : salary: 'float' object is not iterable
+09:44:30 : salary: Expecting property name enclosed in double quotes: line 56 column 5 (char 1438)
+09:57:34 : salary: 0
+09:57:50 : salary: 0
+09:59:22 : salary: 0
+09:59:52 : salary: 'Поля'
+10:00:33 : salary: 'Поля'
+10:19:14 : salary: '1'
+10:23:20 : salary: '1. НАЧИСЛЕНО'
+10:24:03 : salary: '1. НАЧИСЛЕНО'
+10:30:27 : salary: 'Fields'
+10:42:05 : salary: '1'
+10:42:12 : salary: '1'
+10:42:15 : salary: '1'
+10:54:44 : salary: unhashable type: 'dict'
+10:54:57 : salary: unhashable type: 'dict'
