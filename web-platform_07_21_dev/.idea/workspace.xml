@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/zarplata.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/tempates/zarplata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/data/zarplata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/zarplata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zarplata.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +171,9 @@
       <workItem from="1626458159131" duration="256000" />
       <workItem from="1626458656472" duration="9410000" />
       <workItem from="1626490719321" duration="7519000" />
+      <workItem from="1626659978946" duration="143000" />
+      <workItem from="1626660131726" duration="716000" />
+      <workItem from="1626662970381" duration="4544000" />
     </task>
     <servers />
   </component>
