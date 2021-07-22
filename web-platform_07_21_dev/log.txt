@@ -52,3 +52,4 @@
 10:42:15 : salary: '1'
 10:54:44 : salary: unhashable type: 'dict'
 10:54:57 : salary: unhashable type: 'dict'
+10:22:07 : salary: Reverse for 'pdf' not found. 'pdf' is not a valid view function or pattern name.
