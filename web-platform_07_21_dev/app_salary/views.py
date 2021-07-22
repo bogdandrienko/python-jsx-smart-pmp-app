@@ -88,7 +88,7 @@ def salary(request, request_id=0):
         data = None
         user = User.objects.get(id=request.user.id)
         if request.method == 'POST':
-            request_id = request.POST['transact_id']
+            # request_id = request.POST['transact_id']
 
             # Тут мы получаем json ответ от интерфейса 1С
             data = data_s()

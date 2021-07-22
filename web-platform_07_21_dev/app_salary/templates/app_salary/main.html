@@ -25,7 +25,7 @@
         <h1 class="display-4">Расчётный лист.</h1>
         <p class="lead">Эта страница содержит информацию о расчётном листе за прошлый период времени.</p>
         <div class="d-block">
-            <form class="form-control" action="{% url 'app_salary:salary' %}" method="POST">
+            <form class="form-control" action="{% url 'app_salary:view_pdf' %}" method="POST">
                 {% csrf_token %}
                 <input class="form-control" type="text" required="" placeholder="{{ user }}" value="{{ user }}" name="Author"><br>
                 <br>
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-            <form class="form-control" action="{% url 'app_salary:pdf' %}" method="POST">
+            <form class="form-control" action="{% url 'app_salary:create_pdf' %}" method="POST">
                 {% csrf_token %}
                 <button class="btn btn-lg btn-outline-primary form-control" type="submit">Получить pdf</button>
             </form>
