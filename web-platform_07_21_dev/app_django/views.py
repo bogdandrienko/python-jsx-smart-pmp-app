@@ -5,8 +5,10 @@ from django.contrib import admin
 def admin(request):
     return render(request, admin.site.urls)
 
+
 def home(request):
     return render(request, 'components/home.html')
+
 
 def custom(request):
     return render(request, 'utils/custom.html')

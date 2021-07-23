@@ -16,7 +16,7 @@ def create_arr_from_json(json_obj, parent_key: str):
 
 
 def data_s():
-    with open("static/media/tempates/zarplata.json", "r", encoding="utf-8") as read_file:
+    with open("static/media/data/zarplata.json", "r", encoding="utf-8") as read_file:
         data = [
             [
                 ["1. НАЧИСЛЕНО"],

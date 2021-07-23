@@ -34,7 +34,7 @@
                     </h2>
                     <form method="post">
                         {% csrf_token %}
-                        <p>{{ form | crispy }}</p>
+                        <p>{{ form|crispy }}</p>
                         <button type='submit' class="btn btn-lg btn-secondary">Войти</button>
                     </form>
                     <br>

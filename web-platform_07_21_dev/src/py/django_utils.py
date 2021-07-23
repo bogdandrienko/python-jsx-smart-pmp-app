@@ -1,8 +1,9 @@
 import time
+import random
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404, HttpResponseRedirect
-
+from django.contrib.auth.models import User
 
 class AutorizationClass:
     @staticmethod
@@ -46,3 +47,26 @@ class TimeUtils:
     @staticmethod
     def get_current_time():
         return f"{time.strftime('%X')}"
+
+
+def create_account(_login, _not_encrypted_password, _email, _name, _surname, _is_staff):
+    try:
+        user = User.objects.create(
+            username=_login,
+            password=_not_encrypted_password,
+            email=_email,
+            first_name=_name,
+            last_name=_surname,
+            is_staff=_is_staff,
+        )
+        user.save()
+        user.set_password = str(create_encrypted_password(_not_encrypted_password=_not_encrypted_password))
+    except Exception as ex:
+        print(ex)
+
+
+def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', _length=8):
+    password = ''
+    for i in range(1, _length + 1):
+        password += random.choice(_random_chars)
+    return password

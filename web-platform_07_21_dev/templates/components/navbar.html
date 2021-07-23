@@ -6,6 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
@@ -43,83 +44,7 @@
                         </li>
                     </div>
                 </div>
-                <div class="col-md-auto mx-auto d-flex align-items-end">
-                    <div class="space-between">
-                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            production: main
-                                <span class="badge badge-primary badge-pill">
-                                    # 8
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
-                                <li>
-                                    <h6 class="dropdown-header">Основной функционал</h6>
-                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
-                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
-                                    <a class="dropdown-item disabled" href="#">Кабинет</a>
-                                    <a class="dropdown-item" href="{% url 'app_notification:notification' %}">Уведомления [{{notification}}]</a>
-                                    <a class="dropdown-item disabled" href="#">Достижения</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Аккаунты</h6>
-                                    <a class="dropdown-item" href="{% url 'app_account:create' %}">Аккаунт: создать</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:import' %}">Аккаунт: создать из файла</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:export' %}">Аккаунт: выгрузить в файл</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:generate' %}">Аккаунт: создать пароли</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:login' %}">Аккаунт: войти
-                                        {% if request.user.is_authenticated %}
-                                            [вы уже вошли в аккаунт]
-                                        {% endif %}
-                                    </a>
-                                    <a class="dropdown-item" href="{% url 'app_account:logout' %}">Аккаунт: выйти 
-                                        {% if request.user.is_authenticated %}
-                                            [{{ request.user.first_name }}]
-                                        {% else %}
-                                            [вы не вошли в аккаунт]    
-                                        {% endif %}
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Бухгалтерия</h6>
-                                    <a class="dropdown-item" href="{% url 'app_salary:salary' %}">Выгрузка текущего расчётного листа</a>
-                                    <a class="dropdown-item disabled" href="#">Выгрузка расчётного листа за период</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Рационализаторство</h6>
-                                    <a class="dropdown-item" href="{% url 'app_rational:rational' %}">Рационализаторство: список</a>
-                                    <a class="dropdown-item" href="{% url 'app_rational:rational_create' %}">Рационализаторство: добавить</a>
-                                    <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Бережливое производство</h6>
-                                    <a class="dropdown-item disabled" href="#">Бережливое производство: список</a>
-                                    <a class="dropdown-item disabled" href="#">Бережливое производство: добавить</a>
-                                    <a class="dropdown-item disabled" href="#">Бережливое производство: шаблоны</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Служба управления персоналом</h6>
-                                    <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </div>
-                </div>
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
@@ -166,6 +91,135 @@
                         </li>
                     </div>
                 </div>
+
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Основное
+                                <span class="badge badge-primary badge-pill">
+                                    # 8
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Основной функционал</h6>
+                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
+                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item disabled" href="#">Кабинет</a>
+                                    <a class="dropdown-item" href="{% url 'app_notification:notification' %}">Уведомления [{{notification}}]</a>
+                                    <a class="dropdown-item disabled" href="#">Достижения</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Аккаунты</h6>
+                                    <a class="dropdown-item" href="{% url 'app_account:login' %}">Аккаунт: войти
+                                        {% if request.user.is_authenticated %}
+                                            [вы уже вошли в аккаунт]
+                                        {% endif %}
+                                    </a>
+                                    <a class="dropdown-item" href="{% url 'app_account:create_user' %}">Аккаунт: создать одного пользователя</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:change_user' %}">Аккаунт: изменить данные пользователя</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:create_users' %}">Аккаунт: создать пользователей из файла</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:export_users' %}">Аккаунт: выгрузить пользователей в файл</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:generate_password' %}">Аккаунт: сгенерировать один пароль</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:generate_passwords' %}">Аккаунт: сгенерировать пароли в файл</a>
+                                    <a class="dropdown-item" href="{% url 'app_account:logout' %}">Аккаунт: выйти
+                                        {% if request.user.is_authenticated %}
+                                            [{{ request.user.first_name }}]
+                                        {% else %}
+                                            [вы не вошли в аккаунт]
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Бухгалтерия
+                                <span class="badge badge-primary badge-pill">
+                                    # 3
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Бухгалтерия</h6>
+                                    <a class="dropdown-item" href="{% url 'app_salary:salary' %}">Выгрузка текущего расчётного листа</a>
+                                    <a class="dropdown-item disabled" href="#">Выгрузка расчётного листа за период</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Проектная Деятельность
+                                <span class="badge badge-primary badge-pill">
+                                    # 6
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Рационализаторство</h6>
+                                    <a class="dropdown-item" href="{% url 'app_rational:rational' %}">Рационализаторство: список</a>
+                                    <a class="dropdown-item" href="{% url 'app_rational:rational_create' %}">Рационализаторство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Бережливое производство</h6>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: список</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Бережливое производство: шаблоны</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropdown bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Служба Управления Персоналом
+                                <span class="badge badge-primary badge-pill">
+                                    # 1
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Служба управления персоналом</h6>
+                                    <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
                 <!-- Btn-Group -->
                 <div class="btn-group m-1 p-1">
                     {% block second_btn-group %}{% endblock second_btn-group %}

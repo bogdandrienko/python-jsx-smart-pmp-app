@@ -2,12 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/change_user.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/create_user.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/create_users.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/export_users.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/generate_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/generate_passwords.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/accounts/create_users.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/accounts/export_users.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/accounts/generate_passwords.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/zarplata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/create.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/create_many.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/create_password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/templates/app_account/login_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_django/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/py/django_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/py/django_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/tempates/export_account copy.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/tempates/export_account.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/tempates/generate_password.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/tempates/zarplata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +84,7 @@
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_account\templates\app_account" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media\tempates" />
     </key>
   </component>
@@ -182,6 +206,9 @@
       <workItem from="1626918704034" duration="8222000" />
       <workItem from="1626944620151" duration="640000" />
       <workItem from="1626945318833" duration="2188000" />
+      <workItem from="1627005478504" duration="13047000" />
+      <workItem from="1627022906670" duration="1642000" />
+      <workItem from="1627024578972" duration="9411000" />
     </task>
     <servers />
   </component>
