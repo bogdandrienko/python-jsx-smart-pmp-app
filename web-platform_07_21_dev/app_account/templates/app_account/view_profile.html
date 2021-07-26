@@ -1,0 +1,82 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Личный профиль
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+<main class="container-fluid">
+    {% if account %}
+        <div class="p-md-4 text-white rounded bg-dark">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fst-italic ">Личный кабинет</h1>
+                    <p class="lead ">Данная страница отображает информацию о выбранном пользователе, если вы хотите просмотреть другого, воспользуйтесь поиском: </p>
+                </div>
+                <a class="btn btn-lg btn-outline-light" href="{% url 'home' %}">Поиск</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative ">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong class="d-inline-block text-secondary">{{ account.user_iin }}</strong>
+                        </div>
+                        <h3>{{ account.firstname }} {{ account.lastname }} {{ account.patronymic }}</h3>
+                        <hr>
+                        <div class="card-body m-0 p-1 text-center">
+                            {% if account.image_avatar %}
+                                <img src="{{ account.image_avatar.url }}" class="bd-placeholder-img " width="256px" height="100%" alt="{{ account.firstname }}">
+                            {% else %}
+                                <img src="{% static 'media/uploads/account/avatar/default.jpg' %}" class="bd-placeholder-img " width="256px" height="100%" alt="default">
+                            {% endif %}
+                        </div>
+                        <hr>
+                        <p class="card-text">
+                            {{ account.achievements }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ account.biography }}
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{ account.hobbies }}
+                        </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        Аккаунт не найден!
+    {% endif %}
+</main>
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

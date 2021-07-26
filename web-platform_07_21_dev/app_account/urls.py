@@ -1,7 +1,6 @@
 from django.urls import path, include
 from . import views
 
-
 app_name = 'app_account'
 urlpatterns = [
     path('login/', views.login_account, name='login'),
@@ -12,5 +11,6 @@ urlpatterns = [
     path('export_users/', views.export_users, name='export_users'),
     path('generate_password/', views.generate_password, name='generate_password'),
     path('generate_passwords/', views.generate_passwords, name='generate_passwords'),
+    path('profile/<slug:username>', views.view_profile, name='view_profile'),
     path('', include('django.contrib.auth.urls')),
 ]

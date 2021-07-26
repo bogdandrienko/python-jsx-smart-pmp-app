@@ -9,7 +9,7 @@
 
 <!-- Title -->
 {% block title %}
-    Создать пользователей
+    Создать/изменить пользователей
 {% endblock title %}
 
 <!-- Style -->   
@@ -26,20 +26,20 @@
     <div>
         <br>
         <h1 class="product_title text-center">
-        Создать пользователей
+        Создать/изменить пользователей
         </h1>
         <br>
         <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
             <br>
             <div class="d-flex m-1 p-1">
-                <p>Выберите файл и нажмите, чтобы создать новых пользователей:</p>
-                <a class="btn btn-dark" href="{% static 'media/data/accounts/create_users.xlsx' %}">Скачать шаблон добавления пользователей</a>
+                <p>Выберите файл и нажмите, чтобы создать новых или изменить пользователей:</p>
+                <a class="btn btn-dark" href="{% static 'media/data/accounts/create_users.xlsx' %}">Скачать шаблон добавления/изменения пользователей</a>
             </div>
             <br>
         {% if result_create_users %}
             <br>
             <div class="d-flex m-1 p-1">
-                <p>Пользователи успешно созданы!</p>
+                <p>Пользователи успешно созданы/изменены!</p>
             </div>
             <br>
             <a class="btn btn-outline-secondary" href="{% url 'app_account:create_users' %}">Сгенерировать ещё раз</a>

@@ -2,34 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/change_user.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/create_user.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/create_users.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/export_users.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/generate_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/generate_passwords.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/accounts/create_users.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/accounts/export_users.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/accounts/generate_passwords.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/zarplata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/migrations/0003_accountdatamodel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/migrations/0004_auto_20210726_1338.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/migrations/0005_alter_accountdatamodel_image_avatar.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/migrations/0006_auto_20210726_1440.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/migrations/0007_alter_accountdatamodel_user_iin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_account/templates/app_account/view_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/default.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_qZ2KgyO.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_account/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/create.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/create_many.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/create_password.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/templates/app_account/login_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/create_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/templates/app_account/create_users.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_django/settings_old.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_rational/templates/app_rational/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/templates/app_rational/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/py/django_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/py/django_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/tempates/export_account copy.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/tempates/export_account.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/tempates/generate_password.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/tempates/zarplata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -209,6 +200,7 @@
       <workItem from="1627005478504" duration="13047000" />
       <workItem from="1627022906670" duration="1642000" />
       <workItem from="1627024578972" duration="9411000" />
+      <workItem from="1627264844913" duration="15647000" />
     </task>
     <servers />
   </component>

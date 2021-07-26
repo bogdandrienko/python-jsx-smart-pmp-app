@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 
 from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm
+from .models import AccountDataModel
 from src.py.django_utils import create_encrypted_password
 
 import openpyxl
@@ -153,7 +154,7 @@ def create_users(request):
                         )
                     try:
                         user_group = Group.objects.get(name=group)
-                    except:
+                    except Exception as ex:
                         user_group = Group.objects.create(name=group)
                     signup_user = User.objects.get(username=username)
                     user_group.user_set.add(signup_user)
@@ -299,3 +300,12 @@ def generate_passwords(request):
     }
 
     return render(request, 'app_account/generate_passwords.html', context)
+
+
+def view_profile(request, username=None):
+    account = AccountDataModel.objects.get(user_iin=username)
+    context = {
+        'account': account,
+        'username': username
+    }
+    return render(request, 'app_account/view_profile.html', context)
