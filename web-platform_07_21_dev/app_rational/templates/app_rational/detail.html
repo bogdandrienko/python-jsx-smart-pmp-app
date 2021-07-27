@@ -1,5 +1,6 @@
 {% extends "components/base.html" %} 
 {% load static %}
+{% load account_tag %}
 
 <!-- Head -->
 {% block head %}
@@ -101,7 +102,12 @@
                         <hr>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group m-md-2 btn btn-xs btn-outline-info">
-                                {{ rational.rational_autor_name }}
+                                {% account_tag rational.rational_autor_name as acc %}
+                                {% if acc %}
+                                    {{ acc.lastname }} {{ acc.firstname }}
+                                {% else %}
+                                    Профиль не заполнен
+                                {% endif %}
                             </div>
                             <div class="btn-group">
                                 <form action="{% url 'app_rational:rational_change_rating' rational.id %}" method="POST">

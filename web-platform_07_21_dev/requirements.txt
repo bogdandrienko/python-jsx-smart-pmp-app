@@ -21,3 +21,6 @@ requests==2.25.1
 sqlparse==0.4.1
 urllib3==1.26.6
 whitenoise==5.2.0
+
+xhtml2pdf~=0.2.5
+httplib2~=0.19.1

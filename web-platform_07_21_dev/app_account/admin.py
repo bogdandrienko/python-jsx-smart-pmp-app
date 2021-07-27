@@ -48,15 +48,15 @@ class AccountDataModelAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Связанное поле', {'fields': ('username', )}),
         ('Основное', {'fields': ('user_iin', 'password', 'firstname', 'lastname', 'patronymic', 'position', )}),
-        ('Вторичное', {'fields': ('achievements', 'biography', 'hobbies', 'image_avatar', )}),
+        ('Вторичное', {'fields': ('education', 'achievements', 'biography', 'hobbies', 'image_avatar', )}),
         ('Вспомогательное', {'fields': ('mail', 'secret_question', 'group', 'status', )}),
     )
 
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['id', 'user_iin', 'firstname', 'lastname', 'patronymic', 'position', 'mail', 'date_registered',
-                     'group', 'status']
+    search_fields = ['id', 'user_iin', 'firstname', 'lastname', 'patronymic', 'position', 'education', 'mail',
+                     'date_registered', 'group', 'status']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора | Включать только
     # связанные поля для этой модели(ForeignKey...)
     # inlines         = [RationalModelInline]

@@ -39,6 +39,10 @@ def logout_account(request):
     return redirect('app_account:login')
 
 
+def get_user(username: str):
+    return 'Bogdan and  ' + username
+
+
 def create_user(request):
     # Переадресация не аутентифицированного пользователя на страницу входа
     if request.user.is_authenticated is not True:
@@ -303,7 +307,10 @@ def generate_passwords(request):
 
 
 def view_profile(request, username=None):
-    account = AccountDataModel.objects.get(user_iin=username)
+    try:
+        account = AccountDataModel.objects.get(user_iin=username)
+    except Exception as ex:
+        account = False
     context = {
         'account': account,
         'username': username

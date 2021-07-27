@@ -1,4 +1,14 @@
 import json
+import httplib2
+
+
+def get_data(url='http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/202104'):
+    h = httplib2.Http("/path/to/cache-directory")
+    login = 'zpadmin'
+    password = '159159qo'
+    h.add_credentials(login, password)
+    response, content = h.request(url)
+    return content
 
 
 def create_arr_from_json(json_obj, parent_key: str):
@@ -75,4 +85,27 @@ def data_s():
         # return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
 
         return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
+
+    data = get_data()
+    print(data)
+    print(type(data))
+
+    try:
+        with open(f"static/media/data/zarplata1.json", 'w', encoding='utf-8') as file:
+            file.write(data)
+    except Exception as ex:
+        pass
+
+    try:
+        with open(f"static/media/data/zarplata2.json", 'w', encoding='utf-8') as file:
+            file.write(data.decode())
+    except Exception as ex:
+        pass
+
+    try:
+        with open(f"static/media/data/zarplata3.json", 'w', encoding='utf-8') as file:
+            json.dump(data.decode("utf-8"), file)
+    except Exception as ex:
+        pass
+
     return return_data

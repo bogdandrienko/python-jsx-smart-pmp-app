@@ -35,6 +35,7 @@ class AccountDataModel(models.Model):
     position = models.TextField('Должность', blank=True)
 
     # Вторичное
+    education = models.TextField('Образование', blank=True)
     achievements = models.TextField('Достижения', blank=True)
     biography = models.TextField('Биография', blank=True)
     hobbies = models.TextField('Увлечения', blank=True)

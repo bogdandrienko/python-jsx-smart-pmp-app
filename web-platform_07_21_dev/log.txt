@@ -61,3 +61,37 @@
 15:28:43 : salary: Reverse for 'pdf' not found. 'pdf' is not a valid view function or pattern name.
 15:29:22 : salary: Reverse for 'pdf' not found. 'pdf' is not a valid view function or pattern name.
 15:29:51 : salary: Reverse for 'pdf' not found. 'pdf' is not a valid view function or pattern name.
+11:53:02 : rational_list: Reverse for 'get_user' with arguments '('',)' not found. 1 pattern(s) tried: ['account/get_user/$']
+11:53:07 : rational_list: Reverse for 'get_user' with arguments '('',)' not found. 1 pattern(s) tried: ['account/get_user/$']
+11:53:51 : rational_list: Reverse for 'get_user' with arguments '('',)' not found. 1 pattern(s) tried: ['account/get_user/$']
+11:53:54 : rational_list: Reverse for 'get_user' with arguments '('',)' not found. 1 pattern(s) tried: ['account/get_user/$']
+11:53:59 : rational_list: Reverse for 'get_user' with arguments '('',)' not found. 1 pattern(s) tried: ['account/get_user/$']
+11:54:00 : rational_list: Reverse for 'get_user' with arguments '('',)' not found. 1 pattern(s) tried: ['account/get_user/$']
+13:02:51 : rational_list: Reverse for 'get_user' with arguments '('',)' not found. 1 pattern(s) tried: ['account/get_user/$']
+13:05:49 : rational_list: 'account_tag' is not a registered tag library. Must be one of:
+accounts
+admin_list
+admin_modify
+admin_urls
+cache
+crispy_forms_field
+crispy_forms_filters
+crispy_forms_tags
+crispy_forms_utils
+grp_tags
+i18n
+l10n
+likes
+log
+movie_tag
+rest_framework
+static
+tz
+13:07:33 : rational_list: Invalid block tag on line 33: 'account', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:27:47 : rational_detail: Invalid block tag on line 11: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:28:08 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:28:09 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:28:13 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:28:13 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:28:13 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:28:14 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
