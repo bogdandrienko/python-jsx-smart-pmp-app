@@ -2,28 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app_account/migrations/0008_auto_20210727_0802.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_account/templatetags/account_tag.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/zarplata1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/zarplata1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/templates/app_account/view_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/templates/app_account/view_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_rational/templates/app_rational/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/templates/app_rational/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_rational/templates/app_rational/detail_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/templates/app_rational/detail_comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_rational/templates/app_rational/list_all.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/templates/app_rational/list_all.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_rational/templatetags/likes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/templatetags/likes_tag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/accounts/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts/export_users.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata2.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata3.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata3.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,6 +189,7 @@
       <workItem from="1627024578972" duration="9411000" />
       <workItem from="1627264844913" duration="16010000" />
       <workItem from="1627351224369" duration="19308000" />
+      <workItem from="1627437164196" duration="5053000" />
     </task>
     <servers />
   </component>

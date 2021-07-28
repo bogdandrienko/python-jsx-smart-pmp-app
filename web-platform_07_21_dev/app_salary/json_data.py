@@ -108,4 +108,12 @@ def data_s():
     except Exception as ex:
         pass
 
-    return return_data
+    print(json.dumps(data.decode()))
+    print(type(json.dumps(data.decode())))
+
+    data1 = json.loads(data)
+    print(data1)
+    print(type(data1))
+
+    # return return_data
+    return data1
