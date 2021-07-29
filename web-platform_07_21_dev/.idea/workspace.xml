@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/zarplata2.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/zarplata3.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata3.json" afterDir="false" />
     </list>
@@ -190,6 +190,7 @@
       <workItem from="1627264844913" duration="16010000" />
       <workItem from="1627351224369" duration="19308000" />
       <workItem from="1627437164196" duration="5053000" />
+      <workItem from="1627551437204" duration="3628000" />
     </task>
     <servers />
   </component>
