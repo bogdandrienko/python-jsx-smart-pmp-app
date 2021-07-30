@@ -46,7 +46,9 @@ def link_callback(uri, rel):
 
 
 def view_pdf(request):
-    data = data_s()
+    data = None
+    if request.method == 'POST':
+        data = data_s(month=request.POST['transact_id'])
     context = {
         'data': data,
     }
@@ -56,6 +58,7 @@ def view_pdf(request):
 def render_pdf_view(request):
     template_path = 'app_salary/pdf.html'
     data = data_s()
+    # data = None
     context = {
         'data': data,
         'STATIC_ROOT': settings.STATIC_ROOT,
@@ -91,7 +94,7 @@ def salary(request, request_id=0):
             # request_id = request.POST['transact_id']
 
             # Тут мы получаем json ответ от интерфейса 1С
-            data = data_s()
+            data = data_s(month=request.POST['transact_id'])
             # Тут мы получаем json ответ от интерфейса 1С
 
         context = {
