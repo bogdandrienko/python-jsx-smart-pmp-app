@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202101,ed40e72f39a899caba4f5e367612b3c6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202102,295515c0d92de1bd361b4d52e67465a1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202103,08939b1e93c29017dcfdc2b5973b840e" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202104,cc01a6cf19d8b92b0321884c835296d4" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202104,cc01a6cf19d8b92b0321884c835296d4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202105,c20284eb13074c25d0b161da69094aa8" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202105,c20284eb13074c25d0b161da69094aa8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202106,478c2894dd43d1670e7bda67d3a8fffa" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202106,478c2894dd43d1670e7bda67d3a8fffa" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,6 +189,7 @@
       <workItem from="1627551437204" duration="3628000" />
       <workItem from="1627610363104" duration="8311000" />
       <workItem from="1627629966566" duration="10950000" />
+      <workItem from="1627641061110" duration="254000" />
     </task>
     <servers />
   </component>
