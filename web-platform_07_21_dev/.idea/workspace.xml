@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202104,cc01a6cf19d8b92b0321884c835296d4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202106,478c2894dd43d1670e7bda67d3a8fffa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/zarplata_temp.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/pdf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata2.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata3.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata3.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +53,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/media" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/media/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -55,6 +61,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media\data" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_salary" />
@@ -191,6 +198,7 @@
       <workItem from="1627351224369" duration="19308000" />
       <workItem from="1627437164196" duration="5053000" />
       <workItem from="1627551437204" duration="3628000" />
+      <workItem from="1627610363104" duration="8311000" />
     </task>
     <servers />
   </component>

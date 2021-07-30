@@ -5,12 +5,13 @@ import os
 
 def get_data(url='http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/202104'):
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-    h = httplib2.Http(relative_path+"\\static\\media\\data")
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\httplib2")
     login = 'zpadmin'
     password = '159159qo'
     h.add_credentials(login, password)
     response, content = h.request(url)
-    return content
+    # return json.loads(content)
+    return json.loads("static/media/data/zarplata_temp.json")
 
 
 def create_arr_from_json(json_obj, parent_key: str):
@@ -28,53 +29,16 @@ def create_arr_from_json(json_obj, parent_key: str):
 
 
 def data_s():
-    # with open("static/media/data/zarplata.json", "r", encoding="utf-8") as read_file:
-    #     data = [
-    #         [
-    #             ["1. НАЧИСЛЕНО"],
-    #             ["Вид", "Период", "Дни", "Часы", "Сумма"],
-    #             [
-    #                 ["оклад по часам", "Июн21", 9, 72, 47250.00],
-    #                 ["Доплата за ЗОЖ", "Июн21", None, None, 2362.50],
-    #                 ["Компенсация расходов на оплату питания работникам", "Июн21", None, None, 2250.00],
-    #             ],
-    #         ],
-    #         [
-    #             ["2. УДЕРЖАНО"],
-    #             ["Вид", "Период", "Сумма"],
-    #             [
-    #                 ["Взносы НДП Нур Отан", "Июн21", 298.00],
-    #                 ["за питание", "Июн21", 6800.00],
-    #                 ["ИПН исчисленный", "Июн21", 20101.84],
-    #             ],
-    #         ],
-    #         [
-    #             ["3. ДОХОДЫ В НАТУРАЛЬНОЙ ФОРМЕ"],
-    #             ["Вид", "Период", "Дни", "Часы", "Сумма"],
-    #             [
-    #                 ["Всего натуралных доходов", None, None, None, None],
-    #             ],
-    #         ],
-    #         [
-    #             ["4. ВЫПЛАЧЕНО"],
-    #             ["Вид", "Период", "Сумма"],
-    #             [
-    #                 ["Перечислено в банк (Платежное поручение исходящее 0000005893 от 25.05.21)", "Июн21", 40000.84],
-    #                 ["Перечислено в банк (Платежное поручение исходящее 0000005894 от 10.06.21)", "Июн21", 60250.00],
-    #                 ["Всего выплат", None, 100250.84],
-    #             ],
-    #         ],
-    #         [
-    #             ["5. НАЛОГОВЫЕ ВЫЧЕТЫ"],
-    #             ["Вид", "Период", "Дни", "Часы", "Сумма"],
-    #             [
-    #                 ["Вычет ОПВ", "Июн21", None, None, 27372.49],
-    #                 ["Стандартный 1 МЗП", "Июн21", None, None, 42500.00],
-    #                 ["Всего вычеты", None, None, None, 69872.49],
-    #             ],
-    #         ],
-    #     ]
-    #     data = json.load(read_file)
+    data = get_data()
+    if data:
+        # with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+        #     json.dump(data, file, ensure_ascii=False, indent=4)
+        pass
+    else:
+        data = None
+
+    create_arr_from_json(data["global_objects"], "1.Начислено", )
+
 
     # global_objects = []
     # for x in data["global_objects"]:
@@ -88,15 +52,4 @@ def data_s():
 
     # return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
 
-    data_1 = get_data()
-    print(data_1)
-    print(type(data_1))
-
-    if data_1:
-        data_2 = json.loads(data_1)
-        print(data_2)
-        print(type(data_2))
-    else:
-        data_2 = None
-
-    return data_2
+    return data
