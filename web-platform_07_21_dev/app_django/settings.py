@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'app_rest_framework.apps.AppRestFrameworkConfig',
     'rest_framework',
     'corsheaders',
+    'easy_maps',
     'app_account.apps.AppAccountConfig',
     'app_application.apps.AppApplicationConfig',
     'app_notification.apps.AppNotificationConfig',
@@ -213,6 +214,10 @@ username: EMAIL_HOST_USER
 password: EMAIL_HOST_PASSWORD
 use_tls: EMAIL_USE_TLS
 use_ssl: EMAIL_USE_SSL
+
+EASY_MAPS_GOOGLE_KEY = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ___0123456789'
+
+EASY_MAPS_CENTER = (52.173, 61.251)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

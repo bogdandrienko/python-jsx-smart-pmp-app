@@ -6,6 +6,8 @@ from django.urls.base import reverse
 from django.contrib.auth.models import User
 import os
 import io
+import psycopg2 as pg
+import datetime
 from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import get_template, render_to_string
@@ -96,7 +98,6 @@ def salary(request, request_id=0):
             # Тут мы получаем json ответ от интерфейса 1С
             data = data_s(month=request.POST['transact_id'])
             # Тут мы получаем json ответ от интерфейса 1С
-
         context = {
             'user': user,
             'data': data,
@@ -104,4 +105,48 @@ def salary(request, request_id=0):
         return render(request, 'app_salary/main.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'salary: {ex}')
+        HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
+
+
+def geo(request):
+    try:
+        data = None
+        user = User.objects.get(id=request.user.id)
+        if request.method == 'POST':
+            connection = pg.connect(
+                host="192.168.1.6",
+                database="navSections",
+                port="5432",
+                user="postgres",
+                password="nF2ArtXK"
+            )
+            postgreSQL_select_Query = "SELECT * FROM public.navdata_202108 " \
+                                      "ORDER BY navtime DESC, device DESC LIMIT 100;"
+            # "ORDER BY navtime DESC, device DESC LIMIT 100"
+            # "ORDER BY device ASC, navtime DESC LIMIT 100"
+            # "WHERE flags = 0 " \
+            cursor = connection.cursor()
+            cursor.execute(postgreSQL_select_Query)
+            mobile_records = cursor.fetchall()
+            cols = ["устройство", "дата и время", "широта", "долгота", "высота", "скорость", "ds", "направление",
+                    "флаги ошибок"]
+            all_arr = []
+            for rows in mobile_records:
+                arr = []
+                for value in rows:
+                    id_s = rows.index(value)
+                    # print(f"{cols[id_s]}: {value}")
+                    if id_s == 1:
+                        arr.append(datetime.datetime.fromtimestamp(int(value - 21600)).strftime('%Y-%m-%d %H:%M:%S'))
+                    else:
+                        arr.append(value)
+                all_arr.append(arr)
+            data = [cols, all_arr]
+        context = {
+            'user': user,
+            'data': data,
+        }
+        return render(request, 'app_salary/geo.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'geo: {ex}')
         HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')

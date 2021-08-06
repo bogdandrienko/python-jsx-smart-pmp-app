@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="" />
+    <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/geo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/map.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/geolocation/.idea/geolocation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/geolocation/.idea/geolocation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/geolocation/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/geolocation/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/geolocation/data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/geolocation/data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python DOCS/geolocation/py.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python DOCS/geolocation/py.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -189,6 +203,7 @@
       <workItem from="1627629966566" duration="10950000" />
       <workItem from="1627641061110" duration="254000" />
       <workItem from="1627899102020" duration="816000" />
+      <workItem from="1628233555396" duration="4366000" />
     </task>
     <servers />
   </component>

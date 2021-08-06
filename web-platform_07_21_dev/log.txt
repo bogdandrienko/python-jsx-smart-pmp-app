@@ -95,3 +95,10 @@ tz
 13:28:13 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
 13:28:13 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
 13:28:14 : rational_detail: Invalid block tag on line 12: 'account_tag', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+13:21:37 : geo: 'int' object is not iterable
+13:25:46 : geo: User matching query does not exist.
+13:25:48 : geo: User matching query does not exist.
+13:25:56 : geo: User matching query does not exist.
+13:26:01 : geo: User matching query does not exist.
+14:20:18 : geo: map.html
+14:20:36 : geo: map.html

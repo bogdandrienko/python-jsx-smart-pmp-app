@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.salary, name='salary'),
     path('view_pdf/', views.view_pdf, name='view_pdf'),
     path('create_pdf/', views.render_pdf_view, name='create_pdf'),
+    path('geo/', views.geo, name='geo'),
     # path('check/<int:request_id>', views.salary, name='salary/check'),
 ]
