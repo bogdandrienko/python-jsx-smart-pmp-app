@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm
 from .models import AccountDataModel
 from src.py.django_utils import create_encrypted_password
+from app_salary.json_data import get_users
 
 import openpyxl
 
@@ -73,6 +74,25 @@ def create_user(request):
     }
 
     return render(request, 'app_account/create_user.html', context)
+
+
+def create_user_from1c(request):
+    data = None
+    if request.method == 'POST':
+        data_s = get_users()
+        headers = ["Период", "Статус", "ИИН", "Фамилия", "Имя", "Отчество"]
+        bodies = []
+        for x in data_s["global_objects"]:
+            val = []
+            for y in data_s["global_objects"][x]:
+                val.append(data_s["global_objects"][x][y])
+            bodies.append(val)
+        data = [headers, bodies]
+    context = {
+        'data': data,
+    }
+    print(data)
+    return render(request, 'app_account/create_user_from1c.html', context)
 
 
 def change_user(request):

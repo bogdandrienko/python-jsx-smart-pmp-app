@@ -14,6 +14,20 @@ def get_data(url='http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210
     return json.loads(content)
 
 
+def get_users(url='http://192.168.1.158/Tanya_perenos/hs/iden/change/20210301', month=1):
+    url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/2021030{month}'
+    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\httplib2")
+    login = 'zpadmin'
+    password = '159159qo'
+    h.add_credentials(login, password)
+    response, content = h.request(url)
+    # return json.loads(content)
+    with open("static/media/data/accounts.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    return data
+
+
 def create_arr_from_json(json_obj, parent_key: str):
     headers = []
     for x in json_obj[parent_key]["Fields"]:
@@ -80,9 +94,10 @@ def data_s(month=4):
     # data = None
     # with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
     #     data = json.load(file)
+    # data_s = get_users()
     if data:
         # with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-        #     json.dump(data, file, ensure_ascii=False, indent=4)
+        #     json.dump(data_s, file, ensure_ascii=False, indent=4)
         pass
     else:
         data = None
