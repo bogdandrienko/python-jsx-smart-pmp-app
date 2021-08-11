@@ -91,7 +91,6 @@ def create_user_from1c(request):
     context = {
         'data': data,
     }
-    print(data)
     return render(request, 'app_account/create_user_from1c.html', context)
 
 
