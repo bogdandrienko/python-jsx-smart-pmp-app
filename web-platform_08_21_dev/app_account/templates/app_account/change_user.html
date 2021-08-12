@@ -1,0 +1,91 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Изменить данные пользователя
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+{% if change_user_form %}
+
+    <div>
+        <br>
+        <h1 class="product_title text-center">
+        Изменить данные пользователя
+        </h1>
+        <br>
+        <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+            <br>
+            <div class="d-flex m-1 p-1">
+                <p>Заполните поля и нажмите кнопку, чтобы обновить данные пользователя:</p>
+            </div>
+            <br>
+            <div class="d-block text-lg-center">
+                <h2><strong class="fa-paragraph ">{{ request.user.username }}</strong></h2>
+            </div>
+            <br>
+        {% if result_change_user %}
+            <br>
+            <div class="d-flex m-1 p-1">
+                <p>Данные пользователя успешно изменены!</p>
+            </div>
+            <br>
+            <a class="btn btn-outline-secondary display-none" href="{% url 'app_account:change_user' %}">Сгенерировать ещё раз</a>
+            <br>
+        {% else %}
+            <form class="form-control" action="{% url 'app_account:change_user' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>{{ change_user_form|crispy }}</p>
+                <br>
+{#                <input class="form-control" type="text" required="" placeholder="Имя" name="first_name">#}
+{#                <br>#}
+{#                <input class="form-control" type="text" required="" placeholder="Фамилия" name="last_name">#}
+{#                <br>#}
+{#                <input class="form-control" type="email" required="" placeholder="email" name="email">#}
+{#                <br>#}
+                <div class="btn-group form-control">
+                    <button class="btn btn-lg btn-outline-primary" type="submit">Обновить</button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+
+{% else %}
+
+    <div class="mx-auto container">
+        <br>
+        <h1 class="product_title text-center">
+            Данные не получены с сервера!
+        </h1>
+        <br>
+        <div class="container-fluid text-center">
+            <a class="btn btn-lg btn-success" href="{% url 'home' %}">Вернуться</a>
+        </div>
+    </div>
+
+{% endif %}
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
