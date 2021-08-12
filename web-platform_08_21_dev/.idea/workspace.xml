@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/data/accounts_temp.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202104,cc01a6cf19d8b92b0321884c835296d4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +200,7 @@
       <workItem from="1628562425738" duration="6368000" />
       <workItem from="1628569793016" duration="1210000" />
       <workItem from="1628668951547" duration="2945000" />
-      <workItem from="1628759766643" duration="1332000" />
+      <workItem from="1628759766643" duration="3270000" />
     </task>
     <servers />
   </component>

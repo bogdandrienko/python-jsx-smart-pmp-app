@@ -11,7 +11,16 @@ def get_data(url='http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210
     password = '159159qo'
     h.add_credentials(login, password)
     response, content = h.request(url)
-    return json.loads(content)
+    if content:
+        try:
+            with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                json.dump(content, file)
+            return json.loads(content)
+        except Exception as ex:
+            print(ex)
+    with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    return data
 
 
 def get_users(url='http://192.168.1.158/Tanya_perenos/hs/iden/change/20210301', month=1):
@@ -22,11 +31,14 @@ def get_users(url='http://192.168.1.158/Tanya_perenos/hs/iden/change/20210301', 
     password = '159159qqq'
     h.add_credentials(login, password)
     response, content = h.request(url)
-    # if content:
-    #     with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:
-    #         json.dump(content, file)
-    #     return json.loads(content)
-    with open("static/media/data/accounts.json", "r", encoding="utf-8") as file:
+    if content:
+        try:
+            with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:
+                json.dump(content, file)
+            return json.loads(content)
+        except Exception as ex:
+            print(ex)
+    with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
         data = json.load(file)
     return data
 
