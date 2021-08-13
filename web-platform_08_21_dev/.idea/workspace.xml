@@ -2,11 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app_salary/templates/app_salary/career.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/career/data.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/Итоговый_отчет_по_проекту_Машинное_зрение_контроль_i8w37lw.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/Паспорт_Машинное_зрение_контроль_схода_на_грохотах_vf9W3J8.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/План_управления_проектом_Машинное_зрение_контроль__lFfpgwh.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/SMART-Project-Managment-Platform.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__1._Описание__Mu3yWrn.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__3.1._Паспорт.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__3.2._План_уп_jzu3BHi.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/SMART_-_внедрение.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/SSH.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/Рацпредложения_2020г..xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/Снимок3.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Акт_оценки_результатов_ОПЭ.doc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Итоговый_отчет_по_проекту_VR_тренажер.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Паспорт_на_VR_тренажер.doc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Система_Rift_S_.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 1. Описание проекта  .docx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 1. Описание проекта  .docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 3. Сроки реализации.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 3. Сроки реализации.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 3.1. Паспорт.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 3.1. Паспорт.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 3.2. План управления проектом.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Веб-платформа управления изменениями — 3.2. План управления проектом.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Дополнительно/Коммерческие на веб платформу/КП Костанайские Минералы 07.03.2021.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Дополнительно/Коммерческие на веб платформу/КП_веб_платформа.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Дополнительно/Коммерческие на веб платформу/Костанайские минералы.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_rational/templates/app_rational/ratings.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/templates/app_rational/ratings.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_salary/json_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/json_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_salary/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_salary/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202104,cc01a6cf19d8b92b0321884c835296d4" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +75,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app_account/templates/app_account" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app_salary/templates/app_salary" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -55,11 +83,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_08_21_dev\app_salary\templates\app_salary" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_account\templates\app_account" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media\data" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_salary" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_account\templatetags" />
@@ -201,6 +229,9 @@
       <workItem from="1628569793016" duration="1210000" />
       <workItem from="1628668951547" duration="2945000" />
       <workItem from="1628759766643" duration="3270000" />
+      <workItem from="1628819689033" duration="459000" />
+      <workItem from="1628820159072" duration="8738000" />
+      <workItem from="1628840075128" duration="7411000" />
     </task>
     <servers />
   </component>

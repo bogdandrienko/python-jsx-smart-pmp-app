@@ -104,3 +104,65 @@ tz
 14:20:36 : geo: map.html
 14:03:10 : geo: User matching query does not exist.
 14:03:16 : geo: User matching query does not exist.
+11:29:53 : career: [Errno 2] No such file or directory: 'static/media/data/career/data.html'
+11:29:59 : career: [Errno 2] No such file or directory: 'static/media/data/career/data.html'
+11:30:02 : career: [Errno 2] No such file or directory: 'static/media/data/career/data.html'
+11:30:51 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:30:54 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:31:11 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:31:13 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:31:27 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:31:39 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:31:58 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:32:01 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:32:50 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:33:00 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:33:03 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:33:26 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:35:32 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:35:35 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:35:53 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:35:56 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:36:12 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:36:38 : career: invalid mode: 'W+'
+11:36:40 : career: invalid mode: 'W+'
+11:37:02 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:38:35 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:38:40 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:39:03 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:39:06 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+11:39:48 : career: 'str' object has no attribute 'decode'
+11:39:59 : career: write() argument must be str, not bytes
+11:45:11 : career: 'bytes' object has no attribute 'text'
+11:45:24 : career: 'bytes' object has no attribute 'text'
+11:45:40 : career: 'bytes' object has no attribute 'text'
+11:45:59 : career: write() argument must be str, not bytes
+11:46:12 : career: write() argument must be str, not bytes
+11:47:35 : career: 'bytes' object has no attribute 'text'
+11:47:56 : career: 'bytes' object has no attribute 'text'
+11:48:28 : career: 'bytes' object has no attribute 'text'
+11:49:03 : career: write() argument must be str, not bytes
+11:49:36 : career: write() argument must be str, not bytes
+11:49:54 : career: write() argument must be str, not bytes
+11:53:57 : career: 'charmap' codec can't decode byte 0x98 in position 11276: character maps to <undefined>
+11:58:25 : career: 'str' object has no attribute 'descendants'
+11:58:45 : career: 'str' object has no attribute 'descendants'
+11:59:39 : career: 'str' object has no attribute 'descendants'
+13:17:14 : career: 'str' object has no attribute 'descendants'
+13:28:52 : career: list index out of range
+13:45:59 : career: 'charmap' codec can't encode characters in position 2557-2561: character maps to <undefined>
+13:51:00 : career: Invalid URL '<div class="collection-item w-dyn-item" role="listitem"><a class="property-card w-inline-block" href="/career/job-13"><div class="property-content"><h5 class="heading-12">ћашинист железнодорожно-строительных машин </h5></div></a></div>': No schema supplied. Perhaps you meant http://<div class="collection-item w-dyn-item" role="listitem"><a class="property-card w-inline-block" href="/career/job-13"><div class="property-content"><h5 class="heading-12">ћашинист железнодорожно-строительных машин </h5></div></a></div>?
+14:00:16 : career: 'NoneType' object is not callable
+14:00:20 : career: 'NoneType' object is not callable
+14:01:02 : career: 'NoneType' object is not callable
+14:01:30 : career: 'NoneType' object is not callable
+14:02:16 : career: 'NoneType' object is not callable
+14:02:44 : career: 'NoneType' object is not callable
+14:03:09 : career: 'NoneType' object is not callable
+14:03:22 : career: 'NoneType' object is not callable
+14:04:04 : career: 'NoneType' object is not callable
+14:06:31 : career: 'NoneType' object is not callable
+14:10:01 : career: 'charmap' codec can't encode characters in position 0-2: character maps to <undefined>
+14:15:28 : career: unsupported operand type(s) for -: 'str' and 'int'
+14:35:40 : career: name 'headers' is not defined
+14:35:42 : career: name 'headers' is not defined

@@ -1,3 +1,6 @@
+import bs4
+import httplib2
+
 from .json_data import data_s
 from src.py.django_utils import AutorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass
 from django.http.response import HttpResponseRedirect
@@ -6,6 +9,8 @@ from django.urls.base import reverse
 from django.contrib.auth.models import User
 import os
 import io
+import requests
+from bs4 import BeautifulSoup
 import psycopg2 as pg
 import datetime
 from django.conf import settings
@@ -38,8 +43,6 @@ def link_callback(uri, rel):
             path = os.path.join(sRoot, uri.replace(sUrl, ""))
         else:
             return uri
-
-    # make sure that file exists
     if not os.path.isfile(path):
         raise Exception(
             'media URI must start with %s or %s' % (sUrl, mUrl)
@@ -71,7 +74,6 @@ def render_pdf_view(request):
     # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)
-
     # create a pdf
     pisa_status = pisa.CreatePDF(
         html, dest=response, encoding='utf-8', link_callback=link_callback)
@@ -93,8 +95,6 @@ def salary(request, request_id=0):
         data = None
         user = User.objects.get(id=request.user.id)
         if request.method == 'POST':
-            # request_id = request.POST['transact_id']
-
             # Тут мы получаем json ответ от интерфейса 1С
             data = data_s(month=request.POST['transact_id'])
             # Тут мы получаем json ответ от интерфейса 1С
@@ -120,13 +120,11 @@ def geo(request):
                 user="postgres",
                 password="nF2ArtXK"
             )
-            postgreSQL_select_Query = "SELECT * FROM public.navdata_202108 " \
+            postgresql_select_query = "SELECT * FROM public.navdata_202108 " \
                                       "ORDER BY navtime DESC, device DESC LIMIT 100;"
-            # "ORDER BY navtime DESC, device DESC LIMIT 100"
-            # "ORDER BY device ASC, navtime DESC LIMIT 100"
-            # "WHERE flags = 0 " \
+            # "WHERE flags = 0 "
             cursor = connection.cursor()
-            cursor.execute(postgreSQL_select_Query)
+            cursor.execute(postgresql_select_query)
             mobile_records = cursor.fetchall()
             cols = ["устройство", "дата и время", "широта", "долгота", "высота", "скорость", "ds", "направление",
                     "флаги ошибок"]
@@ -135,7 +133,6 @@ def geo(request):
                 arr = []
                 for value in rows:
                     id_s = rows.index(value)
-                    # print(f"{cols[id_s]}: {value}")
                     if id_s == 1:
                         arr.append(datetime.datetime.fromtimestamp(int(value - 21600)).strftime('%Y-%m-%d %H:%M:%S'))
                     else:
@@ -149,4 +146,57 @@ def geo(request):
         return render(request, 'app_salary/geo.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'geo: {ex}')
+        HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')
+
+
+def career(request):
+    try:
+        data = None
+        if request.method == 'POST':
+            # headers = {
+            #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            # }
+            # vacancies_urls = []
+            # url = 'https://www.km-open.online/property'
+            # r = requests.get(url, headers=headers)
+            # soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            # list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
+            # for list_obj in list_objs:
+            #     vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
+            # vacancies_data = []
+            # for url_s in vacancies_urls:
+            #     r = requests.get(url_s, headers=headers)
+            #     soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            #     list_objs = soup.find_all('div', {"class": "title-block"})
+            #     vacancie_data = str(list_objs[0]).split('"heading-11">')[1].split('</h5>')[0]
+            #     vacancies_data.append([vacancie_data, url_s])
+            # data = [["Вакансия"], vacancies_data]
+            # headers = {
+            #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            # }
+
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            }
+            vacancies_urls = []
+            url = 'https://www.km-open.online/property'
+            r = requests.get(url, headers=headers)
+            soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
+            for list_obj in list_objs:
+                vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
+            vacancies_title = []
+            for list_obj in list_objs:
+                vacancies_title.append(str(list_obj).split('class="heading-12">')[1].split('</h5>')[0])
+            vacancies_data = []
+            for title in vacancies_title:
+                vacancies_data.append([title, vacancies_urls[vacancies_title.index(title)]])
+
+            data = [["Вакансия"], vacancies_data]
+        context = {
+            'data': data,
+        }
+        return render(request, 'app_salary/career.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'career: {ex}')
         HttpRaiseExceptionClass.http404_raise(exceptionText='Страница не найдена ;(')

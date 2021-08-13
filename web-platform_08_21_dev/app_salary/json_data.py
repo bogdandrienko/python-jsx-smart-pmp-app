@@ -23,8 +23,8 @@ def get_data(url='http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210
     return data
 
 
-def get_users(url='http://192.168.1.158/Tanya_perenos/hs/iden/change/20210301', month=1):
-    url = f'http://192.168.1.158/Tanya_perenos/hs/iden/change/2021030{month}'
+def get_users(url='http://192.168.1.158/Tanya_perenos/hs/iden/change/20210301', day=1):
+    url = f'http://192.168.1.158/Tanya_perenos/hs/iden/change/2021030{day}'
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
     h = httplib2.Http(relative_path + "\\static\\media\\data\\httplib2")
     login = 'zpadmin'
@@ -40,6 +40,11 @@ def get_users(url='http://192.168.1.158/Tanya_perenos/hs/iden/change/20210301', 
             print(ex)
     with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
         data = json.load(file)
+    return data
+
+
+def get_career(url='https://www.km-open.online/property'):
+    data = None
     return data
 
 
