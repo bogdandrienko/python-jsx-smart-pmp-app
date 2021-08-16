@@ -43,29 +43,11 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'crispy_forms',
-    'app_rest_framework.apps.AppRestFrameworkConfig',
     'rest_framework',
-    'corsheaders',
     'easy_maps',
-    'app_account.apps.AppAccountConfig',
-    'app_application.apps.AppApplicationConfig',
-    'app_notification.apps.AppNotificationConfig',
+    'corsheaders',
 
-    'app_bootstrap_examples.apps.AppBootstrapExamplesConfig',
-    'app_ecommerse.apps.AppEcommerseConfig',
-    'app_news.apps.AppNewsConfig',
-    'app_react.apps.AppReactConfig',
-    'app_wheather.apps.AppWheatherConfig',
-    'app_movies.apps.AppMoviesConfig',
-    'app_rational.apps.AppRationalConfig',
-    'app_email.apps.AppEmailConfig',
-    'app_contact.apps.AppContactConfig',
-    'app_documentation.apps.AppDocumentationConfig',
-    'app_message.apps.AppMessageConfig',
-    'app_chat.apps.AppChatConfig',
-
-    'app_salary.apps.AppSalaryConfig',
-
+    'app_km.apps.AppKmConfig',
 ]
 
 MIDDLEWARE = [
@@ -98,9 +80,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'django.template.context_processors.request',
-                'app_ecommerse.context_processors.menu_links',
-                'app_ecommerse.context_processors.counter',
-                'app_notification.context_processors.notification_counter',
+                'app_km.context_processors.notification_counter',
             ],
         },
     },
@@ -164,6 +144,7 @@ USE_TZ = True
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.0.109:8000",
+    "http://192.168.1.68:8000",
     "http://localhost:8080",
     "http://127.0.0.1:8000",
 ]

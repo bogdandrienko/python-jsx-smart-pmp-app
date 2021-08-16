@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">ГЛАВНАЯ</a>
+        <a class="navbar-brand" href="{% url 'app_km:home' %}">ГЛАВНАЯ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,68 +18,28 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Готовые</h6>
-                                    <a class="dropdown-item" href="{% url 'news' %}">app_news</a>
-                                    <a class="dropdown-item" href="{% url 'ecommerse' %}">app_ecommerse</a>
-                                    <a class="dropdown-item" href="{% url 'react' %}">app_react</a>
-                                    <a class="dropdown-item" href="{% url 'example' %}">app_bootstrap_examples</a>
-                                    <a class="dropdown-item" href="{% url 'movies' %}">app_movies</a>
-                                    <a class="dropdown-item" href="{% url 'chat' %}">app_chat</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:news' %}">app_news</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:react' %}">app_react</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:example' %}">app_bootstrap_examples</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:chat' %}">app_chat</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Экстра</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:email' %}">Электронная почта: общий список</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:message' %}">Сообщения: общий список</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:documentation' %}">Документация: общий список</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:contact' %}">Контакты: общий список</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:weather' %}">Погода: общий список</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">
                                 </li>
                                 <li>
                                     <h6 class="dropdown-header">Геолокация</h6>
-                                    <a class="dropdown-item" href="{% url 'app_salary:geo' %}">Устройства: список</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Электронная почта</h6>
-                                    <a class="dropdown-item" href="{% url 'app_email:email' %}">Электронная почта: общий список</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Сообщения</h6>
-                                    <a class="dropdown-item" href="{% url 'app_message:message' %}">Сообщения: общий список</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Документация</h6>
-                                    <a class="dropdown-item" href="{% url 'app_documentation:documentation' %}">Документация: общий список</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Контакты</h6>
-                                    <a class="dropdown-item" href="{% url 'app_contact:contact' %}">Контакты: общий список</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Погода</h6>
-                                    <a class="dropdown-item" href="{% url 'app_wheather:wheather' %}">Погода: общий список</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">В разработке</h6>
-                                    <a class="dropdown-item" href="{% url 'custom' %}">custom</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Шаблоны</h6>
-                                    <a class="dropdown-item" href="#">none</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:geo' %}">Устройства: список</a>
                                 </li>
                             </ul>
                         </li>
@@ -97,14 +57,14 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Основной функционал</h6>
-                                    <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
-                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:home' %}">Главная страница</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:admin' %}">Панель Администрации</a>
                                     {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'app_account:view_profile' request.user.username %}">Личный кабинет</a>
+                                        <a class="dropdown-item" href="{% url 'app_km:view_profile' request.user.username %}">Личный кабинет</a>
                                     {% else %}
                                         <strong class="dropdown-item">Личный кабинет [вы не вошли в аккаунт]</strong>
                                     {% endif %}
-                                    <a class="dropdown-item disabled" href="{% url 'app_notification:notification' %}">Уведомления [{{notification}}]</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:notification' %}">Уведомления [{{notification}}]</a>
                                     <a class="dropdown-item disabled" href="#">Достижения</a>
                                 </li>
                                 <li>
@@ -112,19 +72,19 @@
                                 </li>
                                 <li>
                                     <h6 class="dropdown-header">Аккаунты</h6>
-                                    <a class="dropdown-item" href="{% url 'app_account:login' %}">Аккаунт: войти
+                                    <a class="dropdown-item" href="{% url 'app_km:login' %}">Аккаунт: войти
                                         {% if request.user.is_authenticated %}
                                             [вы уже вошли в аккаунт]
                                         {% endif %}
                                     </a>
-                                    <a class="dropdown-item" href="{% url 'app_account:create_user' %}">Аккаунт: создать одного пользователя</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:change_user' %}">Аккаунт: изменить данные пользователя</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:create_users' %}">Аккаунт: создать пользователей из файла</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:create_user_from1c' %}">Аккаунт: создать/удалить/обновить пользователей из 1C</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:export_users' %}">Аккаунт: выгрузить пользователей в файл</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:generate_password' %}">Аккаунт: сгенерировать один пароль</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:generate_passwords' %}">Аккаунт: сгенерировать пароли в файл</a>
-                                    <a class="dropdown-item" href="{% url 'app_account:logout' %}">Аккаунт: выйти
+                                    <a class="dropdown-item" href="{% url 'app_km:create_user' %}">Аккаунт: создать одного пользователя</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:change_user' %}">Аккаунт: изменить данные пользователя</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:create_users' %}">Аккаунт: создать пользователей из файла</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:create_user_from1c' %}">Аккаунт: создать/удалить/обновить пользователей из 1C</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:export_users' %}">Аккаунт: выгрузить пользователей в файл</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:generate_password' %}">Аккаунт: сгенерировать один пароль</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:generate_passwords' %}">Аккаунт: сгенерировать пароли в файл</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:logout' %}">Аккаунт: выйти
                                         {% if request.user.is_authenticated %}
                                             [{{ request.user.first_name }}]
                                         {% else %}
@@ -148,7 +108,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Бухгалтерия</h6>
-                                    <a class="dropdown-item" href="{% url 'app_salary:salary' %}">Выгрузка текущего расчётного листа</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:salary' %}">Выгрузка текущего расчётного листа</a>
                                 </li>
                             </ul>
                         </li>
@@ -166,10 +126,10 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Рационализаторство</h6>
-                                    <a class="dropdown-item" href="{% url 'app_rational:rational' %}">Рационализаторство: список</a>
-                                    <a class="dropdown-item" href="{% url 'app_rational:rational_create' %}">Рационализаторство: добавить</a>
-                                    <a class="dropdown-item" href="{% url 'app_rational:rational_ratings' %}">Рационализаторство: рейтинги</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:rational' %}">Рационализаторство: список</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:rational_create' %}">Рационализаторство: добавить</a>
                                     <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:rational_ratings' %}">Рационализаторство: рейтинги</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">
@@ -196,7 +156,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Отдел кадров</h6>
-                                    <a class="dropdown-item" href="{% url 'app_salary:career' %}">Вакансии</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:career' %}">Вакансии</a>
                                     <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
                                 </li>
                             </ul>

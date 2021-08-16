@@ -14,42 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
-from . import views
-
+from django.contrib import admin
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
-    path('admin/', views.admin, name='admin'),
-    path('', views.home, name=''),
-    path('home/', views.home, name='home'),
 
-    path('account/', include('app_account.urls')),
-    path('application/', include('app_application.urls')),
-    path('notification/', include('app_notification.urls')),
-    path('email/', include('app_email.urls')),
-    path('contact/', include('app_contact.urls')),
-    path('documentation/', include('app_documentation.urls')),
-    path('message/', include('app_message.urls')),
-    path('weather/', include('app_wheather.urls')),
-    path('rational/', include('app_rational.urls')),
-
-    path('app_ecommerse/', include('app_ecommerse.urls')),
-    path('app_news/', include('app_news.urls')),
-    path('app_react/', include('app_react.urls')),
-    path('examples/', include('app_bootstrap_examples.urls')),
-    path('movies/', include('app_movies.urls')),
-    path('chat/', include('app_chat.urls')),
-    path('salary/', include('app_salary.urls')),
-
-    path('custom/', views.custom, name='custom'),
-    path('', include('app_rest_framework.urls')),
+    path('', include('app_km.urls')),
 ]
 
 if settings.DEBUG:
-	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
