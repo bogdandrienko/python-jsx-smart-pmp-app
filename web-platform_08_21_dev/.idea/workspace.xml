@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/static/media/uploads/rational/17_08_2021/09_04_45/Система_Rift_S_.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/static/media/uploads/rational/17_08_2021/09_07_14/Безымянный.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/static/media/uploads/rational/17_08_2021/09_07_14/Наброски.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/static/media/uploads/rational/17_08_2021/09_07_14/Общие_сведения.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/static/media/uploads/rational/17_08_2021/09_08_46/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/static/media/uploads/rational/17_08_2021/09_08_46/ip_10.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/static/media/uploads/rational/17_08_2021/09_08_46/Параметры.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Проход.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Реквизиты.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Схема_подключения_алкотеста.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/Паспорт_Машинное_зрение_контроль_схода_на_грохотах_cX08TYh.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/План_управления_проектом_Машинное_зрение_контроль__uHcQB95.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Виртуальная_реальность_ТЗ.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Итоговый_отчет_по_проекту_VR_тренажер.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Система_Rift_S_.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/SMART-Project-Managment-Platform.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/Итоговый_отчет_по_проекту_VR_тренажер.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/Корректировка_премирования_проектной_команды.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Web-platform.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Web-platform.pptx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_07_21_dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_07_21_dev/app_rational/templates/app_rational/ratings.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/app_rational/templates/app_rational/ratings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_07_21_dev/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_07_21_dev/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_07_21_dev/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_07_21_dev/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/list_all.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/list_all.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/list_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/list_module.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templatetags/likes_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templatetags/likes_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +58,7 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -249,6 +214,8 @@
       <workItem from="1629084485106" duration="19500000" />
       <workItem from="1629110588678" duration="930000" />
       <workItem from="1629165101623" duration="8690000" />
+      <workItem from="1629179497807" duration="4000" />
+      <workItem from="1629184748095" duration="2062000" />
     </task>
     <servers />
   </component>
