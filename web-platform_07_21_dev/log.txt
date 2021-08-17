@@ -104,3 +104,4 @@ tz
 14:20:36 : geo: map.html
 14:03:10 : geo: User matching query does not exist.
 14:03:16 : geo: User matching query does not exist.
+09:12:05 : rational_change_rating: Invalid block tag on line 61: 'else', expected 'endif'. Did you forget to register or load this tag?

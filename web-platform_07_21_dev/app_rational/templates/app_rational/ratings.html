@@ -1,5 +1,6 @@
 {% extends 'components/base.html' %}
 {% load static %}
+{% load account_tag %}
 
 <!-- Head -->
 {% block head %}
@@ -50,7 +51,17 @@
             <div class="card shadow-sm">
                 <div class="card-header m-0 p-1">
                     <h4 class="fw-normal card-header bg-light text-dark text-decoration-none d-flex">
-                        <strong>{{ LOOP.user }}</strong>
+                        <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">
+                            {% account_tag LOOP.user as acc %}
+                            {% if acc %}
+                                <strong>{{ acc.lastname }} {{ acc.firstname }}</strong>
+                                <div class="text-center">
+                                    <img src="{{ acc.image_avatar.url }}" class="bd-placeholder-img " width="70% " height="100%" alt="">
+                                </div>
+                            {% else %}
+                                Профиль не заполнен
+                            {% endif %}
+                        </small>
                         <small class="my-2 btn btn-sm btn-outline-dark text-link-dark">{{ forloop.counter }}</small>
                     </h4>
                 </div>

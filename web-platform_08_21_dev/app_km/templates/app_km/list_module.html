@@ -11,7 +11,7 @@
     Домашняя
 {% endblock title %}
 
-<!-- Style -->   
+<!-- Style -->
 {% block style %}{% endblock style %}
 
 <!-- Header -->
@@ -24,14 +24,14 @@
     
     <div class="col my-1">
         <div class="card shadow-sm btn btn-lg">
-            <a class="fa-border shadow-lg" href="{% url 'home' %}">
+            <a class="fa-border shadow-lg" href="{% url 'app_km:home' %}">
                 <div class="card-header">
                     <h5 class=""><strong class="text-dark text-decoration-underline">Вернуться</strong></h5>
                 </div>
             </a>
-            <a class="fa-border shadow-lg" href="{% url 'home' %}">
+            <a class="fa-border shadow-lg" href="{% url 'app_km:home' %}">
                 <div class="card-body m-0 p-1">
-                    <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url 'home' %}">
+                    <a class="btn btn-lg btn-outline-secondary fa-border shadow-lg" href="{% url 'app_km:home' %}">
                         <div class="container-fluid p-2">
                             <img src="{% static 'icons/025-world.png' %}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="Вернуться">
                         </div>

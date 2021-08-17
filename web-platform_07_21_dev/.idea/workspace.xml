@@ -2,243 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0003_accountdatamodel_accounttemplatemodel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0005_contactmodel_emailmodel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0007_auto_20210816_1314.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/09_04_45/Система_Rift_S_.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/09_07_14/Безымянный.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/09_07_14/Наброски.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/09_07_14/Общие_сведения.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/09_08_46/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/09_08_46/ip_10.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/09_08_46/Параметры.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/08_50_25/Проход.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/08_50_25/Реквизиты.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/08_50_25/Схема_подключения_алкотеста.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/11_14_13/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/11_14_13/Паспорт_Машинное_зрение_контроль_схода_на_грохотах_cX08TYh.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/11_14_13/План_управления_проектом_Машинное_зрение_контроль__uHcQB95.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/11_23_56/Виртуальная_реальность_ТЗ.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/11_23_56/Итоговый_отчет_по_проекту_VR_тренажер.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/uploads/rational/17_08_2021/11_23_56/Система_Rift_S_.JPG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Web-platform.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Web-platform.pptx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_rational/templates/app_rational/ratings.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_rational/templates/app_rational/ratings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0002_alter_accounttemplatemodel_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0003_accountdatamodel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0004_auto_20210726_1338.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0005_alter_accountdatamodel_image_avatar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0006_auto_20210726_1440.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0007_alter_accountdatamodel_user_iin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/0008_auto_20210727_0802.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/change_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/change_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/create_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/create_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/create_user_from1c.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/create_user_from1c.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/create_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/create_users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/export_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/export_users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/generate_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/generate_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/generate_passwords.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/generate_passwords.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/login_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/login_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templates/app_account/view_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/view_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templatetags/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templatetags/account_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_account/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templatetags/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/migrations/0002_auto_20210628_0011.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/templates/app_application/home_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/home_module.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/templates/app_application/list_component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/templates/app_application/list_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_module.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_application/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/album.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/album.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/blog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/carousel.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/carousel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/cheatsheet.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/cheatsheet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/cover.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/cover.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/custom.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/custom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/example.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/example.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/grid.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/grid.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/masonry.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/masonry.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/navbar-bottom.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/navbar-bottom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/navbar-fixed.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/navbar-fixed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/navbar-static.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/navbar-static.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/navbars.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/navbars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/offcanvas.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/offcanvas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/pricing.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/pricing.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/sign-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/sign-in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/starter-template.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/starter-template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/sticky-footer-navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/sticky-footer-navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/templates/app_bootstrap_examples/sticky-footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/bootstrap/sticky-footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_bootstrap_examples/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0008_smsmodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/migrations/0002_alter_smsmodel_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_chat/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/migrations/0002_alter_contactmodel_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/templates/app_contact/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_contact/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_django/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_django/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_django/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0006_documentmodel_messagemodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/migrations/0002_alter_documentmodel_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/templates/app_documentation/documentation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/documentation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_documentation/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/migrations/0002_alter_emailmodel_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/templates/app_email/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_email/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/migrations/0002_alter_messagemodel_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/templates/app_message/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_message/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0009_auto_20210816_1326.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/migrations/0002_auto_20210628_0011.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/templates/app_news/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/news_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/templates/app_news/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/news_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/templates/app_news/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/news_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_news/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/context_processors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/context_processors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0004_notificationmodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/migrations/0002_alter_notificationmodel_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/templates/app_notification/notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/notification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_notification/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/migrations/0002_categoryrationalmodel_commentrationalmodel_likerationalmodel_rationalmodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/migrations/0002_auto_20210623_2127.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/migrations/0003_auto_20210628_0011.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/change.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/change.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/detail_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/detail_comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/list_all.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_all.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/list_category.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/list_paginator.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_paginator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/list_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templates/app_rational/ratings.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/ratings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templatetags/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/templatetags/likes_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templatetags/likes_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_rational/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/templates/app_react/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/react.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_react/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/json_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/templates/app_salary/career.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/career.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/templates/app_salary/geo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/geo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/templates/app_salary/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/templates/app_salary/map.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/map.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/templates/app_salary/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/pdf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_salary/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/migrations/0002_alter_city_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/templates/app_wheather/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/wheather_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_wheather/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templates/app_km/list_module.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/templatetags/account_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/src/py/django_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/static/js/react/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/js/react/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/templates/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/templates/components/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/templates/components/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/templates/components/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_08_21_dev/templates/components/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_08_21_dev/templates/utils/custom.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -433,6 +226,8 @@
       <workItem from="1628668951547" duration="2945000" />
       <workItem from="1629093296246" duration="49000" />
       <workItem from="1629102566492" duration="101000" />
+      <workItem from="1629169341744" duration="613000" />
+      <workItem from="1629177685214" duration="196000" />
     </task>
     <servers />
   </component>

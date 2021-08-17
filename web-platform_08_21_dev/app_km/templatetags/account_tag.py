@@ -12,4 +12,3 @@ def account_tag(context, username: str):
     except Exception as e:
         account = False
     return account
-

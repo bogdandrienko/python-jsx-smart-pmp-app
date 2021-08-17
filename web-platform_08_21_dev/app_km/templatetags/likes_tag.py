@@ -12,7 +12,8 @@ def is_liked_tag(context, like_article):
     try:
         is_like = LikeRationalModel.objects.get(like_article=like_article,
                                                 like_author=User.objects.get(id=request.user.id), like_status=True)
-    except Exception as e:
+    except Exception as ex:
+        print(ex)
         is_like = False
     return is_like
 
@@ -23,6 +24,7 @@ def is_disliked_tag(context, like_article):
     try:
         is_dislike = LikeRationalModel.objects.get(like_article=like_article,
                                                    like_author=User.objects.get(id=request.user.id), like_status=False)
-    except Exception as e:
+    except Exception as ex:
+        print(ex)
         is_dislike = False
     return is_dislike

@@ -9,15 +9,15 @@
             <div class="card-header m-0 p-1">
                 <h4 class="fw-normal card-header bg-light text-dark text-decoration-none d-flex">
                     <strong>{{ LOOP.rational_name }}</strong>
-                    {% if LOOP.rational_autor_name == user %}
-                        <a class="w-25 btn btn-lg" target="_blank" href="{% url 'app_km:rational_change' LOOP.id %}">
-                            <i class="material-icons cart-icon text-warning">published_with_changes</i>
-                        </a>
-                    {% else %}
-                        Вам недоступно редактирование
-                    {% endif %}
-                    <small class="my-2 btn btn-sm btn-outline-dark text-link-dark">{{ LOOP.rational_category }}</small>
                 </h4>
+                {% if LOOP.rational_autor_name == user %}
+                    <a class="w-25 btn btn-lg" target="_blank" href="{% url 'app_km:rational_change' LOOP.id %}">
+                        <i class="material-icons cart-icon text-warning">published_with_changes</i>
+                    </a>
+                {% else %}
+                    Вам недоступно редактирование
+                {% endif %}
+                <small class="my-2 btn btn-sm btn-outline-dark text-link-dark">{{ LOOP.rational_category }}</small>
             </div>
             <div class="card-body m-0 p-1">
                 <a href="{% url 'app_km:rational_detail' LOOP.id %}">
@@ -30,7 +30,7 @@
                 <div class="my-1 d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">
-                            {% account_tag LOOP.rational_autor_name as acc %}
+                            {% account_tag LOOP.rational_author_name as acc %}
                             {% if acc %}
                                 {{ acc.lastname }} {{ acc.firstname }}
                             {% else %}

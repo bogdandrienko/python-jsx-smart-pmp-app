@@ -17,7 +17,7 @@ class AuthorizationClass:
     def user_authenticated(request):
         # Проверка регистрации: если пользователь не вошёл в аккаунт его переадресует в форму входа
         if request.user.is_authenticated is not True:
-            return 'app_account:login'
+            return 'app_km:login'
         return None
 
 
@@ -58,7 +58,7 @@ class TimeUtils:
 
 def create_account(_login, _not_encrypted_password, _email, _name, _surname, _is_staff):
     try:
-        user = User.objects.create(
+        user = User.objects.create_notification(
             username=_login,
             password=_not_encrypted_password,
             email=_email,
@@ -79,7 +79,8 @@ def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJ
     return password
 
 
-def get_data(month=4):
+# Salary
+def get_salary_data(month=4):
     url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210{month}'
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
     h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
@@ -91,11 +92,64 @@ def get_data(month=4):
         try:
             with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
                 json.dump(content, file)
-            return json.loads(content)
+            data = json.loads(content)
         except Exception as ex:
             print(ex)
-    with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
-        data = json.load(file)
+            with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                data = json.load(file)
+    else:
+        with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+            data = json.load(file)
+    try:
+        data["global_objects"]["3.Доходы в натуральной форме"]
+    except Exception as ex:
+        print(ex)
+        data["global_objects"]["3.Доходы в натуральной форме"] = {
+            "Fields": {
+                "1": "Вид",
+                "2": "Период",
+                "3": "Дни",
+                "4": "Часы",
+                "5": "Сумма",
+                "6": "ВсегоДни",
+                "7": "ВсегоЧасы"
+            },
+        }
+    data = {
+        "Table_1": create_arr_table(
+            title="1.Начислено", footer="Всего начислено", json_obj=data["global_objects"]["1.Начислено"],
+            exclude=[5, 6]
+        ),
+        "Table_2": create_arr_table(
+            title="2.Удержано", footer="Всего удержано", json_obj=data["global_objects"]["2.Удержано"], exclude=[]
+        ),
+        "Table_3": create_arr_table(
+            title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+            json_obj=data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
+        ),
+        "Table_4": create_arr_table(
+            title="4.Выплачено", footer="Всего выплат", json_obj=data["global_objects"]["4.Выплачено"], exclude=[]
+        ),
+        "Table_5": create_arr_table(
+            title="5.Налоговые вычеты", footer="Всего вычеты", json_obj=data["global_objects"]["5.Налоговые вычеты"],
+            exclude=[]
+        ),
+        "Down": {
+            "first": ["Долг за организацией на начало месяца", data["Долг за организацией на начало месяца"]],
+            "last": ["Долг за организацией на конец месяца", data["Долг за организацией на конец месяца"]],
+        },
+    }
+    # global_objects = []
+    # for x in data["global_objects"]:
+    #     global_objects.append(x)
+    # global_objects = [x for x in data["global_objects"]]
+
+    # return_data = []
+    # for x in global_objects:
+    #     return_data.append(create_arr_from_json(data["global_objects"], x))
+    # return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
+
+    # return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
     return data
 
 
@@ -219,75 +273,6 @@ def create_arr_table(title: str, footer: str, json_obj, exclude: list):
         footers = ["", footer, "", round(sum_, 2)]
 
     return [headers, bodies, footers]
-
-
-def data_s(month=4):
-    data = get_data(month=month)
-
-    # data = None
-    # with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
-    #     data = json.load(file)
-    # data_s = get_users()
-    if data:
-        # with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-        #     json.dump(data_s, file, ensure_ascii=False, indent=4)
-        pass
-    else:
-        data = None
-
-    # table_1 = create_arr_from_json(data["global_objects"], "1.Начислено")
-    try:
-        data["global_objects"]["3.Доходы в натуральной форме"]
-    except Exception as ex:
-        print(ex)
-        data["global_objects"]["3.Доходы в натуральной форме"] = {
-            "Fields": {
-                "1": "Вид",
-                "2": "Период",
-                "3": "Дни",
-                "4": "Часы",
-                "5": "Сумма",
-                "6": "ВсегоДни",
-                "7": "ВсегоЧасы"
-            },
-        }
-
-    data = {
-        "Table_1": create_arr_table(
-            title="1.Начислено", footer="Всего начислено", json_obj=data["global_objects"]["1.Начислено"],
-            exclude=[5, 6]
-        ),
-        "Table_2": create_arr_table(
-            title="2.Удержано", footer="Всего удержано", json_obj=data["global_objects"]["2.Удержано"], exclude=[]
-        ),
-        "Table_3": create_arr_table(
-            title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
-            json_obj=data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
-        ),
-        "Table_4": create_arr_table(
-            title="4.Выплачено", footer="Всего выплат", json_obj=data["global_objects"]["4.Выплачено"], exclude=[]
-        ),
-        "Table_5": create_arr_table(
-            title="5.Налоговые вычеты", footer="Всего вычеты", json_obj=data["global_objects"]["5.Налоговые вычеты"],
-            exclude=[]
-        ),
-        "Down": {
-            "first": ["Долг за организацией на начало месяца", data["Долг за организацией на начало месяца"]],
-            "last": ["Долг за организацией на конец месяца", data["Долг за организацией на конец месяца"]],
-        },
-    }
-    # global_objects = []
-    # for x in data["global_objects"]:
-    #     global_objects.append(x)
-    # global_objects = [x for x in data["global_objects"]]
-
-    # return_data = []
-    # for x in global_objects:
-    #     return_data.append(create_arr_from_json(data["global_objects"], x))
-    # return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
-
-    # return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
-    return data
 
 
 def link_callback(uri):
