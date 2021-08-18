@@ -31,6 +31,12 @@
                 <button class="btn btn-lg btn-outline-primary form-control" type="submit">Получить данные</button>
             </form>
         </div>
+        <div class="d-block">
+            <form class="form-control" action="{% url 'app_km:find' %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-lg btn-outline-primary form-control" type="submit">Найти</button>
+            </form>
+        </div>
     </div>
     <div>
 {#        {% easy_map "Russia, Ekaterinburg, Mira 32" 300 400 %}#}

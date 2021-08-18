@@ -25,6 +25,8 @@ import requests
 import psycopg2 as pg
 import openpyxl
 from xhtml2pdf import pisa
+from fastkml import kml
+from pykml import parser
 
 
 # Admin
@@ -143,6 +145,7 @@ def create_users(request):
         if excel_file:
             def get_value(rows: str, cols: int):
                 return str(sheet[rows + str(cols)].value)
+
             wb = openpyxl.load_workbook(excel_file)
             sheet = wb.active
             max_row = sheet.max_row
@@ -697,7 +700,7 @@ def geo(request):
                 password="nF2ArtXK"
             )
             postgresql_select_query = 'SELECT * FROM public.navdata_202108 ' \
-                                      'ORDER BY navtime DESC, device DESC LIMIT 20;'
+                                      'ORDER BY navtime DESC, device DESC LIMIT 100;'
             # "WHERE flags = 0 "
             cursor = connection.cursor()
             cursor.execute(postgresql_select_query)
@@ -722,6 +725,79 @@ def geo(request):
     except Exception as ex:
         LoggingClass.logging(message=f'geo: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def find(request, val=None):
+    # with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
+    #     data = file.read()
+    # k = kml.KML()
+    # k.from_string(data)
+    # features = list(k.features())
+    # k2 = list(features[0].features())
+    # arr = []
+    # for feat in k2:
+    #     string = str(feat.geometry).split('(')[1].split('0.0')[0].split(' ')
+    #     arr.append([float(string[0]), float(string[1])])
+    # if val is None:
+    #     val = [61.2200083333333, 52.147525]
+    # val2 = 0
+    # val3 = 0
+    # for loop1 in arr:
+    #     # Мы должны найти к какой из точек он ближе(разница двух элементов массива)
+    #     if val[0] > loop1[0]:
+    #         for loop2 in arr:
+    #             if val[1] > loop2[1]:
+    #                 val2 = loop1[0]
+    #                 val3 = loop1[1]
+    #                 break
+    # print([val2, val3])
+    # context = {
+    #     'data': [['широта', 'долгота'], arr],
+    # }
+    context = {
+        'data': None,
+    }
+
+    file_xlsx = 'static/media/data/data.xlsx'
+    workbook = openpyxl.load_workbook(file_xlsx)
+    sheet = workbook.active
+    array = []
+    for num in range(2, 5000):
+        array.append([get_sheet_value("C", num, _sheet=sheet), get_sheet_value("B", num, _sheet=sheet)])
+    # print(array)
+    text = R"""<?xml version="1.0" encoding="utf-8"?>
+  <kml xmlns="http://earth.google.com/kml/2.2">
+    <Document>
+      <name>D:\Рабочий стол\февраль_ASK\июнь.kml</name>
+        """
+    for current in array:
+        index = array.index(current)
+        if index != 0:
+            previous = [array[index-1][0], array[index-1][1]]
+        else:
+            previous = [current[0], current[1]]
+
+        text += f"""<Placemark>
+          <Style>
+            <LineStyle>
+              <color>FF0000FF</color>
+            </LineStyle>
+          </Style>
+          <LineString>
+            <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
+          </LineString>
+      </Placemark>
+    """
+    text += R"""</Document>
+</kml>"""
+    # print(text)
+    with open("static/media/data/data.kml", "w", encoding="utf-8") as file:
+        file.write(text)
+    return render(request, 'app_km/geo.html', context)
+
+
+def get_sheet_value(column, row, _sheet):
+    return str(_sheet[str(column) + str(row)].value)
 
 
 def email(request):
