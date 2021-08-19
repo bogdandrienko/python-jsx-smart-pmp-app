@@ -2,15 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/data/data.kml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/data.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/geo.kml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/loc.kml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp.kml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/geo.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/geo.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/geo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/data.kml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/data.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/geo.kml" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/geo.kml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/loc.kml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp.kml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,6 +228,7 @@
       <workItem from="1629179497807" duration="4000" />
       <workItem from="1629184748095" duration="2062000" />
       <workItem from="1629253230345" duration="16443000" />
+      <workItem from="1629337802747" duration="16760000" />
     </task>
     <servers />
   </component>

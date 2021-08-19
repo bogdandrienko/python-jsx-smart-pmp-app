@@ -18,12 +18,13 @@ from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePass
     NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
     SmsForm
 from .service import AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
-    create_encrypted_password, get_users, get_salary_data, link_callback, get_career
+    create_encrypted_password, get_users, get_salary_data, link_callback, get_career, get_sheet_value
 
 import datetime
 import requests
 import psycopg2 as pg
 import openpyxl
+from  openpyxl.utils import get_column_letter
 from xhtml2pdf import pisa
 from fastkml import kml
 from pykml import parser
@@ -687,97 +688,91 @@ def career(request):
 
 # Extra
 def geo(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    # if AuthorizationClass.user_authenticated(request=request):
+    #     return redirect(AuthorizationClass.user_authenticated(request=request))
     try:
         data = None
+        file = None
         if request.method == 'POST':
-            connection = pg.connect(
-                host="192.168.1.6",
-                database="navSections",
-                port="5432",
-                user="postgres",
-                password="nF2ArtXK"
-            )
-            postgresql_select_query = 'SELECT * FROM public.navdata_202108 ' \
-                                      'ORDER BY navtime DESC, device DESC LIMIT 100;'
-            # "WHERE flags = 0 "
-            cursor = connection.cursor()
-            cursor.execute(postgresql_select_query)
-            mobile_records = cursor.fetchall()
-            cols = ["устройство", "дата и время", "широта", "долгота", "высота", "скорость", "ds", "направление",
-                    "флаги ошибок"]
-            all_arr = []
-            for rows in mobile_records:
-                arr = []
-                for value in rows:
-                    id_s = rows.index(value)
-                    if id_s == 1:
-                        arr.append(datetime.datetime.fromtimestamp(int(value - 21600)).strftime('%Y-%m-%d %H:%M:%S'))
-                    else:
-                        arr.append(value)
-                all_arr.append(arr)
-            data = [cols, all_arr]
-        context = {
-            'data': data,
-        }
-        return render(request, 'app_km/geo.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'geo: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+            if request.POST['request_name'] == 'get_xlsx':
+                connection = pg.connect(
+                    host="192.168.1.6",
+                    database="navSections",
+                    port="5432",
+                    user="postgres",
+                    password="nF2ArtXK"
+                )
 
+                # postgresql_select_query = 'SELECT * FROM public.navdata_202108 ' \
+                #                           'ORDER BY navtime DESC, device DESC LIMIT 10;'
 
-def find(request, val=None):
-    # with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
-    #     data = file.read()
-    # k = kml.KML()
-    # k.from_string(data)
-    # features = list(k.features())
-    # k2 = list(features[0].features())
-    # arr = []
-    # for feat in k2:
-    #     string = str(feat.geometry).split('(')[1].split('0.0')[0].split(' ')
-    #     arr.append([float(string[0]), float(string[1])])
-    # if val is None:
-    #     val = [61.2200083333333, 52.147525]
-    # val2 = 0
-    # val3 = 0
-    # for loop1 in arr:
-    #     # Мы должны найти к какой из точек он ближе(разница двух элементов массива)
-    #     if val[0] > loop1[0]:
-    #         for loop2 in arr:
-    #             if val[1] > loop2[1]:
-    #                 val2 = loop1[0]
-    #                 val3 = loop1[1]
-    #                 break
-    # print([val2, val3])
-    # context = {
-    #     'data': [['широта', 'долгота'], arr],
-    # }
-    context = {
-        'data': None,
-    }
+                # postgresql_select_query = f"""SELECT NAVTIME, device, ROUND(CAST(LATITUDE AS numeric), 5) as Latitude, ROUND(CAST(LONGITUDE AS numeric), 5) as Longitude
+                # FROM PUBLIC.NAVDATA_202108
+                # WHERE NAVTIME BETWEEN 1629299681 - 21600 AND 1629299681 AND LATITUDE BETWEEN 52.138 AND 52.168 AND LONGITUDE BETWEEN 61.2 AND 61.23
+                # GROUP BY NAVTIME, device, round(CAST(latitude as numeric), 5), round(CAST(longitude as numeric), 5)
+                # ORDER BY device, NAVTIME"""
 
-    file_xlsx = 'static/media/data/data.xlsx'
-    workbook = openpyxl.load_workbook(file_xlsx)
-    sheet = workbook.active
-    array = []
-    for num in range(2, 5000):
-        array.append([get_sheet_value("C", num, _sheet=sheet), get_sheet_value("B", num, _sheet=sheet)])
-    # print(array)
-    text = R"""<?xml version="1.0" encoding="utf-8"?>
+                # postgresql_select_query = f"""SELECT * FROM public.navdata_202108 WHERE navtime > 1629261452 AND device = 2 AND Latitude > 0 AND Longitude > 0 ORDER BY device DESC, navtime DESC LIMIT 1000;"""
+
+                # postgresql_select_query = "SELECT device, navtime, latitude, longitude FROM public.navdata_202108 " \
+                #                           "WHERE device = 2 AND navtime > 1629261452 AND latitude > 0 AND longitude > 0 " \
+                #                           "GROUP BY latitude, longitude" \
+                #                           "ORDER BY device DESC, navtime DESC " \
+                #                           "LIMIT 5000;"
+
+                postgresql_select_query = "SELECT device, navtime, ROUND(CAST(latitude AS numeric), 3), ROUND(CAST(longitude AS numeric), 3) FROM public.navdata_202108 " \
+                                          "WHERE device = 2 AND navtime > 1629261452 AND latitude > 0 AND longitude > 0 " \
+                                          "GROUP BY device, navtime, ROUND(CAST(latitude AS numeric), 3), ROUND(CAST(longitude AS numeric), 3) " \
+                                          "ORDER BY navtime;"
+                cursor = connection.cursor()
+                cursor.execute(postgresql_select_query)
+                mobile_records = cursor.fetchall()
+                cols = ["устройство", "дата и время", "широта", "долгота", "высота", "скорость", "ds", "направление",
+                        "флаги ошибок"]
+                all_arr = []
+                for rows in mobile_records:
+                    arr = []
+                    for value in rows:
+                        id_s = rows.index(value)
+                        if id_s == 1:
+                            arr.append(datetime.datetime.fromtimestamp(int(value - 21600)).strftime('%Y-%m-%d %H:%M:%S'))
+                        else:
+                            arr.append(value)
+                    all_arr.append(arr)
+                data = [cols, all_arr]
+                file = 'xlsx'
+                wb = openpyxl.Workbook()
+                sheet = wb.active
+                sheet.title = 'Страница 1'
+                for n in cols:
+                    sheet[f'{get_column_letter(cols.index(n)+1)}1'] = n
+                for n in all_arr:
+                    for i in n:
+                        if i:
+                            sheet[f'{get_column_letter(n.index(i)+1)}{all_arr.index(n)+2}'] = i
+                        else:
+                            sheet[f'{get_column_letter(n.index(i)+1)}{all_arr.index(n)+2}'] = '0.0'
+                wb.save('static/media/data/geo.xlsx')
+            elif request.POST['request_name'] == 'get_kml':
+                file_xlsx = 'static/media/data/geo.xlsx'
+                workbook = openpyxl.load_workbook(file_xlsx)
+                sheet = workbook.active
+                array = []
+                for num in range(2, 1000):
+                    if num:
+                        array.append([get_sheet_value("D", num, _sheet=sheet), get_sheet_value("C", num, _sheet=sheet)])
+                text = R"""<?xml version="1.0" encoding="utf-8"?>
   <kml xmlns="http://earth.google.com/kml/2.2">
     <Document>
       <name>D:\Рабочий стол\февраль_ASK\июнь.kml</name>
         """
-    for current in array:
-        index = array.index(current)
-        if index != 0:
-            previous = [array[index-1][0], array[index-1][1]]
-        else:
-            previous = [current[0], current[1]]
-
-        text += f"""<Placemark>
+                for current in array:
+                    index = array.index(current)
+                    if index != 0:
+                        previous = [array[index-1][0], array[index-1][1]]
+                    else:
+                        previous = [current[0], current[1]]
+                    text += f"""<Placemark>
           <Style>
             <LineStyle>
               <color>FF0000FF</color>
@@ -788,16 +783,48 @@ def find(request, val=None):
           </LineString>
       </Placemark>
     """
-    text += R"""</Document>
+                text += R"""</Document>
 </kml>"""
-    # print(text)
-    with open("static/media/data/data.kml", "w", encoding="utf-8") as file:
-        file.write(text)
-    return render(request, 'app_km/geo.html', context)
+                with open("static/media/data/geo.kml", "w", encoding="utf-8") as file:
+                    file.write(text)
 
-
-def get_sheet_value(column, row, _sheet):
-    return str(_sheet[str(column) + str(row)].value)
+                # with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
+                #     data = file.read()
+                # k = kml.KML()
+                # k.from_string(data)
+                # features = list(k.features())
+                # k2 = list(features[0].features())
+                # arr = []
+                # for feat in k2:
+                #     string = str(feat.geometry).split('(')[1].split('0.0')[0].split(' ')
+                #     arr.append([float(string[0]), float(string[1])])
+                # if val is None:
+                #     val = [61.2200083333333, 52.147525]
+                # val2 = 0
+                # val3 = 0
+                # for loop1 in arr:
+                #     # Мы должны найти к какой из точек он ближе(разница двух элементов массива)
+                #     if val[0] > loop1[0]:
+                #         for loop2 in arr:
+                #             if val[1] > loop2[1]:
+                #                 val2 = loop1[0]
+                #                 val3 = loop1[1]
+                #                 break
+                # print([val2, val3])
+                # context = {
+                #     'data': [['широта', 'долгота'], arr],
+                # }
+                file = 'kml'
+            else:
+                pass
+        context = {
+            'data': data,
+            'file': file
+        }
+        return render(request, 'app_km/geo.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'geo: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def email(request):

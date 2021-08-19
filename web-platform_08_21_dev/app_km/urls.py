@@ -16,7 +16,6 @@ urlpatterns = [
     path('view_pdf/', views.view_pdf, name='view_pdf'),
     path('create_pdf/', views.render_pdf_view, name='create_pdf'),
     path('geo/', views.geo, name='geo'),
-    path('find/', views.find, name='find'),
     path('career/', views.career, name='career'),
     path('rational/', views.rational_list, name='rational'),
     path('search/', views.rational_search, name='rational_search'),

@@ -305,3 +305,7 @@ def link_callback(uri):
             'media URI must start with %s or %s' % (s_url, m_url)
         )
     return path
+
+
+def get_sheet_value(column, row, _sheet):
+    return _sheet[str(column) + str(row)].value
