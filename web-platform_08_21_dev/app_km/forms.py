@@ -361,21 +361,21 @@ class GeoForm(forms.Form):
                                                   'placeholder': '4', 'class': 'form-control', 'min': '1',
                                                   'max': '10'}),
                                        validators=[MinValueValidator(1), MaxValueValidator(10), ], required=True)
-    request_hours = forms.IntegerField(label='Количество затрагиваемых часов от текущего момента:',
+    request_hours = forms.IntegerField(label='Количество затрагиваемых часов от текущего момента(может занять время):',
                                        widget=forms.NumberInput(
                                            attrs={'type': 'number', 'name': 'request_hours',
                                                   'value': '1', 'placeholder': '1', 'class': 'form-control',
                                                   'min': '1', 'max': '96'}),
                                        validators=[MinValueValidator(1), MaxValueValidator(96), ],
                                        required=True)
-    request_between_first = forms.IntegerField(label='Начало диапазона устройств:',
+    request_between_first = forms.IntegerField(label='Начало диапазона устройств(включительно):',
                                                widget=forms.NumberInput(
                                                    attrs={'type': 'number', 'name': 'request_between_first',
                                                           'value': '1', 'placeholder': '1', 'class': 'form-control',
                                                           'min': '1', 'max': '300'}),
                                                validators=[MinValueValidator(1), MaxValueValidator(300), ],
                                                required=True)
-    request_between_last = forms.IntegerField(label='Конец диапазона устройств',
+    request_between_last = forms.IntegerField(label='Конец диапазона устройств(включительно)(не более 5 одновременно):',
                                               widget=forms.NumberInput(
                                                   attrs={'type': 'number', 'name': 'request_between_last', 'value': '5',
                                                          'placeholder': '5', 'class': 'form-control', 'min': '1',

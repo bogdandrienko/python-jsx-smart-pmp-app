@@ -359,7 +359,7 @@ def generate_xlsx(request):
             else:
                 sheet[f'{get_column_letter(n.index(i) + 1)}{all_arr.index(n) + 2}'] = '0.0'
     wb.save('static/media/data/geo.xlsx')
-    return [cols, all_arr]
+    return [cols, all_arr, postgresql_select_query]
 
 
 def generate_kml():
@@ -403,6 +403,36 @@ def generate_kml():
               </LineString>
           </Placemark>
         """
+
+    point = [61.21000, 52.13000]
+    ds = 160
+    first = [61.200, 52.100, 0]
+    second = [61.202, 52.105, 0]
+    third = [61.201, 52.105, 0]
+    # 61.215,52.135,0 61.214,52.137,0 61.213,52.136,0 61.215,52.135,0
+    string_object = ''
+    for iteration in [first, second, third, first]:
+        num = 1
+        for i in iteration:
+            if num == 3:
+                string_object += f"{i} "
+            else:
+                string_object += f"{i},"
+            num += 1
+    print(string_object)
+    text_d = f"""<Placemark>
+		<name>object</name>
+		<styleUrl>#__managed_style_0872CB1CB61C987BBE0F</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						{string_object} 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>"""
     dev = ''
     for x in device_arr:
         dev += f"{x} | "
@@ -413,7 +443,7 @@ def generate_kml():
             """
     text_c = R"""</Document>
     </kml>"""
-    text = text_a + text_b + text_c
+    text = text_a + text_b + text_d + text_c
     with open("static/media/data/geo.kml", "w", encoding="utf-8") as file:
         file.write(text)
 

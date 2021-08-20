@@ -690,16 +690,14 @@ def geo(request):
         data = None
         form = GeoForm()
         if request.method == 'POST':
-
             print('begin')
-
             data = generate_xlsx(request)
+            print('generate_xlsx successfully')
             # print(data)
             generate_kml()
+            print('generate_kml successfully')
             # point = find_point(52.2, 61.3)
-
             print('end')
-
         context = {
             'data': data,
             'form': form,
