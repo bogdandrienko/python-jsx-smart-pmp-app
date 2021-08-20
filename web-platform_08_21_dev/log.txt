@@ -165,3 +165,34 @@ LINE 1: ...e > 1629261452 AND latitude > 0 AND longitude > 0 GROUP BY *
 LINE 1: ...ice, navtime, ROUND(CAST(LATITUDE AS numeric), 5) as Latitud...
                                                              ^
 
+09:50:02 : geo: ОШИБКА:  ошибка синтаксиса (примерное положение: "{")
+LINE 1: ...) FROM public.navdata_202108 WHERE device BETWEEN {request_b...
+                                                             ^
+
+11:41:06 : geo: list index out of range
+11:41:53 : geo: list index out of range
+11:43:25 : geo: list index out of range
+11:44:12 : geo: ОШИБКА:  неверный синтаксис для типа interval: "1 minuts"
+LINE 1: ...> extract(epoch from CURRENT_TIMESTAMP - INTERVAL '1 minuts'...
+                                                             ^
+
+11:44:28 : geo: list index out of range
+11:48:29 : geo: list index out of range
+13:57:57 : geo: ОШИБКА:  оператор не существует: integer - interval
+LINE 1: ...ERE device BETWEEN 1 AND 1 AND navtime > (navtime - INTERVAL...
+                                                             ^
+HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам следует добавить явные приведения типов.
+
+14:16:50 : geo: ОШИБКА:  оператор не существует: timestamp with time zone - numeric
+LINE 1: ...WHERE device BETWEEN 1 AND 5 AND navtime > (now() - 11111111...
+                                                             ^
+HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам следует добавить явные приведения типов.
+
+14:17:07 : geo: ОШИБКА:  оператор не существует: timestamp with time zone - numeric
+LINE 1: ...WHERE device BETWEEN 1 AND 5 AND navtime > (now() - 11111111...
+                                                             ^
+HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам следует добавить явные приведения типов.
+
+14:46:34 : geo: unsupported operand type(s) for -: 'datetime.datetime' and 'int'
+14:55:18 : geo: list.count() takes exactly one argument (0 given)
+14:55:56 : geo: unsupported operand type(s) for +: 'int' and 'str'

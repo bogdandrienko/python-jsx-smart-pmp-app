@@ -1,3 +1,6 @@
+import datetime
+
+import openpyxl
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
@@ -10,6 +13,8 @@ import time
 import random
 import requests
 import bs4
+import psycopg2 as pg
+from openpyxl.utils import get_column_letter
 
 
 class AuthorizationClass:
@@ -309,3 +314,135 @@ def link_callback(uri):
 
 def get_sheet_value(column, row, _sheet):
     return _sheet[str(column) + str(row)].value
+
+
+def generate_xlsx(request):
+    connection = pg.connect(
+        host="192.168.1.6",
+        database="navSections",
+        port="5432",
+        user="postgres",
+        password="nF2ArtXK"
+    )
+    # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
+    #                           "FROM public.navdata_202108 " \
+    #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
+    #                           "ORDER BY device, navtime DESC;"
+    postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
+                              "FROM public.navdata_202108 " \
+                              f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
+                              "ORDER BY device, navtime DESC;"
+    cursor = connection.cursor()
+    cursor.execute(postgresql_select_query)
+    mobile_records = cursor.fetchall()
+    cols = ["устройство", "дата и время", "широта", "долгота", "высота", "скорость", "ds", "направление",
+            "флаги ошибок"]
+    all_arr = []
+    for rows in mobile_records:
+        arr = []
+        for value in rows:
+            id_s = rows.index(value)
+            if id_s == 1:
+                arr.append(datetime.datetime.fromtimestamp(int(value - 21600)).strftime('%Y-%m-%d %H:%M:%S'))
+            else:
+                arr.append(value)
+        all_arr.append(arr)
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    sheet.title = 'Страница 1'
+    for n in cols:
+        sheet[f'{get_column_letter(cols.index(n) + 1)}1'] = n
+    for n in all_arr:
+        for i in n:
+            if i:
+                sheet[f'{get_column_letter(n.index(i) + 1)}{all_arr.index(n) + 2}'] = i
+            else:
+                sheet[f'{get_column_letter(n.index(i) + 1)}{all_arr.index(n) + 2}'] = '0.0'
+    wb.save('static/media/data/geo.xlsx')
+    return [cols, all_arr]
+
+
+def generate_kml():
+    file_xlsx = 'static/media/data/geo.xlsx'
+    workbook = openpyxl.load_workbook(file_xlsx)
+    sheet = workbook.active
+    array = []
+    # colors = ['FFFFFFFF', 'FF0000FF', 'FFFF0000', 'FF00FF00', 'FF00FFFF', 'FF000000']
+    colors = ['FFFFFFFF', 'FF0000FF', 'FFFF0000', 'FF00FF00', 'FF00FFFF', 'FF0F0F0F', 'FFF0F0F0']
+    colors_alias = [': Чё', ': Кр', ': Си', ': Зе', ': Жё', ': Бе', ': Доп1', ': Доп2']
+    final = 0
+    for num in range(2, 10000000):
+        if get_sheet_value("A", num, _sheet=sheet) is None or '':
+            final = num
+            break
+    for num in range(2, final):
+        array.append([get_sheet_value("D", num, _sheet=sheet), get_sheet_value("C", num, _sheet=sheet),
+                      get_sheet_value("A", num, _sheet=sheet)])
+    text_b = ''
+    current_color = colors[0]
+    previous_device = 0
+    device_arr = []
+    for current in array:
+        index = array.index(current)
+        if previous_device is not current[2]:
+            device_arr.append(str(current[2]) + colors_alias[len(device_arr)+1])
+            previous_device = current[2]
+            current_color = colors[colors.index(current_color)+1]
+        if index != 0:
+            previous = [array[index - 1][0], array[index - 1][1]]
+        else:
+            previous = [current[0], current[1]]
+        text_b += f"""<Placemark>
+              <Style>
+                <LineStyle>
+                  <color>{current_color}</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
+              </LineString>
+          </Placemark>
+        """
+    dev = ''
+    for x in device_arr:
+        dev += f"{x} | "
+    text_a = f"""<?xml version="1.0" encoding="utf-8"?>
+      <kml xmlns="http://earth.google.com/kml/2.2">
+        <Document>
+          <name>{dev}</name>
+            """
+    text_c = R"""</Document>
+    </kml>"""
+    text = text_a + text_b + text_c
+    with open("static/media/data/geo.kml", "w", encoding="utf-8") as file:
+        file.write(text)
+
+
+def find_point(latitude: float, longitude: float):
+    # with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
+    #     data = file.read()
+    # k = kml.KML()
+    # k.from_string(data)
+    # features = list(k.features())
+    # k2 = list(features[0].features())
+    # arr = []
+    # for feat in k2:
+    #     string = str(feat.geometry).split('(')[1].split('0.0')[0].split(' ')
+    #     arr.append([float(string[0]), float(string[1])])
+    # if val is None:
+    #     val = [61.2200083333333, 52.147525]
+    # val2 = 0
+    # val3 = 0
+    # for loop1 in arr:
+    #     # Мы должны найти к какой из точек он ближе(разница двух элементов массива)
+    #     if val[0] > loop1[0]:
+    #         for loop2 in arr:
+    #             if val[1] > loop2[1]:
+    #                 val2 = loop1[0]
+    #                 val3 = loop1[1]
+    #                 break
+    # print([val2, val3])
+    # context = {
+    #     'data': [['широта', 'долгота'], arr],
+    # }
+    return [latitude, longitude]

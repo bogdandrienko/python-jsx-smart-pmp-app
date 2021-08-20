@@ -95,7 +95,7 @@ class RationalForm(forms.Form):
                'class': 'form-control'}), required=False)
     rational_date_registered = forms.DateTimeField(label='дата регистрации', widget=forms.DateTimeInput(
         attrs={'type': "datetime-local", 'name': 'rational_date_registered', 'class': 'form-control', 'required': ''}),
-                                                    required=False)
+                                                   required=False)
     rational_name = forms.CharField(label='', widget=forms.TextInput(
         attrs={'type': "text", 'name': 'rational_name', 'placeholder': 'название статьи', 'class': 'form-control',
                'required': ''}), required=True)
@@ -216,6 +216,7 @@ class CityForm(ModelForm):
     """
     City Form
     """
+
     class Meta:
         model = CityModel
         fields = ['name']
@@ -336,7 +337,6 @@ class NotificationForm(forms.Form):
     notification_description = forms.CharField(label='', widget=forms.TextInput(
         attrs={'type': "text", 'name': 'notification_description', 'placeholder': 'описание', 'class': 'form-control',
                'required': ''}), required=False)
-
     # notification_date           = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={
     # 'type':"datetime-local",'name':'notification_date', 'class':'form-control', 'required':''}), required=False)
     # notification_status         = forms.BooleanField(label='', widget=forms.CheckboxInput(attrs={'type':'checkbox',
@@ -346,3 +346,39 @@ class NotificationForm(forms.Form):
     class Meta:
         model = NotificationModel
         fields = '__all__'
+
+
+class GeoForm(forms.Form):
+    """
+    Geo Form
+    """
+    # request_name = forms.CharField(label='', widget=forms.TextInput(
+    #     attrs={'type': "text", 'name': 'request_name', 'placeholder': 'get_xlsx', 'value': 'get_xlsx', 'class': 'd-none',
+    #            'required': ''}), required=False)
+    request_value = forms.IntegerField(label='Разряд округления широты и долготы:',
+                                       widget=forms.NumberInput(
+                                           attrs={'type': 'number', 'name': 'request_value', 'value': '4',
+                                                  'placeholder': '4', 'class': 'form-control', 'min': '1',
+                                                  'max': '10'}),
+                                       validators=[MinValueValidator(1), MaxValueValidator(10), ], required=True)
+    request_hours = forms.IntegerField(label='Количество затрагиваемых часов от текущего момента:',
+                                       widget=forms.NumberInput(
+                                           attrs={'type': 'number', 'name': 'request_hours',
+                                                  'value': '1', 'placeholder': '1', 'class': 'form-control',
+                                                  'min': '1', 'max': '96'}),
+                                       validators=[MinValueValidator(1), MaxValueValidator(96), ],
+                                       required=True)
+    request_between_first = forms.IntegerField(label='Начало диапазона устройств:',
+                                               widget=forms.NumberInput(
+                                                   attrs={'type': 'number', 'name': 'request_between_first',
+                                                          'value': '1', 'placeholder': '1', 'class': 'form-control',
+                                                          'min': '1', 'max': '300'}),
+                                               validators=[MinValueValidator(1), MaxValueValidator(300), ],
+                                               required=True)
+    request_between_last = forms.IntegerField(label='Конец диапазона устройств',
+                                              widget=forms.NumberInput(
+                                                  attrs={'type': 'number', 'name': 'request_between_last', 'value': '5',
+                                                         'placeholder': '5', 'class': 'form-control', 'min': '1',
+                                                         'max': '300'}),
+                                              validators=[MinValueValidator(1), MaxValueValidator(300), ],
+                                              required=True)
