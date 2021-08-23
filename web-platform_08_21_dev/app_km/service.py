@@ -1,4 +1,5 @@
 import datetime
+import math
 
 import openpyxl
 from django.contrib.auth.models import User
@@ -330,7 +331,7 @@ def generate_xlsx(request):
     #                           "ORDER BY device, navtime DESC;"
     postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
                               "FROM public.navdata_202108 " \
-                              f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
+                              f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_minutes']} minutes') AND flags != 64 " \
                               "ORDER BY device, navtime DESC;"
     cursor = connection.cursor()
     cursor.execute(postgresql_select_query)
@@ -385,9 +386,9 @@ def generate_kml():
     for current in array:
         index = array.index(current)
         if previous_device is not current[2]:
-            device_arr.append(str(current[2]) + colors_alias[len(device_arr)+1])
+            device_arr.append(str(current[2]) + colors_alias[len(device_arr) + 1])
             previous_device = current[2]
-            current_color = colors[colors.index(current_color)+1]
+            current_color = colors[colors.index(current_color) + 1]
         if index != 0:
             previous = [array[index - 1][0], array[index - 1][1]]
         else:
@@ -403,6 +404,7 @@ def generate_kml():
               </LineString>
           </Placemark>
         """
+        text_b += create_point_object([current[0], current[1], index])
 
     point = [61.21000, 52.13000]
     ds = 160
@@ -433,6 +435,7 @@ def generate_kml():
 			</outerBoundaryIs>
 		</Polygon>
 	</Placemark>"""
+    text_e = create_point_object([61.215, 52.135, '1'])
     dev = ''
     for x in device_arr:
         dev += f"{x} | "
@@ -444,11 +447,65 @@ def generate_kml():
     text_c = R"""</Document>
     </kml>"""
     text = text_a + text_b + text_d + text_c
+    # text = text_a + create_point_object([61.23500, 52.17263, "Самосвал"]) + \
+    #        create_point_object([61.23654, 52.16710, "Экскаватор"]) + text_c
     with open("static/media/data/geo.kml", "w", encoding="utf-8") as file:
         file.write(text)
 
 
-def find_point(latitude: float, longitude: float):
+def create_point_object(point: list):
+    latitude = point[0]
+    longitude = point[1]
+    id_s = point[2]
+    first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
+    second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
+    third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
+    fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
+    string_object = ''
+    for iteration in [first, second, third, fourth, first]:
+        num = 1
+        for i in iteration:
+            if num == 3:
+                string_object += f"{i} "
+            else:
+                string_object += f"{i},"
+            num += 1
+    text_d = f"""<Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						{string_object} 
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: {id_s}</name>
+            <Point>
+                <coordinates>{latitude},{longitude},0</coordinates>
+            </Point>
+        </Placemark>"""
+    return text_d
+
+
+def get_distance(x1: float, y1: float, x2: float, y2: float):
+    x = (x2 - x1) ** 2
+    y = (y2 - y1) ** 2
+    return math.sqrt(x+y)
+
+
+def find_distance(dist_arr: list):
+    arr_dist = []
+    for dist in dist_arr:
+        arr_dist.append(dist[0])
+    minimum = min(arr_dist)
+    return dist_arr[arr_dist.index(minimum)][1]
+
+
+def read_kml():
     # with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
     #     data = file.read()
     # k = kml.KML()
@@ -475,4 +532,99 @@ def find_point(latitude: float, longitude: float):
     # context = {
     #     'data': [['широта', 'долгота'], arr],
     # }
-    return [latitude, longitude]
+    # return [latitude, longitude]
+    pass
+
+
+def create_style():
+    f"""
+	<gx:CascadingStyle kml:id="__managed_style_25130D559F1CA685BFB3">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1A4EFD26461CA685BFB3">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_047C2286A81CA685BFB3">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1A4EFD26461CA685BFB3</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_25130D559F1CA685BFB3</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="0D045F86381CA685BFB2">
+		<name>Самосвал</name>
+		<LookAt>
+			<longitude>61.2344061029136</longitude>
+			<latitude>52.17019183209385</latitude>
+			<altitude>282.7747547496757</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1198.571236050484</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
+		<Point>
+			<coordinates>61.23500224897153,52.17263169824412,281.7092496784567</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0B4EA6F59B1CA68601E0">
+		<name>Экскаватор</name>
+		<LookAt>
+			<longitude>61.23624067458115</longitude>
+			<latitude>52.17416232356366</latitude>
+			<altitude>277.5968564918906</altitude>
+			<heading>-0.5372217869872089</heading>
+			<tilt>53.57834275643886</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>2536.120178802812</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
+		<Point>
+			<coordinates>61.23654046107902,52.16710625511239,297.4562999141254</coordinates>
+		</Point>
+	</Placemark>"""
+    pass

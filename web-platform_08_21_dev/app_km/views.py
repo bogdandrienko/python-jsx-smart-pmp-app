@@ -19,7 +19,7 @@ from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePass
     SmsForm, GeoForm
 from .service import AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
     create_encrypted_password, get_users, get_salary_data, link_callback, get_career, generate_xlsx, \
-    generate_kml
+    generate_kml, get_distance, find_distance
 
 import requests
 import openpyxl
@@ -697,6 +697,41 @@ def geo(request):
             generate_kml()
             print('generate_kml successfully')
             # point = find_point(52.2, 61.3)
+
+            # Точки
+            point1 = [61.23500, 52.17263, '1']
+            point2 = [61.23500, 52.17263, '2']
+            point3 = [61.23500, 52.17263, '3']
+            point4 = [61.23500, 52.17263, '4']
+            point5 = [61.23500, 52.17263, '5']
+            point5 = [61.23500, 52.17263, '6']
+            point5 = [61.23500, 52.17263, '7']
+            point5 = [61.23500, 52.17263, '8']
+            # .....
+            # Пути
+            dist1 = [[61.23500, 52.17263, '1'], [61.23500, 52.17263, '2']]
+            # 61.23500, 52.17263, 61.23500, 52.17263 'A|B'
+            dist2 = [[61.23500, 52.17263, '1'], [61.23500, 52.17263, '7']]
+            # 61.23500, 52.17263, 61.23500, 52.17263 'A|G'
+            dist3 = [[61.23500, 52.17263, '2'], [61.23500, 52.17263, '3']]
+            # 61.23500, 52.17263, 61.23500, 52.17263 'B|C'
+            dist4 = [[61.23500, 52.17263, '2'], [61.23500, 52.17263, '6']]
+            # 61.23500, 52.17263, 61.23500, 52.17263 'B|F'
+            dist5 = [[61.23500, 52.17263, '2'], [61.23500, 52.17263, '8']]
+            # 61.23500, 52.17263, 61.23500, 52.17263 'B|H'
+            # .....
+            # Связи
+            link1 = ['A', ['B', 'G']]
+            link1 = ['B', ['C', 'F', 'H']]
+            # .....
+
+            dist1 = [round(get_distance(x1=61.23500, y1=52.17263, x2=61.23654, y2=52.16710), 5), 'BA']
+            dist2 = [round(get_distance(x1=61.23550, y1=52.17263, x2=61.23654, y2=52.16710), 5), 'BC']
+            dist3 = [round(get_distance(x1=61.23450, y1=52.17263, x2=61.23654, y2=52.16710), 5), 'BD']
+            print([dist1, dist2, dist3])
+            dist = find_distance([dist1, dist2, dist3])
+            print(dist)
+
             print('end')
         context = {
             'data': data,
