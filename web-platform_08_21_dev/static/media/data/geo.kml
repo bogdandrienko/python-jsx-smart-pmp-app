@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
       <kml xmlns="http://earth.google.com/kml/2.2">
         <Document>
-          <name>21: Кр | </name>
+          <name>10: Кр | 11: Си | 13: Зе | </name>
             <Placemark>
               <Style>
                 <LineStyle>
@@ -9,7 +9,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21812,52.14474,0 61.21812,52.14474,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -18,7 +18,7 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21811676,52.144738,0 61.21811676,52.144742,0 61.21812324,52.144742,0 61.21812324,52.144738,0 61.21811676,52.144738,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
@@ -27,7 +27,7 @@
         <Placemark>
             <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21812,52.14474,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -36,7 +36,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21812,52.14474,0 61.21812,52.14474,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -45,7 +45,7 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21811676,52.144738,0 61.21811676,52.144742,0 61.21812324,52.144742,0 61.21812324,52.144738,0 61.21811676,52.144738,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
@@ -54,7 +54,7 @@
         <Placemark>
             <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21812,52.14474,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -63,7 +63,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21812,52.14474,0 61.21812,52.14474,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -72,7 +72,7 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21811676,52.144738,0 61.21811676,52.144742,0 61.21812324,52.144742,0 61.21812324,52.144738,0 61.21811676,52.144738,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
@@ -81,7 +81,7 @@
         <Placemark>
             <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21812,52.14474,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -90,7 +90,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21812,52.14474,0 61.21812,52.14472,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -99,16 +99,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21811676,52.144718,0 61.21811676,52.144722,0 61.21812324,52.144722,0 61.21812324,52.144718,0 61.21811676,52.144718,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 3</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21812,52.14472,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -117,7 +117,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21812,52.14472,0 61.21828,52.1447,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -126,16 +126,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21827676,52.144698,0 61.21827676,52.144702,0 61.21828324,52.144702,0 61.21828324,52.144698,0 61.21827676,52.144698,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 4</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21828,52.1447,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -144,7 +144,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21828,52.1447,0 61.21835,52.1447,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -153,16 +153,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21834676,52.144698,0 61.21834676,52.144702,0 61.21835324,52.144702,0 61.21835324,52.144698,0 61.21834676,52.144698,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 5</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21835,52.1447,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -171,7 +171,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21835,52.1447,0 61.21832,52.14468,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -180,16 +180,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21831676,52.144678,0 61.21831676,52.144682,0 61.21832324,52.144682,0 61.21832324,52.144678,0 61.21831676,52.144678,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 6</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21832,52.14468,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -198,7 +198,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21835,52.1447,0 61.21832,52.14468,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -207,16 +207,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21831676,52.144678,0 61.21831676,52.144682,0 61.21832324,52.144682,0 61.21832324,52.144678,0 61.21831676,52.144678,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 6</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21832,52.14468,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -225,7 +225,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21835,52.1447,0 61.21832,52.14468,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -234,16 +234,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21831676,52.144678,0 61.21831676,52.144682,0 61.21832324,52.144682,0 61.21832324,52.144678,0 61.21831676,52.144678,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 6</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21832,52.14468,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -252,7 +252,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21832,52.14468,0 61.21818,52.14465,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -261,16 +261,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21817676,52.144648,0 61.21817676,52.144652,0 61.218183239999995,52.144652,0 61.218183239999995,52.144648,0 61.21817676,52.144648,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 9</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21818,52.14465,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -279,7 +279,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21818,52.14465,0 61.21813,52.14465,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -288,16 +288,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218126760000004,52.144648,0 61.218126760000004,52.144652,0 61.21813324,52.144652,0 61.21813324,52.144648,0 61.218126760000004,52.144648,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 10</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21813,52.14465,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -306,7 +306,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21813,52.14465,0 61.21808,52.14466,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -315,16 +315,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21807676,52.144658,0 61.21807676,52.144662000000004,0 61.21808324,52.144662000000004,0 61.21808324,52.144658,0 61.21807676,52.144658,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 11</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21808,52.14466,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -333,7 +333,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21808,52.14466,0 61.21804,52.14469,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -342,16 +342,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218036760000004,52.144687999999995,0 61.218036760000004,52.144692,0 61.21804324,52.144692,0 61.21804324,52.144687999999995,0 61.218036760000004,52.144687999999995,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 12</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21804,52.14469,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -360,7 +360,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21804,52.14469,0 61.21803,52.14472,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -369,16 +369,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21802676,52.144718,0 61.21802676,52.144722,0 61.21803324,52.144722,0 61.21803324,52.144718,0 61.21802676,52.144718,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 13</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21803,52.14472,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -387,7 +387,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21803,52.14472,0 61.21804,52.14474,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -396,16 +396,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218036760000004,52.144738,0 61.218036760000004,52.144742,0 61.21804324,52.144742,0 61.21804324,52.144738,0 61.218036760000004,52.144738,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 14</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21804,52.14474,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -414,7 +414,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21804,52.14474,0 61.21808,52.14477,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -423,16 +423,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21807676,52.144768,0 61.21807676,52.144772,0 61.21808324,52.144772,0 61.21808324,52.144768,0 61.21807676,52.144768,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 15</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21808,52.14477,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -441,7 +441,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21808,52.14477,0 61.21813,52.14479,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -450,16 +450,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218126760000004,52.144788,0 61.218126760000004,52.144792,0 61.21813324,52.144792,0 61.21813324,52.144788,0 61.218126760000004,52.144788,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 16</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21813,52.14479,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -468,7 +468,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21813,52.14479,0 61.21831,52.14484,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -477,16 +477,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218306760000004,52.144838,0 61.218306760000004,52.144842000000004,0 61.21831324,52.144842000000004,0 61.21831324,52.144838,0 61.218306760000004,52.144838,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 17</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21831,52.14484,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -495,7 +495,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21831,52.14484,0 61.21836,52.14486,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -504,16 +504,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21835676,52.144858,0 61.21835676,52.144862,0 61.218363239999995,52.144862,0 61.218363239999995,52.144858,0 61.21835676,52.144858,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 18</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21836,52.14486,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -522,7 +522,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21836,52.14486,0 61.21839,52.1449,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -531,16 +531,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21838676,52.144898,0 61.21838676,52.144902,0 61.21839324,52.144902,0 61.21839324,52.144898,0 61.21838676,52.144898,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 19</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21839,52.1449,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -549,7 +549,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21839,52.1449,0 61.21841,52.14495,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -558,16 +558,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21840676,52.144948,0 61.21840676,52.144952,0 61.21841324,52.144952,0 61.21841324,52.144948,0 61.21840676,52.144948,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 20</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21841,52.14495,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -576,7 +576,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21841,52.14495,0 61.21842,52.14507,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -585,16 +585,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218416760000004,52.145067999999995,0 61.218416760000004,52.145072,0 61.21842324,52.145072,0 61.21842324,52.145067999999995,0 61.218416760000004,52.145067999999995,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 21</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21842,52.14507,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -603,7 +603,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21842,52.14507,0 61.21847,52.14518,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -612,16 +612,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218466760000005,52.145178,0 61.218466760000005,52.145182000000005,0 61.21847324,52.145182000000005,0 61.21847324,52.145178,0 61.218466760000005,52.145178,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 22</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21847,52.14518,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -630,7 +630,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21847,52.14518,0 61.21853,52.14531,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -639,16 +639,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21852676,52.145308,0 61.21852676,52.145312000000004,0 61.21853324,52.145312000000004,0 61.21853324,52.145308,0 61.21852676,52.145308,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 23</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21853,52.14531,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -657,7 +657,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21853,52.14531,0 61.21861,52.14544,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -666,16 +666,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21860676,52.145438,0 61.21860676,52.145442,0 61.218613239999996,52.145442,0 61.218613239999996,52.145438,0 61.21860676,52.145438,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 24</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21861,52.14544,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -684,7 +684,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21861,52.14544,0 61.21865,52.1455,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -693,16 +693,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21864676,52.145497999999996,0 61.21864676,52.145502,0 61.218653239999995,52.145502,0 61.218653239999995,52.145497999999996,0 61.21864676,52.145497999999996,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 25</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21865,52.1455,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -711,7 +711,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21865,52.1455,0 61.21876,52.14564,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -720,16 +720,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218756760000005,52.145638,0 61.218756760000005,52.145642,0 61.21876324,52.145642,0 61.21876324,52.145638,0 61.218756760000005,52.145638,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 26</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21876,52.14564,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -738,7 +738,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21876,52.14564,0 61.21888,52.14577,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -747,16 +747,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21887676,52.145768,0 61.21887676,52.145772,0 61.21888324,52.145772,0 61.21888324,52.145768,0 61.21887676,52.145768,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 27</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21888,52.14577,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -765,7 +765,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21888,52.14577,0 61.21898,52.1459,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -774,16 +774,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.218976760000004,52.145897999999995,0 61.218976760000004,52.145902,0 61.21898324,52.145902,0 61.21898324,52.145897999999995,0 61.218976760000004,52.145897999999995,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 28</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21898,52.1459,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -792,7 +792,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21898,52.1459,0 61.21907,52.14604,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -801,16 +801,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.219066760000004,52.146038,0 61.219066760000004,52.146042,0 61.21907324,52.146042,0 61.21907324,52.146038,0 61.219066760000004,52.146038,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 29</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21907,52.14604,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -819,7 +819,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21907,52.14604,0 61.21916,52.14618,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -828,16 +828,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.219156760000004,52.146178,0 61.219156760000004,52.146182,0 61.21916324,52.146182,0 61.21916324,52.146178,0 61.219156760000004,52.146178,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 30</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21916,52.14618,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -846,7 +846,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21916,52.14618,0 61.21924,52.14632,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -855,16 +855,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21923676,52.146318,0 61.21923676,52.146322000000005,0 61.21924324,52.146322000000005,0 61.21924324,52.146318,0 61.21923676,52.146318,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 31</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21924,52.14632,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -873,7 +873,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21924,52.14632,0 61.2193,52.14645,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -882,16 +882,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21929676,52.146448,0 61.21929676,52.146452000000004,0 61.219303239999995,52.146452000000004,0 61.219303239999995,52.146448,0 61.21929676,52.146448,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 32</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.2193,52.14645,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -900,7 +900,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.2193,52.14645,0 61.21932,52.14652,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -909,16 +909,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.219316760000005,52.146518,0 61.219316760000005,52.146522000000004,0 61.21932324,52.146522000000004,0 61.21932324,52.146518,0 61.219316760000005,52.146518,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 33</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21932,52.14652,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -927,7 +927,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21932,52.14652,0 61.21937,52.14664,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -936,16 +936,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21936676,52.146637999999996,0 61.21936676,52.146642,0 61.219373239999996,52.146642,0 61.219373239999996,52.146637999999996,0 61.21936676,52.146637999999996,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 34</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21937,52.14664,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -954,7 +954,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21937,52.14664,0 61.21945,52.14677,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -963,16 +963,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.219446760000004,52.146767999999994,0 61.219446760000004,52.146772,0 61.21945324,52.146772,0 61.21945324,52.146767999999994,0 61.219446760000004,52.146767999999994,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 35</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21945,52.14677,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -981,7 +981,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21945,52.14677,0 61.21956,52.14689,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -990,16 +990,16 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.21955676,52.146888,0 61.21955676,52.146892,0 61.21956324,52.146892,0 61.21956324,52.146888,0 61.21955676,52.146888,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 36</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.21956,52.14689,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
             </Point>
         </Placemark><Placemark>
               <Style>
@@ -1008,7 +1008,7 @@
                 </LineStyle>
               </Style>
               <LineString>
-                <coordinates>61.21956,52.14689,0 61.2197,52.14702,0 </coordinates>
+                <coordinates>61.2526,52.1732,0 61.2526,52.1732,0 </coordinates>
               </LineString>
           </Placemark>
         <Placemark>
@@ -1017,16 +1017,1663 @@
     			<outerBoundaryIs>
     				<LinearRing>
     					<coordinates>
-    						61.219696760000005,52.147017999999996,0 61.219696760000005,52.147022,0 61.21970324,52.147022,0 61.21970324,52.147017999999996,0 61.219696760000005,52.147017999999996,0  
+    						61.25259676,52.173198,0 61.25259676,52.173202,0 61.25260324,52.173202,0 61.25260324,52.173198,0 61.25259676,52.173198,0  
     					</coordinates>
     				</LinearRing>
     			</outerBoundaryIs>
     		</Polygon>
     	</Placemark>
         <Placemark>
-            <name>Точка: 37</name>
+            <name>Точка: 0</name>
             <Point>
-                <coordinates>61.2197,52.14702,0</coordinates>
+                <coordinates>61.2526,52.1732,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FFFF0000</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2526,52.1732,0 61.2797,52.1416,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.27969676,52.141597999999995,0 61.27969676,52.141602,0 61.279703239999996,52.141602,0 61.279703239999996,52.141597999999995,0 61.27969676,52.141597999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 38</name>
+            <Point>
+                <coordinates>61.2797,52.1416,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2797,52.1416,0 61.2264,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22639676,52.155998,0 61.22639676,52.156002,0 61.226403239999996,52.156002,0 61.226403239999996,52.155998,0 61.22639676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 57</name>
+            <Point>
+                <coordinates>61.2264,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2264,52.156,0 61.2265,52.156,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22649676,52.155998,0 61.22649676,52.156002,0 61.22650324,52.156002,0 61.22650324,52.155998,0 61.22649676,52.155998,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 67</name>
+            <Point>
+                <coordinates>61.2265,52.156,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF00FF00</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.2265,52.156,0 61.2268,52.1555,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22679676,52.155498,0 61.22679676,52.155502000000006,0 61.226803239999995,52.155502000000006,0 61.226803239999995,52.155498,0 61.22679676,52.155498,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>
+        <Placemark>
+            <name>Точка: 68</name>
+            <Point>
+                <coordinates>61.2268,52.1555,0</coordinates>
             </Point>
         </Placemark><Placemark>
 		<name>object</name>

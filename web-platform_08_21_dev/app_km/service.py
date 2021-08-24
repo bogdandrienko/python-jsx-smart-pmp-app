@@ -15,6 +15,7 @@ import random
 import requests
 import bs4
 import psycopg2 as pg
+from fastkml import kml
 from openpyxl.utils import get_column_letter
 
 
@@ -494,7 +495,7 @@ def create_point_object(point: list):
 def get_distance(x1: float, y1: float, x2: float, y2: float):
     x = (x2 - x1) ** 2
     y = (y2 - y1) ** 2
-    return math.sqrt(x+y)
+    return math.sqrt(x + y)
 
 
 def find_distance(dist_arr: list):
@@ -505,35 +506,34 @@ def find_distance(dist_arr: list):
     return dist_arr[arr_dist.index(minimum)][1]
 
 
-def read_kml():
-    # with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
-    #     data = file.read()
-    # k = kml.KML()
-    # k.from_string(data)
-    # features = list(k.features())
-    # k2 = list(features[0].features())
-    # arr = []
-    # for feat in k2:
-    #     string = str(feat.geometry).split('(')[1].split('0.0')[0].split(' ')
-    #     arr.append([float(string[0]), float(string[1])])
-    # if val is None:
-    #     val = [61.2200083333333, 52.147525]
-    # val2 = 0
-    # val3 = 0
-    # for loop1 in arr:
-    #     # Мы должны найти к какой из точек он ближе(разница двух элементов массива)
-    #     if val[0] > loop1[0]:
-    #         for loop2 in arr:
-    #             if val[1] > loop2[1]:
-    #                 val2 = loop1[0]
-    #                 val3 = loop1[1]
-    #                 break
-    # print([val2, val3])
-    # context = {
-    #     'data': [['широта', 'долгота'], arr],
-    # }
-    # return [latitude, longitude]
-    pass
+def read_kml(val: list):
+    with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
+        data = file.read()
+    k = kml.KML()
+    k.from_string(data)
+    features = list(k.features())
+    k2 = list(features[0].features())
+    arr = []
+    for feat in k2:
+        string = str(feat.geometry).split('(')[1].split('0.0')[0].split(' ')
+        arr.append([float(string[0]), float(string[1])])
+    if val is None:
+        val = [61.2200083333333, 52.147525]
+    val2 = 0
+    val3 = 0
+    for loop1 in arr:
+        # Мы должны найти к какой из точек он ближе(разница двух элементов массива)
+        if val[0] > loop1[0]:
+            for loop2 in arr:
+                if val[1] > loop2[1]:
+                    val2 = loop1[0]
+                    val3 = loop1[1]
+                    break
+    print([val2, val3])
+    context = {
+        'data': [['широта', 'долгота'], arr],
+    }
+    return [val2, val3]
 
 
 def create_style():
