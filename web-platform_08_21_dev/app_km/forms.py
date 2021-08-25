@@ -357,8 +357,8 @@ class GeoForm(forms.Form):
     #            'required': ''}), required=False)
     request_value = forms.IntegerField(label='Разряд округления широты и долготы:',
                                        widget=forms.NumberInput(
-                                           attrs={'type': 'number', 'name': 'request_value', 'value': '4',
-                                                  'placeholder': '4', 'class': 'form-control', 'min': '1',
+                                           attrs={'type': 'number', 'name': 'request_value', 'value': '5',
+                                                  'placeholder': '5', 'class': 'form-control', 'min': '1',
                                                   'max': '10'}),
                                        validators=[MinValueValidator(1), MaxValueValidator(10), ], required=True)
     request_minutes = forms.IntegerField(label='Количество затрагиваемых минут от текущего момента(длительный запрос):',
@@ -366,19 +366,19 @@ class GeoForm(forms.Form):
                                            attrs={'type': 'number', 'name': 'request_minutes',
                                                   'value': '10', 'placeholder': '10', 'class': 'form-control',
                                                   'min': '1', 'max': '3600'}),
-                                         validators=[MinValueValidator(1), MaxValueValidator(96), ],
+                                         validators=[MinValueValidator(1), MaxValueValidator(3600), ],
                                          required=True)
     request_between_first = forms.IntegerField(label='Начало диапазона устройств(включительно):',
                                                widget=forms.NumberInput(
                                                    attrs={'type': 'number', 'name': 'request_between_first',
-                                                          'value': '1', 'placeholder': '1', 'class': 'form-control',
+                                                          'value': '6', 'placeholder': '6', 'class': 'form-control',
                                                           'min': '1', 'max': '300'}),
                                                validators=[MinValueValidator(1), MaxValueValidator(300), ],
                                                required=True)
     request_between_last = forms.IntegerField(label='Конец диапазона устройств(включительно)(не более 5 одновременно):',
                                               widget=forms.NumberInput(
-                                                  attrs={'type': 'number', 'name': 'request_between_last', 'value': '1',
-                                                         'placeholder': '1', 'class': 'form-control', 'min': '1',
+                                                  attrs={'type': 'number', 'name': 'request_between_last', 'value': '6',
+                                                         'placeholder': '6', 'class': 'form-control', 'min': '1',
                                                          'max': '300'}),
                                               validators=[MinValueValidator(1), MaxValueValidator(300), ],
                                               required=True)
