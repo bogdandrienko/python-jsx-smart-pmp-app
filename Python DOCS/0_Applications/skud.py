@@ -17,9 +17,13 @@ def play_analyse(temp=37.0):
             )
             return pyodbc.connect(conn_str)
 
+        # sql_select_query = f"SELECT * " \
+        #                    f"FROM dbtable " \
+        #                    f"WHERE CAST(temperature AS FLOAT) >= {temp} AND personid = '6176' OR personid = '25314' OR personid = '931777' OR personid = '5863' " \
+        #                    f"ORDER BY date1 DESC, date2 DESC;"
         sql_select_query = f"SELECT * " \
                            f"FROM dbtable " \
-                           f"WHERE CAST(temperature AS FLOAT) >= {temp} " \
+                           f"WHERE CAST(temperature AS FLOAT) < 37.0 AND date1 BETWEEN '2021-07-25' AND '2021-08-25' " \
                            f"ORDER BY date1 DESC, date2 DESC;"
         connect_db = pyodbc_connect()
         cursor = connect_db.cursor()
