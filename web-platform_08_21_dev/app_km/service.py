@@ -315,7 +315,131 @@ def link_callback(uri):
 
 
 def get_sheet_value(column, row, _sheet):
+    """"
+    Принимает: индексы колонки и строки для извлечения данных, а также лист откуда извлекать.
+    Возвращает: значение, находящееся по индексам на нужном листе.
+    """
     return _sheet[str(column) + str(row)].value
+
+
+def get_hypotenuse(x1: float, y1: float, x2: float, y2: float):
+    """"
+    Принимает: "пару" точек - их широту и долготу.
+    Возвращает: корень из суммы квадратов разностей широты и долготы двух пар точек, ака гипотенузу.
+    """
+    return math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
+
+
+def get_haversine(latitude_1: float, longitude_1: float, latitude_2: float, longitude_2: float):
+    """"
+    Принимает: "пару" точек - их широту и долготу.
+    Возвращает: значение расстояния по гипотенузе двух точек, в метрах, ака формула гаверсинуса.
+    """
+    delta_latitude = latitude_2 * math.pi / 180 - latitude_1 * math.pi / 180
+    delta_longitude = longitude_2 * math.pi / 180 - longitude_1 * math.pi / 180
+    a = math.sin(delta_latitude / 2) * math.sin(delta_latitude / 2) + math.cos(latitude_1 * math.pi / 180) * \
+        math.cos(latitude_2 * math.pi / 180) * math.sin(delta_longitude / 2) * math.sin(delta_longitude / 2)
+    return round(math.atan2(math.sqrt(a), math.sqrt(1 - a)) * 6378.137 * 2 * 1000)
+
+
+def find_near_point(point_arr: list, point_latitude: float, point_longitude: float):
+    """"
+    Принимает: массив точек в которых надо искать, где первый элемент это широта, а второй долгоа. Также данные точки
+    ближайшие координаты которой надо найти.
+    Возвращает: данные точки из массива точек, которая соответствует ближайшему значению целевой точки.
+    """
+    result = ['0', 0, 0 , "0|0"]
+    for coord in point_arr:
+        if coord[1] < point_latitude and coord[2] < point_latitude:
+            result = coord
+    return result
+
+
+def get_vector_arr(point_arr):
+    """
+    Принимает: массив "точек" - первый элемент это имя точки, второй и третий это широта и долгота, а четвёртый связи.
+    Возвращает: массив "векторов" - первый элемент это имя вектора, второй это расстояние через формулу "гаверсинуса".
+    """
+    # Points = [PointName, latitude, longitude, PointLinks]
+    # point1 = ["1", 52.14303, 61.22812, "2"]
+    # point2 = ["2", 52.1431, 61.22829, "1|3"]
+    # Vectors = [VectorName, length(meters)]
+    # vector1 = ["1|2", 12]
+    # vector2 = ["2|3", 14]
+
+    vector_arr = []
+    for point in point_arr:
+        vector1 = point[0]
+        lat1 = point[1]
+        lon1 = point[2]
+        link_arr = point[3].split("|")
+        for link in link_arr:
+            for point_1 in point_arr:
+                if point_1[0] == link:
+                    vector2 = link
+                    lat2 = point_1[1]
+                    lon2 = point_1[2]
+                    length = get_haversine(lat1, lon1, lat2, lon2)
+                    vector_arr.append([f"{vector1}|{vector2}", length])
+    return vector_arr
+
+
+def create_cube_object(point: list):
+    latitude = point[0]
+    longitude = point[1]
+    id_s = point[2]
+    first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
+    second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
+    third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
+    fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
+    string_object = ''
+    for iteration in [first, second, third, fourth, first]:
+        num = 1
+        for i in iteration:
+            if num == 3:
+                string_object += f"{i} "
+            else:
+                string_object += f"{i},"
+            num += 1
+    text_d = f"""<Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						{string_object} 
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>"""
+    return text_d
+
+
+def create_point_object(point: list):
+    latitude = point[0]
+    longitude = point[1]
+    id_s = point[2]
+    first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
+    second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
+    third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
+    fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
+    string_object = ''
+    for iteration in [first, second, third, fourth, first]:
+        num = 1
+        for i in iteration:
+            if num == 3:
+                string_object += f"{i} "
+            else:
+                string_object += f"{i},"
+            num += 1
+    text_d = f"""<Placemark>
+            <name>Точка: {id_s}</name>
+            <Point>
+                <coordinates>{latitude},{longitude},0</coordinates>
+            </Point>
+        </Placemark>"""
+    return text_d
 
 
 def generate_xlsx(request):
@@ -365,25 +489,48 @@ def generate_xlsx(request):
 
 
 def generate_kml():
-    file_xlsx = 'static/media/data/geo.xlsx'
+
+    # Чтение Excel
+    file_xlsx = 'static/media/data/geo_1.xlsx'
     workbook = openpyxl.load_workbook(file_xlsx)
     sheet = workbook.active
-    array = []
-    # colors = ['FFFFFFFF', 'FF0000FF', 'FFFF0000', 'FF00FF00', 'FF00FFFF', 'FF000000']
-    colors = ['FFFFFFFF', 'FF0000FF', 'FFFF0000', 'FF00FF00', 'FF00FFFF', 'FF0F0F0F', 'FFF0F0F0']
-    colors_alias = [': Чё', ': Кр', ': Си', ': Зе', ': Жё', ': Бе', ': Доп1', ': Доп2']
+
+    # Чтение из Excel
     final = 0
     for num in range(2, 10000000):
         if get_sheet_value("A", num, _sheet=sheet) is None or '':
             final = num
             break
+    array = []
     for num in range(2, final):
         array.append([get_sheet_value("D", num, _sheet=sheet), get_sheet_value("C", num, _sheet=sheet),
                       get_sheet_value("A", num, _sheet=sheet)])
-    text_b = ''
-    current_color = colors[0]
-    previous_device = 0
+
+    # Генерация объекта и субъекта
+    point_obj = [61.22330, 52.14113, 'БелАЗ']
+    point_sub = [61.22891, 52.14334, 'Экскаватор']
+    text_x = create_point_object(point_obj)
+    text_y = create_point_object(point_sub)
+
+    # Цена рёбер
+    count = 0
+    for current in array:
+        index = array.index(current)
+        if index != 0:
+            previous = [array[index - 1][0], array[index - 1][1]]
+        else:
+            previous = [current[0], current[1]]
+
+        count += get_hypotenuse(current[0], current[1], previous[0], previous[1])
+    print(round(count, 5))
+
+    # Генерация линий по цветам
     device_arr = []
+    previous_device = 0
+    text_b = ''
+    colors = ['FFFFFFFF', 'FF0000FF', 'FFFF0000', 'FF00FF00', 'FF00FFFF', 'FF0F0F0F', 'FFF0F0F0']
+    colors_alias = [': Чё', ': Кр', ': Си', ': Зе', ': Жё', ': Доп1', ': Доп2']
+    current_color = colors[0]
     for current in array:
         index = array.index(current)
         if previous_device is not current[2]:
@@ -405,105 +552,29 @@ def generate_kml():
               </LineString>
           </Placemark>
         """
-        text_b += create_point_object([current[0], current[1], index])
 
-    point = [61.21000, 52.13000]
-    ds = 160
-    first = [61.200, 52.100, 0]
-    second = [61.202, 52.105, 0]
-    third = [61.201, 52.105, 0]
-    # 61.215,52.135,0 61.214,52.137,0 61.213,52.136,0 61.215,52.135,0
-    string_object = ''
-    for iteration in [first, second, third, first]:
-        num = 1
-        for i in iteration:
-            if num == 3:
-                string_object += f"{i} "
-            else:
-                string_object += f"{i},"
-            num += 1
-    print(string_object)
-    text_d = f"""<Placemark>
-		<name>object</name>
-		<styleUrl>#__managed_style_0872CB1CB61C987BBE0F</styleUrl>
-		<Polygon>
-			<outerBoundaryIs>
-				<LinearRing>
-					<coordinates>
-						{string_object} 
-					</coordinates>
-				</LinearRing>
-			</outerBoundaryIs>
-		</Polygon>
-	</Placemark>"""
-    text_e = create_point_object([61.215, 52.135, '1'])
+        # Генерация точек
+        text_b += create_cube_object([current[0], current[1], index])
+
+    # Генерация имени документа из цветов
     dev = ''
     for x in device_arr:
         dev += f"{x} | "
+
+    # Начало kml
     text_a = f"""<?xml version="1.0" encoding="utf-8"?>
       <kml xmlns="http://earth.google.com/kml/2.2">
         <Document>
           <name>{dev}</name>
             """
+
+    # Конец kml
     text_c = R"""</Document>
     </kml>"""
-    text = text_a + text_b + text_d + text_c
-    # text = text_a + create_point_object([61.23500, 52.17263, "Самосвал"]) + \
-    #        create_point_object([61.23654, 52.16710, "Экскаватор"]) + text_c
+
+    # Запись в kml
     with open("static/media/data/geo.kml", "w", encoding="utf-8") as file:
-        file.write(text)
-
-
-def create_point_object(point: list):
-    latitude = point[0]
-    longitude = point[1]
-    id_s = point[2]
-    first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
-    second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
-    third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
-    fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
-    string_object = ''
-    for iteration in [first, second, third, fourth, first]:
-        num = 1
-        for i in iteration:
-            if num == 3:
-                string_object += f"{i} "
-            else:
-                string_object += f"{i},"
-            num += 1
-    text_d = f"""<Placemark>
-    		<name>object</name>
-    		<Polygon>
-    			<outerBoundaryIs>
-    				<LinearRing>
-    					<coordinates>
-    						{string_object} 
-    					</coordinates>
-    				</LinearRing>
-    			</outerBoundaryIs>
-    		</Polygon>
-    	</Placemark>
-        <Placemark>
-            <name>Точка: {id_s}</name>
-            <Point>
-                <coordinates>{latitude},{longitude},0</coordinates>
-            </Point>
-        </Placemark>"""
-    return text_d
-
-
-def get_distance(x1: float, y1: float, x2: float, y2: float):
-    x = (x2 - x1) ** 2
-    y = (y2 - y1) ** 2
-    return math.sqrt(x + y)
-
-
-def find_distance(dist_arr: list):
-    arr_dist = []
-    for dist in dist_arr:
-        arr_dist.append(dist[0])
-    minimum = min(arr_dist)
-    return dist_arr[arr_dist.index(minimum)][1]
+        file.write(text_a + text_b + text_x + text_y + text_c)
 
 
 def read_kml(val: list):

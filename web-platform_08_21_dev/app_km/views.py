@@ -19,7 +19,7 @@ from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePass
     SmsForm, GeoForm
 from .service import AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
     create_encrypted_password, get_users, get_salary_data, link_callback, get_career, generate_xlsx, \
-    generate_kml, get_distance, find_distance
+    generate_kml, get_hypotenuse, find_near_point, get_haversine, get_vector_arr
 
 import requests
 import openpyxl
@@ -691,46 +691,30 @@ def geo(request):
         form = GeoForm()
         if request.method == 'POST':
             print('begin')
-            data = generate_xlsx(request)
-            print('generate_xlsx successfully')
-            # print(data)
-            generate_kml()
-            print('generate_kml successfully')
-            # point = find_point(52.2, 61.3)
 
-            # Точки
-            point1 = [61.23500, 52.17263, '1']
-            point2 = [61.23500, 52.17263, '2']
-            point3 = [61.23500, 52.17263, '3']
-            point4 = [61.23500, 52.17263, '4']
-            point5 = [61.23500, 52.17263, '5']
-            point5 = [61.23500, 52.17263, '6']
-            point5 = [61.23500, 52.17263, '7']
-            point5 = [61.23500, 52.17263, '8']
-            # .....
-            # Пути
-            dist1 = [[61.23500, 52.17263, '1'], [61.23500, 52.17263, '2']]
-            # 61.23500, 52.17263, 61.23500, 52.17263 'A|B'
-            dist2 = [[61.23500, 52.17263, '1'], [61.23500, 52.17263, '7']]
-            # 61.23500, 52.17263, 61.23500, 52.17263 'A|G'
-            dist3 = [[61.23500, 52.17263, '2'], [61.23500, 52.17263, '3']]
-            # 61.23500, 52.17263, 61.23500, 52.17263 'B|C'
-            dist4 = [[61.23500, 52.17263, '2'], [61.23500, 52.17263, '6']]
-            # 61.23500, 52.17263, 61.23500, 52.17263 'B|F'
-            dist5 = [[61.23500, 52.17263, '2'], [61.23500, 52.17263, '8']]
-            # 61.23500, 52.17263, 61.23500, 52.17263 'B|H'
-            # .....
-            # Связи
-            link1 = ['1', ['2', '7']]
-            link1 = ['2', ['3', '6', '8']]
-            # .....
+            # data = generate_xlsx(request)
+            # print('generate_xlsx successfully')
 
-            dist1 = [round(get_distance(x1=61.23500, y1=52.17263, x2=61.23654, y2=52.16710), 5), 'BA']
-            dist2 = [round(get_distance(x1=61.23550, y1=52.17263, x2=61.23654, y2=52.16710), 5), 'BC']
-            dist3 = [round(get_distance(x1=61.23450, y1=52.17263, x2=61.23654, y2=52.16710), 5), 'BD']
-            print([dist1, dist2, dist3])
-            dist = find_distance([dist1, dist2, dist3])
-            print(dist)
+            # generate_kml()
+            # print('generate_kml successfully')
+
+            # Points = [PointName, latitude, longitude, PointLinks]
+            point1 = ["1", 52.14303, 61.22812,  "2"]
+            point2 = ["2", 52.1431, 61.22829,  "1|3"]
+            point3 = ["3", 52.14323, 61.22862,  "2|4"]
+            point4 = ["4", 52.14329, 61.22878,  "3|5"]
+            point5 = ["5", 52.14332617, 61.22892201,  "6|4"]
+            point_arr = [point1, point2, point3, point4, point5]
+
+            # Near Point
+            near_point = find_near_point(point_arr, 52.143, 61.228)
+            print(near_point)
+
+            # Vectors = [VectorName, length(meters)]
+            vector_arr = get_vector_arr(point_arr)
+            print(vector_arr)
+
+
 
             print('end')
         context = {

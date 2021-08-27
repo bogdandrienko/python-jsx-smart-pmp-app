@@ -196,3 +196,4 @@ HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам сл
 14:46:34 : geo: unsupported operand type(s) for -: 'datetime.datetime' and 'int'
 14:55:18 : geo: list.count() takes exactly one argument (0 given)
 14:55:56 : geo: unsupported operand type(s) for +: 'int' and 'str'
+16:45:39 : geo: create_point_object() takes 1 positional argument but 3 were given
