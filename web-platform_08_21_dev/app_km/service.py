@@ -348,10 +348,12 @@ def find_near_point(point_arr: list, point_latitude: float, point_longitude: flo
     ближайшие координаты которой надо найти.
     Возвращает: данные точки из массива точек, которая соответствует ближайшему значению целевой точки.
     """
-    result = ['0', 0, 0 , "0|0"]
+    result = None
     for coord in point_arr:
-        if coord[1] < point_latitude and coord[2] < point_latitude:
+        if coord[0] <= point_latitude and coord[1] <= point_longitude:
             result = coord
+    if result is None:
+        result = point_arr[0]
     return result
 
 
@@ -369,16 +371,16 @@ def get_vector_arr(point_arr):
 
     vector_arr = []
     for point in point_arr:
-        vector1 = point[0]
-        lat1 = point[1]
-        lon1 = point[2]
+        lat1 = point[0]
+        lon1 = point[1]
+        vector1 = point[2]
         link_arr = point[3].split("|")
         for link in link_arr:
             for point_1 in point_arr:
-                if point_1[0] == link:
+                if point_1[2] == link:
+                    lat2 = point_1[0]
+                    lon2 = point_1[1]
                     vector2 = link
-                    lat2 = point_1[1]
-                    lon2 = point_1[2]
                     length = get_haversine(lat1, lon1, lat2, lon2)
                     vector_arr.append([f"{vector1}|{vector2}", length])
     return vector_arr
@@ -575,6 +577,88 @@ def generate_kml():
     # Запись в kml
     with open("static/media/data/geo.kml", "w", encoding="utf-8") as file:
         file.write(text_a + text_b + text_x + text_y + text_c)
+
+
+def generate_way(object_, subject_, point_arr, vector_arr):
+    text_b = ''
+    for current in point_arr:
+        index = point_arr.index(current)
+        if index != 0:
+            previous = [point_arr[index - 1][0], point_arr[index - 1][1]]
+        else:
+            previous = [current[0], current[1]]
+        text_b += f"""<Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF0000FF</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
+              </LineString>
+          </Placemark>
+        """
+
+        # Генерация точек
+        text_b += create_cube_object([current[0], current[1], index])
+
+    # Генерация объекта и субъекта
+    point_obj = [object_[0], object_[1], "ЭКГ"]
+    point_sub = [subject_[0], subject_[1], "БелАЗ"]
+    text_x = create_point_object(point_obj)
+    text_y = create_point_object(point_sub)
+
+    # Генерация маршрута
+    # От исходной точки идём к её линиям связи, выбираем самую короткую к финальной точке, "наступаем" туда, цикл.
+    start_point = subject_
+    final_point = object_
+    current_point = subject_
+    path = []
+    path_dist = 0
+    for loop in range(3):
+        links = current_point[3].split("|")
+        near_points = []
+        for point in point_arr:
+            for link in links:
+                if point[2] == link:
+                    near_points.append(point)
+        min_dist = 9999
+        for point in near_points:
+            dist = get_haversine(point[0], point[1], final_point[0], final_point[1])
+            if min_dist > dist:
+                min_dist = dist
+                current_point = point
+                path.append(point)
+                path_dist += dist
+    print(path)
+    print(f"{path_dist} meters")
+    # Генерация имени документа из цветов
+    dev = ''
+    for x in [object_[0], subject_[0]]:
+        dev += f"{x} | "
+
+    # Начало kml
+    text_a = f"""<?xml version="1.0" encoding="utf-8"?>
+      <kml xmlns="http://earth.google.com/kml/2.2">
+        <Document>
+          <name>{dev}</name>
+            """
+
+    # Конец kml
+    text_c = R"""</Document>
+    </kml>"""
+
+    # Запись в kml
+    try:
+        os.remove("static/media/data/geo_1.kml")
+    except Exception as ex:
+        pass
+    with open("static/media/data/geo_1.kml", "w", encoding="utf-8") as file:
+        file.write(text_a + text_b + text_x + text_y + text_c)
+
+
+def find_path(object_, subject_, point_arr, vector_arr):
+    pass
 
 
 def read_kml(val: list):

@@ -19,7 +19,7 @@ from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePass
     SmsForm, GeoForm
 from .service import AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
     create_encrypted_password, get_users, get_salary_data, link_callback, get_career, generate_xlsx, \
-    generate_kml, get_hypotenuse, find_near_point, get_haversine, get_vector_arr
+    generate_kml, get_hypotenuse, find_near_point, get_haversine, get_vector_arr, generate_way, find_path
 
 import requests
 import openpyxl
@@ -699,22 +699,25 @@ def geo(request):
             # print('generate_kml successfully')
 
             # Points = [PointName, latitude, longitude, PointLinks]
-            point1 = ["1", 52.14303, 61.22812,  "2"]
-            point2 = ["2", 52.1431, 61.22829,  "1|3"]
-            point3 = ["3", 52.14323, 61.22862,  "2|4"]
-            point4 = ["4", 52.14329, 61.22878,  "3|5"]
-            point5 = ["5", 52.14332617, 61.22892201,  "6|4"]
+            point1 = [61.22812, 52.14303, "1", "2"]
+            point2 = [61.22829, 52.1431, "2", "1|3"]
+            point3 = [61.22862, 52.14323, "3", "2|4"]
+            point4 = [61.22878, 52.14329, "4", "3|5"]
+            point5 = [61.22892201, 52.14332617, "5", "6|4"]
             point_arr = [point1, point2, point3, point4, point5]
 
             # Near Point
-            near_point = find_near_point(point_arr, 52.143, 61.228)
-            print(near_point)
+            object_ = find_near_point(point_arr, 61.2283, 52.1432)
+            print(object_)
+            subject_ = find_near_point(point_arr, 61.22879, 52.1433)
+            print(subject_)
 
             # Vectors = [VectorName, length(meters)]
             vector_arr = get_vector_arr(point_arr)
             print(vector_arr)
 
-
+            # New KML Object
+            generate_way(object_, subject_, point_arr, vector_arr)
 
             print('end')
         context = {

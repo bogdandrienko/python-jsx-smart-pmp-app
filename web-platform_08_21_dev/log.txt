@@ -197,3 +197,13 @@ HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам сл
 14:55:18 : geo: list.count() takes exactly one argument (0 given)
 14:55:56 : geo: unsupported operand type(s) for +: 'int' and 'str'
 16:45:39 : geo: create_point_object() takes 1 positional argument but 3 were given
+12:01:29 : geo: unsupported operand type(s) for -: 'str' and 'float'
+12:54:31 : geo: unsupported operand type(s) for -: 'str' and 'float'
+12:58:00 : geo: list index out of range
+12:59:21 : geo: unsupported operand type(s) for -: 'str' and 'float'
+13:00:03 : geo: unsupported operand type(s) for -: 'str' and 'float'
+13:00:21 : geo: unsupported operand type(s) for -: 'str' and 'float'
+13:00:39 : geo: unsupported operand type(s) for -: 'str' and 'float'
+13:02:43 : geo: name 'text_x' is not defined
+13:02:56 : geo: unsupported operand type(s) for -: 'str' and 'float'
+13:16:58 : geo: [WinError 2] Не удается найти указанный файл: 'static/media/data/geo.kml'
