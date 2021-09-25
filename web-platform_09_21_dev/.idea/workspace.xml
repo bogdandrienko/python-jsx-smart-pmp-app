@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="" />
+    <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src — копия/js/actions/todos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/actions/types.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/components/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/components/layout/Header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/components/todo/Dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/components/todo/Form.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/components/todo/List.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/parse.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/reducers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/reducers/todos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/js/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src — копия/utilities/type_variable.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/actions/todos.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/actions/types.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/layout/Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/todo/Dashboard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/todo/Form.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/todo/List.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/parse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/reducers/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/reducers/todos.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/store.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +101,7 @@
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media\tempates" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.views">
+  <component name="RunManager" selected="Python.test">
     <configuration name="skud" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="web-platform_07_21_dev" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,6 +116,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Python DOCS/0_Applications/skud.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="web-platform_07_21_dev" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -142,6 +193,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.views" />
         <item itemvalue="Python.skud" />
       </list>
@@ -225,6 +277,13 @@
       <workItem from="1630375760587" duration="13695000" />
       <workItem from="1630486522623" duration="135000" />
       <workItem from="1630486670699" duration="1103000" />
+      <workItem from="1630547990192" duration="4784000" />
+      <workItem from="1630640866047" duration="5487000" />
+      <workItem from="1632376522724" duration="914000" />
+      <workItem from="1632379835438" duration="182000" />
+      <workItem from="1632380027775" duration="831000" />
+      <workItem from="1632380993960" duration="3355000" />
+      <workItem from="1632389999314" duration="898000" />
     </task>
     <servers />
   </component>
@@ -249,5 +308,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_platform_07_21_dev$views.coverage" NAME="views Coverage Results" MODIFIED="1626458166663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_rational" />
     <SUITE FILE_PATH="coverage/web_platform_07_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1626238502088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Python DOCS/0_Applications" />
+    <SUITE FILE_PATH="coverage/web_platform_09_21_dev$test.coverage" NAME="test Coverage Results" MODIFIED="1632383532200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
