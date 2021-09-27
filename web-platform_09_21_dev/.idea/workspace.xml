@@ -1,36 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src — копия/js/actions/todos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/actions/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/components/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/components/layout/Header.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/components/todo/Dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/components/todo/Form.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/components/todo/List.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/parse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/reducers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/reducers/todos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/js/store.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src — копия/utilities/type_variable.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/actions/todos.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/actions/types.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/layout/Header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/Dashboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/Form.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/List.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/parse.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/reducers/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/reducers/todos.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/store.js" beforeDir="false" />
-    </list>
+    <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -284,6 +255,7 @@
       <workItem from="1632380027775" duration="831000" />
       <workItem from="1632380993960" duration="3355000" />
       <workItem from="1632389999314" duration="898000" />
+      <workItem from="1632712571807" duration="106000" />
     </task>
     <servers />
   </component>
