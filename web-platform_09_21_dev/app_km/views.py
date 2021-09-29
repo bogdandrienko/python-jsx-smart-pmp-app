@@ -1,29 +1,28 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http.response import Http404, HttpResponseRedirect
-from django.http import HttpResponse
-from django.urls import reverse
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.mail import BadHeaderError, send_mail
+import random
+import openpyxl
+import requests
 from django.conf import settings
-from django.template.loader import get_template
 from django.contrib import admin
-from django.contrib.auth.models import Group, User
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-
-from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
-    ApplicationModuleModel, ApplicationComponentModel, AccountDataModel, NotificationModel, EmailModel, ContactModel, \
-    DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import Group, User
+from django.core.mail import BadHeaderError, send_mail
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse
+from django.http.response import Http404, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import get_template
+from django.urls import reverse
+from xhtml2pdf import pisa
 from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
     NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
     SmsForm, GeoForm
+from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
+    ApplicationModuleModel, ApplicationComponentModel, AccountDataModel, NotificationModel, EmailModel, ContactModel, \
+    DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
 from .service import AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
-    create_encrypted_password, get_users, get_salary_data, link_callback, get_career, generate_xlsx, \
-    generate_kml, get_hypotenuse, find_near_point, get_haversine, get_vector_arr, generate_way, find_path
-
-import requests
-import openpyxl
-from xhtml2pdf import pisa
+    create_encrypted_password, get_users, get_salary_data, link_callback, get_career, find_near_point, get_vector_arr, \
+    generate_way
 
 
 # Admin
@@ -699,25 +698,47 @@ def geo(request):
             # print('generate_kml successfully')
 
             # Points = [PointName, latitude, longitude, PointLinks]
+
             point1 = [61.22812, 52.14303, "1", "2"]
             point2 = [61.22829, 52.1431, "2", "1|3"]
             point3 = [61.22862, 52.14323, "3", "2|4"]
             point4 = [61.22878, 52.14329, "4", "3|5"]
-            point5 = [61.22892201, 52.14332617, "5", "6|4"]
+            point5 = [61.22892201, 52.14332617, "5", "4|6"]
+            point5 = [61.23, 52.14332617, "6", "5|7"]
+            point5 = [61.24, 52.14332617, "7", "9|10"]
+            point5 = [61.25, 52.14332617, "8", "11|12"]
+            point5 = [61.26, 52.14332617, "9", "6|4"]
             point_arr = [point1, point2, point3, point4, point5]
 
+            # Получение значений из формы
+            count_points = int(request.POST['count_points'])
+            correct_rad = int(request.POST['correct_rad'])
+            rounded_val = int(request.POST['rounded_val'])
+
+            points_arr = []
+            val = 0
+            for num in range(1, count_points):
+                x = 61.22812
+                y = 52.14303
+                val += random.random() / 10000 * 2
+                var = [round(x + val, rounded_val), round(y + val - random.random() / 10000 * correct_rad, rounded_val),
+                       str(num), str(f"{num - 1}|{num + 1}")]
+                points_arr.append(var)
+
             # Near Point
-            object_ = find_near_point(point_arr, 61.2283, 52.1432)
-            print(object_)
-            subject_ = find_near_point(point_arr, 61.22879, 52.1433)
+            subject_ = find_near_point(points_arr, 61.27, 52.147)
             print(subject_)
+            object_ = find_near_point(points_arr, 61.24, 52.144)
+            print(object_)
 
             # Vectors = [VectorName, length(meters)]
-            vector_arr = get_vector_arr(point_arr)
-            print(vector_arr)
+            vector_arr = get_vector_arr(points_arr)
+            # print(vector_arr)
+
+            # print(points_arr)
 
             # New KML Object
-            generate_way(object_, subject_, point_arr, vector_arr)
+            generate_way(object_, subject_, points_arr)
 
             print('end')
         context = {

@@ -16,6 +16,7 @@ django-grappelli==2.15.1
 django-js-asset==1.2.2
 djangorestframework==3.12.4
 et-xmlfile==1.1.0
+fastkml==0.11
 future==0.18.2
 geographiclib==1.52
 geopy==2.2.0
@@ -23,12 +24,15 @@ gunicorn==20.1.0
 html5lib==1.1
 httplib2==0.19.1
 idna==2.10
+lxml==4.6.3
 openpyxl==3.0.7
 Pillow==8.2.0
 psycopg2==2.9.1
+pygeoif==0.7
 pyparsing==2.4.7
 PyPDF2==1.26.0
 python-bidi==0.4.2
+python-dateutil==2.8.2
 pytz==2021.1
 reportlab==3.6.1
 requests==2.25.1
@@ -39,5 +43,3 @@ urllib3==1.26.6
 webencodings==0.5.1
 whitenoise==5.2.0
 xhtml2pdf==0.2.5
-
-fastkml~=0.11

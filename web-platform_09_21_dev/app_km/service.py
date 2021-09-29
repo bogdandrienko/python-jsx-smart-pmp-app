@@ -1,6 +1,5 @@
 import datetime
 import math
-
 import openpyxl
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -491,7 +490,6 @@ def generate_xlsx(request):
 
 
 def generate_kml():
-
     # Чтение Excel
     file_xlsx = 'static/media/data/geo_1.xlsx'
     workbook = openpyxl.load_workbook(file_xlsx)
@@ -579,74 +577,38 @@ def generate_kml():
         file.write(text_a + text_b + text_x + text_y + text_c)
 
 
-def generate_way(object_, subject_, point_arr, vector_arr):
-    text_b = ''
-    for current in point_arr:
-        index = point_arr.index(current)
-        if index != 0:
-            previous = [point_arr[index - 1][0], point_arr[index - 1][1]]
-        else:
-            previous = [current[0], current[1]]
-        text_b += f"""<Placemark>
-              <Style>
-                <LineStyle>
-                  <color>FF0000FF</color>
-                </LineStyle>
-              </Style>
-              <LineString>
-                <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
-              </LineString>
-          </Placemark>
-        """
-
-        # Генерация точек
-        text_b += create_cube_object([current[0], current[1], index])
+def generate_way(object_, subject_, point_arr):
+    # Генерация общей карты
+    text_map = generate_map(point_arr, 'FF0000FF')
+    # text_map = ''
 
     # Генерация объекта и субъекта
     point_obj = [object_[0], object_[1], "ЭКГ"]
     point_sub = [subject_[0], subject_[1], "БелАЗ"]
-    text_x = create_point_object(point_obj)
-    text_y = create_point_object(point_sub)
+    text_obj = create_point_object(point_obj)
+    text_sub = create_point_object(point_sub)
 
-    # Генерация маршрута
-    # От исходной точки идём к её линиям связи, выбираем самую короткую к финальной точке, "наступаем" туда, цикл.
-    start_point = subject_
-    final_point = object_
-    path = []
-    path_dist = 0
-    current_point = start_point
-    for loop in range(3):
-        links = current_point[3].split("|")
-        near_points = []
-        for point in point_arr:
-            for link in links:
-                if point[2] == link:
-                    near_points.append(point)
-        min_dist = 9999
-        for point in near_points:
-            dist = get_haversine(point[0], point[1], final_point[0], final_point[1])
-            if min_dist > dist:
-                min_dist = dist
-                current_point = point
-                path.append(point)
-                path_dist += dist
-    print(path)
-    print(f"{path_dist} meters")
+    path = generate_path(object_, subject_, point_arr)
+    # print(path[0])
+    # Генерация карты пути
+    text_path = generate_map(path[0], 'FFFF0000')
 
     # Генерация имени документа из цветов
     dev = ''
     for x in [object_[0], subject_[0]]:
         dev += f"{x} | "
+    dev += f"{path[1]} meters"
+    print(f"{path[1]} meters")
 
     # Начало kml
-    text_a = f"""<?xml version="1.0" encoding="utf-8"?>
+    text_title = f"""<?xml version="1.0" encoding="utf-8"?>
       <kml xmlns="http://earth.google.com/kml/2.2">
         <Document>
           <name>{dev}</name>
             """
 
     # Конец kml
-    text_c = R"""</Document>
+    text_footer = R"""</Document>
     </kml>"""
 
     # Запись в kml
@@ -654,15 +616,169 @@ def generate_way(object_, subject_, point_arr, vector_arr):
         os.remove("static/media/data/geo_1.kml")
     except Exception as ex:
         pass
-    with open("static/media/data/geo_1.kml", "w", encoding="utf-8") as file:
-        file.write(text_a + text_b + text_x + text_y + text_c)
+    with open("static/media/data/geo_5.kml", "w", encoding="utf-8") as file:
+        file.write(text_title + text_map + text_path + text_obj + text_sub + text_footer)
 
 
-def find_path(object_, subject_, point_arr, vector_arr):
-    pass
+def generate_path(object_, subject_, point_arr):
+    """"
+    Генерация пути синего цвета из всех валидных точек и расчёт расстояния.
+    """
+    # Путь маршрут
+    path = []
+    # Расстояние пути
+    path_distantion = 0
+
+    # Откуда начинаем путь
+    from_point = object_
+    print(f"from_point: {from_point}")
+    # from_point: [61.232109, 52.146845, '38', '37|39']
+
+    # Где завершаем путь
+    to_point = subject_
+    print(f"to_point: {to_point}")
+    # to_point: [61.229219, 52.143999, '12', '11|13']
+
+    # Генерация маршрута
+    # От исходной точки идём к её линиям связи, выбираем самую короткую к финальной точке, "наступаем" туда, цикл.
+    start_point = from_point
+    final_point = to_point
+
+    path.append(from_point)
+    while True:
+        print('\n*****************')
+        print('while', start_point[2], final_point[2])
+        links = start_point[3].split("|")
+        print(f"links: {links}")
+        # links: ['38', '40']
+
+        near_points = []
+        for point in point_arr:
+            for link in links:
+                if point[2] == link:
+                    try:
+                        near_points.index(point)
+                    except Exception as ex:
+                        near_points.append(point)
+        print(f"near_points: {near_points}")
+        # near_points: [[61.232054, 52.146927, '38', '37|39'], [61.232384, 52.147085, '40', '39|41']]
+
+        destinations = []
+        for point in near_points:
+            destinations.append(get_haversine(point[0], point[1], final_point[0], final_point[1]))
+        print(f"destinations: {destinations}")
+        # destinations: [[61.232054, 52.146927, '38', '37|39'], [61.232384, 52.147085, '40', '39|41']]
+
+        min_point = min(destinations)
+        print(f"min_point: {min_point}")
+        # min_point: 367
+
+        if min_point == 0:
+            next_point = final_point
+            print(f"next_point: {next_point}")
+            # next_point: [61.232101, 52.146821, '45', '44|46']
+
+            dist = get_haversine(start_point[0], start_point[1], final_point[0], final_point[1])
+            print(f"dist: {dist}")
+            # dist: 22
+
+            path_distantion += dist
+            path.append(next_point)
+            break
+
+        next_point = near_points[destinations.index(min_point)]
+        print(f"next_point: {next_point}")
+        # next_point: [61.232101, 52.146821, '45', '44|46']
+
+        dist = get_haversine(start_point[0], start_point[1], next_point[0], next_point[1])
+        print(f"dist: {dist}")
+        # dist: 22
+
+        path_distantion += dist
+        start_point = next_point
+        path.append(next_point)
+        print('*****************\n')
+    return [path, path_distantion]
+
+
+def generate_path_old(object_, subject_, point_arr):
+    """"
+    Генерация пути синего цвета из всех валидных точек.
+    """
+    # Генерация маршрута
+    # От исходной точки идём к её линиям связи, выбираем самую короткую к финальной точке, "наступаем" туда, цикл.
+    path = []
+    path_dist = 0
+    current_point = subject_
+    # subject_: [61.232230610495556, 52.14697472947569, '21', '20|22']
+    previous_point = subject_
+    for loop in range(len(point_arr)):
+        # links: ['20', '22']
+        links = current_point[3].split("|")
+        near_points = []
+        for point in point_arr:
+            for link in links:
+                if point[2] == link:
+                    # print(point[2])
+                    try:
+                        near_points.index(point)
+                    except Exception as ex:
+                        near_points.append(point)
+
+        # Первые две линии не брать, а к последней по индексу добавлять ещё одну связь.
+        min_dist = 9999
+        # print(near_points)
+        for point in near_points:
+            # object_: [61.2293618582404, 52.143978995225346, '4', '3|5']
+            dist = get_haversine(point[0], point[1], object_[0], object_[1])
+            # print(f"dist: {dist}")
+            if min_dist > dist:
+                min_dist = dist
+                current_point = point
+                path.append(point)
+                distantion = get_haversine(point[0], point[1], previous_point[0], previous_point[1])
+                print(f"prev: {previous_point}   |   curr: {point}     |       deist: {distantion}m")
+                path_dist += distantion
+            previous_point = point
+    print(path_dist)
+    path_dist = 0
+    for x in path:
+        path_dist += get_haversine(x[0], x[1], object_[0], object_[1])
+        print(get_haversine(x[0], x[1], object_[0], object_[1]))
+    return [path, path_dist]
+
+
+def generate_map(point_arr, color):
+    """"
+    Генерация карты выбранного цвета из всех валидных точек.
+    """
+    text = ''
+    for current in point_arr:
+        index = point_arr.index(current)
+        if index != 0:
+            previous = [point_arr[index - 1][0], point_arr[index - 1][1]]
+        else:
+            previous = [current[0], current[1]]
+        text += f"""<Placemark>
+              <Style>
+                <LineStyle>
+                  <color>{color}</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
+              </LineString>
+          </Placemark>
+        """
+        # Генерация точек
+        text += create_cube_object([current[0], current[1], index])
+    return text
 
 
 def read_kml(val: list):
+    """"
+    Чтение из kml-файла
+    """
     with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
         data = file.read()
     k = kml.KML()
