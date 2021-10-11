@@ -1,0 +1,68 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+	Погода
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Погода</h1>
+        <p class="lead">Эта страница информацию о погоде в добавленных городах, а также форму для добавления.</p>
+        <div class="d-block">
+            <form class="form-control" action="" method="post">
+                {% csrf_token %}
+                <label for="city">Введите ниже название города на латинице, для добавления в общий список.</label>
+                {{ form.name }}
+                <input type="submit" name="send" value="Добавить" class="mt-2 btn btn-danger">
+            </form>
+        </div>
+    </div>
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+    {% for info in page %}
+        <div class="alert alert-info">
+            <div class="row">
+                <div class="col-9">
+                    <b>Город:</b> {{ info.city }}<br>
+                    <b>Температура:</b> {{ info.temp }}<sup>o</sup>
+                </div>
+                <div class="col-1">
+                    <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Фото погоды" class="img-thumbnail">
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
