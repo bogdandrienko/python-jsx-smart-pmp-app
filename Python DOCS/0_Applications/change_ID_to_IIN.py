@@ -55,13 +55,12 @@ def click_button(export_file='', col_entry='754'):
             worker_list.append(value)
         workers_id_all.append(worker_list)
     workbook.close()
-
     # print(workers_id_all)
 
     for path, subdirs, files in os.walk(import_folder):
         for name in files:
             if fnmatch(name, pattern):
-                # try:
+                try:
                     name_start = name.split('_')[0].strip()
                     name_end = name.split('.')[1].strip()
                     id_ = name.split('.')[0].strip().split('_')[1].strip()
@@ -71,9 +70,8 @@ def click_button(export_file='', col_entry='754'):
                                            f'{equal_folder}\\{name_start+"_"+num[1]+"."+name_end}')
                         else:
                             pass
-                # except:
-                #     print(name)
-                #     pass
+                except Exception as ex:
+                    print(name, ex)
 
     print('complete')
     app.root.config(background="green")
