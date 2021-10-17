@@ -559,7 +559,35 @@ class AnalyzeClass:
         sources = f"{data['protocol_cam_type']}://192.168.{data['ip_cam_snapshot']}:{data['port_cam']}/" \
                   f"ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG"
         response, content = h.request(sources)
-        with open(data['name_snapshot'], 'wb') as file:
+        with open(data["name_snapshot"], 'wb') as file:
             file.write(content)
         # cv2.imwrite('1.png', img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
         # cv2.imwrite('1.png', img, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
+
+    @staticmethod
+    def play_rtsp():
+        cap = cv2.VideoCapture('rtsp://admin:q1234567@192.168.15.229:554/cam/realmonitor?channel=1&subtype=0')
+        # cap = cv2.VideoCapture('rtsp://admin:nehrfvths123@192.168.15.140:554')
+        # cap = cv2.VideoCapture('rtsp://192.168.15.229:554/cam/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif')
+        # cap = cv2.VideoCapture('rtsp://192.168.15.229:554/live')
+        # cap = cv2.VideoCapture('rtsp://admin:q1234567@192.168.15.229:554/cam/realmonitor?channel=2&subtype=1')
+        # cap = cv2.VideoCapture('rtsp://admin:q1234567@192.168.15.229:554/cam/realmonitor?channel=33&subtype=0')
+        # sources = f"http://192.168.15.227/cgi-bin/snapshot.cgi?channel=road?loginuse=admin&loginpas=q1234567"
+        # sources = f"http://192.168.15.227/cgi-bin/snapshot.cgi?loginuse=admin&loginpas=q1234567"
+        # sources = f"http://192.168.15.227/cgi-bin/snapshot.cgi?chn=1&u=admin&p=q1234567"
+        # sources = f"http://192.168.15.227/cgi-bin/snapshot.cgi?1"
+        # sources = f"rtsp://192.168.15.227:554/cam/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif"
+        # sources = f"rtsp://192.168.15.227:554/live"
+        # sources = f"rtsp://admin:q1234567@192.168.15.227:554/cam/realmonitor?channel=1&subtype=1"
+        # sources = f"rtsp://admin:q1234567@192.168.15.227:554/cam/realmonitor?channel=1&subtype=0"
+        # sources = f"rtsp://admin:nehrfvths123@192.168.15.140:554"
+        while True:
+            try:
+                ret, frame = cap.read()
+                cv2.imshow("Capturing", frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+            except Exception as ex:
+                print(ex)
+        cv2.destroyAllWindows()
+        cap.release()

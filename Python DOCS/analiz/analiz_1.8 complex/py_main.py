@@ -32,7 +32,7 @@ def pause():
 
 def quit_func():
     stop_func()
-    sys.exit(app_container.app.exec_())
+    sys.exit(app_container.app.exec())
 
 
 def snapshot_func(data: dict):
@@ -46,4 +46,4 @@ if __name__ == "__main__":
     widget = app_container.create_ui(title="analysis", width=300, height=300, icon="icon.ico",
                                      play_f=play_func, stop_f=stop_func, quit_f=quit_func, snapshot_f=snapshot_func)
     ui_thread = threading.Thread(target=widget.show())
-    sys.exit(app_container.app.exec_())
+    sys.exit(app_container.app.exec())

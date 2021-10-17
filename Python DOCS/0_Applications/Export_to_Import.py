@@ -1,4 +1,5 @@
 import openpyxl
+from openpyxl.utils import get_column_letter
 import os
 import tkinter
 from threading import Thread
@@ -47,7 +48,7 @@ def click_button(export_file='Export.xlxs', import_file='Import.xlxs', exporting
         workers_from_db = []
 
         for num in range(min_import_value, max_import_value):
-            workers_from_db.append(get_sheet_value('C', num, sheet))
+            workers_from_db.append(get_sheet_value(get_column_letter(3), num, sheet))
 
         for worker_from_1C in workers_from_1c:
             for worker_from_DB in workers_from_db:
@@ -105,7 +106,7 @@ class Application(tkinter.Frame):
 
         self.importing_entry = tkinter.Entry(self.root, font="100")
         self.importing_entry.grid(row=4, column=1, sticky=tkinter.W)
-        self.importing_entry.insert(0, 'RSTBAUCVF')
+        self.importing_entry.insert(0, 'QRSBATUCV')
 
         self.exporting_entry = tkinter.Entry(self.root, font="100")
         self.exporting_entry.grid(row=4, column=0, sticky=tkinter.W)
