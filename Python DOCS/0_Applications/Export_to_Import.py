@@ -106,7 +106,7 @@ class Application(tkinter.Frame):
 
         self.importing_entry = tkinter.Entry(self.root, font="100")
         self.importing_entry.grid(row=4, column=1, sticky=tkinter.W)
-        self.importing_entry.insert(0, 'QRSBATUCV')
+        self.importing_entry.insert(0, 'RSTBAUCV')
 
         self.exporting_entry = tkinter.Entry(self.root, font="100")
         self.exporting_entry.grid(row=4, column=0, sticky=tkinter.W)
