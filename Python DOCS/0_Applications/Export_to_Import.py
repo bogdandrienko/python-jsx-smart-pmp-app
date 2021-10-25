@@ -17,6 +17,7 @@ def click_button(export_file='Export.xlxs', import_file='Import.xlxs', exporting
 
     def whiles(_export_file=export_file, _import_file=import_file, _exporting=exporting, _importing=importing):
         app.root.config(background="red")
+        print('start')
 
         relative_path = os.path.dirname(os.path.abspath('__file__'))
         _export_file = relative_path + '\\' + _export_file
@@ -62,6 +63,8 @@ def click_button(export_file='Export.xlxs', import_file='Import.xlxs', exporting
 
         workbook.save(_import_file)
         workbook.close()
+
+        print('end')
 
     thread_result = Thread(target=whiles)
     thread_result.start()

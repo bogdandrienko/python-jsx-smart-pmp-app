@@ -16,7 +16,7 @@ id_1c = 9
 
 workbook = openpyxl.load_workbook(file_1c)
 sheet = workbook.active
-for num in range(1, 2500):
+for num in range(1, 3000):
     workers_id_1c.append(get_sheet_value(get_column_letter(int(id_1c)), num, _sheet=sheet))
 workbook.close()
 
@@ -26,7 +26,7 @@ id_skud = 3
 
 workbook = openpyxl.load_workbook(file_skud)
 sheet = workbook.active
-for num in range(1, 2500):
+for num in range(1, 3000):
     workers_id_skud.append(get_sheet_value(get_column_letter(int(id_skud)), num, _sheet=sheet))
 workbook.close()
 
