@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202104,0f68107cbc8ca10c04cc77a9a29c8d4d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,6 +273,8 @@
       <workItem from="1635233026080" duration="84000" />
       <workItem from="1635233384042" duration="2000" />
       <workItem from="1635234883174" duration="3116000" />
+      <workItem from="1635327492156" duration="4255000" />
+      <workItem from="1635331844748" duration="47000" />
     </task>
     <servers />
   </component>

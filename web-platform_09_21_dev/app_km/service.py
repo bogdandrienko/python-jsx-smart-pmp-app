@@ -87,20 +87,33 @@ def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJ
 
 # Salary
 def get_salary_data(month=4):
-    # Admin
-    # 159159qqww!
-    url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210{month}'
+    # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210{month}'
+    # login = 'zpadmin'
+    # password = '159159qo'
+
+    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/970801351179/20210{month}'
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
     h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
-    login = 'zpadmin'
-    password = '159159qo'
+    login = 'Admin'
+    password = '159159qqww!'
     h.add_credentials(login, password)
     response, content = h.request(url)
+
+    # print('************************')
+    # print(type(content))
+    # print('************************')
+    # print(content)
+    # print('************************')
+
     if content:
         try:
-            with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-                json.dump(content, file)
+            # print('************************')
             data = json.loads(content)
+            # print(data)
+            # print('************************')
+            with open("static/media/data/zarplata.json", "w", encoding="utf8") as file:
+                encode_data = json.dumps(data, ensure_ascii=False)
+                json.dump(encode_data, file, ensure_ascii=False)
         except Exception as ex:
             print(ex)
             with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
@@ -108,6 +121,7 @@ def get_salary_data(month=4):
     else:
         with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
             data = json.load(file)
+
     try:
         data["global_objects"]["3.Доходы в натуральной форме"]
     except Exception as ex:
@@ -123,6 +137,7 @@ def get_salary_data(month=4):
                 "7": "ВсегоЧасы"
             },
         }
+
     data = {
         "Table_1": create_arr_table(
             title="1.Начислено", footer="Всего начислено", json_obj=data["global_objects"]["1.Начислено"],
