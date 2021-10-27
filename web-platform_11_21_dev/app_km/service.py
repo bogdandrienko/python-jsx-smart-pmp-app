@@ -13,7 +13,7 @@ import time
 import random
 import requests
 import bs4
-import psycopg2 as pg
+# import psycopg2 as pg
 from fastkml import kml
 from openpyxl.utils import get_column_letter
 
@@ -461,24 +461,25 @@ def create_point_object(point: list):
 
 
 def generate_xlsx(request):
-    connection = pg.connect(
-        host="192.168.1.6",
-        database="navSections",
-        port="5432",
-        user="postgres",
-        password="nF2ArtXK"
-    )
+    # connection = pg.connect(
+    #     host="192.168.1.6",
+    #     database="navSections",
+    #     port="5432",
+    #     user="postgres",
+    #     password="nF2ArtXK"
+    # )
+    # # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
+    # #                           "FROM public.navdata_202108 " \
+    # #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
+    # #                           "ORDER BY device, navtime DESC;"
     # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
     #                           "FROM public.navdata_202108 " \
-    #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
+    #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_minutes']} minutes') AND flags != 64 " \
     #                           "ORDER BY device, navtime DESC;"
-    postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
-                              "FROM public.navdata_202108 " \
-                              f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_minutes']} minutes') AND flags != 64 " \
-                              "ORDER BY device, navtime DESC;"
-    cursor = connection.cursor()
-    cursor.execute(postgresql_select_query)
-    mobile_records = cursor.fetchall()
+    # cursor = connection.cursor()
+    # cursor.execute(postgresql_select_query)
+    # mobile_records = cursor.fetchall()
+    mobile_records = []
     cols = ["устройство", "дата и время", "широта", "долгота", "высота", "скорость", "ds", "направление",
             "флаги ошибок"]
     all_arr = []
@@ -503,6 +504,7 @@ def generate_xlsx(request):
             else:
                 sheet[f'{get_column_letter(n.index(i) + 1)}{all_arr.index(n) + 2}'] = '0.0'
     wb.save('static/media/data/geo.xlsx')
+    postgresql_select_query = None
     return [cols, all_arr, postgresql_select_query]
 
 
