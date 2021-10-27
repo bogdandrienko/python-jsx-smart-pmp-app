@@ -87,6 +87,8 @@ def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJ
 
 # Salary
 def get_salary_data(month=4):
+    # Admin
+    # 159159qqww!
     url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210{month}'
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
     h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
