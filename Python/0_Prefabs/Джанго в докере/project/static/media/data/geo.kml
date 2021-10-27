@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+      <kml xmlns="http://earth.google.com/kml/2.2">
+        <Document>
+          <name>61.22829 | 61.22878 | </name>
+            <Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF0000FF</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.22812,52.14303,0 61.22812,52.14303,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22811676,52.143028,0 61.22811676,52.143032000000005,0 61.228123239999995,52.143032000000005,0 61.228123239999995,52.143028,0 61.22811676,52.143028,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF0000FF</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.22812,52.14303,0 61.22829,52.1431,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22828676,52.143097999999995,0 61.22828676,52.143102,0 61.22829324,52.143102,0 61.22829324,52.143097999999995,0 61.22828676,52.143097999999995,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF0000FF</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.22829,52.1431,0 61.22862,52.14323,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22861676,52.143228,0 61.22861676,52.143232000000005,0 61.22862324,52.143232000000005,0 61.22862324,52.143228,0 61.22861676,52.143228,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF0000FF</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.22862,52.14323,0 61.22878,52.14329,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22877676,52.143288,0 61.22877676,52.143292,0 61.22878324,52.143292,0 61.22878324,52.143288,0 61.22877676,52.143288,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark><Placemark>
+              <Style>
+                <LineStyle>
+                  <color>FF0000FF</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>61.22878,52.14329,0 61.22892201,52.14332617,0 </coordinates>
+              </LineString>
+          </Placemark>
+        <Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						61.22891877,52.14332417,0 61.22891877,52.143328170000004,0 61.228925249999996,52.143328170000004,0 61.228925249999996,52.14332417,0 61.22891877,52.14332417,0  
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark><Placemark>
+            <name>Точка: ЭКГ</name>
+            <Point>
+                <coordinates>61.22829,52.1431,0</coordinates>
+            </Point>
+        </Placemark><Placemark>
+            <name>Точка: БелАЗ</name>
+            <Point>
+                <coordinates>61.22878,52.14329,0</coordinates>
+            </Point>
+        </Placemark></Document>
+    </kml>
