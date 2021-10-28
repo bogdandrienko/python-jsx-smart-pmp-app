@@ -25,6 +25,7 @@ gunicorn==20.1.0
 html5lib==1.1
 httplib2==0.19.1
 idna==2.10
+lxml==4.6.3
 openpyxl==3.0.7
 Pillow==8.4.0
 psycopg2==2.8.6

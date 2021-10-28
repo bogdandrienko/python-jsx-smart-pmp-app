@@ -28,6 +28,8 @@ VENV/
 env.bak/
 venv.bak/
 
+# Python cache file
+*.pyc
 
 
 
