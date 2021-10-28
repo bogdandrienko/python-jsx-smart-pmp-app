@@ -115,7 +115,7 @@ def get_salary_data(month=4):
                 encode_data = json.dumps(data, ensure_ascii=False)
                 json.dump(encode_data, file, ensure_ascii=False)
         except Exception as ex:
-            print(ex)
+            # print(ex)
             with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
                 data = json.load(file)
     else:
@@ -125,7 +125,7 @@ def get_salary_data(month=4):
     try:
         data["global_objects"]["3.Доходы в натуральной форме"]
     except Exception as ex:
-        print(ex)
+        # print(ex)
         data["global_objects"]["3.Доходы в натуральной форме"] = {
             "Fields": {
                 "1": "Вид",

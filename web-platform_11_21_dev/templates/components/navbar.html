@@ -150,7 +150,7 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Служба Управления Персоналом
                                 <span class="badge badge-primary badge-pill">
-                                    # 1
+                                    # 3
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
@@ -158,6 +158,33 @@
                                     <h6 class="dropdown-header">Отдел кадров</h6>
                                     <a class="dropdown-item" href="{% url 'app_km:career' %}">Вакансии</a>
                                     <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Отдел труда и заработной платы</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages' %}">Выгрузка данных</a>
+                                    <a class="dropdown-item disabled" href="#">Корректировка данных</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Служба Охраты Труда и Промышленной Безопасности
+                                <span class="badge badge-primary badge-pill">
+                                    # 2
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Отдел охраны труда</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:thermometry' %}">Термометрия</a>
+                                    <a class="dropdown-item disabled" href="#">Алкотесты</a>
                                 </li>
                             </ul>
                         </li>

@@ -1,6 +1,8 @@
 import random
 import openpyxl
 import requests
+import psycopg2 as pg
+import pyodbc
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
@@ -682,6 +684,146 @@ def career(request):
 
 
 # Extra
+def thermometry(request):
+    if AuthorizationClass.user_authenticated(request=request):
+        return redirect(AuthorizationClass.user_authenticated(request=request))
+    data = None
+    if request.method == 'POST':
+        def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
+                           username="sa", password="skud12345678"):
+            conn_str = (
+                    r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
+                    ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
+            )
+            return pyodbc.connect(conn_str)
+
+        sql_select_query = f"SELECT * " \
+                           f"FROM dbtable " \
+                           f"WHERE CAST(temperature AS FLOAT) >= 37.0 AND date1 BETWEEN '2021-06-1' AND '2021-12-31' " \
+                           f"ORDER BY date1 DESC, date2 DESC;"
+        connect_db = pyodbc_connect()
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        cursor.execute(sql_select_query)
+        data = cursor.fetchall()
+        bodies = []
+        for row in data:
+            local_bodies = []
+            value_index = 0
+            for val in row:
+                if value_index == 4:
+                    try:
+                        val = val.encode('1251').decode('utf-8')
+                    except Exception as ex_1:
+                        try:
+                            value = str(val).split(" ")
+                            try:
+                                name = value[0].encode('1251').decode('utf-8')
+                            except Exception as ex:
+                                name = "И" + value[0][2:].encode('1251').decode('utf-8')
+                            try:
+                                surname = value[1].encode('1251').decode('utf-8')
+                            except Exception as ex:
+                                surname = "И" + value[1][2:].encode('1251').decode('utf-8')
+                            string = name + " " + surname
+                            val = string
+                        except Exception as ex_2:
+                            pass
+                value_index += 1
+                local_bodies.append(val)
+            bodies.append(local_bodies)
+
+        headers = ["табельный", "доступ", "дата", "время", "данные", "точка", "номер карты", "температура", "маска"]
+        data = [headers, bodies]
+    context = {
+        'data': data,
+    }
+    return render(request, 'app_km/thermometry.html', context)
+
+
+def passages(request):
+    if AuthorizationClass.user_authenticated(request=request):
+        return redirect(AuthorizationClass.user_authenticated(request=request))
+    data = None
+    if request.method == 'POST':
+        def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
+                           username="sa", password="skud12345678"):
+            conn_str = (
+                    r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
+                    ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
+            )
+            return pyodbc.connect(conn_str)
+
+        id_s = str(request.POST['personid'])
+        try:
+            check = request.POST['check']
+            date = str(request.POST['date']).split('T')[0]
+            time = str(request.POST['date']).split('T')[1]
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE CAST(temperature AS FLOAT) < 37.0 AND date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' AND personid = '{id_s}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        except Exception as ex:
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE CAST(temperature AS FLOAT) < 37.0 AND date1 BETWEEN '2021-06-1' AND '2022-12-31' AND personid = '{id_s}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+
+        update = True
+        if update:
+            date_old = request.POST['date_old']
+            print(date_old)
+            date_new = request.POST['date_new']
+            print(date_new)
+
+            connect_db = pyodbc_connect()
+            cursor = connect_db.cursor()
+            cursor.fast_executemany = True
+            value = f"UPDATE dbtable SET date2 = '12:58:59' " \
+                    f"WHERE date1 = '2021-10-28' AND date2 = '12:57:55' AND personid = '931777' "
+            cursor.execute(value)
+            connect_db.commit()
+
+        connect_db = pyodbc_connect()
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        cursor.execute(sql_select_query)
+        data = cursor.fetchall()
+        bodies = []
+        for row in data:
+            local_bodies = []
+            value_index = 0
+            for val in row:
+                if value_index == 4:
+                    try:
+                        val = val.encode('1251').decode('utf-8')
+                    except Exception as ex_1:
+                        try:
+                            value = str(val).split(" ")
+                            try:
+                                name = value[0].encode('1251').decode('utf-8')
+                            except Exception as ex:
+                                name = "И" + value[0][2:].encode('1251').decode('utf-8')
+                            try:
+                                surname = value[1].encode('1251').decode('utf-8')
+                            except Exception as ex:
+                                surname = "И" + value[1][2:].encode('1251').decode('utf-8')
+                            string = name + " " + surname
+                            val = string
+                        except Exception as ex_2:
+                            pass
+                value_index += 1
+                local_bodies.append(val)
+            bodies.append(local_bodies)
+
+        headers = ["табельный", "доступ", "дата", "время", "данные", "точка", "номер карты", "температура", "маска"]
+        data = [headers, bodies]
+    context = {
+        'data': data,
+    }
+    return render(request, 'app_km/passages.html', context)
+
+
 def geo(request):
     # if AuthorizationClass.user_authenticated(request=request):
     #     return redirect(AuthorizationClass.user_authenticated(request=request))

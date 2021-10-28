@@ -15,6 +15,12 @@ urlpatterns = [
     path('salary/', views.salary, name='salary'),
     path('view_pdf/', views.view_pdf, name='view_pdf'),
     path('create_pdf/', views.render_pdf_view, name='create_pdf'),
+
+    path('thermometry/', views.thermometry, name='thermometry'),
+    path('passages/', views.passages, name='passages'),
+
+
+
     path('geo/', views.geo, name='geo'),
     path('career/', views.career, name='career'),
     path('rational/', views.rational_list, name='rational'),
