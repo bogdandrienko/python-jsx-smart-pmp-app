@@ -13,7 +13,7 @@ import time
 import random
 import requests
 import bs4
-# import psycopg2 as pg
+import psycopg2 as pg
 from fastkml import kml
 from openpyxl.utils import get_column_letter
 
@@ -177,13 +177,19 @@ def get_salary_data(month=4):
 
 
 def get_users(day=1):
-    url = f'http://192.168.1.158/Tanya_perenos/hs/iden/change/2021030{day}'
+    # url = f'http://192.168.1.158/Tanya_perenos/hs/iden/change/2021030{day}'
+    # login = 'zpadmin'
+    # password = '159159qqq'
+
+    url = f'http://192.168.1.10/KM_1C/hs/iden/change/202103{day}'
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
     h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
-    login = 'zpadmin'
-    password = '159159qqq'
+    login = 'Admin'
+    password = '159159qqww!'
     h.add_credentials(login, password)
     response, content = h.request(url)
+    print(content)
+    # data = None
     if content:
         try:
             with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:

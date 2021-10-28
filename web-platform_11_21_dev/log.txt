@@ -214,3 +214,4 @@ HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам сл
 13:15:31 : geo: 'NoneType' object is not subscriptable
 16:01:06 : geo: list index out of range
 16:49:13 : geo: 'str' object cannot be interpreted as an integer
+11:20:00 : career: HTTPSConnectionPool(host='www.km-open.online', port=443): Max retries exceeded with url: /property (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000277F1C9E2E0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
