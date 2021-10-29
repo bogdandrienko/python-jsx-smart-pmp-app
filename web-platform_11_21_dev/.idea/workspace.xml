@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app_km/templates/app_km/passages.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_km/templates/app_km/thermometry.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_km/templates/app_km/skud/passages_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_km/templates/app_km/skud/passages_insert.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_km/templates/app_km/skud/passages_update.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/create_user_from1c.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/create_user_from1c.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/list_component.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/list_component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/list_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/list_module.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/passages.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/skud/passages_select.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/templates/app_km/thermometry.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templates/app_km/skud/passages_thermometry.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
@@ -68,7 +66,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app_km/templates/app_km" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app_km/templates/app_km/skud" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -76,13 +74,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\app_km\templates\app_km\skud" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\app_km\templates\app_km" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_08_21_dev\app_km\templates\app_km" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_08_21_dev\app_km" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_08_21_dev\app_km\templatetags" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_08_21_dev\app_salary\templates\app_salary" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\app_km\templates\app_km\skud" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_account\templatetags" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_account\templates\app_account" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\static\media\tempates" />
@@ -306,6 +305,7 @@
       <workItem from="1635405194764" duration="124000" />
       <workItem from="1635405354155" duration="506000" />
       <workItem from="1635406254130" duration="11626000" />
+      <workItem from="1635472740284" duration="18076000" />
     </task>
     <servers />
   </component>

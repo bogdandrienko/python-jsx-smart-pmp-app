@@ -1,8 +1,6 @@
 import random
 import openpyxl
 import requests
-import psycopg2 as pg
-import pyodbc
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
@@ -24,7 +22,7 @@ from .models import RationalModel, CategoryRationalModel, LikeRationalModel, Com
     DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
 from .service import AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
     create_encrypted_password, get_users, get_salary_data, link_callback, get_career, find_near_point, get_vector_arr, \
-    generate_way
+    generate_way, pyodbc_connect
 
 
 # Admin
@@ -684,26 +682,28 @@ def career(request):
 
 
 # Extra
-def thermometry(request):
+def passages_thermometry(request):
     if AuthorizationClass.user_authenticated(request=request):
         return redirect(AuthorizationClass.user_authenticated(request=request))
     data = None
     if request.method == 'POST':
-        def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
-                           username="sa", password="skud12345678"):
-            conn_str = (
-                    r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
-                    ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
-            )
-            return pyodbc.connect(conn_str)
-
-        sql_select_query = f"SELECT * " \
-                           f"FROM dbtable " \
-                           f"WHERE CAST(temperature AS FLOAT) >= 37.0 AND date1 BETWEEN '2021-06-1' AND '2021-12-31' " \
-                           f"ORDER BY date1 DESC, date2 DESC;"
+        personid = str(request.POST['personid'])
+        date_start = str(request.POST['date_start']).split('T')[0]
+        date_end = str(request.POST['date_end']).split('T')[0]
         connect_db = pyodbc_connect()
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
+        try:
+            check = request.POST['check']
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND personid = '{personid}' AND CAST(temperature AS FLOAT) >= 37.0 " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        except Exception as ex:
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND CAST(temperature AS FLOAT) >= 37.0 " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
         cursor.execute(sql_select_query)
         data = cursor.fetchall()
         bodies = []
@@ -732,61 +732,36 @@ def thermometry(request):
                 value_index += 1
                 local_bodies.append(val)
             bodies.append(local_bodies)
-
         headers = ["табельный", "доступ", "дата", "время", "данные", "точка", "номер карты", "температура", "маска"]
         data = [headers, bodies]
     context = {
         'data': data,
     }
-    return render(request, 'app_km/thermometry.html', context)
+    return render(request, 'app_km/skud/passages_thermometry.html', context)
 
 
-def passages(request):
+def passages_select(request):
     if AuthorizationClass.user_authenticated(request=request):
         return redirect(AuthorizationClass.user_authenticated(request=request))
     data = None
     if request.method == 'POST':
-        def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
-                           username="sa", password="skud12345678"):
-            conn_str = (
-                    r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
-                    ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
-            )
-            return pyodbc.connect(conn_str)
-
-        id_s = str(request.POST['personid'])
+        personid = str(request.POST['personid'])
+        connect_db = pyodbc_connect()
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
         try:
             check = request.POST['check']
             date = str(request.POST['date']).split('T')[0]
             time = str(request.POST['date']).split('T')[1]
             sql_select_query = f"SELECT * " \
                                f"FROM dbtable " \
-                               f"WHERE CAST(temperature AS FLOAT) < 37.0 AND date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' AND personid = '{id_s}' " \
+                               f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' AND personid = '{personid}' " \
                                f"ORDER BY date1 DESC, date2 DESC;"
         except Exception as ex:
             sql_select_query = f"SELECT * " \
                                f"FROM dbtable " \
-                               f"WHERE CAST(temperature AS FLOAT) < 37.0 AND date1 BETWEEN '2021-06-1' AND '2022-12-31' AND personid = '{id_s}' " \
+                               f"WHERE date1 BETWEEN '2021-07-30' AND '2023-12-31' AND personid = '{personid}' " \
                                f"ORDER BY date1 DESC, date2 DESC;"
-
-        update = True
-        if update:
-            date_old = request.POST['date_old']
-            print(date_old)
-            date_new = request.POST['date_new']
-            print(date_new)
-
-            connect_db = pyodbc_connect()
-            cursor = connect_db.cursor()
-            cursor.fast_executemany = True
-            value = f"UPDATE dbtable SET date2 = '12:58:59' " \
-                    f"WHERE date1 = '2021-10-28' AND date2 = '12:57:55' AND personid = '931777' "
-            cursor.execute(value)
-            connect_db.commit()
-
-        connect_db = pyodbc_connect()
-        cursor = connect_db.cursor()
-        cursor.fast_executemany = True
         cursor.execute(sql_select_query)
         data = cursor.fetchall()
         bodies = []
@@ -815,13 +790,103 @@ def passages(request):
                 value_index += 1
                 local_bodies.append(val)
             bodies.append(local_bodies)
-
         headers = ["табельный", "доступ", "дата", "время", "данные", "точка", "номер карты", "температура", "маска"]
         data = [headers, bodies]
     context = {
         'data': data,
     }
-    return render(request, 'app_km/passages.html', context)
+    return render(request, 'app_km/skud/passages_select.html', context)
+
+
+def passages_update(request):
+    if AuthorizationClass.user_authenticated(request=request):
+        return redirect(AuthorizationClass.user_authenticated(request=request))
+    data = None
+    if request.method == 'POST':
+        personid_old = request.POST['personid_old']
+        date_old = str(request.POST['datetime_old']).split('T')[0]
+        time_old = str(request.POST['datetime_old']).split('T')[1]
+        date_new = str(request.POST['datetime_new']).split('T')[0]
+        time_new = str(request.POST['datetime_new']).split('T')[1] + ':00'
+        accessdateandtime_new = date_new + 'T' + time_new
+        connect_db = pyodbc_connect()
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        value = f"UPDATE dbtable SET accessdateandtime = '{accessdateandtime_new}', date1 = '{date_new}', date2 = '{time_new}' " \
+                f"WHERE date1 = '{date_old}' AND date2 BETWEEN '{time_old}:00' AND '{time_old}:59' AND personid = '{personid_old}' "
+        cursor.execute(value)
+        connect_db.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'app_km/skud/passages_update.html', context)
+
+
+def passages_insert(request):
+    if AuthorizationClass.user_authenticated(request=request):
+        return redirect(AuthorizationClass.user_authenticated(request=request))
+    data = None
+    if request.method == 'POST':
+        personid = request.POST['personid']
+        date = str(request.POST['datetime']).split('T')[0]
+        time = str(request.POST['datetime']).split('T')[1] + ':00'
+        accessdateandtime = date + 'T' + time
+        devicename = str(request.POST['devicename'])
+        cardno = str(request.POST['cardno'])
+        temperature = str(request.POST['temperature'])
+        if temperature == '0':
+            temperature = ''
+        mask = str(request.POST['mask'])
+        try:
+            connect_db = pyodbc_connect()
+            cursor = connect_db.cursor()
+            cursor.fast_executemany = True
+            sql_select_query = f"SELECT TOP (1) personname " \
+                               f"FROM dbtable " \
+                               f"WHERE personid = '{personid}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+            cursor.execute(sql_select_query)
+            personname_all = cursor.fetchall()
+            personname = personname_all[0][0]
+        except Exception as ex:
+            personname = 'None'
+        connection = pyodbc_connect()
+        cursor = connection.cursor()
+        cursor.fast_executemany = True
+        rows = ['personid', 'accessdateandtime', 'date1', 'date2', 'personname', 'devicename', 'cardno',
+                'temperature', 'mask']
+        values = [personid, accessdateandtime, date, time, personname, devicename, cardno, temperature, mask]
+        _rows = ''
+        for x in rows:
+            _rows = f"{_rows}{str(x)}, "
+        value = f"INSERT INTO dbtable (" + _rows[:-2:] + f") VALUES {tuple(values)}"
+        cursor.execute(value)
+        connection.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'app_km/skud/passages_insert.html', context)
+
+
+def passages_delete(request):
+    if AuthorizationClass.user_authenticated(request=request):
+        return redirect(AuthorizationClass.user_authenticated(request=request))
+    data = None
+    if request.method == 'POST':
+        personid = str(request.POST['personid'])
+        date = str(request.POST['datetime']).split('T')[0]
+        time = str(request.POST['datetime']).split('T')[1]
+        connect_db = pyodbc_connect()
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        value = f"DELETE FROM dbtable " \
+                f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' AND personid = '{personid}' "
+        cursor.execute(value)
+        connect_db.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'app_km/skud/passages_delete.html', context)
 
 
 def geo(request):

@@ -16,10 +16,11 @@ urlpatterns = [
     path('view_pdf/', views.view_pdf, name='view_pdf'),
     path('create_pdf/', views.render_pdf_view, name='create_pdf'),
 
-    path('thermometry/', views.thermometry, name='thermometry'),
-    path('passages/', views.passages, name='passages'),
-
-
+    path('passages_thermometry/', views.passages_thermometry, name='passages_thermometry'),
+    path('passages_select/', views.passages_select, name='passages_select'),
+    path('passages_update/', views.passages_update, name='passages_update'),
+    path('passages_insert/', views.passages_insert, name='passages_insert'),
+    path('passages_delete/', views.passages_delete, name='passages_delete'),
 
     path('geo/', views.geo, name='geo'),
     path('career/', views.career, name='career'),

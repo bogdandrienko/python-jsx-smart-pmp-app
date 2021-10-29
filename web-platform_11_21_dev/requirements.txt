@@ -44,3 +44,4 @@ urllib3==1.26.7
 webencodings==0.5.1
 whitenoise==5.3.0
 xhtml2pdf==0.2.5
+pyodbc~=4.0.32

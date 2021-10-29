@@ -1,6 +1,7 @@
 import datetime
 import math
 import openpyxl
+import pyodbc
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
@@ -925,3 +926,12 @@ def create_style():
 		</Point>
 	</Placemark>"""
     pass
+
+
+def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
+                   username="sa", password="skud12345678"):
+    conn_str = (
+            r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
+            ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
+    )
+    return pyodbc.connect(conn_str)

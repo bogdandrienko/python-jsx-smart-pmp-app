@@ -164,8 +164,10 @@
                                 </li>
                                 <li>
                                     <h6 class="dropdown-header">Отдел труда и заработной платы</h6>
-                                    <a class="dropdown-item" href="{% url 'app_km:passages' %}">Выгрузка данных</a>
-                                    <a class="dropdown-item disabled" href="#">Корректировка данных</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_select' %}">Выгрузка данных</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_update' %}">Обновление данных</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_insert' %}">Добавление данных</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_delete' %}">Удаление данных</a>
                                 </li>
                             </ul>
                         </li>
@@ -183,7 +185,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Отдел охраны труда</h6>
-                                    <a class="dropdown-item" href="{% url 'app_km:thermometry' %}">Термометрия</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_thermometry' %}">Термометрия</a>
                                     <a class="dropdown-item disabled" href="#">Алкотесты</a>
                                 </li>
                             </ul>
