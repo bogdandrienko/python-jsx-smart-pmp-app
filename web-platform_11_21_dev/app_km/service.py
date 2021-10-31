@@ -14,7 +14,6 @@ import time
 import random
 import requests
 import bs4
-import psycopg2 as pg
 from fastkml import kml
 from openpyxl.utils import get_column_letter
 
