@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+from threading import Thread
 
 
 class Application(tk.Frame):
@@ -39,7 +40,7 @@ class Application(tk.Frame):
         self.submit_button = tk.Button(self.root, text="Добавить", font="100", command=self.insert_data)
         self.submit_button.grid(row=2, column=1, sticky=tk.W)
 
-        self.exit_button = tk.Button(self.root, text="Выход", font="100", command=self.root.quit_button)
+        self.exit_button = tk.Button(self.root, text="Выход", font="100", command=self.quit)
         self.exit_button.grid(row=0, column=1, sticky=tk.W)
 
         # Set the treeview
@@ -76,4 +77,5 @@ class Application(tk.Frame):
 
 
 app = Application(tk.Tk())
-app.root.mainloop()
+thread_main = Thread(target=app.root.mainloop())
+thread_main.start()
