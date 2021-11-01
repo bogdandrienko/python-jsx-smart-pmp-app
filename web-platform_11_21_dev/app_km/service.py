@@ -90,8 +90,10 @@ def get_salary_data(month=4):
     # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210{month}'
     # login = 'zpadmin'
     # password = '159159qo'
-
-    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/970801351179/20210{month}'
+    if int(month) < 10:
+        month = f'0{month}'
+    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/970801351179/2021{month}'
+    print(url)
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
     h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
     login = 'Admin'

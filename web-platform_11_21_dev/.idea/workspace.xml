@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Python/0_Prefabs/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/0_Prefabs/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/0_Prefabs/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SCRIPTS/win_run_192.168.0.109.80.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SCRIPTS/win_run_192.168.1.68.80.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202107,4ff62d0d258add932e6e672691d3c653" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202108,0a01918840aee5ceb8a66a58b9bc9514" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCRIPTS/win_run_192.168.0.109.8000.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCRIPTS/win_run_192.168.1.68.8000.cmd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,6 +311,8 @@
       <workItem from="1635604683092" duration="116000" />
       <workItem from="1635607060941" duration="109000" />
       <workItem from="1635688299163" duration="1187000" />
+      <workItem from="1635740014499" duration="800000" />
+      <workItem from="1635748516981" duration="7219000" />
     </task>
     <servers />
   </component>
@@ -327,7 +337,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_platform_07_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1626238502088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Python DOCS/0_Applications" />
     <SUITE FILE_PATH="coverage/web_platform_09_21_dev$test.coverage" NAME="test Coverage Results" MODIFIED="1632383532200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/web_platform_07_21_dev$views.coverage" NAME="views Coverage Results" MODIFIED="1626458166663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_rational" />
     <SUITE FILE_PATH="coverage/lin_run_sh$test.coverage" NAME="test Coverage Results" MODIFIED="1635405818723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/web_platform_07_21_dev$views.coverage" NAME="views Coverage Results" MODIFIED="1626458166663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_rational" />
   </component>
 </project>

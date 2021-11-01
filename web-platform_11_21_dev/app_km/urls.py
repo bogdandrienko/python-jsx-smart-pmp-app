@@ -4,6 +4,7 @@ from . import views
 app_name = 'app_km'
 urlpatterns = [
 
+    path('', include('django.contrib.auth.urls')),
     path('admin/', views.admin_, name='admin'),
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
@@ -43,7 +44,6 @@ urlpatterns = [
     path('generate_password/', views.generate_password, name='generate_password'),
     path('generate_passwords/', views.generate_passwords, name='generate_passwords'),
     path('profile/<slug:username>', views.view_profile, name='view_profile'),
-    path('', include('django.contrib.auth.urls')),
     path('notification/', views.notification, name='notification'),
     path('create', views.create_notification, name='create'),
     path('<int:notify_id>/accept', views.accept, name='accept'),
@@ -62,6 +62,7 @@ urlpatterns = [
     path('news/<int:article_id>/decrease_rating/', views.decrease_rating, name='decrease_rating'),
     path('weather/', views.weather, name='weather'),
 
+    # bootstrap
     path('bootstrap/example', views.example, name='example'),
     path('bootstrap/album', views.album, name='example-album'),
     path('bootstrap/blog', views.blog, name='example-blog'),

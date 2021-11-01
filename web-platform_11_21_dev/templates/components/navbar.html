@@ -6,16 +6,39 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                development
+                                Администратор
                                 <span class="badge badge-primary badge-pill">
-                                    # 5
+                                    # n + 1
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Основной функционал</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:home' %}">Главная страница</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:notification' %}">Уведомления администратора [{{notification}}]</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Аккаунты</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:create_user' %}">Аккаунт: создать одного пользователя</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:change_user' %}">Аккаунт: изменить данные пользователя</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:create_users' %}">Аккаунт: создать пользователей из файла</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:create_user_from1c' %}">Аккаунт: создать/удалить/обновить пользователей из 1C</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:export_users' %}">Аккаунт: выгрузить пользователей в файл</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:generate_password' %}">Аккаунт: сгенерировать один пароль</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:generate_passwords' %}">Аккаунт: сгенерировать пароли в файл</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
                                 <li>
                                     <h6 class="dropdown-header">Готовые</h6>
                                     <a class="dropdown-item" href="{% url 'app_km:news' %}">app_news</a>
@@ -41,24 +64,91 @@
                                     <h6 class="dropdown-header">Геолокация</h6>
                                     <a class="dropdown-item" href="{% url 'app_km:geo' %}">Устройства: список</a>
                                 </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Отдел труда и заработной платы</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_select' %}">Выгрузка данных</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_update' %}">Обновление данных</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_insert' %}">Добавление данных</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_delete' %}">Удаление данных</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Отдел охраны труда</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:passages_thermometry' %}">Термометрия</a>
+                                    <a class="dropdown-item disabled" href="#">Алкотесты</a>
+                                </li>
                             </ul>
                         </li>
                     </div>
                 </div>
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Основное
+                                Модератор
                                 <span class="badge badge-primary badge-pill">
-                                    # 11
+                                    # 2
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Основной функционал</h6>
                                     <a class="dropdown-item" href="{% url 'app_km:home' %}">Главная страница</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item" href="{% url 'app_km:admin' %}">Панель Модерации</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:notification' %}">Уведомления модератора [{{notification}}]</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Развитие:</h6>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Развитие</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Бухгалтерия:</h6>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Бухгалтерия</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">СУП:</h6>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">СУП</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">СОТиПБ:</h6>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">СОТиПБ</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Профиль
+                                <span class="badge badge-primary badge-pill">
+                                    # 4
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Основной функционал</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:home' %}">Главная страница</a>
                                     {% if request.user.is_authenticated %}
                                         <a class="dropdown-item" href="{% url 'app_km:view_profile' request.user.username %}">Личный кабинет</a>
                                     {% else %}
@@ -77,13 +167,6 @@
                                             [вы уже вошли в аккаунт]
                                         {% endif %}
                                     </a>
-                                    <a class="dropdown-item" href="{% url 'app_km:create_user' %}">Аккаунт: создать одного пользователя</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:change_user' %}">Аккаунт: изменить данные пользователя</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:create_users' %}">Аккаунт: создать пользователей из файла</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:create_user_from1c' %}">Аккаунт: создать/удалить/обновить пользователей из 1C</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:export_users' %}">Аккаунт: выгрузить пользователей в файл</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:generate_password' %}">Аккаунт: сгенерировать один пароль</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:generate_passwords' %}">Аккаунт: сгенерировать пароли в файл</a>
                                     <a class="dropdown-item" href="{% url 'app_km:logout' %}">Аккаунт: выйти
                                         {% if request.user.is_authenticated %}
                                             [{{ request.user.first_name }}]
@@ -96,36 +179,51 @@
                         </li>
                     </div>
                 </div>
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Бухгалтерия
+                                Новости
                                 <span class="badge badge-primary badge-pill">
-                                    # 1
+                                    # 0
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
-                                    <h6 class="dropdown-header">Бухгалтерия</h6>
-                                    <a class="dropdown-item" href="{% url 'app_km:salary' %}">Выгрузка текущего расчётного листа</a>
+                                    <h6 class="dropdown-header">Новости предприятия:</h6>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Просмотр</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Поиск</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Предложить</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Зал славы</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Алтын Канат</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Лучшие работники Комбината</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Чат:</h6>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Общий</a>
+                                    <a class="dropdown-item disabled" href="{% url 'app_km:home' %}">Личный</a>
                                 </li>
                             </ul>
                         </li>
                     </div>
                 </div>
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Проектная Деятельность
+                                Развитие
                                 <span class="badge badge-primary badge-pill">
                                     # 3
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
-                                    <h6 class="dropdown-header">Рационализаторство</h6>
+                                    <h6 class="dropdown-header">Рационализаторство:</h6>
                                     <a class="dropdown-item" href="{% url 'app_km:rational' %}">Рационализаторство: список</a>
                                     <a class="dropdown-item" href="{% url 'app_km:rational_create' %}">Рационализаторство: добавить</a>
                                     <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
@@ -135,27 +233,47 @@
                                     <hr class="dropdown-divider text-light">
                                 </li>
                                 <li>
-                                    <h6 class="dropdown-header">Бережливое производство</h6>
-                                    <a class="dropdown-item disabled" href="#">Бережливое производство: список</a>
-                                    <a class="dropdown-item disabled" href="#">Бережливое производство: добавить</a>
-                                    <a class="dropdown-item disabled" href="#">Бережливое производство: шаблоны</a>
+                                    <h6 class="dropdown-header">Проектная деятельность:</h6>
+                                    <a class="dropdown-item disabled" href="#">Проектная деятельность: список</a>
+                                    <a class="dropdown-item disabled" href="#">Проектная деятельность: добавить</a>
+                                    <a class="dropdown-item disabled" href="#">Проектная деятельность: шаблоны</a>
                                 </li>
                             </ul>
                         </li>
                     </div>
                 </div>
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Служба Управления Персоналом
+                                Бухгалтерия
                                 <span class="badge badge-primary badge-pill">
-                                    # 3
+                                    # 1
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
-                                    <h6 class="dropdown-header">Отдел кадров</h6>
+                                    <h6 class="dropdown-header">Сектор расчёта заработной платы:</h6>
+                                    <a class="dropdown-item" href="{% url 'app_km:salary' %}">Выгрузка текущего расчётного листа</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="col-md-auto mx-auto d-flex align-items-end">
+                    <div class="space-between">
+                        <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                СУП
+                                <span class="badge badge-primary badge-pill">
+                                    # 1
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Отдел кадров:</h6>
                                     <a class="dropdown-item" href="{% url 'app_km:career' %}">Вакансии</a>
                                     <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
                                 </li>
@@ -163,28 +281,26 @@
                                     <hr class="dropdown-divider text-light">
                                 </li>
                                 <li>
-                                    <h6 class="dropdown-header">Отдел труда и заработной платы</h6>
-                                    <a class="dropdown-item" href="{% url 'app_km:passages_select' %}">Выгрузка данных</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:passages_update' %}">Обновление данных</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:passages_insert' %}">Добавление данных</a>
-                                    <a class="dropdown-item" href="{% url 'app_km:passages_delete' %}">Удаление данных</a>
+                                    <h6 class="dropdown-header">Отдел труда и заработной платы:</h6>
+                                    <a class="dropdown-item disabled" href="#">Выгрузка данных</a>
                                 </li>
                             </ul>
                         </li>
                     </div>
                 </div>
+
                 <div class="col-md-auto mx-auto d-flex align-items-end">
                     <div class="space-between">
                         <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Служба Охраты Труда и Промышленной Безопасности
+                                СОТиПБ
                                 <span class="badge badge-primary badge-pill">
-                                    # 2
+                                    # 1
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
-                                    <h6 class="dropdown-header">Отдел охраны труда</h6>
+                                    <h6 class="dropdown-header">Отдел охраны труда:</h6>
                                     <a class="dropdown-item" href="{% url 'app_km:passages_thermometry' %}">Термометрия</a>
                                     <a class="dropdown-item disabled" href="#">Алкотесты</a>
                                 </li>
@@ -192,6 +308,7 @@
                         </li>
                     </div>
                 </div>
+
                 <!-- Btn-Group -->
                 <div class="btn-group m-1 p-1">
                     {% block second_btn-group %}{% endblock second_btn-group %}

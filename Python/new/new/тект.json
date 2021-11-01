@@ -1,0 +1,24 @@
+[]
+
+from selenium import webdriver
+import time
+
+from selenium.webdriver.chrome.options import Options
+
+URL = 'https://www.whatismybrowser.com/detect/what-is-my-user-agent'
+options: Options = webdriver.ChromeOptions()
+options.add_argument(
+    'user-agent = Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69
+    'Safari/537.36')
+
+browser = webdriver.Chrome(executable_path='D:\\python\\selenium_parse\\chromedriver\\chromedriver.exe',
+                           options=options)
+
+try:
+    browser.get(url=URL)
+    time.sleep(10)
+except Exception as ex:
+    print(ex)
+finally:
+    browser.close()
+    browser.quit
