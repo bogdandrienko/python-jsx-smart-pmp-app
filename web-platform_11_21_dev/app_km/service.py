@@ -14,6 +14,7 @@ import time
 import random
 import requests
 import bs4
+import hashlib
 from fastkml import kml
 from openpyxl.utils import get_column_letter
 
@@ -96,10 +97,77 @@ def get_salary_data(month=4):
     print(url)
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
     h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
-    login = 'Admin'
+    login = 'Web_adm_1c'
     password = '159159qqww!'
+    key = 'XWew151299Ioo@'
+
     h.add_credentials(login, password)
     response, content = h.request(url)
+    # data = None
+    # if content:
+    #     try:
+    #         # print('************************')
+    #         data = json.loads(content)
+    #         # print(data)
+    #         # print('************************')
+    #         with open("static/media/data/zarplata.json", "w", encoding="utf8") as file:
+    #             encode_data = json.dumps(data, ensure_ascii=False)
+    #             json.dump(encode_data, file, ensure_ascii=False)
+    #     except Exception as ex:
+    #         # print(ex)
+    #         with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+    #             data = json.load(file)
+    print(content.decode())
+
+    def decode_pass(_text_arr: str, _key: str):
+        key = 'XWew151299Ioo@'
+        # Хеш=Новый ХешированиеДанных(ХешФункция.SHA256);
+        # Хеш.Добавить(КодШифра); //Код Шифра - это наш пароль
+        # КлючШифра = Хеш.ХешСумма;
+        # МассивХеша = новый Массив;
+        # КлючШифра = СтрЗаменить(КлючШифра," ","");
+        # МассивХеша = РазложитьСтрокуВМассивзнаков(КлючШифра,МассивХеша);
+
+        hash_arr = key
+
+        # >> > m = hashlib.sha256()
+        # >> > m.update(b"Nobody inspects")
+        # >> > m.update(b" the spammish repetition")
+        # >> > m.digest()
+        # b'\x03\x1e\xdd}Ae\x15\x93\xc5\xfe\\\x00o\xa5u+7\xfd\xdf\xf7\xbcN\x84:\xa6\xaf\x0c\x95\x0fK\x94\x06'
+        # >> > m.digest_size
+        # 32
+        # >> > m.block_size
+
+        new_text = ''
+        pos_character_hash = 0
+        hash_length = len(hash_arr)
+        pas = False
+        for num in _text_arr:
+
+            if pas:
+                pas = False
+                break
+
+            num_character = ord(num)
+            if pos_character_hash >= hash_length - 1:
+                pos_character_hash = 0
+            pos_character_hash += 1
+            character_hash = ord(hash_arr[pos_character_hash])
+
+            key_crypted_char = num_character - character_hash
+            print(num_character)
+            print(character_hash)
+            crypted_char = chr(key_crypted_char)
+
+            new_text = new_text + crypted_char
+
+            if round(character_hash/2) == character_hash/2:
+                pas = True
+        return new_text
+
+    cry = decode_pass(content.decode(), 'XWew151299Ioo@')
+    print(cry)
 
     # print('************************')
     # print(type(content))
@@ -107,75 +175,75 @@ def get_salary_data(month=4):
     # print(content)
     # print('************************')
 
-    if content:
-        try:
-            # print('************************')
-            data = json.loads(content)
-            # print(data)
-            # print('************************')
-            with open("static/media/data/zarplata.json", "w", encoding="utf8") as file:
-                encode_data = json.dumps(data, ensure_ascii=False)
-                json.dump(encode_data, file, ensure_ascii=False)
-        except Exception as ex:
-            # print(ex)
-            with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
-                data = json.load(file)
-    else:
-        with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
-            data = json.load(file)
-
-    try:
-        data["global_objects"]["3.Доходы в натуральной форме"]
-    except Exception as ex:
-        # print(ex)
-        data["global_objects"]["3.Доходы в натуральной форме"] = {
-            "Fields": {
-                "1": "Вид",
-                "2": "Период",
-                "3": "Дни",
-                "4": "Часы",
-                "5": "Сумма",
-                "6": "ВсегоДни",
-                "7": "ВсегоЧасы"
-            },
-        }
-
-    data = {
-        "Table_1": create_arr_table(
-            title="1.Начислено", footer="Всего начислено", json_obj=data["global_objects"]["1.Начислено"],
-            exclude=[5, 6]
-        ),
-        "Table_2": create_arr_table(
-            title="2.Удержано", footer="Всего удержано", json_obj=data["global_objects"]["2.Удержано"], exclude=[]
-        ),
-        "Table_3": create_arr_table(
-            title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
-            json_obj=data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
-        ),
-        "Table_4": create_arr_table(
-            title="4.Выплачено", footer="Всего выплат", json_obj=data["global_objects"]["4.Выплачено"], exclude=[]
-        ),
-        "Table_5": create_arr_table(
-            title="5.Налоговые вычеты", footer="Всего вычеты", json_obj=data["global_objects"]["5.Налоговые вычеты"],
-            exclude=[]
-        ),
-        "Down": {
-            "first": ["Долг за организацией на начало месяца", data["Долг за организацией на начало месяца"]],
-            "last": ["Долг за организацией на конец месяца", data["Долг за организацией на конец месяца"]],
-        },
-    }
-    # global_objects = []
-    # for x in data["global_objects"]:
-    #     global_objects.append(x)
-    # global_objects = [x for x in data["global_objects"]]
-
-    # return_data = []
-    # for x in global_objects:
-    #     return_data.append(create_arr_from_json(data["global_objects"], x))
-    # return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
-
-    # return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
-    return data
+    # if content:
+    #     try:
+    #         # print('************************')
+    #         data = json.loads(content)
+    #         # print(data)
+    #         # print('************************')
+    #         with open("static/media/data/zarplata.json", "w", encoding="utf8") as file:
+    #             encode_data = json.dumps(data, ensure_ascii=False)
+    #             json.dump(encode_data, file, ensure_ascii=False)
+    #     except Exception as ex:
+    #         # print(ex)
+    #         with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+    #             data = json.load(file)
+    # else:
+    #     with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+    #         data = json.load(file)
+    #
+    # try:
+    #     data["global_objects"]["3.Доходы в натуральной форме"]
+    # except Exception as ex:
+    #     # print(ex)
+    #     data["global_objects"]["3.Доходы в натуральной форме"] = {
+    #         "Fields": {
+    #             "1": "Вид",
+    #             "2": "Период",
+    #             "3": "Дни",
+    #             "4": "Часы",
+    #             "5": "Сумма",
+    #             "6": "ВсегоДни",
+    #             "7": "ВсегоЧасы"
+    #         },
+    #     }
+    #
+    # data = {
+    #     "Table_1": create_arr_table(
+    #         title="1.Начислено", footer="Всего начислено", json_obj=data["global_objects"]["1.Начислено"],
+    #         exclude=[5, 6]
+    #     ),
+    #     "Table_2": create_arr_table(
+    #         title="2.Удержано", footer="Всего удержано", json_obj=data["global_objects"]["2.Удержано"], exclude=[]
+    #     ),
+    #     "Table_3": create_arr_table(
+    #         title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+    #         json_obj=data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
+    #     ),
+    #     "Table_4": create_arr_table(
+    #         title="4.Выплачено", footer="Всего выплат", json_obj=data["global_objects"]["4.Выплачено"], exclude=[]
+    #     ),
+    #     "Table_5": create_arr_table(
+    #         title="5.Налоговые вычеты", footer="Всего вычеты", json_obj=data["global_objects"]["5.Налоговые вычеты"],
+    #         exclude=[]
+    #     ),
+    #     "Down": {
+    #         "first": ["Долг за организацией на начало месяца", data["Долг за организацией на начало месяца"]],
+    #         "last": ["Долг за организацией на конец месяца", data["Долг за организацией на конец месяца"]],
+    #     },
+    # }
+    # # global_objects = []
+    # # for x in data["global_objects"]:
+    # #     global_objects.append(x)
+    # # global_objects = [x for x in data["global_objects"]]
+    #
+    # # return_data = []
+    # # for x in global_objects:
+    # #     return_data.append(create_arr_from_json(data["global_objects"], x))
+    # # return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
+    #
+    # # return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
+    return None
 
 
 def get_users(day=1):
