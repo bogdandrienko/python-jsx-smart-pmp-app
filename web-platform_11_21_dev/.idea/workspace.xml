@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprl970801351179202109,69a3e6cd2300bc641d05a061732a2508" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/0_Prefabs/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/0_Prefabs/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/data/шифрование.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/data/шифрование.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -331,6 +335,8 @@
       <workItem from="1635779599026" duration="894000" />
       <workItem from="1635825949976" duration="1078000" />
       <workItem from="1635846293265" duration="4076000" />
+      <workItem from="1635907244700" duration="13693000" />
+      <workItem from="1635931010163" duration="6142000" />
     </task>
     <servers />
   </component>
@@ -355,7 +361,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_platform_07_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1626238502088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Python DOCS/0_Applications" />
     <SUITE FILE_PATH="coverage/web_platform_09_21_dev$test.coverage" NAME="test Coverage Results" MODIFIED="1632383532200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/lin_run_sh$service.coverage" NAME="service Coverage Results" MODIFIED="1635846908638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_km" />
+    <SUITE FILE_PATH="coverage/lin_run_sh$service.coverage" NAME="service Coverage Results" MODIFIED="1635907757871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_km" />
     <SUITE FILE_PATH="coverage/lin_run_sh$test.coverage" NAME="test Coverage Results" MODIFIED="1635405818723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/web_platform_07_21_dev$views.coverage" NAME="views Coverage Results" MODIFIED="1626458166663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_rational" />
   </component>

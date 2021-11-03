@@ -84,6 +84,34 @@ class EncodingClass:
         #         print(ex_2)
         #     print(ex_1)
 
+        # encoding = chardet.detect(content)['encoding']
+        # print('\n ***************** \n')
+        # print(encoding)
+        # print('\n ***************** \n')
+        # print(content[:100])
+        # print('\n ***************** \n')
+        # print(content.decode()[:100])
+        # print('\n ***************** \n')
+        # print(content.decode(encoding='UTF-8', errors='strict')[:100])
+        # print('\n ***************** \n')
+        # print(content.decode(encoding='UTF-8-SIG', errors='strict')[:100])
+        # print('\n ***************** \n')
+        # # print(content.decode(encoding='1251', errors='strict'))
+        # # print('\n ***************** \n')
+
+        # print('\n ************ \n')
+        # for num in str(MassivKhesha)[1:10]:
+        #     print(ord(num))
+        # print('\n ************ \n')
+        # MassivKhesha_1 = str(sha256(KodShifra.encode('utf-8')).hexdigest())
+        # print(blake2b(b'XWew151299Ioo@').hexdigest())
+        # print(hashlib.sha256("XWew151299Ioo@".encode()).digest().decode())
+        # for num in str(hashlib.sha256("XWew151299Ioo@".encode()).digest().decode())[:5]:
+        #     print(ord(num))
+        # print(MassivKhesha_1)
+        # for num in MassivKhesha_1:
+        #     print(ord(num))
+
     @staticmethod
     def convert_encoding(data: str, new_coding='utf-8'):
         encoding = chardet.detect(data)['encoding']
