@@ -3,6 +3,7 @@ import math
 from hashlib import sha256
 from hashlib import blake2b
 import chardet
+import base64
 import openpyxl
 import pyodbc
 from django.contrib.auth.models import User
@@ -89,54 +90,7 @@ def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJ
     return password
 
 
-def encrypt_text(MassivSimvolov: str, KlyuchShifra: str):
-    ZashifrovannayaStroka = ''
-    PozitsiyaSimvolaKhesha = 0
-    DlinaKhesha = len(KlyuchShifra)
-    for num in MassivSimvolov:
-        NomerSimvola = ord(num)
-        if PozitsiyaSimvolaKhesha >= DlinaKhesha - 1:
-            PozitsiyaSimvolaKhesha = 0
-        PozitsiyaSimvolaKhesha = PozitsiyaSimvolaKhesha + 1
-        SimvolaKhesha = ord(KlyuchShifra[PozitsiyaSimvolaKhesha])
-        Kod_Zashifrovannyy_simvol = NomerSimvola + SimvolaKhesha
-        # print(f"Kod_Zashifrovannyy_simvol: {chr(Kod_Zashifrovannyy_simvol)}: {Kod_Zashifrovannyy_simvol}", )
-        Zashifrovannyy_simvol = chr(Kod_Zashifrovannyy_simvol)
-        ZashifrovannayaStroka = ZashifrovannayaStroka + Zashifrovannyy_simvol
-        if round(SimvolaKhesha / 2, 0) == SimvolaKhesha / 2:
-            SluchaynoyeChislo = random.randint(100, 1000)
-            ZashifrovannayaStroka = ZashifrovannayaStroka + chr(SluchaynoyeChislo)
-    return ZashifrovannayaStroka
-
-
-def decrypt_text(MassivSimvolov: str, KlyuchShifra: str):
-    Rasshifrovat_Tekst = ''
-    PozitsiyaSimvolaKhesha = 0
-    DlinaKhesha = len(KlyuchShifra)
-    propusk = False
-    for num in MassivSimvolov:
-        if propusk:
-            propusk = False
-            continue
-        NomerSimvola = ord(str(num))
-        if PozitsiyaSimvolaKhesha >= DlinaKhesha - 1:
-            PozitsiyaSimvolaKhesha = 0
-        PozitsiyaSimvolaKhesha = PozitsiyaSimvolaKhesha + 1
-        SimvolKhesha = ord(str(KlyuchShifra[PozitsiyaSimvolaKhesha]))
-        Kod_Zashifrovannyy_simvol = NomerSimvola - SimvolKhesha
-        # print(f"NomerSimvola: {chr(NomerSimvola)}: {NomerSimvola}", )
-        # print(f"SimvolKhesha: {chr(SimvolKhesha)}: {SimvolKhesha}", )
-        Zashifrovannyy_simvol = chr(Kod_Zashifrovannyy_simvol)
-        Rasshifrovat_Tekst = Rasshifrovat_Tekst + Zashifrovannyy_simvol
-        if round(SimvolKhesha / 2, 0) == SimvolKhesha / 2:
-            propusk = True
-    return Rasshifrovat_Tekst
-
-
-def decrypt_text_hash(MassivSimvolov: str, KodShifra: str):
-    hash_obj = hashlib.sha256()
-    hash_obj.update(str(KodShifra).encode('utf-8'))
-    MassivKhesha = str(hash_obj.hexdigest().strip().upper())
+def decrypt_text_with_hash(MassivSimvolov: str, MassivKhesha: str):
     Rasshifrovat_Tekst = ''
     PozitsiyaSimvolaKhesha = 0
     DlinaKhesha = len(MassivKhesha)
@@ -151,72 +105,64 @@ def decrypt_text_hash(MassivSimvolov: str, KodShifra: str):
         PozitsiyaSimvolaKhesha = PozitsiyaSimvolaKhesha + 1
         SimvolKhesha = ord(str(MassivKhesha[PozitsiyaSimvolaKhesha]))
         Kod_Zashifrovannyy_simvol = NomerSimvola - SimvolKhesha
-        # print(f"NomerSimvola: {chr(NomerSimvola)}: {NomerSimvola}", )
-        # print(f"SimvolKhesha: {chr(SimvolKhesha)}: {SimvolKhesha}", )
+        # print(f"NomerSimvola:{chr(NomerSimvola)}:{NomerSimvola} | SimvolKhesha:{chr(SimvolKhesha)}:{SimvolKhesha}")
         Zashifrovannyy_simvol = chr(Kod_Zashifrovannyy_simvol)
         Rasshifrovat_Tekst = Rasshifrovat_Tekst + Zashifrovannyy_simvol
         if round(SimvolKhesha / 2, 0) == SimvolKhesha / 2:
             propusk = True
     return Rasshifrovat_Tekst
 
+
 # Salary
 def get_salary_data(iin=970801351179, month=4, year=2021):
-    # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/970801351179/20210{month}'
-    # url = f'http://192.168.1.10/KM_1C/hs/zp/rl/970801351179/2021{month}'
-    # login = 'zpadmin'
-    # password = '159159qo'
-    # key = 'XWew151299Ioo@'
-
     key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                    _length=8)
-    # hash_key_obj = hashlib.sha256()
-    # hash_key_obj.update(key.encode('utf-8'))
-    # key_hash = str(hash_key_obj.hexdigest().strip().upper())
-    # hash_iin_obj = hashlib.sha256()
-    # hash_iin_obj.update(str(iin).encode('utf-8'))
-    # iin_hash = str(hash_iin_obj.hexdigest().strip().upper())
+                                    _length=10)
+    print('\n ***************** \n')
+    print(f"key: {key}")
+    hash_key_obj = hashlib.sha256()
+    hash_key_obj.update(key.encode('utf-8'))
+    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+    print('\n ***************** \n')
+    print(f"key_hash: {key_hash}")
+    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+    print('\n ***************** \n')
+    print(f"key_hash_base64: {key_hash_base64}")
 
-    print('\n ************************ \n')
-    print(iin)
-    print('complete get iin')
-    print('\n ************************ \n')
-
-    print('\n ************************ \n')
-    iin_new = encrypt_text(str(iin), key)
-    # MD5
-    print('complete encrypt iin')
-    print(iin_new)
-    print('\n ************************ \n')
-
-    print('\n ************************ \n')
-    iin_old = decrypt_text(str(iin_new), key)
-    print('complete decrypt iin')
-    print(iin_old)
-    print('\n ************************ \n')
+    print('\n ***************** \n')
+    print(f"iin: {iin}")
+    iin_base64 = base64.b64encode(str(iin).encode()).decode()
+    print('\n ***************** \n')
+    print(f"iin_base64: {iin_base64}")
 
     if int(month) < 10:
         month = f'0{month}'
-    # url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_hash}_{key_hash}/{year}{month}'
-    # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_new}_{key_hash}/{year}{month}'
-    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin}/{year}{month}'
-    print(url)
+    date = f"{year}{month}"
+    print('\n ***************** \n')
+    print(f"date: {date}")
+    date_base64 = base64.b64encode(str(date).encode()).decode()
+    print('\n ***************** \n')
+    print(f"date_base64: {date_base64}")
+
+    url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    # url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    print('\n ***************** \n')
+    print(f"url: {url}")
+
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
     login = 'Web_adm_1c'
     password = '159159qqww!'
     h.add_credentials(login, password)
     response, content = h.request(url)
     data = None
 
-    print('\n ************************ \n')
-    print(content)
-    print('\n ************************ \n')
-    key = 'XWew151299Ioo@'
-    content = decrypt_text_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key)
-    print('\n ************************ \n')
-    print(content)
-    print('\n ************************ \n')
-
+    print('\n ***************** \n')
+    print(f"content: {content}")
+    print('\n ***************** \n')
+    print(f"content_utf: {content.decode()}")
+    content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+    print('\n ***************** \n')
+    print(f"content_decrypt: {content_decrypt}")
     if content:
         try:
             data = json.loads(content)
@@ -283,20 +229,55 @@ def get_salary_data(iin=970801351179, month=4, year=2021):
     return data
 
 
-def get_users(day=1):
-    # url = f'http://192.168.1.158/Tanya_perenos/hs/iden/change/2021030{day}'
-    # login = 'zpadmin'
-    # password = '159159qqq'
+# users from 1C
+def get_users(day=1, month=11, year=2021):
+    key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                    _length=10)
+    print('\n ***************** \n')
+    print(f"key: {key}")
+    hash_key_obj = hashlib.sha256()
+    hash_key_obj.update(key.encode('utf-8'))
+    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+    print('\n ***************** \n')
+    print(f"key_hash: {key_hash}")
+    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+    print('\n ***************** \n')
+    print(f"key_hash_base64: {key_hash_base64}")
 
-    url = f'http://192.168.1.10/KM_1C/hs/iden/change/202103{day}'
+    day = 1
+    if int(day) < 10:
+        day = f'0{day}'
+    month = 11
+    if int(month) < 10:
+        month = f'0{month}'
+    year = 2021
+    date = f"{year}{month}{day}"
+    print('\n ***************** \n')
+    print(f"date: {date}")
+    date_base64 = base64.b64encode(str(date).encode()).decode()
+    print('\n ***************** \n')
+    print(f"date_base64: {date_base64}")
+
+    url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
+    print('\n ***************** \n')
+    print(f"url: {url}")
+
     relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp")
-    login = 'Admin'
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
+    login = 'Web_adm_1c'
     password = '159159qqww!'
     h.add_credentials(login, password)
     response, content = h.request(url)
-    print(content)
-    # data = None
+    data = None
+
+    print('\n ***************** \n')
+    print(f"content: {content}")
+    print('\n ***************** \n')
+    print(f"content_utf: {content.decode()}")
+    content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+    print('\n ***************** \n')
+    print(f"content_decrypt: {content_decrypt}")
+
     if content:
         try:
             with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:
@@ -309,6 +290,7 @@ def get_users(day=1):
     return data
 
 
+# Vacansies
 def get_career():
     # headers = {
     #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'

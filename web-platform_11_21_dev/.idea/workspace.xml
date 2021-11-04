@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprl970801351179202109,69a3e6cd2300bc641d05a061732a2508" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Mjc1QTUwMkNFNjI3QTBCQkIzNkNEMzY0QTM5MEMyN,8d6cfec5f7b8e5e9881e5bbe9751276e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_N0Y3QURDRTdCMzJDNDhDMkIzRDVGRjlGMjBBRUFGN,f340a809777c7873d5c9a038a68b3833" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Njg4RjZDNkIwODMyMUVBNkE2ODY5MENDMkQzNDZCR,c96d73f99c36b84bede8e9a2abb81ee2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_NzlDRUIzQzcyRTdFODZDRDFGMTMxMTRFRTE0RjQ2N,b2a03f4b9f9250b7590ad1cf279af604" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_ODdFMTQ5NUUzRDUxQzlBMzJCMzAwMzIzRDREMDExO,2d894b5b6996f31e395ba50828be82bc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_OUQ5MkY1OEQ5NTM4QTlGNEZERUNCNEM4NTlFN0EyM,e923bb56b1274ffda419c48a4d583806" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Q0VFMEIxRDcxRjRFQjAyQjY2NDIwOTA1QkM4MDAyN,e804edabcd1ebc16cd55086f0c319530" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QTIxOERGQzRDMDhFMEE1Q0IwN0E3NzgzMDNCQTA5N,8266ec241e2cc1977df13cac0b54b692" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QkUyNUE0REY1NzdCMERFNEUwOTAwMzgzQjcwMjRFQ,8c8d03614d9092080d0f80e8c305397e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Rjg4ODgzOTA0Rjc2OTM5NERENDA5MEVFMjNBMzUyN,467189c8e19adc07516e68bb83012c4d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_RkFCQTNFQzdDNkNBNzc4QkQ4OEE3QkEwNTFDREMwM,8760b282234abc968b01b673d289778b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QTkzNDdBM0IxNTI1OTgyQjA5RUE1REZFODM5MkE1N,27acd4fa34dc77f65392a6a6efddd7f9" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QjFDMTBBMjBCNjBBNEU3QjA1NTNGRTY0RkM5ODUzM,8f6680e730f7a8d4c16f1a38e940c55e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QzY3NDU5M0Y1RDVDNTA4N0YzODQ0RkI1OTU1QkE1M,f4bf76d0b75cb6f329493f4076887e60" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python/0_Prefabs/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/0_Prefabs/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/data/шифрование.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/data/шифрование.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -337,6 +348,7 @@
       <workItem from="1635846293265" duration="4076000" />
       <workItem from="1635907244700" duration="13693000" />
       <workItem from="1635931010163" duration="6142000" />
+      <workItem from="1636004515545" duration="10576000" />
     </task>
     <servers />
   </component>

@@ -112,6 +112,77 @@ class EncodingClass:
         # for num in MassivKhesha_1:
         #     print(ord(num))
 
+        # print(f"key_hash: {key_hash}")
+        # key_hash_base = base64.b64encode(str(key_hash).encode())
+        # print(f"key_hash_base: {key_hash_base}")
+        # print(f"key_hash_base_str: {key_hash_base.decode()}")
+        # data = key_hash_base.decode()
+        # print(f"key_hash_base_str_decode: {base64.b64encode(data.encode())}")
+        # url_safe = base64.urlsafe_b64encode('привет'.encode())
+        # print(f"url_safe_encode: {url_safe}")
+        # url_safe = base64.urlsafe_b64decode(str(url_safe))
+        # print(f"url_safe_decode: {url_safe.decode()}")
+        # print('\n ************************ \n')
+        # print(str(iin))
+        # print('complete get iin')
+        # print('\n ************************ \n')
+        # print('\n ************************ \n')
+        # # iin_new = encrypt_text(str(iin), key)
+        # iin_new = base64.b64encode(str(iin).encode())
+        # print('complete encrypt iin')
+        # print(iin_new)
+        # print('\n ************************ \n')
+        # print('\n ************************ \n')
+        # # iin_old = decrypt_text(str(iin_new), key)
+        # iin_old = base64.b64decode(iin_new)
+        # print('complete decrypt iin')
+        # print(str(iin_old.decode()))
+        # print('\n ************************ \n')
+
+        #
+        # def encrypt_text(MassivSimvolov: str, KlyuchShifra: str):
+        #     ZashifrovannayaStroka = ''
+        #     PozitsiyaSimvolaKhesha = 0
+        #     DlinaKhesha = len(KlyuchShifra)
+        #     for num in MassivSimvolov:
+        #         NomerSimvola = ord(num)
+        #         if PozitsiyaSimvolaKhesha >= DlinaKhesha - 1:
+        #             PozitsiyaSimvolaKhesha = 0
+        #         PozitsiyaSimvolaKhesha = PozitsiyaSimvolaKhesha + 1
+        #         SimvolaKhesha = ord(KlyuchShifra[PozitsiyaSimvolaKhesha])
+        #         Kod_Zashifrovannyy_simvol = NomerSimvola + SimvolaKhesha
+        #         # print(f"Kod_Zashifrovannyy_simvol: {chr(Kod_Zashifrovannyy_simvol)}: {Kod_Zashifrovannyy_simvol}", )
+        #         Zashifrovannyy_simvol = chr(Kod_Zashifrovannyy_simvol)
+        #         ZashifrovannayaStroka = ZashifrovannayaStroka + Zashifrovannyy_simvol
+        #         if round(SimvolaKhesha / 2, 0) == SimvolaKhesha / 2:
+        #             SluchaynoyeChislo = random.randint(100, 1000)
+        #             ZashifrovannayaStroka = ZashifrovannayaStroka + chr(SluchaynoyeChislo)
+        #     return ZashifrovannayaStroka
+        #
+        #
+        # def decrypt_text(MassivSimvolov: str, KlyuchShifra: str):
+        #     Rasshifrovat_Tekst = ''
+        #     PozitsiyaSimvolaKhesha = 0
+        #     DlinaKhesha = len(KlyuchShifra)
+        #     propusk = False
+        #     for num in MassivSimvolov:
+        #         if propusk:
+        #             propusk = False
+        #             continue
+        #         NomerSimvola = ord(str(num))
+        #         if PozitsiyaSimvolaKhesha >= DlinaKhesha - 1:
+        #             PozitsiyaSimvolaKhesha = 0
+        #         PozitsiyaSimvolaKhesha = PozitsiyaSimvolaKhesha + 1
+        #         SimvolKhesha = ord(str(KlyuchShifra[PozitsiyaSimvolaKhesha]))
+        #         Kod_Zashifrovannyy_simvol = NomerSimvola - SimvolKhesha
+        #         # print(f"NomerSimvola: {chr(NomerSimvola)}: {NomerSimvola}", )
+        #         # print(f"SimvolKhesha: {chr(SimvolKhesha)}: {SimvolKhesha}", )
+        #         Zashifrovannyy_simvol = chr(Kod_Zashifrovannyy_simvol)
+        #         Rasshifrovat_Tekst = Rasshifrovat_Tekst + Zashifrovannyy_simvol
+        #         if round(SimvolKhesha / 2, 0) == SimvolKhesha / 2:
+        #             propusk = True
+        #     return Rasshifrovat_Tekst
+
     @staticmethod
     def convert_encoding(data: str, new_coding='utf-8'):
         encoding = chardet.detect(data)['encoding']
