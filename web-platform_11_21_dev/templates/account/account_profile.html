@@ -1,0 +1,249 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Личный профиль
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+<main class="container-fluid mx-auto text-center d-block">
+
+    {% if data and data.status %}
+
+        <div class="p-sm-5 text-white rounded bg-dark">
+            <h1 class="display-1 fst-italic">Эта страница содержит информацию о пользователе</h1>
+            <p class="display-6">Проекты, участие в проектах, образование, хобби и многое другое.
+                <p class="display-6">Подробнее ниже...</p>
+            </p>
+
+            {% if data.user_iin|stringformat:"i" == request.user.username %}
+                <div class="order-md-last text-end">
+                    <a href="#" class="btn btn-danger btn-lg">Изменить личный профиль</a>
+                </div>
+            {% else %}
+                <div class="order-md-last text-end">
+                    <a href="#" class="btn btn-danger btn-lg">Пожаловаться на пользователя</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="py-5 text-center">
+            {% if data.image_avatar %}
+            <img src="{{ data.image_avatar.url }}" class="bd-placeholder-img " width="256px" height="100%" alt="{{ data.firstname }}">
+            {% else %}
+            <img src="{% static 'media/uploads/account/avatar/default.jpg' %}" class="bd-placeholder-img " width="256px" height="100%" alt="default">
+            {% endif %}
+            <h2>{{ data.lastname }} {{ data.firstname }} {{ data.patronymic }}</h2>
+            <p class="lead">{{ data.position }}</p>
+        </div>
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Мои проекты</span>
+                    <span class="badge bg-primary rounded-pill">#2</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Первый проект</h6>
+                            <small class="text-muted">Описание</small>
+                        </div>
+                        <span class="text-muted">Рейтинг: +10</span>
+                        <span class="text-muted">Комментарии: 8</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div class="text-danger">
+                            <h6 class="my-0">Второй проект</h6>
+                            <small class="text-muted">Описание</small>
+                        </div>
+                        <span class="text-danger">Рейтинг: -5</span>
+                        <span class="text-muted">Комментарии: 3</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-success">Итого (Рейтинг)</span>
+                        <strong class="text-success">+5</strong>
+                    </li>
+                </ul>
+                <form class="card p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Часть названия проекта">
+                        <button type="submit" class="btn btn-secondary">Найти!</button>
+                    </div>
+                </form>
+                <div class="p-4">
+                    <h4 class="fst-italic">Участник проектов</h4>
+                    <ol class="list-unstyled mb-0">
+                        <li>
+                            <a href="#">Пример первого проекта</a>
+                        </li>
+                        <li>
+                            <a href="#">Пример второго проекта</a>
+                        </li>
+                        <li>
+                            <a href="#">Пример третьего проекта</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="p-4 text-secondary">
+                    <h4>Дата регистрации</h4>
+                    <ol class="list-unstyled mb-0">
+                        <li>
+                            <p>{{ data.date_registered }}</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <div>
+                    <h1 class="blog-post-title text-center">Подробная информация</h1>
+                </div>
+                <article class="blog-post">
+                    <div>
+                        <h2 class="blog-post-title">Образование</h2>
+                        <p>{{ data.education }}</p>
+                        <p>в порядке возрастания даты:</p>
+                        <ol>
+                            <li>Первое</li>
+                            <li>Второе</li>
+                            <li>Третье</li>
+                        </ol>
+                    </div>
+                    <hr>
+                    <div>
+                        <h2 class="blog-post-title">Достижения</h2>
+                        <p>{{ data.achievements }}</p>
+                        <p>от самого наибольшего:</p>
+                        <ul>
+                            <li>Первое</li>
+                            <li>Второе</li>
+                            <li>Третье</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div>
+                        <h2 class="blog-post-title">Биография</h2>
+                        <p>{{ data.biography }}</p>
+                    </div>
+                    <hr>
+                    <div>
+                        <h2 class="blog-post-title">Хобби</h2>
+                        <p>{{ data.hobbies }}</p>
+                    </div>
+                    <hr>
+                </article>
+            </div>
+        </div>
+        <div class="container">
+            <h3 class="pb-4 mb-4 fst-italic border-bottom text-center">Эффективность</h3>
+            <h3>Таблица коэффициента полезного действия</h3>
+            <p>содержит расчёты согласно внутренним формулам и активности пользователя:</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название проекта</th>
+                        <th>Время реализации, дней</th>
+                        <th>Экономический эффект, тыс. тенге</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Первый проект</td>
+                        <td>100</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Второй проект</td>
+                        <td>200</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>Третий проект</td>
+                        <td>300</td>
+                        <td>30</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Итого</td>
+                        <td>6</td>
+                        <td>60</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <h3 class="pb-4 mb-4 fst-italic border-bottom text-center">Мои проекты</h3>
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Обогатительный комплекс</strong>
+                        <h3 class="mb-0">Название реализованного проекта 1</h3>
+                        <div class="mb-1 text-muted">20 декабря 2019</div>
+                        <p class="card-text mb-auto">Описание проекта.</p>
+                        <a href="#" class="stretched-link">Подробнее о проекте</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"/>
+                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Картинка</text>
+                        </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-success">Горно-транспортный комплекс</strong>
+                            <h3 class="mb-0">Название реализованного проекта 2</h3>
+                        <div class="mb-1 text-muted">11 ноября 2020</div>
+                            <p class="mb-auto">Описание проекта.</p>
+                            <a href="#" class="stretched-link">Подробнее о проекте</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"/>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Картинка</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Данных нет.</h1>
+            <p class="lead">Перезагрузите страницу или ожидайте исправления неполадок.</p>
+        </div>
+
+    {% endif %}
+
+</main>
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

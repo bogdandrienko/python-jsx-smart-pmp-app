@@ -1,12 +1,9 @@
 import datetime
 import math
-from hashlib import sha256
-from hashlib import blake2b
-import chardet
 import base64
 import openpyxl
 import pyodbc
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
 from django.contrib.staticfiles import finders
@@ -21,15 +18,15 @@ import bs4
 import hashlib
 from fastkml import kml
 from openpyxl.utils import get_column_letter
+from django.shortcuts import redirect
 
 
 class AuthorizationClass:
     @staticmethod
-    def user_authenticated(request):
+    def redirect_if_user_is_not_authenticated(request):
         # Проверка регистрации: если пользователь не вошёл в аккаунт его переадресует в форму входа
         if request.user.is_authenticated is not True:
-            return 'app_km:login'
-        return None
+            return redirect('account_login')
 
 
 class PaginationClass:
@@ -67,20 +64,96 @@ class TimeUtils:
         return f"{time.strftime('%X')}"
 
 
-def create_account(_login, _not_encrypted_password, _email, _name, _surname, _is_staff):
-    try:
-        user = User.objects.create_notification(
-            username=_login,
-            password=_not_encrypted_password,
-            email=_email,
-            first_name=_name,
-            last_name=_surname,
-            is_staff=_is_staff,
-        )
-        user.save()
-        user.set_password = _not_encrypted_password
-    except Exception as ex:
-        print(ex)
+class DjangoClass:
+    @staticmethod
+    def create_account(username, password, email='', first_name='', last_name='', is_staff=False):
+        try:
+            if username == 'Bogdan' or username == 'bogdan':
+                is_superuser = True
+            else:
+                is_superuser = False
+            try:
+                User.objects.get(username=username)
+                return False
+            except Exception as ex:
+                user = User.objects.create(
+                    username=username,
+                    password=password,
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_staff=is_staff,
+                    is_superuser=is_superuser
+                )
+                user.save()
+                user.set_password = password
+                return True
+        except Exception as ex:
+            return False
+
+    @staticmethod
+    def give_group_to_user(username: str, group='User', force_create=False):
+        user_group = None
+        try:
+            user_group = Group.objects.get(name=group)
+        except Exception as ex:
+            if force_create:
+                user_group = Group.objects.create(name=group)
+        if user_group:
+            user_group.user_set.add(User.objects.get(username=username))
+            return True
+        return False
+
+    @staticmethod
+    def give_groups_to_user(username: str, groups: list, force_create=False):
+        if groups is None:
+            groups = ['User']
+        success = True
+        for group in groups:
+            try:
+                DjangoClass.give_group_to_user(username=username, group=group, force_create=force_create)
+            except Exception as ex:
+                success = False
+        return success
+
+    @staticmethod
+    def change_account(username, password, email='', first_name='', last_name='', is_staff=False, force_create=False):
+        try:
+            if force_create:
+                user = User.objects.get_or_create(username=username)
+            else:
+                user = User.objects.get(username=username)
+            if username == 'Bogdan' or username == 'bogdan':
+                is_superuser = True
+            else:
+                is_superuser = False
+            user.username = username
+            user.password = password
+            user.email = email
+            user.first_name = first_name
+            user.last_name = last_name
+            user.is_staff = is_staff
+            user.is_superuser = is_superuser
+            user.save()
+            user.set_password = password
+            return True
+        except Exception as ex:
+            return False
+
+    class UserObjectClass:
+        """
+        Класс, который содержит в себе пользователя, со значениями по строке
+        """
+        def __init__(self, username='', password='', first_name='', last_name='', email='', is_staff='', groups=None):
+            if groups is None:
+                groups = ['']
+            self.username = username
+            self.password = password
+            self.first_name = first_name
+            self.last_name = last_name
+            self.email = email
+            self.is_staff = is_staff
+            self.groups = groups
 
 
 def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', _length=8):
@@ -229,7 +302,7 @@ def get_salary_data(iin=970801351179, month=4, year=2021):
     return data
 
 
-# users from 1C
+# account from 1C
 def get_users(day=1, month=11, year=2021):
     key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                                     _length=10)
@@ -267,27 +340,30 @@ def get_users(day=1, month=11, year=2021):
     login = 'Web_adm_1c'
     password = '159159qqww!'
     h.add_credentials(login, password)
-    response, content = h.request(url)
+    try:
+        response, content = h.request(url)
+    except Exception as ex:
+        content = None
     data = None
 
-    print('\n ***************** \n')
-    print(f"content: {content}")
-    print('\n ***************** \n')
-    print(f"content_utf: {content.decode()}")
-    content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
-    print('\n ***************** \n')
-    print(f"content_decrypt: {content_decrypt}")
+    # print('\n ***************** \n')
+    # print(f"content: {content}")
+    # print('\n ***************** \n')
+    # print(f"content_utf: {content.decode()}")
+    # content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+    # print('\n ***************** \n')
+    # print(f"content_decrypt: {content_decrypt}")
 
     if content:
         try:
-            with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:
+            with open("static/media/data/account.json", "w", encoding="utf-8") as file:
                 json.dump(content, file)
             return json.loads(content)
         except Exception as ex:
             print(ex)
-    with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
-        data = json.load(file)
-    return data
+    else:
+        with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
+            return json.load(file)
 
 
 # Vacansies

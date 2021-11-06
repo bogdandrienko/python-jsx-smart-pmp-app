@@ -1,0 +1,62 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Обновление записей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">ОБНОВЛЕНИЕ ЗАПИСЕЙ.</h1>
+        <p class="lead">Эта страница содержит форму для обновления записей.</p>
+        <div class="d-block">
+            <form class="form-control" action="{% url 'passages_update' %}" method="POST">
+                {% csrf_token %}
+                <label class="d-flex text-lg-start" for="party">id, данные которого необходимо изменить</label>
+                <input class="form-control" type="number" required="" placeholder="931777" value="931777" name="personid_old">
+                <br>
+                <hr>
+                <br>
+                <div class="d-flex text-lg-start">
+                    <label for="party">Старые дата и время, которые необходимо изменить:</label>
+                    <input class="form-control" type="datetime-local" required="" placeholder="" value="2021-10-28T12:00" name="datetime_old"><br>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <div class="d-flex text-lg-start">
+                    <label for="party">Новые дата и время, которые необходимо установить:</label>
+                    <input class="form-control" type="datetime-local" required="" placeholder="" value="2021-10-28T12:00" name="datetime_new"><br>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <button class="btn btn-lg btn-outline-primary form-control" type="submit">Подтвердить</button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

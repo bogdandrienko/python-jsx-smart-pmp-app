@@ -215,3 +215,33 @@ HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам сл
 16:01:06 : geo: list index out of range
 16:49:13 : geo: 'str' object cannot be interpreted as an integer
 11:20:00 : career: HTTPSConnectionPool(host='www.km-open.online', port=443): Max retries exceeded with url: /property (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000277F1C9E2E0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+11:45:47 : salary: User matching query does not exist.
+11:45:55 : salary: User matching query does not exist.
+11:49:00 : salary: User matching query does not exist.
+11:50:31 : salary: User matching query does not exist.
+11:51:59 : salary: User matching query does not exist.
+11:55:45 : career: Invalid block tag on line 19: 'endblock'. Did you forget to register or load this tag?
+11:55:58 : career: Invalid block tag on line 19: 'endblock'. Did you forget to register or load this tag?
+12:11:14 : rational_create: User matching query does not exist.
+12:12:19 : rational_create: User matching query does not exist.
+12:19:47 : rational_create: User matching query does not exist.
+12:20:51 : rational_create: User matching query does not exist.
+12:22:22 : rational_create: User matching query does not exist.
+12:23:08 : rational_create: User matching query does not exist.
+12:25:34 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:25:40 : rational_create: User matching query does not exist.
+12:26:54 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:26:59 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:27:05 : rational_create: User matching query does not exist.
+12:27:43 : rational_create: User matching query does not exist.
+12:27:47 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:29:54 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:30:06 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:30:12 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:31:00 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:31:41 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:33:21 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:34:42 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:35:13 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:35:23 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+12:35:27 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.

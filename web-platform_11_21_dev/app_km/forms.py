@@ -13,18 +13,22 @@ from .models import RationalModel, CategoryRationalModel, NotificationModel, Con
 # Account
 class CreateUserForm(UserCreationForm):
     """
-    Create User Form
+    Форма создания одиночного пользователя
     """
-    username = forms.IntegerField(label='Имя пользователя', required=True,
-                                  help_text='Внимание, вводите свой	табельный номер!')
-    first_name = forms.CharField(label='Имя', max_length=100, required=False)
-    last_name = forms.CharField(label='Фамилия', max_length=100, required=False)
+    username = forms.CharField(label='ИИН пользователя', min_length=12, max_length=12, required=True,
+                               help_text='Внимание, вводите ИИН!')
+    first_name = forms.CharField(label='Имя', max_length=50, required=False)
+    last_name = forms.CharField(label='Фамилия', max_length=50, required=False)
     email = forms.EmailField(label='Адрес электронной почты', max_length=100, required=False,
-                             help_text='вид: bogdandrienko@gmail.com')
+                             help_text='пример: bogdandrienko@gmail.com')
+    is_staff = forms.BooleanField(label='Доступ к панели модерации', required=False,
+                                  help_text='Поставьте галочку, если нужно разрешить доступ')
+    groups = forms.CharField(label='Доступ к панели модерации', required=False,
+                             help_text='В качестве разделителя используйте запятую, пример: "User, Moderator"')
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'password1', 'password2', 'email')
+        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'is_staff', 'groups')
 
 
 class CreateUsersForm(forms.Form):
@@ -41,19 +45,36 @@ class CreateUsersForm(forms.Form):
 
 class ChangeUserForm(UserCreationForm):
     """
-    Change User Form
+    Форма создания одиночного пользователя
     """
-    first_name = forms.CharField(label='Имя', max_length=100, required=False,
-                                 widget=forms.TextInput(
-                                     attrs={'name': 'username',
-                                            'class': 'form-control'}), )
-    last_name = forms.CharField(label='Фамилия', max_length=100, required=False)
+    first_name = forms.CharField(label='Имя', max_length=50, required=False)
+    last_name = forms.CharField(label='Фамилия', max_length=50, required=False)
     email = forms.EmailField(label='Адрес электронной почты', max_length=100, required=False,
-                             help_text='вид: bogdandrienko@gmail.com')
+                             help_text='пример: bogdandrienko@gmail.com')
+    is_staff = forms.BooleanField(label='Доступ к панели модерации', required=False,
+                                  help_text='Поставьте галочку, если нужно разрешить доступ')
+    groups = forms.CharField(label='Доступ к панели модерации', required=False,
+                             help_text='В качестве разделителя используйте запятую, пример: "User, Moderator"')
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'password1', 'password2', 'email')
+        fields = ('password1', 'password2', 'first_name', 'last_name', 'email', 'is_staff', 'groups')
+
+# class ChangeUserForm(UserCreationForm):
+#     """
+#     Change User Form
+#     """
+#     first_name = forms.CharField(label='Имя', max_length=100, required=False,
+#                                  widget=forms.TextInput(
+#                                      attrs={'name': 'username',
+#                                             'class': 'form-control'}), )
+#     last_name = forms.CharField(label='Фамилия', max_length=100, required=False)
+#     email = forms.EmailField(label='Адрес электронной почты', max_length=100, required=False,
+#                              help_text='вид: bogdandrienko@gmail.com')
+#
+#     class Meta:
+#         model = User
+#         fields = ('first_name', 'last_name', 'password1', 'password2', 'email')
 
 
 class GeneratePasswordsForm(forms.Form):

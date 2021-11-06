@@ -20,7 +20,7 @@ from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePass
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, AccountDataModel, NotificationModel, EmailModel, ContactModel, \
     DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
-from .service import AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
+from .service import DjangoClass, AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
     create_encrypted_password, get_users, get_salary_data, link_callback, get_career, find_near_point, get_vector_arr, \
     generate_way, pyodbc_connect
 
@@ -35,107 +35,93 @@ def home(request):
     return render(request, 'components/home.html')
 
 
-# Account
-def login_account(request):
+#  Account
+def account_login(request):
+    result_form = False
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user:
                 login(request, user)
-                return redirect('app_km:home')
-            return redirect('app_km:create')
-    form = AuthenticationForm()
+                result_form = True
+    form = AuthenticationForm(data=request.POST)
     context = {
         'form': form,
+        'result_form': result_form,
     }
-    return render(request, 'app_km/login_user.html', context)
+    return render(request, 'account/account_login.html', context)
 
 
-def logout_account(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def account_logout(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     logout(request)
-    return redirect('app_km:login')
+    return redirect('account_login')
 
 
-def create_user(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def account_profile(request, username=None):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            signup_user = User.objects.get(username=username)
-            try:
-                user_group = Group.objects.get(name='User')
-            except Exception as ex:
-                print(ex)
-                user_group = Group.objects.create_notification(name='User')
-            user_group.user_set.add(signup_user)
-
-        result_create_user = True
+        pass
+    if username and username != 'None':
+        try:
+            data = AccountDataModel.objects.get(user_iin=username)
+        except Exception as ex:
+            data = None
     else:
-        result_create_user = False
-    create_user_form = CreateUserForm()
-    context = {
-        'create_user_form': create_user_form,
-        'result_create_user': result_create_user,
-    }
-    return render(request, 'app_km/create_user.html', context)
-
-
-def create_user_from1c(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
-    data = None
-    if request.method == 'POST':
-        data_ = get_users()
-        headers = ["Период", "Статус", "ИИН", "Фамилия", "Имя", "Отчество"]
-        bodies = []
-        for x in data_["global_objects"]:
-            val = []
-            for y in data_["global_objects"][x]:
-                val.append(data_["global_objects"][x][y])
-            bodies.append(val)
-        data = [headers, bodies]
+        try:
+            data = AccountDataModel.objects.get(user_iin=request.user.username)
+        except Exception as ex:
+            data = None
     context = {
         'data': data,
     }
-    return render(request, 'app_km/create_user_from1c.html', context)
+    return render(request, 'account/account_profile.html', context)
 
 
-def change_user(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def account_create_account(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    result_form = False
     if request.method == 'POST':
-        form = ChangeUserForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
-            user = User.objects.get(username=request.user.username)
-            user.email = request.POST['email']
-            user.password = request.POST['password1']
-            user.first_name = request.POST['first_name']
-            user.last_name = request.POST['last_name']
-            user.save()
-            user.set_password = request.POST['password1']
-
-        result_change_user = True
-    else:
-        result_change_user = False
-    change_user_form = ChangeUserForm()
+            username = form.cleaned_data.get('username')
+            password1 = form.cleaned_data.get('password1')
+            password2 = form.cleaned_data.get('password2')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            is_staff = form.cleaned_data.get('is_staff')
+            groups = form.cleaned_data.get('groups')
+            groups = [x.strip() for x in str(groups).split(',')]
+            if password1 == password2:
+                success_1 = DjangoClass.create_account(
+                    username=username,
+                    password=password1,
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    is_staff=is_staff
+                )
+                if success_1:
+                    success_2 = DjangoClass.give_groups_to_user(username=username, groups=groups, force_create=True)
+                    if success_1 and success_2:
+                        result_form = True
+    form = CreateUserForm
     context = {
-        'change_user_form': change_user_form,
-        'result_change_user': result_change_user,
+        'form': form,
+        'result_form': result_form,
     }
-    return render(request, 'app_km/change_user.html', context)
+    return render(request, 'account/account_create_account.html', context)
 
 
-def create_users(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def account_create_accounts(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    data = None
+    form = None
+    result_form = False
     if request.method == 'POST':
         excel_file = request.FILES.get('document_addition_file_1')
         if excel_file:
@@ -145,10 +131,11 @@ def create_users(request):
             wb = openpyxl.load_workbook(excel_file)
             sheet = wb.active
             max_row = sheet.max_row
+            users_array = []
             for i in range(2, max_row + 1):
                 username = get_value('A', i)
                 password = get_value('B', i)
-                email_ = get_value('C', i)
+                email = get_value('C', i)
                 first_name = get_value('D', i)
                 last_name = get_value('E', i)
                 group = get_value('F', i)
@@ -156,64 +143,85 @@ def create_users(request):
                     is_staff = True
                 else:
                     is_staff = False
+                groups = [x.strip() for x in str(group).split(',')]
                 if username and password:
-                    try:
-                        user = User.objects.get(username=username)
-                        user.username = username
-                        user.password = password
-                        user.email = email_
-                        user.first_name = first_name
-                        user.last_name = last_name
-                        user.is_staff = is_staff
-                        if username == 'Bogdan' or username == 'bogdan':
-                            user.is_superuser = True
-                        else:
-                            user.is_superuser = False
-                        user.save()
-                        user.set_password = str(password)
-                    except Exception as ex:
-                        print(ex)
-                        User.objects.create_notification(
-                            username=username,
-                            password=password,
-                            email=email_,
-                            first_name=first_name,
-                            last_name=last_name,
-                            is_staff=is_staff,
-                        )
-                    try:
-                        user_group = Group.objects.get(name=group)
-                    except Exception as ex:
-                        print(ex)
-                        user_group = Group.objects.create_notification(name=group)
-                    signup_user = User.objects.get(username=username)
-                    user_group.user_set.add(signup_user)
-        result_create_users = True
-    else:
-        result_create_users = False
-    create_users_form = CreateUsersForm()
+                    users_array.append(DjangoClass.UserObjectClass(
+                        username=username,
+                        password=password,
+                        first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        is_staff=is_staff,
+                        groups=groups,
+                    ))
+            success_3 = True
+            for user in users_array:
+                try:
+                    success_1 = DjangoClass.create_account(
+                        username=user.username,
+                        password=user.password,
+                        first_name=user.first_name,
+                        last_name=user.last_name,
+                        email=user.email,
+                        is_staff=user.is_staff
+                    )
+                    if success_1:
+                        success_2 = DjangoClass.give_groups_to_user(username=user.username, groups=user.groups,
+                                                                    force_create=True)
+                        if success_1 and success_2:
+                            result_form = True
+                except Exception as ex:
+                    success_3 = False
+            if success_3 is False:
+                result_form = False
+    form = CreateUsersForm
     context = {
-        'create_users_form': create_users_form,
-        'result_create_users': result_create_users,
+        'data': data,
+        'form': form,
+        'result_form': result_form
     }
-    return render(request, 'app_km/create_users.html', context)
+    return render(request, 'account/account_create_accounts.html', context)
 
 
-def export_users(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def account_update_accounts_1c(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    data = None
+    form = None
+    result_form = None
+    if request.method == 'POST':
+        data_ = get_users()
+        headers = ["Период", "Статус", "ИИН", "Фамилия", "Имя", "Отчество", 'Табельный', 'Подразделение', 'Цех/Служба',
+                   'Участок/Отдел', 'Должность', 'Категория']
+        bodies = []
+        for x in data_["global_objects"]:
+            val = []
+            for y in data_["global_objects"][x]:
+                val.append(data_["global_objects"][x][y])
+            bodies.append(val)
+        data = [headers, bodies]
+        result_form = True
+        print(data)
+    context = {
+        'data': data,
+        'form': form,
+        'result_form': result_form
+    }
+    return render(request, 'account/account_update_accounts_1c.html', context)
+
+
+def account_export_accounts(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    data = None
+    form = None
+    result_form = None
     if request.method == 'POST':
         wb = openpyxl.Workbook()
         sheet = wb.active
         sheet.title = 'Страница 1'
         user_objects = User.objects.all().order_by('id')
-        sheet['A1'] = 'Имя пользователя'
-        sheet['B1'] = 'Зашифрованный Пароль'
-        sheet['C1'] = 'Почта'
-        sheet['D1'] = 'Имя'
-        sheet['E1'] = 'Фамилия'
-        sheet['F1'] = 'Группа'
-        sheet['G1'] = 'Доступ к админ панели'
+        titles = ['Имя пользователя', 'Зашифрованный Пароль', 'Почта', 'Имя', 'Фамилия', 'Группы', 'Доступ к модерации']
+        for char in 'ABCDEFG':
+            sheet[f'{char}1'] = titles['ABCDEFG'.index(char)]
         value = 1
         for user_object in user_objects:
             value += 1
@@ -225,65 +233,178 @@ def export_users(request):
             groups = Group.objects.filter(user=user_object)
             group_list = ''
             for group in groups:
-                group_list += group.name
-            sheet[f'F{value}'] = group_list
+                if len(str(group.name)) > 1:
+                    group_list += f", {group.name}"
+            sheet[f'F{value}'] = group_list[2:]
             if user_object.is_staff:
                 sheet[f'G{value}'] = 'ИСТИНА'
             else:
                 sheet[f'G{value}'] = 'ЛОЖЬ'
-        wb.save('static/media/data/accounts/export_users.xlsx')
-        result_export_users = True
+        body = []
+        for user_object in user_objects:
+            groups = Group.objects.filter(user=user_object)
+            group_list = ''
+            for group in groups:
+                if len(str(group.name)) > 1:
+                    group_list += f", {group.name}"
+            groups = group_list[2:]
+            if user_object.is_staff:
+                stuff = 'ИСТИНА'
+            else:
+                stuff = 'ЛОЖЬ'
+            body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
+                         user_object.last_name, groups, stuff])
+            data = [titles, body]
+        wb.save('static/media/data/account/export_users.xlsx')
+        result_form = True
     else:
-        result_export_users = False
+        result_form = False
     context = {
-        'result_export_users': result_export_users,
+        'data': data,
+        'form': form,
+        'result_form': result_form
     }
-    return render(request, 'app_km/export_users.html', context)
+    return render(request, 'account/account_export_accounts.html', context)
 
 
-def generate_password(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def account_change_account(request, username=None):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    try:
+        if username:
+            data = User.objects.get(username=username)
+        else:
+            data = User.objects.get(username=request.user.username)
+    except Exception as ex:
+        data = {
+            'username': 0
+        }
+    result_form = False
     if request.method == 'POST':
-        not_encrypted_password = str(request.POST['password'])
+        form = CreateUserForm(request.POST)
+        form.is_valid()
         try:
-            user = User.objects.get(username='None')
+            user = User.objects.get(username=username)
+            password1 = form.cleaned_data.get('password1')
+            password2 = form.cleaned_data.get('password2')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            is_staff = form.cleaned_data.get('is_staff')
+            groups = form.cleaned_data.get('groups')
+            groups = [x.strip() for x in str(groups).split(',')]
+            if password1 == password2:
+                success_1 = DjangoClass.change_account(
+                    username=user.username,
+                    password=password1,
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    is_staff=is_staff,
+                    force_create=False
+                )
+                if success_1:
+                    success_2 = DjangoClass.give_groups_to_user(username=user.username, groups=groups,
+                                                                force_create=True)
+                    if success_1 and success_2:
+                        result_form = True
         except Exception as ex:
-            print(ex)
-            user = User.objects.create_notification(
-                username='None'
-            )
-        user.set_password(not_encrypted_password)
-        user.save()
-        user = User.objects.get(username='None')
-        encrypted_password = user.password
-    else:
-        encrypted_password = False
+            pass
+    form = ChangeUserForm
     context = {
-        'result_generate_password': encrypted_password,
+        'data': data,
+        'form': form,
+        'result_form': result_form,
     }
-    return render(request, 'app_km/generate_password.html', context)
+    return render(request, 'account/account_change_account.html', context)
 
 
-def generate_passwords(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def account_change_accounts(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    data = None
+    form = None
+    result_form = False
+    if request.method == 'POST':
+        excel_file = request.FILES.get('document_addition_file_1')
+        if excel_file:
+            def get_value(rows: str, cols: int):
+                return str(sheet[rows + str(cols)].value)
+
+            wb = openpyxl.load_workbook(excel_file)
+            sheet = wb.active
+            max_row = sheet.max_row
+            users_array = []
+            for i in range(2, max_row + 1):
+                username = get_value('A', i)
+                password = get_value('B', i)
+                email = get_value('C', i)
+                first_name = get_value('D', i)
+                last_name = get_value('E', i)
+                group = get_value('F', i)
+                if get_value('G', i) == 'ИСТИНА' or get_value('G', i) == 'True':
+                    is_staff = True
+                else:
+                    is_staff = False
+                groups = [x.strip() for x in str(group).split(',')]
+                if username and password:
+                    users_array.append(DjangoClass.UserObjectClass(
+                        username=username,
+                        password=password,
+                        first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        is_staff=is_staff,
+                        groups=groups,
+                    ))
+            success_3 = True
+            for user in users_array:
+                try:
+                    success_1 = DjangoClass.change_account(
+                        username=user.username,
+                        password=user.password,
+                        first_name=user.first_name,
+                        last_name=user.last_name,
+                        email=user.email,
+                        is_staff=user.is_staff,
+                        force_create=False
+                    )
+                    if success_1:
+                        success_2 = DjangoClass.give_groups_to_user(username=user.username, groups=user.groups,
+                                                                    force_create=True)
+                        if success_1 and success_2:
+                            result_form = True
+                except Exception as ex:
+                    success_3 = False
+            if success_3 is False:
+                result_form = False
+    form = CreateUsersForm
+    context = {
+        'data': data,
+        'form': form,
+        'result_form': result_form
+    }
+    return render(request, 'account/account_change_accounts.html', context)
+
+
+def account_generate_passwords(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    result_form = None
+    data = None
     if request.method == 'POST':
         passwords_quantity = int(request.POST['passwords_quantity'])
         passwords_chars = str(request.POST['passwords_chars'])
         passwords_length = int(request.POST['passwords_length'])
         wb = openpyxl.Workbook()
         sheet = wb.active
-        sheet.title = 'Страница 1'
-        sheet[f'A1'] = 'Зашифрованный Пароль'
-        sheet[f'B1'] = 'Пароль'
+        titles = ['Зашифрованный Пароль', 'Пароль']
+        for char in 'AB':
+            sheet[f'{char}1'] = titles['AB'.index(char)]
+        body = []
         for n in range(2, passwords_quantity + 2):
             password = create_encrypted_password(_random_chars=passwords_chars, _length=passwords_length)
             try:
                 user = User.objects.get(username='None')
             except Exception as ex:
-                print(ex)
-                user = User.objects.create_notification(
+                user = User.objects.create(
                     username='None',
                     email=password,
                 )
@@ -293,37 +414,33 @@ def generate_passwords(request):
             user = User.objects.get(username='None')
             sheet[f'A{n}'] = user.password
             sheet[f'B{n}'] = user.email
-        wb.save('static/media/data/accounts/generate_passwords.xlsx')
-        result_generate_passwords = True
-    else:
-        result_generate_passwords = False
-    generate_passwords_form = GeneratePasswordsForm()
+            body.append([user.password, user.email])
+        user = User.objects.get(username='None')
+        user.delete()
+        wb.save('static/media/data/account/generate_passwords.xlsx')
+        data = [titles, body]
+        result_form = True
+    form = GeneratePasswordsForm
     context = {
-        'generate_passwords_form': generate_passwords_form,
-        'result_generate_passwords': result_generate_passwords,
+        'data': data,
+        'form': form,
+        'result_form': result_form
     }
-    return render(request, 'app_km/generate_passwords.html', context)
+    return render(request, 'account/account_generate_passwords.html', context)
 
 
-def view_profile(request, username=None):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
-    try:
-        account = AccountDataModel.objects.get(user_iin=username)
-    except Exception as ex:
-        print(ex)
-        account = False
-    context = {
-        'account': account,
-        'username': username
-    }
-    return render(request, 'app_km/view_profile.html', context)
+
+
+
+
+
+
+
 
 
 # Application
 def list_module(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     module = ApplicationModuleModel.objects.order_by('module_position')
     context = {
         'module': module,
@@ -332,13 +449,12 @@ def list_module(request):
 
 
 def list_component(request, module_slug=None):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if module_slug is not None:
         module = ApplicationModuleModel.objects.get(module_slug=module_slug)
         component = ApplicationComponentModel.objects.filter(component_Foreign=module).order_by('component_position')
     else:
-        return redirect('app_km:list_module')
+        return redirect('list_module')
     context = {
         'component': component,
     }
@@ -347,8 +463,7 @@ def list_component(request, module_slug=None):
 
 # Rational
 def rational_list(request, category_slug=None):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if category_slug is not None:
             category_page = get_object_or_404(CategoryRationalModel, category_slug=category_slug)
@@ -362,15 +477,14 @@ def rational_list(request, category_slug=None):
             'page': page,
             'category': category,
         }
-        return render(request, 'app_km/list.html', context)
+        return render(request, 'rational/list_rational.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_list: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def rational_search(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if request.method == 'POST':
             search = request.POST['search_text']
@@ -379,17 +493,16 @@ def rational_search(request):
             context = {
                 'page': rational
             }
-            return render(request, 'app_km/list_search.html', context)
+            return render(request, 'rational/list_search.html', context)
         else:
-            return redirect('app_km:rational')
+            return redirect('rational')
     except Exception as ex:
         LoggingClass.logging(message=f'rational_search: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def rational_detail(request, rational_id=1):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = RationalModel.objects.get(id=rational_id)
         user = User.objects.get(id=request.user.id)
@@ -420,15 +533,14 @@ def rational_detail(request, rational_id=1):
                 'total_rating': total_like - total_dislike
             }
         }
-        return render(request, 'app_km/detail.html', context)
+        return render(request, 'rational/detail_rational.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_detail: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
-def rational_create(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+def create_rational(request):
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if request.method == 'POST':
             form = RationalForm(request.POST, request.FILES)
@@ -455,7 +567,7 @@ def rational_create(request):
                     rational_addition_image=request.FILES.get('rational_addition_image'),
                     # rational_status                 = request.POST['rational_status'],
                 )
-            return redirect('app_km:rational')
+            return redirect('rational')
         form = RationalForm(request.POST, request.FILES)
         category = CategoryRationalModel.objects.order_by('-id')
         user = User.objects.get(id=request.user.id).username
@@ -464,15 +576,14 @@ def rational_create(request):
             'category': category,
             'user': user,
         }
-        return render(request, 'app_km/create.html', context)
+        return render(request, 'rational/create_rational.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_create: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ; (')
 
 
 def rational_change(request, rational_id=None):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if request.method == 'POST':
             form = RationalForm(request.POST, request.FILES)
@@ -499,7 +610,7 @@ def rational_change(request, rational_id=None):
                 _object.rational_addition_image = request.FILES.get('rational_addition_image')
                 # rational_status                 = request.POST['rational_status'],
                 _object.save()
-            return redirect('app_km:rational')
+            return redirect('rational')
         form = RationalForm(request.POST, request.FILES)
         category = CategoryRationalModel.objects.order_by('-id')
         context = {
@@ -507,15 +618,14 @@ def rational_change(request, rational_id=None):
             'category': category,
             'rational_id': rational_id,
         }
-        return render(request, 'app_km/change.html', context)
+        return render(request, 'rational/change_rational.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_change: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def rational_leave_comment(request, rational_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = RationalModel.objects.get(id=rational_id)
         CommentRationalModel.objects.create(comment_article=rational,
@@ -523,15 +633,14 @@ def rational_leave_comment(request, rational_id):
                                             comment_text=request.POST['comment_text'])
         # rational.comment_rational_model_set.create(comment_author=User.objects.get(id=request.user.id),
         #                                          comment_text=request.POST['comment_text'])  # равнозначно предыдущему
-        return HttpResponseRedirect(reverse('app_km:rational_detail', args=(rational.id,)))
+        return HttpResponseRedirect(reverse('rational_detail', args=(rational.id,)))
     except Exception as ex:
         LoggingClass.logging(message=f'rational_leave_comment: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def rational_change_rating(request, rational_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         blog_ = RationalModel.objects.get(id=rational_id)
         user = User.objects.get(id=request.user.id)
@@ -555,15 +664,14 @@ def rational_change_rating(request, rational_id):
                 LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=True).delete()
             except Exception as ex:
                 print(ex)
-        return HttpResponseRedirect(reverse('app_km:rational_detail', args=(blog_.id,)))
+        return HttpResponseRedirect(reverse('rational_detail', args=(blog_.id,)))
     except Exception as ex:
         LoggingClass.logging(message=f'rational_change_rating: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def rational_ratings(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = RationalModel.objects.order_by('-id')
         authors = []
@@ -595,7 +703,7 @@ def rational_ratings(request):
             'page': page,
             'sorted': sorted_by_rating
         }
-        return render(request, 'app_km/ratings.html', context)
+        return render(request, 'rational/ratings_rational.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'rational_change_rating: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
@@ -603,28 +711,24 @@ def rational_ratings(request):
 
 # Salary
 def salary(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         data = None
-        user = User.objects.get(id=request.user.id)
         if request.method == 'POST':
             # Тут мы получаем json ответ от интерфейса 1С
             data = get_salary_data(month=request.POST['transact_id'])
             # Тут мы получаем json ответ от интерфейса 1С
         context = {
-            'user': user,
             'data': data,
         }
-        return render(request, 'app_km/main.html', context)
+        return render(request, 'app_km/salary.html', context)
     except Exception as ex:
         LoggingClass.logging(message=f'salary: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def view_pdf(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         data = get_salary_data(month=request.POST['transact_id'])
@@ -635,8 +739,7 @@ def view_pdf(request):
 
 
 def render_pdf_view(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     template_path = 'app_km/pdf.html'
     data = get_salary_data()
     # data = None
@@ -666,8 +769,7 @@ def render_pdf_view(request):
 
 # Human Resources
 def career(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         data = None
         if request.method == 'POST':
@@ -683,8 +785,7 @@ def career(request):
 
 # Extra
 def passages_thermometry(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -737,12 +838,11 @@ def passages_thermometry(request):
     context = {
         'data': data,
     }
-    return render(request, 'app_km/skud/passages_thermometry.html', context)
+    return render(request, 'skud/passages_thermometry.html', context)
 
 
 def passages_select(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -795,12 +895,11 @@ def passages_select(request):
     context = {
         'data': data,
     }
-    return render(request, 'app_km/skud/passages_select.html', context)
+    return render(request, 'skud/passages_select.html', context)
 
 
 def passages_update(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid_old = request.POST['personid_old']
@@ -819,12 +918,11 @@ def passages_update(request):
     context = {
         'data': data,
     }
-    return render(request, 'app_km/skud/passages_update.html', context)
+    return render(request, 'skud/passages_update.html', context)
 
 
 def passages_insert(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = request.POST['personid']
@@ -865,12 +963,11 @@ def passages_insert(request):
     context = {
         'data': data,
     }
-    return render(request, 'app_km/skud/passages_insert.html', context)
+    return render(request, 'skud/passages_insert.html', context)
 
 
 def passages_delete(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -886,12 +983,11 @@ def passages_delete(request):
     context = {
         'data': data,
     }
-    return render(request, 'app_km/skud/passages_delete.html', context)
+    return render(request, 'skud/passages_delete.html', context)
 
 
 def geo(request):
-    # if AuthorizationClass.user_authenticated(request=request):
-    #     return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         data = None
         form = GeoForm()
@@ -959,8 +1055,7 @@ def geo(request):
 
 
 def email(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     mails = EmailModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
     paginator = Paginator(mails, 10)
@@ -980,8 +1075,7 @@ def email(request):
 
 
 def send_email(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         subject = request.POST.get('subject', '')
         message_s = request.POST.get('message', '')
@@ -996,12 +1090,11 @@ def send_email(request):
                 )
             except BadHeaderError:
                 return redirect('home')
-    return redirect('app_km:email')
+    return redirect('email')
 
 
 def notification(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     form = NotificationForm(request.POST, request.FILES)
     pages = NotificationModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
@@ -1022,8 +1115,7 @@ def notification(request):
 
 
 def create_notification(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         NotificationModel.objects.create(
             notification_name=request.POST['notification_name'],
@@ -1031,36 +1123,33 @@ def create_notification(request):
             notification_description=request.POST['notification_description'],
             notification_author=User.objects.get(id=request.user.id),
         )
-    return redirect('app_km:notification')
+    return redirect('notification')
 
 
 def accept(request, notify_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = NotificationModel.objects.get(id=notify_id)
         rational.notification_status = True
         rational.save()
     except Exception as ex:
         print(ex)
-    return redirect('app_km:notification')
+    return redirect('notification')
 
 
 def decline(request, notify_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = NotificationModel.objects.get(id=notify_id)
         rational.notification_status = False
         rational.save()
     except Exception as ex:
         print(ex)
-    return redirect('app_km:notification')
+    return redirect('notification')
 
 
 def documentation(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         DocumentModel.objects.create(
             document_name=request.POST['document_name'],
@@ -1069,7 +1158,7 @@ def documentation(request):
             document_addition_file_1=request.FILES.get('document_addition_file_1'),
             document_addition_file_2=request.FILES.get('document_addition_file_2'),
         )
-        return redirect('app_km:documentation')
+        return redirect('documentation')
     docs = DocumentModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
     paginator = Paginator(docs, 3)
@@ -1090,8 +1179,7 @@ def documentation(request):
 
 
 def contact(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         ContactModel.objects.create(
             contact_name=request.POST['contact_name'],
@@ -1099,7 +1187,7 @@ def contact(request):
             contact_description=request.POST.get('contact_description'),
             contact_image=request.FILES.get('contact_image'),
         )
-        return redirect('app_km:contact')
+        return redirect('contact')
     contacts = ContactModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
     paginator = Paginator(contacts, 3)
@@ -1120,8 +1208,7 @@ def contact(request):
 
 
 def list_sms(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         SmsModel.objects.create(
             sms_author=User.objects.get(id=request.user.id),
@@ -1149,15 +1236,14 @@ def list_sms(request):
 
 
 def message(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         MessageModel.objects.create(
             message_name=request.POST['message_name'],
             message_slug=request.POST['message_slug'],
             message_description=request.POST.get('message_description'),
         )
-        return redirect('app_km:message')
+        return redirect('message')
     form = MessageForm(request.POST, request.FILES)
     message_s = MessageModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
@@ -1178,8 +1264,7 @@ def message(request):
 
 
 def weather(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     appid = '82b797b6ebc625032318e16f1b42c016'
     url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
     if request.method == 'POST':
@@ -1221,15 +1306,13 @@ def weather(request):
 
 
 def news_list(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     latest_article_list = ArticleModel.objects.order_by('-article_pub_date')[:10]
     return render(request, 'app_km/news_list.html', {'latest_article_list': latest_article_list})
 
 
 def news_create(request):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         ArticleModel.objects.create(
             article_title=request.POST['article_title'],
@@ -1242,8 +1325,7 @@ def news_create(request):
 
 
 def news_detail(request, article_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         a = ArticleModel.objects.get(id=article_id)
     except Exception as ex:
@@ -1254,8 +1336,7 @@ def news_detail(request, article_id):
 
 
 def leave_comment(request, article_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         a = ArticleModel.objects.get(id=article_id)
     except Exception as ex:
@@ -1266,8 +1347,7 @@ def leave_comment(request, article_id):
 
 
 def increase_rating(request, article_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     a = ArticleModel.objects.get(id=article_id)
     a.increase()
     a.save()
@@ -1275,8 +1355,7 @@ def increase_rating(request, article_id):
 
 
 def decrease_rating(request, article_id):
-    if AuthorizationClass.user_authenticated(request=request):
-        return redirect(AuthorizationClass.user_authenticated(request=request))
+    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     a = ArticleModel.objects.get(id=article_id)
     a.decrease()
     a.save()
@@ -1290,84 +1369,84 @@ def react(request):
 
 # Bootstrap
 def example(request):
-    return render(request, 'app_km/bootstrap/example.html')
+    return render(request, 'bootstrap/example.html')
 
 
 def album(request):
-    return render(request, 'app_km/bootstrap/album.html')
+    return render(request, 'bootstrap/album.html')
 
 
 def blog(request):
-    return render(request, 'app_km/bootstrap/blog.html')
+    return render(request, 'bootstrap/blog.html')
 
 
 def carousel(request):
-    return render(request, 'app_km/bootstrap/carousel.html')
+    return render(request, 'bootstrap/carousel.html')
 
 
 def checkout(request):
-    return render(request, 'app_km/bootstrap/checkout.html')
+    return render(request, 'bootstrap/checkout.html')
 
 
 def cover(request):
-    return render(request, 'app_km/bootstrap/cover.html')
+    return render(request, 'bootstrap/cover.html')
 
 
 def dashboard(request):
-    return render(request, 'app_km/bootstrap/dashboard.html')
+    return render(request, 'bootstrap/dashboard.html')
 
 
 def pricing(request):
-    return render(request, 'app_km/bootstrap/pricing.html')
+    return render(request, 'bootstrap/pricing.html')
 
 
 def product(request):
-    return render(request, 'app_km/bootstrap/product.html')
+    return render(request, 'bootstrap/product.html')
 
 
 def sign_in(request):
-    return render(request, 'app_km/bootstrap/sign-in.html')
+    return render(request, 'bootstrap/sign-in.html')
 
 
 def sticky_footer(request):
-    return render(request, 'app_km/bootstrap/sticky-footer.html')
+    return render(request, 'bootstrap/sticky-footer.html')
 
 
 def sticky_footer_navbar(request):
-    return render(request, 'app_km/bootstrap/sticky-footer-navbar.html')
+    return render(request, 'bootstrap/sticky-footer-navbar.html')
 
 
 def starter_template(request):
-    return render(request, 'app_km/bootstrap/starter-template.html')
+    return render(request, 'bootstrap/starter-template.html')
 
 
 def grid(request):
-    return render(request, 'app_km/bootstrap/grid.html')
+    return render(request, 'bootstrap/grid.html')
 
 
 def cheatsheet(request):
-    return render(request, 'app_km/bootstrap/cheatsheet.html')
+    return render(request, 'bootstrap/cheatsheet.html')
 
 
 def nav_bars(request):
-    return render(request, 'app_km/bootstrap/nav_bars.html')
+    return render(request, 'bootstrap/nav_bars.html')
 
 
 def off_canvas(request):
-    return render(request, 'app_km/bootstrap/off_canvas.html')
+    return render(request, 'bootstrap/off_canvas.html')
 
 
 def masonry(request):
-    return render(request, 'app_km/bootstrap/masonry.html')
+    return render(request, 'bootstrap/masonry.html')
 
 
 def navbar_static(request):
-    return render(request, 'app_km/bootstrap/navbar-static.html')
+    return render(request, 'bootstrap/navbar-static.html')
 
 
 def navbar_fixed(request):
-    return render(request, 'app_km/bootstrap/navbar-fixed.html')
+    return render(request, 'bootstrap/navbar-fixed.html')
 
 
 def navbar_bottom(request):
-    return render(request, 'app_km/bootstrap/navbar-bottom.html')
+    return render(request, 'bootstrap/navbar-bottom.html')
