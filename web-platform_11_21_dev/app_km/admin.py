@@ -119,8 +119,9 @@ class AccountDataModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора | Не включать массивные поля(Описание,
     # ckeditor...)
-    list_display = ('id', 'user_iin', 'firstname', 'lastname', 'patronymic', 'position', 'mail', 'date_registered',
-                    'group', 'status')
+    list_display = ('id', 'user_iin', 'firstname', 'lastname', 'patronymic', 'personnel_number', 'subdivision',
+                    'workshop_service', 'department_site', 'position', 'category', 'mail', 'date_registered', 'group',
+                    'status')
     # 'position', 'achievements',
     # 'biography', 'hobbies', 'mail', 'date_registered', 'secret_question'
     # Поля, которые нужно отображать при фильтрации, на панели администратора | Не включать массивные поля(Описание,
@@ -135,7 +136,8 @@ class AccountDataModelAdmin(admin.ModelAdmin):
     # администратора | Использовать либо эту настройку, либо 'fields')
     fieldsets = (
         ('Связанное поле', {'fields': ('username',)}),
-        ('Основное', {'fields': ('user_iin', 'password', 'firstname', 'lastname', 'patronymic', 'position',)}),
+        ('Основное', {'fields': ('user_iin', 'password', 'firstname', 'lastname', 'patronymic', 'personnel_number',
+                                 'subdivision', 'workshop_service', 'department_site', 'position', 'category',)}),
         ('Вторичное', {'fields': ('education', 'achievements', 'biography', 'hobbies', 'image_avatar',)}),
         ('Вспомогательное', {'fields': ('mail', 'secret_question', 'group', 'status',)}),
     )
@@ -143,8 +145,8 @@ class AccountDataModelAdmin(admin.ModelAdmin):
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['id', 'user_iin', 'firstname', 'lastname', 'patronymic', 'position', 'education', 'mail',
-                     'date_registered', 'group', 'status']
+    search_fields = ['id', 'user_iin', 'firstname', 'lastname', 'patronymic', 'position', 'mail', 'date_registered',
+                     'group', 'status']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора | Включать только
     # связанные поля для этой модели(ForeignKey...)
     # inlines         = [RationalModelInline]

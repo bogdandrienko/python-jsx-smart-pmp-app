@@ -3,8 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_change_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_export_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_export_accounts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -366,6 +375,8 @@
       <workItem from="1636173685963" duration="531000" />
       <workItem from="1636174245699" duration="34295000" />
       <workItem from="1636211261905" duration="971000" />
+      <workItem from="1636254552874" duration="19046000" />
+      <workItem from="1636293988508" duration="2149000" />
     </task>
     <servers />
   </component>

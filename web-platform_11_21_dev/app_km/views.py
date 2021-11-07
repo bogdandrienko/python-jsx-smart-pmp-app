@@ -85,30 +85,93 @@ def account_create_account(request):
     AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
     result_form = False
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password1 = form.cleaned_data.get('password1')
-            password2 = form.cleaned_data.get('password2')
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            email = form.cleaned_data.get('email')
-            is_staff = form.cleaned_data.get('is_staff')
-            groups = form.cleaned_data.get('groups')
-            groups = [x.strip() for x in str(groups).split(',')]
-            if password1 == password2:
-                success_1 = DjangoClass.create_account(
-                    username=username,
-                    password=password1,
-                    first_name=first_name,
-                    last_name=last_name,
-                    email=email,
-                    is_staff=is_staff
-                )
-                if success_1:
-                    success_2 = DjangoClass.give_groups_to_user(username=username, groups=groups, force_create=True)
-                    if success_1 and success_2:
-                        result_form = True
+        try:
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password1 = form.cleaned_data.get('password1')
+                password2 = form.cleaned_data.get('password2')
+                first_name = form.cleaned_data.get('first_name')
+                last_name = form.cleaned_data.get('last_name')
+                email = form.cleaned_data.get('email')
+                is_staff = form.cleaned_data.get('is_staff')
+                group = form.cleaned_data.get('group')
+                patronymic = form.cleaned_data.get('patronymic')
+                personnel_number = form.cleaned_data.get('personnel_number')
+                subdivision = form.cleaned_data.get('subdivision')
+                workshop_service = form.cleaned_data.get('workshop_service')
+                department_site = form.cleaned_data.get('department_site')
+                position = form.cleaned_data.get('position')
+                category = form.cleaned_data.get('category')
+                if password1 == password2:
+                    user_obj = DjangoClass.UserAccountClass(
+                        username=username,
+                        password=password1,
+                        first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        is_staff=is_staff,
+                        is_superuser=False
+                    )
+                    group_obj = DjangoClass.UserGroupClass(
+                        username=username,
+                        group=group
+                    )
+                    # success_1 = DjangoClass.create_main_data_account(
+                    #     user_account_class=False,
+                    #     user_group_class=False,
+                    #     username=username,
+                    #     password=password1,
+                    #     first_name=first_name,
+                    #     last_name=last_name,
+                    #     email=email,
+                    #     is_staff=is_staff,
+                    #     is_superuser=False,
+                    #     group=group
+                    # )
+                    success_1 = DjangoClass.create_main_data_account(
+                        user_account_class=user_obj,
+                        user_group_class=group_obj
+                    )
+                    if success_1:
+                        user_first_data_obj = DjangoClass.UserFirstDataAccountClass(
+                            username=username,
+                            user_iin=username,
+                            password=password1,
+                            first_name=first_name,
+                            last_name=last_name,
+                            patronymic=patronymic,
+                            personnel_number=personnel_number,
+                            subdivision=subdivision,
+                            workshop_service=workshop_service,
+                            department_site=department_site,
+                            position=position,
+                            category=category
+                        )
+                        # success_2 = DjangoClass.create_first_data_account(
+                        #     user_first_data_account_class=False,
+                        #     username=username,
+                        #     user_iin=username,
+                        #     password=password1,
+                        #     first_name=first_name,
+                        #     last_name=last_name,
+                        #     patronymic=patronymic,
+                        #     personnel_number=personnel_number,
+                        #     subdivision=subdivision,
+                        #     workshop_service=workshop_service,
+                        #     department_site=department_site,
+                        #     position=position,
+                        #     category=category
+                        # )
+                        success_2 = DjangoClass.create_first_data_account(
+                            user_first_data_account_class=user_first_data_obj
+                        )
+                        if success_1 and success_2:
+                            result_form = True
+                        else:
+                            result_form = False
+        except Exception as ex:
+            print(ex)
     form = CreateUserForm
     context = {
         'form': form,
@@ -143,37 +206,59 @@ def account_create_accounts(request):
                     is_staff = True
                 else:
                     is_staff = False
-                groups = [x.strip() for x in str(group).split(',')]
+                patronymic = get_value('H', i)
+                personnel_number = get_value('I', i)
+                subdivision = get_value('J', i)
+                workshop_service = get_value('K', i)
+                department_site = get_value('L', i)
+                position = get_value('M', i)
+                category = get_value('N', i)
                 if username and password:
-                    users_array.append(DjangoClass.UserObjectClass(
+                    user_obj = DjangoClass.UserAccountClass(
                         username=username,
                         password=password,
                         first_name=first_name,
                         last_name=last_name,
                         email=email,
                         is_staff=is_staff,
-                        groups=groups,
-                    ))
+                        is_superuser=False
+                    )
+                    group_obj = DjangoClass.UserGroupClass(
+                        username=username,
+                        group=group
+                    )
+                    user_first_data_obj = DjangoClass.UserFirstDataAccountClass(
+                        username=username,
+                        user_iin=username,
+                        password=password,
+                        first_name=first_name,
+                        last_name=last_name,
+                        patronymic=patronymic,
+                        personnel_number=personnel_number,
+                        subdivision=subdivision,
+                        workshop_service=workshop_service,
+                        department_site=department_site,
+                        position=position,
+                        category=category
+                    )
+                    users_array.append([user_obj, group_obj, user_first_data_obj])
             success_3 = True
             for user in users_array:
                 try:
-                    success_1 = DjangoClass.create_account(
-                        username=user.username,
-                        password=user.password,
-                        first_name=user.first_name,
-                        last_name=user.last_name,
-                        email=user.email,
-                        is_staff=user.is_staff
+                    success = DjangoClass.create_main_data_account(
+                        user_account_class=user[0],
+                        user_group_class=user[1]
                     )
-                    if success_1:
-                        success_2 = DjangoClass.give_groups_to_user(username=user.username, groups=user.groups,
-                                                                    force_create=True)
-                        if success_1 and success_2:
-                            result_form = True
+                    print(user[2])
+                    if success:
+                        print(success)
+                        success_second = DjangoClass.create_first_data_account(
+                            user_first_data_account_class=user[2]
+                        )
+                        print(f'success_second: {success_second}')
                 except Exception as ex:
                     success_3 = False
-            if success_3 is False:
-                result_form = False
+            result_form = success_3
     form = CreateUsersForm
     context = {
         'data': data,
@@ -219,9 +304,11 @@ def account_export_accounts(request):
         sheet = wb.active
         sheet.title = 'Страница 1'
         user_objects = User.objects.all().order_by('id')
-        titles = ['Имя пользователя', 'Зашифрованный Пароль', 'Почта', 'Имя', 'Фамилия', 'Группы', 'Доступ к модерации']
-        for char in 'ABCDEFG':
-            sheet[f'{char}1'] = titles['ABCDEFG'.index(char)]
+        titles = ['Имя пользователя', 'Зашифрованный Пароль', 'Почта', 'Имя', 'Фамилия', 'Группы', 'Доступ к модерации',
+                  'Отчество', 'Табельный номер', 'Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Должность',
+                  'Категория']
+        for char in 'ABCDEFGHIJKLMN':
+            sheet[f'{char}1'] = titles['ABCDEFGHIJKLMN'.index(char)]
         value = 1
         for user_object in user_objects:
             value += 1
@@ -240,6 +327,17 @@ def account_export_accounts(request):
                 sheet[f'G{value}'] = 'ИСТИНА'
             else:
                 sheet[f'G{value}'] = 'ЛОЖЬ'
+            try:
+                first_data_account = AccountDataModel.objects.get(username=User.objects.get(username=user_object.username))
+                sheet[f'H{value}'] = first_data_account.patronymic
+                sheet[f'I{value}'] = first_data_account.personnel_number
+                sheet[f'J{value}'] = first_data_account.subdivision
+                sheet[f'K{value}'] = first_data_account.workshop_service
+                sheet[f'L{value}'] = first_data_account.department_site
+                sheet[f'M{value}'] = first_data_account.position
+                sheet[f'N{value}'] = first_data_account.category
+            except Exception as ex:
+                pass
         body = []
         for user_object in user_objects:
             groups = Group.objects.filter(user=user_object)
@@ -252,8 +350,16 @@ def account_export_accounts(request):
                 stuff = 'ИСТИНА'
             else:
                 stuff = 'ЛОЖЬ'
-            body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
-                         user_object.last_name, groups, stuff])
+            try:
+                first_data_account = AccountDataModel.objects.get(username=User.objects.get(username=user_object.username))
+                body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
+                             user_object.last_name, groups, stuff, first_data_account.patronymic,
+                             first_data_account.personnel_number, first_data_account.subdivision,
+                             first_data_account.workshop_service, first_data_account.department_site,
+                             first_data_account.position, first_data_account.category])
+            except Exception as ex:
+                body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
+                             user_object.last_name, groups, stuff])
             data = [titles, body]
         wb.save('static/media/data/account/export_users.xlsx')
         result_form = True
@@ -303,8 +409,8 @@ def account_change_account(request, username=None):
                     force_create=False
                 )
                 if success_1:
-                    success_2 = DjangoClass.give_groups_to_user(username=user.username, groups=groups,
-                                                                force_create=True)
+                    success_2 = DjangoClass.set_groups_to_user(username=user.username, groups=groups,
+                                                               force_create=True)
                     if success_1 and success_2:
                         result_form = True
         except Exception as ex:
@@ -368,8 +474,8 @@ def account_change_accounts(request):
                         force_create=False
                     )
                     if success_1:
-                        success_2 = DjangoClass.give_groups_to_user(username=user.username, groups=user.groups,
-                                                                    force_create=True)
+                        success_2 = DjangoClass.set_groups_to_user(username=user.username, groups=user.groups,
+                                                                   force_create=True)
                         if success_1 and success_2:
                             result_form = True
                 except Exception as ex:
@@ -427,15 +533,6 @@ def account_generate_passwords(request):
         'result_form': result_form
     }
     return render(request, 'account/account_generate_passwords.html', context)
-
-
-
-
-
-
-
-
-
 
 
 # Application

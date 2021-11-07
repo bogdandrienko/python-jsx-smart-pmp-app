@@ -23,12 +23,21 @@ class CreateUserForm(UserCreationForm):
                              help_text='пример: bogdandrienko@gmail.com')
     is_staff = forms.BooleanField(label='Доступ к панели модерации', required=False,
                                   help_text='Поставьте галочку, если нужно разрешить доступ')
-    groups = forms.CharField(label='Доступ к панели модерации', required=False,
-                             help_text='В качестве разделителя используйте запятую, пример: "User, Moderator"')
+    group = forms.CharField(label='Группы пользователя', required=False,
+                            help_text='В качестве разделителя используйте запятую, пример: "User, Moderator"')
+    patronymic = forms.CharField(label='Отчество', required=False)
+    personnel_number = forms.CharField(label='Табельный номер', required=False)
+    subdivision = forms.CharField(label='Подразделение', required=False)
+    workshop_service = forms.CharField(label='Цех/Служба', required=False)
+    department_site = forms.CharField(label='Отдел/Участок', required=False)
+    position = forms.CharField(label='Должность', required=False)
+    category = forms.CharField(label='Категория', required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'is_staff', 'groups')
+        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'is_staff', 'group',
+                  'patronymic', 'personnel_number', 'subdivision', 'workshop_service', 'department_site', 'position',
+                  'category')
 
 
 class CreateUsersForm(forms.Form):
@@ -59,6 +68,7 @@ class ChangeUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('password1', 'password2', 'first_name', 'last_name', 'email', 'is_staff', 'groups')
+
 
 # class ChangeUserForm(UserCreationForm):
 #     """

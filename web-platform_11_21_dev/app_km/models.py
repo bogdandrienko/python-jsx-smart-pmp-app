@@ -9,19 +9,24 @@ class AccountDataModel(models.Model):
     """
     Account Data Model
     """
-    # Связанное поле
+    # Foreign key
     username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, editable=True, default=None,
                                  verbose_name='Имя пользователя', blank=True)
 
-    # Основное
+    # First data account
     user_iin = models.IntegerField('ИИН пользователя', unique=True, blank=True)
     password = models.SlugField(max_length=64, verbose_name='пароль', blank=True)
     firstname = models.TextField('Имя', blank=True)
     lastname = models.TextField('Фамилия', blank=True)
     patronymic = models.TextField('Отчество', blank=True)
+    personnel_number = models.TextField('Табельный номер', blank=True)
+    subdivision = models.TextField('Подразделение', blank=True)
+    workshop_service = models.TextField('Цех/Служба', blank=True)
+    department_site = models.TextField('Отдел/Участок', blank=True)
     position = models.TextField('Должность', blank=True)
+    category = models.TextField('Категория', blank=True)
 
-    # Вторичное
+    # Second data account
     education = models.TextField('Образование', blank=True)
     achievements = models.TextField('Достижения', blank=True)
     biography = models.TextField('Биография', blank=True)

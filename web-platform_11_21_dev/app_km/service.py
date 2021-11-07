@@ -19,6 +19,7 @@ import hashlib
 from fastkml import kml
 from openpyxl.utils import get_column_letter
 from django.shortcuts import redirect
+from .models import AccountDataModel
 
 
 class AuthorizationClass:
@@ -65,15 +66,78 @@ class TimeUtils:
 
 
 class DjangoClass:
+    class UserAccountClass:
+        """
+        Основной аккаунт пользователя
+        """
+
+        def __init__(self, username, password, first_name='', last_name='', email='', is_staff=False,
+                     is_superuser=False):
+            self.username = username
+            self.password = password
+            self.first_name = first_name
+            self.last_name = last_name
+            self.email = email
+            self.is_staff = is_staff
+            self.is_superuser = is_superuser
+
+    class UserFirstDataAccountClass:
+        """
+        Первичная информация аккаунта пользователя
+        """
+
+        def __init__(self, username, user_iin='', password='', first_name='', last_name='', patronymic='',
+                     personnel_number='', subdivision='', workshop_service='', department_site='', position='',
+                     category=''):
+            self.username = username
+            self.user_iin = user_iin
+            self.password = password
+            self.first_name = first_name
+            self.last_name = last_name
+            self.patronymic = patronymic
+            self.personnel_number = personnel_number
+            self.subdivision = subdivision
+            self.workshop_service = workshop_service
+            self.department_site = department_site
+            self.position = position
+            self.category = category
+
+    class UserGroupClass:
+        """
+        Основные группы пользователя
+        """
+
+        def __init__(self, username, group='User'):
+            self.username = username
+            self.group = group
+
     @staticmethod
-    def create_account(username, password, email='', first_name='', last_name='', is_staff=False):
+    def create_main_account(user_account_class, username='', password='', email='', first_name='',
+                            last_name='', is_staff=False, is_superuser=False, force_change=False):
         try:
-            if username == 'Bogdan' or username == 'bogdan':
-                is_superuser = True
-            else:
-                is_superuser = False
+            if user_account_class:
+                username = user_account_class.username
+                password = user_account_class.password
+                email = user_account_class.email
+                first_name = user_account_class.first_name
+                last_name = user_account_class.last_name
+                is_staff = user_account_class.is_staff
+                is_superuser = user_account_class.is_superuser
             try:
-                User.objects.get(username=username)
+                user = User.objects.get(username=username)
+                if force_change and user:
+                    DjangoClass.change_main_account(
+                        user_account_class=False,
+                        username=username,
+                        password=password,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name,
+                        is_staff=is_staff,
+                        is_superuser=is_superuser,
+                        force_create=force_change
+                    )
+                    return True
                 return False
             except Exception as ex:
                 user = User.objects.create(
@@ -92,41 +156,21 @@ class DjangoClass:
             return False
 
     @staticmethod
-    def give_group_to_user(username: str, group='User', force_create=False):
-        user_group = None
+    def change_main_account(user_account_class, username: str, password: str, email='', first_name='',
+                            last_name='', is_staff=False, is_superuser=False, force_create=False):
         try:
-            user_group = Group.objects.get(name=group)
-        except Exception as ex:
-            if force_create:
-                user_group = Group.objects.create(name=group)
-        if user_group:
-            user_group.user_set.add(User.objects.get(username=username))
-            return True
-        return False
-
-    @staticmethod
-    def give_groups_to_user(username: str, groups: list, force_create=False):
-        if groups is None:
-            groups = ['User']
-        success = True
-        for group in groups:
-            try:
-                DjangoClass.give_group_to_user(username=username, group=group, force_create=force_create)
-            except Exception as ex:
-                success = False
-        return success
-
-    @staticmethod
-    def change_account(username, password, email='', first_name='', last_name='', is_staff=False, force_create=False):
-        try:
+            if user_account_class:
+                username = user_account_class.username
+                password = user_account_class.password
+                email = user_account_class.email
+                first_name = user_account_class.first_name
+                last_name = user_account_class.last_name
+                is_staff = user_account_class.is_staff
+                is_superuser = user_account_class.is_superuser
             if force_create:
                 user = User.objects.get_or_create(username=username)
             else:
                 user = User.objects.get(username=username)
-            if username == 'Bogdan' or username == 'bogdan':
-                is_superuser = True
-            else:
-                is_superuser = False
             user.username = username
             user.password = password
             user.email = email
@@ -140,20 +184,181 @@ class DjangoClass:
         except Exception as ex:
             return False
 
-    class UserObjectClass:
-        """
-        Класс, который содержит в себе пользователя, со значениями по строке
-        """
-        def __init__(self, username='', password='', first_name='', last_name='', email='', is_staff='', groups=None):
-            if groups is None:
-                groups = ['']
-            self.username = username
-            self.password = password
-            self.first_name = first_name
-            self.last_name = last_name
-            self.email = email
-            self.is_staff = is_staff
-            self.groups = groups
+    @staticmethod
+    def set_user_group(user_group_class, username='', group='User', force_create=False):
+        try:
+            success = True
+            if user_group_class:
+                username = user_group_class.username
+                group = user_group_class.group
+            try:
+                group = [x.strip() for x in group.split(',') if len(x) > 1]
+            except Exception as ex:
+                group = [group]
+            for grp in group:
+                try:
+                    if force_create:
+                        user_group = Group.objects.get_or_create(name=grp)
+                    else:
+                        user_group = Group.objects.get(name=grp)
+                    user_group[0].user_set.add(User.objects.get(username=username))
+                except Exception as ex:
+                    success = False
+            return success
+        except Exception as ex:
+            return False
+
+    @staticmethod
+    def create_main_data_account(user_account_class: UserAccountClass, user_group_class: UserGroupClass, username='',
+                                 password='', email='', first_name='', last_name='', is_staff=False,
+                                 is_superuser=False, group='User'):
+        try:
+            if user_account_class:
+                success_1 = DjangoClass.create_main_account(
+                    user_account_class=user_account_class,
+                    force_change=False
+                )
+            else:
+                success_1 = DjangoClass.create_main_account(
+                    user_account_class=False,
+                    username=username,
+                    password=password,
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_staff=is_staff,
+                    is_superuser=is_superuser,
+                    force_change=False
+                )
+            if success_1:
+                if user_group_class:
+                    success_2 = DjangoClass.set_user_group(
+                        user_group_class=user_group_class,
+                        force_create=True
+                    )
+                else:
+                    success_2 = DjangoClass.set_user_group(
+                        user_group_class=False,
+                        username=username,
+                        group=group,
+                        force_create=True
+                    )
+                if success_1 and success_2:
+                    return True
+            return False
+        except Exception as ex:
+            return False
+
+    @staticmethod
+    def create_first_data_account(user_first_data_account_class, username='', user_iin='', password='', first_name='',
+                                  last_name='', patronymic='', personnel_number='', subdivision='', workshop_service='',
+                                  department_site='', position='', category='', force_change=False):
+        try:
+            if user_first_data_account_class:
+                username = user_first_data_account_class.username
+                user_iin = user_first_data_account_class.user_iin
+                password = user_first_data_account_class.password
+                first_name = user_first_data_account_class.first_name
+                last_name = user_first_data_account_class.last_name
+                patronymic = user_first_data_account_class.patronymic
+                personnel_number = user_first_data_account_class.personnel_number
+                subdivision = user_first_data_account_class.subdivision
+                workshop_service = user_first_data_account_class.workshop_service
+                department_site = user_first_data_account_class.department_site
+                position = user_first_data_account_class.position
+                category = user_first_data_account_class.category
+            try:
+                user = AccountDataModel.objects.get(username=User.objects.get(username=username))
+                if force_change and user:
+                    DjangoClass.change_first_data_account(
+                        user_first_data_account_class=False,
+                        username=username,
+                        user_iin=user_iin,
+                        password=password,
+                        first_name=first_name,
+                        last_name=last_name,
+                        patronymic=patronymic,
+                        personnel_number=personnel_number,
+                        subdivision=subdivision,
+                        workshop_service=workshop_service,
+                        department_site=department_site,
+                        position=position,
+                        category=category
+                    )
+                    print('try')
+                    return True
+                print('try')
+                return False
+            except Exception as ex:
+                print('create data model')
+                username_obj = User.objects.get(username=username)
+                print(username_obj)
+                user = AccountDataModel.objects.create(
+                    username=username_obj,
+                    user_iin=user_iin,
+                    password=password,
+                    # firstname=first_name,
+                    # lastname=last_name,
+                    # patronymic=patronymic,
+                    # personnel_number=personnel_number,
+                    # subdivision=subdivision,
+                    # workshop_service=workshop_service,
+                    # department_site=department_site,
+                    # position=position,
+                    # category=category
+                )
+                user.save()
+                return True
+        except Exception as ex:
+            return False
+
+    @staticmethod
+    def change_first_data_account(user_first_data_account_class, username='', user_iin='', password='', first_name='',
+                                  last_name='', patronymic='', personnel_number='', subdivision='', workshop_service='',
+                                  department_site='', position='', category='', force_create=False):
+        try:
+            if user_first_data_account_class:
+                username = user_first_data_account_class.username
+                user_iin = user_first_data_account_class.user_iin
+                password = user_first_data_account_class.password
+                first_name = user_first_data_account_class.first_name
+                last_name = user_first_data_account_class.last_name
+                patronymic = user_first_data_account_class.patronymic
+                personnel_number = user_first_data_account_class.personnel_number
+                subdivision = user_first_data_account_class.subdivision
+                workshop_service = user_first_data_account_class.workshop_service
+                department_site = user_first_data_account_class.department_site
+                position = user_first_data_account_class.position
+                category = user_first_data_account_class.category
+            if force_create:
+                user = AccountDataModel.objects.get_or_create(username=User.objects.get(username=username))
+            else:
+                user = AccountDataModel.objects.get(username=User.objects.get(username=username))
+            user.username = username
+            user.user_iin = user_iin
+            user.password = password
+            user.firstname = first_name
+            user.lastname = last_name
+            user.patronymic = patronymic
+            user.personnel_number = personnel_number
+            user.subdivision = subdivision
+            user.workshop_service = workshop_service
+            user.department_site = department_site
+            user.position = position
+            user.category = category
+            user.save()
+            return True
+        except Exception as ex:
+            return False
+        pass
+
+    @staticmethod
+    def create_second_data_account():
+        pass
+
+    @staticmethod
+    def change_second_data_account():
+        pass
 
 
 def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', _length=8):

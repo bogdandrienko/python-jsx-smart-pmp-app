@@ -43,17 +43,11 @@
                 <p class="lead">Ниже расположены данные, соответствующие текущему значению.</p>
                 <div class="d-block">
                     <div class="border-dark table-bordered">
-                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-lg table-sm">
+                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
                             <thead>
                                 <tr>
                                     {% for arr_2 in data.0 %}
-                                        {% if forloop.counter == 2 %}
-                                            <th width="480">{{ arr_2 }}</th>
-                                        {% elif forloop.counter == 3 %}
-                                            <th width="480">{{ arr_2 }}</th>
-                                        {% else %}
-                                            <th>{{ arr_2 }}</th>
-                                        {% endif %}
+                                        <th>{{ arr_2 }}</th>
                                     {% endfor %}
                                 </tr>
                             </thead>
