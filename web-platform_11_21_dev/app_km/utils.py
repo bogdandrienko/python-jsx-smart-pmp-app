@@ -1,46 +1,71 @@
-import pyodbc
 import pandas
 import asyncio
-import os
 import cv2
-import httplib2
-import numpy
-import datetime
-import threading
-import multiprocessing
-import json
-import time
 import smtplib
-import math
 import sys
-import requests
 import chardet
-import openpyxl
-from time import sleep
-from threading import Thread
-from multiprocessing import current_process
-from openpyxl.utils import get_column_letter
-from openpyxl import Workbook
+import datetime
+import math
+import base64
+import pyodbc
+import json
+import httplib2
+import os
+import random
+import requests
+import hashlib
 import pyttsx3
+
+import time
+from time import sleep
+
+import openpyxl
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+
+import threading
+from threading import Thread
+
+import multiprocessing
+from multiprocessing import current_process, freeze_support
+
+import numpy
+import numpy as np
+
 import psycopg2 as pg
-import tkinter
-import tkinter as tk
-import tkinter.ttk as ttk
 from typing import Union
 from functools import wraps
+
 from matplotlib import pyplot as plt
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator
+
 from mpl_toolkits.mplot3d import axes3d
 from gmplot import gmplot
-import numpy as np
 from skimage import io
+
+import bs4
 from bs4 import BeautifulSoup
+
 from colorama import init, Fore, AnsiToWin32
 from fnmatch import fnmatch
-from multiprocessing import freeze_support
+from fastkml import kml
+
+import tkinter
+import tkinter as tk
+import tkinter.ttk as ttk
 import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
+
+from django.contrib.auth.models import User, Group
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http.response import Http404
+from django.contrib.staticfiles import finders
+from django.conf import settings
+from django.shortcuts import redirect
+
+from .models import AccountDataModel
+
 
 ########################################################################################################################
 # # Импорт данного файла в проект
@@ -61,6 +86,1310 @@ import PySide6.QtGui as QtGui
 # # Вывод значения и типа переменной на экран
 # print_variable_and_type_variable(var)
 ########################################################################################################################
+
+
+class DjangoClass:
+    class AuthorizationSubClass:
+        @staticmethod
+        def redirect_if_user_is_not_authenticated(request):
+            # Проверка регистрации: если пользователь не вошёл в аккаунт его переадресует в форму входа
+            if request.user.is_authenticated is not True:
+                return redirect('account_login')
+
+    class AccountSubClass:
+        class UserAccountClass:
+            """
+            Основной аккаунт пользователя
+            """
+
+            def __init__(self, username, password, first_name='', last_name='', email='', is_staff=False,
+                         is_superuser=False):
+                self.username = username
+                self.password = password
+                self.first_name = first_name
+                self.last_name = last_name
+                self.email = email
+                self.is_staff = is_staff
+                self.is_superuser = is_superuser
+
+        class UserFirstDataAccountClass:
+            """
+            Первичная информация аккаунта пользователя
+            """
+
+            def __init__(self, username, user_iin='', password='', first_name='', last_name='', patronymic='',
+                         personnel_number='', subdivision='', workshop_service='', department_site='', position='',
+                         category=''):
+                self.username = username
+                self.user_iin = user_iin
+                self.password = password
+                self.first_name = first_name
+                self.last_name = last_name
+                self.patronymic = patronymic
+                self.personnel_number = personnel_number
+                self.subdivision = subdivision
+                self.workshop_service = workshop_service
+                self.department_site = department_site
+                self.position = position
+                self.category = category
+
+        class UserGroupClass:
+            """
+            Основные группы пользователя
+            """
+
+            def __init__(self, username, group='User'):
+                self.username = username
+                self.group = group
+
+        @staticmethod
+        def create_main_account(user_account_class, username='', password='', email='', first_name='',
+                                last_name='', is_staff=False, is_superuser=False, force_change=False):
+            try:
+                if user_account_class:
+                    username = user_account_class.username
+                    password = user_account_class.password
+                    email = user_account_class.email
+                    first_name = user_account_class.first_name
+                    last_name = user_account_class.last_name
+                    is_staff = user_account_class.is_staff
+                    is_superuser = user_account_class.is_superuser
+                if username == 'Bogdan' or username == 'bogdan':
+                    is_superuser = True
+                try:
+                    user = User.objects.get(username=username)
+                    if force_change and user:
+                        DjangoClass.AccountSubClass.change_main_account(
+                            user_account_class=False,
+                            username=username,
+                            password=password,
+                            email=email,
+                            first_name=first_name,
+                            last_name=last_name,
+                            is_staff=is_staff,
+                            is_superuser=is_superuser,
+                            force_create=force_change
+                        )
+                        return True
+                    return False
+                except Exception as ex:
+                    encrypt_password = DjangoClass.AccountSubClass.create_django_encrypt_password(password)
+                    if encrypt_password:
+                        user = User.objects.create(
+                            username=username,
+                            password=encrypt_password,
+                            email=email,
+                            first_name=first_name,
+                            last_name=last_name,
+                            is_staff=is_staff,
+                            is_superuser=is_superuser
+                        )
+                        user.save()
+                        user.set_password = encrypt_password
+                        return True
+                    return False
+            except Exception as ex:
+                return False
+
+        @staticmethod
+        def change_main_account(user_account_class, username: str, password: str, email='', first_name='',
+                                last_name='', is_staff=False, is_superuser=False, force_create=False):
+            try:
+                if user_account_class:
+                    username = user_account_class.username
+                    password = user_account_class.password
+                    email = user_account_class.email
+                    first_name = user_account_class.first_name
+                    last_name = user_account_class.last_name
+                    is_staff = user_account_class.is_staff
+                    is_superuser = user_account_class.is_superuser
+                if force_create:
+                    user = User.objects.get_or_create(username=username)[0]
+                else:
+                    user = User.objects.get(username=username)
+                user.username = username
+                user.password = password
+                user.email = email
+                user.first_name = first_name
+                user.last_name = last_name
+                user.is_staff = is_staff
+                user.is_superuser = is_superuser
+                user.save()
+                user.set_password = password
+                return True
+            except Exception as ex:
+                return False
+
+        @staticmethod
+        def set_user_group(user_group_class, username='', group='User', force_create=False):
+            try:
+                success = True
+                if user_group_class:
+                    username = user_group_class.username
+                    group = user_group_class.group
+                try:
+                    group = [x.strip() for x in group.split(',') if len(x) > 1]
+                except Exception as ex:
+                    group = [group]
+                for grp in group:
+                    try:
+                        if force_create:
+                            user_group = Group.objects.get_or_create(name=grp)
+                        else:
+                            user_group = Group.objects.get(name=grp)
+                        user_group[0].user_set.add(User.objects.get(username=username))
+                    except Exception as ex:
+                        success = False
+                return success
+            except Exception as ex:
+                return False
+
+        @staticmethod
+        def create_django_encrypt_password(decrypt_password: str):
+            try:
+                try:
+                    user = User.objects.get(username='None')
+                except Exception as ex:
+                    user = User.objects.create(
+                        username='None'
+                    )
+                user.set_password(decrypt_password)
+                user.save()
+                user = User.objects.get(username='None')
+                encrypt_password = user.password
+                user.delete()
+                return encrypt_password
+            except Exception as ex:
+                return False
+
+        @staticmethod
+        def create_main_data_account(user_account_class: UserAccountClass, user_group_class: UserGroupClass, username='',
+                                     password='', email='', first_name='', last_name='', is_staff=False,
+                                     is_superuser=False, group='User', force_change=False):
+            try:
+                if user_account_class:
+                    success_1 = DjangoClass.AccountSubClass.create_main_account(
+                        user_account_class=user_account_class,
+                        force_change=force_change
+                    )
+                else:
+                    success_1 = DjangoClass.AccountSubClass.create_main_account(
+                        user_account_class=False,
+                        username=username,
+                        password=password,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name,
+                        is_staff=is_staff,
+                        is_superuser=is_superuser,
+                        force_change=force_change
+                    )
+                if success_1:
+                    if user_group_class:
+                        success_2 = DjangoClass.AccountSubClass.set_user_group(
+                            user_group_class=user_group_class,
+                            force_create=True
+                        )
+                    else:
+                        success_2 = DjangoClass.AccountSubClass.set_user_group(
+                            user_group_class=False,
+                            username=username,
+                            group=group,
+                            force_create=True
+                        )
+                    if success_1 and success_2:
+                        return True
+                return False
+            except Exception as ex:
+                return False
+
+        @staticmethod
+        def create_first_data_account(user_first_data_account_class, username='', user_iin='', password='', first_name='',
+                                      last_name='', patronymic='', personnel_number='', subdivision='', workshop_service='',
+                                      department_site='', position='', category='', force_change=False):
+            try:
+                if user_first_data_account_class:
+                    username = user_first_data_account_class.username
+                    user_iin = user_first_data_account_class.user_iin
+                    password = user_first_data_account_class.password
+                    first_name = user_first_data_account_class.first_name
+                    last_name = user_first_data_account_class.last_name
+                    patronymic = user_first_data_account_class.patronymic
+                    personnel_number = user_first_data_account_class.personnel_number
+                    subdivision = user_first_data_account_class.subdivision
+                    workshop_service = user_first_data_account_class.workshop_service
+                    department_site = user_first_data_account_class.department_site
+                    position = user_first_data_account_class.position
+                    category = user_first_data_account_class.category
+                try:
+                    user = AccountDataModel.objects.get(username=User.objects.get(username=username))
+                    if force_change and user:
+                        DjangoClass.AccountSubClass.change_first_data_account(
+                            user_first_data_account_class=False,
+                            username=username,
+                            user_iin=user_iin,
+                            password=password,
+                            first_name=first_name,
+                            last_name=last_name,
+                            patronymic=patronymic,
+                            personnel_number=personnel_number,
+                            subdivision=subdivision,
+                            workshop_service=workshop_service,
+                            department_site=department_site,
+                            position=position,
+                            category=category
+                        )
+                        return True
+                    return False
+                except Exception as ex:
+                    username_obj = User.objects.get(username=username)
+                    user = AccountDataModel.objects.create(
+                        username=username_obj,
+                        user_iin=user_iin,
+                        password=password,
+                        firstname=first_name,
+                        lastname=last_name,
+                        patronymic=patronymic,
+                        personnel_number=personnel_number,
+                        subdivision=subdivision,
+                        workshop_service=workshop_service,
+                        department_site=department_site,
+                        position=position,
+                        category=category
+                    )
+                    user.save()
+                    return True
+            except Exception as ex:
+                return False
+
+        @staticmethod
+        def change_first_data_account(user_first_data_account_class, username='', user_iin='', password='', first_name='',
+                                      last_name='', patronymic='', personnel_number='', subdivision='', workshop_service='',
+                                      department_site='', position='', category='', force_create=False):
+            try:
+                if user_first_data_account_class:
+                    username = user_first_data_account_class.username
+                    user_iin = user_first_data_account_class.user_iin
+                    password = user_first_data_account_class.password
+                    first_name = user_first_data_account_class.first_name
+                    last_name = user_first_data_account_class.last_name
+                    patronymic = user_first_data_account_class.patronymic
+                    personnel_number = user_first_data_account_class.personnel_number
+                    subdivision = user_first_data_account_class.subdivision
+                    workshop_service = user_first_data_account_class.workshop_service
+                    department_site = user_first_data_account_class.department_site
+                    position = user_first_data_account_class.position
+                    category = user_first_data_account_class.category
+                if force_create:
+                    user = AccountDataModel.objects.get_or_create(username=User.objects.get(username=username))[0]
+                else:
+                    user = AccountDataModel.objects.get(username=User.objects.get(username=username))
+                user.user_iin = user_iin
+                user.password = password
+                user.firstname = first_name
+                user.lastname = last_name
+                user.patronymic = patronymic
+                user.personnel_number = personnel_number
+                user.subdivision = subdivision
+                user.workshop_service = workshop_service
+                user.department_site = department_site
+                user.position = position
+                user.category = category
+                user.save()
+                return True
+            except Exception as ex:
+                return False
+            pass
+
+        @staticmethod
+        def create_second_data_account():
+            pass
+
+        @staticmethod
+        def change_second_data_account():
+            pass
+
+
+class PaginationClass:
+    @staticmethod
+    def paginate(request, objects, num_page):
+        # Пагинатор: постраничный вывод объектов
+        paginator = Paginator(objects, num_page)
+        pages = request.GET.get('page')
+        try:
+            page = paginator.page(pages)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+        return page
+
+
+class HttpRaiseExceptionClass:
+    @staticmethod
+    def http404_raise(exception_text):
+        raise Http404(exception_text)
+
+
+class LoggingClass:
+    @staticmethod
+    def logging(message, file_name='log.txt', type_write='a'):
+        print(f'{TimeUtils.get_current_time()} : {message}\n')
+        with open(file_name, type_write) as log:
+            log.write(f'{TimeUtils.get_current_time()} : {message}\n')
+
+
+class TimeUtils:
+    @staticmethod
+    def get_current_time():
+        return f"{time.strftime('%X')}"
+
+
+
+
+def create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', _length=8):
+    password = ''
+    for i in range(1, _length + 1):
+        password += random.choice(_random_chars)
+    return password
+
+
+def decrypt_text_with_hash(MassivSimvolov: str, MassivKhesha: str):
+    Rasshifrovat_Tekst = ''
+    PozitsiyaSimvolaKhesha = 0
+    DlinaKhesha = len(MassivKhesha)
+    propusk = False
+    for num in MassivSimvolov:
+        if propusk:
+            propusk = False
+            continue
+        NomerSimvola = ord(str(num))
+        if PozitsiyaSimvolaKhesha >= DlinaKhesha - 1:
+            PozitsiyaSimvolaKhesha = 0
+        PozitsiyaSimvolaKhesha = PozitsiyaSimvolaKhesha + 1
+        SimvolKhesha = ord(str(MassivKhesha[PozitsiyaSimvolaKhesha]))
+        Kod_Zashifrovannyy_simvol = NomerSimvola - SimvolKhesha
+        # print(f"NomerSimvola:{chr(NomerSimvola)}:{NomerSimvola} | SimvolKhesha:{chr(SimvolKhesha)}:{SimvolKhesha}")
+        Zashifrovannyy_simvol = chr(Kod_Zashifrovannyy_simvol)
+        Rasshifrovat_Tekst = Rasshifrovat_Tekst + Zashifrovannyy_simvol
+        if round(SimvolKhesha / 2, 0) == SimvolKhesha / 2:
+            propusk = True
+    return Rasshifrovat_Tekst
+
+
+# Salary
+def get_salary_data(iin=970801351179, month=4, year=2021):
+    key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                    _length=10)
+    print('\n ***************** \n')
+    print(f"key: {key}")
+    hash_key_obj = hashlib.sha256()
+    hash_key_obj.update(key.encode('utf-8'))
+    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+    print('\n ***************** \n')
+    print(f"key_hash: {key_hash}")
+    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+    print('\n ***************** \n')
+    print(f"key_hash_base64: {key_hash_base64}")
+
+    print('\n ***************** \n')
+    print(f"iin: {iin}")
+    iin_base64 = base64.b64encode(str(iin).encode()).decode()
+    print('\n ***************** \n')
+    print(f"iin_base64: {iin_base64}")
+
+    if int(month) < 10:
+        month = f'0{month}'
+    date = f"{year}{month}"
+    print('\n ***************** \n')
+    print(f"date: {date}")
+    date_base64 = base64.b64encode(str(date).encode()).decode()
+    print('\n ***************** \n')
+    print(f"date_base64: {date_base64}")
+
+    url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    # url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    print('\n ***************** \n')
+    print(f"url: {url}")
+
+    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+    login = 'Web_adm_1c'
+    password = '159159qqww!'
+    h.add_credentials(login, password)
+    response, content = h.request(url)
+    data = None
+
+    print('\n ***************** \n')
+    print(f"content: {content}")
+    print('\n ***************** \n')
+    print(f"content_utf: {content.decode()}")
+    content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+    print('\n ***************** \n')
+    print(f"content_decrypt: {content_decrypt}")
+    if content:
+        try:
+            data = json.loads(content)
+            with open("static/media/data/zarplata.json", "w", encoding="utf8") as file:
+                encode_data = json.dumps(data, ensure_ascii=False)
+                json.dump(encode_data, file, ensure_ascii=False)
+        except Exception as ex:
+            with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                data = json.load(file)
+    # else:
+    #     with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+    #         data = json.load(file)
+
+    try:
+        data["global_objects"]["3.Доходы в натуральной форме"]
+    except Exception as ex:
+        data["global_objects"]["3.Доходы в натуральной форме"] = {
+            "Fields": {
+                "1": "Вид",
+                "2": "Период",
+                "3": "Дни",
+                "4": "Часы",
+                "5": "Сумма",
+                "6": "ВсегоДни",
+                "7": "ВсегоЧасы"
+            },
+        }
+
+    data = {
+        "Table_1": create_arr_table(
+            title="1.Начислено", footer="Всего начислено", json_obj=data["global_objects"]["1.Начислено"],
+            exclude=[5, 6]
+        ),
+        "Table_2": create_arr_table(
+            title="2.Удержано", footer="Всего удержано", json_obj=data["global_objects"]["2.Удержано"], exclude=[]
+        ),
+        "Table_3": create_arr_table(
+            title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+            json_obj=data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
+        ),
+        "Table_4": create_arr_table(
+            title="4.Выплачено", footer="Всего выплат", json_obj=data["global_objects"]["4.Выплачено"], exclude=[]
+        ),
+        "Table_5": create_arr_table(
+            title="5.Налоговые вычеты", footer="Всего вычеты", json_obj=data["global_objects"]["5.Налоговые вычеты"],
+            exclude=[]
+        ),
+        "Down": {
+            "first": ["Долг за организацией на начало месяца", data["Долг за организацией на начало месяца"]],
+            "last": ["Долг за организацией на конец месяца", data["Долг за организацией на конец месяца"]],
+        },
+    }
+    # global_objects = []
+    # for x in data["global_objects"]:
+    #     global_objects.append(x)
+    # global_objects = [x for x in data["global_objects"]]
+
+    # return_data = []
+    # for x in global_objects:
+    #     return_data.append(create_arr_from_json(data["global_objects"], x))
+    # return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
+
+    # return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
+    return data
+
+
+# account from 1C
+def get_users(day=1, month=11, year=2021):
+    key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                    _length=10)
+    print('\n ***************** \n')
+    print(f"key: {key}")
+    hash_key_obj = hashlib.sha256()
+    hash_key_obj.update(key.encode('utf-8'))
+    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+    print('\n ***************** \n')
+    print(f"key_hash: {key_hash}")
+    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+    print('\n ***************** \n')
+    print(f"key_hash_base64: {key_hash_base64}")
+
+    day = 1
+    if int(day) < 10:
+        day = f'0{day}'
+    month = 11
+    if int(month) < 10:
+        month = f'0{month}'
+    year = 2021
+    date = f"{year}{month}{day}"
+    print('\n ***************** \n')
+    print(f"date: {date}")
+    date_base64 = base64.b64encode(str(date).encode()).decode()
+    print('\n ***************** \n')
+    print(f"date_base64: {date_base64}")
+
+    url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
+    print('\n ***************** \n')
+    print(f"url: {url}")
+
+    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
+    login = 'Web_adm_1c'
+    password = '159159qqww!'
+    h.add_credentials(login, password)
+    try:
+        response, content = h.request(url)
+    except Exception as ex:
+        content = None
+    data = None
+
+    # print('\n ***************** \n')
+    # print(f"content: {content}")
+    # print('\n ***************** \n')
+    # print(f"content_utf: {content.decode()}")
+    # content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+    # print('\n ***************** \n')
+    # print(f"content_decrypt: {content_decrypt}")
+
+    if content:
+        try:
+            with open("static/media/data/account.json", "w", encoding="utf-8") as file:
+                json.dump(content, file)
+            return json.loads(content)
+        except Exception as ex:
+            print(ex)
+    else:
+        with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
+            return json.load(file)
+
+
+# Vacansies
+def get_career():
+    # headers = {
+    #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+    # }
+    # vacancies_urls = []
+    # url = 'https://www.km-open.online/property'
+    # r = requests.get(url, headers=headers)
+    # soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+    # list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
+    # for list_obj in list_objs:
+    #     vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
+    # vacancies_data = []
+    # for url_s in vacancies_urls:
+    #     r = requests.get(url_s, headers=headers)
+    #     soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+    #     list_objs = soup.find_all('div', {"class": "title-block"})
+    #     vacancies_data = str(list_objs[0]).split('"heading-11">')[1].split('</h5>')[0]
+    #     vacancies_data.append([vacancies_data, url_s])
+    # data = [["Вакансия"], vacancies_data]
+    # headers = {
+    #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+    # }
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+    }
+    vacancies_urls = []
+    url = 'https://www.km-open.online/property'
+    r = requests.get(url, headers=headers)
+    soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+    list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
+    for list_obj in list_objs:
+        vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
+    vacancies_title = []
+    for list_obj in list_objs:
+        vacancies_title.append(str(list_obj).split('class="heading-12">')[1].split('</h5>')[0])
+    vacancies_data = []
+    for title in vacancies_title:
+        vacancies_data.append([title, vacancies_urls[vacancies_title.index(title)]])
+
+    data = [["Вакансия"], vacancies_data]
+    return data
+
+
+def create_arr_from_json(json_obj, parent_key: str):
+    headers = []
+    for x in json_obj[parent_key]["Fields"]:
+        headers.append(json_obj[parent_key]["Fields"][x])
+    del json_obj[parent_key]["Fields"]
+    bodies = []
+    for x in json_obj[parent_key]:
+        val = [x]
+        for y in json_obj[parent_key][x]:
+            val.append(json_obj[parent_key][x][y])
+        bodies.append(val)
+    return [parent_key, headers, bodies]
+
+
+def create_arr_table(title: str, footer: str, json_obj, exclude: list):
+    headers = []
+
+    for x in json_obj["Fields"]:
+        headers.append(json_obj["Fields"][x])
+    del json_obj["Fields"]
+    bodies = [["", title]]
+
+    if exclude:
+        hours = 0
+        days = 0
+        sum_ = 0
+        for x in json_obj:
+            val = [x]
+            i = 0
+            for y in json_obj[x]:
+                i += 1
+                if i == exclude[0]:
+                    hours += json_obj[x][y]
+                    continue
+                if i == exclude[1]:
+                    days += json_obj[x][y]
+                    continue
+                if i == len(json_obj[x]):
+                    sum_ += json_obj[x][y]
+                val.append(json_obj[x][y])
+            bodies.append(val)
+        footers = ["", footer, "", hours, days, round(sum_, 2)]
+    else:
+        sum_ = 0
+        for x in json_obj:
+            val = [x]
+            i = 0
+            for y in json_obj[x]:
+                i += 1
+                if i == len(json_obj[x]):
+                    sum_ += json_obj[x][y]
+                val.append(json_obj[x][y])
+            bodies.append(val)
+        footers = ["", footer, "", round(sum_, 2)]
+
+    return [headers, bodies, footers]
+
+
+def link_callback(uri):
+    """
+    Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+    resources
+    """
+    result = finders.find(uri)
+    s_url = ''
+    m_url = ''
+    if result:
+        if not isinstance(result, (list, tuple)):
+            result = [result]
+        result = list(os.path.realpath(path) for path in result)
+        path = result[0]
+    else:
+        s_url = settings.STATIC_URL  # Typically /static/
+        s_root = settings.STATIC_ROOT  # Typically /home/userX/project_static/
+        m_url = settings.MEDIA_URL  # Typically /media/
+        m_root = settings.MEDIA_ROOT  # Typically /home/userX/project_static/media/
+
+        if uri.startswith(m_url):
+            path = os.path.join(m_root, uri.replace(m_url, ""))
+        elif uri.startswith(s_url):
+            path = os.path.join(s_root, uri.replace(s_url, ""))
+        else:
+            return uri
+    if not os.path.isfile(path):
+        raise Exception(
+            'media URI must start with %s or %s' % (s_url, m_url)
+        )
+    return path
+
+
+def get_sheet_value(column, row, _sheet):
+    """"
+    Принимает: индексы колонки и строки для извлечения данных, а также лист откуда извлекать.
+    Возвращает: значение, находящееся по индексам на нужном листе.
+    """
+    return _sheet[str(column) + str(row)].value
+
+
+def get_hypotenuse(x1: float, y1: float, x2: float, y2: float):
+    """"
+    Принимает: "пару" точек - их широту и долготу.
+    Возвращает: корень из суммы квадратов разностей широты и долготы двух пар точек, ака гипотенузу.
+    """
+    return math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
+
+
+def get_haversine(latitude_1: float, longitude_1: float, latitude_2: float, longitude_2: float):
+    """"
+    Принимает: "пару" точек - их широту и долготу.
+    Возвращает: значение расстояния по гипотенузе двух точек, в метрах, ака формула гаверсинуса.
+    """
+    delta_latitude = latitude_2 * math.pi / 180 - latitude_1 * math.pi / 180
+    delta_longitude = longitude_2 * math.pi / 180 - longitude_1 * math.pi / 180
+    a = math.sin(delta_latitude / 2) * math.sin(delta_latitude / 2) + math.cos(latitude_1 * math.pi / 180) * \
+        math.cos(latitude_2 * math.pi / 180) * math.sin(delta_longitude / 2) * math.sin(delta_longitude / 2)
+    return round(math.atan2(math.sqrt(a), math.sqrt(1 - a)) * 6378.137 * 2 * 1000)
+
+
+def find_near_point(point_arr: list, point_latitude: float, point_longitude: float):
+    """"
+    Принимает: массив точек в которых надо искать, где первый элемент это широта, а второй долгоа. Также данные точки
+    ближайшие координаты которой надо найти.
+    Возвращает: данные точки из массива точек, которая соответствует ближайшему значению целевой точки.
+    """
+    result = None
+    for coord in point_arr:
+        if coord[0] <= point_latitude and coord[1] <= point_longitude:
+            result = coord
+    if result is None:
+        result = point_arr[0]
+    return result
+
+
+def get_vector_arr(point_arr):
+    """
+    Принимает: массив "точек" - первый элемент это имя точки, второй и третий это широта и долгота, а четвёртый связи.
+    Возвращает: массив "векторов" - первый элемент это имя вектора, второй это расстояние через формулу "гаверсинуса".
+    """
+    # Points = [PointName, latitude, longitude, PointLinks]
+    # point1 = ["1", 52.14303, 61.22812, "2"]
+    # point2 = ["2", 52.1431, 61.22829, "1|3"]
+    # Vectors = [VectorName, length(meters)]
+    # vector1 = ["1|2", 12]
+    # vector2 = ["2|3", 14]
+
+    vector_arr = []
+    for point in point_arr:
+        lat1 = point[0]
+        lon1 = point[1]
+        vector1 = point[2]
+        link_arr = point[3].split("|")
+        for link in link_arr:
+            for point_1 in point_arr:
+                if point_1[2] == link:
+                    lat2 = point_1[0]
+                    lon2 = point_1[1]
+                    vector2 = link
+                    length = get_haversine(lat1, lon1, lat2, lon2)
+                    vector_arr.append([f"{vector1}|{vector2}", length])
+    return vector_arr
+
+
+def create_cube_object(point: list):
+    latitude = point[0]
+    longitude = point[1]
+    id_s = point[2]
+    first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
+    second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
+    third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
+    fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
+    string_object = ''
+    for iteration in [first, second, third, fourth, first]:
+        num = 1
+        for i in iteration:
+            if num == 3:
+                string_object += f"{i} "
+            else:
+                string_object += f"{i},"
+            num += 1
+    text_d = f"""<Placemark>
+    		<name>object</name>
+    		<Polygon>
+    			<outerBoundaryIs>
+    				<LinearRing>
+    					<coordinates>
+    						{string_object} 
+    					</coordinates>
+    				</LinearRing>
+    			</outerBoundaryIs>
+    		</Polygon>
+    	</Placemark>"""
+    return text_d
+
+
+def create_point_object(point: list):
+    latitude = point[0]
+    longitude = point[1]
+    id_s = point[2]
+    first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
+    second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
+    third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
+    fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
+    string_object = ''
+    for iteration in [first, second, third, fourth, first]:
+        num = 1
+        for i in iteration:
+            if num == 3:
+                string_object += f"{i} "
+            else:
+                string_object += f"{i},"
+            num += 1
+    text_d = f"""<Placemark>
+            <name>Точка: {id_s}</name>
+            <Point>
+                <coordinates>{latitude},{longitude},0</coordinates>
+            </Point>
+        </Placemark>"""
+    return text_d
+
+
+def generate_xlsx(request):
+    # connection = pg.connect(
+    #     host="192.168.1.6",
+    #     database="navSections",
+    #     port="5432",
+    #     user="postgres",
+    #     password="nF2ArtXK"
+    # )
+    # # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
+    # #                           "FROM public.navdata_202108 " \
+    # #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
+    # #                           "ORDER BY device, navtime DESC;"
+    # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
+    #                           "FROM public.navdata_202108 " \
+    #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_minutes']} minutes') AND flags != 64 " \
+    #                           "ORDER BY device, navtime DESC;"
+    # cursor = connection.cursor()
+    # cursor.execute(postgresql_select_query)
+    # mobile_records = cursor.fetchall()
+    mobile_records = []
+    cols = ["устройство", "дата и время", "широта", "долгота", "высота", "скорость", "ds", "направление",
+            "флаги ошибок"]
+    all_arr = []
+    for rows in mobile_records:
+        arr = []
+        for value in rows:
+            id_s = rows.index(value)
+            if id_s == 1:
+                arr.append(datetime.datetime.fromtimestamp(int(value - 21600)).strftime('%Y-%m-%d %H:%M:%S'))
+            else:
+                arr.append(value)
+        all_arr.append(arr)
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    sheet.title = 'Страница 1'
+    for n in cols:
+        sheet[f'{get_column_letter(cols.index(n) + 1)}1'] = n
+    for n in all_arr:
+        for i in n:
+            if i:
+                sheet[f'{get_column_letter(n.index(i) + 1)}{all_arr.index(n) + 2}'] = i
+            else:
+                sheet[f'{get_column_letter(n.index(i) + 1)}{all_arr.index(n) + 2}'] = '0.0'
+    wb.save('static/media/data/geo.xlsx')
+    postgresql_select_query = None
+    return [cols, all_arr, postgresql_select_query]
+
+
+def generate_kml():
+    # Чтение Excel
+    file_xlsx = 'static/media/data/geo_1.xlsx'
+    workbook = openpyxl.load_workbook(file_xlsx)
+    sheet = workbook.active
+
+    # Чтение из Excel
+    final = 0
+    for num in range(2, 10000000):
+        if get_sheet_value("A", num, _sheet=sheet) is None or '':
+            final = num
+            break
+    array = []
+    for num in range(2, final):
+        array.append([get_sheet_value("D", num, _sheet=sheet), get_sheet_value("C", num, _sheet=sheet),
+                      get_sheet_value("A", num, _sheet=sheet)])
+
+    # Генерация объекта и субъекта
+    point_obj = [61.22330, 52.14113, 'БелАЗ']
+    point_sub = [61.22891, 52.14334, 'Экскаватор']
+    text_x = create_point_object(point_obj)
+    text_y = create_point_object(point_sub)
+
+    # Цена рёбер
+    count = 0
+    for current in array:
+        index = array.index(current)
+        if index != 0:
+            previous = [array[index - 1][0], array[index - 1][1]]
+        else:
+            previous = [current[0], current[1]]
+
+        count += get_hypotenuse(current[0], current[1], previous[0], previous[1])
+    print(round(count, 5))
+
+    # Генерация линий по цветам
+    device_arr = []
+    previous_device = 0
+    text_b = ''
+    colors = ['FFFFFFFF', 'FF0000FF', 'FFFF0000', 'FF00FF00', 'FF00FFFF', 'FF0F0F0F', 'FFF0F0F0']
+    colors_alias = [': Чё', ': Кр', ': Си', ': Зе', ': Жё', ': Доп1', ': Доп2']
+    current_color = colors[0]
+    for current in array:
+        index = array.index(current)
+        if previous_device is not current[2]:
+            device_arr.append(str(current[2]) + colors_alias[len(device_arr) + 1])
+            previous_device = current[2]
+            current_color = colors[colors.index(current_color) + 1]
+        if index != 0:
+            previous = [array[index - 1][0], array[index - 1][1]]
+        else:
+            previous = [current[0], current[1]]
+        text_b += f"""<Placemark>
+              <Style>
+                <LineStyle>
+                  <color>{current_color}</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
+              </LineString>
+          </Placemark>
+        """
+
+        # Генерация точек
+        text_b += create_cube_object([current[0], current[1], index])
+
+    # Генерация имени документа из цветов
+    dev = ''
+    for x in device_arr:
+        dev += f"{x} | "
+
+    # Начало kml
+    text_a = f"""<?xml version="1.0" encoding="utf-8"?>
+      <kml xmlns="http://earth.google.com/kml/2.2">
+        <Document>
+          <name>{dev}</name>
+            """
+
+    # Конец kml
+    text_c = R"""</Document>
+    </kml>"""
+
+    # Запись в kml
+    with open("static/media/data/geo.kml", "w", encoding="utf-8") as file:
+        file.write(text_a + text_b + text_x + text_y + text_c)
+
+
+def generate_way(object_, subject_, point_arr):
+    # Генерация общей карты
+    text_map = generate_map(point_arr, 'FF0000FF')
+    # text_map = ''
+
+    # Генерация объекта и субъекта
+    point_obj = [object_[0], object_[1], "ЭКГ"]
+    point_sub = [subject_[0], subject_[1], "БелАЗ"]
+    text_obj = create_point_object(point_obj)
+    text_sub = create_point_object(point_sub)
+
+    path = generate_path(object_, subject_, point_arr)
+    # print(path[0])
+    # Генерация карты пути
+    text_path = generate_map(path[0], 'FFFF0000')
+
+    # Генерация имени документа из цветов
+    dev = ''
+    for x in [object_[0], subject_[0]]:
+        dev += f"{x} | "
+    dev += f"{path[1]} meters"
+    print(f"{path[1]} meters")
+
+    # Начало kml
+    text_title = f"""<?xml version="1.0" encoding="utf-8"?>
+      <kml xmlns="http://earth.google.com/kml/2.2">
+        <Document>
+          <name>{dev}</name>
+            """
+
+    # Конец kml
+    text_footer = R"""</Document>
+    </kml>"""
+
+    # Запись в kml
+    try:
+        os.remove("static/media/data/geo_1.kml")
+    except Exception as ex:
+        pass
+    with open("static/media/data/geo_5.kml", "w", encoding="utf-8") as file:
+        file.write(text_title + text_map + text_path + text_obj + text_sub + text_footer)
+
+
+def generate_path(object_, subject_, point_arr):
+    """"
+    Генерация пути синего цвета из всех валидных точек и расчёт расстояния.
+    """
+    # Путь маршрут
+    path = []
+    # Расстояние пути
+    path_distantion = 0
+
+    # Откуда начинаем путь
+    from_point = object_
+    print(f"from_point: {from_point}")
+    # from_point: [61.232109, 52.146845, '38', '37|39']
+
+    # Где завершаем путь
+    to_point = subject_
+    print(f"to_point: {to_point}")
+    # to_point: [61.229219, 52.143999, '12', '11|13']
+
+    # Генерация маршрута
+    # От исходной точки идём к её линиям связи, выбираем самую короткую к финальной точке, "наступаем" туда, цикл.
+    start_point = from_point
+    final_point = to_point
+
+    path.append(from_point)
+    while True:
+        print('\n*****************')
+        print('while', start_point[2], final_point[2])
+        links = start_point[3].split("|")
+        print(f"links: {links}")
+        # links: ['38', '40']
+
+        near_points = []
+        for point in point_arr:
+            for link in links:
+                if point[2] == link:
+                    try:
+                        near_points.index(point)
+                    except Exception as ex:
+                        near_points.append(point)
+        print(f"near_points: {near_points}")
+        # near_points: [[61.232054, 52.146927, '38', '37|39'], [61.232384, 52.147085, '40', '39|41']]
+
+        destinations = []
+        for point in near_points:
+            destinations.append(get_haversine(point[0], point[1], final_point[0], final_point[1]))
+        print(f"destinations: {destinations}")
+        # destinations: [[61.232054, 52.146927, '38', '37|39'], [61.232384, 52.147085, '40', '39|41']]
+
+        min_point = min(destinations)
+        print(f"min_point: {min_point}")
+        # min_point: 367
+
+        if min_point == 0:
+            next_point = final_point
+            print(f"next_point: {next_point}")
+            # next_point: [61.232101, 52.146821, '45', '44|46']
+
+            dist = get_haversine(start_point[0], start_point[1], final_point[0], final_point[1])
+            print(f"dist: {dist}")
+            # dist: 22
+
+            path_distantion += dist
+            path.append(next_point)
+            break
+
+        next_point = near_points[destinations.index(min_point)]
+        print(f"next_point: {next_point}")
+        # next_point: [61.232101, 52.146821, '45', '44|46']
+
+        dist = get_haversine(start_point[0], start_point[1], next_point[0], next_point[1])
+        print(f"dist: {dist}")
+        # dist: 22
+
+        path_distantion += dist
+        start_point = next_point
+        path.append(next_point)
+        print('*****************\n')
+    return [path, path_distantion]
+
+
+def generate_path_old(object_, subject_, point_arr):
+    """"
+    Генерация пути синего цвета из всех валидных точек.
+    """
+    # Генерация маршрута
+    # От исходной точки идём к её линиям связи, выбираем самую короткую к финальной точке, "наступаем" туда, цикл.
+    path = []
+    path_dist = 0
+    current_point = subject_
+    # subject_: [61.232230610495556, 52.14697472947569, '21', '20|22']
+    previous_point = subject_
+    for loop in range(len(point_arr)):
+        # links: ['20', '22']
+        links = current_point[3].split("|")
+        near_points = []
+        for point in point_arr:
+            for link in links:
+                if point[2] == link:
+                    # print(point[2])
+                    try:
+                        near_points.index(point)
+                    except Exception as ex:
+                        near_points.append(point)
+
+        # Первые две линии не брать, а к последней по индексу добавлять ещё одну связь.
+        min_dist = 9999
+        # print(near_points)
+        for point in near_points:
+            # object_: [61.2293618582404, 52.143978995225346, '4', '3|5']
+            dist = get_haversine(point[0], point[1], object_[0], object_[1])
+            # print(f"dist: {dist}")
+            if min_dist > dist:
+                min_dist = dist
+                current_point = point
+                path.append(point)
+                distantion = get_haversine(point[0], point[1], previous_point[0], previous_point[1])
+                print(f"prev: {previous_point}   |   curr: {point}     |       deist: {distantion}m")
+                path_dist += distantion
+            previous_point = point
+    print(path_dist)
+    path_dist = 0
+    for x in path:
+        path_dist += get_haversine(x[0], x[1], object_[0], object_[1])
+        print(get_haversine(x[0], x[1], object_[0], object_[1]))
+    return [path, path_dist]
+
+
+def generate_map(point_arr, color):
+    """"
+    Генерация карты выбранного цвета из всех валидных точек.
+    """
+    text = ''
+    for current in point_arr:
+        index = point_arr.index(current)
+        if index != 0:
+            previous = [point_arr[index - 1][0], point_arr[index - 1][1]]
+        else:
+            previous = [current[0], current[1]]
+        text += f"""<Placemark>
+              <Style>
+                <LineStyle>
+                  <color>{color}</color>
+                </LineStyle>
+              </Style>
+              <LineString>
+                <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
+              </LineString>
+          </Placemark>
+        """
+        # Генерация точек
+        text += create_cube_object([current[0], current[1], index])
+    return text
+
+
+def read_kml(val: list):
+    """"
+    Чтение из kml-файла
+    """
+    with open("static/media/data/geo.kml", 'rt', encoding="utf-8") as file:
+        data = file.read()
+    k = kml.KML()
+    k.from_string(data)
+    features = list(k.features())
+    k2 = list(features[0].features())
+    arr = []
+    for feat in k2:
+        string = str(feat.geometry).split('(')[1].split('0.0')[0].split(' ')
+        arr.append([float(string[0]), float(string[1])])
+    if val is None:
+        val = [61.2200083333333, 52.147525]
+    val2 = 0
+    val3 = 0
+    for loop1 in arr:
+        # Мы должны найти к какой из точек он ближе(разница двух элементов массива)
+        if val[0] > loop1[0]:
+            for loop2 in arr:
+                if val[1] > loop2[1]:
+                    val2 = loop1[0]
+                    val3 = loop1[1]
+                    break
+    print([val2, val3])
+    context = {
+        'data': [['широта', 'долгота'], arr],
+    }
+    return [val2, val3]
+
+
+def create_style():
+    f"""
+	<gx:CascadingStyle kml:id="__managed_style_25130D559F1CA685BFB3">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1A4EFD26461CA685BFB3">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_047C2286A81CA685BFB3">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1A4EFD26461CA685BFB3</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_25130D559F1CA685BFB3</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="0D045F86381CA685BFB2">
+		<name>Самосвал</name>
+		<LookAt>
+			<longitude>61.2344061029136</longitude>
+			<latitude>52.17019183209385</latitude>
+			<altitude>282.7747547496757</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1198.571236050484</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
+		<Point>
+			<coordinates>61.23500224897153,52.17263169824412,281.7092496784567</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0B4EA6F59B1CA68601E0">
+		<name>Экскаватор</name>
+		<LookAt>
+			<longitude>61.23624067458115</longitude>
+			<latitude>52.17416232356366</latitude>
+			<altitude>277.5968564918906</altitude>
+			<heading>-0.5372217869872089</heading>
+			<tilt>53.57834275643886</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>2536.120178802812</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
+		<Point>
+			<coordinates>61.23654046107902,52.16710625511239,297.4562999141254</coordinates>
+		</Point>
+	</Placemark>"""
+    pass
+
+
+def pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb",
+                   username="sa", password="skud12345678"):
+    conn_str = (
+            r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:' + ip + '\\' + server + ',' + port +
+            ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password + ';'
+    )
+    return pyodbc.connect(conn_str)
 
 
 class MeasureTimeClass:
@@ -644,14 +1973,14 @@ class SQLClass:
         #                    f"FROM dbtable " \
         #                    f"WHERE CAST(temperature AS FLOAT) >= {temp} AND personid = '6176' OR personid = '25314' OR personid = '931777' OR personid = '5863' " \
         #                    f"ORDER BY date1 DESC, date2 DESC;"
-        sql_select_query = f"SELECT * " \
-                           f"FROM dbtable " \
-                           f"WHERE CAST(temperature AS FLOAT) < 37.0 AND date1 BETWEEN '2021-07-25' AND '2021-08-25' " \
-                           f"ORDER BY date1 DESC, date2 DESC;"
+        # sql_select_query = f"SELECT * " \
+        #                    f"FROM dbtable " \
+        #                    f"WHERE CAST(temperature AS FLOAT) < 37.0 AND date1 BETWEEN '2021-07-25' AND '2021-08-25' " \
+        #                    f"ORDER BY date1 DESC, date2 DESC;"
         connect_db = self.pyodbc_connect()
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
-        cursor.execute(sql_select_query)
+        # cursor.execute(sql_select_query)
         data = cursor.fetchall()
 
 
@@ -1075,23 +2404,56 @@ class ExcelClass:
             thread_main.start()
 
     @staticmethod
-    def get_sheet_value(col: Union[str, int], row: int, sheet=None):
-        if isinstance(col, int):
-            col = ExcelClass.get_column_letter(col)
-        return str(sheet[str(col) + str(row)].value)
+    def workbook_create():
+        workbook = openpyxl.Workbook
+        return workbook
 
     @staticmethod
-    def set_sheet_value(col: Union[str, int], row: int, value: str, sheet=None):
-        if isinstance(col, int):
-            col = ExcelClass.get_column_letter(col)
-        if value:
+    def workbook_load(file: str):
+        workbook = openpyxl.load_workbook(file)
+        return workbook
+
+    @staticmethod
+    def workbook_activate(workbook, page_name='page 1'):
+        sheet = workbook.active
+        sheet.title = page_name
+        return sheet
+
+    @staticmethod
+    def workbook_save(workbook, filename: str):
+        workbook.save(filename)
+        # openpyxl.Workbook.save(filename)
+
+    @staticmethod
+    def get_sheet_value(col: Union[str, int], row: int, sheet):
+        try:
+            if isinstance(col, int):
+                col = ExcelClass.get_column_letter(col).upper()
+            value = str(sheet[str(col).upper() + str(row)].value)
+            if value == 'None' or value is None:
+                value = ''
+            return value
+        except Exception as ex:
+            print(f"set_sheet_value: {ex}")
+
+    @staticmethod
+    def set_sheet_value(col: Union[str, int], row: int, value: str, sheet):
+        try:
+            if isinstance(col, int):
+                col = ExcelClass.get_column_letter(col)
+            if value == 'None' or value is None:
+                value = ''
             sheet[str(col) + str(row)] = value
-        else:
-            sheet[str(col) + str(row)] = ''
+        except Exception as ex:
+            print(f"set_sheet_value: {ex}")
 
     @staticmethod
     def get_column_letter(num: int):
         return get_column_letter(num)
+
+    @staticmethod
+    def get_max_num_rows(sheet):
+        return int(sheet.max_row)
 
 
 class PathClass:
@@ -1132,7 +2494,8 @@ class ObjectOrientedProgrammingClass:
                 """
 
                 """
-                print(f'{self.A_1}+{self.B_1}+{self.C_1}+{self.D_1}+{self.E_1}+{self.F_1}+{self.G_1}+{self.H_1}+{self.M_1}')
+                print(
+                    f'{self.A_1}+{self.B_1}+{self.C_1}+{self.D_1}+{self.E_1}+{self.F_1}+{self.G_1}+{self.H_1}+{self.M_1}')
 
             def get_worker_value(self, index):
                 """
@@ -1140,7 +2503,8 @@ class ObjectOrientedProgrammingClass:
                 :param index:
                 :return:
                 """
-                value_ = list((self.A_1, self.B_1, self.C_1, self.D_1, self.E_1, self.F_1, self.G_1, self.H_1, self.M_1))
+                value_ = list(
+                    (self.A_1, self.B_1, self.C_1, self.D_1, self.E_1, self.F_1, self.G_1, self.H_1, self.M_1))
                 return value_[index]
 
             def get_worker_id(self):
@@ -2829,16 +4193,16 @@ class GeoBilazClass:
             password="nF2ArtXK"
         )
 
-        postgreSQL_select_Query = "SELECT * FROM public.navdata_202108 " \
-                                  "WHERE flags = '0' " \
-                                  "ORDER BY navtime DESC, device DESC LIMIT 100;"
+        # postgreSQL_select_Query = "SELECT * FROM public.navdata_202108 " \
+        #                           "WHERE flags = '0' " \
+        #                           "ORDER BY navtime DESC, device DESC LIMIT 100;"
         # "ORDER BY navtime DESC, device DESC LIMIT 100"
         # "ORDER BY device ASC, navtime DESC LIMIT 100"
         # "WHERE flags = 0 " \
 
         cursor = connection.cursor()
 
-        cursor.execute(postgreSQL_select_Query)
+        # cursor.execute(postgreSQL_select_Query)
 
         mobile_records = cursor.fetchall()
 
@@ -2927,7 +4291,6 @@ class OpenCvClass:
                 with open(file_name, type_write) as log:
                     log.write(f'{TimeUtils.get_current_time()} : {message}\n')
 
-
         class CopyDictionary:
             @staticmethod
             def get_all_sources(source: dict, values: dict):
@@ -2935,7 +4298,6 @@ class OpenCvClass:
                 for _key, _value in values.items():
                     value[_key] = _value
                 return value
-
 
         class FileSettings:
             @staticmethod
@@ -2953,12 +4315,10 @@ class OpenCvClass:
                     print(f'import_settings error : {ex}')
                 return data
 
-
         class TimeUtils:
             @staticmethod
             def get_current_time():
                 return f"{time.strftime('%X')}"
-
 
         class SendMail:
             @staticmethod
@@ -2977,7 +4337,6 @@ class OpenCvClass:
                 smtpobj.login(user=login, password=password)
                 smtpobj.sendmail(from_addr=writer, to_addrs=recipient, msg=message)
                 smtpobj.quit()
-
 
         # SQL
         class SQLClass:
@@ -3040,7 +4399,6 @@ class OpenCvClass:
                 cursor.execute(value)
                 connection.commit()
 
-
         # OPENCV
         class AnalyzeClass:
             @staticmethod
@@ -3049,7 +4407,8 @@ class OpenCvClass:
                                                         masks=data['mask_cam'], protocol=data['protocol_cam_type'],
                                                         login=data['login_cam'], password=data['password_cam'],
                                                         port=data['port_cam'], sensitivity=data['sensitivity_analysis'],
-                                                        correct=data['correct_coefficient'], alias_device=data['alias_device'],
+                                                        correct=data['correct_coefficient'],
+                                                        alias_device=data['alias_device'],
                                                         alarm_level=data['alarm_level'])
                 data = CopyDictionary.get_all_sources(data, {'sources': sources})
                 if data['compute_debug'] == 'sync':
@@ -3200,7 +4559,8 @@ class OpenCvClass:
                     mask = source[1]
                     name = source[4]
                     if data['render_debug'] == 'all':
-                        AnalyzeClass.render_flip(image=image, flipcode=0, name=name, resolution_debug=data['resolution_debug'])
+                        AnalyzeClass.render_flip(image=image, flipcode=0, name=name,
+                                                 resolution_debug=data['resolution_debug'])
                         AnalyzeClass.render_cvtcolor(image=image, color_type=cv2.COLOR_RGB2GRAY, name=name,
                                                      resolution_debug=data['resolution_debug'])
                         AnalyzeClass.render_shapes(name=name, resolution_debug=data['resolution_debug'])
@@ -3369,10 +4729,12 @@ class OpenCvClass:
                         if source_type == 'image-http':
                             _sources.append([f'{protocol}://192.168.{x}:{port}/ISAPI/Streaming/channels/101/'
                                              f'picture?snapShotImageType=JPEG', cv2.imread(masks[index], 0),
-                                             sensitivity[index], correct[index], alias_device[index], alarm_level[index]])
+                                             sensitivity[index], correct[index], alias_device[index],
+                                             alarm_level[index]])
                         elif source_type == 'video-rtsp':
-                            _sources.append([f'{protocol}://{login}:{password}@192.168.{x}:{port}', cv2.imread(masks[index], 0),
-                                             sensitivity[index], correct[index], alias_device[index], alarm_level[index]])
+                            _sources.append(
+                                [f'{protocol}://{login}:{password}@192.168.{x}:{port}', cv2.imread(masks[index], 0),
+                                 sensitivity[index], correct[index], alias_device[index], alarm_level[index]])
                         elif source_type == 'video-file':
                             _sources.append([f'{x}', cv2.imread(masks[index], 0), sensitivity[index], correct[index],
                                              alias_device[index], alarm_level[index]])
@@ -3407,12 +4769,14 @@ class OpenCvClass:
             @staticmethod
             def render_cropping_image(image, name, resolution_debug):
                 cropping_image = image[250:1080, 600:1720]
-                AnalyzeClass.render(name=f"cropping_image : {name}", source=cropping_image, resolution_debug=resolution_debug)
+                AnalyzeClass.render(name=f"cropping_image : {name}", source=cropping_image,
+                                    resolution_debug=resolution_debug)
 
             @staticmethod
             def render_bitwise_not_white(image, mask, name, resolution_debug):
                 bitwise_not = cv2.bitwise_not(image, image, mask=mask)
-                AnalyzeClass.render(name=f"_bitwise_not_white : {name}", source=bitwise_not, resolution_debug=resolution_debug)
+                AnalyzeClass.render(name=f"_bitwise_not_white : {name}", source=bitwise_not,
+                                    resolution_debug=resolution_debug)
 
             @staticmethod
             def render_bitwise_and(image, mask, name, resolution_debug):
@@ -3427,7 +4791,8 @@ class OpenCvClass:
             @staticmethod
             def render_cvtcolor_to_hsv(image, name, resolution_debug):
                 cvtcolor = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-                AnalyzeClass.render(name=f"cvtcolor_to_hsv : {name}", source=cvtcolor, resolution_debug=resolution_debug)
+                AnalyzeClass.render(name=f"cvtcolor_to_hsv : {name}", source=cvtcolor,
+                                    resolution_debug=resolution_debug)
 
             @staticmethod
             def render_inrange(image, sensitivity_analysis, name, resolution_debug):
@@ -3519,7 +4884,8 @@ class OpenCvClass:
                 cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
                 inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - sensitivity_analysis], dtype=numpy.uint8),
                                       numpy.array([255, sensitivity_analysis, 255], dtype=numpy.uint8))
-                cv2.putText(inrange, f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * correct_coefficient:0.2f}%",
+                cv2.putText(inrange,
+                            f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * correct_coefficient:0.2f}%",
                             (int(1920 / 5), int(1080 / 2)), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 3)
                 AnalyzeClass.render(name=f"final : {name}", source=inrange, resolution_debug=resolution_debug)
 
@@ -3527,7 +4893,8 @@ class OpenCvClass:
             def render(name: str, source, resolution_debug: list):
                 try:
                     if source is not None:
-                        img = cv2.resize(source, (resolution_debug[0], resolution_debug[1]), interpolation=cv2.INTER_AREA)
+                        img = cv2.resize(source, (resolution_debug[0], resolution_debug[1]),
+                                         interpolation=cv2.INTER_AREA)
                         cv2.imshow(name, img)
                 except Exception as ex:
                     LoggingClass.logging(ex)
@@ -3547,9 +4914,11 @@ class OpenCvClass:
                     return 0.0
 
             @staticmethod
-            def write_result(ip_sql: str, server_sql: str, port_sql: str, database_sql: str, user_sql: str, password_sql: str,
+            def write_result(ip_sql: str, server_sql: str, port_sql: str, database_sql: str, user_sql: str,
+                             password_sql: str,
                              sql_now_check: bool, table_now_sql: str, rows_now_sql: list, sql_data_check: bool,
-                             table_data_sql: str, rows_data_sql: list, source: str, values: float, widget, widget_write: bool,
+                             table_data_sql: str, rows_data_sql: list, source: str, values: float, widget,
+                             widget_write: bool,
                              text_write: bool, sql_val: bool, alarm_level: int):
                 sql_datetime = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
                 boolean = 0
@@ -3623,7 +4992,6 @@ class OpenCvClass:
                 cv2.destroyAllWindows()
                 cap.release()
 
-
         # UI
         class AppContainerClass:
             def __init__(self):
@@ -3672,7 +5040,6 @@ class OpenCvClass:
                 _parent.addWidget(_widget)
                 return _widget
 
-
         class MainWidgetClass(QtWidgets.QWidget):
             def __init__(self, title="APP", width=640, height=480, icon="", play_f=None, stop_f=None, quit_f=None,
                          snapshot_f=None):
@@ -3693,7 +5060,8 @@ class OpenCvClass:
                                                                         background=True)
                 self.h_layout_management_1 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_management_1)
-                self.play_QPushButton = AppContainerClass.create_qpushbutton(self.h_layout_management_1, self.play_btn_func,
+                self.play_QPushButton = AppContainerClass.create_qpushbutton(self.h_layout_management_1,
+                                                                             self.play_btn_func,
                                                                              'play')
                 self.stop_QPushButton = AppContainerClass.create_qpushbutton(self.h_layout_management_1, stop_f, 'stop')
                 self.quit_QPushButton = AppContainerClass.create_qpushbutton(self.h_layout_management_1, quit_f, 'quit')
@@ -3709,30 +5077,37 @@ class OpenCvClass:
                 self.port_cam = AppContainerClass.create_qlable('PORT CAM : 80', self.h_layout_cam_1)
                 self.set_port_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_1, self.get_port_cam_button)
                 self.login_cam = AppContainerClass.create_qlable('LOGIN CAM : admin', self.h_layout_cam_1)
-                self.set_login_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_1, self.get_login_cam_button)
+                self.set_login_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_1,
+                                                                          self.get_login_cam_button)
                 self.password_cam = AppContainerClass.create_qlable('PASSWORD CAM : q1234567', self.h_layout_cam_1)
-                self.set_password_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_1, self.get_password_cam_button)
+                self.set_password_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_1,
+                                                                             self.get_password_cam_button)
                 self.h_layout_cam_2 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_cam_2)
-                self.alias_device = AppContainerClass.create_qlable('ALIAS DEVICE : 16/1 | 16/2 | 16/3 | 16/4 | 16/5 | 16/6 '
-                                                                    '| 16/7 | 16/8 | 16/9 | 16/10', self.h_layout_cam_2)
-                self.set_alias_device = AppContainerClass.create_qpushbutton(self.h_layout_cam_2, self.get_alias_device_button)
+                self.alias_device = AppContainerClass.create_qlable(
+                    'ALIAS DEVICE : 16/1 | 16/2 | 16/3 | 16/4 | 16/5 | 16/6 '
+                    '| 16/7 | 16/8 | 16/9 | 16/10', self.h_layout_cam_2)
+                self.set_alias_device = AppContainerClass.create_qpushbutton(self.h_layout_cam_2,
+                                                                             self.get_alias_device_button)
                 self.h_layout_cam_3 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_cam_3)
-                self.ip_cam = AppContainerClass.create_qlable('IP CAM : 15.202 | 15.206 | 15.207 | 15.208 | 15.209 | 15.210 '
-                                                              '| 15.211 | 15.203 | 15.204 | 15.205', self.h_layout_cam_3)
+                self.ip_cam = AppContainerClass.create_qlable(
+                    'IP CAM : 15.202 | 15.206 | 15.207 | 15.208 | 15.209 | 15.210 '
+                    '| 15.211 | 15.203 | 15.204 | 15.205', self.h_layout_cam_3)
                 self.set_ip_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_3, self.get_ip_cam_button)
                 self.h_layout_cam_4 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_cam_4)
-                self.mask_cam = AppContainerClass.create_qlable('MASK CAM : m_16_1.jpg | m_16_2.jpg | m_16_3.jpg | m_16_4.jpg '
-                                                                '| m_16_5.jpg | m_16_6.jpg | m_16_7.jpg | m_16_8.jpg '
-                                                                '| m_16_9.jpg | m_16_10.jpg', self.h_layout_cam_4)
+                self.mask_cam = AppContainerClass.create_qlable(
+                    'MASK CAM : m_16_1.jpg | m_16_2.jpg | m_16_3.jpg | m_16_4.jpg '
+                    '| m_16_5.jpg | m_16_6.jpg | m_16_7.jpg | m_16_8.jpg '
+                    '| m_16_9.jpg | m_16_10.jpg', self.h_layout_cam_4)
                 self.set_mask_cam = AppContainerClass.create_qpushbutton(self.h_layout_cam_4, self.get_mask_cam_button)
                 self.h_layout_cam_5 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_cam_5)
-                self.sensitivity_analysis = AppContainerClass.create_qlable('SENSITIVITY ANALYSIS : 115 | 115 | 115 | 115 '
-                                                                            '| 115 | 115 | 115 | 115 | 115 | 115',
-                                                                            self.h_layout_cam_5)
+                self.sensitivity_analysis = AppContainerClass.create_qlable(
+                    'SENSITIVITY ANALYSIS : 115 | 115 | 115 | 115 '
+                    '| 115 | 115 | 115 | 115 | 115 | 115',
+                    self.h_layout_cam_5)
                 self.set_sensitivity_analysis = AppContainerClass.create_qpushbutton(self.h_layout_cam_5,
                                                                                      self.get_sensitivity_analysis_button)
                 self.h_layout_cam_6 = QtWidgets.QHBoxLayout()
@@ -3744,8 +5119,9 @@ class OpenCvClass:
                                                                             self.get_alarm_level_button)
                 self.h_layout_cam_7 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_cam_7)
-                self.correct_coefficient = AppContainerClass.create_qlable('CORRECT COEFFICIENT : 1.0 | 1.0 | 1.0 | 1.0 | 1.0 '
-                                                                           '| 1.0 | 1.0 | 1.0 | 1.0 | 1.0', self.h_layout_cam_7)
+                self.correct_coefficient = AppContainerClass.create_qlable(
+                    'CORRECT COEFFICIENT : 1.0 | 1.0 | 1.0 | 1.0 | 1.0 '
+                    '| 1.0 | 1.0 | 1.0 | 1.0 | 1.0', self.h_layout_cam_7)
                 self.set_correct_coefficient = AppContainerClass.create_qpushbutton(self.h_layout_cam_7,
                                                                                     self.get_correct_coefficient_button)
                 # SQL
@@ -3759,26 +5135,33 @@ class OpenCvClass:
                 self.set_ip_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_ip_sql_button)
                 self.server_sql = AppContainerClass.create_qlable(r'SERVER SQL : DESKTOP-SM7K050\COMPUTER_VISION',
                                                                   self.h_layout_sql_1)
-                self.set_server_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_server_sql_button)
+                self.set_server_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1,
+                                                                           self.get_server_sql_button)
                 self.port_sql = AppContainerClass.create_qlable('PORT SQL SERVER : 1433', self.h_layout_sql_1)
                 self.set_port_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_1, self.get_port_sql_button)
                 self.h_layout_sql_2 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_sql_2)
-                self.database_sql = AppContainerClass.create_qlable('DATABASE SQL : analiz_16grohot', self.h_layout_sql_2)
-                self.set_database_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2, self.get_database_sql_button)
+                self.database_sql = AppContainerClass.create_qlable('DATABASE SQL : analiz_16grohot',
+                                                                    self.h_layout_sql_2)
+                self.set_database_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2,
+                                                                             self.get_database_sql_button)
                 self.user_sql = AppContainerClass.create_qlable('USER SQL : computer_vision', self.h_layout_sql_2)
                 self.set_user_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2, self.get_user_sql_button)
                 self.h_layout_sql_3 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_sql_3)
-                self.password_sql = AppContainerClass.create_qlable('PASSWORD SQL : vision12345678', self.h_layout_sql_2)
-                self.set_password_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2, self.get_password_sql_button)
+                self.password_sql = AppContainerClass.create_qlable('PASSWORD SQL : vision12345678',
+                                                                    self.h_layout_sql_2)
+                self.set_password_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_2,
+                                                                             self.get_password_sql_button)
                 self.sql_now_check = AppContainerClass.create_qcheckbox(self.h_layout_sql_3, 'WRITE NOW SQL?')
-                self.table_now_sql = AppContainerClass.create_qlable('TABLE NOW SQL : grohot16_now_table', self.h_layout_sql_3)
+                self.table_now_sql = AppContainerClass.create_qlable('TABLE NOW SQL : grohot16_now_table',
+                                                                     self.h_layout_sql_3)
                 self.set_table_now_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_3,
                                                                               self.get_table_now_sql_button)
                 self.rows_now_sql = AppContainerClass.create_qlable('ROWS NOW SQL : device_row | value_row | alarm_row '
                                                                     '| datetime_row', self.h_layout_sql_3)
-                self.set_rows_now_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_3, self.get_rows_now_sql_button)
+                self.set_rows_now_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_3,
+                                                                             self.get_rows_now_sql_button)
                 self.h_layout_sql_4 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_sql_4)
                 self.sql_data_check = AppContainerClass.create_qcheckbox(self.h_layout_sql_4, 'WRITE DATA SQL?')
@@ -3786,8 +5169,9 @@ class OpenCvClass:
                                                                       self.h_layout_sql_4)
                 self.set_table_data_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_4,
                                                                                self.get_table_data_sql_button)
-                self.rows_data_sql = AppContainerClass.create_qlable('ROWS DATA SQL : device_row | value_row | alarm_row '
-                                                                     '| datetime_row', self.h_layout_sql_4)
+                self.rows_data_sql = AppContainerClass.create_qlable(
+                    'ROWS DATA SQL : device_row | value_row | alarm_row '
+                    '| datetime_row', self.h_layout_sql_4)
                 self.set_rows_data_sql = AppContainerClass.create_qpushbutton(self.h_layout_sql_4,
                                                                               self.get_rows_data_sql_button)
                 # DEBUG
@@ -3801,7 +5185,8 @@ class OpenCvClass:
                 self.speed_analysis = AppContainerClass.create_qlable('SPEED ANALYSIS : 1.0', self.h_layout_debug_1)
                 self.set_speed_analysis = AppContainerClass.create_qpushbutton(self.h_layout_debug_1,
                                                                                self.get_speed_analysis_button)
-                self.speed_video_stream = AppContainerClass.create_qlable('SPEED VIDEO-STREAM : 1.0', self.h_layout_debug_1)
+                self.speed_video_stream = AppContainerClass.create_qlable('SPEED VIDEO-STREAM : 1.0',
+                                                                          self.h_layout_debug_1)
                 self.set_speed_video_stream = AppContainerClass.create_qpushbutton(self.h_layout_debug_1,
                                                                                    self.get_speed_video_stream_button)
                 self.h_layout_debug_2 = QtWidgets.QHBoxLayout()
@@ -3815,8 +5200,9 @@ class OpenCvClass:
                                                                       ['image-http', 'video-rtsp', 'video-file'],
                                                                       'image-http')
                 self.compute_win_debug = AppContainerClass.create_qlable('COMPUTE TYPE :', self.h_layout_debug_2)
-                self.compute_debug = AppContainerClass.create_qcombobox(self.h_layout_debug_2, ['sync', 'async', 'multithread',
-                                                                                                'multiprocess', 'complex'],
+                self.compute_debug = AppContainerClass.create_qcombobox(self.h_layout_debug_2,
+                                                                        ['sync', 'async', 'multithread',
+                                                                         'multiprocess', 'complex'],
                                                                         'complex')
                 self.process_cores = AppContainerClass.create_qlable('PROCESS CORES : 4', self.h_layout_debug_2)
                 self.set_process_cores = AppContainerClass.create_qpushbutton(self.h_layout_debug_2,
@@ -3827,7 +5213,8 @@ class OpenCvClass:
                 self.render_debug = AppContainerClass.create_qcombobox(self.h_layout_debug_3,
                                                                        ['none', 'source', 'final', 'extended',
                                                                         'all'], 'none')
-                self.resolution_debug_1 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '320x240', default=True)
+                self.resolution_debug_1 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '320x240',
+                                                                                default=True)
                 self.resolution_debug_1.toggled.connect(self.set_resolution_debug(self.resolution_debug_1, 320, 240))
                 self.resolution_debug_2 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '640x480')
                 self.resolution_debug_2.toggled.connect(self.set_resolution_debug(self.resolution_debug_2, 640, 480))
@@ -3842,10 +5229,12 @@ class OpenCvClass:
                 # IMPORTS
                 self.h_layout_g_imports = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_g_imports)
-                self.g_imports_set = AppContainerClass.create_qlable('IMPORTS', self.h_layout_g_imports, background=True)
+                self.g_imports_set = AppContainerClass.create_qlable('IMPORTS', self.h_layout_g_imports,
+                                                                     background=True)
                 self.h_layout_imports_1 = QtWidgets.QHBoxLayout()
                 self.v_layout_m.addLayout(self.h_layout_imports_1)
-                self.import_file = AppContainerClass.create_qlable('SETTINGS FILE NAME : settings', self.h_layout_imports_1)
+                self.import_file = AppContainerClass.create_qlable('SETTINGS FILE NAME : settings',
+                                                                   self.h_layout_imports_1)
                 self.set_import_file = AppContainerClass.create_qpushbutton(self.h_layout_imports_1,
                                                                             self.get_settings_file_name)
                 self.export_QPushButton = AppContainerClass.create_qpushbutton(self.h_layout_imports_1,
@@ -3864,7 +5253,8 @@ class OpenCvClass:
                 self.name_snapshot = AppContainerClass.create_qlable('file name : picture.jpg', self.h_layout_shot_1)
                 self.set_name_snapshot = AppContainerClass.create_qpushbutton(self.h_layout_shot_1,
                                                                               self.set_name_snapshot_button)
-                self.snapshot_QPushButton = AppContainerClass.create_qpushbutton(self.h_layout_shot_1, self.snapshot_btn_func,
+                self.snapshot_QPushButton = AppContainerClass.create_qpushbutton(self.h_layout_shot_1,
+                                                                                 self.snapshot_btn_func,
                                                                                  'snapshot')
 
                 self.setLayout(self.v_layout_m)
@@ -4120,12 +5510,15 @@ class OpenCvClass:
                         'port_cam': int(self.port_cam.text().split(':')[1].strip()),
                         'login_cam': str(self.login_cam.text().split(':')[1].strip()),
                         'password_cam': str(self.password_cam.text().split(':')[1].strip()),
-                        'alias_device': list([x.strip() for x in self.alias_device.text().split(':')[1].strip().split('|')]),
+                        'alias_device': list(
+                            [x.strip() for x in self.alias_device.text().split(':')[1].strip().split('|')]),
                         'ip_cam': list([x.strip() for x in self.ip_cam.text().split(':')[1].strip().split('|')]),
                         'mask_cam': list([x.strip() for x in self.mask_cam.text().split(':')[1].strip().split('|')]),
                         'sensitivity_analysis': list([int(x.strip()) for x in
-                                                      self.sensitivity_analysis.text().split(':')[1].strip().split('|')]),
-                        'alarm_level': list([int(x.strip()) for x in self.alarm_level.text().split(':')[1].strip().split('|')]),
+                                                      self.sensitivity_analysis.text().split(':')[1].strip().split(
+                                                          '|')]),
+                        'alarm_level': list(
+                            [int(x.strip()) for x in self.alarm_level.text().split(':')[1].strip().split('|')]),
                         'correct_coefficient': list([float(x.strip()) for x in
                                                      self.correct_coefficient.text().split(':')[1].strip().split('|')]),
 
@@ -4138,10 +5531,12 @@ class OpenCvClass:
                         'password_sql': str(self.password_sql.text().split(':')[1].strip()),
                         'sql_now_check': bool(self.sql_now_check.isChecked()),
                         'table_now_sql': str(self.table_now_sql.text().split(':')[1].strip()),
-                        'rows_now_sql': list([x.strip() for x in self.rows_now_sql.text().split(':')[1].strip().split('|')]),
+                        'rows_now_sql': list(
+                            [x.strip() for x in self.rows_now_sql.text().split(':')[1].strip().split('|')]),
                         'sql_data_check': bool(self.sql_data_check.isChecked()),
                         'table_data_sql': str(self.table_data_sql.text().split(':')[1].strip()),
-                        'rows_data_sql': list([x.strip() for x in self.rows_data_sql.text().split(':')[1].strip().split('|')]),
+                        'rows_data_sql': list(
+                            [x.strip() for x in self.rows_data_sql.text().split(':')[1].strip().split('|')]),
 
                         'auto_import_check': bool(self.auto_import_check.isChecked()),
                         'auto_play_check': bool(self.auto_play_check.isChecked()),
@@ -4218,7 +5613,8 @@ class OpenCvClass:
                                                      f'{self.get_string_from_list(data["correct_coefficient"])}')
                     self.sql_write.setChecked(data["sql_write"])
                     self.ip_sql.setText(f'{self.ip_sql.text().split(":")[0].strip()} : {str(data["ip_sql"])}')
-                    self.server_sql.setText(f'{self.server_sql.text().split(":")[0].strip()} : {str(data["server_sql"])}')
+                    self.server_sql.setText(
+                        f'{self.server_sql.text().split(":")[0].strip()} : {str(data["server_sql"])}')
                     self.port_sql.setText(f'{self.port_sql.text().split(":")[0].strip()} : {str(data["port_sql"])}')
                     self.database_sql.setText(f'{self.database_sql.text().split(":")[0].strip()} : '
                                               f'{str(data["database_sql"])}')
@@ -4282,7 +5678,6 @@ class OpenCvClass:
                     LoggingClass.logging(ex)
                     print(f'auto_play_func error : {ex}')
 
-
         def play_func(data: dict):
             global play
             try:
@@ -4290,31 +5685,27 @@ class OpenCvClass:
 
                 def play_analyze():
                     AnalyzeClass.start_analyze(data=CopyDictionary.get_all_sources(data, {'pause': pause}))
+
                 threading.Thread(target=play_analyze, args=()).start()
             except Exception as ex:
                 print(ex)
                 with open('log.txt', 'a') as log:
                     log.write(f'\n{ex}\n')
 
-
         def stop_func():
             global play
             play = False
-
 
         def pause():
             global play
             return play
 
-
         def quit_func():
             stop_func()
             sys.exit(app_container.app.exec())
 
-
         def snapshot_func(data: dict):
             threading.Thread(target=AnalyzeClass.make_snapshot, args=(data,)).start()
-
 
         # MAIN
         if __name__ == "__main__":
@@ -4322,7 +5713,8 @@ class OpenCvClass:
             play = True
             app_container = AppContainerClass()
             widget = app_container.create_ui(title="analysis", width=300, height=300, icon="icon.ico",
-                                             play_f=play_func, stop_f=stop_func, quit_f=quit_func, snapshot_f=snapshot_func)
+                                             play_f=play_func, stop_f=stop_func, quit_f=quit_func,
+                                             snapshot_f=snapshot_func)
             ui_thread = threading.Thread(target=widget.show())
             sys.exit(app_container.app.exec())
 

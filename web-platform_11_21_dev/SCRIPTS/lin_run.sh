@@ -2,7 +2,7 @@ cd ../
 
 source lin_env/bin/activate
 
-echo -n "enter host and port value (default - '192.168.1.62:8000') : "
+echo -n "enter host and port value (default - '192.168.1.26:8000') : "
 read var_1
 
 if [[ $var_1 == "" ]]

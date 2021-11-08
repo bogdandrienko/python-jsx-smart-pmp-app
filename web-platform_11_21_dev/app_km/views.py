@@ -14,262 +14,332 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
-from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
+from .forms import CreateUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
     NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
     SmsForm, GeoForm
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, AccountDataModel, NotificationModel, EmailModel, ContactModel, \
     DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
-from .service import DjangoClass, AuthorizationClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
+from .utils import DjangoClass, ExcelClass, PaginationClass, HttpRaiseExceptionClass, LoggingClass, \
     create_encrypted_password, get_users, get_salary_data, link_callback, get_career, find_near_point, get_vector_arr, \
     generate_way, pyodbc_connect
 
 
-# Admin
+# admin
 def admin_(request):
     return render(request, admin.site.urls)
 
 
-# Home
+# home
 def home(request):
     return render(request, 'components/home.html')
 
 
-#  Account
+#  account
 def account_login(request):
-    result_form = False
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username=username, password=password)
-            if user:
-                login(request, user)
-                result_form = True
-    form = AuthenticationForm(data=request.POST)
-    context = {
-        'form': form,
-        'result_form': result_form,
-    }
+    try:
+        result_form = False
+        if request.method == 'POST':
+            form = AuthenticationForm(data=request.POST)
+            if form.is_valid():
+                username = request.POST['username']
+                password = request.POST['password']
+                user = authenticate(username=username, password=password)
+                if user:
+                    login(request, user)
+                    result_form = True
+        context = {
+            'form': AuthenticationForm(data=request.POST),
+            'result_form': result_form
+        }
+    except Exception as ex:
+        context = {
+            'form': AuthenticationForm(data=request.POST),
+            'result_form': False
+        }
     return render(request, 'account/account_login.html', context)
 
 
 def account_logout(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
-    logout(request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
+    try:
+        logout(request)
+    except Exception as ex:
+        redirect('account_login')
     return redirect('account_login')
 
 
-def account_profile(request, username=None):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
-    if request.method == 'POST':
-        pass
-    if username and username != 'None':
-        try:
-            data = AccountDataModel.objects.get(user_iin=username)
-        except Exception as ex:
-            data = None
-    else:
-        try:
-            data = AccountDataModel.objects.get(user_iin=request.user.username)
-        except Exception as ex:
-            data = None
-    context = {
-        'data': data,
-    }
-    return render(request, 'account/account_profile.html', context)
-
-
-def account_create_account(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
-    result_form = False
-    if request.method == 'POST':
-        try:
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                username = form.cleaned_data.get('username')
-                password1 = form.cleaned_data.get('password1')
-                password2 = form.cleaned_data.get('password2')
-                first_name = form.cleaned_data.get('first_name')
-                last_name = form.cleaned_data.get('last_name')
-                email = form.cleaned_data.get('email')
-                is_staff = form.cleaned_data.get('is_staff')
-                group = form.cleaned_data.get('group')
-                patronymic = form.cleaned_data.get('patronymic')
-                personnel_number = form.cleaned_data.get('personnel_number')
-                subdivision = form.cleaned_data.get('subdivision')
-                workshop_service = form.cleaned_data.get('workshop_service')
-                department_site = form.cleaned_data.get('department_site')
-                position = form.cleaned_data.get('position')
-                category = form.cleaned_data.get('category')
-                if password1 == password2:
-                    user_obj = DjangoClass.UserAccountClass(
-                        username=username,
-                        password=password1,
-                        first_name=first_name,
-                        last_name=last_name,
-                        email=email,
-                        is_staff=is_staff,
-                        is_superuser=False
-                    )
-                    group_obj = DjangoClass.UserGroupClass(
-                        username=username,
-                        group=group
-                    )
-                    # success_1 = DjangoClass.create_main_data_account(
-                    #     user_account_class=False,
-                    #     user_group_class=False,
-                    #     username=username,
-                    #     password=password1,
-                    #     first_name=first_name,
-                    #     last_name=last_name,
-                    #     email=email,
-                    #     is_staff=is_staff,
-                    #     is_superuser=False,
-                    #     group=group
-                    # )
-                    success_1 = DjangoClass.create_main_data_account(
-                        user_account_class=user_obj,
-                        user_group_class=group_obj
-                    )
-                    if success_1:
-                        user_first_data_obj = DjangoClass.UserFirstDataAccountClass(
-                            username=username,
-                            user_iin=username,
-                            password=password1,
-                            first_name=first_name,
-                            last_name=last_name,
-                            patronymic=patronymic,
-                            personnel_number=personnel_number,
-                            subdivision=subdivision,
-                            workshop_service=workshop_service,
-                            department_site=department_site,
-                            position=position,
-                            category=category
-                        )
-                        # success_2 = DjangoClass.create_first_data_account(
-                        #     user_first_data_account_class=False,
-                        #     username=username,
-                        #     user_iin=username,
-                        #     password=password1,
-                        #     first_name=first_name,
-                        #     last_name=last_name,
-                        #     patronymic=patronymic,
-                        #     personnel_number=personnel_number,
-                        #     subdivision=subdivision,
-                        #     workshop_service=workshop_service,
-                        #     department_site=department_site,
-                        #     position=position,
-                        #     category=category
-                        # )
-                        success_2 = DjangoClass.create_first_data_account(
-                            user_first_data_account_class=user_first_data_obj
-                        )
-                        if success_1 and success_2:
-                            result_form = True
-                        else:
-                            result_form = False
-        except Exception as ex:
-            print(ex)
-    form = CreateUserForm
-    context = {
-        'form': form,
-        'result_form': result_form,
-    }
-    return render(request, 'account/account_create_account.html', context)
-
-
-def account_create_accounts(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
-    data = None
-    form = None
-    result_form = False
-    if request.method == 'POST':
-        excel_file = request.FILES.get('document_addition_file_1')
-        if excel_file:
-            def get_value(rows: str, cols: int):
-                return str(sheet[rows + str(cols)].value)
-
-            wb = openpyxl.load_workbook(excel_file)
-            sheet = wb.active
-            max_row = sheet.max_row
-            users_array = []
-            for i in range(2, max_row + 1):
-                username = get_value('A', i)
-                password = get_value('B', i)
-                email = get_value('C', i)
-                first_name = get_value('D', i)
-                last_name = get_value('E', i)
-                group = get_value('F', i)
-                if get_value('G', i) == 'ИСТИНА' or get_value('G', i) == 'True':
-                    is_staff = True
-                else:
-                    is_staff = False
-                patronymic = get_value('H', i)
-                personnel_number = get_value('I', i)
-                subdivision = get_value('J', i)
-                workshop_service = get_value('K', i)
-                department_site = get_value('L', i)
-                position = get_value('M', i)
-                category = get_value('N', i)
-                if username and password:
-                    user_obj = DjangoClass.UserAccountClass(
-                        username=username,
-                        password=password,
-                        first_name=first_name,
-                        last_name=last_name,
-                        email=email,
-                        is_staff=is_staff,
-                        is_superuser=False
-                    )
-                    group_obj = DjangoClass.UserGroupClass(
-                        username=username,
-                        group=group
-                    )
-                    user_first_data_obj = DjangoClass.UserFirstDataAccountClass(
-                        username=username,
-                        user_iin=username,
-                        password=password,
-                        first_name=first_name,
-                        last_name=last_name,
-                        patronymic=patronymic,
-                        personnel_number=personnel_number,
-                        subdivision=subdivision,
-                        workshop_service=workshop_service,
-                        department_site=department_site,
-                        position=position,
-                        category=category
-                    )
-                    users_array.append([user_obj, group_obj, user_first_data_obj])
-            success_3 = True
-            for user in users_array:
+def account_create_accounts(request, quantity=None):
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
+    try:
+        result_form = False
+        if request.method == 'POST':
+            try:
+                force_change_1 = request.POST['check_1']
+                force_change_1 = True
+            except Exception as ex:
+                force_change_1 = False
+            try:
+                force_change_2 = request.POST['check_2']
+                force_change_2 = True
+                print(force_change_2)
+            except Exception as ex:
+                force_change_2 = False
+            if force_change_1 or force_change_2:
+                force_change = True
+            else:
+                force_change = False
+            user_objects = []
+            # Проверка количества создания аккаунтов
+            if quantity > 1:
+                # Создание массива объектов аккаунтов из excel-шаблона
                 try:
-                    success = DjangoClass.create_main_data_account(
-                        user_account_class=user[0],
-                        user_group_class=user[1]
-                    )
-                    print(user[2])
-                    if success:
-                        print(success)
-                        success_second = DjangoClass.create_first_data_account(
-                            user_first_data_account_class=user[2]
-                        )
-                        print(f'success_second: {success_second}')
+                    excel_file = request.FILES.get('document_addition_file_1')
+                    if excel_file:
+                        workbook = ExcelClass.workbook_load(excel_file)
+                        sheet = ExcelClass.workbook_activate(workbook)
+                        max_num_rows = ExcelClass.get_max_num_rows(sheet)
+                        for num in range(2, max_num_rows + 1):
+                            username = ExcelClass.get_sheet_value('A', num, sheet)
+                            password = ExcelClass.get_sheet_value('B', num, sheet)
+                            email = ExcelClass.get_sheet_value('C', num, sheet)
+                            first_name = ExcelClass.get_sheet_value('D', num, sheet)
+                            last_name = ExcelClass.get_sheet_value('E', num, sheet)
+                            group = ExcelClass.get_sheet_value('F', num, sheet)
+                            is_staff = ExcelClass.get_sheet_value('G', num, sheet).lower()
+                            if is_staff == 'true' or is_staff == '+' or is_staff == 'истина' or \
+                                    is_staff == 'правда' or is_staff == 'да':
+                                is_staff = True
+                            else:
+                                is_staff = False
+                            patronymic = ExcelClass.get_sheet_value('H', num, sheet)
+                            personnel_number = ExcelClass.get_sheet_value('I', num, sheet)
+                            subdivision = ExcelClass.get_sheet_value('J', num, sheet)
+                            workshop_service = ExcelClass.get_sheet_value('K', num, sheet)
+                            department_site = ExcelClass.get_sheet_value('L', num, sheet)
+                            position = ExcelClass.get_sheet_value('M', num, sheet)
+                            category = ExcelClass.get_sheet_value('N', num, sheet)
+                            if username and password:
+                                user_obj = DjangoClass.AccountSubClass.UserAccountClass(
+                                    username=username,
+                                    password=password,
+                                    first_name=first_name,
+                                    last_name=last_name,
+                                    email=email,
+                                    is_staff=is_staff,
+                                    is_superuser=False
+                                )
+                                group_obj = DjangoClass.AccountSubClass.UserGroupClass(
+                                    username=username,
+                                    group=group
+                                )
+                                user_first_data_obj = DjangoClass.AccountSubClass.UserFirstDataAccountClass(
+                                    username=username,
+                                    user_iin=username,
+                                    password=password,
+                                    first_name=first_name,
+                                    last_name=last_name,
+                                    patronymic=patronymic,
+                                    personnel_number=personnel_number,
+                                    subdivision=subdivision,
+                                    workshop_service=workshop_service,
+                                    department_site=department_site,
+                                    position=position,
+                                    category=category
+                                )
+                                user_objects.append([user_obj, group_obj, user_first_data_obj])
                 except Exception as ex:
-                    success_3 = False
-            result_form = success_3
-    form = CreateUsersForm
-    context = {
-        'data': data,
-        'form': form,
-        'result_form': result_form
-    }
+                    pass
+            else:
+                # Создание массива объектов аккаунтов из одиночной формы
+                try:
+                    form = CreateUserForm(request.POST)
+                    if form.is_valid():
+                        username = form.cleaned_data.get('username')
+                    else:
+                        try:
+                            username = request.POST['username']
+                            user = User.objects.get(username=username)
+                        except Exception as ex:
+                            username = None
+                    if username:
+                        form.is_valid()
+                        password1 = form.cleaned_data.get('password1')
+                        password2 = form.cleaned_data.get('password2')
+                        first_name = form.cleaned_data.get('first_name')
+                        last_name = form.cleaned_data.get('last_name')
+                        email = form.cleaned_data.get('email')
+                        is_staff = form.cleaned_data.get('is_staff')
+                        group = form.cleaned_data.get('group')
+                        patronymic = form.cleaned_data.get('patronymic')
+                        personnel_number = form.cleaned_data.get('personnel_number')
+                        subdivision = form.cleaned_data.get('subdivision')
+                        workshop_service = form.cleaned_data.get('workshop_service')
+                        department_site = form.cleaned_data.get('department_site')
+                        position = form.cleaned_data.get('position')
+                        category = form.cleaned_data.get('category')
+                        if password1 == password2:
+                            user_obj = DjangoClass.AccountSubClass.UserAccountClass(
+                                username=username,
+                                password=password1,
+                                first_name=first_name,
+                                last_name=last_name,
+                                email=email,
+                                is_staff=is_staff,
+                                is_superuser=False
+                            )
+                            group_obj = DjangoClass.AccountSubClass.UserGroupClass(
+                                username=username,
+                                group=group
+                            )
+                            user_first_data_obj = DjangoClass.AccountSubClass.UserFirstDataAccountClass(
+                                username=username,
+                                user_iin=username,
+                                password=password1,
+                                first_name=first_name,
+                                last_name=last_name,
+                                patronymic=patronymic,
+                                personnel_number=personnel_number,
+                                subdivision=subdivision,
+                                workshop_service=workshop_service,
+                                department_site=department_site,
+                                position=position,
+                                category=category
+                            )
+                            user_objects.append([user_obj, group_obj, user_first_data_obj])
+                except Exception as ex:
+                    pass
+            # Создание аккаунтов и доп данных для аккаунтов
+            success = True
+            for user_object in user_objects:
+                try:
+                    user_obj = user_object[0]
+                    group_obj = user_object[1]
+                    user_first_data_obj = user_object[2]
+                    DjangoClass.AccountSubClass.create_main_data_account(
+                        user_account_class=user_obj,
+                        user_group_class=group_obj,
+                        force_change=force_change
+                    )
+                    DjangoClass.AccountSubClass.create_first_data_account(
+                        user_first_data_account_class=user_first_data_obj,
+                        force_change=force_change
+                    )
+                except Exception as ex:
+                    success = False
+            result_form = success
+        context = {
+            'form_1': CreateUserForm,
+            'form_2': CreateUsersForm,
+            'result_form': result_form
+        }
+    except Exception as ex:
+        context = {
+            'form_1': CreateUserForm,
+            'form_2': CreateUsersForm,
+            'result_form': False
+        }
     return render(request, 'account/account_create_accounts.html', context)
 
 
+#
+#
+#
+def account_export_accounts(request):
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
+    try:
+        data = None
+        if request.method == 'POST':
+            workbook = ExcelClass.workbook_create()
+            sheet = ExcelClass.workbook_activate(workbook)
+            user_objects = User.objects.all().order_by('id')
+            titles = ['Имя пользователя', 'Пароль', 'Почта', 'Имя', 'Фамилия', 'Группы', 'Доступ к модерации',
+                      'Отчество', 'Табельный номер', 'Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Должность',
+                      'Категория']
+            for char in 'ABCDEFGHIJKLMN':
+                ExcelClass.set_sheet_value(col=char, row=1, value=titles['ABCDEFGHIJKLMN'.index(char)], sheet=sheet)
+
+            index = 1
+            for user_object in user_objects:
+                index += 1
+                print(index)
+                print(user_object.first_name)
+                sheet[f'A{index}'] = user_object.username
+                sheet[f'B{index}'] = user_object.password
+                sheet[f'C{index}'] = user_object.email
+                sheet[f'D{index}'] = user_object.first_name
+                sheet[f'E{index}'] = user_object.last_name
+                groups = Group.objects.filter(user=user_object)
+                group_list = ''
+                for group in groups:
+                    if len(str(group.name)) > 1:
+                        group_list += f", {group.name}"
+                sheet[f'F{index}'] = group_list[2:]
+                if user_object.is_staff:
+                    sheet[f'G{index}'] = 'True'
+                else:
+                    sheet[f'G{index}'] = 'False'
+                try:
+                    first_data_account = AccountDataModel.objects.get(
+                        username=User.objects.get(username=user_object.username))
+                    sheet[f'B{index}'] = first_data_account.password
+                    sheet[f'H{index}'] = first_data_account.patronymic
+                    sheet[f'I{index}'] = first_data_account.personnel_number
+                    sheet[f'J{index}'] = first_data_account.subdivision
+                    sheet[f'K{index}'] = first_data_account.workshop_service
+                    sheet[f'L{index}'] = first_data_account.department_site
+                    sheet[f'M{index}'] = first_data_account.position
+                    sheet[f'N{index}'] = first_data_account.category
+                except Exception as ex:
+                    pass
+            body = []
+            for user_object in user_objects:
+                groups = Group.objects.filter(user=user_object)
+                group_list = ''
+                for group in groups:
+                    if len(str(group.name)) > 1:
+                        group_list += f", {group.name}"
+                groups = group_list[2:]
+                if user_object.is_staff:
+                    stuff = 'True'
+                else:
+                    stuff = 'False'
+                try:
+                    first_data_account = AccountDataModel.objects.get(username=User.objects.get(
+                        username=user_object.username)
+                    )
+                    body.append([user_object.username, first_data_account.password, user_object.email,
+                                 user_object.first_name, user_object.last_name, groups, stuff,
+                                 first_data_account.patronymic, first_data_account.personnel_number,
+                                 first_data_account.subdivision, first_data_account.workshop_service,
+                                 first_data_account.department_site, first_data_account.position,
+                                 first_data_account.category])
+                except Exception as ex:
+                    body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
+                                 user_object.last_name, groups, stuff])
+                data = [titles, body]
+            ExcelClass.workbook_save(workbook=workbook, filename='static/media/data/account/export_users.xlsx')
+            result_form = True
+        else:
+            result_form = False
+        context = {
+            'data': data,
+            'result_form': result_form
+        }
+    except Exception as ex:
+        print(f"")
+        context = {
+            'data': False,
+            'result_form': False
+        }
+    return render(request, 'account/account_export_accounts.html', context)
+
+
+#
+#
+#
 def account_update_accounts_1c(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     form = None
     result_form = None
@@ -294,205 +364,8 @@ def account_update_accounts_1c(request):
     return render(request, 'account/account_update_accounts_1c.html', context)
 
 
-def account_export_accounts(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
-    data = None
-    form = None
-    result_form = None
-    if request.method == 'POST':
-        wb = openpyxl.Workbook()
-        sheet = wb.active
-        sheet.title = 'Страница 1'
-        user_objects = User.objects.all().order_by('id')
-        titles = ['Имя пользователя', 'Зашифрованный Пароль', 'Почта', 'Имя', 'Фамилия', 'Группы', 'Доступ к модерации',
-                  'Отчество', 'Табельный номер', 'Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Должность',
-                  'Категория']
-        for char in 'ABCDEFGHIJKLMN':
-            sheet[f'{char}1'] = titles['ABCDEFGHIJKLMN'.index(char)]
-        value = 1
-        for user_object in user_objects:
-            value += 1
-            sheet[f'A{value}'] = user_object.username
-            sheet[f'B{value}'] = user_object.password
-            sheet[f'C{value}'] = user_object.email
-            sheet[f'D{value}'] = user_object.first_name
-            sheet[f'E{value}'] = user_object.last_name
-            groups = Group.objects.filter(user=user_object)
-            group_list = ''
-            for group in groups:
-                if len(str(group.name)) > 1:
-                    group_list += f", {group.name}"
-            sheet[f'F{value}'] = group_list[2:]
-            if user_object.is_staff:
-                sheet[f'G{value}'] = 'ИСТИНА'
-            else:
-                sheet[f'G{value}'] = 'ЛОЖЬ'
-            try:
-                first_data_account = AccountDataModel.objects.get(username=User.objects.get(username=user_object.username))
-                sheet[f'H{value}'] = first_data_account.patronymic
-                sheet[f'I{value}'] = first_data_account.personnel_number
-                sheet[f'J{value}'] = first_data_account.subdivision
-                sheet[f'K{value}'] = first_data_account.workshop_service
-                sheet[f'L{value}'] = first_data_account.department_site
-                sheet[f'M{value}'] = first_data_account.position
-                sheet[f'N{value}'] = first_data_account.category
-            except Exception as ex:
-                pass
-        body = []
-        for user_object in user_objects:
-            groups = Group.objects.filter(user=user_object)
-            group_list = ''
-            for group in groups:
-                if len(str(group.name)) > 1:
-                    group_list += f", {group.name}"
-            groups = group_list[2:]
-            if user_object.is_staff:
-                stuff = 'ИСТИНА'
-            else:
-                stuff = 'ЛОЖЬ'
-            try:
-                first_data_account = AccountDataModel.objects.get(username=User.objects.get(username=user_object.username))
-                body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
-                             user_object.last_name, groups, stuff, first_data_account.patronymic,
-                             first_data_account.personnel_number, first_data_account.subdivision,
-                             first_data_account.workshop_service, first_data_account.department_site,
-                             first_data_account.position, first_data_account.category])
-            except Exception as ex:
-                body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
-                             user_object.last_name, groups, stuff])
-            data = [titles, body]
-        wb.save('static/media/data/account/export_users.xlsx')
-        result_form = True
-    else:
-        result_form = False
-    context = {
-        'data': data,
-        'form': form,
-        'result_form': result_form
-    }
-    return render(request, 'account/account_export_accounts.html', context)
-
-
-def account_change_account(request, username=None):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
-    try:
-        if username:
-            data = User.objects.get(username=username)
-        else:
-            data = User.objects.get(username=request.user.username)
-    except Exception as ex:
-        data = {
-            'username': 0
-        }
-    result_form = False
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        form.is_valid()
-        try:
-            user = User.objects.get(username=username)
-            password1 = form.cleaned_data.get('password1')
-            password2 = form.cleaned_data.get('password2')
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            email = form.cleaned_data.get('email')
-            is_staff = form.cleaned_data.get('is_staff')
-            groups = form.cleaned_data.get('groups')
-            groups = [x.strip() for x in str(groups).split(',')]
-            if password1 == password2:
-                success_1 = DjangoClass.change_account(
-                    username=user.username,
-                    password=password1,
-                    first_name=first_name,
-                    last_name=last_name,
-                    email=email,
-                    is_staff=is_staff,
-                    force_create=False
-                )
-                if success_1:
-                    success_2 = DjangoClass.set_groups_to_user(username=user.username, groups=groups,
-                                                               force_create=True)
-                    if success_1 and success_2:
-                        result_form = True
-        except Exception as ex:
-            pass
-    form = ChangeUserForm
-    context = {
-        'data': data,
-        'form': form,
-        'result_form': result_form,
-    }
-    return render(request, 'account/account_change_account.html', context)
-
-
-def account_change_accounts(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
-    data = None
-    form = None
-    result_form = False
-    if request.method == 'POST':
-        excel_file = request.FILES.get('document_addition_file_1')
-        if excel_file:
-            def get_value(rows: str, cols: int):
-                return str(sheet[rows + str(cols)].value)
-
-            wb = openpyxl.load_workbook(excel_file)
-            sheet = wb.active
-            max_row = sheet.max_row
-            users_array = []
-            for i in range(2, max_row + 1):
-                username = get_value('A', i)
-                password = get_value('B', i)
-                email = get_value('C', i)
-                first_name = get_value('D', i)
-                last_name = get_value('E', i)
-                group = get_value('F', i)
-                if get_value('G', i) == 'ИСТИНА' or get_value('G', i) == 'True':
-                    is_staff = True
-                else:
-                    is_staff = False
-                groups = [x.strip() for x in str(group).split(',')]
-                if username and password:
-                    users_array.append(DjangoClass.UserObjectClass(
-                        username=username,
-                        password=password,
-                        first_name=first_name,
-                        last_name=last_name,
-                        email=email,
-                        is_staff=is_staff,
-                        groups=groups,
-                    ))
-            success_3 = True
-            for user in users_array:
-                try:
-                    success_1 = DjangoClass.change_account(
-                        username=user.username,
-                        password=user.password,
-                        first_name=user.first_name,
-                        last_name=user.last_name,
-                        email=user.email,
-                        is_staff=user.is_staff,
-                        force_create=False
-                    )
-                    if success_1:
-                        success_2 = DjangoClass.set_groups_to_user(username=user.username, groups=user.groups,
-                                                                   force_create=True)
-                        if success_1 and success_2:
-                            result_form = True
-                except Exception as ex:
-                    success_3 = False
-            if success_3 is False:
-                result_form = False
-    form = CreateUsersForm
-    context = {
-        'data': data,
-        'form': form,
-        'result_form': result_form
-    }
-    return render(request, 'account/account_change_accounts.html', context)
-
-
 def account_generate_passwords(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     result_form = None
     data = None
     if request.method == 'POST':
@@ -535,9 +408,32 @@ def account_generate_passwords(request):
     return render(request, 'account/account_generate_passwords.html', context)
 
 
+def account_profile(request, username=None):
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
+    if request.method == 'POST':
+        pass
+    if username and username != 'None':
+        try:
+            data = AccountDataModel.objects.get(user_iin=username)
+        except Exception as ex:
+            data = None
+    else:
+        try:
+            data = AccountDataModel.objects.get(user_iin=request.user.username)
+        except Exception as ex:
+            data = None
+    context = {
+        'data': data,
+    }
+    return render(request, 'account/account_profile.html', context)
+
+
+#
+#
+#
 # Application
 def list_module(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     module = ApplicationModuleModel.objects.order_by('module_position')
     context = {
         'module': module,
@@ -546,7 +442,7 @@ def list_module(request):
 
 
 def list_component(request, module_slug=None):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if module_slug is not None:
         module = ApplicationModuleModel.objects.get(module_slug=module_slug)
         component = ApplicationComponentModel.objects.filter(component_Foreign=module).order_by('component_position')
@@ -560,7 +456,7 @@ def list_component(request, module_slug=None):
 
 # Rational
 def rational_list(request, category_slug=None):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if category_slug is not None:
             category_page = get_object_or_404(CategoryRationalModel, category_slug=category_slug)
@@ -581,7 +477,7 @@ def rational_list(request, category_slug=None):
 
 
 def rational_search(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if request.method == 'POST':
             search = request.POST['search_text']
@@ -599,7 +495,7 @@ def rational_search(request):
 
 
 def rational_detail(request, rational_id=1):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = RationalModel.objects.get(id=rational_id)
         user = User.objects.get(id=request.user.id)
@@ -637,7 +533,7 @@ def rational_detail(request, rational_id=1):
 
 
 def create_rational(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if request.method == 'POST':
             form = RationalForm(request.POST, request.FILES)
@@ -680,7 +576,7 @@ def create_rational(request):
 
 
 def rational_change(request, rational_id=None):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         if request.method == 'POST':
             form = RationalForm(request.POST, request.FILES)
@@ -722,7 +618,7 @@ def rational_change(request, rational_id=None):
 
 
 def rational_leave_comment(request, rational_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = RationalModel.objects.get(id=rational_id)
         CommentRationalModel.objects.create(comment_article=rational,
@@ -737,7 +633,7 @@ def rational_leave_comment(request, rational_id):
 
 
 def rational_change_rating(request, rational_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         blog_ = RationalModel.objects.get(id=rational_id)
         user = User.objects.get(id=request.user.id)
@@ -768,7 +664,7 @@ def rational_change_rating(request, rational_id):
 
 
 def rational_ratings(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = RationalModel.objects.order_by('-id')
         authors = []
@@ -808,7 +704,7 @@ def rational_ratings(request):
 
 # Salary
 def salary(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         data = None
         if request.method == 'POST':
@@ -825,7 +721,7 @@ def salary(request):
 
 
 def view_pdf(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         data = get_salary_data(month=request.POST['transact_id'])
@@ -836,7 +732,7 @@ def view_pdf(request):
 
 
 def render_pdf_view(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     template_path = 'app_km/pdf.html'
     data = get_salary_data()
     # data = None
@@ -866,7 +762,7 @@ def render_pdf_view(request):
 
 # Human Resources
 def career(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         data = None
         if request.method == 'POST':
@@ -882,7 +778,7 @@ def career(request):
 
 # Extra
 def passages_thermometry(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -939,7 +835,7 @@ def passages_thermometry(request):
 
 
 def passages_select(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -996,7 +892,7 @@ def passages_select(request):
 
 
 def passages_update(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid_old = request.POST['personid_old']
@@ -1019,7 +915,7 @@ def passages_update(request):
 
 
 def passages_insert(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = request.POST['personid']
@@ -1064,7 +960,7 @@ def passages_insert(request):
 
 
 def passages_delete(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -1084,7 +980,7 @@ def passages_delete(request):
 
 
 def geo(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         data = None
         form = GeoForm()
@@ -1152,7 +1048,7 @@ def geo(request):
 
 
 def email(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     mails = EmailModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
     paginator = Paginator(mails, 10)
@@ -1172,7 +1068,7 @@ def email(request):
 
 
 def send_email(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         subject = request.POST.get('subject', '')
         message_s = request.POST.get('message', '')
@@ -1191,7 +1087,7 @@ def send_email(request):
 
 
 def notification(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     form = NotificationForm(request.POST, request.FILES)
     pages = NotificationModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
@@ -1212,7 +1108,7 @@ def notification(request):
 
 
 def create_notification(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         NotificationModel.objects.create(
             notification_name=request.POST['notification_name'],
@@ -1224,7 +1120,7 @@ def create_notification(request):
 
 
 def accept(request, notify_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = NotificationModel.objects.get(id=notify_id)
         rational.notification_status = True
@@ -1235,7 +1131,7 @@ def accept(request, notify_id):
 
 
 def decline(request, notify_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         rational = NotificationModel.objects.get(id=notify_id)
         rational.notification_status = False
@@ -1246,7 +1142,7 @@ def decline(request, notify_id):
 
 
 def documentation(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         DocumentModel.objects.create(
             document_name=request.POST['document_name'],
@@ -1276,7 +1172,7 @@ def documentation(request):
 
 
 def contact(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         ContactModel.objects.create(
             contact_name=request.POST['contact_name'],
@@ -1305,7 +1201,7 @@ def contact(request):
 
 
 def list_sms(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         SmsModel.objects.create(
             sms_author=User.objects.get(id=request.user.id),
@@ -1333,7 +1229,7 @@ def list_sms(request):
 
 
 def message(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         MessageModel.objects.create(
             message_name=request.POST['message_name'],
@@ -1361,7 +1257,7 @@ def message(request):
 
 
 def weather(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     appid = '82b797b6ebc625032318e16f1b42c016'
     url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
     if request.method == 'POST':
@@ -1403,13 +1299,13 @@ def weather(request):
 
 
 def news_list(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     latest_article_list = ArticleModel.objects.order_by('-article_pub_date')[:10]
     return render(request, 'app_km/news_list.html', {'latest_article_list': latest_article_list})
 
 
 def news_create(request):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     if request.method == 'POST':
         ArticleModel.objects.create(
             article_title=request.POST['article_title'],
@@ -1422,7 +1318,7 @@ def news_create(request):
 
 
 def news_detail(request, article_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         a = ArticleModel.objects.get(id=article_id)
     except Exception as ex:
@@ -1433,7 +1329,7 @@ def news_detail(request, article_id):
 
 
 def leave_comment(request, article_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
         a = ArticleModel.objects.get(id=article_id)
     except Exception as ex:
@@ -1444,7 +1340,7 @@ def leave_comment(request, article_id):
 
 
 def increase_rating(request, article_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     a = ArticleModel.objects.get(id=article_id)
     a.increase()
     a.save()
@@ -1452,7 +1348,7 @@ def increase_rating(request, article_id):
 
 
 def decrease_rating(request, article_id):
-    AuthorizationClass.redirect_if_user_is_not_authenticated(request=request)
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     a = ArticleModel.objects.get(id=article_id)
     a.decrease()
     a.save()

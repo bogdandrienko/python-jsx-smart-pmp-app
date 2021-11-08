@@ -43,8 +43,8 @@ class AccountDataModel(models.Model):
 
     class Meta:
         ordering = ('-id',)
-        verbose_name = 'Данные аккаунта'
-        verbose_name_plural = 'Данные аккаунтов'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
         db_table = 'account_data_table'
 
     def __str__(self):
