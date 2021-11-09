@@ -120,10 +120,12 @@
                                 <li>
                                     <h6 class="dropdown-header">Аккаунты</h6>
                                     <a class="dropdown-item" href="{% url 'account_create_accounts' 1 %}">Создать/изменить пользователей</a>
+                                    <a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список пользователей</a>
+                                    <a class="dropdown-item" href="{% url 'account_generate_passwords' %}">Сгенерировать пароли для аккаунтов</a>
 
 
                                     {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="#">Войти [ Вы уже вошли в аккаунт ]</a>
+                                        <a class="dropdown-item" href="{% url 'account_login' %}">Войти [ Вы уже вошли в аккаунт ]</a>
                                     {% else %}
                                         <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
                                     {% endif %}
@@ -131,22 +133,20 @@
                                     {% if request.user.is_authenticated %}
                                         <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
                                     {% else %}
-                                        <a class="dropdown-item" href="#">Выйти [ Вы не вошли в аккаунт ]</a>
+                                        <a class="dropdown-item" href="{% url 'account_login' %}">Выйти [ Вы не вошли в аккаунт ]</a>
                                     {% endif %}
 
                                     <li>
                                         <hr class="dropdown-divider text-light">
                                     </li>
-                                    <a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список пользователей</a>
-                                    <a class="dropdown-item" href="{% url 'account_generate_passwords' %}">Сгенерировать пароли для аккаунтов</a>
                                     <a class="dropdown-item" href="{% url 'account_update_accounts_1c' %}">Обновить пользователей из 1С</a>
-{#                                    {% if request.user.is_authenticated %}#}
-{#                                        <a class="dropdown-item" href="{% url 'account_change_account' request.user.username %}">Изменить свои дополнительные данные</a>#}
-{#                                    {% else %}#}
-{#                                        <a class="dropdown-item" href="#">Изменить свои данные [ Вы не вошли в аккаунт ]</a>#}
-{#                                    {% endif %}#}
                                     {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_profile' request.user.username %}">Личный кабинет [{{ request.user.username }}]</a>
+                                        <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Изменить личный профиль [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_profile' request.user.username %}">Личный профиль [{{ request.user.username }}]</a>
                                     {% else %}
                                         <a class="dropdown-item" href="#">Личный кабинет [ Вы не вошли в аккаунт ]</a>
                                     {% endif %}

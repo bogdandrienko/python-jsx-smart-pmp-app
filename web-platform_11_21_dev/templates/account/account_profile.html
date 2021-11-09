@@ -34,7 +34,7 @@
 
             {% if data.user_iin|stringformat:"i" == request.user.username %}
                 <div class="order-md-last text-end">
-                    <a href="#" class="btn btn-danger btn-lg">Изменить личный профиль</a>
+                    <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg">Изменить личный профиль</a>
                 </div>
             {% else %}
                 <div class="order-md-last text-end">

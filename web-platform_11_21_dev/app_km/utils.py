@@ -234,10 +234,12 @@ class DjangoClass:
                 for grp in group:
                     try:
                         if force_create:
-                            user_group = Group.objects.get_or_create(name=grp)
+                            user_group = Group.objects.get_or_create(name=grp)[0]
                         else:
                             user_group = Group.objects.get(name=grp)
-                        user_group[0].user_set.add(User.objects.get(username=username))
+                        user = User.objects.get(username=username)
+                        user.groups.clear()
+                        user_group.user_set.add(user)
                     except Exception as ex:
                         success = False
                 return success
@@ -507,8 +509,8 @@ def get_salary_data(iin=970801351179, month=4, year=2021):
     print('\n ***************** \n')
     print(f"date_base64: {date_base64}")
 
-    url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-    # url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
     print('\n ***************** \n')
     print(f"url: {url}")
 
@@ -2405,7 +2407,7 @@ class ExcelClass:
 
     @staticmethod
     def workbook_create():
-        workbook = openpyxl.Workbook
+        workbook = openpyxl.Workbook()
         return workbook
 
     @staticmethod
@@ -2414,15 +2416,17 @@ class ExcelClass:
         return workbook
 
     @staticmethod
-    def workbook_activate(workbook, page_name='page 1'):
+    def workbook_activate(workbook):
         sheet = workbook.active
-        sheet.title = page_name
         return sheet
 
     @staticmethod
     def workbook_save(workbook, filename: str):
-        workbook.save(filename)
-        # openpyxl.Workbook.save(filename)
+        openpyxl.Workbook.save(workbook, filename)
+
+    @staticmethod
+    def set_sheet_title(sheet, page_name='page 1'):
+        sheet.title = page_name
 
     @staticmethod
     def get_sheet_value(col: Union[str, int], row: int, sheet):

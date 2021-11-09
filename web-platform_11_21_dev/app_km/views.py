@@ -213,6 +213,8 @@ def account_create_accounts(request, quantity=None):
             success = True
             for user_object in user_objects:
                 try:
+                    if user_object[0].username == 'Bogdan' or user_object[0].username == 'bogdan':
+                        continue
                     user_obj = user_object[0]
                     group_obj = user_object[1]
                     user_first_data_obj = user_object[2]
@@ -242,9 +244,6 @@ def account_create_accounts(request, quantity=None):
     return render(request, 'account/account_create_accounts.html', context)
 
 
-#
-#
-#
 def account_export_accounts(request):
     DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
     try:
@@ -258,42 +257,44 @@ def account_export_accounts(request):
                       'Категория']
             for char in 'ABCDEFGHIJKLMN':
                 ExcelClass.set_sheet_value(col=char, row=1, value=titles['ABCDEFGHIJKLMN'.index(char)], sheet=sheet)
-
             index = 1
             for user_object in user_objects:
                 index += 1
-                print(index)
-                print(user_object.first_name)
-                sheet[f'A{index}'] = user_object.username
-                sheet[f'B{index}'] = user_object.password
-                sheet[f'C{index}'] = user_object.email
-                sheet[f'D{index}'] = user_object.first_name
-                sheet[f'E{index}'] = user_object.last_name
+                if user_object.username == 'Bogdan' or user_object.username == 'bogdan':
+                    index -= 1
+                    continue
+                ExcelClass.set_sheet_value(col='A', row=index, value=user_object.username, sheet=sheet)
+                ExcelClass.set_sheet_value(col='B', row=index, value=user_object.password, sheet=sheet)
+                ExcelClass.set_sheet_value(col='C', row=index, value=user_object.email, sheet=sheet)
+                ExcelClass.set_sheet_value(col='D', row=index, value=user_object.first_name, sheet=sheet)
+                ExcelClass.set_sheet_value(col='E', row=index, value=user_object.last_name, sheet=sheet)
                 groups = Group.objects.filter(user=user_object)
                 group_list = ''
                 for group in groups:
                     if len(str(group.name)) > 1:
                         group_list += f", {group.name}"
-                sheet[f'F{index}'] = group_list[2:]
+                ExcelClass.set_sheet_value(col='F', row=index, value=group_list[2:], sheet=sheet)
                 if user_object.is_staff:
-                    sheet[f'G{index}'] = 'True'
+                    ExcelClass.set_sheet_value(col='G', row=index, value='True', sheet=sheet)
                 else:
-                    sheet[f'G{index}'] = 'False'
+                    ExcelClass.set_sheet_value(col='G', row=index, value='False', sheet=sheet)
                 try:
                     first_data_account = AccountDataModel.objects.get(
                         username=User.objects.get(username=user_object.username))
-                    sheet[f'B{index}'] = first_data_account.password
-                    sheet[f'H{index}'] = first_data_account.patronymic
-                    sheet[f'I{index}'] = first_data_account.personnel_number
-                    sheet[f'J{index}'] = first_data_account.subdivision
-                    sheet[f'K{index}'] = first_data_account.workshop_service
-                    sheet[f'L{index}'] = first_data_account.department_site
-                    sheet[f'M{index}'] = first_data_account.position
-                    sheet[f'N{index}'] = first_data_account.category
+                    ExcelClass.set_sheet_value(col='B', row=index, value=first_data_account.password, sheet=sheet)
+                    ExcelClass.set_sheet_value(col='H', row=index, value=first_data_account.patronymic, sheet=sheet)
+                    ExcelClass.set_sheet_value(col='I', row=index, value=first_data_account.personnel_number, sheet=sheet)
+                    ExcelClass.set_sheet_value(col='J', row=index, value=first_data_account.subdivision, sheet=sheet)
+                    ExcelClass.set_sheet_value(col='K', row=index, value=first_data_account.workshop_service, sheet=sheet)
+                    ExcelClass.set_sheet_value(col='L', row=index, value=first_data_account.department_site, sheet=sheet)
+                    ExcelClass.set_sheet_value(col='M', row=index, value=first_data_account.position, sheet=sheet)
+                    ExcelClass.set_sheet_value(col='N', row=index, value=first_data_account.category, sheet=sheet)
                 except Exception as ex:
                     pass
             body = []
             for user_object in user_objects:
+                if user_object.username == 'Bogdan' or user_object.username == 'bogdan':
+                    continue
                 groups = Group.objects.filter(user=user_object)
                 group_list = ''
                 for group in groups:
@@ -315,7 +316,7 @@ def account_export_accounts(request):
                                  first_data_account.department_site, first_data_account.position,
                                  first_data_account.category])
                 except Exception as ex:
-                    body.append([user_object.username, user_object.password, user_object.email, user_object.first_name,
+                    body.append([user_object.username, user_object.password[:13], user_object.email, user_object.first_name,
                                  user_object.last_name, groups, stuff])
                 data = [titles, body]
             ExcelClass.workbook_save(workbook=workbook, filename='static/media/data/account/export_users.xlsx')
@@ -327,41 +328,11 @@ def account_export_accounts(request):
             'result_form': result_form
         }
     except Exception as ex:
-        print(f"")
         context = {
             'data': False,
             'result_form': False
         }
     return render(request, 'account/account_export_accounts.html', context)
-
-
-#
-#
-#
-def account_update_accounts_1c(request):
-    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
-    data = None
-    form = None
-    result_form = None
-    if request.method == 'POST':
-        data_ = get_users()
-        headers = ["Период", "Статус", "ИИН", "Фамилия", "Имя", "Отчество", 'Табельный', 'Подразделение', 'Цех/Служба',
-                   'Участок/Отдел', 'Должность', 'Категория']
-        bodies = []
-        for x in data_["global_objects"]:
-            val = []
-            for y in data_["global_objects"][x]:
-                val.append(data_["global_objects"][x][y])
-            bodies.append(val)
-        data = [headers, bodies]
-        result_form = True
-        print(data)
-    context = {
-        'data': data,
-        'form': form,
-        'result_form': result_form
-    }
-    return render(request, 'account/account_update_accounts_1c.html', context)
 
 
 def account_generate_passwords(request):
@@ -406,6 +377,56 @@ def account_generate_passwords(request):
         'result_form': result_form
     }
     return render(request, 'account/account_generate_passwords.html', context)
+
+
+#
+#
+#
+def account_update_accounts_1c(request):
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
+    data = None
+    form = None
+    result_form = None
+    if request.method == 'POST':
+        data_ = get_users()
+        headers = ["Период", "Статус", "ИИН", "Фамилия", "Имя", "Отчество", 'Табельный', 'Подразделение', 'Цех/Служба',
+                   'Участок/Отдел', 'Должность', 'Категория']
+        bodies = []
+        for x in data_["global_objects"]:
+            val = []
+            for y in data_["global_objects"][x]:
+                val.append(data_["global_objects"][x][y])
+            bodies.append(val)
+        data = [headers, bodies]
+        result_form = True
+        print(data)
+    context = {
+        'data': data,
+        'form': form,
+        'result_form': result_form
+    }
+    return render(request, 'account/account_update_accounts_1c.html', context)
+
+
+#
+#
+#
+def account_change_profile(request):
+    DjangoClass.AuthorizationSubClass.redirect_if_user_is_not_authenticated(request=request)
+    try:
+        result_form = False
+        if request.method == 'POST':
+            pass
+        context = {
+            'form_1': CreateUserForm,
+            'result_form': result_form
+        }
+    except Exception as ex:
+        context = {
+            'form_1': CreateUserForm,
+            'result_form': False
+        }
+    return render(request, 'account/account_change_profile.html', context)
 
 
 def account_profile(request, username=None):

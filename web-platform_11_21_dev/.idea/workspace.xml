@@ -1,8 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="">
+    <list default="true" id="74f7b2e5-75dd-4fb5-bae8-768c2fd7331b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/web-platform_11_21_dev.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SCRIPTS/win_collect_clear_static.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/account.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/account/account_change_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web-platform_07_21_dev.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCRIPTS/win_collect_static.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/SCRIPTS/win_collect_static.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/migrations/0002_auto_20211107_0951.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202101,ed40e72f39a899caba4f5e367612b3c6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202102,295515c0d92de1bd361b4d52e67465a1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202103,08939b1e93c29017dcfdc2b5973b840e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202105,c20284eb13074c25d0b161da69094aa8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202106,478c2894dd43d1670e7bda67d3a8fffa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/www.km-open.onlineproperty,d8aa6276a1f7da9fb0f04fdd2ac5dbf4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chsidenchange20210301,d0822ca1336544cfd45939b5614f6fe2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202104,0f68107cbc8ca10c04cc77a9a29c8d4d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202107,4ff62d0d258add932e6e672691d3c653" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202108,0a01918840aee5ceb8a66a58b9bc9514" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprl970801351179202109,69a3e6cd2300bc641d05a061732a2508" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Mjc1QTUwMkNFNjI3QTBCQkIzNkNEMzY0QTM5MEMyN,8d6cfec5f7b8e5e9881e5bbe9751276e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_N0Y3QURDRTdCMzJDNDhDMkIzRDVGRjlGMjBBRUFGN,f340a809777c7873d5c9a038a68b3833" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Njg4RjZDNkIwODMyMUVBNkE2ODY5MENDMkQzNDZCR,c96d73f99c36b84bede8e9a2abb81ee2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_NzlDRUIzQzcyRTdFODZDRDFGMTMxMTRFRTE0RjQ2N,b2a03f4b9f9250b7590ad1cf279af604" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_ODdFMTQ5NUUzRDUxQzlBMzJCMzAwMzIzRDREMDExO,2d894b5b6996f31e395ba50828be82bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_OUQ5MkY1OEQ5NTM4QTlGNEZERUNCNEM4NTlFN0EyM,e923bb56b1274ffda419c48a4d583806" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Q0VFMEIxRDcxRjRFQjAyQjY2NDIwOTA1QkM4MDAyN,e804edabcd1ebc16cd55086f0c319530" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QTIxOERGQzRDMDhFMEE1Q0IwN0E3NzgzMDNCQTA5N,8266ec241e2cc1977df13cac0b54b692" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QkUyNUE0REY1NzdCMERFNEUwOTAwMzgzQjcwMjRFQ,8c8d03614d9092080d0f80e8c305397e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Rjg4ODgzOTA0Rjc2OTM5NERENDA5MEVFMjNBMzUyN,467189c8e19adc07516e68bb83012c4d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_RkFCQTNFQzdDNkNBNzc4QkQ4OEE3QkEwNTFDREMwM,8760b282234abc968b01b673d289778b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QTkzNDdBM0IxNTI1OTgyQjA5RUE1REZFODM5MkE1N,27acd4fa34dc77f65392a6a6efddd7f9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QjFDMTBBMjBCNjBBNEU3QjA1NTNGRTY0RkM5ODUzM,8f6680e730f7a8d4c16f1a38e940c55e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QzY3NDU5M0Y1RDVDNTA4N0YzODQ0RkI1OTU1QkE1M,f4bf76d0b75cb6f329493f4076887e60" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MzEzNkQwMkY5NTdEMUU0ODhDMTZFNEE2RTBCRkYzNTdGMzg0,c50c86684faccece0f948de7c170d3e2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MzkwNjE3MDM1M0YwQjA0QjAzNEMwNDEwMkQ1QjE4RkY1MzE0,e66fe92af7c6bcb967c7a3e75299aa43" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_Q0VFODM2QzlCOTk0MTVFMThCQkJDNERFQjMzNjQ2M0VGMDMy,c4d37d48b959701a6d4b0e03e82db3a9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_RUM1NUY1NTYyODVENjNGQ0YyMDYzRjQ4MjZGMjg0RTFGMUUw,8704329a682d24791b674850ffa91884" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_0LMEBdD.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_qZ2KgyO.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/component/Старая_схема_алкотестов.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/component/Фото_текущего.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/component/заявка.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/module/Новая_схема_алкотестов.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/module/Шкаф.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/Итоговый_отчет_по_проекту_Машинное_зрение_контроль_i8w37lw.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/Паспорт_Машинное_зрение_контроль_схода_на_грохотах_vf9W3J8.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/План_управления_проектом_Машинное_зрение_контроль__lFfpgwh.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/SMART-Project-Managment-Platform.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__1._Описание__Mu3yWrn.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__3.1._Паспорт.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__3.2._План_уп_jzu3BHi.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/SMART_-_внедрение.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/SSH.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/Рацпредложения_2020г..xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/Снимок3.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Акт_оценки_результатов_ОПЭ.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Итоговый_отчет_по_проекту_VR_тренажер.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Паспорт_на_VR_тренажер.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Система_Rift_S_.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/15_05_2021/20_28_06/icon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/15_05_2021/20_28_06/Казахский_язык.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/15_05_2021/20_28_06/ОБЖ.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Проход.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Реквизиты.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Схема_подключения_алкотеста.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/Паспорт_Машинное_зрение_контроль_схода_на_грохотах_cX08TYh.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/План_управления_проектом_Машинное_зрение_контроль__uHcQB95.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Виртуальная_реальность_ТЗ.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Итоговый_отчет_по_проекту_VR_тренажер.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Система_Rift_S_.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/SMART-Project-Managment-Platform.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/Итоговый_отчет_по_проекту_VR_тренажер.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/Корректировка_премирования_проектной_команды.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_export_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_export_accounts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,33 +112,10 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="package.json" />
-        <option value="Python Script" />
-        <option value="HTML File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/package.json" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="showPreview" value="true" />
-  </component>
-  <component name="ProjectId" id="1uWgdDLj0A09NNYms8IN41OpzlO" />
+  <component name="ProjectId" id="20fR4k2718wTZ9yII8hb33VMhLv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -48,8 +125,6 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="postgresql" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -58,137 +133,16 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\account" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\app_km\templates\app_km\skud" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\app_km\templates\app_km" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_08_21_dev\app_km\templates\app_km" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_08_21_dev\app_km" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\rational" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\users" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\app_km\templates\app_km\skud" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_07_21_dev\app_account\templatetags" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.utils">
-    <configuration name="service" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="web-platform_07_21_dev" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app_km" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app_km/service.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="skud" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="web-platform_07_21_dev" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Python DOCS/0_Applications" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Python DOCS/0_Applications/skud.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="web-platform_07_21_dev" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="web-platform_07_21_dev" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app_km" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app_km/utils.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="web-platform_07_21_dev" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app_rational" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app_rational/views.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="web-platform" type="Python.DjangoServer" factoryName="Django server">
-      <module name="web-platform_07_21_dev" />
+  <component name="RunManager">
+    <configuration name="web-platform_11_21_dev" type="Python.DjangoServer" factoryName="Django server">
+      <module name="web-platform_11_21_dev" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -211,163 +165,18 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Django Server.web-platform" />
-      <item itemvalue="Python.skud" />
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python.views" />
-      <item itemvalue="Python.service" />
-      <item itemvalue="Python.utils" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.utils" />
-        <item itemvalue="Python.service" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.views" />
-        <item itemvalue="Python.skud" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8e70901f-b0ad-4049-b40c-7c955fb28241" name="Default Changelist" comment="" />
-      <created>1624786846409</created>
+      <changelist id="74f7b2e5-75dd-4fb5-bae8-768c2fd7331b" name="Changes" comment="" />
+      <created>1636433469726</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1624786846409</updated>
-      <workItem from="1624786848617" duration="1869000" />
-      <workItem from="1624817454851" duration="1916000" />
-      <workItem from="1624819509024" duration="1360000" />
-      <workItem from="1624825361379" duration="1153000" />
-      <workItem from="1624875628733" duration="1299000" />
-      <workItem from="1625294842447" duration="1340000" />
-      <workItem from="1625636000444" duration="2775000" />
-      <workItem from="1626140991114" duration="7021000" />
-      <workItem from="1626238379192" duration="3571000" />
-      <workItem from="1626410665942" duration="1227000" />
-      <workItem from="1626427007192" duration="5794000" />
-      <workItem from="1626456161287" duration="322000" />
-      <workItem from="1626456508818" duration="73000" />
-      <workItem from="1626456605285" duration="97000" />
-      <workItem from="1626456722460" duration="79000" />
-      <workItem from="1626456838332" duration="11000" />
-      <workItem from="1626456859523" duration="149000" />
-      <workItem from="1626457030069" duration="146000" />
-      <workItem from="1626457186958" duration="87000" />
-      <workItem from="1626457284504" duration="155000" />
-      <workItem from="1626457453014" duration="75000" />
-      <workItem from="1626457537531" duration="423000" />
-      <workItem from="1626457973990" duration="24000" />
-      <workItem from="1626458011026" duration="130000" />
-      <workItem from="1626458159131" duration="256000" />
-      <workItem from="1626458656472" duration="9410000" />
-      <workItem from="1626490719321" duration="7519000" />
-      <workItem from="1626659978946" duration="143000" />
-      <workItem from="1626660131726" duration="716000" />
-      <workItem from="1626662970381" duration="4544000" />
-      <workItem from="1626687240994" duration="596000" />
-      <workItem from="1626836775995" duration="5406000" />
-      <workItem from="1626918704034" duration="8222000" />
-      <workItem from="1626944620151" duration="640000" />
-      <workItem from="1626945318833" duration="2188000" />
-      <workItem from="1627005478504" duration="13047000" />
-      <workItem from="1627022906670" duration="1642000" />
-      <workItem from="1627024578972" duration="9411000" />
-      <workItem from="1627264844913" duration="16010000" />
-      <workItem from="1627351224369" duration="19308000" />
-      <workItem from="1627437164196" duration="5053000" />
-      <workItem from="1627551437204" duration="3628000" />
-      <workItem from="1627610363104" duration="8311000" />
-      <workItem from="1627629966566" duration="10950000" />
-      <workItem from="1627641061110" duration="254000" />
-      <workItem from="1627899102020" duration="816000" />
-      <workItem from="1628233555396" duration="4366000" />
-      <workItem from="1628562425738" duration="6368000" />
-      <workItem from="1628569793016" duration="1210000" />
-      <workItem from="1628668951547" duration="2945000" />
-      <workItem from="1628759766643" duration="3270000" />
-      <workItem from="1628819689033" duration="459000" />
-      <workItem from="1628820159072" duration="8738000" />
-      <workItem from="1628840075128" duration="7411000" />
-      <workItem from="1629084485106" duration="19500000" />
-      <workItem from="1629110588678" duration="930000" />
-      <workItem from="1629165101623" duration="8690000" />
-      <workItem from="1629179497807" duration="4000" />
-      <workItem from="1629184748095" duration="2062000" />
-      <workItem from="1629253230345" duration="16443000" />
-      <workItem from="1629337802747" duration="16760000" />
-      <workItem from="1629425455372" duration="18589000" />
-      <workItem from="1629452666271" duration="4352000" />
-      <workItem from="1629683926493" duration="15280000" />
-      <workItem from="1629769756988" duration="2788000" />
-      <workItem from="1629877457375" duration="2235000" />
-      <workItem from="1629944923731" duration="27025000" />
-      <workItem from="1630375760587" duration="13695000" />
-      <workItem from="1630486522623" duration="135000" />
-      <workItem from="1630486670699" duration="1103000" />
-      <workItem from="1630547990192" duration="4784000" />
-      <workItem from="1630640866047" duration="5487000" />
-      <workItem from="1632376522724" duration="914000" />
-      <workItem from="1632379835438" duration="182000" />
-      <workItem from="1632380027775" duration="831000" />
-      <workItem from="1632380993960" duration="3355000" />
-      <workItem from="1632389999314" duration="898000" />
-      <workItem from="1632712571807" duration="106000" />
-      <workItem from="1632888202959" duration="19219000" />
-      <workItem from="1632970104198" duration="4002000" />
-      <workItem from="1634048386690" duration="9000" />
-      <workItem from="1634048406892" duration="6000" />
-      <workItem from="1634048427541" duration="24000" />
-      <workItem from="1634624272673" duration="761000" />
-      <workItem from="1634646366301" duration="2793000" />
-      <workItem from="1635233026080" duration="84000" />
-      <workItem from="1635233384042" duration="2000" />
-      <workItem from="1635234883174" duration="3116000" />
-      <workItem from="1635327492156" duration="4255000" />
-      <workItem from="1635331844748" duration="47000" />
-      <workItem from="1635346990787" duration="202000" />
-      <workItem from="1635354117507" duration="435000" />
-      <workItem from="1635354677385" duration="91000" />
-      <workItem from="1635355019452" duration="129000" />
-      <workItem from="1635355219433" duration="740000" />
-      <workItem from="1635356142499" duration="737000" />
-      <workItem from="1635356921688" duration="890000" />
-      <workItem from="1635358775449" duration="439000" />
-      <workItem from="1635359538869" duration="352000" />
-      <workItem from="1635387657302" duration="5983000" />
-      <workItem from="1635399893037" duration="561000" />
-      <workItem from="1635400469870" duration="811000" />
-      <workItem from="1635405194764" duration="124000" />
-      <workItem from="1635405354155" duration="506000" />
-      <workItem from="1635406254130" duration="11626000" />
-      <workItem from="1635472740284" duration="18076000" />
-      <workItem from="1635603869520" duration="135000" />
-      <workItem from="1635604086482" duration="9000" />
-      <workItem from="1635604114666" duration="193000" />
-      <workItem from="1635604683092" duration="116000" />
-      <workItem from="1635607060941" duration="109000" />
-      <workItem from="1635688299163" duration="1187000" />
-      <workItem from="1635740014499" duration="800000" />
-      <workItem from="1635748516981" duration="7219000" />
-      <workItem from="1635779599026" duration="894000" />
-      <workItem from="1635825949976" duration="1078000" />
-      <workItem from="1635846293265" duration="4076000" />
-      <workItem from="1635907244700" duration="13693000" />
-      <workItem from="1635931010163" duration="6142000" />
-      <workItem from="1636004515545" duration="10576000" />
-      <workItem from="1636039215561" duration="709000" />
-      <workItem from="1636040292057" duration="604000" />
-      <workItem from="1636083465601" duration="5265000" />
-      <workItem from="1636171720239" duration="1879000" />
-      <workItem from="1636173685963" duration="531000" />
-      <workItem from="1636174245699" duration="34295000" />
-      <workItem from="1636211261905" duration="971000" />
-      <workItem from="1636254552874" duration="19046000" />
-      <workItem from="1636293988508" duration="2149000" />
-      <workItem from="1636337049203" duration="29348000" />
-      <workItem from="1636380685529" duration="1297000" />
+      <updated>1636433469726</updated>
+      <workItem from="1636433472242" duration="419000" />
+      <workItem from="1636434381505" duration="1056000" />
+      <workItem from="1636435646119" duration="1653000" />
     </task>
     <servers />
   </component>
@@ -388,13 +197,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/lin_run_sh$utils.coverage" NAME="utils Coverage Results" MODIFIED="1636173870528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_km" />
-    <SUITE FILE_PATH="coverage/web_platform_07_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1626238502088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Python DOCS/0_Applications" />
-    <SUITE FILE_PATH="coverage/lin_run_sh$service.coverage" NAME="service Coverage Results" MODIFIED="1635907757871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_km" />
-    <SUITE FILE_PATH="coverage/web_platform_09_21_dev$test.coverage" NAME="test Coverage Results" MODIFIED="1632383532200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/web_platform_07_21_dev$views.coverage" NAME="views Coverage Results" MODIFIED="1626458166663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_rational" />
-    <SUITE FILE_PATH="coverage/lin_run_sh$test.coverage" NAME="test Coverage Results" MODIFIED="1635405818723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
