@@ -2,107 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74f7b2e5-75dd-4fb5-bae8-768c2fd7331b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/web-platform_11_21_dev.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SCRIPTS/win_collect_clear_static.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/account.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/account/account_change_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web-platform_07_21_dev.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_M0E0QTE4MEZFNDYzQzgxQjI4MjVGQ0YwOTIzRDAwNDBBMEMx,ddf3c537a812be007ff01f26f700983b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MDg2QUE5NTI5RjhFNjkyNURGNTc1QUU3ODhCREE0MUI4QUZB,fc911228cf441a302cdfb27835049627" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MDlBOEU1MTRGOUNDRDU4RUFCRTFBMzZFRUREQjg3MTJERkQ5,1f04327fcb0f2d70be5d87fb4ecaa60f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MEE4QTk2NEQwREVBQ0U3REYzRkQ2MzQxQjRGQTRDMjBCRTEx,e7d307d29482ca7031f1147e8dce7f8c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MEQ4MDg3QUUwQkJBQzNDMUNDNTkyOTIxQ0E3MDM0MDREODJB,9bec4f4bf1983254a1be8ba9cc59899c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MjBFREIyOTlFRTEzRjY1ODE1NzYwRUM5QUE1QjNDNDhGNTBB,2fb07d4b80bebb0578734eb8ccb29fc6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MjMyMjNDMEI2QzZBN0I1MzNCN0NDNTY2Q0ZDRDFENDhDQkRB,b1e54868adf34526eab8aee86e1b6d17" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_NDcwQkUzMUM2RjM1RkJDMDEwQjRGOTcxMzZEQTA4MDIxQjJC,34c16a465d0815dceb559d3fa30fbb52" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_NjMxQUUzQ0ZFOEZFMjY4MzkxODQyMTY5NTYwNkZGN0NCRjk0,a3b1ef7fdca874f75dc05cbd38a7e3b9" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_NkZCQzJEQzFDN0VEOUZFRjBFM0RGNUE5MThFNjE4RjUwOEUw,1bd25be408f090d684cd5d4a11998170" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_NzMxOUVBRkQyNkFERkVDOTc0RTQ1REJFRTYwNzA4NTJDMTlB,b1182b145881c0f4aaee03b447bde282" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_NzgxOEJFMEU5RTgxQjlDNUYxNkZBQThFN0REQ0JBQkQ1NzhF,2741973409a51b06d053240fe3be5026" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_ODY3OTFCNUQ4ODE3RkI5NDk5RUY3QTU0QkQ5NEVFQkRDM0My,d5119cb97771bd03a1abbdea3f6d1b3d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_ODk0NDg0MzQyNkZBRjBFMDE2MDkzOUVDMzlBMDBDQUMzOUFC,9d2dde8b0477d1fde4445266eb0763d1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_OTVDMUQwNERFN0Y2QjRDNzFDMEU5MUEwNEQ5MDRBNDYxQjRC,0c8f9a7f320f5f995426df4632bce7fa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_OUM3NjBDQTRCNkE4N0IxRUI4Q0E4MjZGNDNEQTUxMjk2MjAz,117c47c2fd2b84a64fe3655b6bd86939" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QTE2RUZGRkYwNDBENTZGM0YwMjRENUEwRkI2MUU3MjYxQjAz,230cb2063851c7ddf32be100fe44f867" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QTcyMDMyOUUyMjlBN0ZDOUVGRTQ0QTdCNkNBQzYxOUI3Q0U4,4bdb3c6a0b6f91956dc6e3f1f3f896fe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QUZGNkI1QUY4Mzk0RTM2ODRCQUVEQTIzNzI2MDM3RDBDNUZF,b4a3c5e5383e695d94dab45f7a18b8f2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QjE1Njk4MjNCMjNERkZCNzBBNDcyMjIwMTcxRjUwNjZDM0Ix,ce4834973b5f9ea6f94a42e34fc7337c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QzdEREIyMzgzN0Q3QTdCMTY3QUQ4REJCQjc2NDU3MEVBMTIw,42035d32408c50b121eeb2ddeea3f731" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_RjAzN0Y4NzNBRDNCMjQyOEY0MUMwNzBCQjU0QkYxOTE5QjJD,c11cb26db9643cda77448dcbe1ebb0b4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_RjgzMUJDRkNBQTg4QTJEQTA4Q0ZERTZDRkM1NjhBODM5QTRC,c79c4ca17f4d5a63d52a461241115e2f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_RkI2RkNCOUVCRUVCNDlFN0Q0NDYzMzFDMEFFNEI2NTNGRThB,8870fc670833edbe9214446f50d366bb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCRIPTS/win_collect_static.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/SCRIPTS/win_collect_static.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/migrations/0002_auto_20211107_0951.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202101,ed40e72f39a899caba4f5e367612b3c6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202102,295515c0d92de1bd361b4d52e67465a1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202103,08939b1e93c29017dcfdc2b5973b840e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202105,c20284eb13074c25d0b161da69094aa8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/192.168.1.158Tanya_perenoshszprl970801351179202106,478c2894dd43d1670e7bda67d3a8fffa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/httplib2/www.km-open.onlineproperty,d8aa6276a1f7da9fb0f04fdd2ac5dbf4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chsidenchange20210301,d0822ca1336544cfd45939b5614f6fe2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202104,0f68107cbc8ca10c04cc77a9a29c8d4d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202107,4ff62d0d258add932e6e672691d3c653" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202108,0a01918840aee5ceb8a66a58b9bc9514" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshsidenchange20210301,341480659e63ac22428155ca1319f11e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprl970801351179202109,69a3e6cd2300bc641d05a061732a2508" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Mjc1QTUwMkNFNjI3QTBCQkIzNkNEMzY0QTM5MEMyN,8d6cfec5f7b8e5e9881e5bbe9751276e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_N0Y3QURDRTdCMzJDNDhDMkIzRDVGRjlGMjBBRUFGN,f340a809777c7873d5c9a038a68b3833" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Njg4RjZDNkIwODMyMUVBNkE2ODY5MENDMkQzNDZCR,c96d73f99c36b84bede8e9a2abb81ee2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_NzlDRUIzQzcyRTdFODZDRDFGMTMxMTRFRTE0RjQ2N,b2a03f4b9f9250b7590ad1cf279af604" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_ODdFMTQ5NUUzRDUxQzlBMzJCMzAwMzIzRDREMDExO,2d894b5b6996f31e395ba50828be82bc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_OUQ5MkY1OEQ5NTM4QTlGNEZERUNCNEM4NTlFN0EyM,e923bb56b1274ffda419c48a4d583806" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Q0VFMEIxRDcxRjRFQjAyQjY2NDIwOTA1QkM4MDAyN,e804edabcd1ebc16cd55086f0c319530" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QTIxOERGQzRDMDhFMEE1Q0IwN0E3NzgzMDNCQTA5N,8266ec241e2cc1977df13cac0b54b692" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QkUyNUE0REY1NzdCMERFNEUwOTAwMzgzQjcwMjRFQ,8c8d03614d9092080d0f80e8c305397e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_Rjg4ODgzOTA0Rjc2OTM5NERENDA5MEVFMjNBMzUyN,467189c8e19adc07516e68bb83012c4d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_RkFCQTNFQzdDNkNBNzc4QkQ4OEE3QkEwNTFDREMwM,8760b282234abc968b01b673d289778b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QTkzNDdBM0IxNTI1OTgyQjA5RUE1REZFODM5MkE1N,27acd4fa34dc77f65392a6a6efddd7f9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QjFDMTBBMjBCNjBBNEU3QjA1NTNGRTY0RkM5ODUzM,8f6680e730f7a8d4c16f1a38e940c55e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.158Tanya_perenoshszprlOTcwODAxMzUxMTc5_QzY3NDU5M0Y1RDVDNTA4N0YzODQ0RkI1OTU1QkE1M,f4bf76d0b75cb6f329493f4076887e60" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MzEzNkQwMkY5NTdEMUU0ODhDMTZFNEE2RTBCRkYzNTdGMzg0,c50c86684faccece0f948de7c170d3e2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MzkwNjE3MDM1M0YwQjA0QjAzNEMwNDEwMkQ1QjE4RkY1MzE0,e66fe92af7c6bcb967c7a3e75299aa43" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_Q0VFODM2QzlCOTk0MTVFMThCQkJDNERFQjMzNjQ2M0VGMDMy,c4d37d48b959701a6d4b0e03e82db3a9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_RUM1NUY1NTYyODVENjNGQ0YyMDYzRjQ4MjZGMjg0RTFGMUUw,8704329a682d24791b674850ffa91884" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_0LMEBdD.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_qZ2KgyO.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/component/Старая_схема_алкотестов.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/component/Фото_текущего.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/component/заявка.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/module/Новая_схема_алкотестов.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/application/module/Шкаф.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/Итоговый_отчет_по_проекту_Машинное_зрение_контроль_i8w37lw.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/Паспорт_Машинное_зрение_контроль_схода_на_грохотах_vf9W3J8.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_19_06/План_управления_проектом_Машинное_зрение_контроль__lFfpgwh.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/SMART-Project-Managment-Platform.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__1._Описание__Mu3yWrn.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__3.1._Паспорт.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_21_54/Веб-платформа_управления_изменениями__3.2._План_уп_jzu3BHi.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/SMART_-_внедрение.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/SSH.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/Рацпредложения_2020г..xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_24_10/Снимок3.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Акт_оценки_результатов_ОПЭ.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Итоговый_отчет_по_проекту_VR_тренажер.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Паспорт_на_VR_тренажер.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/13_08_2021/16_35_32/Система_Rift_S_.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/15_05_2021/20_28_06/icon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/15_05_2021/20_28_06/Казахский_язык.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/15_05_2021/20_28_06/ОБЖ.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Проход.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Реквизиты.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/08_50_25/Схема_подключения_алкотеста.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/Паспорт_Машинное_зрение_контроль_схода_на_грохотах_cX08TYh.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_14_13/План_управления_проектом_Машинное_зрение_контроль__uHcQB95.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Виртуальная_реальность_ТЗ.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Итоговый_отчет_по_проекту_VR_тренажер.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_23_56/Система_Rift_S_.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/SMART-Project-Managment-Platform.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/Итоговый_отчет_по_проекту_VR_тренажер.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/17_08_2021/11_31_29/Корректировка_премирования_проектной_команды.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_export_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_export_accounts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/accounts_temp.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts_temp.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +105,7 @@
       <updated>1636433469726</updated>
       <workItem from="1636433472242" duration="419000" />
       <workItem from="1636434381505" duration="1056000" />
-      <workItem from="1636435646119" duration="1653000" />
+      <workItem from="1636435646119" duration="17700000" />
     </task>
     <servers />
   </component>

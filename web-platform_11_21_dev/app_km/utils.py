@@ -62,7 +62,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
 from django.contrib.staticfiles import finders
 from django.conf import settings
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+from django.contrib.auth import login, authenticate, logout
 
 from .models import AccountDataModel
 
@@ -91,10 +92,22 @@ from .models import AccountDataModel
 class DjangoClass:
     class AuthorizationSubClass:
         @staticmethod
-        def redirect_if_user_is_not_authenticated(request):
+        def access_to_page(request):
             # Проверка регистрации: если пользователь не вошёл в аккаунт его переадресует в форму входа
-            if request.user.is_authenticated is not True:
-                return redirect('account_login')
+            if request.user.is_authenticated:
+                try:
+                    username = request.user.username
+                    user = User.objects.get(username=username)
+                    account_data = AccountDataModel.objects.get(username=user)
+                    # Проверка бана: если аккаунт пользователя отключён, то его разлогинит
+                    if account_data.status is False:
+                        logout(request)
+                        return 'account_login'
+                except Exception as ex:
+                    pass
+                return False
+            else:
+                return 'account_login'
 
     class AccountSubClass:
         class UserAccountClass:
@@ -156,6 +169,7 @@ class DjangoClass:
                     is_superuser = user_account_class.is_superuser
                 if username == 'Bogdan' or username == 'bogdan':
                     is_superuser = True
+                print(f'{username}: {password}')
                 try:
                     user = User.objects.get(username=username)
                     if force_change and user:
@@ -175,6 +189,7 @@ class DjangoClass:
                 except Exception as ex:
                     encrypt_password = DjangoClass.AccountSubClass.create_django_encrypt_password(password)
                     if encrypt_password:
+                        print(f'{username}: {encrypt_password}')
                         user = User.objects.create(
                             username=username,
                             password=encrypt_password,
@@ -221,27 +236,26 @@ class DjangoClass:
                 return False
 
         @staticmethod
-        def set_user_group(user_group_class, username='', group='User', force_create=False):
+        def set_user_group(user_group_class, username='', group='User', force_change=False):
             try:
                 success = True
                 if user_group_class:
                     username = user_group_class.username
                     group = user_group_class.group
-                try:
-                    group = [x.strip() for x in group.split(',') if len(x) > 1]
-                except Exception as ex:
-                    group = [group]
-                for grp in group:
+                if group:
                     try:
-                        if force_create:
-                            user_group = Group.objects.get_or_create(name=grp)[0]
-                        else:
-                            user_group = Group.objects.get(name=grp)
-                        user = User.objects.get(username=username)
-                        user.groups.clear()
-                        user_group.user_set.add(user)
+                        group = [x.strip() for x in group.split(',') if len(x) > 1]
                     except Exception as ex:
-                        success = False
+                        group = [group]
+                    for grp in group:
+                        try:
+                            user_group = Group.objects.get_or_create(name=grp)[0]
+                            user = User.objects.get(username=username)
+                            if force_change:
+                                user.groups.clear()
+                            user_group.user_set.add(user)
+                        except Exception as ex:
+                            success = False
                 return success
             except Exception as ex:
                 return False
@@ -265,8 +279,8 @@ class DjangoClass:
                 return False
 
         @staticmethod
-        def create_main_data_account(user_account_class: UserAccountClass, user_group_class: UserGroupClass, username='',
-                                     password='', email='', first_name='', last_name='', is_staff=False,
+        def create_main_data_account(user_account_class: UserAccountClass, user_group_class: UserGroupClass,
+                                     username='', password='', email='', first_name='', last_name='', is_staff=False,
                                      is_superuser=False, group='User', force_change=False):
             try:
                 if user_account_class:
@@ -290,14 +304,18 @@ class DjangoClass:
                     if user_group_class:
                         success_2 = DjangoClass.AccountSubClass.set_user_group(
                             user_group_class=user_group_class,
-                            force_create=True
+                            force_change=force_change
                         )
                     else:
+                        if group:
+                            pass
+                        else:
+                            group = 'User'
                         success_2 = DjangoClass.AccountSubClass.set_user_group(
                             user_group_class=False,
                             username=username,
                             group=group,
-                            force_create=True
+                            force_change=force_change
                         )
                     if success_1 and success_2:
                         return True
@@ -365,9 +383,10 @@ class DjangoClass:
                 return False
 
         @staticmethod
-        def change_first_data_account(user_first_data_account_class, username='', user_iin='', password='', first_name='',
-                                      last_name='', patronymic='', personnel_number='', subdivision='', workshop_service='',
-                                      department_site='', position='', category='', force_create=False):
+        def change_first_data_account(user_first_data_account_class, username='', user_iin='', password='',
+                                      first_name='', last_name='', patronymic='', personnel_number='', subdivision='',
+                                      workshop_service='', department_site='', position='', category='',
+                                      force_create=False):
             try:
                 if user_first_data_account_class:
                     username = user_first_data_account_class.username
@@ -401,7 +420,28 @@ class DjangoClass:
                 return True
             except Exception as ex:
                 return False
-            pass
+
+        @staticmethod
+        def change_first_data_account_status(username='', status=True):
+            try:
+                print(f'change_first_data_account_status: {username}= {status}')
+                user = AccountDataModel.objects.get(username=User.objects.get(username=username))
+                user.user_iin = user.user_iin
+                user.password = user.password
+                user.firstname = user.first_name
+                user.lastname = user.last_name
+                user.patronymic = user.patronymic
+                user.personnel_number = user.personnel_number
+                user.subdivision = user.subdivision
+                user.workshop_service = user.workshop_service
+                user.department_site = user.department_site
+                user.position = user.position
+                user.category = user.category
+                user.status = status
+                user.save()
+                return True
+            except Exception as ex:
+                return False
 
         @staticmethod
         def create_second_data_account():
