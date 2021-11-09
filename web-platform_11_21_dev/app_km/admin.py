@@ -3,7 +3,7 @@ from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, CommentRationalModel, \
     LikeRationalModel, RationalModel, AccountTemplateModel, AccountDataModel, EmailModel, ContactModel, \
-    DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel
+    DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile
 
 
 class ArticleAdminForm(forms.ModelForm):
@@ -341,6 +341,28 @@ class ApplicationComponentModelAdmin(admin.ModelAdmin):
     # inlines         = [RationalModelInline]
 
 
+class ProfileModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    # Поля, которые нужно отображать в заголовке, на панели администратора
+    list_display = ('user', 'bio', 'location', 'birth_date')
+    # Поля, которые нужно отображать при фильтрации, на панели администратора
+    list_filter = ('user', 'bio', 'location', 'birth_date')
+    # Поля, которые нужно отображать при создании модели, на панели администратора
+    # fields          = ('id',)
+    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
+    # fieldsets       = (
+    #                     ('Категория', {'fields': ('category_name',)}),
+    #                     ('Префикс', {'fields': ('category_slug',)}),
+    #                     ('Описание', {'fields': ('category_description',)}),
+    #                 )
+    # Поля, которые не нужно отображать при создании модели, на панели администратора |
+    # exclude         = ['id',]
+    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
+    search_fields = ['user', 'bio', 'location', 'birth_date']
+    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
+    # inlines         = [RationalModelInline]
+
+
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Админка'  # default: "Django site admin"
@@ -359,3 +381,4 @@ admin.site.register(RationalModel, RationalModelAdmin)
 admin.site.register(EmailModel)
 admin.site.register(ApplicationModuleModel, ApplicationModuleModelAdmin)
 admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
+admin.site.register(Profile, ProfileModelAdmin)

@@ -456,7 +456,6 @@ def account_update_accounts_1c(request):
                      'Цех_Служба', 'Отдел_Участок', 'Должность', 'Категория']
         user_objects = []
         for user in json_data["global_objects"]:
-            print(f'created {user} of {len(json_data["global_objects"])}')
             username = json_data["global_objects"][user]["ИИН"]
             password = create_encrypted_password(_random_chars=
                                                  'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -526,7 +525,6 @@ def account_update_accounts_1c(request):
                 password_old = account_data.password
                 print('\n ***** *****')
 
-
                 print(f'status: {type_obj["Статус"]}')
                 print(f'username: {user_obj.username}')
                 print(f'old password account: {User.objects.get(username=user_obj.username).password}')
@@ -540,25 +538,28 @@ def account_update_accounts_1c(request):
                 user_obj.password = encrypt_password
                 user_first_data_obj.password = password_old
 
+                user = User.objects.get(username=username)
+
 
             except Exception as ex:
                 print(f'error: {ex}')
 
             print(f'confirm password: {user_obj.password}')
             print(f'confirm password data account: {user_first_data_obj.password}')
-            print('***** ***** \n')
 
-
-            DjangoClass.AccountSubClass.create_main_data_account(
+            status_create_main_data_account = DjangoClass.AccountSubClass.create_main_data_account(
                 user_account_class=user_obj,
                 user_group_class=False,
                 force_change=True
             )
 
-            DjangoClass.AccountSubClass.create_first_data_account(
+            status_create_first_data_account = DjangoClass.AccountSubClass.create_first_data_account(
                 user_first_data_account_class=user_first_data_obj,
                 force_change=True
             )
+
+            print(f'status_create_main_data_account: {status_create_main_data_account}')
+            print(f'status_create_first_data_account: {status_create_first_data_account}')
 
             # активировать/деактивировать аккаунт
             status = type_obj["Статус"]
@@ -568,7 +569,6 @@ def account_update_accounts_1c(request):
                 DjangoClass.AccountSubClass.change_first_data_account_status(username=user_obj.username, status=False)
             else:
                 print(f'unknown status: {status}')
-
 
         # Генерация ответа для отрисовки в таблицу на странице
         titles = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'Табельный', 'Подразделение', 'Цех/Служба',
