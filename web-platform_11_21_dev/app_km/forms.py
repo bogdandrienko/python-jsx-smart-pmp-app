@@ -25,10 +25,15 @@ class CreateUserForm(UserCreationForm):
     last_name = forms.CharField(label='Фамилия', max_length=50, required=False)
     email = forms.EmailField(label='Адрес электронной почты', max_length=100, required=False,
                              help_text='пример: bogdandrienko@gmail.com')
+    is_active = forms.BooleanField(label='Активность аккаунта', required=False, initial=True,
+                                   widget=forms.CheckboxInput(attrs={'type': 'checkbox',
+                                                                     'name': 'rational_status', 'value': 'True',
+                                                                     'class': 'form-check form-check-input'}),
+                                   help_text='Уберите галочку, если нужно заблокировать аккаунт')
     is_staff = forms.BooleanField(label='Доступ к панели модерации', required=False,
                                   help_text='Поставьте галочку, если нужно разрешить доступ')
-    group = forms.CharField(label='Группы пользователя', required=False,
-                            help_text='В качестве разделителя используйте запятую, пример: "User, Moderator"')
+    groups = forms.CharField(label='Группы пользователя', required=False,
+                             help_text='В качестве разделителя используйте запятую, пример: "User, Moderator"')
     patronymic = forms.CharField(label='Отчество', required=False)
     personnel_number = forms.CharField(label='Табельный номер', required=False)
     subdivision = forms.CharField(label='Подразделение', required=False)
@@ -39,9 +44,9 @@ class CreateUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'is_staff', 'group',
-                  'patronymic', 'personnel_number', 'subdivision', 'workshop_service', 'department_site', 'position',
-                  'category')
+        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'is_active', 'is_staff',
+                  'groups', 'patronymic', 'personnel_number', 'subdivision', 'workshop_service', 'department_site',
+                  'position', 'category')
 
 
 class CreateUsersForm(forms.Form):
@@ -354,8 +359,8 @@ class GeoForm(forms.Form):
     Geo Form
     """
     # request_name = forms.CharField(label='', widget=forms.TextInput(
-    #     attrs={'type': "text", 'name': 'request_name', 'placeholder': 'get_xlsx', 'value': 'get_xlsx', 'class': 'd-none',
-    #            'required': ''}), required=False)
+    #     attrs={'type': "text", 'name': 'request_name', 'placeholder': 'get_xlsx', 'value': 'get_xlsx', 'class':
+    #         'd-none', 'required': ''}), required=False)
     request_value = forms.IntegerField(label='Разряд округления широты и долготы:',
                                        widget=forms.NumberInput(
                                            attrs={'type': 'number', 'name': 'request_value', 'value': '5',

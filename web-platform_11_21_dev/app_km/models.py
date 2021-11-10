@@ -7,10 +7,49 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    """
+    Account Profile Model
+    """
+    # Link field
+    user = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True)
+
+    # First data account
+    user_iin = models.IntegerField(verbose_name='ИИН пользователя', null=True, blank=True)
+    password = models.SlugField(verbose_name='Пароль', null=True, blank=True)
+    first_name = models.TextField(verbose_name='Имя', null=True, blank=True)
+    last_name = models.TextField(verbose_name='Фамилия', null=True, blank=True)
+    patronymic = models.TextField(verbose_name='Отчество', null=True, blank=True)
+    personnel_number = models.TextField(verbose_name='Табельный номер', null=True, blank=True)
+    subdivision = models.TextField(verbose_name='Подразделение', null=True, blank=True)
+    workshop_service = models.TextField(verbose_name='Цех/Служба', null=True, blank=True)
+    department_site = models.TextField(verbose_name='Отдел/Участок', null=True, blank=True)
+    position = models.TextField(verbose_name='Должность', null=True, blank=True)
+    category = models.TextField(verbose_name='Категория', null=True, blank=True)
+
+    # Second data account
+    education = models.TextField(verbose_name='Образование', null=True, blank=True)
+    achievements = models.TextField(verbose_name='Достижения', null=True, blank=True)
+    biography = models.TextField(verbose_name='Биография', null=True, blank=True)
+    hobbies = models.TextField(verbose_name='Увлечения', null=True, blank=True)
+    image_avatar = models.ImageField(verbose_name='Аватарка', upload_to='uploads/account/avatar',
+                                     default='uploads/account/avatar/default.jpg', null=True, blank=True)
+
+    # Вспомогательное
+    mail = models.EmailField(verbose_name='Электронная почта', null=True, blank=True)
+    date_registered = models.DateTimeField(verbose_name='дата регистрации', auto_now_add=True, null=True, blank=True)
+    secret_question = models.TextField(verbose_name='Секретный вопрос', null=True, blank=True)
+    group = models.SlugField(verbose_name='группы', null=True, blank=True)
+    status = models.BooleanField(verbose_name='статус', default=True, null=True, blank=True)
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('last_name',)
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'
+        db_table = 'profile_table'
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} {self.patronymic}: {self.user}'
 
 
 @receiver(post_save, sender=User)
@@ -24,51 +63,51 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
-# Account
-class AccountDataModel(models.Model):
-    """
-    Account Data Model
-    """
-    # Foreign key
-    username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, editable=True, default=None,
-                                 verbose_name='Имя пользователя', blank=True)
-
-    # First data account
-    user_iin = models.IntegerField('ИИН пользователя', unique=True, blank=True)
-    password = models.SlugField(max_length=64, verbose_name='пароль', blank=True)
-    firstname = models.TextField('Имя', blank=True)
-    lastname = models.TextField('Фамилия', blank=True)
-    patronymic = models.TextField('Отчество', blank=True)
-    personnel_number = models.TextField('Табельный номер', blank=True)
-    subdivision = models.TextField('Подразделение', blank=True)
-    workshop_service = models.TextField('Цех/Служба', blank=True)
-    department_site = models.TextField('Отдел/Участок', blank=True)
-    position = models.TextField('Должность', blank=True)
-    category = models.TextField('Категория', blank=True)
-
-    # Second data account
-    education = models.TextField('Образование', blank=True)
-    achievements = models.TextField('Достижения', blank=True)
-    biography = models.TextField('Биография', blank=True)
-    hobbies = models.TextField('Увлечения', blank=True)
-    image_avatar = models.ImageField('Аватарка', upload_to='uploads/account/avatar',
-                                     default='uploads/account/avatar/default.jpg', blank=True)
-
-    # Вспомогательное
-    mail = models.EmailField('Электронная почта', blank=True)
-    date_registered = models.DateTimeField('дата регистрации', auto_now_add=True, blank=True)
-    secret_question = models.TextField('Секретный вопрос', blank=True)
-    group = models.SlugField(max_length=64, verbose_name='группы', blank=True)
-    status = models.BooleanField('статус', default=True, blank=True)
-
-    class Meta:
-        ordering = ('-id',)
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
-        db_table = 'account_data_table'
-
-    def __str__(self):
-        return f'{self.firstname} {self.lastname} {self.patronymic}: {self.username}'
+# # Account
+# class AccountDataModel(models.Model):
+#     """
+#     Account Data Model
+#     """
+#     # Foreign key
+#     username = models.ForeignKey(User, on_delete=models.CASCADE, null=True, editable=True, default=None,
+#                                  verbose_name='Имя пользователя', blank=True)
+#
+#     # First data account
+#     user_iin = models.IntegerField('ИИН пользователя', unique=True, blank=True)
+#     password = models.SlugField(max_length=64, verbose_name='пароль', blank=True)
+#     firstname = models.TextField('Имя', blank=True)
+#     lastname = models.TextField('Фамилия', blank=True)
+#     patronymic = models.TextField('Отчество', blank=True)
+#     personnel_number = models.TextField('Табельный номер', blank=True)
+#     subdivision = models.TextField('Подразделение', blank=True)
+#     workshop_service = models.TextField('Цех/Служба', blank=True)
+#     department_site = models.TextField('Отдел/Участок', blank=True)
+#     position = models.TextField('Должность', blank=True)
+#     category = models.TextField('Категория', blank=True)
+#
+#     # Second data account
+#     education = models.TextField('Образование', blank=True)
+#     achievements = models.TextField('Достижения', blank=True)
+#     biography = models.TextField('Биография', blank=True)
+#     hobbies = models.TextField('Увлечения', blank=True)
+#     image_avatar = models.ImageField('Аватарка', upload_to='uploads/account/avatar',
+#                                      default='uploads/account/avatar/default.jpg', blank=True)
+#
+#     # Вспомогательное
+#     mail = models.EmailField('Электронная почта', blank=True)
+#     date_registered = models.DateTimeField('дата регистрации', auto_now_add=True, blank=True)
+#     secret_question = models.TextField('Секретный вопрос', blank=True)
+#     group = models.SlugField(max_length=64, verbose_name='группы', blank=True)
+#     status = models.BooleanField('статус', default=True, blank=True)
+#
+#     class Meta:
+#         ordering = ('-id',)
+#         verbose_name = 'Пользователь'
+#         verbose_name_plural = 'Пользователи'
+#         db_table = 'account_data_table'
+#
+#     def __str__(self):
+#         return f'{self.firstname} {self.lastname} {self.patronymic}: {self.username}'
 
 
 # Application

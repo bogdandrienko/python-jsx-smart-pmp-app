@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'crispy_forms',
     'rest_framework',
-    'easy_maps',
     'corsheaders',
 
     'app_km.apps.AppKmConfig',
@@ -196,10 +195,6 @@ username: EMAIL_HOST_USER
 password: EMAIL_HOST_PASSWORD
 use_tls: EMAIL_USE_TLS
 use_ssl: EMAIL_USE_SSL
-
-EASY_MAPS_GOOGLE_KEY = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ___0123456789'
-
-EASY_MAPS_CENTER = (52.173, 61.251)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

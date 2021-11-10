@@ -1,5 +1,4 @@
 from django import template
-from ..models import AccountDataModel
 
 register = template.Library()
 
@@ -8,7 +7,8 @@ register = template.Library()
 def account_tag(context, username: str):
     request = context['request']
     try:
-        account = AccountDataModel.objects.get(username=username)
+        account = None
+        # account = AccountDataModel.objects.get(username=username)
     except Exception as e:
         account = False
     return account
