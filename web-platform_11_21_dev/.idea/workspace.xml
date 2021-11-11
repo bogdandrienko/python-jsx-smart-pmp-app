@@ -2,56 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_M0I5MUYyQTE2NDg2MjY5OTgzMDMzMjQzOTlFRjExMjg3Q0Iw,a7fc1f915680ae3d906c68eb3543d77d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MEI1MTYzREI1REQwODdBQkU0NDYyODQ1MzFBMjkzRkVDNTQ3,936a6e0c7f01de027d142e604cb85aa6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_MjVFRTQzMkYyQTVBOTYyRjQ2NzY1RUM1QjFFOEY1QUY3N0JG,e74be47543eb859917f51a0b1532cb83" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_NDE2MDA0RDlBQjlDOEFCMDE1MTExQkI4QTdCNUY3ODU3RUFE,822780e45831a91d0966533933a5e517" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QTBGQzAxMzAzNzdFMzc4MkM0NTI3QjZCMzk5QUM2NjZCQTE3,7fd078e0dfcbe708fbdb436d1beaa0b5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QjBCRDgyQkRCNjNEMzU5RjlBRjhGOTExNEFFNjM5MTREQzA5,03bcb3568134314b2b1ad1a5451e9a47" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QkI1ODZGNkY0ODU3NTY4NjM1RDhDN0ZEMTI2MTE5NUNBRjc5,9034f0783804f5bf2df82327464bc79f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QkRCM0NCNTU4RDNEQkNBOTg3QjJFRkM1NjZCRjk1NjIzQjUy,b7f1b8b5c958c6807f31cc5a4f47c69c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_QzMzNkM4NURCQjRBQjc0NTAyNTREMjZGNkE5MkYyQzNGOUM4,c33d80acf85e2b56257515bfb18575f8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_RTdDQ0Q0ODcxMjM1RTRERjE4M0NCQkFERUQ5MjhGMTNGQjBE,b74da2f9a1c002a9193c683cdf4cfbfc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jshintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/migrations/0002_profile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/actions/todos.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/actions/types.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/layout/Header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/Dashboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/Form.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/todo/List.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/parse.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/reducers/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/reducers/todos.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/store.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/accounts_temp.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts_temp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +71,7 @@
       <workItem from="1636530724240" duration="1330000" />
       <workItem from="1636532150678" duration="334000" />
       <workItem from="1636532687066" duration="8769000" />
+      <workItem from="1636541808371" duration="663000" />
     </task>
     <servers />
   </component>
