@@ -24,7 +24,7 @@
 
 <main class="container-fluid mx-auto text-center d-block">
 
-    {% if data and data.status %}
+    {% if data %}
 
         <div class="p-sm-5 text-white rounded bg-dark">
             <h1 class="display-1 fst-italic">Эта страница содержит информацию о пользователе</h1>
@@ -32,7 +32,7 @@
                 <p class="display-6">Подробнее ниже...</p>
             </p>
 
-            {% if data.user_iin|stringformat:"i" == request.user.username %}
+            {% if data.username|stringformat:"i" == request.user.username|stringformat:"i"  %}
                 <div class="order-md-last text-end">
                     <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg">Изменить личный профиль</a>
                 </div>
@@ -44,13 +44,13 @@
         </div>
 
         <div class="py-5 text-center">
-            {% if data.image_avatar %}
-            <img src="{{ data.image_avatar.url }}" class="bd-placeholder-img " width="256px" height="100%" alt="{{ data.firstname }}">
+            {% if data.profile.image_avatar %}
+            <img src="{{ data.profile.image_avatar.url }}" class="bd-placeholder-img " width="256px" height="100%" alt="{{ data.profile.firstname }}">
             {% else %}
             <img src="{% static 'media/uploads/account/avatar/default.jpg' %}" class="bd-placeholder-img " width="256px" height="100%" alt="default">
             {% endif %}
-            <h2>{{ data.lastname }} {{ data.firstname }} {{ data.patronymic }}</h2>
-            <p class="lead">{{ data.position }}</p>
+            <h2>{{ data.profile.last_name }} {{ data.profile.first_name }} {{ data.profile.patronymic }}</h2>
+            <p class="lead">{{ data.profile.position }}</p>
         </div>
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-md-last">

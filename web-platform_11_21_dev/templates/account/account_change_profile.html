@@ -24,35 +24,46 @@
 
 <main class="container-fluid mx-auto text-center d-block">
 
-    {% if form_1 %}
+    {% if result_form %}
 
-        <div class="p-sm-1 text-white rounded bg-dark">
-            <h1 class="display-6 fst-italic">Изменить личный профиль</h1>
-            <p>Эта страница содержит форму для изменения личного профиля.
-                <p class="text-secondary">Заполните форму и нажмите подвердить, чтобы изменить личный профиль.</p>
-            </p>
-            <p class="display-6">Идентификатор пользователя: {{ request.user.username }}</p>
+        <div class="carousel-item active">
+            <div class="p-sm-5 text-white rounded bg-dark">
+                <h1 class="display-4">Успешно выполнено</h1>
+                <p class="lead">Операция успешно выполнена, вернитесь на главную или повторите операцию</p>
+                <div class="btn-group btn-group-lg" role="group" aria-label="Basic mixed styles example">
+                  <a class="btn btn-success active" aria-current="page" href="{% url 'home' %}">Главная</a>
+                  <a type="button" class="btn btn-warning" href="{% url 'account_change_profile' %}">Повторить</a>
+                </div>
+            </div>
         </div>
-        <form class="form-control" action="{% url 'account_change_profile' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>{{ form_1|crispy }}</p>
-            <hr>
-            <label class="form-check-label" for="flexCheckDefault">Перезаписать уже существующего пользователя?</label>
-            <div class="form-switch">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="check_1">
-            </div>
-            <hr>
-            <div class="btn-group form-control">
-                <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
-            </div>
-        </form>
 
     {% else %}
 
-        <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
-            <h1 class="display-4">Данных нет.</h1>
-            <p class="lead">Перезагрузите страницу или ожидайте исправления неполадок.</p>
-        </div>
+        {% if form_1 %}
+
+            <div class="p-sm-1 text-white rounded bg-dark">
+                <h1 class="display-6 fst-italic">Изменить личный профиль</h1>
+                <p>Эта страница содержит форму для изменения личного профиля.
+                    <p class="text-secondary">Заполните форму и нажмите подвердить, чтобы изменить личный профиль.</p>
+                </p>
+                <p class="display-6">Идентификатор пользователя: {{ request.user.username }}</p>
+            </div>
+            <form class="form-control" action="{% url 'account_change_profile' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>{{ form_1|crispy }}</p>
+                <div class="btn-group form-control">
+                    <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                </div>
+            </form>
+
+        {% else %}
+
+            <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
+                <h1 class="display-4">Данных нет.</h1>
+                <p class="lead">Перезагрузите страницу или ожидайте исправления неполадок.</p>
+            </div>
+
+        {% endif %}
 
     {% endif %}
 

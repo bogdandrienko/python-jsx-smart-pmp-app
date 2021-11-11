@@ -204,9 +204,9 @@ CKEDITOR_CONFIGS = {
     'default': {
 
         # 'skin': 'kama',
-        # 'skin': 'moono',
+        'skin': 'moono',
         # 'skin': 'moono-lisa',
-        'skin': 'moonocolor',
+        # 'skin': 'moonocolor',
 
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']

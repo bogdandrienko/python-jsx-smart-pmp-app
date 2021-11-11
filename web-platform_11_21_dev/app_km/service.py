@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -61,7 +63,7 @@ class DjangoClass:
                     user = User.objects.create(
                         # Основное
                         username=self.username,
-                        password=self.get_sha256_password(),
+                        password=self.get_sha256_password(self.password),
 
                         # Персональная информация
                         first_name=self.first_name,
@@ -89,7 +91,7 @@ class DjangoClass:
                     user = User.objects.get(username=self.username)
                     # Основное
                     if self.force_change_account_password:
-                        user.password = self.get_sha256_password()
+                        user.password = self.get_sha256_password(self.password)
                         user.profile.password = self.password
 
                     # Персональная информация
@@ -161,7 +163,8 @@ class DjangoClass:
                 # except Exception as ex:
                 #     return False
 
-            def get_sha256_password(self):
+            @staticmethod
+            def get_sha256_password(password: str):
                 # try:
                 if True:
                     try:
@@ -170,7 +173,7 @@ class DjangoClass:
                         user = User.objects.create(
                             username='None'
                         )
-                    user.set_password(self.password)
+                    user.set_password(password)
                     user.save()
                     user = User.objects.get(username='None')
                     encrypt_password = user.password
@@ -178,6 +181,15 @@ class DjangoClass:
                     return encrypt_password
                 # except Exception as ex:
                 #     return False
+
+            @staticmethod
+            def create_password_from_chars(chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                           length=8):
+                password = ''
+                for i in range(1, length + 1):
+                    password += random.choice(chars)
+                return password
+
 
         class UserProfileClass:
             """
@@ -231,16 +243,6 @@ class DjangoClass:
                     user.save()
                 # except Exception as ex:
                 #     return False
-
-
-
-
-
-
-
-
-
-
 
         class UserGroupClass:
             """
@@ -461,22 +463,22 @@ class DjangoClass:
                 #         return True
                 #     return False
                 except Exception as ex:
-                #     username_obj = User.objects.get(username=username)
-                #     user = AccountDataModel.objects.create(
-                #         username=username_obj,
-                #         user_iin=user_iin,
-                #         password=password,
-                #         firstname=firstname,
-                #         lastname=lastname,
-                #         patronymic=patronymic,
-                #         personnel_number=personnel_number,
-                #         subdivision=subdivision,
-                #         workshop_service=workshop_service,
-                #         department_site=department_site,
-                #         position=position,
-                #         category=category
-                #     )
-                #     user.save()
+                    #     username_obj = User.objects.get(username=username)
+                    #     user = AccountDataModel.objects.create(
+                    #         username=username_obj,
+                    #         user_iin=user_iin,
+                    #         password=password,
+                    #         firstname=firstname,
+                    #         lastname=lastname,
+                    #         patronymic=patronymic,
+                    #         personnel_number=personnel_number,
+                    #         subdivision=subdivision,
+                    #         workshop_service=workshop_service,
+                    #         department_site=department_site,
+                    #         position=position,
+                    #         category=category
+                    #     )
+                    #     user.save()
                     return True
             except Exception as ex:
                 return False

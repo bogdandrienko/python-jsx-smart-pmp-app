@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import FileExtensionValidator, MinValueValidator, MaxValueValidator, MinLengthValidator, \
     MaxLengthValidator
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from .models import RationalModel, CategoryRationalModel, NotificationModel, ContactModel, DocumentModel, \
+from .models import Profile, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, DocumentModel, \
     MessageModel, SmsModel, ArticleModel, CityModel
 
 
@@ -47,6 +47,78 @@ class CreateUserForm(UserCreationForm):
         fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'is_active', 'is_staff',
                   'groups', 'patronymic', 'personnel_number', 'subdivision', 'workshop_service', 'department_site',
                   'position', 'category')
+
+
+class ChangeUserForm(forms.Form):
+    """
+    Change User Form
+    """
+
+    # Second data account
+    education = forms.CharField(
+        label='Образование', min_length=0, max_length=300, required=False,
+        help_text='В качестве разделителя на абзацы используйте символ "|", если хотите не заменять данные, '
+                  'оставьте поле пустым.',
+        widget=forms.Textarea(attrs={'type': 'text', 'name': 'education', 'value': '', 'placeholder': '',
+                                     'class': 'form-control'}),
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ]
+    )
+    achievements = forms.CharField(
+        label='Достижения', min_length=0, max_length=300, required=False,
+        help_text='В качестве разделителя на абзацы используйте символ "|", если хотите не заменять данные, '
+                  'оставьте поле пустым.',
+        widget=forms.Textarea(attrs={'type': 'text', 'name': 'achievements', 'value': '', 'placeholder': '',
+                                     'class': 'form-control'}),
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ]
+    )
+    biography = forms.CharField(
+        label='Биография', min_length=0, max_length=300, required=False,
+        help_text='В качестве разделителя на абзацы используйте символ "|", если хотите не изменять данные, '
+                  'оставьте поле пустым.',
+        widget=forms.Textarea(attrs={'type': 'text', 'name': 'biography', 'value': '', 'placeholder': '',
+                                     'class': 'form-control'}),
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ]
+    )
+    hobbies = forms.CharField(
+        label='Хобби', min_length=0, max_length=300, required=False,
+        help_text='В качестве разделителя на абзацы используйте символ "|", если хотите не заменять данные, '
+                  'оставьте поле пустым.',
+        widget=forms.Textarea(attrs={'type': 'text', 'name': 'hobbies', 'value': '', 'placeholder': '',
+                                     'class': 'form-control'}),
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ]
+    )
+    image_avatar = forms.ImageField(label="Аватарка профиля", widget=forms.ClearableFileInput(
+        attrs={'type': 'file', 'name': 'image_avatar',
+               'class': 'form-control'}), required=False)
+
+    # Third data account
+    email = forms.EmailField(
+        label='Электронная почта', required=False,
+        help_text='Электронная почта, на которую будут приходить вспомогательные сообщения, если хотите не заменять '
+                  'данные, оставьте поле пустым.',
+        widget=forms.TextInput(attrs={'type': 'email', 'name': 'email', 'value': '', 'placeholder': '',
+                                      'class': 'form-control'})
+    )
+    secret_question = forms.CharField(
+        label='Секретный вопрос', min_length=1, max_length=50, required=False,
+        help_text='Вопрос, на который надо будет ответить при восстановлении пароля, если хотите не заменять данные, '
+                  'оставьте поле пустым.',
+        widget=forms.TextInput(attrs={'type': 'text', 'name': 'secret_question', 'value': '', 'placeholder': '',
+                                      'class': 'form-control'}),
+        validators=[MinLengthValidator(1), MaxLengthValidator(50), ]
+    )
+    secret_answer = forms.CharField(
+        label='Секретный ответ', min_length=1, max_length=50, required=False,
+        help_text='Ответ на вопрос, который будет необходим при восстановлении пароля, если хотите не заменять данные, '
+                  'оставьте поле пустым.',
+        widget=forms.TextInput(attrs={'type': 'text', 'name': 'secret_answer', 'value': '', 'placeholder': '',
+                                      'class': 'form-control'}),
+        validators=[MinLengthValidator(1), MaxLengthValidator(50), ]
+    )
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
 
 
 class CreateUsersForm(forms.Form):

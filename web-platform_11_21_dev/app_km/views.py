@@ -1,8 +1,11 @@
 import base64
+import datetime
 import hashlib
 import json
 import os
 import random
+import time
+
 import httplib2
 import openpyxl
 import requests
@@ -19,7 +22,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
-from .forms import CreateUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
+from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
     NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
     SmsForm, GeoForm
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
@@ -27,7 +30,7 @@ from .models import RationalModel, CategoryRationalModel, LikeRationalModel, Com
     DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
 from .service import DjangoClass, PaginationClass, HttpRaiseExceptionClass
 from .utils import ExcelClass, LoggingClass, create_encrypted_password, get_salary_data, link_callback, get_career, \
-    find_near_point, get_vector_arr, generate_way, pyodbc_connect
+    find_near_point, get_vector_arr, generate_way, pyodbc_connect, decrypt_text_with_hash
 
 
 # admin
@@ -73,17 +76,6 @@ def account_logout(request):
         return redirect('account_login')
     except Exception as ex:
         redirect('account_login')
-
-
-
-
-
-
-
-
-
-
-
 
 
 def account_create_accounts(request, quantity=None):
@@ -400,206 +392,204 @@ def account_export_accounts(request):
 def account_generate_passwords(request):
     if DjangoClass.AuthorizationClass.access_to_page(request=request):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
-    result_form = None
-    data = None
-    if request.method == 'POST':
-        passwords_quantity = int(request.POST['passwords_quantity'])
-        passwords_chars = str(request.POST['passwords_chars'])
-        passwords_length = int(request.POST['passwords_length'])
-        wb = openpyxl.Workbook()
-        sheet = wb.active
-        titles = ['Зашифрованный Пароль', 'Пароль']
-        for char in 'AB':
-            sheet[f'{char}1'] = titles['AB'.index(char)]
-        body = []
-        for n in range(2, passwords_quantity + 2):
-            password = create_encrypted_password(_random_chars=passwords_chars, _length=passwords_length)
-            try:
-                user = User.objects.get(username='None')
-            except Exception as ex:
-                user = User.objects.create(
-                    username='None',
-                    email=password,
-                )
-            user.email = password
-            user.set_password(password)
-            user.save()
-            user = User.objects.get(username='None')
-            sheet[f'A{n}'] = user.password
-            sheet[f'B{n}'] = user.email
-            body.append([user.password, user.email])
-        user = User.objects.get(username='None')
-        user.delete()
-        wb.save('static/media/data/account/generate_passwords.xlsx')
-        data = [titles, body]
-        result_form = True
-    form = GeneratePasswordsForm
-    context = {
-        'data': data,
-        'form': form,
-        'result_form': result_form
-    }
+    # try:
+    if True:
+        result_form = None
+        data = None
+        if request.method == 'POST':
+            passwords_quantity = int(request.POST['passwords_quantity'])
+            passwords_chars = str(request.POST['passwords_chars'])
+            passwords_length = int(request.POST['passwords_length'])
+            wb = openpyxl.Workbook()
+            sheet = wb.active
+            titles = ['Пароль', 'Зашифрованный Пароль']
+            for char in 'AB':
+                sheet[f'{char}1'] = titles['AB'.index(char)]
+            body = []
+            for n in range(2, passwords_quantity + 2):
+                password = create_encrypted_password(_random_chars=passwords_chars, _length=passwords_length)
+                encrypt_password = DjangoClass.AccountClass.create_django_encrypt_password(password)
+                sheet[f'A{n}'] = password
+                sheet[f'B{n}'] = encrypt_password
+                body.append([password, encrypt_password])
+            wb.save('static/media/data/account/generate_passwords.xlsx')
+            data = [titles, body]
+            result_form = True
+        form = GeneratePasswordsForm
+        context = {
+            'data': data,
+            'form': form,
+            'result_form': result_form
+        }
+    # except Exception as ex:
+    #     context = {
+    #         'data': False,
+    #         'form': False,
+    #         'result_form': False
+    #     }
     return render(request, 'account/account_generate_passwords.html', context)
 
 
-#
-#
-#
 def account_update_accounts_1c(request):
     if DjangoClass.AuthorizationClass.access_to_page(request=request):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
-    data = None
-    form = None
-    result_form = None
-    if request.method == 'POST':
-        day = 1
-        month = 11
-        year = 2021
+    # try:
+    if True:
+        data = None
+        form = None
+        result_form = None
+        if request.method == 'POST':
+            key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                            _length=10)
+            hash_key_obj = hashlib.sha256()
+            hash_key_obj.update(key.encode('utf-8'))
+            key_hash = str(hash_key_obj.hexdigest().strip().upper())
+            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+            date = datetime.datetime.now().strftime("%Y%m%d")
+            date_base64 = base64.b64encode(str(date).encode()).decode()
+            url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
+            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+            h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
+            login = 'Web_adm_1c'
+            password = '159159qqww!'
+            h.add_credentials(login, password)
+            try:
+                response, content = h.request(url)
+            except Exception as ex:
+                content = None
+            json_data = None
+            success_web_read = False
 
-        key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                        _length=10)
-        hash_key_obj = hashlib.sha256()
-        hash_key_obj.update(key.encode('utf-8'))
-        key_hash = str(hash_key_obj.hexdigest().strip().upper())
-        key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-        if int(day) < 10:
-            day = f'0{day}'
-        if int(month) < 10:
-            month = f'0{month}'
-        date = f"{year}{month}{day}"
-        date_base64 = base64.b64encode(str(date).encode()).decode()
-        url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
-        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-        h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
-        login = 'Web_adm_1c'
-        password = '159159qqww!'
-        h.add_credentials(login, password)
-        try:
-            response, content = h.request(url)
-        except Exception as ex:
-            content = None
-        json_data = None
-        success_web_read = False
-        if content:
+            print('\n ***** ***** \n')
+            print(f'content: {decrypt_text_with_hash(content.decode()[1:], key_hash)}')
+            print('\n ***** ***** \n')
+
+            if content:
+                success = True
+                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+                for error_word in error_word_list:
+                    if str(content.decode()).find(error_word) >= 0:
+                        success = False
+                if success:
+                    try:
+                        json_data = json.loads(decrypt_text_with_hash(content.decode()[1:], key_hash))
+                        with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:
+                            json.dump(decrypt_text_with_hash(content.decode()[1:], key_hash), file)
+                        success_web_read = True
+                    except Exception as ex:
+                        pass
+            if success_web_read is False:
+                print('read temp file')
+                with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
+                    json_data = json.load(file)
+
+            # Генерация объектов для создания аккаунтов
+            titles_1c = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'ТабельныйНомер', 'Подразделение',
+                         'Цех_Служба', 'Отдел_Участок', 'Должность', 'Категория']
+            user_objects = []
+            for user in json_data["global_objects"]:
+                username = json_data["global_objects"][user]["ИИН"]
+                # status = json_data["global_objects"][user]["ИИН"]
+                password = create_encrypted_password(_random_chars=
+                                                     'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                                     _length=10)
+                email = ''
+                first_name = json_data["global_objects"][user]["Имя"]
+                last_name = json_data["global_objects"][user]["Фамилия"]
+
+                print('\n ***** ***** 3')
+                print(f'status: {json_data["global_objects"][user]["Статус"]}')
+
+                if json_data["global_objects"][user]["Статус"] == 'created' or \
+                        json_data["global_objects"][user]["Статус"] == 'changed':
+                    is_active = True
+                else:
+                    is_active = False
+                is_staff = False
+                groups = 'User'
+                patronymic = json_data["global_objects"][user]["Отчество"]
+                personnel_number = json_data["global_objects"][user]["ТабельныйНомер"]
+                subdivision = json_data["global_objects"][user]["Подразделение"]
+                workshop_service = json_data["global_objects"][user]["Цех_Служба"]
+                department_site = json_data["global_objects"][user]["Отдел_Участок"]
+                position = json_data["global_objects"][user]["Должность"]
+                category = json_data["global_objects"][user]["Категория"]
+                account_auth_obj = DjangoClass.AccountClass.UserAuthClass(
+                    # Основное
+                    username=username,
+                    password=password,
+
+                    # Персональная информация
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+
+                    # Права доступа
+                    is_active=is_active,
+                    is_staff=is_staff,
+                    is_superuser=False,
+                    groups=groups,
+
+                    # Настройки создания аккаунта
+                    force_change_account=True,
+                    force_change_account_password=False,
+                    force_clear_groups=False
+                )
+                account_profile_first_obj = DjangoClass.AccountClass.UserProfileClass(
+                    # Основное
+                    username=username,
+
+                    # Персональная информация
+                    user_iin=username,
+                    first_name=first_name,
+                    last_name=last_name,
+                    patronymic=patronymic,
+                    personnel_number=personnel_number,
+
+                    # First data account
+                    subdivision=subdivision,
+                    workshop_service=workshop_service,
+                    department_site=department_site,
+                    position=position,
+                    category=category,
+                )
+                user_objects.append([account_auth_obj, account_profile_first_obj])
+
+            # Создание аккаунтов и доп данных для аккаунтов
             success = True
-            error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
-            for error_word in error_word_list:
-                if str(content.decode()).find(error_word) >= 0:
-                    success = False
-            if success:
-                try:
-                    json_data = json.loads(content)
-                    with open("static/media/data/account.json", "w", encoding="utf-8") as file:
-                        json.dump(content, file)
-                    print('read web file')
-                    success_web_read = True
-                except Exception as ex:
-                    pass
-        if success_web_read is False:
-            print('read temp file')
-            with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
-                json_data = json.load(file)
+            for user_object in user_objects:
+                # try:
+                if True:
+                    account_auth_obj = user_object[0].account_auth_create_or_change()
+                    account_profile_first_obj = user_object[1].profile_first_change()
+                    if account_auth_obj is False or account_profile_first_obj is False:
+                        success = False
+                # except Exception as ex:
+                #     pass
 
-        # Генерация объектов для создания аккаунтов
-        titles_1c = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'ТабельныйНомер', 'Подразделение',
-                     'Цех_Служба', 'Отдел_Участок', 'Должность', 'Категория']
-        user_objects = []
-        for user in json_data["global_objects"]:
-            username = json_data["global_objects"][user]["ИИН"]
-            password = create_encrypted_password(_random_chars=
-                                                 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                                 _length=10)
-            email = ''
-            first_name = json_data["global_objects"][user]["Имя"]
-            last_name = json_data["global_objects"][user]["Фамилия"]
-
-            print('\n ***** ***** 3')
-            print(f'status: {json_data["global_objects"][user]["Статус"]}')
-
-            if json_data["global_objects"][user]["Статус"] == 'created' or \
-                    json_data["global_objects"][user]["Статус"] == 'changed':
-                is_active = True
-            else:
-                is_active = False
-            is_staff = False
-            groups = 'User'
-            patronymic = json_data["global_objects"][user]["Отчество"]
-            personnel_number = json_data["global_objects"][user]["ТабельныйНомер"]
-            subdivision = json_data["global_objects"][user]["Подразделение"]
-            workshop_service = json_data["global_objects"][user]["Цех_Служба"]
-            department_site = json_data["global_objects"][user]["Отдел_Участок"]
-            position = json_data["global_objects"][user]["Должность"]
-            category = json_data["global_objects"][user]["Категория"]
-            account_auth_obj = DjangoClass.AccountClass.UserAuthClass(
-                # Основное
-                username=username,
-                password=password,
-
-                # Персональная информация
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-
-                # Права доступа
-                is_active=is_active,
-                is_staff=is_staff,
-                is_superuser=False,
-                groups=groups,
-
-                # Настройки создания аккаунта
-                force_change_account=True,
-                force_change_account_password=False,
-                force_clear_groups=False
-            )
-            account_profile_first_obj = DjangoClass.AccountClass.UserProfileClass(
-                # Основное
-                username=username,
-
-                # Персональная информация
-                user_iin=username,
-                first_name=first_name,
-                last_name=last_name,
-                patronymic=patronymic,
-                personnel_number=personnel_number,
-
-                # First data account
-                subdivision=subdivision,
-                workshop_service=workshop_service,
-                department_site=department_site,
-                position=position,
-                category=category,
-            )
-            user_objects.append([account_auth_obj, account_profile_first_obj])
-
-        # Создание аккаунтов и доп данных для аккаунтов
-        success = True
-        for user_object in user_objects[100:]:
-            # try:
-            if True:
-                account_auth_obj = user_object[0].account_auth_create_or_change()
-                account_profile_first_obj = user_object[1].profile_first_change()
-                if account_auth_obj is False or account_profile_first_obj is False:
-                    success = False
-            # except Exception as ex:
-            #     pass
-
-        # Генерация ответа для отрисовки в таблицу на странице
-        titles = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'Табельный', 'Подразделение', 'Цех/Служба',
-                  'Отдел/Участок', 'Должность', 'Категория']
-        bodies = []
-        for user in json_data["global_objects"]:
-            user_object = []
-            for key in titles_1c:
-                value = str(json_data["global_objects"][user][key]).strip()
-                user_object.append(value)
-            bodies.append(user_object)
-        data = [titles, bodies]
-        result_form = True
-    context = {
-        'data': data,
-        'form': form,
-        'result_form': result_form
-    }
+            # Генерация ответа для отрисовки в таблицу на странице
+            titles = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'Табельный', 'Подразделение',
+                      'Цех/Служба', 'Отдел/Участок', 'Должность', 'Категория']
+            bodies = []
+            for user in json_data["global_objects"]:
+                user_object = []
+                for key in titles_1c:
+                    value = str(json_data["global_objects"][user][key]).strip()
+                    user_object.append(value)
+                bodies.append(user_object)
+            data = [titles, bodies]
+            result_form = True
+        context = {
+            'data': data,
+            'form': form,
+            'result_form': result_form
+        }
+    # except Exception as ex:
+    #     context = {
+    #         'data': False,
+    #         'form': False,
+    #         'result_form': False
+    #     }
     return render(request, 'account/account_update_accounts_1c.html', context)
 
 
@@ -609,36 +599,71 @@ def account_update_accounts_1c(request):
 def account_change_profile(request):
     if DjangoClass.AuthorizationClass.access_to_page(request=request):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
-    try:
+    # try:
+    if True:
         result_form = False
         if request.method == 'POST':
-            pass
+            user = User.objects.get(username=request.user.username)
+
+            # Second data account
+            education = str(request.POST.get('education')).strip()
+            if education:
+                user.profile.education = education
+            achievements = str(request.POST.get('achievements')).strip()
+            if achievements:
+                user.profile.achievements = achievements
+            biography = str(request.POST.get('biography')).strip()
+            if biography:
+                user.profile.biography = biography
+            image_avatar = request.FILES.get('image_avatar')
+            if image_avatar:
+                user.profile.image_avatar = image_avatar
+
+            # Third data account
+            email = str(request.POST.get('email')).strip()
+            if email:
+                user.profile.email = email
+            secret_question = str(request.POST.get('secret_question')).strip()
+            if secret_question:
+                user.profile.secret_question = secret_question
+            secret_answer = str(request.POST.get('secret_answer')).strip()
+            if secret_answer:
+                user.profile.secret_answer = secret_answer
+
+            user.save()
+            result_form = True
+
         context = {
-            'form_1': CreateUserForm,
+            'form_1': ChangeUserForm,
             'result_form': result_form
         }
-    except Exception as ex:
-        context = {
-            'form_1': CreateUserForm,
-            'result_form': False
-        }
+    # except Exception as ex:
+    #     context = {
+    #         'form_1': False,
+    #         'result_form': False
+    #     }
     return render(request, 'account/account_change_profile.html', context)
 
 
+#
+#
+#
 def account_profile(request, username=None):
     if DjangoClass.AuthorizationClass.access_to_page(request=request):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+    data = None
     if request.method == 'POST':
         pass
+    if username:
+        data = User.objects.get(username=username)
+    else:
+        data = User.objects.get(username=request.user.username)
     context = {
-        'data': None
+        'data': data
     }
     return render(request, 'account/account_profile.html', context)
 
 
-#
-#
-#
 # Application
 def list_module(request):
     module = ApplicationModuleModel.objects.order_by('module_position')

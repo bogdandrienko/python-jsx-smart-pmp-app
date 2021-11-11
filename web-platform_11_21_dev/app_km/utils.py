@@ -296,7 +296,7 @@ def get_users(day=1, month=11, year=2021):
 
     if content:
         try:
-            with open("static/media/data/account.json", "w", encoding="utf-8") as file:
+            with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:
                 json.dump(content, file)
             return json.loads(content)
         except Exception as ex:

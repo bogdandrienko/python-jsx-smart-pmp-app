@@ -2,8 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_OERFMkFBM0UxMTgxMTJDNkIxMDJDQzE4RDlEQTYyRERFM0Q3MD,2572a3910f459b160deb77842d9efe76" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_NjhCMEU1M0Y4MzQ5NjIwQ0E3NTlENUQxQUQxRkY5MEMwOEE0,aaad91842839cce300248946e57a4d6e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMDE=_RUU3MkMyMENGMUE1NkMxQkQ0NDM5OTk2OEM5REQxNUQyNDhD,8927edd7cefe2afe50972b6cf65b0de4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_MDI0OTRBM0MzQThDODY2OUE5MTk1MkYyNDU3Nzk1NDY1NURD,aad8a7ea3b43b3987730a725a7c17c9b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_MkY0MjVFOUY1MEFGNDk5MkExNzk0MzFEQUZFQzVENEFCN0ZE,34b4691700a31ad042b7edad63d5c48a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_NTk1M0IyQjg0Q0E5MTBCMkRGRDI1NzgxQzM3Rjg2MEYxQkFC,2f4ed3e0d5ceead8e4938edf990b895f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_OUMzMTM0RjdDMzU5MjhCNTk5QUFBOEU4QzNGNTVEMjA3QUUw,dae8bc7eed3c43a6049e2a7bdbc81fd2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_QTlEQ0MwRTlGQUI3OEIyMTNCOURGRjg4MEQzREQxRTMwOTM0,3fc5f23ae598823793f57d8544ecb663" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_QzNCNUQwRTdDMTBBMDM2MjRGQ0VCQUZDQkJFRTJEOUE3NzFB,5cffced4c1779742f7efc41b051397b3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_RTVGRUEwQURDRUNDOEI1NkUzNUEyODI3QTI0RDI0NURCMzQ1,4a1f7d70976e7678812959f44f9eb698" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_RjMzRTczODAwMkY5NjVBNzZBQTZBMUY5NEUxRkJCMzhCNDVC,474be757712efcc93a351c67723f23a6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTE=_RjgzRjlBOTA1NzEwRDI2Q0UwMUUwQzg4MEYwNUIzOUMzRkZE,4e0535071fac0a4d6ce802cea08cab0f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/IMG_1532.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/PамирМуллагалиев_932999.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/АзаматНаргозиев_932689.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/АзаматНаргозиев_932689_pU8KRRP.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/АйдарЯкупов_7249.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/АйнураИсмагулова_932853.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/АлександрКондрашев_22515.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/АлександрПанфилов_932834.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_970801351179.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_970801351179_DaxGFJ2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_970801351179_XLlvgag.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/ЖандосАблякимов_932265.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/Новая_схема_алкотестов.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_09_21_dev/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_09_21_dev/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_09_21_dev/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202104,0f68107cbc8ca10c04cc77a9a29c8d4d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_09_21_dev/static/media/data/temp/192.168.1.10KM_1Chszprl970801351179202109,045732edf0af0b5943b4a77323a24509" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/accounts_temp.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts_temp.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_change_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rational/create_rational.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rational/create_rational.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +117,7 @@
       <workItem from="1636532150678" duration="334000" />
       <workItem from="1636532687066" duration="8769000" />
       <workItem from="1636541808371" duration="663000" />
+      <workItem from="1636596541873" duration="18799000" />
     </task>
     <servers />
   </component>

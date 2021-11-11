@@ -34,10 +34,11 @@ class Profile(models.Model):
     image_avatar = models.ImageField(verbose_name='Аватарка', upload_to='uploads/account/avatar',
                                      default='uploads/account/avatar/default.jpg', null=True, blank=True)
 
-    # Вспомогательное
-    mail = models.EmailField(verbose_name='Электронная почта', null=True, blank=True)
+    # Third data account
+    email = models.EmailField(verbose_name='Электронная почта', null=True, blank=True)
     date_registered = models.DateTimeField(verbose_name='дата регистрации', auto_now_add=True, null=True, blank=True)
     secret_question = models.TextField(verbose_name='Секретный вопрос', null=True, blank=True)
+    secret_answer = models.TextField(verbose_name='Секретный ответ', null=True, blank=True)
     group = models.SlugField(verbose_name='группы', null=True, blank=True)
     status = models.BooleanField(verbose_name='статус', default=True, null=True, blank=True)
 

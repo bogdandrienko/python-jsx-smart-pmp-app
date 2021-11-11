@@ -245,3 +245,4 @@ HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам сл
 12:35:13 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
 12:35:23 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
 12:35:27 : rational_list: Reverse for 'rational_create' not found. 'rational_create' is not a valid view function or pattern name.
+15:10:38 : rational_create: RationalModel() got an unexpected keyword argument 'rational_uid_registrated'
