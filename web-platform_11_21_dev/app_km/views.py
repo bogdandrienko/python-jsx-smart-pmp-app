@@ -57,7 +57,11 @@ def account_login(request):
                 user = authenticate(username=username, password=password)
                 if user:
                     login(request, user)
-                    result_form = True
+                    user = User.objects.get(username=username)
+                    if user.profile.email and user.profile.secret_answer and user.profile.secret_question:
+                        result_form = True
+                    else:
+                        return redirect('account_change_profile')
         context = {
             'form': AuthenticationForm(data=request.POST),
             'result_form': result_form

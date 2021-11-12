@@ -6,7 +6,7 @@ urlpatterns = [
 
     # Main
     path('', include('django.contrib.auth.urls')),
-    path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    # path(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', views.admin_, name='admin'),
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
