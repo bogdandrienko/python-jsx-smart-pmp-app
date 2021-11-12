@@ -76,19 +76,19 @@
 
     {% else %}
 
-            <div class="p-sm-5 text-white rounded bg-dark">
-                <h1 class="display-1 fst-italic">Выгрузить пользователей</h1>
-                <p class="display-5">Эта страница содержит форму для выгрузки пользователей на страницу и в excel файл-шаблон.
-                    <p class="display-6">Нажмите подтвердить и затем скачайте файл.</p>
-                </p>
-            </div>
+        <div class="p-sm-5 text-white rounded bg-dark">
+            <h1 class="display-1 fst-italic">Выгрузить пользователей</h1>
+            <p class="display-5">Эта страница содержит форму для выгрузки пользователей на страницу и в excel файл-шаблон.
+                <p class="display-6">Нажмите подтвердить и затем скачайте файл.</p>
+            </p>
+        </div>
 
-            <form class="form-control" action="{% url 'account_export_accounts' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="btn-group form-control">
-                    <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
-                </div>
-            </form>
+        <form class="form-control" action="{% url 'account_export_accounts' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="btn-group form-control">
+                <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+            </div>
+        </form>
 
     {% endif %}
 

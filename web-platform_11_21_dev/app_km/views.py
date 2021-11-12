@@ -30,7 +30,8 @@ from .models import RationalModel, CategoryRationalModel, LikeRationalModel, Com
     DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
 from .service import DjangoClass, PaginationClass, HttpRaiseExceptionClass
 from .utils import ExcelClass, LoggingClass, create_encrypted_password, get_salary_data, link_callback, get_career, \
-    find_near_point, get_vector_arr, generate_way, pyodbc_connect, decrypt_text_with_hash
+    find_near_point, get_vector_arr, generate_way, pyodbc_connect, decrypt_text_with_hash, create_arr_table, \
+    create_arr_from_json
 
 
 # admin
@@ -668,6 +669,303 @@ def account_profile(request, username=None):
     return render(request, 'account/account_profile.html', context)
 
 
+
+
+
+
+
+
+
+# Salary
+def salary(request):
+    DjangoClass.AuthorizationClass.access_to_page(request=request)
+    try:
+        data = None
+        result_form = False
+        if request.method == 'POST':
+            key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                            _length=10)
+            print('\n ***************** \n')
+            print(f"key: {key}")
+            hash_key_obj = hashlib.sha256()
+            hash_key_obj.update(key.encode('utf-8'))
+            key_hash = str(hash_key_obj.hexdigest().strip().upper())
+            print('\n ***************** \n')
+            print(f"key_hash: {key_hash}")
+            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+            print('\n ***************** \n')
+            print(f"key_hash_base64: {key_hash_base64}")
+
+            iin = request.user.username
+            if str(request.user.username).lower() == 'bogdan':
+                iin = 970801351179
+            print('\n ***************** \n')
+            print(f"iin: {iin}")
+            iin_base64 = base64.b64encode(str(iin).encode()).decode()
+            print('\n ***************** \n')
+            print(f"iin_base64: {iin_base64}")
+            print('\n ***************** \n')
+
+            month = request.POST["month"]
+            if int(month) < 10:
+                month = f'0{month}'
+            year = str(request.POST["year"])
+            date = f'{year}{month}'
+            print(f"date: {date}")
+            date_base64 = base64.b64encode(str(date).encode()).decode()
+            print('\n ***************** \n')
+            print(f"date_base64: {date_base64}")
+
+            # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            print('\n ***************** \n')
+            print(f"url: {url}")
+
+            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+            h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+            login = 'Web_adm_1c'
+            password = '159159qqww!'
+            h.add_credentials(login, password)
+            response, content = h.request(url)
+
+            print('\n ***************** \n')
+            print(f"content: {content}")
+            print('\n ***************** \n')
+            print(f"content_utf: {content.decode()}")
+            content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+            print('\n ***************** \n')
+            print(f"content_decrypt: {content_decrypt}")
+
+            success_web_read = False
+            if content:
+                success = True
+                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+                for error_word in error_word_list:
+                    if str(content.decode()).find(error_word) >= 0:
+                        success = False
+                if success:
+                    try:
+                        json_data = json.loads(decrypt_text_with_hash(content.decode()[1:], key_hash))
+                        with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                            encode_data = json.dumps(json_data, ensure_ascii=False)
+                            json.dump(encode_data, file, ensure_ascii=False)
+                        success_web_read = True
+                    except Exception as ex:
+                        pass
+            if success_web_read is False:
+                print('read temp file')
+                with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                    json_data = json.load(file)
+
+            print('\n ***************** \n')
+            print(f"json_data: {json_data}")
+            print('\n ***************** \n')
+
+            try:
+                json_data["global_objects"]["3.Доходы в натуральной форме"]
+            except Exception as ex:
+                json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                    "Fields": {
+                        "1": "Вид",
+                        "2": "Период",
+                        "3": "Дни",
+                        "4": "Часы",
+                        "5": "Сумма",
+                        "6": "ВсегоДни",
+                        "7": "ВсегоЧасы"
+                    },
+                }
+
+            data = {
+                "Table_1": create_arr_table(
+                    title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
+                    exclude=[5, 6]
+                ),
+                "Table_2": create_arr_table(
+                    title="2.Удержано", footer="Всего удержано", json_obj=json_data["global_objects"]["2.Удержано"],
+                    exclude=[]
+                ),
+                "Table_3": create_arr_table(
+                    title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+                    json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
+                ),
+                "Table_4": create_arr_table(
+                    title="4.Выплачено", footer="Всего выплат", json_obj=json_data["global_objects"]["4.Выплачено"],
+                    exclude=[]
+                ),
+                "Table_5": create_arr_table(
+                    title="5.Налоговые вычеты", footer="Всего вычеты",
+                    json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
+                    exclude=[]
+                ),
+                "Down": {
+                    "first": ["Долг за организацией на начало месяца", json_data["Долг за организацией на начало месяца"]],
+                    "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+                },
+            }
+            result_form = True
+        context = {
+            'data': data,
+            'result_form': result_form
+        }
+        return render(request, 'app_km/salary.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'salary: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def render_pdf_view(request):
+    DjangoClass.AuthorizationClass.access_to_page(request=request)
+    template_path = 'app_km/pdf.html'
+
+    key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                    _length=10)
+    print('\n ***************** \n')
+    print(f"key: {key}")
+    hash_key_obj = hashlib.sha256()
+    hash_key_obj.update(key.encode('utf-8'))
+    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+    print('\n ***************** \n')
+    print(f"key_hash: {key_hash}")
+    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+    print('\n ***************** \n')
+    print(f"key_hash_base64: {key_hash_base64}")
+
+    iin = request.user.username
+    if str(request.user.username).lower() == 'bogdan':
+        iin = 970801351179
+    print('\n ***************** \n')
+    print(f"iin: {iin}")
+    iin_base64 = base64.b64encode(str(iin).encode()).decode()
+    print('\n ***************** \n')
+    print(f"iin_base64: {iin_base64}")
+    print('\n ***************** \n')
+
+    month = 10
+    if int(month) < 10:
+        month = f'0{month}'
+    year = 2021
+    date = f'{year}{month}'
+    print(f"date: {date}")
+    date_base64 = base64.b64encode(str(date).encode()).decode()
+    print('\n ***************** \n')
+    print(f"date_base64: {date_base64}")
+
+    # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+    print('\n ***************** \n')
+    print(f"url: {url}")
+
+    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+    login = 'Web_adm_1c'
+    password = '159159qqww!'
+    h.add_credentials(login, password)
+    response, content = h.request(url)
+
+    print('\n ***************** \n')
+    print(f"content: {content}")
+    print('\n ***************** \n')
+    print(f"content_utf: {content.decode()}")
+    content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+    print('\n ***************** \n')
+    print(f"content_decrypt: {content_decrypt}")
+
+    success_web_read = False
+    if content:
+        success = True
+        error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+        for error_word in error_word_list:
+            if str(content.decode()).find(error_word) >= 0:
+                success = False
+        if success:
+            try:
+                json_data = json.loads(decrypt_text_with_hash(content.decode()[1:], key_hash))
+                with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                    encode_data = json.dumps(json_data, ensure_ascii=False)
+                    json.dump(encode_data, file, ensure_ascii=False)
+                success_web_read = True
+            except Exception as ex:
+                pass
+    if success_web_read is False:
+        print('read temp file')
+        with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+            json_data = json.load(file)
+
+    print('\n ***************** \n')
+    print(f"json_data: {json_data}")
+    print('\n ***************** \n')
+
+    try:
+        json_data["global_objects"]["3.Доходы в натуральной форме"]
+    except Exception as ex:
+        json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+            "Fields": {
+                "1": "Вид",
+                "2": "Период",
+                "3": "Дни",
+                "4": "Часы",
+                "5": "Сумма",
+                "6": "ВсегоДни",
+                "7": "ВсегоЧасы"
+            },
+        }
+
+    data = {
+        "Table_1": create_arr_table(
+            title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
+            exclude=[5, 6]
+        ),
+        "Table_2": create_arr_table(
+            title="2.Удержано", footer="Всего удержано", json_obj=json_data["global_objects"]["2.Удержано"],
+            exclude=[]
+        ),
+        "Table_3": create_arr_table(
+            title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+            json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
+        ),
+        "Table_4": create_arr_table(
+            title="4.Выплачено", footer="Всего выплат", json_obj=json_data["global_objects"]["4.Выплачено"],
+            exclude=[]
+        ),
+        "Table_5": create_arr_table(
+            title="5.Налоговые вычеты", footer="Всего вычеты",
+            json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
+            exclude=[]
+        ),
+        "Down": {
+            "first": ["Долг за организацией на начало месяца", json_data["Долг за организацией на начало месяца"]],
+            "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+        },
+    }
+    context = {
+        'data': data,
+        'STATIC_ROOT': settings.STATIC_ROOT,
+    }
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, encoding='utf-8', link_callback=link_callback)
+    # template = render_to_string(template_path, context)
+    # pdf = pisa.pisaDocument(io.BytesIO(template.encode('UTF-8')), response,
+    #                         encoding='utf-8',
+    #                         link_callback=link_callback)
+    # pdf = pisa.pisaDocument(io.StringIO(html), response, encoding='UTF-8')
+    # if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
+
+
+
+
 # Application
 def list_module(request):
     module = ApplicationModuleModel.objects.order_by('module_position')
@@ -937,64 +1235,6 @@ def rational_ratings(request):
     except Exception as ex:
         LoggingClass.logging(message=f'rational_change_rating: {ex}')
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-# Salary
-def salary(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        data = None
-        if request.method == 'POST':
-            # Тут мы получаем json ответ от интерфейса 1С
-            data = get_salary_data(month=request.POST['transact_id'])
-            # Тут мы получаем json ответ от интерфейса 1С
-        context = {
-            'data': data,
-        }
-        return render(request, 'app_km/salary.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'salary: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-def view_pdf(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    data = None
-    if request.method == 'POST':
-        data = get_salary_data(month=request.POST['transact_id'])
-    context = {
-        'data': data,
-    }
-    return render(request, 'app_km/pdf.html', context)
-
-
-def render_pdf_view(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    template_path = 'app_km/pdf.html'
-    data = get_salary_data()
-    # data = None
-    context = {
-        'data': data,
-        'STATIC_ROOT': settings.STATIC_ROOT,
-    }
-    # Create a Django response object, and specify content_type as pdf
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
-    # find the template and render it.
-    template = get_template(template_path)
-    html = template.render(context)
-    # create a pdf
-    pisa_status = pisa.CreatePDF(
-        html, dest=response, encoding='utf-8', link_callback=link_callback)
-    # template = render_to_string(template_path, context)
-    # pdf = pisa.pisaDocument(io.BytesIO(template.encode('UTF-8')), response,
-    #                         encoding='utf-8',
-    #                         link_callback=link_callback)
-    # pdf = pisa.pisaDocument(io.StringIO(html), response, encoding='UTF-8')
-    # if error then show some funny view
-    if pisa_status.err:
-        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
 
 
 # Human Resources

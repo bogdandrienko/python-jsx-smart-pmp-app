@@ -144,6 +144,8 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.0.109:8000",
     "http://192.168.1.68:8000",
+    "http://89.218.132.130:80",
+    "http://89.218.132.130:8000",
     "http://localhost:8080",
     "http://127.0.0.1:8000",
 ]

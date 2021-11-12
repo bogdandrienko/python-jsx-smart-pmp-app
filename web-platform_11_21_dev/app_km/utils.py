@@ -176,6 +176,7 @@ def get_salary_data(iin=970801351179, month=4, year=2021):
     content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
     print('\n ***************** \n')
     print(f"content_decrypt: {content_decrypt}")
+
     if content:
         try:
             data = json.loads(content)
@@ -228,17 +229,17 @@ def get_salary_data(iin=970801351179, month=4, year=2021):
             "last": ["Долг за организацией на конец месяца", data["Долг за организацией на конец месяца"]],
         },
     }
-    # global_objects = []
-    # for x in data["global_objects"]:
-    #     global_objects.append(x)
-    # global_objects = [x for x in data["global_objects"]]
+    global_objects = []
+    for x in data["global_objects"]:
+        global_objects.append(x)
+    global_objects = [x for x in data["global_objects"]]
 
-    # return_data = []
-    # for x in global_objects:
-    #     return_data.append(create_arr_from_json(data["global_objects"], x))
-    # return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
+    return_data = []
+    for x in global_objects:
+        return_data.append(create_arr_from_json(data["global_objects"], x))
+    return_data = [create_arr_from_json(data["global_objects"], x) for x in global_objects]
 
-    # return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
+    return_data = [create_arr_from_json(data["global_objects"], y) for y in [x for x in data["global_objects"]]]
     return data
 
 
