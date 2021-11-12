@@ -24,7 +24,7 @@ from django.urls import reverse
 from xhtml2pdf import pisa
 from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
     NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
-    SmsForm, GeoForm
+    SmsForm, GeoForm, ChangePasswordForm
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, \
     DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
@@ -49,7 +49,7 @@ def home(request):
 #  account
 def account_login(request):
     try:
-        result_form = False
+        result = False
         if request.method == 'POST':
             form = AuthenticationForm(data=request.POST)
             if form.is_valid():
@@ -58,19 +58,15 @@ def account_login(request):
                 user = authenticate(username=username, password=password)
                 if user:
                     login(request, user)
-                    user = User.objects.get(username=username)
-                    if user.profile.email and user.profile.secret_answer and user.profile.secret_question:
-                        result_form = True
-                    else:
-                        return redirect('account_change_profile')
+                    result = True
         context = {
-            'form': AuthenticationForm(data=request.POST),
-            'result_form': result_form
+            'form_1': AuthenticationForm(data=request.POST),
+            'result': result
         }
     except Exception as ex:
         context = {
-            'form': AuthenticationForm(data=request.POST),
-            'result_form': False
+            'form_1': AuthenticationForm(data=request.POST),
+            'result': False
         }
     return render(request, 'account/account_login.html', context)
 
@@ -83,12 +79,34 @@ def account_logout(request):
         redirect('account_login')
 
 
-def account_create_accounts(request, quantity=None):
+def account_create_accounts(request, quantity=1):
+    def get_client_ip(request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[-1].strip()
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
+    print('\n ***** ***** \n')
+    print(f'request.readlines(): {request.readlines()}')
+    print('\n ***** ***** \n')
+
+    print('\n ***** ***** \n')
+    print(f'get_client_ip: {get_client_ip(request=request)}')
+    print('\n ***** ***** \n')
+
+
+
+
+    print(request)
+
+    DjangoClass.LoggingClass.logging(request=request)
     if DjangoClass.AuthorizationClass.access_to_page(request=request):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
     # try:
     if True:
-        result_form = False
+        result = False
         if request.method == 'POST':
             try:
                 force_change_1 = request.POST['check_1']
@@ -180,10 +198,6 @@ def account_create_accounts(request, quantity=None):
                                     position=position,
                                     category=category,
                                 )
-
-                                print('\n ***** ***** 3')
-                                print(f'account_auth_obj: {account_auth_obj}')
-
                                 user_objects.append([account_auth_obj, account_profile_first_obj])
                 # except Exception as ex:
                 #     pass
@@ -191,8 +205,6 @@ def account_create_accounts(request, quantity=None):
                 # Создание массива объектов аккаунтов из одиночной формы
                 # try:
                 if True:
-                    print('\n ***** ***** 1')
-                    print('create one account')
                     form = CreateUserForm(request.POST)
                     if form.is_valid():
                         username = form.cleaned_data.get('username')
@@ -204,8 +216,6 @@ def account_create_accounts(request, quantity=None):
                             username = None
                     if username:
                         form.is_valid()
-                        print('\n ***** ***** 2')
-                        print('form is valid')
                         password1 = form.cleaned_data.get('password1')
                         password2 = form.cleaned_data.get('password2')
                         first_name = form.cleaned_data.get('firstname')
@@ -261,10 +271,6 @@ def account_create_accounts(request, quantity=None):
                                 position=position,
                                 category=category,
                             )
-
-                            print('\n ***** ***** 3')
-                            print(f'account_auth_obj: {account_auth_obj}')
-
                             user_objects.append([account_auth_obj, account_profile_first_obj])
                 # except Exception as ex:
                 #     pass
@@ -279,17 +285,17 @@ def account_create_accounts(request, quantity=None):
                         success = False
                 # except Exception as ex:
                 #     success = False
-            result_form = success
+            result = success
         context = {
             'form_1': CreateUserForm,
             'form_2': CreateUsersForm,
-            'result_form': result_form
+            'result': result
         }
     # except Exception as ex:
     #     context = {
     #         'form_1': CreateUserForm,
     #         'form_2': CreateUsersForm,
-    #         'result_form': False
+    #         'result': False
     #     }
     return render(request, 'account/account_create_accounts.html', context)
 
@@ -379,17 +385,17 @@ def account_export_accounts(request):
                              user_object.profile.category])
                 data = [titles, body]
             ExcelClass.workbook_save(workbook=workbook, filename='static/media/data/account/export_users.xlsx')
-            result_form = True
+            result = True
         else:
-            result_form = False
+            result = False
         context = {
             'data': data,
-            'result_form': result_form
+            'result': result
         }
     # except Exception as ex:
     #     context = {
     #         'data': False,
-    #         'result_form': False
+    #         'result': False
     #     }
     return render(request, 'account/account_export_accounts.html', context)
 
@@ -399,7 +405,7 @@ def account_generate_passwords(request):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
     # try:
     if True:
-        result_form = None
+        result = None
         data = None
         if request.method == 'POST':
             passwords_quantity = int(request.POST['passwords_quantity'])
@@ -419,18 +425,17 @@ def account_generate_passwords(request):
                 body.append([password, encrypt_password])
             wb.save('static/media/data/account/generate_passwords.xlsx')
             data = [titles, body]
-            result_form = True
-        form = GeneratePasswordsForm
+            result = True
         context = {
             'data': data,
-            'form': form,
-            'result_form': result_form
+            'form_1': GeneratePasswordsForm,
+            'result': result
         }
     # except Exception as ex:
     #     context = {
     #         'data': False,
-    #         'form': False,
-    #         'result_form': False
+    #         'form_1': False,
+    #         'result': False
     #     }
     return render(request, 'account/account_generate_passwords.html', context)
 
@@ -441,8 +446,8 @@ def account_update_accounts_1c(request):
     # try:
     if True:
         data = None
-        form = None
-        result_form = None
+        form_1 = None
+        result = None
         if request.method == 'POST':
             key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                                             _length=10)
@@ -561,14 +566,14 @@ def account_update_accounts_1c(request):
                 user_objects.append([account_auth_obj, account_profile_first_obj])
 
             # Создание аккаунтов и доп данных для аккаунтов
-            success = True
+            result = True
             for user_object in user_objects:
                 # try:
                 if True:
                     account_auth_obj = user_object[0].account_auth_create_or_change()
                     account_profile_first_obj = user_object[1].profile_first_change()
                     if account_auth_obj is False or account_profile_first_obj is False:
-                        success = False
+                        result = False
                 # except Exception as ex:
                 #     pass
 
@@ -583,20 +588,48 @@ def account_update_accounts_1c(request):
                     user_object.append(value)
                 bodies.append(user_object)
             data = [titles, bodies]
-            result_form = True
         context = {
             'data': data,
-            'form': form,
-            'result_form': result_form
+            'form_1': form_1,
+            'result': result
         }
     # except Exception as ex:
     #     context = {
     #         'data': False,
-    #         'form': False,
-    #         'result_form': False
+    #         'form_1': False,
+    #         'result': False
     #     }
     return render(request, 'account/account_update_accounts_1c.html', context)
 
+
+def account_change_password(request):
+    # try:
+    if True:
+        result = False
+        if request.method == 'POST':
+            user = User.objects.get(username=request.user.username)
+            # Third data account
+            email = str(request.POST.get('email')).strip()
+            if email:
+                user.profile.email = email
+            secret_question = str(request.POST.get('secret_question')).strip()
+            if secret_question:
+                user.profile.secret_question = secret_question
+            secret_answer = str(request.POST.get('secret_answer')).strip()
+            if secret_answer:
+                user.profile.secret_answer = secret_answer
+            user.save()
+            result = True
+        context = {
+            'form_1': ChangePasswordForm,
+            'result': result
+        }
+    # except Exception as ex:
+    #     context = {
+    #         'form_1': False,
+    #         'result': False
+    #     }
+    return render(request, 'account/account_change_password.html', context)
 
 #
 #
@@ -609,7 +642,6 @@ def account_change_profile(request):
         result_form = False
         if request.method == 'POST':
             user = User.objects.get(username=request.user.username)
-
             # Second data account
             education = str(request.POST.get('education')).strip()
             if education:
@@ -623,21 +655,8 @@ def account_change_profile(request):
             image_avatar = request.FILES.get('image_avatar')
             if image_avatar:
                 user.profile.image_avatar = image_avatar
-
-            # Third data account
-            email = str(request.POST.get('email')).strip()
-            if email:
-                user.profile.email = email
-            secret_question = str(request.POST.get('secret_question')).strip()
-            if secret_question:
-                user.profile.secret_question = secret_question
-            secret_answer = str(request.POST.get('secret_answer')).strip()
-            if secret_answer:
-                user.profile.secret_answer = secret_answer
-
             user.save()
             result_form = True
-
         context = {
             'form_1': ChangeUserForm,
             'result_form': result_form

@@ -1,0 +1,32 @@
+<div class="mx-auto text-center">
+    <h1 class="display-6">Текущие данные.</h1>
+    <p class="lead">Ниже расположены данные, соответствующие текущему значению.</p>
+    <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm">
+        <thead>
+            <tr>
+
+                {% for arr_1 in data.0 %}
+                    <th>
+                        {{ arr_1 }}
+                    </th>
+                {% endfor %}
+
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for arr_1 in data.1 %}
+                <tr>
+
+                    {% for arr_2 in arr_1 %}
+                        <td>
+                            {{ arr_2 }}
+                        </td>
+                    {% endfor %}
+
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>

@@ -2,72 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SCRIPTS/win_run_192.168.1.68.8000.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MDU2MzI1M0Q3Mzk5NENGQ0VBNDFFMTI1NUQ5MEM4MkY0QjQwRE,bffe831b947924bc0659cdaefc8840c0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MTM4RDc1OUFBQTI2N0I4REY3NjM2MDAyREU2Q0NBMjM0MTlGQU,63fde4a11a6e1f158a8276ed5e5c3d12" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MTNDRUM0MkFDRURDQjVEMjA0OTQyMTUzNjVFNUNGM0MxMDg3Nj,0d1850b5638cfad27aae89149d69783d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MjNCOUExODA5OUQ4MjY5QTdGRDJGM0IyQjgwQUU4NEI4MTg3Qj,dae7ccf07bcc1b1a01c27f97c840d021" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MkI3REY2OTM5OENGMTJFM0NERDBERjE4NTkxQjgxNjZCQzZDMj,24d4c96b80594177391f6e7a7f4d0c21" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MzBFRjg0MDJDMEVGMzQwMjg5MDlDNTE2N0I1NTc3MDVCQzk0RU,03c45500b9d89bee32674b9523b8f53c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MzQzMEY3OUNDMkZGMjUyREM4NTM0MjFBQ0FFNjRDRTQxNTY4Mz,b8475d42fc9b9356e5f8ada4f2836578" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_N0E0NTlGOEJDNjIwNDMwQkM3Nzg4MDM0Q0UxOTMyQjQ2NjQ4NU,98cdbbe595e2b74c3c5161c5a48762e7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NDU0OUIxOUFGNTZDMzkxQ0FFQ0QzN0Q4NjEzM0FGRDQzMUY0Qz,d3f7aa4edcccf616a484d9f4576ed9a5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NDdENzE3N0Y1NURGNUIxMDM1MENDMkZBNTg0OEU0MjRBRTIwQk,b9427429a8dbf660f1e233a34205e72c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NEIyNjcyMjA0MDQyOENFMDE2QTQzMTkwREEzNTJCMTVGMUIzOD,84fdef1366b9d27cedbb17c9ea2423fb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NEVCNDUwOTg5NUZBRjk3MEZGMDRFQ0JBNkEwMzkxODU4RDBDOT,23db4979ffa9ea7fc081e891ed4fa286" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NTRENzlFRTNBNEJBNTdBODBGQjQxRUI5ODA1ODE5RTI4QUQzRE,af04c61e70593a2231d7f34b31139a2f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NTVFRDhDMEExNTQxNEJDQkQ1M0REQkZDMEYxRjlCOTJDMTkxNT,3ed0eee84e81bb0119357eca6dcb7544" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NTk0N0QzMkQ4NTFCRDE4MjJFMjdBNUQyMTQ2RjkwRjFFQzA4MD,6dbc667e935ddc8b0c7304ce50208f62" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NUZGNjFFQ0M1OTYxRDREODUwRDVFQ0U5RDBEMUFDRDE2RTU2Mz,b96e6e646916ef19c691621cd42fcb99" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NjJCNEJFNURCQzNDNjVCN0U5NDNDNThBOTMzRTYwMzhGNTAzME,6578f02f464e290e63744bd42c39a2d8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NkFEOUM4RUQ0RDk2OTdFRUQ0MTBFNzc1M0ZBOTY2NUNCM0IyRD,5e8d09c880d13901db059ebe09771515" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NkIxMDI0MjAxNkVGNkMwREU3RTlDNzhEQjIzNTQxRTExNEYyNT,28535e9215a80dc25ddfc6baed921aa4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NkM3RTI0MTA2MzRGOTQ1OEJGMTRBQzY4ODg1ODE1MkZGMjRCMU,732b47a5a9ed93e211524a70a2febfc7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NzE1NEQ1RUNEQUUxQkJEN0ZEMzJFOTAzNTRFNjU0MTEyMDJBNz,3b405e4c393d763cf93664c0ba7a92d5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NzMwNjBGNDg5MTFGNUE3QTREOTg1NDkwM0FFMjY4MzA4Mjg1Rj,31b8e44ec32bedc4b1c8b6ad8fd3bed4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NzkzQkQ1RTRGMzFERjJBRUFFOENFMkE3NzIzQ0E1NjVCRkUzQk,1ab3507e862af2b003d68ddc42c1d36e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_ODRGM0Q2REFEREE1RTBFMTdGNUJDNzc5Q0VGREFBMjdERUQyOD,85ec2897d577b735c2a13c35cc29cdf9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_OTIwRUFDOEU1NThCMURENkREMTMyOURDOUZERkJDNzg3RENENj,f2ecd3405068d96654d2f4d319a0da0d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_Q0MzOUYyNzE2MjlCMEUzOTA4NjAxMDZFQjhERjE3MzFFM0Q3OD,55277508fc8ff388b303ddbff5033593" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QTFERjkwNjg0RDNCMTRCNjA2N0RFQzEwRDA3OEVDQjY2RjRCMj,e91a90083a1aad24ccca38d85b2d81cf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QTREN0M2MDNFMEQwMTlDMUFDRUI0OTdCQkVBMjc3MzU5NjUxNU,7d17e30a7b560b50fdeb9162ef591da9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QTdEMjEyMzA3NTdBNjc2NDQ4QjczN0EzN0VBQUI4MzREOTU5MU,9649710c7f3c7c7c222a5dd5a3ba14d0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QjZDMjkwRkM1Nzk0QUQ0OUUwMzZCOTU3OTFGQjQwODFGRDcxQz,dd3c866542a23639beb366d27882f699" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QzA3Q0ZBOTBBQUYzNzU3MDU4QjhBMjlDRDZFRjlBNUJCOEYwNj,8a228c3996b26fc1aae22b662b1e6362" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QzY0RTY4MTcyREE1QUM1QjYwMjk3QzUwM0RCQTRCRDAzQjU1Qz,1804cb3d010b411d9b33823e56415ce4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QzkwOEZCRTNEMDU1NUQzNTk1NDlEREIwMDJGRTRGODI4QzYyNE,bc3d7dc88a2663be10314b0810ff5370" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RDFCRDM0MjAwNUZDMTdGNDcwMzUxNUEzQkQ3NzUzRjVGQzE2ND,9574dd9388edd2005056044d581d29f0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RDY4QjA0NUQ3RkU4M0E2NTU2QjQ3NTVFNjQwQ0E4MjRDMzhDND,c8175aea4b4f90b2c958a5f38de5b4fc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RDczNkM2M0M1QUM1M0MyOUI1RUUxQ0I3RjFFRTNGNDcxNUZCNU,24258c8bcf3f861444c2575c551362e4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_REQ2Q0FFNTE4QzQyMEVGQUM0QzY1MkNDNTIwQjhGMTQ5N0U2Rj,ee6940149312dc1d7b000d2f11f9e2de" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_REZFMEE1QThEQTgyMDk3RkYwNkU2OTEwRDM4N0E5QzBFRjg0MT,4d1953dd0b5c1aef74f1a0d16cbc44df" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RTNCNEIzMTRBMzkzNDJDRkFBNUZGMjZFMTQ5NTUyN0FBODlDME,b483e3174013c0bee35af5c0ea1f595c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RTNENjVBNUNFRjZDMEY1MjdDMzNDOUFGMzIzRkNBM0YzODhFMD,e3d6d9c275c01aff5824c74f182dd460" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RjU2NTUwRTA0MDIzMThENTI1OEIyMjFEOTk2NUQ3NDBDN0IzMz,c8df1306e68f00da3952495c58f73115" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RjUzNDM2OUMxOUFCODEwNzE1N0M1QjQ0QjcyNzg2MzU5OEJERE,d0567e536b738410cc682b9af49ddc87" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RjhEQ0Y5MzNBRjg5NThFN0EwRDAzNzMzRjYxQzI4QzUyRDhFMD,25e20d58d3ee048c60e51989267d0d22" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RkI5NDVGNjE3MjczNUQ0NzBFNEI4RTYyRTRFNUQ1OTRBQUUyNj,b230e631892159c20f0d319466978968" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RkNFNDE0N0ZBMjg0MjIyM0M5QkFGQjA0RjIwMzQwQUY2NkYzRT,2e88c943f37f38b5fca1fd5905b39e29" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RkRDODg2QjlBQkRENkNFRDg4NjZGQTgyNEE0QkU5MjZBRDQ2M0,3032e750afe30424059fb6c05bee29cc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTI=_NDAyQjU1QkQxQkREQjBGQkQ3NjE5NjQ3REVBODkwM0VFMTk5,b456a5923fe3021a5cd03e85f766f6de" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTI=_OUU1MjMxNkRGRERFMzUwRjc3M0NGRjcwQ0MzOTZDMDI1NzhF,3743cfb00cb4ee54d4fcaadf6bdc964e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/account/account_change_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/aborted.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/success.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/table.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Сценарии.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Сценарии.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCRIPTS/SSH.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SCRIPTS/SSH.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCRIPTS/win_run_192.168.1.68.80.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCRIPTS/win_run_192.168.0.109.80.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_change_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_create_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_create_accounts.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_export_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_export_accounts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_km/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app_km/pdf.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/app_km/salary.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app_km/salary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_update_accounts_1c.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_update_accounts_1c.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,6 +33,13 @@
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -92,13 +55,20 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="sqlite" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/account" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\account" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="web-platform_11_21_dev" type="Python.DjangoServer" factoryName="Django server">
@@ -141,6 +111,7 @@
       <workItem from="1636596541873" duration="18799000" />
       <workItem from="1636635068205" duration="2602000" />
       <workItem from="1636682203839" duration="13799000" />
+      <workItem from="1636720781910" duration="13002000" />
     </task>
     <servers />
   </component>

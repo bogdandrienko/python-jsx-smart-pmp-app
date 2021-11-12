@@ -21,51 +21,36 @@
 
 <!-- Main -->
 {% block main %}
-
 <main class="container-fluid mx-auto text-center d-block">
 
-    {% if result_form %}
+{% if result %}
 
-        <div class="p-sm-5 text-white rounded bg-dark">
-            <h1 class="display-4">Успешно выполнено</h1>
-            <p class="lead">Операция успешно выполнена, вернитесь на главную или повторите операцию</p>
-            <div class="btn-group btn-group-lg" role="group" aria-label="Basic mixed styles example">
-              <a class="btn btn-success active" aria-current="page" href="{% url 'home' %}">Главная</a>
-              <a type="button" class="btn btn-warning" href="{% url 'account_login' %}">Повторить</a>
-            </div>
+    {% include 'components/success.html' %}
+
+{% else %}
+
+    {% if form_1 %}
+
+        <div class="text-white rounded bg-dark">
+            <h1 class="display-6 fst-italic">Войти в аккаунт</h1>
+            <p class="text-secondary">Эта страница содержит форму для входа пользователя.</p>
         </div>
+
+        <form class="form-control" action="{% url 'account_login' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_1|crispy }}
+            <button class="form-control btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+        </form>
 
     {% else %}
 
-        {% if form %}
-
-            <div class="p-sm-5 text-white rounded bg-dark">
-                <h1 class="display-1 fst-italic">Войти в аккаунт</h1>
-                <p class="display-6">Эта страница содержит форму для входа пользователя.
-                    <p class="display-6">Только для уже существующих аккаунтов!</p>
-                </p>
-            </div>
-
-            <form class="form-control" action="{% url 'account_login' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <p>{{ form|crispy }}</p>
-                <div class="btn-group form-control">
-                    <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
-                </div>
-            </form>
-
-        {% else %}
-
-            <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
-                <h1 class="display-4">Данных нет.</h1>
-                <p class="lead">Перезагрузите страницу или ожидайте исправления неполадок.</p>
-            </div>
-
-        {% endif %}
+        {% include 'components/aborted.html' %}
 
     {% endif %}
-</main>
 
+{% endif %}
+
+</main>
 {% endblock main %}
 
 <!-- Footer -->

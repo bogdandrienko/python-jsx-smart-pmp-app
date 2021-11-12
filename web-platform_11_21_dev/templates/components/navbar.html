@@ -122,21 +122,25 @@
                                     {% else %}
                                         <a class="dropdown-item" href="{% url 'account_login' %}">Выйти [ Вы не вошли в аккаунт ]</a>
                                     {% endif %}
-                                    <a class="dropdown-item" href="{% url 'account_create_accounts' 1 %}">Создать/изменить пользователей</a>
-                                    <a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список пользователей</a>
+
                                     <a class="dropdown-item" href="{% url 'account_generate_passwords' %}">Сгенерировать пароли для аккаунтов</a>
-                                    <a class="dropdown-item" href="{% url 'account_update_accounts_1c' %}">Обновить пользователей из 1С</a>
-
-                                    <li>
-                                        <hr class="dropdown-divider text-light">
-                                    </li>
-
+                                    <a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список пользователей</a>
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_change_password' %}">Изменить пароль</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Изменить пароль [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
                                     {% if request.user.is_authenticated %}
                                         <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
                                     {% else %}
                                         <a class="dropdown-item" href="#">Изменить личный профиль [ Вы не вошли в аккаунт ]</a>
                                     {% endif %}
+                                    <li>
+                                        <hr class="dropdown-divider text-light">
+                                    </li>
 
+                                    <a class="dropdown-item" href="{% url 'account_create_accounts' 1 %}">Создать/изменить пользователей</a>
+                                    <a class="dropdown-item" href="{% url 'account_update_accounts_1c' %}">Обновить пользователей из 1С</a>
                                     {% if request.user.is_authenticated %}
                                         <a class="dropdown-item" href="{% url 'account_profile' request.user.username %}">Личный профиль [{{ request.user.username }}]</a>
                                     {% else %}

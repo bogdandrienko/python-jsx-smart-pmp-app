@@ -1,4 +1,6 @@
+import datetime
 import random
+import time
 
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import logout
@@ -18,11 +20,46 @@ class DjangoClass:
                     if user.is_active is False:
                         logout(request)
                         return 'account_login'
+                    else:
+                        if user.profile.email and user.profile.secret_answer and user.profile.secret_question:
+                            pass
+                        else:
+                            return 'account_change_password'
                 except Exception as ex:
                     pass
                 return False
             else:
                 return 'account_login'
+
+    class LoggingClass:
+        @staticmethod
+        def write_to_database():
+            pass
+
+        @staticmethod
+        def write_to_text_file():
+            pass
+
+        @staticmethod
+        def logging(request):
+
+            print('\n ***** ***** \n')
+            print(f'request.user.username: {request.user.username}')
+            print('\n ***** ***** \n')
+
+            print('\n ***** ***** \n')
+            print(f'request.path: {request.path}')
+            print('\n ***** ***** \n')
+
+            print('\n ***** ***** \n')
+            print(f'request.method: {request.method}')
+            print('\n ***** ***** \n')
+
+            print('\n ***** ***** \n')
+            print(f'datetime.datetime.now(): {datetime.datetime.now()}')
+            print('\n ***** ***** \n')
+
+            print(request)
 
     class AccountClass:
         class UserAuthClass:
@@ -54,10 +91,6 @@ class DjangoClass:
                 self.force_clear_groups = force_clear_groups
 
             def account_auth_create(self):
-
-                print('\n ***** ***** 5')
-                print(f'account_auth_create: {self}')
-
                 # try:
                 if True:
                     user = User.objects.create(
@@ -82,10 +115,6 @@ class DjangoClass:
                 #     return False
 
             def account_auth_change(self):
-
-                print('\n ***** ***** 5')
-                print(f'account_auth_change: {self}')
-
                 # try:
                 if True:
                     user = User.objects.get(username=self.username)
@@ -110,10 +139,6 @@ class DjangoClass:
                 #     return False
 
             def account_auth_set_group(self):
-
-                print('\n ***** ***** 6')
-                print(f'account_auth_set_group: {self}')
-
                 # try:
                 if True:
 
@@ -141,10 +166,6 @@ class DjangoClass:
                 #     return False
 
             def account_auth_create_or_change(self):
-
-                print('\n ***** ***** 4')
-                print(f'account_auth_create_or_change username: {self.username}')
-
                 # try:
                 if True:
                     try:

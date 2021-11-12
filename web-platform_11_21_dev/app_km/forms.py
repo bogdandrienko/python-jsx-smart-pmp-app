@@ -49,35 +49,41 @@ class CreateUserForm(UserCreationForm):
                   'position', 'category')
 
 
+class ChangePasswordForm(UserCreationForm):
+    """
+    Change Password Form
+    """
+    # Third data account
+    email = forms.EmailField(
+        label='Электронная почта', required=True,
+        help_text='Электронная почта, на которую будут приходить вспомогательные сообщения.',
+        widget=forms.TextInput(attrs={'type': 'email', 'name': 'email', 'value': '', 'placeholder': '',
+                                      'class': 'form-control', 'required': ''})
+    )
+    secret_question = forms.CharField(
+        label='Секретный вопрос', min_length=1, max_length=50, required=True,
+        help_text='Вопрос, на который надо будет ответить при восстановлении пароля.',
+        widget=forms.TextInput(attrs={'type': 'text', 'name': 'secret_question', 'value': '', 'placeholder': '',
+                                      'class': 'form-control', 'required': ''}),
+        validators=[MinLengthValidator(1), MaxLengthValidator(50), ]
+    )
+    secret_answer = forms.CharField(
+        label='Секретный ответ', min_length=1, max_length=50, required=True,
+        help_text='Ответ на вопрос, который будет необходим при восстановлении пароля.',
+        widget=forms.TextInput(attrs={'type': 'text', 'name': 'secret_answer', 'value': '', 'placeholder': '',
+                                      'class': 'form-control', 'required': ''}),
+        validators=[MinLengthValidator(1), MaxLengthValidator(50), ]
+    )
+
+    class Meta:
+        model = User
+        fields = ('password1', 'password2', 'email', 'secret_question', 'secret_answer')
+
+
 class ChangeUserForm(forms.Form):
     """
     Change User Form
     """
-    # Third data account
-    email = forms.EmailField(
-        label='Электронная почта', required=False,
-        help_text='Электронная почта, на которую будут приходить вспомогательные сообщения, если хотите не заменять '
-                  'данные, оставьте поле пустым.',
-        widget=forms.TextInput(attrs={'type': 'email', 'name': 'email', 'value': '', 'placeholder': '',
-                                      'class': 'form-control'})
-    )
-    secret_question = forms.CharField(
-        label='Секретный вопрос', min_length=1, max_length=50, required=False,
-        help_text='Вопрос, на который надо будет ответить при восстановлении пароля, если хотите не заменять данные, '
-                  'оставьте поле пустым.',
-        widget=forms.TextInput(attrs={'type': 'text', 'name': 'secret_question', 'value': '', 'placeholder': '',
-                                      'class': 'form-control'}),
-        validators=[MinLengthValidator(1), MaxLengthValidator(50), ]
-    )
-    secret_answer = forms.CharField(
-        label='Секретный ответ', min_length=1, max_length=50, required=False,
-        help_text='Ответ на вопрос, который будет необходим при восстановлении пароля, если хотите не заменять данные, '
-                  'оставьте поле пустым.',
-        widget=forms.TextInput(attrs={'type': 'text', 'name': 'secret_answer', 'value': '', 'placeholder': '',
-                                      'class': 'form-control'}),
-        validators=[MinLengthValidator(1), MaxLengthValidator(50), ]
-    )
-
     # Second data account
     education = forms.CharField(
         label='Образование', min_length=0, max_length=300, required=False,
@@ -114,7 +120,6 @@ class ChangeUserForm(forms.Form):
     image_avatar = forms.ImageField(label="Аватарка профиля", widget=forms.ClearableFileInput(
         attrs={'type': 'file', 'name': 'image_avatar',
                'class': 'form-control'}), required=False)
-
 
     class Meta:
         model = Profile
