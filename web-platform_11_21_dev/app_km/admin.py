@@ -3,7 +3,7 @@ from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, CommentRationalModel, \
     LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, ContactModel, \
-    DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile
+    DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile, LoggingActions, LoggingErrors
 
 
 class ProfileModelAdmin(admin.ModelAdmin):
@@ -24,6 +24,50 @@ class ProfileModelAdmin(admin.ModelAdmin):
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
     search_fields = ['user', 'firstname', 'lastname', 'patronymic']
+    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
+    # inlines         = [RationalModelInline]
+
+
+class LoggingActionsModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    # Поля, которые нужно отображать в заголовке, на панели администратора
+    list_display = ('username', 'ip', 'request_path', 'request_method', 'datetime_now')
+    # Поля, которые нужно отображать при фильтрации, на панели администратора
+    list_filter = ('username', 'ip', 'request_path', 'request_method', 'datetime_now')
+    # Поля, которые нужно отображать при создании модели, на панели администратора
+    # fields          = ('id',)
+    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
+    # fieldsets       = (
+    #                     ('Категория', {'fields': ('category_name',)}),
+    #                     ('Префикс', {'fields': ('category_slug',)}),
+    #                     ('Описание', {'fields': ('category_description',)}),
+    #                 )
+    # Поля, которые не нужно отображать при создании модели, на панели администратора |
+    # exclude         = ['id',]
+    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
+    search_fields = ['username', 'ip', 'request_path', 'request_method', 'datetime_now']
+    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
+    # inlines         = [RationalModelInline]
+
+
+class LoggingErrorsModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    # Поля, которые нужно отображать в заголовке, на панели администратора
+    list_display = ('username', 'ip', 'request_path', 'request_method', 'datetime_now', 'error')
+    # Поля, которые нужно отображать при фильтрации, на панели администратора
+    list_filter = ('username', 'ip', 'request_path', 'request_method', 'datetime_now', 'error')
+    # Поля, которые нужно отображать при создании модели, на панели администратора
+    # fields          = ('id',)
+    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
+    # fieldsets       = (
+    #                     ('Категория', {'fields': ('category_name',)}),
+    #                     ('Префикс', {'fields': ('category_slug',)}),
+    #                     ('Описание', {'fields': ('category_description',)}),
+    #                 )
+    # Поля, которые не нужно отображать при создании модели, на панели администратора |
+    # exclude         = ['id',]
+    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
+    search_fields = ['username', 'ip', 'request_path', 'request_method', 'datetime_now', 'error']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
 
@@ -381,3 +425,5 @@ admin.site.register(EmailModel)
 admin.site.register(ApplicationModuleModel, ApplicationModuleModelAdmin)
 admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
 admin.site.register(Profile, ProfileModelAdmin)
+admin.site.register(LoggingActions, LoggingActionsModelAdmin)
+admin.site.register(LoggingErrors, LoggingErrorsModelAdmin)

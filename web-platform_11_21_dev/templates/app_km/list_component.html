@@ -44,8 +44,8 @@
         </div>
     </div>
 
-    {% if component %}
-        {% for LOOP in component %}
+    {% if data %}
+        {% for LOOP in data %}
             <div class="col my-1">
                 <div class="card shadow-sm btn btn-lg">
                     <a class="fa-border shadow-lg" href="{% url LOOP.component_slug %}">

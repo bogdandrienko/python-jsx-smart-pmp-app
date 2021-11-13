@@ -36,18 +36,20 @@ from .utils import ExcelClass, LoggingClass, create_encrypted_password, get_sala
 
 # admin
 def admin_(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     return render(request, admin.site.urls)
 
 
 # home
 def home(request):
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
     return render(request, 'components/home.html')
 
 
 #  account
 def account_login(request):
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
     try:
         result = False
         if request.method == 'POST':
@@ -63,15 +65,18 @@ def account_login(request):
             'form_1': AuthenticationForm(data=request.POST),
             'result': result
         }
-    except Exception as ex:
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        # HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
         context = {
-            'form_1': AuthenticationForm(data=request.POST),
+            'form_1': False,
             'result': False
         }
     return render(request, 'account/account_login.html', context)
 
 
 def account_logout(request):
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
     try:
         logout(request)
         return redirect('account_login')
@@ -80,30 +85,8 @@ def account_logout(request):
 
 
 def account_create_accounts(request, quantity=1):
-    def get_client_ip(request):
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[-1].strip()
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        return ip
-
-    print('\n ***** ***** \n')
-    print(f'request.readlines(): {request.readlines()}')
-    print('\n ***** ***** \n')
-
-    print('\n ***** ***** \n')
-    print(f'get_client_ip: {get_client_ip(request=request)}')
-    print('\n ***** ***** \n')
-
-
-
-
-    print(request)
-
-    DjangoClass.LoggingClass.logging(request=request)
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     # try:
     if True:
         result = False
@@ -199,8 +182,8 @@ def account_create_accounts(request, quantity=1):
                                     category=category,
                                 )
                                 user_objects.append([account_auth_obj, account_profile_first_obj])
-                # except Exception as ex:
-                #     pass
+                # except Exception as error:
+                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             else:
                 # Создание массива объектов аккаунтов из одиночной формы
                 # try:
@@ -272,8 +255,8 @@ def account_create_accounts(request, quantity=1):
                                 category=category,
                             )
                             user_objects.append([account_auth_obj, account_profile_first_obj])
-                # except Exception as ex:
-                #     pass
+                # except Exception as error:
+                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             # Создание аккаунтов и доп данных для аккаунтов
             success = True
             for user_object in user_objects:
@@ -283,7 +266,8 @@ def account_create_accounts(request, quantity=1):
                     account_profile_first_obj = user_object[1].profile_first_change()
                     if account_auth_obj is False or account_profile_first_obj is False:
                         success = False
-                # except Exception as ex:
+                # except Exception as error:
+                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 #     success = False
             result = success
         context = {
@@ -291,18 +275,19 @@ def account_create_accounts(request, quantity=1):
             'form_2': CreateUsersForm,
             'result': result
         }
-    # except Exception as ex:
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'form_1': CreateUserForm,
-    #         'form_2': CreateUsersForm,
+    #         'form_1': False,
+    #         'form_2': False,
     #         'result': False
     #     }
     return render(request, 'account/account_create_accounts.html', context)
 
 
 def account_export_accounts(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     # try:
     if True:
         data = None
@@ -392,7 +377,8 @@ def account_export_accounts(request):
             'data': data,
             'result': result
         }
-    # except Exception as ex:
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'data': False,
     #         'result': False
@@ -401,8 +387,8 @@ def account_export_accounts(request):
 
 
 def account_generate_passwords(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     # try:
     if True:
         result = None
@@ -431,7 +417,8 @@ def account_generate_passwords(request):
             'form_1': GeneratePasswordsForm,
             'result': result
         }
-    # except Exception as ex:
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'data': False,
     #         'form_1': False,
@@ -441,8 +428,8 @@ def account_generate_passwords(request):
 
 
 def account_update_accounts_1c(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     # try:
     if True:
         data = None
@@ -465,15 +452,11 @@ def account_update_accounts_1c(request):
             h.add_credentials(login, password)
             try:
                 response, content = h.request(url)
-            except Exception as ex:
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 content = None
             json_data = None
             success_web_read = False
-
-            print('\n ***** ***** \n')
-            print(f'content: {decrypt_text_with_hash(content.decode()[1:], key_hash)}')
-            print('\n ***** ***** \n')
-
             if content:
                 success = True
                 error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
@@ -481,13 +464,14 @@ def account_update_accounts_1c(request):
                     if str(content.decode()).find(error_word) >= 0:
                         success = False
                 if success:
-                    try:
+                    # try:
+                    if True:
                         json_data = json.loads(decrypt_text_with_hash(content.decode()[1:], key_hash))
                         with open("static/media/data/accounts.json", "w", encoding="utf-8") as file:
                             json.dump(decrypt_text_with_hash(content.decode()[1:], key_hash), file)
                         success_web_read = True
-                    except Exception as ex:
-                        pass
+                    # except Exception as error:
+                    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             if success_web_read is False:
                 print('read temp file')
                 with open("static/media/data/accounts_temp.json", "r", encoding="utf-8") as file:
@@ -574,9 +558,8 @@ def account_update_accounts_1c(request):
                     account_profile_first_obj = user_object[1].profile_first_change()
                     if account_auth_obj is False or account_profile_first_obj is False:
                         result = False
-                # except Exception as ex:
-                #     pass
-
+                # except Exception as error:
+                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             # Генерация ответа для отрисовки в таблицу на странице
             titles = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'Табельный', 'Подразделение',
                       'Цех/Служба', 'Отдел/Участок', 'Должность', 'Категория']
@@ -593,7 +576,8 @@ def account_update_accounts_1c(request):
             'form_1': form_1,
             'result': result
         }
-    # except Exception as ex:
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'data': False,
     #         'form_1': False,
@@ -603,6 +587,7 @@ def account_update_accounts_1c(request):
 
 
 def account_change_password(request):
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
     # try:
     if True:
         result = False
@@ -624,7 +609,8 @@ def account_change_password(request):
             'form_1': ChangePasswordForm,
             'result': result
         }
-    # except Exception as ex:
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'form_1': False,
     #         'result': False
@@ -635,8 +621,8 @@ def account_change_password(request):
 #
 #
 def account_change_profile(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     # try:
     if True:
         result_form = False
@@ -661,7 +647,8 @@ def account_change_profile(request):
             'form_1': ChangeUserForm,
             'result_form': result_form
         }
-    # except Exception as ex:
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'form_1': False,
     #         'result_form': False
@@ -673,18 +660,25 @@ def account_change_profile(request):
 #
 #
 def account_profile(request, username=None):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
-    data = None
-    if request.method == 'POST':
-        pass
-    if username:
-        data = User.objects.get(username=username)
-    else:
-        data = User.objects.get(username=request.user.username)
-    context = {
-        'data': data
-    }
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # try:
+    if True:
+        data = None
+        if request.method == 'POST':
+            pass
+        if username:
+            data = User.objects.get(username=username)
+        else:
+            data = User.objects.get(username=request.user.username)
+        context = {
+            'data': data
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
     return render(request, 'account/account_profile.html', context)
 
 
@@ -692,13 +686,53 @@ def account_profile(request, username=None):
 
 
 
+# Application
+def list_module(request):
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # try:
+    if True:
+        data = ApplicationModuleModel.objects.order_by('module_position')
+        context = {
+            'data': data,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return render(request, 'app_km/list_module.html', context)
+
+
+def list_component(request, module_slug=None):
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # try:
+    if True:
+        if module_slug is not None:
+            module = ApplicationModuleModel.objects.get(module_slug=module_slug)
+            data = ApplicationComponentModel.objects.filter(component_Foreign=module).order_by('component_position')
+        else:
+            return redirect('list_module')
+        context = {
+            'data': data,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return render(request, 'app_km/list_component.html', context)
+
 
 
 
 # Salary
 def salary(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # try:
+    if True:
         data = None
         result_form = False
         if request.method == 'POST':
@@ -827,157 +861,165 @@ def salary(request):
             'data': data,
             'result_form': result_form
         }
-        return render(request, 'app_km/salary.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'salary: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False,
+    #         'result_form': False
+    #     }
+    return render(request, 'app_km/salary.html', context)
 
 
 def render_pdf_view(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    template_path = 'app_km/pdf.html'
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # try:
+    if True:
+        template_path = 'app_km/pdf.html'
+        key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                        _length=10)
+        print('\n ***************** \n')
+        print(f"key: {key}")
+        hash_key_obj = hashlib.sha256()
+        hash_key_obj.update(key.encode('utf-8'))
+        key_hash = str(hash_key_obj.hexdigest().strip().upper())
+        print('\n ***************** \n')
+        print(f"key_hash: {key_hash}")
+        key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+        print('\n ***************** \n')
+        print(f"key_hash_base64: {key_hash_base64}")
 
-    key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                    _length=10)
-    print('\n ***************** \n')
-    print(f"key: {key}")
-    hash_key_obj = hashlib.sha256()
-    hash_key_obj.update(key.encode('utf-8'))
-    key_hash = str(hash_key_obj.hexdigest().strip().upper())
-    print('\n ***************** \n')
-    print(f"key_hash: {key_hash}")
-    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-    print('\n ***************** \n')
-    print(f"key_hash_base64: {key_hash_base64}")
+        iin = request.user.username
+        if str(request.user.username).lower() == 'bogdan':
+            iin = 970801351179
+        print('\n ***************** \n')
+        print(f"iin: {iin}")
+        iin_base64 = base64.b64encode(str(iin).encode()).decode()
+        print('\n ***************** \n')
+        print(f"iin_base64: {iin_base64}")
+        print('\n ***************** \n')
 
-    iin = request.user.username
-    if str(request.user.username).lower() == 'bogdan':
-        iin = 970801351179
-    print('\n ***************** \n')
-    print(f"iin: {iin}")
-    iin_base64 = base64.b64encode(str(iin).encode()).decode()
-    print('\n ***************** \n')
-    print(f"iin_base64: {iin_base64}")
-    print('\n ***************** \n')
+        month = 10
+        if int(month) < 10:
+            month = f'0{month}'
+        year = 2021
+        date = f'{year}{month}'
+        print(f"date: {date}")
+        date_base64 = base64.b64encode(str(date).encode()).decode()
+        print('\n ***************** \n')
+        print(f"date_base64: {date_base64}")
 
-    month = 10
-    if int(month) < 10:
-        month = f'0{month}'
-    year = 2021
-    date = f'{year}{month}'
-    print(f"date: {date}")
-    date_base64 = base64.b64encode(str(date).encode()).decode()
-    print('\n ***************** \n')
-    print(f"date_base64: {date_base64}")
+        # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+        url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+        print('\n ***************** \n')
+        print(f"url: {url}")
 
-    # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-    print('\n ***************** \n')
-    print(f"url: {url}")
+        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+        h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+        login = 'Web_adm_1c'
+        password = '159159qqww!'
+        h.add_credentials(login, password)
+        response, content = h.request(url)
 
-    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-    login = 'Web_adm_1c'
-    password = '159159qqww!'
-    h.add_credentials(login, password)
-    response, content = h.request(url)
+        print('\n ***************** \n')
+        print(f"content: {content}")
+        print('\n ***************** \n')
+        print(f"content_utf: {content.decode()}")
+        content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+        print('\n ***************** \n')
+        print(f"content_decrypt: {content_decrypt}")
 
-    print('\n ***************** \n')
-    print(f"content: {content}")
-    print('\n ***************** \n')
-    print(f"content_utf: {content.decode()}")
-    content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
-    print('\n ***************** \n')
-    print(f"content_decrypt: {content_decrypt}")
+        success_web_read = False
+        if content:
+            success = True
+            error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+            for error_word in error_word_list:
+                if str(content.decode()).find(error_word) >= 0:
+                    success = False
+            if success:
+                try:
+                    json_data = json.loads(decrypt_text_with_hash(content.decode()[1:], key_hash))
+                    with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                        encode_data = json.dumps(json_data, ensure_ascii=False)
+                        json.dump(encode_data, file, ensure_ascii=False)
+                    success_web_read = True
+                except Exception as ex:
+                    pass
+        if success_web_read is False:
+            print('read temp file')
+            with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                json_data = json.load(file)
 
-    success_web_read = False
-    if content:
-        success = True
-        error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
-        for error_word in error_word_list:
-            if str(content.decode()).find(error_word) >= 0:
-                success = False
-        if success:
-            try:
-                json_data = json.loads(decrypt_text_with_hash(content.decode()[1:], key_hash))
-                with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-                    encode_data = json.dumps(json_data, ensure_ascii=False)
-                    json.dump(encode_data, file, ensure_ascii=False)
-                success_web_read = True
-            except Exception as ex:
-                pass
-    if success_web_read is False:
-        print('read temp file')
-        with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
-            json_data = json.load(file)
+        print('\n ***************** \n')
+        print(f"json_data: {json_data}")
+        print('\n ***************** \n')
 
-    print('\n ***************** \n')
-    print(f"json_data: {json_data}")
-    print('\n ***************** \n')
+        try:
+            json_data["global_objects"]["3.Доходы в натуральной форме"]
+        except Exception as ex:
+            json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                "Fields": {
+                    "1": "Вид",
+                    "2": "Период",
+                    "3": "Дни",
+                    "4": "Часы",
+                    "5": "Сумма",
+                    "6": "ВсегоДни",
+                    "7": "ВсегоЧасы"
+                },
+            }
 
-    try:
-        json_data["global_objects"]["3.Доходы в натуральной форме"]
-    except Exception as ex:
-        json_data["global_objects"]["3.Доходы в натуральной форме"] = {
-            "Fields": {
-                "1": "Вид",
-                "2": "Период",
-                "3": "Дни",
-                "4": "Часы",
-                "5": "Сумма",
-                "6": "ВсегоДни",
-                "7": "ВсегоЧасы"
+        data = {
+            "Table_1": create_arr_table(
+                title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
+                exclude=[5, 6]
+            ),
+            "Table_2": create_arr_table(
+                title="2.Удержано", footer="Всего удержано", json_obj=json_data["global_objects"]["2.Удержано"],
+                exclude=[]
+            ),
+            "Table_3": create_arr_table(
+                title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+                json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
+            ),
+            "Table_4": create_arr_table(
+                title="4.Выплачено", footer="Всего выплат", json_obj=json_data["global_objects"]["4.Выплачено"],
+                exclude=[]
+            ),
+            "Table_5": create_arr_table(
+                title="5.Налоговые вычеты", footer="Всего вычеты",
+                json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
+                exclude=[]
+            ),
+            "Down": {
+                "first": ["Долг за организацией на начало месяца", json_data["Долг за организацией на начало месяца"]],
+                "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
             },
         }
-
-    data = {
-        "Table_1": create_arr_table(
-            title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
-            exclude=[5, 6]
-        ),
-        "Table_2": create_arr_table(
-            title="2.Удержано", footer="Всего удержано", json_obj=json_data["global_objects"]["2.Удержано"],
-            exclude=[]
-        ),
-        "Table_3": create_arr_table(
-            title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
-            json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"], exclude=[]
-        ),
-        "Table_4": create_arr_table(
-            title="4.Выплачено", footer="Всего выплат", json_obj=json_data["global_objects"]["4.Выплачено"],
-            exclude=[]
-        ),
-        "Table_5": create_arr_table(
-            title="5.Налоговые вычеты", footer="Всего вычеты",
-            json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
-            exclude=[]
-        ),
-        "Down": {
-            "first": ["Долг за организацией на начало месяца", json_data["Долг за организацией на начало месяца"]],
-            "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
-        },
-    }
-    context = {
-        'data': data,
-        'STATIC_ROOT': settings.STATIC_ROOT,
-    }
-    # Create a Django response object, and specify content_type as pdf
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
-    # find the template and render it.
-    template = get_template(template_path)
-    html = template.render(context)
-    # create a pdf
-    pisa_status = pisa.CreatePDF(
-        html, dest=response, encoding='utf-8', link_callback=link_callback)
-    # template = render_to_string(template_path, context)
-    # pdf = pisa.pisaDocument(io.BytesIO(template.encode('UTF-8')), response,
-    #                         encoding='utf-8',
-    #                         link_callback=link_callback)
-    # pdf = pisa.pisaDocument(io.StringIO(html), response, encoding='UTF-8')
-    # if error then show some funny view
-    if pisa_status.err:
-        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        context = {
+            'data': data,
+            'STATIC_ROOT': settings.STATIC_ROOT,
+        }
+        # Create a Django response object, and specify content_type as pdf
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+        # find the template and render it.
+        template = get_template(template_path)
+        html = template.render(context)
+        # create a pdf
+        pisa_status = pisa.CreatePDF(
+            html, dest=response, encoding='utf-8', link_callback=link_callback)
+        # template = render_to_string(template_path, context)
+        # pdf = pisa.pisaDocument(io.BytesIO(template.encode('UTF-8')), response,
+        #                         encoding='utf-8',
+        #                         link_callback=link_callback)
+        # pdf = pisa.pisaDocument(io.StringIO(html), response, encoding='UTF-8')
+        # if error then show some funny view
+        if pisa_status.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     response = None
     return response
 
 
@@ -985,27 +1027,14 @@ def render_pdf_view(request):
 
 
 
-# Application
-def list_module(request):
-    module = ApplicationModuleModel.objects.order_by('module_position')
-    context = {
-        'module': module,
-    }
-    return render(request, 'app_km/list_module.html', context)
 
 
-def list_component(request, module_slug=None):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
-    if module_slug is not None:
-        module = ApplicationModuleModel.objects.get(module_slug=module_slug)
-        component = ApplicationComponentModel.objects.filter(component_Foreign=module).order_by('component_position')
-    else:
-        return redirect('list_module')
-    context = {
-        'component': component,
-    }
-    return render(request, 'app_km/list_component.html', context)
+
+
+
+
+
+
 
 
 # Rational

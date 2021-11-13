@@ -7,11 +7,16 @@ from django.contrib.auth import logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
 
+from .models import LoggingActions, LoggingErrors
+
 
 class DjangoClass:
     class AuthorizationClass:
         @staticmethod
-        def access_to_page(request):
+        def access_to_page(request, logging=True):
+            # Логирование действий
+            if logging:
+                DjangoClass.LoggingClass.logging_actions(request=request)
             # Проверка регистрации: если пользователь не вошёл в аккаунт его переадресует в форму входа
             if request.user.is_authenticated:
                 try:
@@ -33,33 +38,44 @@ class DjangoClass:
 
     class LoggingClass:
         @staticmethod
-        def write_to_database():
-            pass
+        def logging_errors(request, error):
+            username = request.user.username
+            ip = request.META.get("REMOTE_ADDR")
+            request_path = request.path
+            request_method = request.method
+            datetime_now = datetime.datetime.now()
+            LoggingErrors.objects.create(username=username, ip=ip, request_path=request_path,
+                                         request_method=request_method, error=error)
+            text = [username, ip, request_path, request_method, datetime_now, error]
+            string = ''
+            for val in text:
+                string = string + f', {val}'
+            with open('static/media/data/logging_errors.txt', 'a') as log:
+                log.write(f'\n{string[2:]}\n')
 
         @staticmethod
-        def write_to_text_file():
-            pass
+        def logging_actions(request):
+            username = request.user.username
+            ip = request.META.get("REMOTE_ADDR")
+            request_path = request.path
+            request_method = request.method
+            datetime_now = datetime.datetime.now()
+            LoggingActions.objects.create(username=username, ip=ip, request_path=request_path, request_method=request_method)
+            text = [username, ip, request_path, request_method, datetime_now]
+            string = ''
+            for val in text:
+                string = string + f', {val}'
+            with open('static/media/data/logging_actions.txt', 'a') as log:
+                log.write(f'\n{string[2:]}\n')
 
         @staticmethod
-        def logging(request):
-
-            print('\n ***** ***** \n')
-            print(f'request.user.username: {request.user.username}')
-            print('\n ***** ***** \n')
-
-            print('\n ***** ***** \n')
-            print(f'request.path: {request.path}')
-            print('\n ***** ***** \n')
-
-            print('\n ***** ***** \n')
-            print(f'request.method: {request.method}')
-            print('\n ***** ***** \n')
-
-            print('\n ***** ***** \n')
-            print(f'datetime.datetime.now(): {datetime.datetime.now()}')
-            print('\n ***** ***** \n')
-
-            print(request)
+        def get_client_ip(request):
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                ip = x_forwarded_for.split(',')[-1].strip()
+            else:
+                ip = request.META.get('REMOTE_ADDR')
+            return ip
 
     class AccountClass:
         class UserAuthClass:

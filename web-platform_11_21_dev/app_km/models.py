@@ -64,6 +64,50 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+class LoggingActions(models.Model):
+    """
+    Logging Actions Model
+    """
+
+    username = models.SlugField(verbose_name='Имя пользователя', max_length=12, null=True)
+    ip = models.SlugField(verbose_name='Ip адрес клиента',  max_length=10, null=True)
+    request_path = models.SlugField(verbose_name='Действие', max_length=30, null=True)
+    request_method = models.SlugField(verbose_name='Метод', max_length=5, null=True)
+    datetime_now = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('-datetime_now',)
+        verbose_name = 'Лог'
+        verbose_name_plural = 'Логи'
+        db_table = 'logging_actions_table'
+
+    def __str__(self):
+        return f'{self.datetime_now} {self.username} {self.request_path}'
+
+
+class LoggingErrors(models.Model):
+    """
+    Logging Errors Model
+    """
+
+    username = models.SlugField(verbose_name='Имя пользователя', max_length=12, null=True)
+    ip = models.SlugField(verbose_name='Ip адрес клиента',  max_length=10, null=True)
+    request_path = models.SlugField(verbose_name='Действие', max_length=30, null=True)
+    request_method = models.SlugField(verbose_name='Метод', max_length=5, null=True)
+    error = models.TextField(verbose_name='Ошибка', null=True)
+    datetime_now = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('-datetime_now',)
+        verbose_name = 'Ошибка'
+        verbose_name_plural = 'Ошибки'
+        db_table = 'logging_errors_table'
+
+    def __str__(self):
+        return f'{self.datetime_now} {self.username} {self.request_path}'
+
 # # Account
 # class AccountDataModel(models.Model):
 #     """
