@@ -779,18 +779,25 @@ def salary(request):
             login = 'Web_adm_1c'
             password = '159159qqww!'
             h.add_credentials(login, password)
-            response, content = h.request(url)
-
-            print('\n ***************** \n')
-            print(f"content: {content}")
-            print('\n ***************** \n')
-            print(f"content_utf: {content.decode()}")
-            content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
-            print('\n ***************** \n')
-            print(f"content_decrypt: {content_decrypt}")
-
+            try:
+                response, content = h.request(url)
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                content = None
             success_web_read = False
             if content:
+
+                print('\n ***************** \n')
+                print(f"content: {content}")
+
+                print('\n ***************** \n')
+                print(f"content_utf: {content.decode()}")
+
+                content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:],
+                                                         key_hash)
+                print('\n ***************** \n')
+                print(f"content_decrypt: {content_decrypt}")
+
                 success = True
                 error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
                 for error_word in error_word_list:
@@ -919,18 +926,24 @@ def render_pdf_view(request):
         login = 'Web_adm_1c'
         password = '159159qqww!'
         h.add_credentials(login, password)
-        response, content = h.request(url)
-
-        print('\n ***************** \n')
-        print(f"content: {content}")
-        print('\n ***************** \n')
-        print(f"content_utf: {content.decode()}")
-        content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
-        print('\n ***************** \n')
-        print(f"content_decrypt: {content_decrypt}")
-
+        try:
+            response, content = h.request(url)
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            content = None
         success_web_read = False
         if content:
+
+            print('\n ***************** \n')
+            print(f"content: {content}")
+
+            print('\n ***************** \n')
+            print(f"content_utf: {content.decode()}")
+
+            content_decrypt = decrypt_text_with_hash(content.decode(encoding='UTF-8', errors='strict')[1:], key_hash)
+            print('\n ***************** \n')
+            print(f"content_decrypt: {content_decrypt}")
+
             success = True
             error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
             for error_word in error_word_list:

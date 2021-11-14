@@ -253,10 +253,6 @@ class DjangoClass:
                 self.category = category
 
             def profile_first_change(self):
-
-                print('\n ***** ***** 4')
-                print(f'profile_first_change: {self}')
-
                 # try:
                 if True:
                     user = User.objects.get(username=self.username)

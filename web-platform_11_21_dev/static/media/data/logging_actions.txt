@@ -320,3 +320,55 @@ Bogdan, 127.0.0.1, /account_generate_passwords/, GET, 2021-11-13 12:17:38.220578
 Bogdan, 127.0.0.1, /account_generate_passwords/, POST, 2021-11-13 12:17:39.646847
 
 Bogdan, 127.0.0.1, /home/, GET, 2021-11-13 12:17:41.557548
+
+, 127.0.0.1, /, GET, 2021-11-13 14:25:50.662701
+
+, 127.0.0.1, /, GET, 2021-11-14 20:24:42.097733
+
+, 127.0.0.1, /, GET, 2021-11-14 20:25:07.699107
+
+, 127.0.0.1, /account_login/, GET, 2021-11-14 20:25:30.827293
+
+, 127.0.0.1, /account_login/, POST, 2021-11-14 20:25:32.586399
+
+Bogdan, 127.0.0.1, /account_profile/Bogdan/, GET, 2021-11-14 20:25:39.553709
+
+Bogdan, 127.0.0.1, /account_profile/Bogdan/, GET, 2021-11-14 20:25:45.137545
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, GET, 2021-11-14 20:25:47.013221
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-14 20:25:48.414968
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-14 20:26:16.470357
+
+Bogdan, 127.0.0.1, /salary/, POST, 2021-11-14 20:26:20.572544
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-14 20:27:03.060064
+
+Bogdan, 127.0.0.1, /account_export_accounts/, GET, 2021-11-14 20:27:08.033467
+
+Bogdan, 127.0.0.1, /account_export_accounts/, POST, 2021-11-14 20:27:08.987832
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-14 20:27:21.277985
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-14 20:30:11.523863
+
+Bogdan, 127.0.0.1, /salary/, POST, 2021-11-14 20:30:13.560013
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-14 20:31:37.731332
+
+Bogdan, 127.0.0.1, /salary/, POST, 2021-11-14 20:31:39.201633
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-14 20:33:20.098988
+
+Bogdan, 127.0.0.1, /salary/, POST, 2021-11-14 20:33:21.929646
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-14 20:33:49.720140
+
+Bogdan, 127.0.0.1, /create_pdf/, POST, 2021-11-14 20:33:55.713365
+
+Bogdan, 127.0.0.1, /account_generate_passwords/, GET, 2021-11-14 20:35:12.700696
+
+Bogdan, 127.0.0.1, /account_generate_passwords/, POST, 2021-11-14 20:35:14.266588
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-14 20:35:19.490053
