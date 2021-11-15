@@ -42,6 +42,8 @@
             <button class="form-control btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
         </form>
 
+        <a class="form-control btn btn-lg btn-outline-danger" href="{% url 'account_recover_password' 0 %}">Восстановить пароль</a>
+
     {% else %}
 
         {% include 'components/aborted.html' %}

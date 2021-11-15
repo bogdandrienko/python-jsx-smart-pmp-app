@@ -3,15 +3,18 @@ from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, CommentRationalModel, \
     LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, ContactModel, \
-    DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile, LoggingActions, LoggingErrors
+    DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile, LoggingActions, \
+    LoggingErrors, BankIdeasModel
 
 
 class ProfileModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = ('user', 'first_name', 'last_name', 'patronymic')
+    list_display = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
+                    'department_site', 'position', 'category')
     # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = ('user', 'first_name', 'last_name', 'patronymic')
+    list_filter = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
+                   'department_site', 'position', 'category')
     # Поля, которые нужно отображать при создании модели, на панели администратора
     # fields          = ('id',)
     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
@@ -23,7 +26,8 @@ class ProfileModelAdmin(admin.ModelAdmin):
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['user', 'firstname', 'lastname', 'patronymic']
+    search_fields = ['user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
+                     'department_site', 'position', 'category']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
 
@@ -68,6 +72,31 @@ class LoggingErrorsModelAdmin(admin.ModelAdmin):
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
     search_fields = ['username', 'ip', 'request_path', 'request_method', 'datetime_now', 'error']
+    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
+    # inlines         = [RationalModelInline]
+
+
+class BankIdeasModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    # Поля, которые нужно отображать в заголовке, на панели администратора
+    list_display = ('user', 'name', 'category', 'short_description', 'long_description', 'image', 'document', 'status',
+                    'datetime_register', 'datetime_created')
+    # Поля, которые нужно отображать при фильтрации, на панели администратора
+    list_filter = ('user', 'name', 'category', 'short_description', 'long_description', 'image', 'document', 'status',
+                   'datetime_register', 'datetime_created')
+    # Поля, которые нужно отображать при создании модели, на панели администратора
+    # fields          = ('id',)
+    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
+    # fieldsets       = (
+    #                     ('Категория', {'fields': ('category_name',)}),
+    #                     ('Префикс', {'fields': ('category_slug',)}),
+    #                     ('Описание', {'fields': ('category_description',)}),
+    #                 )
+    # Поля, которые не нужно отображать при создании модели, на панели администратора |
+    # exclude         = ['id',]
+    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
+    search_fields = ['user', 'name', 'category', 'short_description', 'long_description', 'image', 'document', 'status',
+                     'datetime_register', 'datetime_created']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
 
@@ -427,3 +456,4 @@ admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
 admin.site.register(Profile, ProfileModelAdmin)
 admin.site.register(LoggingActions, LoggingActionsModelAdmin)
 admin.site.register(LoggingErrors, LoggingErrorsModelAdmin)
+admin.site.register(BankIdeasModel, BankIdeasModelAdmin)

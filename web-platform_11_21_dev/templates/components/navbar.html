@@ -131,6 +131,11 @@
                                         <a class="dropdown-item" href="#">Изменить пароль [ Вы не вошли в аккаунт ]</a>
                                     {% endif %}
                                     {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_recover_password' 0 %}">Восстановить пароль</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Восстановить пароль [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
                                         <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
                                     {% else %}
                                         <a class="dropdown-item" href="#">Изменить личный профиль [ Вы не вошли в аккаунт ]</a>
@@ -154,6 +159,15 @@
                                     <h6 class="dropdown-header">Сектор расчёта заработной платы:</h6>
                                     <a class="dropdown-item" href="{% url 'salary' %}">Выгрузка текущего расчётного листа</a>
                                 </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Банк идей:</h6>
+                                    <a class="dropdown-item" href="{% url 'bank_ideas' %}">Подать идею</a>
+                                    <a class="dropdown-item" href="{% url 'bank_ideas' %}">Просмотреть идеи</a>
+                                </li>
+
 
                             </ul>
                         </li>

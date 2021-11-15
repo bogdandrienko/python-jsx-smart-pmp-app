@@ -70,7 +70,7 @@ class LoggingActions(models.Model):
     """
 
     username = models.SlugField(verbose_name='Имя пользователя', max_length=12, null=True)
-    ip = models.SlugField(verbose_name='Ip адрес клиента',  max_length=10, null=True)
+    ip = models.SlugField(verbose_name='Ip адрес клиента',  max_length=50, null=True)
     request_path = models.SlugField(verbose_name='Действие', max_length=30, null=True)
     request_method = models.SlugField(verbose_name='Метод', max_length=5, null=True)
     datetime_now = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
@@ -196,6 +196,35 @@ class ApplicationComponentModel(models.Model):
 
     def __str__(self):
         return f'{self.component_Foreign} :: {self.component_position} :: {self.component_name}'
+
+
+# Upgrade
+class BankIdeasModel(models.Model):
+    """
+    Bank Ideas Model
+    """
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь', blank=True)
+    name = models.CharField(verbose_name='Название', max_length=50, blank=True)
+    category = models.CharField(verbose_name='Категория', max_length=30, blank=True)
+    short_description = models.CharField(verbose_name='описание', max_length=50, blank=True)
+    long_description = models.TextField(verbose_name='описание', blank=True)
+
+    image = models.ImageField(verbose_name='картинка', upload_to='uploads/bankidea', blank=True)
+    document = models.FileField(verbose_name='документ', upload_to='uploads/bankidea/%d_%m_%Y/%H_%M_%S', blank=True,
+                                null=True)
+    status = models.BooleanField(verbose_name='статус отображения', default=False, blank=True)
+    datetime_register = models.DateTimeField(verbose_name='Дата регистрации', auto_created=True, null=True,
+                                             editable=True, blank=True)
+    datetime_created = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = 'Идею'
+        verbose_name_plural = 'Идеи'
+        db_table = 'bank_ideas_table'
+
+    def __str__(self):
+        return f'{self.name} : {self.name} : {self.category}'
 
 
 # Rational

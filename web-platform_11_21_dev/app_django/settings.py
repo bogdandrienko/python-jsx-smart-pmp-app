@@ -184,12 +184,21 @@ EMAIL_ADMIN = 'bogdandrienko@gmail.com'
 
 
 # yandex
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'eevee.cycle'
-EMAIL_HOST_PASSWORD = '31284bogdan'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+yandex = True
+if yandex:
+    EMAIL_HOST = 'smtp.yandex.ru'
+    EMAIL_HOST_USER = 'eevee.cycle'
+    EMAIL_HOST_PASSWORD = '31284bogdan'
+    EMAIL_PORT = 465
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
+else:
+    EMAIL_HOST = 'smtp.yandex.ru'
+    EMAIL_HOST_USER = 'eevee.cycle'
+    EMAIL_HOST_PASSWORD = '31284bogdan'
+    EMAIL_PORT = 465
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
 
 host: EMAIL_HOST
 port: EMAIL_PORT

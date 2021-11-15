@@ -1,11 +1,11 @@
 import datetime
 import random
-import time
 
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
+from django.shortcuts import redirect
 
 from .models import LoggingActions, LoggingErrors
 
@@ -13,11 +13,14 @@ from .models import LoggingActions, LoggingErrors
 class DjangoClass:
     class AuthorizationClass:
         @staticmethod
-        def access_to_page(request, logging=True):
+        def access_to_page(request, logging=False, available=False):
+            # Проверка локального доступа, если пользователь в подсети предприятия его переадресует на локальный доступ
+            if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
+                return 'local'
             # Логирование действий
             if logging:
                 DjangoClass.LoggingClass.logging_actions(request=request)
-            # Проверка регистрации: если пользователь не вошёл в аккаунт его переадресует в форму входа
+            # Проверка на вход в аккаунт
             if request.user.is_authenticated:
                 try:
                     user = User.objects.get(username=request.user.username)
@@ -26,8 +29,42 @@ class DjangoClass:
                         logout(request)
                         return 'account_login'
                     else:
+                        # Проверка заполнения спец полей
                         if user.profile.email and user.profile.secret_answer and user.profile.secret_question:
-                            pass
+                            if available:
+                                # Полный доступ на страницу
+                                if str(available).strip().lower() == 'all':
+                                    return False
+                                # Выборка групп доступа на страницу
+                                try:
+                                    page_groups = [str(x).strip().lower() for x in available.split(',')]
+                                except Exception as error:
+                                    page_groups = [available]
+                                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                # Выборка групп доступа пользователя
+                                try:
+                                    user_groups = [str(x).strip().lower() for x in user.groups.all()]
+                                except Exception as error:
+                                    if available:
+                                        user_groups = [available]
+                                    else:
+                                        user_groups = ''
+                                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                # Проверка на наличие хоть одного совпадения
+                                access = False
+                                for user_group in user_groups:
+                                    try:
+                                        if user_group and len(user_group) > 1:
+                                            page_groups.index(user_group)
+                                            access = True
+                                    except Exception as error:
+                                        pass
+                                if access:
+                                    return False
+                                else:
+                                    return 'home'
+                            else:
+                                return 'home'
                         else:
                             return 'account_change_password'
                 except Exception as ex:
@@ -56,6 +93,10 @@ class DjangoClass:
         @staticmethod
         def logging_actions(request):
             username = request.user.username
+
+            # for k, v in request.META.items():
+            #     print(f'\n{k}: {v}')
+
             ip = request.META.get("REMOTE_ADDR")
             request_path = request.path
             request_method = request.method
@@ -451,129 +492,6 @@ class DjangoClass:
                     if success_1 and success_2:
                         return True
                 return False
-            except Exception as ex:
-                return False
-
-        @staticmethod
-        def create_first_data_account(user_first_data_account_class, username='', user_iin='', password='',
-                                      firstname='',
-                                      lastname='', patronymic='', personnel_number='', subdivision='',
-                                      workshop_service='',
-                                      department_site='', position='', category='', force_change=False):
-            try:
-                if user_first_data_account_class:
-                    username = user_first_data_account_class.username
-                    user_iin = user_first_data_account_class.user_iin
-                    password = user_first_data_account_class.password
-                    firstname = user_first_data_account_class.first_name
-                    lastname = user_first_data_account_class.last_name
-                    patronymic = user_first_data_account_class.patronymic
-                    personnel_number = user_first_data_account_class.personnel_number
-                    subdivision = user_first_data_account_class.subdivision
-                    workshop_service = user_first_data_account_class.workshop_service
-                    department_site = user_first_data_account_class.department_site
-                    position = user_first_data_account_class.position
-                    category = user_first_data_account_class.category
-                try:
-                    pass
-                #     user = AccountDataModel.objects.get(username=User.objects.get(username=username))
-                #     if force_change and user:
-                #         DjangoClass.AccountClass.change_first_data_account(
-                #             user_first_data_account_class=False,
-                #             username=username,
-                #             user_iin=user_iin,
-                #             password=password,
-                #             firstname=firstname,
-                #             lastname=lastname,
-                #             patronymic=patronymic,
-                #             personnel_number=personnel_number,
-                #             subdivision=subdivision,
-                #             workshop_service=workshop_service,
-                #             department_site=department_site,
-                #             position=position,
-                #             category=category
-                #         )
-                #         return True
-                #     return False
-                except Exception as ex:
-                    #     username_obj = User.objects.get(username=username)
-                    #     user = AccountDataModel.objects.create(
-                    #         username=username_obj,
-                    #         user_iin=user_iin,
-                    #         password=password,
-                    #         firstname=firstname,
-                    #         lastname=lastname,
-                    #         patronymic=patronymic,
-                    #         personnel_number=personnel_number,
-                    #         subdivision=subdivision,
-                    #         workshop_service=workshop_service,
-                    #         department_site=department_site,
-                    #         position=position,
-                    #         category=category
-                    #     )
-                    #     user.save()
-                    return True
-            except Exception as ex:
-                return False
-
-        @staticmethod
-        def change_first_data_account(user_first_data_account_class, username='', user_iin='', password='',
-                                      firstname='', lastname='', patronymic='', personnel_number='', subdivision='',
-                                      workshop_service='', department_site='', position='', category='',
-                                      force_create=False):
-            try:
-                if user_first_data_account_class:
-                    username = user_first_data_account_class.username
-                    user_iin = user_first_data_account_class.user_iin
-                    password = user_first_data_account_class.password
-                    firstname = user_first_data_account_class.first_name
-                    lastname = user_first_data_account_class.last_name
-                    patronymic = user_first_data_account_class.patronymic
-                    personnel_number = user_first_data_account_class.personnel_number
-                    subdivision = user_first_data_account_class.subdivision
-                    workshop_service = user_first_data_account_class.workshop_service
-                    department_site = user_first_data_account_class.department_site
-                    position = user_first_data_account_class.position
-                    category = user_first_data_account_class.category
-                # if force_create:
-                #     user = AccountDataModel.objects.get_or_create(username=User.objects.get(username=username))[0]
-                # else:
-                #     user = AccountDataModel.objects.get(username=User.objects.get(username=username))
-                # user.user_iin = user_iin
-                # user.password = password
-                # user.firstname = firstname
-                # user.lastname = lastname
-                # user.patronymic = patronymic
-                # user.personnel_number = personnel_number
-                # user.subdivision = subdivision
-                # user.workshop_service = workshop_service
-                # user.department_site = department_site
-                # user.position = position
-                # user.category = category
-                # user.save()
-                return True
-            except Exception as ex:
-                return False
-
-        @staticmethod
-        def change_first_data_account_status(username='', status=True):
-            try:
-                print(f'change_first_data_account_status: {username}= {status}')
-                # user = AccountDataModel.objects.get(username=User.objects.get(username=username))
-                # user.user_iin = user.user_iin
-                # user.password = user.password
-                # user.firstname = user.firstname
-                # user.lastname = user.lastname
-                # user.patronymic = user.patronymic
-                # user.personnel_number = user.personnel_number
-                # user.subdivision = user.subdivision
-                # user.workshop_service = user.workshop_service
-                # user.department_site = user.department_site
-                # user.position = user.position
-                # user.category = user.category
-                # user.status = status
-                # user.save()
-                return True
             except Exception as ex:
                 return False
 

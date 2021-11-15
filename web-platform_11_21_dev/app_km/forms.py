@@ -7,7 +7,7 @@ from django.core.validators import FileExtensionValidator, MinValueValidator, Ma
     MaxLengthValidator
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import Profile, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, DocumentModel, \
-    MessageModel, SmsModel, ArticleModel, CityModel
+    MessageModel, SmsModel, ArticleModel, CityModel, BankIdeasModel
 
 
 # Account
@@ -164,14 +164,44 @@ class GeneratePasswordsForm(forms.Form):
                                           validators=[MinValueValidator(8), MaxValueValidator(24), ], required=True)
 
 
+# upgrade
+class BankIdeasForm(forms.Form):
+    """
+    Bank Ideas Form
+    """
+    name = forms.CharField(label='название', widget=forms.TextInput(
+        attrs={'type': 'text', 'name': 'name', 'placeholder': 'название', 'class': 'form-control', 'required': ''}),
+                           required=True)
+    category = forms.CharField(label='категория', widget=forms.TextInput(
+        attrs={'type': 'text', 'name': 'category', 'placeholder': 'категория', 'class': 'form-control',
+               'required': ''}),
+                               required=True)
+    short_description = forms.CharField(label='короткое описание', widget=forms.TextInput(
+        attrs={'type': 'text', 'name': 'short_description', 'placeholder': 'короткое описание', 'class': 'form-control',
+               'required': ''}),
+                                        required=True)
+    long_description = forms.CharField(label='длинное описание', widget=forms.Textarea(
+        attrs={'type': 'text', 'name': 'long_description', 'placeholder': 'длинное описание', 'class': 'form-control',
+               'required': ''}),
+                                       required=True)
+
+    image = forms.ImageField(label="картинка к идеи", widget=forms.ClearableFileInput(
+        attrs={'type': 'file', 'name': 'image', 'class': 'form-control'}), required=False)
+    document = forms.FileField(label="документ к идеи", widget=forms.ClearableFileInput(
+        attrs={'type': 'file', 'name': 'document', 'class': 'form-control'}), required=False,
+                               allow_empty_file=True)
+
+    class Meta:
+        model = BankIdeasModel
+        fields = '__all__'
+
+
 # Rational
 class RationalForm(forms.Form):
     """
     Rational Create Form
     """
-    rational_structure_from = forms.CharField(label='', widget=forms.TextInput(
-        attrs={'type': "text", 'name': 'rational_structure_from', 'placeholder': 'имя подразделения',
-               'class': 'form-control'}), required=False)
+    rational_structure_from = models.CharField('имя подразделения', max_length=50, blank=True)
     rational_uid_registered = forms.IntegerField(label='номер регистрации', widget=forms.NumberInput(
         attrs={'type': 'number', 'name': 'rational_uid_registered', 'value': '0', 'placeholder': '0',
                'class': 'form-control'}), required=False)

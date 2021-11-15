@@ -8,3 +8,57 @@ Bogdan, 127.0.0.1, /salary/, POST, 2021-11-14 20:32:00.248519, [WinError 10060] 
 Bogdan, 127.0.0.1, /salary/, POST, 2021-11-14 20:33:43.000504, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
 
 Bogdan, 127.0.0.1, /create_pdf/, POST, 2021-11-14 20:34:17.060962, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 192.168.1.68, /account_recover_password/, POST, 2021-11-15 11:18:42.020502, User matching query does not exist.
+
+Bogdan, 192.168.1.68, /account_recover_password/, POST, 2021-11-15 11:19:05.632795, User matching query does not exist.
+
+Bogdan, 192.168.1.68, /account_recover_password/, POST, 2021-11-15 11:46:15.731195, User matching query does not exist.
+
+Bogdan, 192.168.1.68, /account_recover_password/0/, POST, 2021-11-15 12:44:35.424366, User matching query does not exist.
+
+Bogdan, 192.168.1.68, /account_recover_password/0/, POST, 2021-11-15 12:45:44.012310, User matching query does not exist.
+
+Bogdan, 192.168.1.68, /account_recover_password/2/, POST, 2021-11-15 13:20:39.304123, (553, b'5.7.1 Sender address rejected: not owned by auth user.', 'bogdandrienko@gmail.com')
+
+Bogdan, 192.168.1.68, /list_module/, GET, 2021-11-15 13:51:52.460641, Group matching query does not exist.
+
+Bogdan, 192.168.1.68, /home/, GET, 2021-11-15 13:51:53.824636, Group matching query does not exist.
+
+Bogdan, 192.168.1.68, /home/, GET, 2021-11-15 13:51:54.463174, Group matching query does not exist.
+
+Bogdan, 192.168.1.68, /, GET, 2021-11-15 13:52:49.806118, Group matching query does not exist.
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 13:59:20.195917, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:00:47.061417, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:03:57.409715, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:04:24.052823, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:06:03.515845, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:06:13.460965, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:06:53.715643, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:07:08.164462, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:07:10.133422, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:07:10.972234, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:07:11.770801, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:08:33.693389, 'user' is not in list
+
+970801351179, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-15 14:11:46.419203, 'user' is not in list
+
+970801351179, 192.168.1.68, /passages_select/, GET, 2021-11-15 14:17:52.655721, 'user' is not in list
+
+970801351179, 192.168.1.68, /passages_select/, GET, 2021-11-15 14:17:55.993325, 'user' is not in list
+
+970801351179, 192.168.1.68, /passages_select/, GET, 2021-11-15 14:18:54.260441, 'user' is not in list
+
+970801351179, 192.168.1.68, /passages_update/, GET, 2021-11-15 14:18:57.192566, 'user' is not in list

@@ -4,26 +4,32 @@ from . import views
 
 urlpatterns = [
 
-    # Main
+    #  main
+    # no check access (recursive)
     path('', include('django.contrib.auth.urls')),
+    path('local/', views.local, name='local'),
     # path(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', views.admin_, name='admin'),
+    # All access
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
 
 
-    # Account
+    #  account
+    # no check access (recursive)
     path('account_login/', views.account_login, name='account_login'),
-    path('account_logout/', views.account_logout, name='account_logout'),
-    path('account_create_accounts/<int:quantity>/', views.account_create_accounts, name='account_create_accounts'),
-    path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),
-
-    path('account_generate_passwords/', views.account_generate_passwords, name='account_generate_passwords'),
-
-    path('account_update_accounts_1c/', views.account_update_accounts_1c, name='account_update_accounts_1c'),
     path('account_change_password/', views.account_change_password, name='account_change_password'),
+    path('account_recover_password/<int:type_int>/', views.account_recover_password, name='account_recover_password'),
+    # All access
+    path('account_logout/', views.account_logout, name='account_logout'),
+    # User access
     path('account_change_profile/', views.account_change_profile, name='account_change_profile'),
     path('account_profile/<slug:username>/', views.account_profile, name='account_profile'),
+    # Superuser access
+    path('account_create_accounts/<int:quantity>/', views.account_create_accounts, name='account_create_accounts'),
+    path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),
+    path('account_generate_passwords/', views.account_generate_passwords, name='account_generate_passwords'),
+    path('account_update_accounts_1c/', views.account_update_accounts_1c, name='account_update_accounts_1c'),
 
 
 
@@ -31,6 +37,8 @@ urlpatterns = [
 
     path('list_module/', views.list_module, name='list_module'),
     path('list_module/<slug:module_slug>/', views.list_component, name='list_component'),
+
+    path('bank_ideas/', views.bank_ideas, name='bank_ideas'),
 
 
 
@@ -62,7 +70,6 @@ urlpatterns = [
     path('geo/', views.geo, name='geo'),
     path('career/', views.career, name='career'),
 
-    path('react/', views.react, name='react'),
     path('notification/', views.notification, name='notification'),
     path('create_notification', views.create_notification, name='create'),
     path('<int:notify_id>/accept', views.accept, name='accept'),
@@ -80,6 +87,9 @@ urlpatterns = [
     path('news/<int:article_id>/increase_rating/', views.increase_rating, name='increase_rating'),
     path('news/<int:article_id>/decrease_rating/', views.decrease_rating, name='decrease_rating'),
     path('weather/', views.weather, name='weather'),
+
+    # react
+    path('react/', views.react, name='react'),
 
     # bootstrap
     path('bootstrap/example', views.example, name='example'),

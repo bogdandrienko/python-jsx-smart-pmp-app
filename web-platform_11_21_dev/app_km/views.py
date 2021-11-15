@@ -4,8 +4,6 @@ import hashlib
 import json
 import os
 import random
-import time
-
 import httplib2
 import openpyxl
 import requests
@@ -24,32 +22,43 @@ from django.urls import reverse
 from xhtml2pdf import pisa
 from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
     NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
-    SmsForm, GeoForm, ChangePasswordForm
+    SmsForm, GeoForm, ChangePasswordForm, BankIdeasForm
 from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, \
-    DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel
+    DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel, BankIdeasModel
 from .service import DjangoClass, PaginationClass, HttpRaiseExceptionClass
-from .utils import ExcelClass, LoggingClass, create_encrypted_password, get_salary_data, link_callback, get_career, \
-    find_near_point, get_vector_arr, generate_way, pyodbc_connect, decrypt_text_with_hash, create_arr_table, \
-    create_arr_from_json
+from .utils import ExcelClass, LoggingClass, create_encrypted_password, link_callback, get_career, \
+    find_near_point, get_vector_arr, generate_way, pyodbc_connect, decrypt_text_with_hash, create_arr_table
+
+
+#  main
+# local
+def local(request):
+    # logging
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
+    return redirect('http://192.168.1.68:8000/')
 
 
 # admin
 def admin_(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     return render(request, admin.site.urls)
 
 
 # home
 def home(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     return render(request, 'components/home.html')
 
 
 #  account
+# no check access (recursive)
 def account_login(request):
+    # logging
     DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
+
     try:
         result = False
         if request.method == 'POST':
@@ -75,18 +84,199 @@ def account_login(request):
     return render(request, 'account/account_login.html', context)
 
 
-def account_logout(request):
+def account_change_password(request):
+    # logging
     DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
+
+    # try:
+    if True:
+        result = False
+        if request.method == 'POST':
+            user = User.objects.get(username=request.user.username)
+            # User password data
+            password1 = str(request.POST.get('password1')).strip()
+            password2 = str(request.POST.get('password2')).strip()
+            if password1 and password2 and password1 == password2:
+                user.profile.password = password1
+                user.password = password1
+                user.set_password(password1)
+            # Third data account
+            email = str(request.POST.get('email')).strip()
+            if email:
+                user.profile.email = email
+            secret_question = str(request.POST.get('secret_question')).strip()
+            if secret_question:
+                user.profile.secret_question = secret_question
+            secret_answer = str(request.POST.get('secret_answer')).strip()
+            if secret_answer:
+                user.profile.secret_answer = secret_answer
+            user.save()
+            result = True
+        context = {
+            'form_1': ChangePasswordForm,
+            'result': result
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'form_1': False,
+    #         'result': False
+    #     }
+    return render(request, 'account/account_change_password.html', context)
+
+
+def account_recover_password(request, type_int):
+    # logging
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
+
+    # try:
+    if True:
+        form_1 = True
+        result = False
+        data = None
+        if request.method == 'POST':
+            if type_int == 0:
+                username = request.POST.get('username')
+                try:
+                    user = User.objects.get(username=username)
+                    form_1 = False
+                    data = user
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            elif type_int == 1:
+                print('recover_answer')
+                username = request.POST.get('username')
+                try:
+                    user = User.objects.get(username=username)
+                    secret_answer = request.POST.get('secret_answer')
+                    password1 = request.POST.get('password1')
+                    password2 = request.POST.get('password2')
+                    if str(user.profile.secret_answer).lower() == str(secret_answer).lower() and password1 == password2:
+                        user.profile.password = password1
+                        user.set_password(password1)
+                        user.save()
+                        result = True
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            elif type_int == 2:
+                print('recover_email')
+                username = request.POST.get('username')
+                try:
+                    user = User.objects.get(username=username)
+                    password = user.profile.password
+                    email = user.profile.email
+                    if password and email:
+                        subject = 'восстановление пароля от веб платформы'
+                        message_s = password
+                        from_email = 'eevee.cycle@yandex.ru'
+                        to_email = email
+                        if subject and message and to_email:
+                            try:
+                                send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+                                print('send email')
+                                result = True
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'form_1': form_1,
+            'result': result,
+            'data': data
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'form_1': False,
+    #         'result': False
+    #     }
+    return render(request, 'account/account_recover_password.html', context)
+
+
+# All access
+def account_logout(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+
     try:
         logout(request)
         return redirect('account_login')
-    except Exception as ex:
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         redirect('account_login')
 
 
+# User access
+def account_change_profile(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    # try:
+    if True:
+        result_form = False
+        if request.method == 'POST':
+            user = User.objects.get(username=request.user.username)
+            # Second data account
+            education = str(request.POST.get('education')).strip()
+            if education:
+                user.profile.education = education
+            achievements = str(request.POST.get('achievements')).strip()
+            if achievements:
+                user.profile.achievements = achievements
+            biography = str(request.POST.get('biography')).strip()
+            if biography:
+                user.profile.biography = biography
+            image_avatar = request.FILES.get('image_avatar')
+            if image_avatar:
+                user.profile.image_avatar = image_avatar
+            user.save()
+            result_form = True
+        context = {
+            'form_1': ChangeUserForm,
+            'result_form': result_form
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'form_1': False,
+    #         'result_form': False
+    #     }
+    return render(request, 'account/account_change_profile.html', context)
+
+
+def account_profile(request, username=None):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    # try:
+    if True:
+        data = None
+        if request.method == 'POST':
+            pass
+        if username:
+            data = User.objects.get(username=username)
+        else:
+            data = User.objects.get(username=request.user.username)
+        context = {
+            'data': data
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return render(request, 'account/account_profile.html', context)
+
+
+# Superuser access
 def account_create_accounts(request, quantity=1):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     # try:
     if True:
         result = False
@@ -286,8 +476,10 @@ def account_create_accounts(request, quantity=1):
 
 
 def account_export_accounts(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     # try:
     if True:
         data = None
@@ -387,8 +579,10 @@ def account_export_accounts(request):
 
 
 def account_generate_passwords(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     # try:
     if True:
         result = None
@@ -428,16 +622,19 @@ def account_generate_passwords(request):
 
 
 def account_update_accounts_1c(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     # try:
     if True:
         data = None
         form_1 = None
         result = None
         if request.method == 'POST':
-            key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                            _length=10)
+            key = create_encrypted_password(
+                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                _length=10)
             hash_key_obj = hashlib.sha256()
             hash_key_obj.update(key.encode('utf-8'))
             key_hash = str(hash_key_obj.hexdigest().strip().upper())
@@ -490,9 +687,6 @@ def account_update_accounts_1c(request):
                 email = ''
                 first_name = json_data["global_objects"][user]["Имя"]
                 last_name = json_data["global_objects"][user]["Фамилия"]
-
-                print('\n ***** ***** 3')
-                print(f'status: {json_data["global_objects"][user]["Статус"]}')
 
                 if json_data["global_objects"][user]["Статус"] == 'created' or \
                         json_data["global_objects"][user]["Статус"] == 'changed':
@@ -586,110 +780,39 @@ def account_update_accounts_1c(request):
     return render(request, 'account/account_update_accounts_1c.html', context)
 
 
-def account_change_password(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
-    # try:
-    if True:
-        result = False
-        if request.method == 'POST':
-            user = User.objects.get(username=request.user.username)
-            # Third data account
-            email = str(request.POST.get('email')).strip()
-            if email:
-                user.profile.email = email
-            secret_question = str(request.POST.get('secret_question')).strip()
-            if secret_question:
-                user.profile.secret_question = secret_question
-            secret_answer = str(request.POST.get('secret_answer')).strip()
-            if secret_answer:
-                user.profile.secret_answer = secret_answer
-            user.save()
-            result = True
-        context = {
-            'form_1': ChangePasswordForm,
-            'result': result
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'form_1': False,
-    #         'result': False
-    #     }
-    return render(request, 'account/account_change_password.html', context)
-
 #
 #
 #
-def account_change_profile(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
-    # try:
-    if True:
-        result_form = False
-        if request.method == 'POST':
-            user = User.objects.get(username=request.user.username)
-            # Second data account
-            education = str(request.POST.get('education')).strip()
-            if education:
-                user.profile.education = education
-            achievements = str(request.POST.get('achievements')).strip()
-            if achievements:
-                user.profile.achievements = achievements
-            biography = str(request.POST.get('biography')).strip()
-            if biography:
-                user.profile.biography = biography
-            image_avatar = request.FILES.get('image_avatar')
-            if image_avatar:
-                user.profile.image_avatar = image_avatar
-            user.save()
-            result_form = True
-        context = {
-            'form_1': ChangeUserForm,
-            'result_form': result_form
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'form_1': False,
-    #         'result_form': False
-    #     }
-    return render(request, 'account/account_change_profile.html', context)
-
-
 #
 #
 #
-def account_profile(request, username=None):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
-    # try:
-    if True:
-        data = None
-        if request.method == 'POST':
-            pass
-        if username:
-            data = User.objects.get(username=username)
-        else:
-            data = User.objects.get(username=request.user.username)
-        context = {
-            'data': data
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'data': False
-    #     }
-    return render(request, 'account/account_profile.html', context)
-
-
-
-
-
-
-# Application
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# application
 def list_module(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     # try:
     if True:
         data = ApplicationModuleModel.objects.order_by('module_position')
@@ -705,8 +828,10 @@ def list_module(request):
 
 
 def list_component(request, module_slug=None):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     # try:
     if True:
         if module_slug is not None:
@@ -725,19 +850,59 @@ def list_component(request, module_slug=None):
     return render(request, 'app_km/list_component.html', context)
 
 
+# upgrade
+def bank_ideas(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
 
-
-# Salary
-def salary(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     # try:
     if True:
         data = None
         result_form = False
         if request.method == 'POST':
-            key = create_encrypted_password(_random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                            _length=10)
+            user = User.objects.get(username=request.user.username)
+            name = request.POST["name"]
+            category = request.POST["category"]
+            short_description = request.POST["short_description"]
+            long_description = request.POST["long_description"]
+            image = request.FILES["image"]
+            document = request.FILES["document"]
+            BankIdeasModel.objects.create(
+                user=user, name=name, category=category, short_description=short_description, long_description=
+                long_description, image=image, document=document
+            )
+            result_form = True
+        ideas = RationalModel.objects.order_by('-id')
+
+        context = {
+            'form_1': BankIdeasForm,
+            'data': data,
+            'result_form': result_form
+        }
+        # except Exception as error:
+        #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        #     context = {
+        #         'data': False,
+        #         'result_form': False
+        #     }
+        return render(request, 'ideas/create_ideas.html', context)
+
+
+# salary
+def salary(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    # try:
+    if True:
+        data = None
+        result_form = False
+        if request.method == 'POST':
+            key = create_encrypted_password(
+                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                _length=10)
             print('\n ***************** \n')
             print(f"key: {key}")
             hash_key_obj = hashlib.sha256()
@@ -859,7 +1024,8 @@ def salary(request):
                     exclude=[]
                 ),
                 "Down": {
-                    "first": ["Долг за организацией на начало месяца", json_data["Долг за организацией на начало месяца"]],
+                    "first": ["Долг за организацией на начало месяца",
+                              json_data["Долг за организацией на начало месяца"]],
                     "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
                 },
             }
@@ -878,8 +1044,10 @@ def salary(request):
 
 
 def render_pdf_view(request):
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     # try:
     if True:
         template_path = 'app_km/pdf.html'
@@ -1036,287 +1204,12 @@ def render_pdf_view(request):
     return response
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Rational
-def rational_list(request, category_slug=None):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        if category_slug is not None:
-            category_page = get_object_or_404(CategoryRationalModel, category_slug=category_slug)
-            rational = RationalModel.objects.filter(rational_category=category_page).order_by(
-                '-rational_date_registered')
-        else:
-            rational = RationalModel.objects.order_by('-rational_date_registered')
-        category = CategoryRationalModel.objects.order_by('-id')
-        page = PaginationClass.paginate(request=request, objects=rational, num_page=3)
-        context = {
-            'page': page,
-            'category': category,
-        }
-        return render(request, 'rational/list_rational.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_list: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-def rational_search(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        if request.method == 'POST':
-            search = request.POST['search_text']
-            rational = RationalModel.objects.filter(rational_name__icontains=search).order_by(
-                '-rational_date_registered')
-            context = {
-                'page': rational
-            }
-            return render(request, 'rational/list_search.html', context)
-        else:
-            return redirect('rational')
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_search: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-def rational_detail(request, rational_id=1):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        rational = RationalModel.objects.get(id=rational_id)
-        user = User.objects.get(id=request.user.id)
-        comments = CommentRationalModel.objects.filter(comment_article=rational).order_by('-id')
-        # comments = rational.comment_rational_model_set.order_by('-id')  # равнозначно предыдущему
-        blog_is_liked = False
-        blog_is_disliked = False
-        total_like = LikeRationalModel.objects.filter(like_article=rational, like_status=True).count()
-        total_dislike = LikeRationalModel.objects.filter(like_article=rational, like_status=False).count()
-        try:
-            LikeRationalModel.objects.get(like_article=rational, like_author=user, like_status=True)
-            blog_is_liked = True
-        except Exception as ex:
-            print(ex)
-            try:
-                LikeRationalModel.objects.get(like_article=rational, like_author=user, like_status=False)
-                blog_is_disliked = True
-            except Exception as ex:
-                print(ex)
-        context = {
-            'rational': rational,
-            'comments': comments,
-            'likes': {
-                'like': blog_is_liked,
-                'dislike': blog_is_disliked,
-                'total_like': total_like,
-                'total_dislike': total_dislike,
-                'total_rating': total_like - total_dislike
-            }
-        }
-        return render(request, 'rational/detail_rational.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_detail: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-def create_rational(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        if request.method == 'POST':
-            form = RationalForm(request.POST, request.FILES)
-            if form.is_valid():
-                RationalModel.objects.create(
-                    rational_structure_from=request.POST['rational_structure_from'],
-                    rational_uid_registrated=request.POST['rational_uid_registered'],
-                    rational_date_registrated=request.POST.get('rational_date_registered'),
-                    rational_name=request.POST['rational_name'],
-                    rational_place_innovation=request.POST['rational_place_innovation'],
-                    rational_description=request.POST['rational_description'],
-                    rational_addition_file_1=request.FILES.get('rational_addition_file_1'),
-                    rational_addition_file_2=request.FILES.get('rational_addition_file_2'),
-                    rational_addition_file_3=request.FILES.get('rational_addition_file_3'),
-                    rational_offering_members=request.POST['rational_offering_members'],
-                    rational_conclusion=request.POST['rational_conclusion'],
-                    rational_change_documentations=request.POST['rational_change_documentations'],
-                    rational_resolution=request.POST['rational_resolution'],
-                    rational_responsible_members=request.POST['rational_responsible_members'],
-                    rational_date_certification=request.POST.get('rational_date_certification'),
-                    rational_category=CategoryRationalModel.objects.get(id=request.POST.get('rational_category')),
-                    rational_author_name=User.objects.get(id=request.user.id),
-                    # rational_date_create            = request.POST.get('rational_date_create'),
-                    rational_addition_image=request.FILES.get('rational_addition_image'),
-                    # rational_status                 = request.POST['rational_status'],
-                )
-            return redirect('rational')
-        form = RationalForm(request.POST, request.FILES)
-        category = CategoryRationalModel.objects.order_by('-id')
-        user = User.objects.get(id=request.user.id).username
-        context = {
-            'form': form,
-            'category': category,
-            'user': user,
-        }
-        return render(request, 'rational/create_rational.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_create: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ; (')
-
-
-def rational_change(request, rational_id=None):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        if request.method == 'POST':
-            form = RationalForm(request.POST, request.FILES)
-            if form.is_valid():
-                _object = RationalModel.objects.get(id=rational_id)
-                _object.rational_structure_from = request.POST['rational_structure_from']
-                _object.rational_uid_registered = request.POST['rational_uid_registered']
-                _object.rational_date_registered = request.POST.get('rational_date_registered')
-                _object.rational_name = request.POST['rational_name']
-                _object.rational_place_innovation = request.POST['rational_place_innovation']
-                _object.rational_description = request.POST['rational_description']
-                _object.rational_addition_file_1 = request.FILES.get('rational_addition_file_1')
-                _object.rational_addition_file_2 = request.FILES.get('rational_addition_file_2')
-                _object.rational_addition_file_3 = request.FILES.get('rational_addition_file_3')
-                _object.rational_offering_members = request.POST['rational_offering_members']
-                _object.rational_conclusion = request.POST['rational_conclusion']
-                _object.rational_change_documentations = request.POST['rational_change_documentations']
-                _object.rational_resolution = request.POST['rational_resolution']
-                _object.rational_responsible_members = request.POST['rational_responsible_members']
-                _object.rational_date_certification = request.POST.get('rational_date_certification')
-                _object.rational_category = CategoryRationalModel.objects.get(id=request.POST.get('rational_category'))
-                _object.rational_author_name = User.objects.get(id=request.user.id)
-                # rational_date_create            = request.POST.get('rational_date_create'),
-                _object.rational_addition_image = request.FILES.get('rational_addition_image')
-                # rational_status                 = request.POST['rational_status'],
-                _object.save()
-            return redirect('rational')
-        form = RationalForm(request.POST, request.FILES)
-        category = CategoryRationalModel.objects.order_by('-id')
-        context = {
-            'form': form,
-            'category': category,
-            'rational_id': rational_id,
-        }
-        return render(request, 'rational/change_rational.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_change: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-def rational_leave_comment(request, rational_id):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        rational = RationalModel.objects.get(id=rational_id)
-        CommentRationalModel.objects.create(comment_article=rational,
-                                            comment_author=User.objects.get(id=request.user.id),
-                                            comment_text=request.POST['comment_text'])
-        # rational.comment_rational_model_set.create(comment_author=User.objects.get(id=request.user.id),
-        #                                          comment_text=request.POST['comment_text'])  # равнозначно предыдущему
-        return HttpResponseRedirect(reverse('rational_detail', args=(rational.id,)))
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_leave_comment: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-def rational_change_rating(request, rational_id):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        blog_ = RationalModel.objects.get(id=rational_id)
-        user = User.objects.get(id=request.user.id)
-        if request.POST['status'] == '+':
-            try:
-                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=True).delete()
-            except Exception as ex:
-                print(ex)
-                blog_.likerationalmodel_set.create(like_article=blog_, like_author=user, like_status=True)
-            try:
-                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=False).delete()
-            except Exception as ex:
-                print(ex)
-        else:
-            try:
-                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=False).delete()
-            except Exception as ex:
-                print(ex)
-                blog_.likerationalmodel_set.create(like_article=blog_, like_author=user, like_status=False)
-            try:
-                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=True).delete()
-            except Exception as ex:
-                print(ex)
-        return HttpResponseRedirect(reverse('rational_detail', args=(blog_.id,)))
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_change_rating: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-def rational_ratings(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        rational = RationalModel.objects.order_by('-id')
-        authors = []
-        for query in rational:
-            authors.append(query.rational_author_name)
-        user_count = {}
-        for author in authors:
-            user_count[author] = authors.count(author)
-        user_counts = []
-        for blog_s in user_count:
-            rationals = RationalModel.objects.filter(rational_author_name=blog_s)
-            total_rating = 0
-            for rating in rationals:
-                total_like = LikeRationalModel.objects.filter(like_article=rating, like_status=True).count()
-                total_dislike = LikeRationalModel.objects.filter(like_article=rating, like_status=False).count()
-                total_rating += total_like - total_dislike
-            user_counts.append({'user': blog_s, 'count': user_count[blog_s], 'rating': total_rating})
-        sorted_by_rating = True
-        if request.method == 'POST':
-            if request.POST['sorted'] == 'rating':
-                sorted_by_rating = True
-            if request.POST['sorted'] == 'count':
-                sorted_by_rating = False
-        if sorted_by_rating:
-            page = sorted(user_counts, key=lambda k: k['rating'], reverse=True)
-        else:
-            page = sorted(user_counts, key=lambda k: k['count'], reverse=True)
-        context = {
-            'page': page,
-            'sorted': sorted_by_rating
-        }
-        return render(request, 'rational/ratings_rational.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'rational_change_rating: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-# Human Resources
-def career(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
-    try:
-        data = None
-        if request.method == 'POST':
-            data = get_career()
-        context = {
-            'data': data,
-        }
-        return render(request, 'app_km/career.html', context)
-    except Exception as ex:
-        LoggingClass.logging(message=f'career: {ex}')
-        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
-
-
-# Extra
+# extra
 def passages_thermometry(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -1373,7 +1266,10 @@ def passages_thermometry(request):
 
 
 def passages_select(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -1430,7 +1326,10 @@ def passages_select(request):
 
 
 def passages_update(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     data = None
     if request.method == 'POST':
         personid_old = request.POST['personid_old']
@@ -1453,7 +1352,10 @@ def passages_update(request):
 
 
 def passages_insert(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     data = None
     if request.method == 'POST':
         personid = request.POST['personid']
@@ -1498,7 +1400,10 @@ def passages_insert(request):
 
 
 def passages_delete(request):
-    DjangoClass.AuthorizationClass.access_to_page(request=request)
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
     data = None
     if request.method == 'POST':
         personid = str(request.POST['personid'])
@@ -1515,6 +1420,324 @@ def passages_delete(request):
         'data': data,
     }
     return render(request, 'skud/passages_delete.html', context)
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# rational
+def rational_list(request, category_slug=None):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        if category_slug is not None:
+            category_page = get_object_or_404(CategoryRationalModel, category_slug=category_slug)
+            rational = RationalModel.objects.filter(rational_category=category_page).order_by(
+                '-rational_date_registered')
+        else:
+            rational = RationalModel.objects.order_by('-rational_date_registered')
+        category = CategoryRationalModel.objects.order_by('-id')
+        page = PaginationClass.paginate(request=request, objects=rational, num_page=3)
+        context = {
+            'page': page,
+            'category': category,
+        }
+        return render(request, 'rational/list_rational.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_list: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def rational_search(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='User'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        if request.method == 'POST':
+            search = request.POST['search_text']
+            rational = RationalModel.objects.filter(rational_name__icontains=search).order_by(
+                '-rational_date_registered')
+            context = {
+                'page': rational
+            }
+            return render(request, 'rational/list_search.html', context)
+        else:
+            return redirect('rational')
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_search: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def rational_detail(request, rational_id=1):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        rational = RationalModel.objects.get(id=rational_id)
+        user = User.objects.get(id=request.user.id)
+        comments = CommentRationalModel.objects.filter(comment_article=rational).order_by('-id')
+        # comments = rational.comment_rational_model_set.order_by('-id')  # равнозначно предыдущему
+        blog_is_liked = False
+        blog_is_disliked = False
+        total_like = LikeRationalModel.objects.filter(like_article=rational, like_status=True).count()
+        total_dislike = LikeRationalModel.objects.filter(like_article=rational, like_status=False).count()
+        try:
+            LikeRationalModel.objects.get(like_article=rational, like_author=user, like_status=True)
+            blog_is_liked = True
+        except Exception as ex:
+            print(ex)
+            try:
+                LikeRationalModel.objects.get(like_article=rational, like_author=user, like_status=False)
+                blog_is_disliked = True
+            except Exception as ex:
+                print(ex)
+        context = {
+            'rational': rational,
+            'comments': comments,
+            'likes': {
+                'like': blog_is_liked,
+                'dislike': blog_is_disliked,
+                'total_like': total_like,
+                'total_dislike': total_dislike,
+                'total_rating': total_like - total_dislike
+            }
+        }
+        return render(request, 'rational/detail_rational.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_detail: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def create_rational(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        if request.method == 'POST':
+            form = RationalForm(request.POST, request.FILES)
+            if form.is_valid():
+                RationalModel.objects.create(
+                    rational_structure_from=request.POST['rational_structure_from'],
+                    rational_uid_registrated=request.POST['rational_uid_registered'],
+                    rational_date_registrated=request.POST.get('rational_date_registered'),
+                    rational_name=request.POST['rational_name'],
+                    rational_place_innovation=request.POST['rational_place_innovation'],
+                    rational_description=request.POST['rational_description'],
+                    rational_addition_file_1=request.FILES.get('rational_addition_file_1'),
+                    rational_addition_file_2=request.FILES.get('rational_addition_file_2'),
+                    rational_addition_file_3=request.FILES.get('rational_addition_file_3'),
+                    rational_offering_members=request.POST['rational_offering_members'],
+                    rational_conclusion=request.POST['rational_conclusion'],
+                    rational_change_documentations=request.POST['rational_change_documentations'],
+                    rational_resolution=request.POST['rational_resolution'],
+                    rational_responsible_members=request.POST['rational_responsible_members'],
+                    rational_date_certification=request.POST.get('rational_date_certification'),
+                    rational_category=CategoryRationalModel.objects.get(id=request.POST.get('rational_category')),
+                    rational_author_name=User.objects.get(id=request.user.id),
+                    # rational_date_create            = request.POST.get('rational_date_create'),
+                    rational_addition_image=request.FILES.get('rational_addition_image'),
+                    # rational_status                 = request.POST['rational_status'],
+                )
+            return redirect('rational')
+        form = RationalForm(request.POST, request.FILES)
+        category = CategoryRationalModel.objects.order_by('-id')
+        user = User.objects.get(id=request.user.id).username
+        context = {
+            'form': form,
+            'category': category,
+            'user': user,
+        }
+        return render(request, 'rational/create_rational.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_create: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ; (')
+
+
+def rational_change(request, rational_id=None):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        if request.method == 'POST':
+            form = RationalForm(request.POST, request.FILES)
+            if form.is_valid():
+                _object = RationalModel.objects.get(id=rational_id)
+                _object.rational_structure_from = request.POST['rational_structure_from']
+                _object.rational_uid_registered = request.POST['rational_uid_registered']
+                _object.rational_date_registered = request.POST.get('rational_date_registered')
+                _object.rational_name = request.POST['rational_name']
+                _object.rational_place_innovation = request.POST['rational_place_innovation']
+                _object.rational_description = request.POST['rational_description']
+                _object.rational_addition_file_1 = request.FILES.get('rational_addition_file_1')
+                _object.rational_addition_file_2 = request.FILES.get('rational_addition_file_2')
+                _object.rational_addition_file_3 = request.FILES.get('rational_addition_file_3')
+                _object.rational_offering_members = request.POST['rational_offering_members']
+                _object.rational_conclusion = request.POST['rational_conclusion']
+                _object.rational_change_documentations = request.POST['rational_change_documentations']
+                _object.rational_resolution = request.POST['rational_resolution']
+                _object.rational_responsible_members = request.POST['rational_responsible_members']
+                _object.rational_date_certification = request.POST.get('rational_date_certification')
+                _object.rational_category = CategoryRationalModel.objects.get(id=request.POST.get('rational_category'))
+                _object.rational_author_name = User.objects.get(id=request.user.id)
+                # rational_date_create            = request.POST.get('rational_date_create'),
+                _object.rational_addition_image = request.FILES.get('rational_addition_image')
+                # rational_status                 = request.POST['rational_status'],
+                _object.save()
+            return redirect('rational')
+        form = RationalForm(request.POST, request.FILES)
+        category = CategoryRationalModel.objects.order_by('-id')
+        context = {
+            'form': form,
+            'category': category,
+            'rational_id': rational_id,
+        }
+        return render(request, 'rational/change_rational.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_change: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def rational_leave_comment(request, rational_id):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        rational = RationalModel.objects.get(id=rational_id)
+        CommentRationalModel.objects.create(comment_article=rational,
+                                            comment_author=User.objects.get(id=request.user.id),
+                                            comment_text=request.POST['comment_text'])
+        # rational.comment_rational_model_set.create(comment_author=User.objects.get(id=request.user.id),
+        #                                          comment_text=request.POST['comment_text'])  # равнозначно предыдущему
+        return HttpResponseRedirect(reverse('rational_detail', args=(rational.id,)))
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_leave_comment: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def rational_change_rating(request, rational_id):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        blog_ = RationalModel.objects.get(id=rational_id)
+        user = User.objects.get(id=request.user.id)
+        if request.POST['status'] == '+':
+            try:
+                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=True).delete()
+            except Exception as ex:
+                print(ex)
+                blog_.likerationalmodel_set.create(like_article=blog_, like_author=user, like_status=True)
+            try:
+                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=False).delete()
+            except Exception as ex:
+                print(ex)
+        else:
+            try:
+                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=False).delete()
+            except Exception as ex:
+                print(ex)
+                blog_.likerationalmodel_set.create(like_article=blog_, like_author=user, like_status=False)
+            try:
+                LikeRationalModel.objects.get(like_article=blog_, like_author=user, like_status=True).delete()
+            except Exception as ex:
+                print(ex)
+        return HttpResponseRedirect(reverse('rational_detail', args=(blog_.id,)))
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_change_rating: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+def rational_ratings(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        rational = RationalModel.objects.order_by('-id')
+        authors = []
+        for query in rational:
+            authors.append(query.rational_author_name)
+        user_count = {}
+        for author in authors:
+            user_count[author] = authors.count(author)
+        user_counts = []
+        for blog_s in user_count:
+            rationals = RationalModel.objects.filter(rational_author_name=blog_s)
+            total_rating = 0
+            for rating in rationals:
+                total_like = LikeRationalModel.objects.filter(like_article=rating, like_status=True).count()
+                total_dislike = LikeRationalModel.objects.filter(like_article=rating, like_status=False).count()
+                total_rating += total_like - total_dislike
+            user_counts.append({'user': blog_s, 'count': user_count[blog_s], 'rating': total_rating})
+        sorted_by_rating = True
+        if request.method == 'POST':
+            if request.POST['sorted'] == 'rating':
+                sorted_by_rating = True
+            if request.POST['sorted'] == 'count':
+                sorted_by_rating = False
+        if sorted_by_rating:
+            page = sorted(user_counts, key=lambda k: k['rating'], reverse=True)
+        else:
+            page = sorted(user_counts, key=lambda k: k['count'], reverse=True)
+        context = {
+            'page': page,
+            'sorted': sorted_by_rating
+        }
+        return render(request, 'rational/ratings_rational.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'rational_change_rating: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+
+
+# Human Resources
+def career(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='User'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request))
+
+    try:
+        data = None
+        if request.method == 'POST':
+            data = get_career()
+        context = {
+            'data': data,
+        }
+        return render(request, 'app_km/career.html', context)
+    except Exception as ex:
+        LoggingClass.logging(message=f'career: {ex}')
+        HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
 def geo(request):
@@ -1585,6 +1808,33 @@ def geo(request):
         HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
 
 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 def email(request):
     DjangoClass.AuthorizationClass.access_to_page(request=request)
     mails = EmailModel.objects.order_by('-id')
@@ -1893,12 +2143,12 @@ def decrease_rating(request, article_id):
     return HttpResponseRedirect(reverse('news_detail', args=(a.id,)))
 
 
-# React
+# react
 def react(request):
     return render(request, 'app_km/react.html')
 
 
-# Bootstrap
+#  bootstrap
 def example(request):
     return render(request, 'bootstrap/example.html')
 
