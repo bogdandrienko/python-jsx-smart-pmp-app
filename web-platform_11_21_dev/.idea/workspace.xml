@@ -2,39 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app_km/migrations/0002_alter_bankideasmodel_datetime_register.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_km/migrations/0003_alter_bankideasmodel_datetime_register.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTU=_NEI2N0IwMjAxNTVGMzIyODQ3NzYzQjZFRjcwODBCQ0NCRkQ1,b6ce3a3edb66ed4f68f5530264b275cb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTU=_OTg1MTVDODFFMDJDRDgxODM2NzZEN0YxNDFDNzc0OUFFMDM1,1e779b465192fe21934b33d197232345" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/15_11_2021/16_29_41/Export.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/15_11_2021/16_46_55/Export.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/15_11_2021/16_47_42/Import.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/15_11_2021/16_48_30/АПичугин.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/IMG_1532.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/АДзиневский.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/Островский.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/Островский_0eZRdmb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/account/account_recover_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/ideas/create_ideas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Сценарии.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Сценарии.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_09_21_dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_09_21_dev/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_actions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +103,7 @@
       <workItem from="1636906475120" duration="596000" />
       <workItem from="1636941947097" duration="24800000" />
       <workItem from="1636971812383" duration="2028000" />
+      <workItem from="1636982088803" duration="1215000" />
     </task>
     <servers />
   </component>
