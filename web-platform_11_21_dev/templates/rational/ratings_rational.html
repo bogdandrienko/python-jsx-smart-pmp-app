@@ -23,6 +23,7 @@
 <!-- Main -->
 {% block main %}
 <main class="container">
+
     {% if page %}
     <div class="row row-cols-1 row-cols-md-3 text-center">
         <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все предложения</a>
@@ -83,6 +84,7 @@
     {% else %}
         Лидеры не найдены :(
     {% endif %}
+
 </main>
 {% endblock main %}
 

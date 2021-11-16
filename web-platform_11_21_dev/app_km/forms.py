@@ -7,7 +7,7 @@ from django.core.validators import FileExtensionValidator, MinValueValidator, Ma
     MaxLengthValidator
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import Profile, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, DocumentModel, \
-    MessageModel, SmsModel, ArticleModel, CityModel, BankIdeasModel
+    MessageModel, SmsModel, ArticleModel, CityModel, IdeasModel, IdeasCategoryModel
 
 
 # Account
@@ -169,30 +169,45 @@ class BankIdeasForm(forms.Form):
     """
     Bank Ideas Form
     """
-    name = forms.CharField(label='название', widget=forms.TextInput(
-        attrs={'type': 'text', 'name': 'name', 'placeholder': 'название', 'class': 'form-control', 'required': ''}),
-                           required=True)
-    category = forms.CharField(label='категория', widget=forms.TextInput(
-        attrs={'type': 'text', 'name': 'category', 'placeholder': 'категория', 'class': 'form-control',
-               'required': ''}),
-                               required=True)
-    short_description = forms.CharField(label='короткое описание', widget=forms.TextInput(
-        attrs={'type': 'text', 'name': 'short_description', 'placeholder': 'короткое описание', 'class': 'form-control',
-               'required': ''}),
-                                        required=True)
-    long_description = forms.CharField(label='длинное описание', widget=forms.Textarea(
-        attrs={'type': 'text', 'name': 'long_description', 'placeholder': 'длинное описание', 'class': 'form-control',
-               'required': ''}),
-                                       required=True)
+    name = forms.CharField(
+        label='название', widget=forms.TextInput(
+            attrs={'type': 'text', 'name': 'name', 'placeholder': 'название', 'class': 'form-control', 'required': ''}),
+        required=True
+    )
+    category = forms.ModelChoiceField(
+        label='категория', widget=forms.Select(
+            attrs={'class': 'form-select form-select-lg mb-3', 'aria-label': '.form-select-lg example', 'required': ''}
+        ), queryset=IdeasCategoryModel.objects.order_by('id'),
+        empty_label="не выбрано", to_field_name=None, required=True
+    )
+    short_description = forms.CharField(
+        label='короткое описание', widget=forms.TextInput(
+            attrs={'type': 'text', 'name': 'short_description', 'placeholder': 'короткое описание',
+                   'class': 'form-control',
+                   'required': ''}),
+        required=True
+    )
+    long_description = forms.CharField(
+        label='длинное описание', widget=forms.Textarea(
+            attrs={'type': 'text', 'name': 'long_description', 'placeholder': 'длинное описание',
+                   'class': 'form-control',
+                   'required': ''}),
+        required=True
+    )
 
-    image = forms.ImageField(label="картинка к идеи", widget=forms.ClearableFileInput(
-        attrs={'type': 'file', 'name': 'image', 'class': 'form-control'}), required=False)
-    document = forms.FileField(label="документ к идеи", widget=forms.ClearableFileInput(
-        attrs={'type': 'file', 'name': 'document', 'class': 'form-control'}), required=False,
-                               allow_empty_file=True)
+    image = forms.ImageField(
+        label="картинка к идеи", widget=forms.ClearableFileInput(
+            attrs={'type': 'file', 'name': 'image', 'class': 'form-control'}),
+        required=False
+    )
+    document = forms.FileField(
+        label="документ к идеи", widget=forms.ClearableFileInput(
+            attrs={'type': 'file', 'name': 'document', 'class': 'form-control'}),
+        required=False, allow_empty_file=True
+    )
 
     class Meta:
-        model = BankIdeasModel
+        model = IdeasModel
         fields = '__all__'
 
 

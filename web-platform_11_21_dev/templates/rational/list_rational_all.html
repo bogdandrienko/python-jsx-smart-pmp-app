@@ -29,6 +29,7 @@
                 </a>
                 <div class="my-1 d-flex justify-content-between align-items-center">
                     <div class="btn-group">
+
                         <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">
                             {% account_tag LOOP.rational_author_name as acc %}
                             {% if acc %}
@@ -37,23 +38,27 @@
                                 Профиль не заполнен
                             {% endif %}
                         </small>
+
                         {% is_liked_tag LOOP.id as is_liked_bool %}
                         {% if is_liked_bool %}
-                            <p><i class="material-icons text-muted md-48">thumb_up</i></p>
+                            <p><i class="material-icons md-48">thumb_up</i></p>
                         {% else %}
                             {% is_disliked_tag LOOP.id as is_disliked_bool %}
                             {% if is_disliked_bool %}
-                                <p><i class="material-icons text-muted md-48">thumb_down</i></p>
+                                <p><i class="material-icons md-48">thumb_down</i></p>
                             {% else %}
-                                <p><i class="material-icons text-muted md-48">live_help</i></p>
+                                <p><i class="material-icons md-48">live_help</i></p>
                             {% endif %}
                         {% endif %}
+
                         {% if 0 > LOOP.get_total_rating %}
                             <div class="m-sm-1 btn btn-sm btn-outline-danger text-link-danger">{{ LOOP.get_total_rating }}<sup class="text-muted">{{ LOOP.get_total_rating_value }}</sup></div>
                         {% else %}
                             <div class="m-sm-1 btn btn-sm btn-outline-success text-link-success">{{ LOOP.get_total_rating }}<sup class="text-muted">{{ LOOP.get_total_rating_value }}</sup></div>
                         {% endif %}
+
                         <div class="m-sm-0 btn btn-sm btn-outline-secondary text-link-light">{{ LOOP.get_total_comment_value }}</div>
+
                     </div>
                     <small class="text-muted">{{ LOOP.rational_date_registrated }}</small>
                     <small>#{{ forloop.revcounter }}</small>

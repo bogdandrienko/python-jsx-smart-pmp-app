@@ -2,9 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app_km/templatetags/ideas_list_tag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_CZoI9G6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_FRCLbiz.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/10_07_56/Численность_на_11.05.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/Export.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/Export_kiddwYq.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/create_users.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/create_users_2.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/АКурганов.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/Без_названия.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/Без_названия_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/16_11_2021/Без_названия_2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/АбайКулманов_930919.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ideas/ideas_create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ideas/ideas_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ideas/ideas_ratings.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ideas/ideas_view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/migrations/0002_alter_bankideasmodel_datetime_register.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/migrations/0003_alter_bankideasmodel_datetime_register.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_actions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_errors.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ideas/create_ideas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ideas/ideas_change.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rational/list_rational_all.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rational/list_rational_all.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rational/ratings_rational.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rational/ratings_rational.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +51,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
@@ -40,13 +75,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/rational" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/ideas" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\ideas" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\rational" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\account" />
     </key>
@@ -104,6 +140,8 @@
       <workItem from="1636941947097" duration="24800000" />
       <workItem from="1636971812383" duration="2028000" />
       <workItem from="1636982088803" duration="1215000" />
+      <workItem from="1637029795559" duration="21506000" />
+      <workItem from="1637055881539" duration="3137000" />
     </task>
     <servers />
   </component>

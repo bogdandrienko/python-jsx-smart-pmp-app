@@ -1,7 +1,6 @@
 from django.urls import path, include
 from . import views
 
-
 urlpatterns = [
 
     #  main
@@ -13,7 +12,6 @@ urlpatterns = [
     # All access
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
-
 
     #  account
     # no check access (recursive)
@@ -31,30 +29,57 @@ urlpatterns = [
     path('account_generate_passwords/', views.account_generate_passwords, name='account_generate_passwords'),
     path('account_update_accounts_1c/', views.account_update_accounts_1c, name='account_update_accounts_1c'),
 
-
-
-
-
+    #  ideas
+    # All access
+    path('ideas/create/', views.ideas_create, name='ideas_create'),  # create idea
+    path('ideas/list/<slug:category_slug>/', views.ideas_list, name='ideas_list'),  # list ideas
+    path('ideas/ratings/', views.ideas_rating, name='ideas_rating'),  # ratings by posts ideas
+    path('ideas/<int:ideas_int>/', views.ideas_view, name='ideas_view'),  # view idea
+    # User access
+    path('ideas/<int:ideas_int>/comment/', views.ideas_comment, name='ideas_comment'),  # comment
+    path('ideas/<int:ideas_int>/like/', views.ideas_like, name='ideas_like'),  # likes
+    # Moderator access
+    path('ideas/<int:ideas_int>/change/', views.ideas_change, name='ideas_change'),  # change idea
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     path('list_module/', views.list_module, name='list_module'),
     path('list_module/<slug:module_slug>/', views.list_component, name='list_component'),
 
-    path('bank_ideas/', views.bank_ideas, name='bank_ideas'),
-
-
-
     path('salary/', views.salary, name='salary'),
     path('create_pdf/', views.render_pdf_view, name='create_pdf'),
-
-
-
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     path('passages_thermometry/', views.passages_thermometry, name='passages_thermometry'),
     path('passages_select/', views.passages_select, name='passages_select'),
     path('passages_update/', views.passages_update, name='passages_update'),
     path('passages_insert/', views.passages_insert, name='passages_insert'),
     path('passages_delete/', views.passages_delete, name='passages_delete'),
-
-
-
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     path('rational/', views.rational_list, name='rational'),
     path('search/', views.rational_search, name='rational_search'),
     path('<slug:category_slug>', views.rational_list, name='rational_by_category'),
@@ -64,8 +89,6 @@ urlpatterns = [
     path('<int:rational_id>/change/', views.rational_change, name='rational_change'),
     path('<int:rational_id>/leave_comment/', views.rational_leave_comment, name='rational_leave_comment'),
     path('<int:rational_id>/rational_change_rating/', views.rational_change_rating, name='rational_change_rating'),
-
-
 
     path('geo/', views.geo, name='geo'),
     path('career/', views.career, name='career'),

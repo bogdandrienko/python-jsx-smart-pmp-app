@@ -29,7 +29,7 @@
             <h1 class="display-6 fst-italic">Личный профиль</h1>
             <p class="text-secondary">Эта страница содержит подробную информацию о пользователе.</p>
 
-            {% if data.username|stringformat:"i" == request.user.username|stringformat:"i"  %}
+            {% if data.username == request.user.username %}
 
                 <div class="text-end">
                     <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg">Изменить личный профиль</a>

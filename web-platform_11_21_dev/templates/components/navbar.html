@@ -27,27 +27,19 @@
                                     <hr class="dropdown-divider text-light">
                                 </li>
                                 <li>
-                                    <h6 class="dropdown-header">Отдел охраны труда</h6>
-                                    <a class="dropdown-item" href="{% url 'passages_thermometry' %}">Термометрия</a>
-                                    <a class="dropdown-item disabled" href="#">Алкотесты</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Отдел кадров:</h6>
-                                    <a class="dropdown-item" href="{% url 'career' %}">Вакансии</a>
-                                    <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
                                     <h6 class="dropdown-header">Рационализаторство:</h6>
                                     <a class="dropdown-item" href="{% url 'rational' %}">Рационализаторство: список</a>
                                     <a class="dropdown-item" href="{% url 'create_rational' %}">Рационализаторство: добавить</a>
                                     <a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
                                     <a class="dropdown-item" href="{% url 'rational_ratings' %}">Рационализаторство: рейтинги</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Отдел охраны труда</h6>
+                                    <a class="dropdown-item" href="{% url 'passages_thermometry' %}">Термометрия</a>
+                                    <a class="dropdown-item disabled" href="#">Алкотесты</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">
@@ -98,77 +90,24 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Администратор
                                 <span class="badge badge-primary badge-pill">
-                                    # 1
+                                    # 5
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Основной функционал</h6>
-                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
+                                    <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрирования</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">
                                 </li>
-
                                 <li>
                                     <h6 class="dropdown-header">Аккаунты</h6>
-                                    {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_login' %}">Войти [ Вы уже вошли в аккаунт ]</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
-                                    {% endif %}
-                                    {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="{% url 'account_login' %}">Выйти [ Вы не вошли в аккаунт ]</a>
-                                    {% endif %}
-
+                                    <a class="dropdown-item" href="{% url 'account_create_accounts' 1 %}">Создать/изменить пользователей</a>
                                     <a class="dropdown-item" href="{% url 'account_generate_passwords' %}">Сгенерировать пароли для аккаунтов</a>
                                     <a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список пользователей</a>
-                                    {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_change_password' %}">Изменить пароль</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="#">Изменить пароль [ Вы не вошли в аккаунт ]</a>
-                                    {% endif %}
-                                    {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_recover_password' 0 %}">Восстановить пароль</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="#">Восстановить пароль [ Вы не вошли в аккаунт ]</a>
-                                    {% endif %}
-                                    {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="#">Изменить личный профиль [ Вы не вошли в аккаунт ]</a>
-                                    {% endif %}
-                                    <li>
-                                        <hr class="dropdown-divider text-light">
-                                    </li>
-
-                                    <a class="dropdown-item" href="{% url 'account_create_accounts' 1 %}">Создать/изменить пользователей</a>
                                     <a class="dropdown-item" href="{% url 'account_update_accounts_1c' %}">Обновить пользователей из 1С</a>
-                                    {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_profile' request.user.username %}">Личный профиль [{{ request.user.username }}]</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="#">Личный кабинет [ Вы не вошли в аккаунт ]</a>
-                                    {% endif %}
                                 </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Сектор расчёта заработной платы:</h6>
-                                    <a class="dropdown-item" href="{% url 'salary' %}">Выгрузка текущего расчётного листа</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
-                                    <h6 class="dropdown-header">Банк идей:</h6>
-                                    <a class="dropdown-item" href="{% url 'bank_ideas' %}">Подать идею</a>
-                                    <a class="dropdown-item" href="{% url 'bank_ideas' %}">Просмотреть идеи</a>
-                                </li>
-
-
                             </ul>
                         </li>
                     </div>
@@ -242,7 +181,7 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Профиль
                                 <span class="badge badge-primary badge-pill">
-                                    # 1
+                                    # 7
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
@@ -251,6 +190,42 @@
                                     <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
                                     <a class="dropdown-item disabled" href="{% url 'home' %}">Уведомления [{{notification}}]</a>
                                     <a class="dropdown-item disabled" href="{% url 'home' %}">Достижения</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Аккаунты</h6>
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_profile' request.user.username %}">Личный профиль [{{ request.user.profile.last_name }} {{ request.user.profile.first_name }}]</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Личный профиль [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Изменить личный профиль [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_change_password' %}">Изменить пароль</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Изменить пароль [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_recover_password' 0 %}">Восстановить пароль</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Восстановить пароль [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_login' %}">Войти [ Вы уже вошли в аккаунт ]</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
+                                    {% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'account_login' %}">Выйти [ Вы не вошли в аккаунт ]</a>
+                                    {% endif %}
                                 </li>
                             </ul>
                         </li>
@@ -295,10 +270,19 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Развитие
                                 <span class="badge badge-primary badge-pill">
-                                    # 0
+                                    # 3
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                <li>
+                                    <h6 class="dropdown-header">Банк идей:</h6>
+                                    <a class="dropdown-item" href="{% url 'ideas_create' %}">Подать идею в банк идей</a>
+                                    <a class="dropdown-item" href="{% url 'ideas_list' 'All' %}">Просмотреть идеи в банке идей</a>
+                                    <a class="dropdown-item" href="{% url 'ideas_rating' %}">Рейтинги в банке идей</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
                                 <li>
                                     <h6 class="dropdown-header">Рационализаторство:</h6>
                                     <a class="dropdown-item disabled" href="{% url 'home' %}">Рационализаторство: список</a>
@@ -326,13 +310,13 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Бухгалтерия
                                 <span class="badge badge-primary badge-pill">
-                                    # 0
+                                    # 1
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Сектор расчёта заработной платы:</h6>
-                                    <a class="dropdown-item disabled" href="{% url 'home' %}">Выгрузка текущего расчётного листа</a>
+                                    <a class="dropdown-item" href="{% url 'salary' %}">Выгрузка текущего расчётного листа</a>
                                 </li>
                             </ul>
                         </li>
@@ -345,13 +329,13 @@
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 СУП
                                 <span class="badge badge-primary badge-pill">
-                                    # 0
+                                    # 1
                                 </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Отдел кадров:</h6>
-                                    <a class="dropdown-item disabled" href="#">Вакансии</a>
+                                    <a class="dropdown-item" href="{% url 'career' %}">Вакансии</a>
                                     <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
                                 </li>
                                 <li>
@@ -379,7 +363,7 @@
                                 <li>
                                     <h6 class="dropdown-header">Отдел охраны труда:</h6>
                                     <a class="dropdown-item disabled" href="#">Термометрия</a>
-                                    <a class="dropdown-item disabled" href="#">Алкотесты</a>
+                                    <a class="dropdown-item disabled" href="#">Алкометрия</a>
                                 </li>
                             </ul>
                         </li>

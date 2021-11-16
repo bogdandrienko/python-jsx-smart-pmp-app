@@ -1388,3 +1388,2015 @@ Bogdan, 192.168.1.68, /bank_ideas/, POST, 2021-11-15 16:59:15.466430
 , 127.0.0.1, /account_login/, POST, 2021-11-15 19:14:49.009991
 
 , 127.0.0.1, /account_login/, POST, 2021-11-15 19:14:53.184648
+
+, 127.0.0.1, /, GET, 2021-11-16 09:49:28.475385
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 09:49:28.505335
+
+, 127.0.0.1, /, GET, 2021-11-16 09:54:54.726368
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 09:54:54.748764
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 09:55:04.831860
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 09:55:06.930514
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 09:55:11.938815
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 09:55:14.394379
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 09:57:27.825255
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 09:57:30.097042
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 09:57:33.176051
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 09:57:52.125027
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 10:03:52.421832
+
+Bogdan, 127.0.0.1, /ideas/create/, POST, 2021-11-16 10:07:56.228653
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 10:09:16.635954
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:18:39.237729
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:18:53.353012
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:28:55.858837
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:28:56.615773
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:28:57.191757
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:28:57.894880
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:29:05.650987
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:29:07.636624
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:29:25.639657
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:29:30.834238
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:29:32.504112
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:30:10.816091
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:30:29.111900
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:30:52.903663
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:31:01.808328
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:31:07.894339
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:31:13.336166
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:31:30.527697
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:31:56.100301
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:32:26.014863
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:34:10.489106
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:37:43.359989
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:37:48.680547
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:37:50.089845
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:38:21.615641
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:38:45.465161
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:38:47.568555
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:38:50.304768
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:39:30.519443
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:41:03.634491
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:41:14.050591
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:41:15.584579
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:42:26.176490
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:43:05.064954
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:43:38.672011
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:44:13.222676
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:47:08.652142
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:47:27.266815
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:47:29.083463
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:47:30.545223
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:47:40.176561
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:47:42.761346
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 10:48:16.833772
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:01:13.412772
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:02:44.855639
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:03:29.986456
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:04:29.157826
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:08:14.321465
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:08:17.306031
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:08:20.033741
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:08:44.707619
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:08:45.412628
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:08:46.733563
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:09:36.759966
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:09:38.681938
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:09:40.036629
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:09:42.167005
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:09:43.225859
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:09:45.754520
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:09:49.066339
+
+Bogdan, 127.0.0.1, /create_rational/, GET, 2021-11-16 11:10:08.021684
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 11:10:08.036674
+
+Bogdan, 127.0.0.1, /rational/, GET, 2021-11-16 11:10:10.644582
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 11:10:10.661567
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:12:31.493910
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:12:52.081600
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:12:53.241179
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:13:03.505510
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:13:04.440475
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:13:10.425206
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:13:11.394722
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:13:19.794029
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:13:28.352229
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:13:41.132798
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:17:08.926495
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:17:35.217841
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:17:45.257605
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:18:05.625945
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:18:06.722896
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:18:07.681606
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:18:10.415860
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:18:25.225154
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:18:26.610105
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:18:48.010787
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:19:05.546562
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:19:43.073841
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:20:04.540990
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:20:14.897512
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:20:27.482044
+
+Bogdan, 127.0.0.1, /ideas/3/, GET, 2021-11-16 11:21:05.396369
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:22:01.676635
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:22:03.106081
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:23:27.932684
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:24:32.194068
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:28:05.517412
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:28:53.362737
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:29:13.487269
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:29:30.343737
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:30:23.181731
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:31:23.650027
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:31:32.875288
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:31:49.331234
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:31:56.818187
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:31:57.916070
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:33:42.483049
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:34:32.107033
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:34:36.352862
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:34:59.490637
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:35:14.096016
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:35:26.384782
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:35:32.988111
+
+Bogdan, 127.0.0.1, /ideas/4/, GET, 2021-11-16 11:35:45.028165
+
+Bogdan, 127.0.0.1, /ideas/4/, GET, 2021-11-16 11:35:48.883018
+
+Bogdan, 127.0.0.1, /ideas/4/, GET, 2021-11-16 11:35:53.082492
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:36:07.627581
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:36:08.818295
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 11:36:09.706582
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:36:10.587086
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:38:54.061641
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 11:38:58.801242
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 11:39:15.177571
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:39:16.587640
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:39:17.353329
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:39:17.947660
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:39:18.388092
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:39:19.107272
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:39:19.530299
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:39:19.915011
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:39:20.379402
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:39:21.019170
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:39:22.244027
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:39:49.080470
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:39:51.251668
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:39:53.707196
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:39:54.282719
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:39:54.812310
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:39:55.851632
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:39:56.355636
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 11:40:43.861690
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:40:46.027153
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:40:46.492044
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:40:47.082646
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:40:48.698666
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:40:50.450626
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:40:51.476043
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:40:52.563522
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:41:16.938368
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:41:25.605029
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:41:26.291763
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:41:26.955308
+
+Bogdan, 127.0.0.1, /ideas/list/eco/, GET, 2021-11-16 11:41:27.739683
+
+Bogdan, 127.0.0.1, /ideas/list/modern/, GET, 2021-11-16 11:41:28.145772
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:41:28.619337
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:41:41.784064
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:56:32.113463
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 11:56:56.208901
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 11:57:03.165986
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:36:43.652693
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:38:29.241275
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:38:48.522895
+
+, 127.0.0.1, /, GET, 2021-11-16 12:47:06.749573
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 12:47:06.814399
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 12:47:08.632537
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 12:47:11.518792
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-16 12:47:11.537741
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:47:13.332940
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-16 12:47:13.443643
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:47:14.827941
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-16 12:47:14.885787
+
+Bogdan, 127.0.0.1, /ideas/search/, GET, 2021-11-16 12:47:16.236270
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-16 12:47:16.259183
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 12:47:17.891494
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-16 12:47:17.933767
+
+Bogdan, 127.0.0.1, /account_change_password/, POST, 2021-11-16 12:47:34.019478
+
+, 127.0.0.1, /home/, GET, 2021-11-16 12:47:42.643976
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 12:47:42.656643
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 12:47:44.093176
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:47:52.221040
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:47:53.755935
+
+Bogdan, 127.0.0.1, /ideas/search/, GET, 2021-11-16 12:47:55.243270
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:50:45.635526
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:51:09.688972
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:01.489729
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:27.530920
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:27.928252
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:29.219917
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:29.571917
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:29.767383
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:41.125152
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:41.201947
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:41.441733
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:41.658490
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:42.067928
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:42.328717
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:54:42.518209
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 12:54:44.259355
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 12:55:34.720548
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:56:05.806805
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:56:30.526081
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:57:06.779684
+
+Bogdan, 127.0.0.1, /ideas/create/, POST, 2021-11-16 12:57:43.112358
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 12:58:33.044895
+
+Bogdan, 127.0.0.1, /ideas/create/, POST, 2021-11-16 12:58:39.544749
+
+Bogdan, 127.0.0.1, /ideas/create/, POST, 2021-11-16 12:58:58.942296
+
+Bogdan, 127.0.0.1, /ideas/create/, POST, 2021-11-16 12:59:26.761066
+
+Bogdan, 127.0.0.1, /ideas/create/, POST, 2021-11-16 13:00:24.002030
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:00:41.107456
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:00:54.688876
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:00:55.289981
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:00:58.040199
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:01:03.825788
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:01:06.361234
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:03:26.912849
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:12.791719
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:14.626377
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:15.272029
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:15.800402
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:17.674408
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:18.338202
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:18.936766
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:19.361953
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:19.737631
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:20.345996
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:21.632675
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:22.273142
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:22.849670
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:23.336943
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:23.968253
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:24.561848
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:25.649504
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:26.050008
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:26.465554
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:27.033939
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:33.146265
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:33.729445
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:34.193753
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 13:04:34.768695
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:38.761202
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:39.394449
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:39.962102
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:40.673098
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:41.225933
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:41.809989
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:42.320951
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:43.136951
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:43.801664
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:44.816896
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:45.329497
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:04:46.266488
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:04:47.298488
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:04:47.832664
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:04:48.472401
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 13:12:02.467433
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:12:04.032832
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 13:12:06.985809
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 13:12:51.237188
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:13:15.554319
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 13:13:19.297593
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 13:13:22.368161
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 13:13:24.328817
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:13:25.232907
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 13:13:27.297156
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:24:22.561338
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:24:46.591090
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:26:53.827018
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:27:39.295087
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:27:59.992081
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:29:23.459645
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:29:25.686477
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:29:29.038589
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:29:29.534888
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:29:30.359476
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:29:30.984061
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:29:31.679475
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 13:29:33.864309
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:29:35.601465
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:31:11.216274
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:31:19.498130
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:32:12.367919
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:32:15.815351
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:32:16.575929
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 13:32:17.471371
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:32:18.519313
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:32:19.455688
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:32:19.935257
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:33:03.959649
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:33:20.303898
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:33:58.110579
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:33:59.176670
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:34:12.919041
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:34:35.543032
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:34:42.232259
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:36:30.935955
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:37:02.565400
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:37:03.535154
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:37:32.199244
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:38:31.663090
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:38:32.824800
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:39:29.389562
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:39:30.615795
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:39:34.673017
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:39:48.502659
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 13:40:44.919086
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 13:40:46.624379
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 13:40:47.408266
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 13:40:47.959502
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 13:40:48.848276
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:40:49.416186
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:40:51.495923
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:40:52.173011
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:41:29.286539
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:41:30.671522
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:41:31.727808
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:41:33.951231
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:41:34.913925
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 13:41:35.608175
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 13:41:36.569086
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:41:56.110092
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:41:56.855510
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:11.334549
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:12.485730
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:23.151991
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:24.231952
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:33.542890
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:38.206323
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:38.853111
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:50.261124
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:51.198822
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:42:51.862437
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:43:02.350383
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:43:03.246868
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:43:08.118883
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:43:08.774853
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:43:29.725211
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:43:30.717250
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:48:08.759676
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:48:09.607639
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:48:10.444712
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:48:52.014938
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:48:53.070528
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 13:49:24.525985
+
+Bogdan, 127.0.0.1, /account_create_accounts/1/, GET, 2021-11-16 13:51:56.638244
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 13:51:56.660413
+
+Bogdan, 127.0.0.1, /account_create_accounts/1/, GET, 2021-11-16 13:51:59.296398
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 13:51:59.320280
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 13:52:44.360687
+
+Bogdan, 127.0.0.1, /account_create_accounts/1/, GET, 2021-11-16 13:52:45.904378
+
+Bogdan, 127.0.0.1, /account_create_accounts/2/, POST, 2021-11-16 13:53:08.889351
+
+Bogdan, 127.0.0.1, /account_profile/Bogdan/, GET, 2021-11-16 14:01:07.923300
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-16 14:01:13.447965
+
+Bogdan, 127.0.0.1, /salary/, POST, 2021-11-16 14:01:15.222948
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-16 14:01:54.076744
+
+Bogdan, 127.0.0.1, /salary/, POST, 2021-11-16 14:01:58.621916
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-16 14:02:10.316070
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 14:02:12.319967
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:02:17.279918
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:02:20.783209
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:02:22.143889
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 14:02:23.278861
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 14:02:23.782223
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 14:02:24.318028
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 14:02:24.797578
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:02:27.808003
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:02:29.837748
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:02:31.269887
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:02:32.334203
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:02:32.966525
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:02:36.270880
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 14:02:39.917989
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:04:47.366317
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:04:48.397806
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:04:49.285736
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:04:49.965747
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:04:50.644947
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:04:55.922483
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:04:57.380304
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:04:57.949743
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:04:59.692766
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:05:00.950325
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:05:17.471518
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:05:20.685737
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:05:23.439837
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:05:25.646292
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:05:27.759732
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 14:05:29.564265
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:13:08.049335
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:13:09.045446
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:13:10.391396
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 14:13:11.399902
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 14:13:11.853346
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 14:13:12.213842
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:13:12.988682
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:13:13.452741
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:13:14.397190
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:13:15.131102
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:13:15.835843
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:13:16.990082
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:13:18.093970
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:13:18.677339
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:13:19.918217
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:13:20.884412
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:13:22.134601
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:13:25.816324
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:13:29.149665
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:13:31.596903
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 14:13:32.317695
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:13:33.165333
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:13:35.207541
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 14:13:36.367008
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 14:13:54.341804
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:16:42.904584
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:18:59.972815
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:19:01.149450
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:19:01.925157
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:19:06.119130
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:19:52.166269
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:20:27.519018
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:21:12.610846
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:21:30.803735
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:21:37.907980
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:21:58.205338
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:22:41.173511
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:23:43.300745
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:23:54.484851
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:24:04.518026
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:24:26.553291
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:24:33.501112
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 14:24:37.631148
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:24:39.551198
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:25:02.308371
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:25:26.813368
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:25:38.625524
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:25:52.934740
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:25:53.639666
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:26:08.108789
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:26:09.077145
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:27:37.770616
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:30:04.811873
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:30:19.869660
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:30:49.476461
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:31:10.444914
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:31:57.108407
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:32:29.876879
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:36:03.011272
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:37:15.556659
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:38:34.820935
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:38:47.332945
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:39:39.308870
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:39:53.299134
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:40:07.709617
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:40:09.542168
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:40:39.347731
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:40:45.586712
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:41:48.267614
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:42:19.884586
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:42:47.604974
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:43:36.939938
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:43:44.977478
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:49:02.567718
+
+Bogdan, 127.0.0.1, /ideas/1/like/, GET, 2021-11-16 14:49:26.592894
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:49:33.516202
+
+Bogdan, 127.0.0.1, /ideas/1/like/, GET, 2021-11-16 14:50:54.942644
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:51:43.444376
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:51:45.997050
+
+Bogdan, 127.0.0.1, /ideas/1/like/, GET, 2021-11-16 14:52:05.584452
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:52:08.939614
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:52:09.829329
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:52:50.550288
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:52:51.603068
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:53:09.464011
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:53:10.324908
+
+Bogdan, 127.0.0.1, /ideas/1/like/, GET, 2021-11-16 14:57:31.559843
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:57:34.163169
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:57:35.757116
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 14:59:07.486134
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 14:59:08.572962
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:00:00.071271
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:01:28.567977
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:01:29.860692
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:02:17.062715
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:04:08.490500
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:04:10.213233
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:04:49.639815
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:04:50.590527
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:04:50.627266
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:04:52.535883
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:04:52.746866
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:04:54.183794
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:04:54.298426
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:04:58.622944
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:04:58.786402
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:05:00.789505
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:05:00.830341
+
+Bogdan, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:05:02.520650
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:05:02.560955
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:05:36.937266
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:07:00.190366
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:09:02.964281
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:09:04.975775
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:09:25.591322
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:11:15.298838
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:11:27.523386
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:11:43.499321
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:12:43.819651
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:13:21.636262
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:13:28.866072
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:13:51.149352
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:14:09.644105
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:14:28.997213
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:14:42.216102
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:15:03.150457
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:18:22.076983
+
+Bogdan, 127.0.0.1, /ideas/1/comment/, POST, 2021-11-16 15:18:24.625270
+
+Bogdan, 127.0.0.1, /ideas/1/comment/, GET, 2021-11-16 15:18:39.813556
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:18:39.853529
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:18:40.623951
+
+Bogdan, 127.0.0.1, /ideas/1/comment/, POST, 2021-11-16 15:18:42.809230
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:18:42.834092
+
+Bogdan, 127.0.0.1, /ideas/1/comment/, POST, 2021-11-16 15:18:48.345455
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:18:48.426945
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:19:48.818022
+
+Bogdan, 127.0.0.1, /ideas/1/comment/, POST, 2021-11-16 15:19:51.314739
+
+Bogdan, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:19:51.347212
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 15:20:01.017595
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 15:20:19.088104
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:20:28.665861
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 15:20:35.683501
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 15:20:36.330269
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 15:20:36.915274
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 15:20:37.586368
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:20:38.376959
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:20:39.611180
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:20:43.983337
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:20:46.024127
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 15:20:46.921288
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 15:20:48.531410
+
+, 127.0.0.1, /, GET, 2021-11-16 15:24:04.016060
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:24:04.066089
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:24:05.762097
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 15:24:07.242921
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-16 15:24:07.279936
+
+Bogdan, 127.0.0.1, /account_change_password/, POST, 2021-11-16 15:24:25.612703
+
+, 127.0.0.1, /home/, GET, 2021-11-16 15:24:27.345236
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:24:27.361642
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:24:35.418490
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 15:24:36.803594
+
+Bogdan, 127.0.0.1, /account_profile/Bogdan/, GET, 2021-11-16 15:24:40.365955
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 15:24:43.174395
+
+Bogdan, 127.0.0.1, /account_create_accounts/1/, GET, 2021-11-16 15:24:49.325122
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 15:24:49.472641
+
+Bogdan, 127.0.0.1, /account_create_accounts/1/, GET, 2021-11-16 15:25:48.646899
+
+Bogdan, 127.0.0.1, /account_create_accounts/2/, POST, 2021-11-16 15:26:39.857117
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 15:26:43.402919
+
+, 127.0.0.1, /, GET, 2021-11-16 15:26:51.524651
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:26:51.561591
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:27:10.219613
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 15:27:11.973689
+
+970801351179, 127.0.0.1, /account_change_password/, GET, 2021-11-16 15:27:12.019720
+
+970801351179, 127.0.0.1, /account_change_password/, POST, 2021-11-16 15:27:31.014250
+
+, 127.0.0.1, /home/, GET, 2021-11-16 15:27:32.131540
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:27:32.141950
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:27:41.667111
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 15:27:43.013172
+
+970801351179, 127.0.0.1, /account_change_profile/, GET, 2021-11-16 15:27:48.734944
+
+970801351179, 127.0.0.1, /account_change_profile/, POST, 2021-11-16 15:28:11.724880
+
+970801351179, 127.0.0.1, /account_profile/970801351179/, GET, 2021-11-16 15:28:15.326848
+
+970801351179, 127.0.0.1, /ideas/create/, GET, 2021-11-16 15:28:19.909540
+
+970801351179, 127.0.0.1, /ideas/create/, GET, 2021-11-16 15:28:48.432570
+
+970801351179, 127.0.0.1, /ideas/create/, POST, 2021-11-16 15:29:54.370594
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:29:58.278537
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:29:59.902495
+
+970801351179, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 15:30:00.532648
+
+970801351179, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 15:30:00.981288
+
+970801351179, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 15:30:01.341240
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:30:01.925615
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:32:29.327468
+
+970801351179, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:32:33.694867
+
+970801351179, 127.0.0.1, /ideas/1/comment/, POST, 2021-11-16 15:32:42.017809
+
+970801351179, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:32:42.045751
+
+970801351179, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:32:44.128708
+
+970801351179, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:32:44.157782
+
+970801351179, 127.0.0.1, /, GET, 2021-11-16 15:33:35.466735
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-16 15:33:48.193919
+
+Bogdan, 127.0.0.1, /account_logout/, GET, 2021-11-16 15:33:51.644162
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:33:51.715289
+
+Bogdan, 127.0.0.1, /account_login/, GET, 2021-11-16 15:34:07.625603
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-16 15:34:13.884134
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 15:34:15.457458
+
+970801351178, 127.0.0.1, /account_change_password/, GET, 2021-11-16 15:34:15.506614
+
+970801351178, 127.0.0.1, /account_change_password/, POST, 2021-11-16 15:34:33.146309
+
+, 127.0.0.1, /home/, GET, 2021-11-16 15:34:34.427853
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:34:34.437691
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:34:46.168740
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:34:53.767093
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:34:57.006883
+
+Bogdan, 127.0.0.1, /account_login/, GET, 2021-11-16 15:35:17.173246
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-16 15:35:23.819453
+
+970801351178, 127.0.0.1, /account_login/, GET, 2021-11-16 15:35:25.450889
+
+970801351178, 127.0.0.1, /account_login/, POST, 2021-11-16 15:35:48.067310
+
+970801351178, 127.0.0.1, /account_change_password/, GET, 2021-11-16 15:35:54.650719
+
+970801351178, 127.0.0.1, /account_change_password/, POST, 2021-11-16 15:36:07.627319
+
+, 127.0.0.1, /home/, GET, 2021-11-16 15:36:09.038473
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:36:09.050008
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:36:17.472723
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 15:36:18.923127
+
+970801351178, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:36:27.269592
+
+970801351178, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:36:29.084750
+
+970801351178, 127.0.0.1, /ideas/1/comment/, POST, 2021-11-16 15:36:46.301175
+
+970801351178, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:36:46.377088
+
+970801351178, 127.0.0.1, /ideas/1/like/, POST, 2021-11-16 15:36:50.502790
+
+970801351178, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:36:50.534786
+
+970801351178, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:36:53.820778
+
+970801351178, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:37:07.070893
+
+970801351178, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 15:37:31.526826
+
+970801351178, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:37:32.838238
+
+970801351178, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 15:37:33.459488
+
+970801351178, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 15:37:34.140140
+
+970801351178, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 15:37:34.749570
+
+970801351178, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 15:37:35.550203
+
+970801351178, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:37:36.133173
+
+970801351178, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:37:37.373732
+
+970801351178, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 15:37:38.380991
+
+970801351178, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 15:37:43.839258
+
+970801351178, 127.0.0.1, /ideas/create/, GET, 2021-11-16 15:37:50.972421
+
+970801351178, 127.0.0.1, /ideas/create/, POST, 2021-11-16 15:38:42.409856
+
+970801351179, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:39:07.505136
+
+970801351179, 127.0.0.1, /ideas/1/, GET, 2021-11-16 15:39:08.158883
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:39:21.489844
+
+970801351179, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:39:26.068286
+
+970801351179, 127.0.0.1, /ideas/2/comment/, POST, 2021-11-16 15:39:48.075233
+
+970801351179, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:39:48.105153
+
+970801351179, 127.0.0.1, /ideas/2/like/, POST, 2021-11-16 15:39:49.837922
+
+970801351179, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:39:49.866776
+
+970801351179, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:40:20.072952
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-16 15:40:29.663274
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:40:32.639207
+
+Bogdan, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:40:34.328217
+
+Bogdan, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:40:41.968132
+
+Bogdan, 127.0.0.1, /ideas/2/like/, POST, 2021-11-16 15:40:44.847590
+
+Bogdan, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:40:44.875647
+
+970801351179, 127.0.0.1, /ideas/2/like/, POST, 2021-11-16 15:40:46.173489
+
+970801351179, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:40:46.256878
+
+Bogdan, 127.0.0.1, /account_logout/, GET, 2021-11-16 15:40:51.977130
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 15:40:52.083733
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 15:40:55.578358
+
+970801351178, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:40:57.766274
+
+970801351178, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:40:59.558494
+
+970801351178, 127.0.0.1, /ideas/2/like/, POST, 2021-11-16 15:41:01.191881
+
+970801351178, 127.0.0.1, /ideas/2/, GET, 2021-11-16 15:41:01.218311
+
+970801351178, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:41:05.745260
+
+970801351178, 127.0.0.1, /account_change_profile/, GET, 2021-11-16 15:41:25.138938
+
+970801351178, 127.0.0.1, /account_change_profile/, POST, 2021-11-16 15:41:47.565491
+
+970801351178, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:41:50.694020
+
+970801351178, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:41:52.614717
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:41:55.432067
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:41:56.558854
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:06.197935
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:07.276481
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:08.340574
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:08.823420
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:13.750229
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:19.799974
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:20.702959
+
+970801351178, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:42:21.734994
+
+970801351179, 127.0.0.1, /ideas/create/, GET, 2021-11-16 15:42:28.847502
+
+970801351179, 127.0.0.1, /ideas/create/, POST, 2021-11-16 15:43:29.955806
+
+970801351179, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:43:48.151820
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:49.296448
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:50.359303
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:51.048167
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:51.927738
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:52.501242
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:53.014145
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:53.797672
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:54.527549
+
+970801351179, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:43:55.191119
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 15:44:11.061958
+
+970801351179, 127.0.0.1, /ideas/create/, GET, 2021-11-16 15:44:14.206606
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:44:16.454412
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:45:21.503821
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:45:23.424360
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:45:24.840587
+
+970801351179, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 15:45:27.601712
+
+970801351179, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 15:45:28.704038
+
+970801351179, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 15:45:29.497911
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:45:30.329870
+
+970801351179, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 15:45:31.191786
+
+970801351179, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 15:45:31.736829
+
+970801351179, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 15:45:32.272743
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:45:32.945818
+
+970801351179, 127.0.0.1, /ideas/3/, GET, 2021-11-16 15:45:39.128639
+
+970801351179, 127.0.0.1, /ideas/3/, GET, 2021-11-16 15:50:58.645171
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:51:30.860160
+
+970801351179, 127.0.0.1, /ideas/3/change/, GET, 2021-11-16 15:51:31.836072
+
+970801351179, 127.0.0.1, /ideas/3/change/, GET, 2021-11-16 15:51:58.074989
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:52:16.780679
+
+970801351179, 127.0.0.1, /ideas/3/change/, GET, 2021-11-16 15:52:17.338846
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:52:52.480713
+
+970801351179, 127.0.0.1, /ideas/3/change/, GET, 2021-11-16 15:52:54.365215
+
+970801351179, 127.0.0.1, /ideas/3/change/, POST, 2021-11-16 15:53:04.149648
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:53:06.621946
+
+970801351179, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:53:07.399128
+
+970801351179, 127.0.0.1, /ideas/3/change/, GET, 2021-11-16 15:54:27.049720
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 15:54:32.902253
+
+970801351179, 127.0.0.1, /list_module/, GET, 2021-11-16 15:54:34.142685
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 15:54:35.094694
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 15:54:38.724704
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:55:07.023629
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:55:08.164235
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:55:09.093002
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:55:10.054538
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:55:11.078736
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:56:33.759739
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:56:55.114674
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 15:56:56.745151
+
+Bogdan, 127.0.0.1, /account_profile/970801351179/, GET, 2021-11-16 15:56:59.151023
+
+Bogdan, 127.0.0.1, /account_profile/970801351179/, GET, 2021-11-16 15:57:02.294905
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 15:57:05.344367
+
+Bogdan, 127.0.0.1, /account_profile/970801351179/, GET, 2021-11-16 15:57:13.056811
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 15:57:15.344137
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:57:35.815882
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 15:57:36.720638
+
+Bogdan, 127.0.0.1, /account_profile/970801351179/, GET, 2021-11-16 15:57:56.194397
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 15:57:58.295395
+
+Bogdan, 127.0.0.1, /account_profile/970801351179/, GET, 2021-11-16 15:58:03.111646
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 15:58:05.376144
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 15:58:07.528260
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:58:38.383265
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:58:39.742353
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:58:40.862281
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:58:48.158771
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:59:12.985356
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:59:16.243066
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:59:17.256103
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 15:59:18.511297
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 15:59:19.711642
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:59:21.008113
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 15:59:21.774881
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 15:59:23.663720
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:59:25.329422
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 15:59:25.921224
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 15:59:26.511241
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 15:59:27.122595
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 15:59:27.993508
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:00:13.488670
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:00:19.416378
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 16:02:20.474350
+
+Bogdan, 127.0.0.1, /account_logout/, GET, 2021-11-16 16:02:25.072707
+
+, 127.0.0.1, /account_login/, GET, 2021-11-16 16:02:25.097976
+
+, 127.0.0.1, /account_login/, POST, 2021-11-16 16:02:28.321028
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:02:30.121663
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:03:08.340156
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:03:23.890976
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 16:03:28.944110
+
+970801351179, 127.0.0.1, /account_generate_passwords/, GET, 2021-11-16 16:03:37.339945
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 16:03:37.361168
+
+970801351179, 127.0.0.1, /account_export_accounts/, GET, 2021-11-16 16:03:39.738839
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-16 16:03:39.755984
+
+970801351179, 127.0.0.1, /account_change_password/, GET, 2021-11-16 16:03:41.203255
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:05:31.251753
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:05:45.724622
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:06:59.262797
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:07:39.961702
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:07:49.840246
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:07:58.976145
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:08:40.959676
+
+970801351178, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:08:43.652604
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:08:45.850687
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:09:20.756215
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:09:50.148609
+
+970801351178, 127.0.0.1, /career/, GET, 2021-11-16 16:10:13.293954
+
+970801351178, 127.0.0.1, /career/, POST, 2021-11-16 16:10:14.316159
+
+970801351178, 127.0.0.1, /career/, GET, 2021-11-16 16:11:07.902334
+
+970801351178, 127.0.0.1, /career/, GET, 2021-11-16 16:11:11.708704
+
+970801351178, 127.0.0.1, /career/, GET, 2021-11-16 16:11:16.488906
+
+970801351178, 127.0.0.1, /passages_thermometry/, GET, 2021-11-16 16:11:22.109801
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:11:22.185299
+
+970801351178, 127.0.0.1, /list_module/, GET, 2021-11-16 16:11:22.906960
+
+970801351178, 127.0.0.1, /list_module/, GET, 2021-11-16 16:11:44.133328
+
+970801351178, 127.0.0.1, /passages_thermometry/, GET, 2021-11-16 16:12:08.015187
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:12:08.039117
+
+970801351178, 127.0.0.1, /list_module/, GET, 2021-11-16 16:12:28.805315
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:12:29.822304
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:13:12.044728
+
+970801351178, 127.0.0.1, /list_module/, GET, 2021-11-16 16:14:02.174488
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:14:03.095652
+
+970801351178, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:14:16.993965
+
+970801351178, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:14:22.512088
+
+970801351178, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:14:25.255317
+
+970801351178, 127.0.0.1, /home/, GET, 2021-11-16 16:14:27.717798
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-16 16:14:42.927279
+
+Bogdan, 127.0.0.1, /list_module/, GET, 2021-11-16 16:15:04.463455
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 16:15:09.087023
+
+Bogdan, 127.0.0.1, /account_create_accounts/1/, GET, 2021-11-16 16:15:10.502058
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 16:15:24.143590
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 16:15:30.984953
+
+Bogdan, 127.0.0.1, /account_change_profile/, GET, 2021-11-16 16:15:45.265987
+
+Bogdan, 127.0.0.1, /ideas/create/, GET, 2021-11-16 16:16:41.236149
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 16:16:42.170708
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:16:43.132906
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 16:16:46.048687
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 16:16:46.680773
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 16:16:47.672819
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 16:16:48.257179
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 16:16:55.225228
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 16:17:00.529264
+
+Bogdan, 127.0.0.1, /ideas/list/All/, POST, 2021-11-16 16:17:04.842292
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 16:17:07.728006
+
+Bogdan, 127.0.0.1, /ideas/list/completed/, GET, 2021-11-16 16:17:08.297792
+
+Bogdan, 127.0.0.1, /ideas/list/during/, GET, 2021-11-16 16:17:08.641731
+
+Bogdan, 127.0.0.1, /ideas/list/aborted/, GET, 2021-11-16 16:17:08.993593
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:17:09.633401
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:18:53.210395
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:19:38.463759
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:20:01.298356
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:20:32.618772
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:20:37.011712
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:20:37.991627
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:20:38.632871
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:20:40.202977
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:22:09.316767
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:22:36.162419
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:22:56.006414
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:23:02.969039
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:23:09.934099
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:23:10.734824
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:23:13.820204
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:23:15.436153
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:23:16.436196
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 16:23:17.108878
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:23:18.163287
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:23:59.838259
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:24:00.731975
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:24:01.531206
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:24:02.331657
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:24:02.992875
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:24:04.331452
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:24:05.153779
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:24:05.779610
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:25:12.666281
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:25:30.052024
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:25:35.811002
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:25:36.489902
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:25:36.870929
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:25:37.167093
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:26:08.061209
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:26:13.108001
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:26:13.746194
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:27:06.291845
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:27:29.573303
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:27:50.117147
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:28:09.604703
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:28:25.421494
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:23.460837
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:32.914763
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:42.851959
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:43.791613
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:49.002603
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:49.735496
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:50.059565
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:52.628139
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:29:53.117932
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:30:09.956477
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:30:11.088824
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:30:19.477723
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:30:46.587941
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:30:54.597476
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:30:59.566827
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:31:08.292060
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:31:23.276660
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:31:33.310134
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:31:34.376036
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:08.417415
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:12.129534
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:23.741934
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:25.036433
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:33.932852
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:35.097470
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:39.556384
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:40.592637
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:41.334655
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:41.556370
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:32:45.475998
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:33:00.461336
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:33:17.034203
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:33:18.129663
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:33:31.454850
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:33:42.022327
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:33:43.146368
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:33:54.652989
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:34:10.016523
+
+Bogdan, 127.0.0.1, /account_profile/970801351179/, GET, 2021-11-16 16:34:15.544556
+
+Bogdan, 127.0.0.1, /account_change_profile/, GET, 2021-11-16 16:34:19.298212
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 16:34:20.976871
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:34:27.671456
+
+Bogdan, 127.0.0.1, /account_change_profile/, GET, 2021-11-16 16:34:32.361521
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:35:17.183946
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:35:18.955509
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:35:46.935144
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:36:05.407437
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:36:18.258893
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:36:22.886523
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:36:27.649030
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:36:28.750196
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:36:29.195386
+
+Bogdan, 127.0.0.1, /account_profile/970801351178/, GET, 2021-11-16 16:36:29.464329
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 16:36:40.664440
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 16:36:47.602396
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 16:36:50.146035
+
+Bogdan, 127.0.0.1, /ideas/list/All/, GET, 2021-11-16 16:36:51.665445
+
+Bogdan, 127.0.0.1, /ideas/ratings/, GET, 2021-11-16 16:36:56.162076
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:36:57.567907
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:36:58.359999
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:36:59.041033
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:36:59.640717
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:37:00.193098
+
+Bogdan, 127.0.0.1, /ideas/ratings/, POST, 2021-11-16 16:37:00.607521
+
+Bogdan, 127.0.0.1, /ideas/list/all/, GET, 2021-11-16 16:37:02.672115
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-16 16:37:06.249276
+
+, 192.168.1.68, /, GET, 2021-11-16 16:41:25.353866
+
+, 192.168.1.68, /account_login/, GET, 2021-11-16 16:41:25.429816
+
+, 192.168.1.68, /, GET, 2021-11-16 16:43:24.742017
+
+, 192.168.1.68, /account_login/, GET, 2021-11-16 16:43:24.758227
+
+, 192.168.1.68, /account_login/, POST, 2021-11-16 16:43:28.736158
+
+, 192.168.1.68, /account_login/, POST, 2021-11-16 16:43:34.232247
+
+, 192.168.1.68, /account_login/, POST, 2021-11-16 16:43:39.600155
+
+Bogdan, 192.168.1.68, /, GET, 2021-11-16 16:43:50.606535
+
+Bogdan, 192.168.1.68, /account_logout/, GET, 2021-11-16 16:43:59.556817
+
+, 192.168.1.68, /account_login/, GET, 2021-11-16 16:43:59.623278
+
+, 192.168.1.68, /account_login/, POST, 2021-11-16 16:44:02.062946
+
+Bogdan, 192.168.1.68, /account_create_accounts/1/, GET, 2021-11-16 16:44:05.664781
+
+Bogdan, 192.168.1.68, /account_create_accounts/2/, POST, 2021-11-16 16:44:40.714921
+
+Bogdan, 192.168.1.68, /, GET, 2021-11-16 16:45:09.353119
+
+Bogdan, 192.168.1.68, /account_logout/, GET, 2021-11-16 16:45:14.604391
+
+, 192.168.1.68, /account_login/, GET, 2021-11-16 16:45:14.631443
+
+, 192.168.1.68, /account_login/, POST, 2021-11-16 16:45:21.503752
+
+970801351177, 192.168.1.68, /home/, GET, 2021-11-16 16:45:23.361653
+
+970801351177, 192.168.1.68, /account_change_password/, GET, 2021-11-16 16:45:23.441545
+
+970801351177, 192.168.1.68, /account_change_password/, POST, 2021-11-16 16:45:35.467923
+
+, 192.168.1.68, /home/, GET, 2021-11-16 16:45:36.812718
+
+, 192.168.1.68, /account_login/, GET, 2021-11-16 16:45:36.825709
+
+, 192.168.1.68, /account_login/, POST, 2021-11-16 16:45:44.800838
+
+970801351177, 192.168.1.68, /home/, GET, 2021-11-16 16:45:46.362789
+
+970801351177, 192.168.1.68, /account_recover_password/0/, GET, 2021-11-16 16:45:51.356390
+
+970801351177, 192.168.1.68, /account_recover_password/0/, POST, 2021-11-16 16:45:59.458331
+
+970801351177, 192.168.1.68, /account_change_password/, GET, 2021-11-16 16:46:13.562714
+
+970801351177, 192.168.1.68, /account_change_profile/, GET, 2021-11-16 16:46:18.409804
+
+970801351177, 192.168.1.68, /account_change_profile/, POST, 2021-11-16 16:46:42.697364
+
+970801351177, 192.168.1.68, /account_profile/970801351177/, GET, 2021-11-16 16:46:48.082159
+
+970801351177, 192.168.1.68, /ideas/create/, GET, 2021-11-16 16:46:55.909050
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:46:57.148929
+
+970801351177, 192.168.1.68, /ideas/ratings/, GET, 2021-11-16 16:46:58.286088
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:47:05.620921
+
+970801351177, 192.168.1.68, /ideas/3/, GET, 2021-11-16 16:47:20.421047
+
+970801351177, 192.168.1.68, /ideas/3/like/, POST, 2021-11-16 16:47:22.453877
+
+970801351177, 192.168.1.68, /ideas/3/, GET, 2021-11-16 16:47:22.483855
+
+970801351177, 192.168.1.68, /ideas/3/like/, POST, 2021-11-16 16:47:25.308021
+
+970801351177, 192.168.1.68, /ideas/3/, GET, 2021-11-16 16:47:25.361149
+
+970801351177, 192.168.1.68, /ideas/3/comment/, POST, 2021-11-16 16:47:34.716610
+
+970801351177, 192.168.1.68, /ideas/3/, GET, 2021-11-16 16:47:34.743584
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:47:43.732087
+
+970801351177, 192.168.1.68, /ideas/ratings/, GET, 2021-11-16 16:47:45.332595
+
+970801351177, 192.168.1.68, /ideas/ratings/, POST, 2021-11-16 16:47:48.489893
+
+970801351177, 192.168.1.68, /ideas/ratings/, POST, 2021-11-16 16:47:53.498820
+
+970801351177, 192.168.1.68, /ideas/list/all/, GET, 2021-11-16 16:47:57.836524
+
+970801351177, 192.168.1.68, /ideas/list/completed/, GET, 2021-11-16 16:48:02.443567
+
+970801351177, 192.168.1.68, /ideas/list/during/, GET, 2021-11-16 16:48:05.492477
+
+970801351177, 192.168.1.68, /ideas/list/aborted/, GET, 2021-11-16 16:48:07.869926
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:48:10.453370
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:48:11.579948
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:48:13.493423
+
+970801351177, 192.168.1.68, /ideas/list/All/, POST, 2021-11-16 16:48:18.254797
+
+970801351177, 192.168.1.68, /ideas/list/All/, POST, 2021-11-16 16:48:22.315091
+
+970801351177, 192.168.1.68, /ideas/list/All/, POST, 2021-11-16 16:48:26.483445
+
+970801351177, 192.168.1.68, /ideas/create/, GET, 2021-11-16 16:48:29.284928
+
+970801351177, 192.168.1.68, /ideas/create/, POST, 2021-11-16 16:49:07.158167
+
+970801351177, 192.168.1.68, /home/, GET, 2021-11-16 16:49:10.419879
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:49:25.920290
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:49:34.203278
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:49:41.599157
+
+970801351177, 192.168.1.68, /ideas/4/, GET, 2021-11-16 16:49:43.100799
+
+970801351177, 192.168.1.68, /ideas/4/comment/, POST, 2021-11-16 16:49:50.022155
+
+970801351177, 192.168.1.68, /ideas/4/, GET, 2021-11-16 16:49:50.052101
+
+970801351177, 192.168.1.68, /ideas/4/like/, POST, 2021-11-16 16:49:57.575948
+
+970801351177, 192.168.1.68, /ideas/4/, GET, 2021-11-16 16:49:57.606884
+
+970801351177, 192.168.1.68, /ideas/list/All/, GET, 2021-11-16 16:50:00.397754
+
+970801351177, 192.168.1.68, /ideas/ratings/, GET, 2021-11-16 16:50:01.182042
+
+970801351177, 192.168.1.68, /ideas/list/all/, GET, 2021-11-16 16:50:11.085643
+
+970801351177, 192.168.1.68, /ideas/list/during/, GET, 2021-11-16 16:50:13.022555
+
+970801351177, 192.168.1.68, /ideas/4/, GET, 2021-11-16 16:50:16.987972
+
+970801351177, 192.168.1.68, /home/, GET, 2021-11-16 16:50:26.622234
