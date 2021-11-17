@@ -1,10 +1,69 @@
 from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from .models import ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, CommentRationalModel, \
+from .models import ExampleModel, ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, \
+    CommentRationalModel, \
     LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, ContactModel, \
     DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile, LoggingActions, \
     LoggingErrors, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel
+
+
+class ExampleModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    # Поля, которые нужно отображать в заголовке, на панели администратора
+    list_display = ('id',
+                    'boolean_field',
+                    'char_field', 'text_field',
+                    'slug_field', 'email_field', 'url_field', 'ipaddress_field',
+                    'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
+                    'datetime_field', 'date_field', 'time_field', 'duration_field',
+                    'file_field', 'image_field',
+                    'foreignkey',
+                    'binary_field')
+
+    # Поля, которые нужно отображать при фильтрации, на панели администратора
+    list_filter = ('id',
+                   'boolean_field',
+                   'char_field', 'text_field',
+                   'slug_field', 'email_field', 'url_field', 'ipaddress_field',
+                   'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
+                   'datetime_field', 'date_field', 'time_field', 'duration_field',
+                   'file_field', 'image_field',
+                   'foreignkey',
+                   'binary_field')
+
+    # Поля, которые нужно отображать при создании модели, на панели администратора
+    # fields          = ('id',)
+
+    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
+    fieldsets = (
+        ('boolean', {'fields': ('boolean_field',)}),
+        ('string', {'fields': ('char_field', 'text_field',)}),
+        ('specific string', {'fields': ('slug_field', 'email_field', 'url_field', 'ipaddress_field')}),
+        ('integer and float', {'fields': ('integer_field', 'big_integer_field', 'positive_integer_field',
+                                          'float_field', 'decimal_field')}),
+        ('date and time', {'fields': ('datetime_field', 'date_field', 'time_field', 'duration_field',)}),
+        ('file', {'fields': ('file_field', 'image_field')}),
+        ('link', {'fields': ('foreignkey',)}),
+        ('binary', {'fields': ('binary_field',)}),
+    )
+
+    # Поля, которые не нужно отображать при создании модели, на панели администратора |
+    # exclude         = ['id',]
+
+    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
+    search_fields = ['id',
+                     'boolean_field',
+                     'char_field', 'text_field',
+                     'slug_field', 'email_field', 'url_field', 'ipaddress_field',
+                     'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
+                     'datetime_field', 'date_field', 'time_field', 'duration_field',
+                     'file_field', 'image_field',
+                     'foreignkey',
+                     'binary_field']
+
+    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
+    # inlines         = [RationalModelInline]
 
 
 class ProfileModelAdmin(admin.ModelAdmin):
@@ -502,27 +561,44 @@ class ApplicationComponentModelAdmin(admin.ModelAdmin):
     # inlines         = [RationalModelInline]
 
 
+# main
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Админка'  # default: "Django site admin"
-admin.site.register(AccountTemplateModel, AccountTemplateModelAdmin)
-admin.site.register(DocumentModel, DocumentModelAdmin)
-admin.site.register(CityModel)
-admin.site.register(CommentModel)
-admin.site.register(SmsModel)
-admin.site.register(MessageModel, MessageModelAdmin)
-admin.site.register(ContactModel, ContactModelAdmin)
-admin.site.register(CategoryRationalModel, CategoryRationalAdmin)
-admin.site.register(CommentRationalModel, CommentRationalAdmin)
-admin.site.register(LikeRationalModel, LikeRationalAdmin)
-admin.site.register(RationalModel, RationalModelAdmin)
-admin.site.register(EmailModel)
-admin.site.register(ApplicationModuleModel, ApplicationModuleModelAdmin)
-admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
+
+# example
+admin.site.register(ExampleModel, ExampleModelAdmin)
+
+# profile
 admin.site.register(Profile, ProfileModelAdmin)
+
+# logging
 admin.site.register(LoggingActions, LoggingActionsModelAdmin)
 admin.site.register(LoggingErrors, LoggingErrorsModelAdmin)
+
+# module
+admin.site.register(ApplicationModuleModel, ApplicationModuleModelAdmin)
+admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
+
+# ideas
 admin.site.register(IdeasModel, BankIdeasModelAdmin)
 admin.site.register(IdeasCategoryModel, IdeasCategoryModelAdmin)
 admin.site.register(IdeasCommentModel, IdeasCommentModelAdmin)
 admin.site.register(IdeasLikeModel, IdeasLikeModelAdmin)
+
+# rational
+admin.site.register(CategoryRationalModel, CategoryRationalAdmin)
+admin.site.register(CommentRationalModel, CommentRationalAdmin)
+admin.site.register(LikeRationalModel, LikeRationalAdmin)
+admin.site.register(RationalModel, RationalModelAdmin)
+
+# extra
+admin.site.register(AccountTemplateModel, AccountTemplateModelAdmin)
+admin.site.register(DocumentModel, DocumentModelAdmin)
+admin.site.register(MessageModel, MessageModelAdmin)
+admin.site.register(ContactModel, ContactModelAdmin)
+
+admin.site.register(CityModel)
+admin.site.register(CommentModel)
+admin.site.register(SmsModel)
+admin.site.register(EmailModel)

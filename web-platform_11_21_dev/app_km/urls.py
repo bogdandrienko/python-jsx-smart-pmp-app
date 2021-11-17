@@ -12,12 +12,14 @@ urlpatterns = [
     # All access
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
+    path('example/', views.example, name='example'),
+
 
     #  account
     # no check access (recursive)
     path('account_login/', views.account_login, name='account_login'),
     path('account_change_password/', views.account_change_password, name='account_change_password'),
-    path('account_recover_password/<int:type_int>/', views.account_recover_password, name='account_recover_password'),
+    path('account_recover_password/<slug:type_slug>/', views.account_recover_password, name='account_recover_password'),
     # All access
     path('account_logout/', views.account_logout, name='account_logout'),
     # User access
@@ -115,7 +117,7 @@ urlpatterns = [
     path('react/', views.react, name='react'),
 
     # bootstrap
-    path('bootstrap/example', views.example, name='example'),
+    path('bootstrap/bootstrap_example', views.bootstrap_example, name='bootstrap_example'),
     path('bootstrap/album', views.album, name='example_album'),
     path('bootstrap/blog', views.blog, name='example_blog'),
     path('bootstrap/carousel', views.carousel, name='example_carousel'),

@@ -248,3 +248,4 @@ HINT:  Оператор с данными именем и типами аргументов не найден. Возможно, вам сл
 15:10:38 : rational_create: RationalModel() got an unexpected keyword argument 'rational_uid_registrated'
 18:51:42 : rational_create: User matching query does not exist.
 18:52:58 : rational_create: User matching query does not exist.
+13:11:38 : rational_list: No CategoryRationalModel matches the given query.

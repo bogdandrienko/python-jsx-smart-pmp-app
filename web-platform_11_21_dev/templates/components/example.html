@@ -1,0 +1,71 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Шаблон
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container-fluid mx-auto text-center d-block">
+
+{% if result %}
+
+    {% include 'components/success.html' %}
+
+    {% if data %}
+
+        {% include 'components/table.html' %}
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+{% else %}
+
+    {% if form_1 %}
+
+        <div class="text-white rounded bg-dark">
+            <h1 class="display-6 fst-italic">Шаблон</h1>
+            <p class="text-secondary">Содержит форму с максимом вариаций и полей</p>
+            <p class="display-6">Ваш "идентификатор" пользователя: "{{ request.user.username }}"</p>
+        </div>
+
+        <form class="form-control" action="{% url 'example' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_1 }}
+            <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+        </form>
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+{% endif %}
+
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

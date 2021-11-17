@@ -20,14 +20,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
-from .forms import CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
-    NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
-    SmsForm, GeoForm, ChangePasswordForm, BankIdeasForm
-from .models import RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
+from .service import DjangoClass, PaginationClass, HttpRaiseExceptionClass
+from .models import ExampleModel, RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, \
     DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, \
     IdeasLikeModel, IdeasCommentModel
-from .service import DjangoClass, PaginationClass, HttpRaiseExceptionClass
+from .forms import ExampleForm, CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
+    NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
+    SmsForm, GeoForm, ChangePasswordForm, BankIdeasForm
 from .utils import ExcelClass, LoggingClass, create_encrypted_password, link_callback, get_career, \
     find_near_point, get_vector_arr, generate_way, pyodbc_connect, decrypt_text_with_hash, create_arr_table
 
@@ -54,6 +54,41 @@ def home(request):
     return render(request, 'components/home.html')
 
 
+# example
+def example(request):
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+
+    # try:
+    if True:
+        result = False
+        data = False
+        if request.method == 'POST':
+            result = True
+            data = [
+                ['Заголовок_1', 'Заголовок_2'],
+                [
+                    ['Тело_1_1', 'Тело_1_2'],
+                    ['Тело_2_1', 'Тело_2_2'],
+                    ['Тело_3_1', 'Тело_3_2'],
+                 ]
+            ]
+        context = {
+            'result': result,
+            'data': data,
+            'form_1': ExampleForm,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     # HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
+    #     context = {
+    #         'result': False,
+    #         'data' : False,
+    #         'form_1': False,
+    #     }
+    return render(request, 'components/example.html', context)
+
+
 #  account
 # no check access (recursive)
 def account_login(request):
@@ -62,22 +97,22 @@ def account_login(request):
 
     try:
         result = False
+        form_1 = AuthenticationForm(data=request.POST)
         if request.method == 'POST':
-            form = AuthenticationForm(data=request.POST)
-            if form.is_valid():
-                username = request.POST['username']
-                password = request.POST['password']
-                user = authenticate(username=username, password=password)
+            if form_1.is_valid():
+                user = authenticate(
+                    username=DjangoClass.RequestClass.get_value(request, "username"),
+                    password=DjangoClass.RequestClass.get_value(request, "password")
+                )
                 if user:
                     login(request, user)
                     result = True
         context = {
-            'form_1': AuthenticationForm(data=request.POST),
+            'form_1': form_1,
             'result': result
         }
     except Exception as error:
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        # HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
         context = {
             'form_1': False,
             'result': False
@@ -95,22 +130,19 @@ def account_change_password(request):
         if request.method == 'POST':
             user = User.objects.get(username=request.user.username)
             # User password data
-            password1 = str(request.POST.get('password1')).strip()
-            password2 = str(request.POST.get('password2')).strip()
-            if password1 and password2 and password1 == password2:
-                user.profile.password = password1
-                user.password = password1
-                user.set_password(password1)
+            password_1 = DjangoClass.RequestClass.get_value(request, "password_1")
+            password_2 = DjangoClass.RequestClass.get_value(request, "password_2")
+            if password_1 == password_2 != '':
+                user.profile.password = password_1
+                user.password = password_1
+                user.set_password(password_1)
             # Third data account
-            email = str(request.POST.get('email')).strip()
-            if email:
-                user.profile.email = email
-            secret_question = str(request.POST.get('secret_question')).strip()
-            if secret_question:
-                user.profile.secret_question = secret_question
-            secret_answer = str(request.POST.get('secret_answer')).strip()
-            if secret_answer:
-                user.profile.secret_answer = secret_answer
+            if DjangoClass.RequestClass.get_value(request, "email"):
+                user.profile.email = DjangoClass.RequestClass.get_value(request, "email")
+            if DjangoClass.RequestClass.get_value(request, "secret_question"):
+                user.profile.secret_question = DjangoClass.RequestClass.get_value(request, "secret_question")
+            if DjangoClass.RequestClass.get_value(request, "secret_answer"):
+                user.profile.secret_answer = DjangoClass.RequestClass.get_value(request, "secret_answer")
             user.save()
             result = True
         context = {
@@ -126,7 +158,7 @@ def account_change_password(request):
     return render(request, 'account/account_change_password.html', context)
 
 
-def account_recover_password(request, type_int):
+def account_recover_password(request, type_slug):
     # logging
     DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
 
@@ -136,34 +168,27 @@ def account_recover_password(request, type_int):
         result = False
         data = None
         if request.method == 'POST':
-            if type_int == 0:
-                username = request.POST.get('username')
+            user = User.objects.get(username=DjangoClass.RequestClass.get_value(request, "username"))
+            if type_slug.lower() == 'none':
                 try:
-                    user = User.objects.get(username=username)
                     form_1 = False
                     data = user
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            elif type_int == 1:
-                print('recover_answer')
-                username = request.POST.get('username')
+            elif type_slug.lower() == 'secret_answer':
                 try:
-                    user = User.objects.get(username=username)
-                    secret_answer = request.POST.get('secret_answer')
-                    password1 = request.POST.get('password1')
-                    password2 = request.POST.get('password2')
-                    if str(user.profile.secret_answer).lower() == str(secret_answer).lower() and password1 == password2:
+                    secret_answer = DjangoClass.RequestClass.get_value(request, "secret_answer")
+                    password1 = DjangoClass.RequestClass.get_value(request, "password1")
+                    password2 = DjangoClass.RequestClass.get_value(request, "password2")
+                    if user.profile.secret_answer.lower() == secret_answer.lower() and password1 == password2:
                         user.profile.password = password1
                         user.set_password(password1)
                         user.save()
                         result = True
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            elif type_int == 2:
-                print('recover_email')
-                username = request.POST.get('username')
+            elif type_slug.lower() == 'email':
                 try:
-                    user = User.objects.get(username=username)
                     password = user.profile.password
                     email = user.profile.email
                     if password and email:
@@ -174,7 +199,6 @@ def account_recover_password(request, type_int):
                         if subject and message and to_email:
                             try:
                                 send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
-                                print('send email')
                                 result = True
                             except Exception as error:
                                 DjangoClass.LoggingClass.logging_errors(request=request, error=error)
@@ -190,6 +214,7 @@ def account_recover_password(request, type_int):
     #     context = {
     #         'form_1': False,
     #         'result': False
+    #         'data': False
     #     }
     return render(request, 'account/account_recover_password.html', context)
 
@@ -220,18 +245,14 @@ def account_change_profile(request):
         if request.method == 'POST':
             user = User.objects.get(username=request.user.username)
             # Second data account
-            education = str(request.POST.get('education')).strip()
-            if education:
-                user.profile.education = education
-            achievements = str(request.POST.get('achievements')).strip()
-            if achievements:
-                user.profile.achievements = achievements
-            biography = str(request.POST.get('biography')).strip()
-            if biography:
-                user.profile.biography = biography
-            image_avatar = request.FILES.get('image_avatar')
-            if image_avatar:
-                user.profile.image_avatar = image_avatar
+            if DjangoClass.RequestClass.get_value(request, "education"):
+                user.profile.education = DjangoClass.RequestClass.get_value(request, "education")
+            if DjangoClass.RequestClass.get_value(request, "achievements"):
+                user.profile.achievements = DjangoClass.RequestClass.get_value(request, "achievements")
+            if DjangoClass.RequestClass.get_value(request, "biography"):
+                user.profile.biography = DjangoClass.RequestClass.get_value(request, "biography")
+            if DjangoClass.RequestClass.get_file(request, 'image_avatar'):
+                user.profile.image_avatar = DjangoClass.RequestClass.get_file(request, 'image_avatar')
             user.save()
             result_form = True
         context = {
@@ -870,30 +891,27 @@ def ideas_create(request):  # create idea
 
     # try:
     if True:
-        data = None
         result_form = False
         if request.method == 'POST':
-            user = User.objects.get(username=request.user.username)
-            name = request.POST["name"]
-            category = IdeasCategoryModel.objects.get(id=request.POST["category"])
-            short_description = request.POST["short_description"]
-            long_description = request.POST["long_description"]
-            image = request.FILES["image"]
-            document = request.FILES["document"]
             IdeasModel.objects.create(
-                user=user, name=name, category=category, short_description=short_description, long_description=
-                long_description, image=image, document=document
+                user=User.objects.get(username=request.user.username),
+                name=DjangoClass.RequestClass.get_value(request, "name"),
+                category=IdeasCategoryModel.objects.get(id=DjangoClass.RequestClass.get_value(request, "category")),
+                short_description=DjangoClass.RequestClass.get_value(request, "short_description"),
+                long_description=DjangoClass.RequestClass.get_value(request, "long_description"),
+                image=DjangoClass.RequestClass.get_file(request, "image"),
+                document=DjangoClass.RequestClass.get_file(request, "document")
             )
             result_form = True
         context = {
             'form_1': BankIdeasForm,
-            'data': data,
             'result_form': result_form
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'data': False
+    #         'form_1': False,
+    #         'result_form': False
     #     }
     return render(request, 'ideas/ideas_create.html', context)
 
@@ -906,14 +924,17 @@ def ideas_list(request, category_slug='All'):  # list ideas
     # try:
     if True:
         if request.method == 'POST':
-            search = str(request.POST['search_text'])
-            ideas = IdeasModel.objects.filter(name__icontains=search).order_by('-id')
+            ideas = IdeasModel.objects.filter(
+                name__icontains=DjangoClass.RequestClass.get_value(request, "search_text")
+            ).order_by('-id')
         else:
-            if str(category_slug).lower() == 'all':
+            if category_slug.lower() == 'all':
                 ideas = IdeasModel.objects.filter(status=True).order_by('-id')
             else:
-                ideas = IdeasModel.objects.filter(status=True, category=IdeasCategoryModel.objects.get(
-                    category_slug=category_slug))
+                ideas = IdeasModel.objects.filter(
+                    status=True,
+                    category=IdeasCategoryModel.objects.get(category_slug=category_slug)
+                )
 
         page = PaginationClass.paginate(request=request, objects=ideas, num_page=2)
         category = IdeasCategoryModel.objects.order_by('id')
@@ -924,7 +945,8 @@ def ideas_list(request, category_slug='All'):  # list ideas
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'data': False
+    #         'page': False,
+    #         'category': False
     #     }
     return render(request, 'ideas/ideas_list.html', context)
 
@@ -1009,11 +1031,11 @@ def ideas_comment(request, ideas_int=0):  # comment
                                              comment_text=request.POST['comment_text'])
         else:
             pass
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'data': False
-    #     }
+        # except Exception as error:
+        #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        #     context = {
+        #         'data': False
+        #     }
         return redirect(reverse('ideas_view', args=(ideas_int,)))
 
 
@@ -1038,11 +1060,11 @@ def ideas_like(request, ideas_int=0):  # likes
                 IdeasLikeModel.objects.get(like_author=user, like_idea=idea, like_status=True).delete()
             except Exception as ex:
                 pass
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'data': False
-    #     }
+        # except Exception as error:
+        #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        #     context = {
+        #         'data': False
+        #     }
         return redirect(reverse('ideas_view', args=(idea.id,)))
 
 
@@ -2356,7 +2378,7 @@ def react(request):
 
 
 #  bootstrap
-def example(request):
+def bootstrap_example(request):
     return render(request, 'bootstrap/example.html')
 
 

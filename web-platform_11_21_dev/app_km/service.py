@@ -3,6 +3,7 @@ import random
 
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import logout
+from django.core.handlers.wsgi import WSGIRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
 from django.shortcuts import redirect
@@ -101,7 +102,8 @@ class DjangoClass:
             request_path = request.path
             request_method = request.method
             datetime_now = datetime.datetime.now()
-            LoggingActions.objects.create(username=username, ip=ip, request_path=request_path, request_method=request_method)
+            LoggingActions.objects.create(username=username, ip=ip, request_path=request_path,
+                                          request_method=request_method)
             text = [username, ip, request_path, request_method, datetime_now]
             string = ''
             for val in text:
@@ -267,7 +269,6 @@ class DjangoClass:
                 for i in range(1, length + 1):
                     password += random.choice(chars)
                 return password
-
 
         class UserProfileClass:
             """
@@ -494,6 +495,29 @@ class DjangoClass:
                 return False
             except Exception as ex:
                 return False
+
+    class RequestClass:
+        @staticmethod
+        def get_value(request: WSGIRequest, key: str, none_is_error=False, strip=True):
+            if none_is_error:
+                # If key not have is Exception Error
+                value = request.POST[key]
+            else:
+                # If key not have value is None
+                value = request.POST.get(key)
+            if strip:
+                value.strip()
+            return value
+
+        @staticmethod
+        def get_file(request: WSGIRequest, key: str, none_is_error=False):
+            if none_is_error:
+                # If key not have is Exception Error
+                file = request.FILES[key]
+            else:
+                # If key not have value is None
+                file = request.FILES.get(key)
+            return file
 
 
 class PaginationClass:

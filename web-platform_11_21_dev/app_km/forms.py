@@ -6,8 +6,29 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import FileExtensionValidator, MinValueValidator, MaxValueValidator, MinLengthValidator, \
     MaxLengthValidator
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from .models import Profile, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, DocumentModel, \
+from .models import ExampleModel, Profile, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, \
+    DocumentModel, \
     MessageModel, SmsModel, ArticleModel, CityModel, IdeasModel, IdeasCategoryModel
+
+
+# Example
+class ExampleForm(forms.Form):
+    """
+    Форма с максимумом вариаций разных параметров и полей
+    """
+    name = forms.CharField(
+        label='Название',
+        widget=forms.TextInput(
+            attrs={'type': 'text', 'name': 'name', 'placeholder': '', 'class': 'form-control', 'value': '',
+                   'required': ''}
+        ),
+        required=True
+    )
+
+    class Meta:
+        model = ExampleModel
+        # fields = ('password_1', 'password_2', 'email', 'secret_question', 'secret_answer')
+        fields = '__all__'
 
 
 # Account
@@ -49,10 +70,33 @@ class CreateUserForm(UserCreationForm):
                   'position', 'category')
 
 
-class ChangePasswordForm(UserCreationForm):
+class ChangePasswordForm(forms.Form):
     """
     Change Password Form
     """
+    # Main data account
+    password_1 = forms.CharField(
+        label='Новый пароль:',
+        widget=forms.PasswordInput(
+            attrs={'type': 'password', 'name': 'password_1', 'placeholder': '', 'class': 'form-control', 'value': '',
+                   'required': ''}
+        ),
+        min_length=8,
+        max_length=16,
+        validators=[MinLengthValidator(8), MaxLengthValidator(16), ],
+        required=True
+    )
+    password_2 = forms.CharField(
+        label='Повторите новый пароль:',
+        widget=forms.PasswordInput(
+            attrs={'type': 'password', 'name': 'password_2', 'placeholder': '', 'class': 'form-control', 'value': '',
+                   'required': ''}
+        ),
+        min_length=8,
+        max_length=16,
+        validators=[MinLengthValidator(8), MaxLengthValidator(16), ],
+        required=True
+    )
     # Third data account
     email = forms.EmailField(
         label='Электронная почта', required=True,
@@ -76,8 +120,8 @@ class ChangePasswordForm(UserCreationForm):
     )
 
     class Meta:
-        model = User
-        fields = ('password1', 'password2', 'email', 'secret_question', 'secret_answer')
+        model = Profile
+        fields = ('password_1', 'password_2', 'email', 'secret_question', 'secret_answer')
 
 
 class ChangeUserForm(forms.Form):
@@ -198,7 +242,7 @@ class BankIdeasForm(forms.Form):
     image = forms.ImageField(
         label="картинка к идеи", widget=forms.ClearableFileInput(
             attrs={'type': 'file', 'name': 'image', 'class': 'form-control'}),
-        required=False
+        required=False, allow_empty_file=True
     )
     document = forms.FileField(
         label="документ к идеи", widget=forms.ClearableFileInput(

@@ -45,22 +45,16 @@
                                     <hr class="dropdown-divider text-light">
                                 </li>
                                 <li>
-                                    <h6 class="dropdown-header">Шаблоны</h6>
-                                    <a class="dropdown-item" href="{% url 'news' %}">app_news</a>
-                                    <a class="dropdown-item" href="{% url 'react' %}">app_react</a>
-                                    <a class="dropdown-item" href="{% url 'example' %}">app_bootstrap_examples</a>
-                                    <a class="dropdown-item" href="{% url 'chat' %}">app_chat</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider text-light">
-                                </li>
-                                <li>
                                     <h6 class="dropdown-header">Экстра</h6>
                                     <a class="dropdown-item" href="{% url 'email' %}">Электронная почта: общий список</a>
                                     <a class="dropdown-item" href="{% url 'message' %}">Сообщения: общий список</a>
                                     <a class="dropdown-item" href="{% url 'documentation' %}">Документация: общий список</a>
                                     <a class="dropdown-item" href="{% url 'contact' %}">Контакты: общий список</a>
                                     <a class="dropdown-item" href="{% url 'weather' %}">Погода: общий список</a>
+                                    <a class="dropdown-item" href="{% url 'news' %}">app_news</a>
+                                    <a class="dropdown-item" href="{% url 'react' %}">app_react</a>
+                                    <a class="dropdown-item" href="{% url 'bootstrap_example' %}">app_bootstrap_examples</a>
+                                    <a class="dropdown-item" href="{% url 'chat' %}">app_chat</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">
@@ -97,6 +91,13 @@
                                 <li>
                                     <h6 class="dropdown-header">Основной функционал</h6>
                                     <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрирования</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider text-light">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Экстра</h6>
+                                    <a class="dropdown-item" href="{% url 'example' %}">Шаблоны</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider text-light">
@@ -212,7 +213,7 @@
                                         <a class="dropdown-item" href="#">Изменить пароль [ Вы не вошли в аккаунт ]</a>
                                     {% endif %}
                                     {% if request.user.is_authenticated %}
-                                        <a class="dropdown-item" href="{% url 'account_recover_password' 0 %}">Восстановить пароль</a>
+                                        <a class="dropdown-item" href="{% url 'account_recover_password' 'None' %}">Восстановить пароль</a>
                                     {% else %}
                                         <a class="dropdown-item" href="#">Восстановить пароль [ Вы не вошли в аккаунт ]</a>
                                     {% endif %}
