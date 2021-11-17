@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django import forms
 from django.forms import ModelForm, TextInput
@@ -16,14 +17,405 @@ class ExampleForm(forms.Form):
     """
     Форма с максимумом вариаций разных параметров и полей
     """
-    name = forms.CharField(
+    field = forms.CharField(
+        required=True,
         label='Название',
+        initial='',
         widget=forms.TextInput(
             attrs={'type': 'text', 'name': 'name', 'placeholder': '', 'class': 'form-control', 'value': '',
                    'required': ''}
         ),
-        required=True
+        help_text='help_text',
+        error_messages={'required': 'Please enter your name'},
+        validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
+        localize=False,
+        disabled=False,
+
+
+
+        min_length=0,
+        max_length=16,
     )
+
+    boolean_field = forms.BooleanField(
+        widget=forms.CheckboxInput(
+            attrs={'type': 'text',
+                   'name': 'name',
+                   'placeholder': '',
+                   'class': 'form-control',
+                   'value': '',
+                   'required': ''}
+        ),
+    )
+
+    # name = forms.CharField(
+    #     label='Название',
+    #     widget=forms.TextInput(
+    #         attrs={'type': 'text', 'name': 'name', 'placeholder': '', 'class': 'form-control', 'value': '',
+    #                'required': ''}
+    #     ),
+    #     required=True
+    # )
+
+    class Example:
+        boolean_field = models.BooleanField(
+            db_column='boolean_field',
+            db_index=True,
+            db_tablespace='boolean_field_tablespace',
+            primary_key=False,
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=False,
+            help_text='<em>Значение правда или ложь, example: "True" / "False"</em>',
+            verbose_name='boolean',
+        )
+
+        char_field = models.CharField(
+            db_column='char_field',
+            db_index=True,
+            db_tablespace='char_field_tablespace',
+            primary_key=False,
+            validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='',
+            max_length=16,
+            help_text='<em>Небольшая срока текста, example: "текст, текст"</em>',
+            verbose_name='char',
+        )
+
+        text_field = models.TextField(
+            db_column='text_field',
+            db_index=True,
+            db_tablespace='text_field_tablespace',
+            primary_key=False,
+            validators=[MinLengthValidator(0), MaxLengthValidator(254), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='',
+            max_length=254,
+            help_text='<em>Много текста, example: "текст, текст..."</em>',
+            verbose_name='text',
+        )
+
+        slug_field = models.SlugField(
+            db_column='slug_field',
+            db_index=True,
+            db_tablespace='slug_field_tablespace',
+            primary_key=False,
+            validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='',
+            max_length=64,
+            help_text='<em>Строка текста валидная для ссылок и системных вызовов, example: "success"</em>',
+            verbose_name='slug',
+        )
+
+        email_field = models.EmailField(
+            db_column='email_field',
+            db_index=True,
+            db_tablespace='email_field_tablespace',
+            primary_key=False,
+            validators=[MinLengthValidator(0), MaxLengthValidator(254), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='',
+            max_length=254,
+            help_text='<em>Строка содержащая почту, example: "bogdandrienko@gmail.com"</em>',
+            verbose_name='email',
+        )
+
+        url_field = models.URLField(
+            db_column='url_field',
+            db_index=True,
+            db_tablespace='url_field_tablespace',
+            primary_key=False,
+            validators=[MinLengthValidator(0), MaxLengthValidator(200), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='',
+            max_length=200,
+            help_text='<em>Строка содержащая url-адрес, example: "http://89.218.132.130:8000/"</em>',
+            verbose_name='url',
+        )
+
+        ipaddress_field = models.GenericIPAddressField(
+            db_column='ipaddress_field',
+            db_index=True,
+            db_tablespace='ipaddress_field_tablespace',
+            primary_key=False,
+            validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='',
+            max_length=16,
+            help_text='<em>Строка содержащая ip-адрес, example: "127.0.0.1"</em>',
+            verbose_name='ipaddress',
+
+            protocol='both',
+            unpack_ipv4=False,
+        )
+
+        integer_field = models.IntegerField(
+            db_column='integer_field',
+            db_index=True,
+            db_tablespace='integer_field_tablespace',
+            primary_key=False,
+            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=0,
+            help_text='<em>Целочисленное значение от -2147483648 до 2147483647, example: "0"</em>',
+            verbose_name='integer',
+        )
+
+        big_integer_field = models.BigIntegerField(
+            db_column='big_integer_field',
+            db_index=True,
+            db_tablespace='big_integer_field_tablespace',
+            primary_key=False,
+            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=0,
+            help_text='<em>Большое целочисленное значение от -9223372036854775808 до 9223372036854775807, example: "0"'
+                      '</em>',
+            verbose_name='big integer',
+        )
+
+        positive_integer_field = models.BigIntegerField(
+            db_column='positive_integer_field',
+            db_index=True,
+            db_tablespace='positive_integer_field_tablespace',
+            primary_key=False,
+            validators=[MinValueValidator(0), MaxValueValidator(1000), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=0,
+            help_text='<em>Положительное целочисленное значение от 0 до 2147483647, example: "0"</em>',
+            verbose_name='positive integer',
+        )
+
+        float_field = models.FloatField(
+            db_column='float_field',
+            db_index=True,
+            db_tablespace='float_field_tablespace',
+            primary_key=False,
+            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=0.0,
+            help_text='<em>Число с плавающей запятой, example: "0.0"</em>',
+            verbose_name='float',
+        )
+
+        decimal_field = models.DecimalField(
+            db_column='decimal_field',
+            db_index=True,
+            db_tablespace='decimal_field_tablespace',
+            primary_key=False,
+            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=0.0,
+            help_text='<em>Нецелочисленное значение, example: "0.000"</em>',
+            verbose_name='decimal',
+
+            max_digits=10,
+            decimal_places=5,
+        )
+
+        datetime_field = models.DateTimeField(
+            db_column='datetime_field',
+            db_index=True,
+            db_tablespace='datetime_field_tablespace',
+            primary_key=False,
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=timezone.now,
+            help_text='<em>Дата и время, example: "31.12.2021Т23:59:59"</em>',
+            verbose_name='datetime',
+        )
+
+        date_field = models.DateField(
+            db_column='date_field',
+            db_index=True,
+            db_tablespace='date_field_tablespace',
+            primary_key=False,
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=timezone.now,
+            help_text='<em>Дата, example: "31.12.2021"</em>',
+            verbose_name='date',
+        )
+
+        time_field = models.TimeField(
+            db_column='time_field',
+            db_index=True,
+            db_tablespace='time_field_tablespace',
+            primary_key=False,
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=timezone.now,
+            help_text='<em>Время, example: "23:59:59"</em>',
+            verbose_name='time',
+        )
+
+        duration_field = models.DurationField(
+            db_column='duration_field',
+            db_index=True,
+            db_tablespace='duration_field_tablespace',
+            primary_key=False,
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=timezone.timedelta,
+            help_text='<em>Длительность во времени, example: "01:59:59"</em>',
+            verbose_name='duration',
+        )
+
+        file_field = models.FileField(
+            db_column='file_field',
+            db_index=True,
+            db_tablespace='file_field_tablespace',
+            validators=[FileExtensionValidator(['xlsx', 'xls'])],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='uploads/example/example.xlsx',
+            help_text='<em>Файл, с расширением указанным в валидаторе, example: "example.xlsx"</em>',
+            verbose_name='file',
+
+            upload_to='uploads/example/%Y/%m/%d/',
+        )
+
+        image_field = models.FileField(
+            db_column='image_field',
+            db_index=True,
+            db_tablespace='image_field_tablespace',
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default='uploads/example/example.jpg',
+            help_text='<em>Файл, с расширением изображения, example: "example.jpg(/png/bpm...)"</em>',
+            verbose_name='image',
+
+            upload_to='uploads/example/%Y/%m/%d/',
+            # height_field=1920,  # Значение высоты изображения при каждом сохранении объекта
+            # width_field=1080,  # Значение ширины изображения при каждом сохранении объекта.
+        )
+
+        foreignkey = models.ForeignKey(
+            db_column='foreignkey',
+            db_index=True,
+            db_tablespace='foreignkey_tablespace',
+            primary_key=False,
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            default=None,
+            help_text='<em>Связь, с каким-либо объектом, example: "to=User.objects.get(username="Bogdan")"</em>',
+            verbose_name='foreignkey',
+
+            to=User,  # Model
+            on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
+            # on_delete = models.CASCADE,  # Каскадное удаление.
+            # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+            # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
+            # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
+            # on_delete=models.DO_NOTHING,  # Ничего не делать.
+            # limit_choices_to=None,  # Ограничивает доступные значения для поля
+        )
+
+        binary_field = models.BinaryField(
+            db_column='binary_field',
+            db_index=True,
+            db_tablespace='binary_field_tablespace',
+            primary_key=False,
+            validators=[MinLengthValidator(0), MaxLengthValidator(100), ],
+
+            unique=False,
+            null=True,
+            editable=True,
+            blank=True,
+            auto_created=True,
+            max_length=100,
+            help_text='<em>Бинарные данные (сохранять без преписки b"), example: "OTcwODAxMzUxMTc5"</em>',
+            verbose_name='binary',
+        )
 
     class Meta:
         model = ExampleModel
