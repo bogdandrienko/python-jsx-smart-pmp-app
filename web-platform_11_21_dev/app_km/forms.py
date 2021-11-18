@@ -1,3 +1,4 @@
+import datetime
 from django.utils import timezone
 from django.db import models
 from django import forms
@@ -17,413 +18,711 @@ class ExampleForm(forms.Form):
     """
     Форма с максимумом вариаций разных параметров и полей
     """
-    field = forms.CharField(
-        required=True,
-        label='Название',
-        initial='',
+
+    text = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='text',  # Заголовок поля
+        help_text='<small class="text-muted underline">text</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='text',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
         widget=forms.TextInput(
-            attrs={'type': 'text', 'name': 'name', 'placeholder': '', 'class': 'form-control', 'value': '',
-                   'required': ''}
+            attrs={
+                'type': 'text',  # HTML тип поля
+                'name': 'text',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'text',  # Данные, которые видны при удалении всей информации
+                'value': 'text',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'minlength': '10',
+                'maxlength': '20',
+            }
         ),
-        help_text='help_text',
-        error_messages={'required': 'Please enter your name'},
-        validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
-        localize=False,
-        disabled=False,
-
-
-
-        min_length=0,
-        max_length=16,
     )
 
-    boolean_field = forms.BooleanField(
+    much_text = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='much_text',  # Заголовок поля
+        help_text='<small class="text-muted underline">much_text</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='much_text',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.Textarea(
+            attrs={
+                'type': 'text',  # HTML тип поля
+                'name': 'much_text',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'much_text',  # Данные, которые видны при удалении всей информации
+                'value': 'much_text',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'minlength': '10',
+                'maxlength': '200',
+            }
+        ),
+    )
+
+    password_text = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='password_text',  # Заголовок поля
+        help_text='<small class="text-muted underline">password_text</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='password_text',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.PasswordInput(
+            attrs={
+                'type': 'password',  # HTML тип поля
+                'name': 'password_text',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'password_text',  # Данные, которые видны при удалении всей информации
+                'value': 'password_text',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'minlength': '10',
+                'maxlength': '20',
+            }
+        ),
+    )
+
+    email = forms.EmailField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='email',  # Заголовок поля
+        help_text='<small class="text-muted underline">andrienko.1997@list.ru</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='bogdandrienko@gmail.com',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.EmailInput(
+            attrs={
+                'type': 'email',  # HTML тип поля
+                'name': 'email',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'andrienko.1997@list.ru',  # Данные, которые видны при удалении всей информации
+                'value': 'bogdandrienko@gmail.com',  # Начальное значение поля (Второстепенное по приориту после
+                # "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+            }
+        ),
+    )
+
+    url = forms.URLField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='url',  # Заголовок поля
+        help_text='<small class="text-muted underline">http://127.0.0.1:8000/example/</small><br>',
+        # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='http://127.0.0.1:8000/example/',
+        # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.URLInput(
+            attrs={
+                'type': 'url',  # HTML тип поля
+                'name': 'url',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'http://127.0.0.1:8000/example/',  # Данные, которые видны при удалении всей информации
+                'value': 'http://127.0.0.1:8000/example/',
+                # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+            }
+        ),
+    )
+
+    number = forms.IntegerField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='number',  # Заголовок поля
+        help_text='<small class="text-muted underline">number</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial=0,  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.TextInput(
+            attrs={
+                'type': 'number',  # HTML тип поля
+                'name': 'number',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': '0',  # Данные, которые видны при удалении всей информации
+                'value': '0',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'min': '10',
+                'max': '20',
+            }
+        ),
+    )
+
+    hidden = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='hidden',  # Заголовок поля
+        help_text='<small class="text-muted underline">hidden</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='hidden',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.HiddenInput(
+            attrs={
+                'type': 'hidden',  # HTML тип поля
+                'name': 'hidden',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'hidden',  # Данные, которые видны при удалении всей информации
+                'value': 'hidden',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+            }
+        ),
+    )
+
+    datetime_ = forms.DateTimeField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='datetime',  # Заголовок поля
+        help_text='<small class="text-muted underline">2021-11-18T10:27</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial=datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'),  # Начальное значение поля (Имеет приоритет
+        # перед "widget.attrs.value")
+        widget=forms.DateTimeInput(
+            attrs={
+                'type': 'datetime-local',  # HTML тип поля
+                'name': 'datetime',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'),  # Данные, которые видны при
+                # удалении всей информации
+                'value': datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'),  # Начальное значение поля (
+                # Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'min': "2021-07-30T01:00",
+                'max': "2023-12-31T22:59",
+                'format': '%Y-%m-%dT%H:%M:%S',
+            }
+        ),
+    )
+
+    date = forms.DateField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='date',  # Заголовок поля
+        help_text='<small class="text-muted underline">2021-11-18</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial=datetime.datetime.now().strftime('%Y-%m-%d'),  # Начальное значение поля (Имеет приоритет
+        # перед "widget.attrs.value")
+        widget=forms.DateInput(
+            attrs={
+                'type': 'date',  # HTML тип поля
+                'name': 'date',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': datetime.datetime.now().strftime('%Y-%m-%d'),  # Данные, которые видны при
+                # удалении всей информации
+                'value': datetime.datetime.now().strftime('%Y-%m-%d'),  # Начальное значение поля (
+                # Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'min': "2021-07-30",
+                'max': "2023-12-31",
+                'format': '%Y-%m-%d',
+            }
+        ),
+    )
+
+    time = forms.TimeField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='time',  # Заголовок поля
+        help_text='<small class="text-muted underline">10:27</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial=datetime.datetime.now().strftime('%H:%M'),  # Начальное значение поля (Имеет приоритет
+        # перед "widget.attrs.value")
+        widget=forms.TimeInput(
+            attrs={
+                'type': 'time',  # HTML тип поля
+                'name': 'time',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': datetime.datetime.now().strftime('%H:%M'),  # Данные, которые видны при
+                # удалении всей информации
+                'value': datetime.datetime.now().strftime('%H:%M'),  # Начальное значение поля (
+                # Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'min': "01:00",
+                'max': "22:59",
+                'format': '%H:%M:%S',
+            }
+        ),
+    )
+
+    checkbox = forms.BooleanField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='text',  # Заголовок поля
+        help_text='<small class="text-muted underline">checkbox</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial=True,  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
         widget=forms.CheckboxInput(
-            attrs={'type': 'text',
-                   'name': 'name',
-                   'placeholder': '',
-                   'class': 'form-control',
-                   'value': '',
-                   'required': ''}
+            attrs={
+                'type': 'checkbox',  # HTML тип поля
+                'name': 'checkbox',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'checkbox',  # Данные, которые видны при удалении всей информации
+                'value': 'checkbox',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-check-input',  # HTML / css / bootstrap классы
+            }
         ),
     )
 
-    # name = forms.CharField(
-    #     label='Название',
-    #     widget=forms.TextInput(
-    #         attrs={'type': 'text', 'name': 'name', 'placeholder': '', 'class': 'form-control', 'value': '',
-    #                'required': ''}
-    #     ),
-    #     required=True
-    # )
+    checkbox_null = forms.NullBooleanField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='checkbox_null',  # Заголовок поля
+        help_text='<small class="text-muted underline">checkbox_null</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial=None,  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.NullBooleanSelect(
+            attrs={
+                'type': 'checkbox',  # HTML тип поля
+                'name': 'checkbox_null',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'checkbox_null',  # Данные, которые видны при удалении всей информации
+                'value': 'checkbox_null',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+            }
+        ),
+    )
+
+    MONTH_CHOICES = (
+        ('JANUARY', "January"),
+        ('FEBRUARY', "February"),
+        ('MARCH', "March"),
+        ('DECEMBER', "December"),
+    )
+    select = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='text',  # Заголовок поля
+        help_text='<small class="text-muted underline">checkbox</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='MARCH',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.Select(
+            attrs={
+                'type': 'select',  # HTML тип поля
+                'name': 'select',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'MARCH',  # Данные, которые видны при удалении всей информации
+                'value': 'MARCH',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+            },
+            choices=MONTH_CHOICES,
+        ),
+    )
+
+    selectmultiple = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='selectmultiple',  # Заголовок поля
+        help_text='<small class="text-muted underline">selectmultiple</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='MARCH',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.SelectMultiple(
+            attrs={
+                'type': 'select',  # HTML тип поля
+                'name': 'selectmultiple',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'MARCH',  # Данные, которые видны при удалении всей информации
+                'value': 'MARCH',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+            },
+            choices=MONTH_CHOICES,
+        ),
+    )
+
+    radioselect = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='radioselect',  # Заголовок поля
+        help_text='<small class="text-muted underline">radioselect</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='MARCH',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.RadioSelect(
+            attrs={
+                'type': 'radio',  # HTML тип поля
+                'name': 'radioselect',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'MARCH',  # Данные, которые видны при удалении всей информации
+                'value': 'MARCH',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': '',  # HTML / css / bootstrap классы
+            },
+            choices=MONTH_CHOICES,
+        ),
+    )
+
+    checkboxselectmultiple = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='checkboxselectmultiple',  # Заголовок поля
+        help_text='<small class="text-muted underline">checkboxselectmultiple</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='MARCH',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                'type': 'checkbox',  # HTML тип поля
+                'name': 'checkboxselectmultiple',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'MARCH',  # Данные, которые видны при удалении всей информации
+                'value': 'MARCH',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': '',  # HTML / css / bootstrap классы
+            },
+            choices=MONTH_CHOICES,
+        ),
+    )
+
+    file_input = forms.CharField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={'type': 'file',
+                   'name': 'file_input',
+                   'class': '',
+                   'placeholder': 'file_input'},
+        ),
+    )
+
+    file = forms.FileField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='file',  # Заголовок поля
+        help_text='<small class="text-muted underline">file</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='file',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.FileInput(
+            attrs={
+                'type': 'file',  # HTML тип поля
+                'name': 'file',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'file',  # Данные, которые видны при удалении всей информации
+                'value': 'file',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'accept': '.xlsx, .xls, .csv',  # 'image/*' 'text/*' 'text/plain' '.xlsx, .xls, .csv'
+            }
+        ),
+    )
+
+    clearablefile = forms.FileField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='file',  # Заголовок поля
+        help_text='<small class="text-muted underline">clearablefile</small><br>',  # Вспомогательный текст
+        # для поля (Можно передавать html теги)
+        initial='',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.ClearableFileInput(
+            attrs={
+                'type': 'file',  # HTML тип поля
+                'name': 'clearablefile',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'clearablefile',  # Данные, которые видны при удалении всей информации
+                'value': 'clearablefile',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'accept': 'image/*',  # 'image/*' 'text/*' 'text/plain' '.xlsx, .xls, .csv'
+            }
+        ),
+    )
 
     class Example:
-        boolean_field = models.BooleanField(
-            db_column='boolean_field',
-            db_index=True,
-            db_tablespace='boolean_field_tablespace',
-            primary_key=False,
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=False,
-            help_text='<em>Значение правда или ложь, example: "True" / "False"</em>',
-            verbose_name='boolean',
+        text_input = forms.CharField(
+            required=False,
+            widget=forms.TextInput(
+                attrs={'type': 'text',
+                       'name': 'text_input',
+                       'class': '',
+                       'placeholder': 'text_input'}
+            ),
         )
 
-        char_field = models.CharField(
-            db_column='char_field',
-            db_index=True,
-            db_tablespace='char_field_tablespace',
-            primary_key=False,
-            validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='',
-            max_length=16,
-            help_text='<em>Небольшая срока текста, example: "текст, текст"</em>',
-            verbose_name='char',
+        number_input = forms.IntegerField(
+            required=False,
+            widget=forms.NumberInput(
+                attrs={'type': 'number',
+                       'name': 'number_input',
+                       'class': '',
+                       'placeholder': 'number_input'}
+            ),
         )
 
-        text_field = models.TextField(
-            db_column='text_field',
-            db_index=True,
-            db_tablespace='text_field_tablespace',
-            primary_key=False,
-            validators=[MinLengthValidator(0), MaxLengthValidator(254), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='',
-            max_length=254,
-            help_text='<em>Много текста, example: "текст, текст..."</em>',
-            verbose_name='text',
+        email_input = forms.EmailField(
+            required=False,
+            widget=forms.EmailInput(
+                attrs={'type': 'email',
+                       'name': 'email_input',
+                       'class': '',
+                       'placeholder': 'email_input'}
+            ),
         )
 
-        slug_field = models.SlugField(
-            db_column='slug_field',
-            db_index=True,
-            db_tablespace='slug_field_tablespace',
-            primary_key=False,
-            validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='',
-            max_length=64,
-            help_text='<em>Строка текста валидная для ссылок и системных вызовов, example: "success"</em>',
-            verbose_name='slug',
+        url_input = forms.URLField(
+            required=False,
+            widget=forms.URLInput(
+                attrs={'type': 'url',
+                       'name': 'url_input',
+                       'class': '',
+                       'placeholder': 'url_input'}
+            ),
         )
 
-        email_field = models.EmailField(
-            db_column='email_field',
-            db_index=True,
-            db_tablespace='email_field_tablespace',
-            primary_key=False,
-            validators=[MinLengthValidator(0), MaxLengthValidator(254), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='',
-            max_length=254,
-            help_text='<em>Строка содержащая почту, example: "bogdandrienko@gmail.com"</em>',
-            verbose_name='email',
+        password_input = forms.CharField(
+            required=False,
+            widget=forms.PasswordInput(
+                attrs={'type': 'password',
+                       'name': 'password_input',
+                       'class': '',
+                       'placeholder': 'password_input'}
+            ),
         )
 
-        url_field = models.URLField(
-            db_column='url_field',
-            db_index=True,
-            db_tablespace='url_field_tablespace',
-            primary_key=False,
-            validators=[MinLengthValidator(0), MaxLengthValidator(200), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='',
-            max_length=200,
-            help_text='<em>Строка содержащая url-адрес, example: "http://89.218.132.130:8000/"</em>',
-            verbose_name='url',
+        hidden_input = forms.CharField(
+            required=False,
+            widget=forms.HiddenInput(
+                attrs={'type': 'hidden',
+                       'name': 'hidden_input',
+                       'class': '',
+                       'placeholder': 'hidden_input'}
+            ),
         )
 
-        ipaddress_field = models.GenericIPAddressField(
-            db_column='ipaddress_field',
-            db_index=True,
-            db_tablespace='ipaddress_field_tablespace',
-            primary_key=False,
-            validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='',
-            max_length=16,
-            help_text='<em>Строка содержащая ip-адрес, example: "127.0.0.1"</em>',
-            verbose_name='ipaddress',
-
-            protocol='both',
-            unpack_ipv4=False,
+        datetime_input = forms.DateTimeField(
+            required=False,
+            widget=forms.DateTimeInput(
+                attrs={'type': 'datetime-local',
+                       'name': 'datetime_input',
+                       'class': '',
+                       'placeholder': 'datetime_input',
+                       'format': '%Y-%m-%d %H:%M:%S'}
+            ),
         )
 
-        integer_field = models.IntegerField(
-            db_column='integer_field',
-            db_index=True,
-            db_tablespace='integer_field_tablespace',
-            primary_key=False,
-            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=0,
-            help_text='<em>Целочисленное значение от -2147483648 до 2147483647, example: "0"</em>',
-            verbose_name='integer',
+        date_input = forms.DateField(
+            required=False,
+            widget=forms.DateInput(
+                attrs={'type': 'datetime-local',
+                       'name': 'date_input',
+                       'class': '',
+                       'placeholder': 'date_input',
+                       'format': '%Y-%m-%d %H:%M:%S'}
+            ),
         )
 
-        big_integer_field = models.BigIntegerField(
-            db_column='big_integer_field',
-            db_index=True,
-            db_tablespace='big_integer_field_tablespace',
-            primary_key=False,
-            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=0,
-            help_text='<em>Большое целочисленное значение от -9223372036854775808 до 9223372036854775807, example: "0"'
-                      '</em>',
-            verbose_name='big integer',
+        time_input = forms.TimeField(
+            required=False,
+            widget=forms.TimeInput(
+                attrs={'type': 'datetime-local',
+                       'name': 'time_input',
+                       'class': '',
+                       'placeholder': 'time_input',
+                       'format': '%Y-%m-%d %H:%M:%S'}
+            ),
         )
 
-        positive_integer_field = models.BigIntegerField(
-            db_column='positive_integer_field',
-            db_index=True,
-            db_tablespace='positive_integer_field_tablespace',
-            primary_key=False,
-            validators=[MinValueValidator(0), MaxValueValidator(1000), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=0,
-            help_text='<em>Положительное целочисленное значение от 0 до 2147483647, example: "0"</em>',
-            verbose_name='positive integer',
+        textarea_input = forms.CharField(
+            required=False,
+            widget=forms.Textarea(
+                attrs={'type': 'text',
+                       'name': 'textarea_input',
+                       'class': '',
+                       'placeholder': 'textarea_input'}
+            ),
         )
 
-        float_field = models.FloatField(
-            db_column='float_field',
-            db_index=True,
-            db_tablespace='float_field_tablespace',
-            primary_key=False,
-            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=0.0,
-            help_text='<em>Число с плавающей запятой, example: "0.0"</em>',
-            verbose_name='float',
+        checkbox_input = forms.BooleanField(
+            required=False,
+            widget=forms.CheckboxInput(
+                attrs={'type': 'checkbox',
+                       'name': 'checkbox_input',
+                       'class': '',
+                       'placeholder': 'checkbox_input'}
+            ),
         )
 
-        decimal_field = models.DecimalField(
-            db_column='decimal_field',
-            db_index=True,
-            db_tablespace='decimal_field_tablespace',
-            primary_key=False,
-            validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=0.0,
-            help_text='<em>Нецелочисленное значение, example: "0.000"</em>',
-            verbose_name='decimal',
-
-            max_digits=10,
-            decimal_places=5,
+        MONTH_CHOICES = (
+            ('JANUARY', "January"),
+            ('FEBRUARY', "February"),
+            ('MARCH', "March"),
+            ('DECEMBER', "December"),
+        )
+        select_input = forms.CharField(
+            required=False,
+            widget=forms.Select(
+                attrs={'type': 'select',
+                       'name': 'select_input',
+                       'class': '',
+                       'placeholder': 'select_input'},
+                choices=MONTH_CHOICES,
+            ),
         )
 
-        datetime_field = models.DateTimeField(
-            db_column='datetime_field',
-            db_index=True,
-            db_tablespace='datetime_field_tablespace',
-            primary_key=False,
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=timezone.now,
-            help_text='<em>Дата и время, example: "31.12.2021Т23:59:59"</em>',
-            verbose_name='datetime',
+        nullbooleanselect_input = forms.NullBooleanField(
+            required=False,
+            widget=forms.NullBooleanSelect(
+                attrs={'type': 'checkbox',
+                       'name': 'nullbooleanselect_input',
+                       'class': '',
+                       'placeholder': 'nullbooleanselect_input'},
+            ),
         )
 
-        date_field = models.DateField(
-            db_column='date_field',
-            db_index=True,
-            db_tablespace='date_field_tablespace',
-            primary_key=False,
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=timezone.now,
-            help_text='<em>Дата, example: "31.12.2021"</em>',
-            verbose_name='date',
+        selectmultiple_input = forms.CharField(
+            required=False,
+            widget=forms.SelectMultiple(
+                attrs={'type': 'select',
+                       'name': 'selectmultiple_input',
+                       'class': '',
+                       'placeholder': 'selectmultiple_input'},
+                choices=MONTH_CHOICES,
+            ),
         )
 
-        time_field = models.TimeField(
-            db_column='time_field',
-            db_index=True,
-            db_tablespace='time_field_tablespace',
-            primary_key=False,
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=timezone.now,
-            help_text='<em>Время, example: "23:59:59"</em>',
-            verbose_name='time',
+        radioselect_input = forms.CharField(
+            required=False,
+            widget=forms.RadioSelect(
+                attrs={'type': 'radio',
+                       'name': 'radioselect_input',
+                       'class': '',
+                       'placeholder': 'radioselect_input'},
+                choices=MONTH_CHOICES,
+            ),
         )
 
-        duration_field = models.DurationField(
-            db_column='duration_field',
-            db_index=True,
-            db_tablespace='duration_field_tablespace',
-            primary_key=False,
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=timezone.timedelta,
-            help_text='<em>Длительность во времени, example: "01:59:59"</em>',
-            verbose_name='duration',
+        checkboxselectmultiple_input = forms.CharField(
+            required=False,
+            widget=forms.CheckboxSelectMultiple(
+                attrs={'type': 'checkbox',
+                       'name': 'checkboxselectmultiple_input',
+                       'class': '',
+                       'placeholder': 'checkboxselectmultiple_input'},
+                choices=MONTH_CHOICES,
+            ),
         )
 
-        file_field = models.FileField(
-            db_column='file_field',
-            db_index=True,
-            db_tablespace='file_field_tablespace',
-            validators=[FileExtensionValidator(['xlsx', 'xls'])],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='uploads/example/example.xlsx',
-            help_text='<em>Файл, с расширением указанным в валидаторе, example: "example.xlsx"</em>',
-            verbose_name='file',
-
-            upload_to='uploads/example/%Y/%m/%d/',
+        file_input = forms.FileField(
+            required=False,
+            widget=forms.FileInput(
+                attrs={'type': 'file',
+                       'name': 'file_input',
+                       'class': '',
+                       'placeholder': 'file_input'},
+            ),
         )
 
-        image_field = models.FileField(
-            db_column='image_field',
-            db_index=True,
-            db_tablespace='image_field_tablespace',
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default='uploads/example/example.jpg',
-            help_text='<em>Файл, с расширением изображения, example: "example.jpg(/png/bpm...)"</em>',
-            verbose_name='image',
-
-            upload_to='uploads/example/%Y/%m/%d/',
-            # height_field=1920,  # Значение высоты изображения при каждом сохранении объекта
-            # width_field=1080,  # Значение ширины изображения при каждом сохранении объекта.
-        )
-
-        foreignkey = models.ForeignKey(
-            db_column='foreignkey',
-            db_index=True,
-            db_tablespace='foreignkey_tablespace',
-            primary_key=False,
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            default=None,
-            help_text='<em>Связь, с каким-либо объектом, example: "to=User.objects.get(username="Bogdan")"</em>',
-            verbose_name='foreignkey',
-
-            to=User,  # Model
-            on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
-            # on_delete = models.CASCADE,  # Каскадное удаление.
-            # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
-            # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
-            # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
-            # on_delete=models.DO_NOTHING,  # Ничего не делать.
-            # limit_choices_to=None,  # Ограничивает доступные значения для поля
-        )
-
-        binary_field = models.BinaryField(
-            db_column='binary_field',
-            db_index=True,
-            db_tablespace='binary_field_tablespace',
-            primary_key=False,
-            validators=[MinLengthValidator(0), MaxLengthValidator(100), ],
-
-            unique=False,
-            null=True,
-            editable=True,
-            blank=True,
-            auto_created=True,
-            max_length=100,
-            help_text='<em>Бинарные данные (сохранять без преписки b"), example: "OTcwODAxMzUxMTc5"</em>',
-            verbose_name='binary',
+        clearablefileinput_input = forms.FileField(
+            required=False,
+            widget=forms.ClearableFileInput(
+                attrs={'type': 'file',
+                       'name': 'clearablefileinput_input',
+                       'class': 'form-control',
+                       'accept': 'image/*',
+                       'placeholder': 'clearablefileinput_input'},
+            ),
         )
 
     class Meta:
         model = ExampleModel
-        # fields = ('password_1', 'password_2', 'email', 'secret_question', 'secret_answer')
+        # fields = ('username', 'password_1', 'password_2', 'email')
         fields = '__all__'
 
 
 # Account
+class CreateUserCustomForm(forms.Form):
+    """
+    Create User Custom Form
+    """
+
+    username = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='Имя пользователя:',  # Заголовок поля
+        help_text='<small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small><br><br><br>',
+        # Вспомогательный текст для поля (Можно передавать html теги)
+        initial='',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.TextInput(
+            attrs={
+                'type': 'text',  # HTML тип поля
+                'name': 'username',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': 'введите в этом поле имя пользователя',  # Данные, которые видны при удалении всей
+                # информации
+                'value': '',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'minlength': '12',
+                'maxlength': '12',
+            }
+        ),
+    )
+    password_1 = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='Введите желаемый пароль',  # Заголовок поля
+        help_text='<small class="text-muted">введите выше пароль для входа: от 8 до 16 символов</small><br><br><br>',  #
+        # Вспомогательный текст для поля (Можно передавать html теги)
+        initial='',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.PasswordInput(
+            attrs={
+                'type': 'password',  # HTML тип поля
+                'name': 'password_1',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': '',  # Данные, которые видны при удалении всей информации
+                'value': '',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'minlength': '8',
+                'maxlength': '16',
+            }
+        ),
+    )
+    password_2 = forms.CharField(
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='Повторите введённый пароль',  # Заголовок поля
+        help_text='<small class="text-muted">повторите выше пароль для входа: от 8 до 16 символов</small><br><br><br>',  #
+        # Вспомогательный текст для поля (Можно передавать html теги)
+        initial='',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.PasswordInput(
+            attrs={
+                'type': 'password',  # HTML тип поля
+                'name': 'password_2',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                'placeholder': '',  # Данные, которые видны при удалении всей информации
+                'value': '',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+
+                'minlength': '8',
+                'maxlength': '16',
+            }
+        ),
+    )
+
+    class Meta:
+        model = User
+        # fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'is_active', 'is_staff',
+        # 'groups', 'patronymic', 'personnel_number', 'subdivision', 'workshop_service', 'department_site', 'position',
+        # 'category')
+        fields = '__all__'
+
+
 class CreateUserForm(UserCreationForm):
     """
     Форма создания одиночного пользователя
@@ -608,38 +907,101 @@ class BankIdeasForm(forms.Form):
     name = forms.CharField(
         label='название', widget=forms.TextInput(
             attrs={'type': 'text', 'name': 'name', 'placeholder': 'название', 'class': 'form-control', 'required': ''}),
-        required=True
+        required=True,
+        help_text='<small class="text-muted underline">Введите желаемое название проекта</small><br>',
     )
+    # CATEGORY_CHOICES = (
+    #     ('1', "В процессе"),
+    #     ('2', "Экология"),
+    #     ('3', "Индустриализация"),
+    #     ('4', "Инновации"),
+    # )
+    # category = forms.SlugField(
+    #     disabled=False,  # Отключено ли поле в форме
+    #     localize=False,  # Локализовать ли контент принудительно
+    #     required=True,  # Требовать ли наличие данных в поле
+    #     label='категория',  # Заголовок поля
+    #     help_text='<small class="text-muted underline">Выберите одну из всплывающих категорий</small><br>',
+    #     # для поля (Можно передавать html теги)
+    #     initial='4',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+    #     widget=forms.Select(
+    #         attrs={
+    #             'type': 'select',  # HTML тип поля
+    #             'name': 'category',  # HTML имя поля
+    #             'required': '',  # Требовать ли наличие данных в поле
+    #             'placeholder': '4',  # Данные, которые видны при удалении всей информации
+    #             'value': '4',  # Начальное значение поля (Второстепенное по приориту после "initial")
+    #             'class': 'form-control',  # HTML / css / bootstrap классы
+    #         },
+    #         choices=CATEGORY_CHOICES,
+    #     ),
+    # )
     category = forms.ModelChoiceField(
-        label='категория', widget=forms.Select(
-            attrs={'class': 'form-select form-select-lg mb-3', 'aria-label': '.form-select-lg example', 'required': ''}
-        ), queryset=IdeasCategoryModel.objects.order_by('id'),
-        empty_label="не выбрано", to_field_name=None, required=True
+        disabled=False,  # Отключено ли поле в форме
+        localize=False,  # Локализовать ли контент принудительно
+        required=True,  # Требовать ли наличие данных в поле
+        label='категория',  # Заголовок поля
+        help_text='<small class="text-muted underline">Выберите одну из всплывающих категорий</small><br>',
+        # для поля (Можно передавать html теги)
+        # initial='',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        widget=forms.Select(
+            attrs={
+                'type': 'select',  # HTML тип поля
+                'name': 'category',  # HTML имя поля
+                'required': '',  # Требовать ли наличие данных в поле
+                # 'placeholder': '',  # Данные, которые видны при удалении всей информации
+                # 'value': '',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'class': 'form-control',  # HTML / css / bootstrap классы
+            },
+        ),
+        queryset=IdeasCategoryModel.objects.order_by('id'),
+        empty_label="не выбрано",
     )
+
+    # category = forms.ModelChoiceField(
+    #     to_field_name=None,
+    #     required=True,
+    #     label='категория',
+    #     help_text='<small class="text-muted underline">Выберите одну всплывающих из категорий</small><br>',
+    #     widget=forms.Select(
+    #         attrs={
+    #             'class': 'form-select form-select-lg mb-3',
+    #             'aria-label': '.form-select-lg example',
+    #             'required': ''
+    #         }
+    #     ),
+    #     empty_label="не выбрано",
+    #     queryset=IdeasCategoryModel.objects.order_by('id'),
+    # )
+
     short_description = forms.CharField(
         label='короткое описание', widget=forms.TextInput(
             attrs={'type': 'text', 'name': 'short_description', 'placeholder': 'короткое описание',
                    'class': 'form-control',
                    'required': ''}),
-        required=True
+        required=True,
+        help_text='<small class="text-muted underline">Введите короткое описание проекта</small><br>',
     )
     long_description = forms.CharField(
         label='длинное описание', widget=forms.Textarea(
             attrs={'type': 'text', 'name': 'long_description', 'placeholder': 'длинное описание',
                    'class': 'form-control',
                    'required': ''}),
-        required=True
+        required=True,
+        help_text='<small class="text-muted underline">Введите длинное описание проекта</small><br>',
     )
 
     image = forms.ImageField(
-        label="картинка к идеи", widget=forms.ClearableFileInput(
+        label="Аватарка к идеи", widget=forms.ClearableFileInput(
             attrs={'type': 'file', 'name': 'image', 'class': 'form-control'}),
-        required=False, allow_empty_file=True
+        required=False, allow_empty_file=True,
+        help_text='<small class="text-muted underline">Аватарка для проекта</small>><br>',
     )
     document = forms.FileField(
         label="документ к идеи", widget=forms.ClearableFileInput(
             attrs={'type': 'file', 'name': 'document', 'class': 'form-control'}),
-        required=False, allow_empty_file=True
+        required=False, allow_empty_file=True,
+        help_text='<small class="text-muted underline">Документ, прикрепляемый к проекту</small><br>',
     )
 
     class Meta:

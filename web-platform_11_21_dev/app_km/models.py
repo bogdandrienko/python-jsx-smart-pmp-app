@@ -26,7 +26,7 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=False,
-        help_text='<em>Значение правда или ложь, example: "True" / "False"</em>',
+        help_text='<small class="text-muted underline">Значение правда или ложь, example: "True" / "False"</small><hr><br>',
         verbose_name='boolean',
     )
 
@@ -44,7 +44,7 @@ class ExampleModel(models.Model):
         auto_created=True,
         default='',
         max_length=16,
-        help_text='<em>Небольшая срока текста, example: "текст, текст"</em>',
+        help_text='<small class="text-muted underline">Небольшая срока текста, example: "текст, текст"</small><hr><br>',
         verbose_name='char',
     )
 
@@ -62,7 +62,7 @@ class ExampleModel(models.Model):
         auto_created=True,
         default='',
         max_length=254,
-        help_text='<em>Много текста, example: "текст, текст..."</em>',
+        help_text='<small class="text-muted underline">Много текста, example: "текст, текст..."</small><hr><br>',
         verbose_name='text',
     )
 
@@ -80,7 +80,8 @@ class ExampleModel(models.Model):
         auto_created=True,
         default='',
         max_length=64,
-        help_text='<em>Строка текста валидная для ссылок и системных вызовов, example: "success"</em>',
+        help_text='<small class="text-muted underline">Строка текста валидная для ссылок и системных вызовов, '
+                  'example: "success"</small><hr><br>',
         verbose_name='slug',
     )
 
@@ -98,7 +99,8 @@ class ExampleModel(models.Model):
         auto_created=True,
         default='',
         max_length=254,
-        help_text='<em>Строка содержащая почту, example: "bogdandrienko@gmail.com"</em>',
+        help_text='<small class="text-muted underline">Строка содержащая почту, example: '
+                  '"bogdandrienko@gmail.com"</small><hr><br>',
         verbose_name='email',
     )
 
@@ -116,7 +118,8 @@ class ExampleModel(models.Model):
         auto_created=True,
         default='',
         max_length=200,
-        help_text='<em>Строка содержащая url-адрес, example: "http://89.218.132.130:8000/"</em>',
+        help_text='<small class="text-muted underline">Строка содержащая url-адрес, example: '
+                  '"http://89.218.132.130:8000/"</small><hr><br>',
         verbose_name='url',
     )
 
@@ -134,7 +137,8 @@ class ExampleModel(models.Model):
         auto_created=True,
         default='',
         max_length=16,
-        help_text='<em>Строка содержащая ip-адрес, example: "127.0.0.1"</em>',
+        help_text='<small class="text-muted underline">Строка содержащая ip-адрес, example: '
+                  '"127.0.0.1"</small><hr><br>',
         verbose_name='ipaddress',
 
         protocol='both',
@@ -154,7 +158,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=0,
-        help_text='<em>Целочисленное значение от -2147483648 до 2147483647, example: "0"</em>',
+        help_text='<small class="text-muted underline">Целочисленное значение от -2147483648 до 2147483647, example: '
+                  '"0"</small><hr><br>',
         verbose_name='integer',
     )
 
@@ -171,8 +176,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=0,
-        help_text='<em>Большое целочисленное значение от -9223372036854775808 до 9223372036854775807, example: "0"'
-                  '</em>',
+        help_text='<small class="text-muted underline">Большое целочисленное значение от -9223372036854775808 до '
+                  '9223372036854775807, example: "0"</small><hr><br>',
         verbose_name='big integer',
     )
 
@@ -189,7 +194,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=0,
-        help_text='<em>Положительное целочисленное значение от 0 до 2147483647, example: "0"</em>',
+        help_text='<small class="text-muted underline">Положительное целочисленное значение от 0 до 2147483647, '
+                  'example: "0"</small><hr><br>',
         verbose_name='positive integer',
     )
 
@@ -206,7 +212,7 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=0.0,
-        help_text='<em>Число с плавающей запятой, example: "0.0"</em>',
+        help_text='<small class="text-muted underline">Число с плавающей запятой, example: "0.0"</small><hr><br>',
         verbose_name='float',
     )
 
@@ -223,7 +229,7 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=0.0,
-        help_text='<em>Нецелочисленное значение, example: "0.000"</em>',
+        help_text='<small class="text-muted underline">Нецелочисленное значение, example: "0.000"</small><hr><br>',
         verbose_name='decimal',
 
         max_digits=10,
@@ -242,7 +248,7 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=timezone.now,
-        help_text='<em>Дата и время, example: "31.12.2021Т23:59:59"</em>',
+        help_text='<small class="text-muted underline">Дата и время, example: "31.12.2021Т23:59:59"</small><hr><br>',
         verbose_name='datetime',
     )
 
@@ -258,7 +264,7 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=timezone.now,
-        help_text='<em>Дата, example: "31.12.2021"</em>',
+        help_text='<small class="text-muted underline">Дата, example: "31.12.2021"</small><hr><br>',
         verbose_name='date',
     )
 
@@ -274,7 +280,7 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=timezone.now,
-        help_text='<em>Время, example: "23:59:59"</em>',
+        help_text='<small class="text-muted underline">Время, example: "23:59:59"</small><hr><br>',
         verbose_name='time',
     )
 
@@ -290,7 +296,7 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=timezone.timedelta,
-        help_text='<em>Длительность во времени, example: "01:59:59"</em>',
+        help_text='<small class="text-muted underline">Длительность во времени, example: "01:59:59"</small><hr><br>',
         verbose_name='duration',
     )
 
@@ -306,7 +312,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default='uploads/example/example.xlsx',
-        help_text='<em>Файл, с расширением указанным в валидаторе, example: "example.xlsx"</em>',
+        help_text='<small class="text-muted underline">Файл, с расширением указанным в валидаторе, example: '
+                  '"example.xlsx"</small><hr><br>',
         verbose_name='file',
 
         upload_to='uploads/example/%Y/%m/%d/',
@@ -323,7 +330,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default='uploads/example/example.jpg',
-        help_text='<em>Файл, с расширением изображения, example: "example.jpg(/png/bpm...)"</em>',
+        help_text='<small class="text-muted underline">>Файл, с расширением изображения, example: "example.jpg('
+                  '/png/bpm...)"</small><hr><br>',
         verbose_name='image',
 
         upload_to='uploads/example/%Y/%m/%d/',
@@ -343,7 +351,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=None,
-        help_text='<em>Связь, с каким-либо объектом, example: "to=User.objects.get(username="Bogdan")"</em>',
+        help_text='<small class="text-muted underline">Связь, с каким-либо объектом, example: "to=User.objects.get('
+                  'username="Bogdan")"</small><hr><br>',
         verbose_name='foreignkey',
 
         to=User,  # Model
@@ -369,7 +378,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         max_length=100,
-        help_text='<em>Бинарные данные (сохранять без преписки b"), example: "OTcwODAxMzUxMTc5"</em>',
+        help_text='<small class="text-muted underline">Бинарные данные (сохранять без преписки b"), example: '
+                  '"OTcwODAxMzUxMTc5"</small><hr><br>',
         verbose_name='binary',
     )
 

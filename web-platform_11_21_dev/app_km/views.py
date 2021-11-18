@@ -27,7 +27,7 @@ from .models import ExampleModel, RationalModel, CategoryRationalModel, LikeRati
     IdeasLikeModel, IdeasCommentModel
 from .forms import ExampleForm, CreateUserForm, ChangeUserForm, CreateUsersForm, GeneratePasswordsForm, RationalForm, \
     NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, ArticleForm, \
-    SmsForm, GeoForm, ChangePasswordForm, BankIdeasForm
+    SmsForm, GeoForm, ChangePasswordForm, BankIdeasForm, CreateUserCustomForm
 from .utils import ExcelClass, LoggingClass, create_encrypted_password, link_callback, get_career, \
     find_near_point, get_vector_arr, generate_way, pyodbc_connect, decrypt_text_with_hash, create_arr_table
 
@@ -484,6 +484,7 @@ def account_create_accounts(request, quantity=1):
             result = success
         context = {
             'form_1': CreateUserForm,
+            'form_3': CreateUserCustomForm,
             'form_2': CreateUsersForm,
             'result': result
         }

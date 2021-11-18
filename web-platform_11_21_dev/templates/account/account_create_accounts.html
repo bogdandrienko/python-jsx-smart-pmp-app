@@ -62,6 +62,29 @@
                             <button class="form-control btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
                         </form>
 
+
+                        <br>
+                        <br>
+                        <hr>
+                        <br>
+                        <br>
+                        <br>
+                        <hr>
+                        <br>
+                        <br>
+
+                        <form class="form-control" action="{% url 'account_create_accounts' 1 %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form_3 }}
+                            <hr>
+                            <label class="form-check-label" for="flexCheckDefault">Перезаписать уже существующего пользователя?</label>
+                            <div class="form-switch">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="check_1">
+                            </div>
+                            <hr>
+                            <button class="form-control btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                        </form>
+
                     </div>
 
                 {% else %}
