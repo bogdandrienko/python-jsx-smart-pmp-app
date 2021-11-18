@@ -654,7 +654,7 @@ class CreateUserCustomForm(forms.Form):
         label='Имя пользователя:',  # Заголовок поля
         help_text='<small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small><br><br><br>',
         # Вспомогательный текст для поля (Можно передавать html теги)
-        initial='',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
+        # initial='',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
         widget=forms.TextInput(
             attrs={
                 'type': 'text',  # HTML тип поля
@@ -662,7 +662,7 @@ class CreateUserCustomForm(forms.Form):
                 'required': '',  # Требовать ли наличие данных в поле
                 'placeholder': 'введите в этом поле имя пользователя',  # Данные, которые видны при удалении всей
                 # информации
-                'value': '',  # Начальное значение поля (Второстепенное по приориту после "initial")
+                'value': '{{ request.user.username }}',  # Начальное значение поля (Второстепенное по приориту после "initial")
                 'class': 'form-control',  # HTML / css / bootstrap классы
 
                 'minlength': '12',

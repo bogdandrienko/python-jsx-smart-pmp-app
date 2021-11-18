@@ -400,37 +400,38 @@ def account_create_accounts(request, quantity=1):
                 # Создание массива объектов аккаунтов из одиночной формы
                 # try:
                 if True:
-                    form = CreateUserForm(request.POST)
-                    if form.is_valid():
-                        username = form.cleaned_data.get('username')
-                    else:
-                        try:
-                            username = request.POST['username']
-                            user = User.objects.get(username=username)
-                        except Exception as ex:
-                            username = None
-                    if username:
-                        form.is_valid()
-                        password1 = form.cleaned_data.get('password1')
-                        password2 = form.cleaned_data.get('password2')
-                        first_name = form.cleaned_data.get('firstname')
-                        last_name = form.cleaned_data.get('lastname')
-                        email = form.cleaned_data.get('email')
-                        is_active = form.cleaned_data.get('is_active')
-                        is_staff = form.cleaned_data.get('is_staff')
-                        groups = form.cleaned_data.get('groups')
-                        patronymic = form.cleaned_data.get('patronymic')
-                        personnel_number = form.cleaned_data.get('personnel_number')
-                        subdivision = form.cleaned_data.get('subdivision')
-                        workshop_service = form.cleaned_data.get('workshop_service')
-                        department_site = form.cleaned_data.get('department_site')
-                        position = form.cleaned_data.get('position')
-                        category = form.cleaned_data.get('category')
-                        if password1 == password2:
+                    username = DjangoClass.RequestClass.get_value(request, 'username')
+                    groups = request.POST['groups[]']
+                    print(groups)
+                    try:
+                        user = User.objects.get(username=username)
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        # user model
+                        password_1 = DjangoClass.RequestClass.get_value(request, 'password_1')
+                        password_2 = DjangoClass.RequestClass.get_value(request, 'password_2')
+                        if password_1 == password_2:
+                            first_name = DjangoClass.RequestClass.get_value(request, 'first_name')
+                            last_name = DjangoClass.RequestClass.get_value(request, 'last_name')
+                            email = DjangoClass.RequestClass.get_value(request, 'email')
+                            is_active = DjangoClass.RequestClass.get_check(request, 'is_active')
+                            is_staff = DjangoClass.RequestClass.get_check(request, 'is_staff')
+                            groups = DjangoClass.RequestClass.get_value(request, 'groups')
+                            print(groups)
+                            # profile model
+                            patronymic = DjangoClass.RequestClass.get_value(request, 'patronymic')
+                            personnel_number = DjangoClass.RequestClass.get_value(request, 'personnel_number')
+                            subdivision = DjangoClass.RequestClass.get_value(request, 'subdivision')
+                            workshop_service = DjangoClass.RequestClass.get_value(request, 'workshop_service')
+                            department_site = DjangoClass.RequestClass.get_value(request, 'department_site')
+                            position = DjangoClass.RequestClass.get_value(request, 'position')
+                            category = DjangoClass.RequestClass.get_value(request, 'category')
+                            # utils
+                            is_edit = DjangoClass.RequestClass.get_check(request, 'is_edit')
                             account_auth_obj = DjangoClass.AccountClass.UserAuthClass(
                                 # Основное
                                 username=username,
-                                password=password1,
+                                password=password_1,
 
                                 # Персональная информация
                                 first_name=first_name,
@@ -444,9 +445,9 @@ def account_create_accounts(request, quantity=1):
                                 groups=groups,
 
                                 # Настройки создания аккаунта
-                                force_change_account=force_change,
-                                force_change_account_password=force_change,
-                                force_clear_groups=force_change
+                                force_change_account=is_edit,
+                                force_change_account_password=is_edit,
+                                force_clear_groups=is_edit
                             )
                             account_profile_first_obj = DjangoClass.AccountClass.UserProfileClass(
                                 # Основное

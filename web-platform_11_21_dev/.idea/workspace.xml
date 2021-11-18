@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_MjJCNzU5N0Y4NzM5RTYyOTI3MjhEMkVFQkJDMTRFN0I0RDcyMD,84fd7296b8a781605939a74bf188f7c7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMTg=_MzI2NDg3MTlEQzlGRTBGMDRGMkNDQjY1RjhDMjQ3MjIzNTI3,c4f1e57252b266a6e501531b703c199d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/bankidea/18_11_2021/export_users.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/Сценарии.docx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/zarplata.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/zarplata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_create_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_create_accounts.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,6 +119,7 @@
       <workItem from="1637153808178" duration="2873000" />
       <workItem from="1637199399127" duration="5937000" />
       <workItem from="1637207246095" duration="15516000" />
+      <workItem from="1637233083687" duration="8992000" />
     </task>
     <servers />
   </component>
