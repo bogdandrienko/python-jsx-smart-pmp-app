@@ -1,5 +1,6 @@
-{% extends "components/base.html" %} {% load static %} {% load crispy_forms_tags
-%} {% load crispy_forms_filters %}
+{% extends "components/base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
 
 <!-- Head -->
 {% block head %} {% include 'components/navbar.html' %} {% endblock head %}
@@ -19,7 +20,7 @@
 	{% if result %}
 	{% include 'components/success.html' %}
 	{% else %}
-	<div>	
+	<div>
 		<div class="text-white rounded bg-dark">
 			<h1 class="display-6 fst-italic">Создание пользователей</h1>
 			<p class="text-secondary">
@@ -131,22 +132,24 @@
 						</label>
 
 						<label class="form-control">
-							<select type="select" name="group" class="form-select form-select-lg" multiple="multiple" size="5">
+							<select type="select" name="group" class="form-select form-select-lg" multiple="multiple"
+								size="5">
 								{% if groups %}
-									{% for group in groups %}
-										<option value="{{ group.name }}">{{ group.name }}</option>
-									{% endfor %}
+								{% for group in groups %}
+								<option value="{{ group.name }}">{{ group.name }}</option>
+								{% endfor %}
 								{% else %}
-									Группы не созданы!
+								Группы не созданы!
 								{% endif %}
 							</select>
 						</label>
 
 						<label class="form-control-lg">
 							Группы доступа:
-							<input type="text" name="groups" {# required="" #} placeholder="User" value="" class="form-control"
-								{# minlength="0" #} {# maxlength="16"#} />
-							<small class="text-muted">введите, из списка выше и через запятую, необходимые группы доступа для
+							<input type="text" name="groups" {# required="" #} placeholder="User" value=""
+								class="form-control" {# minlength="0" #} {# maxlength="16"#} />
+							<small class="text-muted">введите, из списка выше и через запятую, необходимые группы
+								доступа для
 								пользователя</small>
 						</label>
 					</div>

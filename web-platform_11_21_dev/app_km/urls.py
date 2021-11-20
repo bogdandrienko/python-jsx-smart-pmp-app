@@ -25,7 +25,7 @@ urlpatterns = [
     # User access
     path('account_change_profile/', views.account_change_profile, name='account_change_profile'),
     path('account_profile/<slug:username>/', views.account_profile, name='account_profile'),
-    # Superuser access
+    # Superuser account_update_accounts_1c
     path('account_create_accounts/<int:quantity>/', views.account_create_accounts, name='account_create_accounts'),
     path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),
     path('account_generate_passwords/', views.account_generate_passwords, name='account_generate_passwords'),

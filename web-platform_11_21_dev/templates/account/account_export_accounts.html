@@ -1,7 +1,5 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% load crispy_forms_filters %}
 
 <!-- Head -->
 {% block head %}
@@ -26,8 +24,9 @@
 {% if result %}
 
     {% include 'components/success.html' %}
-    <div class="text-white rounded bg-dark">
-        <a class="btn btn-outline-light" href="{% static 'media/data/account/export_users.xlsx' %}">Скачать результат выгрузки</a>
+
+    <div class="rounded">
+        <a class="w-100 btn btn-lg btn-outline-success" href="{% static 'media/data/account/export_users.xlsx' %}">Скачать результат выгрузки</a>
     </div>
 
     {% if data %}
@@ -47,10 +46,27 @@
         <p class="text-secondary">Эта страница содержит форму для выгрузки пользователей.</p>
     </div>
 
-    <form class="form-control" action="{% url 'account_export_accounts' %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'account_export_accounts' %}"
+          method="POST"
+          target="_self"
+          enctype="multipart/form-data"
+          name="account_export_accounts"
+          autocomplete="on"
+          class=""
+    >
         {% csrf_token %}
-        {{ form_1|crispy }}
-        <button class="form-control btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+        <div>
+            <label class="form-control-lg">
+                Нажмите, чтобы выгрузить пользователей системы:
+                <small class="text-muted">данные будут доступны в виде таблицы и excel-файла</small>
+            </label>
+        </div>
+        <div class="btn-group btn-group-lg">
+            <button href=""
+                    type="submit"
+                    class="w-100 form-control btn btn-lg btn-outline-primary"
+            >Выгрузить</button>
+        </div>
     </form>
 
 {% endif %}

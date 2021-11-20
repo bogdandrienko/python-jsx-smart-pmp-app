@@ -44,9 +44,27 @@
             <p class="text-secondary">Эта страница содержит форму для обновления пользователей из внутренней базы 1С.</p>
         </div>
 
-        <form class="form-control" action="{% url 'account_update_accounts_1c' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'account_update_accounts_1c' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="account_update_accounts_1c"
+              autocomplete="on"
+              class=""
+        >
             {% csrf_token %}
-            <button class="form-control btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+            <div>
+                <label class="form-control-lg">
+                    Нажмите, чтобы обновить пользователей системы из базы данных 1С:
+                    <small class="text-muted">данные обновленных пользователей будут доступны в виде таблицы</small>
+                </label>
+            </div>
+            <div class="btn-group btn-group-lg">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Обновить</button>
+            </div>
         </form>
 
 {% endif %}

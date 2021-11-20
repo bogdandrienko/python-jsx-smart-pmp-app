@@ -2774,3 +2774,27 @@ Bogdan, 127.0.0.1, /account_create_accounts/1/, POST, 2021-11-18 19:49:17.043790
 Bogdan, 192.168.1.68, /account_create_accounts/1/, POST, 2021-11-19 10:34:16.143603, User matching query does not exist.
 
 Bogdan, 192.168.1.68, /account_create_accounts/1/, POST, 2021-11-19 10:35:34.372799, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:12:58.913139, '>' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:13:20.945786, '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:13:37.442321, '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:15:11.805670, '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:15:24.716055, '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:15:54.406056, '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:16:18.400998, '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_login/, POST, 2021-11-20 12:16:37.857523, '>=' not supported between instances of 'datetime.datetime' and 'str'
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-20 22:58:35.049605, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-20 23:23:04.768889, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-20 23:23:39.888644, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-20 23:24:10.844742, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера

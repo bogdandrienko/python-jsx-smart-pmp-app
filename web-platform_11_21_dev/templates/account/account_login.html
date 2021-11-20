@@ -1,16 +1,14 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% load crispy_forms_filters %}
 
 <!-- Head -->
 {% block head %}
-{% include 'components/navbar.html' %}
+    {% include 'components/navbar.html' %}
 {% endblock head %}
 
 <!-- Title -->
 {% block title %}
-Войти в аккаунт
+    Войти в аккаунт
 {% endblock title %}
 
 <!-- Style -->
@@ -23,53 +21,124 @@
 {% block main %}
 <main class="container-fluid mx-auto text-center d-block">
 
-	{% if result > 0 %}
+{% if result > 0 %}
 
-	{% include 'components/success.html' %}
+    {% include 'components/success.html' %}
 
-	{% else %}
+{% else %}
 
-	<div class="text-white rounded bg-dark">
-		<h1 class="display-6 fst-italic">Войти в аккаунт</h1>
-		<p class="text-secondary">Эта страница содержит форму для входа пользователя.</p>
-	</div>
+    <div class="text-white rounded bg-dark">
+        <h1 class="display-6 fst-italic">Войти в аккаунт</h1>
+        <p class="text-secondary">Эта страница содержит форму для входа пользователя.</p>
+    </div>
 
-	<form class="form-control" action="{% url 'account_login' %}" method="POST" enctype="value">
-		{% csrf_token %}
-		<div>
-			{% if result == -1 %}
-			<p class="lead text-danger">Вы ввели неверные имея пользователя или пароль!</p>
-			{% endif %}
-			<label class="form-control-lg">
-				Введите Ваш идентификатор пользователя:
-				<input type="text" name="username" required="" placeholder="" value="" class="form-control"
-					minlength="12" maxlength="12" />
-				<small class="text-muted">ИИН: 12 цифр</small>
-			</label>
+    {% if result == -1 %}
 
-			<label class="form-control-lg">
-				Введите пароль для входа в аккаунт:
-				<input type="password" name="password" required="" placeholder="" value="" class="form-control"
-					minlength="8" maxlength="16" />
-				<small class="text-muted">пароль: от 8 до 16 символов</small>
-			</label>
-		</div>
-		<div class="btn-group btn-group-lg">
-			<button class="form-control btn btn-lg btn-outline-success" type="submit">Войти</button>
-			<a class="form-control btn btn-lg btn-outline-danger"
-				href="{% url 'account_recover_password' 0 %}">Восстановить доступ</a>
-		</div>
+        {% if data <= 10 %}
 
-	</form>
+            <p class="lead text-danger">Вы ввели неверные имя пользователя и/или пароль! Количество попыток входа за последний час: {{ data }} (разрешено не больше 10 в час)</p>
 
-	{% endif %}
+        {% else %}
+
+            <p class="lead text-danger">Вы превысили количество попыток входа! Количество попыток входа за последний час: {{ data }} (разрешено не больше 10 в час)</p>
+
+        {% endif %}
+
+    {% endif %}
+
+    <form action="{% url 'account_login' %}"
+          method="POST"
+          target="_self"
+          enctype="multipart/form-data"
+          name="account_login"
+          autocomplete="on"
+          class=""
+    >
+        {% csrf_token %}
+        <div>
+            <div>
+                <div class="form-floating">
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           required=""
+                           placeholder="_"
+                           value=""
+                           minlength="12"
+                           maxlength="12"
+                           class="form-control form-control-lg"/>
+                    <label for="username"
+                           class="form-control-lg">Введите сюда Ваш "идентификатор" пользователя</label>
+                    <small class="text-muted">иин: 12 цифр</small>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           required=""
+                           placeholder="_"
+                           value=""
+                           minlength="8"
+                           maxlength="16"
+                           class="form-control form-control-lg"/>
+                    <label for="password"
+                           class="form-control-lg">Введите сюда пароль для входа в аккаунт:</label>
+                    <small class="text-muted">пароль: от 8 до 16 символов</small>
+                </div>
+            </div>
+
+            <div>
+                <label class="form-control-lg">
+                    Введите Ваш идентификатор пользователя:
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           required=""
+                           placeholder=""
+                           value=""
+                           minlength="12"
+                           maxlength="12"
+                           class="form-control form-control-lg"/>
+                    <small class="text-muted">ИИН: 12 цифр</small>
+                </label>
+
+                <label class="form-control-lg">
+                    Введите пароль для входа в аккаунт:
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           required=""
+                           placeholder=""
+                           value=""
+                           minlength="8"
+                           maxlength="16"
+                           class="form-control form-control-lg"/>
+                    <small class="text-muted">пароль: от 8 до 16 символов</small>
+                </label>
+            </div>
+        </div>
+        <div class="btn-group btn-group-lg">
+            <button href=""
+                    type="submit"
+                    class="w-100 form-control btn btn-lg btn-outline-primary" >Войти в систему</button>
+            <button href=""
+                    type="reset"
+                    class="w-100 form-control btn btn-lg btn-outline-warning" >Сбросить данные</button>
+            <a href="{% url 'account_recover_password' 0 %}"
+        {#               type=""#}
+               class="w-100 form-control btn btn-lg btn-outline-danger">Восстановить доступ</a>
+        </div>
+    </form>
+
+{% endif %}
 
 </main>
 {% endblock main %}
 
 <!-- Footer -->
 {% block footer %}
-{% include 'components/new_footer.html' %}
+    {% include 'components/new_footer.html' %}
 {% endblock footer %}
 
 <!-- Script -->

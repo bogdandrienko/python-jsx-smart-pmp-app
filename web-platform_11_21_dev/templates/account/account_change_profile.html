@@ -1,7 +1,5 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% load crispy_forms_filters %}
 
 <!-- Head -->
 {% block head %}
@@ -37,10 +35,112 @@
             <p class="display-6">Идентификатор пользователя: {{ request.user.username }}</p>
         </div>
 
-        <form class="form-control" action="{% url 'account_change_profile' %}" method="POST" enctype="multipart/form-data">
+        <form class=""
+              action="{% url 'account_change_profile' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="account_change_profile"
+              autocomplete="on"
+        >
             {% csrf_token %}
-            {{ form_1|crispy }}
-            <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+            <div>
+                <label class="form-control form-control-lg">
+                    Образование:
+                    <textarea class="form-control form-control-lg"
+                       type="text"
+                       id="education"
+                       name="education"
+                       required=""
+                       placeholder="{{ request.user.profile.education }}"
+                       minlength="1"
+                       maxlength="500"
+                       rows="5"
+                    >{{ request.user.profile.education }}</textarea>
+                    <small class="text-muted">введите информацию о своём образовании: максимум 500 символов</small>
+                </label>
+
+                <label class="form-control form-control-lg">
+                    Достижения:
+                    <textarea class="form-control form-control-lg"
+                       type="text"
+                       id="achievements"
+                       name="achievements"
+                       required=""
+                       placeholder="{{ request.user.profile.achievements }}"
+                       minlength="1"
+                       maxlength="500"
+                       rows="5"
+                    >{{ request.user.profile.achievements }}</textarea>
+                    <small class="text-muted">введите информацию о своих достижениях: максимум 500 символов</small>
+                </label>
+
+                <label class="form-control form-control-lg">
+                    Биография:
+                    <textarea class="form-control form-control-lg"
+                       type="text"
+                       id="biography"
+                       name="biography"
+                       required=""
+                       placeholder="{{ request.user.profile.biography }}"
+                       minlength="1"
+                       maxlength="500"
+                       rows="5"
+                    >{{ request.user.profile.biography }}</textarea>
+                    <small class="text-muted">введите информацию о своей биографии: максимум 500 символов</small>
+                </label>
+
+                <label class="form-control form-control-lg">
+                    Хобби:
+                    <textarea class="form-control form-control-lg"
+                       type="text"
+                       id="hobbies"
+                       name="hobbies"
+                       required=""
+                       placeholder="{{ request.user.profile.hobbies }}"
+                       minlength="1"
+                       maxlength="500"
+                       rows="5"
+                    >{{ request.user.profile.hobbies }}</textarea>
+                    <small class="text-muted">введите информацию о своём хобби: максимум 500 символов</small>
+                </label>
+            </div>
+            <div class="form-control form-control-lg">
+                {% if request.user.profile.image_avatar %}
+                    <img class="bd-placeholder-img"
+                         src="{{ request.user.profile.image_avatar.url }}"
+                         width="256px"
+                         height="100%"
+                         alt="{{ request.user.profile.firstname }}">
+                {% else %}
+                    <img class="bd-placeholder-img"
+                         src="{% static 'media/uploads/account/avatar/default.jpg' %}"
+                         width="256px"
+                         height="100%"
+                         alt="{{ request.user.profile.firstname }}">
+                {% endif %}
+
+                <label class="form-control form-control-lg">
+                    Аватарка профиля:
+                    <input class="form-control form-control-lg"
+                       type="file"
+                       id="image_avatar"
+                       name="image_avatar"
+                       required=""
+                       placeholder="{{ request.user.profile.image_avatar }}"
+                       value="{{ request.user.profile.image_avatar }}"
+                       accept="image/*"/>
+                    <small class="text-muted">выберите аватарку профиля, только формат изображений</small>
+                </label>
+            </div>
+            <div class="btn-group btn-group-lg">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary">Сохранить изменения</button>
+                <button href=""
+                        type="reset"
+                        class="w-100 form-control btn btn-lg btn-outline-warning">Сбросить данные</button>
+            </div>
         </form>
 
     {% else %}
