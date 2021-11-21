@@ -110,7 +110,7 @@ def account_login(request):
                         username=request.user.username,
                         request_path='/account_login/',
                         request_method='POST'):
-                    if dat.datetime_now and (dat.datetime_now + datetime.timedelta(hours=6)).\
+                    if dat.datetime_now and (dat.datetime_now + datetime.timedelta(hours=6)). \
                             strftime('%Y-%m-%d %H:%M') >= now:
                         data += 1
                 user = authenticate(
@@ -194,16 +194,20 @@ def account_recover_password(request, type_slug):
 
     # try:
     if True:
-        form_1 = True
-        result = False
+        result = 0
         data = None
         value = None
         if request.method == 'POST':
-            user = User.objects.get(
-                username=DjangoClass.RequestClass.get_value(request, "username"))
+            try:
+                user = User.objects.get(
+                    username=DjangoClass.RequestClass.get_value(request, "username"))
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                user = None
             if type_slug.lower() == 'iin':
                 try:
-                    form_1 = False
+                    if user:
+                        result = 1
                     data = user
 
                     now = (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M')
@@ -216,6 +220,8 @@ def account_recover_password(request, type_slug):
                         if dat.datetime_now and (dat.datetime_now + datetime.timedelta(hours=6)). \
                                 strftime('%Y-%m-%d %H:%M') >= now:
                             value += 1
+                    if value > 10:
+                        result = -1
 
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(
@@ -232,7 +238,7 @@ def account_recover_password(request, type_slug):
                         user.profile.password = password_1
                         user.set_password(password_1)
                         user.save()
-                        result = True
+                        result = 2
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(
                         request=request, error=error)
@@ -249,7 +255,7 @@ def account_recover_password(request, type_slug):
                             try:
                                 send_mail(subject, message_s, from_email, [
                                     to_email, ''], fail_silently=False)
-                                result = True
+                                result = 2
                             except Exception as error:
                                 DjangoClass.LoggingClass.logging_errors(
                                     request=request, error=error)
@@ -257,7 +263,6 @@ def account_recover_password(request, type_slug):
                     DjangoClass.LoggingClass.logging_errors(
                         request=request, error=error)
         context = {
-            'form_1': form_1,
             'result': result,
             'data': data,
             'value': value,
@@ -304,7 +309,7 @@ def account_change_profile(request):
                     request, "education")
             if DjangoClass.RequestClass.get_value(request, "achievements") and \
                     DjangoClass.RequestClass.get_value(
-                    request, "achievements") != user.profile.achievements:
+                        request, "achievements") != user.profile.achievements:
                 user.profile.achievements = DjangoClass.RequestClass.get_value(
                     request, "achievements")
             if DjangoClass.RequestClass.get_value(request, "biography") and \

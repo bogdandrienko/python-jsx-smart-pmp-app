@@ -2798,3 +2798,19 @@ Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-20 23:23:04.76888
 Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-20 23:23:39.888644, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
 
 Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-20 23:24:10.844742, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:52:02.858679, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:52:17.596932, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:52:53.048898, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:53:30.294152, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:53:37.766543, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:56:39.104957, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:56:51.827826, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 09:57:07.979046, User matching query does not exist.
