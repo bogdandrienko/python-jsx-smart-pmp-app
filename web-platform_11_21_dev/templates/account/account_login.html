@@ -19,28 +19,30 @@
 
 <!-- Main -->
 {% block main %}
-<main class="container-fluid mx-auto text-center d-block">
 
-{% if result > 0 %}
+
+
+<div class="text-center bg-dark text-white">
+    <h1 class="display-6 fst-italic">Войти в аккаунт</h1>
+    <small class="text-secondary">Эта страница содержит форму для входа пользователя.</small>
+</div>
+
+{% if response == 1 %}
 
     {% include 'components/success.html' %}
 
 {% else %}
 
-    <div class="text-white rounded bg-dark">
-        <h1 class="display-6 fst-italic">Войти в аккаунт</h1>
-        <p class="text-secondary">Эта страница содержит форму для входа пользователя.</p>
-    </div>
 
-    {% if result == -1 %}
+    {% if response == -1 %}
 
         {% if data <= 10 %}
 
-            <p class="lead text-danger">Вы ввели неверные имя пользователя и/или пароль! Количество попыток входа за последний час: {{ data }} (разрешено не больше 10 в час)</p>
+            <p class="lead text-danger text-center">Вы ввели неверные имя пользователя и/или пароль! Количество попыток входа за последний час: {{ data }} (разрешено не больше 10 в час)</p>
 
         {% else %}
 
-            <p class="lead text-danger">Вы превысили количество попыток входа! Количество попыток входа за последний час: {{ data }} (разрешено не больше 10 в час)</p>
+            <p class="lead text-danger text-center">Вы превысили количество попыток входа! Количество попыток входа за последний час: {{ data }} (разрешено не больше 10 в час)</p>
 
         {% endif %}
 
@@ -52,7 +54,7 @@
           enctype="multipart/form-data"
           name="account_login"
           autocomplete="on"
-          class=""
+          class="text-center"
     >
         {% csrf_token %}
         <div>
@@ -133,7 +135,8 @@
 
 {% endif %}
 
-</main>
+
+
 {% endblock main %}
 
 <!-- Footer -->

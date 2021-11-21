@@ -37,20 +37,23 @@ from .utils import ExcelClass, LoggingClass, create_encrypted_password, link_cal
 # local
 def local(request):
     # logging
-    DjangoClass.AuthorizationClass.access_to_page(
-        request=request, logging=True)
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True)
+
     return redirect('http://192.168.1.68:8000/')
 
 
 # admin
 def admin_(request):
+    # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
+
     return render(request, admin.site.urls)
 
 
 # home
 def home(request):
+    # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='All'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
     return render(request, 'components/home.html')
@@ -58,17 +61,18 @@ def home(request):
 
 # example
 def example(request):
+    # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, available='Superuser'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False))
 
     # try:
     if True:
-        result = False
+        response = 0
         data = False
         if request.method == 'POST':
-            result = True
+            response = 1
             data = [
-                ['Заголовок_1', 'Заголовок_2'],
+                ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
                 [
                     ['Тело_1_1', 'Тело_1_2'],
                     ['Тело_2_1', 'Тело_2_2'],
@@ -76,7 +80,7 @@ def example(request):
                 ]
             ]
         context = {
-            'result': result,
+            'response': response,
             'data': data,
             'form_1': ExampleForm,
         }
@@ -84,7 +88,7 @@ def example(request):
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     # HttpRaiseExceptionClass.http404_raise('Страница не найдена ;(')
     #     context = {
-    #         'result': False,
+    #         'response': False,
     #         'data' : False,
     #         'form_1': False,
     #     }
@@ -99,7 +103,7 @@ def account_login(request):
         request=request, logging=True)
 
     try:
-        result = 0
+        response = 0
         data = None
         if request.method == 'POST':
             try:
@@ -121,21 +125,21 @@ def account_login(request):
                 )
                 if user and data <= 10:
                     login(request, user)
-                    result = 1
+                    response = 1
                 else:
-                    result = -1
+                    response = -1
             except Exception as error:
-                result = -1
+                response = -1
                 DjangoClass.LoggingClass.logging_errors(
                     request=request, error=error)
         context = {
-            'result': result,
+            'response': response,
             'data': data,
         }
     except Exception as error:
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         context = {
-            'result': 0
+            'response': 0
         }
     return render(request, 'account/account_login.html', context)
 
@@ -147,42 +151,45 @@ def account_change_password(request):
 
     # try:
     if True:
-        result = False
+        response = 0
         if request.method == 'POST':
-            user = User.objects.get(username=request.user.username)
-            # User password data
-            password_1 = DjangoClass.RequestClass.get_value(
-                request, "password_1")
-            password_2 = DjangoClass.RequestClass.get_value(
-                request, "password_2")
-            if password_1 == password_2 != '' and password_1 != user.profile.password:
-                user.profile.password = password_1
-                user.password = password_1
-                user.set_password(password_1)
-            # Third data account
-            if DjangoClass.RequestClass.get_value(request, "email") and DjangoClass.RequestClass.get_value(request,
-                                                                                                           "email") != user.profile.email:
-                user.profile.email = DjangoClass.RequestClass.get_value(
-                    request, "email")
-            if DjangoClass.RequestClass.get_value(request, "secret_question") and DjangoClass.RequestClass.get_value(
-                    request, "secret_question") != user.profile.secret_question:
-                user.profile.secret_question = DjangoClass.RequestClass.get_value(
-                    request, "secret_question")
-            if DjangoClass.RequestClass.get_value(request, "secret_answer") and DjangoClass.RequestClass.get_value(
-                    request, "secret_answer") != user.profile.secret_answer:
-                user.profile.secret_answer = DjangoClass.RequestClass.get_value(
-                    request, "secret_answer")
-            user.save()
-            result = True
+            # try:
+            if True:
+                user = User.objects.get(username=request.user.username)
+                # User password data
+                password_1 = DjangoClass.RequestClass.get_value(
+                    request, "password_1")
+                password_2 = DjangoClass.RequestClass.get_value(
+                    request, "password_2")
+                if password_1 == password_2 != '' and password_1 != user.profile.password:
+                    user.profile.password = password_1
+                    user.password = password_1
+                    user.set_password(password_1)
+                # Third data account
+                if DjangoClass.RequestClass.get_value(request, "email") and DjangoClass.RequestClass.get_value(request,
+                                                                                                               "email") != user.profile.email:
+                    user.profile.email = DjangoClass.RequestClass.get_value(
+                        request, "email")
+                if DjangoClass.RequestClass.get_value(request, "secret_question") and DjangoClass.RequestClass.get_value(
+                        request, "secret_question") != user.profile.secret_question:
+                    user.profile.secret_question = DjangoClass.RequestClass.get_value(
+                        request, "secret_question")
+                if DjangoClass.RequestClass.get_value(request, "secret_answer") and DjangoClass.RequestClass.get_value(
+                        request, "secret_answer") != user.profile.secret_answer:
+                    user.profile.secret_answer = DjangoClass.RequestClass.get_value(
+                        request, "secret_answer")
+                user.save()
+                response = 1
+            # except Exception as error:
+            #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            #     response = -1
         context = {
-            'form_1': ChangePasswordForm,
-            'result': result
+            'response': response
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'form_1': False,
-    #         'result': False
+    #         'response': 0
     #     }
     return render(request, 'account/account_change_password.html', context)
 
@@ -194,7 +201,7 @@ def account_recover_password(request, type_slug):
 
     # try:
     if True:
-        result = 0
+        response = 0
         data = None
         value = None
         if request.method == 'POST':
@@ -207,7 +214,7 @@ def account_recover_password(request, type_slug):
             if type_slug.lower() == 'iin':
                 try:
                     if user:
-                        result = 1
+                        response = 1
                     data = user
 
                     now = (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M')
@@ -221,7 +228,7 @@ def account_recover_password(request, type_slug):
                                 strftime('%Y-%m-%d %H:%M') >= now:
                             value += 1
                     if value > 10:
-                        result = -1
+                        response = -1
 
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(
@@ -238,7 +245,7 @@ def account_recover_password(request, type_slug):
                         user.profile.password = password_1
                         user.set_password(password_1)
                         user.save()
-                        result = 2
+                        response = 2
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(
                         request=request, error=error)
@@ -255,7 +262,7 @@ def account_recover_password(request, type_slug):
                             try:
                                 send_mail(subject, message_s, from_email, [
                                     to_email, ''], fail_silently=False)
-                                result = 2
+                                response = 2
                             except Exception as error:
                                 DjangoClass.LoggingClass.logging_errors(
                                     request=request, error=error)
@@ -263,7 +270,7 @@ def account_recover_password(request, type_slug):
                     DjangoClass.LoggingClass.logging_errors(
                         request=request, error=error)
         context = {
-            'result': result,
+            'response': response,
             'data': data,
             'value': value,
         }
@@ -271,7 +278,7 @@ def account_recover_password(request, type_slug):
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'form_1': False,
-    #         'result': False
+    #         'response': False
     #         'data': False
     #     }
     return render(request, 'account/account_recover_password.html', context)
@@ -299,7 +306,7 @@ def account_change_profile(request):
 
     # try:
     if True:
-        result_form = False
+        response = 0
         if request.method == 'POST':
             user = User.objects.get(username=request.user.username)
             # Second data account
@@ -323,16 +330,15 @@ def account_change_profile(request):
                 user.profile.image_avatar = DjangoClass.RequestClass.get_file(
                     request, 'image_avatar')
             user.save()
-            result_form = True
+            response = 1
         context = {
-            'form_1': ChangeUserForm,
-            'result_form': result_form
+            'response': response
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'form_1': False,
-    #         'result_form': False
+    #         'response': -1
     #     }
     return render(request, 'account/account_change_profile.html', context)
 

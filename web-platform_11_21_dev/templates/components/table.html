@@ -1,32 +1,50 @@
-<div class="mx-auto text-center">
-    <h1 class="display-6">Текущие данные.</h1>
-    <p class="lead">Ниже расположены данные, соответствующие текущему значению.</p>
-    <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm">
-        <thead>
+<div class="text-center bg-dark text-white">
+    <h1 class="display-6">Данные</h1>
+    <p class="lead">Текущие данные ниже в таблице:</p>
+    <div class="btn-group btn-group-lg">
+        <a href="{% url 'home' %}"
+           type="submit"
+           class="w-100 form-control btn btn-lg btn-primary">Главная</a>
+        <a href=""
+           type="button"
+           class="w-100 form-control btn btn-lg btn-warning">Повторить</a>
+    </div>
+</div>
+<table class="table table-bordered border-dark table-info table-striped table-hover">
+    <thead>
+        <tr>
+
+            {% for arr_1 in data.0 %}
+
+                <th scope="col" colspan="1" class="text-center">{{ arr_1 }}</th>
+
+            {% endfor %}
+
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for arr_1 in data.1 %}
+
             <tr>
 
-                {% for arr_1 in data.0 %}
-                    <th>
-                        {{ arr_1 }}
-                    </th>
+                {% for arr_2 in arr_1 %}
+
+                    {% if forloop.counter == 1 %}
+
+                        <td colspan="1" class="align-bottom text-end">{{ arr_2 }}</td>
+
+                    {% else %}
+
+                        <td colspan="2" class="align-top text-start">{{ arr_2 }}</td>
+
+                    {% endif %}
+
                 {% endfor %}
 
             </tr>
-        </thead>
-        <tbody>
 
-            {% for arr_1 in data.1 %}
-                <tr>
+        {% endfor %}
 
-                    {% for arr_2 in arr_1 %}
-                        <td>
-                            {{ arr_2 }}
-                        </td>
-                    {% endfor %}
-
-                </tr>
-            {% endfor %}
-
-        </tbody>
-    </table>
-</div>
+    </tbody>
+</table>

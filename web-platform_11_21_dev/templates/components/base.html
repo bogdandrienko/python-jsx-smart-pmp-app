@@ -6,12 +6,15 @@
     <head>
         <!-- Head -->
         {% block head %}{% endblock head %}
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!-- Title -->
         <title>
             {% block title %}{% endblock title %}
         </title>
+
         <!-- Style -->
         {% block style %}{% endblock style %}
         <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}" />
@@ -28,7 +31,7 @@
             {% block header %}{% endblock header %}
         </header>
         <!-- Main -->
-        <main class="bg-light container-fluid" style="min-height: 80vh;">
+        <main class="bg-light container-fluid p-lg-0 m-lg-0" style="min-height: 80vh;">
             {% block main %}{% endblock main %}
         </main>
         <!-- Footer -->

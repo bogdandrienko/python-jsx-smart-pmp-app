@@ -1,8 +1,12 @@
-<div class="p-sm-5 text-white rounded bg-dark">
-    <h1 class="display-4">Данных нет.</h1>
-    <p class="lead">Перезагрузите страницу или ожидайте исправления неполадок.</p>
-    <div class="btn-group btn-group-lg" role="group" aria-label="Basic mixed styles example">
-      <a class="btn btn-success active" aria-current="page" href="{% url 'home' %}">Главная</a>
-      <a type="button" class="btn btn-warning" href="">Перезагрузить</a>
+<div class="text-center bg-dark text-white">
+    <h1 class="display-6">Не успешно</h1>
+    <p class="lead">Операция не выполнена, ожидайте исправления неполадок или повторите операцию.</p>
+    <div class="btn-group btn-group-lg">
+        <a href="{% url 'home' %}"
+           type="submit"
+           class="w-100 form-control btn btn-lg btn-primary">Главная</a>
+        <a href=""
+           type="button"
+           class="w-100 form-control btn btn-lg btn-warning">Повторить</a>
     </div>
 </div>

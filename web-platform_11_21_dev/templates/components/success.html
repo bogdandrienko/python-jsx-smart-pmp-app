@@ -1,8 +1,12 @@
-<div class="p-sm-5 text-white rounded bg-dark">
-    <h1 class="display-4">Успешно выполнено</h1>
-    <p class="lead">Операция успешно выполнена, вернитесь на главную или повторите операцию</p>
-    <div class="btn-group btn-group-lg" role="group" aria-label="Basic mixed styles example">
-      <a class="btn btn-success active" aria-current="page" href="{% url 'home' %}">Главная</a>
-      <a type="button" class="btn btn-warning" href="">Повторить</a>
+<div class="text-center bg-dark text-white">
+    <h1 class="display-6">Успешно</h1>
+    <p class="lead">Операция успешно выполнена, перейдите на главную или повторите операцию.</p>
+    <div class="btn-group btn-group-lg">
+        <a href="{% url 'home' %}"
+           type="submit"
+           class="w-100 form-control btn btn-lg btn-primary">Главная</a>
+        <a href=""
+           type="button"
+           class="w-100 form-control btn btn-lg btn-warning">Повторить</a>
     </div>
 </div>
