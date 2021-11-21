@@ -510,24 +510,17 @@ class DjangoClass:
             return value
 
         @staticmethod
-        def get_check(request: WSGIRequest, key: str, none_is_error=False, strip=True):
+        def get_check(request: WSGIRequest, key: str, none_is_error=False):
             if none_is_error:
                 # If key not have is Exception Error
                 value = request.POST[key]
             else:
                 # If key not have value is None
                 value = request.POST.get(key)
-            if strip and value:
-                value.strip()
-            if value == 'on':
-                return True
-            elif value == 'off':
-                return False
-            elif value is None:
+            if value is None:
                 return False
             else:
-                return value
-
+                return True
 
         @staticmethod
         def get_file(request: WSGIRequest, key: str, none_is_error=False):

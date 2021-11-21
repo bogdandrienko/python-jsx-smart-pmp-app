@@ -2013,6 +2013,7 @@
                 data-bs-parent="#accordionExample"
             >
                 <div class="accordion-body">
+
                     <form>
                         <label for="fname" class="form-control">First name:</label><br />
                         <input type="text" id="fname" name="fname" /><br />
@@ -2583,90 +2584,7 @@
             >
                 <div class="accordion-body">
 
-                    <form action="{% url 'example' %}"
-                          method="POST"
-                          target="_self"
-                          enctype="multipart/form-data"
-                          name="account_login"
-                          autocomplete="on"
-                          class=""
-                    >
-                        {% csrf_token %}
-                        <div>
-                            <div>
-                                <div class="form-floating">
-                                    <input type="text"
-                                           id="username"
-                                           name="username"
-                                           required=""
-                                           placeholder="_"
-                                           value=""
-                                           minlength="12"
-                                           maxlength="12"
-                                           class="form-control form-control-lg"/>
-                                    <label for="username"
-                                           class="form-control-lg">Введите сюда Ваш "идентификатор" пользователя</label>
-                                    <small class="text-muted">иин: 12 цифр</small>
-                                </div>
-
-                                <div class="form-floating">
-                                    <input type="password"
-                                           id="password"
-                                           name="password"
-                                           required=""
-                                           placeholder="_"
-                                           value=""
-                                           minlength="8"
-                                           maxlength="16"
-                                           class="form-control form-control-lg"/>
-                                    <label for="password"
-                                           class="form-control-lg">Введите сюда пароль для входа в аккаунт:</label>
-                                    <small class="text-muted">пароль: от 8 до 16 символов</small>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="form-control-lg">
-                                    Введите Ваш идентификатор пользователя:
-                                    <input type="text"
-                                           id="username"
-                                           name="username"
-                                           required=""
-                                           placeholder=""
-                                           value=""
-                                           minlength="12"
-                                           maxlength="12"
-                                           class="form-control form-control-lg"/>
-                                    <small class="text-muted">ИИН: 12 цифр</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Введите пароль для входа в аккаунт:
-                                    <input type="password"
-                                           id="password"
-                                           name="password"
-                                           required=""
-                                           placeholder=""
-                                           value=""
-                                           minlength="8"
-                                           maxlength="16"
-                                           class="form-control form-control-lg"/>
-                                    <small class="text-muted">пароль: от 8 до 16 символов</small>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="btn-group btn-group-lg">
-                            <button href=""
-                                    type="submit"
-                                    class="w-100 form-control btn btn-lg btn-outline-primary">Войти в систему</button>
-                            <button href=""
-                                    type="reset"
-                                    class="w-100 form-control btn btn-lg btn-outline-warning">Сбросить данные</button>
-                            <a href="{% url 'account_recover_password' 0 %}"
-                        {#               type=""#}
-                               class="w-100 form-control btn btn-lg btn-outline-danger">Восстановить доступ</a>
-                        </div>
-                    </form>
+                    ...
 
                 </div>
             </div>

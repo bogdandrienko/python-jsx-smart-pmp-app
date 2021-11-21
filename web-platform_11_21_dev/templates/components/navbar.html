@@ -106,7 +106,8 @@
 								</li>
 								<li>
 									<h6 class="dropdown-header">Экстра</h6>
-									<a class="dropdown-item" href="{% url 'example' %}">Шаблоны</a>
+									<a class="dropdown-item" href="{% url 'example' %}">Шаблон</a>
+									<a class="dropdown-item" href="{% url 'examples' %}">Формы</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider text-light">
@@ -114,7 +115,7 @@
 								<li>
 									<h6 class="dropdown-header">Аккаунты</h6>
 									<a class="dropdown-item"
-										href="{% url 'account_create_accounts' 1 %}">Создать/изменить пользователей</a>
+										href="{% url 'account_create_accounts' 'one' %}">Создать/изменить пользователей</a>
 									<a class="dropdown-item" href="{% url 'account_generate_passwords' %}">Сгенерировать
 										пароли для аккаунтов</a>
 									<a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список

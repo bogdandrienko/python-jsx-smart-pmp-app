@@ -1,7 +1,5 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% load crispy_forms_filters %}
 
 <!-- Head -->
 {% block head %}
@@ -21,9 +19,15 @@
 
 <!-- Main -->
 {% block main %}
-<main class="container-fluid mx-auto text-center d-block">
 
-{% if result %}
+
+
+<div class="text-center bg-dark text-white">
+    <h1 class="display-6 fst-italic">Обновить пользователей из 1С</h1>
+    <small class="text-secondary">Эта страница содержит форму для обновления пользователей из внутренней базы 1С.</small>
+</div>
+
+{% if response == 1 %}
 
     {% include 'components/success.html' %}
 
@@ -37,39 +41,50 @@
 
     {% endif %}
 
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+    {% if data %}
+
+        {% include 'components/table.html' %}
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
 {% else %}
 
-        <div class="text-white rounded bg-dark">
-            <h1 class="display-6 fst-italic">Обновить пользователей из 1С</h1>
-            <p class="text-secondary">Эта страница содержит форму для обновления пользователей из внутренней базы 1С.</p>
+    <form action="{% url 'account_update_accounts_1c' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples/" #}
+          method="POST" {# method="GET" #}
+          target="_self" {# target="_self" #} {# target="_blank" #} {# target="_parent" #} {# target="_top" #}
+          enctype="multipart/form-data"
+          name="account_update_accounts_1c"
+          autocomplete="on"
+          class="text-center" {# class="text-center form-control form-control-lg" #}
+    >
+        {% csrf_token %}
+        <div>
+            <label class="form-control-lg">
+                Нажмите, чтобы обновить пользователей системы из базы данных 1С:
+                <small class="text-muted">данные обновленных пользователей будут доступны в виде таблицы</small>
+            </label>
         </div>
-
-        <form action="{% url 'account_update_accounts_1c' %}"
-              method="POST"
-              target="_self"
-              enctype="multipart/form-data"
-              name="account_update_accounts_1c"
-              autocomplete="on"
-              class=""
-        >
-            {% csrf_token %}
-            <div>
-                <label class="form-control-lg">
-                    Нажмите, чтобы обновить пользователей системы из базы данных 1С:
-                    <small class="text-muted">данные обновленных пользователей будут доступны в виде таблицы</small>
-                </label>
-            </div>
-            <div class="btn-group btn-group-lg">
-                <button href=""
-                        type="submit"
-                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                >Обновить</button>
-            </div>
-        </form>
+        <hr/>
+        <div class="form-control btn-group btn-group-lg">
+            <button href=""
+                    type="submit"
+                    class="w-100 form-control btn btn-lg btn-outline-primary"
+            >Подтвердить</button>
+        </div>
+    </form>
 
 {% endif %}
 
-</main>
+
+
 {% endblock main %}
 
 <!-- Footer -->

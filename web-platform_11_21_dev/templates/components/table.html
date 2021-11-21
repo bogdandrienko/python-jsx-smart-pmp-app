@@ -10,7 +10,7 @@
            class="w-100 form-control btn btn-lg btn-warning">Повторить</a>
     </div>
 </div>
-<table class="table table-bordered border-dark table-info table-striped table-hover">
+<table class="table table-bordered border-dark table-info table-striped table-hover table-sm">
     <thead>
         <tr>
 
@@ -32,11 +32,11 @@
 
                     {% if forloop.counter == 1 %}
 
-                        <td colspan="1" class="align-bottom text-end">{{ arr_2 }}</td>
+                        <td colspan="1" class="align-bottom text-center">{{ arr_2 }}</td>
 
                     {% else %}
 
-                        <td colspan="2" class="align-top text-start">{{ arr_2 }}</td>
+                        <td colspan="1" class="align-top text-center">{{ arr_2 }}</td>
 
                     {% endif %}
 

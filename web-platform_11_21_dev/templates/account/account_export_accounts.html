@@ -19,14 +19,22 @@
 
 <!-- Main -->
 {% block main %}
-<main class="container-fluid mx-auto text-center d-block">
 
-{% if result %}
+
+
+<div class="text-center bg-dark text-white">
+    <h1 class="display-6 fst-italic">Выгрузить пользователей</h1>
+    <small class="text-secondary">Эта страница содержит форму для выгрузки пользователей.</small>
+</div>
+
+{% if response == 1 %}
 
     {% include 'components/success.html' %}
 
-    <div class="rounded">
-        <a class="w-100 btn btn-lg btn-outline-success" href="{% static 'media/data/account/export_users.xlsx' %}">Скачать результат выгрузки</a>
+    <div class="">
+        <a class="w-100 btn btn-lg btn-outline-success"
+           href="{% static 'media/data/account/export_users.xlsx' %}"
+        >Скачать результат выгрузки</a>
     </div>
 
     {% if data %}
@@ -39,20 +47,19 @@
 
     {% endif %}
 
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
 {% else %}
 
-    <div class="text-white rounded bg-dark">
-        <h1 class="display-6 fst-italic">Выгрузить пользователей</h1>
-        <p class="text-secondary">Эта страница содержит форму для выгрузки пользователей.</p>
-    </div>
-
-    <form action="{% url 'account_export_accounts' %}"
-          method="POST"
-          target="_self"
+    <form action="{% url 'account_export_accounts' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples/" #}
+          method="POST" {# method="GET" #}
+          target="_self" {# target="_self" #} {# target="_blank" #} {# target="_parent" #} {# target="_top" #}
           enctype="multipart/form-data"
           name="account_export_accounts"
           autocomplete="on"
-          class=""
+          class="text-center" {# class="text-center form-control form-control-lg" #}
     >
         {% csrf_token %}
         <div>
@@ -61,17 +68,19 @@
                 <small class="text-muted">данные будут доступны в виде таблицы и excel-файла</small>
             </label>
         </div>
-        <div class="btn-group btn-group-lg">
+        <hr/>
+        <div class="form-control btn-group btn-group-lg">
             <button href=""
                     type="submit"
                     class="w-100 form-control btn btn-lg btn-outline-primary"
-            >Выгрузить</button>
+            >Подтвердить</button>
         </div>
     </form>
 
 {% endif %}
 
-</main>
+
+
 {% endblock main %}
 
 <!-- Footer -->

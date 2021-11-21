@@ -2,20 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/components/examples.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_errors.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_change_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_change_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_create_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_create_accounts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_export_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_export_accounts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_generate_passwords.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_recover_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_recover_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/aborted.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/aborted.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_update_accounts_1c.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_update_accounts_1c.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/example.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/example.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/success.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/table.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/table.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,6 +147,7 @@
       <workItem from="1637468385777" duration="6000" />
       <workItem from="1637468404942" duration="777000" />
       <workItem from="1637473635957" duration="11337000" />
+      <workItem from="1637490694454" duration="20212000" />
     </task>
     <servers />
   </component>
