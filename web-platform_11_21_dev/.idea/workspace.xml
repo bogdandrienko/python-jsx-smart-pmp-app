@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_gGaKXye.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/account/account_change_groups.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_change_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_create_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_create_accounts.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_recover_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_recover_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,16 +50,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/ideas" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/account" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\account" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\ideas" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\rational" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\account" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\ideas" />
@@ -141,6 +141,7 @@
       <workItem from="1637511247191" duration="12280000" />
       <workItem from="1637558406903" duration="3665000" />
       <workItem from="1637563228035" duration="13840000" />
+      <workItem from="1637582603712" duration="7972000" />
     </task>
     <servers />
   </component>

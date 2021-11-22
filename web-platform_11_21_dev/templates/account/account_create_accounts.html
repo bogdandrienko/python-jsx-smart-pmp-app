@@ -21,6 +21,7 @@
 {% block main %}
 
 
+
 <div class="text-center">
     <h1 class="display-6 fst-italic">Создание пользователей</h1>
     <small class="text-secondary">Эта страница содержит форму для создания одиночного или множества пользователей.</small>
@@ -73,8 +74,16 @@
                                            id="username"
                                            name="username"
                                            required=""
-                                           placeholder=""
-                                           value=""
+                                           {% if user.username %}
+                                                placeholder="{{ user.username }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.username %}
+                                                value="{{ user.username }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="12"
                                            maxlength="12"
                                            class="form-control form-control-lg"
@@ -88,8 +97,16 @@
                                            id="password_1"
                                            name="password_1"
                                            required=""
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.password %}
+                                                placeholder="{{ user.profile.password }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.password %}
+                                                value="{{ user.profile.password }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="8"
                                            maxlength="16"
                                            class="form-control form-control-lg"
@@ -103,8 +120,16 @@
                                            id="password_2"
                                            name="password_2"
                                            required=""
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.password %}
+                                                placeholder="{{ user.profile.password }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.password %}
+                                                value="{{ user.profile.password }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="8"
                                            maxlength="16"
                                            class="form-control form-control-lg"
@@ -119,8 +144,16 @@
                                            id="last_name"
                                            name="last_name"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.last_name %}
+                                                placeholder="{{ user.profile.last_name }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.last_name %}
+                                                value="{{ user.profile.last_name }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -134,8 +167,16 @@
                                            id="first_name"
                                            name="first_name"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.first_name %}
+                                                placeholder="{{ user.profile.first_name }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.first_name %}
+                                                value="{{ user.profile.first_name }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -149,8 +190,16 @@
                                            id="patronymic"
                                            name="patronymic"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.last_name %}
+                                                placeholder="{{ user.profile.last_name }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.last_name %}
+                                                value="{{ user.profile.last_name }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -165,8 +214,16 @@
                                            id="email"
                                            name="email"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.email %}
+                                                placeholder="{{ user.profile.email }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.email %}
+                                                value="{{ user.profile.email }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -182,7 +239,11 @@
                                                name="is_active"
 {#                                               required=""#}
                                                value=""
-                                               checked="checked"
+                                               {% if user.is_active %}
+                                                    checked="checked"
+                                               {% else %}
+{#                                                    checked="checked"#}
+                                               {% endif %}
                                                class="form-check-input"
                                         />
                                     </div>
@@ -197,7 +258,11 @@
                                                name="is_staff"
 {#                                               required=""#}
                                                value=""
-{#                                               checked="checked"#}
+                                               {% if user.is_staff %}
+                                                    checked="checked"
+                                               {% else %}
+{#                                                    checked="checked"#}
+                                               {% endif %}
                                                class="form-check-input"
                                         />
                                     </div>
@@ -233,7 +298,11 @@
                                            name="groups"
 {#                                           required=""#}
                                            placeholder=""
-                                           value=""
+                                           {% if user %}
+                                                value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                                           {% else %}
+                                                value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -249,8 +318,16 @@
                                            id="personnel_number"
                                            name="personnel_number"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.personnel_number %}
+                                                placeholder="{{ user.profile.personnel_number }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.personnel_number %}
+                                                value="{{ user.profile.personnel_number }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -264,8 +341,16 @@
                                            id="position"
                                            name="position"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.position %}
+                                                placeholder="{{ user.profile.position }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.position %}
+                                                value="{{ user.profile.position }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -279,8 +364,16 @@
                                            id="category"
                                            name="category"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.category %}
+                                                placeholder="{{ user.profile.category }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.category %}
+                                                value="{{ user.profile.category }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -295,8 +388,16 @@
                                            id="subdivision"
                                            name="subdivision"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.subdivision %}
+                                                placeholder="{{ user.profile.subdivision }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.subdivision %}
+                                                value="{{ user.profile.subdivision }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -310,8 +411,16 @@
                                            id="workshop_service"
                                            name="workshop_service"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.workshop_service %}
+                                                placeholder="{{ user.profile.workshop_service }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.workshop_service %}
+                                                value="{{ user.profile.workshop_service }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -325,8 +434,16 @@
                                            id="department_site"
                                            name="department_site"
 {#                                           required=""#}
-                                           placeholder=""
-                                           value=""
+                                           {% if user.profile.department_site %}
+                                                placeholder="{{ user.profile.department_site }}"
+                                           {% else %}
+                                                placeholder=""
+                                           {% endif %}
+                                           {% if user.profile.department_site %}
+                                                value="{{ user.profile.department_site }}"
+                                           {% else %}
+                                                value=""
+                                           {% endif %}
                                            minlength="1"
                                            maxlength="64"
                                            class="form-control form-control-lg"
@@ -343,11 +460,68 @@
                                                name="is_edit"
 {#                                               required=""#}
                                                value=""
-{#                                               checked="checked"#}
+                                               {% if user %}
+                                                    checked="checked"
+                                               {% else %}
+{#                                                    checked="checked"#}
+                                               {% endif %}
                                                class="form-check-input"
                                         />
                                     </div>
                                     <small class="text-muted">отметьте, если нужно заменить уже существующего пользователя</small>
+                                </label>
+
+
+                            </div>
+                        </div>
+                        <hr/>
+                        <!-- Grid row -->
+                        <div class="container-fluid btn-group row pb-1">
+                            <!-- Grid column -->
+                            <div class="col-lg-6">
+                                <button href=""
+                                        type="submit"
+                                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                                >Подтвердить</button>
+                            </div>
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-lg-6">
+                                <button href=""
+                                        type="reset"
+                                        class="w-100 form-control btn btn-lg btn-outline-warning"
+                                >Сбросить</button>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                    </form>
+
+                    <form action="{% url 'account_create_accounts' 'change' %}"
+                          method="POST"
+                          target="_self"
+                          enctype="multipart/form-data"
+                          name="account_create_accounts change"
+                          autocomplete="on"
+                          class="text-center"
+                    >
+                        {% csrf_token %}
+                        <div>
+                            <div>
+                                <label class="form-control-lg">
+                                    Имя пользователя:
+                                    <input type="text"
+                                           id="username"
+                                           name="username"
+                                           required=""
+                                           placeholder=""
+                                           value=""
+                                           minlength="12"
+                                           maxlength="12"
+                                           class="form-control form-control-lg"
+                                    />
+                                    <small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small>
                                 </label>
                             </div>
                         </div>

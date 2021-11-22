@@ -32,6 +32,7 @@ urlpatterns = [
     path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),
     path('account_generate_passwords/', views.account_generate_passwords, name='account_generate_passwords'),
     path('account_update_accounts_1c/', views.account_update_accounts_1c, name='account_update_accounts_1c'),
+    path('account_change_groups/', views.account_change_groups, name='account_change_groups'),
     #
     #
     #

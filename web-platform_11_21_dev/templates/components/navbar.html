@@ -115,13 +115,16 @@
 								<li>
 									<h6 class="dropdown-header">Аккаунты</h6>
 									<a class="dropdown-item"
-										href="{% url 'account_create_accounts' 'one' %}">Создать/изменить пользователей</a>
-									<a class="dropdown-item" href="{% url 'account_generate_passwords' %}">Сгенерировать
-										пароли для аккаунтов</a>
-									<a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список
-										пользователей</a>
-									<a class="dropdown-item" href="{% url 'account_update_accounts_1c' %}">Обновить
-										пользователей из 1С</a>
+										href="{% url 'account_create_accounts' 'one' %}"
+                                    >Создать/изменить пользователей</a>
+									<a class="dropdown-item" href="{% url 'account_generate_passwords' %}"
+                                    >Сгенерировать пароли для аккаунтов</a>
+									<a class="dropdown-item" href="{% url 'account_export_accounts' %}"
+                                    >Выгрузить список пользователей</a>
+									<a class="dropdown-item" href="{% url 'account_update_accounts_1c' %}"
+                                    >Обновить пользователей из 1С</a>
+									<a class="dropdown-item" href="{% url 'account_change_groups' %}"
+                                    >Изменить группы пользователей</a>
 								</li>
 							</ul>
 						</li>

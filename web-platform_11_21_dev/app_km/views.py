@@ -294,12 +294,12 @@ def account_recover_password(request, type_slug):
                         )
                         message_s = f'{user.profile.first_name} {user.profile.last_name}, перейдите по ссылке: ' \
                                     f'http://192.168.1.68:8000/account_recover_password/0/ , ' \
-                                    f'введите иин и затем в окне почты введите код? (без кавычек): "{encrypt_message}"'
+                                    f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
+                        from_email = 'eevee.cycle@yandex.ru'
                         from_email = 'webapp@km.kz'
                         to_email = email_
                         if subject and message and to_email:
-                            send_mail(subject, message_s, from_email, [
-                                to_email, ''], fail_silently=False)
+                            send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
                             response = 2
             elif type_slug.lower() == 'recover':
                 encrypt_text = DjangoClass.RequestClass.get_value(request, "recover")
@@ -444,8 +444,10 @@ def account_create_accounts(request, quantity_slug):
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
-    try:
+    # try:
+    if True:
         response = 0
+        user = None
         if request.method == 'POST':
             force_change = DjangoClass.RequestClass.get_check(request, 'is_edit')
             user_objects = []
@@ -521,7 +523,7 @@ def account_create_accounts(request, quantity_slug):
                                     [account_auth_obj, account_profile_first_obj])
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            else:
+            elif quantity_slug == "one":
                 # Создание массива объектов аккаунтов из одиночной формы
                 try:
                     username = DjangoClass.RequestClass.get_value(request, 'username')
@@ -583,29 +585,43 @@ def account_create_accounts(request, quantity_slug):
                             [account_auth_obj, account_profile_first_obj])
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            elif quantity_slug == 'change':
+                # try:
+                if True:
+                    username = DjangoClass.RequestClass.get_value(request, 'username')
+                    user = User.objects.get(username=username)
+                    response = 0
+                # except Exception as error:
+                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             # Создание аккаунтов и доп данных для аккаунтов
-            success = 1
-            for user_object in user_objects:
-                try:
-                    account_auth_obj = user_object[0].account_auth_create_or_change()
-                    account_profile_first_obj = user_object[1].profile_first_change()
-                    if account_auth_obj is False or account_profile_first_obj is False:
-                        success = -1
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    success = False
-            response = success
-        groups = Group.objects.all()
+            if quantity_slug != 'change':
+                success = 1
+                for user_object in user_objects:
+                    try:
+                        account_auth_obj = user_object[0].account_auth_create_or_change()
+                        account_profile_first_obj = user_object[1].profile_first_change()
+                        if account_auth_obj is False or account_profile_first_obj is False:
+                            success = -1
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        success = False
+                response = success
+        if user:
+            groups = user.groups.all()
+        else:
+            groups = Group.objects.all()
         context = {
             'response': response,
             'groups': groups,
+            'user': user,
         }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'groups': None,
-        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'groups': None,
+    #         'user': None,
+    #     }
 
     return render(request, 'account/account_create_accounts.html', context)
 
@@ -923,6 +939,40 @@ def account_update_accounts_1c(request):
     return render(request, 'account/account_update_accounts_1c.html', context)
 
 
+def account_change_groups(request):
+    """
+    Страница создания пользователей
+    """
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
+    # try:
+    if True:
+        response = 0
+        user = None
+        if request.method == 'POST':
+            username = DjangoClass.RequestClass.get_value(request, 'username')
+            user = User.objects.get(username=username)
+            # response = 1
+        if user:
+            groups = user.groups.all()
+        else:
+            groups = Group.objects.all()
+        context = {
+            'response': response,
+            'groups': groups,
+            'user': user,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'groups': None,
+    #         'user': None,
+    #     }
+
+    return render(request, 'account/account_change_groups.html', context)
 #
 #
 #
