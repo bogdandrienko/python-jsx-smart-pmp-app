@@ -66,7 +66,7 @@ class DjangoClass:
                                                 page_groups.index(user_group)
                                                 return False
                                         except Exception as error:
-                                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                            pass
                                     return True
                                 else:
                                     return 'home'

@@ -2886,3 +2886,11 @@ Bogdan, 127.0.0.1, /salary/, GET, 2021-11-22 12:38:49.159806, 'superuser' is not
 Bogdan, 127.0.0.1, /salary/, GET, 2021-11-22 12:38:55.320529, 'superuser' is not in list
 
 Bogdan, 127.0.0.1, /salary/, GET, 2021-11-22 12:39:02.612531, 'superuser' is not in list
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-22 12:42:16.240626, 'superuser' is not in list
+
+970801351179, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-22 12:51:56.496680, User matching query does not exist.
+
+970801351179, 127.0.0.1, /account_recover_password/email/, POST, 2021-11-22 13:40:34.409164, (535, b'5.7.0 Authentication failed')
+
+Bogdan, 192.168.1.68, /account_profile/11111111111/, GET, 2021-11-22 13:52:57.425514, User matching query does not exist.

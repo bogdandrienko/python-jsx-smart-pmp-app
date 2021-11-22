@@ -25,7 +25,7 @@ from .models import LoggingActions, RationalModel, CategoryRationalModel, LikeRa
     MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, IdeasLikeModel, IdeasCommentModel
 from .forms import ExampleForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, \
     ArticleForm, SmsForm, GeoForm, BankIdeasForm
-from .utils import ExcelClass, SQLClass
+from .utils import ExcelClass, SQLClass, EncryptingClass
 
 
 #  main
@@ -239,7 +239,8 @@ def account_recover_password(request, type_slug):
     # logging
     DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
 
-    try:
+    # try:
+    if True:
         response = 0
         data = None
         access_count = None
@@ -247,7 +248,6 @@ def account_recover_password(request, type_slug):
             try:
                 user = User.objects.get(username=DjangoClass.RequestClass.get_value(request, "username"))
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 user = None
             if type_slug.lower() == 'iin':
                 try:
@@ -270,46 +270,69 @@ def account_recover_password(request, type_slug):
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             elif type_slug.lower() == 'secret_answer':
                 try:
-                    secret_answer = DjangoClass.RequestClass.get_value(
-                        request, "secret_answer")
-                    password_1 = DjangoClass.RequestClass.get_value(
-                        request, "password_1")
-                    password_2 = DjangoClass.RequestClass.get_value(
-                        request, "password_2")
+                    secret_answer = DjangoClass.RequestClass.get_value(request, "secret_answer")
+                    password_1 = DjangoClass.RequestClass.get_value(request, "password_1")
+                    password_2 = DjangoClass.RequestClass.get_value(request, "password_2")
                     if user.profile.secret_answer.lower() == secret_answer.lower() and password_1 == password_2:
                         user.profile.password = password_1
                         user.set_password(password_1)
                         user.save()
                         response = 2
+                    else:
+                        response = -2
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             elif type_slug.lower() == 'email':
-                try:
+                # try:
                     password = user.profile.password
                     email_ = user.profile.email
                     if password and email_:
-                        subject = 'восстановление пароля от веб платформы'
-                        message_s = password
-                        from_email = 'eevee.cycle@yandex.ru'
+                        subject = 'Восстановление пароля от веб платформы'
+                        encrypt_message = EncryptingClass.encrypt_text(
+                            text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
+                            hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+                        )
+                        message_s = f'{user.profile.first_name} {user.profile.last_name}, перейдите по ссылке: ' \
+                                    f'http://192.168.1.68:8000/account_recover_password/0/ , ' \
+                                    f'введите иин и затем в окне почты введите код? (без кавычек): "{encrypt_message}"'
+                        from_email = 'webapp@km.kz'
                         to_email = email_
                         if subject and message and to_email:
                             send_mail(subject, message_s, from_email, [
                                 to_email, ''], fail_silently=False)
                             response = 2
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            elif type_slug.lower() == 'recover':
+                encrypt_text = DjangoClass.RequestClass.get_value(request, "recover")
+                decrypt_text = EncryptingClass.decrypt_text(
+                    text=encrypt_text,
+                    hash_chars=f'_{user.profile.password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+                )
+                if decrypt_text.split('_')[2] >= (datetime.datetime.now() -
+                                                  datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M') and \
+                        decrypt_text.split('_')[1] == user.profile.password:
+                    login(request, user)
+                    user.profile.secret_question = ''
+                    user.profile.secret_answer = ''
+                    user.profile.password = ''
+                    user.save()
+                    response = 2
+                else:
+                    response = -2
+                    # return redirect('account_change_password')
+                # except Exception as error:
+                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         context = {
             'response': response,
             'data': data,
             'access_count': access_count,
         }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'data': None,
-            'access_count': None,
-        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'data': None,
+    #         'access_count': None,
+    #     }
 
     return render(request, 'account/account_recover_password.html', context)
 

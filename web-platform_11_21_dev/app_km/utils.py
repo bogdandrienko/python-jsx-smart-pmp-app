@@ -898,6 +898,56 @@ class EncodingClass:
         return encoding
 
 
+class EncryptingClass:
+    @staticmethod
+    def encrypt_text(text: str, hash_chars: str):
+        chars = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890' + ' _-:' + hash_chars
+        chars = set(chars)
+        forward_ord_list = []
+        for char in chars:
+            forward_ord_list.append(ord(char))
+        forward_ord_list.sort(reverse=False)
+        reverse_ord_list = forward_ord_list.copy()
+        reverse_ord_list.sort(reverse=True)
+        forward_dictinary = {reverse_ord_list[forward_ord_list.index(x)]: x for x in forward_ord_list}
+        # reverse_dictinary = {forward_ord_list[reverse_ord_list.index(x)]: x for x in reverse_ord_list}
+        # forward_dictinary = {}
+        # for char in forward_ord_list:
+        #     forward_dictinary[reverse_ord_list[forward_ord_list.index(char)]] = char
+        # reverse_dictinary = {}
+        # for char in reverse_ord_list:
+        #     reverse_dictinary[forward_ord_list[reverse_ord_list.index(char)]] = char
+        # value = ''
+        # for x in text:
+        #     value += chr(forward_dictinary[ord(x)])
+        # return value
+        return ''.join([chr(forward_dictinary[ord(x)]) for x in text])
+
+    @staticmethod
+    def decrypt_text(text: str, hash_chars: str):
+        chars = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890' + ' _-:' + hash_chars
+        chars = set(chars)
+        forward_ord_list = []
+        for char in chars:
+            forward_ord_list.append(ord(char))
+        forward_ord_list.sort(reverse=False)
+        reverse_ord_list = forward_ord_list.copy()
+        reverse_ord_list.sort(reverse=True)
+        # forward_dictinary = {reverse_ord_list[forward_ord_list.index(x)]: x for x in forward_ord_list}
+        reverse_dictinary = {forward_ord_list[reverse_ord_list.index(x)]: x for x in reverse_ord_list}
+        # forward_dictinary = {}
+        # for char in forward_ord_list:
+        #     forward_dictinary[reverse_ord_list[forward_ord_list.index(char)]] = char
+        # reverse_dictinary = {}
+        # for char in reverse_ord_list:
+        #     reverse_dictinary[forward_ord_list[reverse_ord_list.index(char)]] = char
+        # value = ''
+        # for x in text:
+        #     value += chr(reverse_dictinary[ord(x)])
+        # return value
+        return ''.join([chr(reverse_dictinary[ord(x)]) for x in text])
+
+
 class Pagination:
     @staticmethod
     def example(self):

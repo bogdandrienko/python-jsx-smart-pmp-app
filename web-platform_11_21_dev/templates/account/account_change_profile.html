@@ -64,14 +64,9 @@
                               {% endif %}
                               minlength="1"
                               maxlength="500"
-                              rows="5"
+                              rows="3"
                               class="form-control form-control-lg"
-                    >
-                          {% if request.user.profile.education %}
-                                {{ request.user.profile.education }}
-                          {% else %}
-                          {% endif %}
-                    </textarea>
+                    >{% if request.user.profile.education %}{{ request.user.profile.education }}{% endif %}</textarea>
                     <small class="text-muted">введите информацию о своём образовании: максимум 500 символов</small>
                 </label>
 
@@ -88,14 +83,9 @@
                               {% endif %}
                               minlength="1"
                               maxlength="500"
-                              rows="5"
+                              rows="3"
                               class="form-control form-control-lg"
-                    >
-                          {% if request.user.profile.achievements %}
-                                {{ request.user.profile.achievements }}
-                          {% else %}
-                          {% endif %}
-                    </textarea>
+                    >{% if request.user.profile.achievements %}{{ request.user.profile.achievements }}{% endif %}</textarea>
                     <small class="text-muted">введите информацию о своих достижениях: максимум 500 символов</small>
                 </label>
 
@@ -112,14 +102,9 @@
                               {% endif %}
                               minlength="1"
                               maxlength="500"
-                              rows="5"
+                              rows="3"
                               class="form-control form-control-lg"
-                    >
-                          {% if request.user.profile.biography %}
-                                {{ request.user.profile.biography }}
-                          {% else %}
-                          {% endif %}
-                    </textarea>
+                    >{% if request.user.profile.biography %}{{ request.user.profile.biography }}{% endif %}</textarea>
                     <small class="text-muted">введите информацию о своей биографии: максимум 500 символов</small>
                 </label>
 
@@ -136,13 +121,9 @@
                               {% endif %}
                               minlength="1"
                               maxlength="500"
-                              rows="5"
+                              rows="3"
                               class="form-control form-control-lg"
-                    >
-                          {% if request.user.profile.hobbies %}
-                                {{ request.user.profile.hobbies }}
-                          {% else %}
-                          {% endif %}</textarea>
+                    >{% if request.user.profile.hobbies %}{{ request.user.profile.hobbies }}{% endif %}</textarea>
                     <small class="text-muted">введите информацию о своём хобби: максимум 500 символов</small>
                 </label>
             </div>
