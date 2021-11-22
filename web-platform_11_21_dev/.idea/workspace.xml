@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/components/examples.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RkQ0N0Y3N0FFMTdENTU1Mzc5NzQ1ODE4Qzc0NENFRTY5NDIzMU,10e979ae8acf26b8a797ac7624e6d18e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/account/avatar/БогданАндриенко_931777_ZZzYfVn.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_errors.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_change_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_password.html" afterDir="false" />
@@ -21,8 +25,12 @@
       <change beforePath="$PROJECT_DIR$/templates/account/account_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_recover_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_recover_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/account_update_accounts_1c.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_update_accounts_1c.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/example.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/example.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/aborted.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/aborted.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/examples.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/examples.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/new_footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/success.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/table.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/table.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,6 +156,8 @@
       <workItem from="1637468404942" duration="777000" />
       <workItem from="1637473635957" duration="11337000" />
       <workItem from="1637490694454" duration="20212000" />
+      <workItem from="1637511247191" duration="12280000" />
+      <workItem from="1637558406903" duration="3665000" />
     </task>
     <servers />
   </component>

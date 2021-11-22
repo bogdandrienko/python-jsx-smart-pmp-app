@@ -1,12 +1,26 @@
-<div class="text-center bg-dark text-white">
+<div class="text-center">
     <h1 class="display-6">Успешно</h1>
     <p class="lead">Операция успешно выполнена, перейдите на главную или повторите операцию.</p>
-    <div class="btn-group btn-group-lg">
-        <a href="{% url 'home' %}"
-           type="submit"
-           class="w-100 form-control btn btn-lg btn-primary">Главная</a>
-        <a href=""
-           type="button"
-           class="w-100 form-control btn btn-lg btn-warning">Повторить</a>
+    <hr/>
+    <!-- Grid row -->
+    <div class="container-fluid btn-group row pb-1">
+        <!-- Grid column -->
+        <div class="col-lg-6">
+            <a href="{% url 'home' %}"
+               type="submit"
+               class="w-100 form-control btn btn-lg btn-outline-primary"
+            >Главная</a>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-lg-6">
+            <a href=""
+               type="button"
+               class="w-100 form-control btn btn-lg btn-outline-warning"
+            >Повторить</a>
+        </div>
+        <!-- Grid column -->
     </div>
+    <hr/>
 </div>

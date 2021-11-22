@@ -477,20 +477,36 @@
 
         </div>
         <hr/>
-        <div class="form-control btn-group btn-group-lg">
-            <button href=""
-                    type="submit"
-                    class="w-100 form-control btn btn-lg btn-outline-primary"
-            >Подтвердить</button>
-            <button href=""
-                    type="reset"
-                    class="w-100 form-control btn btn-lg btn-outline-warning"
-            >Сбросить</button>
-            <a href="{% url 'account_recover_password' 0 %}"
-               type="button"
-               class="w-100 form-control btn btn-lg btn-outline-danger"
-            >Восстановить</a>
+        <!-- Grid row -->
+        <div class="container-fluid btn-group row pb-1">
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Подтвердить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <button href=""
+                        type="reset"
+                        class="w-100 form-control btn btn-lg btn-outline-warning"
+                >Сбросить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <a href="{% url 'account_recover_password' 'none' %}"
+                        type="button"
+                        class="w-100 form-control btn btn-lg btn-outline-danger"
+                >Восстановить</a>
+            </div>
+            <!-- Grid column -->
         </div>
+        <!-- Grid row -->
     </form>
 
 {% elif response == 1 %}

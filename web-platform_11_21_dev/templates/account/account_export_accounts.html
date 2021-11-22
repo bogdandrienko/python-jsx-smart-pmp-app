@@ -22,7 +22,7 @@
 
 
 
-<div class="text-center bg-dark text-white">
+<div class="text-center">
     <h1 class="display-6 fst-italic">Выгрузить пользователей</h1>
     <small class="text-secondary">Эта страница содержит форму для выгрузки пользователей.</small>
 </div>
@@ -31,10 +31,10 @@
 
     {% include 'components/success.html' %}
 
-    <div class="">
+    <div class="p-1">
         <a class="w-100 btn btn-lg btn-outline-success"
            href="{% static 'media/data/account/export_users.xlsx' %}"
-        >Скачать результат выгрузки</a>
+        >Скачать результат</a>
     </div>
 
     {% if data %}
@@ -69,12 +69,18 @@
             </label>
         </div>
         <hr/>
-        <div class="form-control btn-group btn-group-lg">
-            <button href=""
-                    type="submit"
-                    class="w-100 form-control btn btn-lg btn-outline-primary"
-            >Подтвердить</button>
+        <!-- Grid row -->
+        <div class="container-fluid btn-group row pb-1">
+            <!-- Grid column -->
+            <div class="col-lg-12">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Подтвердить</button>
+            </div>
+            <!-- Grid column -->
         </div>
+        <!-- Grid row -->
     </form>
 
 {% endif %}

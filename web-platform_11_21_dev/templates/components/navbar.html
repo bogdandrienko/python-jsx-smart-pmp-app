@@ -216,41 +216,34 @@
 									<h6 class="dropdown-header">Аккаунты</h6>
 									{% if request.user.is_authenticated %}
 									<a class="dropdown-item"
-										href="{% url 'account_profile' request.user.username %}">Личный профиль
-										[{{ request.user.profile.last_name }} {{ request.user.profile.first_name }}]</a>
+										href="{% url 'account_profile' request.user.username %}">Личный профиль [{{ request.user.profile.last_name }} {{ request.user.profile.first_name }}]</a>
 									{% else %}
-									<a class="dropdown-item" href="#">Личный профиль [ Вы не вошли в аккаунт ]</a>
+									    <a class="dropdown-item" href="#">Личный профиль [ Вы ещё не вошли в аккаунт ]</a>
 									{% endif %}
 									{% if request.user.is_authenticated %}
-									<a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный
-										профиль</a>
+									    <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
 									{% else %}
-									<a class="dropdown-item" href="#">Изменить личный профиль [ Вы не вошли в аккаунт
-										]</a>
+									    <a class="dropdown-item" href="#">Изменить личный профиль [ PH Вы ещё не вошли в аккаунт ]</a>
 									{% endif %}
 									{% if request.user.is_authenticated %}
-									<a class="dropdown-item" href="{% url 'account_change_password' %}">Изменить
-										пароль</a>
+									    <a class="dropdown-item" href="{% url 'account_change_password' %}">Изменить пароль</a>
 									{% else %}
-									<a class="dropdown-item" href="#">Изменить пароль [ Вы не вошли в аккаунт ]</a>
+									    <a class="dropdown-item" href="#">Изменить пароль [ PH Вы ещё не вошли в аккаунт ]</a>
 									{% endif %}
 									{% if request.user.is_authenticated %}
-									<a class="dropdown-item" href="{% url 'account_recover_password' 0 %}">Восстановить
-										пароль</a>
+									    <a class="dropdown-item" href="{% url 'account_recover_password' 0 %}">Восстановить пароль</a>
 									{% else %}
-									<a class="dropdown-item" href="#">Восстановить пароль [ Вы не вошли в аккаунт ]</a>
+									    <a class="dropdown-item" href="#">Восстановить пароль [ PH Вы ещё не вошли в аккаунт ]</a>
 									{% endif %}
 									{% if request.user.is_authenticated %}
-									<a class="dropdown-item" href="{% url 'account_login' %}">Войти [ Вы уже вошли в
-										аккаунт ]</a>
+									    <a class="dropdown-item" href="{% url 'account_login' %}">Войти [ PH Вы уже вошли в аккаунт ]</a>
 									{% else %}
-									<a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
+									    <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
 									{% endif %}
 									{% if request.user.is_authenticated %}
-									<a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
+									    <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
 									{% else %}
-									<a class="dropdown-item" href="{% url 'account_login' %}">Выйти [ Вы не вошли в
-										аккаунт ]</a>
+									    <a class="dropdown-item" href="{% url 'account_login' %}">Выйти [ PH Вы ещё не вошли в аккаунт ]</a>
 									{% endif %}
 								</li>
 							</ul>

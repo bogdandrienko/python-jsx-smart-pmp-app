@@ -2856,3 +2856,33 @@ Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-21 20:32:47.75430
 Bogdan, 127.0.0.1, /account_recover_password/iin/, POST, 2021-11-21 20:36:13.199002, User matching query does not exist.
 
 Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-21 20:53:42.439340, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+account_auth_create_or_change, 2021-11-22 11:22:02.023629, User matching query does not exist.
+
+account_auth_set_group, 2021-11-22 11:22:02.031549, User matching query does not exist.
+
+account_auth_set_group, 2021-11-22 11:23:39.898091, User matching query does not exist.
+
+account_auth_set_group, 2021-11-22 11:26:18.731185, User matching query does not exist.
+
+account_auth_set_group, 2021-11-22 11:28:01.584106, User matching query does not exist.
+
+account_auth_set_group, 2021-11-22 11:30:30.442088, User matching query does not exist.
+
+account_auth_set_group, 2021-11-22 11:31:45.285668, User matching query does not exist.
+
+account_auth_set_group, 2021-11-22 11:33:29.049792, User matching query does not exist.
+
+create_django_encrypt_password, 2021-11-22 11:42:14.749583, User matching query does not exist.
+
+create_django_encrypt_password, 2021-11-22 11:42:14.967836, User matching query does not exist.
+
+create_django_encrypt_password, 2021-11-22 11:42:15.186627, User matching query does not exist.
+
+create_django_encrypt_password, 2021-11-22 11:44:39.413336, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-22 12:38:49.159806, 'superuser' is not in list
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-22 12:38:55.320529, 'superuser' is not in list
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-22 12:39:02.612531, 'superuser' is not in list

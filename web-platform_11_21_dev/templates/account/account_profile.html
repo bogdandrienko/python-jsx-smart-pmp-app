@@ -22,7 +22,7 @@
 
 
 
-<div class="text-center bg-dark text-white">
+<div class="text-center">
     <h1 class="display-6 fst-italic">Личный профиль</h1>
     <small class="text-secondary">Эта страница содержит подробную информацию о пользователе.</small>
 </div>
@@ -33,12 +33,12 @@
 
 {% else %}
 
-    <div class="text-white bg-dark">
+    <div class="">
 
         {% if response == 2 %}
 
             <div class="text-end">
-                <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg">Изменить личный профиль</a>
+                <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg p-0 m-0">Изменить личный профиль</a>
             </div>
 
         {% else %}
@@ -54,11 +54,9 @@
     <div class="row g-5">
         <div class="py-5 text-center">
         {% if data.profile.image_avatar %}
-        <img src="{{ data.profile.image_avatar.url }}" class="bd-placeholder-img " width="256px" height="100%"
-            alt="{{ data.profile.firstname }}">
+        <img src="{{ data.profile.image_avatar.url }}" class="bd-placeholder-img fa-image" width="512px" alt="{{ data.profile.firstname }}">
         {% else %}
-        <img src="{% static 'media/uploads/account/avatar/default.jpg' %}" class="bd-placeholder-img " width="256px"
-            height="100%" alt="default">
+        <img src="{% static 'media/uploads/account/avatar/default.jpg' %}" class="bd-placeholder-img container" width="256px" height="100%" alt="default">
         {% endif %}
         <h2>{{ data.profile.last_name }} {{ data.profile.first_name }} {{ data.profile.patronymic }}</h2>
         <p class="lead">{{ data.profile.position }}</p>
