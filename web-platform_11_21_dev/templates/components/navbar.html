@@ -15,36 +15,14 @@
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Development
 								<span class="badge badge-primary badge-pill">
-									# n + 1
+									# n
 								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
 								<li>
-									<h6 class="dropdown-header">Основной функционал</h6>
-									<a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
-									<a class="dropdown-item" href="{% url 'admin' %}">Панель Администрации</a>
-									<a class="dropdown-item disabled" href="{% url 'notification' %}">Уведомления
-										администратора [{{notification}}]</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider text-light">
-								</li>
-								<li>
-									<h6 class="dropdown-header">Рационализаторство:</h6>
-									<a class="dropdown-item" href="{% url 'rational' %}">Рационализаторство: список</a>
-									<a class="dropdown-item" href="{% url 'create_rational' %}">Рационализаторство:
-										добавить</a>
-									<a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
-									<a class="dropdown-item" href="{% url 'rational_ratings' %}">Рационализаторство:
-										рейтинги</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider text-light">
-								</li>
-								<li>
-									<h6 class="dropdown-header">Отдел охраны труда</h6>
-									<a class="dropdown-item" href="{% url 'passages_thermometry' %}">Термометрия</a>
-									<a class="dropdown-item disabled" href="#">Алкотесты</a>
+									<h6 class="dropdown-header">Шаблоны</h6>
+									<a class="dropdown-item" href="{% url 'example' %}">Шаблон</a>
+									<a class="dropdown-item" href="{% url 'examples' %}">Формы</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider text-light">
@@ -60,8 +38,6 @@
 									<a class="dropdown-item" href="{% url 'weather' %}">Погода: общий список</a>
 									<a class="dropdown-item" href="{% url 'news' %}">app_news</a>
 									<a class="dropdown-item" href="{% url 'react' %}">app_react</a>
-									<a class="dropdown-item"
-										href="{% url 'bootstrap_example' %}">app_bootstrap_examples</a>
 									<a class="dropdown-item" href="{% url 'chat' %}">app_chat</a>
 								</li>
 								<li>
@@ -70,6 +46,14 @@
 								<li>
 									<h6 class="dropdown-header">Геолокация</h6>
 									<a class="dropdown-item" href="{% url 'geo' %}">Устройства: список</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider text-light">
+								</li>
+								<li>
+									<h6 class="dropdown-header">Отдел охраны труда</h6>
+									<a class="dropdown-item" href="{% url 'passages_thermometry' %}">Термометрия</a>
+									<a class="dropdown-item disabled" href="#">Алкотесты</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider text-light">
@@ -93,21 +77,13 @@
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Администратор
 								<span class="badge badge-primary badge-pill">
-									# 5
+									# 6
 								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
 								<li>
 									<h6 class="dropdown-header">Основной функционал</h6>
 									<a class="dropdown-item" href="{% url 'admin' %}">Панель Администрирования</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider text-light">
-								</li>
-								<li>
-									<h6 class="dropdown-header">Экстра</h6>
-									<a class="dropdown-item" href="{% url 'example' %}">Шаблон</a>
-									<a class="dropdown-item" href="{% url 'examples' %}">Формы</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider text-light">
@@ -295,7 +271,7 @@
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Развитие
 								<span class="badge badge-primary badge-pill">
-									# 3
+									# 6
 								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
@@ -311,14 +287,10 @@
 								</li>
 								<li>
 									<h6 class="dropdown-header">Рационализаторство:</h6>
-									<a class="dropdown-item disabled" href="{% url 'home' %}">Рационализаторство:
-										список</a>
-									<a class="dropdown-item disabled" href="{% url 'home' %}">Рационализаторство:
-										добавить</a>
-									<a class="dropdown-item disabled" href="{% url 'home' %}">Рационализаторство:
-										шаблоны</a>
-									<a class="dropdown-item disabled" href="{% url 'home' %}">Рационализаторство:
-										рейтинги</a>
+									<a class="dropdown-item" href="{% url 'rational' %}">Рационализаторство: список</a>
+									<a class="dropdown-item" href="{% url 'create_rational' %}">Рационализаторство: добавить</a>
+									<a class="dropdown-item disabled" href="#">Рационализаторство: шаблоны</a>
+									<a class="dropdown-item" href="{% url 'rational_ratings' %}">Рационализаторство: рейтинги</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider text-light">

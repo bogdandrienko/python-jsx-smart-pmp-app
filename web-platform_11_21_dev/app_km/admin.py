@@ -2,10 +2,34 @@ from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import ExampleModel, ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, \
-    CommentRationalModel, \
-    LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, ContactModel, \
-    DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile, LoggingActions, \
-    LoggingErrors, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel
+    CommentRationalModel, GroupsModel, LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, \
+    ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile, \
+    LoggingActions, LoggingErrors, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+
+
+admin.site.unregister(User)
+
+
+class ProfileModelAdminInline(admin.StackedInline):
+    model = Profile
+    filter_horizontal = ('groups',)
+
+
+class UserModelAdmin(UserAdmin):
+    # filter_horizontal = ('user_permissions', 'groups', 'ope')
+    save_on_top = True
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'last_login')
+    inlines = [ProfileModelAdminInline]
+
+
+admin.site.register(User, UserModelAdmin)
+
+
+
+
 
 
 class ExampleModelAdmin(admin.ModelAdmin):
@@ -18,8 +42,10 @@ class ExampleModelAdmin(admin.ModelAdmin):
                     'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
                     'datetime_field', 'date_field', 'time_field', 'duration_field',
                     'file_field', 'image_field',
-                    'foreignkey',
+                    'foreignkey_field', 'one_to_one_field',
                     'binary_field')
+
+    filter_horizontal = ('many_to_many_field',)
 
     # Поля, которые нужно отображать при фильтрации, на панели администратора
     list_filter = ('id',
@@ -29,7 +55,7 @@ class ExampleModelAdmin(admin.ModelAdmin):
                    'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
                    'datetime_field', 'date_field', 'time_field', 'duration_field',
                    'file_field', 'image_field',
-                   'foreignkey',
+                   'foreignkey_field', 'one_to_one_field', 'many_to_many_field',
                    'binary_field')
 
     # Поля, которые нужно отображать при создании модели, на панели администратора
@@ -44,7 +70,7 @@ class ExampleModelAdmin(admin.ModelAdmin):
                                           'float_field', 'decimal_field')}),
         ('date and time', {'fields': ('datetime_field', 'date_field', 'time_field', 'duration_field',)}),
         ('file', {'fields': ('file_field', 'image_field')}),
-        ('link', {'fields': ('foreignkey',)}),
+        ('link', {'fields': ('foreignkey_field', 'one_to_one_field', 'many_to_many_field',)}),
         ('binary', {'fields': ('binary_field',)}),
     )
 
@@ -59,36 +85,61 @@ class ExampleModelAdmin(admin.ModelAdmin):
                      'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
                      'datetime_field', 'date_field', 'time_field', 'duration_field',
                      'file_field', 'image_field',
-                     'foreignkey',
+                     'foreignkey_field', 'one_to_one_field', 'many_to_many_field',
                      'binary_field']
 
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
 
 
-class ProfileModelAdmin(admin.ModelAdmin):
+# class ProfileModelAdmin(admin.ModelAdmin):
+#     """Настройки 'CommentRationalModel' на панели администратора"""
+#     # Поля, которые нужно отображать в заголовке, на панели администратора
+#     list_display = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
+#                     'department_site', 'position', 'category')
+#     # Поля, которые нужно отображать при фильтрации, на панели администратора
+#     list_filter = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
+#                    'department_site', 'position', 'category')
+#     # Поля, которые нужно отображать при создании модели, на панели администратора
+#     # fields          = ('id',)
+#     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
+#     # fieldsets       = (
+#     #                     ('Категория', {'fields': ('category_name',)}),
+#     #                     ('Префикс', {'fields': ('category_slug',)}),
+#     #                     ('Описание', {'fields': ('category_description',)}),
+#     #                 )
+#     # Поля, которые не нужно отображать при создании модели, на панели администратора |
+#     # exclude         = ['id',]
+#     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
+#     search_fields = ['user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
+#                      'department_site', 'position', 'category']
+#     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
+#     # inlines         = [RationalModelInline]
+
+
+class GroupsModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
-                    'department_site', 'position', 'category')
+    list_display = ('name', 'slug')
     # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
-                   'department_site', 'position', 'category')
+    list_filter = ('name', 'slug', 'user',)
+    filter_horizontal = ('user',)
     # Поля, которые нужно отображать при создании модели, на панели администратора
     # fields          = ('id',)
     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
-    # fieldsets       = (
-    #                     ('Категория', {'fields': ('category_name',)}),
-    #                     ('Префикс', {'fields': ('category_slug',)}),
-    #                     ('Описание', {'fields': ('category_description',)}),
-    #                 )
+    fieldsets = (
+        ('Имя отображения', {'fields': ('name',)}),
+        ('Имя валидации', {'fields': ('slug',)}),
+        ('Пользователи', {'fields': ('user',)}),
+    )
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
-                     'department_site', 'position', 'category']
+    search_fields = ['name', 'slug']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
+
+
 
 
 class LoggingActionsModelAdmin(admin.ModelAdmin):
@@ -570,7 +621,10 @@ admin.site.site_title = 'Админка'  # default: "Django site admin"
 admin.site.register(ExampleModel, ExampleModelAdmin)
 
 # profile
-admin.site.register(Profile, ProfileModelAdmin)
+# admin.site.register(Profile, ProfileModelAdmin)
+
+# groups
+admin.site.register(GroupsModel, GroupsModelAdmin)
 
 # logging
 admin.site.register(LoggingActions, LoggingActionsModelAdmin)

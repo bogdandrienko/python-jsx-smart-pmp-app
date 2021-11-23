@@ -156,3 +156,79 @@ Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-11-22 21:40:59.360988
 Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-11-22 21:42:18.736043
 
 Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-11-22 21:42:27.304884
+
+, 127.0.0.1, /, GET, 2021-11-22 22:57:01.772830
+
+, 127.0.0.1, /, GET, 2021-11-22 22:57:01.784797
+
+, 127.0.0.1, /account_login/, GET, 2021-11-22 22:57:01.821723
+
+, 127.0.0.1, /account_login/, GET, 2021-11-22 22:57:25.367246
+
+, 127.0.0.1, /account_login/, POST, 2021-11-22 22:57:28.606671
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-11-22 22:57:31.602995
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-23 07:48:58.535979
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-23 10:17:50.501715
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-23 10:17:50.525719
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:17:50.639265
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 10:17:52.256985
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 10:17:52.274927
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:17:52.292892
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:19:37.621416
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:21:43.667370
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:22:02.042794
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:22:18.786125
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:23:05.872428
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:23:38.306003
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-23 10:57:37.207533
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-23 10:57:37.223474
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 10:57:37.259412
+
+Bogdan, 127.0.0.1, /account_change_password/, POST, 2021-11-23 10:58:05.183082
+
+, 127.0.0.1, /home/, GET, 2021-11-23 10:58:07.706832
+
+, 127.0.0.1, /home/, GET, 2021-11-23 10:58:07.717204
+
+, 127.0.0.1, /account_login/, GET, 2021-11-23 10:58:07.759793
+
+, 127.0.0.1, /account_login/, POST, 2021-11-23 10:58:10.818995
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 10:58:12.018906
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 11:04:40.707233
+
+Bogdan, 127.0.0.1, /passages_select/, GET, 2021-11-23 11:04:43.905126
+
+Bogdan, 127.0.0.1, /passages_select/, GET, 2021-11-23 11:04:43.924748
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 11:04:43.941326
+
+Bogdan, 127.0.0.1, /passages_select/, GET, 2021-11-23 11:08:58.793333
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-11-23 11:09:11.826688
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 11:09:49.213334
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 14:09:33.655084
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-23 14:09:33.854225
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-23 14:09:33.894729

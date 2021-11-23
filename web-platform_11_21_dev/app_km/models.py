@@ -26,7 +26,8 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=False,
-        help_text='<small class="text-muted underline">Значение правда или ложь, example: "True" / "False"</small><hr><br>',
+        help_text='<small class="text-muted underline">Значение правда или ложь, example: "True" / '
+                  '"False"</small><hr><br>',
         verbose_name='boolean',
     )
 
@@ -339,10 +340,10 @@ class ExampleModel(models.Model):
         # width_field=1080,  # Значение ширины изображения при каждом сохранении объекта.
     )
 
-    foreignkey = models.ForeignKey(
-        db_column='foreignkey',
+    foreignkey_field = models.ForeignKey(
+        db_column='foreignkey_field',
         db_index=True,
-        db_tablespace='foreignkey_tablespace',
+        db_tablespace='foreignkey_field_tablespace',
         primary_key=False,
 
         unique=False,
@@ -353,12 +354,79 @@ class ExampleModel(models.Model):
         default=None,
         help_text='<small class="text-muted underline">Связь, с каким-либо объектом, example: "to=User.objects.get('
                   'username="Bogdan")"</small><hr><br>',
-        verbose_name='foreignkey',
+        verbose_name='foreignkey_field',
+        related_name='foreignkey_field',
 
         to=User,  # Model
         on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
         # on_delete = models.CASCADE,  # Каскадное удаление.
         # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+        # on_delete=models.RESTRICT,  # Prevent deletion of the referenced object by raising RestrictedError
+        # (a subclass of django.db.IntegrityError). Unlike PROTECT, deletion of the referenced object is allowed
+        # if it also references a different object that is being deleted in the same operation, but via a CASCADE
+        # relationship.
+        # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
+        # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
+        # on_delete=models.DO_NOTHING,  # Ничего не делать.
+        # limit_choices_to=None,  # Ограничивает доступные значения для поля
+    )
+
+    one_to_one_field = models.OneToOneField(
+        db_column='one_to_one_field',
+        db_index=True,
+        db_tablespace='one_to_one_field_tablespace',
+        primary_key=False,
+
+        unique=False,
+        null=True,
+        editable=True,
+        blank=True,
+        auto_created=True,
+        default=None,
+        help_text='<small class="text-muted underline">Связь, с каким-либо объектом, example: "to=User.objects.get('
+                  'username="Bogdan")"</small><hr><br>',
+        verbose_name='one_to_one_field',
+        related_name='one_to_one_field',
+
+        to=User,  # Model
+        on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
+        # on_delete = models.CASCADE,  # Каскадное удаление.
+        # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+        # on_delete=models.RESTRICT,  # Prevent deletion of the referenced object by raising RestrictedError
+        # (a subclass of django.db.IntegrityError). Unlike PROTECT, deletion of the referenced object is allowed
+        # if it also references a different object that is being deleted in the same operation, but via a CASCADE
+        # relationship.
+        # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
+        # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
+        # on_delete=models.DO_NOTHING,  # Ничего не делать.
+        # limit_choices_to=None,  # Ограничивает доступные значения для поля
+    )
+
+    many_to_many_field = models.ManyToManyField(
+        db_column='many_to_many_field',
+        db_index=True,
+        db_tablespace='many_to_many_field_tablespace',
+        primary_key=False,
+
+        unique=False,
+        # null=True,
+        editable=True,
+        blank=True,
+        auto_created=True,
+        default=None,
+        help_text='<small class="text-muted underline">Связь, с каким-либо объектом, example: "to=User.objects.get('
+                  'username="Bogdan")"</small><hr><br>',
+        verbose_name='many_to_many_field',
+        related_name='many_to_many_field',
+
+        to=User,  # Model
+        # on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
+        # on_delete = models.CASCADE,  # Каскадное удаление.
+        # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+        # on_delete=models.RESTRICT,  # Prevent deletion of the referenced object by raising RestrictedError
+        # (a subclass of django.db.IntegrityError). Unlike PROTECT, deletion of the referenced object is allowed
+        # if it also references a different object that is being deleted in the same operation, but via a CASCADE
+        # relationship.
         # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
         # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
         # on_delete=models.DO_NOTHING,  # Ничего не делать.
@@ -385,17 +453,19 @@ class ExampleModel(models.Model):
 
     class Example:
         # Константа (не обязательно), которая содержит кортеж для параметра 'choices'
-        LIST_KEY_VALUE_CHOICES = [
-            ('db_value_1', 'view_value_1'),
-            ('db_value_2', 'view_value_2')
+        LIST_DB_VIEW_CHOICES = [
+            ('db_save_value_1', 'view_value_1'),
+            ('db_save_value_2', 'view_value_2'),
+            ('db_save_value_3', 'view_value_3')
         ]
+
         name = models.CharField(
             null=False,
             # При True Django сохранит пустое значение как NULL в базе данных. Значение по умолчанию – False.
 
             blank=True,  # При True поле может быть пустым. Значение по умолчанию – False. (для проверки данных)
 
-            choices=LIST_KEY_VALUE_CHOICES,  # Первый элемент каждого кортежа – это значение, которое будет сохранено в
+            choices=LIST_DB_VIEW_CHOICES,  # Первый элемент каждого кортежа – это значение, которое будет сохранено в
             # базе данных. Второй элемент – название, которое будет отображаться для пользователей.
 
             db_column='name',  # Имя колонки в базе данных для хранения данных этого поля. Если этот параметр не указан,
@@ -440,163 +510,209 @@ class ExampleModel(models.Model):
 
             max_length=50,
         )
+        name_1 = models.AutoField
+        name_2 = models.SmallAutoField
+        name_3 = models.BigAutoField
 
-        # A field to store raw binary data
-        binary_field = models.BinaryField(
-            max_length=None
-        )
+        name_4 = models.Field
+        name_5 = models.BigAutoField
+        name_6 = models.Model
+        name_7 = models.UUIDField
+        name_8 = models.FileField
+        name_9 = models.CharField
+        name_10 = models.CommaSeparatedIntegerField
+        name_11 = models.JSONField
+        name_12 = models.FilePathField
+        name_13 = models.IPAddressField
+        name_14 = models.GenericIPAddressField
+        name_15 = models.Field
+        name_16 = models.Field
+        name_17 = models.Field
+        name_18 = models.Field
+        name_19 = models.Field
 
-        # Поле хранящее значение true/false
-        boolean_field = models.BooleanField()
 
-        char_field = models.CharField(
-            max_length=None,
-            # The maximum length (in characters) of the field. The max_length is enforced at the database
-            # level and in Django’s validation using MaxLengthValidator.
-            validators=[MinLengthValidator(8), MaxLengthValidator(12), ]
-        )
 
-        # Дата, представленная в виде объекта datetime.date Python. Принимает несколько дополнительных параметров:
-        date_field = models.DateField(
-            auto_now=False,
-            # Значение поля будет автоматически установлено в текущую дату при каждом сохранении объекта.
-            # Полезно для хранения времени последнего изменения. Заметим, что текущее время будет использовано всегда;
-            # это не просто значение по умолчанию, которое вы можете переопределить.
 
-            auto_now_add=False,  # Значение поля будет автоматически установлено в текущую дату при создании(первом
-            # сохранении) объекта. Полезно для хранения времени создания. Заметим, что текущее время будет использовано
-            # всегда; это не просто значение по-умолчанию, которое вы можете переопределить. По этому, даже если вы
-            # укажите значение для этого поля, оно будет проигнорировано. Если вы хотите изменять значения этого поля,
-            # используйте следующее вместо auto_now_add=True:
+        @staticmethod
+        def string_type():
+            char_field = models.CharField(
+                max_length=None,
+                # The maximum length (in characters) of the field. The max_length is enforced at the database
+                # level and in Django’s validation using MaxLengthValidator.
+                validators=[MinLengthValidator(8), MaxLengthValidator(12), ]
+            )
 
-            auto_created=False,  # Значение поля будет автоматически установлено в текущую дату
-        )
+            # Большое текстовое поле. Форма использует виджет Textarea.
+            text_field = models.TextField()
 
-        # Дата и время, представленные объектом datetime.datetime Python. Принимает аналогичные параметры что и
-        # DateField.
-        DateTimeField = models.DateTimeField(
-            auto_now=False,
-            # Значение поля будет автоматически установлено в текущую дату при каждом сохранении объекта.
-            # Полезно для хранения времени последнего изменения. Заметим, что текущее время будет использовано всегда;
-            # это не просто значение по умолчанию, которое вы можете переопределить.
 
-            auto_now_add=False,  # Значение поля будет автоматически установлено в текущую дату при создании(первом
-            # сохранении) объекта. Полезно для хранения времени создания. Заметим, что текущее время будет использовано
-            # всегда; это не просто значение по-умолчанию, которое вы можете переопределить. По этому, даже если вы
-            # укажите значение для этого поля, оно будет проигнорировано. Если вы хотите изменять значения этого поля,
-            # используйте следующее вместо auto_now_add=True:
+            # «Slug» – это короткое название-метка, которое содержит только буквы, числа, подчеркивание или дефис. В
+            # основном используются в URL.
+            slug_field = models.SlugField(
+                max_length=50,  #
+            )
 
-            auto_created=False,  # Значение поля будет автоматически установлено в текущую дату и время
-        )
+            # A CharField that checks that the value is a valid email address using EmailValidator.
+            email_field = models.EmailField(
+                max_length=254,
+            )
 
-        # A fixed-precision decimal number, represented in Python by a Decimal instance. It validates the input using
-        # DecimalValidator.
-        DecimalField = models.DecimalField(
-            max_digits=None,
-            # Максимальное количество цифр в числе. Заметим, что это число должно быть больше или равно
-            # decimal_places.
 
-            decimal_places=None,  # Количество знаков после запятой.
+            # A CharField for a URL, validated by URLValidator.
+            url_field = models.URLField(
+                max_length=200,
+            )
 
-            # validators=None,  # DecimalValidator
-        )
+            # Адрес IPv4 или IPv6 в виде строки (например, 192.0.2.30 или 2a02:42fe::4). Форма использует виджет TextInput.
+            ipaddress_field = models.GenericIPAddressField(
+                protocol='both',  # Определяет формат IP адреса. Принимает значение 'both' (по умолчанию), 'IPv4' или
+                # 'IPv6'. Значение не чувствительно регистру.
 
-        # Поля для хранения периодов времени - используется объект Python timedelta. Для PostgreSQL используется тип
-        # interval, а в Oracle – INTERVAL DAY(9) TO SECOND(6). Иначе используется bigint, в котором хранится количество
-        # микросекунд.
-        duration_field = models.DurationField()
+                unpack_ipv4=False,  # Преобразует адрес IPv4. Если эта опция установлена, адрес ::ffff::192.0.2.1 будет
+                # преобразован в 192.0.2.1. По-умолчанию отключена. Может быть использовано, если protocol установлен в
+                # 'both'.
+            )
 
-        # A CharField that checks that the value is a valid email address using EmailValidator.
-        email_field = models.EmailField(
-            max_length=254,
-        )
 
-        # Поле для загрузки файла.
-        file_field = models.FileField(
-            upload_to='uploads/%Y/%m/%d/',
-            # Этот атрибут позволяет указать каталог и название файла при его сохранении.
-            # Его можно использовать двумя способами.
-            # file will be uploaded to MEDIA_ROOT/uploads
-            # upload = models.FileField(upload_to='uploads/')
-            # file will be saved to MEDIA_ROOT/uploads/2015/01/30
-            # upload = models.FileField(upload_to='uploads/%Y/%m/%d/')
+        @staticmethod
+        def bool_type():
+            # Поле хранящее значение true/false
+            boolean_field = models.BooleanField()
 
-            max_length=100,
-        )
+            # Поле хранящее значение true/false/None
+            boolean_field_2 = models.NullBooleanField()
 
-        # Число с плавающей точкой представленное объектом float.
-        float_field = models.FloatField()
+        @staticmethod
+        def numeric_type():
+            # An integer. Values from -2147483648 to 2147483647 are safe in all databases supported by Django.
+            integer_field = models.IntegerField()
 
-        # Наследует все атрибуты и методы поля FileField, но также проверяет является ли загруженный файл изображением.
-        image_field = models.ImageField(
-            height_field=1920,  # Имя поля, которому автоматически будет присвоено значение высоты изображения при
-            # каждом сохранении объекта
+            name_1 = models.BigIntegerField
+            name_2 = models.SmallIntegerField
+            name_3 = models.PositiveIntegerField
+            name_4 = models.PositiveSmallIntegerField
+            name_5 = models.PositiveBigIntegerField
 
-            width_field=1080  # Имя поля, которому автоматически будет присвоено значение ширины изображения при каждом
-            # сохранении объекта.
-        )
+            # Число с плавающей точкой представленное объектом float.
+            float_field = models.FloatField()
 
-        # An integer. Values from -2147483648 to 2147483647 are safe in all databases supported by Django.
-        integer_field = models.IntegerField()
+            # A fixed-precision decimal number, represented in Python by a Decimal instance. It validates the input using
+            # DecimalValidator.
+            DecimalField = models.DecimalField(
+                max_digits=None,
+                # Максимальное количество цифр в числе. Заметим, что это число должно быть больше или равно
+                # decimal_places.
 
-        # Адрес IPv4 или IPv6 в виде строки (например, 192.0.2.30 или 2a02:42fe::4). Форма использует виджет TextInput.
-        ipaddress_field = models.GenericIPAddressField(
-            protocol='both',  # Определяет формат IP адреса. Принимает значение 'both' (по умолчанию), 'IPv4' или
-            # 'IPv6'. Значение не чувствительно регистру.
+                decimal_places=None,  # Количество знаков после запятой.
 
-            unpack_ipv4=False,  # Преобразует адрес IPv4. Если эта опция установлена, адрес ::ffff::192.0.2.1 будет
-            # преобразован в 192.0.2.1. По-умолчанию отключена. Может быть использовано, если protocol установлен в
-            # 'both'.
-        )
+                # validators=None,  # DecimalValidator
+            )
 
-        # Как и поле IntegerField, но значение должно быть больше или равно нулю (0). Можно использовать значение от
-        # 0 до 2147483647. Значение 0 принимается для обратной совместимости.
-        positiveinteger_field = models.PositiveIntegerField()
+        @staticmethod
+        def datetime_type():
+            # Дата и время, представленные объектом datetime.datetime Python. Принимает аналогичные параметры что и
+            # DateField.
+            DateTimeField = models.DateTimeField(
+                auto_now=False,
+                # Значение поля будет автоматически установлено в текущую дату при каждом сохранении объекта.
+                # Полезно для хранения времени последнего изменения. Заметим, что текущее время будет использовано всегда;
+                # это не просто значение по умолчанию, которое вы можете переопределить.
 
-        # «Slug» – это короткое название-метка, которое содержит только буквы, числа, подчеркивание или дефис. В
-        # основном используются в URL.
-        slug_field = models.SlugField(
-            max_length=50,  #
-        )
+                auto_now_add=False,  # Значение поля будет автоматически установлено в текущую дату при создании(первом
+                # сохранении) объекта. Полезно для хранения времени создания. Заметим, что текущее время будет использовано
+                # всегда; это не просто значение по-умолчанию, которое вы можете переопределить. По этому, даже если вы
+                # укажите значение для этого поля, оно будет проигнорировано. Если вы хотите изменять значения этого поля,
+                # используйте следующее вместо auto_now_add=True:
 
-        # Большое текстовое поле. Форма использует виджет Textarea.
-        text_field = models.TextField()
+                auto_created=False,  # Значение поля будет автоматически установлено в текущую дату и время
+            )
 
-        # Время, представленное объектом datetime.time Python. Принимает те же аргументы, что и DateField.
-        time_field = models.TimeField(
-            auto_now=False,  #
-            auto_now_add=False,  #
-        )
+            # Дата, представленная в виде объекта datetime.date Python. Принимает несколько дополнительных параметров:
+            date_field = models.DateField(
+                auto_now=False,
+                # Значение поля будет автоматически установлено в текущую дату при каждом сохранении объекта.
+                # Полезно для хранения времени последнего изменения. Заметим, что текущее время будет использовано всегда;
+                # это не просто значение по умолчанию, которое вы можете переопределить.
 
-        # A CharField for a URL, validated by URLValidator.
-        url_field = models.URLField(
-            max_length=200,
-        )
+                auto_now_add=False,  # Значение поля будет автоматически установлено в текущую дату при создании(первом
+                # сохранении) объекта. Полезно для хранения времени создания. Заметим, что текущее время будет использовано
+                # всегда; это не просто значение по-умолчанию, которое вы можете переопределить. По этому, даже если вы
+                # укажите значение для этого поля, оно будет проигнорировано. Если вы хотите изменять значения этого поля,
+                # используйте следующее вместо auto_now_add=True:
 
-        # Django предоставляет набор полей для определения связей между моделями.
-        foreignkey = models.ForeignKey(
-            to=User,  # Link model
-            on_delete=models.CASCADE,  # Каскадное удаление. Django эмулирует поведение SQL правила ON DELETE CASCADE и
-            # так же удаляет объекты, связанные через ForeignKey.
+                auto_created=False,  # Значение поля будет автоматически установлено в текущую дату
+            )
 
-            # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+            # Время, представленное объектом datetime.time Python. Принимает те же аргументы, что и DateField.
+            time_field = models.TimeField(
+                auto_now=False,  #
+                auto_now_add=False,  #
+            )
 
-            # on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
+            # Поля для хранения периодов времени - используется объект Python timedelta. Для PostgreSQL используется тип
+            # interval, а в Oracle – INTERVAL DAY(9) TO SECOND(6). Иначе используется bigint, в котором хранится количество
+            # микросекунд.
+            duration_field = models.DurationField()
 
-            # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию; значение по-умолчанию
-            # должно быть указано для ForeignKey.
+        @staticmethod
+        def file_type():
+            # Поле для загрузки файла.
+            file_field = models.FileField(
+                upload_to='uploads/%Y/%m/%d/',
+                # Этот атрибут позволяет указать каталог и название файла при его сохранении.
+                # Его можно использовать двумя способами.
+                # file will be uploaded to MEDIA_ROOT/uploads
+                # upload = models.FileField(upload_to='uploads/')
+                # file will be saved to MEDIA_ROOT/uploads/2015/01/30
+                # upload = models.FileField(upload_to='uploads/%Y/%m/%d/')
 
-            # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET(). Если указан
-            # выполняемый объект, результат его выполнения.
+                max_length=100,
+            )
 
-            # on_delete=models.DO_NOTHING,  # Ничего не делать. Если используемый тип базы данных следит за
-            # целостностью связей, будет вызвано исключение IntegrityError, за исключением, когда вы самостоятельно
-            # добавите SQL правило ON DELETE для поля таблицы.
+            # Наследует все атрибуты и методы поля FileField, но также проверяет является ли загруженный файл изображением.
+            image_field = models.ImageField(
+                height_field=1920,  # Имя поля, которому автоматически будет присвоено значение высоты изображения при
+                # каждом сохранении объекта
 
-            limit_choices_to=None,  # Ограничивает доступные значения для поля при создании ModelForm или в админке (по
-            # умолчанию можно выбрать любой объект связанной модели). Можно передать словарь, объект Q или функцию,
-            # которая возвращает словарь или объект Q.
-        )
+                width_field=1080  # Имя поля, которому автоматически будет присвоено значение ширины изображения при каждом
+                # сохранении объекта.
+            )
+
+        @staticmethod
+        def binary_type():
+            # A field to store raw binary data
+            binary_field = models.BinaryField(
+                max_length=None
+            )
+
+        @staticmethod
+        def link_type():
+            # Django предоставляет набор полей для определения связей между моделями.
+            foreignkey = models.ForeignKey(
+                to=User,  # Link model
+                on_delete=models.CASCADE,  # Каскадное удаление. Django эмулирует поведение SQL правила ON DELETE CASCADE и
+                # так же удаляет объекты, связанные через ForeignKey.
+
+                # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+
+                # on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
+
+                # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию; значение по-умолчанию
+                # должно быть указано для ForeignKey.
+
+                # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET(). Если указан
+                # выполняемый объект, результат его выполнения.
+
+                # on_delete=models.DO_NOTHING,  # Ничего не делать. Если используемый тип базы данных следит за
+                # целостностью связей, будет вызвано исключение IntegrityError, за исключением, когда вы самостоятельно
+                # добавите SQL правило ON DELETE для поля таблицы.
+
+                limit_choices_to=None,  # Ограничивает доступные значения для поля при создании ModelForm или в админке (по
+                # умолчанию можно выбрать любой объект связанной модели). Можно передать словарь, объект Q или функцию,
+                # которая возвращает словарь или объект Q.
+            )
+
 
     class Meta:
         app_label = 'auth'
@@ -607,6 +723,85 @@ class ExampleModel(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def get_id(self):
+        return self.id
+
+
+class GroupsModel(models.Model):
+    name = models.CharField(
+        db_column='name',
+        db_index=True,
+        db_tablespace='name_tablespace',
+        primary_key=False,
+        validators=[MinLengthValidator(1), MaxLengthValidator(32), ],
+
+        unique=True,
+        null=True,
+        editable=True,
+        blank=True,
+        auto_created=True,
+        default='',
+        max_length=32,
+        help_text='<small class="text-muted underline">латинница, нижний регистр, можно с пробелами, например: '
+                  '"Модератор отдела ОУПиБП"</small><hr><br>',
+        verbose_name='Имя отображения',
+    )
+    slug = models.SlugField(
+        db_column='slug',
+        db_index=True,
+        db_tablespace='slug_tablespace',
+        primary_key=False,
+        validators=[MinLengthValidator(1), MaxLengthValidator(32), ],
+
+        unique=True,
+        null=True,
+        editable=True,
+        blank=True,
+        auto_created=True,
+        default='',
+        max_length=32,
+        help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
+                  '"moderator_oupibp"</small><hr><br>',
+        verbose_name='Имя валидации',
+    )
+
+    user = models.ManyToManyField(
+        db_column='user',
+        db_index=True,
+        db_tablespace='user_tablespace',
+        primary_key=False,
+
+        unique=False,
+        # null=True,
+        editable=True,
+        blank=True,
+        auto_created=True,
+        default=None,
+        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+        verbose_name='Пользователи',
+
+        to=User,  # Model
+        related_name='users',
+        # on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
+        # on_delete = models.CASCADE,  # Каскадное удаление.
+        # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+        # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
+        # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
+        # on_delete=models.DO_NOTHING,  # Ничего не делать.
+        # limit_choices_to=None,  # Ограничивает доступные значения для поля
+    )
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('name',)
+        verbose_name = 'Группа доступа'
+        verbose_name_plural = 'Группы доступа'
+        db_table = 'groups_profile_table'
+
+    def __str__(self):
+        return f'{self.name}'
 
     def get_id(self):
         return self.id
@@ -648,6 +843,37 @@ class Profile(models.Model):
     group = models.SlugField(verbose_name='группы', null=True, blank=True)
     status = models.BooleanField(verbose_name='статус', default=True, null=True, blank=True)
 
+    groups = models.ManyToManyField(
+        db_column='groups_profile',
+        db_index=True,
+        db_tablespace='groups_profile_tablespace',
+        primary_key=False,
+
+        unique=False,
+        # null=True,
+        editable=True,
+        blank=True,
+        auto_created=True,
+        default=None,
+        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+        verbose_name='Группы',
+
+        to=GroupsModel,  # Model
+        related_name='groups',
+        # on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
+        # on_delete = models.CASCADE,  # Каскадное удаление.
+        # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
+        # on_delete=models.RESTRICT,  # Prevent deletion of the referenced object by raising RestrictedError
+        # (a subclass of django.db.IntegrityError). Unlike PROTECT, deletion of the referenced object is allowed
+        # if it also references a different object that is being deleted in the same operation, but via a CASCADE
+        # relationship.
+        # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
+        # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
+        # on_delete=models.DO_NOTHING,  # Ничего не делать.
+        # limit_choices_to=None,  # Ограничивает доступные значения для поля
+    )
+
     class Meta:
         app_label = 'auth'
         ordering = ('last_name',)
@@ -658,16 +884,18 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.patronymic}: {self.user}'
 
+    def get_id(self):
+        return self.id
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
+    # Создание при создании пользователя
     if created:
         Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    # Сохранение при сохранении пользователя
+    else:
+        instance.profile.save()
 
 
 class LoggingActions(models.Model):
@@ -713,53 +941,6 @@ class LoggingErrors(models.Model):
 
     def __str__(self):
         return f'{self.datetime_now} {self.username} {self.request_path}'
-
-
-# # Account
-# class AccountDataModel(models.Model):
-#     """
-#     Account Data Model
-#     """
-#     # Foreign key
-#     username = models.ForeignKey(User, on_delete=models.CASCADE, null=True, editable=True, default=None,
-#                                  verbose_name='Имя пользователя', blank=True)
-#
-#     # First data account
-#     user_iin = models.IntegerField('ИИН пользователя', unique=True, blank=True)
-#     password = models.SlugField(max_length=64, verbose_name='пароль', blank=True)
-#     firstname = models.TextField('Имя', blank=True)
-#     lastname = models.TextField('Фамилия', blank=True)
-#     patronymic = models.TextField('Отчество', blank=True)
-#     personnel_number = models.TextField('Табельный номер', blank=True)
-#     subdivision = models.TextField('Подразделение', blank=True)
-#     workshop_service = models.TextField('Цех/Служба', blank=True)
-#     department_site = models.TextField('Отдел/Участок', blank=True)
-#     position = models.TextField('Должность', blank=True)
-#     category = models.TextField('Категория', blank=True)
-#
-#     # Second data account
-#     education = models.TextField('Образование', blank=True)
-#     achievements = models.TextField('Достижения', blank=True)
-#     biography = models.TextField('Биография', blank=True)
-#     hobbies = models.TextField('Увлечения', blank=True)
-#     image_avatar = models.ImageField('Аватарка', upload_to='uploads/account/avatar',
-#                                      default='uploads/account/avatar/default.jpg', blank=True)
-#
-#     # Вспомогательное
-#     mail = models.EmailField('Электронная почта', blank=True)
-#     date_registered = models.DateTimeField('дата регистрации', auto_now_add=True, blank=True)
-#     secret_question = models.TextField('Секретный вопрос', blank=True)
-#     group = models.SlugField(max_length=64, verbose_name='группы', blank=True)
-#     status = models.BooleanField('статус', default=True, blank=True)
-#
-#     class Meta:
-#         ordering = ('-id',)
-#         verbose_name = 'Пользователь'
-#         verbose_name_plural = 'Пользователи'
-#         db_table = 'account_data_table'
-#
-#     def __str__(self):
-#         return f'{self.firstname} {self.lastname} {self.patronymic}: {self.username}'
 
 
 # Application

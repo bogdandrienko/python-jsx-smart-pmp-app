@@ -2,17 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/account/account_change_groups.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_km/migrations/0002_groupsmodel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_km/migrations/0003_delete_groupsmodel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCRIPTS/win_migrates.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/SCRIPTS/win_migrates.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_create_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_create_accounts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account_recover_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_recover_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/app_km/home_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app_km/home_module.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/album.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/blog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/carousel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/cheatsheet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/checkout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/cover.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/custom.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/dashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/example.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/grid.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/masonry.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/nav_bars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/navbar-bottom.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/navbar-fixed.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/navbar-static.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/off_canvas.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/pricing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/product.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/sign-in.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/starter-template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/sticky-footer-navbar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bootstrap/sticky-footer.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -142,6 +166,7 @@
       <workItem from="1637558406903" duration="3665000" />
       <workItem from="1637563228035" duration="13840000" />
       <workItem from="1637582603712" duration="7972000" />
+      <workItem from="1637600224750" duration="18009000" />
     </task>
     <servers />
   </component>

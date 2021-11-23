@@ -28,8 +28,6 @@ from .forms import ExampleForm, RationalForm, NotificationForm, MessageForm, Doc
 from .utils import ExcelClass, SQLClass, EncryptingClass
 
 
-#  main
-# local
 def local(request):
     """
     Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение загрузки
@@ -40,7 +38,6 @@ def local(request):
     return redirect('http://192.168.1.68:8000/')
 
 
-# admin
 def admin_(request):
     """
     Панель управления
@@ -52,7 +49,6 @@ def admin_(request):
     return render(request, admin.site.urls)
 
 
-# home
 def home(request):
     """
     Домашняя страница
@@ -64,7 +60,6 @@ def home(request):
     return render(request, 'components/home.html')
 
 
-# example
 def example(request):
     """
     Страница с примерами разных frontend элементов
@@ -137,8 +132,6 @@ def examples(request):
     return render(request, 'components/examples.html', context)
 
 
-#  account
-# no check access (recursive)
 def account_login(request):
     """
     Страница логина пользователей
@@ -284,23 +277,23 @@ def account_recover_password(request, type_slug):
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             elif type_slug.lower() == 'email':
                 # try:
-                    password = user.profile.password
-                    email_ = user.profile.email
-                    if password and email_:
-                        subject = 'Восстановление пароля от веб платформы'
-                        encrypt_message = EncryptingClass.encrypt_text(
-                            text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
-                            hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
-                        )
-                        message_s = f'{user.profile.first_name} {user.profile.last_name}, перейдите по ссылке: ' \
-                                    f'http://192.168.1.68:8000/account_recover_password/0/ , ' \
-                                    f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
-                        from_email = 'eevee.cycle@yandex.ru'
-                        from_email = 'webapp@km.kz'
-                        to_email = email_
-                        if subject and message and to_email:
-                            send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
-                            response = 2
+                password = user.profile.password
+                email_ = user.profile.email
+                if password and email_:
+                    subject = 'Восстановление пароля от веб платформы'
+                    encrypt_message = EncryptingClass.encrypt_text(
+                        text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
+                        hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+                    )
+                    message_s = f'{user.profile.first_name} {user.profile.last_name}, перейдите по ссылке: ' \
+                                f'http://192.168.1.68:8000/account_recover_password/0/ , ' \
+                                f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
+                    from_email = 'eevee.cycle@yandex.ru'
+                    from_email = 'webapp@km.kz'
+                    to_email = email_
+                    if subject and message and to_email:
+                        send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+                        response = 2
             elif type_slug.lower() == 'recover':
                 encrypt_text = DjangoClass.RequestClass.get_value(request, "recover")
                 decrypt_text = EncryptingClass.decrypt_text(
@@ -337,7 +330,6 @@ def account_recover_password(request, type_slug):
     return render(request, 'account/account_recover_password.html', context)
 
 
-# All access
 def account_logout(request):
     """
     Ссылка на выход из аккаунта и перенаправление не страницу входа
@@ -354,7 +346,6 @@ def account_logout(request):
     return redirect('account_login')
 
 
-# User access
 def account_change_profile(request):
     """
     Страница изменения профиля пользователя
@@ -434,7 +425,6 @@ def account_profile(request, username):
     return render(request, 'account/account_profile.html', context)
 
 
-# Superuser access
 def account_create_accounts(request, quantity_slug):
     """
     Страница создания пользователей
@@ -973,6 +963,8 @@ def account_change_groups(request):
     #     }
 
     return render(request, 'account/account_change_groups.html', context)
+
+
 #
 #
 #
@@ -983,25 +975,50 @@ def account_change_groups(request):
 #
 #
 #
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#  ideas
-# All access
+def module(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
+    # try:
+    if True:
+        data = ApplicationModuleModel.objects.order_by('module_position')
+        context = {
+            'data': data,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return render(request, 'app_km/list_module.html', context)
+
+
+def component(request, module_slug):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
+    # try:
+    if True:
+        if module_slug is not None:
+            module = ApplicationModuleModel.objects.get(
+                module_slug=module_slug)
+            data = ApplicationComponentModel.objects.filter(
+                component_Foreign=module).order_by('component_position')
+        else:
+            return redirect('list_module')
+        context = {
+            'data': data,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return render(request, 'app_km/list_component.html', context)
+
+
 def ideas_create(request):  # create idea
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
@@ -1146,7 +1163,6 @@ def ideas_view(request, ideas_int):  # view idea
     return render(request, 'ideas/ideas_view.html', context)
 
 
-# User access
 def ideas_comment(request, ideas_int):  # comment
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
@@ -1202,7 +1218,6 @@ def ideas_like(request, ideas_int):  # likes
         return redirect(reverse('ideas_view', args=(idea.id,)))
 
 
-# Moderator access
 def ideas_change(request, ideas_int):  # change idea
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
@@ -1243,106 +1258,255 @@ def ideas_change(request, ideas_int):  # change idea
     return render(request, 'ideas/ideas_change.html', context)
 
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# application
-def list_module(request):
+def passages_thermometry(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
-    # try:
-    if True:
-        data = ApplicationModuleModel.objects.order_by('module_position')
-        context = {
-            'data': data,
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'data': False
-    #     }
-    return render(request, 'app_km/list_module.html', context)
+    data = None
+    if request.method == 'POST':
+        personid = str(request.POST['personid'])
+        date_start = str(request.POST['date_start']).split('T')[0]
+        date_end = str(request.POST['date_end']).split('T')[0]
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        try:
+            check = request.POST['check']
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND personid = '{personid}' " \
+                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' " \
+                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        cursor.execute(sql_select_query)
+        data = cursor.fetchall()
+        bodies = []
+        for row in data:
+            local_bodies = []
+            value_index = 0
+            for val in row:
+                if value_index == 4:
+                    try:
+                        val = val.encode('1251').decode('utf-8')
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        try:
+                            value = str(val).split(" ")
+                            try:
+                                name = value[0].encode('1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                name = "И" + \
+                                       value[0][2:].encode('1251').decode('utf-8')
+                            try:
+                                surname = value[1].encode(
+                                    '1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                surname = "И" + \
+                                          value[1][2:].encode('1251').decode('utf-8')
+                            string = name + " " + surname
+                            val = string
+                        except Exception as error:
+                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                value_index += 1
+                local_bodies.append(val)
+            bodies.append(local_bodies)
+        headers = ["табельный", "доступ", "дата", "время", "данные",
+                   "точка", "номер карты", "температура", "маска"]
+        data = [headers, bodies]
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_thermometry.html', context)
 
 
-def list_component(request, module_slug):
+def passages_select(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
-    # try:
-    if True:
-        if module_slug is not None:
-            module = ApplicationModuleModel.objects.get(
-                module_slug=module_slug)
-            data = ApplicationComponentModel.objects.filter(
-                component_Foreign=module).order_by('component_position')
-        else:
-            return redirect('list_module')
-        context = {
-            'data': data,
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'data': False
-    #     }
-    return render(request, 'app_km/list_component.html', context)
+    data = None
+    if request.method == 'POST':
+        personid = str(request.POST['personid'])
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        try:
+            check = request.POST['check']
+            date = str(request.POST['date']).split('T')[0]
+            time = str(request.POST['date']).split('T')[1]
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' " \
+                               f"AND personid = '{personid}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '2021-07-30' AND '2023-12-31' AND personid = '{personid}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        cursor.execute(sql_select_query)
+        data = cursor.fetchall()
+        bodies = []
+        for row in data:
+            local_bodies = []
+            value_index = 0
+            for val in row:
+                if value_index == 4:
+                    try:
+                        val = val.encode('1251').decode('utf-8')
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        try:
+                            value = str(val).split(" ")
+                            try:
+                                name = value[0].encode('1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                name = "И" + \
+                                       value[0][2:].encode('1251').decode('utf-8')
+                            try:
+                                surname = value[1].encode(
+                                    '1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                surname = "И" + \
+                                          value[1][2:].encode('1251').decode('utf-8')
+                            string = name + " " + surname
+                            val = string
+                        except Exception as error:
+                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                value_index += 1
+                local_bodies.append(val)
+            bodies.append(local_bodies)
+        headers = ["табельный", "доступ", "дата", "время", "данные",
+                   "точка", "номер карты", "температура", "маска"]
+        data = [headers, bodies]
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_select.html', context)
 
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# salary
+def passages_update(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
+    data = None
+    if request.method == 'POST':
+        personid_old = request.POST['personid_old']
+        date_old = str(request.POST['datetime_old']).split('T')[0]
+        time_old = str(request.POST['datetime_old']).split('T')[1]
+        date_new = str(request.POST['datetime_new']).split('T')[0]
+        time_new = str(request.POST['datetime_new']).split('T')[1] + ':00'
+        accessdateandtime_new = date_new + 'T' + time_new
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        value = f"UPDATE dbtable SET accessdateandtime = '{accessdateandtime_new}', date1 = '{date_new}', " \
+                f"date2 = '{time_new}' " \
+                f"WHERE date1 = '{date_old}' AND date2 BETWEEN '{time_old}:00' AND '{time_old}:59' " \
+                f"AND personid = '{personid_old}' "
+        cursor.execute(value)
+        connect_db.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_update.html', context)
+
+
+def passages_insert(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
+    data = None
+    if request.method == 'POST':
+        personid = request.POST['personid']
+        date = str(request.POST['datetime']).split('T')[0]
+        time = str(request.POST['datetime']).split('T')[1] + ':00'
+        accessdateandtime = date + 'T' + time
+        devicename = str(request.POST['devicename'])
+        cardno = str(request.POST['cardno'])
+        temperature = str(request.POST['temperature'])
+        if temperature == '0':
+            temperature = ''
+        mask = str(request.POST['mask'])
+        try:
+            connect_db = SQLClass.pyodbc_connect(
+                ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb", username="sa",
+                password="skud12345678"
+            )
+            cursor = connect_db.cursor()
+            cursor.fast_executemany = True
+            sql_select_query = f"SELECT TOP (1) personname " \
+                               f"FROM dbtable " \
+                               f"WHERE personid = '{personid}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+            cursor.execute(sql_select_query)
+            personname_all = cursor.fetchall()
+            personname = personname_all[0][0]
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            personname = 'None'
+        connection = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connection.cursor()
+        cursor.fast_executemany = True
+        rows = ['personid', 'accessdateandtime', 'date1', 'date2', 'personname', 'devicename', 'cardno',
+                'temperature', 'mask']
+        values = [personid, accessdateandtime, date, time,
+                  personname, devicename, cardno, temperature, mask]
+        _rows = ''
+        for x in rows:
+            _rows = f"{_rows}{str(x)}, "
+        value = f"INSERT INTO dbtable (" + \
+                _rows[:-2:] + f") VALUES {tuple(values)}"
+        cursor.execute(value)
+        connection.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_insert.html', context)
+
+
+def passages_delete(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
+    data = None
+    if request.method == 'POST':
+        personid = str(request.POST['personid'])
+        date = str(request.POST['datetime']).split('T')[0]
+        time = str(request.POST['datetime']).split('T')[1]
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        value = f"DELETE FROM dbtable " \
+                f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' AND personid = '{personid}' "
+        cursor.execute(value)
+        connect_db.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_delete.html', context)
+
+
 def salary(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='User'):
@@ -1502,7 +1666,7 @@ def salary(request):
     return render(request, 'app_km/salary.html', context)
 
 
-def render_pdf_view(request):
+def salary_pdf(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='User'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
@@ -1670,311 +1834,92 @@ def render_pdf_view(request):
     return response
 
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# extra
-def passages_thermometry(request):
+def career(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
-    data = None
-    if request.method == 'POST':
-        personid = str(request.POST['personid'])
-        date_start = str(request.POST['date_start']).split('T')[0]
-        date_end = str(request.POST['date_end']).split('T')[0]
-        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                             database="thirdpartydb", username="sa", password="skud12345678")
-        cursor = connect_db.cursor()
-        cursor.fast_executemany = True
-        try:
-            check = request.POST['check']
-            sql_select_query = f"SELECT * " \
-                               f"FROM dbtable " \
-                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND personid = '{personid}' " \
-                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            sql_select_query = f"SELECT * " \
-                               f"FROM dbtable " \
-                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' " \
-                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
-        cursor.execute(sql_select_query)
-        data = cursor.fetchall()
-        bodies = []
-        for row in data:
-            local_bodies = []
-            value_index = 0
-            for val in row:
-                if value_index == 4:
-                    try:
-                        val = val.encode('1251').decode('utf-8')
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                        try:
-                            value = str(val).split(" ")
-                            try:
-                                name = value[0].encode('1251').decode('utf-8')
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                name = "И" + \
-                                       value[0][2:].encode('1251').decode('utf-8')
-                            try:
-                                surname = value[1].encode(
-                                    '1251').decode('utf-8')
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                surname = "И" + \
-                                          value[1][2:].encode('1251').decode('utf-8')
-                            string = name + " " + surname
-                            val = string
-                        except Exception as error:
-                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                value_index += 1
-                local_bodies.append(val)
-            bodies.append(local_bodies)
-        headers = ["табельный", "доступ", "дата", "время", "данные",
-                   "точка", "номер карты", "температура", "маска"]
-        data = [headers, bodies]
-    context = {
-        'data': data,
-    }
-    return render(request, 'skud/passages_thermometry.html', context)
+    try:
+        data = None
+        if request.method == 'POST':
+            data = CareerClass.get_career()
+        context = {
+            'data': data,
+        }
+        return render(request, 'app_km/career.html', context)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
 
-def passages_select(request):
+def geo(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    try:
+        data = None
+        form = GeoForm()
+        if request.method == 'POST':
+            print('begin')
 
-    data = None
-    if request.method == 'POST':
-        personid = str(request.POST['personid'])
-        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                             database="thirdpartydb", username="sa", password="skud12345678")
-        cursor = connect_db.cursor()
-        cursor.fast_executemany = True
-        try:
-            check = request.POST['check']
-            date = str(request.POST['date']).split('T')[0]
-            time = str(request.POST['date']).split('T')[1]
-            sql_select_query = f"SELECT * " \
-                               f"FROM dbtable " \
-                               f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' " \
-                               f"AND personid = '{personid}' " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            sql_select_query = f"SELECT * " \
-                               f"FROM dbtable " \
-                               f"WHERE date1 BETWEEN '2021-07-30' AND '2023-12-31' AND personid = '{personid}' " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
-        cursor.execute(sql_select_query)
-        data = cursor.fetchall()
-        bodies = []
-        for row in data:
-            local_bodies = []
-            value_index = 0
-            for val in row:
-                if value_index == 4:
-                    try:
-                        val = val.encode('1251').decode('utf-8')
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                        try:
-                            value = str(val).split(" ")
-                            try:
-                                name = value[0].encode('1251').decode('utf-8')
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                name = "И" + \
-                                       value[0][2:].encode('1251').decode('utf-8')
-                            try:
-                                surname = value[1].encode(
-                                    '1251').decode('utf-8')
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                surname = "И" + \
-                                          value[1][2:].encode('1251').decode('utf-8')
-                            string = name + " " + surname
-                            val = string
-                        except Exception as error:
-                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                value_index += 1
-                local_bodies.append(val)
-            bodies.append(local_bodies)
-        headers = ["табельный", "доступ", "дата", "время", "данные",
-                   "точка", "номер карты", "температура", "маска"]
-        data = [headers, bodies]
-    context = {
-        'data': data,
-    }
-    return render(request, 'skud/passages_select.html', context)
+            # data = generate_xlsx(request)
+            # print('generate_xlsx successfully')
+
+            # generate_kml()
+            # print('generate_kml successfully')
+
+            # Points = [PointName, latitude, longitude, PointLinks]
+
+            point1 = [61.22812, 52.14303, "1", "2"]
+            point2 = [61.22829, 52.1431, "2", "1|3"]
+            point3 = [61.22862, 52.14323, "3", "2|4"]
+            point4 = [61.22878, 52.14329, "4", "3|5"]
+            point5 = [61.22892201, 52.14332617, "5", "4|6"]
+            point_arr = [point1, point2, point3, point4, point5]
+
+            # Получение значений из формы
+            count_points = int(request.POST['count_points'])
+            correct_rad = int(request.POST['correct_rad'])
+            rounded_val = int(request.POST['rounded_val'])
+
+            points_arr = []
+            val = 0
+            for num in range(1, count_points):
+                x = 61.22812
+                y = 52.14303
+                val += random.random() / 10000 * 2
+                var = [round(x + val, rounded_val), round(y + val - random.random() / 10000 * correct_rad, rounded_val),
+                       str(num), str(f"{num - 1}|{num + 1}")]
+                points_arr.append(var)
+
+            # Near Point
+            subject_ = GeoClass.find_near_point(points_arr, 61.27, 52.147)
+            print(subject_)
+            object_ = GeoClass.find_near_point(points_arr, 61.24, 52.144)
+            print(object_)
+
+            # Vectors = [VectorName, length(meters)]
+            vector_arr = GeoClass.get_vector_arr(points_arr)
+            # print(vector_arr)
+
+            # print(points_arr)
+
+            # New KML Object
+            GeoClass.generate_way(object_, subject_, points_arr)
+
+            print('end')
+        context = {
+            'data': data,
+            'form': form,
+        }
+        return render(request, 'app_km/geo.html', context)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
 
-def passages_update(request):
-    # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-
-    data = None
-    if request.method == 'POST':
-        personid_old = request.POST['personid_old']
-        date_old = str(request.POST['datetime_old']).split('T')[0]
-        time_old = str(request.POST['datetime_old']).split('T')[1]
-        date_new = str(request.POST['datetime_new']).split('T')[0]
-        time_new = str(request.POST['datetime_new']).split('T')[1] + ':00'
-        accessdateandtime_new = date_new + 'T' + time_new
-        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                             database="thirdpartydb", username="sa", password="skud12345678")
-        cursor = connect_db.cursor()
-        cursor.fast_executemany = True
-        value = f"UPDATE dbtable SET accessdateandtime = '{accessdateandtime_new}', date1 = '{date_new}', " \
-                f"date2 = '{time_new}' " \
-                f"WHERE date1 = '{date_old}' AND date2 BETWEEN '{time_old}:00' AND '{time_old}:59' " \
-                f"AND personid = '{personid_old}' "
-        cursor.execute(value)
-        connect_db.commit()
-    context = {
-        'data': data,
-    }
-    return render(request, 'skud/passages_update.html', context)
+def react(request):
+    return render(request, 'app_km/react.html')
 
 
-def passages_insert(request):
-    # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-
-    data = None
-    if request.method == 'POST':
-        personid = request.POST['personid']
-        date = str(request.POST['datetime']).split('T')[0]
-        time = str(request.POST['datetime']).split('T')[1] + ':00'
-        accessdateandtime = date + 'T' + time
-        devicename = str(request.POST['devicename'])
-        cardno = str(request.POST['cardno'])
-        temperature = str(request.POST['temperature'])
-        if temperature == '0':
-            temperature = ''
-        mask = str(request.POST['mask'])
-        try:
-            connect_db = SQLClass.pyodbc_connect(
-                ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb", username="sa",
-                password="skud12345678"
-            )
-            cursor = connect_db.cursor()
-            cursor.fast_executemany = True
-            sql_select_query = f"SELECT TOP (1) personname " \
-                               f"FROM dbtable " \
-                               f"WHERE personid = '{personid}' " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
-            cursor.execute(sql_select_query)
-            personname_all = cursor.fetchall()
-            personname = personname_all[0][0]
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            personname = 'None'
-        connection = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                             database="thirdpartydb", username="sa", password="skud12345678")
-        cursor = connection.cursor()
-        cursor.fast_executemany = True
-        rows = ['personid', 'accessdateandtime', 'date1', 'date2', 'personname', 'devicename', 'cardno',
-                'temperature', 'mask']
-        values = [personid, accessdateandtime, date, time,
-                  personname, devicename, cardno, temperature, mask]
-        _rows = ''
-        for x in rows:
-            _rows = f"{_rows}{str(x)}, "
-        value = f"INSERT INTO dbtable (" + \
-                _rows[:-2:] + f") VALUES {tuple(values)}"
-        cursor.execute(value)
-        connection.commit()
-    context = {
-        'data': data,
-    }
-    return render(request, 'skud/passages_insert.html', context)
-
-
-def passages_delete(request):
-    # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-
-    data = None
-    if request.method == 'POST':
-        personid = str(request.POST['personid'])
-        date = str(request.POST['datetime']).split('T')[0]
-        time = str(request.POST['datetime']).split('T')[1]
-        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                             database="thirdpartydb", username="sa", password="skud12345678")
-        cursor = connect_db.cursor()
-        cursor.fast_executemany = True
-        value = f"DELETE FROM dbtable " \
-                f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' AND personid = '{personid}' "
-        cursor.execute(value)
-        connect_db.commit()
-    context = {
-        'data': data,
-    }
-    return render(request, 'skud/passages_delete.html', context)
-
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# rational
 def rational_list(request, category_slug):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
@@ -2272,106 +2217,6 @@ def rational_ratings(request):
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
 
-# Human Resources
-def career(request):
-    # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-
-    try:
-        data = None
-        if request.method == 'POST':
-            data = CareerClass.get_career()
-        context = {
-            'data': data,
-        }
-        return render(request, 'app_km/career.html', context)
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-
-def geo(request):
-    # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-    try:
-        data = None
-        form = GeoForm()
-        if request.method == 'POST':
-            print('begin')
-
-            # data = generate_xlsx(request)
-            # print('generate_xlsx successfully')
-
-            # generate_kml()
-            # print('generate_kml successfully')
-
-            # Points = [PointName, latitude, longitude, PointLinks]
-
-            point1 = [61.22812, 52.14303, "1", "2"]
-            point2 = [61.22829, 52.1431, "2", "1|3"]
-            point3 = [61.22862, 52.14323, "3", "2|4"]
-            point4 = [61.22878, 52.14329, "4", "3|5"]
-            point5 = [61.22892201, 52.14332617, "5", "4|6"]
-            point_arr = [point1, point2, point3, point4, point5]
-
-            # Получение значений из формы
-            count_points = int(request.POST['count_points'])
-            correct_rad = int(request.POST['correct_rad'])
-            rounded_val = int(request.POST['rounded_val'])
-
-            points_arr = []
-            val = 0
-            for num in range(1, count_points):
-                x = 61.22812
-                y = 52.14303
-                val += random.random() / 10000 * 2
-                var = [round(x + val, rounded_val), round(y + val - random.random() / 10000 * correct_rad, rounded_val),
-                       str(num), str(f"{num - 1}|{num + 1}")]
-                points_arr.append(var)
-
-            # Near Point
-            subject_ = GeoClass.find_near_point(points_arr, 61.27, 52.147)
-            print(subject_)
-            object_ = GeoClass.find_near_point(points_arr, 61.24, 52.144)
-            print(object_)
-
-            # Vectors = [VectorName, length(meters)]
-            vector_arr = GeoClass.get_vector_arr(points_arr)
-            # print(vector_arr)
-
-            # print(points_arr)
-
-            # New KML Object
-            GeoClass.generate_way(object_, subject_, points_arr)
-
-            print('end')
-        context = {
-            'data': data,
-            'form': form,
-        }
-        return render(request, 'app_km/geo.html', context)
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 #
 #
 #
@@ -2614,50 +2459,6 @@ def message(request):
     return render(request, 'app_km/message.html', context)
 
 
-def weather(request):
-    # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-    appid = '82b797b6ebc625032318e16f1b42c016'
-    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
-    if request.method == 'POST':
-        try:
-            form = CityForm(request.POST)
-            form.save()
-        except Exception as ex:
-            print(ex)
-    form = CityForm()
-    cities = CityModel.objects.all()
-    all_cities = []
-    for city in cities:
-        try:
-            res = requests.get(url.format(city.name)).json()
-            print(res)
-            city_info = {
-                'city': city.name,
-                'temp': res["main"]["temp"],
-                'icon': res["weather"][0]["icon"]
-            }
-            all_cities.append(city_info)
-        except Exception as ex:
-            print(ex)
-    # Начало пагинатора: передать модель и количество объектов на одной странице, объекты будут списком
-    paginator = Paginator(all_cities, 3)
-    page = request.GET.get('page')
-    try:
-        page = paginator.page(page)
-    except PageNotAnInteger:
-        page = paginator.page(1)
-    except EmptyPage:
-        page = paginator.page(paginator.num_pages)
-    # конец пагинатора, объекты под ключом "'page': page"
-    context = {
-        'form': form,
-        'page': page,
-    }
-    return render(request, 'app_km/weather_list.html', context)
-
-
 def news_list(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
@@ -2730,91 +2531,45 @@ def decrease_rating(request, article_id):
     return HttpResponseRedirect(reverse('news_detail', args=(a.id,)))
 
 
-# react
-def react(request):
-    return render(request, 'app_km/react.html')
-
-
-#  bootstrap
-def bootstrap_example(request):
-    return render(request, 'bootstrap/example.html')
-
-
-def album(request):
-    return render(request, 'bootstrap/album.html')
-
-
-def blog(request):
-    return render(request, 'bootstrap/blog.html')
-
-
-def carousel(request):
-    return render(request, 'bootstrap/carousel.html')
-
-
-def checkout(request):
-    return render(request, 'bootstrap/checkout.html')
-
-
-def cover(request):
-    return render(request, 'bootstrap/cover.html')
-
-
-def dashboard(request):
-    return render(request, 'bootstrap/dashboard.html')
-
-
-def pricing(request):
-    return render(request, 'bootstrap/pricing.html')
-
-
-def product(request):
-    return render(request, 'bootstrap/product.html')
-
-
-def sign_in(request):
-    return render(request, 'bootstrap/sign-in.html')
-
-
-def sticky_footer(request):
-    return render(request, 'bootstrap/sticky-footer.html')
-
-
-def sticky_footer_navbar(request):
-    return render(request, 'bootstrap/sticky-footer-navbar.html')
-
-
-def starter_template(request):
-    return render(request, 'bootstrap/starter-template.html')
-
-
-def grid(request):
-    return render(request, 'bootstrap/grid.html')
-
-
-def cheatsheet(request):
-    return render(request, 'bootstrap/cheatsheet.html')
-
-
-def nav_bars(request):
-    return render(request, 'bootstrap/nav_bars.html')
-
-
-def off_canvas(request):
-    return render(request, 'bootstrap/off_canvas.html')
-
-
-def masonry(request):
-    return render(request, 'bootstrap/masonry.html')
-
-
-def navbar_static(request):
-    return render(request, 'bootstrap/navbar-static.html')
-
-
-def navbar_fixed(request):
-    return render(request, 'bootstrap/navbar-fixed.html')
-
-
-def navbar_bottom(request):
-    return render(request, 'bootstrap/navbar-bottom.html')
+def weather(request):
+    # access and logging
+    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
+        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    appid = '82b797b6ebc625032318e16f1b42c016'
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
+    if request.method == 'POST':
+        try:
+            form = CityForm(request.POST)
+            form.save()
+        except Exception as ex:
+            print(ex)
+    form = CityForm()
+    cities = CityModel.objects.all()
+    all_cities = []
+    for city in cities:
+        try:
+            res = requests.get(url.format(city.name)).json()
+            print(res)
+            city_info = {
+                'city': city.name,
+                'temp': res["main"]["temp"],
+                'icon': res["weather"][0]["icon"]
+            }
+            all_cities.append(city_info)
+        except Exception as ex:
+            print(ex)
+    # Начало пагинатора: передать модель и количество объектов на одной странице, объекты будут списком
+    paginator = Paginator(all_cities, 3)
+    page = request.GET.get('page')
+    try:
+        page = paginator.page(page)
+    except PageNotAnInteger:
+        page = paginator.page(1)
+    except EmptyPage:
+        page = paginator.page(paginator.num_pages)
+    # конец пагинатора, объекты под ключом "'page': page"
+    context = {
+        'form': form,
+        'page': page,
+    }
+    return render(request, 'app_km/weather_list.html', context)
