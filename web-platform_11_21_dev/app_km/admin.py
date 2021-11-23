@@ -9,7 +9,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-
 admin.site.unregister(User)
 
 
@@ -28,66 +27,53 @@ class UserModelAdmin(UserAdmin):
 admin.site.register(User, UserModelAdmin)
 
 
-
-
-
-
 class ExampleModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = ('id',
-                    'boolean_field',
-                    'char_field', 'text_field',
-                    'slug_field', 'email_field', 'url_field', 'ipaddress_field',
-                    'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
-                    'datetime_field', 'date_field', 'time_field', 'duration_field',
-                    'file_field', 'image_field',
-                    'foreignkey_field', 'one_to_one_field',
-                    'binary_field')
-
-    filter_horizontal = ('many_to_many_field',)
-
+    list_display = (
+        'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
+        'email_field',
+        'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
+        'float_field', 'decimal_field', 'datetime_field', 'duration_field',
+        'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'onetoone_field'
+    )
+    # Поля, которые отображаются как поле "группы" в пользователе, для моделей Many to Many
+    filter_horizontal = (
+        'manytomany_field',
+    )
     # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = ('id',
-                   'boolean_field',
-                   'char_field', 'text_field',
-                   'slug_field', 'email_field', 'url_field', 'ipaddress_field',
-                   'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
-                   'datetime_field', 'date_field', 'time_field', 'duration_field',
-                   'file_field', 'image_field',
-                   'foreignkey_field', 'one_to_one_field', 'many_to_many_field',
-                   'binary_field')
-
+    list_filter = (
+        'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
+        'email_field',
+        'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
+        'float_field', 'decimal_field', 'datetime_field', 'duration_field',
+        'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'manytomany_field',
+        'onetoone_field',
+    )
     # Поля, которые нужно отображать при создании модели, на панели администратора
     # fields          = ('id',)
-
     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
     fieldsets = (
-        ('boolean', {'fields': ('boolean_field',)}),
-        ('string', {'fields': ('char_field', 'text_field',)}),
-        ('specific string', {'fields': ('slug_field', 'email_field', 'url_field', 'ipaddress_field')}),
-        ('integer and float', {'fields': ('integer_field', 'big_integer_field', 'positive_integer_field',
-                                          'float_field', 'decimal_field')}),
-        ('date and time', {'fields': ('datetime_field', 'date_field', 'time_field', 'duration_field',)}),
-        ('file', {'fields': ('file_field', 'image_field')}),
-        ('link', {'fields': ('foreignkey_field', 'one_to_one_field', 'many_to_many_field',)}),
-        ('binary', {'fields': ('binary_field',)}),
+        ('binary_field', {'fields': (
+            'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
+            'email_field',
+            'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
+            'float_field', 'decimal_field', 'datetime_field', 'duration_field',
+            'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'manytomany_field',
+            'onetoone_field',
+        )}),
     )
-
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
-
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['id',
-                     'boolean_field',
-                     'char_field', 'text_field',
-                     'slug_field', 'email_field', 'url_field', 'ipaddress_field',
-                     'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
-                     'datetime_field', 'date_field', 'time_field', 'duration_field',
-                     'file_field', 'image_field',
-                     'foreignkey_field', 'one_to_one_field', 'many_to_many_field',
-                     'binary_field']
-
+    search_fields = [
+        'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
+        'email_field',
+        'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
+        'float_field', 'decimal_field', 'datetime_field', 'duration_field',
+        'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'manytomany_field',
+        'onetoone_field',
+    ]
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
 
@@ -138,8 +124,6 @@ class GroupsModelAdmin(admin.ModelAdmin):
     search_fields = ['name', 'slug']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
-
-
 
 
 class LoggingActionsModelAdmin(admin.ModelAdmin):
