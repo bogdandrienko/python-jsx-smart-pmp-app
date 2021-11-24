@@ -1,4 +1,5 @@
 {% load static %}
+{% load account_tag %}
 
 <div class="container-fluid">
     <div class="container d-flex text-center">
@@ -10,6 +11,12 @@
                         <h5 class=""><strong class="text-dark text-decoration-underline">Модули</strong></h5>
                     </div>
                 </a>
+                {% account_tag 'home_module' as access %}
+                {% if access %}
+                    Вы видите объект 'home_module' {{ access }}, т.к. вы есть в одной группе доступа с доступом к этому объекту
+                {% else %}
+                    Вы не видите объект 'home_module' {{ access }}, т.к. вас нет ни в одной группе доступа с доступом к этому объекту
+                {% endif %}
                 <a class="" href="{% url 'module' %}">
                     <div class="m-0 p-1">
                         <a class="btn btn-lg btn-outline-secondary" href="{% url 'module' %}">

@@ -28,3 +28,187 @@ Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:42:42.373098, 'User' object has 
 Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:44:13.992610, 'User' object has no attribute 'profile'
 
 Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:51:16.608868, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 17:51:19.601104, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 17:53:30.344906, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 17:58:20.803371, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 17:59:02.400597, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 17:59:24.655534, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:00:01.780442, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:01:04.798807, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:01:23.858017, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:05:15.054113, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:29:07.761788, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:29:08.901854, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:29:10.031361, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:29:10.743142, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.587938, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.608957, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.675015, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.696034, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.739073, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.761107, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.804145, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.824163, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.866200, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.887219, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.929256, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.951276, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:29.993313, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.013331, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.054367, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.074385, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.115421, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.134438, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.176475, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.195492, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.237530, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.258548, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.299584, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.318601, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.361639, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.381658, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.425696, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.443712, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.485750, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.505767, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.547805, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.568823, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.610366, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.630384, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.671421, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.691438, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.732475, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.752492, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.794530, list index out of range
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 18:30:30.812545, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:31:21.912928, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:31:21.931944, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:31:31.183653, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:31:31.202670, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:32:18.094425, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:32:18.113442, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:32:42.778885, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:32:42.799904, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:32:50.124915, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:32:50.145934, list index out of range
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 18:33:22.440938, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:35:06.371592, list index out of range
+
+Bogdan, 127.0.0.1, /logging/, GET, 2021-11-24 18:35:06.390609, list index out of range
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-24 19:13:34.018144, User matching query does not exist.
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:26:29.904244, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:26:42.193519, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:27:08.185617, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:27:24.926357, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:27:29.974190, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:29:13.865386, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:29:31.222624, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:29:50.354818, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:30:06.628952, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:30:25.725165, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:30:34.550477, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:30:39.840009, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:31:03.024591, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:31:06.014829, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account_login/, POST, 2021-11-24 19:31:22.569277, 'LoggingModel' object has no attribute 'datetime_now'
+
+970801351179, 127.0.0.1, /account_change_password/, POST, 2021-11-24 19:33:22.447864, 'User' object has no attribute 'profile'
+
+970801351179, 127.0.0.1, /account_change_password/, POST, 2021-11-24 19:34:17.648366, 'User' object has no attribute 'profile'
+
+, 127.0.0.1, /account/login/, POST, 2021-11-24 20:10:09.468342, 'LoggingModel' object has no attribute 'datetime_now'
+
+, 127.0.0.1, /account/login/, POST, 2021-11-24 20:10:15.362085, 'LoggingModel' object has no attribute 'datetime_now'
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:52:30.408568, User matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:52:39.731181, User matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:55:32.011265, User matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:55:38.451903, User matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:56:58.726321, User matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:57:03.711836, User matching query does not exist.

@@ -2126,36 +2126,6 @@ class GroupsModel(models.Model):
 #
 #
 #
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 # Application
 class ApplicationModuleModel(models.Model):
     """
@@ -2307,6 +2277,16 @@ class IdeasLikeModel(models.Model):
         return f'{self.like_author} :: {self.like_idea} :: {self.like_status} :: {self.like_date}'
 
 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 # Rational
 class CategoryRationalModel(models.Model):
     """

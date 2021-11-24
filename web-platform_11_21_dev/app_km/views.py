@@ -28,34 +28,123 @@ from .forms import ExampleForm, RationalForm, NotificationForm, MessageForm, Doc
 from .utils import ExcelClass, SQLClass, EncryptingClass
 
 
+# local
 def local(request):
     """
     Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение работы
     """
     # logging
-    # DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
 
     return redirect('http://192.168.1.68:8000/')
 
 
+# admin
 def admin_(request):
     """
     Панель управления
     """
-    # access and logging
-    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    # logging
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
 
     return render(request, admin.site.urls)
 
 
+# home
+def home(request):
+    """
+    Домашняя страница
+    """
+    # logging
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
+
+    return render(request, 'components/home.html')
+
+
+# example
+def example(request):
+    """
+    Страница с примерами разных frontend элементов
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
+
+    try:
+        response = 0
+        data = None
+        if request.method == 'POST':
+            response = 1
+            data = [
+                ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
+                [
+                    ['Тело_1_1', 'Тело_1_2'],
+                    ['Тело_2_1', 'Тело_2_2'],
+                    ['Тело_3_1', 'Тело_3_2'],
+                ]
+            ]
+        context = {
+            'response': response,
+            'data': data,
+            'form_1': ExampleForm,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+            'form_1': None,
+        }
+
+    return render(request, 'components/example.html', context)
+
+
+def examples(request):
+    """
+    Страница с примерами разных frontend форм
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
+
+    try:
+        response = 0
+        data = None
+        if request.method == 'POST':
+            response = 1
+            data = [
+                ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
+                [
+                    ['Тело_1_1', 'Тело_1_2'],
+                    ['Тело_2_1', 'Тело_2_2'],
+                    ['Тело_3_1', 'Тело_3_2'],
+                ]
+            ]
+        context = {
+            'response': response,
+            'data': data,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+        }
+
+    return render(request, 'components/examples.html', context)
+
+
+# logging
 def logging(request):
     """
     Страница показа логов системы
     """
     # access and logging
-    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -72,31 +161,31 @@ def logging(request):
                     DjangoClass.RequestClass.get_value(request, 'datetime_end', strip=False),
                     '%Y-%m-%dT%H:%M'
                 ).replace(tzinfo=datetime.timezone.utc)
-                logging = LoggingModel.objects.all()
+                logs = LoggingModel.objects.all()
                 if DjangoClass.RequestClass.get_value(request, 'username_slug_field'):
-                    logging = logging.filter(username_slug_field=DjangoClass.RequestClass.get_value(
+                    logs = logs.filter(username_slug_field=DjangoClass.RequestClass.get_value(
                         request, 'username_slug_field')
                     )
                 if DjangoClass.RequestClass.get_value(request, 'ip_genericipaddress_field'):
-                    logging = logging.filter(ip_genericipaddress_field=DjangoClass.RequestClass.get_value(
+                    logs = logs.filter(ip_genericipaddress_field=DjangoClass.RequestClass.get_value(
                         request, 'ip_genericipaddress_field')
                     )
                 if DjangoClass.RequestClass.get_value(request, 'request_path_slug_field'):
-                    logging = logging.filter(request_path_slug_field=DjangoClass.RequestClass.get_value(
+                    logs = logs.filter(request_path_slug_field=DjangoClass.RequestClass.get_value(
                         request, 'request_path_slug_field')
                     )
                 if DjangoClass.RequestClass.get_value(request, 'request_method_slug_field'):
-                    logging = logging.filter(request_method_slug_field=DjangoClass.RequestClass.get_value(
+                    logs = logs.filter(request_method_slug_field=DjangoClass.RequestClass.get_value(
                         request, 'request_method_slug_field')
                     )
                 if DjangoClass.RequestClass.get_value(request, 'error_text_field'):
-                    logging = logging.filter(error_text_field=DjangoClass.RequestClass.get_value(
+                    logs = logs.filter(error_text_field=DjangoClass.RequestClass.get_value(
                         request, 'error_text_field')
                     )
                 titles = ['username_slug_field', 'ip_genericipaddress_field', 'request_path_slug_field',
                           'request_method_slug_field', 'error_text_field', 'datetime_field']
                 body = []
-                for log in logging:
+                for log in logs:
                     if start and end and \
                             start_datetime <= (log.datetime_field + datetime.timedelta(hours=6)) <= end_datetime:
                         body.append(
@@ -141,7 +230,7 @@ def logging(request):
                 sheet = ExcelClass.workbook_activate(workbook)
                 for title in titles:
                     ExcelClass.set_sheet_value(
-                        col=titles.index(title)+1,
+                        col=titles.index(title) + 1,
                         row=1,
                         value=title,
                         sheet=sheet
@@ -149,8 +238,8 @@ def logging(request):
                 for row in body:
                     for value in row:
                         ExcelClass.set_sheet_value(
-                            col=row.index(value)+1,
-                            row=body.index(row)+2,
+                            col=row.index(value) + 1,
+                            row=body.index(row) + 2,
                             value=value,
                             sheet=sheet
                         )
@@ -173,106 +262,21 @@ def logging(request):
     return render(request, 'account/account_logging.html', context)
 
 
-def home(request):
-    """
-    Домашняя страница
-    """
-    # logging
-    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
-
-    DjangoClass.AuthorizationClass.try_to_access(request=request, page_name='admin')
-
-    # access and logging
-    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-
-    return render(request, 'components/home.html')
-
-
-def example(request):
-    """
-    Страница с примерами разных frontend элементов
-    """
-    # access and logging
-    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-
-    try:
-        response = 0
-        data = None
-        if request.method == 'POST':
-            response = 1
-            data = [
-                ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
-                [
-                    ['Тело_1_1', 'Тело_1_2'],
-                    ['Тело_2_1', 'Тело_2_2'],
-                    ['Тело_3_1', 'Тело_3_2'],
-                ]
-            ]
-        context = {
-            'response': response,
-            'data': data,
-            'form_1': ExampleForm,
-        }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'data': None,
-            'form_1': None,
-        }
-
-    return render(request, 'components/example.html', context)
-
-
-def examples(request):
-    """
-    Страница с примерами разных frontend форм
-    """
-    # access and logging
-    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
-
-    try:
-        response = 0
-        data = None
-        if request.method == 'POST':
-            response = 1
-            data = [
-                ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
-                [
-                    ['Тело_1_1', 'Тело_1_2'],
-                    ['Тело_2_1', 'Тело_2_2'],
-                    ['Тело_3_1', 'Тело_3_2'],
-                ]
-            ]
-        context = {
-            'response': response,
-            'data': data,
-        }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'data': None,
-        }
-
-    return render(request, 'components/examples.html', context)
-
-
+# account
 def account_login(request):
     """
     Страница логина пользователей
     """
-    # # logging
-    # DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
+    # logging
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
 
-    try:
+    # try:
+    if True:
         response = 0
         access_count = None
         if request.method == 'POST':
-            try:
+            # try:
+            if True:
                 now = (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M')
                 access_count = 0
                 for dat in LoggingModel.objects.filter(
@@ -282,8 +286,8 @@ def account_login(request):
                         request_method_slug_field='POST',
                         error_text_field='successful'
                 ):
-                    if dat.datetime_now and \
-                            (dat.datetime_now + datetime.timedelta(hours=6)).strftime('%Y-%m-%d %H:%M') >= now:
+                    if dat.datetime_field and \
+                            (dat.datetime_field + datetime.timedelta(hours=6)).strftime('%Y-%m-%d %H:%M') >= now:
                         access_count += 1
                 user = authenticate(
                     username=DjangoClass.RequestClass.get_value(request, "username"),
@@ -294,34 +298,54 @@ def account_login(request):
                     response = 1
                 else:
                     response = -1
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                response = -1
+            # except Exception as error:
+            #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            #     response = -1
         context = {
             'response': response,
             'access_count': access_count,
         }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'access_count': None,
-        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'access_count': None,
+    #     }
 
     return render(request, 'account/account_login.html', context)
 
 
+def account_logout(request):
+    """
+    Ссылка на выход из аккаунта и перенаправление не страницу входа
+    """
+    # logging
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
+
+    try:
+        logout(request)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+    return redirect('account_login')
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 def account_change_password(request):
     """
     Страница смены пароля пользователей
     """
     # logging
-    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
-
-    try:
-        user = User.objects.get(username='non')
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
 
     try:
         response = 0
@@ -367,7 +391,7 @@ def account_recover_password(request, type_slug):
     Страница восстановления пароля пользователей
     """
     # logging
-    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
 
     # try:
     if True:
@@ -469,29 +493,14 @@ def account_recover_password(request, type_slug):
     return render(request, 'account/account_recover_password.html', context)
 
 
-def account_logout(request):
-    """
-    Ссылка на выход из аккаунта и перенаправление не страницу входа
-    """
-    # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=False, access=None))
-
-    try:
-        logout(request)
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-    return redirect('account_login')
-
-
 def account_change_profile(request):
     """
     Страница изменения профиля пользователя
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -540,8 +549,9 @@ def account_profile(request, username):
     Страница профиля пользователя
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         if username:
@@ -568,10 +578,10 @@ def account_create_accounts(request, quantity_slug):
     """
     Страница создания пользователей
     """
-
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -760,8 +770,9 @@ def account_export_accounts(request):
     Страница экспорта пользователей
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -877,8 +888,9 @@ def account_generate_passwords(request):
     Страница генерации паролей для аккаунтов пользователей
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -933,8 +945,9 @@ def account_update_accounts_1c(request):
     Страница обновления аккаунтов пользователей из системы 1С
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -1082,8 +1095,9 @@ def account_change_groups(request):
     Страница создания пользователей
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1125,8 +1139,9 @@ def account_change_groups(request):
 #
 def module(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1144,8 +1159,9 @@ def module(request):
 
 def component(request, module_slug):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1169,8 +1185,9 @@ def component(request, module_slug):
 
 def ideas_create(request):  # create idea
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1205,8 +1222,9 @@ def ideas_create(request):  # create idea
 
 def ideas_list(request, category_slug):  # list ideas
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1243,8 +1261,9 @@ def ideas_list(request, category_slug):  # list ideas
 
 def ideas_rating(request):  # ratings by posts ideas
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1291,8 +1310,9 @@ def ideas_rating(request):  # ratings by posts ideas
 
 def ideas_view(request, ideas_int):  # view idea
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1313,8 +1333,9 @@ def ideas_view(request, ideas_int):  # view idea
 
 def ideas_comment(request, ideas_int):  # comment
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1335,8 +1356,9 @@ def ideas_comment(request, ideas_int):  # comment
 
 def ideas_like(request, ideas_int):  # likes
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1368,8 +1390,9 @@ def ideas_like(request, ideas_int):  # likes
 
 def ideas_change(request, ideas_int):  # change idea
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1406,10 +1429,21 @@ def ideas_change(request, ideas_int):  # change idea
     return render(request, 'ideas/ideas_change.html', context)
 
 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 def passages_thermometry(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     data = None
     if request.method == 'POST':
@@ -1479,8 +1513,9 @@ def passages_thermometry(request):
 
 def passages_select(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     data = None
     if request.method == 'POST':
@@ -1549,8 +1584,9 @@ def passages_select(request):
 
 def passages_update(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     data = None
     if request.method == 'POST':
@@ -1578,8 +1614,9 @@ def passages_update(request):
 
 def passages_insert(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     data = None
     if request.method == 'POST':
@@ -1633,8 +1670,9 @@ def passages_insert(request):
 
 def passages_delete(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     data = None
     if request.method == 'POST':
@@ -1657,8 +1695,9 @@ def passages_delete(request):
 
 def salary(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='User'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1816,8 +1855,9 @@ def salary(request):
 
 def salary_pdf(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='User'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -1984,8 +2024,9 @@ def salary_pdf(request):
 
 def career(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         data = None
@@ -2001,8 +2042,10 @@ def career(request):
 
 def geo(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
+
     try:
         data = None
         form = GeoForm()
@@ -2065,13 +2108,29 @@ def geo(request):
 
 
 def react(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
+
     return render(request, 'app_km/react.html')
 
 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 def rational_list(request, category_slug):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         if category_slug is not None:
@@ -2096,8 +2155,9 @@ def rational_list(request, category_slug):
 
 def rational_search(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         if request.method == 'POST':
@@ -2116,8 +2176,9 @@ def rational_search(request):
 
 def rational_detail(request, rational_id):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         rational = RationalModel.objects.get(id=rational_id)
@@ -2161,8 +2222,9 @@ def rational_detail(request, rational_id):
 
 def create_rational(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         if request.method == 'POST':
@@ -2213,8 +2275,9 @@ def create_rational(request):
 
 def rational_change(request, rational_id):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         if request.method == 'POST':
@@ -2265,8 +2328,9 @@ def rational_change(request, rational_id):
 
 def rational_leave_comment(request, rational_id):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         rational = RationalModel.objects.get(id=rational_id)
@@ -2283,8 +2347,9 @@ def rational_leave_comment(request, rational_id):
 
 def rational_change_rating(request, rational_id):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         blog_ = RationalModel.objects.get(id=rational_id)
@@ -2322,8 +2387,9 @@ def rational_change_rating(request, rational_id):
 
 def rational_ratings(request):
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         rational = RationalModel.objects.order_by('-id')
@@ -2365,20 +2431,11 @@ def rational_ratings(request):
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 def email(request):
     # access and logging
     if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
         return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
     mails = EmailModel.objects.order_by('-id')
     # Начало пагинатора: передать массив объектов и количество объектов на одной странице, объекты будут списком
     paginator = Paginator(mails, 10)

@@ -79,96 +79,95 @@ class DjangoClass:
                 DjangoClass.AuthorizationClass.http404_raise(exception_text=error)
 
         @staticmethod
-        def try_to_access(request, page_name: str):
+        def try_to_access(request, only_logging=False):
 
             # Eсли пользователь в подсети предприятия его переадресует на локальный доступ
             if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
                 print(f"\n ***** ***** \n")
-                print(f"local redirect")
+                print(f"Локальный доступ, переадресация")
                 print(f"\n ***** ***** \n")
-
                 return 'local'
+
+            # Логирование действий
+            print(f"\n ***** ***** \n")
+            print(f"Логирование")
+            print(f"\n ***** ***** \n")
+            DjangoClass.LoggingClass.logging_actions(request=request)
+
+            # Возврат, если выбрано только логирование
+            if only_logging:
+                print(f"\n ***** ***** \n")
+                print(f"Только логирование")
+                print(f"\n ***** ***** \n")
+                return False
 
             # Проверка на вход в аккаунт
             if request.user.is_authenticated:
                 try:
                     user = User.objects.get(username=request.user.username)
+                    # Проверка суперпользователя: если имеет права, то полный доступ
+                    if user.is_superuser:
+                        print(f"\n ***** ***** \n")
+                        print(f"Вы суперпользователь, доступ на страницу разрешён")
+                        return False
                     # Проверка бана: если аккаунт пользователя отключён, то его разлогинит
                     if user.user_one_to_one_field.activity_boolean_field is False:
                         return 'account_logout'
                     else:
-                        if page_name:
-                            # Проверка заполнения спец полей
-                            if user.user_one_to_one_field.email_field and \
-                                    user.user_one_to_one_field.secret_answer_char_field and \
-                                    user.user_one_to_one_field.secret_question_char_field:
-
-                                # Полный доступ на страницу
-                                if str(page_name).strip().lower() == 'all':
-                                    return False
-
-                                #
-                                #
-                                #
-                                #
-                                #
-
-                                # Выборка всех групп доступа
-                                groups = GroupsModel.objects.all()
-                                print(f"\n ***** ***** \n")
-                                print(f"Выборка всех групп доступа: {groups}")
-
-                                # Выборка всех групп доступа с определённым пользователем
-                                groups = GroupsModel.objects.filter(user_many_to_many_field=user)
-                                print(f"\n ***** ***** \n")
-                                print(f"Выборка всех групп доступа с определённым пользователем: {groups}")
-
-                                access = False
-                                for group in groups:
+                        # Проверка заполнения спец полей
+                        if user.user_one_to_one_field.email_field and \
+                                user.user_one_to_one_field.secret_answer_char_field and \
+                                user.user_one_to_one_field.secret_question_char_field:
+                            # Выборка всех групп доступа
+                            groups = GroupsModel.objects.all()
+                            print(f"\n ***** ***** \n")
+                            print(f"Выборка всех групп доступа: {groups}")
+                            # Выборка всех групп доступа с определённым пользователем
+                            groups = GroupsModel.objects.filter(user_many_to_many_field=user)
+                            print(f"\n ***** ***** \n")
+                            print(f"Выборка всех групп доступа с определённым пользователем: {groups}")
+                            access = False
+                            for group in groups:
+                                try:
                                     pages = [str(x).strip().lower() for x in
                                              str(group.path_text_field).strip().split(',') if len(x) >= 1]
-                                    print(f"pages: {pages}")
-                                    try:
-                                        pages.index(str(page_name).strip().lower())
-                                        access = True
-                                        break
-                                    except Exception as error:
-                                        pass
-
-                                if access:
-                                    print(f"\n ***** ***** \n")
-                                    print(f"Доступ на страницу разрешён")
-                                else:
-                                    print(f"\n ***** ***** \n")
-                                    print(f"Доступ на страницу запрещён")
-
-                                return True
+                                except Exception as error:
+                                    pages = [str(group.path_text_field).strip()]
+                                print(f"pages: {pages}")
+                                try:
+                                    path = str(request.path).strip().split('/')[1]
+                                except Exception as error:
+                                    path = ''
+                                try:
+                                    pages.index(path.strip().lower())
+                                    access = True
+                                    break
+                                except Exception as error:
+                                    pass
+                            if access:
+                                print(f"\n ***** ***** \n")
+                                print(f"Доступ на страницу разрешён")
+                                return False
                             else:
-
                                 print(f"\n ***** ***** \n")
-                                print(f"technical data is not fully")
-                                print(f"\n ***** ***** \n")
-
-                                return 'account_change_password'
+                                print(f"Доступ на страницу запрещён")
+                                return 'home'
                         else:
-
                             print(f"\n ***** ***** \n")
-                            print(f"page name is null")
+                            print(f"Дополнительные данные не заполнены")
                             print(f"\n ***** ***** \n")
-
-                            return 'home'
+                            return 'account_change_password'
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
                     print(f"\n ***** ***** \n")
-                    print(f"user not yet")
+                    print(f"Пользователь не существует")
                     print(f"\n ***** ***** \n")
-
-            print(f"\n ***** ***** \n")
-            print(f"you are not authenticated")
-            print(f"\n ***** ***** \n")
-
-            return 'account_login'
+                    return 'home'
+            else:
+                print(f"\n ***** ***** \n")
+                print(f"Вы не вошли в аккаунт")
+                print(f"\n ***** ***** \n")
+                return 'account_login'
 
         @staticmethod
         def http404_raise(exception_text):
