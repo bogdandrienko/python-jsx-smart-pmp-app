@@ -5,12 +5,31 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('local/', views.local, name='local'),
     path('admin/', views.admin_, name='admin'),
+    path('logging/', views.logging, name='logging'),
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
     path('example/', views.example, name='example'),
     path('examples/', views.examples, name='examples'),
-
-
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     # account
     path('account_login/', views.account_login, name='account_login'),
     path('account_change_password/', views.account_change_password, name='account_change_password'),
@@ -32,6 +51,37 @@ urlpatterns = [
     #
     #
     #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     # module
     path('module/', views.module, name='module'),
     path('module/<slug:module_slug>/', views.component, name='component'),
@@ -44,6 +94,36 @@ urlpatterns = [
     path('ideas/<int:ideas_int>/comment/', views.ideas_comment, name='ideas_comment'),  # comment
     path('ideas/<int:ideas_int>/like/', views.ideas_like, name='ideas_like'),  # likes
     path('ideas/<int:ideas_int>/change/', views.ideas_change, name='ideas_change'),  # change idea
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     #
     #
     #

@@ -3,135 +3,320 @@ from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import ExampleModel, ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, \
     CommentRationalModel, GroupsModel, LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, \
-    ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, Profile, \
-    LoggingActions, LoggingErrors, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel
+    ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, AccountModel, \
+    LoggingModel, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
-admin.site.unregister(User)
-
-
-class ProfileModelAdminInline(admin.StackedInline):
-    model = Profile
-    filter_horizontal = ('groups',)
-
-
-class UserModelAdmin(UserAdmin):
-    # filter_horizontal = ('user_permissions', 'groups', 'ope')
-    save_on_top = True
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'last_login')
-    inlines = [ProfileModelAdminInline]
-
-
-admin.site.register(User, UserModelAdmin)
+# admin
+admin.site.site_header = 'Панель управления'  # default: "Django Administration"
+admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
+admin.site.site_title = 'Админка'  # default: "Django site admin"
 
 
 class ExampleModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
+
     # Поля, которые нужно отображать в заголовке, на панели администратора
     list_display = (
-        'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
-        'email_field',
-        'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
-        'float_field', 'decimal_field', 'datetime_field', 'duration_field',
-        'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'onetoone_field'
+        'binary_field',
+        'boolean_field', 'null_boolean_field',
+        'char_field', 'text_field', 'slug_field', 'email_field', 'url_field', 'genericipaddress_field',
+        'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
+        'datetime_field', 'date_field', 'time_field', 'duration_field',
+        'file_field', 'image_field',
+        'foreign_key_field', 'one_to_one_field',
     )
-    # Поля, которые отображаются как поле "группы" в пользователе, для моделей Many to Many
-    filter_horizontal = (
-        'manytomany_field',
-    )
+
+    # Поля, которые отображаются как поле "группы" в пользователе, для моделей many_to_many_field
+    filter_horizontal = ('many_to_many_field',)
+
     # Поля, которые нужно отображать при фильтрации, на панели администратора
     list_filter = (
-        'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
-        'email_field',
-        'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
-        'float_field', 'decimal_field', 'datetime_field', 'duration_field',
-        'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'manytomany_field',
-        'onetoone_field',
+        'binary_field',
+        'boolean_field', 'null_boolean_field',
+        'char_field', 'text_field', 'slug_field', 'email_field', 'url_field', 'genericipaddress_field',
+        'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
+        'datetime_field', 'date_field', 'time_field', 'duration_field',
+        'file_field', 'image_field',
+        'foreign_key_field', 'one_to_one_field', 'many_to_many_field',
     )
+
     # Поля, которые нужно отображать при создании модели, на панели администратора
     # fields          = ('id',)
+
     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
     fieldsets = (
-        ('binary_field', {'fields': (
-            'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
-            'email_field',
-            'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
-            'float_field', 'decimal_field', 'datetime_field', 'duration_field',
-            'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'manytomany_field',
-            'onetoone_field',
+        ('binary_data', {'fields': (
+            'binary_field',
+        )}),
+        ('boolean_data', {'fields': (
+            'boolean_field', 'null_boolean_field',
+        )}),
+        ('char_data', {'fields': (
+            'char_field', 'text_field', 'slug_field', 'email_field', 'url_field', 'genericipaddress_field',
+        )}),
+        ('numeric_data', {'fields': (
+            'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
+        )}),
+        ('datetime_data', {'fields': (
+            'datetime_field', 'date_field', 'time_field', 'duration_field',
+        )}),
+        ('file_data', {'fields': (
+            'file_field', 'image_field',
+        )}),
+        ('relations_data', {'fields': (
+            'foreign_key_field', 'one_to_one_field', 'many_to_many_field',
         )}),
     )
+
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
+
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
     search_fields = [
-        'binary_field', 'boolean_field', 'null_boolean_field', 'char_field', 'text_field', 'slug_field',
-        'email_field',
-        'url_field', 'genericipaddress_field', 'integer_field', 'big_integer_field', 'positive_integer_field',
-        'float_field', 'decimal_field', 'datetime_field', 'duration_field',
-        'date_field', 'time_field', 'file_field', 'image_field', 'foreignkey_field', 'manytomany_field',
-        'onetoone_field',
+        'binary_field',
+        'boolean_field', 'null_boolean_field',
+        'char_field', 'text_field', 'slug_field', 'email_field', 'url_field', 'genericipaddress_field',
+        'integer_field', 'big_integer_field', 'positive_integer_field', 'float_field', 'decimal_field',
+        'datetime_field', 'date_field', 'time_field', 'duration_field',
+        'file_field', 'image_field',
+        'foreign_key_field', 'one_to_one_field', 'many_to_many_field',
     ]
-    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
+
+    # Поля, которые нужно добавлять связанными при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
 
 
-# class ProfileModelAdmin(admin.ModelAdmin):
-#     """Настройки 'CommentRationalModel' на панели администратора"""
-#     # Поля, которые нужно отображать в заголовке, на панели администратора
-#     list_display = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
-#                     'department_site', 'position', 'category')
-#     # Поля, которые нужно отображать при фильтрации, на панели администратора
-#     list_filter = ('user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
-#                    'department_site', 'position', 'category')
-#     # Поля, которые нужно отображать при создании модели, на панели администратора
-#     # fields          = ('id',)
-#     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
-#     # fieldsets       = (
-#     #                     ('Категория', {'fields': ('category_name',)}),
-#     #                     ('Префикс', {'fields': ('category_slug',)}),
-#     #                     ('Описание', {'fields': ('category_description',)}),
-#     #                 )
-#     # Поля, которые не нужно отображать при создании модели, на панели администратора |
-#     # exclude         = ['id',]
-#     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-#     search_fields = ['user', 'first_name', 'last_name', 'patronymic', 'personnel_number', 'email', 'workshop_service',
-#                      'department_site', 'position', 'category']
-#     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
-#     # inlines         = [RationalModelInline]
+# Регистрация в админ-панели
+admin.site.register(ExampleModel, ExampleModelAdmin)
+
+
+class LoggingModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    list_display = ('username_slug_field', 'ip_genericipaddress_field', 'request_path_slug_field',
+                    'request_method_slug_field', 'error_text_field', 'datetime_field')
+    list_filter = ('username_slug_field', 'ip_genericipaddress_field', 'request_path_slug_field',
+                   'request_method_slug_field', 'error_text_field', 'datetime_field')
+    fieldsets = (
+        ('Имя пользователя', {'fields': (
+            'username_slug_field',
+        )}),
+        ('Ip адрес клиента', {'fields': (
+            'ip_genericipaddress_field',
+        )}),
+        ('Действие пользователя', {'fields': (
+            'request_path_slug_field',
+        )}),
+        ('Метод запроса', {'fields': (
+            'request_method_slug_field',
+        )}),
+        ('Текст ошибки и/или исключения', {'fields': (
+            'error_text_field',
+        )}),
+        ('Дата и время записи', {'fields': (
+            'datetime_field',
+        )}),
+    )
+    search_fields = ['username_slug_field', 'ip_genericipaddress_field', 'request_path_slug_field',
+                     'request_method_slug_field', 'error_text_field', 'datetime_field']
+
+
+# Регистрация в админ-панели
+admin.site.register(LoggingModel, LoggingModelAdmin)
+
+# Выключение встроенной админ-панели пользователей
+admin.site.unregister(User)
+
+
+# Создание вертикального поля для аккаунта
+class AccountModelAdminInline(admin.StackedInline):
+    model = AccountModel
+
+
+# Переопределение встроенной админ-панели пользователей
+class UserModelAdmin(UserAdmin):
+    save_on_top = True
+    inlines = [AccountModelAdminInline]
+
+
+# Регистрация в админ-панели
+admin.site.register(User, UserModelAdmin)
+
+
+class AccountModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    list_display = (
+        'user_one_to_one_field',
+        'password_slug_field',
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'activity_boolean_field'
+    )
+    list_filter = (
+        'user_one_to_one_field',
+        'password_slug_field',
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'activity_boolean_field'
+    )
+    fieldsets = (
+        ('Данные авторизации пользователя', {'fields': (
+            'user_one_to_one_field',
+            'password_slug_field',
+        )}),
+        ('Первичные данные пользователя', {'fields': (
+            'last_name_char_field',
+            'first_name_char_field',
+            'patronymic_char_field',
+        )}),
+        ('Вторичные данные пользователя', {'fields': (
+            'personnel_number_slug_field',
+            'subdivision_char_field',
+            'workshop_service_char_field',
+            'department_site_char_field',
+            'position_char_field',
+            'category_char_field',
+        )}),
+        ('Личные данные пользователя', {'fields': (
+            'education_text_field',
+            'achievements_text_field',
+            'biography_text_field',
+            'hobbies_text_field',
+            'image_field',
+        )}),
+        ('Технические данные пользователя', {'fields': (
+            'email_field',
+            'secret_question_char_field',
+            'secret_answer_char_field',
+            'activity_boolean_field'
+        )}),
+    )
+    search_fields = [
+        'user_one_to_one_field',
+        'password_slug_field',
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'activity_boolean_field'
+    ]
+
+
+# Регистрация в админ-панели
+admin.site.register(AccountModel, AccountModelAdmin)
 
 
 class GroupsModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
-    # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = ('name', 'slug')
-    # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = ('name', 'slug', 'user',)
-    filter_horizontal = ('user',)
-    # Поля, которые нужно отображать при создании модели, на панели администратора
-    # fields          = ('id',)
-    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
+    list_display = ('name_char_field', 'name_slug_field', 'path_text_field',)
+    list_filter = ('name_char_field', 'name_slug_field', 'path_text_field', 'user_many_to_many_field',)
+    filter_horizontal = ('user_many_to_many_field',)
     fieldsets = (
-        ('Имя отображения', {'fields': ('name',)}),
-        ('Имя валидации', {'fields': ('slug',)}),
-        ('Пользователи', {'fields': ('user',)}),
+        ('Имя отображения', {'fields': ('name_char_field',)}),
+        ('Имя валидации', {'fields': ('name_slug_field',)}),
+        ('Имя пути', {'fields': ('path_text_field',)}),
+        ('Пользователи', {'fields': ('user_many_to_many_field',)}),
     )
-    # Поля, которые не нужно отображать при создании модели, на панели администратора |
-    # exclude         = ['id',]
-    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['name', 'slug']
-    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
-    # inlines         = [RationalModelInline]
+    search_fields = ['name_char_field', 'name_slug_field', 'path_text_field', 'user_many_to_many_field']
 
 
-class LoggingActionsModelAdmin(admin.ModelAdmin):
+# Выключение встроенной админ-панели групп
+# admin.site.unregister(Group)
+# Регистрация в админ-панели
+admin.site.register(GroupsModel, GroupsModelAdmin)
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+class ApplicationModuleModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = ('username', 'ip', 'request_path', 'request_method', 'datetime_now')
+    list_display = ('id', 'module_position', 'module_name', 'module_slug', 'module_image', 'module_description')
     # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = ('username', 'ip', 'request_path', 'request_method', 'datetime_now')
+    list_filter = ('id', 'module_position', 'module_name', 'module_slug', 'module_image', 'module_description')
     # Поля, которые нужно отображать при создании модели, на панели администратора
     # fields          = ('id',)
     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
@@ -143,17 +328,21 @@ class LoggingActionsModelAdmin(admin.ModelAdmin):
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['username', 'ip', 'request_path', 'request_method', 'datetime_now']
+    search_fields = ['id', 'module_position', 'module_name', 'module_slug', 'module_image', 'module_description']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
 
 
-class LoggingErrorsModelAdmin(admin.ModelAdmin):
+class ApplicationComponentModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = ('username', 'ip', 'request_path', 'request_method', 'datetime_now', 'error')
+    list_display = (
+        'id', 'component_Foreign', 'component_position', 'component_name', 'component_slug', 'component_image',
+        'component_description')
     # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = ('username', 'ip', 'request_path', 'request_method', 'datetime_now', 'error')
+    list_filter = (
+        'id', 'component_Foreign', 'component_position', 'component_name', 'component_slug', 'component_image',
+        'component_description')
     # Поля, которые нужно отображать при создании модели, на панели администратора
     # fields          = ('id',)
     # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
@@ -165,9 +354,15 @@ class LoggingErrorsModelAdmin(admin.ModelAdmin):
     # Поля, которые не нужно отображать при создании модели, на панели администратора |
     # exclude         = ['id',]
     # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['username', 'ip', 'request_path', 'request_method', 'datetime_now', 'error']
+    search_fields = ['id', 'component_Foreign', 'component_position', 'component_name', 'component_slug',
+                     'component_image', 'component_description']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
+
+
+# module
+admin.site.register(ApplicationModuleModel, ApplicationModuleModelAdmin)
+admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
 
 
 class BankIdeasModelAdmin(admin.ModelAdmin):
@@ -261,6 +456,73 @@ class IdeasLikeModelAdmin(admin.ModelAdmin):
     # inlines         = [RationalModelInline]
 
 
+# ideas
+admin.site.register(IdeasModel, BankIdeasModelAdmin)
+admin.site.register(IdeasCategoryModel, IdeasCategoryModelAdmin)
+admin.site.register(IdeasCommentModel, IdeasCommentModelAdmin)
+admin.site.register(IdeasLikeModel, IdeasLikeModelAdmin)
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 class ArticleAdminForm(forms.ModelForm):
     """Форма с виджетом ckeditor"""
     article_text = forms.CharField(label="текст статьи", widget=CKEditorUploadingWidget())
@@ -546,83 +808,6 @@ class RationalModelAdmin(admin.ModelAdmin):
     # связанные поля для этой модели(ForeignKey...)
     inlines = [CommentRationalInline, LikeRationalInline]
 
-
-class ApplicationModuleModelAdmin(admin.ModelAdmin):
-    """Настройки 'CommentRationalModel' на панели администратора"""
-    # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = ('id', 'module_position', 'module_name', 'module_slug', 'module_image', 'module_description')
-    # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = ('id', 'module_position', 'module_name', 'module_slug', 'module_image', 'module_description')
-    # Поля, которые нужно отображать при создании модели, на панели администратора
-    # fields          = ('id',)
-    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
-    # fieldsets       = (
-    #                     ('Категория', {'fields': ('category_name',)}),
-    #                     ('Префикс', {'fields': ('category_slug',)}),
-    #                     ('Описание', {'fields': ('category_description',)}),
-    #                 )
-    # Поля, которые не нужно отображать при создании модели, на панели администратора |
-    # exclude         = ['id',]
-    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['id', 'module_position', 'module_name', 'module_slug', 'module_image', 'module_description']
-    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
-    # inlines         = [RationalModelInline]
-
-
-class ApplicationComponentModelAdmin(admin.ModelAdmin):
-    """Настройки 'CommentRationalModel' на панели администратора"""
-    # Поля, которые нужно отображать в заголовке, на панели администратора
-    list_display = (
-        'id', 'component_Foreign', 'component_position', 'component_name', 'component_slug', 'component_image',
-        'component_description')
-    # Поля, которые нужно отображать при фильтрации, на панели администратора
-    list_filter = (
-        'id', 'component_Foreign', 'component_position', 'component_name', 'component_slug', 'component_image',
-        'component_description')
-    # Поля, которые нужно отображать при создании модели, на панели администратора
-    # fields          = ('id',)
-    # Поля, которые нужно отображать сгруппированно при создании модели, на панели администратора
-    # fieldsets       = (
-    #                     ('Категория', {'fields': ('category_name',)}),
-    #                     ('Префикс', {'fields': ('category_slug',)}),
-    #                     ('Описание', {'fields': ('category_description',)}),
-    #                 )
-    # Поля, которые не нужно отображать при создании модели, на панели администратора |
-    # exclude         = ['id',]
-    # Поля, которые нужно учитывать при поиске, на панели администратора | Не включать связанные поля(ForeignKey...)
-    search_fields = ['id', 'component_Foreign', 'component_position', 'component_name', 'component_slug',
-                     'component_image', 'component_description']
-    # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
-    # inlines         = [RationalModelInline]
-
-
-# main
-admin.site.site_header = 'Панель управления'  # default: "Django Administration"
-admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
-admin.site.site_title = 'Админка'  # default: "Django site admin"
-
-# example
-admin.site.register(ExampleModel, ExampleModelAdmin)
-
-# profile
-# admin.site.register(Profile, ProfileModelAdmin)
-
-# groups
-admin.site.register(GroupsModel, GroupsModelAdmin)
-
-# logging
-admin.site.register(LoggingActions, LoggingActionsModelAdmin)
-admin.site.register(LoggingErrors, LoggingErrorsModelAdmin)
-
-# module
-admin.site.register(ApplicationModuleModel, ApplicationModuleModelAdmin)
-admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
-
-# ideas
-admin.site.register(IdeasModel, BankIdeasModelAdmin)
-admin.site.register(IdeasCategoryModel, IdeasCategoryModelAdmin)
-admin.site.register(IdeasCommentModel, IdeasCommentModelAdmin)
-admin.site.register(IdeasLikeModel, IdeasLikeModelAdmin)
 
 # rational
 admin.site.register(CategoryRationalModel, CategoryRationalAdmin)

@@ -56,7 +56,7 @@
         {% if data.profile.image_avatar %}
         <img src="{{ data.profile.image_avatar.url }}" class="bd-placeholder-img fa-image" width="512px" alt="{{ data.profile.firstname }}">
         {% else %}
-        <img src="{% static 'media/uploads/account/avatar/default.jpg' %}" class="bd-placeholder-img container" width="256px" height="100%" alt="default">
+        <img src="{% static 'media/uploads/account/avatar/default_avatar.jpg' %}" class="bd-placeholder-img container" width="256px" height="100%" alt="default">
         {% endif %}
         <h2>{{ data.profile.last_name }} {{ data.profile.first_name }} {{ data.profile.patronymic }}</h2>
         <p class="lead">{{ data.profile.position }}</p>

@@ -20,7 +20,7 @@ from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
 from .service import DjangoClass, PaginationClass, SalaryClass, Xhtml2pdfClass, GeoClass, CareerClass, UtilsClass
-from .models import LoggingActions, RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
+from .models import LoggingModel, RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, DocumentModel, \
     MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, IdeasLikeModel, IdeasCommentModel
 from .forms import ExampleForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, \
@@ -30,10 +30,10 @@ from .utils import ExcelClass, SQLClass, EncryptingClass
 
 def local(request):
     """
-    Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение загрузки
+    Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение работы
     """
     # logging
-    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
+    # DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
 
     return redirect('http://192.168.1.68:8000/')
 
@@ -43,19 +43,148 @@ def admin_(request):
     Панель управления
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
     return render(request, admin.site.urls)
+
+
+def logging(request):
+    """
+    Страница показа логов системы
+    """
+    # access and logging
+    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+
+    try:
+        response = 0
+        data = None
+        if request.method == 'POST':
+            try:
+                start = DjangoClass.RequestClass.get_check(request, 'checkbox_start')
+                start_datetime = datetime.datetime.strptime(
+                    DjangoClass.RequestClass.get_value(request, 'datetime_start', strip=False),
+                    '%Y-%m-%dT%H:%M'
+                ).replace(tzinfo=datetime.timezone.utc)
+                end = DjangoClass.RequestClass.get_check(request, 'checkbox_end')
+                end_datetime = datetime.datetime.strptime(
+                    DjangoClass.RequestClass.get_value(request, 'datetime_end', strip=False),
+                    '%Y-%m-%dT%H:%M'
+                ).replace(tzinfo=datetime.timezone.utc)
+                logging = LoggingModel.objects.all()
+                if DjangoClass.RequestClass.get_value(request, 'username_slug_field'):
+                    logging = logging.filter(username_slug_field=DjangoClass.RequestClass.get_value(
+                        request, 'username_slug_field')
+                    )
+                if DjangoClass.RequestClass.get_value(request, 'ip_genericipaddress_field'):
+                    logging = logging.filter(ip_genericipaddress_field=DjangoClass.RequestClass.get_value(
+                        request, 'ip_genericipaddress_field')
+                    )
+                if DjangoClass.RequestClass.get_value(request, 'request_path_slug_field'):
+                    logging = logging.filter(request_path_slug_field=DjangoClass.RequestClass.get_value(
+                        request, 'request_path_slug_field')
+                    )
+                if DjangoClass.RequestClass.get_value(request, 'request_method_slug_field'):
+                    logging = logging.filter(request_method_slug_field=DjangoClass.RequestClass.get_value(
+                        request, 'request_method_slug_field')
+                    )
+                if DjangoClass.RequestClass.get_value(request, 'error_text_field'):
+                    logging = logging.filter(error_text_field=DjangoClass.RequestClass.get_value(
+                        request, 'error_text_field')
+                    )
+                titles = ['username_slug_field', 'ip_genericipaddress_field', 'request_path_slug_field',
+                          'request_method_slug_field', 'error_text_field', 'datetime_field']
+                body = []
+                for log in logging:
+                    if start and end and \
+                            start_datetime <= (log.datetime_field + datetime.timedelta(hours=6)) <= end_datetime:
+                        body.append(
+                            [log.username_slug_field,
+                             log.ip_genericipaddress_field,
+                             log.request_path_slug_field,
+                             log.request_method_slug_field,
+                             log.error_text_field,
+                             log.datetime_field]
+                        )
+                    elif start and end is False and \
+                            start_datetime <= (log.datetime_field + datetime.timedelta(hours=6)):
+                        body.append(
+                            [log.username_slug_field,
+                             log.ip_genericipaddress_field,
+                             log.request_path_slug_field,
+                             log.request_method_slug_field,
+                             log.error_text_field,
+                             log.datetime_field]
+                        )
+                    elif end and start is False and \
+                            (log.datetime_field + datetime.timedelta(hours=6)) <= end_datetime:
+                        body.append(
+                            [log.username_slug_field,
+                             log.ip_genericipaddress_field,
+                             log.request_path_slug_field,
+                             log.request_method_slug_field,
+                             log.error_text_field,
+                             log.datetime_field]
+                        )
+                    elif start is False and end is False:
+                        body.append(
+                            [log.username_slug_field,
+                             log.ip_genericipaddress_field,
+                             log.request_path_slug_field,
+                             log.request_method_slug_field,
+                             log.error_text_field,
+                             log.datetime_field]
+                        )
+                data = [titles, body]
+                workbook = ExcelClass.workbook_create()
+                sheet = ExcelClass.workbook_activate(workbook)
+                for title in titles:
+                    ExcelClass.set_sheet_value(
+                        col=titles.index(title)+1,
+                        row=1,
+                        value=title,
+                        sheet=sheet
+                    )
+                for row in body:
+                    for value in row:
+                        ExcelClass.set_sheet_value(
+                            col=row.index(value)+1,
+                            row=body.index(row)+2,
+                            value=value,
+                            sheet=sheet
+                        )
+                ExcelClass.workbook_save(workbook=workbook, filename='static/media/data/logging/logging.xlsx')
+                response = 1
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                response = -1
+        context = {
+            'response': response,
+            'data': data,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+        }
+
+    return render(request, 'account/account_logging.html', context)
 
 
 def home(request):
     """
     Домашняя страница
     """
+    # logging
+    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
+
+    DjangoClass.AuthorizationClass.try_to_access(request=request, page_name='admin')
+
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='All'):
+    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
     return render(request, 'components/home.html')
 
@@ -65,8 +194,8 @@ def example(request):
     Страница с примерами разных frontend элементов
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
+    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
     try:
         response = 0
@@ -102,8 +231,8 @@ def examples(request):
     Страница с примерами разных frontend форм
     """
     # access and logging
-    if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
-        return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
+    # if DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access='Superuser'):
+    #     return redirect(DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None))
 
     try:
         response = 0
@@ -136,8 +265,8 @@ def account_login(request):
     """
     Страница логина пользователей
     """
-    # logging
-    DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
+    # # logging
+    # DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
 
     try:
         response = 0
@@ -146,10 +275,13 @@ def account_login(request):
             try:
                 now = (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M')
                 access_count = 0
-                for dat in LoggingActions.objects.filter(ip=request.META.get("REMOTE_ADDR"),
-                                                         username=request.user.username,
-                                                         request_path='/account_login/',
-                                                         request_method='POST'):
+                for dat in LoggingModel.objects.filter(
+                        username_slug_field=request.user.username,
+                        ip_genericipaddress_field=request.META.get("REMOTE_ADDR"),
+                        request_path_slug_field='/account_login/',
+                        request_method_slug_field='POST',
+                        error_text_field='successful'
+                ):
                     if dat.datetime_now and \
                             (dat.datetime_now + datetime.timedelta(hours=6)).strftime('%Y-%m-%d %H:%M') >= now:
                         access_count += 1
@@ -185,6 +317,11 @@ def account_change_password(request):
     """
     # logging
     DjangoClass.AuthorizationClass.access_to_page(request=request, logging=True, access=None)
+
+    try:
+        user = User.objects.get(username='non')
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
     try:
         response = 0
@@ -249,11 +386,13 @@ def account_recover_password(request, type_slug):
                     data = user
                     now = (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M')
                     access_count = 0
-                    for dat in LoggingActions.objects.filter(
-                            ip=request.META.get("REMOTE_ADDR"),
-                            username=request.user.username,
-                            request_path='/account_recover_password/iin/',
-                            request_method='POST'):
+                    for dat in LoggingModel.objects.filter(
+                            username_slug_field=request.user.username,
+                            ip_genericipaddress_field=request.META.get("REMOTE_ADDR"),
+                            request_path_slug_field='/account_login/',
+                            request_method_slug_field='POST',
+                            error_text_field='successful'
+                    ):
                         if dat.datetime_now and (dat.datetime_now + datetime.timedelta(hours=6)). \
                                 strftime('%Y-%m-%d %H:%M') >= now:
                             access_count += 1
@@ -635,9 +774,13 @@ def account_export_accounts(request):
                 titles = ['Имя пользователя', 'Пароль', 'Почта', 'Имя', 'Фамилия', 'Активность', 'Доступ к модерации',
                           'Группы', 'Отчество', 'Табельный номер', 'Подразделение', 'Цех/Служба', 'Отдел/Участок',
                           'Должность', 'Категория']
-                for char in 'ABCDEFGHIJKLMNO':
+                for title in titles:
                     ExcelClass.set_sheet_value(
-                        col=char, row=1, value=titles['ABCDEFGHIJKLMNO'.index(char)], sheet=sheet)
+                        col=titles.index(title) + 1,
+                        row=1,
+                        value=title,
+                        sheet=sheet
+                    )
                 index = 1
                 for user_object in user_objects:
                     if User.objects.get(username=user_object.username).is_superuser:
@@ -748,8 +891,13 @@ def account_generate_passwords(request):
                 wb = openpyxl.Workbook()
                 sheet = wb.active
                 titles = ['Пароль', 'Зашифрованный Пароль']
-                for char in 'AB':
-                    sheet[f'{char}1'] = titles['AB'.index(char)]
+                for title in titles:
+                    ExcelClass.set_sheet_value(
+                        col=titles.index(title) + 1,
+                        row=1,
+                        value=title,
+                        sheet=sheet
+                    )
                 body = []
                 for n in range(2, passwords_quantity + 2):
                     password = UtilsClass.create_encrypted_password(

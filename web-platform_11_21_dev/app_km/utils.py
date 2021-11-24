@@ -527,7 +527,7 @@ class ExcelClass:
                 col = ExcelClass.get_column_letter(col)
             if value == 'None' or value is None:
                 value = ''
-            sheet[str(col) + str(row)] = value
+            sheet[str(col) + str(row)] = str(value)
         except Exception as ex:
             print(f"set_sheet_value: {ex}")
 

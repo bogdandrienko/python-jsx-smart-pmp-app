@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import FileExtensionValidator, MinValueValidator, MaxValueValidator, MinLengthValidator, \
     MaxLengthValidator
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from .models import ExampleModel, Profile, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, \
+from .models import ExampleModel, AccountModel, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, \
     DocumentModel, \
     MessageModel, SmsModel, ArticleModel, CityModel, IdeasModel, IdeasCategoryModel
 
@@ -811,7 +811,7 @@ class ChangePasswordForm(forms.Form):
     )
 
     class Meta:
-        model = Profile
+        model = AccountModel
         fields = ('password_1', 'password_2', 'email', 'secret_question', 'secret_answer')
 
 
@@ -857,7 +857,7 @@ class ChangeUserForm(forms.Form):
                'class': 'form-control'}), required=False)
 
     class Meta:
-        model = Profile
+        model = AccountModel
         fields = '__all__'
 
 

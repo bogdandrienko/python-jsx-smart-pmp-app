@@ -1,0 +1,30 @@
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:14:49.762207, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:14:49.781396, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 16:14:51.576451, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-24 16:15:05.511055, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:17:01.426359, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:17:02.500316, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:34:22.834213, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:34:44.242159, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:34:45.018121, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:34:46.112878, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:38:42.645717, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:39:19.354191, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:42:42.373098, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:44:13.992610, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-24 16:51:16.608868, 'User' object has no attribute 'profile'

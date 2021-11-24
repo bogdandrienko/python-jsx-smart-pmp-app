@@ -2,7 +2,6 @@ import math
 import os
 import datetime
 import random
-
 import bs4
 import openpyxl
 import requests
@@ -12,8 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
 from fastkml import kml
 from openpyxl.utils import get_column_letter
-
-from .models import LoggingActions, LoggingErrors
+from .models import LoggingModel, GroupsModel
 from .utils import ExcelClass
 from django.contrib.staticfiles import finders
 from django.conf import settings
@@ -38,9 +36,9 @@ class DjangoClass:
                         if user.is_active is False:
                             return 'account_logout'
                         else:
-                            # Проверка заполнения спец полей
-                            if user.profile.email and user.profile.secret_answer and user.profile.secret_question:
-                                if access:
+                            if access:
+                                # Проверка заполнения спец полей
+                                if user.profile.email and user.profile.secret_answer and user.profile.secret_question:
                                     # Полный доступ на страницу
                                     if str(access).strip().lower() == 'all':
                                         return False
@@ -69,9 +67,9 @@ class DjangoClass:
                                             pass
                                     return True
                                 else:
-                                    return 'home'
+                                    return 'account_change_password'
                             else:
-                                return 'account_change_password'
+                                return 'home'
                     except Exception as error:
                         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
@@ -81,56 +79,158 @@ class DjangoClass:
                 DjangoClass.AuthorizationClass.http404_raise(exception_text=error)
 
         @staticmethod
+        def try_to_access(request, page_name: str):
+
+            # Eсли пользователь в подсети предприятия его переадресует на локальный доступ
+            if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
+                print(f"\n ***** ***** \n")
+                print(f"local redirect")
+                print(f"\n ***** ***** \n")
+
+                return 'local'
+
+            # Проверка на вход в аккаунт
+            if request.user.is_authenticated:
+                try:
+                    user = User.objects.get(username=request.user.username)
+                    # Проверка бана: если аккаунт пользователя отключён, то его разлогинит
+                    if user.user_one_to_one_field.activity_boolean_field is False:
+                        return 'account_logout'
+                    else:
+                        if page_name:
+                            # Проверка заполнения спец полей
+                            if user.user_one_to_one_field.email_field and \
+                                    user.user_one_to_one_field.secret_answer_char_field and \
+                                    user.user_one_to_one_field.secret_question_char_field:
+
+                                # Полный доступ на страницу
+                                if str(page_name).strip().lower() == 'all':
+                                    return False
+
+                                #
+                                #
+                                #
+                                #
+                                #
+
+                                # Выборка всех групп доступа
+                                groups = GroupsModel.objects.all()
+                                print(f"\n ***** ***** \n")
+                                print(f"Выборка всех групп доступа: {groups}")
+
+                                # Выборка всех групп доступа с определённым пользователем
+                                groups = GroupsModel.objects.filter(user_many_to_many_field=user)
+                                print(f"\n ***** ***** \n")
+                                print(f"Выборка всех групп доступа с определённым пользователем: {groups}")
+
+                                access = False
+                                for group in groups:
+                                    pages = [str(x).strip().lower() for x in
+                                             str(group.path_text_field).strip().split(',') if len(x) >= 1]
+                                    print(f"pages: {pages}")
+                                    try:
+                                        pages.index(str(page_name).strip().lower())
+                                        access = True
+                                        break
+                                    except Exception as error:
+                                        pass
+
+                                if access:
+                                    print(f"\n ***** ***** \n")
+                                    print(f"Доступ на страницу разрешён")
+                                else:
+                                    print(f"\n ***** ***** \n")
+                                    print(f"Доступ на страницу запрещён")
+
+                                return True
+                            else:
+
+                                print(f"\n ***** ***** \n")
+                                print(f"technical data is not fully")
+                                print(f"\n ***** ***** \n")
+
+                                return 'account_change_password'
+                        else:
+
+                            print(f"\n ***** ***** \n")
+                            print(f"page name is null")
+                            print(f"\n ***** ***** \n")
+
+                            return 'home'
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+                    print(f"\n ***** ***** \n")
+                    print(f"user not yet")
+                    print(f"\n ***** ***** \n")
+
+            print(f"\n ***** ***** \n")
+            print(f"you are not authenticated")
+            print(f"\n ***** ***** \n")
+
+            return 'account_login'
+
+        @staticmethod
         def http404_raise(exception_text):
             raise Http404(exception_text)
 
     class LoggingClass:
         @staticmethod
         def logging_errors(request, error):
+            # for k, v in request.META.items():
+            #     print(f'\n{k}: {v}')
             username = request.user.username
             ip = request.META.get("REMOTE_ADDR")
             request_path = request.path
             request_method = request.method
             datetime_now = datetime.datetime.now()
-            LoggingErrors.objects.create(username=username, ip=ip, request_path=request_path,
-                                         request_method=request_method, error=error)
+            LoggingModel.objects.create(
+                username_slug_field=username,
+                ip_genericipaddress_field=ip,
+                request_path_slug_field=request_path,
+                request_method_slug_field=request_method,
+                error_text_field=f'error: {error}'
+            )
             text = [username, ip, request_path, request_method, datetime_now, error]
             string = ''
             for val in text:
                 string = string + f', {val}'
-            with open('static/media/data/logging_errors.txt', 'a') as log:
+            with open('static/media/data/logging/logging_errors.txt', 'a') as log:
                 log.write(f'\n{string[2:]}\n')
 
         @staticmethod
         def logging_errors_local(error, function_error):
             datetime_now = datetime.datetime.now()
-            LoggingErrors.objects.create(username='', ip='', request_path=function_error,
-                                         request_method='', error=error)
+            LoggingModel.objects.create(username='', ip='', request_path=function_error,
+                                        request_method='', error=error)
             text = [function_error, datetime_now, error]
             string = ''
             for val in text:
                 string = string + f', {val}'
-            with open('static/media/data/logging_errors.txt', 'a') as log:
+            with open('static/media/data/logging/logging_errors.txt', 'a') as log:
                 log.write(f'\n{string[2:]}\n')
 
         @staticmethod
         def logging_actions(request):
-            username = request.user.username
-
             # for k, v in request.META.items():
             #     print(f'\n{k}: {v}')
-
+            username = request.user.username
             ip = request.META.get("REMOTE_ADDR")
             request_path = request.path
             request_method = request.method
             datetime_now = datetime.datetime.now()
-            LoggingActions.objects.create(username=username, ip=ip, request_path=request_path,
-                                          request_method=request_method)
+            LoggingModel.objects.create(
+                username_slug_field=username,
+                ip_genericipaddress_field=ip,
+                request_path_slug_field=request_path,
+                request_method_slug_field=request_method,
+                error_text_field='successful'
+            )
             text = [username, ip, request_path, request_method, datetime_now]
             string = ''
             for val in text:
                 string = string + f', {val}'
-            with open('static/media/data/logging_actions.txt', 'a') as log:
+            with open('static/media/data/logging/logging_actions.txt', 'a') as log:
                 log.write(f'\n{string[2:]}\n')
 
         @staticmethod

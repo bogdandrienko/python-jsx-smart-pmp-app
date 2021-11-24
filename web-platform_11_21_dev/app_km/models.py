@@ -8,85 +8,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator, MinLeng
     FileExtensionValidator, DecimalValidator
 
 
-
-class GroupsModel(models.Model):
-    name = models.CharField(
-        db_column='name',
-        db_index=True,
-        db_tablespace='name_tablespace',
-        primary_key=False,
-        validators=[MinLengthValidator(1), MaxLengthValidator(32), ],
-
-        unique=True,
-        null=True,
-        editable=True,
-        blank=True,
-        auto_created=True,
-        default='',
-        max_length=32,
-        help_text='<small class="text-muted underline">латинница, нижний регистр, можно с пробелами, например: '
-                  '"Модератор отдела ОУПиБП"</small><hr><br>',
-        verbose_name='Имя отображения',
-    )
-    slug = models.SlugField(
-        db_column='slug',
-        db_index=True,
-        db_tablespace='slug_tablespace',
-        primary_key=False,
-        validators=[MinLengthValidator(1), MaxLengthValidator(32), ],
-
-        unique=True,
-        null=True,
-        editable=True,
-        blank=True,
-        auto_created=True,
-        default='',
-        max_length=32,
-        help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
-                  '"moderator_oupibp"</small><hr><br>',
-        verbose_name='Имя валидации',
-    )
-
-    user = models.ManyToManyField(
-        db_column='user',
-        db_index=True,
-        db_tablespace='user_tablespace',
-        primary_key=False,
-
-        unique=False,
-        # null=True,
-        editable=True,
-        blank=True,
-        auto_created=True,
-        default=None,
-        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
-                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
-        verbose_name='Пользователи',
-
-        to=User,  # Model
-        related_name='users',
-        # on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
-        # on_delete = models.CASCADE,  # Каскадное удаление.
-        # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
-        # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
-        # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
-        # on_delete=models.DO_NOTHING,  # Ничего не делать.
-        # limit_choices_to=None,  # Ограничивает доступные значения для поля
-    )
-
-    class Meta:
-        app_label = 'auth'
-        ordering = ('name',)
-        verbose_name = 'Группа доступа'
-        verbose_name_plural = 'Группы доступа'
-        db_table = 'groups_profile_table'
-
-    def __str__(self):
-        return f'{self.name}'
-
-    def get_id(self):
-        return self.id
-
 class ExampleModel(models.Model):
     """
     Модель с максимумом вариаций параметров и полей
@@ -217,7 +138,7 @@ class ExampleModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default=None,
+        default='',
         verbose_name='slug_field',
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
@@ -290,7 +211,6 @@ class ExampleModel(models.Model):
                   '"127.0.0.1"</small><hr><br>',
 
         protocol='both',
-
         unpack_ipv4=False,
     )
     integer_field = models.IntegerField(
@@ -325,9 +245,9 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=0,
+        verbose_name='big integer',
         help_text='<small class="text-muted">Большое целочисленное значение от -9223372036854775808 до '
                   '9223372036854775807, example: "0"</small><hr><br>',
-        verbose_name='big integer',
     )
     positive_integer_field = models.PositiveIntegerField(
         db_column='positive_integer_field_db_column',
@@ -341,9 +261,9 @@ class ExampleModel(models.Model):
         blank=True,
         auto_created=True,
         default=0,
+        verbose_name='positive_integer_field',
         help_text='<small class="text-muted">Положительное целочисленное значение от 0 до 2147483647, '
                   'example: "0"</small><hr><br>',
-        verbose_name='positive_integer_field',
     )
     float_field = models.FloatField(
         db_column='float_field_db_column',
@@ -517,10 +437,10 @@ class ExampleModel(models.Model):
         # height_field=1920,  # Значение высоты изображения при каждом сохранении объекта
         # width_field=1080,  # Значение ширины изображения при каждом сохранении объекта.
     )
-    foreignkey_field = models.ForeignKey(
-        db_column='foreignkey_field_db_column',
+    foreign_key_field = models.ForeignKey(
+        db_column='foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='foreignkey_field_db_tablespace',
+        db_tablespace='foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique_for_date=False,
@@ -533,23 +453,51 @@ class ExampleModel(models.Model):
         blank=True,
         null=True,
         default=None,
-        verbose_name='foreignkey_field',
+        verbose_name='foreign_key_field',
         help_text='<small class="text-muted">Связь, с каким-либо объектом, example: "to=User.objects.get'
                   '(username="Bogdan")"</small><hr><br>',
 
         to=User,
         on_delete=models.CASCADE,
         # limit_choices_to={'is_staff': True},
-        # related_name='foreignkey_field',
-        # related_query_name='foreignkey_field',
-        # to_field='foreignkey_field',
+        # related_name='foreign_key_field',
+        # related_query_name='foreign_key_field',
+        # to_field='foreign_key_field',
         # db_constraint=True,
         # swappable=True,
     )
-    manytomany_field = models.ManyToManyField(
-        db_column='manytomany_field_db_column',
+    one_to_one_field = models.OneToOneField(
+        db_column='one_to_one_field_db_column',
         db_index=True,
-        db_tablespace='manytomany_field_db_tablespace',
+        db_tablespace='one_to_one_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='one_to_one_field',
+        help_text='<small class="text-muted">Связь, с каким-либо объектом, example: "to=User.objects.get'
+                  '(username="Bogdan")"</small><hr><br>',
+
+        to=User,
+        on_delete=models.CASCADE,
+        related_name='one_to_one_field',
+        # related_query_name='foreignkey_field',
+        # limit_choices_to={'is_staff': True},
+        # db_constraint=True,
+        # swappable=True,
+    )
+    many_to_many_field = models.ManyToManyField(
+        db_column='many_to_many_field_db_column',
+        db_index=True,
+        db_tablespace='many_to_many_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique_for_date=False,
@@ -561,12 +509,12 @@ class ExampleModel(models.Model):
         editable=True,
         blank=True,
         default=None,
-        verbose_name='manytomany_field',
+        verbose_name='many_to_many_field',
         help_text='<small class="text-muted">Связь, с каким-либо объектом, example: "to=User.objects.get'
                   '(username="Bogdan")"</small><hr><br>',
 
         to=User,
-        related_name='manytomany_field',
+        related_name='many_to_many_field',
         # related_query_name='foreignkey_field',
         # limit_choices_to={'is_staff': True},
         # symmetrical=True,
@@ -575,37 +523,8 @@ class ExampleModel(models.Model):
         # db_constraint=True,
         # swappable=True,
     )
-    onetoone_field = models.OneToOneField(
-        db_column='onetoone_field_db_column',
-        db_index=True,
-        db_tablespace='onetoone_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        # choices=LIST_DB_VIEW_CHOICES,
-        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='onetoone_field',
-        help_text='<small class="text-muted">Связь, с каким-либо объектом, example: "to=User.objects.get'
-                  '(username="Bogdan")"</small><hr><br>',
-
-        to=User,
-        on_delete=models.CASCADE,
-        related_name='onetoone_field',
-        # related_query_name='foreignkey_field',
-        # limit_choices_to={'is_staff': True},
-        # db_constraint=True,
-        # swappable=True,
-    )
 
     class FieldsClass:
-
         class ExtraClass:
             # Константа (не обязательно), которая содержит кортеж для параметра 'choices'
             LIST_DB_VIEW_CHOICES = [
@@ -1279,91 +1198,6 @@ class ExampleModel(models.Model):
                 # If in doubt, leave it to its default of True.
             )
 
-        class ManyToManyFieldClass:
-
-            def __init__(self):
-                # Default
-                self.to = User
-
-            # A many-to-many relationship. Requires a positional argument: the class to which the model is related,
-            # which works exactly the same as it does for ForeignKey, including recursive and lazy relationships.
-            # Related objects can be added, removed, or created with the field’s RelatedManager.
-            # Behind the scenes, Django creates an intermediary join table to represent the many-to-many relationship.
-            # By default, this table name is generated using the name of the many-to-many field and the name of the
-            # table for the model that contains it. Since some databases don’t support table names above a certain
-            # length, these table names will be automatically truncated and a uniqueness hash will be used, e.g.
-            # author_books_9cdf. You can manually provide the name of the join table using the db_table option.
-            manytomany_field = models.ManyToManyField(
-                to=User,
-                # Relationships defined this way on abstract models are resolved when the model is subclassed
-                # as a concrete model and are not relative to the abstract model’s app_label
-
-                related_name='foreignkey_field',
-                # The name to use for the relation from the related object back to this one. It’s also the default
-                # value for related_query_name (the name to use for the reverse filter name from the target model).
-                # See the related objects documentation for a full explanation and example. Note that you must set
-                # this value when defining relations on abstract models; and when you do so some special syntax
-                # is available.
-                # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
-                # '+'. For example, this will ensure that the User model won’t have a backwards relation to this model:
-
-                related_query_name='foreignkey_field',
-                # The name to use for the reverse filter name from the target model. It defaults to the value
-                # of related_name or default_related_name if set, otherwise it defaults to the name of the model:
-
-                limit_choices_to={'is_staff': True},
-                # Sets a limit to the available choices for this field when this field is rendered using a
-                # ModelForm or the admin (by default, all objects in the queryset are available to choose).
-                # Either a dictionary, a Q object, or a callable returning a dictionary or Q object can be used.
-
-                symmetrical=True,
-                # Only used in the definition of ManyToManyFields on self. Consider the following model:
-                # models.ManyToManyField("self") When Django processes this model, it identifies that it has a
-                # ManyToManyField on itself, and as a result, it doesn’t add a person_set attribute to the Person
-                # class. Instead, the ManyToManyField is assumed to be symmetrical – that is, if I am your friend,
-                # then you are my friend.
-                # If you do not want symmetry in many-to-many relationships with self, set symmetrical to False.
-                # This will force Django to add the descriptor for the reverse relationship, allowing ManyToManyField
-                # relationships to be non-symmetrical.
-
-                through=User,
-                # Django will automatically generate a table to manage many-to-many relationships. However,
-                # if you want to manually specify the intermediary table, you can use the through option to
-                # specify the Django model that represents the intermediate table that you want to use.
-                #
-                # The most common use for this option is when you want to associate extra data with a many-to-many
-                # relationship.
-
-                through_fields=('group', 'person'),
-                # Only used when a custom intermediary model is specified. Django will normally determine which
-                # fields of the intermediary model to use in order to establish a many-to-many relationship
-                # automatically. However, consider the following models:
-
-                # db_table='foreignkey_field',
-                # The name of the table to create for storing the many-to-many data. If this is not provided,
-                # Django will assume a default name based upon the names of: the table for the model defining
-                # the relationship and the name of the field itself.
-
-                db_constraint=True,
-                # Controls whether or not a constraint should be created in the database for this foreign key.
-                # The default is True, and that’s almost certainly what you want; setting this to False can
-                # be very bad for data integrity. That said, here are some scenarios where you might want to do this:
-
-                swappable=True,
-                # Controls the migration framework’s reaction if this ForeignKey is pointing at a swappable model.
-                # If it is True - the default - then if the ForeignKey is pointing at a model which matches the
-                # current value of settings.AUTH_USER_MODEL (or another swappable model setting) the relationship
-                # will be stored in the migration using a reference to the setting, not to the model directly.
-                # You only want to override this to be False if you are sure your model should always point towards
-                # the swapped-in model - for example, if it is a profile model designed specifically for your custom
-                # user model.
-                # Setting it to False does not mean you can reference a swappable model even if it is swapped out -
-                # False means that the migrations made with this ForeignKey will always reference the exact model you
-                # specify (so it will fail hard if the user tries to run with a User model you don’t support,
-                # for example).
-                # If in doubt, leave it to its default of True.
-            )
-
         class OneToOneFieldClass:
 
             def __init__(self):
@@ -1489,11 +1323,96 @@ class ExampleModel(models.Model):
                 # If in doubt, leave it to its default of True.
             )
 
+        class ManyToManyFieldClass:
+
+            def __init__(self):
+                # Default
+                self.to = User
+
+            # A many-to-many relationship. Requires a positional argument: the class to which the model is related,
+            # which works exactly the same as it does for ForeignKey, including recursive and lazy relationships.
+            # Related objects can be added, removed, or created with the field’s RelatedManager.
+            # Behind the scenes, Django creates an intermediary join table to represent the many-to-many relationship.
+            # By default, this table name is generated using the name of the many-to-many field and the name of the
+            # table for the model that contains it. Since some databases don’t support table names above a certain
+            # length, these table names will be automatically truncated and a uniqueness hash will be used, e.g.
+            # author_books_9cdf. You can manually provide the name of the join table using the db_table option.
+            manytomany_field = models.ManyToManyField(
+                to=User,
+                # Relationships defined this way on abstract models are resolved when the model is subclassed
+                # as a concrete model and are not relative to the abstract model’s app_label
+
+                related_name='foreignkey_field',
+                # The name to use for the relation from the related object back to this one. It’s also the default
+                # value for related_query_name (the name to use for the reverse filter name from the target model).
+                # See the related objects documentation for a full explanation and example. Note that you must set
+                # this value when defining relations on abstract models; and when you do so some special syntax
+                # is available.
+                # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
+                # '+'. For example, this will ensure that the User model won’t have a backwards relation to this model:
+
+                related_query_name='foreignkey_field',
+                # The name to use for the reverse filter name from the target model. It defaults to the value
+                # of related_name or default_related_name if set, otherwise it defaults to the name of the model:
+
+                limit_choices_to={'is_staff': True},
+                # Sets a limit to the available choices for this field when this field is rendered using a
+                # ModelForm or the admin (by default, all objects in the queryset are available to choose).
+                # Either a dictionary, a Q object, or a callable returning a dictionary or Q object can be used.
+
+                symmetrical=True,
+                # Only used in the definition of ManyToManyFields on self. Consider the following model:
+                # models.ManyToManyField("self") When Django processes this model, it identifies that it has a
+                # ManyToManyField on itself, and as a result, it doesn’t add a person_set attribute to the Person
+                # class. Instead, the ManyToManyField is assumed to be symmetrical – that is, if I am your friend,
+                # then you are my friend.
+                # If you do not want symmetry in many-to-many relationships with self, set symmetrical to False.
+                # This will force Django to add the descriptor for the reverse relationship, allowing ManyToManyField
+                # relationships to be non-symmetrical.
+
+                through=User,
+                # Django will automatically generate a table to manage many-to-many relationships. However,
+                # if you want to manually specify the intermediary table, you can use the through option to
+                # specify the Django model that represents the intermediate table that you want to use.
+                #
+                # The most common use for this option is when you want to associate extra data with a many-to-many
+                # relationship.
+
+                through_fields=('group', 'person'),
+                # Only used when a custom intermediary model is specified. Django will normally determine which
+                # fields of the intermediary model to use in order to establish a many-to-many relationship
+                # automatically. However, consider the following models:
+
+                # db_table='foreignkey_field',
+                # The name of the table to create for storing the many-to-many data. If this is not provided,
+                # Django will assume a default name based upon the names of: the table for the model defining
+                # the relationship and the name of the field itself.
+
+                db_constraint=True,
+                # Controls whether or not a constraint should be created in the database for this foreign key.
+                # The default is True, and that’s almost certainly what you want; setting this to False can
+                # be very bad for data integrity. That said, here are some scenarios where you might want to do this:
+
+                swappable=True,
+                # Controls the migration framework’s reaction if this ForeignKey is pointing at a swappable model.
+                # If it is True - the default - then if the ForeignKey is pointing at a model which matches the
+                # current value of settings.AUTH_USER_MODEL (or another swappable model setting) the relationship
+                # will be stored in the migration using a reference to the setting, not to the model directly.
+                # You only want to override this to be False if you are sure your model should always point towards
+                # the swapped-in model - for example, if it is a profile model designed specifically for your custom
+                # user model.
+                # Setting it to False does not mean you can reference a swappable model even if it is swapped out -
+                # False means that the migrations made with this ForeignKey will always reference the exact model you
+                # specify (so it will fail hard if the user tries to run with a User model you don’t support,
+                # for example).
+                # If in doubt, leave it to its default of True.
+            )
+
     class Meta:
         app_label = 'auth'
         ordering = ('-id',)
         verbose_name = 'Шаблон'
-        verbose_name_plural = 'Шаблоны'
+        verbose_name_plural = '0_Шаблоны'
         db_table = 'example_table'
 
     def __str__(self):
@@ -1503,143 +1422,740 @@ class ExampleModel(models.Model):
         return self.id
 
 
-
-class Profile(models.Model):
+class LoggingModel(models.Model):
     """
-    Account Profile Model
+    Logging Model
     """
-    # Link field
-    user = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True)
 
-    # First data account
-    user_iin = models.IntegerField(verbose_name='ИИН пользователя', null=True, blank=True)
-    password = models.SlugField(verbose_name='Пароль', null=True, blank=True)
-    first_name = models.TextField(verbose_name='Имя', null=True, blank=True)
-    last_name = models.TextField(verbose_name='Фамилия', null=True, blank=True)
-    patronymic = models.TextField(verbose_name='Отчество', null=True, blank=True)
-    personnel_number = models.TextField(verbose_name='Табельный номер', null=True, blank=True)
-    subdivision = models.TextField(verbose_name='Подразделение', null=True, blank=True)
-    workshop_service = models.TextField(verbose_name='Цех/Служба', null=True, blank=True)
-    department_site = models.TextField(verbose_name='Отдел/Участок', null=True, blank=True)
-    position = models.TextField(verbose_name='Должность', null=True, blank=True)
-    category = models.TextField(verbose_name='Категория', null=True, blank=True)
-
-    # Second data account
-    education = models.TextField(verbose_name='Образование', null=True, blank=True)
-    achievements = models.TextField(verbose_name='Достижения', null=True, blank=True)
-    biography = models.TextField(verbose_name='Биография', null=True, blank=True)
-    hobbies = models.TextField(verbose_name='Увлечения', null=True, blank=True)
-    image_avatar = models.ImageField(verbose_name='Аватарка', upload_to='uploads/account/avatar',
-                                     default='uploads/account/avatar/default.jpg', null=True, blank=True)
-
-    # Third data account
-    email = models.EmailField(verbose_name='Электронная почта', null=True, blank=True)
-    date_registered = models.DateTimeField(verbose_name='дата регистрации', auto_now_add=True, null=True, blank=True)
-    secret_question = models.TextField(verbose_name='Секретный вопрос', max_length=50, null=True, blank=True)
-    secret_answer = models.TextField(verbose_name='Секретный ответ', max_length=50, null=True, blank=True)
-    group = models.SlugField(verbose_name='группы', null=True, blank=True)
-    status = models.BooleanField(verbose_name='статус', default=True, null=True, blank=True)
-
-    groups = models.ManyToManyField(
-        db_column='groups_profile',
+    username_slug_field = models.SlugField(
+        db_column='username_slug_field_db_column',
         db_index=True,
-        db_tablespace='groups_profile_tablespace',
+        db_tablespace='username_slug_field_db_tablespace',
+        error_messages=False,
         primary_key=False,
-
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(12), ],
         unique=False,
-        # null=True,
         editable=True,
         blank=True,
-        auto_created=True,
-        default=None,
-        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
-                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
-        verbose_name='Группы',
+        null=True,
+        default='',
+        verbose_name='Имя пользователя',
+        help_text='<small class="text-muted">Тут отображается идентификатор пользователя, например: </small><hr><br>',
 
-        to=GroupsModel,  # Model
-        related_name='groups',
-        # on_delete=models.SET_NULL,  # Устанавливает ForeignKey в NULL; возможно только если null равен True.
-        # on_delete = models.CASCADE,  # Каскадное удаление.
-        # on_delete=models.PROTECT,  # Препятствует удалению связанного объекта вызывая исключение
-        # on_delete=models.RESTRICT,  # Prevent deletion of the referenced object by raising RestrictedError
-        # (a subclass of django.db.IntegrityError). Unlike PROTECT, deletion of the referenced object is allowed
-        # if it also references a different object that is being deleted in the same operation, but via a CASCADE
-        # relationship.
-        # on_delete=models.SET_DEFAULT,  # Устанавливает ForeignKey в значение по умолчанию;
-        # on_delete=models.SET(None),  # Устанавливает ForeignKey в значение указанное в SET().
-        # on_delete=models.DO_NOTHING,  # Ничего не делать.
-        # limit_choices_to=None,  # Ограничивает доступные значения для поля
+        max_length=12,
+        allow_unicode=False,
+    )
+    ip_genericipaddress_field = models.GenericIPAddressField(
+        db_column='ip_genericipaddress_field_field_db_column',
+        db_index=True,
+        db_tablespace='ip_genericipaddress_field_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(12), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Ip адрес клиента',
+        help_text='<small class="text-muted">Строка содержащая ip-адрес, example: '
+                  '"127.0.0.1"</small><hr><br>',
+
+        protocol='both',
+        unpack_ipv4=False,
+    )
+    request_path_slug_field = models.SlugField(
+        db_column='request_path_slug_field_field_db_column',
+        db_index=True,
+        db_tablespace='request_path_slug_field_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Действие пользователя',
+        help_text='<small class="text-muted">Строка содержащая путь обращения, example: '
+                  '"https://.../home/"</small><hr><br>',
+
+        max_length=128,
+        allow_unicode=False,
+    )
+    request_method_slug_field = models.SlugField(
+        db_column='request_method_slug_field_field_db_column',
+        db_index=True,
+        db_tablespace='request_method_slug_field_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(4), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Метод запроса',
+        help_text='<small class="text-muted">GET: просмотр страницы, POST: отправка данных из формы</small><hr><br>',
+
+        max_length=4,
+        allow_unicode=False,
+    )
+    error_text_field = models.TextField(
+        db_column='error_text_field_db_column',
+        db_index=True,
+        db_tablespace='error_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="error: ",
+        verbose_name='Текст ошибки и/или исключения',
+        help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
+
+        max_length=512,
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата и время записи',
+        help_text='<small class="text-muted">Дата и время, example: "31.12.2021Т23:59:59"</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
     )
 
     class Meta:
         app_label = 'auth'
-        ordering = ('last_name',)
-        verbose_name = 'Профиль'
-        verbose_name_plural = 'Профили'
-        db_table = 'profile_table'
+        ordering = ('-datetime_field',)
+        verbose_name = 'Лог'
+        verbose_name_plural = '1_Логи'
+        db_table = 'logging_model_table'
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.patronymic}: {self.user}'
+        if self.username_slug_field:
+            try:
+                username = User.objects.get(username=self.username_slug_field).profile.last_name
+            except Exception as error:
+                username = ''
+        else:
+            username = ''
+        return f'{self.datetime_field} {username} {self.request_path_slug_field}'
+
+
+class AccountModel(models.Model):
+    """
+    Account Profile Model
+    """
+    # authorization account data
+    user_one_to_one_field = models.OneToOneField(
+        db_column='user_one_to_one_field_db_column',
+        db_index=True,
+        db_tablespace='user_one_to_one_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Пользователь',
+        help_text='<small class="text-muted">Связь, с пользователем, которому принадлежит профиль, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+
+        to=User,
+        on_delete=models.CASCADE,
+        related_name='user_one_to_one_field',
+    )
+    password_slug_field = models.SlugField(
+        db_column='password_slug_field_db_column',
+        db_index=True,
+        db_tablespace='password_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(8), MaxLengthValidator(16), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Пароль от аккаунта пользователя',
+        help_text='<small class="text-muted">password_slug_field</small><hr><br>',
+
+        max_length=16,
+        allow_unicode=False,
+    )
+    # first account data
+    last_name_char_field = models.CharField(
+        db_column='last_name_char_field_db_column',
+        db_index=True,
+        db_tablespace='last_name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Фамилия',
+        help_text='<small class="text-muted">last_name_char_field</small><hr><br>',
+
+        max_length=32,
+    )
+    first_name_char_field = models.CharField(
+        db_column='first_char_field_db_column',
+        db_index=True,
+        db_tablespace='first_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя',
+        help_text='<small class="text-muted">first_char_field</small><hr><br>',
+
+        max_length=32,
+    )
+    patronymic_char_field = models.CharField(
+        db_column='patronymic_char_field_db_column',
+        db_index=True,
+        db_tablespace='patronymic_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Отчество',
+        help_text='<small class="text-muted">patronymic_char_field</small><hr><br>',
+
+        max_length=32,
+    )
+    # second account data
+    personnel_number_slug_field = models.SlugField(
+        db_column='personnel_number_slug_field_db_column',
+        db_index=True,
+        db_tablespace='personnel_number_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Табельный номер',
+        help_text='<small class="text-muted">personnel_number_slug_field</small><hr><br>',
+
+        max_length=32,
+        allow_unicode=False,
+    )
+    subdivision_char_field = models.CharField(
+        db_column='subdivision_char_field_db_column',
+        db_index=True,
+        db_tablespace='subdivision_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Подразделение',
+        help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    workshop_service_char_field = models.CharField(
+        db_column='workshop_service_char_field_db_column',
+        db_index=True,
+        db_tablespace='workshop_service_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Цех/Служба',
+        help_text='<small class="text-muted">workshop_service_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    department_site_char_field = models.CharField(
+        db_column='department_site_char_field_db_column',
+        db_index=True,
+        db_tablespace='department_site_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Отдел/Участок',
+        help_text='<small class="text-muted">department_site_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    position_char_field = models.CharField(
+        db_column='position_char_field_db_column',
+        db_index=True,
+        db_tablespace='position_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Должность',
+        help_text='<small class="text-muted">position_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    category_char_field = models.CharField(
+        db_column='category_char_field_db_column',
+        db_index=True,
+        db_tablespace='category_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Категория',
+        help_text='<small class="text-muted">category_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    # personal account data
+    education_text_field = models.TextField(
+        db_column='education_text_field_db_column',
+        db_index=True,
+        db_tablespace='education_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Образование',
+        help_text='<small class="text-muted">education_text_field</small><hr><br>',
+
+        max_length=512,
+    )
+    achievements_text_field = models.TextField(
+        db_column='achievements_text_field_db_column',
+        db_index=True,
+        db_tablespace='achievements_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Достижения',
+        help_text='<small class="text-muted">achievements_text_field</small><hr><br>',
+
+        max_length=512,
+    )
+    biography_text_field = models.TextField(
+        db_column='biography_text_field_db_column',
+        db_index=True,
+        db_tablespace='biography_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Биография',
+        help_text='<small class="text-muted">biography_text_field</small><hr><br>',
+
+        max_length=512,
+    )
+    hobbies_text_field = models.TextField(
+        db_column='hobbies_text_field_db_column',
+        db_index=True,
+        db_tablespace='hobbies_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Увлечения',
+        help_text='<small class="text-muted">hobbies_text_field</small><hr><br>',
+
+        max_length=512,
+    )
+    image_field = models.ImageField(
+        db_column='image_field_db_column',
+        db_index=True,
+        db_tablespace='image_field_db_tablespace',
+        error_messages=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='data/account/default_avatar.jpg',
+        verbose_name='Изображение профиля пользователя',
+        help_text='<small class="text-muted">image_field_db_column</small><hr><br>',
+
+        upload_to='uploads/account/avatar',
+        max_length=100,
+    )
+    # technical data account
+    email_field = models.EmailField(
+        db_column='email_field_db_column',
+        db_index=True,
+        db_tablespace='email_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='email_field',
+        help_text='<small class="text-muted">Строка содержащая почту, example: "bogdandrienko@gmail.com"'
+                  '</small><hr><br>',
+
+        max_length=254,
+    )
+    secret_question_char_field = models.CharField(
+        db_column='secret_question_char_field_db_column',
+        db_index=True,
+        db_tablespace='secret_question_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Секретный вопрос',
+        help_text='<small class="text-muted">secret_question_char_field</small><hr><br>',
+
+        max_length=32,
+    )
+    secret_answer_char_field = models.CharField(
+        db_column='secret_answer_char_field_db_column',
+        db_index=True,
+        db_tablespace='secret_answer_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Секретный ответ',
+        help_text='<small class="text-muted">secret_answer_char_field</small><hr><br>',
+
+        max_length=16,
+    )
+    activity_boolean_field = models.BooleanField(
+        db_column='activity_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='activity_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=True,
+        verbose_name='Активность аккаунта пользователя',
+        help_text='<small class="text-muted">activity_boolean_field</small><hr><br>',
+    )
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('user_one_to_one_field',)
+        verbose_name = 'Аккаунт'
+        verbose_name_plural = '3_Аккаунты'
+        db_table = 'account_table'
+
+    def __str__(self):
+        return f'{self.last_name_char_field} | {self.first_name_char_field} | {self.patronymic_char_field} | ' \
+               f'{self.user_one_to_one_field} | {self.activity_boolean_field}'
 
     def get_id(self):
         return self.id
+
+    def get_iin(self):
+        return int(self.user_one_to_one_field.username)
 
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     # Создание при создании пользователя
     if created:
-        Profile.objects.create(user=instance)
+        AccountModel.objects.create(user_one_to_one_field=instance)
     # Сохранение при сохранении пользователя
     else:
-        instance.profile.save()
+        instance.user_one_to_one_field.save()
 
 
-class LoggingActions(models.Model):
-    """
-    Logging Actions Model
-    """
+class GroupsModel(models.Model):
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя группы для отображения',
+        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
+                  '"Модератор отдела ОУПиБП"</small><hr><br>',
 
-    username = models.SlugField(verbose_name='Имя пользователя', max_length=12, null=True)
-    ip = models.SlugField(verbose_name='Ip адрес клиента', max_length=50, null=True)
-    request_path = models.SlugField(verbose_name='Действие', max_length=30, null=True)
-    request_method = models.SlugField(verbose_name='Метод', max_length=5, null=True)
-    datetime_now = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+        max_length=32,
+    )
+    name_slug_field = models.SlugField(
+        db_column='name_slug_field_db_column',
+        db_index=True,
+        db_tablespace='name_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя группы для валидации и ссылок',
+        help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
+                  '"moderator_oupibp"</small><hr><br>',
+
+        max_length=32,
+        allow_unicode=False,
+    )
+    path_text_field = models.TextField(
+        db_column='path_text_field_db_column',
+        db_index=True,
+        db_tablespace='path_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя путей для доступа',
+        help_text='<small class="text-muted underline">через запятую нужно перечислить имена путей для доступа, '
+                  'латинница, любой регистр, например: "login, admin, home"</small><hr><br>',
+
+        max_length=256,
+        # db_collation='text_field_db_collation'
+    )
+    user_many_to_many_field = models.ManyToManyField(
+        db_column='user_many_to_many_field_db_column',
+        db_index=True,
+        db_tablespace='user_many_to_many_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        default=None,
+        verbose_name='Пользователи группы',
+        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+
+        to=User,
+        related_name='user_many_to_many_field',
+    )
 
     class Meta:
         app_label = 'auth'
-        ordering = ('-datetime_now',)
-        verbose_name = 'Лог'
-        verbose_name_plural = 'Логи'
-        db_table = 'logging_actions_table'
+        ordering = ('name_char_field', 'name_slug_field')
+        verbose_name = 'Группа'
+        verbose_name_plural = '4_Группы'
+        db_table = 'groups_model_table'
 
     def __str__(self):
-        return f'{self.datetime_now} {self.username} {self.request_path}'
+        return f'{self.name_char_field} | {self.name_slug_field}'
+
+    def get_id(self):
+        return self.id
 
 
-class LoggingErrors(models.Model):
-    """
-    Logging Errors Model
-    """
-
-    username = models.SlugField(verbose_name='Имя пользователя', max_length=12, null=True)
-    ip = models.SlugField(verbose_name='Ip адрес клиента', max_length=10, null=True)
-    request_path = models.SlugField(verbose_name='Действие', max_length=30, null=True)
-    request_method = models.SlugField(verbose_name='Метод', max_length=5, null=True)
-    error = models.TextField(verbose_name='Ошибка', null=True)
-    datetime_now = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-
-    class Meta:
-        app_label = 'auth'
-        ordering = ('-datetime_now',)
-        verbose_name = 'Ошибка'
-        verbose_name_plural = 'Ошибки'
-        db_table = 'logging_errors_table'
-
-    def __str__(self):
-        return f'{self.datetime_now} {self.username} {self.request_path}'
-
-
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 # Application
 class ApplicationModuleModel(models.Model):
     """
