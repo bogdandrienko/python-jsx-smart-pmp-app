@@ -242,7 +242,157 @@ class DjangoClass:
             return ip
 
     class AccountClass:
-        class UserAuthClass:
+        class UserAccountClass:
+            """
+            Основной аккаунт пользователя
+            """
+
+            def __init__(
+                    # self
+                    self,
+                    # authorization data
+                    username,
+                    password,
+                    # technical data
+                    is_active=True,
+                    is_staff=False,
+                    is_superuser=False,
+                    groups='User',
+                    email='',
+                    secret_question='',
+                    secret_answer='',
+                    # first data
+                    last_name='',
+                    first_name='',
+                    patronymic='',
+                    # second data
+                    personnel_number='',
+                    subdivision='',
+                    workshop_service='',
+                    department_site='',
+                    position='',
+                    category='',
+                    # utils
+                    force_change_account=False,
+                    force_change_account_password=False,
+                    force_clear_groups=False,
+                    request=None
+            ):
+                # authorization data
+                self.username = str(username).strip()
+                self.password = str(password).strip()
+                # technical data
+                self.is_active = bool(is_active)
+                self.is_staff = bool(is_staff)
+                self.is_superuser = bool(is_superuser)
+                try:
+                    self.groups = [group.strip() for group in str(groups).strip().split(',') if len(group) >= 1]
+                except Exception as error:
+                    self.groups = [str(groups).strip()]
+                self.email = str(email).strip()
+                self.secret_question = str(secret_question).strip()
+                self.secret_answer = str(secret_answer).strip()
+                # first data
+                self.first_name = str(first_name).strip()
+                self.last_name = str(last_name).strip()
+                self.patronymic = str(patronymic).strip()
+                # second data
+                self.personnel_number = str(personnel_number).strip()
+                self.subdivision = str(subdivision).strip()
+                self.workshop_service = str(workshop_service).strip()
+                self.department_site = str(department_site).strip()
+                self.position = str(position).strip()
+                self.category = str(category).strip()
+                # utils
+                self.force_change_account = bool(force_change_account)
+                self.force_change_account_password = bool(force_change_account_password)
+                self.force_clear_groups = bool(force_clear_groups)
+                self.request = request
+
+            def account_create_or_change(self):
+                try:
+                    # Пользователь уже существует: изменение
+                    try:
+                        user = User.objects.get(username=self.username)
+                        # Возврат, если пользователь обладает правами суперпользователя
+                        if user.is_superuser:
+                            return False
+                        # Если пользователь уже существует и стоит статус "принудительно изменять аккаунт"
+                        if user and self.force_change_account:
+                            try:
+                                # authorization data
+                                if self.force_change_account_password:
+                                    user.password = DjangoClass.AccountClass.get_sha256_password(self.password)
+                                    user.user_one_to_one_field.password_slug_field = self.password
+                                # technical data
+                                user.user_one_to_one_field.activity_boolean_field = self.is_active
+                                user.user_one_to_one_field.email_field = self.email
+                                user.user_one_to_one_field.secret_question_char_field = self.secret_question
+                                user.user_one_to_one_field.secret_answer_char_field = self.secret_answer
+                                # first data
+                                user.user_one_to_one_field.last_name_char_field = self.last_name
+                                user.user_one_to_one_field.first_name_char_field = self.first_name
+                                user.user_one_to_one_field.patronymic_char_field = self.patronymic
+                                # second data
+                                user.user_one_to_one_field.personnel_number_slug_field = self.personnel_number
+                                user.user_one_to_one_field.subdivision_char_field = self.subdivision
+                                user.user_one_to_one_field.workshop_service_char_field = self.workshop_service
+                                user.user_one_to_one_field.department_site_char_field = self.department_site
+                                user.user_one_to_one_field.position_char_field = self.position
+                                user.user_one_to_one_field.category_char_field = self.category
+                                # save account
+                                user.save()
+                                return self.account_auth_set_group()
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
+                                return False
+                        else:
+                            return False
+                    # Пользователь не существует: создание
+                    except Exception as error:
+                        try:
+                            user = User.objects.create(
+                                # authorization data
+                                username=self.username,
+                                password=DjangoClass.AccountClass.get_sha256_password(self.password),
+                                # technical data
+                                is_active=True,
+                                is_staff=self.is_staff,
+                                is_superuser=self.is_superuser,
+                            )
+                            # authorization data
+                            user.user_one_to_one_field.password_slug_field = self.password
+                            # technical data
+                            user.user_one_to_one_field.activity_boolean_field = self.is_active
+                            user.user_one_to_one_field.email_field = self.email
+                            user.user_one_to_one_field.secret_question_char_field = self.secret_question
+                            user.user_one_to_one_field.secret_answer_char_field = self.secret_answer
+                            # first data
+                            user.user_one_to_one_field.last_name_char_field = self.last_name
+                            user.user_one_to_one_field.first_name_char_field = self.first_name
+                            user.user_one_to_one_field.patronymic_char_field = self.patronymic
+                            # second data
+                            user.user_one_to_one_field.personnel_number_slug_field = self.personnel_number
+                            user.user_one_to_one_field.subdivision_char_field = self.subdivision
+                            user.user_one_to_one_field.workshop_service_char_field = self.workshop_service
+                            user.user_one_to_one_field.department_site_char_field = self.department_site
+                            user.user_one_to_one_field.position_char_field = self.position
+                            user.user_one_to_one_field.category_char_field = self.category
+                            # save account
+                            user.save()
+                            return self.account_auth_set_group()
+                        except Exception as error:
+                            DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
+                            return False
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
+                    return False
+
+            def account_auth_set_group(self):
+                return True
+
+
+        class UserAuthClassOld:
             """
             Основной аккаунт пользователя
             """
@@ -275,7 +425,7 @@ class DjangoClass:
                     user = User.objects.create(
                         # Основное
                         username=self.username,
-                        password=self.get_sha256_password(self.password),
+                        password=DjangoClass.AccountClass.get_sha256_password(self.password),
                         # Персональная информация
                         first_name=self.first_name,
                         last_name=self.last_name,
@@ -297,7 +447,7 @@ class DjangoClass:
                     user = User.objects.get(username=self.username)
                     # Основное
                     if self.force_change_account_password:
-                        user.password = self.get_sha256_password(self.password)
+                        user.password = DjangoClass.AccountClass.get_sha256_password(self.password)
                         user.profile.password = self.password
                     # Персональная информация
                     user.first_name = self.first_name
@@ -357,27 +507,7 @@ class DjangoClass:
                     )
                     return False
 
-            @staticmethod
-            def get_sha256_password(password: str):
-                try:
-                    user = User.objects.get_or_create(username='None')[0]
-                    user.set_password(password)
-                    user.save()
-                    user = User.objects.get(username='None')
-                    encrypt_password = user.password
-                    user.delete()
-                    return encrypt_password
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='get_sha256_password')
-                    return False
 
-            @staticmethod
-            def create_password_from_chars(chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                           length=8):
-                password = ''
-                for i in range(1, length + 1):
-                    password += random.choice(chars)
-                return password
 
         class UserProfileClass:
             """
@@ -556,6 +686,28 @@ class DjangoClass:
                     error=error, function_error='create_django_encrypt_password'
                 )
                 return False
+
+        @staticmethod
+        def get_sha256_password(password: str):
+            try:
+                user = User.objects.get_or_create(username='None')[0]
+                user.set_password(password)
+                user.save()
+                user = User.objects.get_or_create(username='None')[0]
+                encrypt_password = user.password
+                user.delete()
+                return encrypt_password
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='get_sha256_password')
+                return False
+
+        @staticmethod
+        def create_password_from_chars(chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                                       length=8):
+            password = ''
+            for i in range(1, length + 1):
+                password += random.choice(chars)
+            return password
 
     class RequestClass:
         @staticmethod

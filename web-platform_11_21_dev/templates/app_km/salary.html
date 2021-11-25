@@ -357,7 +357,7 @@
 {#                   pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" autocomplete="on" name="datetime">#}
             <button class="btn btn-lg btn-outline-primary form-control" type="submit">Получить данные</button>
         </form>
-        <form class="form-control" action="{% url 'create_pdf' %}" method="POST" enctype="multipart/form-data">
+        <form class="form-control" action="{% url 'salary_pdf' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <button class="btn btn-lg btn-outline-primary form-control" type="submit">Выгрузить pdf</button>
         </form>

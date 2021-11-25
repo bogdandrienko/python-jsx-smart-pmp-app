@@ -47,7 +47,7 @@
                     data-bs-target="#accordion_collapse_1"
                     aria-expanded="false"
                     aria-controls="accordion_collapse_1"
-                >Создать одиночного пользователя</button>
+                >Создать/изменить одиночного пользователя</button>
             </h2>
             <div
                 id="accordion_collapse_1"
@@ -57,11 +57,84 @@
             >
                 <div class="accordion-body">
 
-                    <form action="{% url 'account_create_accounts' 'one' %}"
+                    {% if user is None %}
+                        <hr/>
+                        <label>
+                            <div class="leed display-6 text-center text-danger">
+                                Если хотите загрузить данные уже существующего пользователя, введите имя пользователя и нажмите подтвердить:
+                            </div>
+                        </label>
+
+                        <form action="{% url 'account_create_or_change_accounts' 'change' %}"
+                              method="POST"
+                              target="_self"
+                              enctype="multipart/form-data"
+                              name="account_create_or_change_accounts change"
+                              autocomplete="on"
+                              class="text-center"
+                        >
+                            {% csrf_token %}
+                            <div>
+                                <div>
+                                    <label class="form-control-lg">
+                                        Имя пользователя:
+                                        <input type="text"
+                                               id="username"
+                                               name="username"
+                                               required=""
+                                               placeholder=""
+                                               value=""
+                                               minlength="12"
+                                               maxlength="12"
+                                               class="form-control form-control-lg"
+                                        />
+                                        <small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr/>
+                            <!-- Grid row -->
+                            <div class="container-fluid btn-group row pb-1">
+                                <!-- Grid column -->
+                                <div class="col-lg-6">
+                                    <button href=""
+                                            type="submit"
+                                            class="w-100 form-control btn btn-lg btn-outline-primary"
+                                    >Подтвердить</button>
+                                </div>
+                                <!-- Grid column -->
+
+                                <!-- Grid column -->
+                                <div class="col-lg-6">
+                                    <button href=""
+                                            type="reset"
+                                            class="w-100 form-control btn btn-lg btn-outline-warning"
+                                    >Сбросить</button>
+                                </div>
+                                <!-- Grid column -->
+                            </div>
+                            <!-- Grid row -->
+                        </form>
+                        <hr/>
+                    {% else %}
+                        <!-- Grid row -->
+                        <div class="container-fluid btn-group row pb-1">
+                            <!-- Grid column -->
+                            <div class="col-lg-12">
+                                <a href=""
+                                   type="button"
+                                   class="w-100 form-control btn btn-lg btn-outline-danger"
+                                >Очистить</a>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                    {% endif %}
+
+                    <form action="{% url 'account_create_or_change_accounts' 'one' %}"
                           method="POST"
                           target="_self"
                           enctype="multipart/form-data"
-                          name="account_create_accounts one"
+                          name="account_create_or_change_accounts one"
                           autocomplete="on"
                           class="text-center"
                     >
@@ -77,7 +150,7 @@
                                            {% if user.username %}
                                                 placeholder="{{ user.username }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="970801351179"
                                            {% endif %}
                                            {% if user.username %}
                                                 value="{{ user.username }}"
@@ -97,13 +170,13 @@
                                            id="password_1"
                                            name="password_1"
                                            required=""
-                                           {% if user.profile.password %}
-                                                placeholder="{{ user.profile.password }}"
+                                           {% if user.user_one_to_one_field.password_slug_field %}
+                                                placeholder="{{ user.user_one_to_one_field.password_slug_field }}"
                                            {% else %}
                                                 placeholder=""
                                            {% endif %}
-                                           {% if user.profile.password %}
-                                                value="{{ user.profile.password }}"
+                                           {% if user.user_one_to_one_field.password_slug_field %}
+                                                value="{{ user.user_one_to_one_field.password_slug_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -120,13 +193,13 @@
                                            id="password_2"
                                            name="password_2"
                                            required=""
-                                           {% if user.profile.password %}
-                                                placeholder="{{ user.profile.password }}"
+                                           {% if user.user_one_to_one_field.password_slug_field %}
+                                                placeholder="{{ user.user_one_to_one_field.password_slug_field}}"
                                            {% else %}
                                                 placeholder=""
                                            {% endif %}
-                                           {% if user.profile.password %}
-                                                value="{{ user.profile.password }}"
+                                           {% if user.user_one_to_one_field.password_slug_field %}
+                                                value="{{ user.user_one_to_one_field.password_slug_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -144,13 +217,13 @@
                                            id="last_name"
                                            name="last_name"
 {#                                           required=""#}
-                                           {% if user.profile.last_name %}
-                                                placeholder="{{ user.profile.last_name }}"
+                                           {% if user.user_one_to_one_field.last_name_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.last_name_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="Андриенко"
                                            {% endif %}
-                                           {% if user.profile.last_name %}
-                                                value="{{ user.profile.last_name }}"
+                                           {% if user.user_one_to_one_field.last_name_char_field %}
+                                                value="{{ user.user_one_to_one_field.last_name_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -167,13 +240,13 @@
                                            id="first_name"
                                            name="first_name"
 {#                                           required=""#}
-                                           {% if user.profile.first_name %}
-                                                placeholder="{{ user.profile.first_name }}"
+                                           {% if user.user_one_to_one_field.first_name_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.first_name_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="Богдан"
                                            {% endif %}
-                                           {% if user.profile.first_name %}
-                                                value="{{ user.profile.first_name }}"
+                                           {% if user.user_one_to_one_field.first_name_char_field %}
+                                                value="{{ user.user_one_to_one_field.first_name_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -190,13 +263,13 @@
                                            id="patronymic"
                                            name="patronymic"
 {#                                           required=""#}
-                                           {% if user.profile.last_name %}
-                                                placeholder="{{ user.profile.last_name }}"
+                                           {% if user.user_one_to_one_field.patronymic_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.patronymic_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="Николаевич"
                                            {% endif %}
-                                           {% if user.profile.last_name %}
-                                                value="{{ user.profile.last_name }}"
+                                           {% if user.user_one_to_one_field.patronymic_char_field %}
+                                                value="{{ user.user_one_to_one_field.patronymic_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -214,13 +287,13 @@
                                            id="email"
                                            name="email"
 {#                                           required=""#}
-                                           {% if user.profile.email %}
-                                                placeholder="{{ user.profile.email }}"
+                                           {% if user.user_one_to_one_field.email_field %}
+                                                placeholder="{{ user.user_one_to_one_field.email_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="bogdandrienko@gmail.com"
                                            {% endif %}
-                                           {% if user.profile.email %}
-                                                value="{{ user.profile.email }}"
+                                           {% if user.user_one_to_one_field.email_field %}
+                                                value="{{ user.user_one_to_one_field.email_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -238,8 +311,7 @@
                                                id="is_active"
                                                name="is_active"
 {#                                               required=""#}
-                                               value=""
-                                               {% if user.is_active %}
+                                               {% if user.user_one_to_one_field.activity_boolean_field %}
                                                     checked="checked"
                                                {% else %}
 {#                                                    checked="checked"#}
@@ -257,7 +329,6 @@
                                                id="is_staff"
                                                name="is_staff"
 {#                                               required=""#}
-                                               value=""
                                                {% if user.is_staff %}
                                                     checked="checked"
                                                {% else %}
@@ -280,9 +351,9 @@
                                             multiple="multiple"
                                             class="form-control form-control-lg"
                                     >
-                                        {% if groups %}
-                                            {% for group in groups %}
-                                                <option value="{{ group.name }}">{{ group.name }}</option>
+                                        {% if all_groups %}
+                                            {% for group in all_groups %}
+                                                <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
                                             {% endfor %}
                                         {% else %}
                                             Группы не созданы!
@@ -299,9 +370,9 @@
 {#                                           required=""#}
                                            placeholder=""
                                            {% if user %}
-                                                value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                                                value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
                                            {% else %}
-                                                value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                                                value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
                                            {% endif %}
                                            minlength="1"
                                            maxlength="64"
@@ -318,13 +389,13 @@
                                            id="personnel_number"
                                            name="personnel_number"
 {#                                           required=""#}
-                                           {% if user.profile.personnel_number %}
-                                                placeholder="{{ user.profile.personnel_number }}"
+                                           {% if user.user_one_to_one_field.personnel_number_slug_field %}
+                                                placeholder="{{ user.user_one_to_one_field.personnel_number_slug_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="931777"
                                            {% endif %}
-                                           {% if user.profile.personnel_number %}
-                                                value="{{ user.profile.personnel_number }}"
+                                           {% if user.user_one_to_one_field.personnel_number_slug_field %}
+                                                value="{{ user.user_one_to_one_field.personnel_number_slug_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -332,7 +403,7 @@
                                            maxlength="64"
                                            class="form-control form-control-lg"
                                     />
-                                    <small class="text-muted">ведите Ваш Табельный номер (при наличии)</small>
+                                    <small class="text-muted">введите Ваш Табельный номер (при наличии)</small>
                                 </label>
 
                                 <label class="form-control-lg">
@@ -341,13 +412,13 @@
                                            id="position"
                                            name="position"
 {#                                           required=""#}
-                                           {% if user.profile.position %}
-                                                placeholder="{{ user.profile.position }}"
+                                           {% if user.user_one_to_one_field.position_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.position_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="Техник-программист"
                                            {% endif %}
-                                           {% if user.profile.position %}
-                                                value="{{ user.profile.position }}"
+                                           {% if user.user_one_to_one_field.position_char_field %}
+                                                value="{{ user.user_one_to_one_field.position_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -364,13 +435,13 @@
                                            id="category"
                                            name="category"
 {#                                           required=""#}
-                                           {% if user.profile.category %}
-                                                placeholder="{{ user.profile.category }}"
+                                           {% if user.user_one_to_one_field.category_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.category_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="специалисты (пром)"
                                            {% endif %}
-                                           {% if user.profile.category %}
-                                                value="{{ user.profile.category }}"
+                                           {% if user.user_one_to_one_field.category_char_field %}
+                                                value="{{ user.user_one_to_one_field.category_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -388,13 +459,13 @@
                                            id="subdivision"
                                            name="subdivision"
 {#                                           required=""#}
-                                           {% if user.profile.subdivision %}
-                                                placeholder="{{ user.profile.subdivision }}"
+                                           {% if user.user_one_to_one_field.subdivision_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.subdivision_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="Управление предприятия (ЦК)"
                                            {% endif %}
-                                           {% if user.profile.subdivision %}
-                                                value="{{ user.profile.subdivision }}"
+                                           {% if user.user_one_to_one_field.subdivision_char_field %}
+                                                value="{{ user.user_one_to_one_field.subdivision_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -411,13 +482,13 @@
                                            id="workshop_service"
                                            name="workshop_service"
 {#                                           required=""#}
-                                           {% if user.profile.workshop_service %}
-                                                placeholder="{{ user.profile.workshop_service }}"
+                                           {% if user.user_one_to_one_field.workshop_service_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.workshop_service_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="Отдел информационных технологий"
                                            {% endif %}
-                                           {% if user.profile.workshop_service %}
-                                                value="{{ user.profile.workshop_service }}"
+                                           {% if user.user_one_to_one_field.workshop_service_char_field %}
+                                                value="{{ user.user_one_to_one_field.workshop_service_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -434,13 +505,13 @@
                                            id="department_site"
                                            name="department_site"
 {#                                           required=""#}
-                                           {% if user.profile.department_site %}
-                                                placeholder="{{ user.profile.department_site }}"
+                                           {% if user.user_one_to_one_field.department_site_char_field %}
+                                                placeholder="{{ user.user_one_to_one_field.department_site_char_field }}"
                                            {% else %}
-                                                placeholder=""
+                                                placeholder="Сектор программного обеспечения"
                                            {% endif %}
-                                           {% if user.profile.department_site %}
-                                                value="{{ user.profile.department_site }}"
+                                           {% if user.user_one_to_one_field.department_site_char_field %}
+                                                value="{{ user.user_one_to_one_field.department_site_char_field }}"
                                            {% else %}
                                                 value=""
                                            {% endif %}
@@ -452,12 +523,12 @@
                                 </label>
                             </div>
                             <div>
-                                <label class="form-check-label form-control-lg" for="is_active">
+                                <label class="form-check-label form-control-lg" for="force_change">
                                     Перезаписать уже существующего пользователя? -
                                     <div class="form-switch">
                                         <input type="checkbox"
-                                               id="is_edit"
-                                               name="is_edit"
+                                               id="force_change"
+                                               name="force_change"
 {#                                               required=""#}
                                                value=""
                                                {% if user %}
@@ -498,57 +569,6 @@
                         <!-- Grid row -->
                     </form>
 
-                    <form action="{% url 'account_create_accounts' 'change' %}"
-                          method="POST"
-                          target="_self"
-                          enctype="multipart/form-data"
-                          name="account_create_accounts change"
-                          autocomplete="on"
-                          class="text-center"
-                    >
-                        {% csrf_token %}
-                        <div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Имя пользователя:
-                                    <input type="text"
-                                           id="username"
-                                           name="username"
-                                           required=""
-                                           placeholder=""
-                                           value=""
-                                           minlength="12"
-                                           maxlength="12"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small>
-                                </label>
-                            </div>
-                        </div>
-                        <hr/>
-                        <!-- Grid row -->
-                        <div class="container-fluid btn-group row pb-1">
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="submit"
-                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                >Подтвердить</button>
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="reset"
-                                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                                >Сбросить</button>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
-                    </form>
-
                 </div>
             </div>
         </div>
@@ -562,7 +582,7 @@
                     data-bs-target="#accordion_collapse_2"
                     aria-expanded="false"
                     aria-controls="accordion_collapse_2"
-                >Создать множество пользователей</button>
+                >Создать/изменить множество пользователей</button>
             </h2>
             <div
                 id="accordion_collapse_2"
@@ -578,11 +598,11 @@
                         >Скачать шаблон для заполнения</a>
                     </div>
 
-                    <form action="{% url 'account_create_accounts' 'many' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples/" #}
+                    <form action="{% url 'account_create_or_change_accounts' 'many' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples/" #}
                           method="POST" {# method="GET" #}
                           target="_self" {# target="_self" #} {# target="_blank" #} {# target="_parent" #} {# target="_top" #}
                           enctype="multipart/form-data"
-                          name="account_create_accounts many"
+                          name="account_create_or_change_accounts many"
                           autocomplete="on"
                           class="text-center" {# class="text-center form-control form-control-lg" #}
                     >
@@ -592,8 +612,8 @@
                                 <label class="form-control-lg">
                                     Шаблон для создания пользователей:
                                     <input type="file"
-                                           id="document_addition_file_1"
-                                           name="document_addition_file_1"
+                                           id="excel_file"
+                                           name="excel_file"
                                            required=""
                                            accept=".xlsx, .xls"
                                            class="form-control form-control-lg"
@@ -602,12 +622,12 @@
                                 </label>
                             </div>
                             <div>
-                                <label class="form-check-label form-control-lg" for="is_active">
+                                <label class="form-check-label form-control-lg" for="force_change">
                                     Перезаписать уже существующего пользователя? -
                                     <div class="form-switch">
                                         <input type="checkbox"
-                                               id="is_edit"
-                                               name="is_edit"
+                                               id="force_change"
+                                               name="force_change"
 {#                                               required=""#}
                                                value=""
 {#                                               checked="checked"#}

@@ -212,3 +212,17 @@ Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-11-24 19:13:34.018144, U
 970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:56:58.726321, User matching query does not exist.
 
 970801351179, 127.0.0.1, /home/, GET, 2021-11-24 20:57:03.711836, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_export_accounts/, POST, 2021-11-25 11:10:45.539598, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /account_export_accounts/, POST, 2021-11-25 11:10:45.550583, 'User' object has no attribute 'profile'
+
+Bogdan, 127.0.0.1, /account_export_accounts/, POST, 2021-11-25 11:10:45.560827, 'User' object has no attribute 'profile'
+
+831127350161, 192.168.100.138, /account_change_password/, POST, 2021-11-25 13:27:11.133932, 'User' object has no attribute 'profile'
+
+970801351179, 192.168.100.52, /salary/, POST, 2021-11-25 13:38:51.281448, '3.Доходы в натуральной форме'
+
+Bogdan, 192.168.1.155, /salary/, POST, 2021-11-25 16:02:03.636256, '3.Доходы в натуральной форме'
+
+Bogdan, 192.168.1.155, /salary/, POST, 2021-11-25 16:02:03.687530, '3.Доходы в натуральной форме'

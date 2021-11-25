@@ -1576,7 +1576,7 @@ class AccountModel(models.Model):
     """
     Account Profile Model
     """
-    # authorization account data
+    # authorization data
     user_one_to_one_field = models.OneToOneField(
         db_column='user_one_to_one_field_db_column',
         db_index=True,
@@ -1622,7 +1622,86 @@ class AccountModel(models.Model):
         max_length=16,
         allow_unicode=False,
     )
-    # first account data
+    # technical data
+    activity_boolean_field = models.BooleanField(
+        db_column='activity_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='activity_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=True,
+        verbose_name='Активность аккаунта пользователя',
+        help_text='<small class="text-muted">activity_boolean_field</small><hr><br>',
+    )
+    email_field = models.EmailField(
+        db_column='email_field_db_column',
+        db_index=True,
+        db_tablespace='email_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='email_field',
+        help_text='<small class="text-muted">Строка содержащая почту, example: "bogdandrienko@gmail.com"'
+                  '</small><hr><br>',
+
+        max_length=254,
+    )
+    secret_question_char_field = models.CharField(
+        db_column='secret_question_char_field_db_column',
+        db_index=True,
+        db_tablespace='secret_question_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Секретный вопрос',
+        help_text='<small class="text-muted">secret_question_char_field</small><hr><br>',
+
+        max_length=32,
+    )
+    secret_answer_char_field = models.CharField(
+        db_column='secret_answer_char_field_db_column',
+        db_index=True,
+        db_tablespace='secret_answer_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Секретный ответ',
+        help_text='<small class="text-muted">secret_answer_char_field</small><hr><br>',
+
+        max_length=16,
+    )
+    # first data
     last_name_char_field = models.CharField(
         db_column='last_name_char_field_db_column',
         db_index=True,
@@ -1683,7 +1762,7 @@ class AccountModel(models.Model):
 
         max_length=32,
     )
-    # second account data
+    # second data
     personnel_number_slug_field = models.SlugField(
         db_column='personnel_number_slug_field_db_column',
         db_index=True,
@@ -1805,7 +1884,7 @@ class AccountModel(models.Model):
 
         max_length=64,
     )
-    # personal account data
+    # personal data
     education_text_field = models.TextField(
         db_column='education_text_field_db_column',
         db_index=True,
@@ -1906,85 +1985,6 @@ class AccountModel(models.Model):
         upload_to='uploads/account/avatar',
         max_length=100,
     )
-    # technical data account
-    email_field = models.EmailField(
-        db_column='email_field_db_column',
-        db_index=True,
-        db_tablespace='email_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='email_field',
-        help_text='<small class="text-muted">Строка содержащая почту, example: "bogdandrienko@gmail.com"'
-                  '</small><hr><br>',
-
-        max_length=254,
-    )
-    secret_question_char_field = models.CharField(
-        db_column='secret_question_char_field_db_column',
-        db_index=True,
-        db_tablespace='secret_question_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Секретный вопрос',
-        help_text='<small class="text-muted">secret_question_char_field</small><hr><br>',
-
-        max_length=32,
-    )
-    secret_answer_char_field = models.CharField(
-        db_column='secret_answer_char_field_db_column',
-        db_index=True,
-        db_tablespace='secret_answer_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Секретный ответ',
-        help_text='<small class="text-muted">secret_answer_char_field</small><hr><br>',
-
-        max_length=16,
-    )
-    activity_boolean_field = models.BooleanField(
-        db_column='activity_boolean_field_db_column',
-        db_index=True,
-        db_tablespace='activity_boolean_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=False,
-        default=True,
-        verbose_name='Активность аккаунта пользователя',
-        help_text='<small class="text-muted">activity_boolean_field</small><hr><br>',
-    )
 
     class Meta:
         app_label = 'auth'
@@ -1994,8 +1994,12 @@ class AccountModel(models.Model):
         db_table = 'account_table'
 
     def __str__(self):
+        if self.activity_boolean_field:
+            activity = 'Активен'
+        else:
+            activity = 'Неактивен'
         return f'{self.last_name_char_field} | {self.first_name_char_field} | {self.patronymic_char_field} | ' \
-               f'{self.user_one_to_one_field} | {self.activity_boolean_field}'
+               f'{self.user_one_to_one_field} | {activity}'
 
     def get_id(self):
         return self.id
@@ -2012,6 +2016,65 @@ def create_user_profile(sender, instance, created, **kwargs):
     # Сохранение при сохранении пользователя
     else:
         instance.user_one_to_one_field.save()
+
+
+class ActionModel(models.Model):
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя действия для отображения',
+        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
+                  '"Модератор отдела ОУПиБП"</small><hr><br>',
+
+        max_length=32,
+    )
+    name_slug_field = models.SlugField(
+        db_column='name_slug_field_db_column',
+        db_index=True,
+        db_tablespace='name_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя действия для валидации и ссылок',
+        help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
+                  '"moderator_oupibp"</small><hr><br>',
+
+        max_length=32,
+        allow_unicode=False,
+    )
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('name_char_field', 'name_slug_field')
+        verbose_name = 'Действия'
+        verbose_name_plural = '5_Действия'
+        db_table = 'actions_model_table'
+
+    def __str__(self):
+        return f'{self.name_char_field}'
+
+    def get_id(self):
+        return self.id
 
 
 class GroupsModel(models.Model):
@@ -2081,6 +2144,26 @@ class GroupsModel(models.Model):
         max_length=256,
         # db_collation='text_field_db_collation'
     )
+    path_many_to_many_field = models.ManyToManyField(
+        db_column='path_many_to_many_field_db_column',
+        db_index=True,
+        db_tablespace='path_many_to_many_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        default=None,
+        verbose_name='Разрешённые действия группы',
+        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+
+        to=ActionModel,
+        related_name='path_many_to_many_field',
+    )
     user_many_to_many_field = models.ManyToManyField(
         db_column='user_many_to_many_field_db_column',
         db_index=True,
@@ -2098,7 +2181,7 @@ class GroupsModel(models.Model):
         help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
 
-        to=User,
+        to=AccountModel,
         related_name='user_many_to_many_field',
     )
 
@@ -2110,7 +2193,284 @@ class GroupsModel(models.Model):
         db_table = 'groups_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field} | {self.name_slug_field}'
+        return f'{self.name_char_field}'
+
+    def get_id(self):
+        return self.id
+
+
+class ProjectsModel(models.Model):
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя группы для отображения',
+        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
+                  '"Модератор отдела ОУПиБП"</small><hr><br>',
+
+        max_length=32,
+    )
+    name_slug_field = models.SlugField(
+        db_column='name_slug_field_db_column',
+        db_index=True,
+        db_tablespace='name_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя группы для валидации и ссылок',
+        help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
+                  '"moderator_oupibp"</small><hr><br>',
+
+        max_length=32,
+        allow_unicode=False,
+    )
+    path_text_field = models.TextField(
+        db_column='path_text_field_db_column',
+        db_index=True,
+        db_tablespace='path_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя путей для доступа',
+        help_text='<small class="text-muted underline">через запятую нужно перечислить имена путей для доступа, '
+                  'латинница, любой регистр, например: "login, admin, home"</small><hr><br>',
+
+        max_length=256,
+        # db_collation='text_field_db_collation'
+    )
+    path_many_to_many_field = models.ManyToManyField(
+        db_column='path_many_to_many_field_db_column',
+        db_index=True,
+        db_tablespace='path_many_to_many_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        default=None,
+        verbose_name='Разрешённые действия группы',
+        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+
+        to=ActionModel,
+        related_name='projects_model_path_many_to_many_field',
+    )
+    user_many_to_many_field = models.ManyToManyField(
+        db_column='user_many_to_many_field_db_column',
+        db_index=True,
+        db_tablespace='user_many_to_many_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        default=None,
+        verbose_name='Пользователи группы',
+        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+
+        to=AccountModel,
+        related_name='projects_model_user_many_to_many_field',
+    )
+    boolean_field = models.BooleanField(
+        db_column='boolean_field_db_column',
+        db_index=True,
+        db_tablespace='boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=False,
+        verbose_name='boolean_field',
+        help_text='<small class="text-muted">Значение правда или ложь, example: "True" / '
+                  '"False"</small><hr><br>',
+    )
+    integer_field = models.IntegerField(
+        db_column='integer_field_db_column',
+        db_index=True,
+        db_tablespace='integer_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinValueValidator(-2147483648), MaxValueValidator(2147483647), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='integer_field',
+        help_text='<small class="text-muted">Целочисленное значение от -2147483648 до 2147483647, example: '
+                  '"0"</small><hr><br>',
+    )
+    float_field = models.FloatField(
+        db_column='float_field_db_column',
+        db_index=True,
+        db_tablespace='float_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0.0,
+        verbose_name='float_field',
+        help_text='<small class="text-muted">Число с плавающей запятой, example: "0.0"</small><hr><br>',
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='datetime_field',
+        help_text='<small class="text-muted">Дата и время, example: "31.12.2021Т23:59:59"</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    file_field = models.FileField(
+        db_column='file_field_db_column',
+        db_index=True,
+        db_tablespace='file_field_db_tablespace',
+        error_messages=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[FileExtensionValidator(['xlsx', 'xls'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='file_field',
+        help_text='<small class="text-muted">Файл, с расширением указанным в валидаторе, example: '
+                  '"example.xlsx"</small><hr><br>',
+
+        upload_to='uploads/example/%Y/%m/%d/',
+        max_length=100,
+    )
+    image_field = models.ImageField(
+        db_column='image_field_db_column',
+        db_index=True,
+        db_tablespace='image_field_db_tablespace',
+        error_messages=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[FileExtensionValidator(['jpg'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='uploads/example/example.jpg',
+        verbose_name='file_field',
+        help_text='<small class="text-muted">>Файл, с расширением изображения, example: "example.jpg('
+                  '/png/bpm...)"</small><hr><br>',
+
+        upload_to='uploads/example/example.jpg',
+        max_length=100,
+        # height_field=1920,  # Значение высоты изображения при каждом сохранении объекта
+        # width_field=1080,  # Значение ширины изображения при каждом сохранении объекта.
+    )
+    foreign_key_field = models.ForeignKey(
+        db_column='foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='foreign_key_field',
+        help_text='<small class="text-muted">Связь, с каким-либо объектом, example: "to=User.objects.get'
+                  '(username="Bogdan")"</small><hr><br>',
+
+        to=User,
+        on_delete=models.CASCADE,
+        # limit_choices_to={'is_staff': True},
+        # related_name='foreign_key_field',
+        # related_query_name='foreign_key_field',
+        # to_field='foreign_key_field',
+        # db_constraint=True,
+        # swappable=True,
+    )
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('name_char_field', 'name_slug_field')
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+        db_table = 'projects_model_table'
+
+    def __str__(self):
+        return f'{self.name_char_field}'
 
     def get_id(self):
         return self.id

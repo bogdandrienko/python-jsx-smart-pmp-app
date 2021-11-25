@@ -2,9 +2,9 @@ from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .models import ExampleModel, ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, \
-    CommentRationalModel, GroupsModel, LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, \
+    CommentRationalModel, ActionModel, GroupsModel, LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, \
     ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, AccountModel, \
-    LoggingModel, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel
+    LoggingModel, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User, Group
@@ -133,68 +133,70 @@ admin.site.unregister(User)
 # Создание вертикального поля для аккаунта
 class AccountModelAdminInline(admin.StackedInline):
     model = AccountModel
-
-
-# Переопределение встроенной админ-панели пользователей
-class UserModelAdmin(UserAdmin):
-    save_on_top = True
-    inlines = [AccountModelAdminInline]
-
-
-# Регистрация в админ-панели
-admin.site.register(User, UserModelAdmin)
-
-
-class AccountModelAdmin(admin.ModelAdmin):
-    """Настройки 'CommentRationalModel' на панели администратора"""
     list_display = (
+        # authorization data
         'user_one_to_one_field',
         'password_slug_field',
+        # technical data
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        # first data
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
+        # second data
         'personnel_number_slug_field',
         'subdivision_char_field',
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
         'category_char_field',
+        # personal data
         'education_text_field',
         'achievements_text_field',
         'biography_text_field',
         'hobbies_text_field',
         'image_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'activity_boolean_field'
     )
     list_filter = (
+        # authorization data
         'user_one_to_one_field',
         'password_slug_field',
+        # technical data
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        # first data
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
+        # second data
         'personnel_number_slug_field',
         'subdivision_char_field',
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
         'category_char_field',
+        # personal data
         'education_text_field',
         'achievements_text_field',
         'biography_text_field',
         'hobbies_text_field',
         'image_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'activity_boolean_field'
     )
     fieldsets = (
         ('Данные авторизации пользователя', {'fields': (
             'user_one_to_one_field',
             'password_slug_field',
+        )}),
+        ('Технические данные пользователя', {'fields': (
+            'activity_boolean_field',
+            'email_field',
+            'secret_question_char_field',
+            'secret_answer_char_field',
         )}),
         ('Первичные данные пользователя', {'fields': (
             'last_name_char_field',
@@ -216,34 +218,160 @@ class AccountModelAdmin(admin.ModelAdmin):
             'hobbies_text_field',
             'image_field',
         )}),
-        ('Технические данные пользователя', {'fields': (
-            'email_field',
-            'secret_question_char_field',
-            'secret_answer_char_field',
-            'activity_boolean_field'
-        )}),
     )
     search_fields = [
+        # authorization data
         'user_one_to_one_field',
         'password_slug_field',
+        # technical data
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        # first data
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
+        # second data
         'personnel_number_slug_field',
         'subdivision_char_field',
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
         'category_char_field',
+        # personal data
         'education_text_field',
         'achievements_text_field',
         'biography_text_field',
         'hobbies_text_field',
         'image_field',
+    ]
+
+
+# Переопределение встроенной админ-панели пользователей
+class UserModelAdmin(UserAdmin):
+    save_on_top = True
+    inlines = [AccountModelAdminInline]
+
+
+# Регистрация в админ-панели
+admin.site.register(User, UserModelAdmin)
+
+
+class AccountModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    list_display = (
+        # authorization data
+        'user_one_to_one_field',
+        'password_slug_field',
+        # technical data
+        'activity_boolean_field',
         'email_field',
         'secret_question_char_field',
         'secret_answer_char_field',
-        'activity_boolean_field'
+        # first data
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        # second data
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        # personal data
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
+    )
+    list_filter = (
+        # authorization data
+        'user_one_to_one_field',
+        'password_slug_field',
+        # technical data
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        # first data
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        # second data
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        # personal data
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
+    )
+    fieldsets = (
+        ('Данные авторизации пользователя', {'fields': (
+            'user_one_to_one_field',
+            'password_slug_field',
+        )}),
+        ('Технические данные пользователя', {'fields': (
+            'activity_boolean_field',
+            'email_field',
+            'secret_question_char_field',
+            'secret_answer_char_field',
+        )}),
+        ('Первичные данные пользователя', {'fields': (
+            'last_name_char_field',
+            'first_name_char_field',
+            'patronymic_char_field',
+        )}),
+        ('Вторичные данные пользователя', {'fields': (
+            'personnel_number_slug_field',
+            'subdivision_char_field',
+            'workshop_service_char_field',
+            'department_site_char_field',
+            'position_char_field',
+            'category_char_field',
+        )}),
+        ('Личные данные пользователя', {'fields': (
+            'education_text_field',
+            'achievements_text_field',
+            'biography_text_field',
+            'hobbies_text_field',
+            'image_field',
+        )}),
+    )
+    search_fields = [
+        # authorization data
+        'user_one_to_one_field',
+        'password_slug_field',
+        # technical data
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        # first data
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        # second data
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        # personal data
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
     ]
 
 
@@ -251,18 +379,35 @@ class AccountModelAdmin(admin.ModelAdmin):
 admin.site.register(AccountModel, AccountModelAdmin)
 
 
+class ActionModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    list_display = ('name_char_field', 'name_slug_field')
+    list_filter = ('name_char_field', 'name_slug_field')
+    fieldsets = (
+        ('Имя отображения', {'fields': ('name_char_field',)}),
+        ('Имя валидации', {'fields': ('name_slug_field',)}),
+    )
+    search_fields = ['name_char_field', 'name_slug_field']
+
+
+# Регистрация в админ-панели
+admin.site.register(ActionModel, ActionModelAdmin)
+
+
 class GroupsModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
-    list_display = ('name_char_field', 'name_slug_field', 'path_text_field',)
-    list_filter = ('name_char_field', 'name_slug_field', 'path_text_field', 'user_many_to_many_field',)
-    filter_horizontal = ('user_many_to_many_field',)
+    list_display = ('name_char_field', 'name_slug_field', 'path_text_field')
+    list_filter = ('name_char_field', 'name_slug_field', 'path_text_field', 'path_many_to_many_field',
+                   'user_many_to_many_field')
+    filter_horizontal = ('path_many_to_many_field', 'user_many_to_many_field')
     fieldsets = (
         ('Имя отображения', {'fields': ('name_char_field',)}),
         ('Имя валидации', {'fields': ('name_slug_field',)}),
         ('Имя пути', {'fields': ('path_text_field',)}),
-        ('Пользователи', {'fields': ('user_many_to_many_field',)}),
+        ('Пользователи', {'fields': ('user_many_to_many_field', 'path_many_to_many_field')}),
     )
-    search_fields = ['name_char_field', 'name_slug_field', 'path_text_field', 'user_many_to_many_field']
+    search_fields = ['name_char_field', 'name_slug_field', 'path_text_field', 'user_many_to_many_field',
+                     'path_many_to_many_field']
 
 
 # Выключение встроенной админ-панели групп
@@ -390,6 +535,10 @@ class BankIdeasModelAdmin(admin.ModelAdmin):
     # inlines         = [RationalModelInline]
 
 
+# ideas
+admin.site.register(IdeasModel, BankIdeasModelAdmin)
+
+
 class IdeasCategoryModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
@@ -410,6 +559,9 @@ class IdeasCategoryModelAdmin(admin.ModelAdmin):
     search_fields = ['category_name', 'category_slug', 'category_description', 'category_image']
     # Поля, которые нужно добавлять связанныеми при создании модели, на панели администратора
     # inlines         = [RationalModelInline]
+
+
+admin.site.register(IdeasCategoryModel, IdeasCategoryModelAdmin)
 
 
 class IdeasCommentModelAdmin(admin.ModelAdmin):
@@ -434,6 +586,9 @@ class IdeasCommentModelAdmin(admin.ModelAdmin):
     # inlines         = [RationalModelInline]
 
 
+admin.site.register(IdeasCommentModel, IdeasCommentModelAdmin)
+
+
 class IdeasLikeModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
@@ -456,11 +611,38 @@ class IdeasLikeModelAdmin(admin.ModelAdmin):
     # inlines         = [RationalModelInline]
 
 
-# ideas
-admin.site.register(IdeasModel, BankIdeasModelAdmin)
-admin.site.register(IdeasCategoryModel, IdeasCategoryModelAdmin)
-admin.site.register(IdeasCommentModel, IdeasCommentModelAdmin)
 admin.site.register(IdeasLikeModel, IdeasLikeModelAdmin)
+
+
+class ProjectsModelAdmin(admin.ModelAdmin):
+    """Настройки 'CommentRationalModel' на панели администратора"""
+    list_display = ('name_char_field', 'name_slug_field', 'path_text_field',
+                    'boolean_field', 'integer_field', 'float_field', 'datetime_field', 'file_field', 'image_field',
+                    'foreign_key_field')
+    list_filter = ('name_char_field', 'name_slug_field', 'path_text_field', 'path_many_to_many_field',
+                   'user_many_to_many_field',
+                   'boolean_field', 'integer_field', 'float_field', 'datetime_field', 'file_field', 'image_field',
+                   'foreign_key_field')
+    filter_horizontal = ('path_many_to_many_field', 'user_many_to_many_field')
+    fieldsets = (
+        ('Имя отображения', {'fields': ('name_char_field',)}),
+        ('Имя валидации', {'fields': ('name_slug_field',)}),
+        ('Имя пути', {'fields': ('path_text_field',)}),
+        ('Пользователи', {'fields': ('user_many_to_many_field', 'path_many_to_many_field')}),
+        ('Другое',
+         {'fields': ('boolean_field', 'integer_field', 'float_field', 'datetime_field', 'file_field', 'image_field',
+                     'foreign_key_field')}),
+    )
+    search_fields = ['name_char_field', 'name_slug_field', 'path_text_field', 'path_many_to_many_field',
+                     'user_many_to_many_field',
+                     'boolean_field', 'integer_field', 'float_field', 'datetime_field', 'file_field', 'image_field',
+                     'foreign_key_field']
+
+
+# Выключение встроенной админ-панели групп
+# admin.site.unregister(Group)
+# Регистрация в админ-панели
+admin.site.register(ProjectsModel, ProjectsModelAdmin)
 
 
 #

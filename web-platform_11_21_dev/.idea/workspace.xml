@@ -2,18 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_QUQ0ODA1QUU4QkQxQkVDQzY2QUVBMDgwRTJCQTQ5NTU0QUE5Nj,f78cd40f2640a3230cca28de4e3fb1d5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RDA4RjEwMDg5MUZCQ0Y5OEVFQkQxRkJGMzYxOEM0NDZGOEVDQ0,744660335ddd301e7122b4addc4c52bc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RENBRUVDQUE2RjA4NTRGNDFDMEFFMUQxNUQ2MzNFRTkxREI3Mj,93b6f10ae7c0b464d54be597e134ce01" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMTExMjU=_N0M2QzEwMUI3NTU3NDY4OUJGOTY1MkVCN0NEQzRDQjVEOTQ1,5f1bf6a18c38c76cb54d4f017f496795" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_km/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/templatetags/account_tag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_km/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/create_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/export_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/account/generate_passwords.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/accounts.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/accounts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_change_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_change_groups.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account_create_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account_create_accounts.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/app_km/home_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app_km/home_module.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/app_km/list_module.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app_km/list_module.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/app_km/salary.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app_km/salary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +166,7 @@
       <workItem from="1637728257234" duration="12843000" />
       <workItem from="1637745860434" duration="5261000" />
       <workItem from="1637751381305" duration="15729000" />
+      <workItem from="1637773660090" duration="21992000" />
     </task>
     <servers />
   </component>

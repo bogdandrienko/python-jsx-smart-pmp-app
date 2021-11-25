@@ -20,7 +20,7 @@ from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
 from .service import DjangoClass, PaginationClass, SalaryClass, Xhtml2pdfClass, GeoClass, CareerClass, UtilsClass
-from .models import LoggingModel, RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
+from .models import LoggingModel, GroupsModel, RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, DocumentModel, \
     MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, IdeasLikeModel, IdeasCommentModel
 from .forms import ExampleForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, \
@@ -67,9 +67,9 @@ def example(request):
     Страница с примерами разных frontend элементов
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
-    if page:
-        return redirect(page)
+    # page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    # if page:
+    #     return redirect(page)
 
     try:
         response = 0
@@ -105,9 +105,9 @@ def examples(request):
     Страница с примерами разных frontend форм
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
-    if page:
-        return redirect(page)
+    # page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    # if page:
+    #     return redirect(page)
 
     try:
         response = 0
@@ -328,6 +328,196 @@ def account_logout(request):
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
     return redirect('account_login')
+
+
+def account_create_or_change_accounts(request, quantity_slug):
+    """
+    Страница создания пользователей
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        response = 0
+        user = None
+        if request.method == 'POST':
+            user_objects = []
+            # Проверка количества создания аккаунтов
+            if quantity_slug == "one":
+                # Создание массива объектов аккаунтов из одиночной формы
+                try:
+                    # auth data
+                    username = DjangoClass.RequestClass.get_value(request, 'username')
+                    password_1 = DjangoClass.RequestClass.get_value(request, 'password_1')
+                    password_2 = DjangoClass.RequestClass.get_value(request, 'password_2')
+                    if username and password_1 == password_2:
+                        # technical data
+                        is_active = DjangoClass.RequestClass.get_check(request, 'is_active')
+                        is_staff = DjangoClass.RequestClass.get_check(request, 'is_staff')
+                        _email = DjangoClass.RequestClass.get_value(request, 'email')
+                        groups = DjangoClass.RequestClass.get_value(request, 'groups')
+                        # first data
+                        last_name = DjangoClass.RequestClass.get_value(request, 'last_name')
+                        first_name = DjangoClass.RequestClass.get_value(request, 'first_name')
+                        patronymic = DjangoClass.RequestClass.get_value(request, 'patronymic')
+                        # second data
+                        personnel_number = DjangoClass.RequestClass.get_value(request, 'personnel_number')
+                        subdivision = DjangoClass.RequestClass.get_value(request, 'subdivision')
+                        workshop_service = DjangoClass.RequestClass.get_value(request, 'workshop_service')
+                        department_site = DjangoClass.RequestClass.get_value(request, 'department_site')
+                        position = DjangoClass.RequestClass.get_value(request, 'position')
+                        category = DjangoClass.RequestClass.get_value(request, 'category')
+                        # utils
+                        force_change = DjangoClass.RequestClass.get_check(request, 'force_change')
+                        account_auth_obj = DjangoClass.AccountClass.UserAccountClass(
+                            # authorization data
+                            username=username,
+                            password=password_1,
+                            # technical data
+                            is_active=is_active,
+                            is_staff=is_staff,
+                            is_superuser=False,
+                            groups=groups,
+                            email=_email,
+                            secret_question='',
+                            secret_answer='',
+                            # first data
+                            last_name=last_name,
+                            first_name=first_name,
+                            patronymic=patronymic,
+                            # second data
+                            personnel_number=personnel_number,
+                            subdivision=subdivision,
+                            workshop_service=workshop_service,
+                            department_site=department_site,
+                            position=position,
+                            category=category,
+                            # utils
+                            force_change_account=force_change,
+                            force_change_account_password=False,
+                            force_clear_groups=False,
+                            request=request
+                        )
+                        user_objects.append(account_auth_obj)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    response = -1
+            elif quantity_slug == 'change':
+                try:
+                    username = DjangoClass.RequestClass.get_value(request, 'username')
+                    user = User.objects.get(username=username)
+                    response = 0
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    response = -1
+            elif quantity_slug == "many":
+                # Создание массива объектов аккаунтов из excel-шаблона
+                try:
+                    excel_file = request.FILES.get('excel_file')
+                    if excel_file:
+                        workbook = ExcelClass.workbook_load(excel_file)
+                        sheet = ExcelClass.workbook_activate(workbook)
+                        for row in range(2, ExcelClass.get_max_num_rows(sheet) + 1):
+                            # authorization data
+                            username = ExcelClass.get_sheet_value('J', row, sheet)
+                            password = ExcelClass.get_sheet_value('K', row, sheet)
+                            # technical data
+                            is_active = ExcelClass.get_sheet_value('L', row, sheet)
+                            if is_active.lower() == 'true':
+                                is_active = True
+                            else:
+                                is_active = False
+                            is_staff = ExcelClass.get_sheet_value('M', row, sheet)
+                            if is_staff.lower() == 'true':
+                                is_staff = True
+                            else:
+                                is_staff = False
+                            groups = ExcelClass.get_sheet_value('N', row, sheet)
+                            _email = ExcelClass.get_sheet_value('O', row, sheet)
+                            secret_question = ExcelClass.get_sheet_value('P', row, sheet)
+                            secret_answer = ExcelClass.get_sheet_value('Q', row, sheet)
+                            # first data
+                            last_name = ExcelClass.get_sheet_value('D', row, sheet)
+                            first_name = ExcelClass.get_sheet_value('E', row, sheet)
+                            patronymic = ExcelClass.get_sheet_value('F', row, sheet)
+                            # second data
+                            personnel_number = ExcelClass.get_sheet_value('G', row, sheet)
+                            subdivision = ExcelClass.get_sheet_value('A', row, sheet)
+                            workshop_service = ExcelClass.get_sheet_value('B', row, sheet)
+                            department_site = ExcelClass.get_sheet_value('C', row, sheet)
+                            position = ExcelClass.get_sheet_value('H', row, sheet)
+                            category = ExcelClass.get_sheet_value('I', row, sheet)
+                            # utils
+                            force_change = DjangoClass.RequestClass.get_check(request, 'force_change')
+                            if username and password:
+                                account_auth_obj = DjangoClass.AccountClass.UserAccountClass(
+                                    # authorization data
+                                    username=username,
+                                    password=password,
+                                    # technical data
+                                    is_active=is_active,
+                                    is_staff=is_staff,
+                                    is_superuser=False,
+                                    groups=groups,
+                                    email=_email,
+                                    secret_question=secret_question,
+                                    secret_answer=secret_answer,
+                                    # first data
+                                    last_name=last_name,
+                                    first_name=first_name,
+                                    patronymic=patronymic,
+                                    # second data
+                                    personnel_number=personnel_number,
+                                    subdivision=subdivision,
+                                    workshop_service=workshop_service,
+                                    department_site=department_site,
+                                    position=position,
+                                    category=category,
+                                    # utils
+                                    force_change_account=force_change,
+                                    force_change_account_password=False,
+                                    force_clear_groups=False,
+                                    request=request
+                                )
+                                user_objects.append(account_auth_obj)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    response = -1
+            # Создание аккаунтов и доп данных для аккаунтов
+            if quantity_slug != 'change':
+                success = 1
+                for user_object in user_objects:
+                    try:
+                        successful = user_object.account_create_or_change()
+                        if successful is False:
+                            success = -1
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        success = -1
+                response = success
+        if user:
+            groups = GroupsModel.objects.filter(user_many_to_many_field=user)
+        else:
+            groups = None
+        all_groups = GroupsModel.objects.all()
+        context = {
+            'response': response,
+            'groups': groups,
+            'all_groups': all_groups,
+            'user': user,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'groups': None,
+    #         'user': None,
+    #     }
+
+    return render(request, 'account/account_create_accounts.html', context)
 
 
 #
@@ -574,197 +764,6 @@ def account_profile(request, username):
     return render(request, 'account/account_profile.html', context)
 
 
-def account_create_accounts(request, quantity_slug):
-    """
-    Страница создания пользователей
-    """
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
-    if page:
-        return redirect(page)
-
-    # try:
-    if True:
-        response = 0
-        user = None
-        if request.method == 'POST':
-            force_change = DjangoClass.RequestClass.get_check(request, 'is_edit')
-            user_objects = []
-            # Проверка количества создания аккаунтов
-            if quantity_slug == "many":
-                # Создание массива объектов аккаунтов из excel-шаблона
-                try:
-                    excel_file = request.FILES.get('document_addition_file_1')
-                    if excel_file:
-                        workbook = ExcelClass.workbook_load(excel_file)
-                        sheet = ExcelClass.workbook_activate(workbook)
-                        max_num_rows = ExcelClass.get_max_num_rows(sheet)
-                        for num in range(2, max_num_rows + 1):
-                            username = ExcelClass.get_sheet_value('A', num, sheet)
-                            password = ExcelClass.get_sheet_value('B', num, sheet)
-                            _email = ExcelClass.get_sheet_value('C', num, sheet)
-                            first_name = ExcelClass.get_sheet_value('D', num, sheet)
-                            last_name = ExcelClass.get_sheet_value('E', num, sheet)
-                            is_active = ExcelClass.get_sheet_value('F', num, sheet).lower()
-                            if is_active == 'true':
-                                is_active = True
-                            else:
-                                is_active = False
-                            is_staff = ExcelClass.get_sheet_value('G', num, sheet).lower()
-                            if is_staff == 'true':
-                                is_staff = True
-                            else:
-                                is_staff = False
-                            groups = ExcelClass.get_sheet_value('H', num, sheet)
-                            patronymic = ExcelClass.get_sheet_value('I', num, sheet)
-                            personnel_number = ExcelClass.get_sheet_value('J', num, sheet)
-                            subdivision = ExcelClass.get_sheet_value('K', num, sheet)
-                            workshop_service = ExcelClass.get_sheet_value('L', num, sheet)
-                            department_site = ExcelClass.get_sheet_value('M', num, sheet)
-                            position = ExcelClass.get_sheet_value('N', num, sheet)
-                            category = ExcelClass.get_sheet_value('O', num, sheet)
-                            if username and password:
-                                account_auth_obj = DjangoClass.AccountClass.UserAuthClass(
-                                    # Основное
-                                    username=username,
-                                    password=password,
-                                    # Персональная информация
-                                    first_name=first_name,
-                                    last_name=last_name,
-                                    email=_email,
-                                    # Права доступа
-                                    is_active=is_active,
-                                    is_staff=is_staff,
-                                    is_superuser=False,
-                                    groups=groups,
-                                    # Настройки создания аккаунта
-                                    force_change_account=force_change,
-                                    force_change_account_password=force_change,
-                                    force_clear_groups=force_change
-                                )
-                                account_profile_first_obj = DjangoClass.AccountClass.UserProfileClass(
-                                    # Основное
-                                    username=username,
-                                    # Персональная информация
-                                    user_iin=username,
-                                    first_name=first_name,
-                                    last_name=last_name,
-                                    patronymic=patronymic,
-                                    personnel_number=personnel_number,
-                                    # First data account
-                                    subdivision=subdivision,
-                                    workshop_service=workshop_service,
-                                    department_site=department_site,
-                                    position=position,
-                                    category=category,
-                                )
-                                user_objects.append(
-                                    [account_auth_obj, account_profile_first_obj])
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            elif quantity_slug == "one":
-                # Создание массива объектов аккаунтов из одиночной формы
-                try:
-                    username = DjangoClass.RequestClass.get_value(request, 'username')
-                    # user model
-                    password_1 = DjangoClass.RequestClass.get_value(request, 'password_1')
-                    password_2 = DjangoClass.RequestClass.get_value(request, 'password_2')
-                    if password_1 == password_2:
-                        first_name = DjangoClass.RequestClass.get_value(request, 'first_name')
-                        last_name = DjangoClass.RequestClass.get_value(request, 'last_name')
-                        _email = DjangoClass.RequestClass.get_value(request, 'email')
-                        is_active = DjangoClass.RequestClass.get_check(request, 'is_active')
-                        is_staff = DjangoClass.RequestClass.get_check(request, 'is_staff')
-                        groups = DjangoClass.RequestClass.get_value(request, 'groups')
-                        # Profile
-                        patronymic = DjangoClass.RequestClass.get_value(request, 'patronymic')
-                        personnel_number = DjangoClass.RequestClass.get_value(request, 'personnel_number')
-                        subdivision = DjangoClass.RequestClass.get_value(request, 'subdivision')
-                        workshop_service = DjangoClass.RequestClass.get_value(request, 'workshop_service')
-                        department_site = DjangoClass.RequestClass.get_value(request, 'department_site')
-                        position = DjangoClass.RequestClass.get_value(request, 'position')
-                        category = DjangoClass.RequestClass.get_value(request, 'category')
-                        # utils
-                        is_edit = DjangoClass.RequestClass.get_check(request, 'is_edit')
-                        account_auth_obj = DjangoClass.AccountClass.UserAuthClass(
-                            # Основное
-                            username=username,
-                            password=password_1,
-                            # Персональная информация
-                            first_name=first_name,
-                            last_name=last_name,
-                            email=_email,
-                            # Права доступа
-                            is_active=is_active,
-                            is_staff=is_staff,
-                            is_superuser=False,
-                            groups=groups,
-                            # Настройки создания аккаунта
-                            force_change_account=is_edit,
-                            force_change_account_password=is_edit,
-                            force_clear_groups=is_edit
-                        )
-                        account_profile_first_obj = DjangoClass.AccountClass.UserProfileClass(
-                            # Основное
-                            username=username,
-                            # Персональная информация
-                            user_iin=username,
-                            first_name=first_name,
-                            last_name=last_name,
-                            patronymic=patronymic,
-                            personnel_number=personnel_number,
-                            # First data account
-                            subdivision=subdivision,
-                            workshop_service=workshop_service,
-                            department_site=department_site,
-                            position=position,
-                            category=category,
-                        )
-                        user_objects.append(
-                            [account_auth_obj, account_profile_first_obj])
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            elif quantity_slug == 'change':
-                # try:
-                if True:
-                    username = DjangoClass.RequestClass.get_value(request, 'username')
-                    user = User.objects.get(username=username)
-                    response = 0
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            # Создание аккаунтов и доп данных для аккаунтов
-            if quantity_slug != 'change':
-                success = 1
-                for user_object in user_objects:
-                    try:
-                        account_auth_obj = user_object[0].account_auth_create_or_change()
-                        account_profile_first_obj = user_object[1].profile_first_change()
-                        if account_auth_obj is False or account_profile_first_obj is False:
-                            success = -1
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                        success = False
-                response = success
-        if user:
-            groups = user.groups.all()
-        else:
-            groups = Group.objects.all()
-        context = {
-            'response': response,
-            'groups': groups,
-            'user': user,
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'groups': None,
-    #         'user': None,
-    #     }
-
-    return render(request, 'account/account_create_accounts.html', context)
-
-
 def account_export_accounts(request):
     """
     Страница экспорта пользователей
@@ -781,10 +780,11 @@ def account_export_accounts(request):
             try:
                 workbook = ExcelClass.workbook_create()
                 sheet = ExcelClass.workbook_activate(workbook)
-                user_objects = User.objects.all().order_by('id')
-                titles = ['Имя пользователя', 'Пароль', 'Почта', 'Имя', 'Фамилия', 'Активность', 'Доступ к модерации',
-                          'Группы', 'Отчество', 'Табельный номер', 'Подразделение', 'Цех/Служба', 'Отдел/Участок',
-                          'Должность', 'Категория']
+                user_objects = User.objects.all().order_by('-id')
+                titles = ['Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Фамилия', 'Имя', 'Отчество',
+                          'Табельный номер', 'Должность', 'Категория работника', 'Имя пользователя',
+                          'Пароль аккаунта', 'Активность аккаунта', 'Доступ к панели управления', 'Группы доступа',
+                          'Электронная почта', 'Секретный вопрос', 'Секретный ответ']
                 for title in titles:
                     ExcelClass.set_sheet_value(
                         col=titles.index(title) + 1,
@@ -793,76 +793,103 @@ def account_export_accounts(request):
                         sheet=sheet
                     )
                 index = 1
+                body = []
                 for user_object in user_objects:
                     if User.objects.get(username=user_object.username).is_superuser:
                         continue
                     try:
                         index += 1
-                        ExcelClass.set_sheet_value(col='A', row=index, value=user_object.username, sheet=sheet)
-                        ExcelClass.set_sheet_value(col='B', row=index, value=user_object.profile.password, sheet=sheet)
-                        ExcelClass.set_sheet_value(col='C', row=index, value=user_object.email, sheet=sheet)
-                        ExcelClass.set_sheet_value(
-                            col='D', row=index, value=user_object.profile.first_name, sheet=sheet
-                        )
-                        ExcelClass.set_sheet_value(col='E', row=index, value=user_object.profile.last_name, sheet=sheet)
-                        if user_object.is_active:
-                            ExcelClass.set_sheet_value(col='F', row=index, value='true', sheet=sheet)
+                        sub_body = []
+                        # authorization data
+                        username = user_object.username
+                        ExcelClass.set_sheet_value('J', index, username, sheet)
+
+                        password = user_object.user_one_to_one_field.password_slug_field
+                        ExcelClass.set_sheet_value('K', index, password, sheet)
+
+                        # technical data
+                        is_active = user_object.user_one_to_one_field.activity_boolean_field
+                        if is_active:
+                            is_active = 'true'
                         else:
-                            ExcelClass.set_sheet_value(col='F', row=index, value='false', sheet=sheet)
-                        if user_object.is_staff:
-                            ExcelClass.set_sheet_value(col='G', row=index, value='true', sheet=sheet)
+                            is_active = 'false'
+                        ExcelClass.set_sheet_value('L', index, is_active, sheet)
+
+                        is_staff = user_object.is_staff
+                        if is_staff:
+                            is_staff = 'true'
                         else:
-                            ExcelClass.set_sheet_value(col='G', row=index, value='false', sheet=sheet)
-                        groups = Group.objects.filter(user=user_object)
-                        group_list = ''
-                        for group in groups:
-                            if len(str(group.name)) > 1:
-                                group_list += f", {group.name}"
-                        ExcelClass.set_sheet_value(col='H', row=index, value=group_list[2:], sheet=sheet)
-                        ExcelClass.set_sheet_value(
-                            col='I', row=index, value=user_object.profile.patronymic, sheet=sheet
-                        )
-                        ExcelClass.set_sheet_value(
-                            col='J', row=index, value=user_object.profile.personnel_number, sheet=sheet
-                        )
-                        ExcelClass.set_sheet_value(
-                            col='K', row=index, value=user_object.profile.subdivision, sheet=sheet
-                        )
-                        ExcelClass.set_sheet_value(
-                            col='L', row=index, value=user_object.profile.workshop_service, sheet=sheet
-                        )
-                        ExcelClass.set_sheet_value(
-                            col='M', row=index, value=user_object.profile.department_site, sheet=sheet
-                        )
-                        ExcelClass.set_sheet_value(col='N', row=index, value=user_object.profile.position, sheet=sheet)
-                        ExcelClass.set_sheet_value(col='O', row=index, value=user_object.profile.category, sheet=sheet)
+                            is_staff = 'false'
+                        ExcelClass.set_sheet_value('M', index, is_staff, sheet)
+
+                        group_string = ''
+                        groups = GroupsModel.objects.filter(user_many_to_many_field=user_object)
+                        if groups:
+                            for group in groups:
+                                group_string += f", {group}"
+                            groups = group_string[2:]
+                        else:
+                            groups = ''
+                        ExcelClass.set_sheet_value('N', index, groups, sheet)
+
+                        _email = user_object.user_one_to_one_field.email_field
+                        ExcelClass.set_sheet_value('O', index, _email, sheet)
+
+                        secret_question = user_object.user_one_to_one_field.secret_question_char_field
+                        ExcelClass.set_sheet_value('P', index, secret_question, sheet)
+
+                        secret_answer = user_object.user_one_to_one_field.secret_answer_char_field
+                        ExcelClass.set_sheet_value('Q', index, secret_answer, sheet)
+
+                        # first data
+                        last_name = user_object.user_one_to_one_field.last_name_char_field
+                        ExcelClass.set_sheet_value('D', index, last_name, sheet)
+
+                        first_name = user_object.user_one_to_one_field.first_name_char_field
+                        ExcelClass.set_sheet_value('E', index, first_name, sheet)
+
+                        patronymic = user_object.user_one_to_one_field.patronymic_char_field
+                        ExcelClass.set_sheet_value('F', index, patronymic, sheet)
+                        # second data
+
+                        personnel_number = user_object.user_one_to_one_field.personnel_number_slug_field
+                        ExcelClass.set_sheet_value('G', index, personnel_number, sheet)
+
+                        subdivision = user_object.user_one_to_one_field.subdivision_char_field
+                        ExcelClass.set_sheet_value('A', index, subdivision, sheet)
+
+                        workshop_service = user_object.user_one_to_one_field.workshop_service_char_field
+                        ExcelClass.set_sheet_value('B', index, workshop_service, sheet)
+
+                        department_site = user_object.user_one_to_one_field.department_site_char_field
+                        ExcelClass.set_sheet_value('C', index, department_site, sheet)
+
+                        position = user_object.user_one_to_one_field.position_char_field
+                        ExcelClass.set_sheet_value('H', index, position, sheet)
+
+                        category = user_object.user_one_to_one_field.category_char_field
+                        ExcelClass.set_sheet_value('I', index, category, sheet)
+
+                        sub_body.append(subdivision)
+                        sub_body.append(workshop_service)
+                        sub_body.append(department_site)
+                        sub_body.append(last_name)
+                        sub_body.append(first_name)
+                        sub_body.append(patronymic)
+                        sub_body.append(personnel_number)
+                        sub_body.append(position)
+                        sub_body.append(category)
+                        sub_body.append(username)
+                        sub_body.append(password)
+                        sub_body.append(is_active)
+                        sub_body.append(is_staff)
+                        sub_body.append(groups)
+                        sub_body.append(_email)
+                        sub_body.append(secret_question)
+                        sub_body.append(secret_answer)
+                        body.append(sub_body)
                     except Exception as error:
                         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                body = []
-                for user_object in user_objects:
-                    if User.objects.get(username=user_object.username).is_superuser:
-                        continue
-                    if user_object.is_active:
-                        is_active = True
-                    else:
-                        is_active = False
-                    if user_object.is_staff:
-                        is_staff = True
-                    else:
-                        is_staff = False
-                    groups = Group.objects.filter(user=user_object)
-                    group_list = ''
-                    for group in groups:
-                        if len(str(group.name)) > 1:
-                            group_list += f", {group.name}"
-                    body.append(
-                        [user_object.username, user_object.profile.password, user_object.email,
-                         user_object.profile.first_name, user_object.profile.last_name, is_active, is_staff,
-                         group_list[2:], user_object.profile.patronymic, user_object.profile.personnel_number,
-                         user_object.profile.subdivision, user_object.profile.workshop_service,
-                         user_object.profile.department_site, user_object.profile.position,
-                         user_object.profile.category]
-                    )
                     data = [titles, body]
                 ExcelClass.workbook_save(workbook=workbook, filename='static/media/data/account/export_users.xlsx')
                 response = 1
@@ -1001,69 +1028,72 @@ def account_update_accounts_1c(request):
                          'Цех_Служба', 'Отдел_Участок', 'Должность', 'Категория']
             user_objects = []
             for user in json_data["global_objects"]:
+                # auth data
                 username = json_data["global_objects"][user]["ИИН"]
-                password = UtilsClass.create_encrypted_password(
-                    _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                    _length=10)
-                _email = ''
-                first_name = json_data["global_objects"][user]["Имя"]
-                last_name = json_data["global_objects"][user]["Фамилия"]
-                if json_data["global_objects"][user]["Статус"] == 'created' or \
-                        json_data["global_objects"][user]["Статус"] == 'changed':
-                    is_active = True
-                else:
-                    is_active = False
-                is_staff = False
-                groups = 'User'
-                patronymic = json_data["global_objects"][user]["Отчество"]
-                personnel_number = json_data["global_objects"][user]["ТабельныйНомер"]
-                subdivision = json_data["global_objects"][user]["Подразделение"]
-                workshop_service = json_data["global_objects"][user]["Цех_Служба"]
-                department_site = json_data["global_objects"][user]["Отдел_Участок"]
-                position = json_data["global_objects"][user]["Должность"]
-                category = json_data["global_objects"][user]["Категория"]
-                account_auth_obj = DjangoClass.AccountClass.UserAuthClass(
-                    # Основное
-                    username=username,
-                    password=password,
-                    # Персональная информация
-                    first_name=first_name,
-                    last_name=last_name,
-                    email=_email,
-                    # Права доступа
-                    is_active=is_active,
-                    is_staff=is_staff,
-                    is_superuser=False,
-                    groups=groups,
-                    # Настройки создания аккаунта
-                    force_change_account=True,
-                    force_change_account_password=False,
-                    force_clear_groups=False
+                password = DjangoClass.AccountClass.create_password_from_chars(
+                    chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                    length=10
                 )
-                account_profile_first_obj = DjangoClass.AccountClass.UserProfileClass(
-                    # Основное
-                    username=username,
-                    # Персональная информация
-                    user_iin=username,
-                    first_name=first_name,
-                    last_name=last_name,
-                    patronymic=patronymic,
-                    personnel_number=personnel_number,
-                    # First data account
-                    subdivision=subdivision,
-                    workshop_service=workshop_service,
-                    department_site=department_site,
-                    position=position,
-                    category=category,
-                )
-                user_objects.append(
-                    [account_auth_obj, account_profile_first_obj])
+                if username and password:
+                    # technical data
+                    if json_data["global_objects"][user]["Статус"] == 'created' or \
+                            json_data["global_objects"][user]["Статус"] == 'changed':
+                        is_active = True
+                    else:
+                        is_active = False
+                    is_staff = False
+                    _email = ''
+                    groups = 'User'
+                    # first data
+                    last_name = json_data["global_objects"][user]["Фамилия"]
+                    first_name = json_data["global_objects"][user]["Имя"]
+                    patronymic = json_data["global_objects"][user]["Отчество"]
+                    # second data
+                    personnel_number = json_data["global_objects"][user]["ТабельныйНомер"]
+                    subdivision = json_data["global_objects"][user]["Подразделение"]
+                    workshop_service = json_data["global_objects"][user]["Цех_Служба"]
+                    department_site = json_data["global_objects"][user]["Отдел_Участок"]
+                    position = json_data["global_objects"][user]["Должность"]
+                    category = json_data["global_objects"][user]["Категория"]
+                    account_auth_obj = DjangoClass.AccountClass.UserAccountClass(
+                        # authorization data
+                        username=username,
+                        password=password,
+                        # technical data
+                        is_active=is_active,
+                        is_staff=is_staff,
+                        is_superuser=False,
+                        groups=groups,
+                        email=_email,
+                        secret_question='',
+                        secret_answer='',
+                        # first data
+                        last_name=last_name,
+                        first_name=first_name,
+                        patronymic=patronymic,
+                        # second data
+                        personnel_number=personnel_number,
+                        subdivision=subdivision,
+                        workshop_service=workshop_service,
+                        department_site=department_site,
+                        position=position,
+                        category=category,
+                        # utils
+                        force_change_account=True,
+                        force_change_account_password=False,
+                        force_clear_groups=False,
+                        request=request
+                    )
+                    user_objects.append(account_auth_obj)
             # Создание аккаунтов и доп данных для аккаунтов
             response = 1
             for user_object in user_objects:
-                account_auth_obj = user_object[0].account_auth_create_or_change()
-                account_profile_first_obj = user_object[1].profile_first_change()
-                if account_auth_obj is False or account_profile_first_obj is False:
+                try:
+                    successful = user_object.account_create_or_change()
+                    if successful is False:
+                        response = -1
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                     response = -1
             # Генерация ответа для отрисовки в таблицу на странице
             titles = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'Табельный', 'Подразделение',
@@ -1103,14 +1133,12 @@ def account_change_groups(request):
     if True:
         response = 0
         user = None
+        groups = GroupsModel.objects.all()
         if request.method == 'POST':
             username = DjangoClass.RequestClass.get_value(request, 'username')
             user = User.objects.get(username=username)
+            groups = GroupsModel.objects.filter(user_many_to_many_field=user)
             # response = 1
-        if user:
-            groups = user.groups.all()
-        else:
-            groups = Group.objects.all()
         context = {
             'response': response,
             'groups': groups,

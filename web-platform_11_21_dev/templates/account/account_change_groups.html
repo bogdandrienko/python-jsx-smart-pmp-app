@@ -62,7 +62,7 @@
                 >
                     {% if groups %}
                         {% for group in groups %}
-                            <option value="{{ group.name }}">{{ group.name }}</option>
+                            <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
                         {% endfor %}
                     {% endif %}
                 </select>
@@ -79,9 +79,9 @@
 {#                       required=""#}
                        placeholder=""
                        {% if user %}
-                            value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
                        {% else %}
-                            value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
                        {% endif %}
                        minlength="1"
                        maxlength="64"
@@ -97,8 +97,8 @@
                 {% for group in groups %}
                     <div class="form-check form-switch">
                         <input type="checkbox"
-                               id="{{ group.name }}"
-                               name="{{ group.name }}"
+                               id="{{ group.name_slug_field }}"
+                               name="{{ group.name_slug_field }}"
 {#                               required=""#}
                                value=""
                                {% if group %}
@@ -108,7 +108,7 @@
                                {% endif %}
                                class="form-check-input"
                         />
-                        <label class="form-check-label" for="{{ group.name }}">{{ group.name }}</label>
+                        <label class="form-check-label" for="{{ group.name_slug_field }}">{{ group.name_char_field }}</label>
                     </div>
                 {% endfor %}
             </div>
@@ -127,7 +127,7 @@
                 >
                     <option selected disabled>Выберите группу</option>
                     {% for group in groups %}
-                        <option value="{{ group.name }}">{{ group.name }}</option>
+                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
                     {% endfor %}
                 </select>
                 <small class="text-muted">select: выбрать один из списка</small>
@@ -147,7 +147,7 @@
                 >
                     <option selected disabled>Выберите группу</option>
                     {% for group in groups %}
-                        <option value="{{ group.name }}">{{ group.name }}</option>
+                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
                     {% endfor %}
                 </select>
                 <small class="text-muted">multi_select: выбрать несколько из списка</small>
@@ -163,9 +163,9 @@
 {#                       required=""#}
                        placeholder=""
                        {% if user %}
-                            value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
                        {% else %}
-                            value="{% for group in groups %}{{ group.name }}, {% endfor %}"
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
                        {% endif %}
                        minlength="1"
                        maxlength="64"
