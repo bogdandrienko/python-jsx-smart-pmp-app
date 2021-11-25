@@ -16,7 +16,22 @@ from django.contrib import admin
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Админка'  # default: "Django site admin"
+from django import forms
+from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
 
+from .models import Post
+
+class PostAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = Post
+        fields = '__all__'
+
+class PostAdmin(admin.ModelAdmin):
+    form = PostAdminForm
+
+admin.site.register(Post, PostAdmin)
 
 # class CustomUserAdmin(UserAdmin):
 #     add_form = CustomUserCreationForm

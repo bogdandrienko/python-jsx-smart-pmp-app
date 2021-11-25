@@ -216,98 +216,98 @@ use_ssl: EMAIL_USE_SSL
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Basic',
-    },
-}
+CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/ckeditor/"
 
 # CKEDITOR_CONFIGS = {
 #     'default': {
-#
-#         # 'skin': 'kama',
-#         'skin': 'moono',
-#         # 'skin': 'moono-lisa',
-#         # 'skin': 'moonocolor',
-#
-#         'toolbar_Basic': [
-#             ['Source', '-', 'Bold', 'Italic']
-#         ],
-#         'toolbar_YourCustomToolbarConfig': [
-#             {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
-#             {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
-#             {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
-#             {'name': 'forms',
-#              'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
-#                        'HiddenField']},
-#             '/',
-#             {'name': 'basicstyles',
-#              'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
-#             {'name': 'paragraph',
-#              'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
-#                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
-#                        'Language']},
-#             {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
-#             {'name': 'insert',
-#              'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
-#             '/',
-#             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
-#             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-#             {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
-#             {'name': 'about', 'items': ['About']},
-#             '/',
-#             {'name': 'yourcustomtools', 'items': [
-#                 'Preview',
-#                 'Maximize',
-#                 'Youtube',
-#             ]},
-#         ],
-#
-#         # 'toolbar': 'YourCustomToolbarConfig',
-#         'toolbar': 'full',
-#
-#         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-#         # 'toolbarGroups': [
-#         # { 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] },
-#         # { 'name': 'clipboard', 'groups': [ 'clipboard', 'undo' ] },
-#         # { 'name': 'editing', 'groups': [ 'find', 'selection', 'spellchecker', 'editing' ] },
-#         # { 'name': 'forms', 'groups': [ 'forms' ] },
-#         # '/',
-#         # { 'name': 'basicstyles', 'groups': [ 'basicstyles', 'cleanup' ] },
-#         # { 'name': 'paragraph', 'groups': [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
-#         # { 'name': 'links', 'groups': [ 'links' ] },
-#         # { 'name': 'insert', 'groups': [ 'insert' ] },
-#         # '/',
-#         # { 'name': 'styles', 'groups': [ 'styles' ] },
-#         # { 'name': 'colors', 'groups': [ 'colors' ] },
-#         # { 'name': 'tools', 'groups': [ 'tools' ] },
-#         # { 'name': 'others', 'groups': [ 'others' ] },
-#         # { 'name': 'about', 'groups': [ 'about' ] }
-#         # ],
-#
-#         'height': '75',
-#         'width': '100%',
-#
-#         'toolbarCanCollapse': True,
-#         'tabSpaces': 4,
-#
-#         'extraPlugins': ','.join([
-#             'uploadimage',
-#             'div',
-#             'autolink',
-#             'autoembed',
-#             'embedsemantic',
-#             'autogrow',
-#             # 'devtools',
-#             'widget',
-#             'lineutils',
-#             'clipboard',
-#             'dialog',
-#             'dialogui',
-#             'elementspath',
-#             'youtube',
-#         ]),
-#     }
+#         'toolbar': 'Basic',
+#     },
 # }
+
+CKEDITOR_CONFIGS = {
+    'default': {
+
+        # 'skin': 'kama',
+        'skin': 'moono',
+        # 'skin': 'moono-lisa',
+        # 'skin': 'moonocolor',
+
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                       'HiddenField']},
+            '/',
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'about', 'items': ['About']},
+            '/',
+            {'name': 'yourcustomtools', 'items': [
+                'Preview',
+                'Maximize',
+                'Youtube',
+            ]},
+        ],
+
+        # 'toolbar': 'YourCustomToolbarConfig',
+        'toolbar': 'full',
+
+        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        # 'toolbarGroups': [
+        # { 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] },
+        # { 'name': 'clipboard', 'groups': [ 'clipboard', 'undo' ] },
+        # { 'name': 'editing', 'groups': [ 'find', 'selection', 'spellchecker', 'editing' ] },
+        # { 'name': 'forms', 'groups': [ 'forms' ] },
+        # '/',
+        # { 'name': 'basicstyles', 'groups': [ 'basicstyles', 'cleanup' ] },
+        # { 'name': 'paragraph', 'groups': [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+        # { 'name': 'links', 'groups': [ 'links' ] },
+        # { 'name': 'insert', 'groups': [ 'insert' ] },
+        # '/',
+        # { 'name': 'styles', 'groups': [ 'styles' ] },
+        # { 'name': 'colors', 'groups': [ 'colors' ] },
+        # { 'name': 'tools', 'groups': [ 'tools' ] },
+        # { 'name': 'others', 'groups': [ 'others' ] },
+        # { 'name': 'about', 'groups': [ 'about' ] }
+        # ],
+
+        'height': '75',
+        'width': '100%',
+
+        'toolbarCanCollapse': True,
+        'tabSpaces': 4,
+
+        'extraPlugins': ','.join([
+            'uploadimage',
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+            'youtube',
+        ]),
+    }
+}

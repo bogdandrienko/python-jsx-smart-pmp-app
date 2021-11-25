@@ -12,6 +12,11 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from django.db import models
+from ckeditor.fields import RichTextField
+
+class Post(models.Model):
+    content = RichTextField()
 # from .manager import CustomUserManager
 #
 #
