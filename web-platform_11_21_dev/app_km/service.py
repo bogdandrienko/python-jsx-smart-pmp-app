@@ -11,7 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
 from fastkml import kml
 from openpyxl.utils import get_column_letter
-from .models import LoggingModel, GroupsModel
+from .models import LoggingModel, GroupModel
 from .utils import ExcelClass
 from django.contrib.staticfiles import finders
 from django.conf import settings
@@ -119,11 +119,11 @@ class DjangoClass:
                                 user.user_one_to_one_field.secret_answer_char_field and \
                                 user.user_one_to_one_field.secret_question_char_field:
                             # Выборка всех групп доступа
-                            groups = GroupsModel.objects.all()
+                            groups = GroupModel.objects.all()
                             print(f"\n ***** ***** \n")
                             print(f"Выборка всех групп доступа: {groups}")
                             # Выборка всех групп доступа с определённым пользователем
-                            groups = GroupsModel.objects.filter(user_many_to_many_field=user)
+                            groups = GroupModel.objects.filter(user_many_to_many_field=user)
                             print(f"\n ***** ***** \n")
                             print(f"Выборка всех групп доступа с определённым пользователем: {groups}")
                             access = False

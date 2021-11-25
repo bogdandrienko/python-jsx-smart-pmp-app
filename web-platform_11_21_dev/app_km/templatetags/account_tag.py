@@ -1,6 +1,6 @@
 from django import template
 from django.contrib.auth.models import User
-from ..models import GroupsModel
+from ..models import GroupModel
 from ..service import DjangoClass
 
 register = template.Library()
@@ -10,7 +10,7 @@ register = template.Library()
 def account_tag(context, path):
     request = context['request']
     user = User.objects.get(username=request.user.username)
-    groups = GroupsModel.objects.filter(user_many_to_many_field=user)
+    groups = GroupModel.objects.filter(user_many_to_many_field=user)
     access = False
     for group in groups:
         try:

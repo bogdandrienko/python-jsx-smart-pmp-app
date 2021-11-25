@@ -1,14 +1,37 @@
 from django.db import models
-from django.utils import timezone
-from ckeditor.fields import RichTextField
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator, MinLengthValidator, MaxLengthValidator, \
-    FileExtensionValidator, DecimalValidator
+    FileExtensionValidator, DecimalValidator, ValidationError, RegexValidator, URLValidator, EmailValidator
+from ckeditor.fields import RichTextField
+
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.db import models
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+
+# from .manager import CustomUserManager
+#
+#
+# class CustomUser(AbstractBaseUser, PermissionsMixin):
+#     email = models.EmailField(_('email address'), unique=True)
+#     is_staff = models.BooleanField(default=False)
+#     is_active = models.BooleanField(default=True)
+#     date_joined = models.DateTimeField(default=timezone.now)
+#
+#     USERNAME_FIELD = 'email'
+#     REQUIRED_FIELDS = []
+#
+#     objects = CustomUserManager()
+#
+#     def __str__(self):
+#         return self.email
 
 
-class ExampleModel(models.Model):
+# Examples
+class ExamplesModel(models.Model):
     """
     Модель с максимумом вариаций параметров и полей
     """
@@ -1422,6 +1445,7 @@ class ExampleModel(models.Model):
         return self.id
 
 
+# Logging
 class LoggingModel(models.Model):
     """
     Logging Model
@@ -1572,7 +1596,8 @@ class LoggingModel(models.Model):
         return f'{self.datetime_field} {username} {self.request_path_slug_field}'
 
 
-class AccountModel(models.Model):
+# User
+class UserModel(models.Model):
     """
     Account Profile Model
     """
@@ -2009,15 +2034,16 @@ class AccountModel(models.Model):
 
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_user(sender, instance, created, **kwargs):
     # Создание при создании пользователя
     if created:
-        AccountModel.objects.create(user_one_to_one_field=instance)
+        UserModel.objects.create(user_one_to_one_field=instance)
     # Сохранение при сохранении пользователя
     else:
         instance.user_one_to_one_field.save()
 
 
+# Action
 class ActionModel(models.Model):
     name_char_field = models.CharField(
         db_column='name_char_field_db_column',
@@ -2077,7 +2103,33 @@ class ActionModel(models.Model):
         return self.id
 
 
-class GroupsModel(models.Model):
+# Group
+class GroupModel(models.Model):
+    # authorization data
+    group_one_to_one_field = models.OneToOneField(
+        db_column='group_one_to_one_field_db_column',
+        db_index=True,
+        db_tablespace='group_one_to_one_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Группа',
+        help_text='<small class="text-muted">Связь, с пользователем, которому принадлежит профиль, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+
+        to=Group,
+        on_delete=models.CASCADE,
+        related_name='group_one_to_one_field',
+    )
     name_char_field = models.CharField(
         db_column='name_char_field_db_column',
         db_index=True,
@@ -2181,7 +2233,7 @@ class GroupsModel(models.Model):
         help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
 
-        to=AccountModel,
+        to=UserModel,
         related_name='user_many_to_many_field',
     )
 
@@ -2199,6 +2251,178 @@ class GroupsModel(models.Model):
         return self.id
 
 
+@receiver(post_save, sender=Group)
+def create_group(sender, instance, created, **kwargs):
+    # Создание при создании пользователя
+    if created:
+        GroupModel.objects.create(group_one_to_one_field=instance)
+    # Сохранение при сохранении пользователя
+    else:
+        instance.group_one_to_one_field.save()
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# Application
+class ApplicationModuleModel(models.Model):
+    """
+    Application Module Model
+    """
+    module_position = models.IntegerField('позиция', blank=False)
+    module_name = models.CharField('название', max_length=50, unique=True)
+    module_slug = models.CharField('ссылка', max_length=50, blank=False)
+    module_image = models.ImageField('картинка', upload_to='uploads/application/module', blank=True)
+    module_description = models.CharField('описание', max_length=100, blank=True)
+
+    class Meta:
+        ordering = ('module_position',)
+        verbose_name = 'Модуль'
+        verbose_name_plural = 'Модули'
+        db_table = 'application_module_table'
+
+    def __str__(self):
+        return f'{self.module_name} :: {self.module_position}'
+
+
+class ApplicationComponentModel(models.Model):
+    """
+    Application Component Model
+    """
+    component_Foreign = models.ForeignKey(ApplicationModuleModel, on_delete=models.CASCADE, verbose_name='модуль',
+                                          blank=False)
+    component_position = models.IntegerField('позиция в списке закладок', blank=False)
+    component_name = models.CharField('название закладки', max_length=50, unique=True)
+    component_slug = models.CharField('ссылка закладки', max_length=50, blank=False)
+    component_image = models.ImageField('картинка закладки', upload_to='uploads/application/component', blank=True)
+    component_description = models.CharField('описание закладки', max_length=100, blank=True)
+
+    class Meta:
+        ordering = ('component_Foreign', 'component_position')
+        verbose_name = 'Компонент'
+        verbose_name_plural = 'Компоненты'
+        db_table = 'application_component_table'
+
+    def __str__(self):
+        return f'{self.component_Foreign} :: {self.component_position} :: {self.component_name}'
+
+
+# Ideas
+class IdeasCategoryModel(models.Model):
+    """
+    Ideas Category Model
+    """
+    category_name = models.CharField(max_length=50, unique=True, verbose_name='название')
+    category_slug = models.SlugField(max_length=50, unique=True, verbose_name='ссылка')
+    category_description = models.TextField('описание', blank=True)
+    category_image = models.ImageField('картинка', upload_to='uploads/rational/category', blank=True)
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = 'Категория в банке идей'
+        verbose_name_plural = 'Категории в банке идей'
+        db_table = 'ideas_category_table'
+
+    def __str__(self):
+        return f'{self.category_name}'
+
+
+class IdeasModel(models.Model):
+    """
+    Bank Ideas Model
+    """
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь', blank=True)
+    name = models.CharField(verbose_name='Название', max_length=50, blank=True)
+    category = models.ForeignKey(IdeasCategoryModel, on_delete=models.SET_NULL, null=True, editable=True,
+                                 default=None, verbose_name='Категория', blank=True)
+    short_description = models.CharField(verbose_name='Короткое описание', max_length=50, blank=True)
+    long_description = models.TextField(verbose_name='Длинное описание', blank=True)
+
+    image = models.ImageField(verbose_name='Картинка к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
+                              blank=True)
+    document = models.FileField(verbose_name='Документ к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
+                                blank=True)
+    status = models.BooleanField(verbose_name='Статус отображения', default=False, blank=True)
+    datetime_register = models.DateTimeField(verbose_name='Дата регистрации', auto_created=True, null=True,
+                                             editable=True, blank=True)
+    datetime_created = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = 'Идею'
+        verbose_name_plural = 'Банк идей'
+        db_table = 'ideas_table'
+
+    def __str__(self):
+        return f'{self.name} : {self.name} : {self.category}'
+
+    def get_total_comment_value(self):
+        return IdeasCommentModel.objects.filter(comment_idea=self.id).count()
+
+    def get_like_count(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count()
+
+    def get_dislike_count(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
+
+    def get_total_rating_value(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() + \
+               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
+
+    def get_total_rating(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() - \
+               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
+
+
+class IdeasCommentModel(models.Model):
+    """
+    Ideas Comment Model
+    """
+    comment_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True,
+                                       blank=True)
+    comment_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
+                                     blank=True)
+    comment_text = models.TextField(verbose_name='Текст комментария')
+    comment_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = 'Комментарий в банке идей'
+        verbose_name_plural = 'Комментарии в банке идей'
+        db_table = 'ideas_comment_table'
+
+    def __str__(self):
+        return f'{self.comment_author} :: {self.comment_idea} :: {self.comment_text[:10]}... :: {self.comment_date}'
+
+
+class IdeasLikeModel(models.Model):
+    """
+    Ideas Like Model
+    """
+    like_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True, blank=True)
+    like_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
+                                  blank=True)
+    like_status = models.BooleanField(verbose_name='Лайк/дизлайк', default=False, blank=True)
+    like_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = 'Лайк в банке идей'
+        verbose_name_plural = 'Лайки в банке идей'
+        db_table = 'ideas_like_table'
+
+    def __str__(self):
+        return f'{self.like_author} :: {self.like_idea} :: {self.like_status} :: {self.like_date}'
+
+
+# Projects
 class ProjectsModel(models.Model):
     name_char_field = models.CharField(
         db_column='name_char_field_db_column',
@@ -2303,7 +2527,7 @@ class ProjectsModel(models.Model):
         help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
 
-        to=AccountModel,
+        to=UserModel,
         related_name='projects_model_user_many_to_many_field',
     )
     boolean_field = models.BooleanField(
@@ -2474,167 +2698,6 @@ class ProjectsModel(models.Model):
 
     def get_id(self):
         return self.id
-
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# Application
-class ApplicationModuleModel(models.Model):
-    """
-    Application Module Model
-    """
-    module_position = models.IntegerField('позиция', blank=False)
-    module_name = models.CharField('название', max_length=50, unique=True)
-    module_slug = models.CharField('ссылка', max_length=50, blank=False)
-    module_image = models.ImageField('картинка', upload_to='uploads/application/module', blank=True)
-    module_description = models.CharField('описание', max_length=100, blank=True)
-
-    class Meta:
-        ordering = ('module_position',)
-        verbose_name = 'Модуль'
-        verbose_name_plural = 'Модули'
-        db_table = 'application_module_table'
-
-    def __str__(self):
-        return f'{self.module_name} :: {self.module_position}'
-
-
-class ApplicationComponentModel(models.Model):
-    """
-    Application Component Model
-    """
-    component_Foreign = models.ForeignKey(ApplicationModuleModel, on_delete=models.CASCADE, verbose_name='модуль',
-                                          blank=False)
-    component_position = models.IntegerField('позиция в списке закладок', blank=False)
-    component_name = models.CharField('название закладки', max_length=50, unique=True)
-    component_slug = models.CharField('ссылка закладки', max_length=50, blank=False)
-    component_image = models.ImageField('картинка закладки', upload_to='uploads/application/component', blank=True)
-    component_description = models.CharField('описание закладки', max_length=100, blank=True)
-
-    class Meta:
-        ordering = ('component_Foreign', 'component_position')
-        verbose_name = 'Компонент'
-        verbose_name_plural = 'Компоненты'
-        db_table = 'application_component_table'
-
-    def __str__(self):
-        return f'{self.component_Foreign} :: {self.component_position} :: {self.component_name}'
-
-
-# Upgrade
-class IdeasCategoryModel(models.Model):
-    """
-    Ideas Category Model
-    """
-    category_name = models.CharField(max_length=50, unique=True, verbose_name='название')
-    category_slug = models.SlugField(max_length=50, unique=True, verbose_name='ссылка')
-    category_description = models.TextField('описание', blank=True)
-    category_image = models.ImageField('картинка', upload_to='uploads/rational/category', blank=True)
-
-    class Meta:
-        ordering = ('-id',)
-        verbose_name = 'Категория в банке идей'
-        verbose_name_plural = 'Категории в банке идей'
-        db_table = 'ideas_category_table'
-
-    def __str__(self):
-        return f'{self.category_name}'
-
-
-class IdeasModel(models.Model):
-    """
-    Bank Ideas Model
-    """
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь', blank=True)
-    name = models.CharField(verbose_name='Название', max_length=50, blank=True)
-    category = models.ForeignKey(IdeasCategoryModel, on_delete=models.SET_NULL, null=True, editable=True,
-                                 default=None, verbose_name='Категория', blank=True)
-    short_description = models.CharField(verbose_name='Короткое описание', max_length=50, blank=True)
-    long_description = models.TextField(verbose_name='Длинное описание', blank=True)
-
-    image = models.ImageField(verbose_name='Картинка к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
-                              blank=True)
-    document = models.FileField(verbose_name='Документ к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
-                                blank=True)
-    status = models.BooleanField(verbose_name='Статус отображения', default=False, blank=True)
-    datetime_register = models.DateTimeField(verbose_name='Дата регистрации', auto_created=True, null=True,
-                                             editable=True, blank=True)
-    datetime_created = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-
-    class Meta:
-        ordering = ('-id',)
-        verbose_name = 'Идею'
-        verbose_name_plural = 'Банк идей'
-        db_table = 'ideas_table'
-
-    def __str__(self):
-        return f'{self.name} : {self.name} : {self.category}'
-
-    def get_total_comment_value(self):
-        return IdeasCommentModel.objects.filter(comment_idea=self.id).count()
-
-    def get_like_count(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count()
-
-    def get_dislike_count(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
-
-    def get_total_rating_value(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() + \
-               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
-
-    def get_total_rating(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() - \
-               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
-
-
-class IdeasCommentModel(models.Model):
-    """
-    Ideas Comment Model
-    """
-    comment_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True,
-                                       blank=True)
-    comment_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
-                                     blank=True)
-    comment_text = models.TextField(verbose_name='Текст комментария')
-    comment_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-
-    class Meta:
-        ordering = ('-id',)
-        verbose_name = 'Комментарий в банке идей'
-        verbose_name_plural = 'Комментарии в банке идей'
-        db_table = 'ideas_comment_table'
-
-    def __str__(self):
-        return f'{self.comment_author} :: {self.comment_idea} :: {self.comment_text[:10]}... :: {self.comment_date}'
-
-
-class IdeasLikeModel(models.Model):
-    """
-    Ideas Like Model
-    """
-    like_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True, blank=True)
-    like_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
-                                  blank=True)
-    like_status = models.BooleanField(verbose_name='Лайк/дизлайк', default=False, blank=True)
-    like_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-
-    class Meta:
-        ordering = ('-id',)
-        verbose_name = 'Лайк в банке идей'
-        verbose_name_plural = 'Лайки в банке идей'
-        db_table = 'ideas_like_table'
-
-    def __str__(self):
-        return f'{self.like_author} :: {self.like_idea} :: {self.like_status} :: {self.like_date}'
 
 
 #

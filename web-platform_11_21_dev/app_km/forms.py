@@ -8,10 +8,27 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import FileExtensionValidator, MinValueValidator, MaxValueValidator, MinLengthValidator, \
     MaxLengthValidator
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from .models import ExampleModel, AccountModel, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, \
+from .models import ExamplesModel, UserModel, RationalModel, CategoryRationalModel, NotificationModel, ContactModel, \
     DocumentModel, \
     MessageModel, SmsModel, ArticleModel, CityModel, IdeasModel, IdeasCategoryModel
 
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+# from .models import CustomUser
+
+
+# class CustomUserCreationForm(UserCreationForm):
+#
+#     class Meta:
+#         model = CustomUser
+#         fields = ('email',)
+#
+#
+# class CustomUserChangeForm(UserChangeForm):
+#
+#     class Meta:
+#         model = CustomUser
+#         fields = ('email',)
 
 # Example
 class ExampleForm(forms.Form):
@@ -636,7 +653,7 @@ class ExampleForm(forms.Form):
         )
 
     class Meta:
-        model = ExampleModel
+        model = ExamplesModel
         # fields = ('username', 'password_1', 'password_2', 'email')
         fields = '__all__'
 
@@ -811,7 +828,7 @@ class ChangePasswordForm(forms.Form):
     )
 
     class Meta:
-        model = AccountModel
+        model = UserModel
         fields = ('password_1', 'password_2', 'email', 'secret_question', 'secret_answer')
 
 
@@ -857,7 +874,7 @@ class ChangeUserForm(forms.Form):
                'class': 'form-control'}), required=False)
 
     class Meta:
-        model = AccountModel
+        model = UserModel
         fields = '__all__'
 
 

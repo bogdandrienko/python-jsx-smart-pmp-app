@@ -20,7 +20,8 @@ from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
 from .service import DjangoClass, PaginationClass, SalaryClass, Xhtml2pdfClass, GeoClass, CareerClass, UtilsClass
-from .models import LoggingModel, GroupsModel, RationalModel, CategoryRationalModel, LikeRationalModel, CommentRationalModel, \
+from .models import LoggingModel, GroupModel, RationalModel, CategoryRationalModel, LikeRationalModel, \
+    CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, DocumentModel, \
     MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, IdeasLikeModel, IdeasCommentModel
 from .forms import ExampleForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, \
@@ -28,48 +29,14 @@ from .forms import ExampleForm, RationalForm, NotificationForm, MessageForm, Doc
 from .utils import ExcelClass, SQLClass, EncryptingClass
 
 
-# local
-def local(request):
+def examples_forms(request):
     """
-    Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение работы
-    """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
-
-    return redirect('http://192.168.1.68:8000/')
-
-
-# admin
-def admin_(request):
-    """
-    Панель управления
-    """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
-
-    return render(request, admin.site.urls)
-
-
-# home
-def home(request):
-    """
-    Домашняя страница
-    """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
-
-    return render(request, 'components/home.html')
-
-
-# example
-def example(request):
-    """
-    Страница с примерами разных frontend элементов
+    Страница с примерами разных frontend форм
     """
     # access and logging
-    # page = DjangoClass.AuthorizationClass.try_to_access(request=request)
-    # if page:
-    #     return redirect(page)
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -94,46 +61,72 @@ def example(request):
         context = {
             'response': -1,
             'data': None,
-            'form_1': None,
+            'form_1': ExampleForm,
         }
 
-    return render(request, 'components/example.html', context)
+    return render(request, 'examples/examples.html', context)
 
 
-def examples(request):
+# example
+def example(request):
     """
-    Страница с примерами разных frontend форм
+    Страница с примерами разных frontend элементов
     """
     # access and logging
-    # page = DjangoClass.AuthorizationClass.try_to_access(request=request)
-    # if page:
-    #     return redirect(page)
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
 
     try:
         response = 0
-        data = None
         if request.method == 'POST':
             response = 1
-            data = [
-                ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
-                [
-                    ['Тело_1_1', 'Тело_1_2'],
-                    ['Тело_2_1', 'Тело_2_2'],
-                    ['Тело_3_1', 'Тело_3_2'],
-                ]
+        data = [
+            ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
+            [
+                ['Тело_1_1', 'Тело_1_2'],
+                ['Тело_2_1', 'Тело_2_2'],
+                ['Тело_3_1', 'Тело_3_2'],
             ]
+        ]
         context = {
             'response': response,
             'data': data,
+            'form_1': ExampleForm,
         }
     except Exception as error:
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         context = {
             'response': -1,
             'data': None,
+            'form_1': None,
         }
 
-    return render(request, 'components/examples.html', context)
+    return render(request, 'examples/example.html', context)
+
+
+# local
+def local(request):
+    """
+    Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение работы
+    """
+    # logging
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
+
+    return redirect('http://192.168.1.68:8000/')
+
+
+# admin
+def admin_(request):
+    """
+    Панель управления
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
+
+    return render(request, admin.site.urls)
 
 
 # logging
@@ -260,6 +253,17 @@ def logging(request):
         }
 
     return render(request, 'account/account_logging.html', context)
+
+
+# home
+def home(request):
+    """
+    Домашняя страница
+    """
+    # logging
+    DjangoClass.AuthorizationClass.try_to_access(request=request, only_logging=True)
+
+    return render(request, 'components/home.html')
 
 
 # account
@@ -499,10 +503,10 @@ def account_create_or_change_accounts(request, quantity_slug):
                         success = -1
                 response = success
         if user:
-            groups = GroupsModel.objects.filter(user_many_to_many_field=user)
+            groups = GroupModel.objects.filter(user_many_to_many_field=user)
         else:
             groups = None
-        all_groups = GroupsModel.objects.all()
+        all_groups = GroupModel.objects.all()
         context = {
             'response': response,
             'groups': groups,
@@ -520,16 +524,6 @@ def account_create_or_change_accounts(request, quantity_slug):
     return render(request, 'account/account_create_accounts.html', context)
 
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 def account_change_password(request):
     """
     Страница смены пароля пользователей
@@ -823,7 +817,7 @@ def account_export_accounts(request):
                         ExcelClass.set_sheet_value('M', index, is_staff, sheet)
 
                         group_string = ''
-                        groups = GroupsModel.objects.filter(user_many_to_many_field=user_object)
+                        groups = GroupModel.objects.filter(user_many_to_many_field=user_object)
                         if groups:
                             for group in groups:
                                 group_string += f", {group}"
@@ -1133,11 +1127,11 @@ def account_change_groups(request):
     if True:
         response = 0
         user = None
-        groups = GroupsModel.objects.all()
+        groups = GroupModel.objects.all()
         if request.method == 'POST':
             username = DjangoClass.RequestClass.get_value(request, 'username')
             user = User.objects.get(username=username)
-            groups = GroupsModel.objects.filter(user_many_to_many_field=user)
+            groups = GroupModel.objects.filter(user_many_to_many_field=user)
             # response = 1
         context = {
             'response': response,
@@ -1457,16 +1451,6 @@ def ideas_change(request, ideas_int):  # change idea
     return render(request, 'ideas/ideas_change.html', context)
 
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 def passages_thermometry(request):
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)

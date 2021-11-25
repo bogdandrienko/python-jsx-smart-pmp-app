@@ -19,9 +19,11 @@ from django.conf import settings
 from django.contrib import admin
 
 urlpatterns = [
-    path('grappelli/', include('grappelli.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    # auth
+    path('', include('django.contrib.auth.urls')),
 
     path('', include('app_km.urls')),
 ]

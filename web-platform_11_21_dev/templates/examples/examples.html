@@ -8,13 +8,11 @@
 
 <!-- Title -->
 {% block title %}
-    Шаблон
+    Формы
 {% endblock title %}
 
 <!-- Style -->
-{% block style %}
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3schools30.css"/>
-{% endblock style %}
+{% block style %}{% endblock style %}
 
 <!-- Header -->
 {% block header %}{% endblock header %}
@@ -25,11 +23,491 @@
 
 
 <div class="text-center bg-dark text-white">
-    <h1 class="display-6 fst-italic">Шаблон</h1>
+    <h1 class="display-6 fst-italic">Формы</h1>
     <small class="text-secondary">Содержит форму с максимом вариаций и полей.</small>
 </div>
 
 {% if response == 0 %}
+
+    <form action="{% url 'examples_forms' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples_forms/" #}
+          method="POST" {# method="GET" #}
+          target="_self" {# target="_self" #} {# target="_blank" #} {# target="_parent" #} {# target="_top" #}
+          enctype="multipart/form-data"
+          name="form"
+          autocomplete="on"
+          class="text-center" {# class="text-center form-control form-control-lg" #}
+    >
+        {% csrf_token %}
+        <div>
+            <label class="form-control-lg">
+                username:
+                <input type="text"
+                       id="username"
+                       name="username"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">длина: от 1 до 64 символов</small>
+            </label>
+
+            <hr/>
+
+            <div class="form-floating">
+                <input type="text"
+                       id="username"
+                       name="username"
+                       required=""
+                       placeholder="_"
+                       value=""
+                       minlength="12"
+                       maxlength="12"
+                       class="form-control form-control-lg"/>
+                <label for="username"
+                       class="form-control-lg">Введите сюда Ваш "идентификатор" пользователя</label>
+                <small class="text-muted">иин: 12 цифр</small>
+            </div>
+
+            <hr/>
+
+            <div class="form-floating">
+                <input type="password"
+                       id="password"
+                       name="password"
+                       required=""
+                       placeholder="_"
+                       value=""
+                       minlength="8"
+                       maxlength="16"
+                       class="form-control form-control-lg"/>
+                <label for="password"
+                       class="form-control-lg">Введите сюда пароль для входа в аккаунт:</label>
+                <small class="text-muted">пароль: от 8 до 16 символов</small>
+            </div>
+
+            <hr/>
+
+            <label class="form-control form-control-lg">
+                textarea:
+                <textarea type="text"
+                          id="textarea"
+                          name="textarea"
+                          required=""
+                          placeholder=""
+                          minlength="1"
+                          maxlength="500"
+                          rows="3"
+                          class="form-control form-control-lg"
+                >textarea</textarea>
+                <small class="text-muted">длина: от 1 до 500 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                password:
+                <input type="password"
+                       id="password"
+                       name="password"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">длина: от 1 до 64 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                email:
+                <input type="email"
+                       id="email"
+                       name="email"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">длина: от 1 до 64 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                url:
+                <input type="url"
+                       id="url"
+                       name="url"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">url: от 1 до 64 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                number:
+                <input type="number"
+                       id="number"
+                       name="number"
+                       required=""
+                       placeholder=""
+                       value=""
+                       min="0"
+                       max="1000"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">количество: от 0 до 1000 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                hidden:
+                <input type="text"
+                       id="hidden"
+                       name="hidden"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="0"
+                       maxlength="64"
+                       class="form-control form-control-lg d-none"
+                />
+                <small class="text-muted">скрытая форма: от 0 до 1000 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                image_file:
+                <input type="file"
+                       id="image_file"
+                       name="image_file"
+                       required=""
+                       accept="image/*"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">image_file: форма только для форматов изображений</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                excel_file:
+                <input type="file"
+                       id="excel_file"
+                       name="excel_file"
+                       required=""
+                       accept=".xlsx, .xls"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">excel_file: форма только форматов: .xlsx/.xls</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                text_file:
+                <input type="file"
+                       id="text_file"
+                       name="text_file"
+                       required=""
+                       accept="text/*"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">text_file: форма только текстовых форматов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-check-label form-control-lg" for="checkbox">
+                checkbox:
+                <div class="form-switch">
+                    <input type="checkbox"
+                           id="checkbox"
+                           name="checkbox"
+                           required=""
+                           value=""
+                           checked="checked"
+                           class="form-check-input"
+                    />
+                </div>
+                <small class="text-muted">checkbox: правда или ложь</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                radio:
+                <div>
+                    <input type="radio"
+                           id="radio1"
+                           name="radio"
+                           required=""
+                           placeholder=""
+                           value=""
+                           checked="checked"
+                           class="form-control-lg"
+                    />
+                </div>
+                <div>
+                    <input type="radio"
+                           id="radio2"
+                           name="radio"
+                           required=""
+                           placeholder=""
+                           value=""
+                           class="form-control-lg"
+                    />
+                </div>
+                <input type="radio"
+                       id="radio3"
+                       name="radio"
+                       required=""
+                       placeholder=""
+                       value=""
+                       class="form-control-lg"
+                />
+                <input type="radio"
+                       id="radio4"
+                       name="radio"
+                       required=""
+                       placeholder=""
+                       value=""
+                       class="form-control-lg"
+                />
+                <small class="text-muted">radio: один из радиобоксов, каждый со своим значением</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                color:
+                <input type="color"
+                       id="color"
+                       name="color"
+                       required=""
+                       placeholder=""
+                       value=""
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">color: один из палитры цветов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                date:
+                <input type="date"
+                       id="date"
+                       name="date"
+                       required=""
+                       placeholder=""
+                       value=""
+                       min="2021-01-01"
+                       max="2021-12-31"
+                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">date: дата, в разрешённом диапазоне</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                time:
+                <input type="time"
+                       id="time"
+                       name="time"
+                       required=""
+                       placeholder=""
+                       value=""
+                       min="00:00"
+                       max="23:59"
+                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">time: время, в разрешённом диапазоне</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                datetime-local:
+                <input type="datetime-local"
+                       id="datetime-local"
+                       name="datetime-local"
+                       required=""
+                       placeholder=""
+                       value="2021-10-28T12:00"
+                       min="2021-01-01T00:00"
+                       max="2021-12-31T23:59"
+                       pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">datetime-local: время, в разрешённом диапазоне</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                month:
+                <input type="month"
+                       id="month"
+                       name="month"
+                       required=""
+                       placeholder=""
+                       value=""
+                       min="2021-01-01T00:00"
+                       max="2021-12-31T23:59"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">month: месяц, в разрешённом диапазоне</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                range:
+                <input type="range"
+                       id="range"
+                       name="range"
+                       required=""
+                       placeholder=""
+                       value=""
+                       min="0"
+                       max="100"
+                       class="form-control-lg"
+                />
+                <small class="text-muted">range: от 0 до 100 %</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                search:
+                <input type="search"
+                       id="search"
+                       name="search"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">search: от 1 до 64 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                tel:
+                <input type="tel"
+                       id="tel"
+                       name="tel"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="1"
+                       maxlength="64"
+                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">tel: от 1 до 64 символов</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                select:
+                <select type="select"
+                        id="select"
+                        name="select[]"
+                        required=""
+{#                                            size="3"#}
+{#                                            multiple="multiple"#}
+                        class="form-control form-control-lg"
+                >
+                    <option selected disabled>Выберите героя</option>
+                    <option value="1">Чебурашка</option>
+                    <option value="2">Крокодил Гена</option>
+                    <option value="3">Шапокляк</option>
+                    <option value="4">Крыса Лариса</option>
+                </select>
+                <small class="text-muted">select: выбрать один из списка</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                multi_select:
+                <select type="select"
+                        id="multi_select"
+                        name="multi_select[]"
+                        required=""
+                        size="3"
+                        multiple="multiple"
+                        class="form-control form-control-lg"
+                >
+                    <option selected disabled>Выберите героя</option>
+                    <option value="1">Чебурашка</option>
+                    <option value="2">Крокодил Гена</option>
+                    <option value="3">Шапокляк</option>
+                    <option value="4">Крыса Лариса</option>
+                </select>
+                <small class="text-muted">multi_select: выбрать несколько из списка</small>
+            </label>
+
+            <hr/>
+
+        </div>
+        <hr/>
+        <!-- Grid row -->
+        <div class="container-fluid btn-group row pb-1">
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Подтвердить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <button href=""
+                        type="reset"
+                        class="w-100 form-control btn btn-lg btn-outline-warning"
+                >Сбросить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <a href="{% url 'account_recover_password' 'none' %}"
+                        type="button"
+                        class="w-100 form-control btn btn-lg btn-outline-danger"
+                >Восстановить</a>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </form>
 
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -2345,246 +2823,6 @@
                         {% include 'components/aborted.html' %}
 
                     {% endif %}
-
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_9">
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_9"
-                    aria-expanded="false"
-                    aria-controls="accordion_collapse_9"
-                >accordion_collapse_9</button>
-            </h2>
-            <div
-                id="accordion_collapse_9"
-                class="accordion-collapse collapse"
-                aria-labelledby="accordion_heading_9"
-                data-bs-parent="#accordionExample"
-            >
-                <div class="accordion-body">
-                   <p>
-                        <a class="btn btn-lg btn-outline-dark"
-                           data-bs-toggle="collapse"
-                           href="#multiCollapseExample1"
-                           role="button"
-                           aria-expanded="false"
-                           aria-controls="multiCollapseExample1"
-                        >Восстановить через секретный вопрос</a>
-                        <button class="btn btn-lg btn-outline-dark"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#multiCollapseExample2"
-                                aria-expanded="false"
-                                aria-controls="multiCollapseExample2"
-                        >Восстановить через указанную почту</button>
-                        <button class="btn btn-lg btn-outline-dark"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#multiCollapseExample3"
-                                aria-expanded="false"
-                                aria-controls="multiCollapseExample3"
-                        >Восстановить через обращение к администраторам</button>
-                        <button class="btn btn-lg btn-outline-dark"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target=".multi-collapse"
-                                aria-expanded="false"
-                                aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3"
-                        >Все варианты восстановления</button>
-                    </p>
-                    <div class="row">
-                        <div class="col">
-                            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                <div class="card card-body">
-
-                                    {% if data.profile.secret_question and data.profile.secret_answer %}
-
-                                        <form action="{% url 'account_recover_password' 'secret_answer' %}"
-                                              method="POST"
-                                              target="_self"
-                                              enctype="multipart/form-data"
-                                              name="account_recover_password secret_answer"
-                                              autocomplete="on"
-                                              class=""
-                                        >
-                                            {% csrf_token %}
-                                            <div>
-                                                <div>
-                                                    <label class="form-control-lg">
-                                                        <input type="text"
-                                                               id="username"
-                                                               name="username"
-                                                               required=""
-                                                               placeholder=""
-                                                               value="{{ data.username }}"
-            {#                                                       minlength="1"#}
-            {#                                                       maxlength="20"#}
-                                                               class="form-control form-control-lg d-none"/>
-                                                    </label>
-
-                                                    <label class="form-control-lg">
-                                                        Ответ на секретный вопрос: "{{ data.profile.secret_question }}"
-                                                        <input type="text"
-                                                               id="secret_answer"
-                                                               name="secret_answer"
-                                                               required=""
-                                                               placeholder=""
-                                                               value=""
-                                                               minlength="1"
-                                                               maxlength="20"
-                                                               class="form-control form-control-lg"/>
-                                                        <small class="text-muted">ответ: длина от 1 до 20 символов</small>
-                                                    </label>
-                                                </div>
-                                                <hr>
-                                                <div>
-                                                    <label class="form-control-lg">
-                                                        Введите новый пароль:
-                                                        <input type="password"
-                                                               id="password_1"
-                                                               name="password_1"
-                                                               required=""
-                                                               placeholder=""
-                                                               value=""
-                                                               minlength="8"
-                                                               maxlength="16"
-                                                               class="form-control form-control-lg"/>
-                                                        <small class="text-muted">пароль: от 8 до 16 символов</small>
-                                                    </label>
-
-                                                    <label class="form-control-lg">
-                                                        Повторите новый пароль:
-                                                        <input type="password"
-                                                               id="password_2"
-                                                               name="password_2"
-                                                               required=""
-                                                               placeholder=""
-                                                               value=""
-                                                               minlength="8"
-                                                               maxlength="16"
-                                                               class="form-control form-control-lg"/>
-                                                        <small class="text-muted">пароль: от 8 до 16 символов</small>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="btn-group btn-group-lg">
-                                                <button href=""
-                                                        type="submit"
-                                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                                >Изменить пароль</button>
-                                                <button href=""
-                                                        type="reset"
-                                                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                                                >Сбросить данные</button>
-                                            </div>
-                                        </form>
-
-                                    {% else %}
-
-                                        <div class="text-white rounded bg-dark">
-                                            <h1 class="display-6 fst-italic">Секретный вопрос и/или ответ на указаны!</h1>
-                                        </div>
-
-                                    {% endif %}
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                <div class="card card-body">
-
-                                    {% if data.profile.email %}
-
-                                        <form action="{% url 'account_recover_password' 'email' %}"
-                                              method="POST"
-                                              target="_self"
-                                              enctype="multipart/form-data"
-                                              name="account_recover_password email"
-                                              autocomplete="on"
-                                              class=""
-                                        >
-                                            {% csrf_token %}
-                                            <div>
-                                                <label class="form-control-lg">
-                                                    <input type="text"
-                                                           id="username"
-                                                           name="username"
-                                                           required=""
-                                                           placeholder=""
-                                                           value="{{ data.username }}"
-            {#                                                       minlength="1"#}
-            {#                                                       maxlength="20"#}
-                                                           class="form-control form-control-lg d-none"/>
-                                                </label>
-
-                                                <label class="form-control-lg">
-                                                    Нажмите, чтобы послать пароль на указанную ранее почту:
-                                                    <small class="text-muted">"{{ data.profile.email }}"</small>
-                                                </label>
-                                            </div>
-                                            <div class="btn-group btn-group-lg">
-                                                <button href=""
-                                                        type="submit"
-                                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                                >Послать</button>
-                                            </div>
-                                        </form>
-
-                                    {% else %}
-
-                                        <div class="text-white rounded bg-dark">
-                                            <h1 class="display-6 fst-italic">Почта не указана!</h1>
-                                        </div>
-
-                                    {% endif %}
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="collapse multi-collapse" id="multiCollapseExample3">
-                                <div class="card card-body">
-                                    <div class="rounded">
-                                        <h1 class="display-6 fst-italic">Если вы не можете использовать первые два способа восстановления
-                                            пароля то, согласно принятого Положения. Обращайтесь к начальнику отдела/заму по развитию,
-                                            те, в свою очередь, обращаются к сетевому администратору!</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_10">
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_10"
-                    aria-expanded="false"
-                    aria-controls="accordion_collapse_10"
-                >accordion_collapse_10</button>
-            </h2>
-            <div
-                id="accordion_collapse_10"
-                class="accordion-collapse collapse"
-                aria-labelledby="accordion_heading_10"
-                data-bs-parent="#accordionExample"
-            >
-                <div class="accordion-body">
-
-                    ...
 
                 </div>
             </div>

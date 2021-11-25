@@ -1,34 +1,23 @@
 from django.urls import path, include
 from . import views
 
+
 urlpatterns = [
-    # auth
-    path('', include('django.contrib.auth.urls')),
+    # example
+    path('examples_forms/', views.examples_forms, name='examples_forms'),
+    path('example/', views.example, name='example'),
     # local
     path('local/', views.local, name='local'),
     # admin
     path('admin/', views.admin_, name='admin'),
+    # logging
+    path('logging/', views.logging, name='logging'),
     # home
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
-    # example
-    path('example/', views.example, name='example'),
-    path('examples/', views.examples, name='examples'),
-    # logging
-    path('logging/', views.logging, name='logging'),
     # account
     path('account_login/', views.account_login, name='account_login'),
     path('account_logout/', views.account_logout, name='account_logout'),
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
     path('account_change_password/', views.account_change_password, name='account_change_password'),
     path('account_recover_password/<slug:type_slug>/', views.account_recover_password, name='account_recover_password'),
     path('account_change_profile/', views.account_change_profile, name='account_change_profile'),
@@ -60,16 +49,6 @@ urlpatterns = [
     path('ideas_comment/<int:ideas_int>/', views.ideas_comment, name='ideas_comment'),
     path('ideas/like/<int:ideas_int>/', views.ideas_like, name='ideas_like'),
     path('ideas/change/<int:ideas_int>/', views.ideas_change, name='ideas_change'),
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
     # passages
     path('passages_thermometry/', views.passages_thermometry, name='passages_thermometry'),
     path('passages_select/', views.passages_select, name='passages_select'),
