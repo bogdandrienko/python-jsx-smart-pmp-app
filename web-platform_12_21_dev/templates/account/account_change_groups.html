@@ -1,0 +1,268 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Изменить группы
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="text-center">
+    <h1 class="display-6 fst-italic">Изменить группы</h1>
+    <small class="text-secondary">Эта страница содержит форму для изменения групп пользователей.</small>
+</div>
+
+{% if response == 1 %}
+
+    {% include 'components/success.html' %}
+
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <form action="{% url 'account_change_groups' %}"
+          method="POST"
+          target="_self"
+          enctype="multipart/form-data"
+          name="account_create_accounts one"
+          autocomplete="on"
+          class="text-center"
+    >
+        {% csrf_token %}
+        <div>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                Доступные группы доступа:
+                <select type="select"
+                        id="group"
+                        name="group[]"
+{#                        required=""#}
+                        size="3"
+                        multiple="multiple"
+                        class="form-control form-control-lg"
+                >
+                    {% if groups %}
+                        {% for group in groups %}
+                            <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <small class="text-muted">введите названия групп и введите в строку группы через запятую</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                Группы:
+                <input type="text"
+                       id="groups"
+                       name="groups"
+{#                       required=""#}
+                       placeholder=""
+                       {% if user %}
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
+                       {% else %}
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
+                       {% endif %}
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">введите, из списка выше и через запятую, необходимые
+                    группы доступа для пользователя</small>
+            </label>
+
+            <hr/>
+
+            <div class="text-start form-control form-control-lg">
+                {% for group in groups %}
+                    <div class="form-check form-switch">
+                        <input type="checkbox"
+                               id="{{ group.name_slug_field }}"
+                               name="{{ group.name_slug_field }}"
+{#                               required=""#}
+                               value=""
+                               {% if group %}
+                                    checked="checked"
+                               {% else %}
+{#                                    checked="checked"#}
+                               {% endif %}
+                               class="form-check-input"
+                        />
+                        <label class="form-check-label" for="{{ group.name_slug_field }}">{{ group.name_char_field }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                select:
+                <select type="select"
+                        id="select"
+                        name="select[]"
+                        required=""
+{#                                            size="3"#}
+{#                                            multiple="multiple"#}
+                        class="form-control form-control-lg"
+                >
+                    <option selected disabled>Выберите группу</option>
+                    {% for group in groups %}
+                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
+                    {% endfor %}
+                </select>
+                <small class="text-muted">select: выбрать один из списка</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                multi_select:
+                <select type="select"
+                        id="multi_select"
+                        name="multi_select[]"
+                        required=""
+                        size="3"
+                        multiple="multiple"
+                        class="form-control form-control-lg"
+                >
+                    <option selected disabled>Выберите группу</option>
+                    {% for group in groups %}
+                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
+                    {% endfor %}
+                </select>
+                <small class="text-muted">multi_select: выбрать несколько из списка</small>
+            </label>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                Группы:
+                <input type="text"
+                       id="groups"
+                       name="groups"
+{#                       required=""#}
+                       placeholder=""
+                       {% if user %}
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
+                       {% else %}
+                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
+                       {% endif %}
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">введите, из списка выше и через запятую, необходимые
+                    группы доступа для пользователя</small>
+            </label>
+
+            <hr/>
+
+        </div>
+        <hr/>
+        <!-- Grid row -->
+        <div class="container-fluid btn-group row pb-1">
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Подтвердить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <button href=""
+                        type="reset"
+                        class="w-100 form-control btn btn-lg btn-outline-warning"
+                >Сбросить</button>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </form>
+
+    <form action="{% url 'account_change_groups' %}"
+          method="POST"
+          target="_self"
+          enctype="multipart/form-data"
+          name="account_create_accounts change"
+          autocomplete="on"
+          class="text-center"
+    >
+        {% csrf_token %}
+        <div>
+            <div>
+                <label class="form-control-lg">
+                    Имя пользователя:
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           required=""
+                           placeholder=""
+                           value=""
+                           minlength="12"
+                           maxlength="12"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small>
+                </label>
+            </div>
+        </div>
+        <hr/>
+        <!-- Grid row -->
+        <div class="container-fluid btn-group row pb-1">
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Подтвердить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <button href=""
+                        type="reset"
+                        class="w-100 form-control btn btn-lg btn-outline-warning"
+                >Сбросить</button>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </form>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

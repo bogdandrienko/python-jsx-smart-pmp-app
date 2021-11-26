@@ -1,0 +1,170 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load ideas_list_tag %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Список идей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container-fluid mx-auto text-center d-block">
+
+    <div class="text-white rounded bg-dark">
+        <h1 class="display-6 fst-italic">Банк идей</h1>
+        <p class="text-secondary">Эта страница содержит список идей из банка идей.</p>
+    </div>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <div class="d-flex justify-content-between align-items-center btn-group">
+            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'ideas_create' %}">Подать идею</a>
+        </div>
+        <div class="btn-group m-1">
+
+            <form class="form-control" action="{% url 'ideas_list' 'All' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input class="form-control" name="search_text" type="text" placeholder="Что найти?" aria-label="Что ищем?" required="">
+                <button class="btn btn-lg btn-outline-secondary" type="submit">Подтвердить</button>
+            </form>
+
+            <a class="btn btn-lg btn-outline-dark" href="{% url 'ideas_rating' %}">Рейтинги</a>
+            <a class="btn btn-lg btn-outline-primary" href="{% url 'ideas_list' 'All' %}">Все предложения</a>
+
+            {% for LOOP in category %}
+                {% if LOOP.category_slug == 'completed' %}
+                    <a class="btn btn-lg btn-outline-success" href="{% url 'ideas_list' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
+                {% else %}
+                    {% if LOOP.category_slug == 'during' %}
+                        <a class="btn btn-lg btn-outline-info" href="{% url 'ideas_list' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
+                    {% else %}
+                        {% if LOOP.category_slug == 'aborted' %}
+                            <a class="btn btn-lg btn-outline-danger" href="{% url 'ideas_list' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-outline-secondary" href="{% url 'ideas_list' LOOP.category_slug %}">{{ LOOP.category_name }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% if page %}
+
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 text-center">
+
+            {% for LOOP in page %}
+                <div class="col my-2">
+                    <div class="card shadow-sm">
+
+                        <div class="card-header m-0 p-1">
+                            <h4 class="fw-normal card-header bg-light text-dark text-decoration-none d-flex">
+                                <strong>{{ LOOP.name }}</strong>
+                            </h4>
+
+                            <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">
+                                {% if LOOP.user %}
+                                    Автор: {{ LOOP.user.profile.first_name }} {{ LOOP.user.profile.last_name }}
+                                {% else %}
+                                    Профиль не заполнен
+                                {% endif %}
+                            </small>
+
+                            {% if LOOP.user.username == request.user.username %}
+                                <a class="w-25 btn btn-lg" target="_blank" href="{% url 'ideas_change' LOOP.id %}">
+                                    <i class="material-icons cart-icon text-warning">published_with_changes</i>
+                                </a>
+                            {% else %}
+                                Вы не автор идеи, Вам недоступно редактирование!
+                            {% endif %}
+                            <small class="my-2 btn btn-sm btn-outline-dark text-link-dark">{{ LOOP.category }}</small>
+                        </div>
+
+                        <div class="card-body m-0 p-1">
+
+                            <a href="{% url 'ideas_view' LOOP.id %}">
+                                {% if LOOP.image %}
+                                    <img src="{{ LOOP.image.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ LOOP.rational_name }}">
+                                {% else %}
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.rational_name }}</text></svg>
+                                {% endif %}
+                            </a>
+
+                            <div class="my-1 d-flex justify-content-between align-items-center">
+                                <small class="text-muted">{{ LOOP.short_description }}</small>
+                            </div>
+
+                            <div class="my-1 d-flex justify-content-between align-items-center">
+                                <small class="text-muted">{{ LOOP.datetime_created }} (подано) / {{ LOOP.datetime_register }} (зарегистрировано)</small>
+                                <small>#{{ forloop.revcounter }}</small>
+                            </div>
+
+                            {% if 0 > LOOP.get_total_rating %}
+                                <div class="m-sm-1 btn btn-sm btn-outline-danger text-link-danger">Рейтинг\<sup>всего оценок</sup>: {{ LOOP.get_total_rating }}<sup class="text-muted">{{ LOOP.get_total_rating_value }}</sup></div>
+                            {% else %}
+                                <div class="m-sm-1 btn btn-sm btn-outline-success text-link-success">Рейтинг\<sup>всего оценок</sup>: {{ LOOP.get_total_rating }}<sup class="text-muted">{{ LOOP.get_total_rating_value }}</sup></div>
+                            {% endif %}
+
+                            {% is_liked_tag LOOP.id as is_liked_bool %}
+                            {% if is_liked_bool %}
+                                <i class="material-icons text-success md-48">thumb_up</i>
+                            {% else %}
+                                {% is_disliked_tag LOOP.id as is_disliked_bool %}
+                                {% if is_disliked_bool %}
+                                    <i class="material-icons text-danger md-48">thumb_down</i>
+                                {% else %}
+                                    <i class="material-icons text-muted md-48">live_help</i>
+                                {% endif %}
+                            {% endif %}
+
+                            <div class="m-sm-0 btn btn-sm btn-outline-secondary text-link-light">Комментарии: {{ LOOP.get_total_comment_value }}</div>
+
+                            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'ideas_view' LOOP.id %}">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

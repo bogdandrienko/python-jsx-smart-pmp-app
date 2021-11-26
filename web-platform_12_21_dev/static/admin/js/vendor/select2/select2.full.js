@@ -44,7 +44,7 @@
 var S2;(function () { if (!S2 || !S2.requirejs) {
 if (!S2) { S2 = {}; } else { require = S2; }
 /**
- * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
+ * @license almond 0.3.3 Copyright jQuery Foundation and app_admin contributors.
  * Released under MIT license, http://github.com/requirejs/almond/LICENSE
  */
 //Going sloppy to avoid 'use strict' string cost, but strict practices should
@@ -432,7 +432,7 @@ var requirejs, require, define;
             //http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dom-windowtimers-settimeout:
             //If want a value immediately, use require('id') instead -- something
             //that works in almond on the global level, but not guaranteed and
-            //unlikely to work in other AMD implementations.
+            //unlikely to work in app_admin AMD implementations.
             setTimeout(function () {
                 main(undef, deps, callback, relName);
             }, 4);
@@ -4901,7 +4901,7 @@ S2.define('select2/defaults',[
             language = Translation.loadPath(name);
           } catch (ex) {
             // The translation could not be loaded at all. Sometimes this is
-            // because of a configuration problem, other times this can be
+            // because of a configuration problem, app_admin times this can be
             // because of how Select2 helps load all possible translation files.
             if (options.debug && window.console && console.warn) {
               console.warn(
@@ -6298,7 +6298,7 @@ S2.define('select2/selection/stopPropagation',[
 /*!
  * jQuery Mousewheel 3.1.13
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright jQuery Foundation and app_admin contributors
  * Released under the MIT license
  * http://jquery.org/license
  */

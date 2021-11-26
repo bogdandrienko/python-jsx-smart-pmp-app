@@ -2140,7 +2140,7 @@ if ( document.documentElement.compareDocumentPosition ) {
 	root.insertBefore( form, root.firstChild );
 
 	// The workaround has to do additional checks after a getElementById
-	// Which slows things down for other browsers (hence the branching)
+	// Which slows things down for app_admin browsers (hence the branching)
 	if ( !!document.getElementById( id ) ) {
 		Expr.find.ID = function(match, context, isXML){
 			if ( typeof context.getElementById !== "undefined" && !isXML ) {
@@ -3101,7 +3101,7 @@ jQuery.each( ("blur,focus,load,resize,scroll,unload,click,dblclick," +
 });
 
 // Prevent memory leaks in IE
-// And prevent errors on refresh with events like mouseover in other browsers
+// And prevent errors on refresh with events like mouseover in app_admin browsers
 // Window isn't included so as not to unbind existing unload events
 jQuery( window ).bind( 'unload', function(){ 
 	for ( var id in jQuery.cache )

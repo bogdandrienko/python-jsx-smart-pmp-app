@@ -1,0 +1,139 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Войти в аккаунт
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="text-center">
+    <h1 class="display-6 fst-italic">Войти в аккаунт</h1>
+    <small class="text-secondary">Эта страница содержит форму для входа пользователя.</small>
+</div>
+
+{% if response == 1 %}
+
+    {% include 'components/success.html' %}
+
+{% else %}
+
+    {% if response == -1 %}
+
+        {% if access_count %}
+
+            <p class="lead text-danger text-center">
+
+                {% if access_count <= 10 %}
+                    Вы ввели неверные имя пользователя и/или пароль!
+                {% elif access_count > 10 %}
+                    Вы превысили количество попыток входа!
+                {% endif %}
+                 Количество попыток входа за последний час: {{ access_count }} (разрешено не больше 10 в час)
+            </p>
+
+        {% endif %}
+
+    {% endif %}
+
+    <form action="{% url 'account_login' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples/" #}
+          method="POST" {# method="GET" #}
+          target="_self" {# target="_self" #} {# target="_blank" #} {# target="_parent" #} {# target="_top" #}
+          enctype="multipart/form-data"
+          name="account_login"
+          autocomplete="on"
+          class="text-center p-1 m-1" {# class="text-center form-control form-control-lg" #}
+    >
+        {% csrf_token %}
+        <div>
+            <label class="form-control-lg">
+                Введите Ваш идентификатор пользователя:
+                <input type="text"
+                       id="username"
+                       name="username"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="12"
+                       maxlength="12"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">ИИН: 12 цифр</small>
+            </label>
+
+            <label class="form-control-lg">
+                Введите пароль для входа в аккаунт:
+                <input type="password"
+                       id="password"
+                       name="password"
+                       required=""
+                       placeholder=""
+                       value=""
+                       minlength="8"
+                       maxlength="16"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">пароль: от 8 до 16 символов</small>
+            </label>
+        </div>
+        <hr/>
+        <!-- Grid row -->
+        <div class="container-fluid btn-group row pb-1">
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Подтвердить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <button href=""
+                        type="reset"
+                        class="w-100 form-control btn btn-lg btn-outline-warning"
+                >Сбросить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-4">
+                <a href="{% url 'account_recover_password' 'none' %}"
+                        type="button"
+                        class="w-100 form-control btn btn-lg btn-outline-danger"
+                >Восстановить</a>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </form>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

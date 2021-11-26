@@ -90,7 +90,7 @@
                 if ((maxForms.val() !== '') && (maxForms.val() - totalForms.val()) <= 0) {
                     addButton.parent().hide();
                 }
-                // The delete button of each row triggers a bunch of other things
+                // The delete button of each row triggers a bunch of app_admin things
                 row.find("a." + options.deleteCssClass).on('click', function(e1) {
                     e1.preventDefault();
                     // Remove the parent form containing this button:

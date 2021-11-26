@@ -422,7 +422,7 @@ XRegExp = XRegExp || (function (undef) {
  * @param {Object} [options] Options object with optional properties:
  *   <li>`scope` {String} Scopes where the token applies: 'default', 'class', or 'all'.
  *   <li>`trigger` {Function} Function that returns `true` when the token should be applied; e.g.,
- *     if a flag is set. If `false` is returned, the matched string can be matched by other tokens.
+ *     if a flag is set. If `false` is returned, the matched string can be matched by app_admin tokens.
  *     Has access to persistent properties of the regex being built, through `this` (including
  *     function `this.hasFlag`).
  *   <li>`customFlags` {String} Nonnative flags used by the token's handler or trigger functions.
@@ -528,7 +528,7 @@ XRegExp = XRegExp || (function (undef) {
  * @returns {*} Provided `context` object.
  * @example
  *
- * // Extracts every other digit from a string
+ * // Extracts every app_admin digit from a string
  * XRegExp.forEach('1a2345', /\d/, function (match, i) {
  *   if (i % 2) this.push(+match[0]);
  * }, []);
@@ -1100,7 +1100,7 @@ XRegExp = XRegExp || (function (undef) {
          * If 0, Infinity, or NaN: 0
          * If positive number: limit = floor(limit); if (limit >= pow(2,32)) limit -= pow(2,32);
          * If negative number: pow(2,32) - floor(abs(limit))
-         * If other: Type-convert, then use the above rules
+         * If app_admin: Type-convert, then use the above rules
          */
         limit = (limit === undef ? -1 : limit) >>> 0;
         self.forEach(str, separator, function (match) {
@@ -1277,7 +1277,7 @@ XRegExp = XRegExp || (function (undef) {
  */
 
 /**
- * Adds support for the `\p{L}` or `\p{Letter}` Unicode category. Addon packages for other Unicode
+ * Adds support for the `\p{L}` or `\p{Letter}` Unicode category. Addon packages for app_admin Unicode
  * categories, scripts, blocks, and properties are available separately. All Unicode tokens can be
  * inverted using `\P{..}` or `\p{^..}`. Token names are case insensitive, and any spaces, hyphens,
  * and underscores are ignored.
@@ -1389,7 +1389,7 @@ XRegExp = XRegExp || (function (undef) {
         }
     };
 
-/* Adds data for the Unicode `Letter` category. Addon packages include other categories, scripts,
+/* Adds data for the Unicode `Letter` category. Addon packages include app_admin categories, scripts,
  * blocks, and properties.
  */
     XRegExp.addUnicodePackage({

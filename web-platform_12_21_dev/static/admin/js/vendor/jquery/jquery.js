@@ -5,7 +5,7 @@
  * Includes Sizzle.js
  * https://sizzlejs.com/
  *
- * Copyright JS Foundation and other contributors
+ * Copyright JS Foundation and app_admin contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
@@ -107,7 +107,7 @@ var isWindow = function isWindow( obj ) {
 
 				// Support: Firefox 64+, Edge 18+
 				// Some browsers don't support the "nonce" property on scripts.
-				// On the other hand, just using `getAttribute` is not enough as
+				// On the app_admin hand, just using `getAttribute` is not enough as
 				// the `nonce` attribute is reset to an empty string whenever it
 				// becomes browsing-context connected.
 				// See https://github.com/whatwg/html/issues/2369
@@ -478,7 +478,7 @@ jQuery.extend( {
 	// A global GUID counter for objects
 	guid: 1,
 
-	// jQuery.support is not used in Core but other projects attach their
+	// jQuery.support is not used in Core but app_admin projects attach their
 	// properties to it so it needs to exist.
 	support: support
 } );
@@ -514,7 +514,7 @@ var Sizzle =
  * Sizzle CSS Selector Engine v2.3.4
  * https://sizzlejs.com/
  *
- * Copyright JS Foundation and other contributors
+ * Copyright JS Foundation and app_admin contributors
  * Released under the MIT license
  * https://js.foundation/
  *
@@ -1686,7 +1686,7 @@ Expr = Sizzle.selectors = {
 				match[4] = +( match[4] ? match[5] + (match[6] || 1) : 2 * ( match[3] === "even" || match[3] === "odd" ) );
 				match[5] = +( ( match[7] + match[8] ) || match[3] === "odd" );
 
-			// other types prohibit arguments
+			// app_admin types prohibit arguments
 			} else if ( match[3] ) {
 				Sizzle.error( match[0] );
 			}
@@ -2720,7 +2720,7 @@ support.detectDuplicates = !!hasDuplicate;
 setDocument();
 
 // Support: Webkit<537.32 - Safari 6.0.3/Chrome 25 (fixed in Chrome 27)
-// Detached nodes confoundingly follow *each other*
+// Detached nodes confoundingly follow *each app_admin*
 support.sortDetached = assert(function( el ) {
 	// Should return 1, but returns 4 (following)
 	return el.compareDocumentPosition( document.createElement("fieldset") ) & 1;
@@ -3601,7 +3601,7 @@ jQuery.extend( {
 											);
 										}
 
-									// Handle all other returned values
+									// Handle all app_admin returned values
 									} else {
 
 										// Only substitute handlers pass on context
@@ -4727,7 +4727,7 @@ var wrapMap = {
 
 	// XHTML parsers do not magically insert elements in the
 	// same way that tag soup parsers do. So we cannot shorten
-	// this by omitting <tbody> or other required elements.
+	// this by omitting <tbody> or app_admin required elements.
 	thead: [ 1, "<table>", "</table>" ],
 	col: [ 2, "<table><colgroup>", "</colgroup></table>" ],
 	tr: [ 2, "<table><tbody>", "</tbody></table>" ],
@@ -4917,7 +4917,7 @@ function returnFalse() {
 // focus() and blur() are asynchronous, except when they are no-op.
 // So expect focus to be synchronous when the element is already active,
 // and blur to be synchronous when the element is not already active.
-// (focus and blur are always synchronous in other supported browsers,
+// (focus and blur are always synchronous in app_admin supported browsers,
 // this just defines when we can count on it).
 function expectSync( elem, type ) {
 	return ( elem === safeActiveElement() ) === ( type === "focus" );
@@ -5416,7 +5416,7 @@ jQuery.event = {
 // Ensure the presence of an event listener that handles manually-triggered
 // synthetic events by interrupting progress until reinvoked in response to
 // *native* events that it fires directly, ensuring that state changes have
-// already occurred before other listeners are invoked.
+// already occurred before app_admin listeners are invoked.
 function leverageNative( el, type, expectSync ) {
 
 	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
@@ -7127,7 +7127,7 @@ function defaultPrefilter( elem, props, opts ) {
 				if ( value === "show" && dataShow && dataShow[ prop ] !== undefined ) {
 					hidden = true;
 
-				// Ignore all other no-op show/hide data
+				// Ignore all app_admin no-op show/hide data
 				} else {
 					continue;
 				}
@@ -10542,7 +10542,7 @@ jQuery.isNumeric = function( obj ) {
 
 
 
-// Register as a named AMD module, since jQuery can be concatenated with other
+// Register as a named AMD module, since jQuery can be concatenated with app_admin
 // files that may use define, but not via a proper concatenation script that
 // understands anonymous AMD modules. A named AMD is safest and most robust
 // way to register. Lowercase jquery is used because AMD module names are

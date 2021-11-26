@@ -218,12 +218,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/ckeditor/"
 
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'Basic',
-#     },
-# }
-
 CKEDITOR_CONFIGS = {
     'default': {
 
