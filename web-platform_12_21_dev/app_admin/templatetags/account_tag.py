@@ -9,8 +9,8 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def account_tag(context, path):
     access = False
+    request = context['request']
     try:
-        request = context['request']
         user = UserModel.objects.get(user_one_to_one_field=request.user)
         if user:
             action = ActionModel.objects.get(name_slug_field=path)
@@ -20,7 +20,7 @@ def account_tag(context, path):
                     path_many_to_many_field=action
                 )
     except Exception as error:
-        DjangoClass.LoggingClass.logging_errors()
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     if access:
         return True
     else:
