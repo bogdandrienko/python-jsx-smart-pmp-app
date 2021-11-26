@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_DIR = Path(BASE_DIR, 'static')
-# STATIC_ROOT = Path(BASE_DIR, 'staticroot/')
+STATIC_ROOT = Path(BASE_DIR, 'staticroot/')
 STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media')
@@ -171,14 +171,19 @@ password: EMAIL_HOST_PASSWORD
 use_tls: EMAIL_USE_TLS
 use_ssl: EMAIL_USE_SSL
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # CKEDITOR CONFIGURATION # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/ckeditor/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 CKEDITOR_CONFIGS = {
     'default': {
 
         # 'skin': 'kama',
-        'skin': 'moono',
-        # 'skin': 'moono-lisa',
+        # 'skin': 'moono',
+        'skin': 'moono-lisa',
         # 'skin': 'moonocolor',
 
         'toolbar_Basic': [
