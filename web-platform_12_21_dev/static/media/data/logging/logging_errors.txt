@@ -232,3 +232,5 @@ Bogdan, 192.168.1.155, /salary/, POST, 2021-11-25 16:02:03.687530, '3.Доходы в н
 Bogdan, 127.0.0.1, /, GET, 2021-11-26 18:17:23.910797, ActionModel matching query does not exist.
 
 , 127.0.0.1, /, GET, 2021-11-26 18:21:47.283748, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /, GET, 2021-11-26 18:40:12.858112, 'AnonymousUser' object is not iterable
