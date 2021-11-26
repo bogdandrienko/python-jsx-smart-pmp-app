@@ -6,6 +6,12 @@
 .env_name
 .node_modules
 
+# Cache
+.__pycache__
+*__pycache__
+**__pycache__
+__pycache__/
+
 env/
 venv/
 lin_env/

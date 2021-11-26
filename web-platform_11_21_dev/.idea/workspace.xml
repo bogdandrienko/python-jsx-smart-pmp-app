@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c705a3c2-b23b-4b36-a147-0ee4c67fcbee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_django/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_django/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_km/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_km/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" afterDir="false" />
     </list>
@@ -20,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -57,7 +54,6 @@
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\rational" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\templates\templates" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\static\media\data\account" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\static\media\data\logging" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_11_21_dev\static\media\data" />
@@ -149,12 +145,7 @@
       <workItem from="1637745860434" duration="5261000" />
       <workItem from="1637751381305" duration="15729000" />
       <workItem from="1637773660090" duration="21992000" />
-      <workItem from="1637840090489" duration="62000" />
-      <workItem from="1637840385327" duration="7670000" />
-      <workItem from="1637851043584" duration="5713000" />
-      <workItem from="1637857466185" duration="2313000" />
-      <workItem from="1637861071218" duration="90000" />
-      <workItem from="1637861585332" duration="131000" />
+      <workItem from="1637858179110" duration="942000" />
     </task>
     <servers />
   </component>
