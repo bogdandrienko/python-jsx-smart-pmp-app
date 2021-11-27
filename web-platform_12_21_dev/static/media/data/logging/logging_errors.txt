@@ -238,3 +238,1929 @@ Bogdan, 127.0.0.1, /, GET, 2021-11-26 18:17:23.910797, ActionModel matching quer
 , 127.0.0.1, /, GET, 2021-11-26 18:54:01.241149, 'AnonymousUser' object is not iterable
 
 , 127.0.0.1, /, GET, 2021-11-26 18:54:01.242150, 'AnonymousUser' object is not iterable
+
+, 192.168.1.121, /, GET, 2021-11-26 19:45:36.739579, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-26 19:48:03.331886, ActionModel matching query does not exist.
+
+Bogdan, 192.168.1.121, /, GET, 2021-11-26 19:48:57.307185, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-26 19:56:03.328876, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-26 20:05:42.607186, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-26 20:05:45.737028, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-26 20:05:47.132284, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-26 20:05:49.606485, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-26 20:05:50.372671, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-11-27 18:58:52.775740, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /, GET, 2021-11-27 18:59:03.425444, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-11-27 18:59:04.609550, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /, GET, 2021-11-27 18:59:06.252007, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-27 19:09:19.828841, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-27 20:26:25.401668, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 21:47:37.223143, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 21:47:37.237156, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:38.451779, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:38.466792, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:39.597796, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:39.612809, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:40.190381, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:40.205394, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:40.682343, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:40.698357, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:47:41.046692, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:47:41.061706, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:47:41.607189, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:47:41.621202, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:47:42.324168, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:47:42.340183, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:43.329581, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:43.346597, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:43.924614, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:43.938626, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:44.555690, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:44.569703, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:47:44.966596, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:47:44.981606, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:47:45.404030, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:47:45.418043, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:47:45.889461, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:47:45.903473, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:01.420409, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:01.434421, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:48:01.962395, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:48:01.973405, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:02.561985, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:02.569992, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:48:03.027904, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:48:03.042918, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:48:03.534878, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:48:03.550892, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:03.995823, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:04.010836, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:20.268594, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:20.284609, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:22.245963, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:22.260976, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:23.534121, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:23.548134, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.115637, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.132652, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.502981, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.517994, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.619084, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.635098, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.806250, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.821263, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:48:28.086304, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:48:28.101317, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:28.711212, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:28.726226, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:48:29.340771, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:48:29.355784, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:48:29.900773, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:48:29.915787, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:30.394727, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:30.410742, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:31.291582, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:31.306595, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:17.702474, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:17.716486, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:49:18.111837, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:49:18.124848, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:19.042168, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:19.056180, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:49:19.567140, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:49:19.581152, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:49:20.076124, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:49:20.090136, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:49:20.678220, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:49:20.691232, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:49:37.092538, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:49:37.106550, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:42.553232, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:42.569246, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:49:47.520712, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:49:47.534725, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:49:48.389721, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:49:48.402765, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:49.212087, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:49.226099, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:49:49.819183, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:49:49.840202, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:07.321072, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:07.335085, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:07.899930, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:07.913942, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:08.439408, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:08.453421, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:14.360660, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:14.375673, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:31.717246, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:31.733260, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:50:32.305334, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:50:32.319346, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:50:33.207161, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:50:33.222174, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:33.771701, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:33.787222, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:26.246292, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:26.256301, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:34.038194, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:34.053208, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:53:34.438298, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:53:34.453311, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:53:35.060850, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:53:35.076864, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:53:35.633357, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:53:35.648371, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:53:36.121324, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:53:36.137338, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:36.569226, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:36.585240, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:31.149355, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:31.164368, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:33.566823, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:33.581836, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:34.282965, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:34.298979, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:34.791416, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:34.806430, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:54:36.050533, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:54:36.066547, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:36.716630, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:36.731643, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:54:37.461290, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:54:37.477304, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:38.037307, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:38.052321, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:54:38.674380, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:54:38.688914, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:42.625281, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:42.641296, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:54:43.059185, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:54:43.075199, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:46.449262, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:46.461273, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:54:47.131210, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:54:47.142219, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:47.942434, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:47.957447, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:48.421364, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:48.436377, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:02.427652, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:02.441664, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:03.556169, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:03.571197, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:04.047161, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:04.179278, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:04.953298, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:04.968312, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:06.460182, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:06.474195, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:11.806429, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:11.820442, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:12.367927, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:12.380939, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:13.076939, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:13.089951, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:13.634433, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:13.648446, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:14.171910, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:14.185922, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:14.658342, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:14.671353, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:28.720652, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:28.734664, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:29.692523, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:29.706041, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:30.535803, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:30.548814, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:31.028239, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:31.041251, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:31.467170, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:31.480181, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:32.025171, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:32.039183, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:33.094134, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:33.108146, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:23.434465, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:23.450479, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:24.598523, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:24.613536, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:25.134999, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:25.149011, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:25.782587, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:25.797600, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:26.477708, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:26.492722, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:27.325490, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:27.340503, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:27.831939, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:27.847953, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:28.546374, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:28.561388, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:29.303045, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:29.318058, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:29.874057, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:29.890072, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:56:30.436062, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:56:30.451076, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:31.043146, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:31.058682, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:32.971379, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:32.985391, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:33.548409, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:33.563423, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:34.272841, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:34.288869, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:35.132656, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:35.147669, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:39.647246, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:39.662259, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:40.300826, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:40.315344, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:40.947411, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:40.961928, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:41.586005, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:41.601019, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:42.006378, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:42.022393, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:56:42.681310, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:56:42.697324, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:09.380214, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:09.396229, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:57:09.995286, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:57:10.010314, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:57:10.590873, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:57:10.606888, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:57:11.106003, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:57:11.121016, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:11.860672, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:11.876687, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:57:12.436690, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:57:12.451704, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:13.145375, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:13.161390, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:57:13.513715, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:57:13.528728, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:57:13.951144, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:57:13.967158, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:57:14.329488, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:57:14.344502, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:58:15.554764, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:58:15.569777, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:16.956530, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:16.971049, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:17.927926, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:17.941939, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:18.461400, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:18.474411, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:58:19.222580, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:58:19.236593, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:50.649383, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:50.664396, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:52.127705, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:52.140717, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:52.942438, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:52.955449, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:58:53.523954, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:58:53.537966, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:01:37.542711, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:01:37.558725, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:01:40.525712, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:01:40.541726, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:01:41.145271, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:01:41.159284, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:01:41.773829, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:01:41.793351, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:01:42.304827, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:01:42.317345, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:01:42.854328, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:01:42.863336, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:02:36.215344, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:02:36.231358, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:02:38.310056, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:02:38.325575, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:02:39.129288, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:02:39.145302, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:03:46.559937, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:03:46.574950, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:03:49.648704, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:03:49.664719, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:03:50.680154, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:03:50.694166, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:03:51.483371, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:03:51.498384, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:04:06.115027, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:04:06.130040, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:04:12.985549, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:04:13.000563, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:04:14.467864, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:04:14.482877, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:04:29.537428, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:04:29.552441, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:34.209850, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:34.223863, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:35.083129, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:35.097142, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:35.763760, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:35.776772, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:36.856260, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:36.870273, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:37.846699, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:37.860749, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:39.454825, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:39.467837, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:55.003775, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:55.018804, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:05:56.542264, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:05:56.557278, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:57.315951, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:57.329963, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:57.824401, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:57.839415, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:58.889852, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:58.905866, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:39.196888, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:39.212902, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:41.601581, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:41.617096, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:45.639866, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:45.654879, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:02.360070, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:02.375074, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:03.931507, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:03.946520, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:05.329346, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:05.344359, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:07.730495, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:07.745508, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:08.507183, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:08.522197, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:10.310962, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:10.325975, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:11.604919, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:11.619932, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:54.557920, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:54.572933, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:56.871988, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:56.887001, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:59.327197, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:59.343211, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:08:00.472865, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:08:00.487878, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:13.776130, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:13.791143, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:14.745001, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:14.758013, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:16.302383, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:16.315394, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:18.065288, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:18.079301, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:12:19.849404, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:12:19.862416, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:01.519174, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:01.535189, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:15:03.476957, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:15:03.491970, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:04.920743, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:04.936757, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:55.323181, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:55.339196, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:57.154846, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:57.169860, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:01.158249, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:01.176265, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:03.091480, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:03.105492, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:21.361866, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:21.376879, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:21.983418, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:21.999431, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:31.846517, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:31.861530, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:39.809438, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:39.824451, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:21.472854, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:21.488869, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:17:24.501045, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:17:24.516058, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:17:46.720288, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:17:46.735301, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:48.613502, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:48.628515, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:50.662328, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:50.676340, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:10.742816, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:10.770840, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:35.022732, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:35.037765, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:56.535694, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:56.548706, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:19:22.095052, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:19:22.110066, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:19:30.113008, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:19:30.128022, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:37.051490, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:37.067506, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:49.847620, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:49.866637, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:57.759998, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:57.775012, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:27.401728, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:27.415740, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:52.210420, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:52.223431, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:23:58.000226, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:23:58.014238, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:59.774339, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:59.788352, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:01.267320, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:01.282333, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:19.595927, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:19.609462, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:24:21.275795, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:24:21.289807, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:22.407822, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:22.421834, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:25.953244, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:25.967257, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:24:27.526145, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:24:27.539157, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:28.687219, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:28.701232, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:25:20.725127, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:25:20.739139, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:27:08.099619, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:27:08.111629, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:17.312525, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:17.327555, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:31.371679, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:31.386692, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:32.314515, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:32.329528, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:37.809222, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:37.824236, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:46.378328, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:46.392340, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:52.107747, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:52.122761, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:52.634214, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:52.649227, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:53.637104, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:53.652117, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:53.913348, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:53.927361, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.426804, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.441817, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.666016, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.681030, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.929249, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.944263, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.195486, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.210499, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.490747, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.504760, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.946151, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.961165, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:56.164345, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:56.179358, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:29:48.047057, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:29:48.063071, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:29:48.662603, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:29:48.678617, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:00.705383, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:00.720397, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:31.051314, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:31.066327, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:31.942609, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:31.956621, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:51.606184, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:51.621198, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:07.155351, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:07.170365, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:49.184986, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:49.199999, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:50.440442, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:50.456456, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:57.610801, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:57.625815, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:58.438040, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:58.454054, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:59.873313, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:59.887338, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:09.293043, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:09.308057, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:27.393787, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:27.407799, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:40.752890, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:40.766903, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:34:48.271798, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:34:48.288813, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:37.225695, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:37.240709, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:38.767062, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:38.782075, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:39.255496, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:39.271510, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:39.559765, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:39.574779, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:58.688063, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:58.702076, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.449070, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.464084, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.759345, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.774359, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.991551, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.006564, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.200737, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.215750, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.415928, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.430941, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.651136, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.665149, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.866327, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.880339, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:01.431829, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:01.446842, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:01.802173, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:01.817186, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:02.055398, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:02.070411, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:02.263582, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:02.277595, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:14.267057, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:14.281070, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:14.794525, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:14.809539, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.160850, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.175863, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.404066, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.419079, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.599239, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.614252, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.822437, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.837450, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.043633, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.056645, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.278842, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.290852, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.522058, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.530064, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:38.095933, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:38.111948, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:04.769012, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:04.781022, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:30.467055, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:30.481068, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:37.722369, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:37.736382, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:40:45.093899, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:40:45.107912, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:40:51.563093, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:40:51.577106, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:43:42.270796, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:43:42.286809, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:47:42.281189, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:47:42.294201, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:47:49.663590, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:47:49.677602, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:48:24.689728, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:48:24.705742, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:05.009312, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:05.024325, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:06.594293, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:06.608306, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:07.450053, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:07.465066, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:08.593066, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:08.608080, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:50:31.394127, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:50:31.409140, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:43.187892, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:43.212436, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:45.077630, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:45.090641, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:46.542448, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:46.556461, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:52:39.558795, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:52:39.567802, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:52:45.997384, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:52:46.013398, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:11:45.221387, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:11:45.236401, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:11:46.975001, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:11:46.991016, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:11:49.182072, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:11:49.198087, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:11:50.782531, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:11:50.796543, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:01.768215, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:01.783229, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:08.014953, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:08.030968, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:08.966828, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:08.981842, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:10.502734, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:10.518748, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:10.535764, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:10.550777, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:11.200353, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:11.216367, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:15.609329, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:15.624342, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:15.640356, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:15.655370, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:45.721600, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:45.736614, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:45.752629, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:45.767641, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:46.856190, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:46.872204, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:47.588373, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:47.604387, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:49.080077, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:49.095090, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:49.851761, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:49.866775, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:51.321065, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:51.336077, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:51.812026, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:51.827029, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:01.729746, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:01.744759, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:01.762775, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:01.779790, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:02.418375, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:02.433388, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:02.450403, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:02.465416, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:13:03.223101, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:13:03.239115, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:04.867907, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:04.882921, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:04.899936, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:04.914949, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:07.723537, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:07.738550, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:08.998172, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:09.014186, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:09.031202, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:09.045214, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:12.363002, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:12.385021, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:12.401035, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:12.416049, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:16:46.324981, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:16:46.339995, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:16:46.357010, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:16:46.372023, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:50.347447, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:50.362460, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:50.379475, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:50.394488, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:16:52.866709, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:16:52.881721, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:53.518810, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:53.533824, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:53.550840, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:53.566853, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:54.127856, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:54.142869, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:54.159884, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:54.175899, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:55.653219, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:55.668233, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:55.684247, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:55.698259, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:59.396449, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:59.410461, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:59.426475, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:59.441489, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:17:00.944868, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:17:00.960883, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:01.427338, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:01.442351, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:01.459367, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:01.474380, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:03.156212, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:03.171226, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:04.315748, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:04.330762, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:04.347777, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:04.362790, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:19:03.226269, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:19:03.240282, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:19:03.256296, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:19:03.269308, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:22:32.554532, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:22:32.570546, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:22:32.587562, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:22:32.601574, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:36.570990, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:36.586004, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:36.605020, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:36.620034, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:36.637048, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:36.653063, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:40.838310, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:40.852322, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:40.868337, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:40.883350, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:40.901366, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:40.915378, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:45.134953, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:45.148965, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:45.163979, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:45.180994, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:45.196007, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:45.210019, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:04.598012, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:04.612024, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:04.628039, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:04.642051, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:04.660067, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:04.674079, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:23:28.472354, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:23:28.489369, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:23:28.505383, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:23:28.519396, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:32.062520, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:32.077533, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:24:03.495979, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:24:03.515997, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:24:08.699501, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:24:08.714515, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:24:09.518734, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:24:09.532746, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:24:09.549761, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:24:09.565776, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:24:11.391930, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:24:11.403941, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:24:11.417953, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:24:11.426961, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:15.501416, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:15.517430, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:17.764435, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:17.779448, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:17.796463, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:17.811476, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:26:21.381158, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:26:21.396171, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:26:21.412185, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:26:21.428199, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:25.847755, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:25.862769, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:25.878783, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:25.893796, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:28.930995, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:28.946008, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:31.035388, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:31.050401, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:31.066415, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:31.081447, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:41.938247, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:41.954261, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:41.970275, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:41.985289, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:57.010425, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:57.025438, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:57.042453, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:57.057467, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:05.569373, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:05.584387, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:05.603403, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:05.618417, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:06.962609, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:06.981626, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:07.000643, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:07.016657, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:07.499085, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:07.514098, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:07.532114, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:07.546126, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:10.315102, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:10.330115, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:10.347130, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:10.363145, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:11.402431, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:11.417445, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:11.433459, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:11.449473, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:13.132490, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:13.147503, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:13.164518, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:13.180532, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:50.597123, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:50.612136, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:50.629152, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:50.643164, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:51.229684, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:51.245698, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:51.262713, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:51.276726, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:52.741024, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:52.756038, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:52.772052, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:52.785063, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:53.447174, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:53.457183, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:53.468193, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:53.477201, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:10.956392, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:10.969404, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:10.985418, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:11.000432, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:12.029344, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:12.042355, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:12.065376, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:12.078387, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:23.566458, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:23.580470, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:23.596484, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:23.610497, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:25.317516, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:25.331528, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:25.347543, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:25.360554, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:54.111579, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:54.125592, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:54.143608, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:54.156619, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:55.057418, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:55.071430, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:55.086444, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:55.099455, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:03.434705, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:03.449719, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:03.465733, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:03.478745, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:04.312497, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:04.325509, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:04.340522, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:04.353534, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:11.290033, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:11.303045, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:14.840688, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:14.853700, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:14.869218, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:14.881229, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:21.145623, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:21.158634, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:21.176650, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:21.189662, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:22.133499, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:22.145509, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:23.767948, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:23.781961, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:23.796974, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:23.809986, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:25.238252, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:25.252265, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:26.248148, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:26.263162, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:26.278175, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:26.291186, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:46.887804, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:46.902818, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:46.919833, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:46.934846, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:48.913601, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:48.927614, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:31:58.841560, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:31:58.858576, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:32:01.907657, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:32:01.922670, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:32:01.939685, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:32:01.954699, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:07.399736, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:07.412748, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:07.427761, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:07.440773, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:09.279461, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:09.293473, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:09.312490, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:09.326503, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:33:10.415877, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:33:10.429889, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:11.046436, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:11.060449, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:11.076463, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:11.090475, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:12.542301, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:12.556313, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:12.571327, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:12.584338, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:40.526705, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:40.540718, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:40.555731, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:40.568742, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:43.787662, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:43.801674, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:43.817688, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:43.833703, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:45.096832, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:45.111845, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:46.300730, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:46.314742, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:46.330757, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:46.343768, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:50.271323, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:50.285335, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:52.248089, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:52.262101, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:52.278115, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:52.291127, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:32.518292, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:32.532305, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:32.547318, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:32.561331, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:34:34.091229, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:34:34.104240, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:37.632427, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:37.647440, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:37.662453, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:37.676465, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:39.144271, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:39.159285, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:39.176300, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:39.189311, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:39.715284, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:39.730297, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:39.746311, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:39.760324, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:04.494148, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:04.507159, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:04.522173, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:04.535184, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:10.677746, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:10.692759, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:10.705770, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:10.716780, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:13.389542, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:13.402553, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:13.418568, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:13.432580, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.904146, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.918159, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.935174, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.951189, IdeasLikeModel matching query does not exist.

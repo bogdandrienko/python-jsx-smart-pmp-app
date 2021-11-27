@@ -22,7 +22,8 @@ from .service import DjangoClass, PaginationClass, SalaryClass, Xhtml2pdfClass, 
 from .models import LoggingModel, GroupModel, RationalModel, CategoryRationalModel, LikeRationalModel, \
     CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, DocumentModel, \
-    MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, IdeasLikeModel, IdeasCommentModel
+    MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, IdeasLikeModel, IdeasCommentModel, \
+    IdeaModel, UserModel
 from .forms import ExamplesModelForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, \
     ArticleForm, SmsForm, GeoForm, BankIdeasForm
 from .utils import ExcelClass, SQLClass, EncryptingClass
@@ -1206,7 +1207,7 @@ def component(request, module_slug):
     return render(request, 'app_admin/list_component.html', context)
 
 
-def ideas_create(request):  # create idea
+def idea_create(request):  # create idea
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)
     if page:
@@ -1214,36 +1215,42 @@ def ideas_create(request):  # create idea
 
     # try:
     if True:
-        result_form = False
+        response = 0
+        category = IdeaModel.get_all_category()
         if request.method == 'POST':
-            IdeasModel.objects.create(
-                user=User.objects.get(username=request.user.username),
-                name=DjangoClass.RequestClass.get_value(request, "name"),
-                category=IdeasCategoryModel.objects.get(
-                    id=DjangoClass.RequestClass.get_value(request, "category")),
-                short_description=DjangoClass.RequestClass.get_value(
-                    request, "short_description"),
-                long_description=DjangoClass.RequestClass.get_value(
-                    request, "long_description"),
-                image=DjangoClass.RequestClass.get_file(request, "image"),
-                document=DjangoClass.RequestClass.get_file(request, "document")
+            author_foreign_key_field = UserModel.objects.get(user_one_to_one_field=request.user)
+            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
+            category_slug_field = DjangoClass.RequestClass.get_value(request, "category_slug_field")
+            short_description_char_field = DjangoClass.RequestClass.get_value(request, "short_description_char_field")
+            full_description_text_field = DjangoClass.RequestClass.get_value(request, "full_description_text_field")
+            avatar_image_field = DjangoClass.RequestClass.get_file(request, "avatar_image_field")
+            addiction_file_field = DjangoClass.RequestClass.get_file(request, "addiction_file_field")
+            IdeaModel.objects.create(
+                author_foreign_key_field=author_foreign_key_field,
+                name_char_field=name_char_field,
+                category_slug_field=category_slug_field,
+                short_description_char_field=short_description_char_field,
+                full_description_text_field=full_description_text_field,
+                avatar_image_field=avatar_image_field,
+                addiction_file_field=addiction_file_field,
+                visibility_boolean_field=False,
             )
-            result_form = True
+            response = 1
         context = {
-            'form_1': BankIdeasForm,
-            'result_form': result_form
+            'response': response,
+            'category': category,
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'form_1': False,
-    #         'result_form': False
+    #         'response': -1,
+    #         'category': category,
     #     }
 
-    return render(request, 'ideas/ideas_create.html', context)
+    return render(request, 'idea/idea_create.html', context)
 
 
-def ideas_list(request, category_slug):  # list ideas
+def idea_list(request, category_slug):  # list idea
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)
     if page:
@@ -1251,38 +1258,33 @@ def ideas_list(request, category_slug):  # list ideas
 
     # try:
     if True:
+        idea = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
+        category = IdeaModel.get_all_category()
+        if category_slug.lower() != 'all':
+            idea = idea.filter(category_slug_field=category_slug)
+        num_page = 2
         if request.method == 'POST':
-            ideas = IdeasModel.objects.filter(
-                name__icontains=DjangoClass.RequestClass.get_value(
-                    request, "search_text")
-            ).order_by('-id')
-        else:
-            if category_slug.lower() == 'all':
-                ideas = IdeasModel.objects.filter(status=True).order_by('-id')
-            else:
-                ideas = IdeasModel.objects.filter(
-                    status=True,
-                    category=IdeasCategoryModel.objects.get(
-                        category_slug=category_slug)
-                )
-
+            num_page = 500
+            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
+            if name_char_field:
+                idea = idea.filter(name_char_field__icontains=name_char_field)
         page = PaginationClass.paginate(
-            request=request, objects=ideas, num_page=2)
-        category = IdeasCategoryModel.objects.order_by('id')
+            request=request, objects=idea, num_page=num_page
+        )
         context = {
             'page': page,
-            'category': category
+            'category': category,
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'page': False,
-    #         'category': False
+    #         'category': category,
     #     }
-    return render(request, 'ideas/ideas_list.html', context)
+    return render(request, 'idea/idea_list.html', context)
 
 
-def ideas_rating(request):  # ratings by posts ideas
+def idea_rating(request):  # ratings by posts idea
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)
     if page:
@@ -1328,7 +1330,7 @@ def ideas_rating(request):  # ratings by posts ideas
     #     context = {
     #         'data': False
     #     }
-    return render(request, 'ideas/ideas_ratings.html', context)
+    return render(request, 'idea/ideas_ratings.html', context)
 
 
 def ideas_view(request, ideas_int):  # view idea
@@ -1351,7 +1353,7 @@ def ideas_view(request, ideas_int):  # view idea
     #     context = {
     #         'data': False
     #     }
-    return render(request, 'ideas/ideas_view.html', context)
+    return render(request, 'idea/ideas_view.html', context)
 
 
 def ideas_comment(request, ideas_int):  # comment
@@ -1449,7 +1451,7 @@ def ideas_change(request, ideas_int):  # change idea
     #     context = {
     #         'data': False
     #     }
-    return render(request, 'ideas/ideas_change.html', context)
+    return render(request, 'idea/ideas_change.html', context)
 
 
 def passages_thermometry(request):

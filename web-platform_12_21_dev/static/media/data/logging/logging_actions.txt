@@ -2716,3 +2716,1293 @@ Bogdan, 127.0.0.1, /, GET, 2021-11-26 18:17:23.842737
 , 127.0.0.1, /, GET, 2021-11-26 18:54:01.179094
 
 , 127.0.0.1, /, GET, 2021-11-26 18:54:01.179094
+
+, 192.168.1.121, /, GET, 2021-11-26 19:45:36.677524
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-26 19:48:03.271833
+
+Bogdan, 192.168.1.121, /, GET, 2021-11-26 19:48:57.280161
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-26 19:56:03.264819
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-26 20:05:42.577159
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-26 20:05:45.707002
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-26 20:05:47.105261
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-26 20:05:49.576458
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-26 20:05:50.344647
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-26 20:11:58.259494
+
+, 127.0.0.1, /, GET, 2021-11-27 18:58:52.555545
+
+, 127.0.0.1, /, GET, 2021-11-27 18:59:03.407428
+
+, 127.0.0.1, /home/, GET, 2021-11-27 18:59:04.593536
+
+, 127.0.0.1, /, GET, 2021-11-27 18:59:06.233991
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-27 19:09:16.193617
+
+Bogdan, 127.0.0.1, /module/, GET, 2021-11-27 19:09:19.807823
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-27 19:09:21.333186
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:09:29.486245
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:33:30.167999
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:33:34.636316
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:35:18.800848
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:35:49.531639
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:37:03.504369
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:37:17.922983
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:37:35.305934
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:37:53.818575
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:38:23.636194
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:38:59.233152
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:39:13.479982
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:40:21.459878
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:40:22.763539
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:40:34.748956
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 19:40:44.173171
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, GET, 2021-11-27 20:26:02.928523
+
+Bogdan, 127.0.0.1, /account_update_accounts_1c/, POST, 2021-11-27 20:26:03.895908
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 20:56:30.513771
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 20:58:47.376606
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 20:58:58.716518
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 20:59:11.177235
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 20:59:20.043985
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 20:59:55.699690
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:00:04.323234
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:01:52.825579
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:03:23.864256
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:04:03.594006
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:04:46.902145
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:04:57.948790
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:05:27.494583
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:05:45.790508
+
+Bogdan, 127.0.0.1, /ideas_create/, GET, 2021-11-27 21:05:58.764850
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:08:53.280697
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:09:20.684031
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:10:22.140668
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:10:41.954911
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:11:20.410354
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:12:54.718153
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:13:07.745559
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:15:48.745398
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:16:18.325114
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:17:16.930148
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:17:38.729239
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:18:04.923882
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:19:20.975672
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:19:35.401840
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:23:05.975298
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 21:24:10.021155
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 21:24:28.817004
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-27 21:25:03.027840
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:25:10.423905
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:26:13.304855
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 21:26:33.090505
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 21:26:59.736280
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:27:01.689032
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 21:27:13.265245
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-27 21:27:15.853876
+
+Bogdan, 127.0.0.1, /salary/, GET, 2021-11-27 21:27:19.081261
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-27 21:27:38.395608
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:27:42.679913
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:27:52.871067
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:28:08.623741
+
+Bogdan, 127.0.0.1, /examples_forms/, GET, 2021-11-27 21:28:11.799062
+
+Bogdan, 127.0.0.1, /example/, GET, 2021-11-27 21:28:14.386207
+
+Bogdan, 127.0.0.1, /example/, GET, 2021-11-27 21:28:23.640272
+
+Bogdan, 127.0.0.1, /ideas_list/All/, GET, 2021-11-27 21:28:26.765044
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:28:31.028851
+
+Bogdan, 127.0.0.1, /ideas_list/All/, GET, 2021-11-27 21:29:35.934600
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:32:54.779038
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:32:57.657953
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:33:23.017118
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:33:28.456793
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:33:39.671566
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:42:41.867799
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:44:39.207147
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:45:09.189150
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:45:23.411686
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:45:27.227428
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:46:56.397610
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:00.942172
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:03.436738
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:04.352550
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:47:05.122752
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:47:05.673251
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:47:06.276785
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2021-11-27 21:47:07.030987
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:09.373149
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 21:47:12.480596
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 21:47:37.191115
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:38.420751
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:39.565767
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:40.158353
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:40.649313
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:47:41.015665
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:47:41.572158
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:47:42.292140
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:43.297031
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:47:43.892585
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:47:44.523662
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:47:44.935040
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:47:45.372002
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:47:45.858433
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:01.388380
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:48:01.932864
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:02.534961
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:48:02.996877
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:48:03.499341
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:03.962794
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:20.236566
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:22.214935
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:23.501092
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.084610
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.341838
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.587055
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:24.773220
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2021-11-27 21:48:25.641991
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:48:28.055277
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:28.678183
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:48:29.308743
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:48:29.867744
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:48:30.363700
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:48:31.257504
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:17.630410
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:49:18.075805
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:19.005135
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:49:19.533110
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:49:20.044096
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:49:20.645191
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:49:37.019473
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:42.384082
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:49:47.489178
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:49:48.357637
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:49:49.180531
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:49:49.787155
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:07.291046
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:07.866900
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:08.406379
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:14.313618
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:50:31.688220
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:50:32.272304
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:50:33.174611
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:50:33.740152
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:26.214264
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:53:28.188789
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 21:53:29.173736
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:34.006166
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:53:34.406269
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:53:35.026820
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:53:35.601329
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:53:36.089296
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:53:36.536197
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:31.078292
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:33.536796
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:34.250937
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:34.761390
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:54:36.019505
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:36.684095
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:54:37.430263
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:38.004280
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:54:38.640350
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:42.593253
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:54:43.026156
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:54:46.417234
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:54:47.099181
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:47.914409
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:54:48.390831
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:02.353586
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:03.517135
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:04.013131
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:04.921270
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:06.429156
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:11.770398
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:12.335900
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:13.045871
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:13.603406
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:14.139882
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:14.626314
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:28.650589
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:29.662496
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:55:30.384669
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:55:30.997212
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:55:31.435141
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:55:31.995144
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:55:33.063107
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:23.249301
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:24.566494
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:25.101970
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:25.740550
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:26.445680
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:27.293463
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:27.797909
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:28.512344
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:29.270016
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:29.841523
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:56:30.404034
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:31.009116
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:32.937349
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:33.516381
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:34.238751
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:35.097624
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2021-11-27 21:56:36.906229
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:56:39.614217
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:56:40.267797
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:40.914382
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:56:41.553453
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:56:41.972348
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:56:42.648280
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:09.346185
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:57:09.961256
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:57:10.557844
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:57:11.074976
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:11.825641
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:57:12.403661
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:57:13.113347
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:57:13.481687
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:57:13.918115
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 21:57:14.296459
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:58:15.483701
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:16.922499
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:17.777794
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:18.430372
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:58:19.191553
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:50.575317
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 21:58:52.096678
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 21:58:52.788301
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 21:58:53.492926
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:59:29.749515
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:59:29.751516
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 21:59:29.752518
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:00:11.156139
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:00:11.157140
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:00:15.649654
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:00:59.970335
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:01:37.469646
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:01:40.490680
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:01:41.110735
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:01:41.738798
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:01:42.270786
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:01:42.823301
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:02:36.180313
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:02:38.275025
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:02:39.093256
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:03:46.478865
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:03:49.612673
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:03:50.525016
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:03:51.447339
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:04:06.038959
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:04:12.831413
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:04:14.433834
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:04:29.460359
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:34.176821
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:35.049099
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:35.727729
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:36.824232
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:37.813110
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:39.423273
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:05:54.927580
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:05:56.507234
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:57.163816
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:05:57.791372
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:05:58.854821
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:06:36.546499
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:06:38.438207
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:39.042244
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:06:39.485144
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:06:40.126233
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:06:40.570628
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:06:40.976011
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:41.569042
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:06:42.650682
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:06:43.802208
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:06:44.446808
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:06:44.927234
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:06:45.607838
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:02.330009
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:07:02.837497
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:07:03.403026
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:03.898973
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:07:04.575078
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:05.297318
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:07.700468
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:08.476156
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:07:08.853491
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:07:09.490146
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:07:09.809488
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:10.278428
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:07:10.724328
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:11.573892
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:07:53.292270
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:07:53.890315
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:54.523891
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:07:55.102420
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:07:56.839960
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:07:58.286243
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:07:58.753163
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:07:59.296170
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:07:59.752227
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:08:00.440837
+
+Bogdan, 127.0.0.1, /ideas_view/1/, GET, 2021-11-27 22:12:06.009364
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:13.746103
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:14.715469
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:12:15.281477
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:16.271355
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:12:16.932283
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:12:17.640912
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:12:18.035262
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:12:18.774440
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:12:19.263378
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:12:19.820378
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:12:20.991923
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:01.487146
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:15:02.068662
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:15:02.675221
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:15:03.441926
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:15:04.253646
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:04.889716
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:55.290153
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:15:56.173457
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:15:57.122818
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:15:58.217642
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:16:00.486653
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:01.125220
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:16:02.157236
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:03.059451
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:21.327836
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:21.951389
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:31.814488
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:16:39.776408
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:17:19.311340
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:17:20.310257
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:21.439826
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:17:24.468015
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:17:46.687259
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:17:47.906340
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:48.581473
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:17:49.663432
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:17:50.627297
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:10.709786
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:34.990661
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:18:56.504666
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:19:22.066027
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:19:30.081981
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:37.018461
+
+Bogdan, 127.0.0.1, /ideas_view/1/, GET, 2021-11-27 22:20:45.020902
+
+Bogdan, 127.0.0.1, /ideas_view/1/, GET, 2021-11-27 22:20:45.815133
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:49.815592
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:20:57.727970
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:27.371702
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:52.178392
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:23:57.969199
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:23:58.629784
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:23:59.263346
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:23:59.739307
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:24:00.431428
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:01.236293
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:19.564900
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:24:20.318928
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:24:20.773331
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:24:21.244768
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:24:21.722697
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:22.374793
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2021-11-27 22:24:23.399702
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:25.919214
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:24:26.556779
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:24:27.023700
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:24:27.494117
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:24:27.929519
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:24:28.659194
+
+Bogdan, 127.0.0.1, /ideas_view/1/, GET, 2021-11-27 22:24:56.286721
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:25:20.694099
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:27:08.069592
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:17.281481
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:31.338649
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:32.283487
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:37.778195
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:46.347300
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:52.075719
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:52.603186
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:53.605075
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:53.882321
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.394775
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.634989
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:54.899223
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.163457
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.458719
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:55.915124
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:28:56.131316
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:29:48.015028
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:29:48.630574
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:00.675357
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:31.021287
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:31.910580
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:31:51.573155
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:07.121321
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:49.151957
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:50.406412
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:57.577772
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:58.403505
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:32:59.842285
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:09.259013
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:27.363760
+
+Bogdan, 127.0.0.1, /idea/change/1/, GET, 2021-11-27 22:33:29.678318
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:33:40.723865
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:34:48.239769
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:37.037528
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:38.735034
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:39.222466
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:39.526736
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:58.656035
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.416041
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.728318
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:36:59.958522
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.167707
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.382898
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.616105
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:00.836300
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:01.399800
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:01.769144
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:02.023369
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:02.231554
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:14.233027
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:14.761496
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.127821
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.370036
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.569212
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:15.791409
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.010604
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.248815
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:16.496034
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:37:36.568567
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:37:37.436349
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:37:38.061903
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:04.702954
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:30.279384
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:40:37.690835
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:40:38.316912
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-27 22:40:39.905825
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-27 22:40:42.124154
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:40:45.060870
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:40:46.129818
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:40:49.751897
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:40:50.784335
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:40:51.530540
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:40:52.306768
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:40:52.956877
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:43:40.710412
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:43:42.235764
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:43:43.633017
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:47:42.209125
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:47:49.629560
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:48:24.612660
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:04.930242
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:06.560264
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:07.413020
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:08.559037
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:49:37.180908
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 22:50:31.361097
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:43.158866
+
+Bogdan, 127.0.0.1, /idea_list/db_save_value_2/, GET, 2021-11-27 22:50:43.951092
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:45.044600
+
+Bogdan, 127.0.0.1, /idea_list/db_save_value_3/, GET, 2021-11-27 22:50:45.825305
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:50:46.509419
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 22:52:01.779929
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 22:52:02.012135
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:52:39.485730
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 22:52:45.351799
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 22:52:45.962354
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 22:52:46.576455
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:52:47.220565
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:54:19.529012
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:54:33.702922
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:54:41.285991
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:54:57.430261
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:54:58.359084
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:54:59.238865
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:55:06.872036
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:55:23.601546
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:56:05.307979
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:56:47.357205
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:57:05.614592
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:57:39.234228
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 22:57:49.976630
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 22:59:29.718640
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:00:23.545187
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:00:33.750601
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:00:41.626926
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:07:07.029262
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 23:07:17.706180
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 23:11:08.756421
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:11:42.333369
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:11:44.290056
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:11:45.186356
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:11:46.236318
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:11:46.935443
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:11:48.154047
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:11:49.144490
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:11:49.526405
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:11:50.138960
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:11:50.747500
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:00.394491
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:01.732184
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:02.537964
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:07.977363
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:08.928795
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:12:09.662461
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:10.461698
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:11.163320
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:15.574298
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:12:21.619553
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-11-27 23:12:41.111170
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-27 23:12:42.997184
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:12:45.680564
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:46.822159
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:47.554343
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:49.047048
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:49.818732
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:12:50.433277
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:12:51.287034
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:12:51.777976
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:01.695716
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:02.383343
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:13:03.188071
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:04.833877
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:07.689506
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:13:08.963142
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:13:12.329973
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:13:12.971047
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2021-11-27 23:13:23.295608
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:16:02.730597
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:16:30.882763
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:16:41.556071
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:16:46.288949
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:50.310414
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:16:51.495987
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:16:52.831678
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:53.484781
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:16:54.090823
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:16:54.725397
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:55.619190
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:16:59.362418
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:17:00.240197
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:17:00.908836
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:01.391275
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:03.121181
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:17:04.281719
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:19:03.146198
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:19:05.353005
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:19:09.115356
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:22:32.476463
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:36.416853
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:40.805281
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:22:45.101924
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:04.524947
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:23:28.397287
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:23:29.788954
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:23:31.909358
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:24:03.421913
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:24:08.547323
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:24:09.484703
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:24:10.109257
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:24:11.357871
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:15.466385
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:24:17.730404
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-11-27 23:26:21.349129
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:25.812724
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:28.895963
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:30.999356
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:41.902215
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:26:56.975394
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:05.535343
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:06.927578
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:07.469058
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:10.279070
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:11.367400
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:27:12.370290
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:13.095457
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:50.562092
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:51.196655
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:52.705993
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:27:53.418149
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:10.923363
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:11.996314
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:23.532428
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:25.284487
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:54.078550
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:28:55.023388
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:03.398674
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:04.279468
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:11.257004
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:14.805658
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:21.111593
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:22.102472
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:23.735920
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:25.203222
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:29:26.214119
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:46.851772
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:30:48.878570
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:31:58.761605
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:32:01.873627
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:07.364706
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:09.246431
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:33:09.936908
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:33:10.382341
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:11.011405
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:33:11.746068
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:12.508271
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:33:40.493676
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:43.753632
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:45.064803
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:46.265699
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:50.235291
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:33:52.213058
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:32.484262
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-11-27 23:34:33.222918
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-27 23:34:34.057198
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:37.597395
+
+Bogdan, 127.0.0.1, /idea_list/other/, GET, 2021-11-27 23:34:38.319035
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-11-27 23:34:39.112243
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:34:39.678251
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:34:42.267911
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:04.459117
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:35:05.801875
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:10.634708
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:35:12.067833
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:13.356513
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-11-27 23:35:50.069973
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.869115

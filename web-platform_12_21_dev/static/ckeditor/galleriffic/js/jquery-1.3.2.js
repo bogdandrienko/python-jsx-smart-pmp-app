@@ -2427,7 +2427,7 @@ window.Sizzle = Sizzle;
 })();
 /*
  * A number of helper functions used for managing events.
- * Many of the ideas behind this code originated from
+ * Many of the idea behind this code originated from
  * Dean Edwards' addEvent library.
  */
 jQuery.event = {

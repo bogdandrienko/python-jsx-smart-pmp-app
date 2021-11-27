@@ -41,14 +41,14 @@ urlpatterns = [
     # module
     path('module/', views.module, name='module'),
     path('component/<slug:module_slug>/', views.component, name='component'),
-    # ideas
-    path('ideas_create/', views.ideas_create, name='ideas_create'),
-    path('ideas_list/<slug:category_slug>/', views.ideas_list, name='ideas_list'),
-    path('ideas_ratings/', views.ideas_rating, name='ideas_rating'),
+    # idea
+    path('idea_create/', views.idea_create, name='idea_create'),
+    path('idea_list/<slug:category_slug>/', views.idea_list, name='idea_list'),
+    path('idea_rating/', views.idea_rating, name='idea_rating'),
     path('ideas_view/<int:ideas_int>/', views.ideas_view, name='ideas_view'),
     path('ideas_comment/<int:ideas_int>/', views.ideas_comment, name='ideas_comment'),
-    path('ideas/like/<int:ideas_int>/', views.ideas_like, name='ideas_like'),
-    path('ideas/change/<int:ideas_int>/', views.ideas_change, name='ideas_change'),
+    path('idea/like/<int:ideas_int>/', views.ideas_like, name='ideas_like'),
+    path('idea/change/<int:ideas_int>/', views.ideas_change, name='ideas_change'),
     # passages
     path('passages_thermometry/', views.passages_thermometry, name='passages_thermometry'),
     path('passages_select/', views.passages_select, name='passages_select'),

@@ -2,13 +2,14 @@ from django.contrib import admin
 from django import forms
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
-from .models import ExamplesModel, ApplicationModuleModel, ApplicationComponentModel, CategoryRationalModel, \
-    CommentRationalModel, ActionModel, GroupModel, LikeRationalModel, RationalModel, AccountTemplateModel, EmailModel, \
-    ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, UserModel, \
-    LoggingModel, IdeasModel, IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel
+from .models import ExamplesModel, UserModel, LoggingModel, IdeaModel, IdeaCommentModel, ApplicationModuleModel, \
+    ApplicationComponentModel, CategoryRationalModel, \
+    CommentRationalModel, ActionModel, GroupModel, LikeRationalModel, RationalModel, AccountTemplateModel, \
+    EmailModel, \
+    ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, IdeasModel, \
+    IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel, IdeaRatingModel
 from .forms import ExamplesModelForm
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-
 
 # admin
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
@@ -460,6 +461,168 @@ admin.site.register(Group, GroupModelGroupAdmin)
 #
 #
 #
+
+class IdeaModelAdmin(admin.ModelAdmin):
+    """
+    Idea Model Admin
+    """
+    list_display = (
+        'author_foreign_key_field',
+        'name_char_field',
+        'category_slug_field',
+        'short_description_char_field',
+        'full_description_text_field',
+        'avatar_image_field',
+        'addiction_file_field',
+        'visibility_boolean_field',
+        'created_datetime_field',
+        'register_datetime_field',
+    )
+    list_filter = (
+        'author_foreign_key_field',
+        'name_char_field',
+        'category_slug_field',
+        'short_description_char_field',
+        'full_description_text_field',
+        'avatar_image_field',
+        'addiction_file_field',
+        'visibility_boolean_field',
+        'created_datetime_field',
+        'register_datetime_field',
+    )
+    fieldsets = (
+        ('Автор',
+         {'fields': ('author_foreign_key_field',)}
+         ),
+        ('Имя и категория',
+         {'fields': ('name_char_field', 'category_slug_field',)}
+         ),
+        ('Описание',
+         {'fields': ('short_description_char_field', 'full_description_text_field',)}
+         ),
+        ('Приложения',
+         {'fields': ('avatar_image_field', 'addiction_file_field',)}
+         ),
+        ('Отображение',
+         {'fields': ('visibility_boolean_field',)}
+         ),
+        ('Дата и время',
+         {'fields': ('created_datetime_field', 'register_datetime_field',)}
+         ),
+    )
+    search_fields = [
+        'author_foreign_key_field',
+        'name_char_field',
+        'category_slug_field',
+        'short_description_char_field',
+        'full_description_text_field',
+        'avatar_image_field',
+        'addiction_file_field',
+        'visibility_boolean_field',
+        'created_datetime_field',
+        'register_datetime_field',
+    ]
+
+
+# Регистрация в админ-панели
+admin.site.register(IdeaModel, IdeaModelAdmin)
+
+
+class IdeaCommentModelAdmin(admin.ModelAdmin):
+    """
+    Idea Comment Model Admin
+    """
+    list_display = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'text_field',
+        'datetime_field',
+    )
+    list_filter = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'text_field',
+        'datetime_field',
+    )
+    fieldsets = (
+        ('Автор',
+         {'fields': ('author_foreign_key_field',)}
+         ),
+        ('Идея',
+         {'fields': ('idea_foreign_key_field',)}
+         ),
+        ('Комментарий',
+         {'fields': ('text_field',)}
+         ),
+        ('Дата',
+         {'fields': ('datetime_field',)}
+         ),
+    )
+    search_fields = [
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'text_field',
+        'datetime_field',
+    ]
+
+
+# Регистрация в админ-панели
+admin.site.register(IdeaCommentModel, IdeaCommentModelAdmin)
+
+
+class IdeaRatingModelAdmin(admin.ModelAdmin):
+    """
+    Idea Rating Model Admin
+    """
+    list_display = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'status_boolean_field',
+        'datetime_field',
+    )
+    list_filter = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'status_boolean_field',
+        'datetime_field',
+    )
+    fieldsets = (
+        ('Автор',
+         {'fields': ('author_foreign_key_field',)}
+         ),
+        ('Идея',
+         {'fields': ('idea_foreign_key_field',)}
+         ),
+        ('Статус',
+         {'fields': ('status_boolean_field',)}
+         ),
+        ('Дата',
+         {'fields': ('datetime_field',)}
+         ),
+    )
+    search_fields = [
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'status_boolean_field',
+        'datetime_field',
+    ]
+
+
+# Регистрация в админ-панели
+admin.site.register(IdeaRatingModel, IdeaRatingModelAdmin)
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
 class ApplicationModuleModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
@@ -514,7 +677,7 @@ admin.site.register(ApplicationModuleModel, ApplicationModuleModelAdmin)
 admin.site.register(ApplicationComponentModel, ApplicationComponentModelAdmin)
 
 
-# ideas
+# idea
 class BankIdeasModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
     # Поля, которые нужно отображать в заголовке, на панели администратора
