@@ -2164,3 +2164,317 @@ Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.918159, IdeasLikeMo
 Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.935174, IdeasLikeModel matching query does not exist.
 
 Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-27 23:35:51.951189, IdeasLikeModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-11-28 17:03:36.827095, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-28 17:08:31.702367, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-28 17:12:07.359329, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 17:13:29.400367, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 17:13:29.415381, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-28 18:15:43.693815, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 18:16:22.659953, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 18:16:22.673966, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:45:57.527092, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:10.965317, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:10.979330, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:35.370114, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:35.385128, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:46:56.565214, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:56.624790, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:56.639804, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:59.414292, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:46:59.429305, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:10.676234, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:10.692247, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:47:19.674439, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:19.736494, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:19.750518, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:27.282580, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:27.296594, Field 'id' expected a number but got ''.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:54.563521, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:47:54.577533, IdeasLikeModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:50:15.220363, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:50:18.476927, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:50:21.184863, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:50:23.008543, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:50:23.068587, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:50:24.884005, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:50:26.842765, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:50:26.901816, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:50:28.928176, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:20.685944, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:53:23.049880, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:23.113937, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:53:25.168386, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:25.351548, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:27.302293, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:28.996819, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:31.056169, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:32.605067, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:53:34.275558, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:34.335612, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea/like/1/, POST, 2021-11-28 18:53:35.649824, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:35.710878, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:38.003013, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:53:39.648501, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:02.193588, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:05.053764, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:05.068778, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:06.605169, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:07.935901, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:07.948913, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:09.343220, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:10.912159, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:10.926173, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:12.287926, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:13.914902, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:13.929915, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:15.779825, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:17.258664, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:17.272676, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:19.305526, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:21.377686, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:55:21.392701, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:28.181837, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:28.201855, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:32.211443, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:34.317131, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:36.042267, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:36.062285, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:37.638715, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:39.706244, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:42.435669, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:42.454686, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:44.570610, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:58:46.748949, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:18.767516, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:21.069560, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:21.087576, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:22.461304, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:24.428994, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:25.845846, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:25.863862, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:57.065378, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:58.273452, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 18:59:58.291470, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:00:00.041562, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:00:01.484368, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:00:01.502384, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:01.859596, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:01.877613, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:03.811331, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:06.837564, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:06.859584, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:36.104276, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:36.124294, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:58.472169, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:01:58.493189, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:33.360190, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:33.379207, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:38.619188, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:43.003133, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:44.754506, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:44.773523, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:47.050565, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:48.838153, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:02:48.858172, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:03:15.163166, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:03:15.181182, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:03:17.332093, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:04:30.658055, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:04:37.170188, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:04:38.296188, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:04:39.326113, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:04:39.346131, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:04:40.823800, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:04:48.708914, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:05:35.122328, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:05:36.471544, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:05:39.718934, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:05:42.424852, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:05:42.443868, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:06:44.490465, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:06:44.509482, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:06:48.463619, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:06:52.703693, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:06:52.724712, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:06:55.490725, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:09:45.517825, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:09:56.056035, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 19:09:57.123488, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-28 19:10:01.003495, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 19:10:03.736582, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-28 19:10:05.037299, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-28 19:10:06.318451, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:10:08.902065, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 19:10:13.364593, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 19:10:14.420218, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 19:10:16.161346, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 19:10:20.375663, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/all/, GET, 2021-11-28 19:23:46.835048, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /account_profile/1/, GET, 2021-11-28 19:31:23.344593, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-28 23:24:37.905756, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 23:24:40.757847, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/all/, GET, 2021-11-28 23:30:09.254792, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 23:30:10.730103, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-28 23:30:12.191409, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-11-28 23:30:15.145596, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-11-28 23:30:18.059393, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 23:30:53.167688, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /idea_list/all/, GET, 2021-11-28 23:33:41.671557, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-28 23:33:43.273332, ActionModel matching query does not exist.

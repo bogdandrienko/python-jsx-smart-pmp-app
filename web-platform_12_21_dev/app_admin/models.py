@@ -2507,6 +2507,23 @@ class IdeaModel(models.Model):
         dict_key_val = dict(self.LIST_DB_VIEW_CHOICES)
         return dict_key_val[self.category_slug_field]
 
+    def get_total_comment_value(self):
+        return IdeaCommentModel.objects.filter(idea_foreign_key_field=self.id).count()
+
+    def get_like_count(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=True).count()
+
+    def get_dislike_count(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=False).count()
+
+    def get_total_rating_value(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=True).count() + \
+               IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=False).count()
+
+    def get_total_rating(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=True).count() - \
+               IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=False).count()
+
 
 class IdeaCommentModel(models.Model):
     """
@@ -2699,6 +2716,7 @@ class IdeaRatingModel(models.Model):
     def __str__(self):
         return f'{self.author_foreign_key_field} :: {self.idea_foreign_key_field} :: {self.status_boolean_field} ' \
                f':: {self.datetime_field}'
+
 
 
 #

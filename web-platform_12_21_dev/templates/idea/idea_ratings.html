@@ -1,7 +1,5 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% load crispy_forms_filters %}
 {% load idea_list_tag %}
 
 
@@ -32,9 +30,9 @@
         <p class="text-secondary">Эта страница содержит список рейтингов из банка идей.</p>
     </div>
 
-    <a class="btn btn-lg btn-outline-primary" href="{% url 'ideas_list' 'all' %}">Все идеи</a>
+    <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_list' 'all' %}">Все идеи</a>
     <div class="btn-group">
-        <form action="{% url 'ideas_rating' %}" method="POST">
+        <form action="{% url 'idea_rating' %}" method="POST">
             {% csrf_token %}
             <input class="form-control " type="hidden" name="sorted" value="rating">
             {% if sorted %}
@@ -43,7 +41,7 @@
                 <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">По рейтингу</button>
             {% endif %}
         </form>
-        <form action="{% url 'ideas_rating' %}" method="POST">
+        <form action="{% url 'idea_rating' %}" method="POST">
             {% csrf_token %}
             <input class="form-control " type="hidden" name="sorted" value="count">
             {% if sorted %}
@@ -71,33 +69,31 @@
                             <h4 class="fw-normal card-header bg-light text-dark text-decoration-none">
                                 <strong># {{ forloop.counter }}</strong>
                                 <p class="text-link-dark">
-                                    {% if LOOP.user %}
-                                        {{ LOOP.user.profile.last_name }} {{ LOOP.user.profile.first_name }} {{ LOOP.user.profile.patronymic }}
+                                    {% if LOOP.author %}
+                                        {{ LOOP.author.last_name_char_field }} {{ LOOP.author.first_name_char_field }} {{ LOOP.author.patronymic_char_field }}
                                     {% else %}
                                         Профиль не заполнен
                                     {% endif %}
                                 </p>
                             </h4>
-                            <p><small class="my-2 text-link-dark">{{ LOOP.user.profile.position }}</small></p>
-                            <p><small class="my-2 text-link-dark">{{ LOOP.user.profile.subdivision }}</small></p>
+                            <p><small class="my-2 text-link-dark">{{ LOOP.author.position_char_field }}</small></p>
+                            <p><small class="my-2 text-link-dark">{{ LOOP.author.subdivision_char_field }}</small></p>
                         </div>
 
                         <div class="card-body m-0 p-1">
 
-                            <a href="{% url 'account_profile' LOOP.user.username %}">
-                                {% if LOOP.user.profile.image_avatar %}
-                                    <img src="{{ LOOP.user.profile.image_avatar.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ LOOP.rational_name }}">
+                            <a href="{% url 'account_profile' LOOP.author.id %}">
+                                {% if LOOP.author.image_field %}
+                                    <img src="{{ LOOP.author.image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ LOOP.author.id }}">
                                 {% else %}
-                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.rational_name }}</text></svg>
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ LOOP.author.id }}</text></svg>
                                 {% endif %}
                             </a>
 
                             <div class="my-1 d-flex justify-content-between align-items-center">
                                 <small class="text-muted">{{ LOOP.short_description }}</small>
                             </div>
-
-                            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'account_profile' LOOP.user.username %}">Подробнее</a>
-
+                            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'account_profile' LOOP.author.id %}">Подробнее</a>
                             <div class="btn-group">
                                 <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">Идеи: {{ LOOP.count }}</small>
                                 {% if LOOP.rating > 0 %}

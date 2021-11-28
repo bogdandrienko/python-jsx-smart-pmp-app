@@ -203,7 +203,7 @@
 									<h6 class="dropdown-header">Аккаунты</h6>
 									{% if request.user.is_authenticated %}
 									<a class="dropdown-item"
-										href="{% url 'account_profile' request.user.username %}">Личный профиль [{{ request.user.username }} ]</a>
+										href="{% url 'account_profile' request.user.user_one_to_one_field.id %}">Личный профиль [{{ request.user.username }} ]</a>
 									{% else %}
 									    <a class="dropdown-item" href="#">Личный профиль [ Вы ещё не вошли в аккаунт ]</a>
 									{% endif %}

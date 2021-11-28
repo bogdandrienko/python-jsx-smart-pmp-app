@@ -129,7 +129,7 @@
                             {% endif %}
                         </small>
                         {% if idea.author_foreign_key_field == request.user.user_one_to_one_field %}
-                            <a class="w-25 btn btn-lg" target="_blank" href="{% url 'ideas_change' idea.id %}">
+                            <a class="w-25 btn btn-lg" target="_blank" href="{% url 'idea_change' idea.id %}">
                                 <i class="material-icons cart-icon text-warning">published_with_changes</i>
                             </a>
                         {% else %}
@@ -142,7 +142,7 @@
 
                     <div class="card-body m-0 p-0">
 
-                        <a href="{% url 'ideas_view' idea.id %}">
+                        <a href="{% url 'idea_view' idea.id %}">
                             {% if idea.avatar_image_field %}
                                 <img src="{{ idea.avatar_image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ idea.id }}">
                             {% else %}
@@ -183,7 +183,7 @@
 
                         <div class="my-1 w-100 btn btn-sm btn-outline-secondary">Комментарии: {{ idea.get_total_comment_value }}</div>
 
-                        <a class="my-1 w-100 btn btn-lg btn-outline-primary" href="{% url 'ideas_view' idea.id %}">Подробнее</a>
+                        <a class="my-1 w-100 btn btn-lg btn-outline-primary" href="{% url 'idea_view' idea.id %}">Подробнее</a>
                     </div>
                 </div>
             </div>

@@ -23,7 +23,7 @@ from .models import LoggingModel, GroupModel, RationalModel, CategoryRationalMod
     CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, DocumentModel, \
     MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, IdeasLikeModel, IdeasCommentModel, \
-    IdeaModel, UserModel
+    IdeaModel, UserModel, IdeaCommentModel, IdeaRatingModel
 from .forms import ExamplesModelForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, \
     ArticleForm, SmsForm, GeoForm, BankIdeasForm
 from .utils import ExcelClass, SQLClass, EncryptingClass
@@ -728,7 +728,7 @@ def account_change_profile(request):
     return render(request, 'account/account_change_profile.html', context)
 
 
-def account_profile(request, username):
+def account_profile(request, user_model_int):
     """
     Страница профиля пользователя
     """
@@ -738,11 +738,11 @@ def account_profile(request, username):
         return redirect(page)
 
     try:
-        if username:
-            data = User.objects.get(username=username)
+        if user_model_int:
+            data = UserModel.objects.get(id=user_model_int)
             response = 2
         else:
-            data = User.objects.get(username=request.user.username)
+            data = UserModel.objects.get(user_one_to_one_field=request.user)
             response = 1
         context = {
             'response': response,
@@ -1292,28 +1292,25 @@ def idea_rating(request):  # ratings by posts idea
 
     # try:
     if True:
-        idea = IdeasModel.objects.order_by('-id')
+        idea = IdeaModel.objects.order_by('-id')
         authors = []
         for query in idea:
-            authors.append(query.user)
-        users_dict = {}
+            authors.append(query.author_foreign_key_field)
+        authors_dict = {}
         for author in authors:
-            users_dict[author] = authors.count(author)
+            authors_dict[author] = authors.count(author)
         user_counts = []
-        for blog_s in users_dict:
-            rationals = IdeasModel.objects.filter(user=blog_s)
+        for author in authors_dict:
+            ideas = IdeaModel.objects.filter(author_foreign_key_field=author)
             total_rating = 0
-            for rating in rationals:
-                total_like = IdeasLikeModel.objects.filter(
-                    like_idea=rating, like_status=True).count()
-                total_dislike = IdeasLikeModel.objects.filter(
-                    like_idea=rating, like_status=False).count()
-                total_rating += total_like - total_dislike
+            for idea in ideas:
+                total_rating += idea.get_total_rating()
             user_counts.append(
-                {'user': blog_s, 'count': users_dict[blog_s], 'rating': total_rating})
+                {'author': author, 'count': ideas.count(), 'rating': total_rating}
+            )
         sorted_by_rating = True
         if request.method == 'POST':
-            if request.POST['sorted'] == 'rating':
+            if request.POST['sorted'] == 'idea':
                 sorted_by_rating = True
             if request.POST['sorted'] == 'count':
                 sorted_by_rating = False
@@ -1330,10 +1327,10 @@ def idea_rating(request):  # ratings by posts idea
     #     context = {
     #         'data': False
     #     }
-    return render(request, 'idea/ideas_ratings.html', context)
+    return render(request, 'idea/idea_ratings.html', context)
 
 
-def ideas_view(request, ideas_int):  # view idea
+def idea_view(request, idea_int):  # view idea
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)
     if page:
@@ -1341,22 +1338,25 @@ def ideas_view(request, ideas_int):  # view idea
 
     # try:
     if True:
-        data = IdeasModel.objects.get(id=ideas_int)
-        comments = IdeasCommentModel.objects.filter(
-            comment_idea=data).order_by('-id')
+        response = 1
+        idea = IdeaModel.objects.get(id=idea_int)
+        comments = IdeaCommentModel.objects.filter(idea_foreign_key_field=idea).order_by('-id')
         context = {
-            'data': data,
-            'comments': comments
+            'response': response,
+            'idea': idea,
+            'comments': comments,
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'data': False
+    #         'response': -1,
+    #         'idea': None,
+    #         'comments': None,
     #     }
-    return render(request, 'idea/ideas_view.html', context)
+    return render(request, 'idea/idea_view.html', context)
 
 
-def ideas_comment(request, ideas_int):  # comment
+def idea_comment(request, idea_int):  # comment
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)
     if page:
@@ -1365,21 +1365,22 @@ def ideas_comment(request, ideas_int):  # comment
     # try:
     if True:
         if request.method == 'POST':
-            IdeasCommentModel.objects.create(comment_author=User.objects.get(id=request.user.id),
-                                             comment_idea=IdeasModel.objects.get(
-                                                 id=ideas_int),
-                                             comment_text=request.POST['comment_text'])
+            IdeaCommentModel.objects.create(
+                author_foreign_key_field=UserModel.objects.get(user_one_to_one_field=request.user),
+                idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
+                text_field=request.POST['comment_text']
+            )
         else:
             pass
-        # except Exception as error:
-        #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        #     context = {
-        #         'data': False
-        #     }
-        return redirect(reverse('ideas_view', args=(ideas_int,)))
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return redirect(reverse('idea_view', args=(idea_int,)))
 
 
-def ideas_like(request, ideas_int):  # likes
+def idea_like(request, idea_int):  # likes
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)
     if page:
@@ -1387,33 +1388,64 @@ def ideas_like(request, ideas_int):  # likes
 
     # try:
     if True:
-        idea = IdeasModel.objects.get(id=ideas_int)
-        user = User.objects.get(id=request.user.id)
+        idea = IdeaModel.objects.get(id=idea_int)
+        author = UserModel.objects.get(user_one_to_one_field=request.user)
         if request.POST['status'] == 'like':
-            IdeasLikeModel.objects.get_or_create(
-                like_author=user, like_idea=idea, like_status=True)
             try:
-                IdeasLikeModel.objects.get(
-                    like_author=user, like_idea=idea, like_status=False).delete()
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=True
+                ).delete()
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                IdeaRatingModel.objects.create(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=True
+                )
+            try:
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=False
+                ).delete()
+            except Exception as error:
+                pass
         else:
-            IdeasLikeModel.objects.get_or_create(
-                like_author=user, like_idea=idea, like_status=False)
             try:
-                IdeasLikeModel.objects.get(
-                    like_author=user, like_idea=idea, like_status=True).delete()
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=False
+                ).delete()
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        # except Exception as error:
-        #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        #     context = {
-        #         'data': False
-        #     }
-        return redirect(reverse('ideas_view', args=(idea.id,)))
+                IdeaRatingModel.objects.create(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=False
+                )
+                IdeaCommentModel.objects.create(
+                    author_foreign_key_field=UserModel.objects.get(user_one_to_one_field=request.user),
+                    idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
+                    text_field=request.POST['comment_text']
+                )
+            try:
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=True
+                ).delete()
+            except Exception as error:
+                pass
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return redirect(reverse('idea_view', args=(idea.id,)))
 
 
-def ideas_change(request, ideas_int):  # change idea
+def idea_change(request, idea_int):  # change idea
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request)
     if page:
@@ -1421,7 +1453,7 @@ def ideas_change(request, ideas_int):  # change idea
 
     # try:
     if True:
-        data = IdeasModel.objects.get(id=ideas_int)
+        data = IdeasModel.objects.get(id=idea_int)
         result_form = False
         if request.method == 'POST':
 
@@ -1451,7 +1483,7 @@ def ideas_change(request, ideas_int):  # change idea
     #     context = {
     #         'data': False
     #     }
-    return render(request, 'idea/ideas_change.html', context)
+    return render(request, 'idea/idea_change.html', context)
 
 
 def passages_thermometry(request):
