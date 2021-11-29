@@ -1,0 +1,101 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load account_tag %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Банк идей
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="album bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-6 fst-italic">Банк идей</h1>
+            <small class="text-secondary">Доступные действия:</small>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <a href="{% url 'idea_create' %}">
+                        <img src="{% static "media/module/progress/idea/add.jpg" %}" class="card-img-top" alt="id">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text">Подать идею в банк идей.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'idea_create' %}">Подать</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                            </div>
+                            <small class="text-muted">форма подачи</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <a href="{% url 'idea_list' 'All' %}">
+                        <img src="{% static "media/module/progress/idea/list.jpg" %}" class="card-img-top" alt="id">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text">Просмотреть идеи в банке идей.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'idea_list' 'All' %}">Просмотреть</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                            </div>
+                            <small class="text-muted">список идей</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <a href="{% url 'idea_rating' %}">
+                        <img src="{% static "media/module/progress/idea/rating.jpg" %}" class="card-img-top" alt="id">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text">Рейтинги в банке идей.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'idea_rating' %}">Рейтинги</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                            </div>
+                            <small class="text-muted">список лидеров</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

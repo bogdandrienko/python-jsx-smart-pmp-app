@@ -41,7 +41,13 @@ urlpatterns = [
     # module
     path('module/', views.module, name='module'),
     path('component/<slug:module_slug>/', views.component, name='component'),
+
+    # развитие
+    path('progress/', views.progress, name='progress'),
+
+
     # idea
+    path('idea/', views.idea, name='idea'),
     path('idea_create/', views.idea_create, name='idea_create'),
     path('idea_list/<slug:category_slug>/', views.idea_list, name='idea_list'),
     path('idea_rating/', views.idea_rating, name='idea_rating'),

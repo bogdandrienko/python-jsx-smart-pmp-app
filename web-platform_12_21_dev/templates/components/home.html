@@ -1,5 +1,6 @@
 {% extends "components/base.html" %}
 {% load static %}
+{% load account_tag %}
 
 <!-- Head -->
 {% block head %}
@@ -19,7 +20,145 @@
 
 <!-- Main -->
 {% block main %}
-    {% include 'app_admin/home_module.html' %}
+
+
+
+<div class="container-fluid">
+    <div class="container d-flex text-center">
+        <div class="container">
+
+            <div class="shadow-sm btn btn-lg">
+                <a class="" href="{% url 'module' %}">
+                    <div class="">
+                        <h5 class=""><strong class="text-dark text-decoration-underline">Модули</strong></h5>
+                    </div>
+                </a>
+                {% account_tag 'home_module' as access %}
+                {% if access %}
+                    Вы видите объект 'home_module' {{ access }}, т.к. вы есть в одной группе доступа с доступом к этому объекту
+                {% else %}
+                    Вы не видите объект 'home_module' {{ access }}, т.к. вас нет ни в одной группе доступа с доступом к этому объекту
+                {% endif %}
+{#                <a class="" href="{% url 'module' %}">#}
+{#                    <div class="m-0 p-1">#}
+{#                        <a class="btn btn-lg btn-outline-secondary" href="{% url 'module' %}">#}
+{#                            <div class="container-fluid p-2">#}
+{#                                <img src="{% static 'icons/024-globe.png' %}" class="img-fluid p-2 img-thumbnail rounded-circle shadow-sm card-img-top" alt="Вернуться">#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                <small>Перейти к модулям</small>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </a>#}
+            </div>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="text-center">
+                        <h1 class="display-6 fst-italic">Модули</h1>
+                        <small class="text-secondary">Доступные модули:</small>
+                    </div>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <a href="#">
+                                    <img src="{% static "media/module/profile/profile.png" %}" class="card-img-top" alt="id">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text">Профиль.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-outline-secondary" href="#">Войти</a>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                                        </div>
+                                        <small class="text-muted">личный профиль</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <a href="#">
+                                    <img src="{% static "media/module/news/news.jpg" %}" class="card-img-top" alt="id">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text">Новости.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-outline-secondary" href="#">Войти</a>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                                        </div>
+                                        <small class="text-muted">новости и чаты</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <a href="{% url 'progress' %}">
+                                    <img src="{% static "media/module/progress/progress.jpg" %}" class="card-img-top" alt="id">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text">Развитие.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'progress' %}">Войти</a>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                                        </div>
+                                        <small class="text-muted">улучшение компании</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <a href="#">
+                                    <img src="{% static "media/module/buh/buh.jpg" %}" class="card-img-top" alt="id">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text">Бухгалтерия.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-outline-secondary" href="#">Войти</a>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                                        </div>
+                                        <small class="text-muted">экономические расчёты</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <a href="#">
+                                    <img src="{% static "media/module/hr/hr.jpg" %}" class="card-img-top" alt="id">
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text">Служба Управления Персоналом.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-outline-secondary" href="#">Войти</a>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button>
+                                        </div>
+                                        <small class="text-muted">действия с персоналом</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
 {% endblock main %}
 
 <!-- Footer -->

@@ -1,7 +1,6 @@
 from django import template
-from django.contrib.auth.models import User
 from ..models import UserModel, GroupModel, ActionModel
-from ..service import DjangoClass
+from utils.service import DjangoClass
 
 register = template.Library()
 

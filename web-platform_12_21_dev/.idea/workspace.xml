@@ -2,27 +2,239 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c13e82b1-9ba9-49c0-82b6-2f20783b622a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/Скрипты для сортировки фото и данных из эксель на СКУД.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/skud.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/analiz_1.8 complex.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/analiz_1.8 complex.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Equal_Photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Equal_Photo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/buh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/hr.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/idea.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/list.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/news.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/progress.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/project.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/rating.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/icons/rational.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/buh/buh.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/hr/hr.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/news/news.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/profile/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/progress/idea/add.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/progress/idea/idea.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/progress/idea/list.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/progress/idea/rating.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/progress/progress.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/progress/project/project.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/progress/rational/rational.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/app_admin/progress.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/app_admin/progress_idea.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Core.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Gui.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Network.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Qml.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Widgets.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/msvcp140_1.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/assetimporters/assimp.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/assetimporters/uip.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/designer/qquickwidget.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/generic/qtuiotouchplugin.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/geometryloaders/defaultgeometryloader.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/iconengines/qsvgicon.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qgif.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qicns.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qico.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qjpeg.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qsvg.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qtga.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qtiff.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qwbmp.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qwebp.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qdirect2d.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qminimal.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qoffscreen.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qwindows.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_debugger.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_inspector.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_local.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_messages.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_native.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_nativedebugger.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_preview.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_profiler.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_quickprofiler.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_server.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_tcp.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/renderers/openglrenderer.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/renderers/rhirenderer.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/renderplugins/scene2d.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneexport.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneimport.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlite.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlodbc.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlpsql.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/styles/qwindowsvistastyle.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/pyside6.abi3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/computer_analyse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/icon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/ip 10.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_activate_env.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_create_env.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_pip_freeze.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_pip_install.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/analiz_1.8 complex/Параметры.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/skud/haarcascade_frontalface_alt.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/skud/skud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/.idea/PREFABS.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/analiz_1.8 complex.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/Qt6Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/Qt6Gui.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/Qt6Network.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/Qt6Qml.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/Qt6Widgets.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/msvcp140_1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/assetimporters/assimp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/assetimporters/uip.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/designer/qquickwidget.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/generic/qtuiotouchplugin.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/geometryloaders/defaultgeometryloader.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/iconengines/qsvgicon.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qgif.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qicns.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qico.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qjpeg.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qsvg.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qtga.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qtiff.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qwbmp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/imageformats/qwebp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/platforms/qdirect2d.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/platforms/qminimal.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/platforms/qoffscreen.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/platforms/qwindows.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_debugger.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_inspector.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_local.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_messages.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_native.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_nativedebugger.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_preview.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_profiler.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_quickprofiler.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_server.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_tcp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/renderers/openglrenderer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/renderers/rhirenderer.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/renderplugins/scene2d.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneexport.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneimport.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlite.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlodbc.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlpsql.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/plugins/styles/qwindowsvistastyle.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/PySide6/pyside6.abi3.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20280ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3488cde996bcac7bd461c2e51fdf30b3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20380ISAPIStreamingchannels101picturesnapShotImageType=JPEG,b220edfb84a5b9d49c3c177b813bae71" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20480ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d428cf19cda08309aef6c6de855f85ad" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20580ISAPIStreamingchannels101picturesnapShotImageType=JPEG,f6538b0caea36cedb4a38f4cab643841" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20680ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d097684182f092351ecd70387a1b03e4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20780ISAPIStreamingchannels101picturesnapShotImageType=JPEG,13f3892f2251b9596a4c6d13f3652af4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20880ISAPIStreamingchannels101picturesnapShotImageType=JPEG,333563d7e91b1edbb1310b33bf5cc8be" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.20980ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3c03b9da06583fba42310aa48c0e21c9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.21080ISAPIStreamingchannels101picturesnapShotImageType=JPEG,4564328635c417346e00325da57e57bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/__file__/192.168.15.21180ISAPIStreamingchannels101picturesnapShotImageType=JPEG,1713dcf27426d12119d0dcdbb5b43322" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/icon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/m_16_9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/win_create_env.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/win_env.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/win_pip_freeze.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/win_pip_install.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/ip 10.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/Параметры.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Джанго в докере/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Джанго в докере/docker-compose_old.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Джанго в докере/nginx-conf.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/Скрипты для сортировки фото и данных из эксель на СКУД.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Add_ID_to_JPG.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Change_P_to_eng.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Change_P_to_rus.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Equal_Photo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Equal_Photo_from_1C.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Export_to_Import.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Remove_ID_to_JPG.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/add_ID_to_Foto.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/change_ID_to_IIN.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/equal_external.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/equal_system.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/find_face.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/jpg_to_JPG.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/rename_foto_in_folders.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/skud.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templatetags/account_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/templatetags/idea_list_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templatetags/idea_list_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/app_admin/home_module.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +244,23 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="21SPFb0V3HNy0Js2w7HwxX0Sicx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -45,15 +272,51 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/app_admin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\templates\app_admin" />
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\static\media\idea" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\static\media\module\progress" />
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\static\media\module" />
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\utils\skud" />
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\utils" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.computer_analyse">
+    <configuration name="computer_analyse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="web-platform_12_21_dev" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/analiz_1.8 complex" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\utils\analiz_1.8 complex\computer_analyse.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="web-platform_12_21_dev" type="Python.DjangoServer" factoryName="Django server">
       <module name="web-platform_12_21_dev" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,6 +340,11 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.computer_analyse" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -98,6 +366,10 @@
       <workItem from="1638160419149" duration="635000" />
       <workItem from="1638172456468" duration="1956000" />
       <workItem from="1638182899468" duration="210000" />
+      <workItem from="1638189181986" duration="81000" />
+      <workItem from="1638189643228" duration="1215000" />
+      <workItem from="1638190890130" duration="1685000" />
+      <workItem from="1638192732240" duration="11165000" />
     </task>
     <servers />
   </component>
@@ -118,5 +390,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$main.coverage" NAME="main Coverage Results" MODIFIED="1638192954057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/analiz_1.8 complex" />
   </component>
 </project>
