@@ -2810,3 +2810,9 @@ Bogdan, 127.0.0.1, /home/, GET, 2021-11-29 22:40:15.087675, ActionModel matching
 Bogdan, 127.0.0.1, /home/, GET, 2021-11-29 22:40:56.014888, ActionModel matching query does not exist.
 
 Bogdan, 127.0.0.1, /home/, GET, 2021-11-29 22:42:46.466040, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-11-29 23:31:37.042713, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-11-29 23:31:42.240884, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-11-29 23:32:11.402365, ActionModel matching query does not exist.

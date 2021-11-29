@@ -1,6 +1,6 @@
 from django import template
 from ..models import IdeaRatingModel, UserModel
-from utils.service import DjangoClass
+from app_admin.utils.service import DjangoClass
 
 register = template.Library()
 

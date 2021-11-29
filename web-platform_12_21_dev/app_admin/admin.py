@@ -8,7 +8,6 @@ from .models import ExamplesModel, UserModel, LoggingModel, IdeaModel, IdeaComme
     EmailModel, \
     ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, IdeasModel, \
     IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel, IdeaRatingModel
-from .forms import ExamplesModelForm
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # admin
