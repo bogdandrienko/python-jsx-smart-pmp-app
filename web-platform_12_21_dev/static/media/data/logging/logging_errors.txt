@@ -2478,3 +2478,7 @@ Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-11-28 23:30:53.167688, Cannot assi
 Bogdan, 127.0.0.1, /idea_list/all/, GET, 2021-11-28 23:33:41.671557, Cannot assign "1": "IdeaRatingModel.idea_foreign_key_field" must be a "IdeaModel" instance.
 
 Bogdan, 127.0.0.1, /home/, GET, 2021-11-28 23:33:43.273332, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-11-28 23:46:30.619998, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /, GET, 2021-11-28 23:46:58.871215, ActionModel matching query does not exist.

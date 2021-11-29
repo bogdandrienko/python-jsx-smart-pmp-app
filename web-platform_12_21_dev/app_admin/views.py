@@ -26,7 +26,8 @@ from .models import LoggingModel, GroupModel, RationalModel, CategoryRationalMod
     IdeaModel, UserModel, IdeaCommentModel, IdeaRatingModel
 from .forms import ExamplesModelForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, CityForm, \
     ArticleForm, SmsForm, GeoForm, BankIdeasForm
-from .utils import ExcelClass, SQLClass, EncryptingClass
+# from .utils import ExcelClass, SQLClass, EncryptingClass
+from utils import ExcelClass, SQLClass, EncryptingClass
 
 
 def examples_forms(request):

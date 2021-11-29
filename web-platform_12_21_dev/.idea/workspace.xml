@@ -2,28 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c13e82b1-9ba9-49c0-82b6-2f20783b622a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/idea/files/export_users_ZxE9lK8.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/.idea/Скрипты для сортировки фото и данных из эксель на СКУД.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/skud.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/analiz_1.8 complex.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/analiz_1.8 complex.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Computer Vision 16/analiz_1.8 complex/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Equal_Photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/Скрипты для сортировки фото и данных из эксель на СКУД/Equal_Photo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0002_ideamodel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0003_ideacommentmodel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0004_idearatingmodel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0005_auto_20211127_2152.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0006_alter_ideamodel_category_slug_field.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0007_alter_ideamodel_category_slug_field.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0008_alter_ideamodel_category_slug_field.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templatetags/idea_list_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templatetags/idea_list_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/idea/idea_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/idea/idea_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/idea/ideas_change.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/idea/idea_change.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/idea/ideas_ratings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/idea/idea_ratings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/idea/ideas_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/idea/idea_view.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,10 +47,11 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
     <configuration name="web-platform_12_21_dev" type="Python.DjangoServer" factoryName="Django server">
@@ -92,11 +92,29 @@
       <workItem from="1638097418267" duration="133000" />
       <workItem from="1638097749628" duration="526000" />
       <workItem from="1638101743184" duration="6271000" />
+      <workItem from="1638121347830" duration="25000" />
+      <workItem from="1638121699349" duration="1427000" />
+      <workItem from="1638151326541" duration="1193000" />
+      <workItem from="1638160419149" duration="635000" />
+      <workItem from="1638172456468" duration="1956000" />
+      <workItem from="1638182899468" duration="210000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

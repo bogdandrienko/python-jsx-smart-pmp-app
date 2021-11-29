@@ -29,9 +29,8 @@ correct_folder = create_dir('Корректировка')
 error_folder = create_dir('Ошибка')
 
 
-def click_button(export_file='', col_entry='754'):
+def click_button(export_file='', col_entry='954'):
     """
-
     :param export_file:
     :param col_entry:
     """
@@ -130,7 +129,7 @@ class Application(tkinter.Frame):
         self.submit_button = tkinter.Button(self.root, text="Запустить", font="100", command=self.insert_data)
         self.submit_button.grid(row=0, column=0, sticky=tkinter.W)
 
-        self.exit_button = tkinter.Button(self.root, text="Выход", font="100", command=self.root.quit_button)
+        self.exit_button = tkinter.Button(self.root, text="Выход", font="100", command=self.quit())
         self.exit_button.grid(row=0, column=1, sticky=tkinter.W)
 
         # Define the different GUI widgets
@@ -139,12 +138,14 @@ class Application(tkinter.Frame):
 
         self.export_entry = tkinter.Entry(self.root, font="100")
         self.export_entry.grid(row=1, column=1, sticky=tkinter.W)
+        self.export_entry.insert(0, 'export.xlsx')
 
-        self.col_label = tkinter.Label(self.root, text="Введите цифры столбцов 'Таб''Имя''Фамилия' -(754)", font="100")
+        self.col_label = tkinter.Label(self.root, text="Введите цифры столбцов 'Таб''Имя''Фамилия' -(954)", font="100")
         self.col_label.grid(row=2, column=0, sticky=tkinter.W)
 
         self.col_entry = tkinter.Entry(self.root, font="100")
         self.col_entry.grid(row=2, column=1, sticky=tkinter.W)
+        self.col_entry.insert(0, '954')
 
     def insert_data(self):
         """
