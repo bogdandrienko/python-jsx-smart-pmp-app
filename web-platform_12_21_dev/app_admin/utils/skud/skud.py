@@ -14,7 +14,7 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 from skimage import io
 
-from utils.utils import ExcelClass, DirFolderPathClass
+from app_admin.utils.utils import ExcelClass, DirFolderPathClass
 
 
 # UI
@@ -621,60 +621,68 @@ class MainWidgetClass(QtWidgets.QWidget):
                 # Тут уже лежат в папке файлы с нужными именами
 
             def find_face():
-                input_path = 'input'
-                output_path = 'output'
-                width_add = '0'
-                height_add = '0'
-                windows = 'да'
-                width = '640'
-                height = '480'
-
-                _input_path = DirFolderPathClass.create_folder_in_this_dir(input_path)
-                _output_path = DirFolderPathClass.create_folder_in_this_dir(output_path)
-                play = False
-                sleep(0.25)
-                play = True
+                _input_path = DirFolderPathClass.create_folder_in_this_dir('input')
+                _output_path = DirFolderPathClass.create_folder_in_this_dir('output')
                 pattern = '*.jpg'
-                pattern_2 = '*.png'
 
                 def crop_img(input_file='input.jpg', output_file='output.jpg'):
-                    try:
-                        os.remove('local.jpg')
-                    except:
-                        pass
                     src_img = io.imread(input_file)
-                    # cv2 не читает кириллицу
-                    # src_img = cv2.imread(input_file, 1)
-                    output = None
+                    image_height = 9248
+                    image_width = 6944
+                    width_addiction = 1000
+                    height_addiction = 1500
+                    quality = 50
+                    correct_field = 1000
+
+                    def get_percent(value, side):
+                        return side * value // 100
+
+                    crop_top = (image_height - 8000) // 2
+                    # crop_top = get_percent(25, image_height)
+                    crop_down = (image_height - 8000) // 2
+                    # crop_down = get_percent(25, image_height)
+                    crop_left = (image_width - 6000) // 2
+                    # crop_left = get_percent(25, image_width)
+                    crop_right = (image_width - 6000) // 2
+                    # crop_right = get_percent(25, image_width)
+                    # print(f'top={crop_top} | down={crop_down} | left={crop_left} | right={crop_right}')
+
+                    src_img = src_img[crop_top:image_height-crop_down, crop_left:image_width-crop_right]
                     gray_img = cv2.cvtColor(src_img, cv2.COLOR_BGR2GRAY)
                     haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
-                    faces = haar_face_cascade.detectMultiScale(gray_img)
-                    for (x, y, w, h) in faces:
-                        # output = cv2.rectangle(src_img, (x-w, y-h), (x + w*2, y + h*2), (0, 255, 0), 2)
-                        # output = cv2.rectangle(src_img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                        print(f'x={x} | y={y} | h={h} | w={w}')
-                        output = src_img[int(y - int(height_add)):int(y + h + int(height_add)),
-                                 int(x - int(width_add)):int(x + w + int(width_add))]
+                    detect_faces = haar_face_cascade.detectMultiScale(gray_img)
+                    # print(f'detect_faces: {detect_faces}')
 
-                        # output = src_img[:, :]
+                    correct_faces = []
+                    for (x, y, w, h) in detect_faces:
+                        if x > correct_field and y > correct_field and w > correct_field and h > correct_field:
+                            correct_faces.append([x, y, w, h])
+                    # print(f'correct_faces: {correct_faces}')
+
+                    output = None
+                    for (x, y, w, h) in correct_faces:
+                        height_1 = int(y - int(height_addiction))
+                        height_2 = int(y + h + int(height_addiction))
+                        width_1 = int(x - int(width_addiction))
+                        width_2 = int(x + w + int(width_addiction))
+                        output = src_img[height_1:height_2, width_1:width_2]
+
                     try:
                         os.remove(output_file)
-                    except:
+                    except Exception as error:
                         pass
-                    io.imsave(output_file, output)
-                    os.remove(input_file)
-                    # cv2 не записывает кириллицу
-                    # cv2.imwrite(output_file, output)
-                    print(output_file)
+                    io.imsave(output_file, output, quality=quality)
+                    # os.remove(input_file)
+                    print(output_file.split("\\")[-1])
 
                 def loop():
                     for path, subdirs, files in os.walk(_input_path):
                         for name in files:
-                            if fnmatch(name, pattern) and play or fnmatch(name, pattern_2) and play:
+                            if fnmatch(name, pattern):
                                 try:
                                     crop_img(f'{_input_path}\\{name}', f'{_output_path}\\{name}')
-                                except:
-                                    print(f'{_input_path}\\{name} error to {_output_path}\\{name}')
+                                except Exception as error:
+                                    print(f'{_input_path}\\{name} error to {_output_path}\\{name}: {error}')
                             else:
                                 pass
 
@@ -788,7 +796,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 thread_result = threading.Thread(target=whiles)
                 thread_result.start()
 
-            threading.Thread(target=find_personal_number_in_1c, args=()).start()
+            threading.Thread(target=find_face, args=()).start()
             print('start')
         except Exception as error:
             print(error)

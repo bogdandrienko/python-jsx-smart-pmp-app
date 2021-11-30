@@ -2,90 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c13e82b1-9ba9-49c0-82b6-2f20783b622a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templatetags/access_tag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/input/Алёна+Нагибина_5431172758.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/input/Аманжол+Ташмухамедов_111101.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/input/Виктор+Пышный_4405.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/output/Алёна+Нагибина_5431172758.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/output/Аманжол+Ташмухамедов_111101.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/output/Виктор+Пышный_4405.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Django_Lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/templatetags/account_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templatetags/account_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templatetags/idea_list_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templatetags/idea_list_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/Qt6Core.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Gui.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/Qt6Gui.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Network.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/Qt6Network.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Qml.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/Qt6Qml.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/Qt6Widgets.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/Qt6Widgets.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/msvcp140_1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/msvcp140_1.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/assetimporters/assimp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/assetimporters/assimp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/assetimporters/uip.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/assetimporters/uip.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/designer/qquickwidget.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/designer/qquickwidget.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/generic/qtuiotouchplugin.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/generic/qtuiotouchplugin.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/geometryloaders/defaultgeometryloader.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/geometryloaders/defaultgeometryloader.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/iconengines/qsvgicon.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/iconengines/qsvgicon.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qgif.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qgif.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qicns.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qicns.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qico.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qico.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qjpeg.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qjpeg.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qsvg.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qsvg.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qtga.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qtga.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qtiff.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qtiff.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qwbmp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qwbmp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qwebp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/imageformats/qwebp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qdirect2d.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/platforms/qdirect2d.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qminimal.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/platforms/qminimal.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qoffscreen.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/platforms/qoffscreen.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/platforms/qwindows.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/platforms/qwindows.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_debugger.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_debugger.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_inspector.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_inspector.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_local.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_local.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_messages.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_messages.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_native.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_native.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_nativedebugger.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_nativedebugger.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_preview.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_preview.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_profiler.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_profiler.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_quickprofiler.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_quickprofiler.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_server.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_server.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_tcp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/qmltooling/qmldbg_tcp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/renderers/openglrenderer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/renderers/openglrenderer.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/renderers/rhirenderer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/renderers/rhirenderer.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/renderplugins/scene2d.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/renderplugins/scene2d.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneexport.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneexport.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneimport.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/sceneparsers/gltfsceneimport.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlite.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlodbc.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlodbc.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlpsql.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/sqldrivers/qsqlpsql.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/plugins/styles/qwindowsvistastyle.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/plugins/styles/qwindowsvistastyle.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/PySide6/pyside6.abi3.dll" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/PySide6/pyside6.abi3.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/computer_analyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/computer_analyse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/icon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/icon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/ip 10.docx" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/ip 10.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_10.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_7.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_8.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/m_16_9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/m_16_9.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_activate_env.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/win_activate_env.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_create_env.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/win_create_env.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_pip_freeze.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/win_pip_freeze.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/win_pip_install.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/win_pip_install.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/analiz_1.8 complex/Параметры.docx" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/Параметры.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/skud/haarcascade_frontalface_alt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/skud/haarcascade_frontalface_alt.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/skud/skud.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/skud/skud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/utils/analiz_1.8 complex/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/utils/skud/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/utils/skud/skud.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/skud/skud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/win_0_run_192.168.1.68.8000.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/app_admin/progress.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/app_admin/progress.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,13 +71,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/app_admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app_admin/utils/skud" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\app_admin\utils\skud" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\templates\app_admin" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\static\media\idea" />
     </key>
@@ -147,7 +90,7 @@
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.computer_analyse">
+  <component name="RunManager" selected="Python.skud">
     <configuration name="computer_analyse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="web-platform_12_21_dev" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -162,6 +105,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\utils\analiz_1.8 complex\computer_analyse.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="skud" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="web-platform_12_21_dev" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app_admin/utils/skud" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app_admin/utils/skud/skud.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -195,6 +160,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.skud" />
         <item itemvalue="Python.computer_analyse" />
       </list>
     </recent_temporary>
@@ -224,6 +190,7 @@
       <workItem from="1638190890130" duration="1685000" />
       <workItem from="1638192732240" duration="11165000" />
       <workItem from="1638206570141" duration="560000" />
+      <workItem from="1638207255954" duration="12263000" />
     </task>
     <servers />
   </component>
@@ -247,5 +214,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_platform_12_21_dev$main.coverage" NAME="main Coverage Results" MODIFIED="1638192954057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/analiz_1.8 complex" />
+    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1638249709744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils/skud" />
   </component>
 </project>

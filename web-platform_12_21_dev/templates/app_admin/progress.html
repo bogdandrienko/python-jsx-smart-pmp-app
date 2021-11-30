@@ -1,6 +1,6 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load account_tag %}
+{% load access_tag %}
 
 <!-- Head -->
 {% block head %}
@@ -31,8 +31,14 @@
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+
             <div class="col">
                 <div class="card shadow-sm">
+                    {% access_tag 'idea' as access %}
+                    {% if access %}
+                        Вы видите объект 'idea' {{ access }}, т.к. вы есть в одной группе доступа с доступом к этому объекту
                     <a href="{% url 'idea' %}">
                         <img src="{% static "media/module/progress/idea/idea.jpg" %}" class="card-img-top" alt="id">
                     </a>
@@ -46,6 +52,9 @@
                             <small class="text-muted">общие идеи для роста</small>
                         </div>
                     </div>
+                    {% else %}
+                        Вы не видите объект 'idea' {{ access }}, т.к. вас нет ни в одной группе доступа с доступом к этому объекту
+                    {% endif %}
                 </div>
             </div>
 

@@ -1,5 +1,5 @@
 from django import template
-from ..models import UserModel, GroupModel, ActionModel
+from app_admin.models import UserModel, GroupModel, ActionModel
 from app_admin.utils.service import DjangoClass
 
 register = template.Library()
