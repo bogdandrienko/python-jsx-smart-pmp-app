@@ -5658,3 +5658,341 @@ Bogdan, 192.168.1.68, /idea/, GET, 2021-11-30 12:56:06.060313
 Bogdan, 192.168.1.68, /idea_create/, GET, 2021-11-30 12:56:07.341896
 
 Bogdan, 192.168.1.68, /home/, GET, 2021-11-30 12:56:08.693292
+
+, 127.0.0.1, /, GET, 2021-11-30 19:01:00.234302
+
+, 127.0.0.1, /, GET, 2021-12-01 10:13:21.466227
+
+, 127.0.0.1, /progress/, GET, 2021-12-01 10:13:29.957676
+
+, 127.0.0.1, /account_login/, GET, 2021-12-01 10:13:29.982699
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-01 10:14:17.342905
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:14:21.683176
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:50:07.482379
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:50:08.378174
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:51:55.210730
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:51:55.400900
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:52:01.959582
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:52:11.800155
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:52:21.664780
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 11:00:54.838958
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:01:04.385258
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:06:06.737735
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:09:29.148017
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:09:36.438481
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:10:34.929480
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:11:16.019288
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:12:01.517656
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:12:08.861631
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:13:09.498740
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:13:31.114900
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:14:03.332555
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:14:46.111873
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:15:00.464985
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:15:24.313173
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:15:56.580330
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:16:06.830796
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:16:22.349766
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:16:29.236872
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:17:05.008013
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:17:12.797772
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:17:17.488451
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:17:18.448330
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:17:31.785350
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:19:13.575096
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:20:15.427017
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:21:20.338662
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:21:38.808723
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:21:40.304048
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:21:48.599507
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:22:10.598773
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:22:34.211049
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:22:52.509481
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 11:23:42.406558
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:17:52.828370
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:18:37.567431
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:18:52.064116
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:19:20.080997
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:24:52.677916
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:30:44.217266
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:31:02.795739
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:32:23.958777
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:32:31.225064
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:33:17.753792
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:35:15.816662
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:35:29.913284
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:36:07.002578
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:37:47.149429
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:38:07.427623
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:38:18.843605
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:39:46.224477
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:55:11.576952
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:57:12.645974
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 12:58:39.812375
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:02:01.811003
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:02:11.093060
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:02:44.668864
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:02:45.945010
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:03:29.339659
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:03:45.904765
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:03:46.914403
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:04:31.585975
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:04:35.393201
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:05:43.750751
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:05:45.254590
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:05:48.300643
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:06:05.396182
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:06:06.730478
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:22:31.244056
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:23:00.711092
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:23:26.076923
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:24:06.007847
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:24:07.818014
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:24:11.280248
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:25:01.850354
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:25:07.124871
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:25:10.444320
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:25:44.859847
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:25:47.657327
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:26:04.396399
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:26:07.658160
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:26:08.559975
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:26:09.455769
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:27:44.525400
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:28:00.235864
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:28:08.787283
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-01 13:28:14.769986
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:28:57.838637
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:28:58.010789
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:28:59.330486
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:29:43.359363
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:29:45.940652
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:30:27.617115
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:30:54.762410
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:30:57.743123
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:30:59.145366
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:33:12.034758
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:34:58.539065
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:35:13.513722
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:36:22.893691
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:36:45.024027
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:37:31.345356
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:38:07.555481
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:38:56.870931
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:40:25.635668
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-01 13:45:48.683109
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:46:01.558925
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:46:03.715344
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:46:32.188690
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:46:34.519756
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:48:47.150770
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:49:19.834989
+
+Bogdan, 127.0.0.1, /idea/, GET, 2021-12-01 13:49:29.017375
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-12-01 13:49:31.988900
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:49:33.855584
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 13:49:34.736918
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 13:49:55.468423
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:50:05.139452
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:50:08.338289
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:50:12.113488
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 13:50:17.805624
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:50:42.629959
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:50:51.879504
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:50:56.176314
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:51:12.290764
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:51:14.576327
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:51:15.816932
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:51:16.201273
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:51:49.293131
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:13.932820
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:52:18.243932
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:52:21.037420
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:52:22.289372
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:30.757207
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:31.847173
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:52:32.996698
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:34.518553
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:52:37.422634
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:56.223574
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:53:24.184952
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:53:26.104999
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:53:35.917687
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 13:53:39.227130
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 13:53:57.131719
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:54:02.971969
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 13:54:04.666988
+
+, 127.0.0.1, /, GET, 2021-12-01 13:59:34.277069
+
+, 127.0.0.1, /progress/, GET, 2021-12-01 13:59:36.085200
+
+, 127.0.0.1, /account_login/, GET, 2021-12-01 13:59:36.108220
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 14:00:03.340529
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 14:00:04.379798
+
+Bogdan, 127.0.0.1, /account_change_groups/, GET, 2021-12-01 14:00:07.541601
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 14:00:11.661030
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 14:00:14.359938
+
+Bogdan, 127.0.0.1, /idea/, GET, 2021-12-01 14:00:15.290763
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 14:00:16.362714

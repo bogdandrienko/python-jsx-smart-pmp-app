@@ -405,35 +405,91 @@ admin.site.register(ActionModel, ActionModelAdmin)
 # Group
 class GroupModelAdmin(admin.ModelAdmin):
     """Настройки 'CommentRationalModel' на панели администратора"""
-    list_display = ('name_char_field', 'name_slug_field', 'path_text_field', 'group_one_to_one_field')
-    list_filter = ('name_char_field', 'name_slug_field', 'path_text_field', 'path_many_to_many_field',
-                   'user_many_to_many_field', 'group_one_to_one_field')
-    filter_horizontal = ('path_many_to_many_field', 'user_many_to_many_field')
-    fieldsets = (
-        ('Имя отображения', {'fields': ('name_char_field',)}),
-        ('Имя валидации', {'fields': ('name_slug_field',)}),
-        ('Имя пути', {'fields': ('path_text_field',)}),
-        ('Пользователи', {'fields': ('user_many_to_many_field', 'path_many_to_many_field', 'group_one_to_one_field')}),
+    list_display = (
+        'group_one_to_one_field',
+        'name_char_field',
+        'name_slug_field',
     )
-    search_fields = ['name_char_field', 'name_slug_field', 'path_text_field', 'user_many_to_many_field',
-                     'path_many_to_many_field', 'group_one_to_one_field']
+    list_filter = (
+        'group_one_to_one_field',
+        'name_char_field',
+        'name_slug_field',
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    )
+    filter_horizontal = (
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    )
+    fieldsets = (
+        ('Группа', {'fields': (
+            'group_one_to_one_field',
+        )}),
+        ('Имя отображения', {'fields': (
+            'name_char_field',
+        )}),
+        ('Имя валидации', {'fields': (
+            'name_slug_field',
+        )}),
+        ('Пользователи', {'fields': (
+            'user_many_to_many_field',
+        )}),
+        ('Действия', {'fields': (
+            'action_many_to_many_field',
+        )}),
+    )
+    search_fields = [
+        'group_one_to_one_field',
+        'name_char_field',
+        'name_slug_field',
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    ]
 
 
 # Добавление вертикального поля для стандартных групп
 class GroupModelAdminInline(admin.StackedInline):
     model = GroupModel
-    list_display = ('name_char_field', 'name_slug_field', 'path_text_field', 'group_one_to_one_field')
-    list_filter = ('name_char_field', 'name_slug_field', 'path_text_field', 'path_many_to_many_field',
-                   'user_many_to_many_field', 'group_one_to_one_field')
-    filter_horizontal = ('path_many_to_many_field', 'user_many_to_many_field')
-    fieldsets = (
-        ('Имя отображения', {'fields': ('name_char_field',)}),
-        ('Имя валидации', {'fields': ('name_slug_field',)}),
-        ('Имя пути', {'fields': ('path_text_field',)}),
-        ('Пользователи', {'fields': ('user_many_to_many_field', 'path_many_to_many_field', 'group_one_to_one_field')}),
+    list_display = (
+        'group_one_to_one_field',
+        'name_char_field',
+        'name_slug_field',
     )
-    search_fields = ['name_char_field', 'name_slug_field', 'path_text_field', 'user_many_to_many_field',
-                     'path_many_to_many_field', 'group_one_to_one_field']
+    list_filter = (
+        'group_one_to_one_field',
+        'name_char_field',
+        'name_slug_field',
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    )
+    filter_horizontal = (
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    )
+    fieldsets = (
+        ('Группа', {'fields': (
+            'group_one_to_one_field',
+        )}),
+        ('Имя отображения', {'fields': (
+            'name_char_field',
+        )}),
+        ('Имя валидации', {'fields': (
+            'name_slug_field',
+        )}),
+        ('Пользователи', {'fields': (
+            'user_many_to_many_field',
+        )}),
+        ('Действия', {'fields': (
+            'action_many_to_many_field',
+        )}),
+    )
+    search_fields = [
+        'group_one_to_one_field',
+        'name_char_field',
+        'name_slug_field',
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    ]
 
 
 # Переопределение встроенной админ-панели групп

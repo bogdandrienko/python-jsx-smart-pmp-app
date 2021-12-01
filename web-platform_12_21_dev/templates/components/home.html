@@ -1,6 +1,6 @@
 {% extends "components/base.html" %}
 {% load static %}
-{% load account_tag %}
+{% load access_tag %}
 
 <!-- Head -->
 {% block head %}
@@ -33,7 +33,7 @@
                         <h5 class=""><strong class="text-dark text-decoration-underline">Модули</strong></h5>
                     </div>
                 </a>
-                {% account_tag 'home_module' as access %}
+                {% access_tag 'home_module' as access %}
                 {% if access %}
                     Вы видите объект 'home_module' {{ access }}, т.к. вы есть в одной группе доступа с доступом к этому объекту
                 {% else %}

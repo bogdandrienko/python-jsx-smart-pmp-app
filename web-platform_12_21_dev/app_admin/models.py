@@ -1604,7 +1604,7 @@ class LoggingModel(models.Model):
 # User
 class UserModel(models.Model):
     """
-    Account Profile Model
+    User Model
     """
     # authorization data
     user_one_to_one_field = models.OneToOneField(
@@ -1616,8 +1616,6 @@ class UserModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        # choices=LIST_DB_VIEW_CHOICES,
-        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2050,6 +2048,9 @@ def create_user(sender, instance, created, **kwargs):
 
 # Action
 class ActionModel(models.Model):
+    """
+    Action Model
+    """
     name_char_field = models.CharField(
         db_column='name_char_field_db_column',
         db_index=True,
@@ -2110,6 +2111,9 @@ class ActionModel(models.Model):
 
 # Group
 class GroupModel(models.Model):
+    """
+    Group Model
+    """
     # authorization data
     group_one_to_one_field = models.OneToOneField(
         db_column='group_one_to_one_field_db_column',
@@ -2120,8 +2124,6 @@ class GroupModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        # choices=LIST_DB_VIEW_CHOICES,
-        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2145,7 +2147,7 @@ class GroupModel(models.Model):
         unique_for_month=False,
         unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
-        unique=False,
+        unique=True,
         editable=True,
         blank=True,
         null=True,
@@ -2166,7 +2168,7 @@ class GroupModel(models.Model):
         unique_for_month=False,
         unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
-        unique=False,
+        unique=True,
         editable=True,
         blank=True,
         null=True,
@@ -2177,49 +2179,6 @@ class GroupModel(models.Model):
 
         max_length=32,
         allow_unicode=False,
-    )
-    path_text_field = models.TextField(
-        db_column='path_text_field_db_column',
-        db_index=True,
-        db_tablespace='path_text_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Имя путей для доступа',
-        help_text='<small class="text-muted underline">через запятую нужно перечислить имена путей для доступа, '
-                  'латинница, любой регистр, например: "login, admin, home"</small><hr><br>',
-
-        max_length=256,
-        # db_collation='text_field_db_collation'
-    )
-    path_many_to_many_field = models.ManyToManyField(
-        db_column='path_many_to_many_field_db_column',
-        db_index=True,
-        db_tablespace='path_many_to_many_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        default=None,
-        verbose_name='Разрешённые действия группы',
-        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
-                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
-
-        to=ActionModel,
-        related_name='path_many_to_many_field',
     )
     user_many_to_many_field = models.ManyToManyField(
         db_column='user_many_to_many_field_db_column',
@@ -2240,6 +2199,26 @@ class GroupModel(models.Model):
 
         to=UserModel,
         related_name='user_many_to_many_field',
+    )
+    action_many_to_many_field = models.ManyToManyField(
+        db_column='path_many_to_many_field_db_column',
+        db_index=True,
+        db_tablespace='path_many_to_many_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        default=None,
+        verbose_name='Разрешённые действия группы',
+        help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
+                  '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
+
+        to=ActionModel,
+        related_name='action_many_to_many_field',
     )
 
     class Meta:

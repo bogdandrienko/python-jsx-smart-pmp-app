@@ -9,7 +9,7 @@ import requests
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.mail import BadHeaderError, send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
@@ -22,7 +22,7 @@ from .models import LoggingModel, GroupModel, RationalModel, CategoryRationalMod
     CommentRationalModel, \
     ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, DocumentModel, \
     MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, \
-    IdeasCategoryModel, IdeaModel, UserModel, IdeaCommentModel, IdeaRatingModel
+    IdeasCategoryModel, IdeaModel, UserModel, IdeaCommentModel, IdeaRatingModel, ActionModel
 from .forms import ExamplesModelForm, RationalForm, NotificationForm, \
     MessageForm, DocumentForm, ContactForm, CityForm, \
     ArticleForm, SmsForm, GeoForm, BankIdeasForm
@@ -1127,27 +1127,50 @@ def account_change_groups(request):
     if page:
         return redirect(page)
 
-    try:
+    # try:
+    if True:
         response = 0
         user = None
-        groups = GroupModel.objects.all()
+        groups = Group.objects.all()
         if request.method == 'POST':
             username = DjangoClass.RequestClass.get_value(request, 'username')
-            user = User.objects.get(username=username)
-            groups = GroupModel.objects.filter(user_many_to_many_field=user)
+            group_name_char_field = DjangoClass.RequestClass.get_value(request, 'group_name_char_field')
+            group_name_slug_field = DjangoClass.RequestClass.get_value(request, 'group_name_slug_field')
+            action_name_char_field = DjangoClass.RequestClass.get_value(request, 'action_name_char_field')
+            action_name_slug_field = DjangoClass.RequestClass.get_value(request, 'action_name_slug_field')
+
+            user_model = UserModel.objects.get(user_one_to_one_field=User.objects.get(username=username))
+            print(f'user_model: {user_model}')
+
+            group = Group.objects.get_or_create(name=group_name_char_field)[0]
+            print(f'group: {group}')
+
+            action = ActionModel.objects.get_or_create(
+                name_char_field=action_name_char_field,
+                name_slug_field=action_name_slug_field,
+            )[0]
+            print(f'action: {action}')
+
+            group.group_one_to_one_field.name_char_field = group_name_char_field
+            group.group_one_to_one_field.name_slug_field = group_name_slug_field
+            group.group_one_to_one_field.user_many_to_many_field.add(user_model)
+            group.group_one_to_one_field.action_many_to_many_field.add(action)
+
+            group.save()
+
             response = 1
         context = {
             'response': response,
             'groups': groups,
             'user': user,
         }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'groups': None,
-            'user': None,
-        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'groups': None,
+    #         'user': None,
+    #     }
 
     return render(request, 'account/account_change_groups.html', context)
 

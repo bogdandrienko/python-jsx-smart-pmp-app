@@ -16,7 +16,7 @@ def access_tag(context, path):
             if action:
                 groups = GroupModel.objects.filter(
                     user_many_to_many_field=user,
-                    path_many_to_many_field=action
+                    action_many_to_many_field=action
                 )
                 if groups:
                     access = True

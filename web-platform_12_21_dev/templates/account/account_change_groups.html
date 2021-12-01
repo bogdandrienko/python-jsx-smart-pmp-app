@@ -47,133 +47,84 @@
     >
         {% csrf_token %}
         <div>
-
-            <hr/>
-
-            <label class="form-control-lg">
-                Доступные группы доступа:
-                <select type="select"
-                        id="group"
-                        name="group[]"
-{#                        required=""#}
-                        size="3"
-                        multiple="multiple"
-                        class="form-control form-control-lg"
-                >
-                    {% if groups %}
-                        {% for group in groups %}
-                            <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
-                        {% endfor %}
-                    {% endif %}
-                </select>
-                <small class="text-muted">введите названия групп и введите в строку группы через запятую</small>
-            </label>
-
-            <hr/>
-
-            <label class="form-control-lg">
-                Группы:
-                <input type="text"
-                       id="groups"
-                       name="groups"
-{#                       required=""#}
-                       placeholder=""
-                       {% if user %}
-                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
-                       {% else %}
-                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
-                       {% endif %}
-                       minlength="1"
-                       maxlength="64"
-                       class="form-control form-control-lg"
-                />
-                <small class="text-muted">введите, из списка выше и через запятую, необходимые
-                    группы доступа для пользователя</small>
-            </label>
-
-            <hr/>
-
-            <div class="text-start form-control form-control-lg">
-                {% for group in groups %}
-                    <div class="form-check form-switch">
-                        <input type="checkbox"
-                               id="{{ group.name_slug_field }}"
-                               name="{{ group.name_slug_field }}"
-{#                               required=""#}
-                               value=""
-                               {% if group %}
-                                    checked="checked"
-                               {% else %}
-{#                                    checked="checked"#}
-                               {% endif %}
-                               class="form-check-input"
-                        />
-                        <label class="form-check-label" for="{{ group.name_slug_field }}">{{ group.name_char_field }}</label>
-                    </div>
-                {% endfor %}
+            <div>
+                <label class="form-control-lg">
+                    Имя пользователя:
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           required=""
+                           placeholder="970801351179"
+                           value="Bogdan"
+                           minlength="1"
+                           maxlength="12"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">User.objects.get(username=username)</small>
+                </label>
             </div>
+            <div>
+                <label class="form-control-lg">
+                    Название группы:
+                    <input type="text"
+                           id="group_name_char_field"
+                           name="group_name_char_field"
+                           required=""
+                           placeholder="Пользователь"
+                           value="Пользователь"
+                           minlength="1"
+                           maxlength="32"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">GroupModel:name_char_field</small>
+                </label>
 
-            <hr/>
+                <label class="form-control-lg">
+                    Валидация группы:
+                    <input type="text"
+                           id="group_name_slug_field"
+                           name="group_name_slug_field"
+                           required=""
+                           placeholder="user"
+                           value="user"
+                           minlength="1"
+                           maxlength="32"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">GroupModel:name_slug_field</small>
+                </label>
+            </div>
+            <div>
+                <label class="form-control-lg">
+                    Название действия:
+                    <input type="text"
+                           id="action_name_char_field"
+                           name="action_name_char_field"
+                           required=""
+                           placeholder="Банк идей"
+                           value="Банк идей"
+                           minlength="1"
+                           maxlength="32"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">ActionModel:name_char_field</small>
+                </label>
 
-            <label class="form-control-lg">
-                select:
-                <select type="select"
-                        id="select"
-                        name="select[]"
-                        required=""
-{#                                            size="3"#}
-{#                                            multiple="multiple"#}
-                        class="form-control form-control-lg"
-                >
-                    <option selected disabled>Выберите группу</option>
-                    {% for group in groups %}
-                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
-                    {% endfor %}
-                </select>
-                <small class="text-muted">select: выбрать один из списка</small>
-            </label>
-
-            <hr/>
-
-            <label class="form-control-lg">
-                multi_select:
-                <select type="select"
-                        id="multi_select"
-                        name="multi_select[]"
-                        required=""
-                        size="3"
-                        multiple="multiple"
-                        class="form-control form-control-lg"
-                >
-                    <option selected disabled>Выберите группу</option>
-                    {% for group in groups %}
-                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
-                    {% endfor %}
-                </select>
-                <small class="text-muted">multi_select: выбрать несколько из списка</small>
-            </label>
-
-            <hr/>
-
-            <label class="form-control-lg">
-                Группы:
-                <input type="text"
-                       id="groups"
-                       name="groups"
-{#                       required=""#}
-                       placeholder=""
-                       {% if user %}
-                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
-                       {% else %}
-                            value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
-                       {% endif %}
-                       minlength="1"
-                       maxlength="64"
-                       class="form-control form-control-lg"
-                />
-                <small class="text-muted">введите, из списка выше и через запятую, необходимые
-                    группы доступа для пользователя</small>
-            </label>
+                <label class="form-control-lg">
+                    Валидация действия:
+                    <input type="text"
+                           id="action_name_slug_field"
+                           name="action_name_slug_field"
+                           required=""
+                           placeholder="idea"
+                           value="idea"
+                           minlength="1"
+                           maxlength="32"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">ActionModel:name_slug_field</small>
+                </label>
+            </div>
 
             <hr/>
 
@@ -252,6 +203,95 @@
         </div>
         <!-- Grid row -->
     </form>
+
+        <div>
+
+            <hr/>
+
+            <label class="form-control-lg">
+                select:
+                <select type="select"
+                        id="select"
+                        name="select[]"
+                        required=""
+{#                                            size="3"#}
+{#                                            multiple="multiple"#}
+                        class="form-control form-control-lg"
+                >
+                    <option selected disabled>Выберите группу</option>
+                    {% for group in groups %}
+                        <option value="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</option>
+                    {% endfor %}
+                </select>
+                <small class="text-muted">select: выбрать один из списка</small>
+            </label>
+
+            <label class="form-control-lg">
+                multi_select:
+                <select type="select"
+                        id="multi_select"
+                        name="multi_select[]"
+                        required=""
+                        size="3"
+                        multiple="multiple"
+                        class="form-control form-control-lg"
+                >
+                    <option selected disabled>Выберите группу</option>
+                    {% for group in groups %}
+                        <option value="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</option>
+                    {% endfor %}
+                </select>
+                <small class="text-muted">multi_select: выбрать несколько из списка</small>
+            </label>
+
+            <label class="form-control-lg">
+                text:
+                <input type="text"
+                       id="groups"
+                       name="groups"
+{#                       required=""#}
+                       placeholder=""
+                       {% if user %}
+                            value="{% for group in groups %}{{ group.group_one_to_one_field.name_char_field }}, {% endfor %}"
+                       {% else %}
+                            value="{% for group in groups %}{{ group.group_one_to_one_field.name_char_field }}, {% endfor %}"
+                       {% endif %}
+                       minlength="1"
+                       maxlength="64"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">введите, из списка выше и через запятую, необходимые
+                    группы доступа для пользователя</small>
+            </label>
+
+            <div>
+                <label class="form-control-lg">
+                    checkbox:
+                    {% for group in groups %}
+                        <div class="form-check form-switch form-control-lg">
+                            <input type="checkbox"
+                                   id="{{ group.group_one_to_one_field.name_slug_field }}"
+                                   name="{{ group.group_one_to_one_field.name_slug_field }}"
+{#                                   required=""#}
+                                   value=""
+                                   {% if group %}
+                                        checked="checked"
+                                   {% else %}
+{#                                   checked="checked"#}
+                                   {% endif %}
+                                   class="form-check-input"
+                            />
+                            <label class="form-check-label" for="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</label>
+                        </div>
+                    {% endfor %}
+                    <small class="text-muted">введите, из списка выше и через запятую, необходимые
+                        группы доступа для пользователя</small>
+                </label>
+            </div>
+
+            <hr/>
+
+        </div>
 
 {% endif %}
 

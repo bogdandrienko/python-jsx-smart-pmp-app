@@ -2890,3 +2890,57 @@ Bogdan, 192.168.1.68, /home/, GET, 2021-11-30 12:48:21.116589, ActionModel match
 Bogdan, 192.168.1.68, /home/, GET, 2021-11-30 12:56:03.706591, ActionModel matching query does not exist.
 
 Bogdan, 192.168.1.68, /home/, GET, 2021-11-30 12:56:08.754129, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-11-30 19:01:00.297357, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /, GET, 2021-12-01 10:13:21.544296, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-01 10:14:17.371931, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:14:21.710200, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:50:07.511405, Cannot resolve keyword 'path_many_to_many_field' into field. Choices are: action_many_to_many_field, group_one_to_one_field, group_one_to_one_field_id, id, name_char_field, name_slug_field, user_many_to_many_field
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 10:50:08.404196, Cannot resolve keyword 'path_many_to_many_field' into field. Choices are: action_many_to_many_field, group_one_to_one_field, group_one_to_one_field_id, id, name_char_field, name_slug_field, user_many_to_many_field
+
+Bogdan, 127.0.0.1, /account_change_groups/, POST, 2021-12-01 13:02:11.109075, User matching query does not exist.
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-01 13:28:14.799012, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:30:54.790435, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-01 13:45:48.715645, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:46:32.216715, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:46:34.547287, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:49:33.888614, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 13:49:55.495447, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:50:05.166476, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:50:42.655983, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:50:51.905527, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:51:14.603351, Cannot resolve keyword 'path_many_to_many_field' into field. Choices are: action_many_to_many_field, group_one_to_one_field, group_one_to_one_field_id, id, name_char_field, name_slug_field, user_many_to_many_field
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:51:15.842956, Cannot resolve keyword 'path_many_to_many_field' into field. Choices are: action_many_to_many_field, group_one_to_one_field, group_one_to_one_field_id, id, name_char_field, name_slug_field, user_many_to_many_field
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:51:16.228297, Cannot resolve keyword 'path_many_to_many_field' into field. Choices are: action_many_to_many_field, group_one_to_one_field, group_one_to_one_field_id, id, name_char_field, name_slug_field, user_many_to_many_field
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:13.958879, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:30.784231, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 13:52:31.873197, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-12-01 13:59:34.341126, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 14:00:03.367553, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /progress/, GET, 2021-12-01 14:00:04.408823, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 14:00:16.387736, ActionModel matching query does not exist.
