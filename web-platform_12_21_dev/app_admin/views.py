@@ -1130,8 +1130,8 @@ def account_change_groups(request):
     # try:
     if True:
         response = 0
-        user = None
         groups = Group.objects.all()
+        actions = ActionModel.objects.all()
         if request.method == 'POST':
             username = DjangoClass.RequestClass.get_value(request, 'username')
             group_name_char_field = DjangoClass.RequestClass.get_value(request, 'group_name_char_field')
@@ -1162,14 +1162,14 @@ def account_change_groups(request):
         context = {
             'response': response,
             'groups': groups,
-            'user': user,
+            'actions': actions,
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'response': -1,
     #         'groups': None,
-    #         'user': None,
+    #         'actions': None,
     #     }
 
     return render(request, 'account/account_change_groups.html', context)
