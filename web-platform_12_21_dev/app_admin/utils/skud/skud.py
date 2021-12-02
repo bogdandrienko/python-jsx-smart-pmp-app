@@ -8,17 +8,33 @@ from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from shutil import move, copy
 import threading
 import concurrent.futures
+import asyncio
 from time import sleep
 
 import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
 import cv2
 import openpyxl
+import requests
 from openpyxl.utils import get_column_letter
 from skimage import io
 
 from app_admin.utils.utils import ExcelClass, DirFolderPathClass
 
+
+# Синхронная функция
+def get_url(page_url, timeout=2):
+    try:
+        response = requests.get(url=page_url, timeout=timeout)
+        page_status = "unknown"
+        if response.status_code == 200:
+            page_status = "exists"
+        elif response.status_code == 404:
+            page_status = "does not exist"
+
+        return page_url + " - " + page_status
+    except Exception as error:
+        return page_url + " - " + f'error: {error}'
 
 # UI
 class AppContainerClass:
@@ -739,9 +755,10 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print('end')
 
             # Сравнивает массив фото с excel-файлом выгруженным из системы 1С
-            def equal_foto(max_workers=1):
+            def equal_foto(func_name='equal_foto'):
+                start_time = time.time()
                 print('start')
-                print(f'max_workers={max_workers}')
+                print(f'func_name={func_name}')
 
                 # Выбор excel-файла для загрузки данных из 1с
                 export_file_from_1c = 'export.xlsx'
@@ -784,8 +801,8 @@ class MainWidgetClass(QtWidgets.QWidget):
 
                 # Функция для сравнения фото по именам и данным из excel-файла
                 def loop_equal_foto(file_name: str):
+                    message = ''
                     if self.pause is False:
-
                         # Проверка на формат изображения
                         if fnmatch(file_name, pattern):
                             try:
@@ -801,66 +818,71 @@ class MainWidgetClass(QtWidgets.QWidget):
                                             if full_foto_name == f'{worker[0]}+{worker[1]}_{worker[2]}':
                                                 copy(f'{input_folder}\\{file_name}', f'{equal_folder}\\{file_name}')
                                                 # Вывод на экран сообщения и имени файла
-                                                print(f"соответветствует: {file_name}\n")
+                                                message = f"соответветствует: {file_name}\n"
                                             # Копирование файла и замена имени, если его идентификатор совпадает
                                             elif id_foto == worker[2]:
                                                 copy(f'{input_folder}\\{file_name}',
                                                      f'{equal_folder}\\{worker[0]}+{worker[1]}_{worker[2]}.jpg')
                                                 # Вывод на экран сообщения и имени файла
-                                                print(f"соответветствует с корректировкой: {file_name}\n")
+                                                message = f"соответветствует с корректировкой: {file_name}\n"
                                         # Копирование файла, если его нет в массиве с идентификаторами с 1с
                                         else:
                                             copy(f'{input_folder}\\{file_name}', f'{not_equal_folder}\\{file_name}')
                                             # Вывод на экран сообщения и имени файла
-                                            print(f"не соответветствует: {file_name}\n")
+                                            message = f"не соответветствует: {file_name}\n"
                                 # Копирование файла, если у него нет идентификатора
                                 except Exception as error:
                                     copy(f'{input_folder}\\{file_name}', f'{error_id_folder}\\{file_name}')
                                     # Вывод на экран сообщения и имени файла
-                                    print(f"нет идентификатора: {file_name}\n")
+                                    message = f"нет идентификатора: {file_name}\n"
                             except Exception as error:
                                 copy(f'{input_folder}\\{file_name}', f'{error_folder}\\{file_name}')
                                 # Вывод на экран сообщения и имени файла
-                                print(f"ошибка: {file_name}\n")
-
+                                message = f"ошибка: {file_name}\n"
                         # Если изображение не того формата, копирование его в выбранную папку
                         else:
                             try:
                                 copy(f'{input_folder}\\{file_name}', f'{error_format_folder}\\{file_name}')
                                 # Вывод на экран сообщения и имени файла
-                                print(f"ошибка формата изображения: {file_name}\n")
+                                message = f"ошибка формата изображения: {file_name}\n"
                             except Exception as error:
                                 copy(f'{input_folder}\\{file_name}', f'{error_folder}\\{file_name}')
                                 # Вывод на экран сообщения и имени файла
-                                print(f"ошибка: {file_name}\n")
-
+                                message = f"ошибка: {file_name}\n"
                         # Удаление исходного файла
                         try:
                             os.remove(f'{input_folder}\\{file_name}')
                         except Exception as error:
                             pass
 
-                # Запуск многопоточности
-                file_names = []
-                for path, subdirs, files in os.walk(input_folder):
-                    if self.pause is False:
-                        for name in files:
-                            print(name)
-                            file_names.append(name)
-                            # threading.Thread(target=loop_equal_foto, args=(name,)).start()
-                print(file_names)
+                        return message
 
-                # with ProcessPoolExecutor(max_workers=6) as executor:
-                #     for file in file_names:
-                #         executor.submit(loop_equal_foto, file_names=file)
-
-                with ProcessPoolExecutor(max_workers=6) as executor:
-                    for _ in executor.map(loop_equal_foto, file_names):
-                        pass
+                # Менеджер контекста для многопотока под ThreadPoolExecutor
                 # with ProcessPoolExecutor() as executor:
-                #     # executor.map(loop_equal_foto, file_names)
-                #     for file in file_names:
-                #         executor.submit(loop_equal_foto, file_names=file)
+                #     futures = []
+                #     # Цикл для прохода по ссылкам
+                #     for path, subdirs, files in os.walk(input_folder):
+                #         for name in files:
+                #             if self.pause is False:
+                #                 futures.append(executor.submit(loop_equal_foto, file_name=name))
+                #             for future in concurrent.futures.as_completed(futures):
+                #                 print(future.result())
+
+                for path, subdirs, files in os.walk(input_folder):
+                    for name in files:
+                        if self.pause is False:
+                            # loop_equal_foto(file_name=name)
+                            threading.Thread(target=loop_equal_foto, args=(name,)).start()
+                # Запуск многопоточности
+                # file_names = []
+                # with ThreadPoolExecutor() as executor:
+                #     for path, subdirs, files in os.walk(input_folder):
+                #         for name in files:
+                #             if self.pause is False:
+                #                 executor.submit(loop_equal_foto, file_name=name)
+                #                 # threading.Thread(target=loop_equal_foto, args=(name,)).start()
+
+                print(f"Final time: {round(time.time() - start_time, 1)}")
                 print('end')
 
             # меняет русскую букву "Р" на английскую
@@ -930,17 +952,178 @@ class MainWidgetClass(QtWidgets.QWidget):
                     if self.pause is False:
                         time.sleep(1)
                         print(name)
+                        print(threading)
+                        return 1
+                    return 0
 
-                with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-                    if self.pause is False:
-                        for name in range(1, 500):
-                            executor.submit(loop_example, name=name)
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    futures = []
+                    for name in range(1, 500):
+                        if self.pause is False:
+                            futures.append(executor.submit(loop_example, name=name))
+                            for future in concurrent.futures.as_completed(futures):
+                                print(future.result())
                 print('completed')
 
             # threading.Thread(target=example, args=([3])).start()
             # threading.Thread(target=find_face, args=([3])).start()
-            threading.Thread(target=equal_foto, args=([6])).start()
+            threading.Thread(target=equal_foto, args=(['equal_foto'])).start()
             # threading.Thread(target=change_p_to_eng, args=([3])).start()
+
+            ############################################################################################################
+
+            # #  Синхронный код
+            # start_time = time.time()
+            # # Ссылки
+            # page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+            #
+            # # Синхронная функция
+            # def get_page_from_url(page_url, timeout=2):
+            #     try:
+            #         response = requests.get(url=page_url, timeout=timeout)
+            #         page_status = "unknown"
+            #         if response.status_code == 200:
+            #             page_status = "exists"
+            #         elif response.status_code == 404:
+            #             page_status = "does not exist"
+            #
+            #         return page_url + " - " + page_status
+            #     except Exception as error:
+            #         return page_url + " - " + f'error: {error}'
+            #
+            # # Цикл для прохода по ссылкам
+            # for url in page_urls:
+            #     print(get_page_from_url(page_url=url))
+            #
+            # # Финальное время
+            # print(f"Final time: {round(time.time() - start_time, 1)}")
+
+            ############################################################################################################
+
+            # #  Асинхронный код
+            # start_time = time.time()
+            # # Ссылки
+            # page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+            #
+            # # Асинхронная функция
+            # async def get_page_from_url_async(page_url, timeout=2):
+            #     try:
+            #         response = requests.get(url=page_url, timeout=timeout)
+            #         page_status = "unknown"
+            #         if response.status_code == 200:
+            #             page_status = "exists"
+            #         elif response.status_code == 404:
+            #             page_status = "does not exist"
+            #
+            #         print(page_url + " - " + page_status)
+            #     except Exception as error:
+            #         print(page_url + " - " + f'error: {error}')
+            #
+            # # Цикл для прохода по ссылкам
+            # async def main():
+            #     tasks = []
+            #     for url in page_urls:
+            #         tasks.append(asyncio.create_task(get_page_from_url_async(url)))
+            # asyncio.run(main())
+            # # Финальное время
+            # print(f"Final time: {round(time.time() - start_time, 1)}")
+
+            ############################################################################################################
+
+            # #  Синхронная функция для многопоточного выполнения под Threading
+            # start_time = time.time()
+            # # Ссылки
+            # page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+            #
+            # # Синхронная функция получения статуса при завершении загрузки страницы
+            # def get_page_from_url_threading(page_url, timeout=2):
+            #     try:
+            #         response = requests.get(url=page_url, timeout=timeout)
+            #         page_status = "unknown"
+            #         if response.status_code == 200:
+            #             page_status = "exists"
+            #         elif response.status_code == 404:
+            #             page_status = "does not exist"
+            #
+            #         print(page_url + " - " + page_status)
+            #     except Exception as error:
+            #         print(page_url + " - " + f'error: {error}')
+            #
+            # # Цикл для прохода по ссылкам
+            # for url in page_urls:
+            #     threading.Thread(target=get_page_from_url_threading, args=([url])).start()
+            #
+            # # Финальное время
+            # print(f"Final time: {round(time.time() - start_time, 1)}")
+
+            ############################################################################################################
+
+            # # Многопоточный код c ThreadPoolExecutor
+            # start_time = time.time()
+            # # Ссылки
+            # page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+            #
+            # # Синхронная функция
+            # def get_page_from_url(page_url, timeout=2):
+            #     try:
+            #         response = requests.get(url=page_url, timeout=timeout)
+            #         page_status = "unknown"
+            #         if response.status_code == 200:
+            #             page_status = "exists"
+            #         elif response.status_code == 404:
+            #             page_status = "does not exist"
+            #
+            #         return page_url + " - " + page_status
+            #     except Exception as error:
+            #         return page_url + " - " + f'error: {error}'
+            #
+            # # Менеджер контекста для многопотока под ThreadPoolExecutor
+            # with ThreadPoolExecutor() as executor:
+            #     futures = []
+            #     # Цикл для прохода по ссылкам
+            #     for url in page_urls:
+            #         futures.append(executor.submit(get_page_from_url, page_url=url))
+            #     for future in concurrent.futures.as_completed(futures):
+            #         print(future.result())
+            #
+            # # Финальное время
+            # print(f"Final time: {round(time.time() - start_time, 1)}")
+
+            ############################################################################################################
+
+            # # Мультипроцессорный код c ProcessPoolExecutor
+            # start_time = time.time()
+            # # Ссылки
+            # page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+            #
+            # # Синхронная функция
+            # def get_page_from_url(page_url, timeout=2):
+            #     try:
+            #         response = requests.get(url=page_url, timeout=timeout)
+            #         page_status = "unknown"
+            #         if response.status_code == 200:
+            #             page_status = "exists"
+            #         elif response.status_code == 404:
+            #             page_status = "does not exist"
+            #
+            #         return page_url + " - " + page_status
+            #     except Exception as error:
+            #         return page_url + " - " + f'error: {error}'
+            #
+            # # Менеджер контекста для мультипроцесса под ProcessPoolExecutor
+            # with ProcessPoolExecutor() as executor:
+            #     futures = []
+            #     # Цикл для прохода по ссылкам
+            #     for url in page_urls:
+            #         futures.append(executor.submit(get_url, page_url=url))
+            #     for future in concurrent.futures.as_completed(futures):
+            #         print(future.result())
+            #
+            # # Финальное время
+            # print(f"Final time: {round(time.time() - start_time, 1)}")
+
+            ############################################################################################################
+
         except Exception as error:
             print(error)
 
