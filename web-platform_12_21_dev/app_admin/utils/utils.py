@@ -28,6 +28,8 @@ from threading import Thread
 
 import multiprocessing
 from multiprocessing import current_process, freeze_support
+import concurrent
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
 import numpy
 import numpy as np
@@ -347,6 +349,166 @@ class SQLClass:
         cursor.fast_executemany = True
         # cursor.execute(sql_select_query)
         data = cursor.fetchall()
+
+
+class MultithreadingMultiprocessingClass:
+    class SyncClass:
+        @staticmethod
+        def example():
+            #  Синхронный код
+            start_time = time.time()
+            # Ссылки
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+
+            # Синхронная функция
+            def get_page_from_url(page_url, timeout=2):
+                try:
+                    response = requests.get(url=page_url, timeout=timeout)
+                    page_status = "unknown"
+                    if response.status_code == 200:
+                        page_status = "exists"
+                    elif response.status_code == 404:
+                        page_status = "does not exist"
+
+                    return page_url + " - " + page_status
+                except Exception as error:
+                    return page_url + " - " + f'error: {error}'
+
+            # Цикл для прохода по ссылкам
+            for url in page_urls:
+                print(get_page_from_url(page_url=url))
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+
+    class AsyncClass:
+        @staticmethod
+        def example():
+            #  Асинхронный код
+            start_time = time.time()
+            # Ссылки
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+
+            # Асинхронная функция
+            async def get_page_from_url_async(page_url, timeout=2):
+                try:
+                    response = requests.get(url=page_url, timeout=timeout)
+                    page_status = "unknown"
+                    if response.status_code == 200:
+                        page_status = "exists"
+                    elif response.status_code == 404:
+                        page_status = "does not exist"
+
+                    print(page_url + " - " + page_status)
+                except Exception as error:
+                    print(page_url + " - " + f'error: {error}')
+
+            # Цикл для прохода по ссылкам
+            async def main():
+                tasks = []
+                for url in page_urls:
+                    tasks.append(asyncio.create_task(get_page_from_url_async(url)))
+
+            asyncio.run(main())
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+
+    class ThreadingClass:
+        @staticmethod
+        def example():
+            #  Синхронная функция для многопоточного выполнения под Threading
+            start_time = time.time()
+            # Ссылки
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+
+            # Синхронная функция получения статуса при завершении загрузки страницы
+            def get_page_from_url_threading(page_url, timeout=2):
+                try:
+                    response = requests.get(url=page_url, timeout=timeout)
+                    page_status = "unknown"
+                    if response.status_code == 200:
+                        page_status = "exists"
+                    elif response.status_code == 404:
+                        page_status = "does not exist"
+
+                    print(page_url + " - " + page_status)
+                except Exception as error:
+                    print(page_url + " - " + f'error: {error}')
+
+            # Цикл для прохода по ссылкам
+            for url in page_urls:
+                threading.Thread(target=get_page_from_url_threading, args=([url])).start()
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+
+    class ThreadPoolExecutorClass:
+        @staticmethod
+        def example():
+            # Многопоточный код c ThreadPoolExecutor
+            start_time = time.time()
+            # Ссылки
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+
+            # Синхронная функция
+            def get_page_from_url(page_url, timeout=2):
+                try:
+                    response = requests.get(url=page_url, timeout=timeout)
+                    page_status = "unknown"
+                    if response.status_code == 200:
+                        page_status = "exists"
+                    elif response.status_code == 404:
+                        page_status = "does not exist"
+
+                    return page_url + " - " + page_status
+                except Exception as error:
+                    return page_url + " - " + f'error: {error}'
+
+            # Менеджер контекста для многопотока под ThreadPoolExecutor
+            with ThreadPoolExecutor() as executor:
+                futures = []
+                # Цикл для прохода по ссылкам
+                for url in page_urls:
+                    futures.append(executor.submit(get_page_from_url, page_url=url))
+                for future in concurrent.futures.as_completed(futures):
+                    print(future.result())
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+
+    class ProcessPoolExecutorClass:
+        @staticmethod
+        def example():
+            # Мультипроцессорный код c ProcessPoolExecutor
+            start_time = time.time()
+            # Ссылки
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(21)]
+
+            # Синхронная функция
+            def get_page_from_url(page_url, timeout=2):
+                try:
+                    response = requests.get(url=page_url, timeout=timeout)
+                    page_status = "unknown"
+                    if response.status_code == 200:
+                        page_status = "exists"
+                    elif response.status_code == 404:
+                        page_status = "does not exist"
+
+                    return page_url + " - " + page_status
+                except Exception as error:
+                    return page_url + " - " + f'error: {error}'
+
+            # Менеджер контекста для мультипроцесса под ProcessPoolExecutor
+            with ProcessPoolExecutor() as executor:
+                futures = []
+                # Цикл для прохода по ссылкам
+                for url in page_urls:
+                    futures.append(executor.submit(get_page_from_url, page_url=url))
+                for future in concurrent.futures.as_completed(futures):
+                    print(future.result())
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
 
 
 class EncodingClass:
