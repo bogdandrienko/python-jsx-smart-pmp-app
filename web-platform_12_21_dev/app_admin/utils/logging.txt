@@ -1,0 +1,10 @@
+2021-12-03 21:18:56 | error_func: __main__ | error
+2021-12-03 21:19:07 | error_func: __main__ | error
+
+2021-12-03 21:19:28 | error_func: __main__ | error
+
+2021-12-03 21:19:34 | error_func: __main__ | error
+
+2021-12-03 21:19:35 | error_func: __main__ | error
+
+2021-12-03 21:21:11 | error_func: __main__ | error

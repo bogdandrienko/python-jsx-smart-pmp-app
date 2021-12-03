@@ -12,7 +12,7 @@ from django.http.response import Http404
 from fastkml import kml
 from openpyxl.utils import get_column_letter
 from app_admin.models import LoggingModel, GroupModel
-from app_admin.utils.utils import ExcelClass
+from app_admin.utils.utils_old import ExcelClass
 from django.contrib.staticfiles import finders
 from django.conf import settings
 

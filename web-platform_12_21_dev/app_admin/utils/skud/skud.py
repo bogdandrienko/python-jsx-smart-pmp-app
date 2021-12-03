@@ -19,7 +19,7 @@ import requests
 from openpyxl.utils import get_column_letter
 from skimage import io
 
-from app_admin.utils.utils import ExcelClass, DirFolderPathClass
+from app_admin.utils.utils_old import ExcelClass, DirFolderPathClass
 
 
 # Синхронная функция
@@ -674,8 +674,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f"Final time: {round(time.time() - start_time, 1)}")
                 print('end')
 
-            # Сравнение данных экспортированных из системы и данных из 1с, на выходе файл с фильтром
-            # по работникам не в базе
+            # Сравнение данных из системы и данных из 1с, на выходе файл с фильтром по работникам не в базе
             def equal_system(max_workers=1):
                 start_time = time.time()
                 print('start')

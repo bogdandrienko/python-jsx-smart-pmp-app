@@ -28,7 +28,7 @@ from .forms import ExamplesModelForm, RationalForm, NotificationForm, \
     ArticleForm, SmsForm, GeoForm, BankIdeasForm
 from app_admin.utils.service import DjangoClass, PaginationClass, SalaryClass, Xhtml2pdfClass, GeoClass, CareerClass, \
     UtilsClass
-from app_admin.utils.utils import ExcelClass, SQLClass, EncryptingClass
+from app_admin.utils.utils_old import ExcelClass, SQLClass, EncryptingClass
 
 
 def examples_forms(request):
