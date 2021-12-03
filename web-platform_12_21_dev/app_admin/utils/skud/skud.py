@@ -36,6 +36,7 @@ def get_url(page_url, timeout=2):
     except Exception as error:
         return page_url + " - " + f'error: {error}'
 
+
 # UI
 class AppContainerClass:
     def __init__(self):
@@ -494,27 +495,6 @@ class MainWidgetClass(QtWidgets.QWidget):
                             except:
                                 print(f'{relative_path}{name} error rename to {relative_path}{new}')
 
-            def remove_id_from_jpg(max_workers=1):
-                print(f'max_workers={max_workers}')
-
-                relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-                pattern = '*.jpg'
-                jpg = '.jpg'
-                old = ''
-
-                for path, subdirs, files in os.walk(relative_path):
-                    for name in files:
-                        if fnmatch(name, pattern):
-                            try:
-                                old = name.split('.')[0].split('_')[0].strip()
-                                new = old + jpg
-                                os.rename(relative_path + name, relative_path + new)
-                                print(new)
-                            except:
-                                try:
-                                    print(f"{relative_path}{name} error rename to {relative_path}{old + jpg}")
-                                except:
-                                    print(name)
 
             def rename_foto_in_folders(max_workers=1):
                 print(f'max_workers={max_workers}')
@@ -523,10 +503,10 @@ class MainWidgetClass(QtWidgets.QWidget):
                 dest = ''
                 # source_path = os.path.dirname(os.path.abspath('__file__')) + r"\ВЗРЫВ\2020г"
                 source_path = os.path.dirname(os.path.abspath('__file__')) + '\\' + source
-                # dest_path = os.path.dirname(os.path.abspath('__file__')) + r"\Boom\new"
+                # dest_path = os.path.dirname(os.path.abspath('__file__')) + r"\Boom\new_name"
                 dest_path = os.path.dirname(os.path.abspath('__file__')) + '\\' + dest
                 try:
-                    # create_dir(r'Boom\new')
+                    # create_dir(r'Boom\new_name')
                     DirFolderPathClass.create_folder_in_this_dir(dest)
                 except:
                     pass
@@ -553,7 +533,6 @@ class MainWidgetClass(QtWidgets.QWidget):
                         shutil.copyfile(file, f"{dest_path}\\{sub_sub_dir}_{subdir}_{ext}___{index_file}.jpg")
                     except Exception as ex:
                         print(ex)
-                # Тут уже лежат в папке файлы с нужными именами
 
             def export_to_import(max_workers=1):
                 print(f'max_workers={max_workers}')
@@ -666,52 +645,59 @@ class MainWidgetClass(QtWidgets.QWidget):
             # ОТРЕФАКТОРЕНО:
 
             # Находит и обрезает лица, добавляет края + сжимает фото
-            def find_face(max_workers=1):
+            def find_face(max_workers=3, remove_old_file=False):
+                start_time = time.time()
                 print('start')
                 print(f'max_workers={max_workers}')
 
                 # Создание папок для исходящих и входящих изображений
                 input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
-                output_folder = DirFolderPathClass.create_folder_in_this_dir('output')
+                output_folder = DirFolderPathClass.create_folder_in_this_dir('output\\completed')
+                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\error')
 
                 # Выбор формата изображений для обработки
                 pattern = '*.jpg'
 
                 # Функция для обрезки фото по именам
-                def loop_crop_img(file_name='input.jpg'):
+                def loop_crop_img(file_name):
                     try:
                         if self.pause is False:
                             if fnmatch(file_name, pattern):
                                 # Чтение изображения в память
                                 src_img = io.imread(input_folder + '\\' + file_name)
 
+                                # Множитель
+                                multiply = round(len(src_img) / 9248 * 0.5, 2)
+                                print(multiply)
+
                                 # Коррекция краёв изображения
-                                correct_field = 1000
+                                correct_field = int(1000 * multiply)
 
                                 # Размеры исходного изображения
-                                image_height = 9248
-                                image_width = 6944
 
                                 # Загрузка алгоритма классификатора для поиска лиц
                                 haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 
                                 # Значение, добавляемое по краям изображения
-                                width_addiction = 1000
-                                height_addiction = 1500
+                                # width_addiction = int(image_width * 1.25 * multiply)
+                                # height_addiction = int(image_height * 1.25 * multiply)
 
                                 # Качество сжатия изображения
-                                quality = 50
+                                quality = 100
 
                                 # Получение значения от исходного числа и % от него
                                 def get_percent(value, side):
                                     return side * value // 100
 
                                 # Установка обрезки краёв и обрезка
-                                crop_top = (image_height - 8000) // 2
-                                crop_down = (image_height - 8000) // 2
-                                crop_left = (image_width - 6000) // 2
-                                crop_right = (image_width - 6000) // 2
-                                src_img = src_img[crop_top:image_height - crop_down, crop_left:image_width - crop_right]
+                                # crop_top = (image_height - (8 * multiply)) // 2
+                                # crop_down = (image_height - (8 * multiply)) // 2
+                                # crop_left = (image_width - (6 * multiply)) // 2
+                                # crop_right = (image_width - (6 * multiply)) // 2
+                                # src_img = src_img[
+                                #           int(crop_top):int(image_height) - int(crop_down),
+                                #           int(crop_left):int(image_width) - int(crop_right)
+                                #           ]
 
                                 # Предобработка изображения и поиск лиц алгоритмом
                                 gray_img = cv2.cvtColor(src_img, cv2.COLOR_BGR2GRAY)
@@ -720,21 +706,37 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 # Очистка некорректно найдённых лиц на изображении
                                 correct_faces = []
                                 for (x, y, w, h) in detect_faces:
-                                    if x > correct_field and y > correct_field and w > correct_field and h > correct_field:
+                                    if x > correct_field and y > correct_field and w > correct_field and \
+                                            h > correct_field:
                                         correct_faces.append([x, y, w, h])
 
                                 # Формирование финального результата
                                 output = None
                                 for (x, y, w, h) in correct_faces:
-                                    height_1 = int(y - int(height_addiction))
-                                    height_2 = int(y + h + int(height_addiction))
-                                    width_1 = int(x - int(width_addiction))
-                                    width_2 = int(x + w + int(width_addiction))
-                                    output = src_img[height_1:height_2, width_1:width_2]
+                                    print(f'y={y} | h={h} | x={x} | w={w}')
+                                    height_1 = int(y-(h * 0.5))
+                                    if height_1 < 0:
+                                        height_1 = 0
+                                    height_2 = int(y+h+(h * 0.5))
+                                    if height_2 < 0:
+                                        height_2 = 0
+                                    width_1 = int(x-(w * 0.5 * 0.4))
+                                    if width_1 < 0:
+                                        width_1 = 0
+                                    width_2 = int(x+w+(w * 0.5 * 0.4))
+                                    if width_2 < 0:
+                                        width_2 = 0
+                                    print(f'height_1={height_1} | height_2={height_2} | '
+                                          f'width_1={width_1} |  width_2={width_2}')
+                                    if w > correct_field or h > correct_field:
+                                        if abs(height_2 - height_1) > correct_field and \
+                                                abs(width_2 - width_1) > correct_field:
+                                            output = src_img[int(height_1):int(height_2), int(width_1):int(width_2)]
 
                                 # Удаление исходного фото
                                 try:
-                                    os.remove(input_folder + '\\' + file_name)
+                                    if remove_old_file:
+                                        os.remove(input_folder + '\\' + file_name)
                                 except Exception as error:
                                     pass
 
@@ -742,23 +744,44 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 io.imsave(output_folder + '\\' + file_name, output, quality=quality)
 
                                 # Вывод имени обработанного фото
-                                print(file_name)
+                                return f'{file_name}\n'
+                            # Если изображение не того формата, копирование его в выбранную папку
+                            else:
+                                try:
+                                    copy(f'{input_folder}\\{file_name}', f'{error_folder}\\{file_name}')
+                                    # Вывод на экран сообщения и имени файла
+                                    return f"ошибка формата изображения: {file_name}\n"
+                                except Exception as error:
+                                    copy(f'{input_folder}\\{file_name}', f'{error_folder}\\{file_name}')
+                                    # Вывод на экран сообщения и имени файла
+                                    return f"ошибка: {file_name}\n"
                     except Exception as error:
-                        print(f'{file_name}: {error}')
+                        copy(f'{input_folder}\\{file_name}', f'{error_folder}\\{file_name}')
+                        # Удаление исходного фото
+                        try:
+                            if remove_old_file:
+                                os.remove(input_folder + '\\' + file_name)
+                        except Exception as _:
+                            pass
+                        return f'{file_name}: {error}\n'
 
                 # Запуск многопоточности
-                with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
                     for path, subdirs, files in os.walk(input_folder):
-                        if self.pause is False:
-                            for file in files:
-                                executor.submit(loop_crop_img, file_name=file)
+                        for file in files:
+                            if self.pause is False:
+                                futures = executor.submit(loop_crop_img, file_name=file)
+                                print(futures.result())
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
                 print('end')
 
             # Сравнивает массив фото с excel-файлом выгруженным из системы 1С
-            def equal_foto(func_name='equal_foto'):
+            def equal_foto(max_workers=6, remove_old_file=False):
                 start_time = time.time()
                 print('start')
-                print(f'func_name={func_name}')
+                print(f'max_workers={max_workers}')
 
                 # Выбор excel-файла для загрузки данных из 1с
                 export_file_from_1c = 'export.xlsx'
@@ -790,7 +813,9 @@ class MainWidgetClass(QtWidgets.QWidget):
                         # Создание и наполнение массива с данными по одного человеку
                         local_workers_list = []
                         for x in export_cols_from_1c:
-                            local_workers_list.append(ExcelClass.get_sheet_value(col=int(x), row=num, sheet=sheet))
+                            local_workers_list.append(
+                                str(ExcelClass.get_sheet_value(col=int(x), row=num, sheet=sheet)).strip()
+                            )
                         if local_workers_list[2]:
                             global_workers_list.append(local_workers_list)
                             global_workers_id_list.append(local_workers_list[2])
@@ -808,28 +833,30 @@ class MainWidgetClass(QtWidgets.QWidget):
                             try:
                                 # Получение полного имени файла
                                 full_foto_name = file_name.split('.')[0].strip()
+                                name_foto = file_name.split('+')[1].strip()
                                 try:
                                     # Получение идентификатора из имени файла
                                     id_foto = full_foto_name.split('_')[1].strip()
-                                    for worker in global_workers_list:
-                                        # Проверка, есть ли идентификатор в массиве с идентификаторами с 1с
-                                        if worker[2] in global_workers_id_list:
-                                            # Копирование файла, если его имя полностью совпадает с матрицей
-                                            if full_foto_name == f'{worker[0]}+{worker[1]}_{worker[2]}':
-                                                copy(f'{input_folder}\\{file_name}', f'{equal_folder}\\{file_name}')
-                                                # Вывод на экран сообщения и имени файла
-                                                message = f"соответветствует: {file_name}\n"
-                                            # Копирование файла и замена имени, если его идентификатор совпадает
-                                            elif id_foto == worker[2]:
-                                                copy(f'{input_folder}\\{file_name}',
-                                                     f'{equal_folder}\\{worker[0]}+{worker[1]}_{worker[2]}.jpg')
-                                                # Вывод на экран сообщения и имени файла
-                                                message = f"соответветствует с корректировкой: {file_name}\n"
-                                        # Копирование файла, если его нет в массиве с идентификаторами с 1с
-                                        else:
-                                            copy(f'{input_folder}\\{file_name}', f'{not_equal_folder}\\{file_name}')
+                                    # Проверка, есть ли идентификатор в массиве с идентификаторами с 1с
+                                    try:
+                                        index = global_workers_id_list.index(id_foto)
+                                        worker = global_workers_list[index]
+                                        # Копирование файла, если его имя полностью совпадает с матрицей
+                                        if full_foto_name == f'{worker[0]}+{worker[1]}_{worker[2]}':
+                                            copy(f'{input_folder}\\{file_name}', f'{equal_folder}\\{file_name}')
                                             # Вывод на экран сообщения и имени файла
-                                            message = f"не соответветствует: {file_name}\n"
+                                            message = f"соответветствует: {file_name}\n"
+                                        # Копирование файла и замена имени, если его идентификатор совпадает
+                                        else:
+                                            copy(f'{input_folder}\\{file_name}',
+                                                 f'{equal_folder}\\{worker[0]}+{worker[1]}_{worker[2]}.jpg')
+                                            # Вывод на экран сообщения и имени файла
+                                            message = f"соответветствует с корректировкой: {file_name}\n"
+                                    # Копирование файла, если его нет в массиве с идентификаторами с 1с
+                                    except Exception as error:
+                                        copy(f'{input_folder}\\{file_name}', f'{not_equal_folder}\\{file_name}')
+                                        # Вывод на экран сообщения и имени файла
+                                        message = f"не соответветствует: {file_name}\n"
                                 # Копирование файла, если у него нет идентификатора
                                 except Exception as error:
                                     copy(f'{input_folder}\\{file_name}', f'{error_id_folder}\\{file_name}')
@@ -851,124 +878,299 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 message = f"ошибка: {file_name}\n"
                         # Удаление исходного файла
                         try:
-                            os.remove(f'{input_folder}\\{file_name}')
+                            if remove_old_file:
+                                os.remove(f'{input_folder}\\{file_name}')
                         except Exception as error:
                             pass
 
                         return message
 
-                # Менеджер контекста для многопотока под ThreadPoolExecutor
-                # with ProcessPoolExecutor() as executor:
-                #     futures = []
-                #     # Цикл для прохода по ссылкам
-                #     for path, subdirs, files in os.walk(input_folder):
-                #         for name in files:
-                #             if self.pause is False:
-                #                 futures.append(executor.submit(loop_equal_foto, file_name=name))
-                #             for future in concurrent.futures.as_completed(futures):
-                #                 print(future.result())
-
-                for path, subdirs, files in os.walk(input_folder):
-                    for name in files:
-                        if self.pause is False:
-                            # loop_equal_foto(file_name=name)
-                            threading.Thread(target=loop_equal_foto, args=(name,)).start()
                 # Запуск многопоточности
-                # file_names = []
-                # with ThreadPoolExecutor() as executor:
-                #     for path, subdirs, files in os.walk(input_folder):
-                #         for name in files:
-                #             if self.pause is False:
-                #                 executor.submit(loop_equal_foto, file_name=name)
-                #                 # threading.Thread(target=loop_equal_foto, args=(name,)).start()
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    for path, subdirs, files in os.walk(input_folder):
+                        for file in files:
+                            if self.pause is False:
+                                futures = executor.submit(loop_equal_foto, file_name=file)
+                                print(futures.result())
 
+                # Финальное время
                 print(f"Final time: {round(time.time() - start_time, 1)}")
                 print('end')
 
-            # меняет русскую букву "Р" на английскую
-            def change_p_to_eng(max_workers=1):
+            def remove_id_from_jpg(max_workers=1, remove_old_file=False):
+                start_time = time.time()
+                print('start')
                 print(f'max_workers={max_workers}')
 
-                folder = 'input'
-                relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\' + folder + '\\'
+                # Создание папок для исходящих и входящих изображений
+                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
+                equal_folder = DirFolderPathClass.create_folder_in_this_dir('output\\completed')
+                error_format_folder = DirFolderPathClass.create_folder_in_this_dir('output\\format_error')
+                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\error')
+
+                # Выбор формата изображений для обработки
                 pattern = '*.jpg'
 
-                for path, subdirs, files in os.walk(relative_path):
-                    for name in files:
-                        if fnmatch(name, pattern):
-                            try:
-                                first_name = name.split('+')[0].strip()
-                                second_name = name.split('+')[1].strip()
-                                if ord(first_name[0:1:]) == 1056 or ord(second_name[0:1:]) == 1056:
-                                    if ord(first_name[0:1:]) == 1056:
-                                        first_name = chr(80) + first_name[1::]
-                                    if ord(second_name[0:1:]) == 1056:
-                                        second_name = chr(80) + second_name[1::]
-                                    new = f'{first_name}+{second_name}'
-                                    os.rename(relative_path + name, relative_path + new)
-                                    print(new)
-                            except:
-                                try:
-                                    print(f'{relative_path}{name} error rename')
-                                except:
-                                    print(name)
-
-                print('complete')
-
-            # меняет английскую букву "Р" на русскую
-            def change_p_to_rus(max_workers=1):
-                print(f'max_workers={max_workers}')
-
-                folder = 'input'
-                relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\' + folder + '\\'
-                pattern = '*.jpg'
-
-                for path, subdirs, files in os.walk(relative_path):
-                    for name in files:
-                        if fnmatch(name, pattern):
-                            try:
-                                first_name = name.split('+')[0].strip()
-                                second_name = name.split('+')[1].strip()
-                                if ord(first_name[0:1:]) == 80 or ord(second_name[0:1:]) == 80:
-                                    if ord(first_name[0:1:]) == 80:
-                                        first_name = chr(1056) + first_name[1::]
-                                    if ord(second_name[0:1:]) == 80:
-                                        second_name = chr(1056) + second_name[1::]
-                                    new = f'{first_name}+{second_name}'
-                                    os.rename(relative_path + name, relative_path + new)
-                                    print(new)
-                            except:
-                                try:
-                                    print(f'{relative_path}{name} error rename')
-                                except:
-                                    print(name)
-
-                print('complete')
-
-            def example(max_workers=1):
-                print(f'max_workers={max_workers}')
-
-                def loop_example(name):
-                    if self.pause is False:
-                        time.sleep(1)
-                        print(name)
-                        print(threading)
-                        return 1
-                    return 0
-
-                with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                    futures = []
-                    for name in range(1, 500):
+                # Функция для удаления идентификатора с фото
+                def loop_remove_id(file_name: str):
+                    message = ''
+                    try:
                         if self.pause is False:
-                            futures.append(executor.submit(loop_example, name=name))
-                            for future in concurrent.futures.as_completed(futures):
-                                print(future.result())
-                print('completed')
+                            if fnmatch(file_name, pattern):
+                                name = file_name.split('.')[0].strip().split('_')[0].strip() + pattern[1:]
+                                copy(f'{input_folder}\\{file_name}', f'{equal_folder}\\{name}')
+                                message = f"{name}\n"
+                            # Если изображение не того формата, копирование его в выбранную папку
+                            else:
+                                copy(f'{input_folder}\\{file_name}', f'{error_format_folder}\\{file_name}')
+                                # Вывод на экран сообщения и имени файла
+                                message = f"ошибка формата изображения: {file_name}\n"
+                    except Exception as error:
+                        copy(f'{input_folder}\\{file_name}', f'{error_folder}\\{file_name}')
+                        message = f'{file_name}: {error}\n'
 
-            # threading.Thread(target=example, args=([3])).start()
+                    # Удаление исходного файла
+                    try:
+                        if remove_old_file:
+                            os.remove(f'{input_folder}\\{file_name}')
+                    except Exception as error:
+                        pass
+
+                    return message
+
+                # Запуск многопоточности
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    for path, subdirs, files in os.walk(input_folder):
+                        for file in files:
+                            if self.pause is False:
+                                futures = executor.submit(loop_remove_id, file_name=file)
+                                print(futures.result())
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+
+            # меняет русскую букву "Р" на английскую или наоборот
+            def change_p_to_eng_to_rus(max_workers=12, to_eng=True, remove_old_file=False):
+                start_time = time.time()
+                print('start')
+                print(f'max_workers={max_workers}')
+
+                # Создание папок для исходящих и входящих изображений
+                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
+                output_folder = DirFolderPathClass.create_folder_in_this_dir('output\\completed')
+                error_format_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Неверный формат фото')
+                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Ошибка')
+                pattern = '*.jpg'
+
+                # Функция для замены русской Р на английскую
+                def loop_rename_file(file_name):
+                    message = ''
+                    try:
+                        # Проверка на формат изображения
+                        if fnmatch(file_name, pattern):
+                            full_name = file_name.strip().split('.')[0].strip()
+                            first_name = full_name.split('+')[0].strip()
+                            second_name = full_name.split('+')[1].strip()
+                            new_name = f'{first_name}+{second_name}.jpg'
+                            if to_eng:
+                                eng = 1056
+                                rus = 80
+                            else:
+                                eng = 80
+                                rus = 1056
+                            if ord(first_name[0:1:]) == eng or ord(second_name[0:1:]) == eng:
+                                if ord(first_name[0:1:]) == eng:
+                                    first_name = chr(rus) + first_name[1::]
+                                if ord(second_name[0:1:]) == eng:
+                                    second_name = chr(rus) + second_name[1::]
+                                copy(f'{input_folder}\\{file_name}', f'{output_folder}\\{new_name}')
+                                message = f'{new_name}\n'
+                            else:
+                                copy(f'{input_folder}\\{file_name}', f'{output_folder}\\{new_name}')
+                                message = 'pass\n'
+                        else:
+                            copy(f'{input_folder}\\{file_name}', f'{error_format_folder}\\{file_name}')
+                            message = 'error: неверный формат файла\n'
+                    except Exception as error:
+                        copy(f'{input_folder}\\{file_name}', f'{error_folder}\\{file_name}')
+                        message = f"{file_name} : error : {error}\n"
+
+                    # Удаление исходного файла
+                    try:
+                        if remove_old_file:
+                            os.remove(f'{input_folder}\\{file_name}')
+                    except Exception as error:
+                        pass
+
+                    return message
+
+                # Запуск многопоточности
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    for path, subdirs, files in os.walk(input_folder):
+                        for file in files:
+                            if self.pause is False:
+                                futures = executor.submit(loop_rename_file, file_name=file)
+                                print(futures.result())
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+
+            def filling_extra_data_from_1c_to_import_hikvision(max_workers=3):
+                start_time = time.time()
+                print('start')
+
+                input_1 = '1c.xlsx'
+                input_2 = 'export.xlsx'
+                output_1 = 'import.xlsx'
+
+                workbook = ExcelClass.workbook_load(file=input_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
+
+                global_workers_list = []
+                global_workers_id_list = []
+                for row_export in range(1, max_num_rows+1):
+                    local_workers_list = []
+                    for col in range(1, 10+1):
+                        local_workers_list.append(
+                            ExcelClass.get_sheet_value(
+                                col=ExcelClass.get_column_letter(col),
+                                row=row_export,
+                                sheet=sheet
+                            )
+                        )
+                    if local_workers_list[8]:
+                        global_workers_list.append(local_workers_list)
+                        global_workers_id_list.append(local_workers_list[8])
+                print(global_workers_list)
+                print(global_workers_id_list)
+                ExcelClass.workbook_close(workbook=workbook)
+
+                workbook = ExcelClass.workbook_load(file=input_2)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
+                global_workers_export_list = []
+                for row_export in range(1, max_num_rows+1):
+                    local_workers_export_list = []
+                    for col in range(1, 27+1):
+                        local_workers_export_list.append(
+                            ExcelClass.get_sheet_value(
+                                col=ExcelClass.get_column_letter(col),
+                                row=row_export,
+                                sheet=sheet
+                            )
+                        )
+                    global_workers_export_list.append(local_workers_export_list)
+                print(global_workers_export_list)
+                ExcelClass.workbook_close(workbook=workbook)
+
+                workbook = ExcelClass.workbook_load(file=output_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                for row_export in global_workers_export_list:
+                    print(f'{row_export[0]} {row_export[1]} {row_export[2]}')
+                    for value in row_export:
+                        try:
+                            index = global_workers_id_list.index(row_export[2])
+                            worker = global_workers_list[index]
+                            col_index = row_export.index(value) + 1
+                            if col_index == 1:
+                                value = worker[4]
+                            elif col_index == 2:
+                                value = worker[3]
+                            elif col_index == 18:
+                                value = worker[0]
+                            elif col_index == 19:
+                                value = worker[1]
+                            elif col_index == 20:
+                                value = worker[2]
+                            elif col_index == 21:
+                                value = worker[5]
+                            elif col_index == 22:
+                                value = worker[9]
+                            ExcelClass.set_sheet_value(
+                                col=ExcelClass.get_column_letter(col_index),
+                                row=global_workers_export_list.index(row_export)+1,
+                                value=value,
+                                sheet=sheet
+                            )
+                        except Exception as error:
+                            ExcelClass.set_sheet_value(
+                                col=ExcelClass.get_column_letter(row_export.index(value)+1),
+                                row=global_workers_export_list.index(row_export)+1,
+                                value=value,
+                                sheet=sheet
+                            )
+                ExcelClass.workbook_save(workbook=workbook, filename=output_1)
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+
+
+            def extra_enbek():
+                start_time = time.time()
+                print('start')
+
+                input_1 = '1c.xlsx'
+                input_2 = 'enbek.xlsx'
+                output_1 = 'final.xlsx'
+
+                workbook = ExcelClass.workbook_load(file=input_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
+
+                global_workers_id_list = []
+                for row in range(1, max_num_rows+1):
+                    global_workers_id_list.append(
+                        ExcelClass.get_sheet_value(col=ExcelClass.get_column_letter(11), row=row, sheet=sheet)
+                    )
+                print(global_workers_id_list)
+                ExcelClass.workbook_close(workbook=workbook)
+
+                workbook = ExcelClass.workbook_load(file=input_2)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
+                global_workers_enbek_list = []
+                for row in range(1, max_num_rows + 1):
+                    local_workers_enbek_list = []
+                    for col in range(1, 21 + 1):
+                        local_workers_enbek_list.append(
+                            ExcelClass.get_sheet_value(col=ExcelClass.get_column_letter(col), row=row, sheet=sheet)
+                        )
+                    if local_workers_enbek_list[1] in global_workers_id_list:
+                        local_workers_enbek_list.append('+')
+                    else:
+                        local_workers_enbek_list.append('-')
+                    global_workers_enbek_list.append(local_workers_enbek_list)
+                print(global_workers_enbek_list)
+                ExcelClass.workbook_close(workbook=workbook)
+
+                workbook = ExcelClass.workbook_load(file=output_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                for row in global_workers_enbek_list:
+                    print(row)
+                    for value in row:
+                        ExcelClass.set_sheet_value(
+                            col=ExcelClass.get_column_letter(row.index(value)+1),
+                            row=global_workers_enbek_list.index(row)+1,
+                            value=value,
+                            sheet=sheet
+                        )
+                ExcelClass.workbook_save(workbook=workbook, filename=output_1)
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+
+            # threading.Thread(target=extra_enbek, args=()).start()
+
             # threading.Thread(target=find_face, args=([3])).start()
-            threading.Thread(target=equal_foto, args=(['equal_foto'])).start()
-            # threading.Thread(target=change_p_to_eng, args=([3])).start()
+            # threading.Thread(target=equal_foto, args=([6])).start()
+            # threading.Thread(target=remove_id_from_jpg, args=([6])).start()
+            # threading.Thread(target=change_p_to_eng_to_rus, args=([12, True])).start()
+            threading.Thread(target=filling_extra_data_from_1c_to_import_hikvision, args=([1])).start()
 
             ############################################################################################################
 
