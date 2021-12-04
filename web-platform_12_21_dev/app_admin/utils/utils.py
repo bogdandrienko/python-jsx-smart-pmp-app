@@ -2,8 +2,10 @@ import asyncio
 import concurrent
 import datetime
 import json
+import aiohttp
 import multiprocessing
 import os
+import smtplib
 import sys
 import threading
 import time
@@ -20,6 +22,7 @@ import openpyxl
 import pyttsx3
 import requests
 import psycopg2 as pg
+from bs4 import BeautifulSoup
 from gmplot import gmplot
 from matplotlib import pyplot as plt, cm
 from matplotlib.ticker import LinearLocator
@@ -290,6 +293,187 @@ class DirPathFolderPathClass:
                 print(path)
 
 
+class SyncAsyncThreadingPoolExecutorClass:
+    class Example:
+        @staticmethod
+        # Синхронный код
+        def example_sync_compute():
+            # Начальное время
+            start_time = time.time()
+            print('start')
+            # Генерация ссылок
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(10)]
+
+            # Функция получения текста из ссылки
+            def get_page_from_url(url):
+                try:
+                    # Синхронная библиотека
+                    response = requests.get(url=url, timeout=3)
+                    value = f'{page_urls.index(url) + 1}: {response.text[0:15]}'
+                    print(value)
+                    return value
+                except Exception as error:
+                    get_page_from_url(url=url)
+
+            responses_list = []
+            # Цикл для прохода по ссылкам
+            for page_url in page_urls:
+                resp = get_page_from_url(url=page_url)
+                responses_list.append(resp)
+            for response_from_list in responses_list:
+                print(response_from_list)
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+            print('end')
+
+        @staticmethod
+        # Acинхронный код
+        def example_async_compute():
+            # Начальное время
+            start_time = time.time()
+            print('start')
+            # Генерация ссылок
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(10)]
+
+            # Функция получения текста из ссылки
+            async def get_page_from_url(session, url):
+                try:
+                    # Асинхронная библиотека
+                    async with session.get(url) as resp:
+                        response = await resp.text()
+                    value = f'{page_urls.index(url) + 1}: {response[0:15]}'
+                    print(value)
+                    return value
+                except Exception as error:
+                    await get_page_from_url(session=session, url=url)
+
+            # Цикл для прохода по ссылкам
+            async def main():
+                # Асинхронная библиотека
+                async with aiohttp.ClientSession() as session:
+                    tasks = []
+                    for page_url in page_urls:
+                        tasks.append(
+                            asyncio.ensure_future(
+                                get_page_from_url(
+                                    session=session,
+                                    url=page_url
+                                )
+                            )
+                        )
+
+                    responses_list = await asyncio.gather(*tasks)
+
+                    for response_from_list in responses_list:
+                        print(response_from_list)
+
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+            asyncio.run(main())
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+            print('end')
+
+        @staticmethod
+        # Многопоточный Threading код
+        def example_threading_compute():
+            # Начальное время
+            start_time = time.time()
+            print('start')
+            # Генерация ссылок
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(10)]
+
+            # Функция получения текста из ссылки
+            def get_page_from_url(page_url):
+                try:
+                    # Синхронная библиотека
+                    response = requests.get(url=page_url, timeout=3)
+                    value = f'{page_urls.index(page_url) + 1}: {response.text[0:15]}'
+                    print(value)
+                    return value
+                except Exception as error:
+                    get_page_from_url(page_url=page_url)
+
+            # Цикл для прохода по ссылкам
+            for url in page_urls:
+                threading.Thread(target=get_page_from_url, args=([url])).start()
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+            print('end')
+
+        @staticmethod
+        # Многопоточный ThreadPoolExecutor код
+        def example_thread_pool_executor_compute():
+            # Начальное время
+            start_time = time.time()
+            print('start')
+            # Генерация ссылок
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(10)]
+
+            # Функция получения текста из ссылки
+            def get_page_from_url(page_url):
+                try:
+                    # Синхронная библиотека
+                    response = requests.get(url=page_url, timeout=3)
+                    value = f'{page_urls.index(page_url) + 1}: {response.text[0:15]}'
+                    print(value)
+                    return value
+                except Exception as error:
+                    get_page_from_url(page_url=page_url)
+
+            # Менеджер контекста для многопотока под ThreadPoolExecutor
+            with ThreadPoolExecutor() as executor:
+                futures = []
+                # Цикл для прохода по ссылкам
+                for url in page_urls:
+                    futures.append(executor.submit(get_page_from_url, page_url=url))
+                for future in concurrent.futures.as_completed(futures):
+                    print(future.result())
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+            print('end')
+
+        @staticmethod
+        # Функция получения текста из ссылки
+        def get_page_from_url_sync(page_url):
+            try:
+                # Синхронная библиотека
+                response = requests.get(url=page_url, timeout=3)
+                value = f'{response.text[0:15]}'
+                print(value)
+                return value
+            except Exception as error:
+                SyncAsyncThreadingPoolExecutorClass.Example.get_page_from_url_sync(page_url=page_url)
+
+        @staticmethod
+        # Мультипоточный ProcessPoolExecutor код
+        def example_process_pool_executor_compute():
+            # Начальное время
+            start_time = time.time()
+            print('start')
+            # Генерация ссылок
+            page_urls = ["https://en.wikipedia.org/wiki/" + str(i) for i in range(10)]
+
+            # Менеджер контекста для многопотока под ThreadPoolExecutor
+            with ProcessPoolExecutor() as executor:
+                futures = []
+                # Цикл для прохода по ссылкам
+                for url in page_urls:
+                    futures.append(executor.submit(
+                        SyncAsyncThreadingPoolExecutorClass.Example.get_page_from_url_sync,
+                        page_url=url
+                    ))
+                for future in concurrent.futures.as_completed(futures):
+                    print(future.result())
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+            print('end')
+
+
 class EncryptingClass:
     @staticmethod
     def encrypt_text(text: str, hash_chars: str):
@@ -470,12 +654,348 @@ class EncodingClass:
             print(text)
 
 
+class ParserBeautifulSoupClass:
+    @staticmethod
+    def get_url():
+        pass
+
+    @staticmethod
+    def parse_local_html():
+        pass
+
+    class Example:
+        @staticmethod
+        def example_parse_weather():
+            arr_url = []
+            for year in range(2011, 2012):
+                for month in range(1, 2):
+                    for day in range(1, 32):
+                        url = f"http://www.pogodaiklimat.ru/weather.php?id=35042&b" \
+                              f"day={day}&fday={day}&amonth={month}&ayear={year}&bot=2"
+                        arr_url.append(url)
+
+            arr_responces = []
+            for url in arr_url:
+                headers = {'user-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
+                           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}
+                response = requests.get(url, headers=headers)
+                response.encoding = 'utf-8'
+                soup = BeautifulSoup(response.text, "html.parser")
+                soup.encoded = 'utf-8'
+                rows = soup.find('div', class_='archive-table-wrap')
+                arr_responces.append(rows)
+
+            all_data = []
+            for request in arr_responces:
+                data_list = []
+                for row in request.find_all('tr'):
+                    local_data = []
+                    for col in row.find_all('td'):
+                        local_data.append(col.text)
+                    data_list.append(local_data)
+                all_data.append([''])
+                all_data.append(data_list)
+            for data in all_data:
+                print(data)
+
+        @staticmethod
+        def example_perser_exams_kiney():
+            version = 3
+            with open(f'{version}_data.html', 'r+', encoding='utf-8') as file:
+                questions = []
+                index = 1
+                for lines in file:
+                    c1 = f"""
+                    <div id="content_test"><br><div class="workspace-header"><i>Самопроверка промежуточного рейтинга 1</i></div><p><b class="question" id="1">Сұрақ № 1 / Вопрос № 1 </b>АСУ из регулятора и объекта управления, называется:</p><p><input type="radio" name="variant" value="1" id="ans1"><label for="ans1">автоматической системой регулирования АСР</label></p><p><input type="radio" name="variant" value="2" id="ans2"><label for="ans2">дистанционным управлением</label></p><p><input type="radio" name="variant" value="3" id="ans3"><label for="ans3">автоматической системой управления АСУ</label></p><p><input type="radio" name="variant" value="4" id="ans4"><label for="ans4">автоматическим управлением</label></p><p><input type="radio" name="variant" value="5" id="ans5"><label for="ans5">комплексной автоматизацией</label></p><button class="btn btn-number" number="1" style="width:40px;margin:5px;border: 2px solid #e34761;">1</button><button class="btn btn-number" number="2" style="width:40px;margin:5px;">2</button><button class="btn btn-number" number="3" style="width:40px;margin:5px;">3</button><button class="btn btn-number" number="4" style="width:40px;margin:5px;">4</button><button class="btn btn-number" number="5" style="width:40px;margin:5px;">5</button><button class="btn btn-number" number="6" style="width:40px;margin:5px;">6</button><button class="btn btn-number" number="7" style="width:40px;margin:5px;">7</button><button class="btn btn-number" number="8" style="width:40px;margin:5px;">8</button><button class="btn btn-number" number="9" style="width:40px;margin:5px;">9</button><button class="btn btn-number" number="10" style="width:40px;margin:5px;">10</button><button class="btn btn-number" number="11" style="width:40px;margin:5px;">11</button><button class="btn btn-number" number="12" style="width:40px;margin:5px;">12</button><button class="btn btn-number" number="13" style="width:40px;margin:5px;">13</button><button class="btn btn-number" number="14" style="width:40px;margin:5px;">14</button><button class="btn btn-number" number="15" style="width:40px;margin:5px;">15</button><button class="btn btn-number" number="16" style="width:40px;margin:5px;">16</button><button class="btn btn-number" number="17" style="width:40px;margin:5px;">17</button><button class="btn btn-number" number="18" style="width:40px;margin:5px;">18</button><button class="btn btn-number" number="19" style="width:40px;margin:5px;">19</button><button class="btn btn-number" number="20" style="width:40px;margin:5px;">20</button><button class="btn btn-number" number="21" style="width:40px;margin:5px;">21</button><button class="btn btn-number" number="22" style="width:40px;margin:5px;">22</button><button class="btn btn-number" number="23" style="width:40px;margin:5px;">23</button><button class="btn btn-number" number="24" style="width:40px;margin:5px;">24</button><button class="btn btn-number" number="25" style="width:40px;margin:5px;">25</button><button class="btn btn-number" number="26" style="width:40px;margin:5px;">26</button><button class="btn btn-number" number="27" style="width:40px;margin:5px;">27</button><button class="btn btn-number" number="28" style="width:40px;margin:5px;">28</button><button class="btn btn-number" number="29" style="width:40px;margin:5px;">29</button><button class="btn btn-number" number="30" style="width:40px;margin:5px;">30</button><button class="btn btn-number" number="31" style="width:40px;margin:5px;">31</button><button class="btn btn-number" number="32" style="width:40px;margin:5px;">32</button><button class="btn btn-number" number="33" style="width:40px;margin:5px;">33</button><button class="btn btn-number" number="34" style="width:40px;margin:5px;">34</button><button class="btn btn-number" number="35" style="width:40px;margin:5px;">35</button><button class="btn btn-number" number="36" style="width:40px;margin:5px;">36</button><button class="btn btn-number" number="37" style="width:40px;margin:5px;">37</button><button class="btn btn-number" number="38" style="width:40px;margin:5px;">38</button><button class="btn btn-number" number="39" style="width:40px;margin:5px;">39</button><button class="btn btn-number" number="40" style="width:40px;margin:5px;">40</button><hr></div>
+<div id="content_test"><br><div class="w
+                    """
+                    final_data = f"<strong>{index}</strong><br><hr><br>"
+                    data = lines.split(" </b>")[1].split("<button class=")[0]
+                    try:
+                        new_data = data.split('<img src="')
+                        if len(new_data) > 2:
+                            final_data += data
+                        else:
+                            final_data += data.split('<img src="')[0] + """<img src="https://sdo.kineu.kz""" + \
+                                          data.split('<img src="')[1]
+                    except Exception as ex:
+                        final_data += data
+                    final_data += "<br><hr><br>"
+                    reverse = False
+                    for question in questions:
+                        if question.split("</strong>")[1] == final_data.split("</strong>")[1]:
+                            print('повторение!')
+                            reverse = True
+                            break
+                    if reverse is False:
+                        questions.append(final_data)
+                        index += 1
+            with open(f'{version}_new_data.html', 'w', encoding='utf-8') as file:
+                title = """<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Title</title>
+            </head>
+            <body>
+                """
+                footer = """
+                </body>
+            </html>"""
+                file.write(title)
+                for line in questions:
+                    file.write(line)
+                file.write(footer)
+
+
+class CycleClass:
+    class Example:
+        @staticmethod
+        def example_cycle_for():
+            for i in range(1, 10):
+                print(i)
+
+        @staticmethod
+        def example_cycle_while():
+            sec = 10
+            while sec < 50:
+                sec += 1
+                print(sec)
+
+
+class SendMail:
+    class Example:
+        @staticmethod
+        def example_send_email(subject='subj', text='text'):
+            host = 'smtp.yandex.ru'
+            port = '465'
+            login = 'eevee.cycle'
+            password = '31284bogdan'
+            writer = 'eevee.cycle@yandex.ru'
+            recipient = 'eevee.cycle@yandex.ru'
+
+            message = f"""From: {recipient}\nTo: {writer}\nSubject: {subject}\n\n{text}"""
+
+            smtpobj = smtplib.SMTP_SSL(host=host, port=port)
+            smtpobj.ehlo()
+            smtpobj.login(user=login, password=password)
+            smtpobj.sendmail(from_addr=writer, to_addrs=recipient, msg=message)
+            smtpobj.quit()
+
+
+class Pagination:
+    class Example:
+        @staticmethod
+        def example():
+            alpabet_list = list('abcdefghhklmnt')
+            p = Pagination.Example(alpabet_list, 4)
+            print(p.get_visible_items())
+
+        def __init__(self, items=None, page_size=10):
+            if items is None:
+                items = []
+            self.items = items
+            self.page_size = page_size
+            self.total_pages = 1 if not self.items else len(self.items) // self.page_size + 1
+            self.current_page = 1
+
+        def get_items(self):
+            return self.items
+
+        def get_page_size(self):
+            return self.page_size
+
+        def get_current_page(self):
+            return self.current_page
+
+        def prev_page(self):
+            if self.current_page == 1:
+                return self
+            self.current_page -= 1
+            return self
+
+        def next_page(self):
+            if self.current_page == self.total_pages:
+                return self
+            self.current_page += 1
+            return self
+
+        def first_page(self):
+            self.current_page = 1
+            return self
+
+        def last_page(self):
+            self.current_page = self.total_pages
+            return self
+
+        def go_to_page(self, page):
+            if page < 1:
+                page = 1
+            elif page > self.total_pages:
+                page = self.total_pages
+            self.current_page = page
+            return self
+
+        def get_visible_items(self):
+            start = (self.current_page - 1) * self.page_size
+            return self.items[start:start + self.page_size]
+
+
 ########################################################################################################################
+
+
+class VoiceClass:
+    @staticmethod
+    def example(self):
+        # Not create class:
+        self.speak()
+        self.speak('Приветики!')
+        # With create class:
+        voice = self()
+        voice.say()
+        voice.say('Я уничтожу человечество!!!')
+
+    def __init__(self, obj_id=0, volume=1.0, rate=200, voice=None, voices=None):
+        self.engine = pyttsx3.init()
+        self.volume = volume
+        self.rate = rate
+        self.voice = voice
+        self.voices = voices
+        self.obj_id = obj_id
+        self.properties = [self.volume, self.rate, self.voice, self.voices]
+
+    @staticmethod
+    def speak(text: str = 'Inicialization successfull.'):
+        pyttsx3.speak(text)
+
+    @staticmethod
+    async def async_speak(text: str = 'Inicialization successfull.'):
+        await pyttsx3.speak(text)
+        return text
+
+    def say(self, text: str = 'Inicialization successfull.'):
+        self.engine.say(text)
+        self.engine.runAndWait()
+
+    def get_property(self, name='volume'):
+        return self.engine.getProperty(name)
+
+    def get_properties(self):
+        return [self.engine.getProperty(name) for name in self.properties]
+
+    def set_property(self, name='volume', value=1.0):
+        self.engine.setProperty(name, value)
+
+    def set_properties(self, volume=1.0, rate=200):
+        self.set_property(self.properties[0], volume)
+        self.set_property(self.properties[1], rate)
+
+
+class ObjectOrientedProgrammingClass:
+    @staticmethod
+    def example_worker():
+        class Worker:
+            """
+            Класс, который содержит в себе работника, со значениями по строке
+            """
+
+            def __init__(self, A_1='', B_1='', C_1='', D_1='', E_1='', F_1='', G_1='', H_1='', M_1=''):
+                # Подразделение
+                self.A_1 = A_1
+                # Цех или Служба
+                self.B_1 = B_1
+                # Отдел или участок
+                self.C_1 = C_1
+                # Фамилия
+                self.D_1 = D_1
+                # Имя
+                self.E_1 = E_1
+                # Отчество
+                self.F_1 = F_1
+                # Табельный №
+                self.G_1 = G_1
+                # Категория
+                self.H_1 = H_1
+                # Пол
+                self.M_1 = M_1
+
+            def print_worker(self):
+                """
+
+                """
+                print(
+                    f'{self.A_1}+{self.B_1}+{self.C_1}+{self.D_1}+{self.E_1}+{self.F_1}+{self.G_1}+{self.H_1}+{self.M_1}')
+
+            def get_worker_value(self, index):
+                """
+
+                :param index:
+                :return:
+                """
+                value_ = list(
+                    (self.A_1, self.B_1, self.C_1, self.D_1, self.E_1, self.F_1, self.G_1, self.H_1, self.M_1))
+                return value_[index]
+
+            def get_worker_id(self):
+                """
+
+                :return:
+                """
+                return self.G_1
+
+    @staticmethod
+    def example_objects():
+        class Actions:
+            def __init__(self):
+                pass
+
+            @staticmethod
+            def action(first_value, second_value):
+                return first_value + second_value
+
+        print(Actions.action(10, 30))
+
+        class Circle:
+            pi = 3.14
+
+            def __init__(self, radius=1):
+                self.radius = radius
+                self.circle_reference = 2 * self.pi * self.radius
+
+            def get_area(self):
+                return self.pi * (self.radius ** 2)
+
+            def get_circle_reference(self):
+                return 2 * self.pi * self.radius
+
+        circle_1 = Circle(4)
+        print(circle_1.get_area())
+        print(circle_1.circle_reference)
+        print(circle_1.get_circle_reference())
+
+        # Классы
+        class Car:
+            wheels_number = 4
+
+            def __init__(self, name, color, year, is_crashed):
+                self.name = name
+                self.color = color
+                self.year = year
+                self.is_crashed = is_crashed
+
+        mazda_car = Car(name="Mazda CX7", color="red", year=2017, is_crashed=True)
+        print(mazda_car.name, mazda_car.is_crashed, mazda_car.wheels_number)
+        bmw_car = Car(name="Mazda", color="black", year=2019, is_crashed=False)
+        print(bmw_car.name, bmw_car.is_crashed, bmw_car.wheels_number)
+        print(Car.wheels_number * 3)
 
 
 ########################################################################################################################
 if __name__ == '__main__':
-
-    EncodingClass.Example.example_convert_encoding()
+    # SyncAsyncThreadingPoolExecutorClass.Example.example_sync_compute()
+    # SyncAsyncThreadingPoolExecutorClass.Example.example_async_compute()
+    # SyncAsyncThreadingPoolExecutorClass.Example.example_threading_compute()
+    # SyncAsyncThreadingPoolExecutorClass.Example.example_thread_pool_executor_compute()
+    # SyncAsyncThreadingPoolExecutorClass.Example.example_process_pool_executor_compute()
 
     pass

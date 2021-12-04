@@ -849,6 +849,19 @@ class MainWidgetClass(QtWidgets.QWidget):
 
             # threading.Thread(target=extra_enbek, args=()).start()
 
+            def analyse_image_open_cv(max_workers=1):
+                # Начальное время
+                start_time = time.time()
+                print('start')
+
+                
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+
+            threading.Thread(target=analyse_image_open_cv, args=([3])).start()
+
             # threading.Thread(target=find_face, args=([3])).start()
             # threading.Thread(target=equal_foto, args=([6])).start()
             # threading.Thread(target=remove_id_from_jpg, args=([6])).start()

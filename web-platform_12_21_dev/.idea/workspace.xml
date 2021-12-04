@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bbbc63c-057b-4b79-9921-8caa89c92d24" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/export.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/file.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/import.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/logging.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_admin/utils/utils_old.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/utils/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/utils/skud/skud.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/skud/skud.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/utils/utils_old.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/utils_old.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +129,9 @@
       <workItem from="1638503875289" duration="16046000" />
       <workItem from="1638524394332" duration="4457000" />
       <workItem from="1638531617684" duration="15356000" />
-      <workItem from="1638554813079" duration="765000" />
+      <workItem from="1638554813079" duration="916000" />
+      <workItem from="1638590521477" duration="11894000" />
+      <workItem from="1638622380532" duration="3291000" />
     </task>
     <servers />
   </component>
@@ -161,6 +155,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_platform_12_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1638542743965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils/skud" />
-    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$utils.coverage" NAME="utils Coverage Results" MODIFIED="1638554822991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils" />
+    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$utils.coverage" NAME="utils Coverage Results" MODIFIED="1638625334562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils" />
   </component>
 </project>
