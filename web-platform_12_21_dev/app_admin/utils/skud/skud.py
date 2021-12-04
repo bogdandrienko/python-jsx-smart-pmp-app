@@ -14,12 +14,15 @@ from time import sleep
 import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
 import cv2
+import httplib2
+import numpy
 import openpyxl
 import requests
 from openpyxl.utils import get_column_letter
 from skimage import io
 
-from app_admin.utils.utils_old import ExcelClass, DirFolderPathClass
+from app_admin.utils.utils_old import ExcelClass
+from app_admin.utils.utils import DirPathFolderPathClass
 
 
 # Синхронная функция
@@ -151,9 +154,9 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f'max_workers={max_workers}')
 
                 # Создание папок для исходящих и входящих изображений
-                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
-                output_folder = DirFolderPathClass.create_folder_in_this_dir('output\\completed')
-                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\error')
+                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('input')
+                output_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\completed')
+                error_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\error')
 
                 # Выбор формата изображений для обработки
                 pattern = '*.jpg'
@@ -289,12 +292,12 @@ class MainWidgetClass(QtWidgets.QWidget):
                 export_cols_from_1c = '549'
 
                 # Создание папок для исходящих и входящих изображений
-                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
-                equal_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Есть в базе')
-                not_equal_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Нет в базе')
-                error_format_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Неверный формат фото')
-                error_id_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Нет идентификатора')
-                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Ошибка')
+                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('input')
+                equal_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\Есть в базе')
+                not_equal_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\Нет в базе')
+                error_format_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\Неверный формат фото')
+                error_id_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\Нет идентификатора')
+                error_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\Ошибка')
 
                 # Выбор формата изображений для обработки
                 pattern = '*.jpg'
@@ -404,10 +407,10 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f'max_workers={max_workers}')
 
                 # Создание папок для исходящих и входящих изображений
-                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
-                equal_folder = DirFolderPathClass.create_folder_in_this_dir('output\\completed')
-                error_format_folder = DirFolderPathClass.create_folder_in_this_dir('output\\format_error')
-                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\error')
+                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('input')
+                equal_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\completed')
+                error_format_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\format_error')
+                error_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\error')
 
                 # Выбор формата изображений для обработки
                 pattern = '*.jpg'
@@ -458,10 +461,10 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f'max_workers={max_workers}')
 
                 # Создание папок для исходящих и входящих изображений
-                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
-                equal_folder = DirFolderPathClass.create_folder_in_this_dir('output\\completed')
-                error_format_folder = DirFolderPathClass.create_folder_in_this_dir('output\\format_error')
-                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\error')
+                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('input')
+                equal_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\completed')
+                error_format_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\format_error')
+                error_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\error')
 
                 # Выбор формата изображений для обработки
                 pattern = '*.jpg'
@@ -522,10 +525,10 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f'max_workers={max_workers}')
 
                 # Создание папок для исходящих и входящих изображений
-                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
-                output_folder = DirFolderPathClass.create_folder_in_this_dir('output\\completed')
-                error_format_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Неверный формат фото')
-                error_folder = DirFolderPathClass.create_folder_in_this_dir('output\\Ошибка')
+                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('input')
+                output_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\completed')
+                error_format_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\Неверный формат фото')
+                error_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\Ошибка')
                 pattern = '*.jpg'
 
                 # Функция для замены русской Р на английскую
@@ -780,7 +783,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f'max_workers={max_workers}')
 
                 # Создание папок для исходящих и входящих изображений
-                input_folder = DirFolderPathClass.create_folder_in_this_dir('input')
+                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('input')
 
                 directories_ = []
                 for root, dirs, files in os.walk(input_folder, topdown=True):
@@ -849,18 +852,66 @@ class MainWidgetClass(QtWidgets.QWidget):
 
             # threading.Thread(target=extra_enbek, args=()).start()
 
-            def analyse_image_open_cv(max_workers=1):
+            def analyse_image_open_cv(ip=203):
                 # Начальное время
-                start_time = time.time()
-                print('start')
+                # start_time = time.time()
+                # print('start')
 
+                sources = f'http://192.168.15.{ip}:80/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
+                login = 'admin'
+                password = 'q1234567'
+                h = httplib2.Http(os.path.abspath('__file__'))
+                h.add_credentials(login, password)
+                response, content = h.request(sources)
+                image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
+                image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
+                mask = cv2.imread('m_16_8.jpg', 0)
+                mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
+                bitwise_and = cv2.bitwise_and(image, image, mask=mask)
+                cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
+                inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
+                                      numpy.array([255, 120, 255], dtype=numpy.uint8))
+                value = f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * 1.0:0.2f}%"
 
+                # cv2.imshow('image', image)
+                # cv2.imshow('mask', mask)
+                # cv2.imshow('inrange', inrange)
 
                 # Финальное время
-                print(f"Final time: {round(time.time() - start_time, 1)}")
-                print('end')
+                # print(f"Final time: {round(time.time() - start_time, 1)}")
+                # print('end')
 
-            threading.Thread(target=analyse_image_open_cv, args=([3])).start()
+                # print(value)
+                return value
+
+            # Начальное время
+            start_time = time.time()
+            print('start')
+
+            list_ip = []
+            for num in range(202, 211+1):
+                list_ip.append(num)
+            print(list_ip)
+
+            # Менеджер контекста для многопотока под ThreadPoolExecutor
+            with ThreadPoolExecutor() as executor:
+                futures = []
+                # Цикл для прохода по ссылкам
+                for ip in list_ip:
+                    futures.append(executor.submit(analyse_image_open_cv, ip=ip))
+                for future in concurrent.futures.as_completed(futures):
+                    print(future.result())
+
+            # answer = []
+            # for ip in list_ip:
+            #     answer.append(analyse_image_open_cv(ip=ip))
+            # print(answer)
+
+            # Финальное время
+            print(f"Final time: {round(time.time() - start_time, 1)}")
+            print('end')
+
+            # threading.Thread(target=analyse_image_open_cv, args=([3])).start()
 
             # threading.Thread(target=find_face, args=([3])).start()
             # threading.Thread(target=equal_foto, args=([6])).start()

@@ -2,10 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bbbc63c-057b-4b79-9921-8caa89c92d24" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20280ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3488cde996bcac7bd461c2e51fdf30b3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20380ISAPIStreamingchannels101picturesnapShotImageType=JPEG,b220edfb84a5b9d49c3c177b813bae71" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20480ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d428cf19cda08309aef6c6de855f85ad" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20580ISAPIStreamingchannels101picturesnapShotImageType=JPEG,f6538b0caea36cedb4a38f4cab643841" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20680ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d097684182f092351ecd70387a1b03e4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20780ISAPIStreamingchannels101picturesnapShotImageType=JPEG,13f3892f2251b9596a4c6d13f3652af4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20880ISAPIStreamingchannels101picturesnapShotImageType=JPEG,333563d7e91b1edbb1310b33bf5cc8be" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.20980ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3c03b9da06583fba42310aa48c0e21c9" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.21080ISAPIStreamingchannels101picturesnapShotImageType=JPEG,4564328635c417346e00325da57e57bc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/__file__/192.168.15.21180ISAPIStreamingchannels101picturesnapShotImageType=JPEG,1713dcf27426d12119d0dcdbb5b43322" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/utils/skud/m_16_8.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-platform_12_21_dev.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/utils/skud/skud.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/skud/skud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/utils/utils_old.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/utils_old.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,10 +48,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app_admin/utils/skud" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Python.utils">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_12_21_dev\app_admin\utils\skud" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.skud">
     <configuration name="skud" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="web-platform_12_21_dev" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -109,8 +127,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.utils" />
         <item itemvalue="Python.skud" />
+        <item itemvalue="Python.utils" />
       </list>
     </recent_temporary>
   </component>
@@ -132,6 +150,7 @@
       <workItem from="1638554813079" duration="916000" />
       <workItem from="1638590521477" duration="11894000" />
       <workItem from="1638622380532" duration="3304000" />
+      <workItem from="1638625837615" duration="2374000" />
     </task>
     <servers />
   </component>
@@ -154,7 +173,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1638542743965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils/skud" />
     <SUITE FILE_PATH="coverage/web_platform_12_21_dev$utils.coverage" NAME="utils Coverage Results" MODIFIED="1638625334562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils" />
+    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1638628136031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils/skud" />
   </component>
 </project>
