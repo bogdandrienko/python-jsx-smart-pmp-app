@@ -854,7 +854,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 start_time = time.time()
                 print('start')
 
-                
+
 
                 # Финальное время
                 print(f"Final time: {round(time.time() - start_time, 1)}")
