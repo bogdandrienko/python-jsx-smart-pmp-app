@@ -7,7 +7,7 @@ from .models import ExamplesModel, UserModel, LoggingModel, IdeaModel, IdeaComme
     CommentRationalModel, ActionModel, GroupModel, LikeRationalModel, RationalModel, AccountTemplateModel, \
     EmailModel, \
     ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, IdeasModel, \
-    IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel, IdeaRatingModel
+    IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel, IdeaRatingModel, ComputerVisionModuleModel
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # admin
@@ -862,6 +862,64 @@ class ProjectsModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProjectsModel, ProjectsModelAdmin)
+
+
+class ComputerVisionModuleModelAdmin(admin.ModelAdmin):
+    """
+    Настройки 'ComputerVisionModuleModel' на панели администратора
+    """
+
+    list_display = (
+        'name_char_field',
+        'description_text_field',
+        'path_slug_field',
+        'play_boolean_field',
+        'delay_float_field',
+        'datetime_field',
+        'duration_float_field',
+        'restart_boolean_field',
+        'error_text_field',
+    )
+
+    list_filter = (
+        'name_char_field',
+        'description_text_field',
+        'path_slug_field',
+        'play_boolean_field',
+        'delay_float_field',
+        'datetime_field',
+        'duration_float_field',
+        'restart_boolean_field',
+        'error_text_field',
+    )
+
+    fieldsets = (
+        ('Наименование, описание и путь', {'fields': (
+            'name_char_field', 'description_text_field', 'path_slug_field',
+        )}),
+        ('Управление', {'fields': (
+            'play_boolean_field', 'delay_float_field', 'datetime_field', 'duration_float_field',
+        )}),
+        ('Действия при ошибках и исключениях', {'fields': (
+            'restart_boolean_field', 'error_text_field',
+        )}),
+    )
+
+    search_fields = [
+        'name_char_field',
+        'description_text_field',
+        'path_slug_field',
+        'play_boolean_field',
+        'delay_float_field',
+        'datetime_field',
+        'duration_float_field',
+        'restart_boolean_field',
+        'error_text_field',
+    ]
+
+
+# Регистрация в админ-панели шаблонов
+admin.site.register(ComputerVisionModuleModel, ComputerVisionModuleModelAdmin)
 
 
 #

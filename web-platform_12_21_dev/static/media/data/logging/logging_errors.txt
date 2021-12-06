@@ -2954,3 +2954,5 @@ Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 20:17:51.925634, ActionModel matching
 , 127.0.0.1, /, GET, 2021-12-01 22:28:55.706142, 'AnonymousUser' object is not iterable
 
 , 127.0.0.1, /, GET, 2021-12-03 17:40:16.865882, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /salary/, POST, 2021-12-06 10:51:16.453717, '3.Доходы в натуральной форме'

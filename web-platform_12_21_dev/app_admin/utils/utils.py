@@ -17,6 +17,9 @@ from functools import wraps
 
 from typing import Union
 
+import cv2
+import httplib2
+import numpy
 import numpy as np
 import openpyxl
 import pyttsx3
@@ -28,9 +31,260 @@ from matplotlib import pyplot as plt, cm
 from matplotlib.ticker import LinearLocator
 from mpl_toolkits.mplot3d import axes3d
 from openpyxl.utils import get_column_letter
+from django.utils import timezone
+from app_admin.models import ComputerVisionModuleModel
 
 
-class TimeUtils:
+class ComputerVisionClass:
+    class SoloCamSettingsComputerVisionClassExample:
+        """
+        Настройки одной камеры для модуля: грохота 16 операции, 10 отметка
+        """
+
+        def __init__(self, ip: str, correct: float):
+            # Ip address
+            self.ip = ip
+            # Коэффициент корректировки
+            self.correct = round(correct, 3)
+
+    class EventLoopClass:
+        @staticmethod
+        def loop_modules_global(tick_delay=1.0, module_re_start_delay=5.0):
+            """
+            Цикл прохода по всем модулям-циклам
+            """
+            # try:
+            if True:
+                print('global tick')
+                dict_modules = {str(x[0]).strip(): str(x[1]).strip() for x in
+                                ComputerVisionModuleModel.get_all_modules()}
+                for module in ComputerVisionModuleModel.objects.filter(play_boolean_field=True):
+                    if module.play_boolean_field:
+                        # Проверка, что цикл модуля отработал в последний раз не позже "tick_delay" секунд
+                        print(module.datetime_field + datetime.timedelta(hours=6))
+                        print(DateTimeUtils.get_difference_datetime(seconds=module_re_start_delay))
+                        if module.datetime_field and (module.datetime_field + datetime.timedelta(hours=6)) > \
+                                DateTimeUtils.get_difference_datetime(seconds=-module_re_start_delay):
+                            play_module = False
+                        else:
+                            play_module = True
+                        print(play_module)
+                    else:
+                        continue
+                    if play_module:
+                        # Получение имени модуля из константы в модели ComputerVisionModuleModel
+                        name_module = dict_modules[module.path_slug_field]
+                        if name_module == 'Грохота, 16 операция, 26 отметка':
+                            threading.Thread(
+                                target=ComputerVisionClass.EventLoopClass.
+                                    Grohota16OperationClass.loop_module_grohota_16_operation(module),
+                                args=([])
+                            ).start()
+                        elif name_module == 'Грохота, 26 операция, ?? отметка':
+                            # threading.Thread(
+                            #     target=ComputerVisionClass.EventLoopClass.
+                            #         Grohota26OperationClass.loop_module_grohota_26_operation(),
+                            #     args=([])
+                            # ).start()
+                            pass
+                    else:
+                        continue
+                time.sleep(tick_delay)
+                ComputerVisionClass.EventLoopClass.loop_modules_global()
+            # except Exception as error:
+            #     print(error)
+            #     time.sleep(1)
+            #     ComputerVisionClass.EventLoopClass.loop_modules_global()
+
+        class Grohota16OperationClass:
+            @staticmethod
+            def loop_module_grohota_16_operation(module):
+                """
+                Цикл прохода по компонентам-функциям внутри модуля: Грохота, 16 операция, 10 отметка
+                """
+                try:
+                    # Начальное время
+                    start_time = time.time()
+                    # Данные из базы с настройками по каждому компоненту
+                    settings_components = [
+                        {
+                            'ip': '192.168.15.202',
+                            'correct': 1.2
+                        },
+                        {
+                            'ip': '192.168.15.203',
+                            'correct': 1.3
+                        },
+                        {
+                            'ip': '192.168.15.204',
+                            'correct': 1.4
+                        },
+                        {
+                            'ip': '192.168.15.205',
+                            'correct': 1.5
+                        },
+                        {
+                            'ip': '192.168.15.206',
+                            'correct': 1.6
+                        },
+                        {
+                            'ip': '192.168.15.207',
+                            'correct': 1.7
+                        },
+                        {
+                            'ip': '192.168.15.208',
+                            'correct': 1.8
+                        },
+                        {
+                            'ip': '192.168.15.209',
+                            'correct': 1.9
+                        },
+                        {
+                            'ip': '192.168.15.210',
+                            'correct': 2.0
+                        },
+                        {
+                            'ip': '192.168.15.211',
+                            'correct': 2.1
+                        },
+                    ]
+                    error_text_field = None
+                    with ThreadPoolExecutor() as executor:
+                        try:
+                            futures = []
+                            # Цикл для прохода по настройкам и запуску компонентов
+                            for settings in settings_components:
+                                futures.append(
+                                    executor.submit(
+                                        ComputerVisionClass.EventLoopClass.
+                                            Grohota16OperationClass.component_grohota_16_operation,
+                                        settings=settings
+                                    )
+                                )
+                            for future in concurrent.futures.as_completed(futures):
+                                value = f"{float(future.result()):0.3f}%"
+                                print(value)
+                        except Exception as error:
+                            error_text_field = f'error : {error}'
+                            pass
+
+                    module.duration_float_field = round(time.time() - start_time, 4)
+                    module.datetime_field = timezone.now()
+                    if error_text_field:
+                        module.error_text_field = error_text_field
+                    module.save()
+                    time.sleep(1.0)
+                    ComputerVisionClass.EventLoopClass.\
+                        Grohota16OperationClass.loop_module_grohota_16_operation(module=module)
+                except Exception as error:
+                    print(error)
+
+            @staticmethod
+            def component_grohota_16_operation(settings: dict):
+                """
+                Компонент-функция расчёта % схода на грохотах 16 операции, 10 отметка
+                """
+                try:
+                    sources = f'http://{str(settings["ip"])}:80' \
+                              f'/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
+                    login = 'admin'
+                    password = 'q1234567'
+                    temp_path = DirPathFolderPathClass.create_folder_in_this_dir(
+                        folder_name='static/media/data/computer_vision/temp'
+                    )
+                    h = httplib2.Http(temp_path)
+                    h.add_credentials(login, password)
+                    response, content = h.request(sources)
+                    image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
+                    image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
+                    mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
+                    mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
+                    bitwise_and = cv2.bitwise_and(image, image, mask=mask)
+                    cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
+                    inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
+                                          numpy.array([255, 120, 255], dtype=numpy.uint8))
+                    value = numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * float(settings['correct'])
+                    return round(value, 3)
+                except Exception as error:
+                    return None
+
+        class Grohota26OperationClass:
+            @staticmethod
+            def loop_module_grohota_26_operation():
+                """
+                Цикл прохода по компонентам-функциям внутри модуля: Грохота, 26 операция, ?? отметка
+                """
+                pass
+
+            @staticmethod
+            def component_grohota_26_operation():
+                """
+                Компонент-функция расчёта % схода на грохотах 26 операции, ?? отметка
+                """
+                return None
+
+    @staticmethod
+    def example_analyse():
+
+        def analyse_image_open_cv(ip=203):
+            # Начальное время
+            # start_time = time.time()
+            # print('start')
+
+            sources = f'http://192.168.15.{ip}:80/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
+            login = 'admin'
+            password = 'q1234567'
+            h = httplib2.Http(os.path.abspath('__file__'))
+            h.add_credentials(login, password)
+            response, content = h.request(sources)
+            image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
+            image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
+            mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
+            mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
+            bitwise_and = cv2.bitwise_and(image, image, mask=mask)
+            cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
+            inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
+                                  numpy.array([255, 120, 255], dtype=numpy.uint8))
+            value = f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * 1.0:0.2f}%"
+
+            # Финальное время
+            # print(f"Final time: {round(time.time() - start_time, 1)}")
+            # print('end')
+
+            # print(value)
+            return value
+
+        def analyse():
+
+            list_ip = []
+            for num in range(202, 211 + 1):
+                list_ip.append(num)
+            print(list_ip)
+
+            index = 0
+            while index < 100:
+                index += 1
+                # Начальное время
+                start_time = time.time()
+                print('start')
+                # Менеджер контекста для многопотока под ThreadPoolExecutor
+                with ThreadPoolExecutor() as executor:
+                    futures = []
+                    # Цикл для прохода по ссылкам
+                    for ip in list_ip:
+                        futures.append(executor.submit(analyse_image_open_cv, ip=ip))
+                    for future in concurrent.futures.as_completed(futures):
+                        print(future.result())
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+                time.sleep(1)
+
+        threading.Thread(target=analyse, args=([])).start()
+
+
+class DateTimeUtils:
     @staticmethod
     def get_current_datetime():
         return f"{time.strftime('%Y-%m-%d %H:%M:%S')}"
@@ -46,16 +300,16 @@ class TimeUtils:
     @staticmethod
     def get_difference_datetime(days=0.0, hours=0.0, minutes=0.0, seconds=0.0):
         value = datetime.datetime.now() + datetime.timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
-        return f"{value.strftime('%Y-%m-%d %H:%M:%S')}"
+        return value.replace(tzinfo=datetime.timezone.utc)
 
     class Example:
         @staticmethod
         def example_get_datetime():
-            print(TimeUtils.get_current_datetime())
+            print(DateTimeUtils.get_current_datetime())
 
         @staticmethod
         def example_get_difference_datetime():
-            print(TimeUtils.get_difference_datetime(hours=-2))
+            print(DateTimeUtils.get_difference_datetime(hours=-2))
 
 
 class FileReadWriteClass:
@@ -96,7 +350,7 @@ class LoggingClass:
     def logging_to_local_file(logging_text, error_func, file_name='logging.txt', type_write='a'):
         try:
             with open(file_name, type_write) as file:
-                file.write(f'\n{TimeUtils.get_current_datetime()} | error_func: {error_func} | {logging_text}\n')
+                file.write(f'\n{DateTimeUtils.get_current_datetime()} | error_func: {error_func} | {logging_text}\n')
         except Exception as error:
             print(f'\n{time.strftime("%x %X")} | error_func: {error_func} | {error}\n')
 
@@ -240,7 +494,8 @@ class DirPathFolderPathClass:
         try:
             os.makedirs(full_path)
         except Exception as error:
-            print(f'directory already yet | {error}')
+            # print(f'directory already yet | {error}')
+            pass
         finally:
             return full_path
 

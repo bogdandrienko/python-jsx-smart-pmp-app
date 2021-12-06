@@ -32,6 +32,7 @@ urlpatterns = [
     #
     #
     #
+    path('analyse/', views.analyse, name='analyse'),
     #
     #
     #

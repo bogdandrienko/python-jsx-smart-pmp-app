@@ -4,6 +4,9 @@ import hashlib
 import json
 import os
 import random
+import threading
+from concurrent.futures import ThreadPoolExecutor
+
 import httplib2
 import requests
 from django.conf import settings
@@ -28,7 +31,8 @@ from .forms import ExamplesModelForm, RationalForm, NotificationForm, \
     ArticleForm, SmsForm, GeoForm, BankIdeasForm
 from app_admin.utils.service import DjangoClass, PaginationClass, SalaryClass, Xhtml2pdfClass, GeoClass, CareerClass, \
     UtilsClass
-from app_admin.utils.utils_old import ExcelClass, SQLClass, EncryptingClass
+from app_admin.utils.utils_old import SQLClass
+from app_admin.utils.utils import ExcelClass, EncryptingClass, ComputerVisionClass
 
 
 def examples_forms(request):
@@ -238,7 +242,7 @@ def logging(request):
                             value=value,
                             sheet=sheet
                         )
-                ExcelClass.workbook_save(workbook=workbook, filename='static/media/data/logging/logging.xlsx')
+                ExcelClass.workbook_save(workbook=workbook, excel_file='static/media/data/logging/logging.xlsx')
                 response = 1
             except Exception as error:
                 DjangoClass.LoggingClass.logging_errors(request=request, error=error)
@@ -885,7 +889,7 @@ def account_export_accounts(request):
                     except Exception as error:
                         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                     data = [titles, body]
-                ExcelClass.workbook_save(workbook=workbook, filename='static/media/data/account/export_users.xlsx')
+                ExcelClass.workbook_save(workbook=workbook, excel_file='static/media/data/account/export_users.xlsx')
                 response = 1
             except Exception as error:
                 DjangoClass.LoggingClass.logging_errors(request=request, error=error)
@@ -942,7 +946,7 @@ def account_generate_passwords(request):
                     sheet[f'B{n}'] = encrypt_password
                     body.append([password, encrypt_password])
                 ExcelClass.workbook_save(
-                    workbook=workbook, filename='static/media/data/account/generate_passwords.xlsx'
+                    workbook=workbook, excel_file='static/media/data/account/generate_passwords.xlsx'
                 )
                 data = [titles, body]
                 response = 1
@@ -1173,6 +1177,27 @@ def account_change_groups(request):
     #     }
 
     return render(request, 'account/account_change_groups.html', context)
+
+
+def analyse(request):
+    """
+    Машинное зрение
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request)
+    if page:
+        return redirect(page)
+
+    print('\n***** *****')
+    print('start loop_modules_global')
+    print('***** *****\n')
+
+    threading.Thread(
+        target=ComputerVisionClass.EventLoopClass.loop_modules_global(),
+        args=([1.0, 5.0])
+    ).start()
+
+    return redirect(to='home')
 
 
 #

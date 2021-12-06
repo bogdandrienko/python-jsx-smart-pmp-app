@@ -2697,7 +2697,6 @@ class IdeaRatingModel(models.Model):
                f':: {self.datetime_field}'
 
 
-
 #
 #
 #
@@ -3144,6 +3143,204 @@ class ProjectsModel(models.Model):
 
     def get_id(self):
         return self.id
+
+
+# Computer Vision
+class ComputerVisionModuleModel(models.Model):
+    """
+    Класс, содержащий в себе объект настройки модуля для машинного зрения
+    """
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя модуля:',
+        help_text='<small class="text-muted">короткое и лаконичное имя для модуля</small><hr><br>',
+
+        max_length=64,
+    )
+    description_text_field = models.TextField(
+        db_column='description_text_field_db_column',
+        db_index=True,
+        db_tablespace='description_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Описание модуля:',
+        help_text='<small class="text-muted">описание для модуля</small><hr><br>',
+
+        max_length=1024,
+    )
+    LIST_DB_VIEW_MODULES_CHOICES = [
+        ('16_operation', 'Грохота, 16 операция, 26 отметка'),
+        ('26_operation', 'Грохота, 26 операция, ?? отметка'),
+    ]
+    path_slug_field = models.SlugField(
+        db_column='path_slug_field_db_column',
+        db_index=True,
+        db_tablespace='path_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        choices=LIST_DB_VIEW_MODULES_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Путь модуля:',
+        help_text='<small class="text-muted">полный путь от класса до функции вызова цикла модуля</small><hr><br>',
+
+        max_length=128,
+        allow_unicode=False,
+    )
+    play_boolean_field = models.BooleanField(
+        db_column='play_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='play_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=False,
+        verbose_name='Запуск работы модуля:',
+        help_text='<small class="text-muted">нужно ли запускать модуль каждый тик главного цикла событий'
+                  '</small><hr><br>',
+    )
+    delay_float_field = models.FloatField(
+        db_column='delay_float_field_db_column',
+        db_index=True,
+        db_tablespace='delay_float_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(3600), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=3.0,
+        verbose_name='Задержка цикла модуля:',
+        help_text='<small class="text-muted">время для тика каждого компонента в модуле</small><hr><br>',
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='datetime_field',
+        help_text='<small class="text-muted">дата и время последнего тика модуля</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    duration_float_field = models.FloatField(
+        db_column='duration_float_field_db_column',
+        db_index=True,
+        db_tablespace='duration_float_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(3600), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0.0,
+        verbose_name='Длительность операции:',
+        help_text='<small class="text-muted">длительность последнего тика модуля</small><hr><br>',
+    )
+    restart_boolean_field = models.BooleanField(
+        db_column='restart_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='restart_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=True,
+        verbose_name='Рестарт модуля после ошибки:',
+        help_text='<small class="text-muted">нужно ли перезапускать модуль после ошибки</small><hr><br>',
+    )
+    error_text_field = models.TextField(
+        db_column='error_text_field_db_column',
+        db_index=True,
+        db_tablespace='error_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(2048), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Текст исключения-ошибки модуля:',
+        help_text='<small class="text-muted">описание исключения и/или ошибки модуля</small><hr><br>',
+
+        max_length=2048,
+    )
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('name_char_field', 'path_slug_field')
+        verbose_name = 'Computer Vision Module'
+        verbose_name_plural = 'Computer Vision Modules'
+        db_table = 'computer_vision_module_model_table'
+
+    def __str__(self):
+        return f'{self.name_char_field}'
+
+    @staticmethod
+    def get_all_modules():
+        return ComputerVisionModuleModel.LIST_DB_VIEW_MODULES_CHOICES
 
 
 #

@@ -174,7 +174,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 print(multiply)
 
                                 # Коррекция краёв изображения
-                                correct_field = int(1000 * multiply)
+                                correct_field = int(1250 * multiply)
 
                                 # Размеры исходного изображения
 
@@ -186,7 +186,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 # height_addiction = int(image_height * 1.25 * multiply)
 
                                 # Качество сжатия изображения
-                                quality = 100
+                                quality = 95
 
                                 # Получение значения от исходного числа и % от него
                                 def get_percent(value, side):
@@ -687,7 +687,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 input_2 = '1c.xlsx'
                 output_1 = 'import.xlsx'
 
-                workbook = ExcelClass.workbook_load(file=input_1)
+                workbook = ExcelClass.workbook_load(excel_file=input_1)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
                 max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
 
@@ -699,7 +699,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(global_workers_id_list)
                 ExcelClass.workbook_close(workbook=workbook)
 
-                workbook = ExcelClass.workbook_load(file=input_2)
+                workbook = ExcelClass.workbook_load(excel_file=input_2)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
                 max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
 
@@ -724,7 +724,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(global_workers_id_list)
                 ExcelClass.workbook_close(workbook=workbook)
 
-                workbook = ExcelClass.workbook_load(file=output_1)
+                workbook = ExcelClass.workbook_load(excel_file=output_1)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
                 for row_export in global_workers_list:
                     print(f'{row_export[3]} {row_export[4]} {row_export[8]}')
@@ -735,46 +735,65 @@ class MainWidgetClass(QtWidgets.QWidget):
                             value=value,
                             sheet=sheet
                         )
-                ExcelClass.workbook_save(workbook=workbook, filename=output_1)
+                ExcelClass.workbook_save(workbook=workbook, excel_file=output_1)
 
                 # Финальное время
                 print(f"Final time: {round(time.time() - start_time, 1)}")
                 print('end')
 
-                # def get_sheet_value(column, row, _sheet):
-                #     return str(_sheet[str(column) + str(row)].value)
-                #
-                # def set_sheet_value(column, row, value):
-                #     sheet[f'{column}{row}'] = str(value)
-                #
-                # file_1c = 'export.xlsx'
-                # workers_id_1c = []
-                # id_1c = 9
-                #
-                # workbook = openpyxl.load_workbook(file_1c)
-                # sheet = workbook.active
-                # for num in range(1, 3000):
-                #     workers_id_1c.append(get_sheet_value(get_column_letter(int(id_1c)), num, _sheet=sheet))
-                # workbook.close()
-                #
-                # file_skud = 'import.xlsx'
-                # workers_id_skud = []
-                # id_skud = 3
-                #
-                # workbook = openpyxl.load_workbook(file_skud)
-                # sheet = workbook.active
-                # for num in range(1, 3000):
-                #     workers_id_skud.append(get_sheet_value(get_column_letter(int(id_skud)), num, _sheet=sheet))
-                # workbook.close()
-                #
-                # workbook = openpyxl.load_workbook(file_1c)
-                # sheet = workbook.active
-                #
-                # for x in workers_id_1c:
-                #     for y in workers_id_skud:
-                #         if x == y and x is not None:
-                #             set_sheet_value(column=get_column_letter(int(8)), row=workers_id_1c.index(x) + 1, value='+')
-                # workbook.save('export.xlsx')
+            def find_dublicates(max_workers=1):
+                start_time = time.time()
+                print('start')
+                print(f'max_workers={max_workers}')
+
+                input_1 = 'export.xlsx'
+                output_1 = 'import.xlsx'
+
+                workbook = ExcelClass.workbook_load(excel_file=input_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
+
+                workers_set = []
+                global_workers_list = []
+                for row_export in range(1, max_num_rows + 1):
+                    local_workers_list = []
+                    for col in range(1, 27 + 1):
+                        local_workers_list.append(
+                            ExcelClass.get_sheet_value(
+                                col=ExcelClass.get_column_letter(col),
+                                row=row_export,
+                                sheet=sheet
+                            )
+                        )
+                    if local_workers_list[21] == '':
+                        full_name = f'{local_workers_list[0]}+{local_workers_list[1]}'
+                        try:
+                            workers_set.index(full_name)
+                            local_workers_list[22] = 'dubl'
+                            print('is dubl')
+                        except Exception as error:
+                            workers_set.append(full_name)
+                    global_workers_list.append(local_workers_list)
+                for worker in global_workers_list:
+                    print(worker)
+                ExcelClass.workbook_close(workbook=workbook)
+
+                workbook = ExcelClass.workbook_load(excel_file=output_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                for row_export in global_workers_list:
+                    print(f'{row_export[3]} {row_export[4]} {row_export[8]}')
+                    for value in row_export:
+                        ExcelClass.set_sheet_value(
+                            col=ExcelClass.get_column_letter(row_export.index(value) + 1),
+                            row=global_workers_list.index(row_export) + 1,
+                            value=value,
+                            sheet=sheet
+                        )
+                ExcelClass.workbook_save(workbook=workbook, excel_file=output_1)
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
 
             # Переименование файлов в папках, включая все подпапки
             def rename_file_in_folders(max_workers=1):
@@ -793,6 +812,30 @@ class MainWidgetClass(QtWidgets.QWidget):
                 # Финальное время
                 print(f"Final time: {round(time.time() - start_time, 1)}")
                 print('end')
+
+            # 1 Перевести в единый формат .jpg фото из папок: готовые в импорт и уже добавлены. Сменить латинскую P
+            # на кириллицу.
+            # 2 Объединить все фото в одной папке, заменив перед этим старые свежими.
+            # 3 Обрезать лица
+            # алгоритмом: поиграться с отношением, разрешением и сжатием.
+            # 4 Найти в базе фото совпадения с КМ,
+            # скорректировать ошибки.
+            # 5 Найти в базе фото совпадения с ТОО, скорректировать ошибки.
+            # 6 Сменить
+            # кириллическую P на латинскую.
+            # 7 Импортировать в базу данных hikvision.
+            # 8 Переделать некорректные
+            # названия фото и снова импортировать.
+            # 9 Выгрузить из системы список работников, добавить поля в базу
+            # hikvision и загрузить дополненный список из 1с.
+
+            # threading.Thread(target=find_face, args=([3])).start()
+            # threading.Thread(target=equal_foto, args=([6])).start()
+            # threading.Thread(target=remove_id_from_jpg, args=([6])).start()
+            # threading.Thread(target=change_p_to_eng_to_rus, args=([12, True])).start()
+            # threading.Thread(target=filling_extra_data_from_1c_to_import_hikvision, args=([1])).start()
+            # threading.Thread(target=equal_system, args=([1])).start()
+            # threading.Thread(target=find_dublicates, args=([1])).start()
 
             # Сравнение данных из 1с и данных в базе данных енбека
             def extra_enbek():
@@ -852,87 +895,9 @@ class MainWidgetClass(QtWidgets.QWidget):
 
             # threading.Thread(target=extra_enbek, args=()).start()
 
-            def analyse_image_open_cv(ip=203):
-                # Начальное время
-                # start_time = time.time()
-                # print('start')
-
-                sources = f'http://192.168.15.{ip}:80/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
-                login = 'admin'
-                password = 'q1234567'
-                h = httplib2.Http(os.path.abspath('__file__'))
-                h.add_credentials(login, password)
-                response, content = h.request(sources)
-                image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
-                image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
-                mask = cv2.imread('m_16_8.jpg', 0)
-                mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
-                bitwise_and = cv2.bitwise_and(image, image, mask=mask)
-                cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
-                inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
-                                      numpy.array([255, 120, 255], dtype=numpy.uint8))
-                value = f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * 1.0:0.2f}%"
-
-                # cv2.imshow('image', image)
-                # cv2.imshow('mask', mask)
-                # cv2.imshow('inrange', inrange)
-
-                # Финальное время
-                # print(f"Final time: {round(time.time() - start_time, 1)}")
-                # print('end')
-
-                # print(value)
-                return value
-
-            # Начальное время
-            start_time = time.time()
-            print('start')
-
-            list_ip = []
-            for num in range(202, 211+1):
-                list_ip.append(num)
-            print(list_ip)
-
-            # Менеджер контекста для многопотока под ThreadPoolExecutor
-            with ThreadPoolExecutor() as executor:
-                futures = []
-                # Цикл для прохода по ссылкам
-                for ip in list_ip:
-                    futures.append(executor.submit(analyse_image_open_cv, ip=ip))
-                for future in concurrent.futures.as_completed(futures):
-                    print(future.result())
-
-            # answer = []
-            # for ip in list_ip:
-            #     answer.append(analyse_image_open_cv(ip=ip))
-            # print(answer)
-
-            # Финальное время
-            print(f"Final time: {round(time.time() - start_time, 1)}")
-            print('end')
-
-            # threading.Thread(target=analyse_image_open_cv, args=([3])).start()
-
-            # threading.Thread(target=find_face, args=([3])).start()
-            # threading.Thread(target=equal_foto, args=([6])).start()
-            # threading.Thread(target=remove_id_from_jpg, args=([6])).start()
-            # threading.Thread(target=change_p_to_eng_to_rus, args=([12, True])).start()
-            # threading.Thread(target=filling_extra_data_from_1c_to_import_hikvision, args=([1])).start()
-            # threading.Thread(target=equal_system, args=([1])).start()
-
         except Exception as error:
             print(error)
 
-
-# 1 Перевести в единый формат .jpg фото из папок: готовые в импорт и уже добавлены. Сменить латинскую P на кириллицу.
-# 2 Объединить все фото в одной папке, заменив перед этим старые свежими.
-# 3 Обрезать лица алгоритмом: поиграться с отношением, разрешением и сжатием.
-# 4 Найти в базе фото совпадения с КМ, скорректировать ошибки.
-# 5 Найти в базе фото совпадения с ТОО, скорректировать ошибки.
-# 6 Сменить кириллическую P на латинскую.
-# 7 Импортировать в базу данных hikvision.
-# 8 Переделать некорректные названия фото и снова импортировать.
-# 9 Выгрузить из системы список работников, добавить поля в базу hikvision и загрузить дополненный список из 1с.
 
 # MAIN
 if __name__ == "__main__":

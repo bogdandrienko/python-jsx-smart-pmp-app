@@ -28,6 +28,54 @@
         <div class="container">
 
             <div class="shadow-sm btn btn-lg">
+
+
+
+                <form action="{% url 'analyse' %}"
+                      method="POST"
+                      target="_self"
+                      enctype="multipart/form-data"
+                      name="form"
+                      autocomplete="on"
+                      class="text-center"
+                >
+                    {% csrf_token %}
+                        <hr/>
+                    <!-- Grid row -->
+                    <div class="container-fluid btn-group row pb-1">
+                        <!-- Grid column -->
+                        <div class="col-lg-4">
+                            <button href=""
+                                    type="submit"
+                                    class="w-100 form-control btn btn-lg btn-outline-primary"
+                            >Подтвердить</button>
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-lg-4">
+                            <button href=""
+                                    type="reset"
+                                    class="w-100 form-control btn btn-lg btn-outline-warning"
+                            >Сбросить</button>
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-lg-4">
+                            <a href="{% url 'account_recover_password' 'none' %}"
+                                    type="button"
+                                    class="w-100 form-control btn btn-lg btn-outline-danger"
+                            >Восстановить</a>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                    <hr/>
+                </form>
+
+
+
                 <a class="" href="{% url 'module' %}">
                     <div class="">
                         <h5 class=""><strong class="text-dark text-decoration-underline">Модули</strong></h5>
