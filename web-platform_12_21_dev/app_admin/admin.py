@@ -7,7 +7,8 @@ from .models import ExamplesModel, UserModel, LoggingModel, IdeaModel, IdeaComme
     CommentRationalModel, ActionModel, GroupModel, LikeRationalModel, RationalModel, AccountTemplateModel, \
     EmailModel, \
     ContactModel, DocumentModel, MessageModel, SmsModel, ArticleModel, CommentModel, CityModel, IdeasModel, \
-    IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel, IdeaRatingModel, ComputerVisionModuleModel
+    IdeasCommentModel, IdeasLikeModel, IdeasCategoryModel, ProjectsModel, IdeaRatingModel, ComputerVisionModuleModel, \
+    ComputerVisionComponentModel
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # admin
@@ -922,6 +923,35 @@ class ComputerVisionModuleModelAdmin(admin.ModelAdmin):
 admin.site.register(ComputerVisionModuleModel, ComputerVisionModuleModelAdmin)
 
 
+class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
+    """
+    Настройки 'ComputerVisionComponentModel' на панели администратора
+    """
+
+    list_display = (
+        'genericipaddress_field', 'play_boolean_field',
+    )
+
+    list_filter = (
+        'genericipaddress_field', 'play_boolean_field',
+    )
+
+    fieldsets = (
+        ('ip', {'fields': (
+            'genericipaddress_field',
+        )}),
+        ('play', {'fields': (
+            'play_boolean_field',
+        )}),
+    )
+
+    search_fields = [
+        'genericipaddress_field', 'play_boolean_field',
+    ]
+
+
+# Регистрация в админ-панели шаблонов
+admin.site.register(ComputerVisionComponentModel, ComputerVisionComponentModelAdmin)
 #
 #
 #

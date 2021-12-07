@@ -4,7 +4,6 @@ import hashlib
 import json
 import os
 import random
-import threading
 from concurrent.futures import ThreadPoolExecutor
 
 import httplib2
@@ -21,18 +20,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
-from .models import LoggingModel, GroupModel, RationalModel, CategoryRationalModel, LikeRationalModel, \
-    CommentRationalModel, \
-    ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, ContactModel, DocumentModel, \
-    MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, \
-    IdeasCategoryModel, IdeaModel, UserModel, IdeaCommentModel, IdeaRatingModel, ActionModel
-from .forms import ExamplesModelForm, RationalForm, NotificationForm, \
-    MessageForm, DocumentForm, ContactForm, CityForm, \
-    ArticleForm, SmsForm, GeoForm, BankIdeasForm
+
 from app_admin.utils.service import DjangoClass, PaginationClass, SalaryClass, Xhtml2pdfClass, GeoClass, CareerClass, \
-    UtilsClass
-from app_admin.utils.utils_old import SQLClass
-from app_admin.utils.utils import ExcelClass, EncryptingClass, ComputerVisionClass
+    UtilsClass, ComputerVisionClass
+from app_admin.utils.utils import ExcelClass, EncryptingClass, SQLClass
+from .forms import ExamplesModelForm, RationalForm, NotificationForm, MessageForm, DocumentForm, ContactForm, \
+    CityForm, ArticleForm, SmsForm, GeoForm, BankIdeasForm
+from .models import LoggingModel, GroupModel, RationalModel, CategoryRationalModel, LikeRationalModel, \
+    CommentRationalModel, ApplicationModuleModel, ApplicationComponentModel, NotificationModel, EmailModel, \
+    ContactModel, DocumentModel, MessageModel, CityModel, ArticleModel, SmsModel, IdeasModel, IdeasCategoryModel, \
+    IdeaModel, UserModel, IdeaCommentModel, IdeaRatingModel, ActionModel
 
 
 def examples_forms(request):
@@ -1188,14 +1185,13 @@ def analyse(request):
     if page:
         return redirect(page)
 
-    print('\n***** *****')
-    print('start loop_modules_global')
-    print('***** *****\n')
-
-    threading.Thread(
-        target=ComputerVisionClass.EventLoopClass.loop_modules_global(),
-        args=([1.0, 5.0])
-    ).start()
+    try:
+        with ThreadPoolExecutor() as executor:
+            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.1)
+    except Exception as error:
+        print(f'\nanalyse | error : {error}\n')
+        with ThreadPoolExecutor() as executor:
+            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
 
     return redirect(to='home')
 

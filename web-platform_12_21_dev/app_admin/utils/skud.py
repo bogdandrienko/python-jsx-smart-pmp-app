@@ -1,43 +1,17 @@
 import os
-import shutil
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from fnmatch import fnmatch
 from multiprocessing import freeze_support
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from shutil import move, copy
-import threading
-import concurrent.futures
-import asyncio
-from time import sleep
+from shutil import copy
 
-import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
+import PySide6.QtWidgets as QtWidgets
 import cv2
-import httplib2
-import numpy
-import openpyxl
-import requests
-from openpyxl.utils import get_column_letter
 from skimage import io
-
-from app_admin.utils.utils_old import ExcelClass
-from app_admin.utils.utils import DirPathFolderPathClass
-
-
-# Синхронная функция
-def get_url(page_url, timeout=2):
-    try:
-        response = requests.get(url=page_url, timeout=timeout)
-        page_status = "unknown"
-        if response.status_code == 200:
-            page_status = "exists"
-        elif response.status_code == 404:
-            page_status = "does not exist"
-
-        return page_url + " - " + page_status
-    except Exception as error:
-        return page_url + " - " + f'error: {error}'
+from app_admin.utils.utils import ExcelClass, DirPathFolderPathClass
 
 
 # UI
@@ -168,55 +142,34 @@ class MainWidgetClass(QtWidgets.QWidget):
                             if fnmatch(file_name, pattern):
                                 # Чтение изображения в память
                                 src_img = io.imread(input_folder + '\\' + file_name)
-
-                                # Множитель
-                                multiply = round(len(src_img) / 9248 * 0.5, 2)
-                                print(multiply)
-
-                                # Коррекция краёв изображения
-                                correct_field = int(1250 * multiply)
-
                                 # Размеры исходного изображения
-
+                                image_height = src_img.shape[0]
+                                image_width = src_img.shape[1]
                                 # Загрузка алгоритма классификатора для поиска лиц
                                 haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
-
-                                # Значение, добавляемое по краям изображения
-                                # width_addiction = int(image_width * 1.25 * multiply)
-                                # height_addiction = int(image_height * 1.25 * multiply)
-
-                                # Качество сжатия изображения
-                                quality = 95
-
-                                # Получение значения от исходного числа и % от него
-                                def get_percent(value, side):
-                                    return side * value // 100
-
-                                # Установка обрезки краёв и обрезка
-                                # crop_top = (image_height - (8 * multiply)) // 2
-                                # crop_down = (image_height - (8 * multiply)) // 2
-                                # crop_left = (image_width - (6 * multiply)) // 2
-                                # crop_right = (image_width - (6 * multiply)) // 2
-                                # src_img = src_img[
-                                #           int(crop_top):int(image_height) - int(crop_down),
-                                #           int(crop_left):int(image_width) - int(crop_right)
-                                #           ]
-
+                                # Качество масштабирования изображения
+                                scaling = 50
+                                dsize = (int(image_width * scaling / 100), int(image_height * scaling / 100))
+                                # Масштабирование изображения
+                                final = cv2.resize(
+                                    src=src_img,
+                                    dsize=dsize,
+                                    interpolation=cv2.INTER_CUBIC
+                                )
                                 # Предобработка изображения и поиск лиц алгоритмом
-                                gray_img = cv2.cvtColor(src_img, cv2.COLOR_BGR2GRAY)
+                                gray_img = cv2.cvtColor(final, cv2.COLOR_BGR2GRAY)
                                 detect_faces = haar_face_cascade.detectMultiScale(gray_img)
-
+                                # Коррекция краёв изображения
+                                correct_field = int(1000 * image_height / 9248)
                                 # Очистка некорректно найдённых лиц на изображении
                                 correct_faces = []
                                 for (x, y, w, h) in detect_faces:
                                     if x > correct_field and y > correct_field and w > correct_field and \
                                             h > correct_field:
                                         correct_faces.append([x, y, w, h])
-
                                 # Формирование финального результата
                                 output = None
                                 for (x, y, w, h) in correct_faces:
-                                    print(f'y={y} | h={h} | x={x} | w={w}')
                                     height_1 = int(y - (h * 0.5))
                                     if height_1 < 0:
                                         height_1 = 0
@@ -229,23 +182,20 @@ class MainWidgetClass(QtWidgets.QWidget):
                                     width_2 = int(x + w + (w * 0.5 * 0.4))
                                     if width_2 < 0:
                                         width_2 = 0
-                                    print(f'height_1={height_1} | height_2={height_2} | '
-                                          f'width_1={width_1} |  width_2={width_2}')
                                     if w > correct_field or h > correct_field:
                                         if abs(height_2 - height_1) > correct_field and \
                                                 abs(width_2 - width_1) > correct_field:
-                                            output = src_img[int(height_1):int(height_2), int(width_1):int(width_2)]
-
+                                            output = final[int(height_1):int(height_2), int(width_1):int(width_2)]
                                 # Удаление исходного фото
                                 try:
                                     if remove_old_file:
                                         os.remove(input_folder + '\\' + file_name)
                                 except Exception as error:
                                     pass
-
+                                # Качество сжатия финального изображения
+                                quality = 95
                                 # Сохранение результата
                                 io.imsave(output_folder + '\\' + file_name, output, quality=quality)
-
                                 # Вывод имени обработанного фото
                                 return f'{file_name}\n'
                             # Если изображение не того формата, копирование его в выбранную папку
@@ -287,7 +237,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f'max_workers={max_workers}')
 
                 # Выбор excel-файла для загрузки данных из 1с
-                export_file_from_1c = 'export.xlsx'
+                export_file_from_1c = 'skud/export.xlsx'
                 # Выбор столбцов с данными в excel-файле
                 export_cols_from_1c = '549'
 
@@ -303,7 +253,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 pattern = '*.jpg'
 
                 # Загрузка в память excel-файла
-                workbook = ExcelClass.workbook_load(file=export_file_from_1c)
+                workbook = ExcelClass.workbook_load(excel_file=export_file_from_1c)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
                 max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
 
@@ -537,21 +487,21 @@ class MainWidgetClass(QtWidgets.QWidget):
                     try:
                         # Проверка на формат изображения
                         if fnmatch(file_name, pattern):
-                            full_name = file_name.strip().split('.')[0].strip()
-                            first_name = full_name.split('+')[0].strip()
-                            second_name = full_name.split('+')[1].strip()
-                            new_name = f'{first_name}+{second_name}.jpg'
+                            first_name = file_name.split('+')[0].strip()
+                            second_name = file_name.split('+')[1].strip()
+                            new_name = f'{first_name}+{second_name}'
                             if to_eng:
-                                eng = 1056
-                                rus = 80
+                                russian = 1056
+                                english = 80
                             else:
-                                eng = 80
-                                rus = 1056
-                            if ord(first_name[0:1:]) == eng or ord(second_name[0:1:]) == eng:
-                                if ord(first_name[0:1:]) == eng:
-                                    first_name = chr(rus) + first_name[1::]
-                                if ord(second_name[0:1:]) == eng:
-                                    second_name = chr(rus) + second_name[1::]
+                                russian = 80
+                                english = 1056
+                            if ord(first_name[0:1:]) == russian or ord(second_name[0:1:]) == russian:
+                                if ord(first_name[0:1:]) == russian:
+                                    first_name = chr(english) + first_name[1::]
+                                if ord(second_name[0:1:]) == russian:
+                                    second_name = chr(english) + second_name[1::]
+                                new_name = f'{first_name}+{second_name}'
                                 copy(f'{input_folder}\\{file_name}', f'{output_folder}\\{new_name}')
                                 message = f'{new_name}\n'
                             else:
@@ -594,7 +544,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 input_2 = 'export.xlsx'
                 output_1 = 'import.xlsx'
 
-                workbook = ExcelClass.workbook_load(file=input_1)
+                workbook = ExcelClass.workbook_load(excel_file=input_1)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
                 max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
 
@@ -617,7 +567,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(global_workers_id_list)
                 ExcelClass.workbook_close(workbook=workbook)
 
-                workbook = ExcelClass.workbook_load(file=input_2)
+                workbook = ExcelClass.workbook_load(excel_file=input_2)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
                 max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
                 global_workers_export_list = []
@@ -635,7 +585,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(global_workers_export_list)
                 ExcelClass.workbook_close(workbook=workbook)
 
-                workbook = ExcelClass.workbook_load(file=output_1)
+                workbook = ExcelClass.workbook_load(excel_file=output_1)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
                 for row_export in global_workers_export_list:
                     print(f'{row_export[0]} {row_export[1]} {row_export[2]}')
@@ -671,7 +621,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 value=value,
                                 sheet=sheet
                             )
-                ExcelClass.workbook_save(workbook=workbook, filename=output_1)
+                ExcelClass.workbook_save(workbook=workbook, excel_file=output_1)
 
                 # Финальное время
                 print(f"Final time: {round(time.time() - start_time, 1)}")
@@ -741,6 +691,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f"Final time: {round(time.time() - start_time, 1)}")
                 print('end')
 
+            # Поиск в экспортированном файле дубликаты людей из ТОО
             def find_dublicates(max_workers=1):
                 start_time = time.time()
                 print('start')
@@ -777,6 +728,75 @@ class MainWidgetClass(QtWidgets.QWidget):
                 for worker in global_workers_list:
                     print(worker)
                 ExcelClass.workbook_close(workbook=workbook)
+
+                workbook = ExcelClass.workbook_load(excel_file=output_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                for row_export in global_workers_list:
+                    print(f'{row_export[3]} {row_export[4]} {row_export[8]}')
+                    for value in row_export:
+                        ExcelClass.set_sheet_value(
+                            col=ExcelClass.get_column_letter(row_export.index(value) + 1),
+                            row=global_workers_list.index(row_export) + 1,
+                            value=value,
+                            sheet=sheet
+                        )
+                ExcelClass.workbook_save(workbook=workbook, excel_file=output_1)
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+
+            # Вывод статистики по фото персонала в системе:
+            def get_pixcels():
+                start_time = time.time()
+                print('start')
+
+                input_1 = '1c.xlsx'
+                output_1 = 'import.xlsx'
+
+                workbook = ExcelClass.workbook_load(excel_file=input_1)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
+
+                global_workers_list = []
+                global_workers_id_list = []
+                for row_export in range(1, max_num_rows + 1):
+                    local_workers_list = []
+                    for col in range(1, 10 + 1):
+                        local_workers_list.append(
+                            ExcelClass.get_sheet_value(
+                                col=ExcelClass.get_column_letter(col),
+                                row=row_export,
+                                sheet=sheet
+                            )
+                        )
+                    if local_workers_list[7]:
+                        global_workers_list.append(local_workers_list)
+                        global_workers_id_list.append(local_workers_list[7])
+                print(global_workers_list)
+                print(global_workers_id_list)
+                ExcelClass.workbook_close(workbook=workbook)
+
+                pattern = '*.jpg'
+                for path, subdirs, files in os.walk('input'):
+                    for file in files:
+                        if fnmatch(file, pattern):
+                            try:
+                                image_id = file.split('.')[0].strip().split('_')[1].strip()
+                                print(image_id)
+                                row_id = global_workers_id_list.index(image_id)
+                                print(row_id)
+                                src_img = io.imread(f'input\\{file}')
+                                # Размеры исходного изображения
+                                image_height = src_img.shape[0]
+                                image_width = src_img.shape[1]
+                                print(image_height, image_width)
+                                print(global_workers_list[row_id])
+                                global_workers_list[row_id].append(image_height)
+                                global_workers_list[row_id].append(image_width)
+                                print(global_workers_list[row_id])
+                            except Exception as error:
+                                print('pass')
 
                 workbook = ExcelClass.workbook_load(excel_file=output_1)
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
@@ -832,68 +852,12 @@ class MainWidgetClass(QtWidgets.QWidget):
             # threading.Thread(target=find_face, args=([3])).start()
             # threading.Thread(target=equal_foto, args=([6])).start()
             # threading.Thread(target=remove_id_from_jpg, args=([6])).start()
-            # threading.Thread(target=change_p_to_eng_to_rus, args=([12, True])).start()
+            # threading.Thread(target=change_p_to_eng_to_rus, args=([1, True])).start()
             # threading.Thread(target=filling_extra_data_from_1c_to_import_hikvision, args=([1])).start()
             # threading.Thread(target=equal_system, args=([1])).start()
             # threading.Thread(target=find_dublicates, args=([1])).start()
-
-            # Сравнение данных из 1с и данных в базе данных енбека
-            def extra_enbek():
-                start_time = time.time()
-                print('start')
-
-                input_1 = '1c.xlsx'
-                input_2 = 'enbek.xlsx'
-                output_1 = 'final.xlsx'
-
-                workbook = ExcelClass.workbook_load(file=input_1)
-                sheet = ExcelClass.workbook_activate(workbook=workbook)
-                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
-
-                global_workers_id_list = []
-                for row in range(1, max_num_rows + 1):
-                    global_workers_id_list.append(
-                        ExcelClass.get_sheet_value(col=ExcelClass.get_column_letter(11), row=row, sheet=sheet)
-                    )
-                print(global_workers_id_list)
-                ExcelClass.workbook_close(workbook=workbook)
-
-                workbook = ExcelClass.workbook_load(file=input_2)
-                sheet = ExcelClass.workbook_activate(workbook=workbook)
-                max_num_rows = ExcelClass.get_max_num_rows(sheet=sheet)
-                global_workers_enbek_list = []
-                for row in range(1, max_num_rows + 1):
-                    local_workers_enbek_list = []
-                    for col in range(1, 21 + 1):
-                        local_workers_enbek_list.append(
-                            ExcelClass.get_sheet_value(col=ExcelClass.get_column_letter(col), row=row, sheet=sheet)
-                        )
-                    if local_workers_enbek_list[1] in global_workers_id_list:
-                        local_workers_enbek_list.append('+')
-                    else:
-                        local_workers_enbek_list.append('-')
-                    global_workers_enbek_list.append(local_workers_enbek_list)
-                print(global_workers_enbek_list)
-                ExcelClass.workbook_close(workbook=workbook)
-
-                workbook = ExcelClass.workbook_load(file=output_1)
-                sheet = ExcelClass.workbook_activate(workbook=workbook)
-                for row in global_workers_enbek_list:
-                    print(row)
-                    for value in row:
-                        ExcelClass.set_sheet_value(
-                            col=ExcelClass.get_column_letter(row.index(value) + 1),
-                            row=global_workers_enbek_list.index(row) + 1,
-                            value=value,
-                            sheet=sheet
-                        )
-                ExcelClass.workbook_save(workbook=workbook, filename=output_1)
-
-                # Финальное время
-                print(f"Final time: {round(time.time() - start_time, 1)}")
-                print('end')
-
-            # threading.Thread(target=extra_enbek, args=()).start()
+            with ThreadPoolExecutor() as executor:
+                executor.submit(get_pixcels)
 
         except Exception as error:
             print(error)

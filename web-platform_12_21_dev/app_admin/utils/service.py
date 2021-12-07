@@ -1,18 +1,26 @@
+import concurrent
 import math
 import os
 import datetime
 import random
+import time
+from concurrent.futures import ThreadPoolExecutor
+
 import bs4
+import cv2
+import httplib2
+import numpy
 import openpyxl
 import requests
 from django.contrib.auth.models import User, Group
 from django.core.handlers.wsgi import WSGIRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http.response import Http404
+from django.utils import timezone
 from fastkml import kml
 from openpyxl.utils import get_column_letter
-from app_admin.models import LoggingModel, GroupModel
-from app_admin.utils.utils_old import ExcelClass
+from app_admin.models import LoggingModel, GroupModel, ComputerVisionModuleModel, ComputerVisionComponentModel
+from app_admin.utils.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils
 from django.contrib.staticfiles import finders
 from django.conf import settings
 
@@ -391,7 +399,6 @@ class DjangoClass:
             def account_auth_set_group(self):
                 return True
 
-
         class UserAuthClassOld:
             """
             Основной аккаунт пользователя
@@ -506,8 +513,6 @@ class DjangoClass:
                         error=error, function_error='account_auth_create_or_change'
                     )
                     return False
-
-
 
         class UserProfileClass:
             """
@@ -759,6 +764,255 @@ class PaginationClass:
         except EmptyPage:
             page = paginator.page(paginator.num_pages)
         return page
+
+
+class ComputerVisionClass:
+    class SoloCamSettingsComputerVisionClassExample:
+        """
+        Настройки одной камеры для модуля: грохота 16 операции, 10 отметка
+        """
+
+        def __init__(self, ip: str, correct: float):
+            # Ip address
+            self.ip = ip
+            # Коэффициент корректировки
+            self.correct = round(correct, 3)
+
+    class EventLoopClass:
+        @staticmethod
+        def loop_modules_global(tick_delay=0.5):
+            """
+            Цикл прохода по всем модулям-циклам
+            """
+            try:
+                def global_tick():
+                    # Начальное время
+                    start_time = time.time()
+                    # Получение словаря с названиями модулей из константы модели: "ComputerVisionModuleModel"
+                    dict_modules = {str(x[0]).strip(): str(x[1]).strip() for x in
+                                    ComputerVisionModuleModel.get_all_modules()}
+                    # Менеджер контекста для многопоточное прохода по всем модулям
+                    with ThreadPoolExecutor() as executor:
+                        # Получение всех активных модулей
+                        modules = ComputerVisionModuleModel.objects.filter(play_boolean_field=True)
+                        # Получение всех активных модулей
+                        if modules:
+                            delay = tick_delay
+                        else:
+                            delay = tick_delay * 5
+                        # Цикл прохода по всем активным модулям
+                        for module in modules:
+                            # Проверка, что цикл модуля отработал в последний раз не позже задержки цикла
+                            if module.datetime_field and (module.datetime_field + datetime.timedelta(hours=6)) > \
+                                    DateTimeUtils.get_difference_datetime(seconds=-module.delay_float_field):
+                                continue
+                            # Получение имени модуля из константы в модели ComputerVisionModuleModel
+                            name_module = dict_modules[module.path_slug_field]
+                            if name_module == 'Грохота, 16 операция, 10 отметка':
+                                executor.submit(
+                                    ComputerVisionClass.EventLoopClass.
+                                        Grohota16OperationClass.loop_module_grohota_16_operation,
+                                    module=module
+                                )
+                            elif name_module == 'Грохота, 26 операция, 10 отметка':
+                                executor.submit(
+                                    ComputerVisionClass.EventLoopClass.
+                                        Grohota16OperationClass.loop_module_grohota_16_operation,
+                                    module=module
+                                )
+                            elif name_module == 'Грохота, 36 операция, 10 отметка':
+                                executor.submit(
+                                    ComputerVisionClass.EventLoopClass.
+                                        Grohota16OperationClass.loop_module_grohota_16_operation,
+                                    module=module
+                                )
+                    time.sleep(delay)
+                    print(f'\n#######################################'
+                          f'\n##### {round(time.time() - start_time, 2)} seconds for global_tick ####'
+                          f'\n#######################################\n')
+
+                while True:
+                    global_tick()
+            except Exception as error:
+                print(f'\nloop_modules_global | error : {error}\n')
+                time.sleep(tick_delay * 10)
+                ComputerVisionClass.EventLoopClass.loop_modules_global()
+
+        class Grohota16OperationClass:
+            @staticmethod
+            def loop_module_grohota_16_operation(module):
+                """
+                Цикл прохода по компонентам-функциям внутри модуля: Грохота, 16 операция, 10 отметка
+                """
+                try:
+                    # Начальное время
+                    start_time = time.time()
+                    # Данные из базы с настройками по каждому активному компоненту
+                    components = ComputerVisionComponentModel.objects.filter(play_boolean_field=True)
+                    with ThreadPoolExecutor() as executor:
+                        # Цикл для прохода по настройкам и запуску компонентов
+                        for component in components:
+                            executor.submit(
+                                ComputerVisionClass.EventLoopClass.
+                                    Grohota16OperationClass.component_grohota_16_operation,
+                                component=component
+                            )
+                    module = ComputerVisionModuleModel.objects.get(path_slug_field=module.path_slug_field)
+                    module.duration_float_field = round(time.time() - start_time, 2)
+                    module.datetime_field = timezone.now()
+                    module.save()
+                except Exception as error:
+                    error_text_field = f'loop_module_grohota_16_operation | {timezone.now()} | error : {error}'
+                    module = ComputerVisionModuleModel.objects.get(path_slug_field=module.path_slug_field)
+                    module.error_text_field = error_text_field
+                    module.save()
+                    print(f'\n{error_text_field}\n')
+
+            @staticmethod
+            def component_grohota_16_operation(component):
+                """
+                Компонент-функция расчёта % схода на грохотах 16 операции, 10 отметка
+                """
+                try:
+                    # Создание папки с кешем для библиотеки
+                    temp_path = DirPathFolderPathClass.create_folder_in_this_dir(
+                        folder_name='static/media/data/computer_vision/temp'
+                    )
+                    # Создание экземпляра объекта библиотеки, установка папки с кешем для библиотеки и таймаута
+                    h = httplib2.Http(cache=temp_path, timeout=3)
+                    # Установка логина от камеры
+                    login = 'admin'
+                    # Установка пароля от камеры
+                    password = 'q1234567'
+                    # Добавление логина и пароля к авторизации
+                    h.add_credentials(login, password)
+                    # Заполнение api-пути для получения изображения по сети от камеры
+                    sources = f'http://{str(component.genericipaddress_field)}:80' \
+                              f'/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
+                    # Установка заголовка для запроса
+                    headers = {
+                        'user-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=1.0'}
+                    # Получение данных с api камеры
+                    response, content = h.request(uri=sources, method="GET", headers=headers)
+                    # Чтение изображения-маски
+                    mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
+                    # Превращение массива байтов в массив пикселей и чтение массива в объект-изображение cv2
+                    image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
+                    # Наложение на изображение маски с тёмным режимом: закрашивание участков в чёрный
+                    bitwise_and = cv2.bitwise_and(image, image, mask=mask)
+                    # Перевод изображения BGR(RGB - для не cv2) в формат HSV
+                    cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
+                    # Заполнение массива изображения по диапазону с выбранной чувствительностью
+                    inrange = cv2.inRange(
+                        cvtcolor,
+                        numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
+                        numpy.array([255, 120, 255], dtype=numpy.uint8)
+                    )
+                    # Подсчёт белых пикселей после заполнения к белым пикселям на маске и умножение на коррекцию
+                    value = numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * float(1)
+                    # Запись результата в базу данных
+                    LoggingModel.objects.create(
+                        username_slug_field='computer vision',
+                        ip_genericipaddress_field=component.genericipaddress_field,
+                        request_path_slug_field='component_grohota_16_operation',
+                        request_method_slug_field='POST',
+                        error_text_field=f'value: {round(value, 3)} %'
+                    )
+                    # Вывод результата в консоль
+                    print(f'{component.genericipaddress_field}: {round(value, 3)} %')
+                except Exception as error:
+                    print(f'\ncomponent_grohota_16_operation| {component.genericipaddress_field} | error : {error}\n')
+
+            @staticmethod
+            def component_grohota_16_operation_old(component):
+                """
+                Компонент-функция расчёта % схода на грохотах 16 операции, 10 отметка
+                """
+                try:
+                    sources = f'http://{str(component.genericipaddress_field)}:80' \
+                              f'/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
+                    login = 'admin'
+                    password = 'q1234567'
+                    temp_path = DirPathFolderPathClass.create_folder_in_this_dir(
+                        folder_name='static/media/data/computer_vision/temp'
+                    )
+                    h = httplib2.Http(temp_path)
+                    h.add_credentials(login, password)
+                    response, content = h.request(sources)
+                    image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
+                    image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
+                    mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
+                    mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
+                    bitwise_and = cv2.bitwise_and(image, image, mask=mask)
+                    cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
+                    inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
+                                          numpy.array([255, 120, 255], dtype=numpy.uint8))
+                    value = numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * float(1)
+                    print(f'{component.genericipaddress_field}: {round(value, 3)} %')
+                except Exception as error:
+                    print(f'\ncomponent_grohota_16_operation | error : {error}\n')
+
+    @staticmethod
+    def example_analyse():
+
+        def analyse_image_open_cv(ip=203):
+            # Начальное время
+            # start_time = time.time()
+            # print('start')
+
+            sources = f'http://192.168.15.{ip}:80/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
+            login = 'admin'
+            password = 'q1234567'
+            h = httplib2.Http(os.path.abspath('__file__'))
+            h.add_credentials(login, password)
+            response, content = h.request(sources)
+            image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
+            image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
+            mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
+            mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
+            bitwise_and = cv2.bitwise_and(image, image, mask=mask)
+            cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
+            inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
+                                  numpy.array([255, 120, 255], dtype=numpy.uint8))
+            value = f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * 1.0:0.2f}%"
+
+            # Финальное время
+            # print(f"Final time: {round(time.time() - start_time, 1)}")
+            # print('end')
+
+            # print(value)
+            return value
+
+        def analyse():
+
+            list_ip = []
+            for num in range(202, 211 + 1):
+                list_ip.append(num)
+            print(list_ip)
+
+            index = 0
+            while index < 100:
+                index += 1
+                # Начальное время
+                start_time = time.time()
+                print('start')
+                # Менеджер контекста для многопотока под ThreadPoolExecutor
+                with ThreadPoolExecutor() as executor:
+                    futures = []
+                    # Цикл для прохода по ссылкам
+                    for ip in list_ip:
+                        futures.append(executor.submit(analyse_image_open_cv, ip=ip))
+                    for future in concurrent.futures.as_completed(futures):
+                        print(future.result())
+
+                # Финальное время
+                print(f"Final time: {round(time.time() - start_time, 1)}")
+                print('end')
+                time.sleep(1)
+
+        with ThreadPoolExecutor() as executor:
+            executor.submit(analyse)
 
 
 class SalaryClass:

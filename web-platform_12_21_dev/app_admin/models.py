@@ -3191,8 +3191,9 @@ class ComputerVisionModuleModel(models.Model):
         max_length=1024,
     )
     LIST_DB_VIEW_MODULES_CHOICES = [
-        ('16_operation', 'Грохота, 16 операция, 26 отметка'),
-        ('26_operation', 'Грохота, 26 операция, ?? отметка'),
+        ('16_operation', 'Грохота, 16 операция, 10 отметка'),
+        ('26_operation', 'Грохота, 26 операция, 10 отметка'),
+        ('36_operation', 'Грохота, 36 операция, 10 отметка'),
     ]
     path_slug_field = models.SlugField(
         db_column='path_slug_field_db_column',
@@ -3342,6 +3343,111 @@ class ComputerVisionModuleModel(models.Model):
     def get_all_modules():
         return ComputerVisionModuleModel.LIST_DB_VIEW_MODULES_CHOICES
 
+
+class ComputerVisionComponentModel(models.Model):
+    """
+    Класс, содержащий в себе объект настройки компонента для модуля анализа машинного зрения
+    """
+    module_foreign_key_field = models.ForeignKey(
+        db_column='module_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='module_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Модуль компонента:',
+        help_text='<small class="text-muted">связь, к какому модулю относится компонент</small><hr><br>',
+
+        to=ComputerVisionModuleModel,
+        on_delete=models.SET_NULL,
+    )
+    play_boolean_field = models.BooleanField(
+        db_column='play_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='play_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=False,
+        verbose_name='Запуск работы компонента:',
+        help_text='<small class="text-muted">нужно ли запускать компонент каждый тик'
+                  '</small><hr><br>',
+    )
+
+
+    genericipaddress_field = models.GenericIPAddressField(
+        db_column='genericipaddress_field_db_column',
+        db_index=True,
+        db_tablespace='genericipaddress_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Ip адрес:',
+        help_text='<small class="text-muted">ip-адрес<hr><br>',
+
+        protocol='both',
+        unpack_ipv4=False,
+    )
+
+
+    # play | boolean | Активность компонента: | нужно ли делать расчёты в этом компоненте
+
+    # alias | char | Псевдоним компонента: | псевдоним, используемый для отображения или записи в стороннюю базу
+
+    # protocol | slug | Протокол api источника компонента: | способ соединения с api: "http://" / "rtsp://" / "https://"
+    # port | integer | Порт api источника компонента: | порт соединения: "80" / "434"
+    # ip | genericipaddress | Ip адрес источника компонента: | ip адрес в формате: "192.168.15.202"
+    # login | slug | Логин источника компонента: | логин от источника компонента: "admin"
+    # password | slug | Пароль источника компонента: | пароль от источника компонента: "q1234567"
+
+    # mask | char | Путь к маске компонента: | путь от главной папки к папке с изображением-маской: "static/media/data/computer_vision/temp"
+
+    # bright_level | integer |
+    # in_range_set_from | integer |
+    # in_range_set_to | integer |
+    # count_not_zero | integer |
+
+    # point_1_1 | integer |
+    # point_1_2 | integer |
+    # point_1_2 | integer |
+    # point_2_1 | integer |
+    # point_2_2 | integer |
+    # point_2_3 | integer |
+
+    # alarm_level | integer |
+    # null_level | integer |
+    # correct_coefficient | float |
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('genericipaddress_field', 'play_boolean_field')
+        verbose_name = 'Computer Vision Component'
+        verbose_name_plural = 'Computer Vision Components'
+        db_table = 'computer_vision_component_model_table'
+
+    def __str__(self):
+        return f'{self.genericipaddress_field}'
 
 #
 #
