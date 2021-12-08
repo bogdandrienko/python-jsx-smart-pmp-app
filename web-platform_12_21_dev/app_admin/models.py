@@ -2128,7 +2128,6 @@ class GroupModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default=None,
         verbose_name='Группа',
         help_text='<small class="text-muted">Связь, с пользователем, которому принадлежит профиль, example: '
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',

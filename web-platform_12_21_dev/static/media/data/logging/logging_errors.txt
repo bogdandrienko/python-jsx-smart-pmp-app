@@ -4192,3 +4192,29 @@ Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:25.017245, 'charmap
 Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:25.026221, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
 
 Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:25.036194, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+, 127.0.0.1, /, GET, 2021-12-08 19:25:21.915545, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-12-08 19:25:23.356347, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-12-08 19:25:53.902609, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-12-08 19:25:57.796011, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-12-08 19:26:40.673074, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-12-08 19:26:51.013972, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-12-08 19:27:00.009688, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-08 19:28:09.078968, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-08 19:28:30.187280, ActionModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-08 19:28:36.832947, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-12-08 19:38:52.022891, 'AnonymousUser' object is not iterable
+
+, 127.0.0.1, /home/, GET, 2021-12-08 19:38:55.424863, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-08 19:39:12.977872, ActionModel matching query does not exist.
