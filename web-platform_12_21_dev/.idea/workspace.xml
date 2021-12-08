@@ -2,28 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bbbc63c-057b-4b79-9921-8caa89c92d24" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app_admin/migrations/0007_auto_20211208_1526.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/win_0_run_192.168.15.87.8000.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/utils/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/mask/m_16_8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/mask/m_16_8.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20280ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3488cde996bcac7bd461c2e51fdf30b3" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20280ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3488cde996bcac7bd461c2e51fdf30b3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20380ISAPIStreamingchannels101picturesnapShotImageType=JPEG,b220edfb84a5b9d49c3c177b813bae71" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20380ISAPIStreamingchannels101picturesnapShotImageType=JPEG,b220edfb84a5b9d49c3c177b813bae71" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20480ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d428cf19cda08309aef6c6de855f85ad" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20480ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d428cf19cda08309aef6c6de855f85ad" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20580ISAPIStreamingchannels101picturesnapShotImageType=JPEG,f6538b0caea36cedb4a38f4cab643841" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20580ISAPIStreamingchannels101picturesnapShotImageType=JPEG,f6538b0caea36cedb4a38f4cab643841" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20680ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d097684182f092351ecd70387a1b03e4" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20680ISAPIStreamingchannels101picturesnapShotImageType=JPEG,d097684182f092351ecd70387a1b03e4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20780ISAPIStreamingchannels101picturesnapShotImageType=JPEG,13f3892f2251b9596a4c6d13f3652af4" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20780ISAPIStreamingchannels101picturesnapShotImageType=JPEG,13f3892f2251b9596a4c6d13f3652af4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20880ISAPIStreamingchannels101picturesnapShotImageType=JPEG,333563d7e91b1edbb1310b33bf5cc8be" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20880ISAPIStreamingchannels101picturesnapShotImageType=JPEG,333563d7e91b1edbb1310b33bf5cc8be" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20980ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3c03b9da06583fba42310aa48c0e21c9" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.20980ISAPIStreamingchannels101picturesnapShotImageType=JPEG,3c03b9da06583fba42310aa48c0e21c9" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.21080ISAPIStreamingchannels101picturesnapShotImageType=JPEG,4564328635c417346e00325da57e57bc" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.21080ISAPIStreamingchannels101picturesnapShotImageType=JPEG,4564328635c417346e00325da57e57bc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.21180ISAPIStreamingchannels101picturesnapShotImageType=JPEG,1713dcf27426d12119d0dcdbb5b43322" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/computer_vision/temp/192.168.15.21180ISAPIStreamingchannels101picturesnapShotImageType=JPEG,1713dcf27426d12119d0dcdbb5b43322" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_actions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/data/logging/logging_errors.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/utils/skud.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/utils/skud.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +174,7 @@
       <workItem from="1638897575771" duration="619000" />
       <workItem from="1638953514449" duration="3098000" />
       <workItem from="1638958769380" duration="2095000" />
+      <workItem from="1638963658458" duration="576000" />
     </task>
     <servers />
   </component>
@@ -217,7 +198,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_platform_12_21_dev$utils.coverage" NAME="utils Coverage Results" MODIFIED="1638765868118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils" />
-    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$skud__1_.coverage" NAME="skud (1) Coverage Results" MODIFIED="1638873030195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils" />
+    <SUITE FILE_PATH="coverage/web_platform_12_21_dev$skud__1_.coverage" NAME="skud (1) Coverage Results" MODIFIED="1638964107440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils" />
     <SUITE FILE_PATH="coverage/web_platform_12_21_dev$skud.coverage" NAME="skud Coverage Results" MODIFIED="1638871637455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app_admin/utils/skud" />
   </component>
 </project>

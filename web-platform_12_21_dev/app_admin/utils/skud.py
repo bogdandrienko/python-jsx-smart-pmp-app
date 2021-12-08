@@ -128,9 +128,9 @@ class MainWidgetClass(QtWidgets.QWidget):
                 print(f'max_workers={max_workers}')
 
                 # Создание папок для исходящих и входящих изображений
-                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('input')
-                output_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\completed')
-                error_folder = DirPathFolderPathClass.create_folder_in_this_dir('output\\error')
+                input_folder = DirPathFolderPathClass.create_folder_in_this_dir('skud\\input')
+                output_folder = DirPathFolderPathClass.create_folder_in_this_dir('skud\\output\\completed')
+                error_folder = DirPathFolderPathClass.create_folder_in_this_dir('skud\\output\\error')
 
                 # Выбор формата изображений для обработки
                 pattern = '*.jpg'
@@ -146,7 +146,7 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 image_height = src_img.shape[0]
                                 image_width = src_img.shape[1]
                                 # Загрузка алгоритма классификатора для поиска лиц
-                                haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+                                haar_face_cascade = cv2.CascadeClassifier('skud\\haarcascade_frontalface_alt.xml')
                                 # Качество масштабирования изображения
                                 scaling = 50
                                 dsize = (int(image_width * scaling / 100), int(image_height * scaling / 100))
@@ -849,15 +849,15 @@ class MainWidgetClass(QtWidgets.QWidget):
             # 9 Выгрузить из системы список работников, добавить поля в базу
             # hikvision и загрузить дополненный список из 1с.
 
-            # threading.Thread(target=find_face, args=([3])).start()
+            threading.Thread(target=find_face, args=([3])).start()
             # threading.Thread(target=equal_foto, args=([6])).start()
             # threading.Thread(target=remove_id_from_jpg, args=([6])).start()
             # threading.Thread(target=change_p_to_eng_to_rus, args=([1, True])).start()
             # threading.Thread(target=filling_extra_data_from_1c_to_import_hikvision, args=([1])).start()
             # threading.Thread(target=equal_system, args=([1])).start()
             # threading.Thread(target=find_dublicates, args=([1])).start()
-            with ThreadPoolExecutor() as executor:
-                executor.submit(get_pixcels)
+            # with ThreadPoolExecutor() as executor:
+            #     executor.submit(get_pixcels)
 
         except Exception as error:
             print(error)
