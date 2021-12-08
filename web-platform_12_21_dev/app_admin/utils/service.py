@@ -20,7 +20,7 @@ from django.utils import timezone
 from fastkml import kml
 from openpyxl.utils import get_column_letter
 from app_admin.models import LoggingModel, GroupModel, ComputerVisionModuleModel, ComputerVisionComponentModel
-from app_admin.utils.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils
+from app_admin.utils.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils, SQLClass
 from django.contrib.staticfiles import finders
 from django.conf import settings
 
@@ -892,11 +892,12 @@ class ComputerVisionClass:
                     # Установка заголовка для запроса
                     headers = {
                         'user-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
-                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=1.0'}
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+                    }
                     # Получение данных с api камеры
                     response, content = h.request(uri=sources, method="GET", headers=headers)
                     # Чтение изображения-маски
-                    mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
+                    mask = cv2.imread(component.mask_char_field, 0)
                     # Превращение массива байтов в массив пикселей и чтение массива в объект-изображение cv2
                     image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
                     # Наложение на изображение маски с тёмным режимом: закрашивание участков в чёрный
@@ -917,12 +918,41 @@ class ComputerVisionClass:
                         ip_genericipaddress_field=component.genericipaddress_field,
                         request_path_slug_field='component_grohota_16_operation',
                         request_method_slug_field='POST',
-                        error_text_field=f'value: {round(value, 3)} %'
+                        error_text_field=f'value: {round(value, 2)} %'
                     )
+                    # value = value/100
+                    #
+                    # device_row = component.alias_char_field
+                    # if value > 30:
+                    #     alarm_row = 1
+                    # else:
+                    #     alarm_row = 0
+                    # datetime_row = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+                    # rows = ['device_row', 'value_row', 'alarm_row', 'datetime_row']
+                    # values = [device_row, round(value, 2), alarm_row, datetime_row]
+                    #
+                    # connection = SQLClass.pyodbc_connect(
+                    #     ip='192.168.15.122',
+                    #     server='WINCC',
+                    #     port='49279',
+                    #     database='KM_Fabrika',
+                    #     username='computer_vision',
+                    #     password='vision12345678'
+                    # )
+                    # cursor = connection.cursor()
+                    # cursor.fast_executemany = True
+                    # __rows = ''
+                    # for x in rows:
+                    #     __rows = f"{__rows}{str(x)}, "
+                    # query = f"UPDATE {'grohot16_now_table'} SET {rows[1]} = '{values[1]}',{rows[2]} = '{values[2]}' ,{rows[3]} = '{values[3]}' " \
+                    #         f"WHERE {rows[0]} = '{values[0]}'"
+                    # cursor.execute(query)
+                    # connection.commit()
+
                     # Вывод результата в консоль
-                    print(f'{component.genericipaddress_field}: {round(value, 3)} %')
+                    print(f'{component.genericipaddress_field} | {component.alias_char_field} : {round(value, 2)} %')
                 except Exception as error:
-                    print(f'\ncomponent_grohota_16_operation| {component.genericipaddress_field} | error : {error}\n')
+                    print(f'\ncomponent_grohota_16_operation| {component.genericipaddress_field} | {component.alias_char_field} | error : {error}\n')
 
             @staticmethod
             def component_grohota_16_operation_old(component):
@@ -949,6 +979,7 @@ class ComputerVisionClass:
                     inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
                                           numpy.array([255, 120, 255], dtype=numpy.uint8))
                     value = numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * float(1)
+
                     print(f'{component.genericipaddress_field}: {round(value, 3)} %')
                 except Exception as error:
                     print(f'\ncomponent_grohota_16_operation | error : {error}\n')

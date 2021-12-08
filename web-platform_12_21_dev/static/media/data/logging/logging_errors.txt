@@ -2956,3 +2956,1239 @@ Bogdan, 127.0.0.1, /home/, GET, 2021-12-01 20:17:51.925634, ActionModel matching
 , 127.0.0.1, /, GET, 2021-12-03 17:40:16.865882, 'AnonymousUser' object is not iterable
 
 Bogdan, 127.0.0.1, /salary/, POST, 2021-12-06 10:51:16.453717, '3.Доходы в натуральной форме'
+
+, 127.0.0.1, /, GET, 2021-12-08 13:06:00.238796, 'AnonymousUser' object is not iterable
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:16.895675, 'check'
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.535285, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.543268, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.554235, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.562213, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.572187, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.582160, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.591136, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.601109, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.611086, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.620059, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.630036, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.638015, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.647984, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.657958, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.666934, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.676911, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.684889, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.694863, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.703839, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.712815, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.721790, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.730763, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.740736, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.748719, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.758688, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.767664, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.775647, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.785616, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.794596, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.804565, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.812548, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.821524, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.830500, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.840469, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.850443, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.858425, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.868395, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.877371, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.886347, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.896324, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.904302, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.914272, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.922251, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.931227, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.940206, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.950178, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.960150, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.969125, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.978105, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.987082, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:18.997051, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.007024, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.015003, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.024976, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.032955, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.042928, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.050911, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.061877, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.069856, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.079829, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.087812, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.097781, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.106757, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.114740, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.124713, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.132688, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.143658, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.153632, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.161614, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.171584, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.179563, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.188542, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.196521, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.205497, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.213472, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.222448, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.230427, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.239402, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.247385, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.255364, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.264340, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.272315, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.281294, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.289273, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.298249, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.307221, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.315204, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.324176, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.332159, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.341134, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.349109, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.358086, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.366064, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.375040, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.382021, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.391001, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.398976, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.407952, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.416928, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.423913, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.432886, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.442858, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.451858, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.459837, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.469786, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.478791, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.486775, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.497711, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.507719, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.516661, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.525637, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.534636, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.544586, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.552567, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.561541, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.570516, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.580490, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.589466, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.598442, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.607418, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.618389, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.627368, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.637338, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.645319, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.654297, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.662276, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.671251, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.680224, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.689204, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.697178, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.706154, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.716127, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.725107, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.736074, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.744057, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.769984, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.779957, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.788933, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.796916, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.807886, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.816859, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.825834, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.833813, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.841796, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.850768, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.858746, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.867726, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.875701, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.884681, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.892659, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.901636, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.910608, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.918586, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.927567, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.936538, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.944521, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.953494, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.962469, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.971445, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.981418, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.988400, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:19.998373, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.007368, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.016324, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.025325, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.034277, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.044250, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.052252, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.063199, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.072194, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.082149, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.091129, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.101098, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.110074, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.120047, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.130025, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.140992, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.148970, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.158943, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.166922, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.176896, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.184874, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.194847, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.202826, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.213796, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.222795, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.247706, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.258680, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.266656, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.276654, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.285605, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.294585, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.302563, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.328490, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.335475, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.344451, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.355418, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.363397, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.372377, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.380355, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.390325, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.400298, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.409280, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.417257, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.427230, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.436201, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.445177, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.455151, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.463129, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.475097, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.482079, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.492052, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.504041, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.513995, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.523967, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.533940, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.542916, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.552890, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.561866, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.571839, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.579818, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.588793, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.600762, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.608740, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.619711, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.627689, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.636666, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.645642, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.653620, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.662596, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.670575, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.680548, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.689524, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.699498, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.710471, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.718447, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.728421, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.737397, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.746373, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.755380, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.763350, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.774297, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.782277, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.792286, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.803225, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.812200, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.821172, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.830148, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.839124, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.849098, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.857077, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.868047, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.876030, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.886998, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.894979, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.904952, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:20.969776, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.151289, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.162373, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.172234, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.181210, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.191182, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.202153, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.214121, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.223098, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.234100, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.242047, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.254015, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.278948, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.289919, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.297901, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.307871, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.318841, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.327822, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.337791, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.348762, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.551220, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.562194, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.571170, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.599092, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.609069, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.621039, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.632005, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.644008, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.651974, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.662921, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.671897, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.682868, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.710793, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.719769, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.729757, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.740714, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.750691, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.760664, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.770637, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.780607, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.791581, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.801550, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.812521, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.824495, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.834463, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.845438, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.854409, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.865384, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.874355, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.884333, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.894306, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.904279, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.915250, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.924223, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.935197, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.943173, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.955140, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.965117, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.976084, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.986057, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:21.996030, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.007999, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.015977, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.027949, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.036925, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.046898, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.072863, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.083816, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.092793, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.102745, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.110755, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.120728, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.131686, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.139669, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.149620, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.160591, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.169567, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.179543, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.189513, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.198493, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.209471, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.218435, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.228414, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.239380, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.248367, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.258334, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.267305, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.277279, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.285258, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.296228, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.305210, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.315181, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.324157, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.333134, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.343106, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.353079, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.362055, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.372029, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.380007, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.390974, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.399954, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.409924, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.418903, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.427876, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.438851, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.448820, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.459790, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.484724, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.495695, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.505668, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.514647, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.524621, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.533593, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.543571, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.552542, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.561518, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.570498, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.579470, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.589448, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.599417, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.608397, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.619364, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.645298, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.654270, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.664247, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.672226, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.682195, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.691175, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.701145, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.711122, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.719096, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.730067, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.738065, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.748037, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.757020, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.765971, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.775944, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.783953, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.794894, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.820829, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.829804, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.839774, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.848750, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.857730, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.868696, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.877673, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.886653, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.896622, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.906596, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.914578, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.925545, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.934524, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.943500, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.953474, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.962446, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.971422, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.981399, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:22.990371, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.000349, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.009321, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.019309, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.030265, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.038248, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.048221, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.105068, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.115042, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.125012, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.133988, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.142965, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.151944, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.161917, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.169895, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.178871, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.187847, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.196819, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.205797, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.215768, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.224749, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.234718, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.242700, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.252670, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.260649, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.270625, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.278605, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.287580, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.329757, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.337750, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.346716, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.354695, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.364664, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.372643, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.382616, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.390598, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.400569, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.408551, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.418520, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.428498, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.437470, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.447442, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.489331, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.497313, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.506289, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.515261, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.524241, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.533213, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.543187, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.551169, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.561139, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.570115, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.579095, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.589064, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.597047, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.608014, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.616548, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.625965, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.634945, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.644915, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.653891, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.662870, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.671843, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.681816, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.691789, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.700765, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.709746, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.718717, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.728690, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.738668, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.747640, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.756620, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.765592, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.775566, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.784541, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.793518, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.802517, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.811469, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.821477, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.829421, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.842386, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.853378, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.861336, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.870316, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.880285, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.890262, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.898241, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.908211, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.919181, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.927160, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.939132, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.948108, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.957080, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.966056, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.975032, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.985005, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:23.993985, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.003958, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.011937, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.020909, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.030886, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.038865, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.049904, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.058808, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.067807, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.076760, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.086733, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.096707, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.106680, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.116653, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.125634, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.135606, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.145580, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.153558, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.163532, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.172508, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.181480, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.191453, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.200430, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.210407, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.219383, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.228355, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.238328, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.248312, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.257277, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.266253, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.275233, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.285203, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.294182, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.303159, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.314125, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.322108, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.333075, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.341057, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.351027, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.360002, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.368982, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.379949, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.387932, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.397905, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.406888, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.416855, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.426827, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.436797, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.447768, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.457741, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.466717, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.476691, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.486664, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.494646, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.504620, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.513592, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.522571, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.532541, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.540523, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.550497, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.559469, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.569446, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.577425, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.587394, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.597368, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.606344, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.616317, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.624296, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.634273, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.643245, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.652225, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.660204, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.670173, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.678156, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.687131, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.700093, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.709069, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.719042, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.727025, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.736998, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.747968, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.756941, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.766914, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.774897, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.784870, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.792849, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.802822, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.812792, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.821772, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.829750, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.871641, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.880610, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.889623, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.898562, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.908536, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.918510, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.926487, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.936464, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.944443, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.955410, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.966380, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.974363, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:24.983339, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:25.007271, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:25.017245, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:25.026221, 'charmap' codec can't encode character '\x98' in position 12: character maps to <undefined>
+
+Bogdan, 127.0.0.1, /passages_select/, POST, 2021-12-08 13:13:25.036194, 'charmap' codec can't encode character '\x98' in position 1: character maps to <undefined>

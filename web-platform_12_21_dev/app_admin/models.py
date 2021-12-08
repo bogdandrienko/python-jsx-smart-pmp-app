@@ -3383,11 +3383,69 @@ class ComputerVisionComponentModel(models.Model):
         null=False,
         default=False,
         verbose_name='Запуск работы компонента:',
-        help_text='<small class="text-muted">нужно ли запускать компонент каждый тик'
-                  '</small><hr><br>',
+        help_text='<small class="text-muted">нужно ли делать расчёты каждый тик в этом компоненте</small><hr><br>',
     )
+    alias_char_field = models.CharField(
+        db_column='alias_char_field_db_column',
+        db_index=True,
+        db_tablespace='alias_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Псевдоним компонента:',
+        help_text='<small class="text-muted">псевдоним, используемый для отображения или записи в стороннюю базу'
+                  '</small><hr><br>',
 
+        max_length=64,
+    )
+    protocol_slug_field = models.SlugField(
+        db_column='protocol_slug_field_db_column',
+        db_index=True,
+        db_tablespace='protocol_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='http://',
+        verbose_name='Протокол api источника компонента:',
+        help_text='<small class="text-muted">способ соединения с api: "http://" / "rtsp://" / "https://"'
+                  '</small><hr><br>',
 
+        max_length=50,
+        allow_unicode=False,
+    )
+    port_integer_field = models.IntegerField(
+        db_column='port_integer_field_db_column',
+        db_index=True,
+        db_tablespace='port_integer_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(9999999), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=80,
+        verbose_name='Порт api источника компонента:',
+        help_text='<small class="text-muted">порт соединения: "80" / "434"</small><hr><br>',
+    )
     genericipaddress_field = models.GenericIPAddressField(
         db_column='genericipaddress_field_db_column',
         db_index=True,
@@ -3403,51 +3461,320 @@ class ComputerVisionComponentModel(models.Model):
         blank=True,
         null=True,
         default=None,
-        verbose_name='Ip адрес:',
-        help_text='<small class="text-muted">ip-адрес<hr><br>',
+        verbose_name='Ip адрес источника компонента:',
+        help_text='<small class="text-muted">ip адрес в формате: "192.168.15.202"<hr><br>',
 
         protocol='both',
         unpack_ipv4=False,
     )
+    login_slug_field = models.SlugField(
+        db_column='login_protocol_slug_field_db_column',
+        db_index=True,
+        db_tablespace='login_protocol_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='admin',
+        verbose_name='Логин источника компонента:',
+        help_text='<small class="text-muted">логин от источника компонента: "admin"</small><hr><br>',
 
+        max_length=50,
+        allow_unicode=False,
+    )
+    password_slug_field = models.SlugField(
+        db_column='password_protocol_slug_field_db_column',
+        db_index=True,
+        db_tablespace='password_protocol_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='q1234567',
+        verbose_name='Пароль источника компонента:',
+        help_text='<small class="text-muted">пароль от источника компонента: "q1234567"</small><hr><br>',
 
-    # play | boolean | Активность компонента: | нужно ли делать расчёты в этом компоненте
+        max_length=50,
+        allow_unicode=False,
+    )
+    mask_char_field = models.CharField(
+        db_column='mask_char_field_db_column',
+        db_index=True,
+        db_tablespace='mask_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Путь к маске компонента:',
+        help_text='<small class="text-muted">путь от главной папки к папке с изображением-маской: '
+                  '"static/media/data/computer_vision/temp"</small><hr><br>',
 
-    # alias | char | Псевдоним компонента: | псевдоним, используемый для отображения или записи в стороннюю базу
-
-    # protocol | slug | Протокол api источника компонента: | способ соединения с api: "http://" / "rtsp://" / "https://"
-    # port | integer | Порт api источника компонента: | порт соединения: "80" / "434"
-    # ip | genericipaddress | Ip адрес источника компонента: | ip адрес в формате: "192.168.15.202"
-    # login | slug | Логин источника компонента: | логин от источника компонента: "admin"
-    # password | slug | Пароль источника компонента: | пароль от источника компонента: "q1234567"
-
-    # mask | char | Путь к маске компонента: | путь от главной папки к папке с изображением-маской: "static/media/data/computer_vision/temp"
-
-    # bright_level | integer |
-    # in_range_set_from | integer |
-    # in_range_set_to | integer |
-    # count_not_zero | integer |
-
-    # point_1_1 | integer |
-    # point_1_2 | integer |
-    # point_1_2 | integer |
-    # point_2_1 | integer |
-    # point_2_2 | integer |
-    # point_2_3 | integer |
-
-    # alarm_level | integer |
-    # null_level | integer |
-    # correct_coefficient | float |
+        max_length=64,
+    )
+    bright_level_integer_field = models.IntegerField(
+        db_column='bright_level_integer_field_db_column',
+        db_index=True,
+        db_tablespace='bright_level_integer_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(100), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=100,
+        verbose_name='bright_level',
+        help_text='<small class="text-muted">bright_level</small><hr><br>',
+    )
+    in_range_set_from_integer_field = models.IntegerField(
+        db_column='in_range_set_from_integer_field_db_column',
+        db_index=True,
+        db_tablespace='bright_level_integer_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='in_range_set_from',
+        help_text='<small class="text-muted">in_range_set_from</small><hr><br>',
+    )
+    in_range_set_to_integer_field = models.IntegerField(
+        db_column='in_range_set_to_integer_field_db_column',
+        db_index=True,
+        db_tablespace='in_range_set_to_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='in_range_set_to',
+        help_text='<small class="text-muted">in_range_set_to</small><hr><br>',
+    )
+    count_not_zero_integer_field = models.IntegerField(
+        db_column='count_not_zero_integer_field_db_column',
+        db_index=True,
+        db_tablespace='count_not_zero_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='count_not_zero',
+        help_text='<small class="text-muted">count_not_zero</small><hr><br>',
+    )
+    point_1_1_integer_field = models.IntegerField(
+        db_column='point_1_1_field_db_column',
+        db_index=True,
+        db_tablespace='point_1_1_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='point_1_1',
+        help_text='<small class="text-muted">point_1_1</small><hr><br>',
+    )
+    point_1_2_integer_field = models.IntegerField(
+        db_column='point_1_2_field_db_column',
+        db_index=True,
+        db_tablespace='point_1_2_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='point_1_2',
+        help_text='<small class="text-muted">point_1_2</small><hr><br>',
+    )
+    point_1_3_integer_field = models.IntegerField(
+        db_column='point_1_3_field_db_column',
+        db_index=True,
+        db_tablespace='point_1_3_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='point_1_3',
+        help_text='<small class="text-muted">point_1_3</small><hr><br>',
+    )
+    point_2_1_integer_field = models.IntegerField(
+        db_column='point_2_1_field_db_column',
+        db_index=True,
+        db_tablespace='point_2_1_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='point_2_1',
+        help_text='<small class="text-muted">point_2_1</small><hr><br>',
+    )
+    point_2_2_integer_field = models.IntegerField(
+        db_column='point_2_2_field_db_column',
+        db_index=True,
+        db_tablespace='point_2_2_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='point_2_2',
+        help_text='<small class="text-muted">point_2_2</small><hr><br>',
+    )
+    point_2_3_integer_field = models.IntegerField(
+        db_column='point_2_3_field_db_column',
+        db_index=True,
+        db_tablespace='point_2_3_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='point_2_3',
+        help_text='<small class="text-muted">point_2_3</small><hr><br>',
+    )
+    alarm_level_integer_field = models.IntegerField(
+        db_column='alarm_level_field_db_column',
+        db_index=True,
+        db_tablespace='alarm_level_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(100), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='alarm_level',
+        help_text='<small class="text-muted">alarm_level</small><hr><br>',
+    )
+    null_level_integer_field = models.IntegerField(
+        db_column='null_level_field_db_column',
+        db_index=True,
+        db_tablespace='null_level_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='null_level',
+        help_text='<small class="text-muted">null_level</small><hr><br>',
+    )
+    correct_coefficient_float_field = models.FloatField(
+        db_column='correct_coefficient_float_field_db_column',
+        db_index=True,
+        db_tablespace='correct_coefficient_float_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinValueValidator(0), MaxValueValidator(100), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0.0,
+        verbose_name='correct_coefficient_',
+        help_text='<small class="text-muted">correct_coefficient_</small><hr><br>',
+    )
 
     class Meta:
         app_label = 'app_admin'
-        ordering = ('genericipaddress_field', 'play_boolean_field')
+        ordering = ('play_boolean_field', 'alias_char_field', 'genericipaddress_field')
         verbose_name = 'Computer Vision Component'
         verbose_name_plural = 'Computer Vision Components'
         db_table = 'computer_vision_component_model_table'
 
     def __str__(self):
         return f'{self.genericipaddress_field}'
+
 
 #
 #

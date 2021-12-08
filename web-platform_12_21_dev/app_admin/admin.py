@@ -929,29 +929,112 @@ class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        'genericipaddress_field', 'play_boolean_field',
+        'module_foreign_key_field',
+        'play_boolean_field',
+        'alias_char_field',
+        'protocol_slug_field',
+        'port_integer_field',
+        'genericipaddress_field',
+        'login_slug_field',
+        'password_slug_field',
+        'mask_char_field',
+        'bright_level_integer_field',
+        'in_range_set_from_integer_field',
+        'in_range_set_to_integer_field',
+        'count_not_zero_integer_field',
+        'point_1_1_integer_field',
+        'point_1_2_integer_field',
+        'point_1_3_integer_field',
+        'point_2_1_integer_field',
+        'point_2_2_integer_field',
+        'point_2_3_integer_field',
+        'alarm_level_integer_field',
+        'null_level_integer_field',
+        'correct_coefficient_float_field',
     )
 
     list_filter = (
-        'genericipaddress_field', 'play_boolean_field',
+        'module_foreign_key_field',
+        'play_boolean_field',
+        'alias_char_field',
+        'protocol_slug_field',
+        'port_integer_field',
+        'genericipaddress_field',
+        'login_slug_field',
+        'password_slug_field',
+        'mask_char_field',
+        'bright_level_integer_field',
+        'in_range_set_from_integer_field',
+        'in_range_set_to_integer_field',
+        'count_not_zero_integer_field',
+        'point_1_1_integer_field',
+        'point_1_2_integer_field',
+        'point_1_3_integer_field',
+        'point_2_1_integer_field',
+        'point_2_2_integer_field',
+        'point_2_3_integer_field',
+        'alarm_level_integer_field',
+        'null_level_integer_field',
+        'correct_coefficient_float_field',
     )
 
     fieldsets = (
         ('ip', {'fields': (
-            'genericipaddress_field',
-        )}),
-        ('play', {'fields': (
+            'module_foreign_key_field',
             'play_boolean_field',
+            'alias_char_field',
+            'protocol_slug_field',
+            'port_integer_field',
+            'genericipaddress_field',
+            'login_slug_field',
+            'password_slug_field',
+            'mask_char_field',
+            'bright_level_integer_field',
+            'in_range_set_from_integer_field',
+            'in_range_set_to_integer_field',
+            'count_not_zero_integer_field',
+            'point_1_1_integer_field',
+            'point_1_2_integer_field',
+            'point_1_3_integer_field',
+            'point_2_1_integer_field',
+            'point_2_2_integer_field',
+            'point_2_3_integer_field',
+            'alarm_level_integer_field',
+            'null_level_integer_field',
+            'correct_coefficient_float_field',
         )}),
     )
 
     search_fields = [
-        'genericipaddress_field', 'play_boolean_field',
+        'module_foreign_key_field',
+        'play_boolean_field',
+        'alias_char_field',
+        'protocol_slug_field',
+        'port_integer_field',
+        'genericipaddress_field',
+        'login_slug_field',
+        'password_slug_field',
+        'mask_char_field',
+        'bright_level_integer_field',
+        'in_range_set_from_integer_field',
+        'in_range_set_to_integer_field',
+        'count_not_zero_integer_field',
+        'point_1_1_integer_field',
+        'point_1_2_integer_field',
+        'point_1_3_integer_field',
+        'point_2_1_integer_field',
+        'point_2_2_integer_field',
+        'point_2_3_integer_field',
+        'alarm_level_integer_field',
+        'null_level_integer_field',
+        'correct_coefficient_float_field',
     ]
 
 
 # Регистрация в админ-панели шаблонов
 admin.site.register(ComputerVisionComponentModel, ComputerVisionComponentModelAdmin)
+
+
 #
 #
 #

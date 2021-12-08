@@ -1,0 +1,20 @@
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
+
+('42000', "[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Incorrect syntax near '16'. (102) (SQLExecDirectW)")
