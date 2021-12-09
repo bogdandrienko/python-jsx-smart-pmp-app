@@ -1,0 +1,44 @@
+<div class="text-center">
+    <h1 class="display-6">Данные</h1>
+    <p class="lead">Текущие данные ниже в таблице:</p>
+    <hr/>
+</div>
+<table class="table table-bordered table-info table-striped table-hover table-sm">
+    <thead>
+        <tr>
+
+            {% for arr_1 in data.0 %}
+
+                <th scope="col" colspan="1" class="text-center">{{ arr_1 }}</th>
+
+            {% endfor %}
+
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for arr_1 in data.1 %}
+
+            <tr>
+
+                {% for arr_2 in arr_1 %}
+
+                    {% if forloop.counter == 1 %}
+
+                        <td colspan="1" class="align-bottom text-center">{{ arr_2 }}</td>
+
+                    {% else %}
+
+                        <td colspan="1" class="align-top text-center">{{ arr_2 }}</td>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+<hr/>
