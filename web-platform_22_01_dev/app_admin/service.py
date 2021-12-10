@@ -19,7 +19,8 @@ from django.http.response import Http404
 from django.utils import timezone
 from fastkml import kml
 from openpyxl.utils import get_column_letter
-from app_admin.models import LoggingModel, GroupModel, ComputerVisionModuleModel, ComputerVisionComponentModel
+from app_admin.models import LoggingModel, GroupModel, ComputerVisionModuleModel, ComputerVisionComponentModel, \
+    UserModel
 from app_admin.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils, SQLClass
 from django.contrib.staticfiles import finders
 from django.conf import settings
@@ -30,7 +31,7 @@ from django.contrib.auth.models import User, Group
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import Http404
 
-from app_admin.models import GroupModel, LoggingModel
+from app_admin.models import GroupModel, LoggingModel, ActionModel
 
 
 class DjangoClass:
@@ -95,94 +96,64 @@ class DjangoClass:
                 DjangoClass.AuthorizationClass.http404_raise(exception_text=error)
 
         @staticmethod
-        def try_to_access(request, only_logging=False):
+        def try_to_access(request, access: str):
 
             # Если пользователь в подсети предприятия его переадресует на локальный доступ
             if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-                print(f"\n ***** ***** \n")
-                print(f"Локальный доступ, переадресация")
-                print(f"\n ***** ***** \n")
+                print('return local')
                 return 'local'
 
             # Логирование действий
-            print(f"\n ***** ***** \n")
-            print(f"Логирование")
-            print(f"\n ***** ***** \n")
             DjangoClass.LoggingClass.logging_actions(request=request)
 
             # Возврат, если выбрано только логирование
-            if only_logging:
-                print(f"\n ***** ***** \n")
-                print(f"Только логирование")
-                print(f"\n ***** ***** \n")
+            if access == 'logging':
+                print('return logging')
                 return False
 
             # Проверка на вход в аккаунт
             if request.user.is_authenticated:
                 try:
                     user = User.objects.get(username=request.user.username)
+                    user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
                     # Проверка суперпользователя: если имеет права, то полный доступ
                     if user.is_superuser:
-                        print(f"\n ***** ***** \n")
-                        print(f"Вы суперпользователь, доступ на страницу разрешён")
+                        print('return you"re superuser')
                         return False
                     # Проверка бана: если аккаунт пользователя отключён, то его разлогинит
-                    if user.user_one_to_one_field.activity_boolean_field is False:
+                    if user_model.activity_boolean_field is False:
+                        print('return you"re banned')
                         return 'account_logout'
                     else:
                         # Проверка заполнения спец полей
-                        if user.user_one_to_one_field.email_field and \
-                                user.user_one_to_one_field.secret_answer_char_field and \
-                                user.user_one_to_one_field.secret_question_char_field:
-                            # Выборка всех групп доступа
-                            groups = GroupModel.objects.all()
-                            print(f"\n ***** ***** \n")
-                            print(f"Выборка всех групп доступа: {groups}")
+                        if user_model.email_field and \
+                                user_model.secret_question_char_field and user_model.secret_question_char_field:
                             # Выборка всех групп доступа с определённым пользователем
-                            groups = GroupModel.objects.filter(user_many_to_many_field=user)
-                            print(f"\n ***** ***** \n")
-                            print(f"Выборка всех групп доступа с определённым пользователем: {groups}")
-                            access = False
-                            for group in groups:
-                                try:
-                                    pages = [str(x).strip().lower() for x in
-                                             str(group.path_text_field).strip().split(',') if len(x) >= 1]
-                                except Exception as error:
-                                    pages = [str(group.path_text_field).strip()]
-                                print(f"pages: {pages}")
-                                try:
-                                    path = str(request.path).strip().split('/')[1]
-                                except Exception as error:
-                                    path = ''
-                                try:
-                                    pages.index(path.strip().lower())
-                                    access = True
-                                    break
-                                except Exception as error:
-                                    pass
-                            if access:
-                                print(f"\n ***** ***** \n")
-                                print(f"Доступ на страницу разрешён")
-                                return False
-                            else:
-                                print(f"\n ***** ***** \n")
-                                print(f"Доступ на страницу запрещён")
+                            try:
+                                action_model = ActionModel.objects.get(name_slug_field=access)
+                                if action_model:
+                                    groups = GroupModel.objects.filter(
+                                        user_many_to_many_field=user_model,
+                                        action_many_to_many_field=action_model,
+                                    )
+                                    if groups:
+                                        print('return action/group have')
+                                        return False
+                                    else:
+                                        print('return action/group not have')
+                                        return 'home'
+                            except Exception as error:
+                                print('return action/group error')
                                 return 'home'
                         else:
-                            print(f"\n ***** ***** \n")
-                            print(f"Дополнительные данные не заполнены")
-                            print(f"\n ***** ***** \n")
+                            print('return profile is not full')
                             return 'account_change_password'
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    print(f"\n ***** ***** \n")
-                    print(f"Пользователь не существует")
-                    print(f"\n ***** ***** \n")
+                    print('return error account')
                     return 'home'
             else:
-                print(f"\n ***** ***** \n")
-                print(f"Вы не вошли в аккаунт")
-                print(f"\n ***** ***** \n")
+                print('return not authentificated')
                 return 'account_login'
 
         @staticmethod
@@ -326,86 +297,81 @@ class DjangoClass:
                 self.request = request
 
             def account_create_or_change(self):
-                try:
+                # try:
+                if True:
                     # Пользователь уже существует: изменение
                     try:
                         user = User.objects.get(username=self.username)
+                        # Если пользователь уже существует и стоит статус "принудительно изменять аккаунт"
+                        if user is False or self.force_change_account is False:
+                            return False
                         # Возврат, если пользователь обладает правами суперпользователя
                         if user.is_superuser:
                             return False
-                        # Если пользователь уже существует и стоит статус "принудительно изменять аккаунт"
-                        if user and self.force_change_account:
-                            try:
-                                # authorization data
-                                if self.force_change_account_password:
-                                    user.password = DjangoClass.AccountClass.get_sha256_password(self.password)
-                                    user.user_one_to_one_field.password_slug_field = self.password
-                                # technical data
-                                user.user_one_to_one_field.activity_boolean_field = self.is_active
-                                user.user_one_to_one_field.email_field = self.email
-                                user.user_one_to_one_field.secret_question_char_field = self.secret_question
-                                user.user_one_to_one_field.secret_answer_char_field = self.secret_answer
-                                # first data
-                                user.user_one_to_one_field.last_name_char_field = self.last_name
-                                user.user_one_to_one_field.first_name_char_field = self.first_name
-                                user.user_one_to_one_field.patronymic_char_field = self.patronymic
-                                # second data
-                                user.user_one_to_one_field.personnel_number_slug_field = self.personnel_number
-                                user.user_one_to_one_field.subdivision_char_field = self.subdivision
-                                user.user_one_to_one_field.workshop_service_char_field = self.workshop_service
-                                user.user_one_to_one_field.department_site_char_field = self.department_site
-                                user.user_one_to_one_field.position_char_field = self.position
-                                user.user_one_to_one_field.category_char_field = self.category
-                                # save account
-                                user.save()
-                                return self.account_auth_set_group()
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
-                                return False
-                        else:
-                            return False
                     # Пользователь не существует: создание
                     except Exception as error:
-                        try:
-                            user = User.objects.create(
-                                # authorization data
-                                username=self.username,
-                                password=DjangoClass.AccountClass.get_sha256_password(self.password),
-                                # technical data
-                                is_active=True,
-                                is_staff=self.is_staff,
-                                is_superuser=self.is_superuser,
-                            )
+                        user = User.objects.create(
                             # authorization data
-                            user.user_one_to_one_field.password_slug_field = self.password
+                            username=self.username,
+                            password=DjangoClass.AccountClass.get_sha256_password(self.password),
                             # technical data
-                            user.user_one_to_one_field.activity_boolean_field = self.is_active
-                            user.user_one_to_one_field.email_field = self.email
-                            user.user_one_to_one_field.secret_question_char_field = self.secret_question
-                            user.user_one_to_one_field.secret_answer_char_field = self.secret_answer
-                            # first data
-                            user.user_one_to_one_field.last_name_char_field = self.last_name
-                            user.user_one_to_one_field.first_name_char_field = self.first_name
-                            user.user_one_to_one_field.patronymic_char_field = self.patronymic
-                            # second data
-                            user.user_one_to_one_field.personnel_number_slug_field = self.personnel_number
-                            user.user_one_to_one_field.subdivision_char_field = self.subdivision
-                            user.user_one_to_one_field.workshop_service_char_field = self.workshop_service
-                            user.user_one_to_one_field.department_site_char_field = self.department_site
-                            user.user_one_to_one_field.position_char_field = self.position
-                            user.user_one_to_one_field.category_char_field = self.category
-                            # save account
-                            user.save()
-                            return self.account_auth_set_group()
-                        except Exception as error:
-                            DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
-                            return False
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
-                    return False
+                            is_active=True,
+                            is_staff=self.is_staff,
+                            is_superuser=self.is_superuser,
+                        )
+                    # try:
+                    if True:
+                        user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                        # authorization data
+                        if self.force_change_account_password:
+                            user.password = DjangoClass.AccountClass.get_sha256_password(self.password)
+                            user_model.password_slug_field = self.password
+                        # technical data
+                        user_model.activity_boolean_field = self.is_active
+                        user_model.email_field = self.email
+                        user_model.secret_question_char_field = self.secret_question
+                        user_model.secret_answer_char_field = self.secret_answer
+                        # first data
+                        user_model.last_name_char_field = self.last_name
+                        user_model.first_name_char_field = self.first_name
+                        user_model.patronymic_char_field = self.patronymic
+                        # second data
+                        user_model.personnel_number_slug_field = self.personnel_number
+                        user_model.subdivision_char_field = self.subdivision
+                        user_model.workshop_service_char_field = self.workshop_service
+                        user_model.department_site_char_field = self.department_site
+                        user_model.position_char_field = self.position
+                        user_model.category_char_field = self.category
+                        # save account
+                        user_model.save()
+                        return self.account_auth_set_group()
+                    # except Exception as error:
+                    #     DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
+                    #     return False
+                # except Exception as error:
+                #     DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
+                #     return False
 
             def account_auth_set_group(self):
-                return True
+                user = User.objects.get(username=self.username)
+                user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                if self.force_clear_groups:
+                    for group in GroupModel.objects.filter(user_many_to_many_field=user_model):
+                        group.user_many_to_many_field.remove(user_model)
+                success = True
+                for group in self.groups:
+                    if len(str(group).strip()) >= 1:
+                        # try:
+                        if True:
+                            group_object = Group.objects.get_or_create(name=group)[0]
+                            group_model = GroupModel.objects.get_or_create(group_foreign_key_field=group_object)[0]
+                            group_model.user_many_to_many_field.add(user_model)
+                        # except Exception as error:
+                        #     DjangoClass.LoggingClass.logging_errors_local(
+                        #         error=error, function_error='account_auth_set_group'
+                        #     )
+                        #     success = False
+                return success
 
         class UserAuthClassOld:
             """
@@ -703,11 +669,10 @@ class DjangoClass:
         @staticmethod
         def get_sha256_password(password: str):
             try:
-                user = User.objects.get_or_create(username='None')[0]
+                user = User.objects.create(username='sha256')
                 user.set_password(password)
-                user.save()
-                user = User.objects.get_or_create(username='None')[0]
                 encrypt_password = user.password
+                UserModel.objects.get(user_foreign_key_field=user).delete()
                 user.delete()
                 return encrypt_password
             except Exception as error:
@@ -960,7 +925,8 @@ class ComputerVisionClass:
                     # Вывод результата в консоль
                     print(f'{component.genericipaddress_field} | {component.alias_char_field} : {round(value, 2)} %')
                 except Exception as error:
-                    print(f'\ncomponent_grohota_16_operation| {component.genericipaddress_field} | {component.alias_char_field} | error : {error}\n')
+                    print(
+                        f'\ncomponent_grohota_16_operation| {component.genericipaddress_field} | {component.alias_char_field} | error : {error}\n')
 
             @staticmethod
             def component_grohota_16_operation_old(component):

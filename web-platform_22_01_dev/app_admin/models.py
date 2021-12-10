@@ -2,6 +2,8 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
     FileExtensionValidator, DecimalValidator
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Examples
 from django.utils import timezone
@@ -2006,6 +2008,13 @@ class UserModel(models.Model):
         return int(self.user_foreign_key_field.username)
 
 
+@receiver(post_save, sender=User)
+def create_user(sender, instance, created, **kwargs):
+    # Создание при создании родительской модели
+    if created:
+        UserModel.objects.get_or_create(user_foreign_key_field=instance)
+
+
 # Action
 class ActionModel(models.Model):
     """
@@ -2192,6 +2201,13 @@ class GroupModel(models.Model):
 
     def get_id(self):
         return self.id
+
+
+@receiver(post_save, sender=Group)
+def create_user(sender, instance, created, **kwargs):
+    # Создание при создании родительской модели
+    if created:
+        GroupModel.objects.get_or_create(group_foreign_key_field=instance)
 
 
 # Computer Vision

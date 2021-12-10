@@ -30,4 +30,18 @@ urlpatterns = [
     # home
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
+    # account
+    path('account_login/', views.account_login, name='account_login'),
+    path('account_logout/', views.account_logout, name='account_logout'),
+    path('account_change_password/', views.account_change_password, name='account_change_password'),
+    path('account_change_profile/', views.account_change_profile, name='account_change_profile'),
+    path('account_recover_password/<slug:type_slug>/', views.account_recover_password, name='account_recover_password'),
+    path('account_profile/<int:user_id>/', views.account_profile, name='account_profile'),
+
+    path('account_create_accounts/<slug:quantity_slug>/', views.account_create_or_change_accounts,
+         name='account_create_or_change_accounts'),
+    path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),
+    path('account_generate_passwords/', views.account_generate_passwords, name='account_generate_passwords'),
+    path('account_update_accounts_1c/', views.account_update_accounts_1c, name='account_update_accounts_1c'),
+    path('account_change_groups/', views.account_change_groups, name='account_change_groups'),
 ]

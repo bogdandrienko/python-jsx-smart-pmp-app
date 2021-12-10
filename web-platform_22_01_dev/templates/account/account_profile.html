@@ -1,0 +1,116 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Личный профиль
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="text-center">
+    <h1 class="display-6 fst-italic">Личный профиль</h1>
+    <small class="text-secondary">Эта страница содержит подробную информацию о пользователе.</small>
+</div>
+
+{% if response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="">
+
+        {% if response == 2 %}
+
+            <div class="text-end">
+                <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg p-0 m-0">Изменить личный профиль</a>
+            </div>
+
+        {% else %}
+
+            <div class="text-end">
+                <a href="" class="btn btn-danger btn-lg">Пожаловаться на пользователя</a>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="row g-5">
+        <div class="py-5 text-center">
+        {% if user_model.image_field.url %}
+        <img src="{{ user_model.image_field.url }}" class="bd-placeholder-img fa-image" width="512px" alt="{{ user_model.first_name_char_field }}">
+        {% else %}
+        <img src="{% static 'media/uploads/account/avatar/default_avatar.jpg' %}" class="bd-placeholder-img container" width="256px" height="100%" alt="default">
+        {% endif %}
+        <h2>{{ user_model.last_name_char_field }} {{ user_model.first_name_char_field }} {{ user_model.patronymic_char_field }}</h2>
+        <p class="lead">{{ user_model.position_char_field }}</p>
+    </div>
+    <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <div class="p-4 text-secondary">
+                <h4>Дата регистрации</h4>
+                <ol class="list-unstyled mb-0">
+                    <li>
+                        <p>{{ user.date_joined }}</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-7 col-lg-8">
+            <div>
+                <h1 class="blog-post-title text-center">Подробная информация:</h1>
+            </div>
+            <article class="blog-post text-end">
+                <div>
+                    <h2 class="blog-post-title">Образование:</h2>
+                    <p>{{ user_model.education_text_field }}</p>
+                </div>
+                <hr>
+                <div>
+                    <h2 class="blog-post-title">Достижения:</h2>
+                    <p>{{ user_model.achievements_text_field }}</p>
+                </div>
+                <hr>
+                <div>
+                    <h2 class="blog-post-title">Биография:</h2>
+                    <p>{{ user_model.biography_text_field }}</p>
+                </div>
+                <hr>
+                <div>
+                    <h2 class="blog-post-title">Хобби:</h2>
+                    <p>{{ user_model.hobbies_text_field }}</p>
+                </div>
+                <hr>
+            </article>
+        </div>
+    </div>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

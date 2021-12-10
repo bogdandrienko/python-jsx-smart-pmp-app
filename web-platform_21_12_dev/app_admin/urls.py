@@ -19,9 +19,10 @@ urlpatterns = [
     path('account_login/', views.account_login, name='account_login'),
     path('account_logout/', views.account_logout, name='account_logout'),
     path('account_change_password/', views.account_change_password, name='account_change_password'),
-    path('account_recover_password/<slug:type_slug>/', views.account_recover_password, name='account_recover_password'),
     path('account_change_profile/', views.account_change_profile, name='account_change_profile'),
+    path('account_recover_password/<slug:type_slug>/', views.account_recover_password, name='account_recover_password'),
     path('account_profile/<int:user_model_int>/', views.account_profile, name='account_profile'),
+
     path('account_create_accounts/<slug:quantity_slug>/', views.account_create_or_change_accounts,
          name='account_create_or_change_accounts'),
     path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),
