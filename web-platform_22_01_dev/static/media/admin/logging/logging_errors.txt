@@ -18,3 +18,5 @@ Bogdan, 127.0.0.1, /, GET, 2021-12-09 16:32:24.694239, UserModel matching query 
 Bogdan, 127.0.0.1, /, GET, 2021-12-09 16:46:12.612266, UserModel matching query does not exist.
 
 Bogdan, 127.0.0.1, /home/, GET, 2021-12-09 16:49:16.440811, UserModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-12-09 17:47:58.475830, 'AnonymousUser' object is not iterable
