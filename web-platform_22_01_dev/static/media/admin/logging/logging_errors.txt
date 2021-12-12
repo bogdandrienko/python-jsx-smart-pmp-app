@@ -5044,3 +5044,7 @@ Bogdan, 127.0.0.1, /salary_pdf/, POST, 2021-12-12 15:18:26.469065, [WinError 100
 970801351179, 127.0.0.1, /home/, GET, 2021-12-12 16:25:34.255082, ActionModel matching query does not exist.
 
 970801351179, 127.0.0.1, /home/, GET, 2021-12-12 16:25:35.155883, ActionModel matching query does not exist.
+
+, 192.168.1.68, /, GET, 2021-12-12 16:33:19.546896, User matching query does not exist.
+
+, 192.168.1.68, /home/, GET, 2021-12-12 16:33:21.543615, User matching query does not exist.
