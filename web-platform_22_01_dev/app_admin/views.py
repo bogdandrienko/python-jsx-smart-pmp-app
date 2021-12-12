@@ -75,6 +75,7 @@ def examples_forms(request):
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
     if page:
         return redirect(page)
+
     try:
         response = 0
         data = None
@@ -344,7 +345,7 @@ def account_change_password(request):
     Страница смены пароля пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
     if page:
         return redirect(page)
 
@@ -452,7 +453,7 @@ def account_recover_password(request, type_slug):
     Страница восстановления пароля пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
     if page:
         return redirect(page)
 
@@ -1228,10 +1229,12 @@ def module_or_component(request, url_slug: str):
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
     if page:
         return redirect(page)
+
     modules = ModuleOrComponentModel.objects.filter(parent_slug_field=url_slug)
     context = {
         'modules': modules,
     }
+
     return render(request, 'components/module.html', context)
 
 

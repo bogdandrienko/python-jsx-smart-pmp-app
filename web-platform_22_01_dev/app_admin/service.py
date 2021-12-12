@@ -31,65 +31,6 @@ from app_admin.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils
 class DjangoClass:
     class AuthorizationClass:
         @staticmethod
-        def access_to_page(request, logging, access):
-            try:
-                # Если пользователь в подсети предприятия его переадресует на локальный доступ
-                if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-                    return 'local'
-                # Логирование действий
-                if logging:
-                    DjangoClass.LoggingClass.logging_actions(request=request)
-                # Проверка на вход в аккаунт
-                if request.user.is_authenticated:
-                    try:
-                        user = User.objects.get(username=request.user.username)
-                        # Проверка бана: если аккаунт пользователя отключён, то его разлогинит
-                        if user.is_active is False:
-                            return 'account_logout'
-                        else:
-                            if access:
-                                # Проверка заполнения спец полей
-                                if user.profile.email and user.profile.secret_answer and user.profile.secret_question:
-                                    # Полный доступ на страницу
-                                    if str(access).strip().lower() == 'all':
-                                        return False
-                                    # Выборка групп доступа на страницу
-                                    try:
-                                        page_groups = [str(x).strip().lower() for x in str(access).split(',')]
-                                    except Exception as error:
-                                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                        page_groups = [access]
-                                    # Выборка групп доступа пользователя
-                                    try:
-                                        user_groups = [str(x).strip().lower() for x in user.groups.all()]
-                                    except Exception as error:
-                                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                        if access:
-                                            user_groups = [access]
-                                        else:
-                                            user_groups = ''
-                                    # Проверка на наличие хоть одного совпадения
-                                    for user_group in user_groups:
-                                        try:
-                                            if user_group and len(user_group) > 1:
-                                                page_groups.index(user_group)
-                                                return False
-                                        except Exception as error:
-                                            pass
-                                    return True
-                                else:
-                                    return 'account_change_password'
-                            else:
-                                return 'home'
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-                return 'account_login'
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                DjangoClass.AuthorizationClass.http404_raise(exception_text=error)
-
-        @staticmethod
         def try_to_access(request, access: str):
 
             # Если пользователь в подсети предприятия его переадресует на локальный доступ
@@ -149,10 +90,6 @@ class DjangoClass:
             else:
                 print('return not authentificated')
                 return 'account_login'
-
-        @staticmethod
-        def http404_raise(exception_text):
-            raise Http404(exception_text)
 
     class LoggingClass:
         @staticmethod
