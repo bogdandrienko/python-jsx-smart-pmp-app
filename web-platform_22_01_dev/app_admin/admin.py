@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ExamplesModel, UserModel, GroupModel, LoggingModel, ActionModel, ComputerVisionModuleModel, \
-    ComputerVisionComponentModel, ModuleOrComponentModel
+    ComputerVisionComponentModel, ModuleOrComponentModel, IdeaCommentModel, IdeaModel, IdeaRatingModel
 
 # admin
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
@@ -9,7 +9,7 @@ admin.site.site_title = 'Админка'  # default: "Django site admin"
 
 
 class ExamplesModelAdmin(admin.ModelAdmin):
-    """Настройки 'CommentRationalModel' на панели администратора"""
+    """Настройки 'Examples Model Admin' на панели администратора"""
     # form = ExamplesModelForm
 
     # Поля, которые нужно отображать в заголовке, на панели администратора
@@ -89,7 +89,7 @@ admin.site.register(ExamplesModel, ExamplesModelAdmin)
 
 # Logging
 class LoggingModelAdmin(admin.ModelAdmin):
-    """Настройки 'CommentRationalModel' на панели администратора"""
+    """Настройки 'Logging Model Admin' на панели администратора"""
     list_display = ('username_slug_field', 'ip_genericipaddress_field', 'request_path_slug_field',
                     'request_method_slug_field', 'error_text_field', 'datetime_field')
     list_filter = ('username_slug_field', 'ip_genericipaddress_field', 'request_path_slug_field',
@@ -124,6 +124,7 @@ admin.site.register(LoggingModel, LoggingModelAdmin)
 
 # User
 class UserModelAdmin(admin.ModelAdmin):
+    """Настройки 'User Model Admin' на панели администратора"""
     list_display = (
         # authorization data
         'user_foreign_key_field',
@@ -244,7 +245,7 @@ admin.site.register(UserModel, UserModelAdmin)
 
 
 class ActionModelAdmin(admin.ModelAdmin):
-    """Настройки 'CommentRationalModel' на панели администратора"""
+    """Настройки 'Action Model Admin' на панели администратора"""
     list_display = ('name_char_field', 'name_slug_field')
     list_filter = ('name_char_field', 'name_slug_field')
     fieldsets = (
@@ -260,7 +261,7 @@ admin.site.register(ActionModel, ActionModelAdmin)
 
 # Group
 class GroupModelAdmin(admin.ModelAdmin):
-    """Настройки 'CommentRationalModel' на панели администратора"""
+    """Настройки 'Group Model Admin' на панели администратора"""
     list_display = (
         'group_foreign_key_field',
         'name_char_field',
@@ -309,9 +310,8 @@ admin.site.register(GroupModel, GroupModelAdmin)
 
 class ComputerVisionModuleModelAdmin(admin.ModelAdmin):
     """
-    Настройки 'ComputerVisionModuleModel' на панели администратора
+    Настройки 'Computer Vision Module Model' на панели администратора
     """
-
     list_display = (
         'name_char_field',
         'description_text_field',
@@ -323,7 +323,6 @@ class ComputerVisionModuleModelAdmin(admin.ModelAdmin):
         'restart_boolean_field',
         'error_text_field',
     )
-
     list_filter = (
         'name_char_field',
         'description_text_field',
@@ -335,7 +334,6 @@ class ComputerVisionModuleModelAdmin(admin.ModelAdmin):
         'restart_boolean_field',
         'error_text_field',
     )
-
     fieldsets = (
         ('Наименование, описание и путь', {'fields': (
             'name_char_field', 'description_text_field', 'path_slug_field',
@@ -347,7 +345,6 @@ class ComputerVisionModuleModelAdmin(admin.ModelAdmin):
             'restart_boolean_field', 'error_text_field',
         )}),
     )
-
     search_fields = [
         'name_char_field',
         'description_text_field',
@@ -367,9 +364,8 @@ admin.site.register(ComputerVisionModuleModel, ComputerVisionModuleModelAdmin)
 
 class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
     """
-    Настройки 'ComputerVisionComponentModel' на панели администратора
+    Настройки 'Computer Vision Component Model' на панели администратора
     """
-
     list_display = (
         'module_foreign_key_field',
         'play_boolean_field',
@@ -394,7 +390,6 @@ class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
         'null_level_integer_field',
         'correct_coefficient_float_field',
     )
-
     list_filter = (
         'module_foreign_key_field',
         'play_boolean_field',
@@ -419,7 +414,6 @@ class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
         'null_level_integer_field',
         'correct_coefficient_float_field',
     )
-
     fieldsets = (
         ('ip', {'fields': (
             'module_foreign_key_field',
@@ -446,7 +440,6 @@ class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
             'correct_coefficient_float_field',
         )}),
     )
-
     search_fields = [
         'module_foreign_key_field',
         'play_boolean_field',
@@ -477,57 +470,203 @@ class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
 admin.site.register(ComputerVisionComponentModel, ComputerVisionComponentModelAdmin)
 
 
-class ApplicationModuleOrComponentModelAdmin(admin.ModelAdmin):
+class ModuleOrComponentModelAdmin(admin.ModelAdmin):
     """
-    Настройки 'ComputerVisionComponentModel' на панели администратора
+    Настройки 'Module Or Component Model Admin' на панели администратора
     """
-
     list_display = (
         'name_char_field',
         'type_slug_field',
         'position_float_field',
-        'return_slug_field',
         'parent_slug_field',
         'url_slug_field',
+        'return_slug_field',
         'image_field',
         'text_field',
     )
-
     list_filter = (
         'name_char_field',
         'type_slug_field',
         'position_float_field',
-        'return_slug_field',
         'parent_slug_field',
         'url_slug_field',
+        'return_slug_field',
         'image_field',
         'text_field',
     )
-
     fieldsets = (
         ('main', {'fields': (
             'name_char_field',
             'type_slug_field',
             'position_float_field',
-            'return_slug_field',
             'parent_slug_field',
             'url_slug_field',
+            'return_slug_field',
             'image_field',
             'text_field',
         )}),
     )
-
     search_fields = [
         'name_char_field',
         'type_slug_field',
         'position_float_field',
-        'return_slug_field',
         'parent_slug_field',
         'url_slug_field',
+        'return_slug_field',
         'image_field',
         'text_field',
     ]
 
 
 # Регистрация в админ-панели шаблонов
-admin.site.register(ModuleOrComponentModel, ApplicationModuleOrComponentModelAdmin)
+admin.site.register(ModuleOrComponentModel, ModuleOrComponentModelAdmin)
+
+
+class IdeaModelAdmin(admin.ModelAdmin):
+    """
+    Idea Model Admin
+    """
+    list_display = (
+        'author_foreign_key_field',
+        'name_char_field',
+        'category_slug_field',
+        'short_description_char_field',
+        'full_description_text_field',
+        'avatar_image_field',
+        'addiction_file_field',
+        'visibility_boolean_field',
+        'created_datetime_field',
+        'register_datetime_field',
+    )
+    list_filter = (
+        'author_foreign_key_field',
+        'name_char_field',
+        'category_slug_field',
+        'short_description_char_field',
+        'full_description_text_field',
+        'avatar_image_field',
+        'addiction_file_field',
+        'visibility_boolean_field',
+        'created_datetime_field',
+        'register_datetime_field',
+    )
+    fieldsets = (
+        ('Автор',
+         {'fields': ('author_foreign_key_field',)}
+         ),
+        ('Имя и категория',
+         {'fields': ('name_char_field', 'category_slug_field',)}
+         ),
+        ('Описание',
+         {'fields': ('short_description_char_field', 'full_description_text_field',)}
+         ),
+        ('Приложения',
+         {'fields': ('avatar_image_field', 'addiction_file_field',)}
+         ),
+        ('Отображение',
+         {'fields': ('visibility_boolean_field',)}
+         ),
+        ('Дата и время',
+         {'fields': ('created_datetime_field', 'register_datetime_field',)}
+         ),
+    )
+    search_fields = [
+        'author_foreign_key_field',
+        'name_char_field',
+        'category_slug_field',
+        'short_description_char_field',
+        'full_description_text_field',
+        'avatar_image_field',
+        'addiction_file_field',
+        'visibility_boolean_field',
+        'created_datetime_field',
+        'register_datetime_field',
+    ]
+
+
+# Регистрация в админ-панели
+admin.site.register(IdeaModel, IdeaModelAdmin)
+
+
+class IdeaCommentModelAdmin(admin.ModelAdmin):
+    """
+    Idea Comment Model Admin
+    """
+    list_display = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'text_field',
+        'datetime_field',
+    )
+    list_filter = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'text_field',
+        'datetime_field',
+    )
+    fieldsets = (
+        ('Автор',
+         {'fields': ('author_foreign_key_field',)}
+         ),
+        ('Идея',
+         {'fields': ('idea_foreign_key_field',)}
+         ),
+        ('Комментарий',
+         {'fields': ('text_field',)}
+         ),
+        ('Дата',
+         {'fields': ('datetime_field',)}
+         ),
+    )
+    search_fields = [
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'text_field',
+        'datetime_field',
+    ]
+
+
+# Регистрация в админ-панели
+admin.site.register(IdeaCommentModel, IdeaCommentModelAdmin)
+
+
+class IdeaRatingModelAdmin(admin.ModelAdmin):
+    """
+    Idea Rating Model Admin
+    """
+    list_display = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'status_boolean_field',
+        'datetime_field',
+    )
+    list_filter = (
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'status_boolean_field',
+        'datetime_field',
+    )
+    fieldsets = (
+        ('Автор',
+         {'fields': ('author_foreign_key_field',)}
+         ),
+        ('Идея',
+         {'fields': ('idea_foreign_key_field',)}
+         ),
+        ('Статус',
+         {'fields': ('status_boolean_field',)}
+         ),
+        ('Дата',
+         {'fields': ('datetime_field',)}
+         ),
+    )
+    search_fields = [
+        'author_foreign_key_field',
+        'idea_foreign_key_field',
+        'status_boolean_field',
+        'datetime_field',
+    ]
+
+
+# Регистрация в админ-панели
+admin.site.register(IdeaRatingModel, IdeaRatingModelAdmin)

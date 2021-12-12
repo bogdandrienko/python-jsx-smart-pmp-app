@@ -4,9 +4,9 @@ import hashlib
 import json
 import os
 import random
-from concurrent.futures import ThreadPoolExecutor
-from email import message
 import httplib2
+from email import message
+from concurrent.futures import ThreadPoolExecutor
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -15,19 +15,16 @@ from django.contrib.auth import login, authenticate, logout
 from django.template.loader import get_template
 from django.urls import reverse
 from xhtml2pdf import pisa
-
-from app_admin.forms import ExamplesModelForm
-from app_admin.models import LoggingModel, ActionModel, IdeaModel, IdeaCommentModel, IdeaRatingModel, IdeasModel, \
-    IdeasCategoryModel, ModuleOrComponentModel
-from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryClass, Xhtml2pdfClass, CareerClass, \
-    GeoClass, ComputerVisionClass
-from app_admin.utils import ExcelClass, EncryptingClass, SQLClass
 from django.contrib.auth.models import User, Group
 from app_admin.models import UserModel, GroupModel
 from app_admin.forms import GeoForm
-
-# example
 from app_settings import settings
+from app_admin.models import LoggingModel, ActionModel, IdeaModel, IdeaCommentModel, IdeaRatingModel, \
+    ModuleOrComponentModel
+from app_admin.forms import ExamplesModelForm
+from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryClass, Xhtml2pdfClass, CareerClass, \
+    GeoClass, ComputerVisionClass
+from app_admin.utils import ExcelClass, EncryptingClass, SQLClass
 
 
 def example(request):
@@ -453,7 +450,7 @@ def account_recover_password(request, type_slug):
     Страница восстановления пароля пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
     if page:
         return redirect(page)
 
@@ -469,6 +466,7 @@ def account_recover_password(request, type_slug):
                 user = User.objects.get(username=DjangoClass.RequestClass.get_value(request, "username"))
                 user_model = UserModel.objects.get(user_foreign_key_field=user)
             except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 user = None
             if type_slug.lower() == 'iin':
                 # try:
@@ -520,7 +518,7 @@ def account_recover_password(request, type_slug):
                         message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
                                     f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/0/ , ' \
                                     f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
-                        from_email = 'eevee.cycle@yandex.ru'
+                        # from_email = 'eevee.cycle@yandex.ru'
                         from_email = 'webapp@km.kz'
                         to_email = email_
                         if subject and message and to_email:
@@ -670,7 +668,7 @@ def account_create_or_change_accounts(request):
                                 new_account = False
                             # Пользователь не существует: создание
                             except Exception as error:
-                                error = f'{error} = pass'
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                                 user = User.objects.create(
                                     # authorization data
                                     username=username,
@@ -727,7 +725,7 @@ def account_create_or_change_accounts(request):
                                             group_foreign_key_field=group_object
                                         )
                                     except Exception as error:
-                                        error = f'{error} = pass'
+                                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                                         group_model = GroupModel.objects.create(
                                             group_foreign_key_field=group_object,
                                             name_char_field=group,
@@ -784,6 +782,7 @@ def account_export_accounts(request):
                     )
                 index = 1
                 body = []
+                response = 1
                 for user_object in user_objects:
                     try:
                         if User.objects.get(username=user_object.username).is_superuser:
@@ -892,7 +891,6 @@ def account_export_accounts(request):
                         response = -1
                     data = [titles, body]
                 ExcelClass.workbook_save(workbook=workbook, excel_file='static/media/admin/account/export_users.xlsx')
-                response = 1
             except Exception as error:
                 DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 response = -1
@@ -1028,7 +1026,6 @@ def account_update_accounts_1c(request):
                 # Генерация объектов для создания аккаунтов
                 titles_1c = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'ТабельныйНомер', 'Подразделение',
                              'Цех_Служба', 'Отдел_Участок', 'Должность', 'Категория']
-                user_objects = []
                 for user in json_data["global_objects"]:
                     try:
                         # authorization data
@@ -1057,7 +1054,7 @@ def account_update_accounts_1c(request):
                             new_account = False
                         # Пользователь не существует: создание
                         except Exception as error:
-                            error = f'{error} = pass'
+                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                             user = User.objects.create(
                                 # authorization data
                                 username=username,
@@ -1095,7 +1092,6 @@ def account_update_accounts_1c(request):
                         user_model = UserModel.objects.get_or_create(
                             user_foreign_key_field=User.objects.get(username=username)
                         )[0]
-                        response = 1
                         groups = ['User']
                         for group in groups:
                             if len(group) > 0:
@@ -1105,7 +1101,7 @@ def account_update_accounts_1c(request):
                                         group_foreign_key_field=group_object
                                     )
                                 except Exception as error:
-                                    error = f'{error} = pass'
+                                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                                     group_model = GroupModel.objects.create(
                                         group_foreign_key_field=group_object,
                                         name_char_field=group,
@@ -1238,30 +1234,9 @@ def module_or_component(request, url_slug: str):
     return render(request, 'components/module.html', context)
 
 
-def module(request, type_slug: str):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    try:
-        modules = ModuleOrComponentModel.objects.all()
-        context = {
-            'modules': modules
-        }
-        return render(request, f'components/module.html', context)
-        # return render(request, f'module/{type_slug}.html', context)
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-        }
-
-    return render(request, 'components/home.html', context)
-
-
 def idea_create(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_create')
     if page:
         return redirect(page)
 
@@ -1270,7 +1245,7 @@ def idea_create(request):
         response = 0
         category = IdeaModel.get_all_category()
         if request.method == 'POST':
-            author_foreign_key_field = UserModel.objects.get(user_one_to_one_field=request.user)
+            author_foreign_key_field = UserModel.objects.get(user_foreign_key_field=request.user)
             name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
             category_slug_field = DjangoClass.RequestClass.get_value(request, "category_slug_field")
             short_description_char_field = DjangoClass.RequestClass.get_value(request, "short_description_char_field")
@@ -1310,7 +1285,8 @@ def idea_list(request):
 
     # try:
     if True:
-        idea = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
+        idea = IdeaModel.objects.all()
+        # idea = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
         category = IdeaModel.get_all_category()
         num_page = 2
         if request.method == 'POST':
@@ -1452,7 +1428,7 @@ def idea_comment(request, idea_int):
     if True:
         if request.method == 'POST':
             IdeaCommentModel.objects.create(
-                author_foreign_key_field=UserModel.objects.get(user_one_to_one_field=request.user),
+                author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
                 idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
                 text_field=request.POST['comment_text']
             )
@@ -1475,7 +1451,7 @@ def idea_like(request, idea_int):
     # try:
     if True:
         idea = IdeaModel.objects.get(id=idea_int)
-        author = UserModel.objects.get(user_one_to_one_field=request.user)
+        author = UserModel.objects.get(user_foreign_key_field=request.user)
         if request.POST['status'] == 'like':
             try:
                 IdeaRatingModel.objects.get(
@@ -1484,6 +1460,7 @@ def idea_like(request, idea_int):
                     status_boolean_field=True
                 ).delete()
             except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 IdeaRatingModel.objects.create(
                     author_foreign_key_field=author,
                     idea_foreign_key_field=idea,
@@ -1496,7 +1473,7 @@ def idea_like(request, idea_int):
                     status_boolean_field=False
                 ).delete()
             except Exception as error:
-                pass
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         else:
             try:
                 IdeaRatingModel.objects.get(
@@ -1505,13 +1482,14 @@ def idea_like(request, idea_int):
                     status_boolean_field=False
                 ).delete()
             except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 IdeaRatingModel.objects.create(
                     author_foreign_key_field=author,
                     idea_foreign_key_field=idea,
                     status_boolean_field=False
                 )
                 IdeaCommentModel.objects.create(
-                    author_foreign_key_field=UserModel.objects.get(user_one_to_one_field=request.user),
+                    author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
                     idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
                     text_field=request.POST['comment_text']
                 )
@@ -1522,7 +1500,7 @@ def idea_like(request, idea_int):
                     status_boolean_field=True
                 ).delete()
             except Exception as error:
-                pass
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
@@ -1539,14 +1517,13 @@ def idea_change(request, idea_int):
 
     # try:
     if True:
-        data = IdeasModel.objects.get(id=idea_int)
+        data = IdeaModel.objects.get(id=idea_int)
         result_form = False
         if request.method == 'POST':
             if request.POST["name"]:
                 data.name = request.POST["name"]
             if request.POST["category"]:
-                data.category = IdeasCategoryModel.objects.get(
-                    id=request.POST["category"])
+                data.category = request.POST["category"]
             if request.POST["short_description"]:
                 data.short_description = request.POST["short_description"]
             if request.POST["long_description"]:
@@ -1569,6 +1546,38 @@ def idea_change(request, idea_int):
     #         'data': False
     #     }
     return render(request, 'idea/idea_change.html', context)
+
+
+def idea_activate(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        data = IdeaModel.objects.get(id=idea_int)
+        data.visibility_boolean_field = True
+        data.save()
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    return redirect(reverse('idea_list', args=()))
+
+
+def idea_deactivate(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        data = IdeaModel.objects.get(id=idea_int)
+        data.visibility_boolean_field = False
+        data.save()
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    return redirect(reverse('idea_list', args=()))
 
 
 def salary(request):
@@ -1938,12 +1947,12 @@ def geo(request):
 
             # Points = [PointName, latitude, longitude, PointLinks]
 
-            point1 = [61.22812, 52.14303, "1", "2"]
-            point2 = [61.22829, 52.1431, "2", "1|3"]
-            point3 = [61.22862, 52.14323, "3", "2|4"]
-            point4 = [61.22878, 52.14329, "4", "3|5"]
-            point5 = [61.22892201, 52.14332617, "5", "4|6"]
-            point_arr = [point1, point2, point3, point4, point5]
+            # point1 = [61.22812, 52.14303, "1", "2"]
+            # point2 = [61.22829, 52.1431, "2", "1|3"]
+            # point3 = [61.22862, 52.14323, "3", "2|4"]
+            # point4 = [61.22878, 52.14329, "4", "3|5"]
+            # point5 = [61.22892201, 52.14332617, "5", "4|6"]
+            # point_arr = [point1, point2, point3, point4, point5]
 
             # Получение значений из формы
             count_points = int(request.POST['count_points'])
@@ -1967,7 +1976,7 @@ def geo(request):
             print(object_)
 
             # Vectors = [VectorName, length(meters)]
-            vector_arr = GeoClass.get_vector_arr(points_arr)
+            # vector_arr = GeoClass.get_vector_arr(points_arr)
             # print(vector_arr)
 
             # print(points_arr)
@@ -2021,7 +2030,7 @@ def passages_thermometry(request):
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         try:
-            check = request.POST['check']
+            # check = request.POST['check']
             sql_select_query = f"SELECT * " \
                                f"FROM dbtable " \
                                f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND personid = '{personid}' " \
@@ -2091,7 +2100,7 @@ def passages_select(request):
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         try:
-            check = request.POST['check']
+            # check = request.POST['check']
             date = str(request.POST['date']).split('T')[0]
             time = str(request.POST['date']).split('T')[1]
             sql_select_query = f"SELECT * " \
@@ -2203,10 +2212,10 @@ def passages_insert(request):
             )
             cursor = connect_db.cursor()
             cursor.fast_executemany = True
-            sql_select_query = f"SELECT TOP (1) personname " \
-                               f"FROM dbtable " \
-                               f"WHERE personid = '{personid}' " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
+            sql_select_query = f'SELECT TOP (1) personname ' \
+                               f'FROM dbtable ' \
+                               f'WHERE personid = \'{personid}\' ' \
+                               f'ORDER BY date1 DESC, date2 DESC;'
             cursor.execute(sql_select_query)
             personname_all = cursor.fetchall()
             personname = personname_all[0][0]

@@ -29,6 +29,8 @@ urlpatterns = [
     # home
     path('', views.home, name=''),
     path('home/', views.home, name='home'),
+    # модули
+    path('module_or_component/<slug:url_slug>/', views.module_or_component, name='module_or_component'),
     # account
     path('account_login/', views.account_login, name='account_login'),
     path('account_logout/', views.account_logout, name='account_logout'),
@@ -43,9 +45,6 @@ urlpatterns = [
     path('account_update_accounts_1c/', views.account_update_accounts_1c, name='account_update_accounts_1c'),
     path('account_change_groups/', views.account_change_groups, name='account_change_groups'),
 
-    # модули
-    path('module_or_component/<slug:url_slug>/', views.module_or_component, name='module_or_component'),
-
     # idea
     path('idea_create/', views.idea_create, name='idea_create'),
     path('idea_list/', views.idea_list, name='idea_list'),
@@ -55,6 +54,8 @@ urlpatterns = [
     path('idea_comment/<int:idea_int>/', views.idea_comment, name='idea_comment'),
     path('idea/like/<int:idea_int>/', views.idea_like, name='idea_like'),
     path('idea/change/<int:idea_int>/', views.idea_change, name='idea_change'),
+    path('idea/activate/<int:idea_int>/', views.idea_activate, name='idea_activate'),
+    path('idea/deactivate/<int:idea_int>/', views.idea_deactivate, name='idea_deactivate'),
 
     # salary
     path('salary/', views.salary, name='salary'),

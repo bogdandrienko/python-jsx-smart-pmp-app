@@ -1,12 +1,10 @@
-from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator, MaxValueValidator, \
-    FileExtensionValidator, DecimalValidator
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
-# Examples
 from django.utils import timezone
+from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator, MaxValueValidator, \
+    FileExtensionValidator, DecimalValidator
 
 
 class ExamplesModel(models.Model):
@@ -1568,6 +1566,7 @@ class LoggingModel(models.Model):
             try:
                 username = User.objects.get(username=self.username_slug_field).profile.last_name
             except Exception as error:
+                error = f'error = {error}'
                 username = ''
         else:
             username = ''
@@ -2015,7 +2014,7 @@ def create_user(sender, instance, created, **kwargs):
         try:
             UserModel.objects.get_or_create(user_foreign_key_field=instance)
         except Exception as error:
-            error = f'{error} = pass'
+            error = f'error = {error}'
 
 
 # Action
@@ -2032,7 +2031,7 @@ class ActionModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2042,7 +2041,7 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
                   '"Модератор отдела ОУПиБП"</small><hr><br>',
 
-        max_length=32,
+        max_length=64,
     )
     name_slug_field = models.SlugField(
         db_column='name_slug_field_db_column',
@@ -2053,7 +2052,7 @@ class ActionModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2063,7 +2062,7 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
                   '"moderator_oupibp"</small><hr><br>',
 
-        max_length=32,
+        max_length=64,
         allow_unicode=False,
     )
 
@@ -2217,7 +2216,7 @@ def create_group(sender, instance, created, **kwargs):
                 name_slug_field=instance.name,
             )
         except Exception as error:
-            error = f'{error} = pass'
+            error = f'error = {error}'
 
 
 # Module Or Component
@@ -2246,7 +2245,7 @@ class ModuleOrComponentModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Тип',
+        verbose_name='Тип:',
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
@@ -2269,7 +2268,7 @@ class ModuleOrComponentModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Возврат:',
+        verbose_name='Ссылка для возврата:',
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
@@ -2292,7 +2291,7 @@ class ModuleOrComponentModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Родитель:',
+        verbose_name='Ссылка для отображения:',
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
@@ -2314,7 +2313,7 @@ class ModuleOrComponentModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default=0.0,
+        default=1.0,
         verbose_name='Позиция в списке:',
         help_text='<small class="text-muted">Число с плавающей запятой, example: "0.0"</small><hr><br>',
     )
@@ -2356,7 +2355,7 @@ class ModuleOrComponentModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Ссылка:',
+        verbose_name='Ссылка для перехода:',
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
@@ -3490,115 +3489,3 @@ class IdeaRatingModel(models.Model):
     def __str__(self):
         return f'{self.author_foreign_key_field} :: {self.idea_foreign_key_field} :: {self.status_boolean_field} ' \
                f':: {self.datetime_field}'
-
-
-# Ideas
-class IdeasCategoryModel(models.Model):
-    """
-    Ideas Category Model
-    """
-    category_name = models.CharField(max_length=50, unique=True, verbose_name='название')
-    category_slug = models.SlugField(max_length=50, unique=True, verbose_name='ссылка')
-    category_description = models.TextField('описание', blank=True)
-    category_image = models.ImageField('картинка', upload_to='uploads/rational/category', blank=True)
-
-    class Meta:
-        app_label = 'app_admin'
-        ordering = ('-id',)
-        verbose_name = 'Категория в банке идей'
-        verbose_name_plural = 'Категории в банке идей'
-        db_table = 'ideas_category_table'
-
-    def __str__(self):
-        return f'{self.category_name}'
-
-
-class IdeasModel(models.Model):
-    """
-    Bank Ideas Model
-    """
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь', blank=True)
-    name = models.CharField(verbose_name='Название', max_length=50, blank=True)
-    category = models.ForeignKey(IdeasCategoryModel, on_delete=models.SET_NULL, null=True, editable=True,
-                                 default=None, verbose_name='Категория', blank=True)
-    short_description = models.CharField(verbose_name='Короткое описание', max_length=50, blank=True)
-    long_description = models.TextField(verbose_name='Длинное описание', blank=True)
-
-    image = models.ImageField(verbose_name='Картинка к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
-                              blank=True)
-    document = models.FileField(verbose_name='Документ к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
-                                blank=True)
-    status = models.BooleanField(verbose_name='Статус отображения', default=False, blank=True)
-    datetime_register = models.DateTimeField(verbose_name='Дата регистрации', auto_created=True, null=True,
-                                             editable=True, blank=True)
-    datetime_created = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-
-    class Meta:
-        app_label = 'app_admin'
-        ordering = ('-id',)
-        verbose_name = 'Идею'
-        verbose_name_plural = 'Банк идей'
-        db_table = 'ideas_table'
-
-    def __str__(self):
-        return f'{self.name} : {self.name} : {self.category}'
-
-    def get_total_comment_value(self):
-        return IdeasCommentModel.objects.filter(comment_idea=self.id).count()
-
-    def get_like_count(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count()
-
-    def get_dislike_count(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
-
-    def get_total_rating_value(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() + \
-               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
-
-    def get_total_rating(self):
-        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() - \
-               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
-
-
-class IdeasCommentModel(models.Model):
-    """
-    Ideas Comment Model
-    """
-    comment_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True,
-                                       blank=True)
-    comment_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
-                                     blank=True)
-    comment_text = models.TextField(verbose_name='Текст комментария')
-    comment_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-
-    class Meta:
-        app_label = 'app_admin'
-        ordering = ('-id',)
-        verbose_name = 'Комментарий в банке идей'
-        verbose_name_plural = 'Комментарии в банке идей'
-        db_table = 'ideas_comment_table'
-
-    def __str__(self):
-        return f'{self.comment_author} :: {self.comment_idea} :: {self.comment_text[:10]}... :: {self.comment_date}'
-
-
-class IdeasLikeModel(models.Model):
-    """
-    Ideas Like Model
-    """
-    like_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True, blank=True)
-    like_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
-                                  blank=True)
-    like_status = models.BooleanField(verbose_name='Лайк/дизлайк', default=False, blank=True)
-    like_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-
-    class Meta:
-        app_label = 'app_admin'
-        ordering = ('-id',)
-        verbose_name = 'Лайк в банке идей'
-        verbose_name_plural = 'Лайки в банке идей'
-        db_table = 'ideas_like_table'
-
-    def __str__(self):
-        return f'{self.like_author} :: {self.like_idea} :: {self.like_status} :: {self.like_date}'

@@ -1,30 +1,25 @@
-import concurrent
 import datetime
 import math
 import os
 import random
 import time
-from concurrent.futures import ThreadPoolExecutor
-
 import bs4
 import cv2
 import httplib2
 import numpy
 import openpyxl
 import requests
+from concurrent.futures import ThreadPoolExecutor
 from django.conf import settings
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.contrib.staticfiles import finders
 from django.core.handlers.wsgi import WSGIRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import Http404
 from django.utils import timezone
 from fastkml import kml
 from openpyxl.utils import get_column_letter
-
-from app_admin.models import ComputerVisionModuleModel, ComputerVisionComponentModel, \
-    UserModel
-from app_admin.models import GroupModel, LoggingModel, ActionModel
+from app_admin.models import UserModel, GroupModel, LoggingModel, ActionModel, ComputerVisionModuleModel, \
+    ComputerVisionComponentModel
 from app_admin.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils
 
 
@@ -78,6 +73,7 @@ class DjangoClass:
                                         print('return action/group not have')
                                         return 'home'
                             except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                                 print('return action/group error')
                                 return 'home'
                         else:
@@ -150,160 +146,7 @@ class DjangoClass:
             with open('static/media/admin/logging/logging_actions.txt', 'a') as log:
                 log.write(f'\n{string[2:]}\n')
 
-        @staticmethod
-        def get_client_ip(request):
-            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-            if x_forwarded_for:
-                ip = x_forwarded_for.split(',')[-1].strip()
-            else:
-                ip = request.META.get('REMOTE_ADDR')
-            return ip
-
     class AccountClass:
-        class UserAccountClass:
-            """
-            Основной аккаунт пользователя
-            """
-
-            def __init__(
-                    # self
-                    self,
-                    # authorization data
-                    username,
-                    password,
-                    # technical data
-                    is_active=True,
-                    is_staff=False,
-                    is_superuser=False,
-                    groups='User',
-                    email='',
-                    secret_question='',
-                    secret_answer='',
-                    # first data
-                    last_name='',
-                    first_name='',
-                    patronymic='',
-                    # second data
-                    personnel_number='',
-                    subdivision='',
-                    workshop_service='',
-                    department_site='',
-                    position='',
-                    category='',
-                    # utils
-                    force_change_account=False,
-                    force_change_account_password=False,
-                    force_clear_groups=False,
-                    request=None
-            ):
-                # authorization data
-                self.username = str(username).strip()
-                self.password = str(password).strip()
-                # technical data
-                self.is_active = bool(is_active)
-                self.is_staff = bool(is_staff)
-                self.is_superuser = bool(is_superuser)
-                try:
-                    self.groups = [group.strip() for group in str(groups).strip().split(',') if len(group) >= 1]
-                except Exception as error:
-                    self.groups = [str(groups).strip()]
-                self.email = str(email).strip()
-                self.secret_question = str(secret_question).strip()
-                self.secret_answer = str(secret_answer).strip()
-                # first data
-                self.first_name = str(first_name).strip()
-                self.last_name = str(last_name).strip()
-                self.patronymic = str(patronymic).strip()
-                # second data
-                self.personnel_number = str(personnel_number).strip()
-                self.subdivision = str(subdivision).strip()
-                self.workshop_service = str(workshop_service).strip()
-                self.department_site = str(department_site).strip()
-                self.position = str(position).strip()
-                self.category = str(category).strip()
-                # utils
-                self.force_change_account = bool(force_change_account)
-                self.force_change_account_password = bool(force_change_account_password)
-                self.force_clear_groups = bool(force_clear_groups)
-                self.request = request
-
-            def account_create_or_change(self):
-                # try:
-                if True:
-                    # Пользователь уже существует: изменение
-                    try:
-                        user = User.objects.get(username=self.username)
-                        # Возврат, если пользователь обладает правами суперпользователя
-                        if user.is_superuser:
-                            return False
-                        # Если пользователь уже существует и стоит статус "принудительно изменять аккаунт"
-                        if user is False or self.force_change_account is False:
-                            return False
-                    # Пользователь не существует: создание
-                    except Exception as error:
-                        user = User.objects.create(
-                            # authorization data
-                            username=self.username,
-                            password=DjangoClass.AccountClass.create_django_encrypt_password(self.password),
-                            # technical data
-                            is_active=True,
-                            is_staff=self.is_staff,
-                            is_superuser=self.is_superuser,
-                        )
-                    # try:
-                    if True:
-                        user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                        # authorization data
-                        if self.force_change_account_password:
-                            user.password = DjangoClass.AccountClass.create_django_encrypt_password(self.password)
-                            user_model.password_slug_field = self.password
-                        # technical data
-                        user_model.activity_boolean_field = self.is_active
-                        user_model.email_field = self.email
-                        user_model.secret_question_char_field = self.secret_question
-                        user_model.secret_answer_char_field = self.secret_answer
-                        # first data
-                        user_model.last_name_char_field = self.last_name
-                        user_model.first_name_char_field = self.first_name
-                        user_model.patronymic_char_field = self.patronymic
-                        # second data
-                        user_model.personnel_number_slug_field = self.personnel_number
-                        user_model.subdivision_char_field = self.subdivision
-                        user_model.workshop_service_char_field = self.workshop_service
-                        user_model.department_site_char_field = self.department_site
-                        user_model.position_char_field = self.position
-                        user_model.category_char_field = self.category
-                        # save account
-                        user_model.save()
-                        return self.account_auth_set_group()
-                    # except Exception as error:
-                    #     DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
-                    #     return False
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=self.request, error=error)
-                #     return False
-
-            def account_auth_set_group(self):
-                user = User.objects.get(username=self.username)
-                user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                if self.force_clear_groups:
-                    for group in GroupModel.objects.filter(user_many_to_many_field=user_model):
-                        group.user_many_to_many_field.remove(user_model)
-                success = True
-                for group in self.groups:
-                    if len(str(group).strip()) >= 1:
-                        # try:
-                        if True:
-                            group_object = Group.objects.get_or_create(name=group)[0]
-                            group_model = GroupModel.objects.get_or_create(group_foreign_key_field=group_object)[0]
-                            group_model.user_many_to_many_field.add(user_model)
-                        # except Exception as error:
-                        #     DjangoClass.LoggingClass.logging_errors_local(
-                        #         error=error, function_error='account_auth_set_group'
-                        #     )
-                        #     success = False
-                return success
-
         @staticmethod
         def create_django_encrypt_password(password: str):
             try:
@@ -420,23 +263,14 @@ class ComputerVisionClass:
                             # Получение имени модуля из константы в модели ComputerVisionModuleModel
                             name_module = dict_modules[module.path_slug_field]
                             if name_module == 'Грохота, 16 операция, 10 отметка':
-                                executor.submit(
-                                    ComputerVisionClass.EventLoopClass.
-                                        Grohota16OperationClass.loop_module_grohota_16_operation,
-                                    module=module
-                                )
+                                executor.submit(ComputerVisionClass.EventLoopClass.Grohota16OperationClass.
+                                                loop_module_grohota_16_operation, module=module)
                             elif name_module == 'Грохота, 26 операция, 10 отметка':
-                                executor.submit(
-                                    ComputerVisionClass.EventLoopClass.
-                                        Grohota16OperationClass.loop_module_grohota_16_operation,
-                                    module=module
-                                )
+                                executor.submit(ComputerVisionClass.EventLoopClass.Grohota16OperationClass.
+                                                loop_module_grohota_16_operation, module=module)
                             elif name_module == 'Грохота, 36 операция, 10 отметка':
-                                executor.submit(
-                                    ComputerVisionClass.EventLoopClass.
-                                        Grohota16OperationClass.loop_module_grohota_16_operation,
-                                    module=module
-                                )
+                                executor.submit(ComputerVisionClass.EventLoopClass.Grohota16OperationClass.
+                                                loop_module_grohota_16_operation, module=module)
                     time.sleep(delay)
                     print(f'\n#######################################'
                           f'\n##### {round(time.time() - start_time, 2)} seconds for global_tick ####'
@@ -463,11 +297,8 @@ class ComputerVisionClass:
                     with ThreadPoolExecutor() as executor:
                         # Цикл для прохода по настройкам и запуску компонентов
                         for component in components:
-                            executor.submit(
-                                ComputerVisionClass.EventLoopClass.
-                                    Grohota16OperationClass.component_grohota_16_operation,
-                                component=component
-                            )
+                            executor.submit(ComputerVisionClass.EventLoopClass.Grohota16OperationClass.
+                                            component_grohota_16_operation, component=component)
                     module = ComputerVisionModuleModel.objects.get(path_slug_field=module.path_slug_field)
                     module.duration_float_field = round(time.time() - start_time, 2)
                     module.datetime_field = timezone.now()
@@ -555,7 +386,8 @@ class ComputerVisionClass:
                     # __rows = ''
                     # for x in rows:
                     #     __rows = f"{__rows}{str(x)}, "
-                    # query = f"UPDATE {'grohot16_now_table'} SET {rows[1]} = '{values[1]}',{rows[2]} = '{values[2]}' ,{rows[3]} = '{values[3]}' " \
+                    # query = f"UPDATE {'grohot16_now_table'} SET {rows[1]} = '{values[1]}',{rows[2]} = '{values[2]}' ,
+                    # {rows[3]} = '{values[3]}' " \
                     #         f"WHERE {rows[0]} = '{values[0]}'"
                     # cursor.execute(query)
                     # connection.commit()
@@ -564,98 +396,8 @@ class ComputerVisionClass:
                     print(f'{component.genericipaddress_field} | {component.alias_char_field} : {round(value, 2)} %')
                 except Exception as error:
                     print(
-                        f'\ncomponent_grohota_16_operation| {component.genericipaddress_field} | {component.alias_char_field} | error : {error}\n')
-
-            @staticmethod
-            def component_grohota_16_operation_old(component):
-                """
-                Компонент-функция расчёта % схода на грохотах 16 операции, 10 отметка
-                """
-                try:
-                    sources = f'http://{str(component.genericipaddress_field)}:80' \
-                              f'/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
-                    login = 'admin'
-                    password = 'q1234567'
-                    temp_path = DirPathFolderPathClass.create_folder_in_this_dir(
-                        folder_name='static/media/data/computer_vision/temp'
-                    )
-                    h = httplib2.Http(temp_path)
-                    h.add_credentials(login, password)
-                    response, content = h.request(sources)
-                    image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
-                    image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
-                    mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
-                    mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
-                    bitwise_and = cv2.bitwise_and(image, image, mask=mask)
-                    cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
-                    inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
-                                          numpy.array([255, 120, 255], dtype=numpy.uint8))
-                    value = numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * float(1)
-
-                    print(f'{component.genericipaddress_field}: {round(value, 3)} %')
-                except Exception as error:
-                    print(f'\ncomponent_grohota_16_operation | error : {error}\n')
-
-    @staticmethod
-    def example_analyse():
-
-        def analyse_image_open_cv(ip=203):
-            # Начальное время
-            # start_time = time.time()
-            # print('start')
-
-            sources = f'http://192.168.15.{ip}:80/ISAPI/Streaming/channels/101/picture?snapShotImageType=JPEG'
-            login = 'admin'
-            password = 'q1234567'
-            h = httplib2.Http(os.path.abspath('__file__'))
-            h.add_credentials(login, password)
-            response, content = h.request(sources)
-            image = cv2.imdecode(numpy.frombuffer(content, numpy.uint8), cv2.IMREAD_COLOR)
-            image = cv2.resize(image, (750, 500), interpolation=cv2.INTER_AREA)
-            mask = cv2.imread('static/media/data/computer_vision/mask/m_16_8.jpg', 0)
-            mask = cv2.resize(mask, (750, 500), interpolation=cv2.INTER_AREA)
-            bitwise_and = cv2.bitwise_and(image, image, mask=mask)
-            cvtcolor = cv2.cvtColor(bitwise_and, cv2.COLOR_BGR2HSV)
-            inrange = cv2.inRange(cvtcolor, numpy.array([0, 0, 255 - 120], dtype=numpy.uint8),
-                                  numpy.array([255, 120, 255], dtype=numpy.uint8))
-            value = f"{numpy.sum(inrange > 0) / numpy.sum(mask > 0) * 100 * 1.0:0.2f}%"
-
-            # Финальное время
-            # print(f"Final time: {round(time.time() - start_time, 1)}")
-            # print('end')
-
-            # print(value)
-            return value
-
-        def analyse():
-
-            list_ip = []
-            for num in range(202, 211 + 1):
-                list_ip.append(num)
-            print(list_ip)
-
-            index = 0
-            while index < 100:
-                index += 1
-                # Начальное время
-                start_time = time.time()
-                print('start')
-                # Менеджер контекста для многопотока под ThreadPoolExecutor
-                with ThreadPoolExecutor() as executor:
-                    futures = []
-                    # Цикл для прохода по ссылкам
-                    for ip in list_ip:
-                        futures.append(executor.submit(analyse_image_open_cv, ip=ip))
-                    for future in concurrent.futures.as_completed(futures):
-                        print(future.result())
-
-                # Финальное время
-                print(f"Final time: {round(time.time() - start_time, 1)}")
-                print('end')
-                time.sleep(1)
-
-        with ThreadPoolExecutor() as executor:
-            executor.submit(analyse)
+                        f'\ncomponent_grohota_16_operation| {component.genericipaddress_field} | '
+                        f'{component.alias_char_field} | error : {error}\n')
 
 
 class SalaryClass:
@@ -836,18 +578,19 @@ class GeoClass:
                 else:
                     string_object += f"{i},"
                 num += 1
-        text_d = f"""<Placemark>
-        		<name>object</name>
-        		<Polygon>
-        			<outerBoundaryIs>
-        				<LinearRing>
-        					<coordinates>
-        						{string_object} 
-        					</coordinates>
-        				</LinearRing>
-        			</outerBoundaryIs>
-        		</Polygon>
-        	</Placemark>"""
+        text_d = '' \
+            # f"""<Placemark>
+        # 	<name>object</name>
+        # 	<Polygon>
+        # 		<outerBoundaryIs>
+        # 			<LinearRing>
+        # 				<coordinates>
+        # 					{string_object}
+        # 				</coordinates>
+        # 			</LinearRing>
+        # 		</outerBoundaryIs>
+        # 	</Polygon>
+        # </Placemark>"""
         return text_d
 
     @staticmethod
@@ -855,19 +598,19 @@ class GeoClass:
         latitude = point[0]
         longitude = point[1]
         id_s = point[2]
-        first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
-        second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
-        third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
-        fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
-        string_object = ''
-        for iteration in [first, second, third, fourth, first]:
-            num = 1
-            for i in iteration:
-                if num == 3:
-                    string_object += f"{i} "
-                else:
-                    string_object += f"{i},"
-                num += 1
+        # first = [latitude - 0.000002 * 1.62, longitude - 0.000002, 0]
+        # second = [latitude - 0.000002 * 1.62, longitude + 0.000002, 0]
+        # third = [latitude + 0.000002 * 1.62, longitude + 0.000002, 0]
+        # fourth = [latitude + 0.000002 * 1.62, longitude - 0.000002, 0]
+        # string_object = ''
+        # for iteration in [first, second, third, fourth, first]:
+        #     num = 1
+        #     for i in iteration:
+        #         if num == 3:
+        #             string_object += f"{i} "
+        #         else:
+        #             string_object += f"{i},"
+        #         num += 1
         text_d = f"""<Placemark>
                 <name>Точка: {id_s}</name>
                 <Point>
@@ -885,13 +628,20 @@ class GeoClass:
         #     user="postgres",
         #     password="nF2ArtXK"
         # )
-        # # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
+        # # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric),
+        # {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
         # #                           "FROM public.navdata_202108 " \
-        # #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
+        # #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND
+        # {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) >
+        # (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_hours']} hours') AND flags != 64 " \
         # #                           "ORDER BY device, navtime DESC;"
-        # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric), {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
+        # postgresql_select_query = f"SELECT device, navtime, ROUND(CAST(latitude AS numeric),
+        # {request.POST['request_value']}), ROUND(CAST(longitude AS numeric), {request.POST['request_value']}) " \
         #                           "FROM public.navdata_202108 " \
-        #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) > (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_minutes']} minutes') AND flags != 64 " \
+        #                           f"WHERE device BETWEEN {request.POST['request_between_first']} AND
+        #                           {request.POST['request_between_last']} AND timezone('UTC', to_timestamp(navtime)) >
+        #                           (CURRENT_TIMESTAMP - INTERVAL '{request.POST['request_minutes']} minutes') AND
+        #                           flags != 64 " \
         #                           "ORDER BY device, navtime DESC;"
         # cursor = connection.cursor()
         # cursor.execute(postgresql_select_query)
@@ -971,29 +721,29 @@ class GeoClass:
         colors_alias = [': Чё', ': Кр', ': Си', ': Зе', ': Жё', ': Доп1', ': Доп2']
         current_color = colors[0]
         for current in array:
-            index = array.index(current)
+            # index = array.index(current)
             if previous_device is not current[2]:
                 device_arr.append(str(current[2]) + colors_alias[len(device_arr) + 1])
                 previous_device = current[2]
                 current_color = colors[colors.index(current_color) + 1]
-            if index != 0:
-                previous = [array[index - 1][0], array[index - 1][1]]
-            else:
-                previous = [current[0], current[1]]
-            text_b += f"""<Placemark>
-                  <Style>
-                    <LineStyle>
-                      <color>{current_color}</color>
-                    </LineStyle>
-                  </Style>
-                  <LineString>
-                    <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
-                  </LineString>
-              </Placemark>
-            """
-
-            # Генерация точек
-            text_b += GeoClass.create_cube_object([current[0], current[1], index])
+            # if index != 0:
+            #     previous = [array[index - 1][0], array[index - 1][1]]
+            # else:
+            #     previous = [current[0], current[1]]
+            # text_b += f"""<Placemark>
+            #       <Style>
+            #         <LineStyle>
+            #           <color>{current_color}</color>
+            #         </LineStyle>
+            #       </Style>
+            #       <LineString>
+            #         <coordinates>{previous[0]},{previous[1]},0 {current[0]},{current[1]},0 </coordinates>
+            #       </LineString>
+            #   </Placemark>
+            # """
+            #
+            # # Генерация точек
+            # text_b += GeoClass.create_cube_object([current[0], current[1], index])
 
         # Генерация имени документа из цветов
         dev = ''
@@ -1249,96 +999,96 @@ class GeoClass:
 
     @staticmethod
     def create_style():
-        f"""
-    	<gx:CascadingStyle kml:id="__managed_style_25130D559F1CA685BFB3">
-    		<Style>
-    			<IconStyle>
-    				<scale>1.2</scale>
-    				<Icon>
-    					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
-    				</Icon>
-    				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
-    			</IconStyle>
-    			<LabelStyle>
-    			</LabelStyle>
-    			<LineStyle>
-    				<color>ff2dc0fb</color>
-    				<width>6</width>
-    			</LineStyle>
-    			<PolyStyle>
-    				<color>40ffffff</color>
-    			</PolyStyle>
-    			<BalloonStyle>
-    				<displayMode>hide</displayMode>
-    			</BalloonStyle>
-    		</Style>
-    	</gx:CascadingStyle>
-    	<gx:CascadingStyle kml:id="__managed_style_1A4EFD26461CA685BFB3">
-    		<Style>
-    			<IconStyle>
-    				<Icon>
-    					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
-    				</Icon>
-    				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
-    			</IconStyle>
-    			<LabelStyle>
-    			</LabelStyle>
-    			<LineStyle>
-    				<color>ff2dc0fb</color>
-    				<width>4</width>
-    			</LineStyle>
-    			<PolyStyle>
-    				<color>40ffffff</color>
-    			</PolyStyle>
-    			<BalloonStyle>
-    				<displayMode>hide</displayMode>
-    			</BalloonStyle>
-    		</Style>
-    	</gx:CascadingStyle>
-    	<StyleMap id="__managed_style_047C2286A81CA685BFB3">
-    		<Pair>
-    			<key>normal</key>
-    			<styleUrl>#__managed_style_1A4EFD26461CA685BFB3</styleUrl>
-    		</Pair>
-    		<Pair>
-    			<key>highlight</key>
-    			<styleUrl>#__managed_style_25130D559F1CA685BFB3</styleUrl>
-    		</Pair>
-    	</StyleMap>
-    	<Placemark id="0D045F86381CA685BFB2">
-    		<name>Самосвал</name>
-    		<LookAt>
-    			<longitude>61.2344061029136</longitude>
-    			<latitude>52.17019183209385</latitude>
-    			<altitude>282.7747547496757</altitude>
-    			<heading>0</heading>
-    			<tilt>0</tilt>
-    			<gx:fovy>35</gx:fovy>
-    			<range>1198.571236050484</range>
-    			<altitudeMode>absolute</altitudeMode>
-    		</LookAt>
-    		<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
-    		<Point>
-    			<coordinates>61.23500224897153,52.17263169824412,281.7092496784567</coordinates>
-    		</Point>
-    	</Placemark>
-    	<Placemark id="0B4EA6F59B1CA68601E0">
-    		<name>Экскаватор</name>
-    		<LookAt>
-    			<longitude>61.23624067458115</longitude>
-    			<latitude>52.17416232356366</latitude>
-    			<altitude>277.5968564918906</altitude>
-    			<heading>-0.5372217869872089</heading>
-    			<tilt>53.57834275643886</tilt>
-    			<gx:fovy>35</gx:fovy>
-    			<range>2536.120178802812</range>
-    			<altitudeMode>absolute</altitudeMode>
-    		</LookAt>
-    		<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
-    		<Point>
-    			<coordinates>61.23654046107902,52.16710625511239,297.4562999141254</coordinates>
-    		</Point>
-    	</Placemark>"""
+        # f"""
+        # <gx:CascadingStyle kml:id="__managed_style_25130D559F1CA685BFB3">
+        # 	<Style>
+        # 		<IconStyle>
+        # 			<scale>1.2</scale>
+        # 			<Icon>
+        # 				<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+        # 			</Icon>
+        # 			<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+        # 		</IconStyle>
+        # 		<LabelStyle>
+        # 		</LabelStyle>
+        # 		<LineStyle>
+        # 			<color>ff2dc0fb</color>
+        # 			<width>6</width>
+        # 		</LineStyle>
+        # 		<PolyStyle>
+        # 			<color>40ffffff</color>
+        # 		</PolyStyle>
+        # 		<BalloonStyle>
+        # 			<displayMode>hide</displayMode>
+        # 		</BalloonStyle>
+        # 	</Style>
+        # </gx:CascadingStyle>
+        # <gx:CascadingStyle kml:id="__managed_style_1A4EFD26461CA685BFB3">
+        # 	<Style>
+        # 		<IconStyle>
+        # 			<Icon>
+        # 				<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+        # 			</Icon>
+        # 			<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+        # 		</IconStyle>
+        # 		<LabelStyle>
+        # 		</LabelStyle>
+        # 		<LineStyle>
+        # 			<color>ff2dc0fb</color>
+        # 			<width>4</width>
+        # 		</LineStyle>
+        # 		<PolyStyle>
+        # 			<color>40ffffff</color>
+        # 		</PolyStyle>
+        # 		<BalloonStyle>
+        # 			<displayMode>hide</displayMode>
+        # 		</BalloonStyle>
+        # 	</Style>
+        # </gx:CascadingStyle>
+        # <StyleMap id="__managed_style_047C2286A81CA685BFB3">
+        # 	<Pair>
+        # 		<key>normal</key>
+        # 		<styleUrl>#__managed_style_1A4EFD26461CA685BFB3</styleUrl>
+        # 	</Pair>
+        # 	<Pair>
+        # 		<key>highlight</key>
+        # 		<styleUrl>#__managed_style_25130D559F1CA685BFB3</styleUrl>
+        # 	</Pair>
+        # </StyleMap>
+        # <Placemark id="0D045F86381CA685BFB2">
+        # 	<name>Самосвал</name>
+        # 	<LookAt>
+        # 		<longitude>61.2344061029136</longitude>
+        # 		<latitude>52.17019183209385</latitude>
+        # 		<altitude>282.7747547496757</altitude>
+        # 		<heading>0</heading>
+        # 		<tilt>0</tilt>
+        # 		<gx:fovy>35</gx:fovy>
+        # 		<range>1198.571236050484</range>
+        # 		<altitudeMode>absolute</altitudeMode>
+        # 	</LookAt>
+        # 	<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
+        # 	<Point>
+        # 		<coordinates>61.23500224897153,52.17263169824412,281.7092496784567</coordinates>
+        # 	</Point>
+        # </Placemark>
+        # <Placemark id="0B4EA6F59B1CA68601E0">
+        # 	<name>Экскаватор</name>
+        # 	<LookAt>
+        # 		<longitude>61.23624067458115</longitude>
+        # 		<latitude>52.17416232356366</latitude>
+        # 		<altitude>277.5968564918906</altitude>
+        # 		<heading>-0.5372217869872089</heading>
+        # 		<tilt>53.57834275643886</tilt>
+        # 		<gx:fovy>35</gx:fovy>
+        # 		<range>2536.120178802812</range>
+        # 		<altitudeMode>absolute</altitudeMode>
+        # 	</LookAt>
+        # 	<styleUrl>#__managed_style_047C2286A81CA685BFB3</styleUrl>
+        # 	<Point>
+        # 		<coordinates>61.23654046107902,52.16710625511239,297.4562999141254</coordinates>
+        # 	</Point>
+        # </Placemark>"""
         pass
 
 

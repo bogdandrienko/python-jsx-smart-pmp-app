@@ -43,7 +43,7 @@
                                         <a href="{% url 'module_or_component' modules.0.return_slug_field %}">
                                     {% endif %}
                                 {% else %}
-                                    <a href="{% url 'module_or_component' 'module' %}">
+                                    <a href="{% url 'home' %}">
                                 {% endif %}
                                     <img src="{% static 'media/admin/module/components/return.png' %}" class="card-img-top" alt="id">
                                 </a>
@@ -60,7 +60,6 @@
                             {% if access %}
                                 <div class="col">
                                     <div class="card shadow-sm">
-                                        {{ access }}
                                         {% if modules.0.type_slug_field == '2_component' %}
                                             <a href="{% url module.url_slug_field %}">
                                         {% else %}
