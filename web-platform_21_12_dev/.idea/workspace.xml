@@ -2,47 +2,90 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3bbcadc-d872-4431-8ed9-561e41ab5286" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/context_processors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.bundle.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.esm.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.esm.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.esm.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/js/bootstrap_5.1.3/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/create_groups.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/create_users.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/default_avatar.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/export_users.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/generate_passwords.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/account/avatar/БогданАндриенко_931777_1500_1125.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/account/avatar/Требования_к_фото.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_change_groups.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_change_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_change_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_create_accounts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_export_accounts.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_generate_passwords.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_profile_old.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_recover_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_update_accounts_1c.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/buh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/hr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/module.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/news.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/module/return.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0002_ideamodel_ideascategorymodel_ideasmodel_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0003_applicationmoduleorcomponentmodel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0004_delete_applicationmoduleorcomponentmodel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/templatetags/idea_list_tag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/img/favicon/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/img/favicon/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/img/favicon/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/img/return.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/accounts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/accounts_temp.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/buhgalteria.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/buhgalteria_zarplata.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/components/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/components/detail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/components/list.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/components/ratings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/components/return.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/hr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/human.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/module.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/news.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/progress.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/progress_idea.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/progress_project.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/progress_rational.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/vacansies.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/module/zarplata_salary.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/buh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/buh_68Fzten.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/buh_salary.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/hr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/human.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/list.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/progress.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/progress_idea.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/progress_idea_ab8W9tt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/progress_xXHiyxM.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/ratings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/vacansies.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/uploads/admin/module/zarplata_salary.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/module.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/extra/geo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/hr/career.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_change.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_ratings.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_view.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/salary/salary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/salary/salary_pdf.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/skud/passages_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/skud/passages_insert.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/skud/passages_select.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/skud/passages_thermometry.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/skud/passages_update.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/templatetags/access_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/templatetags/access_tag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_settings/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/create_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/create_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/export_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/account/export_users.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_errors.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_change_groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_change_groups.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_create_accounts.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/account/account_create_accounts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,6 +178,10 @@
       <workItem from="1639026486907" duration="4008000" />
       <workItem from="1639044400229" duration="2569000" />
       <workItem from="1639104744725" duration="9144000" />
+      <workItem from="1639136938400" duration="21000" />
+      <workItem from="1639239112138" duration="740000" />
+      <workItem from="1639241916959" duration="1195000" />
+      <workItem from="1639277731514" duration="5810000" />
     </task>
     <servers />
   </component>

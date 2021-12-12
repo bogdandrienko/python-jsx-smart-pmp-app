@@ -1,0 +1,214 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load idea_list_tag %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Список идей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="text-center">
+    <h1 class="display-6 fst-italic">Подать идею в банк идей</h1>
+    <small class="text-secondary">Содержит форму с полями для подачи идеи.</small>
+</div>
+
+<div class="pricing-header p-0 m-0 mx-auto text-center">
+    <div class="d-flex justify-content-between align-items-center btn-group">
+        <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'idea_create' %}">Подать идею</a>
+    </div>
+    <div class="btn-group m-1">
+
+    <form action="{% url 'idea_category' 'All' %}"
+          method="POST"
+          target="_self"
+          enctype="multipart/form-data"
+          name="idea_list All"
+          autocomplete="on"
+          class="text-center"
+    >
+        {% csrf_token %}
+        <div>
+            <label class="form-control-lg">
+                Что найти?:
+                <input type="text"
+                       id="name_char_field"
+                       name="name_char_field"
+                       required=""
+                       placeholder="Что найти?"
+                       value=""
+                       minlength="1"
+                       maxlength="32"
+                       class="form-control form-control-lg"
+                />
+                <small class="text-muted">длина: от 1 до 32 символов</small>
+            </label>
+            </div>
+            <hr/>
+            <!-- Grid row -->
+            <div class="container-fluid btn-group row pb-1">
+                <!-- Grid column -->
+                <div class="col-lg-6">
+                    <button href=""
+                            type="submit"
+                            class="w-100 form-control btn btn-lg btn-outline-primary"
+                    >Подтвердить</button>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-lg-6">
+                    <button href=""
+                            type="reset"
+                            class="w-100 form-control btn btn-lg btn-outline-warning"
+                    >Сбросить</button>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+            <hr/>
+        </form>
+
+        <a class="btn btn-lg btn-outline-dark" href="{% url 'idea_rating' %}">Рейтинги</a>
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_list' %}">Все предложения</a>
+        {% for cat in category %}
+            {% if forloop.counter == 0 %}
+                <a class="btn btn-lg btn-outline-success" href="{% url 'idea_category' cat.0 %}">{{ cat.1 }}</a>
+            {% elif forloop.counter == 1 %}
+                <a class="btn btn-lg btn-outline-danger" href="{% url 'idea_category' cat.0 %}">{{ cat.1 }}</a>
+            {% elif forloop.counter == 2 %}
+                <a class="btn btn-lg btn-outline-warning" href="{% url 'idea_category' cat.0 %}">{{ cat.1 }}</a>
+            {% elif forloop.counter == 3 %}
+                <a class="btn btn-lg btn-outline-success" href="{% url 'idea_category' cat.0 %}">{{ cat.1 }}</a>
+            {% else %}
+                <a class="btn btn-lg btn-outline-secondary" href="{% url 'idea_category' cat.0 %}">{{ cat.1 }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% if page %}
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 text-center m-0 p-0">
+
+        {% for idea in page %}
+            <div class="col my-2">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h4 class="fw-normal card-header bg-light text-dark text-decoration-none text-center">
+                            <strong>{{ idea.name_char_field }}</strong>
+                        </h4>
+
+                        <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">
+                            {% if idea.author_foreign_key_field %}
+                                Автор: {{ idea.author_foreign_key_field.last_name_char_field }} {{ idea.author_foreign_key_field.first_name_char_field }}
+                            {% else %}
+                                Профиль не заполнен
+                            {% endif %}
+                        </small>
+                        {% if idea.author_foreign_key_field == request.user.user_one_to_one_field %}
+                            <a class="w-25 btn btn-lg" target="_blank" href="{% url 'idea_change' idea.id %}">
+                                <i class="material-icons cart-icon text-warning">published_with_changes</i>
+                            </a>
+                        {% else %}
+                            <a class="w-25 btn btn-lg" target="_self" href="#">
+                                <i class="material-icons cart-icon text-muted">published_with_changes</i>
+                            </a>
+                        {% endif %}
+                        <small class="my-2 btn btn-sm btn-outline-dark text-link-dark">{{ idea.get_category }}</small>
+                    </div>
+
+                    <div class="card-body m-0 p-0">
+
+                        <a href="{% url 'idea_view' idea.id %}">
+                            {% if idea.avatar_image_field %}
+                                <img src="{{ idea.avatar_image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ idea.id }}">
+                            {% else %}
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ idea.id }}</text></svg>
+                            {% endif %}
+                        </a>
+
+                        <div class="my-1 d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{ idea.short_description_char_field }}</small>
+                        </div>
+
+                        <div class="my-1 d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{ idea.created_datetime_field }} (подано) / {{ idea.register_datetime_field }} (зарегистрировано)</small>
+                            <small>#{{ forloop.revcounter }}</small>
+                        </div>
+
+                        {% if 0 > idea.get_total_rating %}
+                            <div class="my-1 btn btn-sm btn-outline-danger text-link-danger">
+                                Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}<sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
+                            </div>
+                        {% else %}
+                            <div class="my-1 btn btn-sm btn-outline-success text-link-success">
+                                Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}<sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
+                            </div>
+                        {% endif %}
+
+                        {% is_liked_tag idea.id as is_liked_bool %}
+                        {% if is_liked_bool %}
+                            <i class="material-icons text-success md-48">thumb_up</i>
+                        {% else %}
+                            {% is_disliked_tag idea.id as is_disliked_bool %}
+                            {% if is_disliked_bool %}
+                                <i class="material-icons text-danger md-48">thumb_down</i>
+                            {% else %}
+                                <i class="material-icons text-muted md-48">live_help</i>
+                            {% endif %}
+                        {% endif %}
+
+                        <div class="my-1 w-100 btn btn-sm btn-outline-secondary">Комментарии: {{ idea.get_total_comment_value }}</div>
+
+                        <a class="my-1 w-100 btn btn-lg btn-outline-primary" href="{% url 'idea_view' idea.id %}">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="container d-flex justify-content-center align-self-center">
+        {% include 'components/paginator.html' %}
+    </div>
+
+{% else %}
+
+    {% include 'components/aborted.html' %}
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ExamplesModel, UserModel, GroupModel, LoggingModel, ActionModel, ComputerVisionModuleModel, \
-    ComputerVisionComponentModel
+    ComputerVisionComponentModel, ModuleOrComponentModel
 
 # admin
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
@@ -475,3 +475,59 @@ class ComputerVisionComponentModelAdmin(admin.ModelAdmin):
 
 # Регистрация в админ-панели шаблонов
 admin.site.register(ComputerVisionComponentModel, ComputerVisionComponentModelAdmin)
+
+
+class ApplicationModuleOrComponentModelAdmin(admin.ModelAdmin):
+    """
+    Настройки 'ComputerVisionComponentModel' на панели администратора
+    """
+
+    list_display = (
+        'name_char_field',
+        'type_slug_field',
+        'position_float_field',
+        'return_slug_field',
+        'parent_slug_field',
+        'url_slug_field',
+        'image_field',
+        'text_field',
+    )
+
+    list_filter = (
+        'name_char_field',
+        'type_slug_field',
+        'position_float_field',
+        'return_slug_field',
+        'parent_slug_field',
+        'url_slug_field',
+        'image_field',
+        'text_field',
+    )
+
+    fieldsets = (
+        ('main', {'fields': (
+            'name_char_field',
+            'type_slug_field',
+            'position_float_field',
+            'return_slug_field',
+            'parent_slug_field',
+            'url_slug_field',
+            'image_field',
+            'text_field',
+        )}),
+    )
+
+    search_fields = [
+        'name_char_field',
+        'type_slug_field',
+        'position_float_field',
+        'return_slug_field',
+        'parent_slug_field',
+        'url_slug_field',
+        'image_field',
+        'text_field',
+    ]
+
+
+# Регистрация в админ-панели шаблонов
+admin.site.register(ModuleOrComponentModel, ApplicationModuleOrComponentModelAdmin)

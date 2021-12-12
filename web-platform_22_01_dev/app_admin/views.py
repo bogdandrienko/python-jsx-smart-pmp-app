@@ -3,21 +3,33 @@ import datetime
 import hashlib
 import json
 import os
+import random
+from concurrent.futures import ThreadPoolExecutor
 from email import message
 import httplib2
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
+from django.template.loader import get_template
+from django.urls import reverse
+from xhtml2pdf import pisa
+
 from app_admin.forms import ExamplesModelForm
-from app_admin.models import LoggingModel, ActionModel
-from app_admin.service import DjangoClass, UtilsClass
-from app_admin.utils import ExcelClass, EncryptingClass
+from app_admin.models import LoggingModel, ActionModel, IdeaModel, IdeaCommentModel, IdeaRatingModel, IdeasModel, \
+    IdeasCategoryModel, ModuleOrComponentModel
+from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryClass, Xhtml2pdfClass, CareerClass, \
+    GeoClass, ComputerVisionClass
+from app_admin.utils import ExcelClass, EncryptingClass, SQLClass
 from django.contrib.auth.models import User, Group
 from app_admin.models import UserModel, GroupModel
-
+from app_admin.forms import GeoForm
 
 # example
+from app_settings import settings
+
+
 def example(request):
     """
     Страница с примерами разных frontend элементов
@@ -29,8 +41,6 @@ def example(request):
 
     try:
         response = 0
-        if request.method == 'POST':
-            response = 1
         data = [
             ['Заголовок_1', 'Заголовок_2', 'Заголовок_3'],
             [
@@ -39,6 +49,8 @@ def example(request):
                 ['Тело_3_1', 'Тело_3_2'],
             ]
         ]
+        if request.method == 'POST':
+            response = 1
         context = {
             'response': response,
             'data': data,
@@ -63,7 +75,6 @@ def examples_forms(request):
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
     if page:
         return redirect(page)
-
     try:
         response = 0
         data = None
@@ -98,8 +109,10 @@ def local(request):
     """
     Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение работы
     """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    if page:
+        return redirect(page)
 
     return redirect('http://192.168.1.68:8000/')
 
@@ -248,8 +261,10 @@ def home(request):
     """
     Домашняя страница
     """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    if page:
+        return redirect(page)
 
     return render(request, 'components/home.html')
 
@@ -259,8 +274,10 @@ def account_login(request):
     """
     Страница логина пользователей
     """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -309,8 +326,10 @@ def account_logout(request):
     """
     Ссылка на выход из аккаунта и перенаправление не страницу входа
     """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    if page:
+        return redirect(page)
 
     try:
         logout(request)
@@ -324,8 +343,10 @@ def account_change_password(request):
     """
     Страница смены пароля пользователей
     """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
 
     try:
         response = 0
@@ -430,8 +451,10 @@ def account_recover_password(request, type_slug):
     """
     Страница восстановления пароля пользователей
     """
-    # logging
-    DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    if page:
+        return redirect(page)
 
     # try:
     if True:
@@ -578,102 +601,25 @@ def account_profile(request, user_id):
     return render(request, 'account/account_profile.html', context)
 
 
-def account_create_or_change_accounts(request, quantity_slug):
+def account_create_or_change_accounts(request):
     """
-    Страница создания пользователей
+    Страница создания или изменения пользователей
     """
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         response = 0
-        user = None
-        user_model = None
         if request.method == 'POST':
-            # Проверка количества создания аккаунтов
-            if quantity_slug == "one":
-                # Создание аккаунта из одиночной формы
-                # try:
-                if True:
-                    # auth data
-                    username = DjangoClass.RequestClass.get_value(request, 'username')
-                    password_1 = DjangoClass.RequestClass.get_value(request, 'password_1')
-                    password_2 = DjangoClass.RequestClass.get_value(request, 'password_2')
-                    if username and password_1 == password_2:
-                        # technical data
-                        is_active = DjangoClass.RequestClass.get_check(request, 'is_active')
-                        is_staff = DjangoClass.RequestClass.get_check(request, 'is_staff')
-                        _email = DjangoClass.RequestClass.get_value(request, 'email')
-                        groups = DjangoClass.RequestClass.get_value(request, 'groups')
-                        # first data
-                        last_name = DjangoClass.RequestClass.get_value(request, 'last_name')
-                        first_name = DjangoClass.RequestClass.get_value(request, 'first_name')
-                        patronymic = DjangoClass.RequestClass.get_value(request, 'patronymic')
-                        # second data
-                        personnel_number = DjangoClass.RequestClass.get_value(request, 'personnel_number')
-                        subdivision = DjangoClass.RequestClass.get_value(request, 'subdivision')
-                        workshop_service = DjangoClass.RequestClass.get_value(request, 'workshop_service')
-                        department_site = DjangoClass.RequestClass.get_value(request, 'department_site')
-                        position = DjangoClass.RequestClass.get_value(request, 'position')
-                        category = DjangoClass.RequestClass.get_value(request, 'category')
-                        # utils
-                        force_change = DjangoClass.RequestClass.get_check(request, 'force_change')
-                        account_auth_obj = DjangoClass.AccountClass.UserAccountClass(
-                            # authorization data
-                            username=username,
-                            password=password_1,
-                            # technical data
-                            is_active=is_active,
-                            is_staff=is_staff,
-                            is_superuser=False,
-                            groups=groups,
-                            email=_email,
-                            secret_question='',
-                            secret_answer='',
-                            # first data
-                            last_name=last_name,
-                            first_name=first_name,
-                            patronymic=patronymic,
-                            # second data
-                            personnel_number=personnel_number,
-                            subdivision=subdivision,
-                            workshop_service=workshop_service,
-                            department_site=department_site,
-                            position=position,
-                            category=category,
-                            # utils
-                            force_change_account=force_change,
-                            force_change_account_password=False,
-                            force_clear_groups=False,
-                            request=request
-                        )
-                        account_auth_obj.account_create_or_change()
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                #     response = -1
-            elif quantity_slug == 'change':
-                # try:
-                if True:
-                    username = DjangoClass.RequestClass.get_value(request, 'username')
-                    user = User.objects.get(username=username)
-                    user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                    response = 0
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                #     response = -1
-            elif quantity_slug == "many":
-                # Создание массива объектов аккаунтов из excel-шаблона
-                # try:
-                if True:
-                    excel_file = request.FILES.get('excel_file')
-                    if excel_file:
-                        workbook = ExcelClass.workbook_load(excel_file)
-                        sheet = ExcelClass.workbook_activate(workbook)
-                        user_objects = []
-                        for row in range(2, ExcelClass.get_max_num_rows(sheet) + 1):
+            excel_file = request.FILES.get('excel_file')
+            if excel_file:
+                try:
+                    workbook = ExcelClass.workbook_load(excel_file=excel_file)
+                    sheet = ExcelClass.workbook_activate(workbook=workbook)
+                    for row in range(2, ExcelClass.get_max_num_rows(sheet) + 1):
+                        try:
                             # authorization data
                             username = ExcelClass.get_sheet_value('J', row, sheet)
                             password = ExcelClass.get_sheet_value('K', row, sheet)
@@ -688,10 +634,15 @@ def account_create_or_change_accounts(request, quantity_slug):
                                 is_staff = True
                             else:
                                 is_staff = False
-                            groups = ExcelClass.get_sheet_value('N', row, sheet)
-                            _email = ExcelClass.get_sheet_value('O', row, sheet)
-                            secret_question = ExcelClass.get_sheet_value('P', row, sheet)
-                            secret_answer = ExcelClass.get_sheet_value('Q', row, sheet)
+                            is_superuser = ExcelClass.get_sheet_value('N', row, sheet)
+                            if is_superuser.lower() == 'true':
+                                is_superuser = True
+                            else:
+                                is_superuser = False
+                            groups = ExcelClass.get_sheet_value('O', row, sheet)
+                            email_ = ExcelClass.get_sheet_value('P', row, sheet)
+                            secret_question = ExcelClass.get_sheet_value('Q', row, sheet)
+                            secret_answer = ExcelClass.get_sheet_value('R', row, sheet)
                             # first data
                             last_name = ExcelClass.get_sheet_value('D', row, sheet)
                             first_name = ExcelClass.get_sheet_value('E', row, sheet)
@@ -704,73 +655,99 @@ def account_create_or_change_accounts(request, quantity_slug):
                             position = ExcelClass.get_sheet_value('H', row, sheet)
                             category = ExcelClass.get_sheet_value('I', row, sheet)
                             # utils
-                            force_change = DjangoClass.RequestClass.get_check(request, 'force_change')
-                            if username and password:
-                                account_auth_obj = DjangoClass.AccountClass.UserAccountClass(
+                            force_change_account = DjangoClass.RequestClass.get_check(request, 'force_change_account')
+                            force_change_password = DjangoClass.RequestClass.get_check(request, 'force_change_password')
+                            force_clear_groups = DjangoClass.RequestClass.get_check(request, 'force_clear_groups')
+                            if len(username) < 1:
+                                continue
+                            # Пользователь уже существует: изменение
+                            try:
+                                user = User.objects.get(username=username)
+                                # Возврат, если пользователь обладает правами суперпользователя или его нельзя изменять
+                                if user.is_superuser or force_change_account is False:
+                                    continue
+                                new_account = False
+                            # Пользователь не существует: создание
+                            except Exception as error:
+                                error = f'{error} = pass'
+                                user = User.objects.create(
                                     # authorization data
                                     username=username,
-                                    password=password,
+                                    password=DjangoClass.AccountClass.create_django_encrypt_password(password),
                                     # technical data
-                                    is_active=is_active,
+                                    is_active=True,
                                     is_staff=is_staff,
-                                    is_superuser=False,
-                                    groups=groups,
-                                    email=_email,
-                                    secret_question=secret_question,
-                                    secret_answer=secret_answer,
-                                    # first data
-                                    last_name=last_name,
-                                    first_name=first_name,
-                                    patronymic=patronymic,
-                                    # second data
-                                    personnel_number=personnel_number,
-                                    subdivision=subdivision,
-                                    workshop_service=workshop_service,
-                                    department_site=department_site,
-                                    position=position,
-                                    category=category,
-                                    # utils
-                                    force_change_account=force_change,
-                                    force_change_account_password=True,
-                                    force_clear_groups=True,
-                                    request=request
+                                    is_superuser=is_superuser,
                                 )
-                                user_objects.append(account_auth_obj)
-                        # Создание аккаунтов и доп данных для аккаунтов
-                        success = 1
-                        for user_object in user_objects:
-                            # try:
-                            if True:
-                                successful = user_object.account_create_or_change()
-                                if successful is False:
-                                    success = -1
-                            # except Exception as error:
-                            #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                            #     success = -1
-                        response = success
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                #     response = -1
-        if user:
-            groups = GroupModel.objects.filter(user_many_to_many_field=user_model)
-        else:
-            groups = None
-        all_groups = GroupModel.objects.all()
+                                new_account = True
+                            user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                            # authorization data
+                            if new_account:
+                                user_model.password_slug_field = password
+                            else:
+                                if force_change_password:
+                                    user.password = DjangoClass.AccountClass.create_django_encrypt_password(
+                                        password
+                                    )
+                                    user.save()
+                                    user_model.password_slug_field = password
+                            # technical data
+                            user_model.activity_boolean_field = is_active
+                            user_model.email_field = email_
+                            user_model.secret_question_char_field = secret_question
+                            user_model.secret_answer_char_field = secret_answer
+                            # first data
+                            user_model.last_name_char_field = last_name
+                            user_model.first_name_char_field = first_name
+                            user_model.patronymic_char_field = patronymic
+                            # second data
+                            user_model.personnel_number_slug_field = personnel_number
+                            user_model.subdivision_char_field = subdivision
+                            user_model.workshop_service_char_field = workshop_service
+                            user_model.department_site_char_field = department_site
+                            user_model.position_char_field = position
+                            user_model.category_char_field = category
+                            # save
+                            user_model.save()
+                            # update data
+                            user_model = UserModel.objects.get_or_create(
+                                user_foreign_key_field=User.objects.get(username=username)
+                            )[0]
+                            if force_clear_groups:
+                                for group in GroupModel.objects.filter(user_many_to_many_field=user_model):
+                                    group.user_many_to_many_field.remove(user_model)
+                            response = 1
+                            groups = [group.strip() for group in str(groups).strip().split(',')]
+                            for group in groups:
+                                if len(group) > 0:
+                                    group_object = Group.objects.get_or_create(name=group)[0]
+                                    try:
+                                        group_model = GroupModel.objects.get(
+                                            group_foreign_key_field=group_object
+                                        )
+                                    except Exception as error:
+                                        error = f'{error} = pass'
+                                        group_model = GroupModel.objects.create(
+                                            group_foreign_key_field=group_object,
+                                            name_char_field=group,
+                                            name_slug_field=group,
+                                        )
+                                    group_model.user_many_to_many_field.add(user_model)
+                        except Exception as error:
+                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                            response = -1
+                    ExcelClass.workbook_close(workbook=workbook)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    response = -1
         context = {
             'response': response,
-            'groups': groups,
-            'all_groups': all_groups,
-            'user': user,
-            'user_model': user_model,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'groups': None,
-    #         'user': None,
-    #         'user_model': None,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+        }
 
     return render(request, 'account/account_create_accounts.html', context)
 
@@ -784,20 +761,19 @@ def account_export_accounts(request):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         response = 0
         data = None
         if request.method == 'POST':
-            # try:
-            if True:
+            try:
                 workbook = ExcelClass.workbook_create()
                 sheet = ExcelClass.workbook_activate(workbook)
                 user_objects = User.objects.all().order_by('-id')
                 titles = ['Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Фамилия', 'Имя', 'Отчество',
                           'Табельный номер', 'Должность', 'Категория работника', 'Имя пользователя',
-                          'Пароль аккаунта', 'Активность аккаунта', 'Доступ к панели управления', 'Группы доступа',
-                          'Электронная почта', 'Секретный вопрос', 'Секретный ответ']
+                          'Пароль аккаунта', 'Активность аккаунта', 'Доступ к панели управления',
+                          'Права суперпользователя', 'Группы доступа', 'Электронная почта', 'Секретный вопрос',
+                          'Секретный ответ']
                 for title in titles:
                     ExcelClass.set_sheet_value(
                         col=titles.index(title) + 1,
@@ -808,10 +784,9 @@ def account_export_accounts(request):
                 index = 1
                 body = []
                 for user_object in user_objects:
-                    if User.objects.get(username=user_object.username).is_superuser:
-                        continue
-                    # try:
-                    if True:
+                    try:
+                        if User.objects.get(username=user_object.username).is_superuser:
+                            continue
                         index += 1
                         sub_body = []
                         # authorization data
@@ -837,6 +812,13 @@ def account_export_accounts(request):
                             is_staff = 'false'
                         ExcelClass.set_sheet_value('M', index, is_staff, sheet)
 
+                        is_superuser = user_object.is_superuser
+                        if is_superuser:
+                            is_superuser = 'true'
+                        else:
+                            is_superuser = 'false'
+                        ExcelClass.set_sheet_value('N', index, is_superuser, sheet)
+
                         group_string = ''
                         groups = GroupModel.objects.filter(user_many_to_many_field=user_model)
                         if groups:
@@ -845,16 +827,16 @@ def account_export_accounts(request):
                             groups = group_string[2:]
                         else:
                             groups = ''
-                        ExcelClass.set_sheet_value('N', index, groups, sheet)
+                        ExcelClass.set_sheet_value('P', index, groups, sheet)
 
                         _email = user_model.email_field
                         ExcelClass.set_sheet_value('O', index, _email, sheet)
 
                         secret_question = user_model.secret_question_char_field
-                        ExcelClass.set_sheet_value('P', index, secret_question, sheet)
+                        ExcelClass.set_sheet_value('Q', index, secret_question, sheet)
 
                         secret_answer = user_model.secret_answer_char_field
-                        ExcelClass.set_sheet_value('Q', index, secret_answer, sheet)
+                        ExcelClass.set_sheet_value('R', index, secret_answer, sheet)
 
                         # first data
                         last_name = user_model.last_name_char_field
@@ -898,29 +880,31 @@ def account_export_accounts(request):
                         sub_body.append(password)
                         sub_body.append(is_active)
                         sub_body.append(is_staff)
+                        sub_body.append(is_superuser)
                         sub_body.append(groups)
                         sub_body.append(_email)
                         sub_body.append(secret_question)
                         sub_body.append(secret_answer)
                         body.append(sub_body)
-                    # except Exception as error:
-                    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        response = -1
                     data = [titles, body]
                 ExcelClass.workbook_save(workbook=workbook, excel_file='static/media/admin/account/export_users.xlsx')
                 response = 1
-            # except Exception as error:
-            #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            #     response = -1
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                response = -1
         context = {
             'response': response,
             'data': data,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'data': None,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+        }
 
     return render(request, 'account/account_export_accounts.html', context)
 
@@ -940,10 +924,10 @@ def account_generate_passwords(request):
         if request.method == 'POST':
             try:
                 passwords_chars = DjangoClass.RequestClass.get_value(request, "passwords_chars")
-                passwords_quantity = int(DjangoClass.RequestClass.get_value(request, "passwords_quantity"))
-                passwords_length = int(DjangoClass.RequestClass.get_value(request, "passwords_length"))
+                passwords_quantity = DjangoClass.RequestClass.get_value(request, "passwords_quantity")
+                passwords_length = DjangoClass.RequestClass.get_value(request, "passwords_length")
                 workbook = ExcelClass.workbook_create()
-                sheet = ExcelClass.workbook_activate(workbook)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
                 titles = ['Пароль', 'Зашифрованный Пароль']
                 for title in titles:
                     ExcelClass.set_sheet_value(
@@ -953,19 +937,19 @@ def account_generate_passwords(request):
                         sheet=sheet
                     )
                 body = []
-                for n in range(2, passwords_quantity + 2):
+                for n in range(2, int(passwords_quantity) + 2):
                     password = DjangoClass.AccountClass.create_password_from_chars(
                         chars=passwords_chars,
-                        length=passwords_length
+                        length=int(passwords_length)
                     )
-                    encrypt_password = DjangoClass.AccountClass.create_django_encrypt_password(
-                        password)
+                    encrypt_password = DjangoClass.AccountClass.create_django_encrypt_password(password)
                     sheet[f'A{n}'] = password
                     sheet[f'B{n}'] = encrypt_password
                     body.append([password, encrypt_password])
                 ExcelClass.workbook_save(
                     workbook=workbook, excel_file='static/media/admin/account/generate_passwords.xlsx'
                 )
+                ExcelClass.workbook_close(workbook=workbook)
                 data = [titles, body]
                 response = 1
             except Exception as error:
@@ -994,11 +978,13 @@ def account_update_accounts_1c(request):
     if page:
         return redirect(page)
 
-    try:
+    # try:
+    if True:
         response = 0
         data = None
         if request.method == 'POST':
-            try:
+            # try:
+            if True:
                 key = UtilsClass.create_encrypted_password(
                     _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                     _length=10
@@ -1043,22 +1029,16 @@ def account_update_accounts_1c(request):
                              'Цех_Служба', 'Отдел_Участок', 'Должность', 'Категория']
                 user_objects = []
                 for user in json_data["global_objects"]:
-                    # auth data
-                    username = json_data["global_objects"][user]["ИИН"]
-                    password = DjangoClass.AccountClass.create_password_from_chars(
-                        chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                        length=10
-                    )
-                    if username and password:
+                    try:
+                        # authorization data
+                        username = json_data["global_objects"][user]["ИИН"]
+                        password = DjangoClass.AccountClass.create_password_from_chars(length=8)
                         # technical data
                         if json_data["global_objects"][user]["Статус"] == 'created' or \
                                 json_data["global_objects"][user]["Статус"] == 'changed':
                             is_active = True
                         else:
                             is_active = False
-                        is_staff = False
-                        _email = ''
-                        groups = 'User'
                         # first data
                         last_name = json_data["global_objects"][user]["Фамилия"]
                         first_name = json_data["global_objects"][user]["Имя"]
@@ -1070,46 +1050,72 @@ def account_update_accounts_1c(request):
                         department_site = json_data["global_objects"][user]["Отдел_Участок"]
                         position = json_data["global_objects"][user]["Должность"]
                         category = json_data["global_objects"][user]["Категория"]
-                        account_auth_obj = DjangoClass.AccountClass.UserAccountClass(
-                            # authorization data
-                            username=username,
-                            password=password,
-                            # technical data
-                            is_active=is_active,
-                            is_staff=is_staff,
-                            is_superuser=False,
-                            groups=groups,
-                            email=_email,
-                            secret_question='',
-                            secret_answer='',
-                            # first data
-                            last_name=last_name,
-                            first_name=first_name,
-                            patronymic=patronymic,
-                            # second data
-                            personnel_number=personnel_number,
-                            subdivision=subdivision,
-                            workshop_service=workshop_service,
-                            department_site=department_site,
-                            position=position,
-                            category=category,
-                            # utils
-                            force_change_account=True,
-                            force_change_account_password=False,
-                            force_clear_groups=False,
-                            request=request
-                        )
-                        user_objects.append(account_auth_obj)
-                # Создание аккаунтов и доп данных для аккаунтов
-                response = 1
-                for user_object in user_objects:
-                    try:
-                        successful = user_object.account_create_or_change()
-                        if successful is False:
-                            response = -1
+                        # Пользователь уже существует: изменение
+                        try:
+                            user = User.objects.get(username=username)
+                            new_account = False
+                        # Пользователь не существует: создание
+                        except Exception as error:
+                            error = f'{error} = pass'
+                            user = User.objects.create(
+                                # authorization data
+                                username=username,
+                                password=DjangoClass.AccountClass.create_django_encrypt_password(password=password),
+                                # technical data
+                                is_active=True,
+                                is_staff=False,
+                                is_superuser=False,
+                            )
+                            new_account = True
+                        user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                        # authorization data
+                        if new_account:
+                            user_model.password_slug_field = password
+                        # technical data
+                        user_model.activity_boolean_field = is_active
+                        if new_account:
+                            user_model.email_field = ''
+                            user_model.secret_question_char_field = ''
+                            user_model.secret_answer_char_field = ''
+                        # first data
+                        user_model.last_name_char_field = last_name
+                        user_model.first_name_char_field = first_name
+                        user_model.patronymic_char_field = patronymic
+                        # second data
+                        user_model.personnel_number_slug_field = personnel_number
+                        user_model.subdivision_char_field = subdivision
+                        user_model.workshop_service_char_field = workshop_service
+                        user_model.department_site_char_field = department_site
+                        user_model.position_char_field = position
+                        user_model.category_char_field = category
+                        # save
+                        user_model.save()
+                        # update data
+                        user_model = UserModel.objects.get_or_create(
+                            user_foreign_key_field=User.objects.get(username=username)
+                        )[0]
+                        response = 1
+                        groups = ['User']
+                        for group in groups:
+                            if len(group) > 0:
+                                group_object = Group.objects.get_or_create(name=group)[0]
+                                try:
+                                    group_model = GroupModel.objects.get(
+                                        group_foreign_key_field=group_object
+                                    )
+                                except Exception as error:
+                                    error = f'{error} = pass'
+                                    group_model = GroupModel.objects.create(
+                                        group_foreign_key_field=group_object,
+                                        name_char_field=group,
+                                        name_slug_field=group,
+                                    )
+                                group_model.user_many_to_many_field.add(user_model)
+                        response = 1
                     except Exception as error:
                         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                         response = -1
+
                 # Генерация ответа для отрисовки в таблицу на странице
                 titles = ['Период', 'Статус', 'ИИН', 'Фамилия', 'Имя', 'Отчество', 'Табельный', 'Подразделение',
                           'Цех/Служба', 'Отдел/Участок', 'Должность', 'Категория']
@@ -1121,18 +1127,18 @@ def account_update_accounts_1c(request):
                         user_object.append(value)
                     bodies.append(user_object)
                 data = [titles, bodies]
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            # except Exception as error:
+            #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         context = {
             'response': response,
             'data': data,
         }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'data': None,
-        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'data': None,
+    #     }
 
     return render(request, 'account/account_update_accounts_1c.html', context)
 
@@ -1149,46 +1155,1102 @@ def account_change_groups(request):
     # try:
     if True:
         response = 0
-        groups = Group.objects.all()
-        actions = ActionModel.objects.all()
         if request.method == 'POST':
-            username = DjangoClass.RequestClass.get_value(request, 'username')
+            type_select = DjangoClass.RequestClass.get_value(request, 'type_select')
+
             group_name_char_field = DjangoClass.RequestClass.get_value(request, 'group_name_char_field')
             group_name_slug_field = DjangoClass.RequestClass.get_value(request, 'group_name_slug_field')
             action_name_char_field = DjangoClass.RequestClass.get_value(request, 'action_name_char_field')
             action_name_slug_field = DjangoClass.RequestClass.get_value(request, 'action_name_slug_field')
 
-            user_model = UserModel.objects.get(user_one_to_one_field=User.objects.get(username=username))
-            print(f'user_model: {user_model}')
-
-            group = Group.objects.get_or_create(name=group_name_char_field)[0]
-            print(f'group: {group}')
-
-            action = ActionModel.objects.get_or_create(
-                name_char_field=action_name_char_field,
-                name_slug_field=action_name_slug_field,
-            )[0]
-            print(f'action: {action}')
-
-            group.group_one_to_one_field.name_char_field = group_name_char_field
-            group.group_one_to_one_field.name_slug_field = group_name_slug_field
-            group.group_one_to_one_field.user_many_to_many_field.add(user_model)
-            group.group_one_to_one_field.action_many_to_many_field.add(action)
-
-            group.save()
-
+            group = DjangoClass.RequestClass.get_value(request, 'group')
+            action = DjangoClass.RequestClass.get_value(request, 'action')
+            username = DjangoClass.RequestClass.get_value(request, 'username')
+            if group_name_char_field and group_name_slug_field and action_name_char_field and action_name_slug_field:
+                action_model = ActionModel.objects.get_or_create(
+                    name_char_field=action_name_char_field,
+                    name_slug_field=action_name_slug_field,
+                )[0]
+                group = Group.objects.get_or_create(name=group_name_slug_field)[0]
+                group_model = GroupModel.objects.get_or_create(
+                    group_foreign_key_field=group,
+                    name_slug_field=group_name_slug_field,
+                )[0]
+                if type_select == 'add':
+                    group_model.action_many_to_many_field.add(action_model)
+                elif type_select == 'remove':
+                    group_model.action_many_to_many_field.remove(action_model)
+                group_model.save()
+            elif action:
+                group = Group.objects.get_or_create(name=group)[0]
+                group_model = GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
+                action_model = ActionModel.objects.get_or_create(name_slug_field=action)[0]
+                if type_select == 'add':
+                    group_model.action_many_to_many_field.add(action_model)
+                elif type_select == 'remove':
+                    group_model.action_many_to_many_field.remove(action_model)
+                group_model.save()
+            elif username:
+                group = Group.objects.get_or_create(name=group)[0]
+                group_model = GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
+                user_model = UserModel.objects.get_or_create(
+                    user_foreign_key_field=User.objects.get_or_create(username=username)[0]
+                )[0]
+                if type_select == 'add':
+                    group_model.user_many_to_many_field.add(user_model)
+                elif type_select == 'remove':
+                    group_model.user_many_to_many_field.remove(user_model)
+                group_model.save()
             response = 1
+        actions = ActionModel.objects.all()
+        groups = GroupModel.objects.all()
+        users = UserModel.objects.all()
         context = {
             'response': response,
-            'groups': groups,
             'actions': actions,
+            'groups': groups,
+            'users': users,
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'response': -1,
-    #         'groups': None,
     #         'actions': None,
+    #         'groups': None,
+    #         'users': None,
     #     }
 
     return render(request, 'account/account_change_groups.html', context)
+
+
+def module_or_component(request, url_slug: str):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+    modules = ModuleOrComponentModel.objects.filter(parent_slug_field=url_slug)
+    context = {
+        'modules': modules,
+    }
+    return render(request, 'components/module.html', context)
+
+
+def module(request, type_slug: str):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        modules = ModuleOrComponentModel.objects.all()
+        context = {
+            'modules': modules
+        }
+        return render(request, f'components/module.html', context)
+        # return render(request, f'module/{type_slug}.html', context)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+        }
+
+    return render(request, 'components/home.html', context)
+
+
+def idea_create(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        response = 0
+        category = IdeaModel.get_all_category()
+        if request.method == 'POST':
+            author_foreign_key_field = UserModel.objects.get(user_one_to_one_field=request.user)
+            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
+            category_slug_field = DjangoClass.RequestClass.get_value(request, "category_slug_field")
+            short_description_char_field = DjangoClass.RequestClass.get_value(request, "short_description_char_field")
+            full_description_text_field = DjangoClass.RequestClass.get_value(request, "full_description_text_field")
+            avatar_image_field = DjangoClass.RequestClass.get_file(request, "avatar_image_field")
+            addiction_file_field = DjangoClass.RequestClass.get_file(request, "addiction_file_field")
+            IdeaModel.objects.create(
+                author_foreign_key_field=author_foreign_key_field,
+                name_char_field=name_char_field,
+                category_slug_field=category_slug_field,
+                short_description_char_field=short_description_char_field,
+                full_description_text_field=full_description_text_field,
+                avatar_image_field=avatar_image_field,
+                addiction_file_field=addiction_file_field,
+                visibility_boolean_field=False,
+            )
+            response = 1
+        context = {
+            'response': response,
+            'category': category,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'category': category,
+    #     }
+
+    return render(request, 'idea/idea_create.html', context)
+
+
+def idea_list(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        idea = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
+        category = IdeaModel.get_all_category()
+        num_page = 2
+        if request.method == 'POST':
+            num_page = 500
+            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
+            if name_char_field:
+                idea = idea.filter(name_char_field__icontains=name_char_field)
+        try:
+            page = PaginationClass.paginate(request=request, objects=idea, num_page=num_page)
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'page': page,
+            'category': category,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'page': False,
+    #         'category': category,
+    #     }
+    return render(request, 'idea/idea_list.html', context)
+
+
+def idea_category(request, category_slug):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        idea = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
+        category = IdeaModel.get_all_category()
+        if category_slug.lower() != 'all':
+            idea = idea.filter(category_slug_field=category_slug)
+        num_page = 2
+        if request.method == 'POST':
+            num_page = 500
+            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
+            if name_char_field:
+                idea = idea.filter(name_char_field__icontains=name_char_field)
+        try:
+            page = PaginationClass.paginate(request=request, objects=idea, num_page=num_page)
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'page': page,
+            'category': category,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'page': False,
+    #         'category': category,
+    #     }
+    return render(request, 'idea/idea_list.html', context)
+
+
+def idea_rating(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        idea = IdeaModel.objects.order_by('-id')
+        authors = []
+        for query in idea:
+            authors.append(query.author_foreign_key_field)
+        authors_dict = {}
+        for author in authors:
+            authors_dict[author] = authors.count(author)
+        user_counts = []
+        for author in authors_dict:
+            ideas = IdeaModel.objects.filter(author_foreign_key_field=author)
+            total_rating = 0
+            for idea in ideas:
+                total_rating += idea.get_total_rating()
+            user_counts.append(
+                {'author': author, 'count': ideas.count(), 'rating': total_rating}
+            )
+        sorted_by_rating = True
+        if request.method == 'POST':
+            if request.POST['sorted'] == 'idea':
+                sorted_by_rating = True
+            if request.POST['sorted'] == 'count':
+                sorted_by_rating = False
+        if sorted_by_rating:
+            page = sorted(user_counts, key=lambda k: k['rating'], reverse=True)
+        else:
+            page = sorted(user_counts, key=lambda k: k['count'], reverse=True)
+        context = {
+            'page': page,
+            'sorted': sorted_by_rating
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return render(request, 'idea/idea_ratings.html', context)
+
+
+def idea_view(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        response = 1
+        idea = IdeaModel.objects.get(id=idea_int)
+        comments = IdeaCommentModel.objects.filter(idea_foreign_key_field=idea).order_by('-id')
+        context = {
+            'response': response,
+            'idea': idea,
+            'comments': comments,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'idea': None,
+    #         'comments': None,
+    #     }
+    return render(request, 'idea/idea_view.html', context)
+
+
+def idea_comment(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        if request.method == 'POST':
+            IdeaCommentModel.objects.create(
+                author_foreign_key_field=UserModel.objects.get(user_one_to_one_field=request.user),
+                idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
+                text_field=request.POST['comment_text']
+            )
+        else:
+            pass
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return redirect(reverse('idea_view', args=(idea_int,)))
+
+
+def idea_like(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        idea = IdeaModel.objects.get(id=idea_int)
+        author = UserModel.objects.get(user_one_to_one_field=request.user)
+        if request.POST['status'] == 'like':
+            try:
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=True
+                ).delete()
+            except Exception as error:
+                IdeaRatingModel.objects.create(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=True
+                )
+            try:
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=False
+                ).delete()
+            except Exception as error:
+                pass
+        else:
+            try:
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=False
+                ).delete()
+            except Exception as error:
+                IdeaRatingModel.objects.create(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=False
+                )
+                IdeaCommentModel.objects.create(
+                    author_foreign_key_field=UserModel.objects.get(user_one_to_one_field=request.user),
+                    idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
+                    text_field=request.POST['comment_text']
+                )
+            try:
+                IdeaRatingModel.objects.get(
+                    author_foreign_key_field=author,
+                    idea_foreign_key_field=idea,
+                    status_boolean_field=True
+                ).delete()
+            except Exception as error:
+                pass
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return redirect(reverse('idea_view', args=(idea.id,)))
+
+
+def idea_change(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        data = IdeasModel.objects.get(id=idea_int)
+        result_form = False
+        if request.method == 'POST':
+            if request.POST["name"]:
+                data.name = request.POST["name"]
+            if request.POST["category"]:
+                data.category = IdeasCategoryModel.objects.get(
+                    id=request.POST["category"])
+            if request.POST["short_description"]:
+                data.short_description = request.POST["short_description"]
+            if request.POST["long_description"]:
+                data.long_description = request.POST["long_description"]
+            if request.FILES["image"]:
+                data.image = request.FILES["image"]
+            if request.FILES["document"]:
+                data.document = request.FILES["document"]
+
+            data.save()
+            result_form = True
+        context = {
+            'form_1': None,
+            'data': data,
+            'result_form': result_form
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False
+    #     }
+    return render(request, 'idea/idea_change.html', context)
+
+
+def salary(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        data = None
+        result_form = False
+        if request.method == 'POST':
+            key = UtilsClass.create_encrypted_password(
+                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                _length=10)
+            print('\n ***************** \n')
+            print(f"key: {key}")
+            hash_key_obj = hashlib.sha256()
+            hash_key_obj.update(key.encode('utf-8'))
+            key_hash = str(hash_key_obj.hexdigest().strip().upper())
+            print('\n ***************** \n')
+            print(f"key_hash: {key_hash}")
+            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+            print('\n ***************** \n')
+            print(f"key_hash_base64: {key_hash_base64}")
+
+            iin = request.user.username
+            if str(request.user.username).lower() == 'bogdan':
+                iin = 970801351179
+            print('\n ***************** \n')
+            print(f"iin: {iin}")
+            iin_base64 = base64.b64encode(str(iin).encode()).decode()
+            print('\n ***************** \n')
+            print(f"iin_base64: {iin_base64}")
+            print('\n ***************** \n')
+
+            month = request.POST["month"]
+            if int(month) < 10:
+                month = f'0{month}'
+            year = str(request.POST["year"])
+            date = f'{year}{month}'
+            print(f"date: {date}")
+            date_base64 = base64.b64encode(str(date).encode()).decode()
+            print('\n ***************** \n')
+            print(f"date_base64: {date_base64}")
+
+            # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            print('\n ***************** \n')
+            print(f"url: {url}")
+
+            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+            h = httplib2.Http(
+                relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+            _login = 'Web_adm_1c'
+            password = '159159qqww!'
+            h.add_credentials(_login, password)
+            try:
+                response, content = h.request(url)
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                content = None
+            success_web_read = False
+            if content:
+
+                print('\n ***************** \n')
+                print(f"content: {content}")
+
+                print('\n ***************** \n')
+                print(f"content_utf: {content.decode()}")
+
+                content_decrypt = UtilsClass.decrypt_text_with_hash(
+                    content.decode(encoding='UTF-8', errors='strict')[1:], key_hash
+                )
+                print('\n ***************** \n')
+                print(f"content_decrypt: {content_decrypt}")
+
+                success = True
+                error_word_list = ['Ошибка', 'ошибка',
+                                   'Error', 'error', 'Failed', 'failed']
+                for error_word in error_word_list:
+                    if str(content.decode()).find(error_word) >= 0:
+                        success = False
+                if success:
+                    try:
+                        json_data = json.loads(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                        with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                            encode_data = json.dumps(
+                                json_data, ensure_ascii=False)
+                            json.dump(encode_data, file, ensure_ascii=False)
+                        success_web_read = True
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            if success_web_read is False:
+                print('read temp file')
+                with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                    json_data = json.load(file)
+
+            print('\n ***************** \n')
+            print(f"json_data: {json_data}")
+            print('\n ***************** \n')
+
+            try:
+                json_data["global_objects"]["3.Доходы в натуральной форме"]
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                    "Fields": {
+                        "1": "Вид",
+                        "2": "Период",
+                        "3": "Дни",
+                        "4": "Часы",
+                        "5": "Сумма",
+                        "6": "ВсегоДни",
+                        "7": "ВсегоЧасы"
+                    },
+                }
+
+            data = {
+                "Table_1": SalaryClass.create_arr_table(
+                    title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
+                    exclude=[5, 6]
+                ),
+                "Table_2": SalaryClass.create_arr_table(
+                    title="2.Удержано", footer="Всего удержано", json_obj=json_data["global_objects"]["2.Удержано"],
+                    exclude=[]
+                ),
+                "Table_3": SalaryClass.create_arr_table(
+                    title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+                    json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"], exclude=[
+                    ]
+                ),
+                "Table_4": SalaryClass.create_arr_table(
+                    title="4.Выплачено", footer="Всего выплат", json_obj=json_data["global_objects"]["4.Выплачено"],
+                    exclude=[]
+                ),
+                "Table_5": SalaryClass.create_arr_table(
+                    title="5.Налоговые вычеты", footer="Всего вычеты",
+                    json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
+                    exclude=[]
+                ),
+                "Down": {
+                    "first": ["Долг за организацией на начало месяца",
+                              json_data["Долг за организацией на начало месяца"]],
+                    "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+                },
+            }
+            result_form = True
+        context = {
+            'data': data,
+            'result_form': result_form
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'data': False,
+    #         'result_form': False
+    #     }
+    return render(request, 'salary/salary.html', context)
+
+
+def salary_pdf(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        template_path = 'salary/salary_pdf.html'
+        key = UtilsClass.create_encrypted_password(
+            _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', _length=10
+        )
+        print('\n ***************** \n')
+        print(f"key: {key}")
+        hash_key_obj = hashlib.sha256()
+        hash_key_obj.update(key.encode('utf-8'))
+        key_hash = str(hash_key_obj.hexdigest().strip().upper())
+        print('\n ***************** \n')
+        print(f"key_hash: {key_hash}")
+        key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+        print('\n ***************** \n')
+        print(f"key_hash_base64: {key_hash_base64}")
+
+        iin = request.user.username
+        if str(request.user.username).lower() == 'bogdan':
+            iin = 970801351179
+        print('\n ***************** \n')
+        print(f"iin: {iin}")
+        iin_base64 = base64.b64encode(str(iin).encode()).decode()
+        print('\n ***************** \n')
+        print(f"iin_base64: {iin_base64}")
+        print('\n ***************** \n')
+
+        month = 10
+        if int(month) < 10:
+            month = f'0{month}'
+        year = 2021
+        date = f'{year}{month}'
+        print(f"date: {date}")
+        date_base64 = base64.b64encode(str(date).encode()).decode()
+        print('\n ***************** \n')
+        print(f"date_base64: {date_base64}")
+
+        # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+        url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+        print('\n ***************** \n')
+        print(f"url: {url}")
+
+        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+        h = httplib2.Http(
+            relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+        _login = 'Web_adm_1c'
+        password = '159159qqww!'
+        h.add_credentials(_login, password)
+        try:
+            response, content = h.request(url)
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(
+                request=request, error=error)
+            content = None
+        success_web_read = False
+        if content:
+
+            print('\n ***************** \n')
+            print(f"content: {content}")
+
+            print('\n ***************** \n')
+            print(f"content_utf: {content.decode()}")
+
+            content_decrypt = UtilsClass.decrypt_text_with_hash(
+                content.decode(encoding='UTF-8', errors='strict')[1:], key_hash
+            )
+            print('\n ***************** \n')
+            print(f"content_decrypt: {content_decrypt}")
+
+            success = True
+            error_word_list = ['Ошибка', 'ошибка',
+                               'Error', 'error', 'Failed', 'failed']
+            for error_word in error_word_list:
+                if str(content.decode()).find(error_word) >= 0:
+                    success = False
+            if success:
+                try:
+                    json_data = json.loads(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                    with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                        encode_data = json.dumps(json_data, ensure_ascii=False)
+                        json.dump(encode_data, file, ensure_ascii=False)
+                    success_web_read = True
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        if success_web_read is False:
+            print('read temp file')
+            with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                json_data = json.load(file)
+
+        print('\n ***************** \n')
+        print(f"json_data: {json_data}")
+        print('\n ***************** \n')
+
+        try:
+            json_data["global_objects"]["3.Доходы в натуральной форме"]
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                "Fields": {
+                    "1": "Вид",
+                    "2": "Период",
+                    "3": "Дни",
+                    "4": "Часы",
+                    "5": "Сумма",
+                    "6": "ВсегоДни",
+                    "7": "ВсегоЧасы"
+                },
+            }
+
+        data = {
+            "Table_1": SalaryClass.create_arr_table(
+                title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
+                exclude=[5, 6]
+            ),
+            "Table_2": SalaryClass.create_arr_table(
+                title="2.Удержано", footer="Всего удержано", json_obj=json_data["global_objects"]["2.Удержано"],
+                exclude=[]
+            ),
+            "Table_3": SalaryClass.create_arr_table(
+                title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
+                json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"], exclude=[
+                ]
+            ),
+            "Table_4": SalaryClass.create_arr_table(
+                title="4.Выплачено", footer="Всего выплат", json_obj=json_data["global_objects"]["4.Выплачено"],
+                exclude=[]
+            ),
+            "Table_5": SalaryClass.create_arr_table(
+                title="5.Налоговые вычеты", footer="Всего вычеты",
+                json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
+                exclude=[]
+            ),
+            "Down": {
+                "first": ["Долг за организацией на начало месяца", json_data["Долг за организацией на начало месяца"]],
+                "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+            },
+        }
+        context = {
+            'data': data,
+            'STATIC_ROOT': settings.STATIC_ROOT,
+        }
+        # Create a Django response object, and specify content_type as pdf
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+        # find the template and render it.
+        template = get_template(template_path)
+        html = template.render(context)
+        # create a pdf
+        pisa_status = pisa.CreatePDF(html, dest=response, encoding='utf-8', link_callback=Xhtml2pdfClass.link_callback)
+        # template = render_to_string(template_path, context)
+        # pdf = pisa.pisaDocument(io.BytesIO(template.encode('UTF-8')), response,
+        #                         encoding='utf-8',
+        #                         link_callback=link_callback)
+        # pdf = pisa.pisaDocument(io.StringIO(html), response, encoding='UTF-8')
+        # if error then show some funny view
+        if pisa_status.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     response = None
+    return response
+
+
+def career(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        data = None
+        if request.method == 'POST':
+            data = CareerClass.get_career()
+        context = {
+            'data': data,
+        }
+        return render(request, 'hr/career.html', context)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+
+def geo(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        data = None
+        form = GeoForm()
+        if request.method == 'POST':
+            print('begin')
+
+            # data = generate_xlsx(request)
+            # print('generate_xlsx successfully')
+
+            # generate_kml()
+            # print('generate_kml successfully')
+
+            # Points = [PointName, latitude, longitude, PointLinks]
+
+            point1 = [61.22812, 52.14303, "1", "2"]
+            point2 = [61.22829, 52.1431, "2", "1|3"]
+            point3 = [61.22862, 52.14323, "3", "2|4"]
+            point4 = [61.22878, 52.14329, "4", "3|5"]
+            point5 = [61.22892201, 52.14332617, "5", "4|6"]
+            point_arr = [point1, point2, point3, point4, point5]
+
+            # Получение значений из формы
+            count_points = int(request.POST['count_points'])
+            correct_rad = int(request.POST['correct_rad'])
+            rounded_val = int(request.POST['rounded_val'])
+
+            points_arr = []
+            val = 0
+            for num in range(1, count_points):
+                x = 61.22812
+                y = 52.14303
+                val += random.random() / 10000 * 2
+                var = [round(x + val, rounded_val), round(y + val - random.random() / 10000 * correct_rad, rounded_val),
+                       str(num), str(f"{num - 1}|{num + 1}")]
+                points_arr.append(var)
+
+            # Near Point
+            subject_ = GeoClass.find_near_point(points_arr, 61.27, 52.147)
+            print(subject_)
+            object_ = GeoClass.find_near_point(points_arr, 61.24, 52.144)
+            print(object_)
+
+            # Vectors = [VectorName, length(meters)]
+            vector_arr = GeoClass.get_vector_arr(points_arr)
+            # print(vector_arr)
+
+            # print(points_arr)
+
+            # New KML Object
+            GeoClass.generate_way(object_, subject_, points_arr)
+
+            print('end')
+        context = {
+            'data': data,
+            'form': form,
+        }
+        return render(request, 'extra/geo.html', context)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+
+def analyse(request):
+    """
+    Машинное зрение
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        with ThreadPoolExecutor() as executor:
+            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.1)
+    except Exception as error:
+        print(f'\nanalyse | error : {error}\n')
+        with ThreadPoolExecutor() as executor:
+            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
+
+    return redirect(to='home')
+
+
+def passages_thermometry(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    data = None
+    if request.method == 'POST':
+        personid = str(request.POST['personid'])
+        date_start = str(request.POST['date_start']).split('T')[0]
+        date_end = str(request.POST['date_end']).split('T')[0]
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        try:
+            check = request.POST['check']
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND personid = '{personid}' " \
+                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' " \
+                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        cursor.execute(sql_select_query)
+        data = cursor.fetchall()
+        bodies = []
+        for row in data:
+            local_bodies = []
+            value_index = 0
+            for val in row:
+                if value_index == 4:
+                    try:
+                        val = val.encode('1251').decode('utf-8')
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        try:
+                            value = str(val).split(" ")
+                            try:
+                                name = value[0].encode('1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                name = "И" + \
+                                       value[0][2:].encode('1251').decode('utf-8')
+                            try:
+                                surname = value[1].encode(
+                                    '1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                surname = "И" + \
+                                          value[1][2:].encode('1251').decode('utf-8')
+                            string = name + " " + surname
+                            val = string
+                        except Exception as error:
+                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                value_index += 1
+                local_bodies.append(val)
+            bodies.append(local_bodies)
+        headers = ["табельный", "доступ", "дата", "время", "данные",
+                   "точка", "номер карты", "температура", "маска"]
+        data = [headers, bodies]
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_thermometry.html', context)
+
+
+def passages_select(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    data = None
+    if request.method == 'POST':
+        personid = str(request.POST['personid'])
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        try:
+            check = request.POST['check']
+            date = str(request.POST['date']).split('T')[0]
+            time = str(request.POST['date']).split('T')[1]
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' " \
+                               f"AND personid = '{personid}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            sql_select_query = f"SELECT * " \
+                               f"FROM dbtable " \
+                               f"WHERE date1 BETWEEN '2021-07-30' AND '2023-12-31' AND personid = '{personid}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+        cursor.execute(sql_select_query)
+        data = cursor.fetchall()
+        bodies = []
+        for row in data:
+            local_bodies = []
+            value_index = 0
+            for val in row:
+                if value_index == 4:
+                    try:
+                        val = val.encode('1251').decode('utf-8')
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                        try:
+                            value = str(val).split(" ")
+                            try:
+                                name = value[0].encode('1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                name = "И" + \
+                                       value[0][2:].encode('1251').decode('utf-8')
+                            try:
+                                surname = value[1].encode(
+                                    '1251').decode('utf-8')
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                surname = "И" + \
+                                          value[1][2:].encode('1251').decode('utf-8')
+                            string = name + " " + surname
+                            val = string
+                        except Exception as error:
+                            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                value_index += 1
+                local_bodies.append(val)
+            bodies.append(local_bodies)
+        headers = ["табельный", "доступ", "дата", "время", "данные",
+                   "точка", "номер карты", "температура", "маска"]
+        data = [headers, bodies]
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_select.html', context)
+
+
+def passages_update(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    data = None
+    if request.method == 'POST':
+        personid_old = request.POST['personid_old']
+        date_old = str(request.POST['datetime_old']).split('T')[0]
+        time_old = str(request.POST['datetime_old']).split('T')[1]
+        date_new = str(request.POST['datetime_new']).split('T')[0]
+        time_new = str(request.POST['datetime_new']).split('T')[1] + ':00'
+        accessdateandtime_new = date_new + 'T' + time_new
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        value = f"UPDATE dbtable SET accessdateandtime = '{accessdateandtime_new}', date1 = '{date_new}', " \
+                f"date2 = '{time_new}' " \
+                f"WHERE date1 = '{date_old}' AND date2 BETWEEN '{time_old}:00' AND '{time_old}:59' " \
+                f"AND personid = '{personid_old}' "
+        cursor.execute(value)
+        connect_db.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_update.html', context)
+
+
+def passages_insert(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    data = None
+    if request.method == 'POST':
+        personid = request.POST['personid']
+        date = str(request.POST['datetime']).split('T')[0]
+        time = str(request.POST['datetime']).split('T')[1] + ':00'
+        accessdateandtime = date + 'T' + time
+        devicename = str(request.POST['devicename'])
+        cardno = str(request.POST['cardno'])
+        temperature = str(request.POST['temperature'])
+        if temperature == '0':
+            temperature = ''
+        mask = str(request.POST['mask'])
+        try:
+            connect_db = SQLClass.pyodbc_connect(
+                ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434", database="thirdpartydb", username="sa",
+                password="skud12345678"
+            )
+            cursor = connect_db.cursor()
+            cursor.fast_executemany = True
+            sql_select_query = f"SELECT TOP (1) personname " \
+                               f"FROM dbtable " \
+                               f"WHERE personid = '{personid}' " \
+                               f"ORDER BY date1 DESC, date2 DESC;"
+            cursor.execute(sql_select_query)
+            personname_all = cursor.fetchall()
+            personname = personname_all[0][0]
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            personname = 'None'
+        connection = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connection.cursor()
+        cursor.fast_executemany = True
+        rows = ['personid', 'accessdateandtime', 'date1', 'date2', 'personname', 'devicename', 'cardno',
+                'temperature', 'mask']
+        values = [personid, accessdateandtime, date, time,
+                  personname, devicename, cardno, temperature, mask]
+        _rows = ''
+        for x in rows:
+            _rows = f"{_rows}{str(x)}, "
+        value = f"INSERT INTO dbtable (" + \
+                _rows[:-2:] + f") VALUES {tuple(values)}"
+        cursor.execute(value)
+        connection.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_insert.html', context)
+
+
+def passages_delete(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    data = None
+    if request.method == 'POST':
+        personid = str(request.POST['personid'])
+        date = str(request.POST['datetime']).split('T')[0]
+        time = str(request.POST['datetime']).split('T')[1]
+        connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
+                                             database="thirdpartydb", username="sa", password="skud12345678")
+        cursor = connect_db.cursor()
+        cursor.fast_executemany = True
+        value = f"DELETE FROM dbtable " \
+                f"WHERE date1 = '{date}' AND date2 BETWEEN '{time}:00' AND '{time}:59' AND personid = '{personid}' "
+        cursor.execute(value)
+        connect_db.commit()
+    context = {
+        'data': data,
+    }
+    return render(request, 'skud/passages_delete.html', context)

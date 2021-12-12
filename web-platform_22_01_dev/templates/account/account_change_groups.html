@@ -39,35 +39,6 @@
 
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_3">
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_3"
-                    aria-expanded="false"
-                    aria-controls="accordion_collapse_3"
-                >список всех действий</button>
-            </h2>
-            <div
-                id="accordion_collapse_3"
-                class="accordion-collapse collapse"
-                aria-labelledby="accordion_collapse_3"
-                data-bs-parent="#accordionExample"
-            >
-                <div class="accordion-body">
-
-                    <ol class="list-group list-group-numbered">
-                        {% for action in actions %}
-                            <li class="list-group-item">{{ action.name_char_field }} / {{ action.name_slug_field }}</li>
-                        {% endfor %}
-                    </ol>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
             <h2 class="accordion-header" id="accordion_heading_1">
                 <button
                     class="accordion-button collapsed"
@@ -76,7 +47,7 @@
                     data-bs-target="#accordion_collapse_1"
                     aria-expanded="false"
                     aria-controls="accordion_collapse_1"
-                >список всех групп с доступными действиями</button>
+                >форма для создания действия и группы, и присоединения действия к группе</button>
             </h2>
             <div
                 id="accordion_collapse_1"
@@ -86,180 +57,16 @@
             >
                 <div class="accordion-body">
 
-                    <ol class="list-group list-group-numbered">
-                        {% for group in groups %}
-                            <li class="list-group-item">
-                                <strong>{{ group }}</strong>
-                                <ul class="list-group list-group-flush">
-                                    {% for action in group.group_one_to_one_field.action_many_to_many_field.all %}
-                                        <li class="list-group-item">{{ action.name_char_field }} / {{ action.name_slug_field }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% endfor %}
-                    </ol>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_2">
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_2"
-                    aria-expanded="false"
-                    aria-controls="accordion_collapse_2"
-                >примеры форм</button>
-            </h2>
-            <div
-                id="accordion_collapse_2"
-                class="accordion-collapse collapse"
-                aria-labelledby="accordion_collapse_2"
-                data-bs-parent="#accordionExample"
-            >
-                <div class="accordion-body">
-
-                    <div>
-
-                        <hr/>
-
-                        <label class="form-control-lg">
-                            select:
-                            <select type="select"
-                                    id="select"
-                                    name="select[]"
-                                    required=""
-                {#                                            size="3"#}
-                {#                                            multiple="multiple"#}
-                                    class="form-control form-control-lg"
-                            >
-                                <option selected disabled>Выберите группу</option>
-                                {% for group in groups %}
-                                    <option value="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</option>
-                                {% endfor %}
-                            </select>
-                            <small class="text-muted">select: выбрать один из списка</small>
-                        </label>
-
-                        <label class="form-control-lg">
-                            multi_select:
-                            <select type="select"
-                                    id="multi_select"
-                                    name="multi_select[]"
-                                    required=""
-                                    size="3"
-                                    multiple="multiple"
-                                    class="form-control form-control-lg"
-                            >
-                                <option selected disabled>Выберите группу</option>
-                                {% for group in groups %}
-                                    <option value="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</option>
-                                {% endfor %}
-                            </select>
-                            <small class="text-muted">multi_select: выбрать несколько из списка</small>
-                        </label>
-
-                        <label class="form-control-lg">
-                            text:
-                            <input type="text"
-                                   id="groups"
-                                   name="groups"
-                {#                       required=""#}
-                                   placeholder=""
-                                   {% if user %}
-                                        value="{% for group in groups %}{{ group.group_one_to_one_field.name_char_field }}, {% endfor %}"
-                                   {% else %}
-                                        value="{% for group in groups %}{{ group.group_one_to_one_field.name_char_field }}, {% endfor %}"
-                                   {% endif %}
-                                   minlength="1"
-                                   maxlength="64"
-                                   class="form-control form-control-lg"
-                            />
-                            <small class="text-muted">введите, из списка выше и через запятую, необходимые
-                                группы доступа для пользователя</small>
-                        </label>
-
-                        <div>
-                            <label class="form-control-lg">
-                                checkbox:
-                                {% for group in groups %}
-                                    <div class="form-check form-switch form-control-lg">
-                                        <input type="checkbox"
-                                               id="{{ group.group_one_to_one_field.name_slug_field }}"
-                                               name="{{ group.group_one_to_one_field.name_slug_field }}"
-                {#                                   required=""#}
-                                               value=""
-                                               {% if group %}
-                                                    checked="checked"
-                                               {% else %}
-                {#                                   checked="checked"#}
-                                               {% endif %}
-                                               class="form-check-input"
-                                        />
-                                        <label class="form-check-label" for="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</label>
-                                    </div>
-                                {% endfor %}
-                                <small class="text-muted">введите, из списка выше и через запятую, необходимые
-                                    группы доступа для пользователя</small>
-                            </label>
-                        </div>
-
-                        <hr/>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_4">
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_4"
-                    aria-expanded="false"
-                    aria-controls="accordion_collapse_4"
-                >готовая форма для добавления к пользователю группы и добавления действия к этой группе</button>
-            </h2>
-            <div
-                id="accordion_collapse_4"
-                class="accordion-collapse collapse"
-                aria-labelledby="accordion_collapse_4"
-                data-bs-parent="#accordionExample"
-            >
-                <div class="accordion-body">
-
                     <form action="{% url 'account_change_groups' %}"
                           method="POST"
                           target="_self"
                           enctype="multipart/form-data"
-                          name="account_create_accounts one"
+                          name="account_change_groups"
                           autocomplete="on"
                           class="text-center"
                     >
                         {% csrf_token %}
                         <div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Имя пользователя:
-                                    <input type="text"
-                                           id="username"
-                                           name="username"
-                                           required=""
-                                           placeholder="970801351179"
-                                           value="Bogdan"
-                                           minlength="1"
-                                           maxlength="12"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">User.objects.get(username=username)</small>
-                                </label>
-                            </div>
                             <div>
                                 <label class="form-control-lg">
                                     Название группы:
@@ -273,7 +80,7 @@
                                            maxlength="32"
                                            class="form-control form-control-lg"
                                     />
-                                    <small class="text-muted">GroupModel:name_char_field</small>
+                                    <small class="text-muted">видимое имя группы, пример: "Пользователь"</small>
                                 </label>
 
                                 <label class="form-control-lg">
@@ -288,7 +95,7 @@
                                            maxlength="32"
                                            class="form-control form-control-lg"
                                     />
-                                    <small class="text-muted">GroupModel:name_slug_field</small>
+                                    <small class="text-muted">валидируемое имя группы, пример: "user"</small>
                                 </label>
                             </div>
                             <div>
@@ -298,13 +105,13 @@
                                            id="action_name_char_field"
                                            name="action_name_char_field"
                                            required=""
-                                           placeholder="Банк идей"
-                                           value="Банк идей"
+                                           placeholder="Просмотр домашней страницы"
+                                           value="Просмотр домашней страницы"
                                            minlength="1"
                                            maxlength="32"
                                            class="form-control form-control-lg"
                                     />
-                                    <small class="text-muted">ActionModel:name_char_field</small>
+                                    <small class="text-muted">видимое имя действия, пример: "Просмотр домашней страницы"</small>
                                 </label>
 
                                 <label class="form-control-lg">
@@ -313,17 +120,34 @@
                                            id="action_name_slug_field"
                                            name="action_name_slug_field"
                                            required=""
-                                           placeholder="idea"
-                                           value="idea"
+                                           placeholder="view_home_page"
+                                           value="view_home_page"
                                            minlength="1"
                                            maxlength="32"
                                            class="form-control form-control-lg"
                                     />
-                                    <small class="text-muted">ActionModel:name_slug_field</small>
+                                    <small class="text-muted">валидируемое имя действия, пример: "view_home_page"</small>
                                 </label>
                             </div>
-
+                            <div>
+                                <label class="form-control-lg">
+                                    Выберите тип:
+                                    <select type="select"
+                                            id="type_select"
+                                            name="type_select"
+                                            required=""
+{#                                            size="3"#}
+{#                                            multiple="multiple"#}
+                                            class="form-control form-control-lg"
+                                    >
+                                        <option value="add">Присоединить</option>
+                                        <option value="remove">Отсоединить</option>
+                                    </select>
+                                    <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
+                                </label>
+                            </div>
                         </div>
+
                         <hr/>
                         <!-- Grid row -->
                         <div class="container-fluid btn-group row pb-1">
@@ -353,20 +177,20 @@
         </div>
 
         <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_5">
+            <h2 class="accordion-header" id="accordion_heading_2">
                 <button
                     class="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_5"
+                    data-bs-target="#accordion_collapse_2"
                     aria-expanded="false"
-                    aria-controls="accordion_collapse_5"
-                >готовая форма для присоединения действия к группе</button>
+                    aria-controls="accordion_collapse_2"
+                >форма для присоединения/отсоединения действия к группе</button>
             </h2>
             <div
-                id="accordion_collapse_5"
+                id="accordion_collapse_2"
                 class="accordion-collapse collapse"
-                aria-labelledby="accordion_collapse_5"
+                aria-labelledby="accordion_collapse_2"
                 data-bs-parent="#accordionExample"
             >
                 <div class="accordion-body">
@@ -382,28 +206,10 @@
                         {% csrf_token %}
                         <div>
                             <label class="form-control-lg">
-                                Выберите группу, к которой нужно добавить действие:
+                                Выберите действие, которое нужно присоединить к группе:
                                 <select type="select"
-                                        id="select"
-                                        name="select[]"
-                                        required=""
-{#                                        size="3"#}
-{#                                        multiple="multiple"#}
-                                        class="form-control form-control-lg"
-                                >
-                                    <option selected disabled>Выберите группу</option>
-                                    {% for group in groups %}
-                                        <option value="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</option>
-                                    {% endfor %}
-                                </select>
-                                <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
-                            </label>
-
-                            <label class="form-control-lg">
-                                Выберите действие, которое нужно добавить к группе:
-                                <select type="select"
-                                        id="select"
-                                        name="select[]"
+                                        id="action"
+                                        name="action"
                                         required=""
 {#                                        size="3"#}
 {#                                        multiple="multiple"#}
@@ -411,12 +217,47 @@
                                 >
                                     <option selected disabled>Выберите действие</option>
                                     {% for action in actions %}
-                                        <option value="{{ action.name_slug_field }}">{{ action.name_char_field }}</option>
+                                        <option value="{{ action.name_slug_field }}">{{ action.name_char_field }} [{{ action.name_slug_field }}]</option>
                                     {% endfor %}
                                 </select>
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
+
+                            <label class="form-control-lg">
+                                Выберите группу, к которой нужно присоединить действие:
+                                <select type="select"
+                                        id="group"
+                                        name="group"
+                                        required=""
+{#                                        size="3"#}
+{#                                        multiple="multiple"#}
+                                        class="form-control form-control-lg"
+                                >
+                                    <option selected disabled>Выберите группу</option>
+                                    {% for group in groups %}
+                                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }} [{{ group.name_slug_field }}]</option>
+                                    {% endfor %}
+                                </select>
+                                <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
+                            </label>
+
+                            <label class="form-control-lg">
+                                Выберите тип:
+                                <select type="select"
+                                        id="type_select"
+                                        name="type_select"
+                                        required=""
+{#                                        size="3"#}
+{#                                        multiple="multiple"#}
+                                        class="form-control form-control-lg"
+                                >
+                                    <option value="add">Присоединить</option>
+                                    <option value="remove">Отсоединить</option>
+                                </select>
+                                <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
+                            </label>
                         </div>
+
                         <hr/>
                         <!-- Grid row -->
                         <div class="container-fluid btn-group row pb-1">
@@ -446,20 +287,20 @@
         </div>
 
         <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_6">
+            <h2 class="accordion-header" id="accordion_heading_3">
                 <button
                     class="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_6"
+                    data-bs-target="#accordion_collapse_3"
                     aria-expanded="false"
-                    aria-controls="accordion_collapse_6"
-                >готовая форма для удаления действия из группы</button>
+                    aria-controls="accordion_collapse_3"
+                >форма для присоединения/отсоединения пользователя к группе</button>
             </h2>
             <div
-                id="accordion_collapse_6"
+                id="accordion_collapse_3"
                 class="accordion-collapse collapse"
-                aria-labelledby="accordion_collapse_6"
+                aria-labelledby="accordion_collapse_3"
                 data-bs-parent="#accordionExample"
             >
                 <div class="accordion-body">
@@ -475,10 +316,28 @@
                         {% csrf_token %}
                         <div>
                             <label class="form-control-lg">
-                                Выберите группу, из которой нужно удалить действие:
+                                Выберите пользователя, которого нужно присоединить к группе:
                                 <select type="select"
-                                        id="select"
-                                        name="select[]"
+                                        id="username"
+                                        name="username"
+                                        required=""
+{#                                        size="3"#}
+{#                                        multiple="multiple"#}
+                                        class="form-control form-control-lg"
+                                >
+                                    <option selected disabled>Выберите пользователя</option>
+                                    {% for user in users %}
+                                        <option value="{{ user.user_foreign_key_field.username }}">{{ user.last_name_char_field }} {{ user.first_name_char_field }} {{ user.patronymic_char_field }}</option>
+                                    {% endfor %}
+                                </select>
+                                <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
+                            </label>
+
+                            <label class="form-control-lg">
+                                Выберите группу, к которой нужно присоединить пользователя:
+                                <select type="select"
+                                        id="group"
+                                        name="group"
                                         required=""
 {#                                        size="3"#}
 {#                                        multiple="multiple"#}
@@ -486,30 +345,29 @@
                                 >
                                     <option selected disabled>Выберите группу</option>
                                     {% for group in groups %}
-                                        <option value="{{ group.group_one_to_one_field.name_slug_field }}">{{ group.group_one_to_one_field.name_char_field }}</option>
+                                        <option value="{{ group.name_slug_field }}">{{ group.name_char_field }} [{{ group.name_slug_field }}]</option>
                                     {% endfor %}
                                 </select>
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
 
                             <label class="form-control-lg">
-                                Выберите действие, которое нужно удалить из группы:
+                                Выберите тип:
                                 <select type="select"
-                                        id="select"
-                                        name="select[]"
+                                        id="type_select"
+                                        name="type_select"
                                         required=""
 {#                                        size="3"#}
 {#                                        multiple="multiple"#}
                                         class="form-control form-control-lg"
                                 >
-                                    <option selected disabled>Выберите действие</option>
-                                    {% for action in actions %}
-                                        <option value="{{ action.name_slug_field }}">{{ action.name_char_field }}</option>
-                                    {% endfor %}
+                                    <option value="add">Присоединить</option>
+                                    <option value="remove">Отсоединить</option>
                                 </select>
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
                         </div>
+
                         <hr/>
                         <!-- Grid row -->
                         <div class="container-fluid btn-group row pb-1">
@@ -538,6 +396,25 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endif %}
 

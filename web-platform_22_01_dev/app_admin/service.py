@@ -1,7 +1,7 @@
 import concurrent
+import datetime
 import math
 import os
-import datetime
 import random
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -12,26 +12,20 @@ import httplib2
 import numpy
 import openpyxl
 import requests
+from django.conf import settings
 from django.contrib.auth.models import User, Group
+from django.contrib.staticfiles import finders
 from django.core.handlers.wsgi import WSGIRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http.response import Http404
+from django.http import Http404
 from django.utils import timezone
 from fastkml import kml
 from openpyxl.utils import get_column_letter
-from app_admin.models import LoggingModel, GroupModel, ComputerVisionModuleModel, ComputerVisionComponentModel, \
+
+from app_admin.models import ComputerVisionModuleModel, ComputerVisionComponentModel, \
     UserModel
-from app_admin.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils, SQLClass
-from django.contrib.staticfiles import finders
-from django.conf import settings
-import datetime
-import random
-
-from django.contrib.auth.models import User, Group
-from django.core.handlers.wsgi import WSGIRequest
-from django.http import Http404
-
 from app_admin.models import GroupModel, LoggingModel, ActionModel
+from app_admin.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils
 
 
 class DjangoClass:
@@ -302,18 +296,18 @@ class DjangoClass:
                     # Пользователь уже существует: изменение
                     try:
                         user = User.objects.get(username=self.username)
-                        # Если пользователь уже существует и стоит статус "принудительно изменять аккаунт"
-                        if user is False or self.force_change_account is False:
-                            return False
                         # Возврат, если пользователь обладает правами суперпользователя
                         if user.is_superuser:
+                            return False
+                        # Если пользователь уже существует и стоит статус "принудительно изменять аккаунт"
+                        if user is False or self.force_change_account is False:
                             return False
                     # Пользователь не существует: создание
                     except Exception as error:
                         user = User.objects.create(
                             # authorization data
                             username=self.username,
-                            password=DjangoClass.AccountClass.get_sha256_password(self.password),
+                            password=DjangoClass.AccountClass.create_django_encrypt_password(self.password),
                             # technical data
                             is_active=True,
                             is_staff=self.is_staff,
@@ -324,7 +318,7 @@ class DjangoClass:
                         user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
                         # authorization data
                         if self.force_change_account_password:
-                            user.password = DjangoClass.AccountClass.get_sha256_password(self.password)
+                            user.password = DjangoClass.AccountClass.create_django_encrypt_password(self.password)
                             user_model.password_slug_field = self.password
                         # technical data
                         user_model.activity_boolean_field = self.is_active
@@ -373,303 +367,10 @@ class DjangoClass:
                         #     success = False
                 return success
 
-        class UserAuthClassOld:
-            """
-            Основной аккаунт пользователя
-            """
-
-            def __init__(self, username, password, first_name='', last_name='', email='', is_active=True,
-                         is_staff=False, is_superuser=False, groups='User', force_change_account=False,
-                         force_change_account_password=False, force_clear_groups=False):
-                # Основное
-                self.username = username
-                self.password = password
-
-                # Персональная информация
-                self.first_name = first_name
-                self.last_name = last_name
-                self.email = email
-
-                # Права доступа
-                self.is_active = is_active
-                self.is_staff = is_staff
-                self.is_superuser = is_superuser
-                self.groups = groups
-
-                # Настройки создания аккаунта
-                self.force_change_account = force_change_account
-                self.force_change_account_password = force_change_account_password
-                self.force_clear_groups = force_clear_groups
-
-            def account_auth_create(self):
-                try:
-                    user = User.objects.create(
-                        # Основное
-                        username=self.username,
-                        password=DjangoClass.AccountClass.get_sha256_password(self.password),
-                        # Персональная информация
-                        first_name=self.first_name,
-                        last_name=self.last_name,
-                        email=self.email,
-                        # Права доступа
-                        is_active=self.is_active,
-                        is_staff=self.is_staff,
-                        is_superuser=self.is_superuser,
-                    )
-                    user.profile.password = self.password
-                    user.save()
-                    return self.account_auth_set_group()
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='account_auth_change')
-                    return False
-
-            def account_auth_change(self):
-                try:
-                    user = User.objects.get(username=self.username)
-                    # Основное
-                    if self.force_change_account_password:
-                        user.password = DjangoClass.AccountClass.get_sha256_password(self.password)
-                        user.profile.password = self.password
-                    # Персональная информация
-                    user.first_name = self.first_name
-                    user.last_name = self.last_name
-                    user.email = self.email
-                    # Права доступа
-                    user.is_active = self.is_active
-                    user.is_staff = self.is_staff
-                    user.is_superuser = self.is_superuser
-                    user.save()
-                    return self.account_auth_set_group()
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='account_auth_change')
-                    return False
-
-            def account_auth_set_group(self):
-                try:
-                    try:
-                        groups = [x.strip() for x in self.groups.split(',')]
-                    except Exception as error:
-                        groups = [self.groups]
-                    if self.force_clear_groups:
-                        User.objects.get(username=self.username).groups.clear()
-                    success = True
-                    for group in groups:
-                        if len(str(group).strip()) >= 1:
-                            try:
-                                group_object = Group.objects.get_or_create(name=group)[0]
-                                group_object.user_set.add(User.objects.get(username=self.username))
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors_local(
-                                    error=error, function_error='account_auth_set_group'
-                                )
-                                success = False
-                    return success
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='account_auth_set_group')
-                    return False
-
-            def account_auth_create_or_change(self):
-                try:
-                    try:
-                        user = User.objects.get(username=self.username)
-                        # Возврат, если пользователь обладает правами суперпользователя
-                        if user.is_superuser:
-                            return False
-                        # Если пользователь уже существует и стоит статус "принудительно изменять аккаунт"
-                        if user and self.force_change_account:
-                            return self.account_auth_change()
-                        else:
-                            return False
-                    except Exception as error:
-                        return self.account_auth_create()
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors_local(
-                        error=error, function_error='account_auth_create_or_change'
-                    )
-                    return False
-
-        class UserProfileClass:
-            """
-            Первичная информация аккаунта пользователя
-            """
-
-            def __init__(self, username, user_iin='', first_name='', last_name='', patronymic='', personnel_number='',
-                         subdivision='', workshop_service='', department_site='', position='', category=''):
-                # Основное
-                self.username = username
-
-                # Персональная информация
-                self.user_iin = user_iin
-                self.first_name = first_name
-                self.last_name = last_name
-                self.patronymic = patronymic
-                self.personnel_number = personnel_number
-
-                # First data account
-                self.subdivision = subdivision
-                self.workshop_service = workshop_service
-                self.department_site = department_site
-                self.position = position
-                self.category = category
-
-            def profile_first_change(self):
-                # try:
-                if True:
-                    user = User.objects.get(username=self.username)
-                    # Возврат, если пользователь обладает правами суперпользователя
-                    if user.is_superuser:
-                        return False
-                    # Персональная информация
-                    user.profile.user_iin = self.user_iin
-                    user.profile.first_name = self.first_name
-                    user.profile.last_name = self.last_name
-                    user.profile.patronymic = self.patronymic
-                    user.profile.personnel_number = self.personnel_number
-
-                    # First data account
-                    user.profile.subdivision = self.subdivision
-                    user.profile.workshop_service = self.workshop_service
-                    user.profile.department_site = self.department_site
-                    user.profile.position = self.position
-                    user.profile.category = self.category
-
-                    user.save()
-                # except Exception as ex:
-                #     return False
-
         @staticmethod
-        def create_main_account(user_account_class, username='', password='', email='', firstname='',
-                                lastname='', is_staff=False, is_superuser=False, force_change=False):
+        def create_django_encrypt_password(password: str):
             try:
-                if user_account_class:
-                    username = user_account_class.username
-                    password = user_account_class.password
-                    email = user_account_class.email
-                    firstname = user_account_class.first_name
-                    lastname = user_account_class.last_name
-                    is_staff = user_account_class.is_staff
-                    is_superuser = user_account_class.is_superuser
-                if username == 'Bogdan' or username == 'bogdan':
-                    is_superuser = True
-                print(f'{username}: {password}')
-                try:
-                    user = User.objects.get(username=username)
-                    if force_change and user:
-                        DjangoClass.AccountClass.change_main_account(
-                            user_account_class=False,
-                            username=username,
-                            password=password,
-                            email=email,
-                            firstname=firstname,
-                            lastname=lastname,
-                            is_staff=is_staff,
-                            is_superuser=is_superuser,
-                            force_create=force_change
-                        )
-                        return True
-                    return False
-                except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors_local(
-                        error=error, function_error='create_main_account'
-                    )
-                    encrypt_password = DjangoClass.AccountClass.create_django_encrypt_password(password)
-                    if encrypt_password:
-                        print(f'{username}: {encrypt_password}')
-                        user = User.objects.create(
-                            username=username,
-                            password=encrypt_password,
-                            email=email,
-                            firstname=firstname,
-                            lastname=lastname,
-                            is_staff=is_staff,
-                            is_superuser=is_superuser
-                        )
-                        user.save()
-                        user.set_password = encrypt_password
-                        return True
-                    return False
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='create_main_account')
-                return False
-
-        @staticmethod
-        def change_main_account(user_account_class, username: str, password: str, email='', firstname='',
-                                lastname='', is_staff=False, is_superuser=False, force_create=False):
-            try:
-                if user_account_class:
-                    username = user_account_class.username
-                    password = user_account_class.password
-                    email = user_account_class.email
-                    firstname = user_account_class.first_name
-                    lastname = user_account_class.last_name
-                    is_staff = user_account_class.is_staff
-                    is_superuser = user_account_class.is_superuser
-                if force_create:
-                    user = User.objects.get_or_create(username=username)[0]
-                else:
-                    user = User.objects.get(username=username)
-                user.username = username
-                user.password = password
-                user.email = email
-                user.first_name = firstname
-                user.last_name = lastname
-                user.is_staff = is_staff
-                user.is_superuser = is_superuser
-                user.save()
-                user.set_password = password
-                return True
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='change_main_account')
-                return False
-
-        @staticmethod
-        def set_user_group(user_group_class, username='', group='User', force_change=False):
-            try:
-                success = True
-                if user_group_class:
-                    username = user_group_class.username
-                    group = user_group_class.group
-                if group:
-                    try:
-                        group = [x.strip() for x in group.split(',') if len(x) > 1]
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='set_user_group')
-                        group = [group]
-                    for grp in group:
-                        try:
-                            user_group = Group.objects.get_or_create(name=grp)[0]
-                            user = User.objects.get(username=username)
-                            if force_change:
-                                user.groups.clear()
-                            user_group.user_set.add(user)
-                        except Exception as error:
-                            DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='set_user_group')
-                            success = False
-                return success
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors_local(error=error, function_error='set_user_group')
-                return False
-
-        @staticmethod
-        def create_django_encrypt_password(decrypt_password: str):
-            try:
-                user = User.objects.get_or_create(username='None')[0]
-                user.set_password(decrypt_password)
-                user.save()
-                user = User.objects.get(username='None')
-                encrypt_password = user.password
-                user.delete()
-                return encrypt_password
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors_local(
-                    error=error, function_error='create_django_encrypt_password'
-                )
-                return False
-
-        @staticmethod
-        def get_sha256_password(password: str):
-            try:
-                user = User.objects.create(username='sha256')
+                user = User.objects.get_or_create(username='sha256')[0]
                 user.set_password(password)
                 encrypt_password = user.password
                 UserModel.objects.get(user_foreign_key_field=user).delete()

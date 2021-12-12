@@ -8,7 +8,7 @@
 
 <!-- Title -->
 {% block title %}
-    Создать пользователя
+    Создание/изменение пользователей
 {% endblock title %}
 
 <!-- Style -->
@@ -23,649 +23,120 @@
 
 
 <div class="text-center">
-    <h1 class="display-6 fst-italic">Создание пользователей</h1>
-    <small class="text-secondary">Эта страница содержит форму для создания одиночного или множества пользователей.</small>
+    <h1 class="display-6 fst-italic">Создание/изменение пользователей</h1>
+    <small class="text-secondary">Эта страница содержит шаблон и форму для создания или изменения пользователей.</small>
 </div>
 
-{% if response == 1 %}
+{% if response == 0 %}
+
+    <div class="text-center">
+        <a class="btn btn-lg btn-outline-success"
+           href="{% static 'media/admin/account/create_users.xlsx' %}"
+        >Скачать шаблон для заполнения</a>
+    </div>
+
+    <form action="{% url 'account_create_or_change_accounts' %}"
+          method="POST"
+          target="_self"
+          enctype="multipart/form-data"
+          name="account_create_or_change_accounts many"
+          autocomplete="on"
+          class="text-center"
+    >
+        {% csrf_token %}
+        <div>
+            <div>
+                <label class="form-control-lg">
+                    Заполненный шаблон для создания пользователей:
+                    <input type="file"
+                           id="excel_file"
+                           name="excel_file"
+                           required=""
+                           accept=".xlsx, .xls"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">шаблон: заполненный excel-шаблон с пользователями (xlsx/xls)</small>
+                </label>
+            </div>
+
+            <div>
+                <label class="form-check-label form-control-lg" for="force_change_account">
+                    Перезаписать данные уже существующего пользователя?
+                    <div class="form-switch">
+                        <input type="checkbox"
+                               id="force_change_account"
+                               name="force_change_account"
+{#                                               required=""#}
+                               value=""
+{#                                               checked="checked"#}
+                               class="form-check-input"
+                        />
+                    </div>
+                    <small class="text-muted">отметьте, если нужно заменить данные</small>
+                </label>
+
+                <label class="form-check-label form-control-lg" for="force_change_password">
+                    Перезаписать пароль уже существующего пользователя?
+                    <div class="form-switch">
+                        <input type="checkbox"
+                               id="force_change_password"
+                               name="force_change_password"
+{#                                               required=""#}
+                               value=""
+{#                                               checked="checked"#}
+                               class="form-check-input"
+                        />
+                    </div>
+                    <small class="text-muted">отметьте, если нужно заменить пароль</small>
+                </label>
+
+                <label class="form-check-label form-control-lg" for="force_clear_groups">
+                    Очистить группы уже существующего пользователя?
+                    <div class="form-switch">
+                        <input type="checkbox"
+                               id="force_clear_groups"
+                               name="force_clear_groups"
+{#                                               required=""#}
+                               value=""
+{#                                               checked="checked"#}
+                               class="form-check-input"
+                        />
+                    </div>
+                    <small class="text-muted">отметьте, если нужно очистить группы</small>
+                </label>
+            </div>
+        </div>
+        <hr/>
+        <!-- Grid row -->
+        <div class="container-fluid btn-group row pb-1">
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <button href=""
+                        type="submit"
+                        class="w-100 form-control btn btn-lg btn-outline-primary"
+                >Подтвердить</button>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <button href=""
+                        type="reset"
+                        class="w-100 form-control btn btn-lg btn-outline-warning"
+                >Сбросить</button>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </form>
+
+{% elif response == 1 %}
 
     {% include 'components/success.html' %}
 
 {% elif response == -1 %}
 
     {% include 'components/aborted.html' %}
-
-{% else %}
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_1">
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_1"
-                    aria-expanded="false"
-                    aria-controls="accordion_collapse_1"
-                >Создать/изменить одиночного пользователя</button>
-            </h2>
-            <div
-                id="accordion_collapse_1"
-                class="accordion-collapse collapse"
-                aria-labelledby="accordion_heading_1"
-                data-bs-parent="#accordionExample"
-            >
-                <div class="accordion-body">
-
-                    {% if user is None %}
-                        <hr/>
-                        <label>
-                            <div class="leed display-6 text-center text-danger">
-                                Если хотите загрузить данные уже существующего пользователя, введите имя пользователя и нажмите подтвердить:
-                            </div>
-                        </label>
-
-                        <form action="{% url 'account_create_or_change_accounts' 'change' %}"
-                              method="POST"
-                              target="_self"
-                              enctype="multipart/form-data"
-                              name="account_create_or_change_accounts change"
-                              autocomplete="on"
-                              class="text-center"
-                        >
-                            {% csrf_token %}
-                            <div>
-                                <div>
-                                    <label class="form-control-lg">
-                                        Имя пользователя:
-                                        <input type="text"
-                                               id="username"
-                                               name="username"
-                                               required=""
-                                               placeholder=""
-                                               value=""
-                                               minlength="12"
-                                               maxlength="12"
-                                               class="form-control form-control-lg"
-                                        />
-                                        <small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small>
-                                    </label>
-                                </div>
-                            </div>
-                            <hr/>
-                            <!-- Grid row -->
-                            <div class="container-fluid btn-group row pb-1">
-                                <!-- Grid column -->
-                                <div class="col-lg-6">
-                                    <button href=""
-                                            type="submit"
-                                            class="w-100 form-control btn btn-lg btn-outline-primary"
-                                    >Подтвердить</button>
-                                </div>
-                                <!-- Grid column -->
-
-                                <!-- Grid column -->
-                                <div class="col-lg-6">
-                                    <button href=""
-                                            type="reset"
-                                            class="w-100 form-control btn btn-lg btn-outline-warning"
-                                    >Сбросить</button>
-                                </div>
-                                <!-- Grid column -->
-                            </div>
-                            <!-- Grid row -->
-                        </form>
-                        <hr/>
-                    {% else %}
-                        <!-- Grid row -->
-                        <div class="container-fluid btn-group row pb-1">
-                            <!-- Grid column -->
-                            <div class="col-lg-12">
-                                <a href=""
-                                   type="button"
-                                   class="w-100 form-control btn btn-lg btn-outline-danger"
-                                >Очистить</a>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                    {% endif %}
-
-                    <form action="{% url 'account_create_or_change_accounts' 'one' %}"
-                          method="POST"
-                          target="_self"
-                          enctype="multipart/form-data"
-                          name="account_create_or_change_accounts one"
-                          autocomplete="on"
-                          class="text-center"
-                    >
-                        {% csrf_token %}
-                        <div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Имя пользователя:
-                                    <input type="text"
-                                           id="username"
-                                           name="username"
-                                           required=""
-                                           {% if user.username %}
-                                                placeholder="{{ user.username }}"
-                                           {% else %}
-                                                placeholder="970801351179"
-                                           {% endif %}
-                                           {% if user.username %}
-                                                value="{{ user.username }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="12"
-                                           maxlength="12"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите выше идентификатор пользователя: 12 знаков</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Введите желаемый пароль для входа:
-                                    <input type="password"
-                                           id="password_1"
-                                           name="password_1"
-                                           required=""
-                                           {% if user_model.password_slug_field %}
-                                                placeholder="{{ user_model.password_slug_field }}"
-                                           {% else %}
-                                                placeholder=""
-                                           {% endif %}
-                                           {% if user_model.password_slug_field %}
-                                                value="{{ user_model.password_slug_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="8"
-                                           maxlength="16"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите выше пароль для входа: от 8 до 16 символов</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Повторите пароль:
-                                    <input type="password"
-                                           id="password_2"
-                                           name="password_2"
-                                           required=""
-                                           {% if user_model.password_slug_field %}
-                                                placeholder="{{ user_model.password_slug_field }}"
-                                           {% else %}
-                                                placeholder=""
-                                           {% endif %}
-                                           {% if user_model.password_slug_field %}
-                                                value="{{ user_model.password_slug_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="8"
-                                           maxlength="16"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">повторите введённый пароль</small>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Фамилия:
-                                    <input type="text"
-                                           id="last_name"
-                                           name="last_name"
-{#                                           required=""#}
-                                           {% if user_model.last_name_char_field %}
-                                                placeholder="{{ user_model.last_name_char_field }}"
-                                           {% else %}
-                                                placeholder="Андриенко"
-                                           {% endif %}
-                                           {% if user_model.last_name_char_field %}
-                                                value="{{ user_model.last_name_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Вашу фамилию</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Имя:
-                                    <input type="text"
-                                           id="first_name"
-                                           name="first_name"
-{#                                           required=""#}
-                                           {% if user_model.first_name_char_field %}
-                                                placeholder="{{ user_model.first_name_char_field }}"
-                                           {% else %}
-                                                placeholder="Богдан"
-                                           {% endif %}
-                                           {% if user_model.first_name_char_field %}
-                                                value="{{ user_model.first_name_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Ваше имя</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Отчество:
-                                    <input type="text"
-                                           id="patronymic"
-                                           name="patronymic"
-{#                                           required=""#}
-                                           {% if user_model.patronymic_char_field %}
-                                                placeholder="{{ user_model.patronymic_char_field }}"
-                                           {% else %}
-                                                placeholder="Богдан"
-                                           {% endif %}
-                                           {% if user_model.patronymic_char_field %}
-                                                value="{{ user_model.patronymic_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Ваше Отчество (при наличии)</small>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Почта:
-                                    <input type="email"
-                                           id="email"
-                                           name="email"
-{#                                           required=""#}
-                                           {% if user_model.email_field %}
-                                                placeholder="{{ user_model.email_field  }}"
-                                           {% else %}
-                                                placeholder="bogdandrienko@gmail.com"
-                                           {% endif %}
-                                           {% if user_model.email_field  %}
-                                                value="{{ user_model.email_field  }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Вашу фамилию</small>
-                                </label>
-
-                                <label class="form-check-label form-control-lg" for="is_active">
-                                    Активность пользователя? -
-                                    <div class="form-switch">
-                                        <input type="checkbox"
-                                               id="is_active"
-                                               name="is_active"
-{#                                               required=""#}
-                                               {% if user_model.activity_boolean_field %}
-                                                    checked="checked"
-                                               {% else %}
-{#                                                    checked="checked"#}
-                                               {% endif %}
-                                               class="form-check-input"
-                                        />
-                                    </div>
-                                    <small class="text-muted">уберите отметку, если нужно деактивировать пользователя</small>
-                                </label>
-
-                                <label class="form-check-label form-control-lg" for="is_staff">
-                                    Доступ к панели управления? -
-                                    <div class="form-switch">
-                                        <input type="checkbox"
-                                               id="is_staff"
-                                               name="is_staff"
-{#                                               required=""#}
-                                               {% if user.is_staff %}
-                                                    checked="checked"
-                                               {% else %}
-{#                                                    checked="checked"#}
-                                               {% endif %}
-                                               class="form-check-input"
-                                        />
-                                    </div>
-                                    <small class="text-muted">отметьте, если пользователю нужно иметь доступ к панели управления</small>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Доступные группы доступа:
-                                    <select type="select"
-                                            id="group"
-                                            name="group[]"
-{#                                            required=""#}
-                                            size="3"
-                                            multiple="multiple"
-                                            class="form-control form-control-lg"
-                                    >
-                                        {% if all_groups %}
-                                            {% for group in all_groups %}
-                                                <option value="{{ group.name_slug_field }}">{{ group.name_char_field }}</option>
-                                            {% endfor %}
-                                        {% else %}
-                                            Группы не созданы!
-                                        {% endif %}
-                                    </select>
-                                    <small class="text-muted">введите названия групп и введите в строку группы через запятую</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Группы:
-                                    <input type="text"
-                                           id="groups"
-                                           name="groups"
-{#                                           required=""#}
-                                           placeholder=""
-                                           {% if user %}
-                                                value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
-                                           {% else %}
-                                                value="{% for group in groups %}{{ group.name_char_field }}, {% endfor %}"
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите, из списка выше и через запятую, необходимые
-                                        группы доступа для пользователя</small>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Табельный номер:
-                                    <input type="text"
-                                           id="personnel_number"
-                                           name="personnel_number"
-{#                                           required=""#}
-                                           {% if user_model.personnel_number_slug_field %}
-                                                placeholder="{{ user_model.personnel_number_slug_field }}"
-                                           {% else %}
-                                                placeholder="931777"
-                                           {% endif %}
-                                           {% if user_model.personnel_number_slug_field %}
-                                                value="{{ user_model.personnel_number_slug_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Ваш Табельный номер (при наличии)</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Должность:
-                                    <input type="text"
-                                           id="position"
-                                           name="position"
-{#                                           required=""#}
-                                           {% if user_model.position_char_field %}
-                                                placeholder="{{ user_model.position_char_field }}"
-                                           {% else %}
-                                                placeholder="Техник-программист"
-                                           {% endif %}
-                                           {% if user_model.position_char_field %}
-                                                value="{{ user_model.position_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Вашу Должность</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Категория:
-                                    <input type="text"
-                                           id="category"
-                                           name="category"
-{#                                           required=""#}
-                                           {% if user_model.category_char_field %}
-                                                placeholder="{{ user_model.category_char_field }}"
-                                           {% else %}
-                                                placeholder="специалисты (пром)"
-                                           {% endif %}
-                                           {% if user_model.category_char_field %}
-                                                value="{{ user_model.category_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Вашу Категорию персонала</small>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Подразделение:
-                                    <input type="text"
-                                           id="subdivision"
-                                           name="subdivision"
-{#                                           required=""#}
-                                           {% if user_model.subdivision_char_field %}
-                                                placeholder="{{ user_model.subdivision_char_field }}"
-                                           {% else %}
-                                                placeholder="Управление предприятия (ЦК)"
-                                           {% endif %}
-                                           {% if user_model.subdivision_char_field %}
-                                                value="{{ user_model.subdivision_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Подразделение, в котором Вы работаете (при наличии)</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Цех/Служба:
-                                    <input type="text"
-                                           id="workshop_service"
-                                           name="workshop_service"
-{#                                           required=""#}
-                                           {% if user_model.workshop_service_char_field %}
-                                                placeholder="{{ user_model.workshop_service_char_field }}"
-                                           {% else %}
-                                                placeholder="Отдел информационных технологий"
-                                           {% endif %}
-                                           {% if user_model.workshop_service_char_field %}
-                                                value="{{ user_model.workshop_service_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Цех или Службу, в которых Вы работаете (при наличии)</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Отдел/Участок:
-                                    <input type="text"
-                                           id="department_site"
-                                           name="department_site"
-{#                                           required=""#}
-                                           {% if user_model.department_site_char_field %}
-                                                placeholder="{{ user_model.department_site_char_field }}"
-                                           {% else %}
-                                                placeholder="Сектор программного обеспечения"
-                                           {% endif %}
-                                           {% if user_model.department_site_char_field %}
-                                                value="{{ user_model.department_site_char_field }}"
-                                           {% else %}
-                                                value=""
-                                           {% endif %}
-                                           minlength="1"
-                                           maxlength="64"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">введите Отдел или Участок, в котором Вы работаете (при наличии)</small>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-check-label form-control-lg" for="force_change">
-                                    Перезаписать уже существующего пользователя? -
-                                    <div class="form-switch">
-                                        <input type="checkbox"
-                                               id="force_change"
-                                               name="force_change"
-{#                                               required=""#}
-                                               value=""
-                                               {% if user %}
-                                                    checked="checked"
-                                               {% else %}
-{#                                                    checked="checked"#}
-                                               {% endif %}
-                                               class="form-check-input"
-                                        />
-                                    </div>
-                                    <small class="text-muted">отметьте, если нужно заменить уже существующего пользователя</small>
-                                </label>
-
-
-                            </div>
-                        </div>
-                        <hr/>
-                        <!-- Grid row -->
-                        <div class="container-fluid btn-group row pb-1">
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="submit"
-                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                >Подтвердить</button>
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="reset"
-                                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                                >Сбросить</button>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_2">
-                <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_2"
-                    aria-expanded="false"
-                    aria-controls="accordion_collapse_2"
-                >Создать/изменить множество пользователей</button>
-            </h2>
-            <div
-                id="accordion_collapse_2"
-                class="accordion-collapse collapse"
-                aria-labelledby="accordion_heading_2"
-                data-bs-parent="#accordionExample"
-            >
-                <div class="accordion-body">
-
-                    <div class="text-center">
-                        <a class="btn btn-lg btn-outline-success"
-                           href="{% static 'media/admin/account/create_users.xlsx' %}"
-                        >Скачать шаблон для заполнения</a>
-                    </div>
-
-                    <form action="{% url 'account_create_or_change_accounts' 'many' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples/" #}
-                          method="POST" {# method="GET" #}
-                          target="_self" {# target="_self" #} {# target="_blank" #} {# target="_parent" #} {# target="_top" #}
-                          enctype="multipart/form-data"
-                          name="account_create_or_change_accounts many"
-                          autocomplete="on"
-                          class="text-center" {# class="text-center form-control form-control-lg" #}
-                    >
-                        {% csrf_token %}
-                        <div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Шаблон для создания пользователей:
-                                    <input type="file"
-                                           id="excel_file"
-                                           name="excel_file"
-                                           required=""
-                                           accept=".xlsx, .xls"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">шаблон: заполненный шаблон с пользователями</small>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-check-label form-control-lg" for="force_change">
-                                    Перезаписать уже существующего пользователя? -
-                                    <div class="form-switch">
-                                        <input type="checkbox"
-                                               id="force_change"
-                                               name="force_change"
-{#                                               required=""#}
-                                               value=""
-{#                                               checked="checked"#}
-                                               class="form-check-input"
-                                        />
-                                    </div>
-                                    <small class="text-muted">отметьте, если нужно заменить уже существующего пользователя</small>
-                                </label>
-                            </div>
-                        </div>
-                        <hr/>
-                        <!-- Grid row -->
-                        <div class="container-fluid btn-group row pb-1">
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="submit"
-                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                >Подтвердить</button>
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="reset"
-                                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                                >Сбросить</button>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
 
 {% endif %}
 

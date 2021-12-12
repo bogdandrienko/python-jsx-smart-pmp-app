@@ -1413,7 +1413,7 @@ class ExamplesModel(models.Model):
         app_label = 'auth'
         ordering = ('-id',)
         verbose_name = 'Шаблон'
-        verbose_name_plural = '0_Шаблоны'
+        verbose_name_plural = 'Шаблоны'
         db_table = 'example_model_table'
 
     def __str__(self):
@@ -1560,7 +1560,7 @@ class LoggingModel(models.Model):
         app_label = 'auth'
         ordering = ('-datetime_field',)
         verbose_name = 'Лог'
-        verbose_name_plural = '1_Логи'
+        verbose_name_plural = 'Логи'
         db_table = 'logging_model_table'
 
     def __str__(self):
@@ -1978,20 +1978,20 @@ class UserModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default='data/account/default_avatar.jpg',
+        default='admin/account/default_avatar.jpg',
         verbose_name='Изображение профиля пользователя',
         help_text='<small class="text-muted">image_field_db_column</small><hr><br>',
 
-        upload_to='uploads/account/avatar',
+        upload_to='uploads/admin/account/avatar',
         max_length=100,
     )
 
     class Meta:
         app_label = 'auth'
         ordering = ('last_name_char_field', 'first_name_char_field', 'patronymic_char_field',)
-        verbose_name = 'Аккаунт'
-        verbose_name_plural = '2_Аккаунты'
-        db_table = 'account_model_table'
+        verbose_name = 'Пользователь расширенный'
+        verbose_name_plural = 'Пользователи расширение'
+        db_table = 'user_extend_model_table'
 
     def __str__(self):
         if self.activity_boolean_field:
@@ -2012,7 +2012,10 @@ class UserModel(models.Model):
 def create_user(sender, instance, created, **kwargs):
     # Создание при создании родительской модели
     if created:
-        UserModel.objects.get_or_create(user_foreign_key_field=instance)
+        try:
+            UserModel.objects.get_or_create(user_foreign_key_field=instance)
+        except Exception as error:
+            error = f'{error} = pass'
 
 
 # Action
@@ -2068,7 +2071,7 @@ class ActionModel(models.Model):
         app_label = 'auth'
         ordering = ('name_char_field', 'name_slug_field')
         verbose_name = 'Действия'
-        verbose_name_plural = '4_Действия'
+        verbose_name_plural = 'Действия'
         db_table = 'actions_model_table'
 
     def __str__(self):
@@ -2192,9 +2195,9 @@ class GroupModel(models.Model):
     class Meta:
         app_label = 'auth'
         ordering = ('name_char_field', 'name_slug_field')
-        verbose_name = 'Группа'
-        verbose_name_plural = '3_Группы'
-        db_table = 'groups_model_table'
+        verbose_name = 'Группа расширенная'
+        verbose_name_plural = 'Группы расширение'
+        db_table = 'group_extend_model_table'
 
     def __str__(self):
         return f'{self.name_char_field}'
@@ -2204,10 +2207,218 @@ class GroupModel(models.Model):
 
 
 @receiver(post_save, sender=Group)
-def create_user(sender, instance, created, **kwargs):
+def create_group(sender, instance, created, **kwargs):
     # Создание при создании родительской модели
     if created:
-        GroupModel.objects.get_or_create(group_foreign_key_field=instance)
+        try:
+            GroupModel.objects.get_or_create(
+                group_foreign_key_field=instance,
+                name_char_field=instance.name,
+                name_slug_field=instance.name,
+            )
+        except Exception as error:
+            error = f'{error} = pass'
+
+
+# Module Or Component
+class ModuleOrComponentModel(models.Model):
+    """
+    Module Or Component Model
+    """
+    LIST_DB_VIEW_CHOICES = [
+        ('0_module', 'Модуль'),
+        ('1_section', 'Секция'),
+        ('2_component', 'Компонент')
+    ]
+    type_slug_field = models.SlugField(
+        db_column='type_slug_field_db_column',
+        db_index=True,
+        db_tablespace='type_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Тип',
+        help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
+                  'example: "success"</small><hr><br>',
+
+        max_length=50,
+        allow_unicode=False,
+    )
+    return_slug_field = models.SlugField(
+        db_column='return_slug_field_db_column',
+        db_index=True,
+        db_tablespace='return_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Возврат:',
+        help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
+                  'example: "success"</small><hr><br>',
+
+        max_length=50,
+        allow_unicode=False,
+    )
+    parent_slug_field = models.SlugField(
+        db_column='parent_slug_field_db_column',
+        db_index=True,
+        db_tablespace='parent_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Родитель:',
+        help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
+                  'example: "success"</small><hr><br>',
+
+        max_length=50,
+        allow_unicode=False,
+    )
+    position_float_field = models.FloatField(
+        db_column='position_float_field_db_column',
+        db_index=True,
+        db_tablespace='position_float_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0.0,
+        verbose_name='Позиция в списке:',
+        help_text='<small class="text-muted">Число с плавающей запятой, example: "0.0"</small><hr><br>',
+    )
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название:',
+        help_text='<small class="text-muted">Небольшая срока текста, example: "текст, текст"</small><hr><br>',
+
+        max_length=64,
+        # db_collation='char_field_db_collation'
+    )
+    url_slug_field = models.SlugField(
+        db_column='url_slug_field_db_column',
+        db_index=True,
+        db_tablespace='url_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Ссылка:',
+        help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
+                  'example: "success"</small><hr><br>',
+
+        max_length=50,
+        allow_unicode=False,
+    )
+    image_field = models.ImageField(
+        db_column='image_field_db_column',
+        db_index=True,
+        db_tablespace='image_field_db_tablespace',
+        error_messages=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='admin/module/module.png',
+        verbose_name='file_field',
+        help_text='<small class="text-muted">>Файл, с расширением изображения, example: "example.jpg('
+                  '/png/bpm...)"</small><hr><br>',
+
+        upload_to='uploads/admin/module',
+        max_length=100,
+        # height_field=1920,  # Значение высоты изображения при каждом сохранении объекта
+        # width_field=1080,  # Значение ширины изображения при каждом сохранении объекта.
+    )
+    text_field = models.TextField(
+        db_column='text_field_db_column',
+        db_index=True,
+        db_tablespace='text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Описание:',
+        help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
+
+        max_length=512,
+        # db_collation='text_field_db_collation'
+    )
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('type_slug_field', 'parent_slug_field', 'position_float_field', 'name_char_field')
+        verbose_name = 'Модуль или компонент'
+        verbose_name_plural = 'Модули и компоненты'
+        db_table = 'module_or_component_table'
+
+    def __str__(self):
+        return f'{self.name_char_field}'
 
 
 # Computer Vision
@@ -2839,3 +3050,555 @@ class ComputerVisionComponentModel(models.Model):
 
     def __str__(self):
         return f'{self.genericipaddress_field}'
+
+
+# Idea
+class IdeaModel(models.Model):
+    """
+    Idea Model
+    """
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+    )
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название',
+        help_text='<small class="text-muted">name_char_field</small><hr><br>',
+
+        max_length=32,
+    )
+    LIST_DB_VIEW_CHOICES = [
+        ('innovation', 'Инновации'),
+        ('optimization', 'Оптимизации'),
+        ('industry', 'Индустрия 4.0'),
+        ('other', 'Другое'),
+    ]
+    category_slug_field = models.SlugField(
+        db_column='category_slug_field_db_column',
+        db_index=True,
+        db_tablespace='category_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Категория',
+        help_text='<small class="text-muted">category_slug_field</small><hr><br>',
+
+        max_length=16,
+        allow_unicode=False,
+    )
+    short_description_char_field = models.CharField(
+        db_column='short_description_char_field_db_column',
+        db_index=True,
+        db_tablespace='short_description_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Краткое описание',
+        help_text='<small class="text-muted">short_description_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    full_description_text_field = models.TextField(
+        db_column='full_description_text_field_db_column',
+        db_index=True,
+        db_tablespace='full_description_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Полное описание',
+        help_text='<small class="text-muted">full_description_text_field</small><hr><br>',
+
+        max_length=1024,
+    )
+    avatar_image_field = models.ImageField(
+        db_column='avatar_image_field_db_column',
+        db_index=True,
+        db_tablespace='avatar_image_field_db_tablespace',
+        error_messages=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='uploads/idea/default_avatar.jpg',
+        verbose_name='Аватарка-заставка для идеи',
+        help_text='<small class="text-muted">>avatar_image_field</small><hr><br>',
+
+        upload_to='uploads/idea/avatar/',
+        max_length=100,
+    )
+    addiction_file_field = models.FileField(
+        db_column='addiction_file_field_db_column',
+        db_index=True,
+        db_tablespace='addiction_file_field_db_tablespace',
+        error_messages=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[FileExtensionValidator(['xlsx', 'xls', 'docx', 'doc', 'pdf'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Файл-приложение',
+        help_text='<small class="text-muted">addiction_file_field</small><hr><br>',
+
+        upload_to='uploads/idea/files/',
+        max_length=100,
+    )
+    visibility_boolean_field = models.BooleanField(
+        db_column='visibility_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='visibility_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=False,
+        verbose_name='Видимость идеи в общем списке',
+        help_text='<small class="text-muted">visibility_boolean_field</small><hr><br>',
+    )
+    created_datetime_field = models.DateTimeField(
+        db_column='created_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='created_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата создания',
+        help_text='<small class="text-muted">created_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    register_datetime_field = models.DateTimeField(
+        db_column='register_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='register_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата регистрации',
+        help_text='<small class="text-muted">register_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('-id',)
+        verbose_name = 'Идея'
+        verbose_name_plural = '0_Идеи'
+        db_table = 'idea_model_table'
+
+    def __str__(self):
+        return f'{self.name_char_field} : {self.category_slug_field} : {self.author_foreign_key_field}'
+
+    @staticmethod
+    def get_all_category():
+        return IdeaModel.LIST_DB_VIEW_CHOICES
+
+    def get_category(self):
+        dict_key_val = dict(self.LIST_DB_VIEW_CHOICES)
+        return dict_key_val[self.category_slug_field]
+
+    def get_total_comment_value(self):
+        return IdeaCommentModel.objects.filter(idea_foreign_key_field=self.id).count()
+
+    def get_like_count(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=True).count()
+
+    def get_dislike_count(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=False).count()
+
+    def get_total_rating_value(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=True).count() + \
+               IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=False).count()
+
+    def get_total_rating(self):
+        return IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=True).count() - \
+               IdeaRatingModel.objects.filter(idea_foreign_key_field=self, status_boolean_field=False).count()
+
+
+class IdeaCommentModel(models.Model):
+    """
+    Ideas Comment Model
+    """
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+    )
+    idea_foreign_key_field = models.ForeignKey(
+        db_column='idea_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='idea_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Идея',
+        help_text='<small class="text-muted">idea_foreign_key_field</small><hr><br>',
+
+        to=IdeaModel,
+        on_delete=models.SET_NULL,
+    )
+    text_field = models.TextField(
+        db_column='text_field_db_column',
+        db_index=True,
+        db_tablespace='text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Комментарий',
+        help_text='<small class="text-muted">text_field</small><hr><br>',
+
+        max_length=512,
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        # choices=LIST_DB_VIEW_CHOICES,
+        # validators=[MinValueValidator(8), MaxValueValidator(12), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата создания',
+        help_text='<small class="text-muted">Дата и время, example: "31.12.2021Т23:59:59"</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('-id',)
+        verbose_name = 'Комментарий'
+        verbose_name_plural = '1_Идеи_Комментарии'
+        db_table = 'idea_comment_model_table'
+
+    def __str__(self):
+        return f'{self.author_foreign_key_field} :: {self.idea_foreign_key_field} :: {self.text_field[:10]}... ' \
+               f':: {self.datetime_field}'
+
+
+class IdeaRatingModel(models.Model):
+    """
+    Idea Rating Model
+    """
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+    )
+    idea_foreign_key_field = models.ForeignKey(
+        db_column='idea_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='idea_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Идея',
+        help_text='<small class="text-muted">idea_foreign_key_field</small><hr><br>',
+
+        to=IdeaModel,
+        on_delete=models.SET_NULL,
+    )
+    status_boolean_field = models.BooleanField(
+        db_column='status_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='status_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=True,
+        verbose_name='Лайк / дизлайк',
+        help_text='<small class="text-muted">status_boolean_field</small><hr><br>',
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата создания',
+        help_text='<small class="text-muted">Дата и время, example: "31.12.2021Т23:59:59"</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('-id',)
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = '1_Идеи_Рейтинги'
+        db_table = 'idea_rating_model_table'
+
+    def __str__(self):
+        return f'{self.author_foreign_key_field} :: {self.idea_foreign_key_field} :: {self.status_boolean_field} ' \
+               f':: {self.datetime_field}'
+
+
+# Ideas
+class IdeasCategoryModel(models.Model):
+    """
+    Ideas Category Model
+    """
+    category_name = models.CharField(max_length=50, unique=True, verbose_name='название')
+    category_slug = models.SlugField(max_length=50, unique=True, verbose_name='ссылка')
+    category_description = models.TextField('описание', blank=True)
+    category_image = models.ImageField('картинка', upload_to='uploads/rational/category', blank=True)
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('-id',)
+        verbose_name = 'Категория в банке идей'
+        verbose_name_plural = 'Категории в банке идей'
+        db_table = 'ideas_category_table'
+
+    def __str__(self):
+        return f'{self.category_name}'
+
+
+class IdeasModel(models.Model):
+    """
+    Bank Ideas Model
+    """
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь', blank=True)
+    name = models.CharField(verbose_name='Название', max_length=50, blank=True)
+    category = models.ForeignKey(IdeasCategoryModel, on_delete=models.SET_NULL, null=True, editable=True,
+                                 default=None, verbose_name='Категория', blank=True)
+    short_description = models.CharField(verbose_name='Короткое описание', max_length=50, blank=True)
+    long_description = models.TextField(verbose_name='Длинное описание', blank=True)
+
+    image = models.ImageField(verbose_name='Картинка к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
+                              blank=True)
+    document = models.FileField(verbose_name='Документ к идеи', upload_to='uploads/bankidea/%d_%m_%Y', null=True,
+                                blank=True)
+    status = models.BooleanField(verbose_name='Статус отображения', default=False, blank=True)
+    datetime_register = models.DateTimeField(verbose_name='Дата регистрации', auto_created=True, null=True,
+                                             editable=True, blank=True)
+    datetime_created = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('-id',)
+        verbose_name = 'Идею'
+        verbose_name_plural = 'Банк идей'
+        db_table = 'ideas_table'
+
+    def __str__(self):
+        return f'{self.name} : {self.name} : {self.category}'
+
+    def get_total_comment_value(self):
+        return IdeasCommentModel.objects.filter(comment_idea=self.id).count()
+
+    def get_like_count(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count()
+
+    def get_dislike_count(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
+
+    def get_total_rating_value(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() + \
+               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
+
+    def get_total_rating(self):
+        return IdeasLikeModel.objects.filter(like_idea=self, like_status=True).count() - \
+               IdeasLikeModel.objects.filter(like_idea=self, like_status=False).count()
+
+
+class IdeasCommentModel(models.Model):
+    """
+    Ideas Comment Model
+    """
+    comment_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True,
+                                       blank=True)
+    comment_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
+                                     blank=True)
+    comment_text = models.TextField(verbose_name='Текст комментария')
+    comment_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('-id',)
+        verbose_name = 'Комментарий в банке идей'
+        verbose_name_plural = 'Комментарии в банке идей'
+        db_table = 'ideas_comment_table'
+
+    def __str__(self):
+        return f'{self.comment_author} :: {self.comment_idea} :: {self.comment_text[:10]}... :: {self.comment_date}'
+
+
+class IdeasLikeModel(models.Model):
+    """
+    Ideas Like Model
+    """
+    like_author = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Пользователь', null=True, blank=True)
+    like_idea = models.ForeignKey(IdeasModel, on_delete=models.SET_NULL, verbose_name='Идея', null=True,
+                                  blank=True)
+    like_status = models.BooleanField(verbose_name='Лайк/дизлайк', default=False, blank=True)
+    like_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+
+    class Meta:
+        app_label = 'app_admin'
+        ordering = ('-id',)
+        verbose_name = 'Лайк в банке идей'
+        verbose_name_plural = 'Лайки в банке идей'
+        db_table = 'ideas_like_table'
+
+    def __str__(self):
+        return f'{self.like_author} :: {self.like_idea} :: {self.like_status} :: {self.like_date}'
