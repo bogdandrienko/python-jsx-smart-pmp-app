@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3bbcadc-d872-4431-8ed9-561e41ab5286" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_actions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/module.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/module.html" afterDir="false" />
-    </list>
+    <list default="true" id="d3bbcadc-d872-4431-8ed9-561e41ab5286" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,6 +97,7 @@
       <workItem from="1639241916959" duration="1195000" />
       <workItem from="1639277731514" duration="5810000" />
       <workItem from="1639303417159" duration="610000" />
+      <workItem from="1639305236656" duration="329000" />
     </task>
     <servers />
   </component>
