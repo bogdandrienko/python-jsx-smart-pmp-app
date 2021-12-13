@@ -1,5 +1,5 @@
 from django import template
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from app_admin.models import UserModel, GroupModel, ActionModel
 from app_admin.service import DjangoClass
 

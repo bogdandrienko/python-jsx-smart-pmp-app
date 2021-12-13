@@ -1226,7 +1226,7 @@ def module_or_component(request, url_slug: str):
     if page:
         return redirect(page)
 
-    modules = ModuleOrComponentModel.objects.filter(parent_slug_field=url_slug)
+    modules = ModuleOrComponentModel.objects.filter(current_path_slug_field=url_slug)
     context = {
         'modules': modules,
     }

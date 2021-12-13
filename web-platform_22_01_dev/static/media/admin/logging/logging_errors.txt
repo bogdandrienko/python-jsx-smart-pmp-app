@@ -5764,3 +5764,205 @@ Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-12-12 23:05:51.028450, IdeaRatingMod
 970801351179, 127.0.0.1, /idea_create/, GET, 2021-12-12 23:15:00.698899, ActionModel matching query does not exist.
 
 970801351179, 127.0.0.1, /idea_create/, GET, 2021-12-12 23:15:07.433389, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-12-12 23:37:10.677064, User matching query does not exist.
+
+, 127.0.0.1, /account_login/, GET, 2021-12-12 23:37:11.857014, User matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-12-13 09:10:56.451089, User matching query does not exist.
+
+, 127.0.0.1, /account_login/, GET, 2021-12-13 09:11:34.183670, User matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:30.957944, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:30.971933, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:37.332505, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:37.344474, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:54.140256, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:54.152438, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:55.202854, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:55.214149, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:56.013284, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:13:56.027296, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:15:44.732869, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:15:44.743923, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_view/1/, GET, 2021-12-13 09:15:47.825641, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_view/1/, GET, 2021-12-13 09:15:47.841131, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_view/1/, GET, 2021-12-13 09:15:49.811774, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_view/1/, GET, 2021-12-13 09:15:49.827945, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:01.257685, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:01.269188, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:02.260636, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:02.271629, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:14.561878, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:14.572544, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:19.061119, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:19.072907, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:20.711905, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:20.723980, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:21.605495, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:21.616619, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:21.634498, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:16:21.647377, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:18:23.766355, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:18:23.779715, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:18:23.799155, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_list/, GET, 2021-12-13 09:18:23.813026, IdeaRatingModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_module/, GET, 2021-12-13 10:21:38.494583, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_module/, GET, 2021-12-13 10:21:39.573200, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_module/, GET, 2021-12-13 10:21:40.159753, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_buhgalteria/, GET, 2021-12-13 10:25:16.536670, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_buhgalteria/, GET, 2021-12-13 10:25:22.567853, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_buhgalteria/, GET, 2021-12-13 10:25:32.414543, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_buhgalteria/, GET, 2021-12-13 10:27:29.609282, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_buhgalteria/, GET, 2021-12-13 10:27:37.486907, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/component_zarplata/, GET, 2021-12-13 10:28:22.439710, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/component_zarplata/, GET, 2021-12-13 10:28:23.856367, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:06:54.082293, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:06:54.092259, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:06:57.151837, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:06:57.162808, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:07:04.734120, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:07:04.747064, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:07:05.911081, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:07:05.924745, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:07:08.616376, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-13 11:07:08.628411, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_zarplata/, GET, 2021-12-13 11:13:01.391769, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_zarplata/, GET, 2021-12-13 11:13:36.751975, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_zarplata/, GET, 2021-12-13 11:14:03.328620, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_zarplata/, GET, 2021-12-13 11:15:32.077521, ActionModel matching query does not exist.
+
+, 192.168.1.68, /, GET, 2021-12-13 11:34:50.724054, User matching query does not exist.
+
+, 192.168.1.68, /account_login/, GET, 2021-12-13 11:34:51.676675, User matching query does not exist.
+
+, 192.168.1.68, /account_login/, POST, 2021-12-13 11:34:55.995680, User matching query does not exist.
+
+, 192.168.1.68, /account_login/, POST, 2021-12-13 11:35:36.674638, User matching query does not exist.
+
+, 192.168.1.68, /account_login/, POST, 2021-12-13 11:35:40.769814, User matching query does not exist.
+
+, 192.168.1.68, /account_login/, POST, 2021-12-13 11:35:53.261130, User matching query does not exist.
+
+, 192.168.1.68, /home/, GET, 2021-12-13 11:35:57.328324, User matching query does not exist.
+
+, 192.168.1.68, /home/, GET, 2021-12-13 11:35:58.572553, User matching query does not exist.
+
+, 192.168.1.68, /account_login/, GET, 2021-12-13 11:35:59.140569, User matching query does not exist.
+
+, 192.168.1.68, /account_login/, POST, 2021-12-13 11:36:04.261497, User matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:26.870241, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:26.881294, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:26.902667, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:26.912998, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:37.766954, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:37.779302, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:37.797302, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:39:37.810092, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:40:48.729896, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:40:48.748298, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:40:48.767949, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.68, /idea_list/, GET, 2021-12-13 11:40:48.780149, IdeaRatingModel matching query does not exist.
+
+, 192.168.1.61, /, GET, 2021-12-13 11:41:21.311675, User matching query does not exist.
+
+, 192.168.1.61, /account_login/, GET, 2021-12-13 11:41:23.170410, User matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:31.296156, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:31.308434, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:31.326933, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:31.339567, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:41.323652, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:41.336556, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:41.355049, IdeaRatingModel matching query does not exist.
+
+970801351179, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:42:41.367329, IdeaRatingModel matching query does not exist.
+
+Bogdan, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:43:53.912524, IdeaRatingModel matching query does not exist.
+
+Bogdan, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:43:53.924703, IdeaRatingModel matching query does not exist.
+
+Bogdan, 192.168.1.61, /idea_view/1/, GET, 2021-12-13 11:43:55.320072, IdeaRatingModel matching query does not exist.
+
+Bogdan, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:43:58.576752, IdeaRatingModel matching query does not exist.
+
+Bogdan, 192.168.1.61, /idea_list/, GET, 2021-12-13 11:43:58.587850, IdeaRatingModel matching query does not exist.
+
+Bogdan, 192.168.1.61, /idea_view/1/, GET, 2021-12-13 11:43:59.707630, IdeaRatingModel matching query does not exist.
+
+, 192.168.1.61, /account_login/, GET, 2021-12-13 11:46:58.033735, User matching query does not exist.

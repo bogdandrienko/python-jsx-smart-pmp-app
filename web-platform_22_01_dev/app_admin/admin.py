@@ -246,13 +246,38 @@ admin.site.register(UserModel, UserModelAdmin)
 
 class ActionModelAdmin(admin.ModelAdmin):
     """Настройки 'Action Model Admin' на панели администратора"""
-    list_display = ('name_char_field', 'name_slug_field')
-    list_filter = ('name_char_field', 'name_slug_field')
-    fieldsets = (
-        ('Имя отображения', {'fields': ('name_char_field',)}),
-        ('Имя валидации', {'fields': ('name_slug_field',)}),
+    list_display = (
+        'type_slug_field',
+        'name_char_field',
+        'name_slug_field',
+        'position_float_field'
     )
-    search_fields = ['name_char_field', 'name_slug_field']
+    list_filter = (
+        'type_slug_field',
+        'name_char_field',
+        'name_slug_field',
+        'position_float_field'
+    )
+    fieldsets = (
+        ('Тип', {'fields': (
+            'type_slug_field',
+        )}),
+        ('Имя отображения', {'fields': (
+            'name_char_field',
+        )}),
+        ('Имя валидации', {'fields': (
+            'name_slug_field',
+        )}),
+        ('Позиция в списке', {'fields': (
+            'position_float_field',
+        )}),
+    )
+    search_fields = [
+        'type_slug_field',
+        'name_char_field',
+        'name_slug_field',
+        'position_float_field'
+    ]
 
 
 # Регистрация в админ-панели
@@ -266,6 +291,7 @@ class GroupModelAdmin(admin.ModelAdmin):
         'group_foreign_key_field',
         'name_char_field',
         'name_slug_field',
+        'position_float_field',
     )
     list_filter = (
         'group_foreign_key_field',
@@ -273,6 +299,7 @@ class GroupModelAdmin(admin.ModelAdmin):
         'name_slug_field',
         'user_many_to_many_field',
         'action_many_to_many_field',
+        'position_float_field',
     )
     filter_horizontal = (
         'user_many_to_many_field',
@@ -294,6 +321,9 @@ class GroupModelAdmin(admin.ModelAdmin):
         ('Действия', {'fields': (
             'action_many_to_many_field',
         )}),
+        ('Позиция в списке', {'fields': (
+            'position_float_field',
+        )}),
     )
     search_fields = [
         'group_foreign_key_field',
@@ -301,6 +331,7 @@ class GroupModelAdmin(admin.ModelAdmin):
         'name_slug_field',
         'user_many_to_many_field',
         'action_many_to_many_field',
+        'position_float_field',
     ]
 
 
@@ -477,20 +508,20 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
     list_display = (
         'name_char_field',
         'type_slug_field',
+        'previous_path_slug_field',
+        'current_path_slug_field',
+        'next_path_slug_field',
         'position_float_field',
-        'parent_slug_field',
-        'url_slug_field',
-        'return_slug_field',
         'image_field',
         'text_field',
     )
     list_filter = (
         'name_char_field',
         'type_slug_field',
+        'previous_path_slug_field',
+        'current_path_slug_field',
+        'next_path_slug_field',
         'position_float_field',
-        'parent_slug_field',
-        'url_slug_field',
-        'return_slug_field',
         'image_field',
         'text_field',
     )
@@ -498,10 +529,10 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
         ('main', {'fields': (
             'name_char_field',
             'type_slug_field',
+            'previous_path_slug_field',
+            'current_path_slug_field',
+            'next_path_slug_field',
             'position_float_field',
-            'parent_slug_field',
-            'url_slug_field',
-            'return_slug_field',
             'image_field',
             'text_field',
         )}),
@@ -509,10 +540,10 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
     search_fields = [
         'name_char_field',
         'type_slug_field',
+        'previous_path_slug_field',
+        'current_path_slug_field',
+        'next_path_slug_field',
         'position_float_field',
-        'parent_slug_field',
-        'url_slug_field',
-        'return_slug_field',
         'image_field',
         'text_field',
     ]

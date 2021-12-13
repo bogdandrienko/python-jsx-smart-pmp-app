@@ -40,7 +40,7 @@
                                     {% if modules.0.type_slug_field == '0_module' %}
                                         <a href="{% url 'home' %}">
                                     {% else %}
-                                        <a href="{% url 'module_or_component' modules.0.return_slug_field %}">
+                                        <a href="{% url 'module_or_component' modules.0.previous_path_slug_field %}">
                                     {% endif %}
                                 {% else %}
                                     <a href="{% url 'home' %}">
@@ -56,14 +56,14 @@
                             </div>
                         </div>
                         {% for module in modules %}
-                            {% access_tag module.url_slug_field as access %}
+                            {% access_tag module.current_path_slug_field as access %}
                             {% if access %}
                                 <div class="col">
                                     <div class="card shadow-sm">
                                         {% if modules.0.type_slug_field == '2_component' %}
-                                            <a href="{% url module.url_slug_field %}">
+                                            <a href="{% url module.next_path_slug_field %}">
                                         {% else %}
-                                            <a href="{% url 'module_or_component' module.url_slug_field %}">
+                                            <a href="{% url 'module_or_component' module.next_path_slug_field %}">
                                         {% endif %}
                                             <img src="{{ module.image_field.url }}" class="card-img-top" alt="id">
                                         </a>
@@ -73,9 +73,9 @@
                                                 <div>
                                                     <div class="btn-group">
                                                         {% if modules.0.type_slug_field == '2_component' %}
-                                                            <a class="btn btn-sm btn-outline-primary" href="{% url module.url_slug_field %}">Войти</a>
+                                                            <a class="btn btn-sm btn-outline-primary" href="{% url module.next_path_slug_field %}">Войти</a>
                                                         {% else %}
-                                                            <a class="btn btn-sm btn-outline-primary" href="{% url 'module_or_component' module.url_slug_field %}">Войти</a>
+                                                            <a class="btn btn-sm btn-outline-primary" href="{% url 'module_or_component' module.next_path_slug_field %}">Войти</a>
                                                         {% endif %}
                                                         <button class="btn btn-sm btn-outline-secondary" href="#">Подробнее</button>
                                                     </div>
