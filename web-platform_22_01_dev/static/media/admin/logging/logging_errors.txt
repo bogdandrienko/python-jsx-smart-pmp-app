@@ -6336,3 +6336,309 @@ Bogdan, 192.168.1.61, /idea_view/1/, GET, 2021-12-13 11:43:59.707630, IdeaRating
 970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 16:51:58.368635, ActionModel matching query does not exist.
 
 970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 16:51:58.962697, ActionModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2021-12-14 19:51:52.039301, User matching query does not exist.
+
+, 127.0.0.1, /account_login/, GET, 2021-12-14 19:51:53.249576, User matching query does not exist.
+
+970801351179, 127.0.0.1, /account_login/, POST, 2021-12-14 19:52:01.911042, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:52:02.890913, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:52:03.459752, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:52:04.080522, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.128135, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.144149, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.158162, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.172174, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.188189, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.202201, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.216213, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.230226, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:52:06.244505, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:52:06.597819, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:52:07.183339, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:52:07.846929, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:52:08.642635, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:31.304460, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:31.320485, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:32.241819, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:33.164733, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:33.693190, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:53:34.666785, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:53:34.683800, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:35.378765, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:38.434374, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:38.447379, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:38.980113, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:53:39.631692, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:53:40.305290, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:40.734672, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:53:41.495348, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:42.034827, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:42.977669, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:43.498132, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:44.242810, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:44.258820, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:44.748986, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:53:45.600213, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:53:45.617227, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:46.220782, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:53:46.728756, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:53:47.245214, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:47.653577, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:53:48.274129, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:48.793590, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:49.661199, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:50.306782, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:59.982905, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_project/, GET, 2021-12-14 19:54:02.927464, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:54:03.407313, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:04.112278, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:04.784877, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_rational/, GET, 2021-12-14 19:54:05.372356, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:54:05.946867, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:06.549401, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:07.226155, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 19:54:08.076912, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:09.675468, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:21.517363, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:22.151927, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.161824, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.178839, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.194853, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.207865, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.221878, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.235890, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.251904, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.266918, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:24.296832, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:24.940924, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:24.957819, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:24.970830, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:24.985809, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:24.999822, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:25.013834, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:25.026850, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:25.041863, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:26.038926, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:40.404616, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:54:40.986063, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:41.662664, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:49.779977, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:50.263408, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:50.893968, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:51.623126, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:57.635181, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:58.311715, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:59:34.704934, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:35.256424, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:59:40.295643, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:40.862152, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:59:41.395625, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:59:41.936105, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:42.744823, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:59:43.558649, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:44.074110, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:59:44.862996, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:45.332413, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:59:46.087147, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:46.734721, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:33.316307, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_project/, GET, 2021-12-14 20:02:33.909781, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:02:34.559675, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:35.250864, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:36.070706, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:02:36.990263, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:38.723804, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:46.407463, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:47.950096, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:02:49.035176, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:49.847899, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:53.748294, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:02:54.323806, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:55.081478, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:56.642632, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:02:57.428150, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:58.833189, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:03:04.406462, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 20:03:05.071052, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:03:05.600523, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:03:06.496026, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:03:07.799789, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:03:09.682442, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:03:17.367609, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:03:18.673032, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:03:20.066520, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_create/, GET, 2021-12-14 20:03:20.773149, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:03:22.030281, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:04:01.051692, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:04:01.888275, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:04:03.285742, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /idea_create/, GET, 2021-12-14 20:04:03.798898, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:04:05.537682, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:04:06.414461, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 20:04:07.085611, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:04:07.753203, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:04:08.225623, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 20:04:08.687406, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.688861, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.704875, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.718887, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.731899, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.745911, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.758923, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.772935, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.786948, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 20:33:15.305568, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:33:16.330007, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:33:16.952560, ActionModel matching query does not exist.
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:33:17.636168, ActionModel matching query does not exist.

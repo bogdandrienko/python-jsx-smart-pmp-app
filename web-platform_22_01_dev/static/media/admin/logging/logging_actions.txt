@@ -9570,3 +9570,279 @@ Bogdan, 127.0.0.1, /, GET, 2021-12-14 16:38:00.483034
 970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 16:51:58.262825
 
 970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 16:51:58.886616
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-14 16:53:50.776881
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 16:53:53.679460
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-14 16:54:01.970827
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 16:54:04.394981
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-14 19:29:29.032209
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:29:29.612725
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-14 19:46:47.969817
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:51:35.526403
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:51:36.340415
+
+Bogdan, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:51:36.877879
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:51:37.637212
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:51:38.229089
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:51:39.164099
+
+Bogdan, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:51:39.516974
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:51:41.937100
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:51:43.149179
+
+, 127.0.0.1, /, GET, 2021-12-14 19:51:52.019285
+
+, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:51:53.211541
+
+, 127.0.0.1, /account_login/, GET, 2021-12-14 19:51:53.228556
+
+, 127.0.0.1, /account_login/, POST, 2021-12-14 19:52:01.684841
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:52:02.870895
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:52:03.435731
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:52:04.056497
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:52:05.102112
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:52:06.219483
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:52:06.572796
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:52:07.158317
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:52:07.826911
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:52:08.616613
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:31.279438
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:32.216793
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:33.140369
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:33.667166
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:53:34.641763
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:35.358153
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:38.412391
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:38.961096
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:53:39.606669
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:53:40.249240
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:40.677621
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:53:41.470328
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:42.009806
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:42.949645
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:43.474110
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:53:44.217916
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:44.722963
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:53:45.575190
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:46.195761
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:53:46.701732
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:53:47.226198
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:47.629556
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:53:48.249107
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:48.769569
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:49.635175
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:53:50.280777
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:53:59.956778
+
+970801351179, 127.0.0.1, /module_or_component/section_project/, GET, 2021-12-14 19:54:02.903443
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:54:03.387449
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:04.088258
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:04.758854
+
+970801351179, 127.0.0.1, /module_or_component/section_rational/, GET, 2021-12-14 19:54:05.347334
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:54:05.927849
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:06.525381
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:07.203134
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 19:54:08.050889
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:09.649446
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:21.489338
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:22.126904
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:23.137803
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:24.270810
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 19:54:24.916903
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:26.012898
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:40.379362
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:54:40.966046
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:41.637642
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:54:49.753955
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:50.234381
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:50.868946
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:51.598103
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:54:57.610159
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:54:58.287695
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:59:34.684916
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:35.230401
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 19:59:40.270621
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:40.837129
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 19:59:41.369602
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 19:59:41.917088
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:42.719802
+
+970801351179, 127.0.0.1, /module_or_component/module_hr/, GET, 2021-12-14 19:59:43.532625
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:44.049084
+
+970801351179, 127.0.0.1, /module_or_component/module_buhgalteria/, GET, 2021-12-14 19:59:44.835972
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:45.307391
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 19:59:46.062123
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 19:59:46.709698
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:33.290281
+
+970801351179, 127.0.0.1, /module_or_component/section_project/, GET, 2021-12-14 20:02:33.885741
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:02:34.540264
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:35.224841
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:36.046685
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:02:36.965240
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:38.699782
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:46.384599
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:47.925074
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:02:48.895928
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:49.828881
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:53.727276
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:02:54.298784
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:02:55.060461
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:56.615608
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:02:57.404128
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:02:58.809164
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:03:04.381439
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 20:03:05.047031
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:03:05.572499
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:03:06.429882
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:03:07.773767
+
+970801351179, 127.0.0.1, /idea_create/, GET, 2021-12-14 20:03:09.637586
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:03:09.661608
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:03:17.342587
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:03:18.648009
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:03:20.040497
+
+970801351179, 127.0.0.1, /idea_create/, GET, 2021-12-14 20:03:20.747125
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:03:22.008261
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:04:01.025399
+
+970801351179, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-14 20:04:01.861651
+
+970801351179, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-14 20:04:03.259921
+
+970801351179, 127.0.0.1, /idea_create/, GET, 2021-12-14 20:04:03.775904
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:04:05.517664
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:04:06.391440
+
+970801351179, 127.0.0.1, /module_or_component/module_news/, GET, 2021-12-14 20:04:07.060588
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:04:07.734186
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:04:08.200600
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 20:04:08.662385
+
+970801351179, 127.0.0.1, /module_or_component/section_self/, GET, 2021-12-14 20:04:09.663838
+
+970801351179, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-14 20:33:15.280581
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:33:16.311992
+
+970801351179, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-14 20:33:16.928539
+
+970801351179, 127.0.0.1, /home/, GET, 2021-12-14 20:33:17.617150

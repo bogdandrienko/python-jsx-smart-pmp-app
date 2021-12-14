@@ -2024,11 +2024,11 @@ class ActionModel(models.Model):
     Action Model
     """
     LIST_DB_VIEW_CHOICES = [
-        ('0_main', 'Основное'),
-        ('1_module', 'Модуль'),
-        ('2_section', 'Секция'),
-        ('3_component', 'Компонент'),
-        ('4_utils', 'Вспомогательное'),
+        ('main', 'Основное'),
+        ('module', 'Модуль'),
+        ('section', 'Секция'),
+        ('component', 'Компонент'),
+        ('utils', 'Вспомогательное'),
     ]
     type_slug_field = models.SlugField(
         db_column='type_slug_field_db_column',
@@ -2123,7 +2123,14 @@ class ActionModel(models.Model):
         db_table = 'actions_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field}'
+        try:
+            dictionary = {x[0]: x[1] for x in self.LIST_DB_VIEW_CHOICES}
+            print(dictionary)
+            type_slug = dictionary[self.type_slug_field]
+            print(type_slug)
+        except Exception as error:
+            type_slug = '_'
+        return f'{type_slug} | {self.name_char_field} | {self.name_slug_field}'
 
     def get_id(self):
         return self.id
@@ -2473,7 +2480,14 @@ class ModuleOrComponentModel(models.Model):
         db_table = 'module_or_component_table'
 
     def __str__(self):
-        return f'{self.name_char_field}'
+        try:
+            dictionary = {x[0]: x[1] for x in self.LIST_DB_VIEW_CHOICES}
+            print(dictionary)
+            type_slug = dictionary[self.type_slug_field]
+            print(type_slug)
+        except Exception as error:
+            type_slug = '_'
+        return f'{type_slug} | {self.name_char_field} | {self.next_path_slug_field}'
 
 
 #
