@@ -2291,26 +2291,6 @@ class ModuleOrComponentModel(models.Model):
     """
     Module Or Component Model
     """
-    name_char_field = models.CharField(
-        db_column='name_char_field_db_column',
-        db_index=True,
-        db_tablespace='name_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Название:',
-        help_text='<small class="text-muted">Небольшая срока текста, example: "текст, текст"</small><hr><br>',
-
-        max_length=64,
-    )
     LIST_DB_VIEW_CHOICES = [
         ('0_module', 'Модуль'),
         ('1_section', 'Секция'),
@@ -2338,6 +2318,26 @@ class ModuleOrComponentModel(models.Model):
 
         max_length=50,
         allow_unicode=False,
+    )
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название:',
+        help_text='<small class="text-muted">Небольшая срока текста, example: "текст, текст"</small><hr><br>',
+
+        max_length=64,
     )
     previous_path_slug_field = models.SlugField(
         db_column='previous_path_slug_field_db_column',

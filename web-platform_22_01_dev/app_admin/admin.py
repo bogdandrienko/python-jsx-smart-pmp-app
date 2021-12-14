@@ -342,8 +342,8 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
     Настройки 'Module Or Component Model Admin' на панели администратора
     """
     list_display = (
-        'name_char_field',
         'type_slug_field',
+        'name_char_field',
         'previous_path_slug_field',
         'current_path_slug_field',
         'next_path_slug_field',
@@ -352,8 +352,8 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
         'text_field',
     )
     list_filter = (
-        'name_char_field',
         'type_slug_field',
+        'name_char_field',
         'previous_path_slug_field',
         'current_path_slug_field',
         'next_path_slug_field',
@@ -363,8 +363,8 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
     )
     fieldsets = (
         ('main', {'fields': (
-            'name_char_field',
             'type_slug_field',
+            'name_char_field',
             'previous_path_slug_field',
             'current_path_slug_field',
             'next_path_slug_field',
@@ -374,8 +374,8 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
         )}),
     )
     search_fields = [
-        'name_char_field',
         'type_slug_field',
+        'name_char_field',
         'previous_path_slug_field',
         'current_path_slug_field',
         'next_path_slug_field',
