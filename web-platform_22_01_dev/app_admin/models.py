@@ -7,6 +7,7 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
     FileExtensionValidator, DecimalValidator
 
 
+# example
 class ExamplesModel(models.Model):
     """
     Модель с максимумом вариаций параметров и полей
@@ -1421,7 +1422,7 @@ class ExamplesModel(models.Model):
         return self.id
 
 
-# Logging
+# logging
 class LoggingModel(models.Model):
     """
     Logging Model
@@ -1573,7 +1574,7 @@ class LoggingModel(models.Model):
         return f'{self.datetime_field} {username} {self.request_path_slug_field}'
 
 
-# User
+# user
 class UserModel(models.Model):
     """
     User Model
@@ -2017,7 +2018,7 @@ def create_user(sender, instance, created, **kwargs):
             error = f'error = {error}'
 
 
-# Action
+# action
 class ActionModel(models.Model):
     """
     Action Model
@@ -2128,7 +2129,7 @@ class ActionModel(models.Model):
         return self.id
 
 
-# Group
+# group
 class GroupModel(models.Model):
     """
     Group Model
@@ -2285,7 +2286,7 @@ def create_group(sender, instance, created, **kwargs):
             error = f'error = {error}'
 
 
-# Module Or Component
+# module_or_component
 class ModuleOrComponentModel(models.Model):
     """
     Module Or Component Model
@@ -2475,7 +2476,17 @@ class ModuleOrComponentModel(models.Model):
         return f'{self.name_char_field}'
 
 
-# Idea
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# idea
 class IdeaModel(models.Model):
     """
     Idea Model
@@ -2915,7 +2926,7 @@ class IdeaRatingModel(models.Model):
                f':: {self.datetime_field}'
 
 
-# Computer Vision
+# extra
 class ComputerVisionModuleModel(models.Model):
     """
     Класс, содержащий в себе объект настройки модуля для машинного зрения

@@ -633,7 +633,17 @@ class ExamplesModelForm(forms.Form):
         fields = '__all__'
 
 
-# Geo
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# extra
 class GeoForm(forms.Form):
     """
     Geo Form

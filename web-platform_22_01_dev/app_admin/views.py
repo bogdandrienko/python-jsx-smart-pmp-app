@@ -27,6 +27,7 @@ from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryCl
 from app_admin.utils import ExcelClass, EncryptingClass, SQLClass
 
 
+# example
 def example(request):
     """
     Страница с примерами разных frontend элементов
@@ -267,6 +268,21 @@ def home(request):
     return render(request, 'components/home.html')
 
 
+# module_or_component
+def module_or_component(request, url_slug: str):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    modules = ModuleOrComponentModel.objects.filter(current_path_slug_field=url_slug)
+    context = {
+        'modules': modules,
+    }
+
+    return render(request, 'components/module.html', context)
+
+
 # account
 def account_login(request):
     """
@@ -445,7 +461,7 @@ def account_change_profile(request):
     return render(request, 'account/account_change_profile.html', context)
 
 
-def account_recover_password(request, type_slug):
+def account_recover_password(request, type_slug='iin'):
     """
     Страница восстановления пароля пользователей
     """
@@ -565,6 +581,34 @@ def account_recover_password(request, type_slug):
     #     }
 
     return render(request, 'account/account_recover_password.html', context)
+
+
+def account_self_profile(request):
+    """
+    Страница профиля пользователя
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        user_model = UserModel.objects.get_or_create(user_foreign_key_field=request.user)[0]
+        response = 1
+        context = {
+            'response': response,
+            'user': request.user,
+            'user_model': user_model,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'user': None,
+            'user_model': None,
+        }
+
+    return render(request, 'account/account_profile.html', context)
 
 
 def account_profile(request, user_id):
@@ -1220,20 +1264,17 @@ def account_change_groups(request):
     return render(request, 'account/account_change_groups.html', context)
 
 
-def module_or_component(request, url_slug: str):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    modules = ModuleOrComponentModel.objects.filter(current_path_slug_field=url_slug)
-    context = {
-        'modules': modules,
-    }
-
-    return render(request, 'components/module.html', context)
-
-
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# idea
 def idea_create(request):
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_create')
@@ -1580,6 +1621,95 @@ def idea_deactivate(request, idea_int):
     return redirect(reverse('idea_list', args=()))
 
 
+# extra
+def geo(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        data = None
+        form = GeoForm()
+        if request.method == 'POST':
+            print('begin')
+
+            # data = generate_xlsx(request)
+            # print('generate_xlsx successfully')
+
+            # generate_kml()
+            # print('generate_kml successfully')
+
+            # Points = [PointName, latitude, longitude, PointLinks]
+
+            # point1 = [61.22812, 52.14303, "1", "2"]
+            # point2 = [61.22829, 52.1431, "2", "1|3"]
+            # point3 = [61.22862, 52.14323, "3", "2|4"]
+            # point4 = [61.22878, 52.14329, "4", "3|5"]
+            # point5 = [61.22892201, 52.14332617, "5", "4|6"]
+            # point_arr = [point1, point2, point3, point4, point5]
+
+            # Получение значений из формы
+            count_points = int(request.POST['count_points'])
+            correct_rad = int(request.POST['correct_rad'])
+            rounded_val = int(request.POST['rounded_val'])
+
+            points_arr = []
+            val = 0
+            for num in range(1, count_points):
+                x = 61.22812
+                y = 52.14303
+                val += random.random() / 10000 * 2
+                var = [round(x + val, rounded_val), round(y + val - random.random() / 10000 * correct_rad, rounded_val),
+                       str(num), str(f"{num - 1}|{num + 1}")]
+                points_arr.append(var)
+
+            # Near Point
+            subject_ = GeoClass.find_near_point(points_arr, 61.27, 52.147)
+            print(subject_)
+            object_ = GeoClass.find_near_point(points_arr, 61.24, 52.144)
+            print(object_)
+
+            # Vectors = [VectorName, length(meters)]
+            # vector_arr = GeoClass.get_vector_arr(points_arr)
+            # print(vector_arr)
+
+            # print(points_arr)
+
+            # New KML Object
+            GeoClass.generate_way(object_, subject_, points_arr)
+
+            print('end')
+        context = {
+            'data': data,
+            'form': form,
+        }
+        return render(request, 'extra/geo.html', context)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+
+def analyse(request):
+    """
+    Машинное зрение
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        with ThreadPoolExecutor() as executor:
+            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.1)
+    except Exception as error:
+        print(f'\nanalyse | error : {error}\n')
+        with ThreadPoolExecutor() as executor:
+            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
+
+    return redirect(to='home')
+
+
+# salary
 def salary(request):
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
@@ -1909,6 +2039,7 @@ def salary_pdf(request):
     return response
 
 
+# career
 def career(request):
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
@@ -1927,93 +2058,7 @@ def career(request):
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
 
-def geo(request):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    try:
-        data = None
-        form = GeoForm()
-        if request.method == 'POST':
-            print('begin')
-
-            # data = generate_xlsx(request)
-            # print('generate_xlsx successfully')
-
-            # generate_kml()
-            # print('generate_kml successfully')
-
-            # Points = [PointName, latitude, longitude, PointLinks]
-
-            # point1 = [61.22812, 52.14303, "1", "2"]
-            # point2 = [61.22829, 52.1431, "2", "1|3"]
-            # point3 = [61.22862, 52.14323, "3", "2|4"]
-            # point4 = [61.22878, 52.14329, "4", "3|5"]
-            # point5 = [61.22892201, 52.14332617, "5", "4|6"]
-            # point_arr = [point1, point2, point3, point4, point5]
-
-            # Получение значений из формы
-            count_points = int(request.POST['count_points'])
-            correct_rad = int(request.POST['correct_rad'])
-            rounded_val = int(request.POST['rounded_val'])
-
-            points_arr = []
-            val = 0
-            for num in range(1, count_points):
-                x = 61.22812
-                y = 52.14303
-                val += random.random() / 10000 * 2
-                var = [round(x + val, rounded_val), round(y + val - random.random() / 10000 * correct_rad, rounded_val),
-                       str(num), str(f"{num - 1}|{num + 1}")]
-                points_arr.append(var)
-
-            # Near Point
-            subject_ = GeoClass.find_near_point(points_arr, 61.27, 52.147)
-            print(subject_)
-            object_ = GeoClass.find_near_point(points_arr, 61.24, 52.144)
-            print(object_)
-
-            # Vectors = [VectorName, length(meters)]
-            # vector_arr = GeoClass.get_vector_arr(points_arr)
-            # print(vector_arr)
-
-            # print(points_arr)
-
-            # New KML Object
-            GeoClass.generate_way(object_, subject_, points_arr)
-
-            print('end')
-        context = {
-            'data': data,
-            'form': form,
-        }
-        return render(request, 'extra/geo.html', context)
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-
-def analyse(request):
-    """
-    Машинное зрение
-    """
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    try:
-        with ThreadPoolExecutor() as executor:
-            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.1)
-    except Exception as error:
-        print(f'\nanalyse | error : {error}\n')
-        with ThreadPoolExecutor() as executor:
-            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
-
-    return redirect(to='home')
-
-
+# passages
 def passages_thermometry(request):
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
