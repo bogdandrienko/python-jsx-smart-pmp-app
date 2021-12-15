@@ -2024,11 +2024,11 @@ class ActionModel(models.Model):
     Action Model
     """
     LIST_DB_VIEW_CHOICES = [
-        ('main', 'Основное'),
-        ('module', 'Модуль'),
-        ('section', 'Секция'),
-        ('component', 'Компонент'),
-        ('utils', 'Вспомогательное'),
+        ('0_main', 'Основное'),
+        ('1_module', 'Модуль'),
+        ('2_section', 'Секция'),
+        ('3_component', 'Компонент'),
+        ('4_utils', 'Вспомогательное'),
     ]
     type_slug_field = models.SlugField(
         db_column='type_slug_field_db_column',
@@ -2040,7 +2040,7 @@ class ActionModel(models.Model):
         unique_for_month=False,
         unique_for_year=False,
         choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2050,7 +2050,7 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
-        max_length=50,
+        max_length=128,
         allow_unicode=False,
     )
     name_char_field = models.CharField(
@@ -2062,7 +2062,7 @@ class ActionModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2072,7 +2072,7 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
                   '"Модератор отдела ОУПиБП"</small><hr><br>',
 
-        max_length=64,
+        max_length=128,
     )
     name_slug_field = models.SlugField(
         db_column='name_slug_field_db_column',
@@ -2083,7 +2083,7 @@ class ActionModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2093,7 +2093,7 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
                   '"moderator_oupibp"</small><hr><br>',
 
-        max_length=64,
+        max_length=128,
         allow_unicode=False,
     )
     position_float_field = models.FloatField(
@@ -2125,9 +2125,7 @@ class ActionModel(models.Model):
     def __str__(self):
         try:
             dictionary = {x[0]: x[1] for x in self.LIST_DB_VIEW_CHOICES}
-            print(dictionary)
             type_slug = dictionary[self.type_slug_field]
-            print(type_slug)
         except Exception as error:
             type_slug = '_'
         return f'{type_slug} | {self.name_char_field} | {self.name_slug_field}'
@@ -2172,7 +2170,7 @@ class GroupModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2182,7 +2180,7 @@ class GroupModel(models.Model):
         help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
                   '"Модератор отдела ОУПиБП"</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     name_slug_field = models.SlugField(
         db_column='name_slug_field_db_column',
@@ -2193,7 +2191,7 @@ class GroupModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2203,7 +2201,7 @@ class GroupModel(models.Model):
         help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
                   '"moderator_oupibp"</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
         allow_unicode=False,
     )
     user_many_to_many_field = models.ManyToManyField(
@@ -2313,7 +2311,7 @@ class ModuleOrComponentModel(models.Model):
         unique_for_month=False,
         unique_for_year=False,
         choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2323,7 +2321,7 @@ class ModuleOrComponentModel(models.Model):
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
-        max_length=50,
+        max_length=64,
         allow_unicode=False,
     )
     name_char_field = models.CharField(
@@ -2335,7 +2333,7 @@ class ModuleOrComponentModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2344,7 +2342,7 @@ class ModuleOrComponentModel(models.Model):
         verbose_name='Название:',
         help_text='<small class="text-muted">Небольшая срока текста, example: "текст, текст"</small><hr><br>',
 
-        max_length=64,
+        max_length=128,
     )
     previous_path_slug_field = models.SlugField(
         db_column='previous_path_slug_field_db_column',
@@ -2355,7 +2353,7 @@ class ModuleOrComponentModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2365,7 +2363,7 @@ class ModuleOrComponentModel(models.Model):
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
-        max_length=50,
+        max_length=128,
         allow_unicode=False,
     )
     current_path_slug_field = models.SlugField(
@@ -2377,7 +2375,7 @@ class ModuleOrComponentModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2387,7 +2385,7 @@ class ModuleOrComponentModel(models.Model):
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
-        max_length=50,
+        max_length=128,
         allow_unicode=False,
     )
     next_path_slug_field = models.SlugField(
@@ -2399,7 +2397,7 @@ class ModuleOrComponentModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2409,7 +2407,7 @@ class ModuleOrComponentModel(models.Model):
         help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
                   'example: "success"</small><hr><br>',
 
-        max_length=50,
+        max_length=128,
         allow_unicode=False,
     )
     position_float_field = models.FloatField(
@@ -2460,7 +2458,7 @@ class ModuleOrComponentModel(models.Model):
         unique_for_date=False,
         unique_for_month=False,
         unique_for_year=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2469,7 +2467,7 @@ class ModuleOrComponentModel(models.Model):
         verbose_name='Описание:',
         help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
 
-        max_length=512,
+        max_length=256,
     )
 
     class Meta:
@@ -2482,9 +2480,7 @@ class ModuleOrComponentModel(models.Model):
     def __str__(self):
         try:
             dictionary = {x[0]: x[1] for x in self.LIST_DB_VIEW_CHOICES}
-            print(dictionary)
             type_slug = dictionary[self.type_slug_field]
-            print(type_slug)
         except Exception as error:
             type_slug = '_'
         return f'{type_slug} | {self.name_char_field} | {self.next_path_slug_field}'
