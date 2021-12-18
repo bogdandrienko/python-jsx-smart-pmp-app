@@ -348,8 +348,8 @@ class ModuleOrComponentModelAdmin(admin.ModelAdmin):
         'current_path_slug_field',
         'next_path_slug_field',
         'position_float_field',
-        'image_field',
-        'text_field',
+        # 'image_field',
+        # 'text_field',
     )
     list_filter = (
         'type_slug_field',
@@ -477,7 +477,7 @@ class IdeaCommentModelAdmin(admin.ModelAdmin):
     list_filter = (
         'author_foreign_key_field',
         'idea_foreign_key_field',
-        'text_field',
+        # 'text_field',
         'datetime_field',
     )
     fieldsets = (

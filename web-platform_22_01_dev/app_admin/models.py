@@ -1999,7 +1999,7 @@ class UserModel(models.Model):
         else:
             activity = 'Неактивен'
         return f'{self.last_name_char_field} | {self.first_name_char_field} | {self.patronymic_char_field} | ' \
-               f'{activity} | {self.personnel_number_slug_field} | {self.position_char_field}'
+               f'{activity} | {self.personnel_number_slug_field} | {self.position_char_field} | {self.id}'
 
     def get_id(self):
         return self.id
@@ -2723,7 +2723,7 @@ class IdeaModel(models.Model):
 
     def get_category(self):
         dict_key_val = dict(self.LIST_DB_VIEW_CHOICES)
-        return dict_key_val[self.category_slug_field]
+        return [self.category_slug_field, dict_key_val[self.category_slug_field]]
 
     def get_total_comment_value(self):
         return IdeaCommentModel.objects.filter(idea_foreign_key_field=self.id).count()

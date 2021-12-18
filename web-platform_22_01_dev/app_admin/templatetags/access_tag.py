@@ -10,11 +10,12 @@ register = template.Library()
 def access_tag(context, path):
     access = False
     request = context['request']
+    if request.user.is_authenticated is False:
+        return False
     try:
         user = User.objects.get(username=request.user.username)
         if user.is_superuser:
-            access = True
-            path = False
+            return True
         user = UserModel.objects.get(user_foreign_key_field=request.user)
         if user and path:
             action = ActionModel.objects.get(name_slug_field=path)

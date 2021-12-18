@@ -1,0 +1,161 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load idea_list_tag %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Рейтинги в банке идей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
+    <div class="col text-end">
+        <a href="{% url 'module_or_component' 'module_modules' %}">
+            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
+        </a>
+        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
+            <p class="card-text text-dark">Вернуться в модули.</p>
+        </a>
+    </div>
+    <div class="col text-start">
+        <h1 class="display-6 fst-italic">Рейтинги</h1>
+        <small class="text-secondary">Содержит список рейтингов в банке идей.</small>
+    </div>
+</div>
+
+{% if response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="text-center">
+        <div class="btn-group">
+            <label class="form-control-lg">
+                Сортировка рейтинга:
+                <small class="text-muted">выберите тип сортировки.</small>
+            </label>
+
+            <form action="{% url 'idea_rating' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control" type="hidden" name="sorted" value="rating">
+                {% if sorted %}
+                    <button class="btn btn-lg btn-success" type="submit">По рейтингу</button>
+                {% else %}
+                    <button class="btn btn-lg btn-outline-success" type="submit">По рейтингу</button>
+                {% endif %}
+            </form>
+
+            <form action="{% url 'idea_rating' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control" type="hidden" name="sorted" value="count">
+                {% if sorted %}
+                    <button class="btn btn-lg btn-outline-success" type="submit">По количеству</button>
+                {% else %}
+                    <button class="btn btn-lg btn-success" type="submit">По количеству</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    {% if page %}
+
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 text-center m-0">
+
+            {% for account in page %}
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-header">
+                            <h4 class="text-dark fw-normal text-end">
+                                <strong># {{ forloop.counter }}</strong>
+                            </h4>
+                            <a class="text-decoration-none lead text-dark" href="{% url 'account_profile' account.author.id %}">
+                                <strong>{{ account.author.last_name_char_field }} {{ account.author.first_name_char_field }} {{ account.author.patronymic_char_field }}</strong>
+                            </a>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="container-fluid d-flex justify-content-between">
+                                <small class="my-2 text-link-dark">{{ account.author.position_char_field }}</small>
+                                <small class="my-2 text-link-dark">{{ account.author.subdivision_char_field }}</small>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="{% url 'account_profile' account.author.id %}">
+                                {% if account.author.image_field %}
+                                    <img src="{{ account.author.image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ account.author.id }}">
+                                {% else %}
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ account.author.id }}</text></svg>
+                                {% endif %}
+                            </a>
+                        </div>
+
+                        <div class="card-body">
+                            <a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'account_profile' account.author.id %}">Подробнее</a>
+                            <div class="container-fluid d-flex justify-content-between">
+                                <small class="btn btn-sm btn-outline-warning">Идеи: {{ account.count }}</small>
+                                {% if account.rating > 0 %}
+                                    <div class="btn btn-sm btn-outline-success">Рейтинг: {{ account.rating }}</div>
+                                {% else %}
+                                    <div class="btn btn-sm btn-outline-danger">Рейтинг: {{ account.rating }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="card-header text-end">
+                            <small class="text-dark">{{ account.author.user_foreign_key_field.date_joined }}</small>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

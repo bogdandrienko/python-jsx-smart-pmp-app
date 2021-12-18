@@ -35,6 +35,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
 
     # module_or_component
+    path('module_or_component/', views.module_or_component, name='module_or_component'),
     path('module_or_component/<slug:url_slug>/', views.module_or_component, name='module_or_component'),
 
     # account
@@ -44,7 +45,7 @@ urlpatterns = [
     path('account_change_profile/', views.account_change_profile, name='account_change_profile'),
     path('account_recover_password/', views.account_recover_password, name='account_recover_password'),
     path('account_recover_password/<slug:type_slug>/', views.account_recover_password, name='account_recover_password'),
-    path('account_self_profile/', views.account_self_profile, name='account_self_profile'),
+    path('account_profile/', views.account_profile, name='account_profile'),
     path('account_profile/<int:user_id>/', views.account_profile, name='account_profile'),
     path('account_create_or_change_accounts/', views.account_create_or_change_accounts,
          name='account_create_or_change_accounts'),
@@ -65,16 +66,25 @@ urlpatterns = [
     #
     # idea
     path('idea_create/', views.idea_create, name='idea_create'),
+    path('idea_change/<int:idea_int>/', views.idea_change, name='idea_change'),
     path('idea_list/', views.idea_list, name='idea_list'),
-    path('idea_category/<slug:category_slug>/', views.idea_category, name='idea_category'),
-    path('idea_rating/', views.idea_rating, name='idea_rating'),
+    path('idea_list/<slug:category_slug>/', views.idea_list, name='idea_list'),
+    path('idea_change_visibility/<int:idea_int>/', views.idea_change_visibility, name='idea_change_visibility'),
     path('idea_view/<int:idea_int>/', views.idea_view, name='idea_view'),
+    path('idea_like/<int:idea_int>/', views.idea_like, name='idea_like'),
     path('idea_comment/<int:idea_int>/', views.idea_comment, name='idea_comment'),
-    path('idea/like/<int:idea_int>/', views.idea_like, name='idea_like'),
-    path('idea/change/<int:idea_int>/', views.idea_change, name='idea_change'),
-    path('idea/activate/<int:idea_int>/', views.idea_activate, name='idea_activate'),
-    path('idea/deactivate/<int:idea_int>/', views.idea_deactivate, name='idea_deactivate'),
+    path('idea_rating/', views.idea_rating, name='idea_rating'),
 
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     # extra
     path('geo/', views.geo, name='geo'),
     path('analyse/', views.analyse, name='analyse'),

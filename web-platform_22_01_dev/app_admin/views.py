@@ -33,7 +33,7 @@ def example(request):
     Страница с примерами разных frontend элементов
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='example')
     if page:
         return redirect(page)
 
@@ -70,7 +70,7 @@ def examples_forms(request):
     Страница с примерами разных frontend форм
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='examples_forms')
     if page:
         return redirect(page)
 
@@ -109,7 +109,7 @@ def local(request):
     Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение работы
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
     if page:
         return redirect(page)
 
@@ -122,7 +122,7 @@ def admin_(request):
     Панель управления
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
     if page:
         return redirect(page)
 
@@ -261,7 +261,7 @@ def home(request):
     Домашняя страница
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
     if page:
         return redirect(page)
 
@@ -269,16 +269,25 @@ def home(request):
 
 
 # module_or_component
-def module_or_component(request, url_slug: str):
+def module_or_component(request, url_slug='module_modules'):
     # access and logging
     page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
     if page:
         return redirect(page)
 
-    modules = ModuleOrComponentModel.objects.filter(current_path_slug_field=url_slug)
-    context = {
-        'modules': modules,
-    }
+    try:
+        modules = ModuleOrComponentModel.objects.filter(current_path_slug_field=url_slug)
+        response = 0
+        context = {
+            'response': response,
+            'modules': modules,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'modules': None,
+        }
 
     return render(request, 'components/module.html', context)
 
@@ -289,7 +298,7 @@ def account_login(request):
     Страница логина пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
     if page:
         return redirect(page)
 
@@ -341,7 +350,7 @@ def account_logout(request):
     Ссылка на выход из аккаунта и перенаправление не страницу входа
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
     if page:
         return redirect(page)
 
@@ -358,7 +367,7 @@ def account_change_password(request):
     Страница смены пароля пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
     if page:
         return redirect(page)
 
@@ -466,12 +475,11 @@ def account_recover_password(request, type_slug='iin'):
     Страница восстановления пароля пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         response = 0
         data = None
         user = None
@@ -570,15 +578,15 @@ def account_recover_password(request, type_slug='iin'):
             'user': user,
             'user_model': user_model,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'data': None,
-    #         'access_count': None,
-    #         'user': None,
-    #         'user_model': None,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+            'access_count': None,
+            'user': None,
+            'user_model': None,
+        }
 
     return render(request, 'account/account_recover_password.html', context)
 
@@ -611,7 +619,7 @@ def account_self_profile(request):
     return render(request, 'account/account_profile.html', context)
 
 
-def account_profile(request, user_id):
+def account_profile(request, user_id=0):
     """
     Страница профиля пользователя
     """
@@ -621,6 +629,8 @@ def account_profile(request, user_id):
         return redirect(page)
 
     try:
+        if user_id == 0:
+            user_id = request.user.id
         user = User.objects.get(id=user_id)
         if user:
             user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
@@ -649,7 +659,7 @@ def account_create_or_change_accounts(request):
     Страница создания или изменения пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_create_or_change_accounts')
     if page:
         return redirect(page)
 
@@ -800,7 +810,7 @@ def account_export_accounts(request):
     Страница экспорта пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_export_accounts')
     if page:
         return redirect(page)
 
@@ -957,7 +967,7 @@ def account_generate_passwords(request):
     Страница генерации паролей для аккаунтов пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_generate_passwords')
     if page:
         return redirect(page)
 
@@ -1017,7 +1027,7 @@ def account_update_accounts_1c(request):
     Страница обновления аккаунтов пользователей из системы 1С
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_update_accounts_1c')
     if page:
         return redirect(page)
 
@@ -1189,7 +1199,7 @@ def account_change_groups(request):
     Страница создания пользователей
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_change_groups')
     if page:
         return redirect(page)
 
@@ -1318,174 +1328,162 @@ def idea_create(request):
     return render(request, 'idea/idea_create.html', context)
 
 
-def idea_list(request):
+def idea_change(request, idea_int):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_change')
     if page:
         return redirect(page)
 
     # try:
     if True:
-        idea = IdeaModel.objects.all()
-        # idea = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
-        category = IdeaModel.get_all_category()
-        num_page = 2
-        if request.method == 'POST':
-            num_page = 500
-            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
-            if name_char_field:
-                idea = idea.filter(name_char_field__icontains=name_char_field)
-        try:
-            page = PaginationClass.paginate(request=request, objects=idea, num_page=num_page)
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'page': page,
-            'category': category,
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'page': False,
-    #         'category': category,
-    #     }
-    return render(request, 'idea/idea_list.html', context)
-
-
-def idea_category(request, category_slug):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    # try:
-    if True:
-        idea = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
-        category = IdeaModel.get_all_category()
-        if category_slug.lower() != 'all':
-            idea = idea.filter(category_slug_field=category_slug)
-        num_page = 2
-        if request.method == 'POST':
-            num_page = 500
-            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
-            if name_char_field:
-                idea = idea.filter(name_char_field__icontains=name_char_field)
-        try:
-            page = PaginationClass.paginate(request=request, objects=idea, num_page=num_page)
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'page': page,
-            'category': category,
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'page': False,
-    #         'category': category,
-    #     }
-    return render(request, 'idea/idea_list.html', context)
-
-
-def idea_rating(request):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    # try:
-    if True:
-        idea = IdeaModel.objects.order_by('-id')
-        authors = []
-        for query in idea:
-            authors.append(query.author_foreign_key_field)
-        authors_dict = {}
-        for author in authors:
-            authors_dict[author] = authors.count(author)
-        user_counts = []
-        for author in authors_dict:
-            ideas = IdeaModel.objects.filter(author_foreign_key_field=author)
-            total_rating = 0
-            for idea in ideas:
-                total_rating += idea.get_total_rating()
-            user_counts.append(
-                {'author': author, 'count': ideas.count(), 'rating': total_rating}
-            )
-        sorted_by_rating = True
-        if request.method == 'POST':
-            if request.POST['sorted'] == 'idea':
-                sorted_by_rating = True
-            if request.POST['sorted'] == 'count':
-                sorted_by_rating = False
-        if sorted_by_rating:
-            page = sorted(user_counts, key=lambda k: k['rating'], reverse=True)
-        else:
-            page = sorted(user_counts, key=lambda k: k['count'], reverse=True)
-        context = {
-            'page': page,
-            'sorted': sorted_by_rating
-        }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'data': False
-    #     }
-    return render(request, 'idea/idea_ratings.html', context)
-
-
-def idea_view(request, idea_int):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    # try:
-    if True:
-        response = 1
+        response = 0
         idea = IdeaModel.objects.get(id=idea_int)
-        comments = IdeaCommentModel.objects.filter(idea_foreign_key_field=idea).order_by('-id')
+        users = UserModel.objects.all()
+        categoryes = IdeaModel.get_all_category()
+        if request.method == 'POST':
+            author_foreign_key_field_id = DjangoClass.RequestClass.get_value(request, "author_foreign_key_field_id")
+            author_foreign_key_field = UserModel.objects.get(id=author_foreign_key_field_id)
+            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
+            category_slug_field = DjangoClass.RequestClass.get_value(request, "category_slug_field")
+            short_description_char_field = DjangoClass.RequestClass.get_value(request, "short_description_char_field")
+            full_description_text_field = DjangoClass.RequestClass.get_value(request, "full_description_text_field")
+            avatar_image_field = DjangoClass.RequestClass.get_file(request, "avatar_image_field")
+            addiction_file_field = DjangoClass.RequestClass.get_file(request, "addiction_file_field")
+
+            if author_foreign_key_field and author_foreign_key_field != idea.author_foreign_key_field:
+                idea.author_foreign_key_field = author_foreign_key_field
+            if name_char_field and name_char_field != idea.name_char_field:
+                idea.name_char_field = name_char_field
+            if category_slug_field and category_slug_field != idea.category_slug_field:
+                idea.category_slug_field = category_slug_field
+            if short_description_char_field and short_description_char_field != idea.short_description_char_field:
+                idea.short_description_char_field = short_description_char_field
+            if full_description_text_field and full_description_text_field != idea.full_description_text_field:
+                idea.full_description_text_field = full_description_text_field
+            if avatar_image_field and avatar_image_field != idea.avatar_image_field:
+                idea.avatar_image_field = avatar_image_field
+            if addiction_file_field and addiction_file_field != idea.addiction_file_field:
+                idea.addiction_file_field = addiction_file_field
+
+            idea.save()
+            response = 1
         context = {
             'response': response,
             'idea': idea,
-            'comments': comments,
+            'users': users,
+            'categoryes': categoryes,
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'response': -1,
     #         'idea': None,
-    #         'comments': None,
+    #         'users': None,
+    #         'categoryes': None,
     #     }
-    return render(request, 'idea/idea_view.html', context)
+
+    return render(request, 'idea/idea_change.html', context)
 
 
-def idea_comment(request, idea_int):
+def idea_list(request, category_slug='All'):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_list')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        ideas = IdeaModel.objects.all().order_by('-id')
+        categoryes = IdeaModel.get_all_category()
+        num_page = 5
+        if category_slug.lower() != 'all':
+            ideas = ideas.filter(category_slug_field=category_slug)
+        if request.method == 'POST':
+            search_char_field = DjangoClass.RequestClass.get_value(request, "search_char_field")
+            if search_char_field:
+                ideas = ideas.filter(name_char_field__icontains=search_char_field)
+            num_page = 100
+        try:
+            page = PaginationClass.paginate(request=request, objects=ideas, num_page=num_page)
+            response = 0
+        except Exception as error:
+            response = -1
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': response,
+            'page': page,
+            'categoryes': categoryes,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'page': False,
+    #         'categoryes': categoryes
+    #     }
+
+    return render(request, 'idea/idea_list.html', context)
+
+
+def idea_change_visibility(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_change_visibility')
     if page:
         return redirect(page)
 
     # try:
     if True:
         if request.method == 'POST':
-            IdeaCommentModel.objects.create(
-                author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
-                idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
-                text_field=request.POST['comment_text']
-            )
-        else:
-            pass
+            status = DjangoClass.RequestClass.get_value(request, "hidden")
+            if status == 'true':
+                status = True
+            elif status == 'false':
+                status = False
+            data = IdeaModel.objects.get(id=idea_int)
+            data.visibility_boolean_field = status
+
+            data.save()
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+    return redirect(reverse('idea_list', args=()))
+
+
+def idea_view(request, idea_int):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_view')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        idea = IdeaModel.objects.get(id=idea_int)
+        comments = IdeaCommentModel.objects.filter(idea_foreign_key_field=idea)
+        try:
+            page = PaginationClass.paginate(request=request, objects=comments, num_page=5)
+            response = 0
+        except Exception as error:
+            response = -1
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': response,
+            'idea': idea,
+            'page': page,
+        }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'data': False
+    #         'response': -1,
+    #         'idea': None,
+    #         'page': page,
     #     }
-    return redirect(reverse('idea_view', args=(idea_int,)))
+
+    return render(request, 'idea/idea_view.html', context)
 
 
 def idea_like(request, idea_int):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_like')
     if page:
         return redirect(page)
 
@@ -1547,84 +1545,101 @@ def idea_like(request, idea_int):
     #     context = {
     #         'data': False
     #     }
+
     return redirect(reverse('idea_view', args=(idea.id,)))
 
 
-def idea_change(request, idea_int):
+def idea_comment(request, idea_int):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_comment')
     if page:
         return redirect(page)
 
     # try:
     if True:
-        data = IdeaModel.objects.get(id=idea_int)
-        result_form = False
         if request.method == 'POST':
-            if request.POST["name"]:
-                data.name = request.POST["name"]
-            if request.POST["category"]:
-                data.category = request.POST["category"]
-            if request.POST["short_description"]:
-                data.short_description = request.POST["short_description"]
-            if request.POST["long_description"]:
-                data.long_description = request.POST["long_description"]
-            if request.FILES["image"]:
-                data.image = request.FILES["image"]
-            if request.FILES["document"]:
-                data.document = request.FILES["document"]
+            IdeaCommentModel.objects.create(
+                author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
+                idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
+                text_field=DjangoClass.RequestClass.get_value(request, "text_field")
+            )
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
-            data.save()
-            result_form = True
+    return redirect(reverse('idea_view', args=(idea_int,)))
+
+
+def idea_rating(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_rating')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        idea = IdeaModel.objects.order_by('-id')
+        authors = []
+        for query in idea:
+            authors.append(query.author_foreign_key_field)
+        authors_dict = {}
+        for author in authors:
+            authors_dict[author] = authors.count(author)
+        user_counts = []
+        for author in authors_dict:
+            ideas = IdeaModel.objects.filter(author_foreign_key_field=author)
+            total_rating = 0
+            for idea in ideas:
+                total_rating += idea.get_total_rating()
+            user_counts.append(
+                {'author': author, 'count': ideas.count(), 'rating': total_rating}
+            )
+        sorted_by_rating = True
+        if request.method == 'POST':
+            if request.POST['sorted'] == 'idea':
+                sorted_by_rating = True
+            if request.POST['sorted'] == 'count':
+                sorted_by_rating = False
+        if sorted_by_rating:
+            page = sorted(user_counts, key=lambda k: k['rating'], reverse=True)
+        else:
+            page = sorted(user_counts, key=lambda k: k['count'], reverse=True)
+
+        try:
+            page = PaginationClass.paginate(request=request, objects=page, num_page=5)
+            response = 0
+        except Exception as error:
+            response = -1
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
         context = {
-            'form_1': None,
-            'data': data,
-            'result_form': result_form
+            'response': response,
+            'page': page,
+            'sorted': sorted_by_rating
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
+    #         'response': -1,
     #         'data': False
     #     }
-    return render(request, 'idea/idea_change.html', context)
+
+    return render(request, 'idea/idea_rating.html', context)
 
 
-def idea_activate(request, idea_int):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    # try:
-    if True:
-        data = IdeaModel.objects.get(id=idea_int)
-        data.visibility_boolean_field = True
-        data.save()
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    return redirect(reverse('idea_list', args=()))
-
-
-def idea_deactivate(request, idea_int):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    # try:
-    if True:
-        data = IdeaModel.objects.get(id=idea_int)
-        data.visibility_boolean_field = False
-        data.save()
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    return redirect(reverse('idea_list', args=()))
-
-
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 # extra
 def geo(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='geo')
     if page:
         return redirect(page)
 
@@ -1694,7 +1709,7 @@ def analyse(request):
     Машинное зрение
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='analyse')
     if page:
         return redirect(page)
 

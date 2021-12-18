@@ -9,34 +9,52 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto">
 
-				<div class="col-md-auto mx-auto d-flex align-items-end">
-					<div class="space-between">
-						<li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
-							<a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
-								data-bs-toggle="dropdown" aria-expanded="false">
-								Development
-								<span class="badge badge-primary badge-pill">
-									# n
-								</span>
-							</a>
-							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
-								<li>
-									<h6 class="dropdown-header">Шаблоны</h6>
-									<a class="dropdown-item" href="{% url 'examples_forms' %}">Формы</a>
-									<a class="dropdown-item" href="{% url 'example' %}">Шаблон</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider text-light">
-								</li>
-								<li>
-									<h6 class="dropdown-header">Экстра</h6>
-									<a class="dropdown-item" href="{% url 'geo' %}">Геолокация, устройства: список</a>
-									<a class="dropdown-item" href="{% url 'analyse' %}">Машинное зрение: запуск анализа</a>
-								</li>
-							</ul>
-						</li>
-					</div>
-				</div>
+                {% access_tag 'superuser' as access %}
+                {% if access %}
+                    <div class="col-md-auto mx-auto d-flex align-items-end">
+                        <div class="space-between">
+                            <li class="navbar navbar-expand-lg navbar-dark dropend bg-dark nav-item font-weight-bold">
+                                <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Development
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
+                                    <li>
+                                        <h6 class="dropdown-header">Шаблоны</h6>
+
+                                        {% access_tag 'examples_forms' as access %}
+                                        {% if access %}
+                                            <a class="dropdown-item" href="{% url 'examples_forms' %}">Формы</a>
+                                        {% endif %}
+
+                                        {% access_tag 'example' as access %}
+                                        {% if access %}
+                                            <a class="dropdown-item" href="{% url 'example' %}">Шаблон</a>
+                                        {% endif %}
+
+                                        <a class="dropdown-item disabled" href="{% url 'home' %}">Количество аккаунтов: [{{ notification }}] [ PH context processor ]</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider text-light">
+                                    </li>
+                                    <li>
+                                        <h6 class="dropdown-header">Экстра</h6>
+
+                                        {% access_tag 'geo' as access %}
+                                        {% if access %}
+                                            <a class="dropdown-item" href="{% url 'geo' %}">Геолокация, устройства: список</a>
+                                        {% endif %}
+
+                                        {% access_tag 'analyse' as access %}
+                                        {% if access %}
+                                            <a class="dropdown-item" href="{% url 'analyse' %}">Машинное зрение: запуск анализа</a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    </div>
+                {% endif %}
 
 				<div class="col-md-auto mx-auto d-flex align-items-end">
 					<div class="space-between">
@@ -44,31 +62,48 @@
 							<a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Модератор
-								<span class="badge badge-primary badge-pill">
-									# 7
-								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
 								<li>
 									<h6 class="dropdown-header">Основной функционал</h6>
 									<a class="dropdown-item" href="{% url 'admin' %}">Панель Администрирования</a>
-									<a class="dropdown-item" href="{% url 'logging' %}">Логи Системы</a>
+
+                                    {% access_tag 'logging' as access %}
+                                    {% if access %}
+									    <a class="dropdown-item" href="{% url 'logging' %}">Логи Системы</a>
+                                    {% endif %}
 								</li>
 								<li>
 									<hr class="dropdown-divider text-light">
 								</li>
-                                {% access_tag 'superuser' as access %}
-                                {% if access %}
-                                    <li>
-                                        <h6 class="dropdown-header">Аккаунты</h6>
+                                <li>
+                                    <h6 class="dropdown-header">Аккаунты</h6>
+
+                                    {% access_tag 'account_create_or_change_accounts' as access %}
+                                    {% if access %}
                                         <a class="dropdown-item" href="{% url 'account_create_or_change_accounts' %}">Создать/изменить пользователей</a>
+                                    {% endif %}
+
+                                    {% access_tag 'account_generate_passwords' as access %}
+                                    {% if access %}
                                         <a class="dropdown-item" href="{% url 'account_generate_passwords' %}">Сгенерировать пароли для аккаунтов</a>
+                                    {% endif %}
+
+                                    {% access_tag 'account_export_accounts' as access %}
+                                    {% if access %}
                                         <a class="dropdown-item" href="{% url 'account_export_accounts' %}">Выгрузить список пользователей</a>
+                                    {% endif %}
+
+                                    {% access_tag 'account_update_accounts_1c' as access %}
+                                    {% if access %}
                                         <a class="dropdown-item" href="{% url 'account_update_accounts_1c' %}">Обновить пользователей из 1С</a>
+                                    {% endif %}
+
+                                    {% access_tag 'account_change_groups' as access %}
+                                    {% if access %}
                                         <a class="dropdown-item" href="{% url 'account_change_groups' %}">Изменить группы пользователей</a>
-                                    </li>
-                                {% else %}
-                                {% endif %}
+                                    {% endif %}
+                                </li>
 							</ul>
 						</li>
 					</div>
@@ -80,9 +115,6 @@
 							<a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Профиль
-								<span class="badge badge-primary badge-pill">
-									# 7
-								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
 								<li>
@@ -96,38 +128,30 @@
 								</li>
 								<li>
 									<h6 class="dropdown-header">Аккаунты</h6>
-                                    <a class="dropdown-item disabled" href="{% url 'home' %}">Количество аккаунтов: [{{ notification }}] PH context processor</a>
-									{% if request.user.is_authenticated %}
-									<a class="dropdown-item"
-										href="{% url 'account_self_profile' %}">Личный профиль [ PH {{ request.user.username }} ]</a>
-									{% else %}
-									    <a class="dropdown-item" href="{% url 'account_login' %}">Личный профиль [ PH Вы ещё не вошли в аккаунт ]</a>
-									{% endif %}
-									{% if request.user.is_authenticated %}
-									    <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
-									{% else %}
-									    <a class="dropdown-item" href="{% url 'account_login' %}">Изменить личный профиль [ PH PH Вы ещё не вошли в аккаунт ]</a>
-									{% endif %}
-									{% if request.user.is_authenticated %}
-									    <a class="dropdown-item" href="{% url 'account_change_password' %}">Изменить пароль</a>
-									{% else %}
-									    <a class="dropdown-item" href="{% url 'account_login' %}">Изменить пароль [ PH Вы ещё не вошли в аккаунт ]</a>
-									{% endif %}
-									{% if request.user.is_authenticated %}
-									    <a class="dropdown-item" href="{% url 'account_recover_password' 'iin' %}">Восстановить пароль</a>
-									{% else %}
-									    <a class="dropdown-item" href=""{% url 'account_login' %}>Восстановить пароль [ PH Вы ещё не вошли в аккаунт ]</a>
-									{% endif %}
-									{% if request.user.is_authenticated %}
-									    <a class="dropdown-item" href="{% url 'account_login' %}">Войти [ PH Вы уже вошли в аккаунт ]</a>
-									{% else %}
-									    <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
-									{% endif %}
-									{% if request.user.is_authenticated %}
-									    <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
-									{% else %}
-									    <a class="dropdown-item" href="{% url 'account_login' %}">Выйти [ PH Вы ещё не вошли в аккаунт ]</a>
-									{% endif %}
+
+                                    {% access_tag 'account_profile' as account_profile %}
+                                    {% if account_profile %}
+                                        <a class="dropdown-item" href="{% url 'account_profile' 0 %}">Личный профиль [ {{ request.user.username }} ]</a>
+                                    {% endif %}
+
+                                    {% access_tag 'account_change_profile' as account_change_profile %}
+                                    {% if account_change_profile %}
+                                        <a class="dropdown-item" href="{% url 'account_change_profile' %}">Изменить личный профиль</a>
+                                    {% endif %}
+
+                                    {% access_tag 'account_change_password' as account_change_password %}
+                                    {% if account_change_password %}
+                                        <a class="dropdown-item" href="{% url 'account_change_password' %}">Изменить пароль</a>
+                                    {% endif %}
+
+                                    <a class="dropdown-item" href="{% url 'account_recover_password' 'iin' %}">Восстановить пароль</a>
+
+                                    <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
+
+                                    {% access_tag 'account_logout' as account_logout %}
+                                    {% if account_logout %}
+                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
+                                    {% endif %}
 								</li>
 							</ul>
 						</li>
@@ -140,9 +164,6 @@
 							<a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Новости
-								<span class="badge badge-primary badge-pill">
-									# 0
-								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
 								<li>
@@ -173,17 +194,26 @@
 							<a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Развитие
-								<span class="badge badge-primary badge-pill">
-									# 3
-								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
                                 <li>
                                     <h6 class="dropdown-header">Банк идей:</h6>
                                     <a class="dropdown-item disabled" href="#">Шаблоны или примеры для банка идей</a>
-                                    <a class="dropdown-item" href="{% url 'idea_create' %}">Подать идею в банк идей</a>
-                                    <a class="dropdown-item" href="{% url 'idea_list' %}">Просмотреть идеи в банке идей</a>
-                                    <a class="dropdown-item" href="{% url 'idea_rating' %}">Рейтинги банка идей</a>
+
+                                    {% access_tag 'idea_create' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'idea_create' %}">Подать идею в банк идей</a>
+                                    {% endif %}
+
+                                    {% access_tag 'idea_list' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'idea_list' %}">Просмотреть идеи в банке идей</a>
+                                    {% endif %}
+
+                                    {% access_tag 'idea_rating' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'idea_rating' %}">Рейтинги банка идей</a>
+                                    {% endif %}
                                 </li>
 								<li>
 									<hr class="dropdown-divider text-light">
@@ -216,14 +246,15 @@
 							<a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Бухгалтерия
-								<span class="badge badge-primary badge-pill">
-									# 1
-								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
 								<li>
 									<h6 class="dropdown-header">Сектор расчёта заработной платы:</h6>
-									<a class="dropdown-item" href="{% url 'salary' %}">Выгрузка текущего расчётного листа</a>
+
+                                    {% access_tag 'salary' as access %}
+                                    {% if access %}
+									    <a class="dropdown-item" href="{% url 'salary' %}">Выгрузка текущего расчётного листа</a>
+                                    {% endif %}
 								</li>
 							</ul>
 						</li>
@@ -236,14 +267,16 @@
 							<a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								Служба Управления Персоналом
-								<span class="badge badge-primary badge-pill">
-									# 6
-								</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="">
 								<li>
 									<h6 class="dropdown-header">Отдел кадров:</h6>
-									<a class="dropdown-item" href="{% url 'career' %}">Вакансии</a>
+
+                                    {% access_tag 'career' as access %}
+                                    {% if access %}
+									    <a class="dropdown-item" href="{% url 'career' %}">Вакансии</a>
+                                    {% endif %}
+
 									<a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
 								</li>
 								<li>
@@ -251,7 +284,12 @@
 								</li>
 								<li>
 									<h6 class="dropdown-header">Отдел охраны труда</h6>
-									<a class="dropdown-item" href="{% url 'passages_thermometry' %}">Термометрия</a>
+
+                                    {% access_tag 'passages_thermometry' as access %}
+                                    {% if access %}
+									    <a class="dropdown-item" href="{% url 'passages_thermometry' %}">Термометрия</a>
+                                    {% endif %}
+
 									<a class="dropdown-item disabled" href="#">Алкометрия</a>
 								</li>
 								<li>
@@ -259,10 +297,26 @@
 								</li>
                                 <li>
                                     <h6 class="dropdown-header">Отдел труда и заработной платы</h6>
-                                    <a class="dropdown-item" href="{% url 'passages_select' %}">Выгрузка данных</a>
-                                    <a class="dropdown-item" href="{% url 'passages_update' %}">Обновление данных</a>
-                                    <a class="dropdown-item" href="{% url 'passages_insert' %}">Добавление данных</a>
-                                    <a class="dropdown-item" href="{% url 'passages_delete' %}">Удаление данных</a>
+
+                                    {% access_tag 'passages_select' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'passages_select' %}">Выгрузка данных</a>
+                                    {% endif %}
+
+                                    {% access_tag 'passages_update' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'passages_update' %}">Обновление данных</a>
+                                    {% endif %}
+
+                                    {% access_tag 'passages_insert' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'passages_insert' %}">Добавление данных</a>
+                                    {% endif %}
+
+                                    {% access_tag 'passages_delete' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'passages_delete' %}">Удаление данных</a>
+                                    {% endif %}
                                 </li>
 							</ul>
 						</li>

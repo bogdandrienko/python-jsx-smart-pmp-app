@@ -30,15 +30,13 @@ class DjangoClass:
 
             # Если пользователь в подсети предприятия его переадресует на локальный доступ
             if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-                print('return local')
                 return 'local'
 
             # Логирование действий
             DjangoClass.LoggingClass.logging_actions(request=request)
 
             # Возврат, если выбрано только логирование
-            if access == 'logging':
-                print('return logging')
+            if access == 'only_logging':
                 return False
 
             # Проверка на вход в аккаунт
@@ -48,11 +46,9 @@ class DjangoClass:
                     user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
                     # Проверка суперпользователя: если имеет права, то полный доступ
                     if user.is_superuser:
-                        print('return you"re superuser')
                         return False
                     # Проверка бана: если аккаунт пользователя отключён, то его разлогинит
                     if user_model.activity_boolean_field is False:
-                        print('return you"re banned')
                         return 'account_logout'
                     else:
                         # Проверка заполнения спец полей
@@ -67,24 +63,18 @@ class DjangoClass:
                                         action_many_to_many_field=action_model,
                                     )
                                     if groups:
-                                        print('return action/group have')
                                         return False
                                     else:
-                                        print('return action/group not have')
                                         return 'home'
                             except Exception as error:
                                 DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                print('return action/group error')
                                 return 'home'
                         else:
-                            print('return profile is not full')
                             return 'account_change_password'
                 except Exception as error:
                     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    print('return error account')
                     return 'home'
             else:
-                print('return not authentificated')
                 return 'account_login'
 
     class LoggingClass:

@@ -10,7 +10,7 @@
 
 <!-- Title -->
 {% block title %}
-    Просмотр идеи
+    Просмотр идеи в банке идей
 {% endblock title %}
 
 <!-- Style -->
@@ -26,205 +26,292 @@
 
 
 
-<div class="text-center">
-    <h1 class="display-6 fst-italic">Идея</h1>
-    <small class="text-secondary">Эта страница содержит подробную информацию об идее.</small>
+<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
+    <div class="col text-end">
+        <a href="{% url 'module_or_component' 'module_modules' %}">
+            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
+        </a>
+        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
+            <p class="card-text text-dark">Вернуться в модули.</p>
+        </a>
+    </div>
+    <div class="col text-start">
+        <h1 class="display-6 fst-italic">Просмотр идеи</h1>
+        <small class="text-secondary">Содержит подробную информацию об идеи в банке идей.</small>
+    </div>
 </div>
 
-{% if response == 1 %}
-
-    <div class="text-center p-1">
-        <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_list' %}">Все предложения</a>
-    </div>
-
-    {% if idea %}
-
-        {% access_tag 'idea_visibility_change' as idea_visibility_change %}
-        {% if idea.visibility_boolean_field or idea_visibility_change %}
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative ">
-                        <div class="col p-4 d-flex flex-column position-static">
-
-                            {% if idea_visibility_change %}
-                                {% if idea.visibility_boolean_field %}
-                                    <form action="{% url 'idea_deactivate' idea.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <button class="m-md-2 btn btn-xs btn-outline-danger" type="submit">скрыть</button>
-                                    </form>
-                                {% else %}
-                                    <form action="{% url 'idea_activate' idea.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">одобрить</button>
-                                    </form>
-                                {% endif %}
-                            {% else %}
-                                [ PH idea_visibility_change ]
-                            {% endif %}
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <strong class="d-inline-block text-primary">
-                                    {{ idea.category_slug_field }}
-                                    <p class="text-secondary">
-                                        {% if idea.visibility_boolean_field %}
-                                            Опубликованная идея
-                                        {% else %}
-                                            Не опубликованная идея
-                                        {% endif %}
-                                    </p>
-                                </strong>
-                                <strong class="d-inline-block text-primary">Банк идей</strong>
-                            </div>
-                            <h3>{{ idea.name_char_field }}</h3>
-                            <hr>
-                            <div class="text-center">
-                                {% if idea.avatar_image_field %}
-                                    <img src="{{ idea.avatar_image_field.url }}" class="bd-placeholder-img " width="70% " height="100%" alt="{{ idea.id }}">
-                                {% else %}
-                                    <svg class="bd-placeholder-img card-img-top" width="100% " height="100% " xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail " preserveAspectRatio="xMidYMid slice " focusable="false"><title>Placeholder</title><rect width="100% " height="100% " fill="#55595c "/><text x="50% " y="50% " fill="#eceeef " dy=".3em ">{{ idea.id }}</text></svg>
-                                {% endif %}
-                            </div>
-                            <hr>
-                            <p class="card-text">
-                                {{ idea.short_description_char_field }}
-                            </p>
-                            <hr>
-                            <p class="card-text">
-                                {{ idea.full_description_text_field }}
-                            </p>
-                            <hr>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-
-                                    <form action="{% url 'idea_like' idea.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <input class="form-control d-none" type="hidden" placeholder="like" name="status" value="like">
-                                        {% is_liked_tag idea.id as is_liked_bool %}
-                                        {% if is_liked_bool %}
-                                            <button class="m-md-2 btn btn-xs btn-success" type="submit">лайков:<p>{{ data.get_like_count }}</p></button>
-                                        {% else %}
-                                            <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">лайков:<p>{{ data.get_like_count }}</p></button>
-                                        {% endif %}
-                                    </form>
-
-                                    {% if 0 > idea.get_total_rating %}
-                                        <div class="m-sm-1 btn btn-sm btn-outline-danger text-link-danger">Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}<sup class="text-muted">{{ idea.get_total_rating_value }}</sup></div>
-                                    {% else %}
-                                        <div class="m-sm-1 btn btn-sm btn-outline-success text-link-success">Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}<sup class="text-muted">{{ idea.get_total_rating_value }}</sup></div>
-                                    {% endif %}
-
-                                    <form action="{% url 'idea_like' idea.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <input class="form-control d-none" type="hidden" placeholder="dislike" name="status" value="dislike">
-                                        {% is_disliked_tag idea.id as is_disliked_bool %}
-                                        {% if is_disliked_bool %}
-                                            <button class="m-md-2 btn btn-xs btn-danger" type="submit">дизлайков:<p>{{ data.get_dislike_count }}</p></button>
-                                        {% else %}
-                                            <div>
-                                                <label class="form-control-lg">
-                                                    Комментарий к дизлайку:
-                                                    <input type="text"
-                                                           id="comment_text"
-                                                           name="comment_text"
-                                                           required=""
-                                                           placeholder="комментарий к дизлайку"
-                                                           value=""
-                                                           minlength="1"
-                                                           maxlength="64"
-                                                           class="form-control form-control-lg"
-                                                    />
-                                                    <small class="text-muted">количество: от 1 до 64 символов</small>
-                                                </label>
-                                                <button class="m-md-2 btn btn-xs btn-outline-danger" type="submit">дизлайк:<p>{{ data.get_dislike_count }}</p></button>
-                                            </div>
-                                        {% endif %}
-                                    </form>
-
-                                    <div class="m-sm-0 btn btn-sm btn-outline-secondary text-link-light">Комментарии: {{ idea.get_total_comment_value }}</div>
-
-                                </div>
-                                {% if idea.addiction_file_field %}
-                                    <a class="btn btn-dark" href="{{ idea.addiction_file_field.url }}">скачать 1 приложение</a>
-                                {% endif %}
-
-                                <small class="text-muted">{{ idea.created_datetime_field }} (подано) / {{ idea.register_datetime_field }} (зарегистрировано)</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="my-3 p-3 bg-body rounded shadow-sm">
-
-                {% if comments %}
-
-                    <h2 class="border-bottom pb-2 mb-0">Комментарии</h2>
-
-                    {% for comment in comments %}
-
-                        <div class="shadow-sm">
-                            <div class="text-muted pt-3">
-                                <div class="d-flex justify-content-between align-items-center mb-0 small lh-smd-blocktext-link-dark">
-                                    <p>
-                                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                                        <small class="btn btn-sm btn-outline-dark">
-
-                                            {% if comment.author_foreign_key_field %}
-                                                Автор: {{ comment.author_foreign_key_field.last_name_char_field }} {{ comment.author_foreign_key_field.first_name_char_field }}
-                                            {% else %}
-                                                Профиль не заполнен
-                                            {% endif %}
-
-                                        </small>
-                                    </p>
-                                    <p><small class="">{{ comment.datetime_field }}</small></p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="text-gray-dark border-bottom">{{comment.text_field}}</p>
-                                <a class="btn btn-danger" href="#">Пожаловаться</a>
-                            </div>
-                        </div>
-
-                    {% endfor %}
-
-                {% else %}
-
-                    <h2 class="pb-2 mb-0">Комментарии не найдены</h2>
-
-                {% endif %}
-
-            </div>
-
-            <div class="my-3 p-3 bg-body rounded shadow-sm">
-                <h2 class="pb-2 mb-0">Добавить свой комментарий:</h2>
-                <form class="" action="{% url 'idea_comment' idea.id %}" method="POST">
-                    {% csrf_token %}
-                    <textarea class="form-control" type="text" required="" placeholder="Ваш комментарий" cols="30" rows="10" name="comment_text"></textarea><br>
-                    <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
-                </form>
-            </div>
-
-        {% else %}
-            {% include 'components/aborted.html' %}
-        {% endif %}
-
-    {% else %}
-
-        Предложение не найдено
-
-    {% endif %}
-
-{% elif response == -1 %}
+{% if response == -1 %}
 
     {% include 'components/aborted.html' %}
 
 {% else %}
 
-    {% include 'components/aborted.html' %}
+    {% access_tag 'idea_moderator' as idea_moderator %}
+    {% if idea.visibility_boolean_field or idea_moderator %}
+        <div class="col container">
+            <div class="card shadow-sm text-center">
+                <div class="card-header">
+                    <strong class="lead text-dark" >{{ idea.name_char_field }}</strong>
+                </div>
+
+                <div class="card-header">
+                    {% if idea_moderator %}
+                        <form action="{% url 'idea_change_visibility' idea.id %}" method="POST">
+                            {% csrf_token %}
+
+                            {% if idea.visibility_boolean_field %}
+
+                                <label class="form-control-lg">
+                                    Скрыть идею:
+                                    <input type="text"
+                                           id="hidden"
+                                           name="hidden"
+                                           required=""
+                                           placeholder=""
+                                           value="false"
+                                           minlength="0"
+                                           maxlength="64"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <small class="text-muted">! функционал модератора !</small>
+                                </label>
+                                <button class="btn btn-outline-danger" type="submit">скрыть</button>
+
+                            {% else %}
+
+                                <label class="form-control-lg">
+                                    Одобрить идею:
+                                    <input type="text"
+                                           id="hidden"
+                                           name="hidden"
+                                           required=""
+                                           placeholder=""
+                                           value="true"
+                                           minlength="0"
+                                           maxlength="64"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <small class="text-muted">! функционал модератора !</small>
+                                </label>
+
+                                <button class="btn btn-outline-success" type="submit">одобрить</button>
+
+                            {% endif %}
+
+                        </form>
+                    {% endif %}
+
+                    {% access_tag 'idea_moderator' as idea_moderator %}
+                    {% if idea.author_foreign_key_field.user_foreign_key_field.username == request.user.username or idea_moderator %}
+                        <div class="form-control-lg">
+                            Редактировать идею:
+                            <a class="btn btn-lg btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">
+                                <i class="material-icons cart-icon">published_with_changes</i>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <div class="container-fluid d-flex justify-content-between">
+                        {% if idea.author_foreign_key_field %}
+                            <a class="btn btn-sm btn-outline-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
+                                Автор: {{ idea.author_foreign_key_field.last_name_char_field }} {{ idea.author_foreign_key_field.first_name_char_field }} {{ idea.author_foreign_key_field.patronymic_char_field }}
+                            </a>
+                        {% else %}
+                            <small class="btn btn-sm btn-outline-success">
+                                Профиль не заполнен
+                            </small>
+                        {% endif %}
+
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'idea_list' idea.get_category.0 %}">{{ idea.get_category.1 }}</a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <a href="{% url 'idea_view' idea.id %}">
+                            {% if idea.avatar_image_field %}
+                                <img src="{{ idea.avatar_image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ idea.id }}">
+                            {% else %}
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ idea.id }}</text></svg>
+                            {% endif %}
+                        </a>
+                    </div>
+                    <hr/>
+                    <div class="container-fluid">
+                        <small class="card-text">{{ idea.short_description_char_field }}</small>
+                    </div>
+                    <hr/>
+                    <div class="container-fluid">
+                        <small class="card-text">{{ idea.full_description_text_field }}</small>
+                    </div>
+                    <hr/>
+                    <div class="container-fluid">
+                        {% if idea.addiction_file_field %}
+                            <a class="btn btn-outline-dark" href="{{ idea.addiction_file_field.url }}">скачать 1 приложение</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card-header">
+                    <div class="container-fluid d-flex justify-content-between">
+                        {% if 0 > idea.get_total_rating %}
+                            <div class="btn btn-sm btn-outline-danger">
+                        {% else %}
+                            <div class="btn btn-sm btn-outline-success">
+                        {% endif %}
+                            Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}
+                            <sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
+                        </div>
+
+                        {% is_liked_tag idea.id as is_liked_bool %}
+                        {% if is_liked_bool %}
+                            <i class="material-icons text-success md-48">thumb_up</i>
+                        {% else %}
+                            {% is_disliked_tag idea.id as is_disliked_bool %}
+                            {% if is_disliked_bool %}
+                                <i class="material-icons text-danger md-48">thumb_down</i>
+                            {% else %}
+                                <i class="material-icons text-muted md-48">live_help</i>
+                            {% endif %}
+                        {% endif %}
+
+                        <div class="btn btn-sm btn-outline-secondary">Комментариев: {{ idea.get_total_comment_value }}</div>
+                    </div>
+
+                    <div class="container-fluid d-flex justify-content-between">
+                        <small class="text-muted">(подано:){{ idea.created_datetime_field }}</small>
+                        <small class="text-muted">(зарегистрировано:){{ idea.register_datetime_field }}</small>
+                    </div>
+                </div>
+
+                <div class="container-fluid d-flex">
+                    <form action="{% url 'idea_like' idea.id %}" method="POST">
+                        {% csrf_token %}
+                        <input class="d-none" type="hidden" placeholder="like" name="status" value="like">
+                        {% is_liked_tag idea.id as is_liked_bool %}
+                        {% if is_liked_bool %}
+                            <button class="btn btn-sm btn-success" type="submit">
+                                лайк:<p>{{ idea.get_like_count }}</p>
+                            </button>
+                        {% else %}
+                            <button class="btn btn-sm btn-outline-success" type="submit">
+                                лайк:<p>{{ idea.get_like_count }}</p>
+                            </button>
+                        {% endif %}
+                    </form>
+
+                    <form action="{% url 'idea_like' idea.id %}" method="POST">
+                        {% csrf_token %}
+                        <input class="d-none" type="hidden" placeholder="dislike" name="status" value="dislike">
+                        {% is_disliked_tag idea.id as is_disliked_bool %}
+                        {% if is_disliked_bool %}
+                            <button class="btn btn-sm btn-danger" type="submit">
+                                дизлайк:<p>{{ idea.get_dislike_count }}</p>
+                            </button>
+                        {% else %}
+                            <button class="btn btn-sm btn-outline-danger" type="submit">
+                                дизлайк:<p>{{ idea.get_dislike_count }}</p>
+                            </button>
+                            <label class="form-control-lg">
+                                Комментарий к дизлайку:
+                                <input type="text"
+                                       id="text_field"
+                                       name="text_field"
+                                       required=""
+                                       placeholder="причина"
+                                       value=""
+                                       minlength="1"
+                                       maxlength="512"
+                                       class="form-control form-control-lg"
+                                />
+                                <small class="text-muted">количество: от 1 до 512 символов</small>
+                            </label>
+                        {% endif %}
+                    </form>
+                    <form class="form-control" action="{% url 'idea_comment' idea.id %}" method="POST">
+                        {% csrf_token %}
+                        <label class="form-control form-control-lg">
+                            Добавить свой комментарий:
+                            <textarea type="text"
+                                      id="text_field"
+                                      name="text_field"
+                                      required=""
+                                      placeholder="текст комментария"
+                                      minlength="1"
+                                      maxlength="512"
+                                      rows="2"
+                                      class="form-control form-control-lg"
+                            ></textarea>
+                            <small class="text-muted">длина: от 1 до 512 символов</small>
+                        </label>
+                        <button class="btn btn-lg btn-outline-primary w-100" type="submit">Подтвердить</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <h1 class="border-bottom text-center">Комментарии</h1>
+
+            {% if page %}
+
+                <div class="container d-flex justify-content-center align-self-center">
+                    {% include 'components/paginator.html' %}
+                </div>
+
+                {% for comment in page %}
+
+                    <div class="form-control">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>
+                                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="20" height="20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                                {% if idea.author_foreign_key_field %}
+                                    <a class="btn btn-sm btn-outline-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
+                                        Автор: {{ idea.author_foreign_key_field.last_name_char_field }} {{ idea.author_foreign_key_field.first_name_char_field }} {{ idea.author_foreign_key_field.patronymic_char_field }}
+                                    </a>
+                                {% else %}
+                                    <small class="btn btn-sm btn-outline-success">
+                                        Профиль не заполнен
+                                    </small>
+                                {% endif %}
+                            </p>
+
+                            <p>
+                                <small class="">{{ comment.datetime_field }}</small>
+                            </p>
+
+                            <p>
+                                <a class="btn btn-outline-danger" href="#">Пожаловаться</a>
+                            </p>
+                        </div>
+                        <small class="">{{comment.text_field}}</small>
+                    </div>
+
+                {% endfor %}
+
+                <div class="container d-flex justify-content-center align-self-center">
+                    {% include 'components/paginator.html' %}
+                </div>
+
+            {% else %}
+
+                <h2 class="">Комментарии не найдены</h2>
+
+            {% endif %}
+
+        </div>
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
 
 {% endif %}
+
+
 
 {% endblock main %}
 
