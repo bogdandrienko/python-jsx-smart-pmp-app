@@ -14964,3 +14964,131 @@ Bogdan, 127.0.0.1, /, GET, 2021-12-18 21:18:49.818796
 Bogdan, 127.0.0.1, /idea_create/, GET, 2021-12-18 21:18:52.622747
 
 Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-18 21:18:55.260390
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-19 23:50:03.889795
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-19 23:50:09.998216
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-19 23:50:19.025531
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-19 23:50:21.588618
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-19 23:50:22.240195
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-19 23:50:25.113741
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-19 23:50:28.681902
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-20 00:04:48.680245
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-20 00:05:30.505748
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-20 00:05:36.980338
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-20 00:17:48.938996
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-20 00:17:53.695720
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-20 00:17:58.265136
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-20 00:18:00.806391
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-20 00:18:02.749112
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-20 00:18:03.798043
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-20 00:18:03.799043
+
+Bogdan, 127.0.0.1, /module_or_component/section_main/, GET, 2021-12-20 00:18:04.705353
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-20 00:18:05.482041
+
+Bogdan, 127.0.0.1, /module_or_component/section_self_profile/, GET, 2021-12-20 00:18:06.419216
+
+Bogdan, 127.0.0.1, /account_profile/, GET, 2021-12-20 00:18:07.203912
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-20 00:18:09.483934
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-20 00:18:10.668985
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-20 00:18:13.129167
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-20 00:18:14.248169
+
+Bogdan, 127.0.0.1, /module_or_component/module_profile/, GET, 2021-12-20 00:18:22.417765
+
+Bogdan, 127.0.0.1, /module_or_component/section_self_profile/, GET, 2021-12-20 00:18:23.740939
+
+Bogdan, 127.0.0.1, /account_login/, GET, 2021-12-20 00:18:26.612354
+
+Bogdan, 127.0.0.1, /account_recover_password/, GET, 2021-12-20 00:18:30.251581
+
+Bogdan, 127.0.0.1, /account_change_password/, GET, 2021-12-20 00:18:32.361452
+
+Bogdan, 127.0.0.1, /account_profile/, GET, 2021-12-20 00:18:35.161442
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-20 00:18:42.664465
+
+Bogdan, 127.0.0.1, /module_or_component/module_progress/, GET, 2021-12-20 00:18:43.883546
+
+Bogdan, 127.0.0.1, /module_or_component/section_idea/, GET, 2021-12-20 00:18:45.297307
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2021-12-20 00:18:48.202226
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:18:49.123042
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2021-12-20 00:18:49.571440
+
+Bogdan, 127.0.0.1, /idea_create/, POST, 2021-12-20 00:19:23.111763
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-20 00:19:24.354865
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:19:26.753497
+
+Bogdan, 127.0.0.1, /account_profile/1/, GET, 2021-12-20 00:19:34.652845
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-12-20 00:19:41.964200
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-12-20 00:19:43.836860
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-20 00:19:45.377226
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-12-20 00:19:50.568693
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:19:52.343267
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:20:10.465551
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:20:10.530609
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:20:19.561473
+
+Bogdan, 127.0.0.1, /idea_comment/6/, POST, 2021-12-20 00:20:25.558792
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:20:25.599828
+
+Bogdan, 127.0.0.1, /idea_comment/6/, POST, 2021-12-20 00:20:30.155716
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:20:30.194751
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2021-12-20 00:20:39.525873
+
+Bogdan, 127.0.0.1, /idea_rating/, POST, 2021-12-20 00:20:42.808784
+
+Bogdan, 127.0.0.1, /idea_rating/, POST, 2021-12-20 00:20:49.171933
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:21:39.773113
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:21:58.710092
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:22:00.477164
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:22:00.526275
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:22:02.401226
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:22:02.444263
+
+Bogdan, 127.0.0.1, /career/, GET, 2021-12-20 00:23:16.923357
+
+Bogdan, 127.0.0.1, /career/, POST, 2021-12-20 00:23:17.742083

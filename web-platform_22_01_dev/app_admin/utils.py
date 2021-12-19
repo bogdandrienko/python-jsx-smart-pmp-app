@@ -62,7 +62,7 @@ class ExcelClass:
         try:
             workbook.save(excel_file)
         except Exception as error:
-            print(f'Please, close the excel_file: {excel_file} | {error}')
+            print(f'\n ! Please, close the excel_file! \n: {excel_file} | {error}')
 
     @staticmethod
     def workbook_close(workbook):

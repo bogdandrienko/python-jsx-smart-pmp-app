@@ -147,8 +147,13 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 image_width = src_img.shape[1]
                                 # Загрузка алгоритма классификатора для поиска лиц
                                 haar_face_cascade = cv2.CascadeClassifier('skud\\haarcascade_frontalface_alt.xml')
+                                # Оптимальный размер изображения
+                                optimal_height = 3000
+                                optimal_width = 2250
+                                # Коэффициент корректировки
+                                correct = 3.0
                                 # Качество масштабирования изображения
-                                scaling = 50
+                                scaling = int(100 * (optimal_height / image_height) * correct)
                                 dsize = (int(image_width * scaling / 100), int(image_height * scaling / 100))
                                 # Масштабирование изображения
                                 final = cv2.resize(
@@ -160,13 +165,16 @@ class MainWidgetClass(QtWidgets.QWidget):
                                 gray_img = cv2.cvtColor(final, cv2.COLOR_BGR2GRAY)
                                 detect_faces = haar_face_cascade.detectMultiScale(gray_img)
                                 # Коррекция краёв изображения
-                                correct_field = int(1000 * image_height / 9248)
+                                # correct_field = int(1000 * image_height / 9248)
+                                correct_field = int(image_height * scaling / 100 / 100 * 10)
                                 # Очистка некорректно найдённых лиц на изображении
                                 correct_faces = []
                                 for (x, y, w, h) in detect_faces:
                                     if x > correct_field and y > correct_field and w > correct_field and \
                                             h > correct_field:
                                         correct_faces.append([x, y, w, h])
+                                # cv2.waitKey(0)
+                                # cv2.imshow(f'img{file_name}', final)
                                 # Формирование финального результата
                                 output = None
                                 for (x, y, w, h) in correct_faces:
@@ -849,7 +857,7 @@ class MainWidgetClass(QtWidgets.QWidget):
             # 9 Выгрузить из системы список работников, добавить поля в базу
             # hikvision и загрузить дополненный список из 1с.
 
-            # threading.Thread(target=find_face, args=([3])).start()
+            threading.Thread(target=find_face, args=([3])).start()
             # threading.Thread(target=equal_foto, args=([6])).start()
             # threading.Thread(target=remove_id_from_jpg, args=([6])).start()
             # threading.Thread(target=change_p_to_eng_to_rus, args=([1, True])).start()

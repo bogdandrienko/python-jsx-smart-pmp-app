@@ -21166,3 +21166,69 @@ Bogdan, 127.0.0.1, /idea_view/1/, GET, 2021-12-18 20:37:32.257498, IdeaRatingMod
 Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-18 21:18:55.313436, IdeaRatingModel matching query does not exist.
 
 Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-18 21:18:55.327448, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:18:49.188100, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:18:49.214123, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:19:26.817554, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:19:26.833568, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:19:26.855588, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:19:26.871602, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-12-20 00:19:43.892910, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-12-20 00:19:43.907923, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-12-20 00:19:43.933946, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-12-20 00:19:43.948959, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-20 00:19:45.435277, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-20 00:19:45.452292, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-20 00:19:45.475313, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-20 00:19:45.491327, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-12-20 00:19:50.627745, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, POST, 2021-12-20 00:19:50.643759, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:19:52.401318, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:19:52.415331, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:19:52.432346, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:19:52.448360, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:20:10.483566, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:20:10.508588, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:20:10.592663, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:20:19.578488, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:21:39.841190, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-20 00:21:39.856221, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:22:00.580425, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:22:00.593969, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:22:00.609507, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:22:00.622536, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:22:02.413236, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_like/6/, POST, 2021-12-20 00:22:02.429250, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/6/, GET, 2021-12-20 00:22:02.499312, IdeaRatingModel matching query does not exist.
