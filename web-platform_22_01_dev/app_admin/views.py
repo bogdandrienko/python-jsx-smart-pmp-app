@@ -7,6 +7,8 @@ import random
 import httplib2
 from email import message
 from concurrent.futures import ThreadPoolExecutor
+
+import requests
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -1713,13 +1715,24 @@ def analyse(request):
     if page:
         return redirect(page)
 
-    try:
-        with ThreadPoolExecutor() as executor:
-            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.1)
-    except Exception as error:
-        print(f'\nanalyse | error : {error}\n')
-        with ThreadPoolExecutor() as executor:
-            executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
+    # response = requests.get(url='http://127.0.0.1/drf/users/2/', timeout=3)
+    # print(response.text)
+
+    # login = 'Bogdan'
+    # password = '31284bogdan'
+    h = httplib2.Http(os.path.abspath('__file__'))
+    # h.add_credentials(login, password)
+    response, content = h.request('http://127.0.0.1/drf/articles/')
+    print(response)
+    print(content.decode())
+
+    # try:
+    #     with ThreadPoolExecutor() as executor:
+    #         executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.1)
+    # except Exception as error:
+    #     print(f'\nanalyse | error : {error}\n')
+    #     with ThreadPoolExecutor() as executor:
+    #         executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
 
     return redirect(to='home')
 
