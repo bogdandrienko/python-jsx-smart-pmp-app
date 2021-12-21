@@ -1,31 +1,33 @@
 from rest_framework import serializers
-from app_admin.models import IdeaModel
 from django.contrib.auth.models import User, Group
-from .models import Article
+from app_djangorestframework.models import TodoModel, DataModel, IdeasModel
 
 
-class ArticleSerializer(serializers.ModelSerializer):
+class TodoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Article
-        fields = '__all__'
-    # title = serializers.CharField(max_length=120)
-    # description = serializers.CharField()
-    # body = serializers.CharField()
-
-
-class IdeaModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = IdeaModel
+        model = TodoModel
         fields = '__all__'
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class DataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DataModel
+        fields = '__all__'
+
+
+class IdeasModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IdeasModel
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = '__all__'
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ['url', 'name']
+        fields = '__all__'

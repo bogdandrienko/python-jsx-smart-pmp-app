@@ -2291,6 +2291,164 @@ def create_group(sender, instance, created, **kwargs):
             error = f'error = {error}'
 
 
+# notification
+class NotificationModel(models.Model):
+    """
+    Notification Model
+    """
+    user_foreign_key_field = models.ForeignKey(
+        db_column='user_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='user_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Пользователь:',
+        help_text='<small class="text-muted">Связь, с какой-либо группой, example: "to=Group.objects.get'
+                  '(name="User")"</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+    )
+    LIST_DB_VIEW_CHOICES = [
+        ('errors', 'Ошибки'),
+        ('notifications', 'Уведомления'),
+        ('messages', 'Сообщения'),
+    ]
+    type_slug_field = models.SlugField(
+        db_column='type_slug_field_db_column',
+        db_index=True,
+        db_tablespace='type_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        choices=LIST_DB_VIEW_CHOICES,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Путь модуля:',
+        help_text='<small class="text-muted">полный путь от класса до функции вызова цикла модуля</small><hr><br>',
+
+        max_length=128,
+        allow_unicode=False,
+    )
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя группы для отображения',
+        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
+                  '"Модератор отдела ОУПиБП"</small><hr><br>',
+
+        max_length=128,
+    )
+    text_field = models.TextField(
+        db_column='text_field_db_column',
+        db_index=True,
+        db_tablespace='text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='text_field',
+        help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
+
+        max_length=1024,
+    )
+    created_datetime_field = models.DateTimeField(
+        db_column='created_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='created_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата создания',
+        help_text='<small class="text-muted">created_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    decision_datetime_field = models.DateTimeField(
+        db_column='decision_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='decision_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Дата решения',
+        help_text='<small class="text-muted">register_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'auth'
+        ordering = ('created_datetime_field', 'user_foreign_key_field', 'type_slug_field')
+        verbose_name = 'Уведомление'
+        verbose_name_plural = 'Уведомления'
+        db_table = 'notification_model_table'
+
+    def __str__(self):
+        try:
+            dictionary = {x[0]: x[1] for x in self.LIST_DB_VIEW_CHOICES}
+            type_slug = dictionary[self.type_slug_field]
+        except Exception as error:
+            type_slug = '_'
+        return f'{type_slug} | {self.name_char_field} | {self.user_foreign_key_field}'
+
+    def get_id(self):
+        return self.id
+
+    @staticmethod
+    def get_all_types():
+        return NotificationModel.LIST_DB_VIEW_CHOICES
+
+
 # module_or_component
 class ModuleOrComponentModel(models.Model):
     """

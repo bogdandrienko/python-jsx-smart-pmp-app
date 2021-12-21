@@ -1,0 +1,14 @@
+status: 200
+date: Tue, 21 Dec 2021 04:47:04 GMT
+server: WSGIServer/0.2 CPython/3.9.9
+content-type: application/json
+vary: Accept, Cookie
+allow: GET, POST, HEAD, OPTIONS
+x-frame-options: DENY
+content-length: 765
+x-content-type-options: nosniff
+referrer-policy: same-origin
+cross-origin-opener-policy: same-origin
+content-location: http://127.0.0.1/drf/ideas/
+
+[{"id":2,"author_char_field":"1","name_char_field":"2","category_slug_field":"innovation","short_description_char_field":"3","full_description_text_field":"4","avatar_image_field":null,"addiction_file_field":null,"visibility_boolean_field":false,"created_datetime_field":"2021-12-21T10:46:00+06:00","register_datetime_field":"2021-12-21T10:46:00+06:00","author_foreign_key_field":1},{"id":1,"author_char_field":"1","name_char_field":"2","category_slug_field":"innovation","short_description_char_field":"3","full_description_text_field":"4","avatar_image_field":null,"addiction_file_field":null,"visibility_boolean_field":false,"created_datetime_field":"2021-12-21T10:46:00+06:00","register_datetime_field":"2021-12-21T10:46:00+06:00","author_foreign_key_field":1}]

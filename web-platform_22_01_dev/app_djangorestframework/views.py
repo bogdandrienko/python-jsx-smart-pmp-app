@@ -1,49 +1,38 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from app_admin.models import IdeaModel
-from .serializers import UserSerializer, GroupSerializer, IdeaModelSerializer, ArticleSerializer
-from .models import Article
+from app_djangorestframework.serializers import UserSerializer, GroupSerializer, IdeasModelSerializer, TodoSerializer, \
+    DataSerializer
+from app_djangorestframework.models import TodoModel, DataModel, IdeasModel
 
 
 # Create your views here.
 
-class ArticleView(APIView):
-    def get(self, request):
-        articles = Article.objects.all()
-        serializer = ArticleSerializer(articles, many=True)
-        return Response({"articles": serializer.data})
+
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = TodoModel.objects.all()
+    serializer_class = TodoSerializer
+    permission_classes = [permissions.AllowAny]
 
 
-class IdeaView(APIView):
-    def get(self, request):
-        return Response({"ideas": IdeaModelSerializer(instance=IdeaModel.objects.all(), many=True).data})
+class DataViewSet(viewsets.ModelViewSet):
+    queryset = DataModel.objects.all()
+    serializer_class = DataSerializer
+    permission_classes = [permissions.AllowAny]
 
 
-class GetIdeaView(APIView):
-    def get(self, request):
-        queryset = IdeaModel.objects.all()
-        serializer_for_queryset = IdeaModelSerializer(
-            instance=queryset,  # Передаём набор записей
-            many=True  # Указываем, что на вход подаётся именно набор записей
-        )
-        return Response({"ideas": serializer_for_queryset.data})
+class IdeasViewSet(viewsets.ModelViewSet):
+    queryset = IdeasModel.objects.all()
+    serializer_class = IdeasModelSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]

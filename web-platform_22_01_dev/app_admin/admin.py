@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import ExamplesModel, UserModel, GroupModel, LoggingModel, ActionModel, ComputerVisionModuleModel, \
-    ComputerVisionComponentModel, ModuleOrComponentModel, IdeaCommentModel, IdeaModel, IdeaRatingModel
+from app_admin.models import ExamplesModel, UserModel, GroupModel, LoggingModel, ActionModel, \
+    ComputerVisionModuleModel, ComputerVisionComponentModel, ModuleOrComponentModel, IdeaCommentModel, IdeaModel, \
+    IdeaRatingModel, NotificationModel
 
 # admin
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
@@ -334,6 +335,50 @@ class GroupModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(GroupModel, GroupModelAdmin)
+
+
+# notification
+class NotificationModelAdmin(admin.ModelAdmin):
+    """
+    Настройки 'Notification Model' на панели администратора
+    """
+    list_display = (
+        'user_foreign_key_field',
+        'type_slug_field',
+        'name_char_field',
+        'text_field',
+        'created_datetime_field',
+        'decision_datetime_field',
+    )
+    list_filter = (
+        'user_foreign_key_field',
+        'type_slug_field',
+        'name_char_field',
+        'text_field',
+        'created_datetime_field',
+        'decision_datetime_field',
+    )
+    fieldsets = (
+        ('main', {'fields': (
+            'user_foreign_key_field',
+            'type_slug_field',
+            'name_char_field',
+            'text_field',
+            'created_datetime_field',
+            'decision_datetime_field',
+        )}),
+    )
+    search_fields = [
+        'user_foreign_key_field',
+        'type_slug_field',
+        'name_char_field',
+        'text_field',
+        'created_datetime_field',
+        'decision_datetime_field',
+    ]
+
+
+admin.site.register(NotificationModel, NotificationModelAdmin)
 
 
 # module_or_component

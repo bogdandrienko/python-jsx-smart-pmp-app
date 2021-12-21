@@ -49,6 +49,11 @@
                                         {% if access %}
                                             <a class="dropdown-item" href="{% url 'analyse' %}">Машинное зрение: запуск анализа</a>
                                         {% endif %}
+
+                                        {% access_tag 'react' as access %}
+                                        {% if access %}
+                                            <a class="dropdown-item" href="{% url 'react' %}">React</a>
+                                        {% endif %}
                                     </li>
                                 </ul>
                             </li>
@@ -120,7 +125,12 @@
 								<li>
 									<h6 class="dropdown-header">Основной функционал</h6>
 									<a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
-									<a class="dropdown-item disabled" href="#">Уведомления</a>
+
+                                    {% access_tag 'account_notification' as access %}
+                                    {% if access %}
+                                        <a class="dropdown-item" href="{% url 'account_notification' 0 %}">Уведомления</a>
+                                    {% endif %}
+
 									<a class="dropdown-item disabled" href="#">Достижения</a>
 								</li>
 								<li>

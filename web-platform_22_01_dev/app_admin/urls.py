@@ -49,6 +49,9 @@ urlpatterns = [
     path('account_recover_password/<slug:type_slug>/', views.account_recover_password, name='account_recover_password'),
     path('account_profile/', views.account_profile, name='account_profile'),
     path('account_profile/<int:user_id>/', views.account_profile, name='account_profile'),
+    path('account_notification/', views.account_notification, name='account_notification'),
+    path('account_notification/<slug:type_slug>/', views.account_notification, name='account_notification'),
+    path('account_create_notification/', views.account_create_notification, name='account_create_notification'),
     path('account_create_or_change_accounts/', views.account_create_or_change_accounts,
          name='account_create_or_change_accounts'),
     path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),
@@ -90,6 +93,7 @@ urlpatterns = [
     # extra
     path('geo/', views.geo, name='geo'),
     path('analyse/', views.analyse, name='analyse'),
+    path('react/', views.react, name='react'),
 
     # salary
     path('salary/', views.salary, name='salary'),

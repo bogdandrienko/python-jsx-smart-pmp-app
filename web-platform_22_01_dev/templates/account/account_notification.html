@@ -1,0 +1,113 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Личный профиль
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="text-center">
+    <h1 class="display-6 fst-italic">Личный профиль</h1>
+    <small class="text-secondary">Эта страница содержит подробную информацию о пользователе.</small>
+</div>
+
+{% if response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="container text-center">
+        <div class="btn-group m-1">
+
+            <a class="btn btn-lg btn-outline-primary" href="{% url 'account_notification' 'All' %}">Все типы</a>
+
+            {% for type in types %}
+                {% if forloop.counter == 0 %}
+                    <a class="btn btn-lg btn-outline-success" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                {% elif forloop.counter == 1 %}
+                    <a class="btn btn-lg btn-outline-danger" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                {% elif forloop.counter == 2 %}
+                    <a class="btn btn-lg btn-outline-warning" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                {% elif forloop.counter == 3 %}
+                    <a class="btn btn-lg btn-outline-success" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                {% else %}
+                    <a class="btn btn-lg btn-outline-secondary" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% if page %}
+
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+
+        <div class="text-center">
+            <h1 class="display-6">Данные</h1>
+            <p class="lead">Текущие данные ниже в таблице:</p>
+            <hr/>
+        </div>
+        <table class="table table-bordered table-info table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="1" class="text-center">Заголовок уведомления</th>
+                    <th scope="col" colspan="1" class="text-center">Текст уведомления</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for notification in page %}
+
+                    <tr>
+                        <td colspan="1" class="align-bottom text-center">{{ notification.name_char_field }}</td>
+                        <td colspan="1" class="align-bottom text-center">{{ notification.text_field }}</td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

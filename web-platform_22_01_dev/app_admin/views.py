@@ -22,11 +22,11 @@ from app_admin.models import UserModel, GroupModel
 from app_admin.forms import GeoForm
 from app_settings import settings
 from app_admin.models import LoggingModel, ActionModel, IdeaModel, IdeaCommentModel, IdeaRatingModel, \
-    ModuleOrComponentModel
+    ModuleOrComponentModel, NotificationModel
 from app_admin.forms import ExamplesModelForm
 from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryClass, Xhtml2pdfClass, CareerClass, \
     GeoClass, ComputerVisionClass
-from app_admin.utils import ExcelClass, EncryptingClass, SQLClass
+from app_admin.utils import ExcelClass, EncryptingClass, SQLClass, DirPathFolderPathClass
 
 
 # example
@@ -593,34 +593,6 @@ def account_recover_password(request, type_slug='iin'):
     return render(request, 'account/account_recover_password.html', context)
 
 
-def account_self_profile(request):
-    """
-    Страница профиля пользователя
-    """
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
-    if page:
-        return redirect(page)
-
-    try:
-        user_model = UserModel.objects.get_or_create(user_foreign_key_field=request.user)[0]
-        response = 1
-        context = {
-            'response': response,
-            'user': request.user,
-            'user_model': user_model,
-        }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'user': None,
-            'user_model': None,
-        }
-
-    return render(request, 'account/account_profile.html', context)
-
-
 def account_profile(request, user_id=0):
     """
     Страница профиля пользователя
@@ -654,6 +626,81 @@ def account_profile(request, user_id=0):
         }
 
     return render(request, 'account/account_profile.html', context)
+
+
+def account_notification(request, type_slug='All'):
+    """
+    Страница уведомлений пользователя
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    try:
+        user_model = UserModel.objects.get_or_create(user_foreign_key_field=User.objects.get(id=request.user.id))[0]
+        if type_slug.lower() != 'all':
+            notifications = NotificationModel.objects.filter(
+                user_foreign_key_field=user_model,
+                type_slug_field=type_slug
+            )
+        else:
+            notifications = NotificationModel.objects.filter(
+                user_foreign_key_field=user_model,
+            )
+        types = NotificationModel.get_all_types()
+
+        try:
+            page = PaginationClass.paginate(request=request, objects=notifications, num_page=100)
+            response = 0
+        except Exception as error:
+            response = -1
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+        context = {
+            'response': response,
+            'page': page,
+            'types': types,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'page': None,
+            'types': None,
+        }
+
+    return render(request, 'account/account_notification.html', context)
+
+
+def account_create_notification(request):
+    """
+    Страница создания уведомления пользователя
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        if request.method == 'POST':
+            type_slug_field = DjangoClass.RequestClass.get_value(request, "type_slug_field")
+            name_char_field = DjangoClass.RequestClass.get_value(request, "name_char_field")
+            text_field = DjangoClass.RequestClass.get_value(request, "text_field")
+            superusers = User.objects.filter(is_superuser=True)
+            for superuser in superusers:
+                user_model = UserModel.objects.get_or_create(user_foreign_key_field=superuser)[0]
+                NotificationModel.objects.create(
+                    user_foreign_key_field=user_model,
+                    type_slug_field=type_slug_field,
+                    name_char_field=name_char_field,
+                    text_field=text_field
+                )
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+    return redirect('home')
 
 
 def account_create_or_change_accounts(request):
@@ -1718,11 +1765,11 @@ def analyse(request):
     # response = requests.get(url='http://127.0.0.1/drf/users/2/', timeout=3)
     # print(response.text)
 
-    # login = 'Bogdan'
-    # password = '31284bogdan'
-    h = httplib2.Http(os.path.abspath('__file__'))
-    # h.add_credentials(login, password)
-    response, content = h.request('http://127.0.0.1/drf/articles/')
+    login = 'Bogdan'
+    password = '31284bogdan'
+    h = httplib2.Http(DirPathFolderPathClass.create_folder_in_this_dir(folder_name='static/media/temp'))
+    h.add_credentials(login, password)
+    response, content = h.request('http://127.0.0.1/drf/ideas/')
     print(response)
     print(content.decode())
 
@@ -1735,6 +1782,19 @@ def analyse(request):
     #         executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
 
     return redirect(to='home')
+
+
+def react(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='react')
+    if page:
+        return redirect(page)
+
+    try:
+        context = {}
+        return render(request, 'react/react.html', context)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
 
 # salary

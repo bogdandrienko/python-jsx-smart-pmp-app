@@ -15150,3 +15150,983 @@ Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-20 13:39:43.320838
 Bogdan, 127.0.0.1, /home/, GET, 2021-12-20 13:39:43.363698
 
 , 192.168.1.68, /, GET, 2021-12-20 14:45:08.507326
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 09:37:10.303360
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 09:48:44.596568
+
+Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-21 09:48:46.613998
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 09:48:46.638953
+
+Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-21 09:49:14.781650
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 09:49:14.838146
+
+Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-21 09:49:41.102043
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 09:49:41.127973
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 09:50:29.951349
+
+Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-21 09:50:51.546486
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 09:50:51.737976
+
+Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-21 09:56:02.816448
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 09:56:02.838899
+
+Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-21 09:58:26.565363
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 09:58:26.651122
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-21 10:05:59.555526
+
+Bogdan, 127.0.0.1, /module_or_component/module_modules/, GET, 2021-12-21 10:05:59.828927
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 10:06:00.746096
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 10:06:01.607640
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 10:07:49.966208
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 10:36:38.420366
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 10:47:03.204411
+
+Bogdan, 127.0.0.1, /analyse/, GET, 2021-12-21 10:47:04.509997
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 10:47:04.532958
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 10:56:19.150820
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 10:56:20.719236
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:00:43.990294
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:01:19.208572
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:01:35.974647
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:01:44.821079
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:05:43.129754
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:12:04.809120
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:12:13.064077
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:12:16.409359
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:12:29.975871
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:13:25.624730
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:13:47.970111
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:13:57.233223
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:14:15.168788
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:14:20.446359
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:14:31.505190
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:14:44.912681
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:15:02.689653
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:15:10.760406
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:15:32.041305
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:15:43.745427
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:15:53.213657
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:16:05.578639
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:17:18.021380
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:18:07.628880
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:18:12.318436
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:18:30.386848
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:20:09.470094
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:21:22.331080
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:21:50.314815
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:22:03.498272
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:22:11.346670
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:22:35.490733
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:22:46.194292
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:22:46.930338
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:22:51.735599
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:24:00.911092
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:24:17.430433
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:25:02.258147
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:25:37.443122
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:27:31.698855
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:28:10.471176
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:29:40.480020
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:34:11.657925
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:40:55.353753
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:44:38.422540
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:50:32.503309
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:50:52.879177
+
+Bogdan, 127.0.0.1, /react/, GET, 2021-12-21 11:51:02.774782
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 15:25:38.373603
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 15:44:03.760652
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 15:58:07.047610
+
+Bogdan, 127.0.0.1, /, GET, 2021-12-21 15:59:02.750474
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 15:59:04.970796
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 15:59:22.551801
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 15:59:36.518458
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 16:00:06.579453
+
+Bogdan, 127.0.0.1, /account_notification/, GET, 2021-12-21 16:01:38.096169
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 16:01:39.387852
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 16:01:44.523371
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 16:01:54.193103
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 16:01:59.085597
+
+Bogdan, 127.0.0.1, /account_notification/0/, GET, 2021-12-21 16:02:49.048802
+
+Bogdan, 127.0.0.1, /account_notification/, GET, 2021-12-21 16:02:51.343004
+
+Bogdan, 127.0.0.1, /account_notification/, GET, 2021-12-21 16:03:29.575865
+
+Bogdan, 127.0.0.1, /account_notification/, GET, 2021-12-21 16:03:31.782328
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:03:45.115498
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:03:47.835033
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:03:49.188884
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:03:50.507495
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:03:51.149530
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:03:51.923147
+
+Bogdan, 127.0.0.1, /account_notification/0_errors/, GET, 2021-12-21 16:04:09.130861
+
+Bogdan, 127.0.0.1, /account_notification/0_errors/, GET, 2021-12-21 16:04:11.018942
+
+Bogdan, 127.0.0.1, /account_notification/0_errors/, GET, 2021-12-21 16:08:34.232301
+
+Bogdan, 127.0.0.1, /account_notification/0_errors/, GET, 2021-12-21 16:08:41.210379
+
+Bogdan, 127.0.0.1, /account_notification/0_errors/, GET, 2021-12-21 16:09:01.203450
+
+Bogdan, 127.0.0.1, /account_notification/0_errors/, GET, 2021-12-21 16:09:11.373610
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:09:13.447606
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:09:14.094622
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:09:14.831763
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:09:16.566427
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:09:17.087229
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:09:17.517992
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:09:36.724780
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:09:37.559250
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:09:38.071163
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:09:38.607114
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:09:39.264513
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:09:49.335982
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:09:50.448420
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:09:51.112135
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:09:51.663103
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:09:52.254102
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:09:52.798964
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:09:54.588702
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:09:55.191099
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:09:55.753101
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:09:56.408028
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:09:58.150435
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:09:58.791805
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:10:00.359183
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:10:37.536000
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:10:38.054552
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:10:38.622287
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:10:39.167691
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:10:39.807613
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:10:40.318635
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:10:41.208092
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:10:41.638102
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:10:42.023484
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:10:42.512650
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:10:42.886878
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:10:43.263723
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:10:43.991767
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:10:44.398420
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:10:44.767155
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:10:45.207728
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:10:45.582821
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:10:45.903040
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:10:46.431627
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:07.956277
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:08.896427
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:09.607865
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:10.638973
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:11.231974
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:11.615021
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:14.924142
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:15.712574
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:16.224774
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:16.655133
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:17.517496
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:18.149906
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:18.512229
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:18.967799
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:19.487570
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:19.886929
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:20.535368
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:20.951860
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:21.328103
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:21.729398
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:22.118557
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:22.528601
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:22.902480
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:23.224015
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:23.566413
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:23.887661
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:24.199719
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:24.502341
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:25.054299
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:26.958415
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:27.334566
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:27.927676
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:28.438947
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:52.918562
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:11:54.086814
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:11:54.576927
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:11:55.239955
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:11:55.840359
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:20.310418
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:20.910643
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:21.486108
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:21.789277
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:22.030656
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:22.260169
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:22.438165
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:22.634661
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:31.506440
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:53.590714
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:12:54.393805
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:12:54.864457
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:12:55.378108
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:55.921004
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:12:56.616712
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:12:57.104359
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:12:57.597276
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:12:58.351968
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:12:58.791347
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:12:59.280473
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:12:59.783575
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:13:00.247731
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:13:00.983746
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:13:01.400412
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:13:02.040318
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:13:02.744158
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:13:03.161681
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:13:03.594824
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:13:03.887760
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:13:04.160309
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:13:04.616858
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:13:04.927620
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:13:05.415125
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:13:05.800702
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:13:06.126683
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:13:23.298858
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:13:24.905093
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:13:26.649088
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:13:28.800472
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:13:29.352651
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:13:30.025659
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:13:38.264302
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:13:38.768515
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:13:39.968786
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:14:28.922280
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:14:29.655957
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:14:30.281119
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:14:30.896499
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:14:31.505268
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:14:32.209471
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:14:32.610196
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:14:33.010977
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:14:47.764902
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:14:48.400621
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:14:49.490279
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:14:49.968571
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:14:50.793713
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:15:18.480093
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:15:18.857861
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:15:19.240817
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:15:20.257807
+
+Bogdan, 127.0.0.1, /idea_list/, GET, 2021-12-21 16:15:21.820246
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-12-21 16:15:24.185461
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-12-21 16:15:24.800390
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2021-12-21 16:15:25.505230
+
+Bogdan, 127.0.0.1, /idea_list/optimization/, GET, 2021-12-21 16:15:26.338406
+
+Bogdan, 127.0.0.1, /idea_list/innovation/, GET, 2021-12-21 16:15:26.777190
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-21 16:15:27.232468
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:15:29.440475
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:15:29.906139
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:15:30.329996
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:15:30.738375
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:15:31.122009
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:16:38.071425
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:16:39.426561
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:16:40.002626
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:16:40.506118
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:16:41.010499
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:16:41.386679
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:16:58.753393
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:01.112687
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:01.626020
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:02.543471
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:03.049435
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:03.705494
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:17:04.378476
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:05.506540
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:06.027130
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:06.882357
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:17:07.459234
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:08.248169
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:08.746951
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:09.257912
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:20.120375
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:21.049425
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:21.658284
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:22.218344
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:17:22.690534
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:23.225241
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:23.777897
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:24.178350
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:25.002522
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:17:25.409174
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:43.051809
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:43.643701
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:44.178283
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:17:44.882453
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:17:45.691897
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:17:52.954459
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:53.370752
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:17:53.966630
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:04.818344
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:05.511832
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:06.042846
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:19:06.777850
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:07.474446
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:08.139140
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:08.562000
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:19:09.011080
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:09.570594
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:16.961600
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:17.659469
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:18.083559
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:19:19.114655
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:19.523645
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:19.955379
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:20.579443
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:21.147147
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:21.578262
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:19:22.003400
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:22.403087
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:19:26.081399
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:27.034675
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:28.968967
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:48.697903
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:49.123388
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:49.708631
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:19:50.443878
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:51.146776
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:51.588369
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:52.162504
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:19:57.162859
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:19:57.826728
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:58.370705
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:19:58.899354
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:19:59.530183
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:20:00.081680
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:20:00.531796
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:20:01.074377
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:20:01.604271
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:20:02.036111
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:20:02.435437
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:20:02.868151
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:20:03.426633
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:20:04.161929
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:20:04.946952
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:22:09.605171
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:22:11.884475
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:22:12.469485
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:22:13.005239
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:22:28.570155
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:22:29.340072
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:22:29.765138
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:22:30.205442
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:22:30.610950
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:22:31.219543
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:22:31.403550
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:22:54.921371
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:22:56.875994
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:22:57.380439
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:22:57.869606
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:22:58.717603
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:22:59.254153
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:22:59.949127
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:23:00.412864
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:01.316492
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:02.045233
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:02.717220
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:03.308796
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:03.716846
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:04.596823
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:05.103994
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:23:05.739579
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:08.469174
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:30.892904
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:31.428030
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:23:31.948237
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:32.580889
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:33.637165
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:34.108263
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:34.660650
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:35.139919
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:35.620629
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:23:36.085735
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:36.588394
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:37.189863
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:37.588152
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:23:37.916543
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:38.515695
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:51.464833
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:23:52.339941
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:52.886351
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:23:53.453806
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:23:54.117260
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:23:54.524586
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:23:55.069187
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:25:05.347730
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:28:28.205839
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:28:44.246423
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:29:52.673061
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:30:29.812158
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:30:31.807873
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:30:33.111661
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:30:34.527023
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:30:35.086553
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:30:35.623209
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:30:36.559853
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:30:37.382380
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:30:38.839845
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:30:40.247101
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:30:42.679638
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:30:43.367136
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:30:49.845131
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:31:56.744001
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:31:57.296338
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:31:57.865636
+
+Bogdan, 127.0.0.1, /account_notification/notification/, GET, 2021-12-21 16:31:58.423872
+
+Bogdan, 127.0.0.1, /account_notification/message/, GET, 2021-12-21 16:31:58.928134
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:32:00.200402
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:44:54.041747
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:44:58.656169
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:45:28.331816
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:45:35.018943
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:45:40.162799
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:45:46.355288
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:45:55.662490
+
+Bogdan, 127.0.0.1, /account_create_notification/, POST, 2021-12-21 16:45:57.397669
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 16:45:57.431095
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:45:58.790025
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:46:00.002045
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:46:01.094653
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:46:02.026168
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:46:02.735099
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:46:03.510954
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:46:04.278307
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:46:06.203910
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:46:06.572513
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:46:07.901830
+
+Bogdan, 127.0.0.1, /account_notification/messages/, GET, 2021-12-21 16:46:08.372534
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:46:09.149440
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 16:46:19.306482
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:46:51.716958
+
+Bogdan, 127.0.0.1, /account_create_notification/, POST, 2021-12-21 16:46:52.781315
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:47:27.568927
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:47:28.939377
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:47:30.813636
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:47:31.317218
+
+Bogdan, 127.0.0.1, /account_notification/messages/, GET, 2021-12-21 16:47:32.108887
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:47:32.940291
+
+Bogdan, 127.0.0.1, /account_notification/messages/, GET, 2021-12-21 16:47:33.604547
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:47:35.166187
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:47:38.943951
+
+Bogdan, 127.0.0.1, /account_create_notification/, POST, 2021-12-21 16:47:40.367933
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 16:47:40.467849
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:47:44.939053
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:47:46.020127
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:47:47.395402
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:47:48.425900
+
+Bogdan, 127.0.0.1, /account_create_notification/, POST, 2021-12-21 16:47:52.983089
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:48:27.214359
+
+Bogdan, 127.0.0.1, /account_create_notification/, POST, 2021-12-21 16:48:28.172776
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 16:48:28.200702
+
+Bogdan, 127.0.0.1, /account_notification/All/, GET, 2021-12-21 16:48:29.363524
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:48:32.645449
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:33.284029
+
+Bogdan, 127.0.0.1, /account_notification/messages/, GET, 2021-12-21 16:48:33.910089
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:34.646107
+
+Bogdan, 127.0.0.1, /account_notification/messages/, GET, 2021-12-21 16:48:35.398594
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:35.949718
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:48:36.589956
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:37.093504
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:38.601861
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:45.448096
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:48:46.172635
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:47.788516
+
+Bogdan, 127.0.0.1, /account_notification/messages/, GET, 2021-12-21 16:48:49.541426
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:48:50.942054
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:48:54.903915
+
+Bogdan, 127.0.0.1, /account_notification/messages/, GET, 2021-12-21 16:48:56.677641
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:48:57.166188
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:48:57.693091
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:52:20.312778
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:54:32.394297
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:54:47.765593
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:55:48.762673
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:55:49.986570
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:55:51.108951
+
+Bogdan, 127.0.0.1, /account_create_notification/, POST, 2021-12-21 16:55:53.186331
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 16:55:53.215253
+
+Bogdan, 127.0.0.1, /account_notification/errors/, GET, 2021-12-21 16:55:54.359811
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:55:55.311038
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:57:46.133708
+
+Bogdan, 127.0.0.1, /idea_view/2/, GET, 2021-12-21 16:57:49.669168
+
+Bogdan, 127.0.0.1, /account_create_notification/, POST, 2021-12-21 16:57:50.442581
+
+Bogdan, 127.0.0.1, /home/, GET, 2021-12-21 16:57:50.505106
+
+Bogdan, 127.0.0.1, /account_notification/notifications/, GET, 2021-12-21 16:57:51.431765

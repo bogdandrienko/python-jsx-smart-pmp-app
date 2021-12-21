@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'app_djangorestframework.apps.AppDjangorestframeworkConfig',
 
-    'app_admin.apps.AppAdminConfig'
+    'app_admin.apps.AppAdminConfig',
 ]
 
 MIDDLEWARE = [

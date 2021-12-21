@@ -1,0 +1,45 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    React
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">React</h1>
+        <p class="lead">React.</p>
+    </div>
+
+    <main>
+        <button id="btn" name="btn" class="btn btn-lg btn-outline-success">Запуск</button>
+        <div id="list" class="card form-control"></div>
+    </main>
+
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}
+        <script src="{% static 'js/react.js' %}"></script>
+{% endblock script %}
