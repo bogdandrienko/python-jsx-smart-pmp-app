@@ -247,6 +247,35 @@
                         </label>
                         <button class="btn btn-lg btn-outline-primary w-100" type="submit">Подтвердить</button>
                     </form>
+
+                    <form class="" action="{% url 'account_create_notification' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text"
+                               id="type_slug_field"
+                               name="type_slug_field"
+                               required=""
+                               placeholder=""
+                               value="notifications"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <input type="text"
+                               id="name_char_field"
+                               name="name_char_field"
+                               required=""
+                               placeholder=""
+                               value="Жалоба на статью в банке идей"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <input type="text"
+                               id="text_field"
+                               name="text_field"
+                               required=""
+                               placeholder=""
+                               value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <button class="btn btn-lg btn-outline-danger" type="submit">Пожаловаться</button>
+                    </form>
                 </div>
 
             </div>
@@ -285,39 +314,30 @@
                             <p>
                                 <form class="" action="{% url 'account_create_notification' %}" method="POST">
                                     {% csrf_token %}
-                                    <label class="form-control-lg">
-                                        <input type="text"
-                                               id="type_slug_field"
-                                               name="type_slug_field"
-                                               required=""
-                                               placeholder=""
-                                               value="notifications"
-                                               class="form-control form-control-lg d-none"
-                                        />
-                                        <small class="text-muted"></small>
-                                    </label>
-                                    <label class="form-control-lg">
-                                        <input type="text"
-                                               id="name_char_field"
-                                               name="name_char_field"
-                                               required=""
-                                               placeholder=""
-                                               value="Жалоба на комментарий в банке идей"
-                                               class="form-control form-control-lg d-none"
-                                        />
-                                        <small class="text-muted"></small>
-                                    </label>
-                                    <label class="form-control-lg">
-                                        <input type="text"
-                                               id="text_field"
-                                               name="text_field"
-                                               required=""
-                                               placeholder=""
-                                               value="[Пользователь: {{ request.user }}] | [ id комментария: {{comment.id}} ] | [ Автор комментария: {{ comment.author_foreign_key_field }} ] | [Идея в банке идей: {{ comment.idea_foreign_key_field }} ]"
-                                               class="form-control form-control-lg d-none"
-                                        />
-                                        <small class="text-muted"></small>
-                                    </label>
+                                    <input type="text"
+                                           id="type_slug_field"
+                                           name="type_slug_field"
+                                           required=""
+                                           placeholder=""
+                                           value="notifications"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <input type="text"
+                                           id="name_char_field"
+                                           name="name_char_field"
+                                           required=""
+                                           placeholder=""
+                                           value="Жалоба на комментарий в банке идей"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <input type="text"
+                                           id="text_field"
+                                           name="text_field"
+                                           required=""
+                                           placeholder=""
+                                           value="[ Пользователь: {{ request.user }} ] | [ id комментария: {{comment.id}} ] | [ Автор комментария: {{ comment.author_foreign_key_field }} ] | [ Идея в банке идей: {{ comment.idea_foreign_key_field }} ]"
+                                           class="form-control form-control-lg d-none"
+                                    />
                                     <button class="btn btn-sm btn-outline-danger w-100" type="submit">Пожаловаться</button>
                                 </form>
                             </p>

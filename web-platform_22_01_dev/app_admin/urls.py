@@ -52,6 +52,8 @@ urlpatterns = [
     path('account_notification/', views.account_notification, name='account_notification'),
     path('account_notification/<slug:type_slug>/', views.account_notification, name='account_notification'),
     path('account_create_notification/', views.account_create_notification, name='account_create_notification'),
+    path('account_change_notification/<int:notification_id>/', views.account_delete_or_change_notification,
+         name='account_delete_or_change_notification'),
     path('account_create_or_change_accounts/', views.account_create_or_change_accounts,
          name='account_create_or_change_accounts'),
     path('account_export_accounts/', views.account_export_accounts, name='account_export_accounts'),

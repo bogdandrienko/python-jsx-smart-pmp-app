@@ -128,7 +128,7 @@
 
                                     {% access_tag 'account_notification' as access %}
                                     {% if access %}
-                                        <a class="dropdown-item" href="{% url 'account_notification' 0 %}">Уведомления</a>
+                                        <a class="dropdown-item" href="{% url 'account_notification' 'All' %}">Уведомления</a>
                                     {% endif %}
 
 									<a class="dropdown-item disabled" href="#">Достижения</a>

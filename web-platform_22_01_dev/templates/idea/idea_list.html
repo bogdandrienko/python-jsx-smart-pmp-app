@@ -219,8 +219,37 @@
                                     <small class="text-muted">(зарегистрировано:){{ idea.register_datetime_field }}</small>
                                 </div>
 
-                                <div class="container-fluid">
-                                    <a class="btn btn-lg btn-outline-primary w-100" href="{% url 'idea_view' idea.id %}">Подробнее</a>
+                                <div class="container-fluid btn-group">
+                                    <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_view' idea.id %}">Подробнее</a>
+
+                                    <form class="" action="{% url 'account_create_notification' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="text"
+                                               id="type_slug_field"
+                                               name="type_slug_field"
+                                               required=""
+                                               placeholder=""
+                                               value="notifications"
+                                               class="form-control form-control-lg d-none"
+                                        />
+                                        <input type="text"
+                                               id="name_char_field"
+                                               name="name_char_field"
+                                               required=""
+                                               placeholder=""
+                                               value="Жалоба на статью в банке идей"
+                                               class="form-control form-control-lg d-none"
+                                        />
+                                        <input type="text"
+                                               id="text_field"
+                                               name="text_field"
+                                               required=""
+                                               placeholder=""
+                                               value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
+                                               class="form-control form-control-lg d-none"
+                                        />
+                                        <button class="btn btn-lg btn-outline-danger" type="submit">Пожаловаться</button>
+                                    </form>
                                 </div>
                             </div>
 

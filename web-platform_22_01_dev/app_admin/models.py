@@ -2385,6 +2385,24 @@ class NotificationModel(models.Model):
 
         max_length=1024,
     )
+    status_boolean_field = models.BooleanField(
+        db_column='status_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='status_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique_for_date=False,
+        unique_for_month=False,
+        unique_for_year=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=False,
+        verbose_name='Статус: ',
+        help_text='<small class="text-muted">Значение правда или ложь, example: "True" / '
+                  '"False"</small><hr><br>',
+    )
     created_datetime_field = models.DateTimeField(
         db_column='created_datetime_field_db_column',
         db_index=True,

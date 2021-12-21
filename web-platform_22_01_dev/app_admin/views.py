@@ -10,6 +10,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 import requests
 from django.core.mail import send_mail
+from django.utils import timezone
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import admin
@@ -26,7 +27,7 @@ from app_admin.models import LoggingModel, ActionModel, IdeaModel, IdeaCommentMo
 from app_admin.forms import ExamplesModelForm
 from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryClass, Xhtml2pdfClass, CareerClass, \
     GeoClass, ComputerVisionClass
-from app_admin.utils import ExcelClass, EncryptingClass, SQLClass, DirPathFolderPathClass
+from app_admin.utils import ExcelClass, EncryptingClass, SQLClass, DirPathFolderPathClass, DateTimeUtils
 
 
 # example
@@ -642,14 +643,13 @@ def account_notification(request, type_slug='All'):
         if type_slug.lower() != 'all':
             notifications = NotificationModel.objects.filter(
                 user_foreign_key_field=user_model,
-                type_slug_field=type_slug
-            )
+                type_slug_field=type_slug,
+            ).order_by('status_boolean_field', '-created_datetime_field')
         else:
             notifications = NotificationModel.objects.filter(
                 user_foreign_key_field=user_model,
-            )
+            ).order_by('status_boolean_field', '-created_datetime_field')
         types = NotificationModel.get_all_types()
-
         try:
             page = PaginationClass.paginate(request=request, objects=notifications, num_page=100)
             response = 0
@@ -701,6 +701,38 @@ def account_create_notification(request):
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
     return redirect('home')
+
+
+def account_delete_or_change_notification(request, notification_id: int):
+    """
+    Страница создания уведомления пользователя
+    """
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+        if request.method == 'POST':
+
+            type_action = DjangoClass.RequestClass.get_value(request, "type_action")
+            notification = NotificationModel.objects.get(id=notification_id)
+            if type_action == 'change':
+                status = DjangoClass.RequestClass.get_value(request, "hidden")
+                if status == 'true':
+                    status = True
+                elif status == 'false':
+                    status = False
+                notification.status_boolean_field = status
+                notification.decision_datetime_field = DateTimeUtils.get_current_datetime()
+                notification.save()
+            elif type_action == 'delete':
+                notification.delete()
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+    return redirect('account_notification')
 
 
 def account_create_or_change_accounts(request):

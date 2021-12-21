@@ -66,7 +66,7 @@
             <p class="lead">Текущие данные ниже в таблице:</p>
             <hr/>
         </div>
-        <table class="table table-bordered table-info table-striped table-hover table-sm">
+        <table class="table table-bordered table-dark table-striped table-hover table-sm">
             <thead>
                 <tr>
                     <th scope="col" colspan="1" class="text-center">Заголовок уведомления</th>
@@ -78,7 +78,53 @@
                 {% for notification in page %}
 
                     <tr>
-                        <td colspan="1" class="align-bottom text-center">{{ notification.name_char_field }}</td>
+                        <td colspan="1" class="align-bottom text-center">
+                            <div>
+                                {{ notification.name_char_field }}
+                            </div>
+                            <div class="btn-group">
+                                <form class="" action="{% url 'account_delete_or_change_notification' notification.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text"
+                                           id="type_action"
+                                           name="type_action"
+                                           required=""
+                                           placeholder=""
+                                           value="change"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <input type="text"
+                                           id="hidden"
+                                           name="hidden"
+                                           required=""
+                                           placeholder=""
+                                           {% if notification.status_boolean_field %}
+                                                value="false"
+                                           {% else %}
+                                                value="true"
+                                           {% endif %}
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                   {% if notification.status_boolean_field %}
+                                        <button class="btn btn-sm btn-outline-warning w-100" type="submit">Активировать</button>
+                                   {% else %}
+                                        <button class="btn btn-sm btn-outline-success w-100" type="submit">Деактивировать</button>
+                                   {% endif %}
+                                </form>
+                                <form class="" action="{% url 'account_delete_or_change_notification' notification.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text"
+                                           id="type_action"
+                                           name="type_action"
+                                           required=""
+                                           placeholder=""
+                                           value="delete"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <button class="btn btn-sm btn-outline-danger w-100" type="submit">Удалить</button>
+                                </form>
+                            </div>
+                        </td>
                         <td colspan="1" class="align-bottom text-center">{{ notification.text_field }}</td>
                     </tr>
 
