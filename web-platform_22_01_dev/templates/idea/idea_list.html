@@ -1,8 +1,7 @@
 {% extends "components/base.html" %}
-{% load access_tag %}
 {% load static %}
+{% load access_tag %}
 {% load idea_list_tag %}
-
 
 <!-- Head -->
 {% block head %}
@@ -90,18 +89,27 @@
 
             <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_list' 'All' %}">Все предложения</a>
 
+            {% access_tag 'idea_moderator' as idea_moderator %}
+            {% if idea.visibility_boolean_field or idea_moderator %}
+
+                <a class="btn btn-lg btn-outline-danger" href="{% url 'idea_list' 'idea_change_visibility' %}">На модерации</a>
+
+            {% endif %}
+
             {% for category in categoryes %}
-                {% if forloop.counter == 0 %}
+
+                {% if forloop.counter == 1 %}
                     <a class="btn btn-lg btn-outline-success" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
-                {% elif forloop.counter == 1 %}
-                    <a class="btn btn-lg btn-outline-danger" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
                 {% elif forloop.counter == 2 %}
                     <a class="btn btn-lg btn-outline-warning" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
                 {% elif forloop.counter == 3 %}
-                    <a class="btn btn-lg btn-outline-success" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
-                {% else %}
                     <a class="btn btn-lg btn-outline-secondary" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                {% elif forloop.counter == 4 %}
+                    <a class="btn btn-lg btn-outline-dark" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                {% else %}
+                    <a class="btn btn-lg btn-outline-dark" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
                 {% endif %}
+
             {% endfor %}
 
         </div>
@@ -120,6 +128,7 @@
 
                 {% access_tag 'idea_moderator' as idea_moderator %}
                 {% if idea.visibility_boolean_field or idea_moderator %}
+
                     <div class="col">
                         <div class="card shadow-sm">
                             <div class="card-header">
@@ -129,7 +138,9 @@
                             </div>
 
                             <div class="card-header">
+
                                 {% if idea_moderator %}
+
                                     <form action="{% url 'idea_change_visibility' idea.id %}" method="POST">
                                         {% csrf_token %}
 
@@ -173,26 +184,34 @@
                                         {% endif %}
 
                                     </form>
+
                                 {% endif %}
 
-                                {% if idea.author_foreign_key_field.user_foreign_key_field.username == request.user.username or idea_moderator%}
+                                {% if idea.author_foreign_key_field.user_foreign_key_field.username == request.user.username or idea_moderator %}
+
                                     <div class="form-control-lg">
                                         Редактировать идею:
                                         <a class="btn btn-lg btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">
                                             <i class="material-icons cart-icon">published_with_changes</i>
                                         </a>
                                     </div>
+
                                 {% endif %}
 
                                 <div class="container-fluid d-flex justify-content-between">
+
                                     {% if idea.author_foreign_key_field %}
+
                                         <a class="btn btn-sm btn-outline-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
                                             Автор: {{ idea.author_foreign_key_field.last_name_char_field }} {{ idea.author_foreign_key_field.first_name_char_field }} {{ idea.author_foreign_key_field.patronymic_char_field }}
                                         </a>
+
                                     {% else %}
+
                                         <small class="btn btn-sm btn-outline-success">
                                             Профиль не заполнен
                                         </small>
+
                                     {% endif %}
 
                                     <a class="btn btn-sm btn-outline-secondary" href="{% url 'idea_list' idea.get_category.0 %}">{{ idea.get_category.1 }}</a>
@@ -202,11 +221,17 @@
                             <div class="card-body">
                                 <div class="container-fluid">
                                     <a href="{% url 'idea_view' idea.id %}">
+
                                         {% if idea.avatar_image_field %}
+
                                             <img src="{{ idea.avatar_image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" width="" height="20" alt="{{ idea.id }}">
+
                                         {% else %}
+
                                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text class="justify-content-center" x="10%" y="50%" fill="#eceeef" dy=".1em">{{ idea.id }}</text></svg>
+
                                         {% endif %}
+
                                     </a>
                                 </div>
 
@@ -222,34 +247,41 @@
                                 <div class="container-fluid btn-group">
                                     <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_view' idea.id %}">Подробнее</a>
 
-                                    <form class="" action="{% url 'account_create_notification' %}" method="POST">
-                                        {% csrf_token %}
-                                        <input type="text"
-                                               id="type_slug_field"
-                                               name="type_slug_field"
-                                               required=""
-                                               placeholder=""
-                                               value="notifications"
-                                               class="form-control form-control-lg d-none"
-                                        />
-                                        <input type="text"
-                                               id="name_char_field"
-                                               name="name_char_field"
-                                               required=""
-                                               placeholder=""
-                                               value="Жалоба на статью в банке идей"
-                                               class="form-control form-control-lg d-none"
-                                        />
-                                        <input type="text"
-                                               id="text_field"
-                                               name="text_field"
-                                               required=""
-                                               placeholder=""
-                                               value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
-                                               class="form-control form-control-lg d-none"
-                                        />
-                                        <button class="btn btn-lg btn-outline-danger" type="submit">Пожаловаться</button>
-                                    </form>
+
+                                    {% access_tag 'account_create_notification' as account_create_notification %}
+                                    {% if account_create_notification %}
+
+                                        <form class="" action="{% url 'account_create_notification' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="text"
+                                                   id="type_slug_field"
+                                                   name="type_slug_field"
+                                                   required=""
+                                                   placeholder=""
+                                                   value="notifications"
+                                                   class="form-control form-control-lg d-none"
+                                            />
+                                            <input type="text"
+                                                   id="name_char_field"
+                                                   name="name_char_field"
+                                                   required=""
+                                                   placeholder=""
+                                                   value="Жалоба на статью в банке идей"
+                                                   class="form-control form-control-lg d-none"
+                                            />
+                                            <input type="text"
+                                                   id="text_field"
+                                                   name="text_field"
+                                                   required=""
+                                                   placeholder=""
+                                                   value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
+                                                   class="form-control form-control-lg d-none"
+                                            />
+                                            <button class="btn btn-lg btn-outline-danger" type="submit">Пожаловаться</button>
+                                        </form>
+
+                                    {% endif %}
+
                                 </div>
                             </div>
 
@@ -269,14 +301,22 @@
 
                                     {% is_liked_tag idea.id as is_liked_bool %}
                                     {% if is_liked_bool %}
+
                                         <i class="material-icons text-success md-48">thumb_up</i>
+
                                     {% else %}
+
                                         {% is_disliked_tag idea.id as is_disliked_bool %}
                                         {% if is_disliked_bool %}
+
                                             <i class="material-icons text-danger md-48">thumb_down</i>
+
                                         {% else %}
+
                                             <i class="material-icons text-muted md-48">live_help</i>
+
                                         {% endif %}
+
                                     {% endif %}
 
                                     <div class="btn btn-sm btn-outline-secondary">Комментариев: {{ idea.get_total_comment_value }}</div>

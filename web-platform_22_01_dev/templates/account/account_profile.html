@@ -54,9 +54,9 @@
     <div class="row g-5">
         <div class="py-5 text-center">
         {% if user_model.image_field.url %}
-        <img src="{{ user_model.image_field.url }}" class="bd-placeholder-img fa-image" width="512px" alt="{{ user_model.first_name_char_field }}">
+            <img src="{{ user_model.image_field.url }}" class="bd-placeholder-img img-fluid" width="512px" alt="{{ user_model.first_name_char_field }}">
         {% else %}
-        <img src="{% static 'media/uploads/account/avatar/default_avatar.jpg' %}" class="bd-placeholder-img container" width="256px" height="100%" alt="default">
+            <img src="{% static 'media/uploads/account/avatar/default_avatar.jpg' %}" class="bd-placeholder-img img-fluid" width="256px" height="100%" alt="default">
         {% endif %}
         <h2>{{ user_model.last_name_char_field }} {{ user_model.first_name_char_field }} {{ user_model.patronymic_char_field }}</h2>
         <p class="lead">{{ user_model.position_char_field }}</p>

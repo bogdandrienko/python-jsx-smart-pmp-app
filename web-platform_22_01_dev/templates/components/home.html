@@ -29,12 +29,24 @@
 </div>
 
 <div class="container-fluid text-center container">
-    <a href="{% url 'module_or_component' 'module_modules' %}">
-        <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top w-auto" alt="id">
-    </a>
+
+    {% access_tag 'module_modules' as module_modules %}
+    {% if module_modules %}
+
+        <a href="{% url 'module_or_component' 'module_modules' %}">
+
+    {% else %}
+
+        <a href="{% url 'account_login' %}">
+
+    {% endif %}
+
+            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
+        </a>
     <div class="card-body">
         <p class="card-text">Модули.</p>
     </div>
+
 </div>
 
 

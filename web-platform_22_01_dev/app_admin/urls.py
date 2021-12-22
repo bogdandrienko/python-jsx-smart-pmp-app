@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.urls import path, include
 from . import views
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register(prefix=r'ideas', viewset=views.IdeasViewSet, basename='ideas')
+router.register(prefix=r'users', viewset=views.UserViewSet, basename='users')
+router.register(prefix=r'groups', viewset=views.GroupViewSet, basename='groups')
 
 urlpatterns = [
-    path('drf/', include('rest_framework.urls')),
-
     # example
     path('examples_forms/', views.examples_forms, name='examples_forms'),
     path('example/', views.example, name='example'),
@@ -52,7 +57,7 @@ urlpatterns = [
     path('account_notification/', views.account_notification, name='account_notification'),
     path('account_notification/<slug:type_slug>/', views.account_notification, name='account_notification'),
     path('account_create_notification/', views.account_create_notification, name='account_create_notification'),
-    path('account_change_notification/<int:notification_id>/', views.account_delete_or_change_notification,
+    path('account_delete_or_change_notification/<int:notification_id>/', views.account_delete_or_change_notification,
          name='account_delete_or_change_notification'),
     path('account_create_or_change_accounts/', views.account_create_or_change_accounts,
          name='account_create_or_change_accounts'),
@@ -96,6 +101,7 @@ urlpatterns = [
     path('geo/', views.geo, name='geo'),
     path('analyse/', views.analyse, name='analyse'),
     path('react/', views.react, name='react'),
+    path('drf/', include(router.urls)),
 
     # salary
     path('salary/', views.salary, name='salary'),

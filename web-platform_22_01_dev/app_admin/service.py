@@ -3,21 +3,21 @@ import math
 import os
 import random
 import time
-import bs4
 import cv2
 import httplib2
 import numpy
 import openpyxl
-import requests
+from openpyxl.utils import get_column_letter
+from fastkml import kml
 from concurrent.futures import ThreadPoolExecutor
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.staticfiles import finders
 from django.core.handlers.wsgi import WSGIRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
-from fastkml import kml
-from openpyxl.utils import get_column_letter
+
 from app_admin.models import UserModel, GroupModel, LoggingModel, ActionModel, ComputerVisionModuleModel, \
     ComputerVisionComponentModel
 from app_admin.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils
@@ -1080,53 +1080,6 @@ class GeoClass:
         # 	</Point>
         # </Placemark>"""
         pass
-
-
-class CareerClass:
-    @staticmethod
-    # Vacansies
-    def get_career():
-        # headers = {
-        #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
-        # }
-        # vacancies_urls = []
-        # url = 'https://www.km-open.online/property'
-        # r = requests.get(url, headers=headers)
-        # soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
-        # list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
-        # for list_obj in list_objs:
-        #     vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
-        # vacancies_data = []
-        # for url_s in vacancies_urls:
-        #     r = requests.get(url_s, headers=headers)
-        #     soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
-        #     list_objs = soup.find_all('div', {"class": "title-block"})
-        #     vacancies_data = str(list_objs[0]).split('"heading-11">')[1].split('</h5>')[0]
-        #     vacancies_data.append([vacancies_data, url_s])
-        # data = [["Вакансия"], vacancies_data]
-        # headers = {
-        #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
-        # }
-
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
-        }
-        vacancies_urls = []
-        url = 'https://www.km-open.online/property'
-        r = requests.get(url, headers=headers)
-        soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
-        list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
-        for list_obj in list_objs:
-            vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
-        vacancies_title = []
-        for list_obj in list_objs:
-            vacancies_title.append(str(list_obj).split('class="heading-12">')[1].split('</h5>')[0])
-        vacancies_data = []
-        for title in vacancies_title:
-            vacancies_data.append([title, vacancies_urls[vacancies_title.index(title)]])
-
-        data = [["Вакансия"], vacancies_data]
-        return data
 
 
 class UtilsClass:

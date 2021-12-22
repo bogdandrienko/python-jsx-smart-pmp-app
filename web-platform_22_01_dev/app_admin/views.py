@@ -4,29 +4,28 @@ import hashlib
 import json
 import os
 import random
+import bs4
 import httplib2
-from email import message
-from concurrent.futures import ThreadPoolExecutor
-
 import requests
-from django.core.mail import send_mail
-from django.utils import timezone
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from rest_framework import viewsets, permissions
+from xhtml2pdf import pisa
+from email import message
+
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User, Group
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from django.urls import reverse
-from xhtml2pdf import pisa
-from django.contrib.auth.models import User, Group
-from app_admin.models import UserModel, GroupModel
-from app_admin.forms import GeoForm
+
 from app_settings import settings
+from app_admin.forms import ExamplesModelForm, GeoForm
 from app_admin.models import LoggingModel, ActionModel, IdeaModel, IdeaCommentModel, IdeaRatingModel, \
-    ModuleOrComponentModel, NotificationModel
-from app_admin.forms import ExamplesModelForm
-from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryClass, Xhtml2pdfClass, CareerClass, \
-    GeoClass, ComputerVisionClass
+    ModuleOrComponentModel, NotificationModel, IdeasModel, UserModel, GroupModel
+from app_admin.serializers import UserSerializer, GroupSerializer, IdeasModelSerializer
+from app_admin.service import DjangoClass, UtilsClass, PaginationClass, SalaryClass, Xhtml2pdfClass, GeoClass
 from app_admin.utils import ExcelClass, EncryptingClass, SQLClass, DirPathFolderPathClass, DateTimeUtils
 
 
@@ -111,10 +110,8 @@ def local(request):
     """
     Перенаправляет пользователей внутренней сети (192.168.1.202) на локальный адрес - ускорение работы
     """
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='only_logging')
-    if page:
-        return redirect(page)
+    # Логирование действий
+    DjangoClass.LoggingClass.logging_actions(request=request)
 
     return redirect('http://192.168.1.68:8000/')
 
@@ -425,7 +422,7 @@ def account_change_profile(request):
     Страница изменения профиля пользователя
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_change_profile')
     if page:
         return redirect(page)
 
@@ -599,7 +596,7 @@ def account_profile(request, user_id=0):
     Страница профиля пользователя
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_profile')
     if page:
         return redirect(page)
 
@@ -634,7 +631,7 @@ def account_notification(request, type_slug='All'):
     Страница уведомлений пользователя
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_notification')
     if page:
         return redirect(page)
 
@@ -654,8 +651,8 @@ def account_notification(request, type_slug='All'):
             page = PaginationClass.paginate(request=request, objects=notifications, num_page=100)
             response = 0
         except Exception as error:
-            response = -1
             DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            response = -1
 
         context = {
             'response': response,
@@ -678,7 +675,7 @@ def account_create_notification(request):
     Страница создания уведомления пользователя
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_create_notification')
     if page:
         return redirect(page)
 
@@ -708,7 +705,7 @@ def account_delete_or_change_notification(request, notification_id: int):
     Страница создания уведомления пользователя
     """
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_delete_or_change_notification')
     if page:
         return redirect(page)
 
@@ -1477,7 +1474,9 @@ def idea_list(request, category_slug='All'):
         ideas = IdeaModel.objects.all().order_by('-id')
         categoryes = IdeaModel.get_all_category()
         num_page = 5
-        if category_slug.lower() != 'all':
+        if category_slug == 'idea_change_visibility':
+            ideas = ideas.filter(visibility_boolean_field=False)
+        elif category_slug.lower() != 'all':
             ideas = ideas.filter(category_slug_field=category_slug)
         if request.method == 'POST':
             search_char_field = DjangoClass.RequestClass.get_value(request, "search_char_field")
@@ -1488,8 +1487,8 @@ def idea_list(request, category_slug='All'):
             page = PaginationClass.paginate(request=request, objects=ideas, num_page=num_page)
             response = 0
         except Exception as error:
-            response = -1
             DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            response = -1
         context = {
             'response': response,
             'page': page,
@@ -1689,8 +1688,8 @@ def idea_rating(request):
             page = PaginationClass.paginate(request=request, objects=page, num_page=5)
             response = 0
         except Exception as error:
-            response = -1
             DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            response = -1
 
         context = {
             'response': response,
@@ -1701,7 +1700,8 @@ def idea_rating(request):
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'response': -1,
-    #         'data': False
+    #         'page': None,
+    #         'sorted': None
     #     }
 
     return render(request, 'idea/idea_rating.html', context)
@@ -1797,10 +1797,10 @@ def analyse(request):
     # response = requests.get(url='http://127.0.0.1/drf/users/2/', timeout=3)
     # print(response.text)
 
-    login = 'Bogdan'
+    login_ = 'Bogdan'
     password = '31284bogdan'
     h = httplib2.Http(DirPathFolderPathClass.create_folder_in_this_dir(folder_name='static/media/temp'))
-    h.add_credentials(login, password)
+    h.add_credentials(login_, password)
     response, content = h.request('http://127.0.0.1/drf/ideas/')
     print(response)
     print(content.decode())
@@ -1809,6 +1809,7 @@ def analyse(request):
     #     with ThreadPoolExecutor() as executor:
     #         executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.1)
     # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     print(f'\nanalyse | error : {error}\n')
     #     with ThreadPoolExecutor() as executor:
     #         executor.submit(ComputerVisionClass.EventLoopClass.loop_modules_global, tick_delay=0.2)
@@ -1832,7 +1833,7 @@ def react(request):
 # salary
 def salary(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='salary')
     if page:
         return redirect(page)
 
@@ -1840,6 +1841,7 @@ def salary(request):
     if True:
         data = None
         result_form = False
+        response = 0
         if request.method == 'POST':
             key = UtilsClass.create_encrypted_password(
                 _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -1976,23 +1978,25 @@ def salary(request):
                     "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
                 },
             }
-            result_form = True
+            response = 1
         context = {
+            'response': response,
             'data': data,
             'result_form': result_form
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
-    #         'data': False,
-    #         'result_form': False
+    #         'response': -1,
+    #         'data': None,
+    #         'result_form': None
     #     }
     return render(request, 'salary/salary.html', context)
 
 
 def salary_pdf(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='salary')
     if page:
         return redirect(page)
 
@@ -2047,8 +2051,7 @@ def salary_pdf(request):
         try:
             response, content = h.request(url)
         except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(
-                request=request, error=error)
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             content = None
         success_web_read = False
         if content:
@@ -2162,14 +2165,53 @@ def salary_pdf(request):
 # career
 def career(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='career')
     if page:
         return redirect(page)
 
     try:
         data = None
         if request.method == 'POST':
-            data = CareerClass.get_career()
+            # headers = {
+            #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            # }
+            # vacancies_urls = []
+            # url = 'https://www.km-open.online/property'
+            # r = requests.get(url, headers=headers)
+            # soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            # list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
+            # for list_obj in list_objs:
+            #     vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
+            # vacancies_data = []
+            # for url_s in vacancies_urls:
+            #     r = requests.get(url_s, headers=headers)
+            #     soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            #     list_objs = soup.find_all('div', {"class": "title-block"})
+            #     vacancies_data = str(list_objs[0]).split('"heading-11">')[1].split('</h5>')[0]
+            #     vacancies_data.append([vacancies_data, url_s])
+            # data = [["Вакансия"], vacancies_data]
+            # headers = {
+            #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            # }
+
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            }
+            vacancies_urls = []
+            url = 'https://www.km-open.online/property'
+            r = requests.get(url, headers=headers)
+            soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
+            for list_obj in list_objs:
+                vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
+            vacancies_title = []
+            for list_obj in list_objs:
+                vacancies_title.append(str(list_obj).split('class="heading-12">')[1].split('</h5>')[0])
+            vacancies_data = []
+            for title in vacancies_title:
+                vacancies_data.append([title, vacancies_urls[vacancies_title.index(title)]])
+
+            data = [["Вакансия"], vacancies_data]
         context = {
             'data': data,
         }
@@ -2181,7 +2223,7 @@ def career(request):
 # passages
 def passages_thermometry(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_thermometry')
     if page:
         return redirect(page)
 
@@ -2253,7 +2295,7 @@ def passages_thermometry(request):
 
 def passages_select(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_select')
     if page:
         return redirect(page)
 
@@ -2324,7 +2366,7 @@ def passages_select(request):
 
 def passages_update(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_update')
     if page:
         return redirect(page)
 
@@ -2354,7 +2396,7 @@ def passages_update(request):
 
 def passages_insert(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_insert')
     if page:
         return redirect(page)
 
@@ -2410,7 +2452,7 @@ def passages_insert(request):
 
 def passages_delete(request):
     # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_delete')
     if page:
         return redirect(page)
 
@@ -2431,3 +2473,21 @@ def passages_delete(request):
         'data': data,
     }
     return render(request, 'skud/passages_delete.html', context)
+
+
+class IdeasViewSet(viewsets.ModelViewSet):
+    queryset = IdeasModel.objects.all()
+    serializer_class = IdeasModelSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.AllowAny]
