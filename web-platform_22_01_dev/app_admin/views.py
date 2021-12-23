@@ -265,7 +265,18 @@ def home(request):
     if page:
         return redirect(page)
 
-    return render(request, 'components/home.html')
+    try:
+        response = 0
+        context = {
+            'response': response,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+        }
+
+    return render(request, 'components/home.html', context)
 
 
 # module_or_component
@@ -290,6 +301,66 @@ def module_or_component(request, url_slug='module_modules'):
         }
 
     return render(request, 'components/module.html', context)
+
+
+def account_create_modules_and_actions(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    if page:
+        return redirect(page)
+
+    # try:
+    if True:
+
+        response = 0
+        if request.method == 'POST':
+            response = 1
+            modules = DjangoClass.RequestClass.get_file(request, "excel_file_modules")
+            actions = DjangoClass.RequestClass.get_file(request, "excel_file_actions")
+            if modules:
+                workbook = ExcelClass.workbook_load(excel_file=modules)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                dictionary = {x[1]: x[0] for x in ModuleOrComponentModel.LIST_DB_VIEW_CHOICES}
+                for row in range(2, ExcelClass.get_max_num_rows(sheet) + 1):
+                    try:
+                        ModuleOrComponentModel.objects.create(
+                            type_slug_field=dictionary[str(ExcelClass.get_sheet_value('A', row, sheet)).strip()],
+                            name_char_field=ExcelClass.get_sheet_value('B', row, sheet),
+                            previous_path_slug_field=ExcelClass.get_sheet_value('C', row, sheet),
+                            current_path_slug_field=ExcelClass.get_sheet_value('D', row, sheet),
+                            next_path_slug_field=ExcelClass.get_sheet_value('E', row, sheet),
+                            position_float_field=ExcelClass.get_sheet_value('F', row, sheet),
+                            text_field=ExcelClass.get_sheet_value('G', row, sheet)
+                        )
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                ExcelClass.workbook_close(workbook=workbook)
+            if actions:
+                workbook = ExcelClass.workbook_load(excel_file=actions)
+                sheet = ExcelClass.workbook_activate(workbook=workbook)
+                dictionary = {x[1]: x[0] for x in ActionModel.LIST_DB_VIEW_CHOICES}
+                for row in range(2, ExcelClass.get_max_num_rows(sheet) + 1):
+                    try:
+                        ActionModel.objects.create(
+                            type_slug_field=dictionary[str(ExcelClass.get_sheet_value('A', row, sheet)).strip()],
+                            name_char_field=ExcelClass.get_sheet_value('B', row, sheet),
+                            name_slug_field=ExcelClass.get_sheet_value('C', row, sheet),
+                        )
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                ExcelClass.workbook_close(workbook=workbook)
+
+        context = {
+            'response': response,
+        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'modules': None,
+    #     }
+
+    return render(request, 'account/account_create_modules_and_actions.html', context)
 
 
 # account

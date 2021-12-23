@@ -1,0 +1,141 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Создание/изменение пользователей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Создание модулей или действий
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит форму для создания модулей или действий.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+
+    {% include 'components/success.html' %}
+
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="container">
+        <form action="{% url 'account_create_modules_and_actions' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="account_create_modules_and_actions"
+              autocomplete="on"
+              class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label class="form-control-lg m-1">
+                        Заполненный шаблон для создания модулей:
+                        <input type="file"
+                               id="excel_file_modules"
+                               name="excel_file_modules"
+                               required=""
+                               accept=".xlsx, .xls"
+                               class="form-control form-control-lg"
+                        />
+                        <small class="text-muted">шаблон: заполненный excel-шаблон (xlsx/xls)</small>
+                    </label>
+                </div>
+            </div>
+            <hr/>
+            <div class="container-fluid btn-group row m-1">
+                <div class="col-lg-6">
+                    <button href=""
+                            type="submit"
+                            class="w-100 form-control btn btn-lg btn-outline-primary"
+                    >Подтвердить</button>
+                </div>
+                <div class="col-lg-6">
+                    <button href=""
+                            type="reset"
+                            class="w-100 form-control btn btn-lg btn-outline-warning"
+                    >Сбросить</button>
+                </div>
+            </div>
+        </form>
+
+        <form action="{% url 'account_create_modules_and_actions' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="account_create_modules_and_actions"
+              autocomplete="on"
+              class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label class="form-control-lg m-1">
+                        Заполненный шаблон для создания действий:
+                        <input type="file"
+                               id="excel_file_actions"
+                               name="excel_file_actions"
+                               required=""
+                               accept=".xlsx, .xls"
+                               class="form-control form-control-lg"
+                        />
+                        <small class="text-muted">шаблон: заполненный excel-шаблон (xlsx/xls)</small>
+                    </label>
+                </div>
+            </div>
+            <hr/>
+            <div class="container text-center">
+                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <div class="m-1">
+                        <button href=""
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary form-control"
+                        >Подтвердить</button>
+                    </div>
+
+                    <div class="m-1">
+                        <button href=""
+                                type="reset"
+                                class="btn btn-lg btn-outline-warning form-control"
+                        >Сбросить</button>
+                    </div>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

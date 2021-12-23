@@ -250,13 +250,11 @@ class ActionModelAdmin(admin.ModelAdmin):
         'type_slug_field',
         'name_char_field',
         'name_slug_field',
-        'position_float_field'
     )
     list_filter = (
         'type_slug_field',
         'name_char_field',
         'name_slug_field',
-        'position_float_field'
     )
     fieldsets = (
         ('Тип', {'fields': (
@@ -268,15 +266,11 @@ class ActionModelAdmin(admin.ModelAdmin):
         ('Имя валидации', {'fields': (
             'name_slug_field',
         )}),
-        ('Позиция в списке', {'fields': (
-            'position_float_field',
-        )}),
     )
     search_fields = [
         'type_slug_field',
         'name_char_field',
         'name_slug_field',
-        'position_float_field'
     ]
 
 

@@ -1,26 +1,23 @@
-<div class="text-center">
-    <h1 class="display-6">Данные не получены / операция не выполнена</h1>
-    <p class="lead">Данных нет, повторите операцию позднее или ожидайте исправления неполадок</p>
+<div class="container">
+    <h1 class="display-6 text-center">Данные не получены / операция не выполнена</h1>
+    <p class="lead text-center">Данных нет, повторите операцию позднее или ожидайте исправления неполадок</p>
     <hr/>
-    <!-- Grid row -->
-    <div class="container-fluid btn-group row pb-1">
-        <!-- Grid column -->
-        <div class="col-lg-6">
-            <a href="{% url 'home' %}"
-               type="submit"
-               class="w-100 form-control btn btn-lg btn-outline-primary"
-            >Главная</a>
-        </div>
-        <!-- Grid column -->
+    <div class="text-center">
+        <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+            <div class="m-1">
+                <button href=""
+                        type="submit"
+                        class="btn btn-lg btn-outline-primary form-control"
+                >Подтвердить</button>
+            </div>
 
-        <!-- Grid column -->
-        <div class="col-lg-6">
-            <a href=""
-               type="button"
-               class="w-100 form-control btn btn-lg btn-outline-warning"
-            >Повторить</a>
-        </div>
-        <!-- Grid column -->
+            <div class="m-1">
+                <button href=""
+                        type="reset"
+                        class="btn btn-lg btn-outline-warning form-control"
+                >Сбросить</button>
+            </div>
+        </ul>
     </div>
     <hr/>
 </div>

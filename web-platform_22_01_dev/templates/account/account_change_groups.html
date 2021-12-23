@@ -15,17 +15,19 @@
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Изменить группы
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит форму для изменения групп пользователей.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
-
-<div class="text-center">
-    <h1 class="display-6 fst-italic">Изменить группы</h1>
-    <small class="text-secondary">Эта страница содержит форму для изменения групп пользователей.</small>
-</div>
 
 {% if response == 1 %}
 
@@ -147,31 +149,25 @@
                                 </label>
                             </div>
                         </div>
-
                         <hr/>
-                        <!-- Grid row -->
-                        <div class="container-fluid btn-group row pb-1">
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="submit"
-                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                >Подтвердить</button>
-                            </div>
-                            <!-- Grid column -->
+                        <div class="container text-center">
+                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                <div class="m-1">
+                                    <button href=""
+                                            type="submit"
+                                            class="btn btn-lg btn-outline-primary form-control"
+                                    >Подтвердить</button>
+                                </div>
 
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="reset"
-                                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                                >Сбросить</button>
-                            </div>
-                            <!-- Grid column -->
+                                <div class="m-1">
+                                    <button href=""
+                                            type="reset"
+                                            class="btn btn-lg btn-outline-warning form-control"
+                                    >Сбросить</button>
+                                </div>
+                            </ul>
                         </div>
-                        <!-- Grid row -->
                     </form>
-
                 </div>
             </div>
         </div>
@@ -257,29 +253,24 @@
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
                         </div>
-
                         <hr/>
-                        <!-- Grid row -->
-                        <div class="container-fluid btn-group row pb-1">
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="submit"
-                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                >Подтвердить</button>
-                            </div>
-                            <!-- Grid column -->
+                        <div class="container text-center">
+                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                <div class="m-1">
+                                    <button href=""
+                                            type="submit"
+                                            class="btn btn-lg btn-outline-primary form-control"
+                                    >Подтвердить</button>
+                                </div>
 
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="reset"
-                                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                                >Сбросить</button>
-                            </div>
-                            <!-- Grid column -->
+                                <div class="m-1">
+                                    <button href=""
+                                            type="reset"
+                                            class="btn btn-lg btn-outline-warning form-control"
+                                    >Сбросить</button>
+                                </div>
+                            </ul>
                         </div>
-                        <!-- Grid row -->
                     </form>
 
                 </div>
@@ -367,54 +358,29 @@
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
                         </div>
-
                         <hr/>
-                        <!-- Grid row -->
-                        <div class="container-fluid btn-group row pb-1">
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="submit"
-                                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                                >Подтвердить</button>
-                            </div>
-                            <!-- Grid column -->
+                        <div class="container text-center">
+                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                <div class="m-1">
+                                    <button href=""
+                                            type="submit"
+                                            class="btn btn-lg btn-outline-primary form-control"
+                                    >Подтвердить</button>
+                                </div>
 
-                            <!-- Grid column -->
-                            <div class="col-lg-6">
-                                <button href=""
-                                        type="reset"
-                                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                                >Сбросить</button>
-                            </div>
-                            <!-- Grid column -->
+                                <div class="m-1">
+                                    <button href=""
+                                            type="reset"
+                                            class="btn btn-lg btn-outline-warning form-control"
+                                    >Сбросить</button>
+                                </div>
+                            </ul>
                         </div>
-                        <!-- Grid row -->
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endif %}
 

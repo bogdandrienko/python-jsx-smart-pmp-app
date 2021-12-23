@@ -9,45 +9,59 @@
 
 <!-- Title -->
 {% block title %}
-    Домашняя
+    Главная страница
 {% endblock title %}
 
 <!-- Style -->   
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Главная страница
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Главная страница веб-платформы.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
 
-<div class="text-center">
-    <h1 class="display-6 fst-italic">Главная</h1>
-    <small class="text-secondary">Главная страница веб-платформы.</small>
-</div>
+{% if response == 1 %}
 
-<div class="container-fluid text-center container">
+    {% include 'components/success.html' %}
 
-    {% access_tag 'module_modules' as module_modules %}
-    {% if module_modules %}
+{% elif response == -1 %}
 
-        <a href="{% url 'module_or_component' 'module_modules' %}">
+    {% include 'components/aborted.html' %}
 
-    {% else %}
+{% else %}
 
-        <a href="{% url 'account_login' %}">
+    <div class="container-fluid text-center container">
 
-    {% endif %}
+        {% access_tag 'module_modules' as module_modules %}
+        {% if module_modules %}
 
-            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
-        </a>
-    <div class="card-body">
-        <p class="card-text">Модули.</p>
+            <a href="{% url 'module_or_component' 'module_modules' %}">
+
+        {% else %}
+
+            <a href="{% url 'account_login' %}">
+
+        {% endif %}
+
+                <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
+            </a>
+        <div class="card-body">
+            <p class="card-text">Модули.</p>
+        </div>
+
     </div>
 
-</div>
+{% endif %}
 
 
 

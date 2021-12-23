@@ -44,6 +44,8 @@ urlpatterns = [
     # module_or_component
     path('module_or_component/', views.module_or_component, name='module_or_component'),
     path('module_or_component/<slug:url_slug>/', views.module_or_component, name='module_or_component'),
+    path('account_create_modules_and_actions/', views.account_create_modules_and_actions,
+         name='account_create_modules_and_actions'),
 
     # account
     path('account_login/', views.account_login, name='account_login'),

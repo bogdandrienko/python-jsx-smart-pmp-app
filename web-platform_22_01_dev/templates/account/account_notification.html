@@ -15,19 +15,25 @@
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Уведомления
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит уведомления от других пользователей по категориям.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
 
-<div class="text-center">
-    <h1 class="display-6 fst-italic">Уведомления</h1>
-    <small class="text-secondary">Эта страница содержит уведомления от других пользователей по категориям.</small>
-</div>
+{% if response == 1 %}
 
-{% if response == -1 %}
+    {% include 'components/success.html' %}
+
+{% elif response == -1 %}
 
     {% include 'components/aborted.html' %}
 
@@ -113,9 +119,27 @@
                                            class="form-control form-control-lg d-none"
                                     />
                                    {% if notification.status_boolean_field %}
-                                        <button class="btn btn-sm btn-outline-warning w-100" type="submit">Активировать</button>
+                                        <div class="container text-center">
+                                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                                <div class="m-1">
+                                                    <button href=""
+                                                            type="submit"
+                                                            class="btn btn-lg btn-outline-warning form-control"
+                                                    >Активировать</button>
+                                                </div>
+                                            </ul>
+                                        </div>
                                    {% else %}
-                                        <button class="btn btn-sm btn-outline-success w-100" type="submit">Деактивировать</button>
+                                        <div class="container text-center">
+                                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                                <div class="m-1">
+                                                    <button href=""
+                                                            type="submit"
+                                                            class="btn btn-lg btn-outline-success form-control"
+                                                    >Деактивировать</button>
+                                                </div>
+                                            </ul>
+                                        </div>
                                    {% endif %}
                                 </form>
                                 <form class="" action="{% url 'account_delete_or_change_notification' notification.id %}" method="POST">
@@ -128,7 +152,16 @@
                                            value="delete"
                                            class="form-control form-control-lg d-none"
                                     />
-                                    <button class="btn btn-sm btn-outline-danger w-100" type="submit">Удалить</button>
+                                    <div class="container text-center">
+                                        <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                            <div class="m-1">
+                                                <button href=""
+                                                        type="submit"
+                                                        class="btn btn-lg btn-outline-danger form-control"
+                                                >Удалить</button>
+                                            </div>
+                                        </ul>
+                                    </div>
                                 </form>
                             </div>
                         </td>

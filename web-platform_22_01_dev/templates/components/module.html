@@ -16,17 +16,19 @@
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Модули или компоненты
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Доступные Вам модули или компоненты.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
-
-<div class="text-center">
-    <h1 class="display-6 fst-italic">Модули или компоненты</h1>
-    <small class="text-secondary">Доступные Вам модули или компоненты.</small>
-</div>
 
 {% if response == 1 %}
 

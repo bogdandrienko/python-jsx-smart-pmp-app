@@ -15,306 +15,278 @@
 {% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Расчётный лист
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит форму для выгрузки расчётного листа. Выберите дату и нажмите подтвердить, или сразу скачайте pdf-документ.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
 
-<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
-    <div class="col text-end">
-        <a href="{% url 'module_or_component' 'module_modules' %}">
-            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
-        </a>
-        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
-            <p class="card-text text-dark">Вернуться в модули.</p>
-        </a>
-    </div>
-    <div class="col text-start">
-        <h1 class="display-6 fst-italic">Расчётный лист</h1>
-        <small class="text-secondary">Содержит форму для выгрузки расчётного листа. Выберите дату и нажмите подтвердить, или сразу скачайте pdf-документ.</small>
-    </div>
-</div>
-
 {% if response == 1 %}
 
+    <div class="container">
+        <div class="pricing-header px-0 py-0 pt-md-0 pb-md-0 mx-auto text-center">
+            <a href="{% url 'salary' %}" class="btn btn-xs display-1 btn-secondary">вернуться</a> <h1 class="display-4">Прошлый период.<button onclick="display()" class="btn btn-xs display-1 btn-secondary">печать</button></h1>
+            <p class="lead">Ниже расположены данные, соответствующие прошлому периоду.</p>
 
-    <div class="pricing-header px-0 py-0 pt-md-0 pb-md-0 mx-auto text-center">
-        <a href="{% url 'salary' %}" class="btn btn-xs display-1 btn-secondary">вернуться</a> <h1 class="display-4">Прошлый период.<button onclick="display()" class="btn btn-xs display-1 btn-secondary">печать</button></h1>
-        <p class="lead">Ниже расположены данные, соответствующие прошлому периоду.</p>
+            <script>
+                function display() {
+                window.print();
+                }
+            </script>
 
-        <script>
-            function display() {
-            window.print();
-            }
-        </script>
+            <div class="d-block">
+                <div class="border-dark table-bordered">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 display-6">
 
-        <div class="d-block">
-            <div class="border-dark table-bordered">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 display-6">
+                        {% if data.Table_1 %}
+                            <div class="col my-2">
+                            <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
+                                <thead>
+                                    <tr>
+                                        {% for arr_1 in data.Table_1.0|slice:":5" %}
+                                            {% if forloop.first %}
+                                                <th width="720">{{ arr_1 }}</th>
+                                            {% else %}
 
-                    {% if data.Table_1 %}
-                        <div class="col my-2">
-                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
-                            <thead>
-                                <tr>
-                                    {% for arr_1 in data.Table_1.0|slice:":5" %}
-                                        {% if forloop.first %}
-                                            <th width="720">{{ arr_1 }}</th>
-                                        {% else %}
-
-                                            <th>{{ arr_1 }}</th>
-                                        {% endif %}
+                                                <th>{{ arr_1 }}</th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if data.Table_1.1.1 %}
+                                        <td>
+                                            <strong>
+                                                {{ data.Table_1.1.0.1 }}
+                                            </strong>
+                                        </td>
+                                    {% endif %}
+                                    {% for arr_1 in data.Table_1.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_2 in arr_1|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_2 %}
+                                                        {{ arr_2 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
                                     {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if data.Table_1.1.1 %}
-                                    <td>
-                                        <strong>
-                                            {{ data.Table_1.1.0.1 }}
-                                        </strong>
-                                    </td>
-                                {% endif %}
-                                {% for arr_1 in data.Table_1.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_1 in data.Table_1.2|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_1 %}
+                                                        {{ arr_1 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        {% endif %}
+
+                        {% if data.Table_2 %}
+                            <div class="col my-0">
+                            <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
+                                <thead>
                                     <tr>
-                                        {% for arr_2 in arr_1|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_2 %}
-                                                    {{ arr_2 }}
-                                                {% endif %}
-                                            </td>
+                                        {% for arr_1 in data.Table_2.0|slice:":5" %}
+                                            {% if forloop.first %}
+                                                <th width="720">{{ arr_1 }}</th>
+                                            {% else %}
+
+                                                <th>{{ arr_1 }}</th>
+                                            {% endif %}
                                         {% endfor %}
                                     </tr>
-                                {% endfor %}
-                                    <tr>
-                                        {% for arr_1 in data.Table_1.2|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_1 %}
-                                                    {{ arr_1 }}
-                                                {% endif %}
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    {% endif %}
-
-                    {% if data.Table_2 %}
-                        <div class="col my-0">
-                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
-                            <thead>
-                                <tr>
-                                    {% for arr_1 in data.Table_2.0|slice:":5" %}
-                                        {% if forloop.first %}
-                                            <th width="720">{{ arr_1 }}</th>
-                                        {% else %}
-
-                                            <th>{{ arr_1 }}</th>
-                                        {% endif %}
+                                </thead>
+                                <tbody>
+                                    {% if data.Table_2.1.1 %}
+                                        <td>
+                                            <strong>
+                                                {{ data.Table_2.1.0.1 }}
+                                            </strong>
+                                        </td>
+                                    {% endif %}
+                                    {% for arr_1 in data.Table_2.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_2 in arr_1|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_2 %}
+                                                        {{ arr_2 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
                                     {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if data.Table_2.1.1 %}
-                                    <td>
-                                        <strong>
-                                            {{ data.Table_2.1.0.1 }}
-                                        </strong>
-                                    </td>
-                                {% endif %}
-                                {% for arr_1 in data.Table_2.1|slice:"1:" %}
-                                    <tr>
-                                        {% for arr_2 in arr_1|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_2 %}
-                                                    {{ arr_2 }}
-                                                {% endif %}
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                                {% endfor %}
-                                    <tr>
-                                        {% for arr_1 in data.Table_2.2|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_1 %}
-                                                    {{ arr_1 }}
-                                                {% endif %}
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    {% endif %}
+                                        <tr>
+                                            {% for arr_1 in data.Table_2.2|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_1 %}
+                                                        {{ arr_1 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        {% endif %}
 
-                    {% if data.Table_3 %}
-                        <div class="col my-0">
-                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
-                            <thead>
-                                <tr>
-                                    {% for arr_1 in data.Table_3.0|slice:":5" %}
-                                        {% if forloop.first %}
-                                            <th width="720">{{ arr_1 }}</th>
-                                        {% else %}
-                                            <th>{{ arr_1 }}</th>
-                                        {% endif %}
+                        {% if data.Table_3 %}
+                            <div class="col my-0">
+                            <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
+                                <thead>
+                                    <tr>
+                                        {% for arr_1 in data.Table_3.0|slice:":5" %}
+                                            {% if forloop.first %}
+                                                <th width="720">{{ arr_1 }}</th>
+                                            {% else %}
+                                                <th>{{ arr_1 }}</th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if data.Table_3.1.0 %}
+                                        <td>
+                                            <strong>
+                                                {{ data.Table_3.1.0.1 }}
+                                            </strong>
+                                        </td>
+                                    {% endif %}
+                                    {% for arr_1 in data.Table_3.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_2 in arr_1|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_2 %}
+                                                        {{ arr_2 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
                                     {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if data.Table_3.1.0 %}
-                                    <td>
-                                        <strong>
-                                            {{ data.Table_3.1.0.1 }}
-                                        </strong>
-                                    </td>
-                                {% endif %}
-                                {% for arr_1 in data.Table_3.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_1 in data.Table_3.2|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_1 %}
+                                                        {{ arr_1 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        {% endif %}
+
+                        {% if data.Table_4 %}
+                            <div class="col my-0">
+                            <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
+                                <thead>
                                     <tr>
-                                        {% for arr_2 in arr_1|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_2 %}
-                                                    {{ arr_2 }}
-                                                {% endif %}
-                                            </td>
+                                        {% for arr_1 in data.Table_4.0|slice:":5" %}
+                                            {% if forloop.first %}
+                                                <th width="720">{{ arr_1 }}</th>
+                                            {% else %}
+
+                                                <th>{{ arr_1 }}</th>
+                                            {% endif %}
                                         {% endfor %}
                                     </tr>
-                                {% endfor %}
-                                    <tr>
-                                        {% for arr_1 in data.Table_3.2|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_1 %}
-                                                    {{ arr_1 }}
-                                                {% endif %}
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    {% endif %}
-
-                    {% if data.Table_4 %}
-                        <div class="col my-0">
-                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
-                            <thead>
-                                <tr>
-                                    {% for arr_1 in data.Table_4.0|slice:":5" %}
-                                        {% if forloop.first %}
-                                            <th width="720">{{ arr_1 }}</th>
-                                        {% else %}
-
-                                            <th>{{ arr_1 }}</th>
-                                        {% endif %}
+                                </thead>
+                                <tbody>
+                                    {% if data.Table_4.1.1 %}
+                                        <td>
+                                            <strong>
+                                                {{ data.Table_4.1.0.1 }}
+                                            </strong>
+                                        </td>
+                                    {% endif %}
+                                    {% for arr_1 in data.Table_4.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_2 in arr_1|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_2 %}
+                                                        {{ arr_2 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
                                     {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if data.Table_4.1.1 %}
-                                    <td>
-                                        <strong>
-                                            {{ data.Table_4.1.0.1 }}
-                                        </strong>
-                                    </td>
-                                {% endif %}
-                                {% for arr_1 in data.Table_4.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_1 in data.Table_4.2|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_1 %}
+                                                        {{ arr_1 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        {% endif %}
+
+                        {% if data.Table_5 %}
+                            <div class="col my-0">
+                            <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
+                                <thead>
                                     <tr>
-                                        {% for arr_2 in arr_1|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_2 %}
-                                                    {{ arr_2 }}
-                                                {% endif %}
-                                            </td>
+                                        {% for arr_1 in data.Table_5.0|slice:":5" %}
+                                            {% if forloop.first %}
+                                                <th width="720">{{ arr_1 }}</th>
+                                            {% else %}
+
+                                                <th>{{ arr_1 }}</th>
+                                            {% endif %}
                                         {% endfor %}
                                     </tr>
-                                {% endfor %}
-                                    <tr>
-                                        {% for arr_1 in data.Table_4.2|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_1 %}
-                                                    {{ arr_1 }}
-                                                {% endif %}
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    {% endif %}
-
-                    {% if data.Table_5 %}
-                        <div class="col my-0">
-                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
-                            <thead>
-                                <tr>
-                                    {% for arr_1 in data.Table_5.0|slice:":5" %}
-                                        {% if forloop.first %}
-                                            <th width="720">{{ arr_1 }}</th>
-                                        {% else %}
-
-                                            <th>{{ arr_1 }}</th>
-                                        {% endif %}
+                                </thead>
+                                <tbody>
+                                    {% if data.Table_5.1.1 %}
+                                        <td>
+                                            <strong>
+                                                {{ data.Table_5.1.0.1 }}
+                                            </strong>
+                                        </td>
+                                    {% endif %}
+                                    {% for arr_1 in data.Table_5.1|slice:"1:" %}
+                                        <tr>
+                                            {% for arr_2 in arr_1|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_2 %}
+                                                        {{ arr_2 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
                                     {% endfor %}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if data.Table_5.1.1 %}
-                                    <td>
-                                        <strong>
-                                            {{ data.Table_5.1.0.1 }}
-                                        </strong>
-                                    </td>
-                                {% endif %}
-                                {% for arr_1 in data.Table_5.1|slice:"1:" %}
-                                    <tr>
-                                        {% for arr_2 in arr_1|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_2 %}
-                                                    {{ arr_2 }}
-                                                {% endif %}
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                                {% endfor %}
-                                    <tr>
-                                        {% for arr_1 in data.Table_5.2|slice:"1:6" %}
-                                            <td>
-                                                {% if arr_1 %}
-                                                    {{ arr_1 }}
-                                                {% endif %}
-                                            </td>
-                                        {% endfor %}
-                                    </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    {% endif %}
+                                        <tr>
+                                            {% for arr_1 in data.Table_5.2|slice:"1:6" %}
+                                                <td>
+                                                    {% if arr_1 %}
+                                                        {{ arr_1 }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        {% endif %}
 
-                    {% if data.Down %}
-                        <div class="col my-0">
-                    <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
-                        <thead>
-                            <tr>
-                                <th width="720">Наименование</th>
-                                <th>Сумма</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    {{ data.Down.last.0 }}
-                                </td>
-                                <td>
-                                    {{ data.Down.last.1 }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                        </div>
-                        <div class="col my-0">
+                        {% if data.Down %}
+                            <div class="col my-0">
                         <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
                             <thead>
                                 <tr>
@@ -325,22 +297,42 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        {{ data.Down.first.0 }}
+                                        {{ data.Down.last.0 }}
                                     </td>
                                     <td>
-                                        {{ data.Down.first.1 }}
+                                        {{ data.Down.last.1 }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        </div>
+                            </div>
+                            <div class="col my-0">
+                            <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-sm table-sm">
+                                <thead>
+                                    <tr>
+                                        <th width="720">Наименование</th>
+                                        <th>Сумма</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ data.Down.first.0 }}
+                                        </td>
+                                        <td>
+                                            {{ data.Down.first.1 }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
 
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 {% elif response == -1 %}
 
@@ -348,85 +340,87 @@
 
 {% else %}
 
-    <form action="{% url 'salary' %}"
-          method="POST"
-          target="_self"
-          enctype="multipart/form-data"
-          name="form"
-          autocomplete="on"
-          class="text-center"
-    >
-        {% csrf_token %}
-        <div>
-            <label class="form-control-lg">
-                Выберите месяц выгрузки:
-                <input type="number"
-                       id="month"
-                       name="month"
-                       required=""
-                       placeholder="10"
-                       value="10"
-                       min="1"
-                       max="12"
-                       class="form-control form-control-lg"
-                />
-                <small class="text-muted">число: от 1 до прошлого периода</small>
-            </label>
+    <div class="container">
+        <form action="{% url 'salary' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="form"
+              autocomplete="on"
+              class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <label class="form-control-lg">
+                    Выберите месяц выгрузки:
+                    <input type="number"
+                           id="month"
+                           name="month"
+                           required=""
+                           placeholder="10"
+                           value="10"
+                           min="1"
+                           max="12"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">число: от 1 до прошлого периода</small>
+                </label>
 
-            <label class="form-control-lg">
-                Выберите год выгрузки:
-                <input type="number"
-                       id="year"
-                       name="year"
-                       required=""
-                       placeholder="2021"
-                       value="2021"
-                       min="2021"
-                       max="2022"
-                       class="form-control form-control-lg"
-                />
-                <small class="text-muted">число: начиная от 2021 года</small>
-            </label>
-        </div>
-        <hr/>
-        <div class="container-fluid btn-group row pb-1">
-            <div class="col-lg-6">
-                <button href=""
-                        type="submit"
-                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                >Подтвердить</button>
+                <label class="form-control-lg">
+                    Выберите год выгрузки:
+                    <input type="number"
+                           id="year"
+                           name="year"
+                           required=""
+                           placeholder="2021"
+                           value="2021"
+                           min="2021"
+                           max="2022"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">число: начиная от 2021 года</small>
+                </label>
             </div>
-            <div class="col-lg-6">
-                <button href=""
-                        type="reset"
-                        class="w-100 form-control btn btn-lg btn-outline-warning"
-                >Сбросить</button>
+            <hr/>
+            <div class="container-fluid btn-group row pb-1">
+                <div class="col-lg-6">
+                    <button href=""
+                            type="submit"
+                            class="w-100 form-control btn btn-lg btn-outline-primary"
+                    >Подтвердить</button>
+                </div>
+                <div class="col-lg-6">
+                    <button href=""
+                            type="reset"
+                            class="w-100 form-control btn btn-lg btn-outline-warning"
+                    >Сбросить</button>
+                </div>
             </div>
-        </div>
-        <hr/>
-    </form>
+            <hr/>
+        </form>
 
-    <form action="{% url 'salary_pdf' %}"
-          method="POST"
-          target="_self"
-          enctype="multipart/form-data"
-          name="form"
-          autocomplete="on"
-          class="text-center"
-    >
-        {% csrf_token %}
-        <div class="container-fluid btn-group row pb-1">
-            <div class="col-lg-12">
-                <button href=""
-                        type="submit"
-                        class="w-100 form-control btn btn-lg btn-outline-primary"
-                >Выгрузить pdf-отчёт</button>
+        <form action="{% url 'salary_pdf' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="form"
+              autocomplete="on"
+              class="text-center"
+        >
+            {% csrf_token %}
+            <div class="container-fluid btn-group row pb-1">
+                <div class="col-lg-12">
+                    <button href=""
+                            type="submit"
+                            class="w-100 form-control btn btn-lg btn-outline-primary"
+                    >Выгрузить pdf-отчёт</button>
+                </div>
             </div>
-        </div>
-        <hr/>
-    </form>
+            <hr/>
+        </form>
 
-    <img src="{% static "media/admin/account/zarplata.jpg" %} " class="bd-placeholder-img " width="100% " height="100% " alt="zarplata">
+        <img src="{% static "media/admin/account/zarplata.jpg" %} " class="bd-placeholder-img " width="100% " height="100% " alt="zarplata">
+    </div>
 
 {% endif %}
 

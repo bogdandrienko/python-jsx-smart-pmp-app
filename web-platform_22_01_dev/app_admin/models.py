@@ -2096,28 +2096,10 @@ class ActionModel(models.Model):
         max_length=128,
         allow_unicode=False,
     )
-    position_float_field = models.FloatField(
-        db_column='position_float_field_db_column',
-        db_index=True,
-        db_tablespace='position_float_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
-        validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=1.0,
-        verbose_name='Позиция в списке:',
-        help_text='<small class="text-muted">Число с плавающей запятой, example: "1.1"</small><hr><br>',
-    )
 
     class Meta:
         app_label = 'auth'
-        ordering = ('type_slug_field', 'name_char_field', 'position_float_field')
+        ordering = ('type_slug_field', 'name_char_field')
         verbose_name = 'Действия'
         verbose_name_plural = 'Действия'
         db_table = 'actions_model_table'

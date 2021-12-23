@@ -45,19 +45,24 @@
                                         <li>
                                             <h6 class="dropdown-header">Экстра</h6>
 
-                                            {% access_tag 'geo' as access %}
-                                            {% if access %}
+                                            {% access_tag 'geo' as geo %}
+                                            {% if geo %}
                                                 <a class="dropdown-item" href="{% url 'geo' %}">Геолокация, устройства: список</a>
                                             {% endif %}
 
-                                            {% access_tag 'analyse' as access %}
-                                            {% if access %}
+                                            {% access_tag 'analyse' as analyse %}
+                                            {% if analyse %}
                                                 <a class="dropdown-item" href="{% url 'analyse' %}">Машинное зрение: запуск анализа</a>
                                             {% endif %}
 
-                                            {% access_tag 'react' as access %}
-                                            {% if access %}
+                                            {% access_tag 'react' as react %}
+                                            {% if react %}
                                                 <a class="dropdown-item" href="{% url 'react' %}">React</a>
+                                            {% endif %}
+
+                                            {% access_tag 'account_create_modules_and_actions' as account_create_modules_and_actions %}
+                                            {% if account_create_modules_and_actions %}
+                                                <a class="dropdown-item" href="{% url 'account_create_modules_and_actions' %}">Создание модулей или действий</a>
                                             {% endif %}
                                         </li>
                                         <li>
@@ -228,17 +233,8 @@
                                                 {% endif %}
 
                                                 <a class="dropdown-item" href="{% url 'account_recover_password' 'iin' %}">Восстановить пароль</a>
-
-                                                {% if request.user.is_authenticated is False %}
-
-                                                    <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
-
-                                                {% else %}
-
-                                                    <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
-
-                                                {% endif %}
-
+                                                <a class="dropdown-item" href="{% url 'account_login' %}">Войти</a>
+                                                <a class="dropdown-item" href="{% url 'account_logout' %}">Выйти</a>
                                             </li>
                                             <li>
                                                 <hr class="dropdown-divider text-light">
