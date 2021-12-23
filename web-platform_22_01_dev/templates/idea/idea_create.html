@@ -14,28 +14,21 @@
 <!-- Style -->
 {% block style %}{% endblock style %}
 
+
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Подать идею
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит форму для заполнения и добавления идеи в банк идей.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
-
-<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
-    <div class="col text-end">
-        <a href="{% url 'module_or_component' 'module_modules' %}">
-            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
-        </a>
-        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
-            <p class="card-text text-dark">Вернуться в модули.</p>
-        </a>
-    </div>
-    <div class="col text-start">
-        <h1 class="display-6 fst-italic">Подать идею</h1>
-        <small class="text-secondary">Содержит форму для заполнения и добавления идеи в банк идей.</small>
-    </div>
-</div>
 
 {% if response == 1 %}
 
@@ -59,7 +52,7 @@
             {% csrf_token %}
             <div>
                 <div>
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Название:
                         <input type="text"
                                id="name_char_field"
@@ -74,7 +67,7 @@
                         <small class="text-muted">длина: не более 32 символов</small>
                     </label>
 
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Категория:
                         <select type="select"
                                 id="category_slug_field"
@@ -82,7 +75,6 @@
                                 required
                                 class="form-control form-control-lg"
                         >
-{#                            <option selected disabled>Нажмите сюда и выберите категорию из списка</option>#}
                             {% for cat in category %}
                                 <option value="{{ cat.0 }}">{{ cat.1 }}</option>
                             {% endfor %}
@@ -92,7 +84,7 @@
                 </div>
 
                 <div>
-                    <label class="form-control form-control-lg">
+                    <label class="form-control form-control-lg m-1">
                         Краткое описание:
                         <input type="text"
                                id="short_description_char_field"
@@ -107,7 +99,7 @@
                         <small class="text-muted">длина: не более 64 символов</small>
                     </label>
 
-                    <label class="form-control form-control-lg">
+                    <label class="form-control form-control-lg m-1">
                         Полное описание:
                         <textarea type="text"
                                   id="full_description_text_field"
@@ -124,7 +116,7 @@
                 </div>
 
                 <div>
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Аватарка-заставка для идеи:
                         <input type="file"
                                id="avatar_image_field"
@@ -136,7 +128,7 @@
                         <small class="text-muted">только для форматов изображений: .jpg / .png</small>
                     </label>
 
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Файл-приложение:
                         <input type="file"
                                id="addiction_file_field"
@@ -148,24 +140,25 @@
                         <small class="text-muted">только для форматов файлов: .xlsx / .xls / .docx / .doc / .pdf</small>
                     </label>
                 </div>
+            </div>
+            <hr/>
+            <div class="container text-center">
+                <ul class="container-fluid btn-group row nav col-auto col-md-auto col-lg-auto justify-content-center">
+                    <div class="col-lg-6 p-1">
+                        <button href=""
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary w-100 form-control "
+                        >Подтвердить</button>
+                    </div>
 
+                    <div class="col-lg-6 p-1">
+                        <button href=""
+                                type="reset"
+                                class="btn btn-lg btn-outline-warning w-100 form-control "
+                        >Сбросить</button>
+                    </div>
+                </ul>
             </div>
-            <hr/>
-            <div class="container-fluid btn-group row">
-                <div class="col-lg-6">
-                    <button href=""
-                            type="submit"
-                            class="w-100 form-control btn btn-lg btn-outline-primary"
-                    >Подтвердить</button>
-                </div>
-                <div class="col-lg-6">
-                    <button href=""
-                            type="reset"
-                            class="w-100 form-control btn btn-lg btn-outline-warning"
-                    >Сбросить</button>
-                </div>
-            </div>
-            <hr/>
         </form>
     </div>
 

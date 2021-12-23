@@ -601,15 +601,12 @@ def account_profile(request, user_id=0):
         return redirect(page)
 
     try:
-        if user_id == 0:
-            user_id = request.user.id
-        user = User.objects.get(id=user_id)
-        if user:
-            user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-            response = 2
+        if user_id <= 0:
+            user = request.user
         else:
-            user_model = UserModel.objects.get_or_create(user_foreign_key_field=request.user)[0]
-            response = 1
+            user = User.objects.get(id=user_id)
+        user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+        response = 1
         context = {
             'response': response,
             'user': user,
@@ -1471,13 +1468,13 @@ def idea_list(request, category_slug='All'):
 
     # try:
     if True:
-        ideas = IdeaModel.objects.all().order_by('-id')
+        ideas = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
         categoryes = IdeaModel.get_all_category()
         num_page = 5
         if category_slug == 'idea_change_visibility':
-            ideas = ideas.filter(visibility_boolean_field=False)
+            ideas = IdeaModel.objects.filter(visibility_boolean_field=False).order_by('-id')
         elif category_slug.lower() != 'all':
-            ideas = ideas.filter(category_slug_field=category_slug)
+            ideas = ideas.filter(category_slug_field=category_slug, )
         if request.method == 'POST':
             search_char_field = DjangoClass.RequestClass.get_value(request, "search_char_field")
             if search_char_field:
@@ -1610,7 +1607,7 @@ def idea_like(request, idea_int):
                 IdeaCommentModel.objects.create(
                     author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
                     idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
-                    text_field=request.POST['comment_text']
+                    text_field=request.POST['text_field']
                 )
             try:
                 IdeaRatingModel.objects.get(
@@ -2229,64 +2226,66 @@ def passages_thermometry(request):
 
     data = None
     if request.method == 'POST':
-        personid = str(request.POST['personid'])
-        date_start = str(request.POST['date_start']).split('T')[0]
-        date_end = str(request.POST['date_end']).split('T')[0]
+        date_start = DjangoClass.RequestClass.get_value(request, 'date_start').split('T')[0]
+        date_end = DjangoClass.RequestClass.get_value(request, 'date_end').split('T')[0]
+        check = DjangoClass.RequestClass.get_check(request, 'check')
+        personid = DjangoClass.RequestClass.get_value(request, 'personid')
         connect_db = SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
                                              database="thirdpartydb", username="sa", password="skud12345678")
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         try:
-            # check = request.POST['check']
-            sql_select_query = f"SELECT * " \
-                               f"FROM dbtable " \
-                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND personid = '{personid}' " \
-                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            sql_select_query = f"SELECT * " \
-                               f"FROM dbtable " \
-                               f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' " \
-                               f"AND CAST(temperature AS FLOAT) >= 37.0 " \
-                               f"ORDER BY date1 DESC, date2 DESC;"
-        cursor.execute(sql_select_query)
-        data = cursor.fetchall()
-        bodies = []
-        for row in data:
-            local_bodies = []
-            value_index = 0
-            for val in row:
-                if value_index == 4:
-                    try:
-                        val = val.encode('1251').decode('utf-8')
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            if check:
+                sql_select_query = f"SELECT * " \
+                                   f"FROM dbtable " \
+                                   f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' AND personid = '{personid}' " \
+                                   f"AND CAST(temperature AS FLOAT) >= 37.0 " \
+                                   f"ORDER BY date1 DESC, date2 DESC;"
+            else:
+                sql_select_query = f"SELECT * " \
+                                   f"FROM dbtable " \
+                                   f"WHERE date1 BETWEEN '{date_start}' AND '{date_end}' " \
+                                   f"AND CAST(temperature AS FLOAT) >= 37.0 " \
+                                   f"ORDER BY date1 DESC, date2 DESC;"
+            cursor.execute(sql_select_query)
+            data = cursor.fetchall()
+            bodies = []
+            for row in data:
+                local_bodies = []
+                value_index = 0
+                for val in row:
+                    if value_index == 4:
                         try:
-                            value = str(val).split(" ")
-                            try:
-                                name = value[0].encode('1251').decode('utf-8')
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                name = "И" + \
-                                       value[0][2:].encode('1251').decode('utf-8')
-                            try:
-                                surname = value[1].encode(
-                                    '1251').decode('utf-8')
-                            except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                                surname = "И" + \
-                                          value[1][2:].encode('1251').decode('utf-8')
-                            string = name + " " + surname
-                            val = string
+                            val = val.encode('1251').decode('utf-8')
                         except Exception as error:
                             DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                value_index += 1
-                local_bodies.append(val)
-            bodies.append(local_bodies)
-        headers = ["табельный", "доступ", "дата", "время", "данные",
-                   "точка", "номер карты", "температура", "маска"]
-        data = [headers, bodies]
+                            try:
+                                value = str(val).split(" ")
+                                try:
+                                    name = value[0].encode('1251').decode('utf-8')
+                                except Exception as error:
+                                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                    name = "И" + \
+                                           value[0][2:].encode('1251').decode('utf-8')
+                                try:
+                                    surname = value[1].encode(
+                                        '1251').decode('utf-8')
+                                except Exception as error:
+                                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                                    surname = "И" + \
+                                              value[1][2:].encode('1251').decode('utf-8')
+                                string = name + " " + surname
+                                val = string
+                            except Exception as error:
+                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    value_index += 1
+                    local_bodies.append(val)
+                bodies.append(local_bodies)
+            headers = ["табельный", "доступ", "дата", "время", "данные", "точка", "номер карты", "температура",
+                       "маска", "алкотест"]
+            data = [headers, bodies]
+        except Exception as error:
+            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     context = {
         'data': data,
     }

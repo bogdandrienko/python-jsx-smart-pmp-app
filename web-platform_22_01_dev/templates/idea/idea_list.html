@@ -14,32 +14,22 @@
 {% endblock title %}
 
 <!-- Style -->
-{% block style %}
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-{% endblock style %}
+{% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Список идей
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит список идей в банке идей, также есть поле для поиска по названию и сортировки по категориям.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
-
-<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
-    <div class="col text-end">
-        <a href="{% url 'module_or_component' 'module_modules' %}">
-            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
-        </a>
-        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
-            <p class="card-text text-dark">Вернуться в модули.</p>
-        </a>
-    </div>
-    <div class="col text-start">
-        <h1 class="display-6 fst-italic">Список идей</h1>
-        <small class="text-secondary">Содержит список идей в банке идей, также есть поле для поиска по названию и сортировки по категориям.</small>
-    </div>
-</div>
 
 {% if response == -1 %}
 
@@ -78,40 +68,51 @@
                     <div class="col-lg-12">
                         <button href=""
                                 type="submit"
-                                class="w-100 form-control btn btn-lg btn-outline-warning"
+                                class="w-100 form-control btn btn-sm btn-outline-warning"
                         >Найти</button>
                     </div>
                 </div>
             </form>
         </div>
+        <hr/>
 
-        <div class="btn-group m-1">
+        <div class="container text-center">
+            <ul class="container-fluid nav col-auto col-md-auto col-lg-auto justify-content-center">
 
-            <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_list' 'All' %}">Все предложения</a>
+                <li class="p-1">
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'idea_list' 'All' %}">Все идеи</a>
+                </li>
 
-            {% access_tag 'idea_moderator' as idea_moderator %}
-            {% if idea.visibility_boolean_field or idea_moderator %}
+                {% access_tag 'idea_moderator' as idea_moderator %}
+                {% if idea.visibility_boolean_field or idea_moderator %}
 
-                <a class="btn btn-lg btn-outline-danger" href="{% url 'idea_list' 'idea_change_visibility' %}">На модерации</a>
+                    <li class="p-1">
+                        <a class="btn btn-sm btn-outline-danger" href="{% url 'idea_list' 'idea_change_visibility' %}">На модерации</a>
+                    </li>
 
-            {% endif %}
-
-            {% for category in categoryes %}
-
-                {% if forloop.counter == 1 %}
-                    <a class="btn btn-lg btn-outline-success" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
-                {% elif forloop.counter == 2 %}
-                    <a class="btn btn-lg btn-outline-warning" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
-                {% elif forloop.counter == 3 %}
-                    <a class="btn btn-lg btn-outline-secondary" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
-                {% elif forloop.counter == 4 %}
-                    <a class="btn btn-lg btn-outline-dark" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
-                {% else %}
-                    <a class="btn btn-lg btn-outline-dark" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
                 {% endif %}
 
-            {% endfor %}
+                {% for category in categoryes %}
 
+                    <li class="p-1">
+
+                        {% if forloop.counter == 1 %}
+                            <a class="btn btn-sm btn-outline-success w-100" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                        {% elif forloop.counter == 2 %}
+                            <a class="btn btn-sm btn-outline-warning w-100" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                        {% elif forloop.counter == 3 %}
+                            <a class="btn btn-sm btn-outline-secondary w-100" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                        {% elif forloop.counter == 4 %}
+                            <a class="btn btn-sm btn-outline-dark w-100" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                        {% else %}
+                            <a class="btn btn-sm btn-outline-dark w-100" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                        {% endif %}
+
+                    </li>
+
+                {% endfor %}
+
+            </ul>
         </div>
     </div>
 
@@ -129,7 +130,7 @@
                 {% access_tag 'idea_moderator' as idea_moderator %}
                 {% if idea.visibility_boolean_field or idea_moderator %}
 
-                    <div class="col">
+                    <div class="col p-1">
                         <div class="card shadow-sm">
                             <div class="card-header">
                                 <a class="text-decoration-none lead text-dark" href="{% url 'idea_view' idea.id %}">
@@ -160,7 +161,7 @@
                                                 />
                                                 <small class="text-muted">! функционал модератора !</small>
                                             </label>
-                                            <button class="btn btn-outline-danger" type="submit">скрыть</button>
+                                            <button class="btn btn-sm btn-outline-danger" type="submit">скрыть</button>
 
                                         {% else %}
 
@@ -179,7 +180,7 @@
                                                 <small class="text-muted">! функционал модератора !</small>
                                             </label>
 
-                                            <button class="btn btn-outline-success" type="submit">одобрить</button>
+                                            <button class="btn btn-sm btn-outline-success" type="submit">одобрить</button>
 
                                         {% endif %}
 
@@ -191,9 +192,7 @@
 
                                     <div class="form-control-lg">
                                         Редактировать идею:
-                                        <a class="btn btn-lg btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">
-                                            <i class="material-icons cart-icon">published_with_changes</i>
-                                        </a>
+                                        <a class="btn btn-sm btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">Редактировать</a>
                                     </div>
 
                                 {% endif %}
@@ -202,13 +201,16 @@
 
                                     {% if idea.author_foreign_key_field %}
 
-                                        <a class="btn btn-sm btn-outline-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
-                                            Автор: {{ idea.author_foreign_key_field.last_name_char_field }} {{ idea.author_foreign_key_field.first_name_char_field }} {{ idea.author_foreign_key_field.patronymic_char_field }}
+                                        <a class="p-1 text-decoration-none text-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
+                                            Автор:
+                                                {% if idea.author_foreign_key_field.last_name_char_field %}{{ idea.author_foreign_key_field.last_name_char_field }} {% endif %}
+                                                {% if idea.author_foreign_key_field.first_name_char_field %}{{ idea.author_foreign_key_field.first_name_char_field }} {% endif %}
+                                                {% if idea.author_foreign_key_field.patronymic_char_field %}{{ idea.author_foreign_key_field.patronymic_char_field }} {% endif %}
                                         </a>
 
                                     {% else %}
 
-                                        <small class="btn btn-sm btn-outline-success">
+                                        <small class="p-1">
                                             Профиль не заполнен
                                         </small>
 
@@ -245,7 +247,7 @@
                                 </div>
 
                                 <div class="container-fluid btn-group">
-                                    <a class="btn btn-lg btn-outline-primary" href="{% url 'idea_view' idea.id %}">Подробнее</a>
+                                    <a class="btn btn-sm btn-outline-primary" href="{% url 'idea_view' idea.id %}">Подробнее</a>
 
 
                                     {% access_tag 'account_create_notification' as account_create_notification %}
@@ -277,7 +279,7 @@
                                                    value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
                                                    class="form-control form-control-lg d-none"
                                             />
-                                            <button class="btn btn-lg btn-outline-danger" type="submit">Пожаловаться</button>
+                                            <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться</button>
                                         </form>
 
                                     {% endif %}
@@ -286,41 +288,51 @@
                             </div>
 
                             <div class="card-header">
-                                <div class="container-fluid d-flex justify-content-between">
-                                    {% if 0 > idea.get_total_rating %}
-                                        <div class="btn btn-sm btn-outline-danger">
-                                            Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}
-                                            <sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
-                                        </div>
-                                    {% else %}
-                                        <div class="btn btn-sm btn-outline-success">
-                                            Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}
-                                            <sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
-                                        </div>
-                                    {% endif %}
+                                <ul class="container-fluid nav col-auto col-md-auto col-lg-auto justify-content-center">
 
-                                    {% is_liked_tag idea.id as is_liked_bool %}
-                                    {% if is_liked_bool %}
+                                    <li class="p-1">
+                                        {% if 0 > idea.get_total_rating %}
+                                            <div class="btn btn-sm btn-outline-danger">
+                                                Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}
+                                                <sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
+                                            </div>
+                                        {% else %}
+                                            <div class="btn btn-sm btn-outline-success">
+                                                Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}
+                                                <sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
+                                            </div>
+                                        {% endif %}
+                                    </li>
 
-                                        <i class="material-icons text-success md-48">thumb_up</i>
+                                    <li class="p-1">
+                                        {% is_liked_tag idea.id as is_liked_bool %}
+                                        {% if is_liked_bool %}
 
-                                    {% else %}
-
-                                        {% is_disliked_tag idea.id as is_disliked_bool %}
-                                        {% if is_disliked_bool %}
-
-                                            <i class="material-icons text-danger md-48">thumb_down</i>
+                                            <small class="text-success">Вам понравилось</small>
 
                                         {% else %}
 
-                                            <i class="material-icons text-muted md-48">live_help</i>
+                                            {% is_disliked_tag idea.id as is_disliked_bool %}
+                                            {% if is_disliked_bool %}
+
+                                                <small class="text-danger">Вам не понравилось</small>
+
+                                            {% else %}
+
+                                                <small class="text-secondary">Вы не отметили</small>
+
+                                            {% endif %}
 
                                         {% endif %}
+                                    </li>
 
-                                    {% endif %}
+                                    <li class="p-1">
+                                        <div class="btn btn-sm btn-outline-secondary">Комментариев: {{ idea.get_total_comment_value }}</div>
+                                    </li>
 
-                                    <div class="btn btn-sm btn-outline-secondary">Комментариев: {{ idea.get_total_comment_value }}</div>
-                                </div>
+                                </ul>
+                            </div>
+                            <div>
                                 <div class="text-end">
                                     <a class="text-decoration-none lead text-dark" href="{% url 'idea_view' idea.id %}">
                                         <small>#{{ forloop.revcounter }}</small>

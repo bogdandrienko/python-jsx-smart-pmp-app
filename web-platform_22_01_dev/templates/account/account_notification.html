@@ -34,25 +34,32 @@
 {% else %}
 
     <div class="container text-center">
-        <div class="btn-group m-1">
-
-            <a class="btn btn-lg btn-outline-primary" href="{% url 'account_notification' 'All' %}">Все типы</a>
+        <ul class="nav col-auto col-md-auto col-lg-auto justify-content-center">
+            <li class="p-1">
+                <a class="btn btn-lg btn-outline-primary w-100" href="{% url 'account_notification' 'All' %}">Все типы</a>
+            </li>
 
             {% for type in types %}
-                {% if forloop.counter == 0 %}
-                    <a class="btn btn-lg btn-outline-success" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
-                {% elif forloop.counter == 1 %}
-                    <a class="btn btn-lg btn-outline-danger" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
-                {% elif forloop.counter == 2 %}
-                    <a class="btn btn-lg btn-outline-warning" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
-                {% elif forloop.counter == 3 %}
-                    <a class="btn btn-lg btn-outline-success" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
-                {% else %}
-                    <a class="btn btn-lg btn-outline-secondary" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
-                {% endif %}
+
+                <li class="p-1">
+
+                    {% if forloop.counter == 0 %}
+                        <a class="btn btn-lg btn-outline-success w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% elif forloop.counter == 1 %}
+                        <a class="btn btn-lg btn-outline-danger w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% elif forloop.counter == 2 %}
+                        <a class="btn btn-lg btn-outline-warning w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% elif forloop.counter == 3 %}
+                        <a class="btn btn-lg btn-outline-success w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% else %}
+                        <a class="btn btn-lg btn-outline-secondary w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% endif %}
+
+                </li>
+
             {% endfor %}
 
-        </div>
+        </ul>
     </div>
 
     {% if page %}

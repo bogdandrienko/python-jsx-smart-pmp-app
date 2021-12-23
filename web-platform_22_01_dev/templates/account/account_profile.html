@@ -1,5 +1,6 @@
 {% extends "components/base.html" %}
 {% load static %}
+{% load access_tag %}
 
 <!-- Head -->
 {% block head %}
@@ -35,7 +36,7 @@
 
     <div class="">
 
-        {% if response == 2 %}
+        {% if user == request.user %}
 
             <div class="text-end">
                 <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg p-0 m-0">Изменить личный профиль</a>
@@ -44,7 +45,41 @@
         {% else %}
 
             <div class="text-end">
-                <a href="" class="btn btn-danger btn-lg">Пожаловаться на пользователя</a>
+
+
+                {% access_tag 'account_create_notification' as account_create_notification %}
+                {% if account_create_notification %}
+
+                    <form class="" action="{% url 'account_create_notification' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text"
+                               id="type_slug_field"
+                               name="type_slug_field"
+                               required=""
+                               placeholder=""
+                               value="notifications"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <input type="text"
+                               id="name_char_field"
+                               name="name_char_field"
+                               required=""
+                               placeholder=""
+                               value="Жалоба на пользователя"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <input type="text"
+                               id="text_field"
+                               name="text_field"
+                               required=""
+                               placeholder=""
+                               value="[ Пользователь: {{ request.user }} ] | [ id пользователя: {{ user.id }} ] | [ имя пользователя: {{ user.username }} ]"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться</button>
+                    </form>
+
+                {% endif %}
             </div>
 
         {% endif %}
@@ -58,8 +93,22 @@
         {% else %}
             <img src="{% static 'media/uploads/account/avatar/default_avatar.jpg' %}" class="bd-placeholder-img img-fluid" width="256px" height="100%" alt="default">
         {% endif %}
-        <h2>{{ user_model.last_name_char_field }} {{ user_model.first_name_char_field }} {{ user_model.patronymic_char_field }}</h2>
-        <p class="lead">{{ user_model.position_char_field }}</p>
+
+        {% if user_model.last_name_char_field or user_model.first_name_char_field or user_model.patronymic_char_field %}
+            <h2>
+                {% if user_model.last_name_char_field %}{{ user_model.last_name_char_field }} {% endif %}
+                {% if user_model.first_name_char_field %}{{ user_model.first_name_char_field }} {% endif %}
+                {% if user_model.patronymic_char_field %}{{ user_model.patronymic_char_field }} {% endif %}
+            </h2>
+        {% else %}
+            <h2>Данные аккаунта не заполнены</h2>
+        {% endif %}
+
+        {% if user_model.position_char_field %}
+            <p class="lead">{{ user_model.position_char_field }}</p>
+        {% endif %}
+
+
     </div>
     <div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">

@@ -15,28 +15,21 @@
 <!-- Style -->
 {% block style %}{% endblock style %}
 
+
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Изменить идею
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит форму для изменения идеи в банке идей.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
-
-<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
-    <div class="col text-end">
-        <a href="{% url 'module_or_component' 'module_modules' %}">
-            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
-        </a>
-        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
-            <p class="card-text text-dark">Вернуться в модули.</p>
-        </a>
-    </div>
-    <div class="col text-start">
-        <h1 class="display-6 fst-italic">Изменить идею</h1>
-        <small class="text-secondary">Содержит форму для изменения идеи в банке идей.</small>
-    </div>
-</div>
 
 {% if response == 1 %}
 
@@ -62,14 +55,12 @@
                 {% access_tag 'idea_moderator' as idea_moderator %}
                 {% if idea_moderator %}
                     <div>
-                        <label class="form-control-lg">
+                        <label class="form-control-lg m-1">
                             Автор:
                             <select type="select"
                                     id="author_foreign_key_field_id"
                                     name="author_foreign_key_field_id"
                                     required=""
-    {#                                        size="3"#}
-    {#                                        multiple="multiple"#}
                                     class="form-control form-control-lg"
                             >
                                 <option selected value="{{ idea.author_foreign_key_field.id }}">Текущий автор: {{ idea.author_foreign_key_field }}</option>
@@ -82,7 +73,7 @@
                     </div>
                 {% endif %}
                 <div>
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Название:
                         <input type="text"
                                id="name_char_field"
@@ -97,7 +88,7 @@
                         <small class="text-muted">длина: не более 32 символов</small>
                     </label>
 
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Категория:
                         <select type="select"
                                 id="category_slug_field"
@@ -115,7 +106,7 @@
                 </div>
 
                 <div>
-                    <label class="form-control form-control-lg">
+                    <label class="form-control form-control-lg m-1">
                         Краткое описание:
                         <input type="text"
                                id="short_description_char_field"
@@ -130,7 +121,7 @@
                         <small class="text-muted">длина: не более 64 символов</small>
                     </label>
 
-                    <label class="form-control form-control-lg">
+                    <label class="form-control form-control-lg m-1">
                         Полное описание:
                         <textarea type="text"
                                   id="full_description_text_field"
@@ -148,9 +139,12 @@
 
                 <div>
                     {% if idea.avatar_image_field %}
-                        <img src="{{ idea.avatar_image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" alt="{{ idea.id }}" style="width: 512px;">
+                        <label class="form-control-lg m-1">
+                            Текущая аватарка-заставка:
+                            <img src="{{ idea.avatar_image_field.url }}" class="bd-placeholder-img card-img-top featurette-image img-fluid mx-auto" alt="{{ idea.id }}" style="width: 256px;">
+                        </label>
                     {% endif %}
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Аватарка-заставка для идеи:
                         <input type="file"
                                id="avatar_image_field"
@@ -165,10 +159,13 @@
 
                 <div>
                     {% if idea.addiction_file_field %}
-                        <a class="btn btn-dark" href="{{ idea.addiction_file_field.url }}">скачать файл-приложение</a>
+                        <label class="form-control-lg m-1">
+                            Текущий файл-приложение:
+                            <a class="btn btn-dark" href="{{ idea.addiction_file_field.url }}">скачать файл-приложение</a>
+                        </label>
                     {% endif %}
 
-                    <label class="form-control-lg">
+                    <label class="form-control-lg m-1">
                         Файл-приложение:
                         <input type="file"
                                id="addiction_file_field"
@@ -180,24 +177,25 @@
                         <small class="text-muted">только для форматов файлов: .xlsx / .xls / .docx / .doc / .pdf</small>
                     </label>
                 </div>
+            </div>
+            <hr/>
+            <div class="container text-center">
+                <ul class="container-fluid btn-group row nav col-auto col-md-auto col-lg-auto justify-content-center">
+                    <div class="col-lg-6 p-1">
+                        <button href=""
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary w-100 form-control "
+                        >Подтвердить</button>
+                    </div>
 
+                    <div class="col-lg-6 p-1">
+                        <button href=""
+                                type="reset"
+                                class="btn btn-lg btn-outline-warning w-100 form-control "
+                        >Сбросить</button>
+                    </div>
+                </ul>
             </div>
-            <hr/>
-            <div class="container-fluid btn-group row">
-                <div class="col-lg-6">
-                    <button href=""
-                            type="submit"
-                            class="w-100 form-control btn btn-lg btn-outline-primary"
-                    >Подтвердить</button>
-                </div>
-                <div class="col-lg-6">
-                    <button href=""
-                            type="reset"
-                            class="w-100 form-control btn btn-lg btn-outline-warning"
-                    >Сбросить</button>
-                </div>
-            </div>
-            <hr/>
         </form>
     </div>
 

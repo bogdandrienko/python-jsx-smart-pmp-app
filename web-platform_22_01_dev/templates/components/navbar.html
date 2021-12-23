@@ -60,6 +60,42 @@
                                                 <a class="dropdown-item" href="{% url 'react' %}">React</a>
                                             {% endif %}
                                         </li>
+                                        <li>
+                                            <hr class="dropdown-divider text-light">
+                                        </li>
+
+                                        {% access_tag 'section_otiz' as section_otiz %}
+                                        {% if section_otiz %}
+
+                                            <li>
+                                                <h6 class="dropdown-header">Отдел труда и заработной платы:</h6>
+
+                                                {% access_tag 'passages_select' as access %}
+                                                {% if access %}
+                                                    <a class="dropdown-item" href="{% url 'passages_select' %}">Выгрузка данных</a>
+                                                {% endif %}
+
+                                                {% access_tag 'passages_update' as access %}
+                                                {% if access %}
+                                                    <a class="dropdown-item" href="{% url 'passages_update' %}">Обновление данных</a>
+                                                {% endif %}
+
+                                                {% access_tag 'passages_insert' as access %}
+                                                {% if access %}
+                                                    <a class="dropdown-item" href="{% url 'passages_insert' %}">Добавление данных</a>
+                                                {% endif %}
+
+                                                {% access_tag 'passages_delete' as access %}
+                                                {% if access %}
+                                                    <a class="dropdown-item" href="{% url 'passages_delete' %}">Удаление данных</a>
+                                                {% endif %}
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider text-light">
+                                            </li>
+
+                                        {% endif %}
+
                                     </ul>
                                 </li>
                             </div>
@@ -430,38 +466,6 @@
                                                 {% endif %}
 
                                                 <a class="dropdown-item disabled" href="#">Алкометрия</a>
-                                            </li>
-                                            <li>
-                                                <hr class="dropdown-divider text-light">
-                                            </li>
-
-                                        {% endif %}
-
-                                        {% access_tag 'section_otiz' as section_otiz %}
-                                        {% if section_otiz %}
-
-                                            <li>
-                                                <h6 class="dropdown-header">Отдел труда и заработной платы:</h6>
-
-                                                {% access_tag 'passages_select' as access %}
-                                                {% if access %}
-                                                    <a class="dropdown-item" href="{% url 'passages_select' %}">Выгрузка данных</a>
-                                                {% endif %}
-
-                                                {% access_tag 'passages_update' as access %}
-                                                {% if access %}
-                                                    <a class="dropdown-item" href="{% url 'passages_update' %}">Обновление данных</a>
-                                                {% endif %}
-
-                                                {% access_tag 'passages_insert' as access %}
-                                                {% if access %}
-                                                    <a class="dropdown-item" href="{% url 'passages_insert' %}">Добавление данных</a>
-                                                {% endif %}
-
-                                                {% access_tag 'passages_delete' as access %}
-                                                {% if access %}
-                                                    <a class="dropdown-item" href="{% url 'passages_delete' %}">Удаление данных</a>
-                                                {% endif %}
                                             </li>
                                             <li>
                                                 <hr class="dropdown-divider text-light">

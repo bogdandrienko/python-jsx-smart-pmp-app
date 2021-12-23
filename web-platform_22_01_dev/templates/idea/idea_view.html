@@ -14,32 +14,22 @@
 {% endblock title %}
 
 <!-- Style -->
-{% block style %}
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-{% endblock style %}
+{% block style %}{% endblock style %}
 
 <!-- Header -->
-{% block header %}{% endblock header %}
+{% block header %}
+    Просмотр идеи
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит подробную информацию об идеи в банке идей.
+{% endblock description %}
 
 <!-- Main -->
 {% block main %}
 
 
-
-<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
-    <div class="col text-end">
-        <a href="{% url 'module_or_component' 'module_modules' %}">
-            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
-        </a>
-        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
-            <p class="card-text text-dark">Вернуться в модули.</p>
-        </a>
-    </div>
-    <div class="col text-start">
-        <h1 class="display-6 fst-italic">Просмотр идеи</h1>
-        <small class="text-secondary">Содержит подробную информацию об идеи в банке идей.</small>
-    </div>
-</div>
 
 {% if response == -1 %}
 
@@ -79,7 +69,7 @@
                                     />
                                     <small class="text-muted">! функционал модератора !</small>
                                 </label>
-                                <button class="btn btn-outline-danger" type="submit">скрыть</button>
+                                <button class="btn btn-sm btn-outline-danger" type="submit">скрыть</button>
 
                             {% else %}
 
@@ -98,7 +88,7 @@
                                     <small class="text-muted">! функционал модератора !</small>
                                 </label>
 
-                                <button class="btn btn-outline-success" type="submit">одобрить</button>
+                                <button class="btn btn-sm btn-outline-success" type="submit">одобрить</button>
 
                             {% endif %}
 
@@ -111,17 +101,18 @@
 
                         <div class="form-control-lg">
                             Редактировать идею:
-                            <a class="btn btn-lg btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">
-                                <i class="material-icons cart-icon">published_with_changes</i>
-                            </a>
+                            <a class="btn btn-sm btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">Редактировать</a>
                         </div>
 
                     {% endif %}
 
                     <div class="container-fluid d-flex justify-content-between">
                         {% if idea.author_foreign_key_field %}
-                            <a class="btn btn-sm btn-outline-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
-                                Автор: {{ idea.author_foreign_key_field.last_name_char_field }} {{ idea.author_foreign_key_field.first_name_char_field }} {{ idea.author_foreign_key_field.patronymic_char_field }}
+                            <a class="p-1 text-decoration-none text-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
+                                Автор:
+                                    {% if idea.author_foreign_key_field.last_name_char_field %}{{ idea.author_foreign_key_field.last_name_char_field }} {% endif %}
+                                    {% if idea.author_foreign_key_field.first_name_char_field %}{{ idea.author_foreign_key_field.first_name_char_field }} {% endif %}
+                                    {% if idea.author_foreign_key_field.patronymic_char_field %}{{ idea.author_foreign_key_field.patronymic_char_field }} {% endif %}
                             </a>
                         {% else %}
                             <small class="btn btn-sm btn-outline-success">
@@ -155,7 +146,7 @@
                     <div class="container-fluid">
 
                         {% if idea.addiction_file_field %}
-                            <a class="btn btn-outline-dark" href="{{ idea.addiction_file_field.url }}">скачать 1 приложение</a>
+                            <a class="btn btn-sm btn-outline-dark" href="{{ idea.addiction_file_field.url }}">скачать 1 приложение</a>
                         {% endif %}
 
                     </div>
@@ -177,15 +168,19 @@
                         {% is_liked_tag idea.id as is_liked_bool %}
                         {% if is_liked_bool %}
 
-                            <i class="material-icons text-success md-48">thumb_up</i>
+                            <small class="text-success">Вам понравилось</small>
 
                         {% else %}
 
                             {% is_disliked_tag idea.id as is_disliked_bool %}
                             {% if is_disliked_bool %}
-                                <i class="material-icons text-danger md-48">thumb_down</i>
+
+                                <small class="text-danger">Вам не понравилось</small>
+
                             {% else %}
-                                <i class="material-icons text-muted md-48">live_help</i>
+
+                                <small class="text-secondary">Вы не отметили</small>
+
                             {% endif %}
 
                         {% endif %}
@@ -271,7 +266,7 @@
                             ></textarea>
                             <small class="text-muted">длина: от 1 до 512 символов</small>
                         </label>
-                        <button class="btn btn-lg btn-outline-primary w-100" type="submit">Подтвердить</button>
+                        <button class="btn btn-sm btn-outline-primary w-100" type="submit">Подтвердить</button>
                     </form>
 
                     {% access_tag 'account_create_notification' as account_create_notification %}
@@ -303,7 +298,7 @@
                                    value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
                                    class="form-control form-control-lg d-none"
                             />
-                            <button class="btn btn-lg btn-outline-danger" type="submit">Пожаловаться</button>
+                            <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться</button>
                         </form>
 
                     {% endif %}

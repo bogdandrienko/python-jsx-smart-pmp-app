@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="row row-cols-1 row-cols-md-2 text-center m-0 p-0">
+    <div class="col text-end">
+        <a href="{% url 'module_or_component' 'module_modules' %}">
+            <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top" alt="id" style="width: 128px;">
+        </a>
+        <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
+            <p class="card-text text-dark">Вернуться в модули.</p>
+        </a>
+    </div>
+    <div class="col text-start">
+        <h1 class="display-6 fst-italic">Список идей</h1>
+        <small class="text-secondary">Содержит список идей в банке идей, также есть поле для поиска по названию и сортировки по категориям.</small>
+    </div>
+</div>
