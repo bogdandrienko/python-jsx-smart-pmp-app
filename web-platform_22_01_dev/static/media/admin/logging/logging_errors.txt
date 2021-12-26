@@ -44326,3 +44326,25 @@ Bogdan, 192.168.1.68, /salary/, POST, 2021-12-24 10:44:28.822467, Expecting valu
 Bogdan, 192.168.1.68, /salary/, POST, 2021-12-24 10:44:39.069571, Expecting value: line 1 column 1 (char 0)
 
 Bogdan, 192.168.1.68, /salary/, POST, 2021-12-24 10:44:42.771745, '3.Доходы в натуральной форме'
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:48:30.750775, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:48:30.765789, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:48:30.789810, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:48:30.804824, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:48:30.850864, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:50:08.702321, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:50:08.717334, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:50:08.740354, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:50:08.757370, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2021-12-26 19:50:08.802410, IdeaRatingModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /idea_view/3/, GET, 2021-12-26 19:50:13.691172, IdeaRatingModel matching query does not exist.
