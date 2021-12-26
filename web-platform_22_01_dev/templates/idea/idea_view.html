@@ -194,7 +194,8 @@
                     </div>
                 </div>
 
-                <div class="container-fluid d-flex">
+                <div class="container-fluid">
+
                     <form action="{% url 'idea_like' idea.id %}" method="POST">
                         {% csrf_token %}
                         <input class="d-none" type="hidden" placeholder="like" name="status" value="like">
@@ -250,6 +251,7 @@
                         {% endif %}
 
                     </form>
+
                     <form class="form-control" action="{% url 'idea_comment' idea.id %}" method="POST">
                         {% csrf_token %}
                         <label class="form-control form-control-lg">
