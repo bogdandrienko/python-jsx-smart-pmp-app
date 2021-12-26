@@ -141,21 +141,31 @@
                 </div>
             </div>
             <hr/>
-            <div class="container text-center">
-                <ul class="container-fluid btn-group row nav col-auto col-md-auto col-lg-auto justify-content-center">
-                    <div class="col-lg-6 p-1">
+            <div class="text-center">
+                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <div class="m-1">
                         <button href=""
                                 type="submit"
-                                class="btn btn-lg btn-outline-primary w-100 form-control "
+                                class="btn btn-lg btn-outline-primary w-100 form-control"
                         >Подтвердить</button>
                     </div>
 
-                    <div class="col-lg-6 p-1">
+                    <div class="m-1">
                         <button href=""
                                 type="reset"
-                                class="btn btn-lg btn-outline-warning w-100 form-control "
+                                class="btn btn-lg btn-outline-warning w-100 form-control"
                         >Сбросить</button>
                     </div>
+                </ul>
+            </div>
+            <div class="text-center">
+                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-primary" type="button" href="{% url 'home' %}">Подтвердить</a>
+                    </li>
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-warning" type="button" href="">Сбросить</a>
+                    </li>
                 </ul>
             </div>
         </form>

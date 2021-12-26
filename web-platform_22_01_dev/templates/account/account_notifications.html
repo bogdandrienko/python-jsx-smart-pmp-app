@@ -30,50 +30,36 @@
 
 
 {% if response == 1 %}
-
     {% include 'components/success.html' %}
-
 {% elif response == -1 %}
-
     {% include 'components/aborted.html' %}
-
 {% else %}
-
-    <div class="container text-center">
-        <ul class="nav col-auto col-md-auto col-lg-auto justify-content-center">
-            <li class="p-1">
-                <a class="btn btn-lg btn-outline-primary w-100" href="{% url 'account_notification' 'All' %}">Все типы</a>
+    <div class="text-center">
+        <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+            <li class="m-1">
+                <a class="btn btn-lg btn-outline-primary" type="button" href="{% url 'account_notification' 'All' %}">Все типы</a>
             </li>
-
             {% for type in types %}
-
-                <li class="p-1">
-
+                <li class="m-1">
                     {% if forloop.counter == 0 %}
-                        <a class="btn btn-lg btn-outline-success w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                        <a class="btn btn-lg btn-outline-success" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
                     {% elif forloop.counter == 1 %}
-                        <a class="btn btn-lg btn-outline-danger w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                        <a class="btn btn-lg btn-outline-danger" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
                     {% elif forloop.counter == 2 %}
-                        <a class="btn btn-lg btn-outline-warning w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                        <a class="btn btn-lg btn-outline-warning" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
                     {% elif forloop.counter == 3 %}
-                        <a class="btn btn-lg btn-outline-success w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                        <a class="btn btn-lg btn-outline-success" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
                     {% else %}
-                        <a class="btn btn-lg btn-outline-secondary w-100" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                        <a class="btn btn-lg btn-outline-secondary" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
                     {% endif %}
-
                 </li>
-
             {% endfor %}
-
         </ul>
     </div>
-
     {% if page %}
-
         <div class="container d-flex justify-content-center align-self-center">
             {% include 'components/paginator.html' %}
         </div>
-
         <div class="text-center">
             <h1 class="display-6">Данные</h1>
             <p class="lead">Текущие данные ниже в таблице:</p>
@@ -87,9 +73,7 @@
                 </tr>
             </thead>
             <tbody>
-
                 {% for notification in page %}
-
                     <tr>
                         <td colspan="1" class="align-bottom text-center">
                             <div>
@@ -167,23 +151,15 @@
                         </td>
                         <td colspan="1" class="align-bottom text-center">{{ notification.text_field }}</td>
                     </tr>
-
                 {% endfor %}
-
             </tbody>
         </table>
-
         <div class="container d-flex justify-content-center align-self-center">
             {% include 'components/paginator.html' %}
         </div>
-
     {% else %}
-
         {% include 'components/aborted.html' %}
-
     {% endif %}
-
-
 {% endif %}
 
 

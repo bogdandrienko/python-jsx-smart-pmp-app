@@ -734,7 +734,7 @@ def account_notification(request, type_slug='All'):
             'types': None,
         }
 
-    return render(request, 'account/account_notification.html', context)
+    return render(request, 'account/account_notifications.html', context)
 
 
 def account_create_notification(request):

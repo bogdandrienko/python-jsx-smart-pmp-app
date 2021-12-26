@@ -30,15 +30,10 @@
 
 
 {% if response == 1 %}
-
     {% include 'components/success.html' %}
-
 {% elif response == -1 %}
-
     {% include 'components/aborted.html' %}
-
 {% else %}
-
     <div class="container">
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <div class="d-block">
@@ -74,9 +69,8 @@
                 </form>
             </div>
         </div>
-
         {% if data %}
-
+            {% include 'components/table.html' %}
             <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
                 <h1 class="display-4">Текущие данные.</h1>
                 <p class="lead">Ниже расположены данные, соответствующие текущему значению.</p>
@@ -111,19 +105,12 @@
                     </div>
                 </div>
             </div>
-
         {% else %}
-
-            <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
-                <h1 class="display-4">Данных нет.</h1>
-                <p class="lead">Нажмите на кнопку выгрузки или ожидайте исправления неполадок.</p>
-            </div>
-
+            {% include 'components/aborted.html' %}
         {% endif %}
-
     </div>
+{% endif %}
 
-    {% endif %}
 
 
 {% endblock main %}

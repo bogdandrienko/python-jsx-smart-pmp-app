@@ -1,23 +1,18 @@
+<hr/>
 <div class="container">
-    <h1 class="display-6 text-center">Успешно</h1>
-    <p class="lead text-center">Операция успешно выполнена, перейдите на главную или повторите операцию.</p>
-    <hr/>
-    <div class="text-center">
-        <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-            <div class="m-1">
-                <a href="{% url 'home' %}"
-                        type="button"
-                        class="btn btn-lg btn-outline-primary form-control"
-                >На главную</a>
-            </div>
-
-            <div class="m-1">
-                <a href="#"
-                        type="button"
-                        class="btn btn-lg btn-outline-success form-control"
-                >Повторить</a>
-            </div>
-        </ul>
+    <div class="container-fluid">
+        <h1 class="display-6 text-center">Успешно</h1>
+        <p class="lead text-center">Операция успешно выполнена, перейдите на главную или повторите операцию.</p>
+        <div class="text-center">
+            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                <li class="m-1">
+                    <a class="btn btn-lg btn-outline-primary" type="button" href="{% url 'home' %}">На главную</a>
+                </li>
+                <li class="m-1">
+                    <a class="btn btn-lg btn-outline-success" type="button" href="">Повторить</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <hr/>
 </div>
+<hr/>

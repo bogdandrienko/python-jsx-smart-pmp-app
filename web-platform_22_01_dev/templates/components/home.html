@@ -2,6 +2,7 @@
 {% load static %}
 {% load access_tag %}
 
+
 <!-- Head -->
 {% block head %}
     {% include 'components/navbar.html' %}
@@ -31,36 +32,23 @@
 
 
 {% if response == 1 %}
-
     {% include 'components/success.html' %}
-
 {% elif response == -1 %}
-
     {% include 'components/aborted.html' %}
-
 {% else %}
-
     <div class="container-fluid text-center container">
-
         {% access_tag 'module_modules' as module_modules %}
         {% if module_modules %}
-
             <a href="{% url 'module_or_component' 'module_modules' %}">
-
         {% else %}
-
             <a href="{% url 'account_login' %}">
-
         {% endif %}
-
                 <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
             </a>
         <div class="card-body">
             <p class="card-text">Модули.</p>
         </div>
-
     </div>
-
 {% endif %}
 
 
