@@ -454,9 +454,8 @@ def account_change_password(request):
                 email = DjangoClass.RequestClass.get_value(request, "email")
                 secret_question = DjangoClass.RequestClass.get_value(request, "secret_question")
                 secret_answer = DjangoClass.RequestClass.get_value(request, "secret_answer")
-                if password_1 == password_2 and len(password_1) >= 8:
-                    if user_model.password_slug_field != password_1:
-                        user_model.password_slug_field = password_1
+                if password_1 == password_2 and len(password_1) >= 8 and password_1 != user_model.password_slug_field:
+                    user_model.password_slug_field = password_1
                     user.password = password_1
                     user.set_password(password_1)
                 # Third data account
@@ -916,7 +915,7 @@ def account_create_or_change_accounts(request):
                                 for group in GroupModel.objects.filter(user_many_to_many_field=user_model):
                                     group.user_many_to_many_field.remove(user_model)
                             response = 1
-                            groups = [group.strip() for group in str(groups).strip().split(',')]
+                            groups = [group.strip() for group in str(groups).lower().strip().split(',')]
                             for group in groups:
                                 if len(group) > 0:
                                     group_object = Group.objects.get_or_create(name=group)[0]
@@ -1292,7 +1291,7 @@ def account_update_accounts_1c(request):
                         user_model = UserModel.objects.get_or_create(
                             user_foreign_key_field=User.objects.get(username=username)
                         )[0]
-                        groups = ['User']
+                        groups = ['user']
                         for group in groups:
                             if len(group) > 0:
                                 group_object = Group.objects.get_or_create(name=group)[0]
