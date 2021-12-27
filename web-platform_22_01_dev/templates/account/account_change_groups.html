@@ -30,15 +30,10 @@
 
 
 {% if response == 1 %}
-
     {% include 'components/success.html' %}
-
 {% elif response == -1 %}
-
     {% include 'components/aborted.html' %}
-
 {% else %}
-
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="accordion_heading_1">
@@ -49,7 +44,7 @@
                     data-bs-target="#accordion_collapse_1"
                     aria-expanded="false"
                     aria-controls="accordion_collapse_1"
-                >форма для создания действия и группы, и присоединения действия к группе</button>
+                >форма для создания действия</button>
             </h2>
             <div
                 id="accordion_collapse_1"
@@ -58,7 +53,6 @@
                 data-bs-parent="#accordionExample"
             >
                 <div class="accordion-body">
-
                     <form action="{% url 'account_change_groups' %}"
                           method="POST"
                           target="_self"
@@ -69,37 +63,6 @@
                     >
                         {% csrf_token %}
                         <div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Название группы:
-                                    <input type="text"
-                                           id="group_name_char_field"
-                                           name="group_name_char_field"
-                                           required=""
-                                           placeholder="Пользователь"
-                                           value="Пользователь"
-                                           minlength="1"
-                                           maxlength="32"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">видимое имя группы, пример: "Пользователь"</small>
-                                </label>
-
-                                <label class="form-control-lg">
-                                    Валидация группы:
-                                    <input type="text"
-                                           id="group_name_slug_field"
-                                           name="group_name_slug_field"
-                                           required=""
-                                           placeholder="user"
-                                           value="user"
-                                           minlength="1"
-                                           maxlength="32"
-                                           class="form-control form-control-lg"
-                                    />
-                                    <small class="text-muted">валидируемое имя группы, пример: "user"</small>
-                                </label>
-                            </div>
                             <div>
                                 <label class="form-control-lg">
                                     Название действия:
@@ -115,7 +78,6 @@
                                     />
                                     <small class="text-muted">видимое имя действия, пример: "Просмотр домашней страницы"</small>
                                 </label>
-
                                 <label class="form-control-lg">
                                     Валидация действия:
                                     <input type="text"
@@ -131,47 +93,22 @@
                                     <small class="text-muted">валидируемое имя действия, пример: "view_home_page"</small>
                                 </label>
                             </div>
-                            <div>
-                                <label class="form-control-lg">
-                                    Выберите тип:
-                                    <select type="select"
-                                            id="type_select"
-                                            name="type_select"
-                                            required=""
-{#                                            size="3"#}
-{#                                            multiple="multiple"#}
-                                            class="form-control form-control-lg"
-                                    >
-                                        <option value="add">Присоединить</option>
-                                        <option value="remove">Отсоединить</option>
-                                    </select>
-                                    <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
-                                </label>
-                            </div>
                         </div>
                         <hr/>
-                        <div class="container text-center">
-                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                                <div class="m-1">
-                                    <button href=""
-                                            type="submit"
-                                            class="btn btn-lg btn-outline-primary form-control"
-                                    >Подтвердить</button>
-                                </div>
-
-                                <div class="m-1">
-                                    <button href=""
-                                            type="reset"
-                                            class="btn btn-lg btn-outline-warning form-control"
-                                    >Сбросить</button>
-                                </div>
+                        <div class="container-fluid text-center">
+                            <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                                </li>
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
+                                </li>
                             </ul>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
         <div class="accordion-item">
             <h2 class="accordion-header" id="accordion_heading_2">
                 <button
@@ -181,7 +118,7 @@
                     data-bs-target="#accordion_collapse_2"
                     aria-expanded="false"
                     aria-controls="accordion_collapse_2"
-                >форма для присоединения/отсоединения действия к группе</button>
+                >форма для создания группы</button>
             </h2>
             <div
                 id="accordion_collapse_2"
@@ -190,7 +127,80 @@
                 data-bs-parent="#accordionExample"
             >
                 <div class="accordion-body">
-
+                    <form action="{% url 'account_change_groups' %}"
+                          method="POST"
+                          target="_self"
+                          enctype="multipart/form-data"
+                          name="account_change_groups"
+                          autocomplete="on"
+                          class="text-center"
+                    >
+                        {% csrf_token %}
+                        <div>
+                            <div>
+                                <label class="form-control-lg">
+                                    Название действия:
+                                    <input type="text"
+                                           id="action_name_char_field"
+                                           name="action_name_char_field"
+                                           required=""
+                                           placeholder="Просмотр домашней страницы"
+                                           value="Просмотр домашней страницы"
+                                           minlength="1"
+                                           maxlength="32"
+                                           class="form-control form-control-lg"
+                                    />
+                                    <small class="text-muted">видимое имя действия, пример: "Просмотр домашней страницы"</small>
+                                </label>
+                                <label class="form-control-lg">
+                                    Валидация действия:
+                                    <input type="text"
+                                           id="action_name_slug_field"
+                                           name="action_name_slug_field"
+                                           required=""
+                                           placeholder="view_home_page"
+                                           value="view_home_page"
+                                           minlength="1"
+                                           maxlength="32"
+                                           class="form-control form-control-lg"
+                                    />
+                                    <small class="text-muted">валидируемое имя действия, пример: "view_home_page"</small>
+                                </label>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="container-fluid text-center">
+                            <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                                </li>
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="accordion_heading_3">
+                <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#accordion_collapse_3"
+                    aria-expanded="false"
+                    aria-controls="accordion_collapse_3"
+                >форма для присоединения/отсоединения действия к группе</button>
+            </h2>
+            <div
+                id="accordion_collapse_3"
+                class="accordion-collapse collapse"
+                aria-labelledby="accordion_collapse_3"
+                data-bs-parent="#accordionExample"
+            >
+                <div class="accordion-body">
                     <form action="{% url 'account_change_groups' %}"
                           method="POST"
                           target="_self"
@@ -218,7 +228,6 @@
                                 </select>
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
-
                             <label class="form-control-lg">
                                 Выберите группу, к которой нужно присоединить действие:
                                 <select type="select"
@@ -236,7 +245,6 @@
                                 </select>
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
-
                             <label class="form-control-lg">
                                 Выберите тип:
                                 <select type="select"
@@ -254,44 +262,35 @@
                             </label>
                         </div>
                         <hr/>
-                        <div class="container text-center">
-                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                                <div class="m-1">
-                                    <button href=""
-                                            type="submit"
-                                            class="btn btn-lg btn-outline-primary form-control"
-                                    >Подтвердить</button>
-                                </div>
-
-                                <div class="m-1">
-                                    <button href=""
-                                            type="reset"
-                                            class="btn btn-lg btn-outline-warning form-control"
-                                    >Сбросить</button>
-                                </div>
+                        <div class="container-fluid text-center">
+                            <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                                </li>
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
+                                </li>
                             </ul>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
-
         <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_3">
+            <h2 class="accordion-header" id="accordion_heading_4">
                 <button
                     class="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#accordion_collapse_3"
+                    data-bs-target="#accordion_collapse_4"
                     aria-expanded="false"
-                    aria-controls="accordion_collapse_3"
+                    aria-controls="accordion_collapse_4"
                 >форма для присоединения/отсоединения пользователя к группе</button>
             </h2>
             <div
-                id="accordion_collapse_3"
+                id="accordion_collapse_4"
                 class="accordion-collapse collapse"
-                aria-labelledby="accordion_collapse_3"
+                aria-labelledby="accordion_collapse_4"
                 data-bs-parent="#accordionExample"
             >
                 <div class="accordion-body">
@@ -323,7 +322,6 @@
                                 </select>
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
-
                             <label class="form-control-lg">
                                 Выберите группу, к которой нужно присоединить пользователя:
                                 <select type="select"
@@ -341,7 +339,6 @@
                                 </select>
                                 <small class="text-muted">нажмите и выберите один из элементов из выпадающего списка</small>
                             </label>
-
                             <label class="form-control-lg">
                                 Выберите тип:
                                 <select type="select"
@@ -359,21 +356,14 @@
                             </label>
                         </div>
                         <hr/>
-                        <div class="container text-center">
-                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                                <div class="m-1">
-                                    <button href=""
-                                            type="submit"
-                                            class="btn btn-lg btn-outline-primary form-control"
-                                    >Подтвердить</button>
-                                </div>
-
-                                <div class="m-1">
-                                    <button href=""
-                                            type="reset"
-                                            class="btn btn-lg btn-outline-warning form-control"
-                                    >Сбросить</button>
-                                </div>
+                        <div class="container-fluid text-center">
+                            <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                                </li>
+                                <li class="m-1">
+                                    <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
+                                </li>
                             </ul>
                         </div>
                     </form>
@@ -381,7 +371,6 @@
             </div>
         </div>
     </div>
-
 {% endif %}
 
 

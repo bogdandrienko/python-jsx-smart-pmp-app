@@ -387,8 +387,7 @@ def account_login(request):
                         request_method_slug_field='POST',
                         error_text_field='successful'
                 ):
-                    if dat.datetime_field and \
-                            (dat.datetime_field + datetime.timedelta(hours=6)).strftime('%Y-%m-%d %H:%M') >= now:
+                    if (dat.datetime_field + datetime.timedelta(hours=6)).strftime('%Y-%m-%d %H:%M') >= now:
                         access_count += 1
                 user = authenticate(
                     username=DjangoClass.RequestClass.get_value(request, "username"),
@@ -1909,8 +1908,7 @@ def salary(request):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         data = None
         response = 0
         if request.method == 'POST':
@@ -1962,11 +1960,9 @@ def salary(request):
                         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             if success_web_read is False:
                 print('read temp file')
-                with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
-                    json_data = json.load(file)
-
-            # print(json_data)
-
+                # with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                #     json_data = json.load(file)
+                json_data = {}
             try:
                 json_data["global_objects"]["3.Доходы в натуральной форме"]
             except Exception as error:
@@ -1982,60 +1978,87 @@ def salary(request):
                         "7": "ВсегоЧасы"
                     },
                 }
-
             new_data = dict(json_data).copy()
             del (new_data["global_objects"])
-            print(new_data)
-
             new_arr = []
             for key, value in new_data.items():
                 new_arr.append([key, value])
-
+            temp_json = dict(json_data).copy()
+            up = SalaryClass.create_arr_table(
+                title="1.Начислено",
+                footer="Всего начислено",
+                json_obj=temp_json["global_objects"]["1.Начислено"],
+                exclude=[5, 6]
+            )
+            up = up[len(up) - 1]
+            up = up[len(up) - 1]
+            down = SalaryClass.create_arr_table(
+                title="2.Удержано",
+                footer="Всего удержано",
+                json_obj=temp_json["global_objects"]["2.Удержано"],
+                exclude=[]
+            ),
+            down = down[len(down) - 1]
+            down = down[len(down) - 1]
+            down = down[len(down) - 1]
             data = {
-                "Table_0_1": new_arr[:len(new_arr)//2],
-                "Table_0_2": new_arr[len(new_arr)//2:],
+                "Table_0_1": new_arr[:len(new_arr) // 2],
+                "Table_0_2": new_arr[len(new_arr) // 2:],
                 "Table_1": SalaryClass.create_arr_table(
-                    title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
+                    title="1.Начислено",
+                    footer="Всего начислено",
+                    json_obj=json_data["global_objects"]["1.Начислено"],
                     exclude=[5, 6]
                 ),
                 "Table_2": SalaryClass.create_arr_table(
-                    title="2.Удержано", footer="Всего удержано", json_obj=json_data["global_objects"]["2.Удержано"],
+                    title="2.Удержано",
+                    footer="Всего удержано",
+                    json_obj=json_data["global_objects"]["2.Удержано"],
                     exclude=[]
                 ),
                 "Table_3": SalaryClass.create_arr_table(
-                    title="3.Доходы в натуральной форме", footer="Всего натуральных доходов",
-                    json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"], exclude=[
-                    ]
+                    title="3.Доходы в натуральной форме",
+                    footer="Всего натуральных доходов",
+                    json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"],
+                    exclude=[]
                 ),
                 "Table_4": SalaryClass.create_arr_table(
-                    title="4.Выплачено", footer="Всего выплат", json_obj=json_data["global_objects"]["4.Выплачено"],
+                    title="4.Выплачено",
+                    footer="Всего выплат",
+                    json_obj=json_data["global_objects"]["4.Выплачено"],
                     exclude=[]
                 ),
                 "Table_5": SalaryClass.create_arr_table(
-                    title="5.Налоговые вычеты", footer="Всего вычеты",
+                    title="5.Налоговые вычеты",
+                    footer="Всего вычеты",
                     json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
                     exclude=[]
                 ),
                 "Down": {
-                    "first": ["Долг за организацией на начало месяца",
-                              json_data["Долг за организацией на начало месяца"]],
+                    "first": [
+                        "Долг за организацией на начало месяца",
+                        json_data["Долг за организацией на начало месяца"]
+                    ],
                     "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
                 },
+                "Final": [
+                    ["Период", json_data["Период"]],
+                    ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+                    ["Всего начислено", up],
+                    ["Всего удержано", down],
+                ],
             }
-
-            # print(data)
-
             response = 1
         context = {
             'response': response,
             'data': data,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'data': None,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+        }
     return render(request, 'salary/salary.html', context)
 
 

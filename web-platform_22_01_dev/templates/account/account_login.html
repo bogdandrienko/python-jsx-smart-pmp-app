@@ -30,18 +30,12 @@
 
 
 {% if response == 1 %}
-
     {% include 'components/success.html' %}
-
 {% else %}
-
     <div class="container">
         {% if response == -1 %}
-
             {% if access_count %}
-
                 <p class="lead text-danger text-center m-1">
-
                     {% if access_count <= 10 %}
                         Вы ввели неверные имя пользователя и/или пароль!
                     {% elif access_count > 10 %}
@@ -49,11 +43,8 @@
                     {% endif %}
                      Количество попыток входа за последний час: {{ access_count }} (разрешено не больше 10 в час)
                 </p>
-
             {% endif %}
-
         {% endif %}
-
         <form action="{% url 'account_login' %}"
               method="POST"
               target="_self"
@@ -78,7 +69,6 @@
                     />
                     <small class="text-muted">ИИН: 12 цифр</small>
                 </label>
-
                 <label class="form-control-lg m-1">
                     Введите пароль для входа в аккаунт:
                     <input type="password"
@@ -103,14 +93,12 @@
                                 class="btn btn-lg btn-outline-primary form-control"
                         >Подтвердить</button>
                     </div>
-
                     <div class="m-1">
                         <button href=""
                                 type="reset"
                                 class="btn btn-lg btn-outline-warning form-control"
                         >Сбросить</button>
                     </div>
-
                     <div class="m-1">
                         <a href="{% url 'account_recover_password' '_' %}"
                                 type="button"
@@ -121,7 +109,6 @@
             </div>
         </form>
     </div>
-
 {% endif %}
 
 

@@ -41,8 +41,8 @@ class DjangoClass:
                     if user_model.activity_boolean_field is False:
                         return 'account_logout'
                     else:
-                        if user_model.email_field and \
-                                user_model.secret_question_char_field and user_model.secret_answer_char_field:
+                        if user_model.email_field and user_model.secret_question_char_field and \
+                                user_model.secret_answer_char_field:
                             try:
                                 action_model = ActionModel.objects.get(name_slug_field=access)
                                 if action_model:
@@ -382,6 +382,8 @@ class SalaryClass:
     @staticmethod
     def create_arr_table(title: str, footer: str, json_obj, exclude: list):
         headers = []
+
+        json_obj = dict(json_obj).copy()
 
         for x in json_obj["Fields"]:
             headers.append(json_obj["Fields"][x])

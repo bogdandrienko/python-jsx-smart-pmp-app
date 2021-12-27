@@ -40,10 +40,6 @@
                             {% if react %}
                                 <a class="dropdown-item" href="{% url 'react' %}">React</a>
                             {% endif %}
-                            {% access_tag 'account_create_modules_and_actions' as account_create_modules_and_actions %}
-                            {% if account_create_modules_and_actions %}
-                                <a class="dropdown-item" href="{% url 'account_create_modules_and_actions' %}">Создание модулей или действий</a>
-                            {% endif %}
                             <hr class="dropdown-divider">
                         </li>
                         {% access_tag 'section_otiz' as section_otiz %}
@@ -84,6 +80,10 @@
                             {% access_tag 'logging' as access %}
                             {% if access %}
                                 <a class="dropdown-item" href="{% url 'logging' %}">Логи Системы</a>
+                            {% endif %}
+                            {% access_tag 'account_create_modules_and_actions' as account_create_modules_and_actions %}
+                            {% if account_create_modules_and_actions %}
+                                <a class="dropdown-item" href="{% url 'account_create_modules_and_actions' %}">Создание модулей или действий</a>
                             {% endif %}
                             <hr class="dropdown-divider">
                         </li>
