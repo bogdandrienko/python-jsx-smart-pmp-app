@@ -549,7 +549,8 @@ def account_recover_password(request, type_slug='iin'):
     if page:
         return redirect(page)
 
-    try:
+    # try:
+    if True:
         response = 0
         data = None
         user = None
@@ -558,10 +559,9 @@ def account_recover_password(request, type_slug='iin'):
         if request.method == 'POST':
             try:
                 user = User.objects.get(username=DjangoClass.RequestClass.get_value(request, "username"))
-                user_model = UserModel.objects.get(user_foreign_key_field=user)
+                user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
             except Exception as error:
                 DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                user = None
             if type_slug.lower() == 'iin':
                 # try:
                 if True:
@@ -576,8 +576,7 @@ def account_recover_password(request, type_slug='iin'):
                             request_method_slug_field='POST',
                             error_text_field='successful'
                     ):
-                        if dat.datetime_now and (dat.datetime_now + datetime.timedelta(hours=6)). \
-                                strftime('%Y-%m-%d %H:%M') >= now:
+                        if (dat.datetime_field + datetime.timedelta(hours=6)).strftime('%Y-%m-%d %H:%M') >= now:
                             access_count += 1
                     if access_count > 10:
                         response = -1
@@ -603,14 +602,15 @@ def account_recover_password(request, type_slug='iin'):
                 if True:
                     password = user_model.password_slug_field
                     email_ = user_model.email_field
-                    if password and email_:
+                    email__ = DjangoClass.RequestClass.get_value(request, "email")
+                    if password and email_ and email_ == email__:
                         subject = 'Восстановление пароля от веб платформы'
                         encrypt_message = EncryptingClass.encrypt_text(
                             text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
                             hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
                         )
                         message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-                                    f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/0/ , ' \
+                                    f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/ , ' \
                                     f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
                         # from_email = 'eevee.cycle@yandex.ru'
                         from_email = 'webapp@km.kz'
@@ -618,6 +618,11 @@ def account_recover_password(request, type_slug='iin'):
                         if subject and message and to_email:
                             send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
                             response = 2
+                        else:
+                            response = -2
+                    else:
+                        response = -2
+
                 # except Exception as error:
                 #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             elif type_slug.lower() == 'recover':
@@ -648,15 +653,15 @@ def account_recover_password(request, type_slug='iin'):
             'user': user,
             'user_model': user_model,
         }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'data': None,
-            'access_count': None,
-            'user': None,
-            'user_model': None,
-        }
+    # except Exception as error:
+    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    #     context = {
+    #         'response': -1,
+    #         'data': None,
+    #         'access_count': None,
+    #         'user': None,
+    #         'user_model': None,
+    #     }
 
     return render(request, 'account/account_recover_password.html', context)
 
@@ -1907,48 +1912,27 @@ def salary(request):
     # try:
     if True:
         data = None
-        result_form = False
         response = 0
         if request.method == 'POST':
             key = UtilsClass.create_encrypted_password(
                 _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                _length=10)
-            print('\n ***************** \n')
-            print(f"key: {key}")
+                _length=10
+            )
             hash_key_obj = hashlib.sha256()
             hash_key_obj.update(key.encode('utf-8'))
             key_hash = str(hash_key_obj.hexdigest().strip().upper())
-            print('\n ***************** \n')
-            print(f"key_hash: {key_hash}")
             key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-            print('\n ***************** \n')
-            print(f"key_hash_base64: {key_hash_base64}")
-
             iin = request.user.username
             if str(request.user.username).lower() == 'bogdan':
                 iin = 970801351179
-            print('\n ***************** \n')
-            print(f"iin: {iin}")
             iin_base64 = base64.b64encode(str(iin).encode()).decode()
-            print('\n ***************** \n')
-            print(f"iin_base64: {iin_base64}")
-            print('\n ***************** \n')
-
-            month = request.POST["month"]
+            month = DjangoClass.RequestClass.get_value(request, "month")
             if int(month) < 10:
                 month = f'0{month}'
-            year = str(request.POST["year"])
-            date = f'{year}{month}'
-            print(f"date: {date}")
-            date_base64 = base64.b64encode(str(date).encode()).decode()
-            print('\n ***************** \n')
-            print(f"date_base64: {date_base64}")
-
+            year = DjangoClass.RequestClass.get_value(request, "year")
+            date_base64 = base64.b64encode(f'{year}{month}'.encode()).decode()
             # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
             url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-            print('\n ***************** \n')
-            print(f"url: {url}")
-
             relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
             h = httplib2.Http(
                 relative_path + "\\static\\media\\data\\temp\\get_salary_data")
@@ -1962,22 +1946,8 @@ def salary(request):
                 content = None
             success_web_read = False
             if content:
-
-                print('\n ***************** \n')
-                print(f"content: {content}")
-
-                print('\n ***************** \n')
-                print(f"content_utf: {content.decode()}")
-
-                content_decrypt = UtilsClass.decrypt_text_with_hash(
-                    content.decode(encoding='UTF-8', errors='strict')[1:], key_hash
-                )
-                print('\n ***************** \n')
-                print(f"content_decrypt: {content_decrypt}")
-
                 success = True
-                error_word_list = ['Ошибка', 'ошибка',
-                                   'Error', 'error', 'Failed', 'failed']
+                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
                 for error_word in error_word_list:
                     if str(content.decode()).find(error_word) >= 0:
                         success = False
@@ -1985,8 +1955,7 @@ def salary(request):
                     try:
                         json_data = json.loads(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
                         with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-                            encode_data = json.dumps(
-                                json_data, ensure_ascii=False)
+                            encode_data = json.dumps(json_data, ensure_ascii=False)
                             json.dump(encode_data, file, ensure_ascii=False)
                         success_web_read = True
                     except Exception as error:
@@ -1996,9 +1965,7 @@ def salary(request):
                 with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
                     json_data = json.load(file)
 
-            print('\n ***************** \n')
-            print(f"json_data: {json_data}")
-            print('\n ***************** \n')
+            # print(json_data)
 
             try:
                 json_data["global_objects"]["3.Доходы в натуральной форме"]
@@ -2016,7 +1983,17 @@ def salary(request):
                     },
                 }
 
+            new_data = dict(json_data).copy()
+            del (new_data["global_objects"])
+            print(new_data)
+
+            new_arr = []
+            for key, value in new_data.items():
+                new_arr.append([key, value])
+
             data = {
+                "Table_0_1": new_arr[:len(new_arr)//2],
+                "Table_0_2": new_arr[len(new_arr)//2:],
                 "Table_1": SalaryClass.create_arr_table(
                     title="1.Начислено", footer="Всего начислено", json_obj=json_data["global_objects"]["1.Начислено"],
                     exclude=[5, 6]
@@ -2045,18 +2022,19 @@ def salary(request):
                     "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
                 },
             }
+
+            # print(data)
+
             response = 1
         context = {
             'response': response,
             'data': data,
-            'result_form': result_form
         }
     # except Exception as error:
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     context = {
     #         'response': -1,
     #         'data': None,
-    #         'result_form': None
     #     }
     return render(request, 'salary/salary.html', context)
 

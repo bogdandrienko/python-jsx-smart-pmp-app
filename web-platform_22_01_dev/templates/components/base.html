@@ -2,56 +2,41 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
-
-    <!-- Head -->
+<html lang="en" class="h-100">
     <head>
-        <!-- Head -->
-        {% block head %}{% endblock head %}
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Title -->
+        <meta name="description" content="just for fun">
+        <meta name="author" content="Andriyenko Bogdan">
+        <meta name="generator" content="Custom">
+        <link rel="icon" href="{% static 'img/favicon/favicon.ico' %}" type="image/png">
         <title>
             {% block title %}{% endblock title %}
         </title>
-
-        <!-- Style -->
         {% block style %}{% endblock style %}
-        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}" />
-        <!-- Not Optimizated Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'css/bootstrap_5.1.3/bootstrap.css' %}">
-        <!-- Optimizated Bootstrap CSS -->
-        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_5.1.3/bootstrap.min.css' %}"> -->
     </head>
-
-    <!-- Body -->
-    <body class="bg-dark">
-        <main class="bg-light container-fluid" style="min-height: 80vh;">
-            <div class="container bg-light">
-                <div class="container-fluid">
-                    <div class="text-center">
-                        <h1 class="display-5 fw-bold fst-italic">{% block header %}{% endblock header %}</h1>
-                        <div class="col-lg-6 mx-auto">
-                            <p class="lead mb-4">{% block description %}{% endblock description %}</p>
+    <body class="d-flex flex-column h-100 bg-light">
+        <header>
+            {% block head %}{% endblock head %}
+        </header>
+        <main class="flex-shrink-0 bg-light">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="container-fluid">
+                        <div class="text-center">
+                            <h1 class="display-5 fw-bold fst-italic">{% block header %}{% endblock header %}</h1>
+                            <div class="col-lg-6 mx-auto">
+                                <p class="lead mb-4">{% block description %}{% endblock description %}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% block main %}{% endblock main %}
             </div>
-            <!-- Main -->
-            {% block main %}{% endblock main %}
         </main>
-        <!-- Footer -->
-        <footer class="bg-dark">
-            {% block footer %}{% endblock footer %}
-        </footer>
-        <!-- Script -->
+        {% block footer %}{% endblock footer %}
         {% block script %}{% endblock script %}
-        <!-- Not Optimizated Bootstrap JavaScript -->
         <script src="{% static 'js/bootstrap_5.1.3/bootstrap.js' %}"></script>
-        <!-- Optimizated Bootstrap JavaScript -->
-        <!-- <script src="{% static 'js/bootstrap_5.1.3/bootstrap.min.js' %}"></script> -->
     </body>
-
 </html>

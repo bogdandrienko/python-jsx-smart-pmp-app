@@ -27,34 +27,22 @@ class DjangoClass:
     class AuthorizationClass:
         @staticmethod
         def try_to_access(request, access: str):
-
-            # Если пользователь в подсети предприятия его переадресует на локальный доступ
+            DjangoClass.LoggingClass.logging_actions(request=request)
             if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
                 return 'local'
-
-            # Логирование действий
-            DjangoClass.LoggingClass.logging_actions(request=request)
-
-            # Возврат, если выбрано только логирование
             if access == 'only_logging':
                 return False
-
-            # Проверка на вход в аккаунт
             if request.user.is_authenticated:
                 try:
                     user = User.objects.get(username=request.user.username)
                     user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                    # Проверка суперпользователя: если имеет права, то полный доступ
                     if user.is_superuser:
                         return False
-                    # Проверка бана: если аккаунт пользователя отключён, то его разлогинит
                     if user_model.activity_boolean_field is False:
                         return 'account_logout'
                     else:
-                        # Проверка заполнения спец полей
                         if user_model.email_field and \
-                                user_model.secret_question_char_field and user_model.secret_question_char_field:
-                            # Выборка всех групп доступа с определённым пользователем
+                                user_model.secret_question_char_field and user_model.secret_answer_char_field:
                             try:
                                 action_model = ActionModel.objects.get(name_slug_field=access)
                                 if action_model:

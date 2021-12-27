@@ -1,6 +1,7 @@
 {% extends "components/base.html" %}
 {% load static %}
 
+
 <!-- Head -->
 {% block head %}
     {% include 'components/navbar.html' %}
@@ -204,6 +205,57 @@
 
         </tbody>
     </table>
+
+    <hr/>
+
+    <div class="container-fluid">
+        <form action="{% url 'idea_create' %}"
+                  method="POST"
+                  target="_self"
+                  enctype="multipart/form-data"
+                  name="idea_create"
+                  autocomplete="on"
+                  class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <label class="form-control-lg m-1">
+                    Название:
+                    <input type="text"
+                           id="name_char_field"
+                           name="name_char_field"
+                           required=""
+                           placeholder="Название"
+                           value=""
+                           minlength="1"
+                           maxlength="32"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">длина: не более 32 символов</small>
+                </label>
+            </div>
+            <hr/>
+            <div class="container-fluid text-center">
+                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                    <li class="m-1">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                    </li>
+                    <li class="m-1">
+                        <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
+                    </li>
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-primary" href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-success" href="">Повторить</a>
+                    </li>
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-warning" href="#">ВВЕРХ!</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
 
     <hr/>
 

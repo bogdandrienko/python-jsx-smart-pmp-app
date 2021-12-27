@@ -1,6 +1,7 @@
 {% extends "components/base.html" %}
 {% load static %}
 
+
 <!-- Head -->
 {% block head %}
     {% include 'components/navbar.html' %}
@@ -30,15 +31,10 @@
 
 
 {% if response == 1 %}
-
     {% include 'components/success.html' %}
-
 {% elif response == -1 %}
-
     {% include 'components/aborted.html' %}
-
 {% else %}
-
     <div class="container">
         <form action="{% url 'idea_create' %}"
                   method="POST"
@@ -65,7 +61,6 @@
                         />
                         <small class="text-muted">длина: не более 32 символов</small>
                     </label>
-
                     <label class="form-control-lg m-1">
                         Категория:
                         <select type="select"
@@ -81,7 +76,6 @@
                         <small class="text-muted">обязательно выбрать одну из категорий</small>
                     </label>
                 </div>
-
                 <div>
                     <label class="form-control form-control-lg m-1">
                         Краткое описание:
@@ -97,7 +91,6 @@
                         />
                         <small class="text-muted">длина: не более 64 символов</small>
                     </label>
-
                     <label class="form-control form-control-lg m-1">
                         Полное описание:
                         <textarea type="text"
@@ -113,7 +106,6 @@
                         <small class="text-muted">длина: не более 1024 символов</small>
                     </label>
                 </div>
-
                 <div>
                     <label class="form-control-lg m-1">
                         Аватарка-заставка для идеи:
@@ -126,7 +118,6 @@
                         />
                         <small class="text-muted">только для форматов изображений: .jpg / .png</small>
                     </label>
-
                     <label class="form-control-lg m-1">
                         Файл-приложение:
                         <input type="file"
@@ -141,36 +132,18 @@
                 </div>
             </div>
             <hr/>
-            <div class="text-center">
-                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                    <div class="m-1">
-                        <button href=""
-                                type="submit"
-                                class="btn btn-lg btn-outline-primary w-100 form-control"
-                        >Подтвердить</button>
-                    </div>
-
-                    <div class="m-1">
-                        <button href=""
-                                type="reset"
-                                class="btn btn-lg btn-outline-warning w-100 form-control"
-                        >Сбросить</button>
-                    </div>
-                </ul>
-            </div>
-            <div class="text-center">
-                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+            <div class="container-fluid text-center">
+                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
                     <li class="m-1">
-                        <a class="btn btn-lg btn-outline-primary" type="button" href="{% url 'home' %}">Подтвердить</a>
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
                     </li>
                     <li class="m-1">
-                        <a class="btn btn-lg btn-outline-warning" type="button" href="">Сбросить</a>
+                        <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
                     </li>
                 </ul>
             </div>
         </form>
     </div>
-
 {% endif %}
 
 
