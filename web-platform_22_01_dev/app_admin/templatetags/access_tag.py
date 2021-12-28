@@ -26,9 +26,8 @@ def access_tag(context, path):
                 )
                 if groups:
                     access = True
-        pass
     except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        pass
     if access:
         return True
     else:

@@ -163,6 +163,15 @@
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Новости</a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                        {% access_tag 'section_study' as section_news %}
+                        {% if section_news %}
+                            <li>
+                                <strong class="dropdown-header">Обучение:</strong>
+                                <a class="dropdown-item disabled" href="#">Видеоролики</a>
+                                <a class="dropdown-item disabled" href="#">Инструкции</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
                         {% access_tag 'section_news' as section_news %}
                         {% if section_news %}
                             <li>

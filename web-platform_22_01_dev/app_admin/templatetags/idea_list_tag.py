@@ -1,6 +1,5 @@
 from django import template
 from app_admin.models import IdeaRatingModel, UserModel, IdeaModel
-from app_admin.service import DjangoClass
 
 register = template.Library()
 
@@ -16,7 +15,6 @@ def is_liked_tag(context, idea):
         )
         is_like = True
     except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         is_like = False
     return is_like
 
@@ -32,6 +30,5 @@ def is_disliked_tag(context, idea):
         )
         is_dislike = True
     except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         is_dislike = False
     return is_dislike

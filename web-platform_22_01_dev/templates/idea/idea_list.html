@@ -163,7 +163,7 @@
                                     {% endif %}
                                     <div class="container-fluid d-flex justify-content-between">
                                         {% if idea.author_foreign_key_field %}
-                                            <a class="p-1 text-decoration-none text-dark" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
+                                            <a class="btn btn-sm btn-outline-success" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
                                                 Автор:
                                                     {% if idea.author_foreign_key_field.last_name_char_field %}{{ idea.author_foreign_key_field.last_name_char_field }} {% endif %}
                                                     {% if idea.author_foreign_key_field.first_name_char_field %}{{ idea.author_foreign_key_field.first_name_char_field }} {% endif %}

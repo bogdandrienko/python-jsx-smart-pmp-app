@@ -399,7 +399,6 @@ def account_login(request):
                 else:
                     response = -1
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 response = -1
         context = {
             'response': response,
@@ -548,8 +547,7 @@ def account_recover_password(request, type_slug='iin'):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         response = 0
         data = None
         user = None
@@ -560,10 +558,9 @@ def account_recover_password(request, type_slug='iin'):
                 user = User.objects.get(username=DjangoClass.RequestClass.get_value(request, "username"))
                 user_model = UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                pass
             if type_slug.lower() == 'iin':
-                # try:
-                if True:
+                try:
                     if user:
                         response = 1
                     now = (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M')
@@ -579,11 +576,10 @@ def account_recover_password(request, type_slug='iin'):
                             access_count += 1
                     if access_count > 10:
                         response = -1
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             elif type_slug.lower() == 'secret_answer':
-                # try:
-                if True:
+                try:
                     secret_answer = DjangoClass.RequestClass.get_value(request, "secret_answer")
                     password_1 = DjangoClass.RequestClass.get_value(request, "password_1")
                     password_2 = DjangoClass.RequestClass.get_value(request, "password_2")
@@ -594,11 +590,10 @@ def account_recover_password(request, type_slug='iin'):
                         response = 2
                     else:
                         response = -2
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             elif type_slug.lower() == 'email':
-                # try:
-                if True:
+                try:
                     password = user_model.password_slug_field
                     email_ = user_model.email_field
                     email__ = DjangoClass.RequestClass.get_value(request, "email")
@@ -621,12 +616,10 @@ def account_recover_password(request, type_slug='iin'):
                             response = -2
                     else:
                         response = -2
-
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             elif type_slug.lower() == 'recover':
-                # try:
-                if True:
+                try:
                     encrypt_text = DjangoClass.RequestClass.get_value(request, "recover")
                     decrypt_text = EncryptingClass.decrypt_text(
                         text=encrypt_text,
@@ -643,8 +636,8 @@ def account_recover_password(request, type_slug='iin'):
                         response = 2
                     else:
                         response = -2
-                # except Exception as error:
-                #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                except Exception as error:
+                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         context = {
             'response': response,
             'data': data,
@@ -652,15 +645,15 @@ def account_recover_password(request, type_slug='iin'):
             'user': user,
             'user_model': user_model,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'data': None,
-    #         'access_count': None,
-    #         'user': None,
-    #         'user_model': None,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+            'access_count': None,
+            'user': None,
+            'user_model': None,
+        }
 
     return render(request, 'account/account_recover_password.html', context)
 
@@ -1130,7 +1123,7 @@ def account_generate_passwords(request):
                 passwords_length = DjangoClass.RequestClass.get_value(request, "passwords_length")
                 workbook = ExcelClass.workbook_create()
                 sheet = ExcelClass.workbook_activate(workbook=workbook)
-                titles = ['Пароль', 'Зашифрованный Пароль']
+                titles = ['Пароль']
                 for title in titles:
                     ExcelClass.set_sheet_value(
                         col=titles.index(title) + 1,
@@ -1144,10 +1137,8 @@ def account_generate_passwords(request):
                         chars=passwords_chars,
                         length=int(passwords_length)
                     )
-                    encrypt_password = DjangoClass.AccountClass.create_django_encrypt_password(password)
                     sheet[f'A{n}'] = password
-                    sheet[f'B{n}'] = encrypt_password
-                    body.append([password, encrypt_password])
+                    body.append([password])
                 ExcelClass.workbook_save(
                     workbook=workbook, excel_file='static/media/admin/account/generate_passwords.xlsx'
                 )
@@ -1440,8 +1431,7 @@ def idea_create(request):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         response = 0
         category = IdeaModel.get_all_category()
         if request.method == 'POST':
@@ -1467,12 +1457,12 @@ def idea_create(request):
             'response': response,
             'category': category,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'category': category,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'category': None,
+        }
 
     return render(request, 'idea/idea_create.html', context)
 
@@ -1483,8 +1473,7 @@ def idea_change(request, idea_int):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         response = 0
         idea = IdeaModel.objects.get(id=idea_int)
         users = UserModel.objects.all()
@@ -1522,14 +1511,14 @@ def idea_change(request, idea_int):
             'users': users,
             'categoryes': categoryes,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'idea': None,
-    #         'users': None,
-    #         'categoryes': None,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'idea': None,
+            'users': None,
+            'categoryes': None,
+        }
 
     return render(request, 'idea/idea_change.html', context)
 
@@ -1540,38 +1529,34 @@ def idea_list(request, category_slug='All'):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
-        ideas = IdeaModel.objects.filter(visibility_boolean_field=True).order_by('-id')
+    try:
         categoryes = IdeaModel.get_all_category()
         num_page = 5
         if category_slug == 'idea_change_visibility':
-            ideas = IdeaModel.objects.filter(visibility_boolean_field=False).order_by('-id')
+            ideas = IdeaModel.objects.filter(visibility_boolean_field=False)
         elif category_slug.lower() != 'all':
-            ideas = ideas.filter(category_slug_field=category_slug, )
+            ideas = IdeaModel.objects.filter(category_slug_field=category_slug, visibility_boolean_field=True)
+        else:
+            ideas = IdeaModel.objects.filter(visibility_boolean_field=True)
         if request.method == 'POST':
             search_char_field = DjangoClass.RequestClass.get_value(request, "search_char_field")
             if search_char_field:
                 ideas = ideas.filter(name_char_field__icontains=search_char_field)
             num_page = 100
-        try:
-            page = PaginationClass.paginate(request=request, objects=ideas, num_page=num_page)
-            response = 0
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            response = -1
+        page = PaginationClass.paginate(request=request, objects=ideas, num_page=num_page)
+        response = 0
         context = {
             'response': response,
             'page': page,
             'categoryes': categoryes,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'page': False,
-    #         'categoryes': categoryes
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'page': None,
+            'categoryes': None
+        }
 
     return render(request, 'idea/idea_list.html', context)
 
@@ -1582,8 +1567,7 @@ def idea_change_visibility(request, idea_int):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         if request.method == 'POST':
             status = DjangoClass.RequestClass.get_value(request, "hidden")
             if status == 'true':
@@ -1594,8 +1578,8 @@ def idea_change_visibility(request, idea_int):
             data.visibility_boolean_field = status
 
             data.save()
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
     return redirect(reverse('idea_list', args=()))
 
@@ -1606,8 +1590,7 @@ def idea_view(request, idea_int):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         idea = IdeaModel.objects.get(id=idea_int)
         comments = IdeaCommentModel.objects.filter(idea_foreign_key_field=idea)
         try:
@@ -1621,13 +1604,13 @@ def idea_view(request, idea_int):
             'idea': idea,
             'page': page,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'idea': None,
-    #         'page': page,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'idea': None,
+            'page': None,
+        }
 
     return render(request, 'idea/idea_view.html', context)
 
@@ -1638,8 +1621,7 @@ def idea_like(request, idea_int):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         idea = IdeaModel.objects.get(id=idea_int)
         author = UserModel.objects.get(user_foreign_key_field=request.user)
         if request.POST['status'] == 'like':
@@ -1650,7 +1632,6 @@ def idea_like(request, idea_int):
                     status_boolean_field=True
                 ).delete()
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 IdeaRatingModel.objects.create(
                     author_foreign_key_field=author,
                     idea_foreign_key_field=idea,
@@ -1663,7 +1644,7 @@ def idea_like(request, idea_int):
                     status_boolean_field=False
                 ).delete()
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                pass
         else:
             try:
                 IdeaRatingModel.objects.get(
@@ -1672,7 +1653,6 @@ def idea_like(request, idea_int):
                     status_boolean_field=False
                 ).delete()
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 IdeaRatingModel.objects.create(
                     author_foreign_key_field=author,
                     idea_foreign_key_field=idea,
@@ -1690,14 +1670,11 @@ def idea_like(request, idea_int):
                     status_boolean_field=True
                 ).delete()
             except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'data': False
-    #     }
+                pass
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
-    return redirect(reverse('idea_view', args=(idea.id,)))
+    return redirect(reverse('idea_view', args=(idea_int,)))
 
 
 def idea_comment(request, idea_int):
@@ -1706,16 +1683,15 @@ def idea_comment(request, idea_int):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         if request.method == 'POST':
             IdeaCommentModel.objects.create(
                 author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
                 idea_foreign_key_field=IdeaModel.objects.get(id=idea_int),
                 text_field=DjangoClass.RequestClass.get_value(request, "text_field")
             )
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
     return redirect(reverse('idea_view', args=(idea_int,)))
 
@@ -1726,8 +1702,7 @@ def idea_rating(request):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
+    try:
         idea = IdeaModel.objects.order_by('-id')
         authors = []
         for query in idea:
@@ -1754,28 +1729,224 @@ def idea_rating(request):
             page = sorted(user_counts, key=lambda k: k['rating'], reverse=True)
         else:
             page = sorted(user_counts, key=lambda k: k['count'], reverse=True)
-
-        try:
-            page = PaginationClass.paginate(request=request, objects=page, num_page=5)
-            response = 0
-        except Exception as error:
-            DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            response = -1
-
+        page = PaginationClass.paginate(request=request, objects=page, num_page=5)
+        response = 0
         context = {
             'response': response,
             'page': page,
             'sorted': sorted_by_rating
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'page': None,
-    #         'sorted': None
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'page': None,
+            'sorted': None
+        }
 
     return render(request, 'idea/idea_rating.html', context)
+
+
+# salary
+def salary(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='salary')
+    if page:
+        return redirect(page)
+
+    try:
+        data = None
+        response = 0
+        if request.method == 'POST':
+            key = UtilsClass.create_encrypted_password(
+                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                _length=10
+            )
+            hash_key_obj = hashlib.sha256()
+            hash_key_obj.update(key.encode('utf-8'))
+            key_hash = str(hash_key_obj.hexdigest().strip().upper())
+            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+            iin = request.user.username
+            if str(request.user.username).lower() == 'bogdan':
+                iin = 970801351179
+            iin_base64 = base64.b64encode(str(iin).encode()).decode()
+            month = DjangoClass.RequestClass.get_value(request, "month")
+            if int(month) < 10:
+                month = f'0{month}'
+            year = DjangoClass.RequestClass.get_value(request, "year")
+            date_base64 = base64.b64encode(f'{year}{month}'.encode()).decode()
+            # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+            h = httplib2.Http(
+                relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+            _login = 'Web_adm_1c'
+            password = '159159qqww!'
+            h.add_credentials(_login, password)
+            try:
+                response, content = h.request(url)
+            except Exception as error:
+                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                content = None
+            success_web_read = False
+
+            # print(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+
+            if content:
+                success = True
+                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+                for error_word in error_word_list:
+                    if str(content.decode()).find(error_word) >= 0:
+                        success = False
+                if success:
+                    try:
+                        json_data = json.loads(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                        with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                            encode_data = json.dumps(json_data, ensure_ascii=False)
+                            json.dump(encode_data, file, ensure_ascii=False)
+                        success_web_read = True
+                    except Exception as error:
+                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            if success_web_read is False:
+                print('read temp file')
+                # with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
+                #     json_data = json.load(file)
+                json_data = {}
+            try:
+                json_data["global_objects"]["3.Доходы в натуральной форме"]
+            except Exception as error:
+                json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                    "Fields": {
+                        "1": "Вид",
+                        "2": "Период",
+                        "3": "Сумма"
+                    },
+                }
+            new_data = dict(json_data).copy()
+            del (new_data["global_objects"])
+            new_arr = []
+            for key, value in new_data.items():
+                new_arr.append([key, value])
+            temp_json = dict(json_data).copy()
+            up = SalaryClass.create_arr_table(
+                title="1.Начислено",
+                footer="Всего начислено",
+                json_obj=temp_json["global_objects"]["1.Начислено"],
+                exclude=[5, 6]
+            )
+            up = up[len(up) - 1]
+            up = up[len(up) - 1]
+            down = SalaryClass.create_arr_table(
+                title="2.Удержано",
+                footer="Всего удержано",
+                json_obj=temp_json["global_objects"]["2.Удержано"],
+                exclude=[]
+            ),
+            down = down[len(down) - 1]
+            down = down[len(down) - 1]
+            down = down[len(down) - 1]
+            data = {
+                "Table_0_1": new_arr[:len(new_arr) // 2],
+                "Table_0_2": new_arr[len(new_arr) // 2:],
+                "Table_1": SalaryClass.create_arr_table(
+                    title="1.Начислено",
+                    footer="Всего начислено",
+                    json_obj=json_data["global_objects"]["1.Начислено"],
+                    exclude=[5, 6]
+                ),
+                "Table_2": SalaryClass.create_arr_table(
+                    title="2.Удержано",
+                    footer="Всего удержано",
+                    json_obj=json_data["global_objects"]["2.Удержано"],
+                    exclude=[]
+                ),
+                "Table_3": SalaryClass.create_arr_table(
+                    title="3.Доходы в натуральной форме",
+                    footer="Всего натуральных доходов",
+                    json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"],
+                    exclude=[]
+                ),
+                "Table_4": SalaryClass.create_arr_table(
+                    title="4.Выплачено",
+                    footer="Всего выплат",
+                    json_obj=json_data["global_objects"]["4.Выплачено"],
+                    exclude=[]
+                ),
+                "Table_5": SalaryClass.create_arr_table(
+                    title="5.Налоговые вычеты",
+                    footer="Всего вычеты",
+                    json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
+                    exclude=[]
+                ),
+                "Down": {
+                    "first": [
+                        "Долг за организацией на начало месяца",
+                        json_data["Долг за организацией на начало месяца"]
+                    ],
+                    "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+                },
+                "Final": [
+                    ["Период", json_data["Период"]],
+                    ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+                    ["Всего начислено", up],
+                    ["Всего удержано", down],
+                ],
+            }
+            response = 1
+
+            # print(data)
+
+        context = {
+            'response': response,
+            'data': data,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'data': None,
+        }
+    return render(request, 'salary/salary.html', context)
+
+
+# career
+def career(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='career')
+    if page:
+        return redirect(page)
+
+    try:
+        data = None
+        if request.method == 'POST':
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            }
+            vacancies_urls = []
+            url = 'https://www.km-open.online/property'
+            r = requests.get(url, headers=headers)
+            soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
+            for list_obj in list_objs:
+                vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
+            vacancies_title = []
+            for list_obj in list_objs:
+                vacancies_title.append(str(list_obj).split('class="heading-12">')[1].split('</h5>')[0])
+            vacancies_data = []
+            for title in vacancies_title:
+                vacancies_data.append([title, vacancies_urls[vacancies_title.index(title)]])
+
+            data = [["Вакансия"], vacancies_data]
+        context = {
+            'data': data,
+        }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'data': None,
+        }
+
+    return render(request, 'hr/career.html', context)
 
 
 #
@@ -1899,167 +2070,6 @@ def react(request):
         return render(request, 'react/react.html', context)
     except Exception as error:
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-
-# salary
-def salary(request):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='salary')
-    if page:
-        return redirect(page)
-
-    try:
-        data = None
-        response = 0
-        if request.method == 'POST':
-            key = UtilsClass.create_encrypted_password(
-                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                _length=10
-            )
-            hash_key_obj = hashlib.sha256()
-            hash_key_obj.update(key.encode('utf-8'))
-            key_hash = str(hash_key_obj.hexdigest().strip().upper())
-            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-            iin = request.user.username
-            if str(request.user.username).lower() == 'bogdan':
-                iin = 970801351179
-            iin_base64 = base64.b64encode(str(iin).encode()).decode()
-            month = DjangoClass.RequestClass.get_value(request, "month")
-            if int(month) < 10:
-                month = f'0{month}'
-            year = DjangoClass.RequestClass.get_value(request, "year")
-            date_base64 = base64.b64encode(f'{year}{month}'.encode()).decode()
-            # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-            url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-            h = httplib2.Http(
-                relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-            _login = 'Web_adm_1c'
-            password = '159159qqww!'
-            h.add_credentials(_login, password)
-            try:
-                response, content = h.request(url)
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                content = None
-            success_web_read = False
-            if content:
-                success = True
-                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
-                for error_word in error_word_list:
-                    if str(content.decode()).find(error_word) >= 0:
-                        success = False
-                if success:
-                    try:
-                        json_data = json.loads(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
-                        with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-                            encode_data = json.dumps(json_data, ensure_ascii=False)
-                            json.dump(encode_data, file, ensure_ascii=False)
-                        success_web_read = True
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            if success_web_read is False:
-                print('read temp file')
-                # with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
-                #     json_data = json.load(file)
-                json_data = {}
-            try:
-                json_data["global_objects"]["3.Доходы в натуральной форме"]
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                json_data["global_objects"]["3.Доходы в натуральной форме"] = {
-                    "Fields": {
-                        "1": "Вид",
-                        "2": "Период",
-                        "3": "Дни",
-                        "4": "Часы",
-                        "5": "Сумма",
-                        "6": "ВсегоДни",
-                        "7": "ВсегоЧасы"
-                    },
-                }
-            new_data = dict(json_data).copy()
-            del (new_data["global_objects"])
-            new_arr = []
-            for key, value in new_data.items():
-                new_arr.append([key, value])
-            temp_json = dict(json_data).copy()
-            up = SalaryClass.create_arr_table(
-                title="1.Начислено",
-                footer="Всего начислено",
-                json_obj=temp_json["global_objects"]["1.Начислено"],
-                exclude=[5, 6]
-            )
-            up = up[len(up) - 1]
-            up = up[len(up) - 1]
-            down = SalaryClass.create_arr_table(
-                title="2.Удержано",
-                footer="Всего удержано",
-                json_obj=temp_json["global_objects"]["2.Удержано"],
-                exclude=[]
-            ),
-            down = down[len(down) - 1]
-            down = down[len(down) - 1]
-            down = down[len(down) - 1]
-            data = {
-                "Table_0_1": new_arr[:len(new_arr) // 2],
-                "Table_0_2": new_arr[len(new_arr) // 2:],
-                "Table_1": SalaryClass.create_arr_table(
-                    title="1.Начислено",
-                    footer="Всего начислено",
-                    json_obj=json_data["global_objects"]["1.Начислено"],
-                    exclude=[5, 6]
-                ),
-                "Table_2": SalaryClass.create_arr_table(
-                    title="2.Удержано",
-                    footer="Всего удержано",
-                    json_obj=json_data["global_objects"]["2.Удержано"],
-                    exclude=[]
-                ),
-                "Table_3": SalaryClass.create_arr_table(
-                    title="3.Доходы в натуральной форме",
-                    footer="Всего натуральных доходов",
-                    json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"],
-                    exclude=[]
-                ),
-                "Table_4": SalaryClass.create_arr_table(
-                    title="4.Выплачено",
-                    footer="Всего выплат",
-                    json_obj=json_data["global_objects"]["4.Выплачено"],
-                    exclude=[]
-                ),
-                "Table_5": SalaryClass.create_arr_table(
-                    title="5.Налоговые вычеты",
-                    footer="Всего вычеты",
-                    json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
-                    exclude=[]
-                ),
-                "Down": {
-                    "first": [
-                        "Долг за организацией на начало месяца",
-                        json_data["Долг за организацией на начало месяца"]
-                    ],
-                    "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
-                },
-                "Final": [
-                    ["Период", json_data["Период"]],
-                    ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
-                    ["Всего начислено", up],
-                    ["Всего удержано", down],
-                ],
-            }
-            response = 1
-        context = {
-            'response': response,
-            'data': data,
-        }
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        context = {
-            'response': -1,
-            'data': None,
-        }
-    return render(request, 'salary/salary.html', context)
 
 
 def salary_pdf(request):
@@ -2228,64 +2238,6 @@ def salary_pdf(request):
     #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
     #     response = None
     return response
-
-
-# career
-def career(request):
-    # access and logging
-    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='career')
-    if page:
-        return redirect(page)
-
-    try:
-        data = None
-        if request.method == 'POST':
-            # headers = {
-            #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
-            # }
-            # vacancies_urls = []
-            # url = 'https://www.km-open.online/property'
-            # r = requests.get(url, headers=headers)
-            # soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
-            # list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
-            # for list_obj in list_objs:
-            #     vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
-            # vacancies_data = []
-            # for url_s in vacancies_urls:
-            #     r = requests.get(url_s, headers=headers)
-            #     soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
-            #     list_objs = soup.find_all('div', {"class": "title-block"})
-            #     vacancies_data = str(list_objs[0]).split('"heading-11">')[1].split('</h5>')[0]
-            #     vacancies_data.append([vacancies_data, url_s])
-            # data = [["Вакансия"], vacancies_data]
-            # headers = {
-            #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
-            # }
-
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
-            }
-            vacancies_urls = []
-            url = 'https://www.km-open.online/property'
-            r = requests.get(url, headers=headers)
-            soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
-            list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
-            for list_obj in list_objs:
-                vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
-            vacancies_title = []
-            for list_obj in list_objs:
-                vacancies_title.append(str(list_obj).split('class="heading-12">')[1].split('</h5>')[0])
-            vacancies_data = []
-            for title in vacancies_title:
-                vacancies_data.append([title, vacancies_urls[vacancies_title.index(title)]])
-
-            data = [["Вакансия"], vacancies_data]
-        context = {
-            'data': data,
-        }
-        return render(request, 'hr/career.html', context)
-    except Exception as error:
-        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
 
 
 # passages

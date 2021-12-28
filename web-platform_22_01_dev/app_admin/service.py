@@ -55,12 +55,10 @@ class DjangoClass:
                                     else:
                                         return 'home'
                             except Exception as error:
-                                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                                 return 'home'
                         else:
                             return 'account_change_password'
                 except Exception as error:
-                    DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                     return 'home'
             else:
                 return 'account_login'

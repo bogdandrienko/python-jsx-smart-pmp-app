@@ -36,7 +36,14 @@
 {% elif response == -1 %}
     {% include 'components/aborted.html' %}
 {% else %}
-    <div class="container-fluid text-center container">
+    <div class="container container-fluid text-center">
+        <div class="embed-responsive embed-responsive-16by9">
+            <video class="embed-responsive-item" width="70%" height="70%" controls>
+                <source src="{% static "media/video/first_login.mp4" %}"/>
+            </video>
+        </div>
+    </div>
+    <div class="container container-fluid text-center">
         {% access_tag 'module_modules' as module_modules %}
         {% if module_modules %}
             <a href="{% url 'module_or_component' 'module_modules' %}">

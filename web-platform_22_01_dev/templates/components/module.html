@@ -37,9 +37,9 @@
     {% include 'components/aborted.html' %}
 {% else %}
     <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
             <div class="border shadow text-center">
-                <div class="card-img align-content-center p-5">
+                <div class="card-img align-content-center p-2">
                     {% if modules %}
                         {% if modules.0.type_slug_field == '0_module' %}
                             <a href="{% url 'home' %}">
@@ -53,26 +53,26 @@
                     </a>
                 </div>
                 <h4 class="fst-italic text-uppercase">Назад.</h4>
-                <div class="card-body">
+                <div class="card-body text-center">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <div class="btn-group">
-
-                                {% if modules %}
-                                    {% if modules.0.type_slug_field == '0_module' %}
-                                        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-primary">Перейти</a>
-                                    {% else %}
-                                        <a href="{% url 'module_or_component' modules.0.previous_path_slug_field %}" class="btn btn-sm btn-outline-primary">Перейти</a>
-                                    {% endif %}
-                                {% else %}
-                                    <a href="{% url 'home' %}" class="btn btn-sm btn-outline-primary">Перейти</a>
-                                {% endif %}
-
-                            </div>
-                        </div>
-                        <div>
-                            <small class="text-muted">вернуться в предыдущее меню</small>
-                        </div>
+{#                        <div>#}
+{#                            <div class="btn-group">#}
+{##}
+{#                                {% if modules %}#}
+{#                                    {% if modules.0.type_slug_field == '0_module' %}#}
+{#                                        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-primary">Перейти</a>#}
+{#                                    {% else %}#}
+{#                                        <a href="{% url 'module_or_component' modules.0.previous_path_slug_field %}" class="btn btn-sm btn-outline-primary">Перейти</a>#}
+{#                                    {% endif %}#}
+{#                                {% else %}#}
+{#                                    <a href="{% url 'home' %}" class="btn btn-sm btn-outline-primary">Перейти</a>#}
+{#                                {% endif %}#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+                    </div>
+                    <div>
+                        <small class="text-muted">вернуться в предыдущее меню</small>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 {% access_tag module.next_path_slug_field as access %}
                 {% if access %}
                     <div class="border shadow text-center">
-                        <div class="card-img text-center align-content-center p-5">
+                        <div class="card-img text-center align-content-center p-2">
                             {% if modules.0.type_slug_field == '2_component' %}
                                 <a href="{% url module.next_path_slug_field %}">
                             {% else %}
@@ -96,21 +96,27 @@
                         {% endif %}
                             <h4 class="fst-italic text-uppercase">{{ module.name_char_field }}</h4>
                         </a>
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="btn-group">
-                                        {% if modules.0.type_slug_field == '2_component' %}
-                                            <a class="btn btn-sm btn-outline-primary" href="{% url module.next_path_slug_field %}">Войти</a>
-                                        {% else %}
-                                            <a class="btn btn-sm btn-outline-primary" href="{% url 'module_or_component' module.next_path_slug_field %}">Войти</a>
-                                        {% endif %}
-                                        <button class="btn btn-sm btn-outline-secondary" href="#">Подробнее</button>
-                                    </div>
-                                </div>
-                                <div>
+{#                                <div>#}
+{#                                    <div class="btn-group">#}
+{#                                        {% if modules.0.type_slug_field == '2_component' %}#}
+{#                                            <a class="btn btn-sm btn-outline-primary" href="{% url module.next_path_slug_field %}">Войти</a>#}
+{#                                        {% else %}#}
+{#                                            <a class="btn btn-sm btn-outline-primary" href="{% url 'module_or_component' module.next_path_slug_field %}">Войти</a>#}
+{#                                        {% endif %}#}
+{#                                        <button class="btn btn-sm btn-outline-secondary" href="#">Подробнее</button>#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+                            <div>
+                                {% if modules.0.type_slug_field == '2_component' %}
+                                    <a href="{% url module.next_path_slug_field %}" class="text-dark text-decoration-none">
+                                {% else %}
+                                    <a href="{% url 'module_or_component' module.next_path_slug_field %}" class="text-dark text-decoration-none">
+                                {% endif %}
                                     <small class="text-muted">{{ module.text_field }}</small>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
