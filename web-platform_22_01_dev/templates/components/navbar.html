@@ -1,7 +1,7 @@
 {% load access_tag %}
 
 
-<nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'home' %}">ГЛАВНАЯ</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,7 +13,7 @@
             {% if access %}
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Development</a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <strong class="dropdown-header">Шаблоны</strong>
                             {% access_tag 'examples_forms' as access %}
@@ -73,13 +73,13 @@
             {% if moderator %}
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Модератор</a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-end>
                         <li>
                             <strong class="dropdown-header">Основной функционал</strong>
                             <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрирования</a>
                             {% access_tag 'logging' as access %}
                             {% if access %}
-                                <a class="dropdown-item" href="{% url 'logging' %}">Логи Системы</a>
+                                <a class="dropdown-item" href="{% url 'logging' %}">Логи Системы <span class="badge bg-danger rounded-pill">{{ errors }}</span></a>
                             {% endif %}
                             {% access_tag 'account_create_modules_and_actions' as account_create_modules_and_actions %}
                             {% if account_create_modules_and_actions %}
@@ -118,7 +118,7 @@
             {% if module_profile %}
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Профиль</a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         {% access_tag 'section_main' as section_main %}
                         {% if section_main %}
                             <li>
@@ -126,7 +126,7 @@
                                 <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
                                 {% access_tag 'account_notification' as access %}
                                 {% if access %}
-                                    <a class="dropdown-item" href="{% url 'account_notification' 'All' %}">Уведомления <span class="badge bg-danger rounded-pill">{{ notification }}</span></a>
+                                    <a class="dropdown-item" href="{% url 'account_notification' 'All' %}">Уведомления <span class="badge bg-warning rounded-pill">{{ notifications }}</span></a>
                                 {% endif %}
                                 <a class="dropdown-item disabled" href="#">Достижения</a>
                                 <hr class="dropdown-divider">
@@ -162,7 +162,7 @@
             {% if module_news %}
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Новости</a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         {% access_tag 'section_study' as section_news %}
                         {% if section_news %}
                             <li>
@@ -202,7 +202,7 @@
             {% if module_progress %}
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Развитие</a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         {% access_tag 'section_idea' as section_idea %}
                         {% if section_idea %}
                             <li>
@@ -253,7 +253,7 @@
             {% if module_buhgalteria %}
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Бухгалтерия</a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         {% access_tag 'section_zarplata' as section_zarplata %}
                         {% if section_zarplata %}
                             <li>
@@ -273,7 +273,7 @@
             {% if module_hr %}
                 <li class="dropend">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Служба Управления Персоналом</a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         {% access_tag 'section_hr' as section_hr %}
                         {% if section_hr %}
                             <li>

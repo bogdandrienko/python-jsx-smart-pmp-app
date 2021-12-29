@@ -309,9 +309,7 @@ def account_create_modules_and_actions(request):
     if page:
         return redirect(page)
 
-    # try:
-    if True:
-
+    try:
         response = 0
         if request.method == 'POST':
             response = 1
@@ -323,15 +321,16 @@ def account_create_modules_and_actions(request):
                 dictionary = {x[1]: x[0] for x in ModuleOrComponentModel.LIST_DB_VIEW_CHOICES}
                 for row in range(2, ExcelClass.get_max_num_rows(sheet) + 1):
                     try:
-                        ModuleOrComponentModel.objects.create(
-                            type_slug_field=dictionary[str(ExcelClass.get_sheet_value('A', row, sheet)).strip()],
-                            name_char_field=ExcelClass.get_sheet_value('B', row, sheet),
-                            previous_path_slug_field=ExcelClass.get_sheet_value('C', row, sheet),
-                            current_path_slug_field=ExcelClass.get_sheet_value('D', row, sheet),
-                            next_path_slug_field=ExcelClass.get_sheet_value('E', row, sheet),
-                            position_float_field=ExcelClass.get_sheet_value('F', row, sheet),
-                            text_field=ExcelClass.get_sheet_value('G', row, sheet)
-                        )
+                        module = ModuleOrComponentModel.objects.get_or_create(
+                            next_path_slug_field=ExcelClass.get_sheet_value('E', row, sheet)
+                        )[0]
+                        module.type_slug_field = dictionary[str(ExcelClass.get_sheet_value('A', row, sheet)).strip()]
+                        module.name_char_field = ExcelClass.get_sheet_value('B', row, sheet)
+                        module.previous_path_slug_field = ExcelClass.get_sheet_value('C', row, sheet)
+                        module.current_path_slug_field = ExcelClass.get_sheet_value('D', row, sheet)
+                        module.position_float_field = ExcelClass.get_sheet_value('F', row, sheet)
+                        module.text_field = ExcelClass.get_sheet_value('G', row, sheet)
+                        module.save()
                     except Exception as error:
                         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 ExcelClass.workbook_close(workbook=workbook)
@@ -341,11 +340,12 @@ def account_create_modules_and_actions(request):
                 dictionary = {x[1]: x[0] for x in ActionModel.LIST_DB_VIEW_CHOICES}
                 for row in range(2, ExcelClass.get_max_num_rows(sheet) + 1):
                     try:
-                        ActionModel.objects.create(
-                            type_slug_field=dictionary[str(ExcelClass.get_sheet_value('A', row, sheet)).strip()],
-                            name_char_field=ExcelClass.get_sheet_value('B', row, sheet),
-                            name_slug_field=ExcelClass.get_sheet_value('C', row, sheet),
-                        )
+                        action = ActionModel.objects.get_or_create(
+                            name_slug_field=ExcelClass.get_sheet_value('C', row, sheet)
+                        )[0]
+                        action.type_slug_field = dictionary[str(ExcelClass.get_sheet_value('A', row, sheet)).strip()]
+                        action.name_char_field = ExcelClass.get_sheet_value('B', row, sheet)
+                        action.save()
                     except Exception as error:
                         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 ExcelClass.workbook_close(workbook=workbook)
@@ -353,12 +353,12 @@ def account_create_modules_and_actions(request):
         context = {
             'response': response,
         }
-    # except Exception as error:
-    #     DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-    #     context = {
-    #         'response': -1,
-    #         'modules': None,
-    #     }
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {
+            'response': -1,
+            'modules': None,
+        }
 
     return render(request, 'account/account_create_modules_and_actions.html', context)
 
@@ -1755,6 +1755,36 @@ def salary(request):
         return redirect(page)
 
     try:
+        date = [int(x) for x in str(DateTimeUtils.get_current_date()).split('-')]
+        year = date[0]
+        month = date[1] - 1
+        day = date[2]
+        if day < 10:
+            month -= 1
+        if month == 0:
+            month = 12
+            year -= 1
+        elif month < 0:
+            month = 11
+            year -= 1
+        months = []
+        months_list = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь',
+                       'Ноябрь', 'Декабрь']
+        for month_list in months_list:
+            index = months_list.index(month_list)+1
+            if index == month:
+                months.append([index, month_list, True])
+            else:
+                months.append([index, month_list, False])
+        years = []
+        years_list = [2021, 2022, 2023, 2024, 2025]
+        for year_list in years_list:
+            index = years_list.index(year)+1
+            if index == month:
+                years.append([year_list, True])
+            else:
+                years.append([year_list, False])
+
         data = None
         response = 0
         if request.method == 'POST':
@@ -1783,127 +1813,125 @@ def salary(request):
             _login = 'Web_adm_1c'
             password = '159159qqww!'
             h.add_credentials(_login, password)
-            try:
-                response, content = h.request(url)
-            except Exception as error:
-                DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                content = None
-            success_web_read = False
-
-            # print(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
-
+            response, content = h.request(url)
             if content:
+                message = UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                 success = True
                 error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
                 for error_word in error_word_list:
-                    if str(content.decode()).find(error_word) >= 0:
+                    if message.find(error_word) >= 0:
                         success = False
-                if success:
-                    try:
-                        json_data = json.loads(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
-                        with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-                            encode_data = json.dumps(json_data, ensure_ascii=False)
-                            json.dump(encode_data, file, ensure_ascii=False)
-                        success_web_read = True
-                    except Exception as error:
-                        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-            if success_web_read is False:
-                print('read temp file')
+                if message.find('send') == 0:
+                    data = message.split('send')[1].strip()
+                    success = False
+            else:
+                success = False
+            if success:
+                json_data = json.loads(UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                    encode_data = json.dumps(json_data, ensure_ascii=False)
+                    json.dump(encode_data, file, ensure_ascii=False)
+
+                # Временное чтение файла для отладки без доступа к 1С
                 # with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
                 #     json_data = json.load(file)
-                json_data = {}
-            try:
-                json_data["global_objects"]["3.Доходы в натуральной форме"]
-            except Exception as error:
-                json_data["global_objects"]["3.Доходы в натуральной форме"] = {
-                    "Fields": {
-                        "1": "Вид",
-                        "2": "Период",
-                        "3": "Сумма"
-                    },
-                }
-            new_data = dict(json_data).copy()
-            del (new_data["global_objects"])
-            new_arr = []
-            for key, value in new_data.items():
-                new_arr.append([key, value])
-            temp_json = dict(json_data).copy()
-            up = SalaryClass.create_arr_table(
-                title="1.Начислено",
-                footer="Всего начислено",
-                json_obj=temp_json["global_objects"]["1.Начислено"],
-                exclude=[5, 6]
-            )
-            up = up[len(up) - 1]
-            up = up[len(up) - 1]
-            down = SalaryClass.create_arr_table(
-                title="2.Удержано",
-                footer="Всего удержано",
-                json_obj=temp_json["global_objects"]["2.Удержано"],
-                exclude=[]
-            ),
-            down = down[len(down) - 1]
-            down = down[len(down) - 1]
-            down = down[len(down) - 1]
-            data = {
-                "Table_0_1": new_arr[:len(new_arr) // 2],
-                "Table_0_2": new_arr[len(new_arr) // 2:],
-                "Table_1": SalaryClass.create_arr_table(
+
+                try:
+                    json_data["global_objects"]["3.Доходы в натуральной форме"]
+                except Exception as error:
+                    json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                        "Fields": {
+                            "1": "Вид",
+                            "2": "Период",
+                            "3": "Сумма"
+                        },
+                    }
+                new_data = dict(json_data).copy()
+                del (new_data["global_objects"])
+                new_arr = []
+                for key, value in new_data.items():
+                    new_arr.append([key, value])
+                temp_json = dict(json_data).copy()
+                up = SalaryClass.create_arr_table(
                     title="1.Начислено",
                     footer="Всего начислено",
-                    json_obj=json_data["global_objects"]["1.Начислено"],
+                    json_obj=temp_json["global_objects"]["1.Начислено"],
                     exclude=[5, 6]
-                ),
-                "Table_2": SalaryClass.create_arr_table(
+                )
+                up = up[len(up) - 1]
+                up = up[len(up) - 1]
+                down = SalaryClass.create_arr_table(
                     title="2.Удержано",
                     footer="Всего удержано",
-                    json_obj=json_data["global_objects"]["2.Удержано"],
+                    json_obj=temp_json["global_objects"]["2.Удержано"],
                     exclude=[]
                 ),
-                "Table_3": SalaryClass.create_arr_table(
-                    title="3.Доходы в натуральной форме",
-                    footer="Всего натуральных доходов",
-                    json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"],
-                    exclude=[]
-                ),
-                "Table_4": SalaryClass.create_arr_table(
-                    title="4.Выплачено",
-                    footer="Всего выплат",
-                    json_obj=json_data["global_objects"]["4.Выплачено"],
-                    exclude=[]
-                ),
-                "Table_5": SalaryClass.create_arr_table(
-                    title="5.Налоговые вычеты",
-                    footer="Всего вычеты",
-                    json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
-                    exclude=[]
-                ),
-                "Down": {
-                    "first": [
-                        "Долг за организацией на начало месяца",
-                        json_data["Долг за организацией на начало месяца"]
+                down = down[len(down) - 1]
+                down = down[len(down) - 1]
+                down = down[len(down) - 1]
+                data = {
+                    "Table_0_1": new_arr[:len(new_arr) // 2],
+                    "Table_0_2": new_arr[len(new_arr) // 2:],
+                    "Table_1": SalaryClass.create_arr_table(
+                        title="1.Начислено",
+                        footer="Всего начислено",
+                        json_obj=json_data["global_objects"]["1.Начислено"],
+                        exclude=[5, 6]
+                    ),
+                    "Table_2": SalaryClass.create_arr_table(
+                        title="2.Удержано",
+                        footer="Всего удержано",
+                        json_obj=json_data["global_objects"]["2.Удержано"],
+                        exclude=[]
+                    ),
+                    "Table_3": SalaryClass.create_arr_table(
+                        title="3.Доходы в натуральной форме",
+                        footer="Всего натуральных доходов",
+                        json_obj=json_data["global_objects"]["3.Доходы в натуральной форме"],
+                        exclude=[]
+                    ),
+                    "Table_4": SalaryClass.create_arr_table(
+                        title="4.Выплачено",
+                        footer="Всего выплат",
+                        json_obj=json_data["global_objects"]["4.Выплачено"],
+                        exclude=[]
+                    ),
+                    "Table_5": SalaryClass.create_arr_table(
+                        title="5.Налоговые вычеты",
+                        footer="Всего вычеты",
+                        json_obj=json_data["global_objects"]["5.Налоговые вычеты"],
+                        exclude=[]
+                    ),
+                    "Down": {
+                        "first": [
+                            "Долг за организацией на начало месяца",
+                            json_data["Долг за организацией на начало месяца"]
+                        ],
+                        "last": ["Долг за организацией на конец месяца",
+                                 json_data["Долг за организацией на конец месяца"]],
+                    },
+                    "Final": [
+                        ["Период", json_data["Период"]],
+                        ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
+                        # ["Всего начислено", up],
+                        # ["Всего удержано", down],
                     ],
-                    "last": ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
-                },
-                "Final": [
-                    ["Период", json_data["Период"]],
-                    ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
-                    ["Всего начислено", up],
-                    ["Всего удержано", down],
-                ],
-            }
-            response = 1
-
-            # print(data)
-
+                }
+                response = 1
+            else:
+                response = -1
         context = {
             'response': response,
+            'months': months,
+            'years': years,
             'data': data,
         }
     except Exception as error:
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         context = {
             'response': -1,
+            'months': None,
+            'years': None,
             'data': None,
         }
     return render(request, 'salary/salary.html', context)

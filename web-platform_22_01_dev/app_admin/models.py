@@ -2063,7 +2063,7 @@ class ActionModel(models.Model):
         unique_for_month=False,
         unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=True,
+        unique=False,
         editable=True,
         blank=True,
         null=True,
@@ -2241,7 +2241,7 @@ class GroupModel(models.Model):
         blank=True,
         null=True,
         default=1.0,
-        verbose_name='Позиция в списке:',
+        verbose_name='Позиция в админ-панели:',
         help_text='<small class="text-muted">Число с плавающей запятой, example: "0.0"</small><hr><br>',
     )
 
@@ -2431,7 +2431,7 @@ class NotificationModel(models.Model):
         ordering = ('created_datetime_field', 'user_foreign_key_field', 'type_slug_field')
         verbose_name = 'Уведомление'
         verbose_name_plural = 'Уведомления'
-        db_table = 'notification_model_table'
+        db_table = 'notifications_model_table'
 
     def __str__(self):
         try:
@@ -2583,7 +2583,7 @@ class ModuleOrComponentModel(models.Model):
         blank=True,
         null=True,
         default=1.0,
-        verbose_name='Позиция в списке:',
+        verbose_name='Позиция в модулях:',
         help_text='<small class="text-muted">Число с плавающей запятой, example: "0.0"</small><hr><br>',
     )
     image_field = models.ImageField(

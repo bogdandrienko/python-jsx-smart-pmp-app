@@ -36,11 +36,12 @@
 {% elif response == -1 %}
     {% include 'components/aborted.html' %}
 {% else %}
-    <div class="container container-fluid text-center">
+    <div class="container-fluid text-center">
         <div class="embed-responsive embed-responsive-16by9">
-            <video class="embed-responsive-item" width="70%" height="70%" controls>
-                <source src="{% static "media/video/first_login.mp4" %}"/>
-            </video>
+            <iframe class="embed-responsive-item" width="75%"  height="75%" src="https://www.youtube.com/embed/WlC8iXpn2vA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen controls></iframe>
+{#            <video class="embed-responsive-item" width="70%" height="70%" controls>#}
+{#                <source src="{% static "media/video/first_login.mp4" %}"/>#}
+{#            </video>#}
         </div>
     </div>
     <div class="container container-fluid text-center">
