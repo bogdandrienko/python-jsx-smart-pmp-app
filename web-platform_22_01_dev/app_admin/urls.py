@@ -89,6 +89,13 @@ urlpatterns = [
     path('idea_comment/<int:idea_int>/', views.idea_comment, name='idea_comment'),
     path('idea_rating/', views.idea_rating, name='idea_rating'),
 
+    # salary
+    path('salary/', views.salary, name='salary'),
+    path('salary_pdf/', views.salary_pdf, name='salary_pdf'),
+
+    # study
+    path('video_study/', views.video_study, name='video_study'),
+
     #
     #
     #
@@ -104,10 +111,6 @@ urlpatterns = [
     path('analyse/', views.analyse, name='analyse'),
     path('react/', views.react, name='react'),
     path('drf/', include(router.urls)),
-
-    # salary
-    path('salary/', views.salary, name='salary'),
-    path('salary_pdf/', views.salary_pdf, name='salary_pdf'),
 
     # career
     path('career/', views.career, name='career'),

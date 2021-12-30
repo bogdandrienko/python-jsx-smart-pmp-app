@@ -102,13 +102,11 @@
         <div class="container d-flex justify-content-center align-self-center">
             {% include 'components/paginator.html' %}
         </div>
-
         <div class="container-fluid text-center">
             <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
                 {% for idea in page %}
                     {% access_tag 'idea_moderator' as idea_moderator %}
                     {% if idea.visibility_boolean_field or idea_moderator %}
-
                         <li class="m-1">
                             <div class="card shadow-sm">
                                 <div class="card-header">
@@ -118,7 +116,7 @@
                                 </div>
                                 <div class="card-header">
                                     {% if idea_moderator %}
-                                        <form action="{% url 'idea_change_visibility' idea.id %}" method="POST">
+                                        <form action="{% url 'idea_change_visibility' idea.id %}" method="POST" class="m-1">
                                             {% csrf_token %}
                                             {% if idea.visibility_boolean_field %}
                                                 <label class="form-control-lg">
@@ -156,21 +154,21 @@
                                         </form>
                                     {% endif %}
                                     {% if idea.author_foreign_key_field.user_foreign_key_field.username == request.user.username or idea_moderator %}
-                                        <div class="form-control-lg">
+                                        <div class="form-control-lg m-1">
                                             Редактировать идею:
                                             <a class="btn btn-sm btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">Редактировать</a>
                                         </div>
                                     {% endif %}
                                     <div class="container-fluid d-flex justify-content-between">
                                         {% if idea.author_foreign_key_field %}
-                                            <a class="btn btn-sm btn-outline-success" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
+                                            <a class="btn btn-sm btn-outline-success m-1" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
                                                 Автор:
                                                     {% if idea.author_foreign_key_field.last_name_char_field %}{{ idea.author_foreign_key_field.last_name_char_field }} {% endif %}
                                                     {% if idea.author_foreign_key_field.first_name_char_field %}{{ idea.author_foreign_key_field.first_name_char_field }} {% endif %}
                                                     {% if idea.author_foreign_key_field.patronymic_char_field %}{{ idea.author_foreign_key_field.patronymic_char_field }} {% endif %}
                                             </a>
                                         {% else %}
-                                            <small class="p-1">
+                                            <small class="m-1">
                                                 Профиль не заполнен
                                             </small>
                                         {% endif %}
@@ -178,27 +176,27 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="container-fluid">
+                                    <div class="container-fluid m-1">
                                         <a href="{% url 'idea_view' idea.id %}">
                                             {% if idea.avatar_image_field %}
-                                                <img src="{{ idea.avatar_image_field.url }}" class="card-img-top img-fluid" alt="id" style="width: 512px;">
+                                                <img src="{{ idea.avatar_image_field.url }}" class="card-img-top img-fluid" alt="id" style="width: 384px;">
                                             {% else %}
-                                                <img src="{% static 'img/favicon/logo512.png' %}" class="card-img-top img-fluid" alt="id" style="width: 512px;">
+                                                <img src="{% static 'img/favicon/logo512.png' %}" class="card-img-top img-fluid" alt="id" style="width: 384px;">
                                             {% endif %}
                                         </a>
                                     </div>
-                                    <div class="container-fluid">
+                                    <div class="container-fluid m-1">
                                         <small class="text-muted">{{ idea.short_description_char_field }}</small>
                                     </div>
-                                    <div class="container-fluid d-flex justify-content-between">
-                                        <small class="text-muted">(подано:){{ idea.created_datetime_field }}</small>
-                                        <small class="text-muted">(зарегистрировано:){{ idea.register_datetime_field }}</small>
+                                    <div class="container-fluid d-flex justify-content-between m-1">
+                                        <small class="text-muted">подано: {{ idea.created_datetime_field }}</small>
+                                        <small class="text-muted">зарегистрировано: {{ idea.register_datetime_field }}</small>
                                     </div>
                                     <div class="container-fluid btn-group">
-                                        <a class="btn btn-sm btn-outline-primary" href="{% url 'idea_view' idea.id %}">Подробнее</a>
+                                        <a class="btn btn-sm btn-outline-primary m-1" href="{% url 'idea_view' idea.id %}">Подробнее</a>
                                         {% access_tag 'account_create_notification' as account_create_notification %}
                                         {% if account_create_notification %}
-                                            <form class="" action="{% url 'account_create_notification' %}" method="POST">
+                                            <form class="m-1" action="{% url 'account_create_notification' %}" method="POST">
                                                 {% csrf_token %}
                                                 <input type="text"
                                                        id="type_slug_field"
@@ -224,41 +222,47 @@
                                                        value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
                                                        class="form-control form-control-lg d-none"
                                                 />
-                                                <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться</button>
+                                                <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться на идею</button>
                                             </form>
                                         {% endif %}
                                     </div>
                                 </div>
                                 <div class="card-header">
                                     <ul class="container-fluid nav col-auto col-md-auto col-lg-auto justify-content-center">
-                                        <li class="p-1">
-                                            {% if 0 > idea.get_total_rating %}
-                                                <div class="btn btn-sm btn-outline-danger">
-                                                    Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}
-                                                    <sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
-                                                </div>
-                                            {% else %}
-                                                <div class="btn btn-sm btn-outline-success">
-                                                    Рейтинг\<sup>всего оценок</sup>: {{ idea.get_total_rating }}
-                                                    <sup class="text-muted">{{ idea.get_total_rating_value }}</sup>
-                                                </div>
-                                            {% endif %}
-                                        </li>
-                                        <li class="p-1">
-                                            {% is_liked_tag idea.id as is_liked_bool %}
-                                            {% if is_liked_bool %}
-                                                <small class="text-success">Вам понравилось</small>
-                                            {% else %}
-                                                {% is_disliked_tag idea.id as is_disliked_bool %}
-                                                {% if is_disliked_bool %}
-                                                    <small class="text-danger">Вам не понравилось</small>
+                                        <li class="m-1">
+                                            <a href="{% url 'idea_view' idea.id %}">
+                                                {% if 0 > idea.get_total_rating %}
+                                                    <div class="btn btn-sm btn-outline-danger">
+                                                        Рейтинг\<sup>оценок</sup>: {{ idea.get_total_rating }}
+                                                        <sup class="text-dark">{{ idea.get_total_rating_value }}</sup>
+                                                    </div>
                                                 {% else %}
-                                                    <small class="text-secondary">Вы не оценили</small>
+                                                    <div class="btn btn-sm btn-outline-success">
+                                                        Рейтинг\<sup>оценок</sup>: {{ idea.get_total_rating }}
+                                                        <sup class="text-dark">{{ idea.get_total_rating_value }}</sup>
+                                                    </div>
                                                 {% endif %}
-                                            {% endif %}
+                                            </a>
                                         </li>
-                                        <li class="p-1">
-                                            <div class="btn btn-sm btn-outline-secondary">Комментариев: {{ idea.get_total_comment_value }}</div>
+                                        <li class="m-1">
+                                            <a href="{% url 'idea_view' idea.id %}" class="text-decoration-none">
+                                                {% is_liked_tag idea.id as is_liked_bool %}
+                                                {% if is_liked_bool %}
+                                                    <small class="text-success">Вам понравилось</small>
+                                                {% else %}
+                                                    {% is_disliked_tag idea.id as is_disliked_bool %}
+                                                    {% if is_disliked_bool %}
+                                                        <small class="text-danger">Вам не понравилось</small>
+                                                    {% else %}
+                                                        <small class="text-secondary">Вы не оценили</small>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </a>
+                                        </li>
+                                        <li class="m-1">
+                                            <a href="{% url 'idea_view' idea.id %}">
+                                                <div class="btn btn-sm btn-outline-secondary">Комментариев: {{ idea.get_total_comment_value }}</div>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>

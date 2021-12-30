@@ -1771,7 +1771,7 @@ def salary(request):
         months_list = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь',
                        'Ноябрь', 'Декабрь']
         for month_list in months_list:
-            index = months_list.index(month_list)+1
+            index = months_list.index(month_list) + 1
             if index == month:
                 months.append([index, month_list, True])
             else:
@@ -1779,12 +1779,11 @@ def salary(request):
         years = []
         years_list = [2021, 2022, 2023, 2024, 2025]
         for year_list in years_list:
-            index = years_list.index(year)+1
+            index = years_list.index(year) + 1
             if index == month:
                 years.append([year_list, True])
             else:
                 years.append([year_list, False])
-
         data = None
         response = 0
         if request.method == 'POST':
@@ -1850,25 +1849,9 @@ def salary(request):
                 del (new_data["global_objects"])
                 new_arr = []
                 for key, value in new_data.items():
+                    if key == 'Долг за организацией на начало месяца' or key == 'Долг за организацией на конец месяца':
+                        continue
                     new_arr.append([key, value])
-                temp_json = dict(json_data).copy()
-                up = SalaryClass.create_arr_table(
-                    title="1.Начислено",
-                    footer="Всего начислено",
-                    json_obj=temp_json["global_objects"]["1.Начислено"],
-                    exclude=[5, 6]
-                )
-                up = up[len(up) - 1]
-                up = up[len(up) - 1]
-                down = SalaryClass.create_arr_table(
-                    title="2.Удержано",
-                    footer="Всего удержано",
-                    json_obj=temp_json["global_objects"]["2.Удержано"],
-                    exclude=[]
-                ),
-                down = down[len(down) - 1]
-                down = down[len(down) - 1]
-                down = down[len(down) - 1]
                 data = {
                     "Table_0_1": new_arr[:len(new_arr) // 2],
                     "Table_0_2": new_arr[len(new_arr) // 2:],
@@ -1913,8 +1896,6 @@ def salary(request):
                     "Final": [
                         ["Период", json_data["Период"]],
                         ["Долг за организацией на конец месяца", json_data["Долг за организацией на конец месяца"]],
-                        # ["Всего начислено", up],
-                        # ["Всего удержано", down],
                     ],
                 }
                 response = 1
@@ -1946,6 +1927,7 @@ def career(request):
 
     try:
         data = None
+        response = 0
         if request.method == 'POST':
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
@@ -1963,18 +1945,35 @@ def career(request):
             vacancies_data = []
             for title in vacancies_title:
                 vacancies_data.append([title, vacancies_urls[vacancies_title.index(title)]])
-
             data = [["Вакансия"], vacancies_data]
+            response = 1
         context = {
             'data': data,
+            'response': response
         }
     except Exception as error:
         DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         context = {
             'data': None,
+            'response': None,
         }
 
     return render(request, 'hr/career.html', context)
+
+
+def video_study(request):
+    # access and logging
+    page = DjangoClass.AuthorizationClass.try_to_access(request=request, access='video_study')
+    if page:
+        return redirect(page)
+
+    try:
+        context = {}
+    except Exception as error:
+        DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        context = {}
+
+    return render(request, 'news/video_study.html', context)
 
 
 #

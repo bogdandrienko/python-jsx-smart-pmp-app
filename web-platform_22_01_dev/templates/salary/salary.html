@@ -1,5 +1,7 @@
 {% extends "components/base.html" %}
 {% load static %}
+{% load value_salary_tag %}
+
 
 <!-- Head -->
 {% block head %}
@@ -21,7 +23,7 @@
 
 <!-- Description -->
 {% block description %}
-    Содержит форму для выгрузки расчётного листа. Выберите дату и нажмите подтвердить, или сразу скачайте pdf-документ.
+    Содержит форму для выгрузки расчётного листа. Выберите дату, нажмите подтвердить и ожидайте результата.
 {% endblock description %}
 
 <!-- Main -->
@@ -40,23 +42,23 @@
                     <li class="m-1">
                         <a class="btn btn-lg btn-outline-success" href="{% url 'salary' %}">Повторить</a>
                     </li>
-                    <li class="m-1">
-                        <button onclick="display()" class="btn btn-lg btn-outline-secondary">Печать или сохранить pdf</button>
-                        <script>
-                            function display() {
-                            window.print();
-                            }
-                        </script>
-                    </li>
+{#                    <li class="m-1">#}
+{#                        <button onclick="display()" class="btn btn-lg btn-outline-secondary">Печать или сохранить pdf</button>#}
+{#                        <script>#}
+{#                            function display() {#}
+{#                            window.print();#}
+{#                            }#}
+{#                        </script>#}
+{#                    </li>#}
                 </ul>
             </div>
             <p class="text-muted">Ниже расположены данные, соответствующие выбранному периоду:</p>
             <div class="container-fluid text-center">
-                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                    {% if data.Final %}
+                {% if data.Final %}
+                    <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
                         <li class="">
-                            <h6 class="display-6 lead">Основная информация.</h6>
-                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
+                            <h6 class="lead fw-bold bold">Основная информация.</h6>
+                            <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
                                 <thead>
                                     <tr>
                                         <th class="text-center">Тип</th>
@@ -64,337 +66,318 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for arr_1 in data.Final %}
-                                        <tr>
-                                            {% if forloop.counter0 == 1 %}
-                                                {% for arr_2 in arr_1 %}
-                                                    {% if forloop.counter0 == 0 %}
-                                                        <td class="text-start">{{ arr_2 }}</td>
-                                                    {% else %}
-                                                        {% if data.Down.last.1 >= 0 %}
-                                                            <td class="text-end bold fw-bold text-success table-active">{{ arr_2 }}</td>
-                                                        {% else %}
-                                                            <td class="text-end bold fw-bold text-danger table-active">{{ arr_2 }}</td>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% else %}
-                                                {% for arr_2 in arr_1 %}
-                                                    {% if forloop.counter0 == 0 %}
-                                                        <td class="text-start">{{ arr_2 }}</td>
-                                                    {% else %}
-                                                        <td class="text-end">{{ arr_2 }}</td>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% endif %}
-                                        </tr>
-                                    {% endfor %}
+                                    <tr>
+                                        <td class="text-start">{{ data.Final.0.0 }}</td>
+                                        <td class="text-end">{{ data.Final.0.1 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">{{ data.Final.1.0 }}</td>
+                                        {% if data.Final.1.1 >= 0 %}
+                                            <td class="text-end bold fw-bold text-success table-active">{% value_salary_tag data.Final.1.1 as value %}{{ value }}</td>
+                                        {% else %}
+                                            <td class="text-end bold fw-bold text-danger table-active">{% value_salary_tag data.Final.1.1 as value %}{{ value }}</td>
+                                        {% endif %}
+                                    </tr>
                                 </tbody>
                             </table>
                         </li>
-                    {% endif %}
-                </ul>
+                    </ul>
+                {% endif %}
             </div>
-{#            <div class="accordion" id="accordionExample">#}
-{#                <div class="accordion-item">#}
-{#                    <h2 class="accordion-header" id="accordion_heading_1">#}
-{#                        <button#}
-{#                            class="accordion-button collapsed"#}
-{#                            type="button"#}
-{#                            data-bs-toggle="collapse"#}
-{#                            data-bs-target="#accordion_collapse_1"#}
-{#                            aria-expanded="false"#}
-{#                            aria-controls="accordion_collapse_1"#}
-{#                        >Подробности:</button>#}
-{#                    </h2>#}
-{#                    <div#}
-{#                        id="accordion_collapse_1"#}
-{#                        class="accordion-collapse collapse"#}
-{#                        aria-labelledby="accordion_collapse_1"#}
-{#                        data-bs-parent="#accordionExample"#}
-{#                    >#}
-{#                        <div class="accordion-body">#}
-{#                            <div class="text-center">#}
-                                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                                    {% if data.Table_0_1 %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">Дополнительная информация.</h6>
-                                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">Тип</th>
-                                                        <th class="text-center">Значение</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for arr_1 in data.Table_0_1 %}
-                                                        <tr>
-                                                            {% for arr_2 in arr_1 %}
-                                                                <td class="text-start">{{ arr_2 }}</td>
-                                                            {% endfor %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </li>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+            {% if data.Table_0_1 %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">Дополнительная информация.</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Тип</th>
+                                <th class="text-center">Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.Table_0_1 %}
+                                <tr>
+                                    {% for arr_2 in arr_1 %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <td class="text-start">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% else %}
+                                            <td class="text-end">{% if arr_2 == 0 %}{% else %}{% value_salary_tag arr_2 as value %}{{ value }}{% endif %}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+            {% if data.Table_0_2 %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">Дополнительная информация.</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Тип</th>
+                                <th class="text-center">Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.Table_0_2 %}
+                                <tr>
+                                    {% for arr_2 in arr_1 %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <td class="text-start">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% else %}
+                                            <td class="text-end">{% if arr_2 == 0 %}{% else %}{% value_salary_tag arr_2 as value %}{{ value }}{% endif %}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+        </ul>
+
+        <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+            {% if data.Table_1 %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">{{ data.Table_1.1.0.1 }}</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                {% for arr_1 in data.Table_1.0|slice:":5" %}
+                                    <th class="text-center">{{ arr_1 }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.Table_1.1|slice:"1:" %}
+                                <tr>
+                                    {% for arr_2 in arr_1|slice:"1:6" %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <td class="text-start">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% elif forloop.counter0 == 4 %}
+                                            <td class="text-end" width="100">{% if arr_2 == 0 %}{% else %}{% value_salary_tag arr_2 as value %}{{ value }}{% endif %}</td>
+                                        {% else %}
+                                            <td class="text-end">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                {% for arr_1 in data.Table_1.2|slice:"1:6" %}
+                                    {% if forloop.counter0 == 0 %}
+                                        <td class="text-start table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
+                                    {% elif forloop.counter0 == 4 %}
+                                        <td class="text-end table-active" width="100">{% if arr_1 == 0 %}{% else %}{% value_salary_tag arr_1 as value %}{{ value }}{% endif %}</td>
+                                    {% else %}
+                                        <td class="text-end table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
                                     {% endif %}
-                                    {% if data.Table_0_2 %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">Дополнительная информация.</h6>
-                                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">Тип</th>
-                                                        <th class="text-center">Значение</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for arr_1 in data.Table_0_2 %}
-                                                        <tr>
-                                                            {% for arr_2 in arr_1 %}
-                                                                <td class="text-start">{{ arr_2 }}</td>
-                                                            {% endfor %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </li>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+            {% if data.Table_2 %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">{{ data.Table_2.1.0.1 }}</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                {% for arr_1 in data.Table_2.0|slice:":5" %}
+                                    <th class="text-center">{{ arr_1 }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.Table_2.1|slice:"1:" %}
+                                <tr>
+                                    {% for arr_2 in arr_1|slice:"1:6" %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <td class="text-start">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% elif forloop.counter0 == 2 %}
+                                            <td class="text-end" width="100">{% if arr_2 == 0 %}{% else %}{% value_salary_tag arr_2 as value %}{{ value }}{% endif %}</td>
+                                        {% else %}
+                                            <td class="text-end">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                {% for arr_1 in data.Table_2.2|slice:"1:6" %}
+                                    {% if forloop.counter0 == 0 %}
+                                        <td class="text-start table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
+                                    {% elif forloop.counter0 == 2 %}
+                                        <td class="text-end table-active" width="100">{% if arr_1 == 0 %}{% else %}{% value_salary_tag arr_1 as value %}{{ value }}{% endif %}</td>
+                                    {% else %}
+                                        <td class="text-end table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
                                     {% endif %}
-                                </ul>
-                                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                                    {% if data.Table_1 %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">{{ data.Table_1.1.0.1 }}</h6>
-                                            <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary">
-                                                <thead>
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_1.0|slice:":5" %}
-                                                            <th class="text-center">{{ arr_1 }}</th>
-                                                        {% endfor %}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for arr_1 in data.Table_1.1|slice:"1:" %}
-                                                        <tr>
-                                                            {% for arr_2 in arr_1|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_2 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_2 }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_1.2|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_1 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_1 }}</td>
-                                                                {% endif %}
-                                                        {% endfor %}
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+        </ul>
+        <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+            {% if data.Table_3 %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">{{ data.Table_3.1.0.1 }}</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                {% for arr_1 in data.Table_3.0|slice:":5" %}
+                                    <th class="text-center">{{ arr_1 }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.Table_3.1|slice:"1:" %}
+                                <tr>
+                                    {% for arr_2 in arr_1|slice:"1:6" %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <td class="text-start">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% elif forloop.counter0 == 2 %}
+                                            <td class="text-end" width="100">{% if arr_2 == 0 %}{% else %}{% value_salary_tag arr_2 as value %}{{ value }}{% endif %}</td>
+                                        {% else %}
+                                            <td class="text-end">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                {% for arr_1 in data.Table_3.2|slice:"1:6" %}
+                                    {% if forloop.counter0 == 0 %}
+                                        <td class="text-start table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
+                                    {% elif forloop.counter0 == 2 %}
+                                        <td class="text-end table-active" width="100">{% if arr_1 == 0 %}{% else %}{% value_salary_tag arr_1 as value %}{{ value }}{% endif %}</td>
+                                    {% else %}
+                                        <td class="text-end table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
                                     {% endif %}
-                                    {% if data.Table_2 %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">{{ data.Table_2.1.0.1 }}</h6>
-                                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
-                                                <thead>
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_2.0|slice:":5" %}
-                                                            <th class="text-center">{{ arr_1 }}</th>
-                                                        {% endfor %}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for arr_1 in data.Table_2.1|slice:"1:" %}
-                                                        <tr>
-                                                            {% for arr_2 in arr_1|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_2 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_2 }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_2.2|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_1 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_1 }}</td>
-                                                                {% endif %}
-                                                        {% endfor %}
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+            {% if data.Table_4 %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">{{ data.Table_4.1.0.1 }}</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                {% for arr_1 in data.Table_4.0|slice:":5" %}
+                                    <th class="text-center">{{ arr_1 }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.Table_4.1|slice:"1:" %}
+                                <tr>
+                                    {% for arr_2 in arr_1|slice:"1:6" %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <td class="text-start">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% elif forloop.counter0 == 2 %}
+                                            <td class="text-end" width="100">{% if arr_2 == 0 %}{% else %}{% value_salary_tag arr_2 as value %}{{ value }}{% endif %}</td>
+                                        {% else %}
+                                            <td class="text-end">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                {% for arr_1 in data.Table_4.2|slice:"1:6" %}
+                                    {% if forloop.counter0 == 0 %}
+                                        <td class="text-start table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
+                                    {% elif forloop.counter0 == 2 %}
+                                        <td class="text-end table-active" width="100">{% if arr_1 == 0 %}{% else %}{% value_salary_tag arr_1 as value %}{{ value }}{% endif %}</td>
+                                    {% else %}
+                                        <td class="text-end table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
                                     {% endif %}
-                                </ul>
-                                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                                    {% if data.Table_3 %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">{{ data.Table_3.1.0.1 }}</h6>
-                                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
-                                                <thead>
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_3.0|slice:":5" %}
-                                                            <th class="text-center">{{ arr_1 }}</th>
-                                                        {% endfor %}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for arr_1 in data.Table_3.1|slice:"1:" %}
-                                                        <tr>
-                                                            {% for arr_2 in arr_1|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_2 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_2 }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_3.2|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_1 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_1 }}</td>
-                                                                {% endif %}
-                                                        {% endfor %}
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+        </ul>
+        <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+            {% if data.Table_5 %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">{{ data.Table_5.1.0.1 }}</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                {% for arr_1 in data.Table_5.0|slice:":5" %}
+                                    <th class="text-center">{{ arr_1 }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.Table_5.1|slice:"1:" %}
+                                <tr>
+                                    {% for arr_2 in arr_1|slice:"1:6" %}
+                                        {% if forloop.counter0 == 0 %}
+                                            <td class="text-start">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% elif forloop.counter0 == 2 %}
+                                            <td class="text-end" width="100">{% if arr_2 == 0 %}{% else %}{% value_salary_tag arr_2 as value %}{{ value }}{% endif %}</td>
+                                        {% else %}
+                                            <td class="text-end">{% if arr_2 == 0 %}{% else %}{{ arr_2 }}{% endif %}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                {% for arr_1 in data.Table_5.2|slice:"1:6" %}
+                                    {% if forloop.counter0 == 0 %}
+                                        <td class="text-start table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
+                                    {% elif forloop.counter0 == 2 %}
+                                        <td class="text-end table-active" width="100">{% if arr_1 == 0 %}{% else %}{% value_salary_tag arr_1 as value %}{{ value }}{% endif %}</td>
+                                    {% else %}
+                                        <td class="text-end table-active">{% if arr_1 == 0 %}{% else %}{{ arr_1 }}{% endif %}</td>
                                     {% endif %}
-                                    {% if data.Table_4 %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">{{ data.Table_4.1.0.1 }}</h6>
-                                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
-                                                <thead>
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_4.0|slice:":5" %}
-                                                            {% if forloop.first %}
-                                                                <th class="text-center">{{ arr_1 }}</th>
-                                                            {% else %}
-                                                                <th class="text-center">{{ arr_1 }}</th>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for arr_1 in data.Table_4.1|slice:"1:" %}
-                                                        <tr>
-                                                            {% for arr_2 in arr_1|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_2 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_2 }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                        <tr>
-                                                            {% for arr_1 in data.Table_4.2|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_1 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_1 }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                                    {% if data.Table_5 %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">{{ data.Table_5.1.0.1 }}</h6>
-                                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
-                                                <thead>
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_5.0|slice:":5" %}
-                                                            <th class="text-center">{{ arr_1 }}</th>
-                                                        {% endfor %}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for arr_1 in data.Table_5.1|slice:"1:" %}
-                                                        <tr>
-                                                            {% for arr_2 in arr_1|slice:"1:6" %}
-                                                                {% if forloop.counter0 == 0 %}
-                                                                    <td class="text-start">{{ arr_2 }}</td>
-                                                                {% else %}
-                                                                    <td class="text-end">{{ arr_2 }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </tr>
-                                                    {% endfor %}
-                                                    <tr>
-                                                        {% for arr_1 in data.Table_5.2|slice:"1:6" %}
-                                                            {% if forloop.counter0 == 0 %}
-                                                                <td class="text-start">{{ arr_1 }}</td>
-                                                            {% else %}
-                                                                <td class="text-end">{{ arr_1 }}</td>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
-                                    {% endif %}
-                                    {% if data.Down %}
-                                        <li class="">
-                                            <h6 class="display-6 lead">Итого.</h6>
-                                            <table class="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-dark">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">Тип</th>
-                                                        <th class="text-center">Значение</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="text-start">
-                                                            {{ data.Down.last.0 }}
-                                                        </td>
-                                                        {% if data.Down.last.1 >= 0 %}
-                                                            <td class="text-end bold fw-bold text-success table-active">
-                                                                {{ data.Down.last.1 }}
-                                                            </td>
-                                                        {% else %}
-                                                            <td class="text-end bold fw-bold text-danger table-active">
-                                                                {{ data.Down.last.1 }}
-                                                            </td>
-                                                        {% endif %}
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-start">
-                                                            {{ data.Down.first.0 }}
-                                                        </td>
-                                                        <td class="text-end">
-                                                            {{ data.Down.first.1 }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+            {% if data.Down %}
+                <li class="">
+                    <h6 class="lead fw-bold bold">Итого.</h6>
+                    <table class="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Тип</th>
+                                <th class="text-center">Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-start">{% if data.Down.first.0 == 0 %}{% else %}{% value_salary_tag data.Down.first.0 as value %}{{ value }}{% endif %}
+                                </td>
+                                <td class="text-end" width="100">{% if data.Down.first.1 == 0 %}{% else %}{% value_salary_tag data.Down.first.1 as value %}{{ value }}{% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-start">{% if data.Down.last.0 == 0 %}{% else %}{% value_salary_tag data.Down.last.0 as value %}{{ value }}{% endif %}</td>
+                                {% if data.Down.last.1 >= 0 %}
+                                    <td class="text-end bold fw-bold text-success table-active" width="100">{% if data.Down.last.1 == 0 %}{% else %}{% value_salary_tag data.Down.last.1 as value %}{{ value }}{% endif %}</td>
+                                {% else %}
+                                    <td class="text-end bold fw-bold text-danger table-active" width="100">{% value_salary_tag data.Down.last.1 as value %}{{ value }}</td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 {% elif response == -1 %}
     {% if data %}
         <div class="container container-fluid text-center">
@@ -407,8 +390,6 @@
             <strong class="text-danger">неизвестно</strong>
         </div>
     {% endif %}
-
-
     {% include 'components/aborted.html' %}
 {% else %}
     <div class="container">
@@ -453,7 +434,7 @@
                             <option value="12">Декабрь</option>
                         {% endif %}
                     </select>
-                    <small class="text-muted">месяц: выбери месяц из выпадающего списка</small>
+                    <small class="text-muted">месяц: выберите месяц из выпадающего списка</small>
                 </label>
                 <label class="form-control-lg">
                     Выберите год выгрузки:
@@ -474,16 +455,38 @@
                         {% else %}
                             <option value="2021">2021</option>
                             <option value="2022" selected>2022</option>
+                            <option value="2023">2023</option>
                         {% endif %}
                     </select>
-                    <small class="text-muted">год: выбери год из выпадающего списка</small>
+                    <small class="text-muted">год: выберите год из выпадающего списка</small>
                 </label>
             </div>
             <hr/>
             <div class="container-fluid text-center">
+                <div class="container text-center d-none" id="spinner">
+                    <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;" role="status">
+                      <span class="visually-hidden">ждите</span>
+                        <small class="text-dark">ждите</small>
+                    </div>
+                </div>
                 <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
                     <li class="m-1">
-                        <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                        <button onclick="display()" class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                        <script>
+                            function display() {
+                                {#window.print();#}
+                            let spinner = document.getElementById('spinner');
+                            spinner.classList.remove('d-none')
+                            }
+                        </script>
+{#                    <li class="m-1">#}
+{#                        <button onclick="display()" class="btn btn-lg btn-outline-secondary">Печать или сохранить pdf</button>#}
+{#                        <script>#}
+{#                            function display() {#}
+{#                            window.print();#}
+{#                            }#}
+{#                        </script>#}
+{#                    </li>#}
                     </li>
                     <li class="m-1">
                         <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
