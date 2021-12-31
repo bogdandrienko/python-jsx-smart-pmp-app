@@ -1935,7 +1935,7 @@ def career(request):
             vacancies_urls = []
             url = 'https://www.km-open.online/property'
             r = requests.get(url, headers=headers)
-            soup = bs4.BeautifulSoup(r.content.decode("utf-8"))
+            soup = bs4.BeautifulSoup(r.content.decode("utf-8"), features="lxml")
             list_objs = soup.find_all('div', {"class": "collection-item w-dyn-item"})
             for list_obj in list_objs:
                 vacancies_urls.append(url.split('/property')[0] + str(list_obj).split('href="')[1].split('"')[0])
