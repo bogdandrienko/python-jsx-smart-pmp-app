@@ -1,0 +1,54 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+
+<!-- Head -->
+{% block head %}
+{#    {% include 'components/navbar.html' %}#}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Главная страница
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Главная страница
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Главная страница веб-платформы.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+{% elif response == -1 %}
+{% else %}
+    <div class="container text-center">
+        <small class="lead fw-bold">Первый вход в систему:</small>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" width="75%"  height="75%" src="https://www.youtube.com/embed/WlC8iXpn2vA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen controls></iframe>
+        </div>
+    </div>
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+{#    {% include 'components/footer.html' %}#}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

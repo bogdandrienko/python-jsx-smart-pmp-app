@@ -1,0 +1,14 @@
+status: 200
+date: Thu, 23 Dec 2021 18:00:20 GMT
+server: WSGIServer/0.2 CPython/3.9.9
+content-type: application/json
+vary: Accept, Cookie
+allow: GET, POST, HEAD, OPTIONS
+x-frame-options: DENY
+content-length: 2
+x-content-type-options: nosniff
+referrer-policy: same-origin
+cross-origin-opener-policy: same-origin
+content-location: http://127.0.0.1/drf/ideas/
+
+[]

@@ -1,0 +1,42 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="just for fun">
+        <meta name="author" content="Andriyenko Bogdan">
+        <meta name="generator" content="Custom">
+        <link rel="icon" href="{% static 'img/favicon/favicon.ico' %}" type="image/png">
+        <title>
+            {% block title %}{% endblock title %}
+        </title>
+        {% block style %}{% endblock style %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap_5.1.3/bootstrap.css' %}">
+    </head>
+    <body class="d-flex flex-column h-100 bg-light">
+        <header>
+            {% block head %}{% endblock head %}
+        </header>
+        <main class="flex-shrink-0 bg-light">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="container-fluid">
+                        <div class="text-center">
+                            <h1 class="display-5 fw-bold fst-italic">{% block header %}{% endblock header %}</h1>
+                            <div class="col-lg-6 mx-auto">
+                                <p class="lead mb-4">{% block description %}{% endblock description %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% block main %}{% endblock main %}
+            </div>
+        </main>
+        {% block footer %}{% endblock footer %}
+        {% block script %}{% endblock script %}
+        <script src="{% static 'js/bootstrap_5.1.3/bootstrap.js' %}"></script>
+    </body>
+</html>
