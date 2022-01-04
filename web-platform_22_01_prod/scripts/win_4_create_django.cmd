@@ -6,13 +6,17 @@ pip install env
 
 cd ..\
 
-python -m venv env
-
 call .\env\Scripts\activate.bat
+
+python -m venv env
 
 python -m pip install --upgrade pip
 
 
+
+pip install django
+
+pip install Pillow
 
 pip install -r requirements.txt
 
