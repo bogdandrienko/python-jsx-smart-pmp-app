@@ -1,10 +1,11 @@
 {% extends "components/base.html" %}
 {% load static %}
+{% load access_tag %}
 
 
 <!-- Head -->
 {% block head %}
-{#    {% include 'components/navbar.html' %}#}
+    {% include 'components/navbar.html' %}
 {% endblock head %}
 
 <!-- Title -->
@@ -31,8 +32,44 @@
 
 
 {% if response == 1 %}
+    {% include 'components/success.html' %}
 {% elif response == -1 %}
+    {% include 'components/aborted.html' %}
 {% else %}
+    <div class="container">
+        <div class="border shadow text-center">
+            <div class="card-img align-content-center">
+                {% access_tag 'module_modules' as module_modules %}
+                {% if module_modules %}
+                    <a href="{% url 'module_or_component' 'module_modules' %}">
+                {% else %}
+                    <a href="{% url 'account_login' %}">
+                {% endif %}
+                        <img src="{% static 'media/admin/module/module.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
+                    </a>
+            </div>
+            <div class="card-body">
+                {% access_tag 'module_modules' as module_modules %}
+                {% if module_modules %}
+                    <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="text-decoration-none">
+                {% endif %}
+                        <h6 class="fst-italic text-uppercase text-dark">Модули</h6>
+                    </a>
+            </div>
+            <div class="card-header">
+                {% access_tag 'module_modules' as module_modules %}
+                {% if module_modules %}
+                    <a href="{% url 'module_or_component' 'module_modules' %}" class="text-decoration-none">
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="text-decoration-none">
+                {% endif %}
+                        <small class="text-muted text-lowercase">перейти ко всем модулям веб-платформы.</small>
+                    </a>
+            </div>
+        </div>
+    </div>
     <div class="container text-center">
         <small class="lead fw-bold">Первый вход в систему:</small>
         <div class="embed-responsive embed-responsive-16by9">
@@ -47,7 +84,7 @@
 
 <!-- Footer -->
 {% block footer %}
-{#    {% include 'components/footer.html' %}#}
+    {% include 'components/footer.html' %}
 {% endblock footer %}
 
 <!-- Script -->

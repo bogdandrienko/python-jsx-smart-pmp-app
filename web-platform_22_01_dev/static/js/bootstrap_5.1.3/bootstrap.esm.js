@@ -2316,7 +2316,7 @@ class Dropdown extends BaseComponent {
     //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
     // If input/textarea:
     //  - If space key => not a dropdown command
-    //  - If key is app_admin than escape
+    //  - If key is app_django than escape
     //    - If key is not up or down => not a dropdown command
     //    - If trigger inside the menu => not a dropdown command
     if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {

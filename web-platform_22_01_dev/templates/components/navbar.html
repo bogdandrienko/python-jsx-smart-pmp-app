@@ -36,10 +36,6 @@
                             {% if analyse %}
                                 <a class="dropdown-item" href="{% url 'analyse' %}">Машинное зрение: запуск анализа</a>
                             {% endif %}
-                            {% access_tag 'react' as react %}
-                            {% if react %}
-                                <a class="dropdown-item" href="{% url 'react' %}">React</a>
-                            {% endif %}
                             <hr class="dropdown-divider">
                         </li>
                         {% access_tag 'section_otiz' as section_otiz %}
@@ -81,9 +77,9 @@
                             {% if logging %}
                                 <a class="dropdown-item" href="{% url 'logging' %}">Логи Системы <span class="badge bg-danger rounded-pill">{{ errors }}</span></a>
                             {% endif %}
-                            {% access_tag 'account_create_modules_and_actions' as account_create_modules_and_actions %}
-                            {% if account_create_modules_and_actions %}
-                                <a class="dropdown-item" href="{% url 'account_create_modules_and_actions' %}">Создание модулей или действий</a>
+                            {% access_tag 'create_modules' as create_modules %}
+                            {% if create_modules %}
+                                <a class="dropdown-item" href="{% url 'create_modules' %}">Создание действий, групп или модулей</a>
                             {% endif %}
                             <hr class="dropdown-divider">
                         </li>
@@ -175,6 +171,18 @@
                                 <hr class="dropdown-divider">
                             </li>
                         {% endif %}
+                        {% access_tag 'section_chat' as section_chat %}
+                        {% if section_chat %}
+                            <li>
+                                <strong class="dropdown-header">Чат:</strong>
+                                {% access_tag 'chat' as chat %}
+                                {% if chat %}
+                                    <a class="dropdown-item" href="{% url 'chat' %}">Общий</a>
+                                {% endif %}
+                                <a class="dropdown-item disabled" href="#">Личный</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
                         {% access_tag 'section_news' as section_news %}
                         {% if section_news %}
                             <li>
@@ -185,15 +193,6 @@
                                 <a class="dropdown-item disabled" href="#">Зал славы</a>
                                 <a class="dropdown-item disabled" href="#">Алтын Канат</a>
                                 <a class="dropdown-item disabled" href="#">Лучшие работники Комбината</a>
-                                <hr class="dropdown-divider">
-                            </li>
-                        {% endif %}
-                        {% access_tag 'section_chat' as section_chat %}
-                        {% if section_chat %}
-                            <li>
-                                <strong class="dropdown-header">Чат:</strong>
-                                <a class="dropdown-item disabled" href="#">Общий</a>
-                                <a class="dropdown-item disabled" href="#">Личный</a>
                                 <hr class="dropdown-divider">
                             </li>
                         {% endif %}

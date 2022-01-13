@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'app_admin.apps.AppAdminConfig',
+    'app_django.apps.AppAdminConfig',
 ]
 
 MIDDLEWARE = [
@@ -170,8 +171,7 @@ use_tls: EMAIL_USE_TLS
 use_ssl: EMAIL_USE_SSL
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
+    # Use Django's standard `django.contrib.auth` permissions, or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]

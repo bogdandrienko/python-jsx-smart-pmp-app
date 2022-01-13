@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from app_admin.models import UserModel, NotificationModel, LoggingModel
+from app_admin.models import LoggingModel
+from app_admin.models import UserModel, NotificationModel
 from app_admin.service import DjangoClass
 
 

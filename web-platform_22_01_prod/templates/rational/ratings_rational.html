@@ -1,0 +1,97 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% load account_tag %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Списки лидеров
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+
+    {% if page %}
+    <div class="row row-cols-1 row-cols-md-3 text-center">
+        <a class="btn btn-lg btn-outline-primary" href="{% url 'rational' %}">Все предложения</a>
+        <div class="btn-group">
+            <form action="{% url 'rational_ratings' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control " type="hidden" name="sorted" value="rating">
+                {% if sorted %}
+                    <button class="m-md-2 btn btn-xs btn-success" type="submit">По рейтингу</button>
+                {% else %}
+                    <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">По рейтингу</button>
+                {% endif %}
+            </form>
+            <form action="{% url 'rational_ratings' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control " type="hidden" name="sorted" value="count">
+                {% if sorted %}
+                    <button class="m-md-2 btn btn-xs btn-outline-success" type="submit">По количеству</button>
+                {% else %}
+                    <button class="m-md-2 btn btn-xs btn-success" type="submit">По количеству</button>
+                {% endif %}
+            </form>
+        </div>
+        {% for LOOP in page %}
+        <div class="col my-2">
+            <div class="card shadow-sm">
+                <div class="card-header m-0 p-1">
+                    <h4 class="fw-normal card-header bg-light text-dark text-decoration-none d-flex">
+                        <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">
+                            {% account_tag LOOP.user as acc %}
+                            {% if acc %}
+                                <strong>{{ acc.lastname }} {{ acc.firstname }}</strong>
+                            {% else %}
+                                Профиль не заполнен
+                            {% endif %}
+                        </small>
+                        <small class="my-2 btn btn-sm btn-outline-dark text-link-dark">{{ forloop.counter }}</small>
+                    </h4>
+                </div>
+                <div class="card-body m-0 p-1">
+                    <div class="my-1 d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <small class="my-1 btn btn-sm btn-outline-dark text-link-dark">Комментарии: {{ LOOP.count }}</small>
+                            {% if LOOP.rating > 0 %}
+                                <div class="m-sm-0 btn btn-sm btn-outline-success text-link-light">Рейтинг: {{ LOOP.rating }}</div>
+                            {% else %}
+                                <div class="m-sm-0 btn btn-sm btn-outline-danger text-link-light">Рейтинг: {{ LOOP.rating }}</div>
+                            {% endif %}
+                        </div>
+{#                        <small class="text-muted">{{ LOOP.count }}</small>#}
+                        <small>#{{ forloop.revcounter }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        Лидеры не найдены :(
+    {% endif %}
+
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

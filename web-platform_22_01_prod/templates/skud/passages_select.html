@@ -1,0 +1,102 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Выгрузка записей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+<main class="container">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">ВЫГРУЗКА ЗАПИСЕЙ.</h1>
+        <p class="lead">Эта страница содержит форму для выгрузки записей.</p>
+        <div class="d-block">
+            <form class="form-control" action="{% url 'passages_select' %}" method="POST">
+                {% csrf_token %}
+                <label class="d-flex text-lg-start" for="party">id, данные которого необходимо выгрузить</label>
+                <input class="form-control text-lg-start" type="number" required="" placeholder="931777" value="931777" name="personid">
+                <br>
+                <hr>
+                <br>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="check">
+                    <label class="form-check-label" for="flexCheckDefault">Включить ограничение выгрузки по дате и времени?</label>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <div class="d-flex text-lg-start">
+                    <label class="d-flex text-lg-start" for="party">Дата и время для ограничения</label>
+                    <input class="form-control" type="datetime-local" required="" placeholder="" value="2021-10-28T12:00" name="date"><br>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <button class="btn btn-lg btn-outline-primary form-control" type="submit">Подтвердить</button>
+            </form>
+        </div>
+    </div>
+    {% if data %}
+        <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Текущие данные.</h1>
+            <p class="lead">Ниже расположены данные, соответствующие текущему значению.</p>
+            <div class="d-block">
+                <div class="border-dark table-bordered">
+                    <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-lg table-sm">
+                        <thead>
+                            <tr>
+                                {% for arr_2 in data.0 %}
+                                    {% if forloop.counter == 2 %}
+                                        <th width="480">{{ arr_2 }}</th>
+                                    {% elif forloop.counter == 3 %}
+                                        <th width="480">{{ arr_2 }}</th>
+                                    {% else %}
+                                        <th>{{ arr_2 }}</th>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.1 %}
+                                <tr>
+                                    {% for arr_2 in arr_1 %}
+                                        <td>
+                                            {{ arr_2 }}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Данных нет.</h1>
+            <p class="lead">Нажмите на кнопку выгрузки или ожидайте исправления неполадок.</p>
+        </div>
+    {% endif %}
+</main>
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

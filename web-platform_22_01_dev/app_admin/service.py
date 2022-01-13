@@ -1,3 +1,10 @@
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.staticfiles import finders
+from django.core.handlers.wsgi import WSGIRequest
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils import timezone
+
 import datetime
 import math
 import os
@@ -11,16 +18,9 @@ from openpyxl.utils import get_column_letter
 from fastkml import kml
 from concurrent.futures import ThreadPoolExecutor
 
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.contrib.staticfiles import finders
-from django.core.handlers.wsgi import WSGIRequest
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.utils import timezone
-
-from app_admin.models import UserModel, GroupModel, LoggingModel, ActionModel, ComputerVisionModuleModel, \
-    ComputerVisionComponentModel
+from app_admin.models import LoggingModel, UserModel, GroupModel, ActionModel
 from app_admin.utils import ExcelClass, DirPathFolderPathClass, DateTimeUtils
+from app_django.models import ComputerVisionModuleModel, ComputerVisionComponentModel
 
 
 class DjangoClass:

@@ -1,0 +1,421 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Paginator &#8212; Django 4.0.2.dev20220105081954 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Request and response objects" href="request-response.html" />
+    <link rel="prev" title="Database Functions" href="models/database-functions.html" />
+
+
+
+ 
+<script src="../templatebuiltins.js"></script>
+<script>
+(function($) {
+    if (!django_template_builtins) {
+       // templatebuiltins.js missing, do nothing.
+       return;
+    }
+    $(document).ready(function() {
+        // Hyperlink Django template tags and filters
+        var base = "templates/builtins.html";
+        if (base == "#") {
+            // Special case for builtins.html itself
+            base = "";
+        }
+        // Tags are keywords, class '.k'
+        $("div.highlight\\-html\\+django span.k").each(function(i, elem) {
+             var tagname = $(elem).text();
+             if ($.inArray(tagname, django_template_builtins.ttags) != -1) {
+                 var fragment = tagname.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + tagname + "</a>");
+             }
+        });
+        // Filters are functions, class '.nf'
+        $("div.highlight\\-html\\+django span.nf").each(function(i, elem) {
+             var filtername = $(elem).text();
+             if ($.inArray(filtername, django_template_builtins.tfilters) != -1) {
+                 var fragment = filtername.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + filtername + "</a>");
+             }
+        });
+    });
+})(jQuery);</script>
+
+  </head><body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t6">
+    <div id="hd">
+      <h1><a href="../index.html">Django 4.0.2.dev20220105081954 documentation</a></h1>
+      <div id="global-nav">
+        <a title="Home page" href="../index.html">Home</a>  |
+        <a title="Table of contents" href="../contents.html">Table of contents</a>  |
+        <a title="Global index" href="../genindex.html">Index</a>  |
+        <a title="Module index" href="../py-modindex.html">Modules</a>
+      </div>
+      <div class="nav">
+    &laquo; <a href="models/database-functions.html" title="Database Functions">previous</a>
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="request-response.html" title="Request and response objects">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="ref-paginator">
+            
+  <div class="section" id="s-paginator">
+<span id="paginator"></span><h1>Paginator<a class="headerlink" href="#paginator" title="Permalink to this headline">¶</a></h1>
+<p>Django provides a few classes that help you manage paginated data – that is,
+data that’s split across several pages, with “Previous/Next” links. These
+classes live in <a class="reference external" href="https://github.com/django/django/blob/main/django/core/paginator.py">django/core/paginator.py</a>.</p>
+<p>For examples, see the <a class="reference internal" href="../topics/pagination.html"><span class="doc">Pagination topic guide</span></a>.</p>
+<span class="target" id="module-django.core.paginator"></span><div class="section" id="s-paginator-class">
+<span id="paginator-class"></span><h2><code class="docutils literal notranslate"><span class="pre">Paginator</span></code> class<a class="headerlink" href="#paginator-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="django.core.paginator.Paginator">
+<em class="property">class </em><code class="descname">Paginator</code>(<em>object_list</em>, <em>per_page</em>, <em>orphans=0</em>, <em>allow_empty_first_page=True</em>)<a class="headerlink" href="#django.core.paginator.Paginator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A paginator acts like a sequence of <a class="reference internal" href="#django.core.paginator.Page" title="django.core.paginator.Page"><code class="xref py py-class docutils literal notranslate"><span class="pre">Page</span></code></a> when using <code class="docutils literal notranslate"><span class="pre">len()</span></code> or
+iterating it directly.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.object_list">
+<code class="descclassname">Paginator.</code><code class="descname">object_list</code><a class="headerlink" href="#django.core.paginator.Paginator.object_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required. A list, tuple, <code class="docutils literal notranslate"><span class="pre">QuerySet</span></code>, or other sliceable object with a
+<code class="docutils literal notranslate"><span class="pre">count()</span></code> or <code class="docutils literal notranslate"><span class="pre">__len__()</span></code> method. For consistent pagination,
+<code class="docutils literal notranslate"><span class="pre">QuerySet</span></code>s should be ordered, e.g. with an
+<a class="reference internal" href="models/querysets.html#django.db.models.query.QuerySet.order_by" title="django.db.models.query.QuerySet.order_by"><code class="xref py py-meth docutils literal notranslate"><span class="pre">order_by()</span></code></a> clause or with a default
+<a class="reference internal" href="models/options.html#django.db.models.Options.ordering" title="django.db.models.Options.ordering"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ordering</span></code></a> on the model.</p>
+<div class="admonition-performance-issues-paginating-large-queryset-s admonition">
+<p class="first admonition-title">Performance issues paginating large <code class="docutils literal notranslate"><span class="pre">QuerySet</span></code>s</p>
+<p class="last">If you’re using a <code class="docutils literal notranslate"><span class="pre">QuerySet</span></code> with a very large number of items,
+requesting high page numbers might be slow on some databases, because
+the resulting <code class="docutils literal notranslate"><span class="pre">LIMIT</span></code>/<code class="docutils literal notranslate"><span class="pre">OFFSET</span></code> query needs to count the number of
+<code class="docutils literal notranslate"><span class="pre">OFFSET</span></code> records which takes longer as the page number gets higher.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.per_page">
+<code class="descclassname">Paginator.</code><code class="descname">per_page</code><a class="headerlink" href="#django.core.paginator.Paginator.per_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required. The maximum number of items to include on a page, not including
+orphans (see the <a class="reference internal" href="#django.core.paginator.Paginator.orphans" title="django.core.paginator.Paginator.orphans"><code class="xref py py-attr docutils literal notranslate"><span class="pre">orphans</span></code></a> optional argument below).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.orphans">
+<code class="descclassname">Paginator.</code><code class="descname">orphans</code><a class="headerlink" href="#django.core.paginator.Paginator.orphans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional. Use this when you don’t want to have a last page with very few
+items. If the last page would normally have a number of items less than or
+equal to <code class="docutils literal notranslate"><span class="pre">orphans</span></code>, then those items will be added to the previous page
+(which becomes the last page) instead of leaving the items on a page by
+themselves. For example, with 23 items, <code class="docutils literal notranslate"><span class="pre">per_page=10</span></code>, and <code class="docutils literal notranslate"><span class="pre">orphans=3</span></code>,
+there will be two pages; the first page with 10 items and the second
+(and last) page with 13 items. <code class="docutils literal notranslate"><span class="pre">orphans</span></code> defaults to zero, which means
+pages are never combined and the last page may have one item.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.allow_empty_first_page">
+<code class="descclassname">Paginator.</code><code class="descname">allow_empty_first_page</code><a class="headerlink" href="#django.core.paginator.Paginator.allow_empty_first_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional. Whether or not the first page is allowed to be empty.  If
+<code class="docutils literal notranslate"><span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">object_list</span></code> is  empty, then an <code class="docutils literal notranslate"><span class="pre">EmptyPage</span></code> error will
+be raised.</p>
+</dd></dl>
+
+<div class="section" id="s-methods">
+<span id="methods"></span><h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="django.core.paginator.Paginator.get_page">
+<code class="descclassname">Paginator.</code><code class="descname">get_page</code>(<em>number</em>)<a class="headerlink" href="#django.core.paginator.Paginator.get_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#django.core.paginator.Page" title="django.core.paginator.Page"><code class="xref py py-class docutils literal notranslate"><span class="pre">Page</span></code></a> object with the given 1-based index, while also
+handling out of range and invalid page numbers.</p>
+<p>If the page isn’t a number, it returns the first page. If the page number
+is negative or greater than the number of pages, it returns the last page.</p>
+<p>Raises an <a class="reference internal" href="#django.core.paginator.EmptyPage" title="django.core.paginator.EmptyPage"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EmptyPage</span></code></a> exception only if you specify
+<code class="docutils literal notranslate"><span class="pre">Paginator(...,</span> <span class="pre">allow_empty_first_page=False)</span></code> and the <code class="docutils literal notranslate"><span class="pre">object_list</span></code> is
+empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Paginator.page">
+<code class="descclassname">Paginator.</code><code class="descname">page</code>(<em>number</em>)<a class="headerlink" href="#django.core.paginator.Paginator.page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#django.core.paginator.Page" title="django.core.paginator.Page"><code class="xref py py-class docutils literal notranslate"><span class="pre">Page</span></code></a> object with the given 1-based index. Raises
+<a class="reference internal" href="#django.core.paginator.PageNotAnInteger" title="django.core.paginator.PageNotAnInteger"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PageNotAnInteger</span></code></a> if the <code class="docutils literal notranslate"><span class="pre">number</span></code> cannot be converted to an integer
+by calling <code class="docutils literal notranslate"><span class="pre">int()</span></code>. Raises <a class="reference internal" href="#django.core.paginator.EmptyPage" title="django.core.paginator.EmptyPage"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EmptyPage</span></code></a> if the given page number
+doesn’t exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Paginator.get_elided_page_range">
+<code class="descclassname">Paginator.</code><code class="descname">get_elided_page_range</code>(<em>number</em>, <em>*</em>, <em>on_each_side=3</em>, <em>on_ends=2</em>)<a class="headerlink" href="#django.core.paginator.Paginator.get_elided_page_range" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<span class="title">New in Django 3.2.</span> </div>
+<p>Returns a 1-based list of page numbers similar to
+<a class="reference internal" href="#django.core.paginator.Paginator.page_range" title="django.core.paginator.Paginator.page_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Paginator.page_range</span></code></a>, but may add an ellipsis to either or both
+sides of the current page number when <a class="reference internal" href="#django.core.paginator.Paginator.num_pages" title="django.core.paginator.Paginator.num_pages"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Paginator.num_pages</span></code></a> is large.</p>
+<p>The number of pages to include on each side of the current page number is
+determined by the <code class="docutils literal notranslate"><span class="pre">on_each_side</span></code> argument which defaults to 3.</p>
+<p>The number of pages to include at the beginning and end of page range is
+determined by the <code class="docutils literal notranslate"><span class="pre">on_ends</span></code> argument which defaults to 2.</p>
+<p>For example, with the default values for <code class="docutils literal notranslate"><span class="pre">on_each_side</span></code> and <code class="docutils literal notranslate"><span class="pre">on_ends</span></code>,
+if the current page is 10 and there are 50 pages, the page range will be
+<code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">'…',</span> <span class="pre">7,</span> <span class="pre">8,</span> <span class="pre">9,</span> <span class="pre">10,</span> <span class="pre">11,</span> <span class="pre">12,</span> <span class="pre">13,</span> <span class="pre">'…',</span> <span class="pre">49,</span> <span class="pre">50]</span></code>. This will result in
+pages 7, 8, and 9 to the left of and 11, 12, and 13 to the right of the
+current page as well as pages 1 and 2 at the start and 49 and 50 at the
+end.</p>
+<p>Raises <a class="reference internal" href="#django.core.paginator.InvalidPage" title="django.core.paginator.InvalidPage"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidPage</span></code></a> if the given page number doesn’t exist.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="s-attributes">
+<span id="attributes"></span><h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.ELLIPSIS">
+<code class="descclassname">Paginator.</code><code class="descname">ELLIPSIS</code><a class="headerlink" href="#django.core.paginator.Paginator.ELLIPSIS" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<span class="title">New in Django 3.2.</span> </div>
+<p>A translatable string used as a substitute for elided page numbers in the
+page range returned by <a class="reference internal" href="#django.core.paginator.Paginator.get_elided_page_range" title="django.core.paginator.Paginator.get_elided_page_range"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_elided_page_range()</span></code></a>. Default is
+<code class="docutils literal notranslate"><span class="pre">'…'</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.count">
+<code class="descclassname">Paginator.</code><code class="descname">count</code><a class="headerlink" href="#django.core.paginator.Paginator.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of objects, across all pages.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When determining the number of objects contained in <code class="docutils literal notranslate"><span class="pre">object_list</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Paginator</span></code> will first try calling <code class="docutils literal notranslate"><span class="pre">object_list.count()</span></code>. If
+<code class="docutils literal notranslate"><span class="pre">object_list</span></code> has no <code class="docutils literal notranslate"><span class="pre">count()</span></code> method, then <code class="docutils literal notranslate"><span class="pre">Paginator</span></code> will
+fall back to using <code class="docutils literal notranslate"><span class="pre">len(object_list)</span></code>. This allows objects, such as
+<code class="docutils literal notranslate"><span class="pre">QuerySet</span></code>, to use a more efficient <code class="docutils literal notranslate"><span class="pre">count()</span></code> method when
+available.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.num_pages">
+<code class="descclassname">Paginator.</code><code class="descname">num_pages</code><a class="headerlink" href="#django.core.paginator.Paginator.num_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of pages.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Paginator.page_range">
+<code class="descclassname">Paginator.</code><code class="descname">page_range</code><a class="headerlink" href="#django.core.paginator.Paginator.page_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>A 1-based range iterator of page numbers, e.g. yielding <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code>.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="s-page-class">
+<span id="page-class"></span><h2><code class="docutils literal notranslate"><span class="pre">Page</span></code> class<a class="headerlink" href="#page-class" title="Permalink to this headline">¶</a></h2>
+<p>You usually won’t construct <code class="docutils literal notranslate"><span class="pre">Page</span></code> objects by hand – you’ll get them by
+iterating <a class="reference internal" href="#django.core.paginator.Paginator" title="django.core.paginator.Paginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Paginator</span></code></a>, or by using <a class="reference internal" href="#django.core.paginator.Paginator.page" title="django.core.paginator.Paginator.page"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Paginator.page()</span></code></a>.</p>
+<dl class="class">
+<dt id="django.core.paginator.Page">
+<em class="property">class </em><code class="descname">Page</code>(<em>object_list</em>, <em>number</em>, <em>paginator</em>)<a class="headerlink" href="#django.core.paginator.Page" title="Permalink to this definition">¶</a></dt>
+<dd><p>A page acts like a sequence of <a class="reference internal" href="#django.core.paginator.Page.object_list" title="django.core.paginator.Page.object_list"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Page.object_list</span></code></a> when using
+<code class="docutils literal notranslate"><span class="pre">len()</span></code> or iterating it directly.</p>
+</dd></dl>
+
+<div class="section" id="s-id1">
+<span id="id1"></span><h3>Methods<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="django.core.paginator.Page.has_next">
+<code class="descclassname">Page.</code><code class="descname">has_next</code>()<a class="headerlink" href="#django.core.paginator.Page.has_next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if there’s a next page.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Page.has_previous">
+<code class="descclassname">Page.</code><code class="descname">has_previous</code>()<a class="headerlink" href="#django.core.paginator.Page.has_previous" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if there’s a previous page.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Page.has_other_pages">
+<code class="descclassname">Page.</code><code class="descname">has_other_pages</code>()<a class="headerlink" href="#django.core.paginator.Page.has_other_pages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if there’s a next <strong>or</strong> previous page.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Page.next_page_number">
+<code class="descclassname">Page.</code><code class="descname">next_page_number</code>()<a class="headerlink" href="#django.core.paginator.Page.next_page_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the next page number. Raises <a class="reference internal" href="#django.core.paginator.InvalidPage" title="django.core.paginator.InvalidPage"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidPage</span></code></a> if next page
+doesn’t exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Page.previous_page_number">
+<code class="descclassname">Page.</code><code class="descname">previous_page_number</code>()<a class="headerlink" href="#django.core.paginator.Page.previous_page_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the previous page number. Raises <a class="reference internal" href="#django.core.paginator.InvalidPage" title="django.core.paginator.InvalidPage"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidPage</span></code></a> if previous
+page doesn’t exist.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Page.start_index">
+<code class="descclassname">Page.</code><code class="descname">start_index</code>()<a class="headerlink" href="#django.core.paginator.Page.start_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the 1-based index of the first object on the page, relative to all
+of the objects in the paginator’s list. For example, when paginating a list
+of 5 objects with 2 objects per page, the second page’s
+<a class="reference internal" href="#django.core.paginator.Page.start_index" title="django.core.paginator.Page.start_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">start_index()</span></code></a> would return <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="django.core.paginator.Page.end_index">
+<code class="descclassname">Page.</code><code class="descname">end_index</code>()<a class="headerlink" href="#django.core.paginator.Page.end_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the 1-based index of the last object on the page, relative to all
+of the objects in the paginator’s list. For example, when paginating a list
+of 5 objects with 2 objects per page, the second page’s
+<a class="reference internal" href="#django.core.paginator.Page.end_index" title="django.core.paginator.Page.end_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">end_index()</span></code></a> would return <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="s-id2">
+<span id="id2"></span><h3>Attributes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt id="django.core.paginator.Page.object_list">
+<code class="descclassname">Page.</code><code class="descname">object_list</code><a class="headerlink" href="#django.core.paginator.Page.object_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of objects on this page.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Page.number">
+<code class="descclassname">Page.</code><code class="descname">number</code><a class="headerlink" href="#django.core.paginator.Page.number" title="Permalink to this definition">¶</a></dt>
+<dd><p>The 1-based page number for this page.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="django.core.paginator.Page.paginator">
+<code class="descclassname">Page.</code><code class="descname">paginator</code><a class="headerlink" href="#django.core.paginator.Page.paginator" title="Permalink to this definition">¶</a></dt>
+<dd><p>The associated <a class="reference internal" href="#django.core.paginator.Paginator" title="django.core.paginator.Paginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Paginator</span></code></a> object.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="s-exceptions">
+<span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="django.core.paginator.InvalidPage">
+<em class="property">exception </em><code class="descname">InvalidPage</code><a class="headerlink" href="#django.core.paginator.InvalidPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>A base class for exceptions raised when a paginator is passed an invalid
+page number.</p>
+</dd></dl>
+
+<p>The <a class="reference internal" href="#django.core.paginator.Paginator.page" title="django.core.paginator.Paginator.page"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Paginator.page()</span></code></a> method raises an exception if the requested page is
+invalid (i.e. not an integer) or contains no objects. Generally, it’s enough
+to catch the <code class="docutils literal notranslate"><span class="pre">InvalidPage</span></code> exception, but if you’d like more granularity,
+you can catch either of the following exceptions:</p>
+<dl class="exception">
+<dt id="django.core.paginator.PageNotAnInteger">
+<em class="property">exception </em><code class="descname">PageNotAnInteger</code><a class="headerlink" href="#django.core.paginator.PageNotAnInteger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when <a class="reference internal" href="#django.core.paginator.Paginator.page" title="django.core.paginator.Paginator.page"><code class="xref py py-meth docutils literal notranslate"><span class="pre">page()</span></code></a> is given a value that isn’t an integer.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="django.core.paginator.EmptyPage">
+<em class="property">exception </em><code class="descname">EmptyPage</code><a class="headerlink" href="#django.core.paginator.EmptyPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when <a class="reference internal" href="#django.core.paginator.Paginator.page" title="django.core.paginator.Paginator.page"><code class="xref py py-meth docutils literal notranslate"><span class="pre">page()</span></code></a> is given a valid value but no objects
+exist on that page.</p>
+</dd></dl>
+
+<p>Both of the exceptions are subclasses of <a class="reference internal" href="#django.core.paginator.InvalidPage" title="django.core.paginator.InvalidPage"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidPage</span></code></a>, so you can handle
+them both with <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">InvalidPage</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Paginator</a><ul>
+<li><a class="reference internal" href="#paginator-class"><code class="docutils literal notranslate"><span class="pre">Paginator</span></code> class</a><ul>
+<li><a class="reference internal" href="#methods">Methods</a></li>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#page-class"><code class="docutils literal notranslate"><span class="pre">Page</span></code> class</a><ul>
+<li><a class="reference internal" href="#id1">Methods</a></li>
+<li><a class="reference internal" href="#id2">Attributes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="models/database-functions.html"
+                        title="previous chapter">Database Functions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="request-response.html"
+                        title="next chapter">Request and response objects</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/paginator.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+              <h3>Last update:</h3>
+              <p class="topless">Jan 05, 2022</p>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="models/database-functions.html" title="Database Functions">previous</a>
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="request-response.html" title="Request and response objects">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

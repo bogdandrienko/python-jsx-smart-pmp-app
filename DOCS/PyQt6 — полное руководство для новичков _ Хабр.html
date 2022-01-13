@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://habr.com/ru/company/skillfactory/blog/599599/ -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+  <title>PyQt6 — полное руководство для новичков / Хабр</title>
+  <style>
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSxf6TF0.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveQhf6TF0.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveSBf6TF0.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/firasans/v11/va9B4kDNxMZdWfMOD5VnZKveRhf6.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* non-breaking hyphen */
+    @font-face {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/l/font?kit=KFOlCnqEu92Fr1MmEU9vBh0_IsHAlmrO6g&skey=ee881451c540fdec&v=v29) format('woff2');
+      unicode-range: U+02011;
+    }
+  </style>
+  <link rel="preload" href="./PyQt6 — полное руководство для новичков _ Хабр_files/chunk-vendors.961b6771.css" as="style"><link rel="preload" href="./PyQt6 — полное руководство для новичков _ Хабр_files/chunk-vendors.1fc8c5a6.js.Без названия" as="script"><link rel="preload" href="./PyQt6 — полное руководство для новичков _ Хабр_files/app.fa66137f.css" as="style"><link rel="preload" href="./PyQt6 — полное руководство для новичков _ Хабр_files/app.2f08e961.js.Без названия" as="script">
+  <link rel="stylesheet" href="./PyQt6 — полное руководство для новичков _ Хабр_files/chunk-vendors.961b6771.css"><link rel="stylesheet" href="./PyQt6 — полное руководство для новичков _ Хабр_files/app.fa66137f.css">
+  <script type="text/javascript" async="" src="./PyQt6 — полное руководство для новичков _ Хабр_files/js"></script><script async="" src="./PyQt6 — полное руководство для новичков _ Хабр_files/tag.js.Без названия"></script><script async="" src="./PyQt6 — полное руководство для новичков _ Хабр_files/analytics.js.Без названия"></script><script>window.i18nFetch = new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', '/js/i18n/ru-compiled.4fd66d0b0db277683556f49927a1e306.json');
+          xhr.responseType = 'json';
+          xhr.onload = function(e) {
+            if (this.status === 200) {
+              res({ru: xhr.response});
+            } else {
+              rej(e);
+            }
+          };
+          xhr.send();
+        });</script>
+  
+  <script data-vue-meta="ssr" type="application/ld+json" data-vmid="ldjson-schema">{"@context":"http:\/\/schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/habr.com\/ru\/company\/skillfactory\/blog\/599599\/"},"headline":"PyQt6 — полное руководство для новичков","datePublished":"2022-01-09T23:33:48+03:00","dateModified":"2022-01-10T17:55:47+03:00","author":{"@type":"Person","name":"honyaki"},"publisher":{"@type":"Organization","name":"Habr","logo":{"@type":"ImageObject","url":"https:\/\/habrastorage.org\/webt\/a_\/lk\/9m\/a_lk9mjkccjox-zccjrpfolmkmq.png"}},"description":"К старту курса по разработке на Python делимся детальным руководством по работе с современным PyQt. Чтобы читать было удобнее, мы объединили несколько статей в о...","url":"https:\/\/habr.com\/ru\/company\/skillfactory\/blog\/599599\/#post-content-body","about":["c_skillfactory","h_python","h_programming","h_desktop_environment","h_qt_software","f_develop"],"image":["https:\/\/habr.com\/share\/publication\/599599\/2eeacfa0a5ffcab50d5762ac150c417f\/","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/f81\/d9c\/703\/f81d9c70359118652c9dc28bc35a5c73.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/765\/a2b\/47e\/765a2b47e8561b8a21ee2d47cd8c9094.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/919\/88b\/636\/91988b6363fd2bf413509e133ea5b0c5.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/918\/5fc\/165\/9185fc1656dffdc301ab054d529687b2.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/9ba\/66f\/d93\/9ba66fd935b59fe9f3d70364708ca88e.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/2d4\/285\/2fa\/2d42852fa52322ca9618a50e4953d5b4.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/5a6\/497\/6e4\/5a64976e40781887778d91703f09ea82.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/4b7\/b01\/98b\/4b7b0198b28875e836b24b662347d427.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/bcf\/b7f\/520\/bcfb7f5204521c8749ce8846bbeba6a5.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/97f\/b1b\/34c\/97fb1b34c88349f7a2abd863919a6132.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/12b\/1aa\/44d\/12b1aa44de3efb1060ffd2d8061d34b3.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/5e6\/22f\/850\/5e622f850e3606aa347b2a43810d544e.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/145\/fd6\/03b\/145fd603bef99cce34d304c59c6845e6.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/3d6\/41e\/63b\/3d641e63b5d95f58916f755a5afe5354.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/1f3\/5b0\/d1b\/1f35b0d1bb8a9c6ff7b33cdd3fc61814.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/e9c\/17f\/635\/e9c17f6353e8c4af54a2de9bb74b9784.png","https:\/\/habrastorage.org\/getpro\/habr\/upload_files\/9c9\/d12\/1c0\/9c9d121c03037cc47648fca807bbb4c3.png"]}</script>
+  <script src="./PyQt6 — полное руководство для новичков _ Хабр_files/gpt.js.Без названия" async=""></script>
+  <style>.grecaptcha-badge{visibility: hidden;}</style>
+  <meta name="habr-version" content="2.56.0">
+  
+  <meta data-vue-meta="ssr" property="fb:app_id" content="444736788986613"><meta data-vue-meta="ssr" property="fb:pages" content="472597926099084"><meta data-vue-meta="ssr" name="twitter:card" content="summary_large_image"><meta data-vue-meta="ssr" name="twitter:site" content="@habr_com"><meta data-vue-meta="ssr" property="og:site_name" content="Хабр" data-vmid="og:site_name"><meta data-vue-meta="ssr" property="og:title" content="PyQt6 — полное руководство для новичков" data-vmid="og:title"><meta data-vue-meta="ssr" name="twitter:title" content="PyQt6 — полное руководство для новичков" data-vmid="twitter:title"><meta data-vue-meta="ssr" name="aiturec:title" content="PyQt6 — полное руководство для новичков" data-vmid="aiturec:title"><meta data-vue-meta="ssr" name="description" content="К старту курса по разработке на Python делимся детальным руководством по работе с современным PyQt. Чтобы читать было удобнее, мы объединили несколько статей в одну:Первое приложениеСлоты и..." data-vmid="description"><meta data-vue-meta="ssr" itemprop="description" content="К старту курса по разработке на Python делимся детальным руководством по работе с современным PyQt. Чтобы читать было удобнее, мы объединили несколько статей в одну:Первое приложениеСлоты и..." data-vmid="description:itemprop"><meta data-vue-meta="ssr" property="og:description" content="К старту курса по разработке на Python делимся детальным руководством по работе с современным PyQt. Чтобы читать было удобнее, мы объединили несколько статей в одну:Первое приложениеСлоты и..." data-vmid="og:description"><meta data-vue-meta="ssr" name="twitter:description" content="К старту курса по разработке на Python делимся детальным руководством по работе с современным PyQt. Чтобы читать было удобнее, мы объединили несколько статей в одну:Первое приложениеСлоты и..." data-vmid="twitter:description"><meta data-vue-meta="ssr" property="aiturec:description" content="К старту курса по разработке на Python делимся детальным руководством по работе с современным PyQt. Чтобы читать было удобнее, мы объединили несколько статей в одну:Первое приложениеСлоты и..." data-vmid="aiturec:description"><meta data-vue-meta="ssr" itemprop="image" content="https://habrastorage.org/getpro/habr/upload_files/3fa/d79/b0b/3fad79b0bb27fffd153b655b831975ec.png" data-vmid="image:itemprop"><meta data-vue-meta="ssr" property="og:image" content="https://habrastorage.org/getpro/habr/upload_files/3fa/d79/b0b/3fad79b0bb27fffd153b655b831975ec.png" data-vmid="og:image"><meta data-vue-meta="ssr" property="og:image:width" content="1200" data-vmid="og:image:width"><meta data-vue-meta="ssr" property="og:image:height" content="630" data-vmid="og:image:height"><meta data-vue-meta="ssr" property="aiturec:image" content="https://habrastorage.org/getpro/habr/upload_files/3fa/d79/b0b/3fad79b0bb27fffd153b655b831975ec.png" data-vmid="aiturec:image"><meta data-vue-meta="ssr" name="twitter:image" content="https://habrastorage.org/getpro/habr/upload_files/3fa/d79/b0b/3fad79b0bb27fffd153b655b831975ec.png" data-vmid="twitter:image"><meta data-vue-meta="ssr" property="vk:image" content="https://habrastorage.org/getpro/habr/upload_files/3fa/d79/b0b/3fad79b0bb27fffd153b655b831975ec.png?format=vk" data-vmid="vk:image"><meta data-vue-meta="ssr" property="aiturec:item_id" content="599599" data-vmid="aiturec:item_id"><meta data-vue-meta="ssr" property="aiturec:datetime" content="2022-01-09T20:33:48.000Z" data-vmid="aiturec:datetime"><meta data-vue-meta="ssr" property="og:type" content="article" data-vmid="og:type"><meta data-vue-meta="ssr" property="og:locale" content="ru_RU" data-vmid="og:locale"><meta data-vue-meta="ssr" name="keywords" content="skillfactory, pyqt, pyqt6, python, qt, программирование, интерфейсы, gui, графические интерфейсы, графический интерфейс пользователя">
+  <link data-vue-meta="ssr" href="https://habr.com/ru/company/skillfactory/blog/599599/" rel="og:url" data-vmid="og:url"><link data-vue-meta="ssr" href="https://habr.com/ru/rss/post/599599/?fl=ru" type="application/rss+xml" title="" rel="alternate" name="rss"><link data-vue-meta="ssr" href="https://habr.com/ru/company/skillfactory/blog/599599/" rel="canonical" data-vmid="canonical"><link data-vue-meta="ssr" data-vmid="hreflang"><link data-vue-meta="ssr" image_src="image" href="https://habrastorage.org/getpro/habr/upload_files/3fa/d79/b0b/3fad79b0bb27fffd153b655b831975ec.png" data-vmid="image:href"><link data-vue-meta="ssr" rel="amphtml" href="https://habr.com/ru/amp/post/599599/">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303b44">
+  <meta name="msapplication-TileColor" content="#629FBC">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.habr.com/habr-web/img/favicons/favicon-16.png">
+  <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.habr.com/habr-web/img/favicons/favicon-32.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-180.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-256.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1136x640.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2436x1125.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1792x828.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_828x1792.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_1334x750.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2668.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2208x1242.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1125x2436.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1242x2208.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2732x2048.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2688x1242.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2224x1668.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_750x1334.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x2732.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2388x1668.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2224.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_640x1136.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1668x2388.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="https://assets.habr.com/habr-web/img/splashes/splash_2048x1536.png">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="https://assets.habr.com/habr-web/img/splashes/splash_1536x2048.png">
+  <link rel="mask-icon" color="#77a2b6" href="https://assets.habr.com/habr-web/img/favicons/apple-touch-icon-120.svg">
+  <link crossorigin="use-credentials" href="https://habr.com/manifest.webmanifest" rel="manifest">
+<meta http-equiv="origin-trial" content="AxujKG9INjsZ8/gUq8+dTruNvk7RjZQ1oFhhgQbcTJKDnZfbzSTE81wvC2Hzaf3TW4avA76LTZEMdiedF1vIbA4AAABueyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="Azuce85ORtSnWe1MZDTv68qpaW3iHyfL9YbLRy0cwcCZwVnePnOmkUJlG8HGikmOwhZU22dElCcfrfX2HhrBPAkAAAB7eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A16nvcdeoOAqrJcmjLRpl1I6f3McDD8EfofAYTt/P/H4/AWwB99nxiPp6kA0fXoiZav908Z8etuL16laFPUdfQsAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AxBHdr0J44vFBQtZUqX9sjiqf5yWZ/OcHRcRMN3H9TH+t90V/j3ENW6C8+igBZFXMJ7G3Pr8Dd13632aLng42wgAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2NTI3NzQ0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A88BWHFjcawUfKU3lIejLoryXoyjooBXLgWmGh+hNcqMK44cugvsI5YZbNarYvi3roc1fYbHA1AVbhAtuHZflgEAAAB2eyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IlRydXN0VG9rZW5zIiwiZXhwaXJ5IjoxNjUyNzc0NDAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A8FHS1NmdCwGqD9DwOicnHHY+y27kdWfxKa0YHSGDfv0CSpDKRHTQdQmZVPDUdaFWUsxdgVxlwAd6o+dhJykPA0AAACWeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjQzMTU1MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><meta http-equiv="origin-trial" content="A8zdXi6dr1hwXEUjQrYiyYQGlU3557y5QWDnN0Lwgj9ePt66XMEvNkVWOEOWPd7TP9sBQ25X0Q15Lr1Nn4oGFQkAAACceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjQzMTU1MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><meta http-equiv="origin-trial" content="A4/Htern2udN9w3yJK9QgWQxQFruxOXsXL7cW60DyCl0EZFGCSme/J33Q/WzF7bBkVvhEWDlcBiUyZaim5CpFQwAAACceyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjQzMTU1MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlLCJ1c2FnZSI6InN1YnNldCJ9"><script src="./PyQt6 — полное руководство для новичков _ Хабр_files/pubads_impl_2022010407.js.Без названия" async=""></script><script charset="utf-8" src="./PyQt6 — полное руководство для новичков _ Хабр_files/chunk-2d21ab85.4d06bd97.js.Без названия"></script><script charset="utf-8" src="./PyQt6 — полное руководство для новичков _ Хабр_files/hljs.2f6aaaaa.js.Без названия"></script><link rel="stylesheet" type="text/css" href="./PyQt6 — полное руководство для новичков _ Хабр_files/gallery.aea4c1d9.css"><script charset="utf-8" src="./PyQt6 — полное руководство для новичков _ Хабр_files/gallery.fb11412f.js.Без названия"></script><script charset="utf-8" src="./PyQt6 — полное руководство для новичков _ Хабр_files/chunk-2d222042.bdf40a76.js.Без названия"></script><script data-vue-meta="ssr" onload="window[&#39;e0044d29c024&#39;] = true" src="./PyQt6 — полное руководство для новичков _ Хабр_files/saved_resource" data-vmid="checklogin"></script><script charset="utf-8" src="./PyQt6 — полное руководство для новичков _ Хабр_files/photoswipe.2b48f110.js.Без названия"></script></head><div id="screen-shader" style="            transition: opacity 0.1s ease 0s;             z-index: 2147483647;            margin: 0;             border-radius: 0;             padding: 0;             background: rgb(0,0,0) !important;             pointer-events: none;             position: fixed;             top: -10%;             right: -10%;             width: 120%;             height: 120%;             opacity: 0.4240;            mix-blend-mode: multiply;             display: block;        "></div>
+<body>
+
+
+<div id="app" data-async-called="true"><div class="tm-layout__wrapper"><!----> <div></div> <!----> <header class="tm-header"><div class="tm-page-width"><div class="tm-header__container"><!----> <span class="tm-header__logo-wrap"><a href="https://habr.com/ru/" class="tm-header__logo tm-header__logo_ru"><svg height="16" width="16" class="tm-svg-img tm-header__icon"><title>Хабр</title> <use xlink:href="/img/habr-logo-ru.svg#logo"></use></svg></a> <span class="tm-header__beta-sign" style="display:none;">β</span></span> <div class="tm-dropdown tm-header__projects"><div class="tm-dropdown__head"><button class="tm-header__dropdown-toggle"><svg height="16" width="16" class="tm-svg-img tm-header__icon tm-header__icon_dropdown"><title>Открыть список</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#arrow-down"></use></svg></button></div> <!----></div> <a href="https://habr.com/ru/sandbox/start/" class="tm-header__become-author-btn">
+            Как стать автором
+          </a> <!----> <a href="https://effect.habr.com/s/f0zRmdeCcfXjA4VfmysS8A.YUZDRI8faQUoUgROoVtSWDW8qdT09kQesYo09OY_ZtTdvmN182lHq54zykOd2j7JCZllTVaagXwQMqyPFcUXgQYyZp9x2AeC68M2yb0YPIk" target="_blank" class="tm-top-link" style="color: rgb(153, 255, 167);">
+  Админ, Агент или Монстр? Облачный квест
+</a> <!----></div></div></header> <div class="tm-layout"><div class="tm-page-progress-bar"></div> <div data-menu-sticky="true" class="tm-base-layout__header tm-base-layout__header_is-sticky"><div class="tm-page-width"><div class="tm-base-layout__header-wrapper"><div class="tm-main-menu"><div class="tm-main-menu__section"><nav class="tm-main-menu__section-content"><!----> <a href="https://habr.com/ru/all/" class="tm-main-menu__item">
+        Все потоки
+      </a> <a href="https://habr.com/ru/flows/develop/" class="tm-main-menu__item">
+          Разработка
+        </a><a href="https://habr.com/ru/flows/admin/" class="tm-main-menu__item">
+          Администрирование
+        </a><a href="https://habr.com/ru/flows/design/" class="tm-main-menu__item">
+          Дизайн
+        </a><a href="https://habr.com/ru/flows/management/" class="tm-main-menu__item">
+          Менеджмент
+        </a><a href="https://habr.com/ru/flows/marketing/" class="tm-main-menu__item">
+          Маркетинг
+        </a><a href="https://habr.com/ru/flows/popsci/" class="tm-main-menu__item">
+          Научпоп
+        </a></nav></div></div> <div class="tm-header-user-menu tm-base-layout__user-menu"><a href="https://habr.com/ru/search/" class="tm-header-user-menu__item tm-header-user-menu__search"><svg height="24" width="24" class="tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark"><title>Поиск</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#search"></use></svg></a> <!----> <!----> <!----> <div class="tm-header-user-menu__item tm-header-user-menu__user_desktop"><div class="tm-dropdown"><div class="tm-dropdown__head"><svg height="24" width="24" data-test-id="menu-toggle-guest" class="tm-svg-img tm-header-user-menu__icon"><title>Профиль</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#header-user"></use></svg> <!----></div> <!----></div> <!----></div> <!----></div></div></div></div> <!----> <div class="tm-page-width"></div> <main class="tm-layout__container"><div hl="ru" companyname="skillfactory" data-async-called="true" class="tm-page"><div class="tm-page-width"><div class="tm-page__header"><!----></div> <div class="tm-page__wrapper"><div class="tm-page__main tm-page__main_has-sidebar"><div class="pull-down"><div class="pull-down__header" style="height:0px;"><div class="pull-down__content" style="bottom:10px;"><svg height="24" width="24" class="tm-svg-img pull-down__arrow"><title>Обновить</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#pull-arrow"></use></svg></div></div> <div class="tm-article-presenter"><div class="tm-company-card tm-company-article__company-card"><div class="tm-company-card__info"><div class="tm-company-card__header"><a href="https://habr.com/ru/company/skillfactory/profile/" class="tm-company-card__avatar"><div class="tm-entity-image"><img alt="" height="48" src="./PyQt6 — полное руководство для новичков _ Хабр_files/9bb5f7d50871bf0981f64b1970f22fe1.png" width="48" class="tm-entity-image__pic"></div></a> <!----> <div class="tm-rating tm-company-card__rating"><div class="tm-rating__header"> <div class="tm-rating__counter">100.74</div></div> <div class="tm-rating__text">
+    Рейтинг
+  </div></div></div> <div class="tm-company-card__info"><a href="https://habr.com/ru/company/skillfactory/profile/" class="tm-company-card__name">
+        SkillFactory
+      </a> <div class="tm-company-card__description">Школа Computer Science</div></div></div> <div class="tm-company-card__buttons"><!----> <!----></div></div> <div class="tm-article-presenter__body"><div class="tm-misprint-area"><div class="tm-misprint-area__wrapper"><article class="tm-article-presenter__content tm-article-presenter__content_narrow"><div class="tm-article-presenter__header"> <div class="tm-article-snippet tm-article-presenter__snippet"><div class="tm-article-snippet__meta-container"><div class="tm-article-snippet__meta"><span class="tm-user-info tm-article-snippet__author"><a href="https://habr.com/ru/users/honyaki/" title="honyaki" class="tm-user-info__userpic"><div class="tm-entity-image"><img alt="" height="24" src="./PyQt6 — полное руководство для новичков _ Хабр_files/96e81dbc01247c6c855b1806b355efa3.jpg" width="24" class="tm-entity-image__pic"></div></a> <span class="tm-user-info__user"><a href="https://habr.com/ru/users/honyaki/" class="tm-user-info__username">
+      honyaki
+    </a> </span></span> <span class="tm-article-snippet__datetime-published"><time datetime="2022-01-09T20:33:48.000Z" title="2022-01-10, 02:33">вчера в 02:33</time></span></div> <!----></div> <h1 lang="ru" class="tm-article-snippet__title tm-article-snippet__title_h1"><span>PyQt6 — полное руководство для новичков</span></h1> <div class="tm-article-snippet__hubs"><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/company/skillfactory/blog/" class="tm-article-snippet__hubs-item-link router-link-active"><span>Блог компании SkillFactory</span> <!----></a></span><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/hub/python/" class="tm-article-snippet__hubs-item-link"><span>Python</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/hub/programming/" class="tm-article-snippet__hubs-item-link"><span>Программирование</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/hub/desktop_environment/" class="tm-article-snippet__hubs-item-link"><span>Графические оболочки</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span><span class="tm-article-snippet__hubs-item"><a href="https://habr.com/ru/hub/qt_software/" class="tm-article-snippet__hubs-item-link"><span>Qt</span> <span title="Профильный хаб" class="tm-article-snippet__profiled-hub">*</span></a></span></div> <div class="tm-article-snippet__labels"><div class="tm-article-snippet__label tm-article-snippet__label_variant-translation"><span>
+        Перевод
+      </span></div><div class="tm-article-snippet__label tm-article-snippet__label_variant-tutorial"><span>
+        Tutorial
+      </span></div></div> <!----> <!----></div></div> <div class="tm-article-presenter__origin"><a href="https://www.pythonguis.com/tutorials/pyqt6-creating-your-first-window/" target="_blank" class="tm-article-presenter__origin-link">
+                Автор оригинала:
+                <span>
+                  Martin Fitzpatrick
+                </span></a></div> <div data-gallery-root="" lang="ru" class="tm-article-body"><div></div> <div id="post-content-body" class="article-formatted-body article-formatted-body_version-2"><div xmlns="http://www.w3.org/1999/xhtml"><figure class="full-width "><img height="620" data-src="https://habrastorage.org/getpro/habr/upload_files/f81/d9c/703/f81d9c70359118652c9dc28bc35a5c73.png" data-width="848" src="./PyQt6 — полное руководство для новичков _ Хабр_files/f81d9c70359118652c9dc28bc35a5c73.png" width="848"><figcaption></figcaption></figure><p>К старту курса по <a href="https://skillfactory.ru/python-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pdev_090122&amp;utm_term=lead">разработке на Python</a> делимся детальным руководством по работе с современным PyQt. Чтобы читать было удобнее, мы объединили несколько статей в одну:</p><ol><li><p><a href="https://habr.com/ru/company/skillfactory/blog/599599/#pyqt6creatingyourfirstwindow">Первое приложение</a></p></li><li><p><a href="https://habr.com/ru/company/skillfactory/blog/599599/#pyqt6signalsslotsevents">Слоты и сигналы</a></p></li><li><p><a href="https://habr.com/ru/company/skillfactory/blog/599599/#pyqt6widgets">Виджеты</a></p></li></ol><p>За подробностями приглашаем под кат.</p><hr><a class="anchor" name="pyqt6creatingyourfirstwindow" id="pyqt6creatingyourfirstwindow"></a><h2>Простое приложение Hello World! на Python и Qt6</h2><p>PyQt — это библиотека Python для создания приложений с графическим интерфейсом с помощью инструментария Qt. Созданная в Riverbank Computing, PyQt является свободным ПО (по лицензии GPL) и разрабатывается с 1999 года. Последняя версия PyQt6 — на основе Qt 6 — выпущена в 2021 году, и библиотека продолжает обновляться. Это руководство можно также использовать для <a href="https://www.pythonguis.com/tutorials/pyside-signals-slots-events/">PySide2</a>, <a href="https://www.pythonguis.com/tutorials/pyside6-signals-slots-events/">PySide6</a> и <a href="https://www.pythonguis.com/tutorials/pyqt-signals-slots-events/">PyQt5</a>.</p><p>Сегодня используются две основные версии: <a href="https://www.pythonguis.com/pyqt5-tutorial">PyQt5 на основе Qt5</a> и <a href="https://www.pythonguis.com/pyqt6-tutorial">PyQt6 на основе Qt6</a>. Обе почти полностью совместимы, за исключением импорта и отсутствия поддержки некоторых продвинутых модулей из Qt6. В PyQt6 вносятся изменения в работу пространств имён и флагов, но ими легко управлять. В этом руководстве мы узнаем, как использовать PyQt6 для создания настольных приложений.</p><p>Сначала создадим несколько простых окон на рабочем столе, чтобы убедиться, что PyQt работает, и разберём базовые понятия. Затем кратко изучим цикл событий и то, как он связан с программированием графического интерфейса на Python. В заключение поговорим о QMainWindow с полезными элементами интерфейса, такими как панели инструментов и меню. Подробно я расскажу о них в следующих руководствах.</p><h4>Создание приложения</h4><p>Установка PyQt:</p><pre><code class="bash hljs">pip install pyqt6
+<span class="hljs-comment"># и на будущее</span>
+pip install pyqt-tools</code></pre><p>Сначала создадим новый файл Python с любым названием (например app.py) и сохраним его. Исходный код приложения показан ниже. Введите его полностью и постарайтесь не ошибиться. Если что-то напутаете, Python укажет, что именно:</p><pre><code class="python hljs"><span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QWidget
+
+<span class="hljs-keyword">import</span> sys <span class="hljs-comment"># Только для доступа к аргументам командной строки</span>
+
+<span class="hljs-comment"># Приложению нужен один (и только один) экземпляр QApplication.</span>
+<span class="hljs-comment"># Передаём sys.argv, чтобы разрешить аргументы командной строки для приложения.</span>
+<span class="hljs-comment"># Если не будете использовать аргументы командной строки, QApplication([]) тоже работает</span>
+app = QApplication(sys.argv)
+
+<span class="hljs-comment"># Создаём виджет Qt — окно.</span>
+window = QWidget()
+window.show()  <span class="hljs-comment"># Важно: окно по умолчанию скрыто.</span>
+
+<span class="hljs-comment"># Запускаем цикл событий.</span>
+app.exec()
+
+
+<span class="hljs-comment"># Приложение не доберётся сюда, пока вы не выйдете и цикл</span>
+<span class="hljs-comment"># событий не остановится.</span></code></pre><p>Запускаем приложение из командной строки, как и любой скрипт Python:</p><pre><code class="bash hljs">python3 app.py</code></pre><p>Выполнив его, мы увидим окно. В Qt автоматически создаётся окно с обычным оформлением, возможностью его перетаскивать и менять размер. То, что вы увидите, зависит от платформы, где этот пример выполняется. Вот как отображается это окно на Windows, macOS и Linux (Ubuntu):</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="Окно на Windows, macOS и Linux" title="Окно на Windows, macOS и Linux" height="331" data-src="https://habrastorage.org/getpro/habr/upload_files/765/a2b/47e/765a2b47e8561b8a21ee2d47cd8c9094.png" data-width="1154"><figcaption>Окно на Windows, macOS и Linux</figcaption></figure><h3>Разбор кода</h3><p>Пройдём код построчно, чтобы понять, что именно происходит. Сначала мы импортируем классы PyQt для приложения: здесь это обработчик приложения QApplication и базовый пустой виджет графического интерфейса QWidget (оба из модуля QtWidgets):</p><pre><code class="python hljs"><span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QWidget</code></pre><h3>Основные модули для Qt: QtWidgets, QtGui и QtCore.</h3><p>Возможен ещё <code>from import *</code>, но этот вид импорта обычно не приветствуется в Python. Дальше создаём экземпляр QApplication и передаём sys.arg (список Python с аргументами командной строки, передаваемыми приложению):</p><pre><code class="python hljs">app = QApplication(sys.argv)
+</code></pre><p>Если не будете использовать аргументы командной строки для управления Qt, передайте пустой список:</p><pre><code class="python hljs">app = QApplication([])</code></pre><p>Затем создаём экземпляр QWidget, используя имя переменной window:</p><pre><code class="python hljs">window = QWidget()
+window.show()</code></pre><p>В Qt все виджеты верхнего уровня — окна, то есть у них нет родительского элемента и они не вложены в другой виджет или макет. В принципе, окно можно создать, используя любой виджет.</p><p>Виджеты без родительского элемента по умолчанию невидимы. Поэтому после создания объекта window необходимо всегда вызывать функцию .show(), чтобы сделать его видимым. .show() можно удалить, но тогда, запустив приложение, вы не сможете выйти из него!</p><blockquote><p>В окне находится пользовательский интерфейс приложения. У каждого приложения он как минимум один. Приложение (по умолчанию) завершает работу при закрытии последнего окна.</p></blockquote><p>Наконец, вызываем app.exec(), чтобы запустить цикл события.</p><h4>Что такое «цикл событий»?</h4><p>Прежде чем вывести окно на экран, разберём ключевые понятия, касающиеся организации приложений в мире Qt. Если вам уже знакомы циклы событий, можете пропустить эту часть статьи.</p><p>Основной элемент всех приложений в Qt — класс QApplication. Для работы каждому приложению нужен один — и только один — объект QApplication, который содержит цикл событий приложения. Это основной цикл, управляющий всем взаимодействием пользователя с графическим интерфейсом:</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" height="504" data-src="https://habrastorage.org/getpro/habr/upload_files/919/88b/636/91988b6363fd2bf413509e133ea5b0c5.png" data-width="634"><figcaption></figcaption></figure><p>При каждом взаимодействии с приложением — будь то нажатие клавиши, щелчок или движение мыши — генерируется событие, которое помещается в очередь событий. В цикле событий очередь проверяется на каждой итерации: если найдено ожидающее событие, оно вместе с управлением передаётся определённому обработчику этого события. Последний обрабатывает его, затем возвращает управление в цикл событий и ждёт новых событий. Для каждого приложения выполняется только один цикл событий.</p><p>Класс QApplication содержит цикл событий Qt (нужен один экземпляр QApplication). Приложение ждёт в цикле событий новое событие, которое будет сгенерировано при выполнении действия. Всегда выполняется только один цикл событий.</p><h4>QMainWindow</h4><p>Итак, в Qt любые виджеты могут быть окнами. Например, если заменить QtWidget на QPushButton. В этом примере получается окно с одной нажимаемой кнопкой:</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QPushButton
+
+app = QApplication(sys.argv)
+
+window = QPushButton(<span class="hljs-string">"Push Me"</span>)
+window.show()
+
+app.exec()</code></pre><p>Классно, но не очень полезно на самом деле: редко когда нужен пользовательский интерфейс, состоящий только из одного элемента управления. Зато возможность с помощью макетов вкладывать одни виджеты в другие позволяет создавать сложные пользовательские интерфейсы внутри пустого QWidget.</p><p>В Qt уже есть решение для окна — виджет QMainWindow, имеющий стандартные функции окна для использования в приложениях, который содержит панели инструментов, меню, строку состояния, закрепляемые виджеты и многое другое. Рассмотрим эти расширенные функции позже, а пока добавим в приложение простой, пустой QMainWindow:</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow
+
+app = QApplication(sys.argv)
+
+window = QMainWindow()
+window.show()
+
+<span class="hljs-comment"># Запускаем цикл событий.</span>
+app.exec()</code></pre><p>Запускаем и видим главное окно. Точно такое же, как и раньше.</p><p>QMainWindow пока не очень интересный. Добавим контент. Чтобы сделать настраиваемое окно, лучше создать подкласс QMainWindow, а затем настроить окно в блоке __init__. Так окно  станет независимым в плане поведения. Итак, добавляем подкласс QMainWindow — MainWindow:</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys
+
+<span class="hljs-keyword">from</span> PyQt6.QtCore <span class="hljs-keyword">import</span> QSize, Qt
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QPushButton
+
+
+<span class="hljs-comment"># Подкласс QMainWindow для настройки главного окна приложения</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+        button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+
+        <span class="hljs-comment"># Устанавливаем центральный виджет Window.</span>
+        self.setCentralWidget(button)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><p>Для этого демо используем QPushButton. Основные виджеты Qt всегда импортируются из пространства имён QtWidgets, как и классы QMainWindow и QApplication. При использовании QMainWindow задействуем .setCentralWidget для размещения виджета (здесь виджет — QPushButton) в QMainWindow, по умолчанию он занимает всё окно. Как добавлять в окна несколько виджетов? Об этом поговорим рассмотрим в руководстве по макетам.</p><p>При создании подкласса из класса Qt, чтобы разрешить Qt настраивать объект, всегда нужно вызывать функцию super __init__.</p><p>В блоке __init__ сначала используем .setWindowTitle(), чтобы поменять заголовок главного окна. Затем добавляем первый виджет — QPushButton — в середину окна. Это один из основных виджетов Qt. При создании кнопки можно ввести текст, который будет на ней отображаться. Вызываем .setCentralWidget() в окне. Это специальная функция QMainWindow, которая позволяет установить виджет на середину окна.</p><p>Запускаем и снова видим окно, но на этот раз с виджетом QPushButton в центре. Нажатие кнопки ничего не даст — с этим мы разберёмся после:</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QMainWindow с одной кнопкой QPushButton на Windows, macOS и Linux" title="QMainWindow с одной кнопкой QPushButton на Windows, macOS и Linux" height="261" data-src="https://habrastorage.org/getpro/habr/upload_files/918/5fc/165/9185fc1656dffdc301ab054d529687b2.png" data-width="746"><figcaption>QMainWindow с одной кнопкой QPushButton на Windows, macOS и Linux</figcaption></figure><p>Скоро мы подробно рассмотрим другие виджеты, но, если вам не терпится и хочется забежать вперёд, можете заглянуть в <a href="http://doc.qt.io/qt-5/widget-classes.html#basic-widget-classes">документацию QWidget</a>. Попробуйте добавить различные виджеты в окно.</p><h4>Изменение размеров окон и виджетов</h4><p>Сейчас размер окна можно свободно поменять: щёлкните мышью на любой угол и перетаскивайте, меняя таким образом размер. Можно дать возможность пользователям самим менять размер приложений, а можно установить ограничения на минимальные или максимальные размеры или фиксированный размер окна.</p><p>В Qt размеры определяются с помощью объекта QSize. Он принимает параметры ширины и высоты. Например, так создаётся окно фиксированного размера 400 x 300 пикселей:</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+
+<span class="hljs-keyword">from</span> PyQt6.QtCore <span class="hljs-keyword">import</span> QSize, Qt
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QPushButton
+
+
+<span class="hljs-comment"># Подкласс QMainWindow для настройки главного окна приложения</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+
+        self.setFixedSize(QSize(<span class="hljs-number">400</span>, <span class="hljs-number">300</span>))
+
+        <span class="hljs-comment"># Устанавливаем центральный виджет Window.</span>
+        self.setCentralWidget(button)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><p>Запускаем и видим окно фиксированного размера. Поменять его размер не получится.</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="Окно фиксированного размера" title="Окно фиксированного размера" height="437" data-src="https://habrastorage.org/getpro/habr/upload_files/9ba/66f/d93/9ba66fd935b59fe9f3d70364708ca88e.png" data-width="1275"><figcaption>Окно фиксированного размера</figcaption></figure><blockquote><p>Элемент управления maximize отключён на Windows и Linux. На macOS можно развернуть приложение на весь экран, но размер центрального виджета не изменится.</p></blockquote><p>Кроме .setFixedSize() можно также вызвать .setMinimumSize() и .setMaximumSize(), чтобы установить минимальный и максимальный размеры соответственно. Попробуйте сами! Эти методы регулирования размеров работают в любом виджете. Продолжить изучение Python вы сможете на наших курсах:</p><ul><li><p><a href="https://skillfactory.ru/python-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pdev_090122&amp;utm_term=main">Курс Python-разработчик</a></p></li><li><p><a href="https://skillfactory.ru/python-fullstack-web-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_fpw_090122&amp;utm_term=main">Профессия Fullstack-разработчик на Python</a></p></li><li><p><a href="https://skillfactory.ru/python-for-web-developers?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pws_090122&amp;utm_term=main">Курс «Python для веб-разработки»</a></p></li></ul><p>А ещё вы можете <a href="https://www.pythonguis.com/pyqt6-book/">приобрести</a> книгу автора этих уроков или продолжить чтение.</p><hr><a class="anchor" name="pyqt6signalsslotsevents" id="pyqt6signalsslotsevents"></a><h2>Слоты и сигналы</h2><p>Ранее мы рассмотрели классы QApplication и QMainWindow, цикл событий и добавили в окно простой виджет. А теперь изучим механизмы Qt для взаимодействия виджетов и окон друг с другом. В статью внесены изменения, связанные с PyQt6.</p><p>Мы создали окно и добавили в него простой виджет push button, но кнопка пока бесполезна. Нужно связать действие нажатия кнопки с происходящим. В Qt это делается с помощью сигналов и слотов или событий.</p><p>Сигналы — это уведомления, отправляемые виджетами, когда что-то происходит. Этим «чем-то» может быть что угодно — нажатие кнопки, изменение текста в поле ввода или изменение текста в окне. Многие сигналы инициируются в ответ на действия пользователя, но не только: в сигналах могут отправляться данные с дополнительным контекстом произошедшего.</p><blockquote><p>Можно также писать собственные сигналы, их мы рассмотрим позже.</p></blockquote><p>Слоты в Qt — это приёмники сигналов. Слотом в приложении на Python можно сделать любую функцию (или метод), просто подключив к нему сигнал. Принимающая функция получает данные, отправляемые ей в сигнале. У многих виджетов Qt есть встроенные слоты, а значит, виджеты можно подключать друг к другу напрямую.</p><p>Рассмотрим основные сигналы Qt и их использование для подключения виджетов в приложениях. Сохраните эту заготовку приложения в файле app.py:</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QPushButton
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><h3>Сигналы QPushButton</h3><p>Сейчас у нас есть QMainWindow с центральным виджетом QPushButton. Подключим эту кнопку к пользовательскому методу Python. Создадим простой настраиваемый слот the_button_was_clicked, принимающий сигнал clicked от QPushButton:</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QPushButton
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+        button.setCheckable(<span class="hljs-literal">True</span>)
+        button.clicked.connect(self.the_button_was_clicked)
+
+        <span class="hljs-comment"># Устанавливаем центральный виджет Window.</span>
+        self.setCentralWidget(button)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_button_was_clicked</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Clicked!"</span>)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><p>Запускаем. Если нажать на кнопку, в консоли появится текст Clicked! («Нажата!»):</p><pre><code class="hljs erlang-repl">Clicked!
+Clicked!
+Clicked!
+Clicked!
+</code></pre><h4>Получение данных</h4><p>В сигналах может отправляться дополнительная информация о произошедшем. И сигнал .clicked — не исключение: с его помощью сообщается о нажатом (или переключенном) состоянии кнопки. Для обычных кнопок это значение всегда False, поэтому первый слот проигнорировал эти данные. Включим возможность нажатия кнопки, чтобы увидеть этот эффект. Ниже добавляется второй слот и выводится состояние нажатия:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+        button.setCheckable(<span class="hljs-literal">True</span>)
+        button.clicked.connect(self.the_button_was_clicked)
+        button.clicked.connect(self.the_button_was_toggled)
+
+        self.setCentralWidget(button)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_button_was_clicked</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Clicked!"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_button_was_toggled</span><span class="hljs-params">(self, checked)</span>:</span>
+        print(<span class="hljs-string">"Checked?"</span>, checked)
+</code></pre><p>Запускаем! Если нажать на кнопку, она подсветится и станет checked («Нажатой»). Чтобы отключить её, нажимаем ещё раз. Найдите состояние нажатия в консоли:</p><pre><code class="python hljs">Clicked!
+Checked? <span class="hljs-literal">True</span>
+Clicked!
+Checked? <span class="hljs-literal">False</span>
+Clicked!
+Checked? <span class="hljs-literal">True</span>
+Clicked!
+Checked? <span class="hljs-literal">False</span>
+Clicked!
+Checked? <span class="hljs-literal">True</span>
+</code></pre><p>К сигналу подключается сколько угодно слотов, в которых можно реагировать сразу на несколько версий сигналов.</p><h4>Хранение данных</h4><p>Текущее состояние виджета на Python часто хранят в переменной, что позволяет работать со значениями без доступа к исходному виджету. Причём для их хранения используются отдельные переменные или словарь. В следующем примере сохраняем значение кнопки checked («Нажата») в переменной button_is_checked в self:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.button_is_checked = <span class="hljs-literal">True</span>
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+        button.setCheckable(<span class="hljs-literal">True</span>)
+        button.clicked.connect(self.the_button_was_toggled)
+        button.setChecked(self.button_is_checked)
+
+        self.setCentralWidget(button)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_button_was_toggled</span><span class="hljs-params">(self, checked)</span>:</span>
+        self.button_is_checked = checked
+
+        print(self.button_is_checked)
+</code></pre><p>Сначала устанавливаем переменной значение по умолчанию True, а затем используем это значение, чтобы установить исходное состояние виджета. Когда состояние виджета меняется, получаем сигнал и соответственно обновляем переменную.</p><p>Эта же схема применима к любым виджетам PyQt. Если в виджете нет сигнала, которым отправляется текущее состояние, нужно получить значение из виджета прямо в обработчике. Например, здесь мы проверяем состояние checked («Нажата») в <em>нажатом</em> обработчике:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.button_is_checked = <span class="hljs-literal">True</span>
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        self.button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+        self.button.setCheckable(<span class="hljs-literal">True</span>)
+        self.button.released.connect(self.the_button_was_released)
+        self.button.setChecked(self.button_is_checked)
+
+        self.setCentralWidget(self.button)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_button_was_released</span><span class="hljs-params">(self)</span>:</span>
+        self.button_is_checked = self.button.isChecked()
+
+        print(self.button_is_checked)
+</code></pre><p>Сохраним ссылку на кнопку в self, чтобы получить к ней доступ в слоте.</p><p>Сигнал released срабатывает, когда кнопка отпускается, при этом состояние нажатия не отправляется. Его получают из кнопки в обработчике, используя .isChecked().</p><h4>Изменение интерфейса</h4><p>Мы уже видели, как принимаются сигналы и выводятся на консоль результаты. Но что происходит с интерфейсом, когда нажимают на кнопку? Обновим метод слота, чтобы изменить кнопку, поменяв текст, отключив её и сделав её недоступной. И отключим пока состояние, допускающее нажатие:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        self.button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+        self.button.clicked.connect(self.the_button_was_clicked)
+
+        self.setCentralWidget(self.button)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_button_was_clicked</span><span class="hljs-params">(self)</span>:</span>
+        self.button.setText(<span class="hljs-string">"You already clicked me."</span>)
+        self.button.setEnabled(<span class="hljs-literal">False</span>)
+
+        <span class="hljs-comment"># Также меняем заголовок окна.</span>
+        self.setWindowTitle(<span class="hljs-string">"My Oneshot App"</span>)
+</code></pre><p>Снова нужен доступ к кнопке в методе the_button_was_clicked, поэтому сохраняем ссылку на неё в self. Чтобы поменять текст кнопки, передаём str в .setText(). Чтобы отключить кнопку, вызываем .setEnabled() с аргументом False. И запускаем программу. Если нажать на кнопку, текст изменится и кнопка станет недоступной.</p><p>В методах слота можно не только менять кнопку, которая активирует сигнал, но и делать всё что угодно. Например, поменять заголовок окна, добавив в метод the_button_was_clicked эту строку:</p><pre><code class="python hljs">self.setWindowTitle(<span class="hljs-string">"A new window title"</span>)</code></pre><p>Большинство виджетов, в том числе QMainWindow, имеют свои сигналы. В следующем, более сложном примере подключим сигнал .windowTitleChanged в QMainWindow к пользовательскому методу слота. А также сделаем для этого слота новый заголовок окна:</p><pre><code class="python hljs"><span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QPushButton
+
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> choice
+
+window_titles = [
+    <span class="hljs-string">'My App'</span>,
+    <span class="hljs-string">'My App'</span>,
+    <span class="hljs-string">'Still My App'</span>,
+    <span class="hljs-string">'Still My App'</span>,
+    <span class="hljs-string">'What on earth'</span>,
+    <span class="hljs-string">'What on earth'</span>,
+    <span class="hljs-string">'This is surprising'</span>,
+    <span class="hljs-string">'This is surprising'</span>,
+    <span class="hljs-string">'Something went wrong'</span>
+]
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.n_times_clicked = <span class="hljs-number">0</span>
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        self.button = QPushButton(<span class="hljs-string">"Press Me!"</span>)
+        self.button.clicked.connect(self.the_button_was_clicked)
+
+        self.windowTitleChanged.connect(self.the_window_title_changed)
+
+        <span class="hljs-comment"># Устанавливаем центральный виджет Window.</span>
+        self.setCentralWidget(self.button)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_button_was_clicked</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Clicked."</span>)
+        new_window_title = choice(window_titles)
+        print(<span class="hljs-string">"Setting title:  %s"</span> % new_window_title)
+        self.setWindowTitle(new_window_title)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">the_window_title_changed</span><span class="hljs-params">(self, window_title)</span>:</span>
+        print(<span class="hljs-string">"Window title changed: %s"</span> % window_title)
+
+        <span class="hljs-keyword">if</span> window_title == <span class="hljs-string">'Something went wrong'</span>:
+            self.button.setDisabled(<span class="hljs-literal">True</span>)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><p>Сначала создаём список заголовков окна и выбираем один из них наугад, используя встроенную функцию Python random.choice(). Подключаем пользовательский метод слота the_window_title_changed к сигналу окна .windowTitleChanged.</p><p>При нажатии на кнопку заголовок окна случайным образом изменится. Если новый заголовок окна изменится на Something went wrong («Что-то пошло не так»), кнопка отключится.</p><p>Запускаем! Нажимайте на кнопку, пока заголовок не изменится на Something went wrong. В этом примере стоит обратить внимание вот на что:</p><ol><li><p>Сигнал windowTitleChanged при установке заголовка окна выдаётся не всегда. Он срабатывает, только если новый заголовок отличается от предыдущего: если один и тот же заголовок устанавливается несколько раз, сигнал срабатывает только в первый раз. Чтобы избежать неожиданностей, важно перепроверять условия срабатывания сигналов при их использовании в приложении.</p></li><li><p>С помощью сигналов создаются цепочки. Одно событие — нажатие кнопки — может привести к тому, что поочерёдно произойдут другие. Эти последующие эффекты отделены от того, что их вызвало. Они возникают согласно простым правилам. И это отделение эффектов от их триггеров — один из ключевых принципов, которые учитываются при создании приложений с графическим интерфейсом. Возвращаться к этому будем на протяжении всего курса.</p></li></ol><p>Мы рассмотрели сигналы и слоты, показали простые сигналы и их использование для передачи данных и состояния в приложении. Теперь переходим к виджетам Qt, которые будут использоваться в приложениях вместе с сигналами.</p><h4>Подключение виджетов друг к другу напрямую</h4><p>Мы уже видели примеры подключения сигналов виджетов к методам Python. Когда сигнал из виджета срабатывает, вызывается метод Python, из сигнала он получает данные. Но для обработки сигналов не всегда нужна функция Python — можно подключать виджеты друг к другу напрямую. </p><p>Добавим в окно виджеты QLineEdit и QLabel. В __init__ для окна и подключим сигнал редактирования строки .textChanged к методу .setText в QLabel. Когда в QLineEdit меняется текст, он сразу будет поступать в QLabel (в метод .setText):</p><pre><code class="python hljs"><span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QLabel, QLineEdit, QVBoxLayout, QWidget
+
+<span class="hljs-keyword">import</span> sys
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        self.label = QLabel()
+
+        self.input = QLineEdit()
+        self.input.textChanged.connect(self.label.setText)
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.input)
+        layout.addWidget(self.label)
+
+        container = QWidget()
+        container.setLayout(layout)
+
+        <span class="hljs-comment"># Устанавливаем центральный виджет Window.</span>
+        self.setCentralWidget(container)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><blockquote><p>Внимание: чтобы подключить входные данные к метке, нужно определить и эти данные, и метку. В этом коде в макет добавляются два виджета и устанавливаются в окне. Подробно рассмотрим макеты позже, а пока не обращайте на них внимания.</p></blockquote><p>Запускаем программу:</p><figure class=""><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" height="138" data-src="https://habrastorage.org/getpro/habr/upload_files/2d4/285/2fa/2d42852fa52322ca9618a50e4953d5b4.png" data-width="201"><figcaption></figcaption></figure><p>Введите текст в верхнем поле — он сразу появится в виде метки.</p><p>У большинства виджетов Qt есть доступные слоты, к которым подключается любой сигнал, возврощающий тот же тип, что он принимает. В документации по виджетам, в разделе Public Slots («Общедоступные слоты»), имеются слоты для каждого виджета. Посмотрите <a href="https://doc.qt.io/qt-5/qlabel.html#public-slots">документацию</a> для QLabel.</p><h4>События</h4><p>Любое взаимодействие пользователя с приложением Qt — это событие. Есть много типов событий, каждое из которых — это отдельный тип взаимодействия. В Qt события представлены объектами событий, в которые упакована информация о произошедшем. События передаются определённым обработчикам событий в виджете, где произошло взаимодействие.</p><p>Определяя пользовательские или расширенные обработчики событий, можно менять способ реагирования виджетов на них. Обработчики событий определяются так же, как и любой другой метод, но название обработчика зависит от типа обрабатываемого события.</p><p>QMouseEvent — одно из основных событий, получаемых виджетами. События QMouseEvent создаются для каждого отдельного нажатия кнопки мыши и её перемещения в виджете. Вот обработчики событий мыши:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Обработчик</p></th><th><p>Событие</p></th></tr><tr><td><p><code>mouseMoveEvent</code></p></td><td><p>Мышь переместилась</p></td></tr><tr><td><p><code>mousePressEvent</code></p></td><td><p>Кнопка мыши нажата</p></td></tr><tr><td><p><code>mouseReleaseEvent</code></p></td><td><p>Кнопка мыши отпущена</p></td></tr><tr><td><p><code>mouseDoubleClickEvent</code></p></td><td><p>Обнаружен двойной клик</p></td></tr></tbody></table></div></div></div><p>Например, нажатие на виджет приведёт к отправке QMouseEvent в обработчик событий .mousePressEvent в этом виджете.</p><p>События можно перехватывать, создав подкласс и переопределив метод обработчика в этом классе. Их можно фильтровать, менять или игнорировать, передавая обычному обработчику путём вызова функции суперкласса методом super(). Они добавляются в класс главного окна следующим образом (в каждом случае в e будет получено входящее событие):</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+
+<span class="hljs-keyword">from</span> PyQt6.QtCore <span class="hljs-keyword">import</span> Qt
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QLabel, QMainWindow, QTextEdit
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+        self.label = QLabel(<span class="hljs-string">"Click in this window"</span>)
+        self.setCentralWidget(self.label)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mouseMoveEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        self.label.setText(<span class="hljs-string">"mouseMoveEvent"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mousePressEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        self.label.setText(<span class="hljs-string">"mousePressEvent"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mouseReleaseEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        self.label.setText(<span class="hljs-string">"mouseReleaseEvent"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mouseDoubleClickEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        self.label.setText(<span class="hljs-string">"mouseDoubleClickEvent"</span>)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><p>Запускаем! В окне переместите мышь и нажмите на кнопку, затем дважды нажмите на кнопку и посмотрите, какие появляются события.</p><p>События перемещения мыши регистрируются только при нажатой кнопке. Чтобы это изменить, вызовите в окне self.setMouseTracking(True). События press («Нажатие кнопки»), click («Клика») и double-click («Двойного клика») срабатывают при нажатии кнопки. Событие release («Отпускание») срабатывает, только когда кнопка отпускается. Клик пользователя регистрируется обычно при нажатии кнопки мыши и её отпускании.</p><p>Внутри обработчиков события есть доступ к объекту этого события. Он содержит информацию о событии и используется, чтобы реагировать по-разному в зависимости от того, что произошло. Рассмотрим объекты событий управления мышью.</p><h4>События управления мышью</h4><p>В Qt все события управления мышью отслеживаются с помощью объекта QMouseEvent. При этом информация о событии считывается из следующих методов событий:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Метод</p></th><th><p>Возвращает</p></th></tr><tr><td><p><code>.button()</code></p></td><td><p>Конкретную кнопку, вызвавшую данное событие</p></td></tr><tr><td><p><code>.buttons()</code></p></td><td><p>Состояние всех кнопок мыши (флаги OR)</p></td></tr><tr><td><p><code>.position()</code></p></td><td><p>Относительную позицию виджета в виде целого <code>QPoint</code> .</p></td></tr></tbody></table></div></div></div><p>Эти методы используются в обработчике событий, чтобы на разные события реагировать по-разному или полностью их игнорировать. Через методы позиционирования в виде объектов QPoint предоставляется глобальная и локальная (касающаяся виджета) информация о местоположении. Сведения о кнопках поступают с использованием типов кнопок мыши из пространства имён Qt. Например, в этом коде показаны разные реакции на нажатие левой, правой или средней кнопки мыши в окне:</p><pre><code class="python hljs">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mousePressEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        <span class="hljs-keyword">if</span> e.button() == Qt.LeftButton:
+            <span class="hljs-comment"># здесь обрабатываем нажатие левой кнопки</span>
+            self.label.setText(<span class="hljs-string">"mousePressEvent LEFT"</span>)
+
+        <span class="hljs-keyword">elif</span> e.button() == Qt.MiddleButton:
+            <span class="hljs-comment"># здесь обрабатываем нажатие средней кнопки.</span>
+            self.label.setText(<span class="hljs-string">"mousePressEvent MIDDLE"</span>)
+
+        <span class="hljs-keyword">elif</span> e.button() == Qt.RightButton:
+            <span class="hljs-comment"># здесь обрабатываем нажатие правой кнопки.</span>
+            self.label.setText(<span class="hljs-string">"mousePressEvent RIGHT"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mouseReleaseEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        <span class="hljs-keyword">if</span> e.button() == Qt.LeftButton:
+            self.label.setText(<span class="hljs-string">"mouseReleaseEvent LEFT"</span>)
+
+        <span class="hljs-keyword">elif</span> e.button() == Qt.MiddleButton:
+            self.label.setText(<span class="hljs-string">"mouseReleaseEvent MIDDLE"</span>)
+
+        <span class="hljs-keyword">elif</span> e.button() == Qt.RightButton:
+            self.label.setText(<span class="hljs-string">"mouseReleaseEvent RIGHT"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mouseDoubleClickEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        <span class="hljs-keyword">if</span> e.button() == Qt.LeftButton:
+            self.label.setText(<span class="hljs-string">"mouseDoubleClickEvent LEFT"</span>)
+
+        <span class="hljs-keyword">elif</span> e.button() == Qt.MiddleButton:
+            self.label.setText(<span class="hljs-string">"mouseDoubleClickEvent MIDDLE"</span>)
+
+        <span class="hljs-keyword">elif</span> e.button() == Qt.RightButton:
+            self.label.setText(<span class="hljs-string">"mouseDoubleClickEvent RIGHT"</span>)</code></pre><p>Идентификаторы кнопок определяются в пространстве имён Qt:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Код</p></th><th><p>Бинарное значение</p></th><th><p>Описание</p></th></tr><tr><td><p><code>Qt.NoButton</code></p></td><td><p>0 (<code>000</code>)</p></td><td><p>Кнопка не нажата, или событие не связано с нажатием кнопки</p></td></tr><tr><td><p><code>Qt.LeftButton</code></p></td><td><p>1 (<code>001</code>)</p></td><td><p>Левая кнопка нажата</p></td></tr><tr><td><p><code>Qt.RightButton</code></p></td><td><p>2 (<code>010</code>)</p></td><td><p>Правая кнопка нажата</p></td></tr><tr><td><p><code>Qt.MiddleButton</code></p></td><td><p>4 (<code>100</code>)</p></td><td><p>Средняя кнопка [обычно это колёсико мыши] нажата</p></td></tr></tbody></table></div></div></div><p>В мышках для правшей положения левой и правой кнопок меняются местами, то есть при нажатии правой кнопки вернётся Qt.LeftButton. Иными словами, учитывать ориентацию мыши не нужно.</p><h4>Контекстные меню</h4><p>Контекстные меню — это небольшие контекстно-зависимые меню, которые обычно появляются в окне при нажатии правой кнопкои мыши. В Qt у виджетов есть определённое событие для активации таких меню. </p><p>В примере ниже мы будем перехватывать событие .contextMenuEvent в QMainWindow. Это событие запускается всякий раз перед самым появлением контекстного меню, а передаётся событие с одним значением типа QContextMenuEvent.</p><p>Чтобы перехватить событие, просто переопределяем метод объекта с помощью нового метода с тем же именем. В нашем случае создаём метод в подклассе MainWindow с именем contextMenuEvent, и он будет получать все события этого типа:</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+
+<span class="hljs-keyword">from</span> PyQt6.QtCore <span class="hljs-keyword">import</span> Qt
+<span class="hljs-keyword">from</span> PyQt6.QtGui <span class="hljs-keyword">import</span> QAction
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QLabel, QMainWindow, QMenu
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">contextMenuEvent</span><span class="hljs-params">(self, e)</span>:</span>
+        context = QMenu(self)
+        context.addAction(QAction(<span class="hljs-string">"test 1"</span>, self))
+        context.addAction(QAction(<span class="hljs-string">"test 2"</span>, self))
+        context.addAction(QAction(<span class="hljs-string">"test 3"</span>, self))
+        context.exec(e.globalPos())
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><p>Если запустить этот код и нажать правой кнопкой в окне, появится контекстное меню. В действиях меню можно настроить слоты .triggered как обычные (и повторно использовать действия, определённые для меню и панелей инструментов).</p><p>При передаче исходного положения в функцию exec оно должно соответствовать родительскому элементу, переданному при определении. В нашем случае в качестве родительского элемента передаётся self, поэтому используем глобальное положение. Для полноты картины нужно сказать, что создавать контекстные меню можно и при помощи сигналов:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+        self.show()
+
+        self.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.customContextMenuRequested.connect(self.on_context_menu)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">on_context_menu</span><span class="hljs-params">(self, pos)</span>:</span>
+        context = QMenu(self)
+        context.addAction(QAction(<span class="hljs-string">"test 1"</span>, self))
+        context.addAction(QAction(<span class="hljs-string">"test 2"</span>, self))
+        context.addAction(QAction(<span class="hljs-string">"test 3"</span>, self))
+        context.exec(self.mapToGlobal(pos))</code></pre><p>Что выбрать — решать только вам.</p><h3>Иерархия событий</h3><p>В PyQt каждый виджет — это часть двух различных иерархий: иерархии объектов в Python и иерархии макета в Qt. Реакция на события или их игнорирование влияет на поведение пользовательского интерфейса.</p><h4>Перенаправление наследования Python</h4><p>Часто бывает нужно перехватить событие, что-то с ним сделать, запустив при этом поведение обработки событий по умолчанию. Если объект унаследован от стандартного виджета, у него наверняка будет поведение по умолчанию. Запустить его можно, методом super() вызвав реализацию из суперкласса. Будет вызван именно суперкласс в Python, а не .parent() из PyQt:</p><pre><code class="python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mousePressEvent</span><span class="hljs-params">(self, event)</span>:</span>
+    print(<span class="hljs-string">"Mouse pressed!"</span>)
+    super(self, MainWindow).contextMenuEvent(event)</code></pre><p>Интерфейс ведёт себя как раньше, при этом мы добавили новое поведение, которое не вмешивается в прежнее.</p><h4>Передача вверх по иерархии макета</h4><p>Когда в приложение добавляется виджет, он также получает из макета другой родительский элемент. Чтобы найти родительский элемент виджета, надо вызвать функцию .parent(). Иногда эти родительские элементы указываются вручную (и часто автоматически), например для QMenu или QDialog. Когда в главное окно добавляется виджет, оно становится родительским элементом виджета.</p><p>Когда события создаются для взаимодействия пользователя с пользовательским интерфейсом, они передаются в его самый верхний виджет. Если в окне есть кнопка и вы нажмёте её, она получит событие первой.</p><p>Если первый виджет не может обработать событие, оно перейдёт к следующему по очереди родительскому виджету. Эта передача вверх по иерархии вложенных виджетов продолжится, пока событие не будет обработано или не достигнет главного окна. В обработчиках событий событие помечают как обработанное через вызов .accept():</p><pre><code class="python hljs">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomButton</span><span class="hljs-params">(QPushButton)</span>
+        <span class="hljs-title">def</span> <span class="hljs-title">mousePressEvent</span><span class="hljs-params">(self, e)</span>:</span>
+            e.accept()</code></pre><p>Вызвав в объекте события .ignore(), помечают его как необработанное. В этом случае событие будет передаваться по иерархии вверх:</p><pre><code class="python hljs">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomButton</span><span class="hljs-params">(QPushButton)</span>
+        <span class="hljs-title">def</span> <span class="hljs-title">event</span><span class="hljs-params">(self, e)</span>:</span>
+            e.ignore()</code></pre><p>Чтобы виджет пропускал события, вы можете спокойно игнорировать те, на которые каким-то образом реагировали. Аналогично вы можете отреагировать на одни события, заглушая другие. А продолжить изучение Python вы сможете на наших курсах:</p><ul><li><p><a href="https://skillfactory.ru/python-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pdev_090122&amp;utm_term=main">Курс Python-разработчик</a></p></li><li><p><a href="https://skillfactory.ru/python-fullstack-web-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_fpw_090122&amp;utm_term=main">Профессия Fullstack-разработчик на Python</a></p></li><li><p><a href="https://skillfactory.ru/python-for-web-developers?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pws_090122&amp;utm_term=main">Курс «Python для веб-разработки»</a></p></li></ul><p>Напомним также о <a href="https://www.pythonguis.com/pyqt6-book/">книге</a> автора этих уроков.</p><hr><a class="anchor" name="pyqt6widgets" id="pyqt6widgets"></a><h2>Виджеты</h2><p>В большинстве пользовательских интерфейсов и в Qt «виджет» — это компонент, с которым взаимодействует пользователь. Пользовательские интерфейсы состоят из нескольких виджетов, расположенных внутри окна. В Qt большой выбор виджетов и можно создать собственные виджеты.</p><h4>Краткое демо</h4><p>Посмотрим на самые распространённые виджеты PyQt. Они создаются и добавляются в макет окна с помощью этого кода (работу макетов в Qt рассмотрим в следующем руководстве):</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+
+<span class="hljs-keyword">from</span> PyQt6.QtCore <span class="hljs-keyword">import</span> Qt
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> (
+    QApplication,
+    QCheckBox,
+    QComboBox,
+    QDateEdit,
+    QDateTimeEdit,
+    QDial,
+    QDoubleSpinBox,
+    QFontComboBox,
+    QLabel,
+    QLCDNumber,
+    QLineEdit,
+    QMainWindow,
+    QProgressBar,
+    QPushButton,
+    QRadioButton,
+    QSlider,
+    QSpinBox,
+    QTimeEdit,
+    QVBoxLayout,
+    QWidget,
+)
+
+
+<span class="hljs-comment"># Подкласс QMainWindow для настройки основного окна приложения</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"Widgets App"</span>)
+
+        layout = QVBoxLayout()
+        widgets = [
+            QCheckBox,
+            QComboBox,
+            QDateEdit,
+            QDateTimeEdit,
+            QDial,
+            QDoubleSpinBox,
+            QFontComboBox,
+            QLCDNumber,
+            QLabel,
+            QLineEdit,
+            QProgressBar,
+            QPushButton,
+            QRadioButton,
+            QSlider,
+            QSpinBox,
+            QTimeEdit,
+        ]
+
+        <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> widgets:
+            layout.addWidget(w())
+
+        widget = QWidget()
+        widget.setLayout(layout)
+
+        <span class="hljs-comment"># Устанавливаем центральный виджет окна. Виджет будет расширяться по умолчанию,</span>
+        <span class="hljs-comment"># заполняя всё пространство окна.</span>
+        self.setCentralWidget(widget)
+
+
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+
+app.exec()</code></pre><p>Запускаем! Появится окно со всеми созданными виджетами:</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="Виджеты на Windows, Mac и Ubuntu Linux" title="Виджеты на Windows, Mac и Ubuntu Linux" height="620" data-src="https://habrastorage.org/getpro/habr/upload_files/5a6/497/6e4/5a64976e40781887778d91703f09ea82.png" data-width="848"><figcaption>Виджеты на Windows, Mac и Ubuntu Linux</figcaption></figure><p>Посмотрим внимательно на все эти виджеты:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Класс виджета</p></th><th><p>Описание виджета</p></th></tr><tr><td><p><code>QCheckbox</code></p></td><td><p>Чекбокс</p></td></tr><tr><td><p><code>QComboBox</code></p></td><td><p>Окно выпадающего списка</p></td></tr><tr><td><p><code>QDateEdit</code></p></td><td><p>Для редактирования даты и времени</p></td></tr><tr><td><p><code>QDateTimeEdit</code></p></td><td><p>Для редактирования даты и времени</p></td></tr><tr><td><p><code>QDial</code></p></td><td><p>Поворотный циферблат</p></td></tr><tr><td><p><code>QDoubleSpinbox</code></p></td><td><p>Спиннер для чисел с плавающей точкой</p></td></tr><tr><td><p><code>QFontComboBox</code></p></td><td><p>Список шрифтов</p></td></tr><tr><td><p><code>QLCDNumber</code></p></td><td><p>Довольно неприятный дисплей LCD</p></td></tr><tr><td><p><code>QLabel</code></p></td><td><p>Просто метка, не интерактивная</p></td></tr><tr><td><p><code>QLineEdit</code></p></td><td><p>Поле ввода со строкой</p></td></tr><tr><td><p><code>QProgressBar</code></p></td><td><p>Индикатор выполнения</p></td></tr><tr><td><p><code>QPushButton</code></p></td><td><p>Кнопка</p></td></tr><tr><td><p><code>QRadioButton</code></p></td><td><p>Переключаемый набор, в котором активен только один элемент</p></td></tr><tr><td><p><code>QSlider</code></p></td><td><p>Слайдер</p></td></tr><tr><td><p><code>QSpinBox</code></p></td><td><p>Спиннер для целых чисел</p></td></tr><tr><td><p><code>QTimeEdit</code></p></td><td><p>Поле редактирования времени</p></td></tr></tbody></table></div></div></div><p>Их гораздо больше, но они не поместятся в статью. Полный список есть в документации Qt.</p><p>Разберём подробно самые используемые виджеты и поэкспериментируем с ними в простом приложении. Сохраните следующий код в файле app.py и, запустив его, убедитесь, что он работает:</p><pre><code class="python hljs"><span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> (
+    QMainWindow, QApplication,
+    QLabel, QCheckBox, QComboBox, QListBox, QLineEdit,
+    QLineEdit, QSpinBox, QDoubleSpinBox, QSlider
+)
+<span class="hljs-keyword">from</span> PyQt6.QtCore <span class="hljs-keyword">import</span> Qt
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+
+app = QApplication(sys.argv)
+w = MainWindow()
+w.show()
+app.exec()</code></pre><p>Выше мы импортировали несколько виджетов Qt. Разберём каждый по очереди. Добавим их в приложение и посмотрим, как они себя ведут.</p><h4>QLabel</h4><p>Начнём с QLabel, одного из простейших виджетов в Qt. Он состоит из строчки текста и устанавливается в приложении. Текст задаётся аргументом QLabel:</p><pre><code class="python hljs">widget = QLabel(<span class="hljs-string">"Hello"</span>)</code></pre><p>Или с помощью метода .setText():</p><pre><code class="python hljs">widget = QLabel(<span class="hljs-string">"1"</span>)  <span class="hljs-comment"># Создана метка с текстом 1.</span>
+widget.setText(<span class="hljs-string">"2"</span>)   <span class="hljs-comment"># Создана метка с текстом 2.</span></code></pre><p>Параметры шрифта, например его размер или выравнивание в виджете, настраиваются так:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QLabel(<span class="hljs-string">"Hello"</span>)
+        font = widget.font()
+        font.setPointSize(<span class="hljs-number">30</span>)
+        widget.setFont(font)
+        widget.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
+
+        self.setCentralWidget(widget)</code></pre><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QLabel на Windows, Mac и Ubuntu Linux" title="QLabel на Windows, Mac и Ubuntu Linux" height="266" data-src="https://habrastorage.org/getpro/habr/upload_files/4b7/b01/98b/4b7b0198b28875e836b24b662347d427.png" data-width="773"><figcaption>QLabel на Windows, Mac и Ubuntu Linux</figcaption></figure><blockquote><p>Рекомендация по шрифту: чтобы изменить свойства шрифта виджета, лучше получить текущий шрифт, обновить его и применить снова. Так начертание шрифта будет соответствовать ограничениям рабочего стола. Выравнивание указывается с помощью флага из пространства имён Qt. Вот флаги для горизонтального выравнивания:</p></blockquote><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Флаг PyQt6 (полный код)</p></th><th><p>Поведение</p></th></tr><tr><td><p><code>Qt.AlignmentFlag.AlignLeft</code></p></td><td><p>Выравнивает по левому краю</p></td></tr><tr><td><p><code>Qt.AlignmentFlag.AlignRight</code></p></td><td><p>Выравнивает по правому краю</p></td></tr><tr><td><p><code>Qt.AlignmentFlag.AlignHCenter</code></p></td><td><p>Центрирует по горизонтали в доступном пространстве</p></td></tr><tr><td><p><code>Qt.AlignmentFlag.AlignJustify</code></p></td><td><p>Выравнивает текст в доступном пространстве</p></td></tr></tbody></table></div></div></div><p>Флаги используются вместе с помощью каналов (|), но флаги вертикального и горизонтального выравнивания не применяются одновременно:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Флаг PyQt6 (полный код)</p></th><th><p>Поведение</p></th></tr><tr><td><p><code>Qt.AlignmentFlag.AlignTop</code></p></td><td><p>Выравнивается по верху</p></td></tr><tr><td><p><code>Qt.AlignmentFlag.AlignBottom</code></p></td><td><p>Выравнивается по низу</p></td></tr><tr><td><p><code>Qt.AlignmentFlag.AlignVCenter</code></p></td><td><p>Центрирует вертикально в доступном пространстве</p></td></tr></tbody></table></div></div></div><pre><code class="python hljs">align_top_left = Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop</code></pre><p>При этом для совместного применения двух флагов (не A &amp; B) используется канал | с операцией логического «ИЛИ». Эти флаги — неперекрывающиеся битовые маски. Например, у Qt.AlignmentFlag.AlignLeft шестнадцатеричное значение 0x0001, а у Qt.AlignmentFlag.AlignBottom — 0x0040. С помощью операции логического «ИЛИ» получаем значение «внизу слева» — 0x0041. Этот принцип применим и ко всем остальным парам флагов Qt. Если вам что-то здесь непонятно, смело пропускайте эту часть и переходите к следующей. Только не забывайте использовать |. Наконец, есть флаг, с помощью которого выполняется выравнивание по центру в обоих направлениях одновременно:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Флаг PyQt6</p></th><th><p>Поведение</p></th></tr><tr><td><p><code>Qt.AlignmentFlag.AlignCenter</code></p></td><td><p>Центрирует горизонтально <em>и</em> вертикально.</p></td></tr></tbody></table></div></div></div><p>Как ни странно, QLabel используется и для показа изображения с помощью .setPixmap(). Этот метод принимает QPixmap, создаваемый передачей имени файла изображения в QPixmap. Среди примеров из этой книги есть файл otje.jpg, который отображается в окне так:</p><pre><code class="python hljs">widget.setPixmap(QPixmap(<span class="hljs-string">'otje.jpg'</span>))</code></pre><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="Кот Отье" title="Кот Отье" height="220" data-src="https://habrastorage.org/getpro/habr/upload_files/bcf/b7f/520/bcfb7f5204521c8749ce8846bbeba6a5.png" data-width="980"><figcaption>Кот Отье</figcaption></figure><p>Какая мордочка! По умолчанию изображение масштабируется, сохраняя соотношение ширины и высоты. Если нужно растянуть и подогнать его по размерам окна, установите .setScaledContents(True) в QLabel:</p><pre><code class="python hljs">widget.setScaledContents(<span class="hljs-literal">True</span>)</code></pre><h4>QCheckBox</h4><p>А этот виджет, как следует из названия, предоставляет пользователю чекбокс с флажками. Как и во всех виджетах Qt, здесь есть настраиваемые параметры, изменяющие его поведение:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QCheckBox()
+        widget.setCheckState(Qt.CheckState.Checked)
+
+        <span class="hljs-comment"># Включение трёх состояний: widget.setCheckState(Qt.PartiallyChecked)</span>
+        <span class="hljs-comment"># Или: widget.setTriState(True)</span>
+        widget.stateChanged.connect(self.show_state)
+
+        self.setCentralWidget(widget)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show_state</span><span class="hljs-params">(self, s)</span>:</span>
+        print(s == Qt.CheckState.Checked)
+        print(s)</code></pre><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QCheckBox на Windows, Mac &amp; Ubuntu Linux" title="QCheckBox на Windows, Mac &amp; Ubuntu Linux" height="267" data-src="https://habrastorage.org/getpro/habr/upload_files/97f/b1b/34c/97fb1b34c88349f7a2abd863919a6132.png" data-width="773"><figcaption>QCheckBox на Windows, Mac &amp; Ubuntu Linux</figcaption></figure><p>Состояние чекбокса устанавливается программно с помощью .setChecked или .setCheckState. Первый принимает True или False, то есть чекбокс с галочкой или без неё соответственно. В случае с .setCheckState с помощью флага пространства имён Qt также указывается конкретное состояние чекбокса:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Флаг PyQt6 (Полный код)</p></th><th><p>Состояние</p></th></tr><tr><td><p><code>Qt.CheckState.Unchecked</code></p></td><td><p>Элемент не отмечен</p></td></tr><tr><td><p><code>Qt.CheckState.PartiallyChecked</code></p></td><td><p>Элемент отмечен частично</p></td></tr><tr><td><p><code>Qt.CheckState.Checked</code></p></td><td><p>Элемент отмечен</p></td></tr></tbody></table></div></div></div><p>Чекбокс, поддерживающий состояние частичной отмеченности (Qt.CheckState.PartiallyChecked) галочками, обычно называют «имеющим третье состояние», т. е. он и отмечен, и не отмечен. Чекбокс в этом состоянии часто отображается в виде серого флажка и используется в иерархических структурах чекбоксов, где дочерние чекбоксы связаны с родительскими.</p><p>Установив значение Qt.CheckState.PartiallyChecked, вы переведёте чекбокс в третье состояние. То же самое, но без перевода текущего состояния в состояние частичной отмеченности галочками, делается с помощью .setTriState(True).</p><p>При запуске скрипта номер текущего состояния отображается в виде значения целочисленного типа int. Причём состоянию, отмеченному галочками, соответствует 2, не отмеченному — 0, а состоянию частичной отмеченности — 1. Запоминать эти значения не нужно: К примеру, переменная пространства имён Qt.Checked равна 2. Это значение соответствующих флагов состояния. То есть вы можете проверить состояние с помощью state == Qt.Checked.</p><h4>QComboBox</h4><p>QComboBox — это выпадающий список, закрытый по умолчанию, с кнопкой, чтобы открыть его. Можно выбрать один элемент из списка, при этом выбранный в данный момент элемент отображается в виджете в виде метки. Поле со списком подходит для выбора варианта из длинного списка вариантов. Такое поле используется при выборе начертания или размера шрифта в текстовых редакторах. В Qt для выбора шрифта есть специальное поле со списком шрифтов — QFontComboBox.</p><p>В QComboBox можно добавлять элементы, передавая список строк в .addItems(). Элементы добавляются в порядке расположения соответствующих элементам строк кода.</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QComboBox()
+        widget.addItems([<span class="hljs-string">"One"</span>, <span class="hljs-string">"Two"</span>, <span class="hljs-string">"Three"</span>])
+
+        <span class="hljs-comment"># Отправляет текущий индекс (позицию) выбранного элемента.</span>
+        widget.currentIndexChanged.connect( self.index_changed )
+
+        <span class="hljs-comment"># Есть альтернативный сигнал отправки текста.</span>
+        widget.textChanged.connect( self.text_changed )
+
+        self.setCentralWidget(widget)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index_changed</span><span class="hljs-params">(self, i)</span>:</span> <span class="hljs-comment"># i — это int</span>
+        print(i)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">text_changed</span><span class="hljs-params">(self, s)</span>:</span> <span class="hljs-comment"># s — это str</span>
+        print(s)</code></pre><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QComboBox на Windows, Mac и Ubuntu Linux" title="QComboBox на Windows, Mac и Ubuntu Linux" height="267" data-src="https://habrastorage.org/getpro/habr/upload_files/12b/1aa/44d/12b1aa44de3efb1060ffd2d8061d34b3.png" data-width="773"><figcaption>QComboBox на Windows, Mac и Ubuntu Linux</figcaption></figure><p>Сигнал .currentIndexChanged срабатывает при обновлении выбранного в данный момент элемента, индекс которого в списке передаётся по умолчанию. Кроме того, есть сигнал .currentTextChanged, при срабатывании которого вместо индекса предоставляется метка выбранного в данный момент элемента. Это часто оказывается полезнее.</p><p>Также QComboBox можно редактировать, вводя значения, которых в данный момент нет в списке, — вставлять их или просто использовать как значения. Поле делается редактируемым так:</p><pre><code class="python hljs">widget.setEditable(<span class="hljs-literal">True</span>)</code></pre><p>Чтобы определить, как обрабатываются вставляемые значения, устанавливается флаг. Флаги хранятся в самом классе QComboBox. Вот их список:</p><div><div class="table"><div class="table table_wrapped"><table><tbody><tr><th><p>Флаг PyQt6 (полный код)</p></th><th><p>Поведение</p></th></tr><tr><td><p><code>QComboBox.InsertPolicy.NoInsert</code></p></td><td><p>Не вставлять</p></td></tr><tr><td><p><code>QComboBox.InsertPolicy.InsertAtTop</code></p></td><td><p>Вставить как первый элемент</p></td></tr><tr><td><p><code>QComboBox.InsertPolicy.InsertAtCurrent</code></p></td><td><p>Заменить текущий выбранный элемент</p></td></tr><tr><td><p><code>QComboBox.InsertPolicy.InsertAtBottom</code></p></td><td><p>Вставить после последнего элемента</p></td></tr><tr><td><p><code>QComboBox.InsertPolicy.InsertAfterCurrent</code></p></td><td><p>Вставить после текущего элемента</p></td></tr><tr><td><p><code>QComboBox.InsertPolicy.InsertBeforeCurrent</code></p></td><td><p>Вставить перед текущим элементом</p></td></tr><tr><td><p><code>QComboBox.InsertPolicy.InsertAlphabetically</code></p></td><td><p>Вставить в алфавитном порядке</p></td></tr></tbody></table></div></div></div><p>Чтобы использовать их, применяется флаг:</p><pre><code class="python hljs">widget.setInsertPolicy(QComboBox.InsertPolicy.InsertAlphabetically)</code></pre><p>Кроме того, можно ограничить количество элементов поля, например при помощи .setMaxCount:</p><pre><code class="python hljs">widget.setMaxCount(<span class="hljs-number">10</span>)</code></pre><p>Подробнее о QComboBox рассказывается <a href="https://www.pythonguis.com/docs/qcombobox/">здесь</a>.</p><h4>QListWidget</h4><p>Этот виджет похож на QComboBox, но варианты здесь представлены в виде прокручиваемого списка элементов и возможен выбор нескольких элементов одновременно. В QListWidget есть сигнал currentItemChanged для отправки QListItem (элемента виджета списка) и сигнал currentTextChanged для отправки текста текущего элемента:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QListWidget()
+        widget.addItems([<span class="hljs-string">"One"</span>, <span class="hljs-string">"Two"</span>, <span class="hljs-string">"Three"</span>])
+
+        widget.currentItemChanged.connect(self.index_changed)
+        widget.currentTextChanged.connect(self.text_changed)
+
+        self.setCentralWidget(widget)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index_changed</span><span class="hljs-params">(self, onelistitem)</span>:</span>
+        print(onelistitem.text())
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">text_changed</span><span class="hljs-params">(self, s)</span>:</span> <span class="hljs-comment"># s — это строка</span>
+        print(s)</code></pre><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QListWidget на Windows, Mac и Ubuntu Linux" title="QListWidget на Windows, Mac и Ubuntu Linux" height="346" data-src="https://habrastorage.org/getpro/habr/upload_files/5e6/22f/850/5e622f850e3606aa347b2a43810d544e.png" data-width="889"><figcaption>QListWidget на Windows, Mac и Ubuntu Linux</figcaption></figure><h4>QLineEdit</h4><p>Виджет QLineEdit — это простое однострочное текстовое поле для редактирования вводимых пользователями данных. Он используется для полей, где нет ограничений на входные данные. Например, при вводе адреса электронной почты или имени компьютера:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QLineEdit()
+        widget.setMaxLength(<span class="hljs-number">10</span>)
+        widget.setPlaceholderText(<span class="hljs-string">"Enter your text"</span>)
+
+        <span class="hljs-comment">#widget.setReadOnly(True) # раскомментируйте, чтобы сделать доступным только для чтения</span>
+
+        widget.returnPressed.connect(self.return_pressed)
+        widget.selectionChanged.connect(self.selection_changed)
+        widget.textChanged.connect(self.text_changed)
+        widget.textEdited.connect(self.text_edited)
+
+        self.setCentralWidget(widget)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">return_pressed</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Return pressed!"</span>)
+        self.centralWidget().setText(<span class="hljs-string">"BOOM!"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">selection_changed</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Selection changed"</span>)
+        print(self.centralWidget().selectedText())
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">text_changed</span><span class="hljs-params">(self, s)</span>:</span>
+        print(<span class="hljs-string">"Text changed..."</span>)
+        print(s)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">text_edited</span><span class="hljs-params">(self, s)</span>:</span>
+        print(<span class="hljs-string">"Text edited..."</span>)
+        print(s)
+</code></pre><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QLineEdit на Windows, Mac и Ubuntu Linux" title="QLineEdit на Windows, Mac и Ubuntu Linux" height="266" data-src="https://habrastorage.org/getpro/habr/upload_files/145/fd6/03b/145fd603bef99cce34d304c59c6845e6.png" data-width="773"><figcaption>QLineEdit на Windows, Mac и Ubuntu Linux</figcaption></figure><p>Как показано в этом коде, при однострочном редактировании вы можете установить максимальную длину текста.</p><p>В QLineEdit есть ряд сигналов для различных событий редактирования, в том числе при нажатии клавиши return (пользователем), когда пользователь изменил свой выбор. Также есть два сигнала редактирования: один — на случай, когда текст в поле отредактирован, другой — когда он изменён. Здесь различаются два вида изменений: пользовательские и выполненные программой. Сигнал textEdited отправляется только при редактировании текста пользователем.</p><p>Кроме того, с помощью маски ввода можно выполнить проверку вводимых данных, чтобы определить, какие символы поддерживаются и где. Применяется к соответствующему полю так:</p><pre><code class="python hljs">widget.setInputMask(<span class="hljs-string">'000.000.000.000;_'</span>)</code></pre><p>Это позволяет использовать серию трёхзначных чисел, разделённых точками, для проверки адресов IPv4.</p><h4>QSpinBox и QDoubleSpinBox</h4><p>QSpinBox — это небольшое поле ввода чисел со стрелками для изменения значения. Оно поддерживает целые числа, а QDoubleSpinBox — числа с плавающей точкой:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QSpinBox()
+        <span class="hljs-comment"># Или: widget = QDoubleSpinBox()</span>
+
+        widget.setMinimum(<span class="hljs-number">-10</span>)
+        widget.setMaximum(<span class="hljs-number">3</span>)
+        <span class="hljs-comment"># Или: widget.setRange(-10,3)</span>
+
+        widget.setPrefix(<span class="hljs-string">"$"</span>)
+        widget.setSuffix(<span class="hljs-string">"c"</span>)
+        widget.setSingleStep(<span class="hljs-number">3</span>)  <span class="hljs-comment"># Или, например, 0.5 в QDoubleSpinBox</span>
+        widget.valueChanged.connect(self.value_changed)
+        widget.textChanged.connect(self.value_changed_str)
+
+        self.setCentralWidget(widget)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">value_changed</span><span class="hljs-params">(self, i)</span>:</span>
+        print(i)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">value_changed_str</span><span class="hljs-params">(self, s)</span>:</span>
+        print(s)
+</code></pre><p>Запустив код, вы увидите поле для ввода чисел. Значение в нём показывает префиксные и постфиксные блоки и ограничено диапазоном от +3 до –10:</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QSpinBox на Windows, Mac и Ubuntu Linux" title="QSpinBox на Windows, Mac и Ubuntu Linux" height="267" data-src="https://habrastorage.org/getpro/habr/upload_files/3d6/41e/63b/3d641e63b5d95f58916f755a5afe5354.png" data-width="773"><figcaption>QSpinBox на Windows, Mac и Ubuntu Linux</figcaption></figure><p>В этом коде показан разнообразный функционал виджета. Чтобы задать диапазон допустимых значений, используются setMinimum и setMaximum. Одновременно они устанавливаются с помощью SetRange. Аннотация типов значений поддерживается префиксами и суффиксами, добавляемыми к числу. Например, для обозначений валюты или денежных единиц используются .setPrefix и .setSuffix соответственно.</p><p>Нажав на стрелки «вверх» и «вниз» на виджете, можно увеличить или уменьшить значение на величину, устанавливаемую с помощью .setSingleStep. Но это не повлияет на допустимые для виджета значения.</p><p>В QSpinBox и QDoubleSpinBox есть сигнал .valueChanged, срабатывающий при изменении их значений. С помощью необработанного сигнала .valueChanged отправляется числовое значение (целочисленного типа int или типа числа с плавающей точкой float), а с помощью .textChanged — значение в виде строки, включающей символы префикса и суффикса.</p><h4>QSlider</h4><p>QSlider — это ползунок, очень схожий по внутреннему функционалу с QDoubleSpinBox. Текущее значение представлено не числами, а в виде маркера ползунка, располагающегося по всей длине виджета. Этот виджет удобен для указания значения в промежутке между максимумом и минимумом, где абсолютная точность не требуется. Чаще всего этот тип виджетов используется при регулировке громкости. Есть и другие сигналы: .sliderMoved срабатывает при перемещении ползунка а .sliderPressed — при нажатии на ползунок:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QSlider()
+
+        widget.setMinimum(<span class="hljs-number">-10</span>)
+        widget.setMaximum(<span class="hljs-number">3</span>)
+        <span class="hljs-comment"># Или: widget.setRange(-10,3)</span>
+
+        widget.setSingleStep(<span class="hljs-number">3</span>)
+
+        widget.valueChanged.connect(self.value_changed)
+        widget.sliderMoved.connect(self.slider_position)
+        widget.sliderPressed.connect(self.slider_pressed)
+        widget.sliderReleased.connect(self.slider_released)
+
+        self.setCentralWidget(widget)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">value_changed</span><span class="hljs-params">(self, i)</span>:</span>
+        print(i)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slider_position</span><span class="hljs-params">(self, p)</span>:</span>
+        print(<span class="hljs-string">"position"</span>, p)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slider_pressed</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Pressed!"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slider_released</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Released"</span>)</code></pre><p>Запустив код, вы увидите ползунок. Переместите его, чтобы изменить значение:</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QSlider на Windows, Mac и Ubuntu Linux" title="QSlider на Windows, Mac и Ubuntu Linux" height="266" data-src="https://habrastorage.org/getpro/habr/upload_files/1f3/5b0/d1b/1f35b0d1bb8a9c6ff7b33cdd3fc61814.png" data-width="773"><figcaption>QSlider на Windows, Mac и Ubuntu Linux</figcaption></figure><p>Также можно сделать вертикальный или горизонтальный ползунок, задав соответствующее расположение при его создании. Флаги расположения определены в пространстве имён Qt, например:</p><pre><code class="python hljs">widget.QSlider(Qt.Orientiation.Vertical)</code></pre><p>Или так:</p><pre><code class="python hljs">widget.QSlider(Qt.Orientiation.Horizontal)</code></pre><h4>QDial</h4><p>Наконец, QDial — это круговой виджет, схожий по функционалу с механическим ползунком из реального мира. Красиво, но с точки зрения пользовательского интерфейса не очень удобно. Он часто используется в аудиоприложениях:</p><pre><code class="python hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainWindow</span><span class="hljs-params">(QMainWindow)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super().__init__()
+
+        self.setWindowTitle(<span class="hljs-string">"My App"</span>)
+
+        widget = QDial()
+        widget.setRange(<span class="hljs-number">-10</span>, <span class="hljs-number">100</span>)
+        widget.setSingleStep(<span class="hljs-number">0.5</span>)
+
+        widget.valueChanged.connect(self.value_changed)
+        widget.sliderMoved.connect(self.slider_position)
+        widget.sliderPressed.connect(self.slider_pressed)
+        widget.sliderReleased.connect(self.slider_released)
+
+        self.setCentralWidget(widget)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">value_changed</span><span class="hljs-params">(self, i)</span>:</span>
+        print(i)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slider_position</span><span class="hljs-params">(self, p)</span>:</span>
+        print(<span class="hljs-string">"position"</span>, p)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slider_pressed</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Pressed!"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slider_released</span><span class="hljs-params">(self)</span>:</span>
+        print(<span class="hljs-string">"Released"</span>)</code></pre><p>Запустив код, вы увидите круговой ползунок. Поверните его, чтобы выбрать число:</p><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" alt="QDial на Windows, Mac и Ubuntu Linux" title="QDial на Windows, Mac и Ubuntu Linux" height="266" data-src="https://habrastorage.org/getpro/habr/upload_files/e9c/17f/635/e9c17f6353e8c4af54a2de9bb74b9784.png" data-width="773"><figcaption>QDial на Windows, Mac и Ubuntu Linux</figcaption></figure><p>На сегодня мы заканчиваем, но это далеко не всё. Мы также расскажем о макете в PyQt, о работе с QAction, тулбарами, диалогами и не только. А пока ещё раз <a href="https://www.pythonguis.com/pyqt6-book/">напоминаем</a> о книге автора этих уроков и приглашаем на наши курсы:</p><ul><li><p><a href="https://skillfactory.ru/python-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pdev_090122&amp;utm_term=conc">Курс Python-разработчик</a></p></li><li><p><a href="https://skillfactory.ru/python-fullstack-web-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_fpw_090122&amp;utm_term=conc">Профессия Fullstack-разработчик на Python</a></p></li><li><p><a href="https://skillfactory.ru/python-for-web-developers?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pws_090122&amp;utm_term=conc">Курс «Python для веб-разработки»</a></p></li></ul><figure class="full-width "><img src="./PyQt6 — полное руководство для новичков _ Хабр_files/image-loader.svg" height="229" data-src="https://habrastorage.org/getpro/habr/upload_files/9c9/d12/1c0/9c9d121c03037cc47648fca807bbb4c3.png" data-width="1000"><figcaption></figcaption></figure><p>Узнайте подробности <a href="https://skillfactory.ru/catalogue?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=sf_allcourses_090122&amp;utm_term=conc">здесь</a>.</p><details class="spoiler"><summary>Профессии и курсы</summary><div class="spoiler__content"><p><strong>Data Science и Machine Learning</strong></p><ul><li><p><a href="https://skillfactory.ru/data-scientist-pro?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=data-science_dspr_090122&amp;utm_term=cat">Профессия Data Scientist</a></p></li><li><p><a href="https://skillfactory.ru/data-analyst-pro?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=analytics_dapr_090122&amp;utm_term=cat">Профессия Data Analyst</a></p></li><li><p><a href="https://skillfactory.ru/matematika-dlya-data-science#syllabus?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=data-science_mat_090122&amp;utm_term=cat">Курс «Математика для Data Science»</a></p></li><li><p><a href="https://skillfactory.ru/matematika-i-machine-learning-dlya-data-science?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=data-science_matml_090122&amp;utm_term=cat">Курс «Математика и Machine Learning для Data Science»</a></p></li><li><p><a href="https://skillfactory.ru/data-engineer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=data-science_dea_090122&amp;utm_term=cat">Курс по Data Engineering</a></p></li><li><p><a href="https://skillfactory.ru/machine-learning-i-deep-learning?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=data-science_mldl_090122&amp;utm_term=cat">Курс «Machine Learning и Deep Learning»</a></p></li><li><p><a href="https://skillfactory.ru/machine-learning?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=data-science_ml_090122&amp;utm_term=cat">Курс по Machine Learning</a></p></li></ul><p><strong>Python, веб-разработка</strong></p><ul><li><p><a href="https://skillfactory.ru/python-fullstack-web-developer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_fpw_090122&amp;utm_term=cat">Профессия Fullstack-разработчик на Python</a></p></li><li><p><a href="https://skillfactory.ru/python-for-web-developers?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_pws_090122&amp;utm_term=cat">Курс «Python для веб-разработки»</a></p></li><li><p><a href="https://skillfactory.ru/frontend-razrabotchik?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_fr_090122&amp;utm_term=cat">Профессия Frontend-разработчик</a></p></li><li><p><a href="https://skillfactory.ru/webdev?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_webdev_090122&amp;utm_term=cat">Профессия Веб-разработчик</a></p></li></ul><p><strong>Мобильная разработка</strong></p><ul><li><p><a href="https://skillfactory.ru/ios-razrabotchik-s-nulya?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_ios_090122&amp;utm_term=cat">Профессия iOS-разработчик</a></p></li><li><p><a href="https://skillfactory.ru/android-razrabotchik?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_andr_090122&amp;utm_term=cat">Профессия Android-разработчик</a></p></li></ul><p><strong>Java и C#</strong></p><ul><li><p><a href="https://skillfactory.ru/java-razrabotchik?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_java_090122&amp;utm_term=cat">Профессия Java-разработчик</a></p></li><li><p><a href="https://skillfactory.ru/java-qa-engineer-testirovshik-po?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_qaja_090122&amp;utm_term=cat">Профессия QA-инженер на JAVA</a></p></li><li><p><a href="https://skillfactory.ru/c-sharp-razrabotchik?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_cdev_090122&amp;utm_term=cat">Профессия C#-разработчик</a></p></li><li><p><a href="https://skillfactory.ru/game-razrabotchik-na-unity-i-c-sharp?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_gamedev_090122&amp;utm_term=cat">Профессия Разработчик игр на Unity</a></p></li></ul><p><strong>От основ — в глубину</strong></p><ul><li><p><a href="https://skillfactory.ru/algoritmy-i-struktury-dannyh?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_algo_090122&amp;utm_term=cat">Курс «Алгоритмы и структуры данных»</a></p></li><li><p><a href="https://skillfactory.ru/c-plus-plus-razrabotchik?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_cplus_090122&amp;utm_term=cat">Профессия C++ разработчик</a></p></li><li><p><a href="https://skillfactory.ru/cyber-security-etichnij-haker?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_hacker_090122&amp;utm_term=cat">Профессия Этичный хакер</a></p></li></ul><p><strong>А также</strong></p><ul><li><p><a href="https://skillfactory.ru/devops-ingineer?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=coding_devops_090122&amp;utm_term=cat">Курс по DevOps</a></p></li><li><p><a href="https://skillfactory.ru/catalogue?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=article&amp;utm_content=sf_allcourses_090122&amp;utm_term=cat">Все курсы</a></p></li></ul></div></details></div></div> <div aria-hidden="true" role="dialog" tabindex="-1" class="pswp"><div class="pswp__bg"></div> <div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div> <div class="pswp__item"></div> <div class="pswp__item"></div></div> <div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><span class="tm-svg-icon__wrapper pswp__button pswp__button--close"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Закрыть</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#close"></use></svg></span> <div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div></div></div></div> <!----></div> <div class="tm-article-presenter__meta"><div class="tm-separated-list tm-article-presenter__meta-list"><span class="tm-separated-list__title">Теги:</span> <ul class="tm-separated-list__list"><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bskillfactory%5D" class="tm-tags-list__link">skillfactory</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bpyqt%5D" class="tm-tags-list__link">pyqt</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bpyqt6%5D" class="tm-tags-list__link">pyqt6</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bpython%5D" class="tm-tags-list__link">python</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bqt%5D" class="tm-tags-list__link">qt</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%5D" class="tm-tags-list__link">программирование</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D1%8B%5D" class="tm-tags-list__link">интерфейсы</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5Bgui%5D" class="tm-tags-list__link">gui</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D1%8B%5D" class="tm-tags-list__link">графические интерфейсы</a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/search/?target_type=posts&amp;order=relevance&amp;q=%5B%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%5D" class="tm-tags-list__link">графический интерфейс пользователя</a></li></ul></div> <div class="tm-separated-list tm-article-presenter__meta-list"><span class="tm-separated-list__title">Хабы:</span> <ul class="tm-separated-list__list"><li class="tm-separated-list__item"><a href="https://habr.com/ru/company/skillfactory/blog/" class="tm-hubs-list__link router-link-active">
+    Блог компании SkillFactory
+  </a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/hub/python/" class="tm-hubs-list__link">
+    Python
+  </a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/hub/programming/" class="tm-hubs-list__link">
+    Программирование
+  </a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/hub/desktop_environment/" class="tm-hubs-list__link">
+    Графические оболочки
+  </a></li><li class="tm-separated-list__item"><a href="https://habr.com/ru/hub/qt_software/" class="tm-hubs-list__link">
+    Qt
+  </a></li></ul></div></div></article></div> <!----></div> <div class="tm-article-sticky-panel"><div class="tm-data-icons tm-article-sticky-panel__icons"><div class="tm-article-rating tm-data-icons__item"><div class="tm-votes-meter tm-article-rating__votes-switcher"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 24: ↑23 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 24: ↑23 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+22</span></div> <div class="v-portal" style="display:none;"></div></div> <!----> <span title="Количество просмотров" class="tm-icon-counter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">13K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    210
+  </span></button> <!----> <div title="Поделиться" class="tm-sharing tm-data-icons__item"><button type="button" class="tm-sharing__button"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="tm-sharing__icon"><path fill="currentColor" d="M13.8 13.8V18l7.2-6.6L13.8 5v3.9C5 8.9 3 18.6 3 18.6c2.5-4.4 6-4.8 10.8-4.8z"></path></svg></button> <div class="v-portal" style="display:none;"></div></div> <div class="v-portal" style="display:none;"></div></div> </div></div> <div class="v-portal" style="display:none;"></div> <div class="tm-article-presenter__footer"><div class="tm-article-blocks"><div class="tm-editoral-subscription"><span class="tm-svg-icon__wrapper tm-editoral-subscription__close"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Закрыть</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#close"></use></svg></span> <h3 class="tm-editoral-subscription__title">
+    Редакторский дайджест
+  </h3> <p class="tm-editoral-subscription__description">
+    Присылаем лучшие статьи раз&nbsp;в&nbsp;месяц
+  </p> <form method="GET" class="tm-editoral-subscription__form"><div class="tm-input-text-decorated tm-editoral-subscription__input tm-input-text-decorated_has-label-after" name="email" placeholder="Электропочта" type="email"><!----> <input name="email" placeholder="Электропочта" type="email" class="tm-input-text-decorated__input"> <div class="tm-input-text-decorated__label tm-input-text-decorated__label_after"><button type="submit" class="tm-editoral-subscription__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class=""><path fill="currentColor" clip-rule="evenodd" d="M19.707 11.293a1 1 0 010 1.414l-5.5 5.5a1 1 0 01-1.414-1.414L16.586 13H5a1 1 0 110-2h11.586l-3.793-3.793a1 1 0 011.414-1.414l5.5 5.5z"></path></svg></button></div></div> <!----></form></div> <section class="tm-block tm-block_spacing-bottom"><!----> <div class="tm-block__body tm-block__body_variant-balanced"><div class="tm-article-author"><div class="tm-article-author__company"><div class="tm-article-author__company-card"><div class="tm-company-snippet"><a href="https://habr.com/ru/company/skillfactory/profile/" class="tm-company-snippet__logo-link"><div class="tm-entity-image"><img alt="" height="40" src="./PyQt6 — полное руководство для новичков _ Хабр_files/9bb5f7d50871bf0981f64b1970f22fe1.png" width="40" class="tm-entity-image__pic"></div></a> <div class="tm-company-snippet__info"><a href="https://habr.com/ru/company/skillfactory/profile/" class="tm-company-snippet__title">SkillFactory</a> <div class="tm-company-snippet__description">Школа Computer Science</div></div></div> <div class="tm-article-author__buttons"><!----> <!----></div></div> <div class="tm-article-author__company-contacts"><a href="http://www.skillfactory.ru/" rel="noopener" target="_blank" class="tm-article-author__contact">
+      Сайт
+    </a></div> <div class="tm-article-author__separator"></div></div> <div class="tm-user-card tm-article-author__user-card tm-user-card_variant-article"><div class="tm-user-card__info-container"><div class="tm-user-card__header"><div class="tm-user-card__header-data"><a href="https://habr.com/ru/users/honyaki/" class="tm-user-card__userpic tm-user-card__userpic_size-40"><div class="tm-entity-image"><img alt="" src="./PyQt6 — полное руководство для новичков _ Хабр_files/96e81dbc01247c6c855b1806b355efa3(1).jpg" class="tm-entity-image__pic"></div></a> <div class="tm-user-card__meta"><div title=" 144 голоса " class="tm-karma tm-user-card__karma"><div class="tm-karma__votes tm-karma__votes_positive">
+    34
+  </div> <div class="tm-karma__text">
+    Карма
+  </div></div> <div title="Рейтинг пользователя" class="tm-rating tm-user-card__rating"><div class="tm-rating__header"> <div class="tm-rating__counter">57.2</div></div> <div class="tm-rating__text">
+    Рейтинг
+  </div></div></div></div></div> <div class="tm-user-card__info tm-user-card__info_variant-article"><div class="tm-user-card__title tm-user-card__title_variant-article"><!----> <a href="https://habr.com/ru/users/honyaki/" class="tm-user-card__nickname tm-user-card__nickname_variant-article">
+          @honyaki
+        </a> <!----></div> <p class="tm-user-card__short-info tm-user-card__short-info_variant-article">Пользователь</p></div></div> <div class="tm-user-card__buttons tm-user-card__buttons_variant-article"><!----> <!----> <!----> <!----> <!----></div></div> <!----></div> <div class="v-portal" style="display:none;"></div></div> <!----></section> <!----> <div class="tm-article-blocks__comments"><div class="tm-article-page-comments"><div class="tm-article-comments-counter-link tm-article-comments-counter-button"><a href="https://habr.com/ru/company/skillfactory/blog/599599/comments/" class="tm-article-comments-counter-link__link tm-article-comments-counter-link__link_button-style"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon tm-article-comments-counter-link__icon_contrasted"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value tm-article-comments-counter-link__value_contrasted">
+       Комментарии 6 
+    </span></a> <!----></div></div></div>  <section class="tm-block tm-block_spacing-around"><header class="tm-block__header"><h2 class="tm-block__title">Похожие публикации</h2> <!----></header> <div class="tm-block__body"><ul class="tm-article-list-block__list"><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-05-29T14:07:16.000Z" title="2021-05-29, 20:07">29  мая  2021 в 20:07</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/skillfactory/blog/559390/" class="tm-article-title__link"><span>Как создавать предметы генеративного искусства с помощью L-систем на языке Python</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 17: ↑16 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 17: ↑16 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+15</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">6.1K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    66
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/559390/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      2
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/559390/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +2
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-01-23T11:39:54.000Z" title="2021-01-23, 17:39">23  января  2021 в 17:39</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/skillfactory/blog/538324/" class="tm-article-title__link"><span>Как сделать Data Science приложение для Windows (и не только) с графическим интерфейсом с помощью PySimpleGUI</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 28: ↑26 и ↓2</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 28: ↑26 и ↓2" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+24</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">17K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    155
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/538324/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      10
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/538324/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +10
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2020-11-19T14:03:03.000Z" title="2020-11-19, 20:03">19  ноября  2020 в 20:03</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/skillfactory/blog/528232/" class="tm-article-title__link"><span>57 отборных репозиториев для всех разработчиков Python</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 22: ↑19 и ↓3</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 22: ↑19 и ↓3" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+16</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">19K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    387
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/528232/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      15
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/528232/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +15
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li> <!----></ul></div> <!----></section> <div class="tm-project-block tm-project-block_variant-vacancies"><div class="tm-project-block__header"><div class="tm-project-block__title"><a href="https://career.habr.com/companies/skillfactory/vacancies?utm_campaign=vacancies_postlist_company&amp;utm_content=vacancies&amp;utm_medium=habr_block&amp;utm_source=habr_mob" rel="noopener" target="_blank" class="tm-project-block__title-link"> Вакансии компании «SkillFactory» </a></div></div> <div class="tm-project-block__content"><ul class="tm-project-block-items"><li class="tm-project-block-items__item"><a href="https://career.habr.com/vacancies/1000094044?utm_campaign=vacancies_postlist_company&amp;utm_content=vacancy&amp;utm_medium=habr_block&amp;utm_source=habr_mob" rel="noopener" target="_blank" class="tm-project-block-items__detail tm-project-block-items__title"><!---->Data Engineer
+    </a> <div class="tm-project-block-items__properties"><span class="tm-project-block-items__property-item">до 200&nbsp;000 ₽</span><span class="tm-project-block-items__property-item">SkillFactory</span><span class="tm-project-block-items__property-item">Можно удаленно</span></div></li><li class="tm-project-block-items__item"><a href="https://career.habr.com/vacancies/1000093700?utm_campaign=vacancies_postlist_company&amp;utm_content=vacancy&amp;utm_medium=habr_block&amp;utm_source=habr_mob" rel="noopener" target="_blank" class="tm-project-block-items__detail tm-project-block-items__title"><!---->Маркетинговый аналитик
+    </a> <div class="tm-project-block-items__properties"><span class="tm-project-block-items__property-item">SkillFactory</span><span class="tm-project-block-items__property-item">Можно удаленно</span></div></li><li class="tm-project-block-items__item"><a href="https://career.habr.com/vacancies/1000093532?utm_campaign=vacancies_postlist_company&amp;utm_content=vacancy&amp;utm_medium=habr_block&amp;utm_source=habr_mob" rel="noopener" target="_blank" class="tm-project-block-items__detail tm-project-block-items__title"><!---->Ведущий автор на курс "Computer Vision"
+    </a> <div class="tm-project-block-items__properties"><span class="tm-project-block-items__property-item">SkillFactory</span><span class="tm-project-block-items__property-item">Можно удаленно</span></div></li><li class="tm-project-block-items__item"><a href="https://career.habr.com/vacancies/1000093535?utm_campaign=vacancies_postlist_company&amp;utm_content=vacancy&amp;utm_medium=habr_block&amp;utm_source=habr_mob" rel="noopener" target="_blank" class="tm-project-block-items__detail tm-project-block-items__title"><!---->Автор на курс по Machine Learning
+    </a> <div class="tm-project-block-items__properties"><span class="tm-project-block-items__property-item">SkillFactory</span><span class="tm-project-block-items__property-item">Можно удаленно</span></div></li><li class="tm-project-block-items__item"><a href="https://career.habr.com/vacancies/1000080729?utm_campaign=vacancies_postlist_company&amp;utm_content=vacancy&amp;utm_medium=habr_block&amp;utm_source=habr_mob" rel="noopener" target="_blank" class="tm-project-block-items__detail tm-project-block-items__title"><!---->Эксперт на курс по тестированию на Java
+    </a> <div class="tm-project-block-items__properties"><span class="tm-project-block-items__property-item">SkillFactory</span><span class="tm-project-block-items__property-item">Можно удаленно</span></div></li></ul></div> <div class="tm-project-block__footer"><a href="https://career.habr.com/companies/skillfactory/vacancies?utm_campaign=vacancies_postlist_company&amp;utm_content=vacancies_all&amp;utm_medium=habr_block&amp;utm_source=habr_mob" rel="noopener" target="_blank" class="tm-project-block__link">Больше вакансий на Хабр Карьере</a></div></div> <section class="tm-block tm-block_spacing-around"><header class="tm-block__header"><h2 class="tm-block__title">Лучшие публикации за сутки</h2> <!----></header> <div class="tm-block__body"><ul class="tm-article-list-block__list"><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-10T13:00:01.000Z" title="2022-01-10, 19:00">вчера в 19:00</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/ruvds/blog/599061/" class="tm-article-title__link"><span>Я коллекционер</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 78: ↑77 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 78: ↑77 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+76</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">8.3K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    19
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/ruvds/blog/599061/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      53
+    </span></a> <a href="https://habr.com/ru/company/ruvds/blog/599061/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +53
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-10T13:38:28.000Z" title="2022-01-10, 19:38">вчера в 19:38</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/post/599935/" class="tm-article-title__link"><span>PHP Дайджест № 219 (1 – 10 января 2022)</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 55: ↑55 и ↓0</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 55: ↑55 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+55</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">6.1K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    17
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/post/599935/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      1
+    </span></a> <a href="https://habr.com/ru/post/599935/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +1
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-10T10:28:25.000Z" title="2022-01-10, 16:28">вчера в 16:28</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/timeweb/blog/599435/" class="tm-article-title__link"><span>«Тысячи друзей Ким Чен Ына». Как северокорейские хакеры грабили банк</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 63: ↑57 и ↓6</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 63: ↑57 и ↓6" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+51</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">11K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    36
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/timeweb/blog/599435/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      30
+    </span></a> <a href="https://habr.com/ru/company/timeweb/blog/599435/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +30
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-10T17:16:25.000Z" title="2022-01-10, 23:16">вчера в 23:16</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/reactos/blog/599777/" class="tm-article-title__link"><span>Сказ о том, как я погряз в Матрице</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 46: ↑45 и ↓1</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 46: ↑45 и ↓1" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+44</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">6.3K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    20
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/reactos/blog/599777/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      5
+    </span></a> <a href="https://habr.com/ru/company/reactos/blog/599777/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +5
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-block tm-article-snippet-block-block_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-10T16:41:33.000Z" title="2022-01-10, 22:41">вчера в 22:41</time></div></div> <h2 class="tm-article-title tm-article-title_block"><a href="https://habr.com/ru/company/lamptest/blog/600005/" class="tm-article-title__link"><span>Новые лампы Lexman</span></a></h2> <div class="tm-data-icons"><!----> <div class="tm-votes-meter tm-data-icons__item"><svg height="24" width="24" class="tm-svg-img tm-votes-meter__icon tm-votes-meter__icon_appearance-article"><title>Всего голосов 44: ↑44 и ↓0</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-rating"></use></svg> <span title="Всего голосов 44: ↑44 и ↓0" class="tm-votes-meter__value tm-votes-meter__value_positive tm-votes-meter__value_appearance-article tm-votes-meter__value_rating">+44</span></div> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">12K</span></span> <button title="Добавить в закладки" type="button" class="bookmarks-button tm-data-icons__item"><span title="Добавить в закладки" class="tm-svg-icon__wrapper bookmarks-button__icon"><svg height="24" width="24" class="tm-svg-img tm-svg-icon"><title>Добавить в закладки</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-favorite"></use></svg></span> <span title="Количество пользователей, добавивших публикацию в закладки" class="bookmarks-button__counter">
+    21
+  </span></button> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/lamptest/blog/600005/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      31
+    </span></a> <a href="https://habr.com/ru/company/lamptest/blog/600005/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +31
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li> <!----></ul></div> <!----></section> </div></div></div></div></div> <div class="tm-page__sidebar"><div class="tm-layout-sidebar"><div class="tm-layout-sidebar__placeholder_stick-top"></div> <div class="tm-sexy-sidebar tm-sexy-sidebar_stick-top" style="margin-top:0px;"><!----> <section class="tm-block tm-block_spacing-bottom"><header class="tm-block__header"><h2 class="tm-block__title">Информация</h2> <!----></header> <div class="tm-block__body"><div class="tm-company-basic-info"><dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Дата основания</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><time datetime="2012-10-31T18:00:00.000Z" title="2012-11-01, 00:00">1  ноября  2012</time></dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Местоположение</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+    Россия
+  </dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Сайт</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><a href="http://www.skillfactory.ru/" target="_blank" class="tm-company-basic-info__link">
+      www.skillfactory.ru
+    </a></dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Численность</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap">
+    201–500 человек
+  </dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Дата регистрации</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><time datetime="2012-12-14T13:25:37.000Z" title="2012-12-14, 19:25">14  декабря  2012</time></dd></dl> <dl class="tm-description-list tm-description-list_variant-columns-nowrap"><dt class="tm-description-list__title tm-description-list__title_variant-columns-nowrap">Представитель</dt> <dd class="tm-description-list__body tm-description-list__body_variant-columns-nowrap"><a href="https://habr.com/ru/users/skillfactory_school/" class="tm-company-basic-info__link">
+      Skillfactory School
+    </a></dd></dl></div></div> <!----></section> <div class="tm-company-widgets"><section class="tm-block tm-block_spacing-bottom" type="banner"><header class="tm-block__header tm-block__header_variant-borderless"><h2 class="tm-block__title">Виджет</h2> <!----></header> <div class="tm-block__body"><a href="https://skillfactory.ru/catalogue?utm_source=habr&amp;utm_medium=habr&amp;utm_campaign=habr_viget&amp;utm_content=sf_allcourses_newyear20212022&amp;utm_term=rightviget" class="tm-widget-banner__image-wrapper"><img alt="" src="./PyQt6 — полное руководство для новичков _ Хабр_files/81603f8fd8e534e8380d514b17d813d2.png" class="tm-widget-banner__image"></a> <!----></div> <!----></section></div> <section class="tm-block tm-block_spacing-around"><header class="tm-block__header"><h2 class="tm-block__title">Блог на Хабре</h2> <!----></header> <div class="tm-block__body"><ul class="tm-article-list-block__list"><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-09T20:33:48.000Z" title="2022-01-10, 02:33">вчера в 02:33</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/skillfactory/blog/599599/" aria-current="page" class="tm-article-title__link router-link-exact-active router-link-active"><span>PyQt6 — полное руководство для новичков</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">13K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/599599/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      6
+    </span></a> <!----></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-06T22:07:40.000Z" title="2022-01-07, 04:07">7  января   в 04:07</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/skillfactory/blog/599535/" class="tm-article-title__link"><span>Мигающему курсору исполнилось 54 года</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">7.8K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/599535/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      7
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/599535/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +7
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-05T12:12:21.000Z" title="2022-01-05, 18:12">5  января   в 18:12</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/skillfactory/blog/599341/" class="tm-article-title__link"><span>Компилятор C# 10, .NET 6 и интерполяция строк</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">8.8K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/599341/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      57
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/599341/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +57
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2022-01-03T15:00:35.000Z" title="2022-01-03, 21:00">3  января   в 21:00</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/skillfactory/blog/599135/" class="tm-article-title__link"><span>ЧПУ, Arduino Uno и CoreXZ: как я собрал плоттер-головоломку</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">8.6K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/599135/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      6
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/599135/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +6
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li><li class="tm-article-list-block__item"><article class="tm-article-snippet-block-sidebar tm-article-snippet-block-sidebar_preview"><div class="tm-article-snippet-block__user-meta"><div class="tm-article-snippet-block__date"><time datetime="2021-12-30T13:42:18.000Z" title="2021-12-30, 19:42">30  декабря  2021 в 19:42</time></div></div> <h2 class="tm-article-title tm-article-title_sidebar"><a href="https://habr.com/ru/company/skillfactory/blog/598621/" class="tm-article-title__link"><span>Как Mozilla упустила (не)очевидную уязвимость</span></a></h2> <div class="tm-data-icons"><!----> <!----> <span class="tm-icon-counter tm-data-icons__item" title="Количество просмотров"><svg height="24" width="24" class="tm-svg-img tm-icon-counter__icon"><title>Просмотры</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-views"></use></svg> <span class="tm-icon-counter__value">9.5K</span></span> <!----> <div class="tm-article-comments-counter-link tm-data-icons__item" title="Читать комментарии"><a href="https://habr.com/ru/company/skillfactory/blog/598621/comments/" class="tm-article-comments-counter-link__link"><svg height="24" width="24" class="tm-svg-img tm-article-comments-counter-link__icon"><title>Комментарии</title> <use xlink:href="/img/megazord-v24.4a410f80.svg#counter-comments"></use></svg> <span class="tm-article-comments-counter-link__value">
+      9
+    </span></a> <a href="https://habr.com/ru/company/skillfactory/blog/598621/comments/" class="tm-article-comments-counter-link__link"><span title="Читать новые комментарии" class="tm-article-comments-counter-link__unread-counter">
+      +9
+    </span></a></div> <!----> <div class="v-portal" style="display: none;"></div></div></article></li> <!----></ul></div> <!----></section></div></div></div></div></div></div></main> <!----></div> <div class="tm-footer-menu"><div class="tm-page-width"><div class="tm-footer-menu__container"><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Ваш аккаунт
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://habr.com/kek/v1/auth/habrahabr/?back=/ru/company/skillfactory/blog/599599/&amp;hl=ru" rel="nofollow" target="_self">
+                Войти
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/kek/v1/auth/habrahabr-register/?back=/ru/company/skillfactory/blog/599599/&amp;hl=ru" rel="nofollow" target="_self">
+                Регистрация
+              </a></li></ul></div></div><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Разделы
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/" class="footer-menu__item-link router-link-active">
+                Публикации
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/news/" class="footer-menu__item-link">
+                Новости
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/hubs/" class="footer-menu__item-link">
+                Хабы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/companies/" class="footer-menu__item-link">
+                Компании
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/users/" class="footer-menu__item-link">
+                Авторы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/sandbox/" class="footer-menu__item-link">
+                Песочница
+              </a></li></ul></div></div><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Информация
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/help/" class="footer-menu__item-link">
+                Устройство сайта
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/authors/codex/" class="footer-menu__item-link">
+                Для авторов
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/companies/corpblogs/" class="footer-menu__item-link">
+                Для компаний
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/docs/docs/transparency/" class="footer-menu__item-link">
+                Документы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/agreement" target="_blank">
+                Соглашение
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://account.habr.com/info/confidential/" target="_blank">
+                Конфиденциальность
+              </a></li></ul></div></div><div class="tm-footer-menu__block"><h3 class="tm-footer-menu__block-title">
+          Услуги
+        </h3> <div class="tm-footer-menu__block-content"><ul class="tm-footer-menu__list"><li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQLwRfQmXibiUlWaRg-BAc38s7oM3lJiaPju7qmdJsp8ysIvZ_G-Npem0njJLMozE2bPHMpDqiI5hhy/pub?start=false&amp;loop=false&amp;delayms=60000&amp;slide=id.g91a03369cd_4_297" target="_blank">
+                Реклама
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habrastorage.org/storage/stuff/habr/service_price.pdf" target="_blank">
+                Тарифы
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://docs.google.com/presentation/d/e/2PACX-1vQJJds8-Di7BQSP_guHxICN7woVYoN5NP_22ra-BIo4bqnTT9FR6fB-Ku2P0AoRpX0Ds-LRkDeAoD8F/pub?start=false&amp;loop=false&amp;delayms=60000" target="_blank">
+                Контент
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://tmtm.timepad.ru/" target="_blank">
+                Семинары
+              </a></li><li class="tm-footer-menu__list-item"><a href="https://habr.com/ru/megaprojects/" class="footer-menu__item-link">
+                Мегапроекты
+              </a></li></ul></div></div></div></div></div> <div class="tm-footer"><div class="tm-page-width"><div class="tm-footer__container"><!----> <div class="tm-footer__social"><a href="https://www.facebook.com/habrahabr.ru" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Facebook</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-facebook"></use></svg></a><a href="https://twitter.com/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Twitter</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-twitter"></use></svg></a><a href="https://vk.com/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>VK</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-vkontakte"></use></svg></a><a href="https://telegram.me/habr_com" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Telegram</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-telegram"></use></svg></a><a href="https://www.youtube.com/channel/UCd_sTwKqVrweTt4oAKY5y4w" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Youtube</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-youtube"></use></svg></a><a href="https://zen.yandex.ru/habr" rel="nofollow noopener noreferrer" target="_blank" class="tm-svg-icon__wrapper tm-social-icons__icon"><svg height="16" width="16" class="tm-svg-img tm-svg-icon"><title>Яндекс Дзен</title> <use xlink:href="/img/social-icons-sprite.svg#social-logo-zen"></use></svg></a></div> <div class="v-portal" style="display:none;"></div> <button class="tm-footer__link"><!---->
+        Настройка языка
+      </button> <a href="https://habr.com/ru/about" class="tm-footer__link">
+        О сайте
+      </a> <a href="https://habr.com/ru/feedback/" class="tm-footer__link">
+        Техническая поддержка
+      </a> <!----> <a href="https://habr.com/berserk-mode-nope" class="tm-footer__link">
+        Вернуться на старую версию
+      </a> <div class="tm-footer-copyright"><span class="tm-copyright"><span class="tm-copyright__years">© 2006–2022 </span> <span class="tm-copyright__name">«<a href="https://company.habr.com/" rel="noopener" target="_blank" class="tm-copyright__link">Habr</a>»</span></span></div></div></div></div> <!----> <!----></div> <div class="vue-portal-target"><!----></div></div>
+
+<script src="./PyQt6 — полное руководство для новичков _ Хабр_files/chunk-vendors.1fc8c5a6.js.Без названия" defer=""></script><script src="./PyQt6 — полное руководство для новичков _ Хабр_files/app.2f08e961.js.Без названия" defer=""></script>
+
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </script>
+  
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(24049213, "init", {
+      defer:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:false,
+    });
+  </script>
+  <noscript>
+    <div>
+      <img src="https://mc.yandex.ru/watch/24049213" style="position:absolute; left:-9999px;" alt="" />
+    </div>
+  </noscript>
+  
+    <script type="text/javascript">
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = 'https://vk.com/rtrg?p=VK-RTRG-421343-57vKE';
+        }, 0);
+      });
+    </script>
+  
+<script src="./PyQt6 — полное руководство для новичков _ Хабр_files/ads.js.Без названия" onload="window[&#39;zhY4i4nJ9K&#39;] = true"></script><div id="K9Jn4i4Yhz" style="display: none;"></div>
+
+
+<div><div><div class="Vue-Toastification__container top-left"></div></div><div><div class="Vue-Toastification__container top-center"></div></div><div><div class="Vue-Toastification__container top-right"></div></div><div><div class="Vue-Toastification__container bottom-left"></div></div><div><div class="Vue-Toastification__container bottom-center"></div></div><div><div class="Vue-Toastification__container bottom-right"></div></div></div></body></html>

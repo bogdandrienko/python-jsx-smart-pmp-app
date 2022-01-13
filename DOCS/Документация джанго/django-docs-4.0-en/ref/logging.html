@@ -1,0 +1,524 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Logging &#8212; Django 4.0.2.dev20220105081954 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Middleware" href="middleware.html" />
+    <link rel="prev" title="Form and field validation" href="forms/validation.html" />
+
+
+
+ 
+<script src="../templatebuiltins.js"></script>
+<script>
+(function($) {
+    if (!django_template_builtins) {
+       // templatebuiltins.js missing, do nothing.
+       return;
+    }
+    $(document).ready(function() {
+        // Hyperlink Django template tags and filters
+        var base = "templates/builtins.html";
+        if (base == "#") {
+            // Special case for builtins.html itself
+            base = "";
+        }
+        // Tags are keywords, class '.k'
+        $("div.highlight\\-html\\+django span.k").each(function(i, elem) {
+             var tagname = $(elem).text();
+             if ($.inArray(tagname, django_template_builtins.ttags) != -1) {
+                 var fragment = tagname.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + tagname + "</a>");
+             }
+        });
+        // Filters are functions, class '.nf'
+        $("div.highlight\\-html\\+django span.nf").each(function(i, elem) {
+             var filtername = $(elem).text();
+             if ($.inArray(filtername, django_template_builtins.tfilters) != -1) {
+                 var fragment = filtername.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + filtername + "</a>");
+             }
+        });
+    });
+})(jQuery);</script>
+
+  </head><body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t6">
+    <div id="hd">
+      <h1><a href="../index.html">Django 4.0.2.dev20220105081954 documentation</a></h1>
+      <div id="global-nav">
+        <a title="Home page" href="../index.html">Home</a>  |
+        <a title="Table of contents" href="../contents.html">Table of contents</a>  |
+        <a title="Global index" href="../genindex.html">Index</a>  |
+        <a title="Module index" href="../py-modindex.html">Modules</a>
+      </div>
+      <div class="nav">
+    &laquo; <a href="forms/validation.html" title="Form and field validation">previous</a>
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="middleware.html" title="Middleware">next</a> &raquo;</div>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="ref-logging">
+            
+  <div class="section" id="s-logging">
+<span id="s-logging-ref"></span><span id="logging"></span><span id="logging-ref"></span><h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../howto/logging.html#logging-how-to"><span class="std std-ref">How to configure and use logging</span></a></li>
+<li><a class="reference internal" href="../topics/logging.html#logging-explanation"><span class="std std-ref">Django logging overview</span></a></li>
+</ul>
+</div>
+<span class="target" id="module-django.utils.log"></span><p>Django’s logging module extends Python’s builtin <a class="reference external" href="https://docs.python.org/3/library/logging.html#module-logging" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a>.</p>
+<p>Logging is configured as part of the general Django <a class="reference internal" href="applications.html#django.setup" title="django.setup"><code class="xref py py-func docutils literal notranslate"><span class="pre">django.setup()</span></code></a>
+function, so it’s always available unless explicitly disabled.</p>
+<div class="section" id="s-django-s-default-logging-configuration">
+<span id="s-default-logging-configuration"></span><span id="django-s-default-logging-configuration"></span><span id="default-logging-configuration"></span><h2>Django’s default logging configuration<a class="headerlink" href="#django-s-default-logging-configuration" title="Permalink to this headline">¶</a></h2>
+<p>By default, Django uses Python’s <a class="reference external" href="https://docs.python.org/3/library/logging.config.html#logging-config-dictschema" title="(in Python v3.10)"><span class="xref std std-ref">logging.config.dictConfig format</span></a>.</p>
+<div class="section" id="s-default-logging-conditions">
+<span id="default-logging-conditions"></span><h3>Default logging conditions<a class="headerlink" href="#default-logging-conditions" title="Permalink to this headline">¶</a></h3>
+<p>The full set of default logging conditions are:</p>
+<p>When <a class="reference internal" href="settings.html#std:setting-DEBUG"><code class="xref std std-setting docutils literal notranslate"><span class="pre">DEBUG</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">django</span></code> logger sends messages in the <code class="docutils literal notranslate"><span class="pre">django</span></code> hierarchy (except
+<code class="docutils literal notranslate"><span class="pre">django.server</span></code>) at the <code class="docutils literal notranslate"><span class="pre">INFO</span></code> level or higher to the console.</li>
+</ul>
+<p>When <a class="reference internal" href="settings.html#std:setting-DEBUG"><code class="xref std std-setting docutils literal notranslate"><span class="pre">DEBUG</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">django</span></code> logger sends messages in the <code class="docutils literal notranslate"><span class="pre">django</span></code> hierarchy (except
+<code class="docutils literal notranslate"><span class="pre">django.server</span></code>)  with <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> or <code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code> level to
+<a class="reference internal" href="#django.utils.log.AdminEmailHandler" title="django.utils.log.AdminEmailHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdminEmailHandler</span></code></a>.</li>
+</ul>
+<p>Independently of the value of <a class="reference internal" href="settings.html#std:setting-DEBUG"><code class="xref std std-setting docutils literal notranslate"><span class="pre">DEBUG</span></code></a>:</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#django-server-logger"><span class="std std-ref">django.server</span></a> logger sends messages at the <code class="docutils literal notranslate"><span class="pre">INFO</span></code> level
+or higher to the console.</li>
+</ul>
+<p>All loggers except <a class="reference internal" href="#django-server-logger"><span class="std std-ref">django.server</span></a> propagate logging to their
+parents, up to the root <code class="docutils literal notranslate"><span class="pre">django</span></code> logger. The <code class="docutils literal notranslate"><span class="pre">console</span></code> and <code class="docutils literal notranslate"><span class="pre">mail_admins</span></code>
+handlers are attached to the root logger to provide the behavior described
+above.</p>
+<p>Python’s own defaults send records of level <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> and higher
+to the console.</p>
+</div>
+<div class="section" id="s-default-logging-definition">
+<span id="s-id1"></span><span id="default-logging-definition"></span><span id="id1"></span><h3>Default logging definition<a class="headerlink" href="#default-logging-definition" title="Permalink to this headline">¶</a></h3>
+<p>Django’s default logging configuration inherits Python’s defaults. It’s
+available as <code class="docutils literal notranslate"><span class="pre">django.utils.log.DEFAULT_LOGGING</span></code> and defined in
+<a class="reference external" href="https://github.com/django/django/blob/main/django/utils/log.py">django/utils/log.py</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;require_debug_false&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;()&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.RequireDebugFalse&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;require_debug_true&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;()&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.RequireDebugTrue&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;formatters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;django.server&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;()&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.ServerFormatter&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;[</span><span class="si">{server_time}</span><span class="s1">] </span><span class="si">{message}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;console&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;require_debug_true&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.StreamHandler&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;django.server&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.StreamHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span><span class="p">:</span> <span class="s1">&#39;django.server&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;require_debug_false&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.AdminEmailHandler&#39;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;loggers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;django&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;console&#39;</span><span class="p">,</span> <span class="s1">&#39;mail_admins&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;django.server&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;django.server&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../topics/logging.html#configuring-logging"><span class="std std-ref">Configuring logging</span></a> on how to complement or replace this default
+logging configuration.</p>
+</div>
+</div>
+<div class="section" id="s-django-logging-extensions">
+<span id="django-logging-extensions"></span><h2>Django logging extensions<a class="headerlink" href="#django-logging-extensions" title="Permalink to this headline">¶</a></h2>
+<p>Django provides a number of utilities to handle the particular requirements of
+logging in a web server environment.</p>
+<div class="section" id="s-loggers">
+<span id="loggers"></span><h3>Loggers<a class="headerlink" href="#loggers" title="Permalink to this headline">¶</a></h3>
+<p>Django provides several built-in loggers.</p>
+<div class="section" id="s-django">
+<span id="s-django-logger"></span><span id="django"></span><span id="django-logger"></span><h4><code class="docutils literal notranslate"><span class="pre">django</span></code><a class="headerlink" href="#django" title="Permalink to this headline">¶</a></h4>
+<p>The parent logger for messages in the <code class="docutils literal notranslate"><span class="pre">django</span></code> <a class="reference internal" href="../howto/logging.html#naming-loggers-hierarchy"><span class="std std-ref">named logger hierarchy</span></a>. Django does not post messages using this name.
+Instead, it uses one of the loggers below.</p>
+</div>
+<div class="section" id="s-django-request">
+<span id="s-django-request-logger"></span><span id="django-request"></span><span id="django-request-logger"></span><h4><code class="docutils literal notranslate"><span class="pre">django.request</span></code><a class="headerlink" href="#django-request" title="Permalink to this headline">¶</a></h4>
+<p>Log messages related to the handling of requests. 5XX responses are
+raised as <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> messages; 4XX responses are raised as <code class="docutils literal notranslate"><span class="pre">WARNING</span></code>
+messages. Requests that are logged to the <code class="docutils literal notranslate"><span class="pre">django.security</span></code> logger aren’t
+logged to <code class="docutils literal notranslate"><span class="pre">django.request</span></code>.</p>
+<p>Messages to this logger have the following extra context:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">status_code</span></code>: The HTTP response code associated with the request.</li>
+<li><code class="docutils literal notranslate"><span class="pre">request</span></code>: The request object that generated the logging message.</li>
+</ul>
+</div>
+<div class="section" id="s-django-server">
+<span id="s-django-server-logger"></span><span id="django-server"></span><span id="django-server-logger"></span><h4><code class="docutils literal notranslate"><span class="pre">django.server</span></code><a class="headerlink" href="#django-server" title="Permalink to this headline">¶</a></h4>
+<p>Log messages related to the handling of requests received by the server invoked
+by the <a class="reference internal" href="django-admin.html#django-admin-runserver"><code class="xref std std-djadmin docutils literal notranslate"><span class="pre">runserver</span></code></a> command. HTTP 5XX responses are logged as <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>
+messages, 4XX responses are logged as <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> messages, and everything else
+is logged as <code class="docutils literal notranslate"><span class="pre">INFO</span></code>.</p>
+<p>Messages to this logger have the following extra context:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">status_code</span></code>: The HTTP response code associated with the request.</li>
+<li><code class="docutils literal notranslate"><span class="pre">request</span></code>: The request object that generated the logging message.</li>
+</ul>
+</div>
+<div class="section" id="s-django-template">
+<span id="s-django-template-logger"></span><span id="django-template"></span><span id="django-template-logger"></span><h4><code class="docutils literal notranslate"><span class="pre">django.template</span></code><a class="headerlink" href="#django-template" title="Permalink to this headline">¶</a></h4>
+<p>Log messages related to the rendering of templates.</p>
+<ul class="simple">
+<li>Missing context variables are logged as <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> messages.</li>
+</ul>
+</div>
+<div class="section" id="s-django-db-backends">
+<span id="s-django-db-logger"></span><span id="django-db-backends"></span><span id="django-db-logger"></span><h4><code class="docutils literal notranslate"><span class="pre">django.db.backends</span></code><a class="headerlink" href="#django-db-backends" title="Permalink to this headline">¶</a></h4>
+<p>Messages relating to the interaction of code with the database. For example,
+every application-level SQL statement executed by a request is logged at the
+<code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> level to this logger.</p>
+<p>Messages to this logger have the following extra context:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">duration</span></code>: The time taken to execute the SQL statement.</li>
+<li><code class="docutils literal notranslate"><span class="pre">sql</span></code>: The SQL statement that was executed.</li>
+<li><code class="docutils literal notranslate"><span class="pre">params</span></code>: The parameters that were used in the SQL call.</li>
+<li><code class="docutils literal notranslate"><span class="pre">alias</span></code>: The alias of the database used in the SQL call.</li>
+</ul>
+<p>For performance reasons, SQL logging is only enabled when
+<code class="docutils literal notranslate"><span class="pre">settings.DEBUG</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, regardless of the logging
+level or handlers that are installed.</p>
+<p>This logging does not include framework-level initialization (e.g.
+<code class="docutils literal notranslate"><span class="pre">SET</span> <span class="pre">TIMEZONE</span></code>) or transaction management queries (e.g. <code class="docutils literal notranslate"><span class="pre">BEGIN</span></code>,
+<code class="docutils literal notranslate"><span class="pre">COMMIT</span></code>, and <code class="docutils literal notranslate"><span class="pre">ROLLBACK</span></code>). Turn on query logging in your database if you
+wish to view all database queries.</p>
+<div class="versionchanged">
+<span class="title">Changed in Django 4.0:</span> <p>The database <code class="docutils literal notranslate"><span class="pre">alias</span></code> was added to log messages.</p>
+</div>
+</div>
+<div class="section" id="s-django-security">
+<span id="s-django-security-logger"></span><span id="django-security"></span><span id="django-security-logger"></span><h4><code class="docutils literal notranslate"><span class="pre">django.security.*</span></code><a class="headerlink" href="#django-security" title="Permalink to this headline">¶</a></h4>
+<p>The security loggers will receive messages on any occurrence of
+<a class="reference internal" href="exceptions.html#django.core.exceptions.SuspiciousOperation" title="django.core.exceptions.SuspiciousOperation"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SuspiciousOperation</span></code></a> and other security-related
+errors. There is a sub-logger for each subtype of security error, including all
+<code class="docutils literal notranslate"><span class="pre">SuspiciousOperation</span></code>s. The level of the log event depends on where the
+exception is handled.  Most occurrences are logged as a warning, while
+any <code class="docutils literal notranslate"><span class="pre">SuspiciousOperation</span></code> that reaches the WSGI handler will be logged as an
+error. For example, when an HTTP <code class="docutils literal notranslate"><span class="pre">Host</span></code> header is included in a request from
+a client that does not match <a class="reference internal" href="settings.html#std:setting-ALLOWED_HOSTS"><code class="xref std std-setting docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span></code></a>, Django will return a 400
+response, and an error message will be logged to the
+<code class="docutils literal notranslate"><span class="pre">django.security.DisallowedHost</span></code> logger.</p>
+<p>These log events will reach the <code class="docutils literal notranslate"><span class="pre">django</span></code> logger by default, which mails error
+events to admins when <code class="docutils literal notranslate"><span class="pre">DEBUG=False</span></code>. Requests resulting in a 400 response due
+to a <code class="docutils literal notranslate"><span class="pre">SuspiciousOperation</span></code> will not be logged to the <code class="docutils literal notranslate"><span class="pre">django.request</span></code>
+logger, but only to the <code class="docutils literal notranslate"><span class="pre">django.security</span></code> logger.</p>
+<p>To silence a particular type of <code class="docutils literal notranslate"><span class="pre">SuspiciousOperation</span></code>, you can override that
+specific logger following this example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;null&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.NullHandler&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+<span class="s1">&#39;loggers&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;django.security.DisallowedHost&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;null&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>Other <code class="docutils literal notranslate"><span class="pre">django.security</span></code> loggers not based on <code class="docutils literal notranslate"><span class="pre">SuspiciousOperation</span></code> are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">django.security.csrf</span></code>: For <a class="reference internal" href="csrf.html#csrf-rejected-requests"><span class="std std-ref">CSRF failures</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="s-django-db-backends-schema">
+<span id="django-db-backends-schema"></span><h4><code class="docutils literal notranslate"><span class="pre">django.db.backends.schema</span></code><a class="headerlink" href="#django-db-backends-schema" title="Permalink to this headline">¶</a></h4>
+<p>Logs the SQL queries that are executed during schema changes to the database by
+the <a class="reference internal" href="../topics/migrations.html"><span class="doc">migrations framework</span></a>. Note that it won’t log the
+queries executed by <a class="reference internal" href="migration-operations.html#django.db.migrations.operations.RunPython" title="django.db.migrations.operations.RunPython"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunPython</span></code></a>.
+Messages to this logger have <code class="docutils literal notranslate"><span class="pre">params</span></code> and <code class="docutils literal notranslate"><span class="pre">sql</span></code> in their extra context (but
+unlike <code class="docutils literal notranslate"><span class="pre">django.db.backends</span></code>, not duration). The values have the same meaning
+as explained in <a class="reference internal" href="#django-db-logger"><span class="std std-ref">django.db.backends</span></a>.</p>
+</div>
+</div>
+<div class="section" id="s-handlers">
+<span id="handlers"></span><h3>Handlers<a class="headerlink" href="#handlers" title="Permalink to this headline">¶</a></h3>
+<p>Django provides one log handler in addition to <a class="reference external" href="https://docs.python.org/3/library/logging.handlers.html#module-logging.handlers" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">those</span> <span class="pre">provided</span> <span class="pre">by</span> <span class="pre">the</span>
+<span class="pre">Python</span> <span class="pre">logging</span> <span class="pre">module</span></code></a>.</p>
+<dl class="class">
+<dt id="django.utils.log.AdminEmailHandler">
+<em class="property">class </em><code class="descname">AdminEmailHandler</code>(<em>include_html=False</em>, <em>email_backend=None</em>, <em>reporter_class=None</em>)<a class="headerlink" href="#django.utils.log.AdminEmailHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>This handler sends an email to the site <a class="reference internal" href="settings.html#std:setting-ADMINS"><code class="xref std std-setting docutils literal notranslate"><span class="pre">ADMINS</span></code></a> for each log
+message it receives.</p>
+<p>If the log record contains a <code class="docutils literal notranslate"><span class="pre">request</span></code> attribute, the full details
+of the request will be included in the email. The email subject will
+include the phrase “internal IP” if the client’s IP address is in the
+<a class="reference internal" href="settings.html#std:setting-INTERNAL_IPS"><code class="xref std std-setting docutils literal notranslate"><span class="pre">INTERNAL_IPS</span></code></a> setting; if not, it will include “EXTERNAL IP”.</p>
+<p>If the log record contains stack trace information, that stack
+trace will be included in the email.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">include_html</span></code> argument of <code class="docutils literal notranslate"><span class="pre">AdminEmailHandler</span></code> is used to
+control whether the traceback email includes an HTML attachment
+containing the full content of the debug web page that would have been
+produced if <a class="reference internal" href="settings.html#std:setting-DEBUG"><code class="xref std std-setting docutils literal notranslate"><span class="pre">DEBUG</span></code></a> were <code class="docutils literal notranslate"><span class="pre">True</span></code>. To set this value in your
+configuration, include it in the handler definition for
+<code class="docutils literal notranslate"><span class="pre">django.utils.log.AdminEmailHandler</span></code>, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.AdminEmailHandler&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;include_html&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>Be aware of the <a class="reference internal" href="../topics/logging.html#logging-security-implications"><span class="std std-ref">security implications of logging</span></a> when using the <code class="docutils literal notranslate"><span class="pre">AdminEmailHandler</span></code>.</p>
+<p>By setting the <code class="docutils literal notranslate"><span class="pre">email_backend</span></code> argument of <code class="docutils literal notranslate"><span class="pre">AdminEmailHandler</span></code>, the
+<a class="reference internal" href="../topics/email.html#topic-email-backends"><span class="std std-ref">email backend</span></a> that is being used by the
+handler can be overridden, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.AdminEmailHandler&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email_backend&#39;</span><span class="p">:</span> <span class="s1">&#39;django.core.mail.backends.filebased.EmailBackend&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>By default, an instance of the email backend specified in
+<a class="reference internal" href="settings.html#std:setting-EMAIL_BACKEND"><code class="xref std std-setting docutils literal notranslate"><span class="pre">EMAIL_BACKEND</span></code></a> will be used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">reporter_class</span></code> argument of <code class="docutils literal notranslate"><span class="pre">AdminEmailHandler</span></code> allows providing
+an <code class="docutils literal notranslate"><span class="pre">django.views.debug.ExceptionReporter</span></code> subclass to customize the
+traceback text sent in the email body. You provide a string import path to
+the class you wish to use, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.AdminEmailHandler&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;include_html&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;reporter_class&#39;</span><span class="p">:</span> <span class="s1">&#39;somepackage.error_reporter.CustomErrorReporter&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="django.utils.log.AdminEmailHandler.send_mail">
+<code class="descname">send_mail</code>(<em>subject</em>, <em>message</em>, <em>*args</em>, <em>**kwargs</em>)<a class="headerlink" href="#django.utils.log.AdminEmailHandler.send_mail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends emails to admin users. To customize this behavior, you can
+subclass the <a class="reference internal" href="#django.utils.log.AdminEmailHandler" title="django.utils.log.AdminEmailHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdminEmailHandler</span></code></a> class and
+override this method.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="s-filters">
+<span id="filters"></span><h3>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h3>
+<p>Django provides some log filters in addition to those provided by the Python
+logging module.</p>
+<dl class="class">
+<dt id="django.utils.log.CallbackFilter">
+<em class="property">class </em><code class="descname">CallbackFilter</code>(<em>callback</em>)<a class="headerlink" href="#django.utils.log.CallbackFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>This filter accepts a callback function (which should accept a single
+argument, the record to be logged), and calls it for each record that
+passes through the filter. Handling of that record will not proceed if the
+callback returns False.</p>
+<p>For instance, to filter out <a class="reference internal" href="exceptions.html#django.http.UnreadablePostError" title="django.http.UnreadablePostError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">UnreadablePostError</span></code></a>
+(raised when a user cancels an upload) from the admin emails, you would
+create a filter function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">UnreadablePostError</span>
+
+<span class="k">def</span> <span class="nf">skip_unreadable_post</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">:</span>
+        <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc_value</span><span class="p">,</span> <span class="n">UnreadablePostError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>and then add it to your logging config:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;skip_unreadable_posts&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;()&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.CallbackFilter&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;callback&#39;</span><span class="p">:</span> <span class="n">skip_unreadable_post</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+<span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;skip_unreadable_posts&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.AdminEmailHandler&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="django.utils.log.RequireDebugFalse">
+<em class="property">class </em><code class="descname">RequireDebugFalse</code><a class="headerlink" href="#django.utils.log.RequireDebugFalse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This filter will only pass on records when settings.DEBUG is False.</p>
+<p>This filter is used as follows in the default <a class="reference internal" href="settings.html#std:setting-LOGGING"><code class="xref std std-setting docutils literal notranslate"><span class="pre">LOGGING</span></code></a>
+configuration to ensure that the <a class="reference internal" href="#django.utils.log.AdminEmailHandler" title="django.utils.log.AdminEmailHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdminEmailHandler</span></code></a> only sends
+error emails to admins when <a class="reference internal" href="settings.html#std:setting-DEBUG"><code class="xref std std-setting docutils literal notranslate"><span class="pre">DEBUG</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;require_debug_false&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;()&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.RequireDebugFalse&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+<span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;require_debug_false&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.AdminEmailHandler&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="django.utils.log.RequireDebugTrue">
+<em class="property">class </em><code class="descname">RequireDebugTrue</code><a class="headerlink" href="#django.utils.log.RequireDebugTrue" title="Permalink to this definition">¶</a></dt>
+<dd><p>This filter is similar to <a class="reference internal" href="#django.utils.log.RequireDebugFalse" title="django.utils.log.RequireDebugFalse"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireDebugFalse</span></code></a>, except that records are
+passed only when <a class="reference internal" href="settings.html#std:setting-DEBUG"><code class="xref std std-setting docutils literal notranslate"><span class="pre">DEBUG</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Logging</a><ul>
+<li><a class="reference internal" href="#django-s-default-logging-configuration">Django’s default logging configuration</a><ul>
+<li><a class="reference internal" href="#default-logging-conditions">Default logging conditions</a></li>
+<li><a class="reference internal" href="#default-logging-definition">Default logging definition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#django-logging-extensions">Django logging extensions</a><ul>
+<li><a class="reference internal" href="#loggers">Loggers</a><ul>
+<li><a class="reference internal" href="#django"><code class="docutils literal notranslate"><span class="pre">django</span></code></a></li>
+<li><a class="reference internal" href="#django-request"><code class="docutils literal notranslate"><span class="pre">django.request</span></code></a></li>
+<li><a class="reference internal" href="#django-server"><code class="docutils literal notranslate"><span class="pre">django.server</span></code></a></li>
+<li><a class="reference internal" href="#django-template"><code class="docutils literal notranslate"><span class="pre">django.template</span></code></a></li>
+<li><a class="reference internal" href="#django-db-backends"><code class="docutils literal notranslate"><span class="pre">django.db.backends</span></code></a></li>
+<li><a class="reference internal" href="#django-security"><code class="docutils literal notranslate"><span class="pre">django.security.*</span></code></a></li>
+<li><a class="reference internal" href="#django-db-backends-schema"><code class="docutils literal notranslate"><span class="pre">django.db.backends.schema</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#handlers">Handlers</a></li>
+<li><a class="reference internal" href="#filters">Filters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="forms/validation.html"
+                        title="previous chapter">Form and field validation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="middleware.html"
+                        title="next chapter">Middleware</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/logging.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+              <h3>Last update:</h3>
+              <p class="topless">Jan 05, 2022</p>
+          </div>
+        
+      
+    </div>
+
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="forms/validation.html" title="Form and field validation">previous</a>
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="middleware.html" title="Middleware">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

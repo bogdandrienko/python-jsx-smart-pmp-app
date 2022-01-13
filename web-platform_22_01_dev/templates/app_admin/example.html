@@ -1,0 +1,292 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Шаблон
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}{% endblock header %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="text-center">
+    <h1 class="display-6 fst-italic">Шаблон</h1>
+    <small class="text-secondary">Содержит форму с максимом вариаций и полей.</small>
+</div>
+
+{% if response == 0 %}
+
+    <hr/>
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="accordion_heading_1">
+                <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#accordion_collapse_1"
+                    aria-expanded="false"
+                    aria-controls="accordion_collapse_1"
+                >accordion_heading_1</button>
+            </h2>
+            <div
+                id="accordion_collapse_1"
+                class="accordion-collapse collapse"
+                aria-labelledby="accordion_collapse_1"
+                data-bs-parent="#accordionExample"
+            >
+                <div class="accordion-body">
+
+                    accordion_collapse_1
+
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="accordion_heading_2">
+                <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#accordion_collapse_2"
+                    aria-expanded="false"
+                    aria-controls="accordion_collapse_2"
+                >accordion_heading_2</button>
+            </h2>
+            <div
+                id="accordion_collapse_2"
+                class="accordion-collapse collapse"
+                aria-labelledby="accordion_collapse_2"
+                data-bs-parent="#accordionExample"
+            >
+                <div class="accordion-body">
+
+                    accordion_collapse_2
+
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="accordion_heading_3">
+                <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#accordion_collapse_3"
+                    aria-expanded="false"
+                    aria-controls="accordion_collapse_3"
+                >accordion_heading_3</button>
+            </h2>
+            <div
+                id="accordion_collapse_3"
+                class="accordion-collapse collapse"
+                aria-labelledby="accordion_collapse_3"
+                data-bs-parent="#accordionExample"
+            >
+                <div class="accordion-body">
+
+                    accordion_collapse_3
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div>
+        <p>
+        <a class="btn btn-lg btn-outline-dark"
+           data-bs-toggle="collapse"
+           href="#collapse1"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapse1"
+        >collapse1</a>
+        <button class="btn btn-lg btn-outline-dark"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse2"
+                aria-expanded="false"
+                aria-controls="collapse2"
+        >collapse1</button>
+        <button class="btn btn-lg btn-outline-dark"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target=".multi-collapse"
+                aria-expanded="false"
+                aria-controls="collapse1 collapse2"
+        >collapse1 collapse2</button>
+        </p>
+        <div class="row">
+            <div class="col">
+                <div class="collapse multi-collapse" id="collapse1">
+                    <div class="card card-body">
+
+                        collapse1
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="collapse multi-collapse" id="collapse2">
+                    <div class="card card-body">
+
+                        collapse2
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <table class="table table-bordered table-info table-striped table-hover table-sm">
+        <thead>
+            <tr>
+
+                {% for arr_1 in data.0 %}
+
+                    {% if forloop.counter == 1 %}
+
+                        <th scope="col" class="text-center">{{ arr_1 }}</th>
+
+                    {% else %}
+
+                        <th scope="col" class="text-center">{{ arr_1 }}</th>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for arr_1 in data.1 %}
+
+                <tr>
+
+                    {% for arr_2 in arr_1 %}
+
+                        {% if forloop.counter == 1 %}
+
+                            <td colspan="2" rowspan="1" class="align-bottom text-center">{{ arr_2 }}</td>
+
+                        {% else %}
+
+                            <td colspan="1"  rowspan="1" class="align-top text-center">{{ arr_2 }}</td>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    <hr/>
+
+    <div class="container-fluid">
+        <form action="{% url 'idea_create' %}"
+                  method="POST"
+                  target="_self"
+                  enctype="multipart/form-data"
+                  name="idea_create"
+                  autocomplete="on"
+                  class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <label class="form-control-lg m-1">
+                    Название:
+                    <input type="text"
+                           id="name_char_field"
+                           name="name_char_field"
+                           required=""
+                           placeholder="Название"
+                           value=""
+                           minlength="1"
+                           maxlength="32"
+                           class="form-control form-control-lg"
+                    />
+                    <small class="text-muted">длина: не более 32 символов</small>
+                </label>
+            </div>
+            <hr/>
+            <div class="container-fluid text-center">
+                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                    <li class="m-1">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Подтвердить</button>
+                    </li>
+                    <li class="m-1">
+                        <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
+                    </li>
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-primary" href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-success" href="">Повторить</a>
+                    </li>
+                    <li class="m-1">
+                        <a class="btn btn-lg btn-outline-warning" href="#">ВВЕРХ!</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <hr/>
+
+{% elif response == 1 %}
+
+      {% include 'components/success.html' %}
+
+      {% if data %}
+
+          {% include 'components/table.html' %}
+
+      {% else %}
+
+          {% include 'components/aborted.html' %}
+
+      {% endif %}
+
+{% else %}
+
+    {% include 'components/aborted.html' %}
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

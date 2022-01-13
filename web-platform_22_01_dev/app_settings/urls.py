@@ -24,6 +24,7 @@ urlpatterns = [
     path('drf/', include('rest_framework.urls')),
 
     path('', include('app_admin.urls')),
+    path('', include('app_django.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
