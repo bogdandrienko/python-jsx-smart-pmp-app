@@ -1,0 +1,300 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load access_tag %}
+{% load idea_list_tag %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Список идей в банке идей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Список идей
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит список идей в банке идей, также есть поле для поиска по названию и сортировки по категориям.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == -1 %}
+    {% include 'components/aborted.html' %}
+{% else %}
+    <div class="container-fluid text-center">
+        <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+            <li class="m-1">
+                <form action="{% url 'idea_list' 'All' %}"
+                      method="POST"
+                      target="_self"
+                      enctype="multipart/form-data"
+                      name="idea_list All"
+                      autocomplete="on"
+                      class="text-center"
+                >
+                    {% csrf_token %}
+                    <div>
+                        <label class="form-control-lg">
+                            Поиск:
+                            <input type="text"
+                                   id="search_char_field"
+                                   name="search_char_field"
+                                   required=""
+                                   placeholder="Что ищем?"
+                                   value=""
+                                   minlength="1"
+                                   maxlength="32"
+                                   class="form-control form-control-lg"
+                            />
+                            <small class="text-muted">введите часть названия проекта</small>
+                        </label>
+                    </div>
+                    <div class="container-fluid text-center">
+                        <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                            <li class="m-1">
+                                <button class="btn btn-lg btn-outline-primary" type="submit">Найти</button>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </li>
+            <li class="m-1">
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'idea_list' 'All' %}">Все идеи</a>
+            </li>
+            {% access_tag 'idea_moderator' as idea_moderator %}
+            {% if idea.visibility_boolean_field or idea_moderator %}
+                <li class="p-1">
+                    <a class="btn btn-sm btn-outline-danger" href="{% url 'idea_list' 'idea_change_visibility' %}">На модерации</a>
+                </li>
+            {% endif %}
+            {% for category in categoryes %}
+                <li class="m-1">
+                    {% if forloop.counter == 1 %}
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                    {% elif forloop.counter == 2 %}
+                        <a class="btn btn-sm btn-outline-warning" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                    {% elif forloop.counter == 3 %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                    {% elif forloop.counter == 4 %}
+                        <a class="btn btn-sm btn-outline-dark" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                    {% else %}
+                        <a class="btn btn-sm btn-outline-dark" href="{% url 'idea_list' category.0 %}">{{ category.1 }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if page %}
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+        <div class="container-fluid text-center">
+            <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                {% for idea in page %}
+                    {% access_tag 'idea_moderator' as idea_moderator %}
+                    {% if idea.visibility_boolean_field or idea_moderator %}
+                        <li class="m-1">
+                            <div class="card shadow-sm">
+                                <div class="card-header">
+                                    <a class="text-decoration-none lead text-dark" href="{% url 'idea_view' idea.id %}">
+                                        <strong>{{ idea.name_char_field }}</strong>
+                                    </a>
+                                </div>
+                                <div class="card-header">
+                                    {% if idea_moderator %}
+                                        <form action="{% url 'idea_change_visibility' idea.id %}" method="POST" class="m-1">
+                                            {% csrf_token %}
+                                            {% if idea.visibility_boolean_field %}
+                                                <label class="form-control-lg">
+                                                    Скрыть идею:
+                                                    <input type="text"
+                                                           id="hidden"
+                                                           name="hidden"
+                                                           required=""
+                                                           placeholder=""
+                                                           value="false"
+                                                           minlength="0"
+                                                           maxlength="64"
+                                                           class="form-control form-control-lg d-none"
+                                                    />
+                                                    <small class="text-muted">! функционал модератора !</small>
+                                                </label>
+                                                <button class="btn btn-sm btn-outline-danger" type="submit">скрыть</button>
+                                            {% else %}
+                                                <label class="form-control-lg">
+                                                    Одобрить идею:
+                                                    <input type="text"
+                                                           id="hidden"
+                                                           name="hidden"
+                                                           required=""
+                                                           placeholder=""
+                                                           value="true"
+                                                           minlength="0"
+                                                           maxlength="64"
+                                                           class="form-control form-control-lg d-none"
+                                                    />
+                                                    <small class="text-muted">! функционал модератора !</small>
+                                                </label>
+                                                <button class="btn btn-sm btn-outline-success" type="submit">одобрить</button>
+                                            {% endif %}
+                                        </form>
+                                    {% endif %}
+                                    {% if idea.author_foreign_key_field.user_foreign_key_field.username == request.user.username or idea_moderator %}
+                                        <div class="form-control-lg m-1">
+                                            Редактировать идею:
+                                            <a class="btn btn-sm btn-outline-warning" target="_blank" href="{% url 'idea_change' idea.id %}">Редактировать</a>
+                                        </div>
+                                    {% endif %}
+                                    <div class="container-fluid d-flex justify-content-between">
+                                        {% if idea.author_foreign_key_field %}
+                                            <a class="btn btn-sm btn-outline-success m-1" href="{% url 'account_profile' idea.author_foreign_key_field.id %}">
+                                                Автор:
+                                                    {% if idea.author_foreign_key_field.last_name_char_field %}{{ idea.author_foreign_key_field.last_name_char_field }} {% endif %}
+                                                    {% if idea.author_foreign_key_field.first_name_char_field %}{{ idea.author_foreign_key_field.first_name_char_field }} {% endif %}
+                                                    {% if idea.author_foreign_key_field.patronymic_char_field %}{{ idea.author_foreign_key_field.patronymic_char_field }} {% endif %}
+                                            </a>
+                                        {% else %}
+                                            <small class="m-1">
+                                                Профиль не заполнен
+                                            </small>
+                                        {% endif %}
+                                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'idea_list' idea.get_category.0 %}">{{ idea.get_category.1 }}</a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container-fluid m-1">
+                                        <a href="{% url 'idea_view' idea.id %}">
+                                            {% if idea.avatar_image_field %}
+                                                <img src="{{ idea.avatar_image_field.url }}" class="card-img-top img-fluid" alt="id" style="width: 384px;">
+                                            {% else %}
+                                                <img src="{% static 'img/favicon/logo512.png' %}" class="card-img-top img-fluid" alt="id" style="width: 384px;">
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="container-fluid m-1">
+                                        <small class="text-muted">{{ idea.short_description_char_field }}</small>
+                                    </div>
+                                    <div class="container-fluid d-flex justify-content-between m-1">
+                                        <small class="text-muted">подано: {{ idea.created_datetime_field }}</small>
+                                        <small class="text-muted">зарегистрировано: {{ idea.register_datetime_field }}</small>
+                                    </div>
+                                    <div class="container-fluid btn-group">
+                                        <a class="btn btn-sm btn-outline-primary m-1" href="{% url 'idea_view' idea.id %}">Подробнее</a>
+                                        {% access_tag 'account_create_notification' as account_create_notification %}
+                                        {% if account_create_notification %}
+                                            <form class="m-1" action="{% url 'account_create_notification' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="text"
+                                                       id="type_slug_field"
+                                                       name="type_slug_field"
+                                                       required=""
+                                                       placeholder=""
+                                                       value="notifications"
+                                                       class="form-control form-control-lg d-none"
+                                                />
+                                                <input type="text"
+                                                       id="name_char_field"
+                                                       name="name_char_field"
+                                                       required=""
+                                                       placeholder=""
+                                                       value="Жалоба на статью в банке идей"
+                                                       class="form-control form-control-lg d-none"
+                                                />
+                                                <input type="text"
+                                                       id="text_field"
+                                                       name="text_field"
+                                                       required=""
+                                                       placeholder=""
+                                                       value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
+                                                       class="form-control form-control-lg d-none"
+                                                />
+                                                <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться на идею</button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="card-header">
+                                    <ul class="container-fluid nav col-auto col-md-auto col-lg-auto justify-content-center">
+                                        <li class="m-1">
+                                            <a href="{% url 'idea_view' idea.id %}">
+                                                {% if 0 > idea.get_total_rating %}
+                                                    <div class="btn btn-sm btn-outline-danger">
+                                                        Рейтинг\<sup>оценок</sup>: {{ idea.get_total_rating }}
+                                                        <sup class="text-dark">{{ idea.get_total_rating_value }}</sup>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="btn btn-sm btn-outline-success">
+                                                        Рейтинг\<sup>оценок</sup>: {{ idea.get_total_rating }}
+                                                        <sup class="text-dark">{{ idea.get_total_rating_value }}</sup>
+                                                    </div>
+                                                {% endif %}
+                                            </a>
+                                        </li>
+                                        <li class="m-1">
+                                            <a href="{% url 'idea_view' idea.id %}" class="text-decoration-none">
+                                                {% is_liked_tag idea.id as is_liked_bool %}
+                                                {% if is_liked_bool %}
+                                                    <small class="text-success">Вам понравилось</small>
+                                                {% else %}
+                                                    {% is_disliked_tag idea.id as is_disliked_bool %}
+                                                    {% if is_disliked_bool %}
+                                                        <small class="text-danger">Вам не понравилось</small>
+                                                    {% else %}
+                                                        <small class="text-secondary">Вы не оценили</small>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </a>
+                                        </li>
+                                        <li class="m-1">
+                                            <a href="{% url 'idea_view' idea.id %}">
+                                                <div class="btn btn-sm btn-outline-secondary">Комментариев: {{ idea.get_total_comment_value }}</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <div class="text-end">
+                                        <a class="text-decoration-none lead text-dark" href="{% url 'idea_view' idea.id %}">
+                                            <small>#{{ forloop.revcounter }}</small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+    {% else %}
+        {% include 'components/aborted.html' %}
+    {% endif %}
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

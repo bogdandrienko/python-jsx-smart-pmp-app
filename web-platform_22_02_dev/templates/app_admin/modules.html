@@ -1,0 +1,134 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load access_tag %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Модули или компоненты
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Модули или компоненты
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Доступные Вам модули или компоненты.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+    {% include 'components/success.html' %}
+{% elif response == -1 %}
+    {% include 'components/aborted.html' %}
+{% else %}
+    <div class="container-fluid">
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+            <div class="border shadow text-center">
+                <div class="card-img align-content-center">
+                    {% if modules %}
+                        {% if modules.0.type_slug_field == '0_module' %}
+                            <a href="{% url 'home' %}">
+                        {% else %}
+                            <a href="{% url 'module_or_component' modules.0.previous_path_slug_field %}">
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'home' %}">
+                    {% endif %}
+                        <img src="{% static 'img/return.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if modules %}
+                        {% if modules.0.type_slug_field == '0_module' %}
+                            <a href="{% url 'home' %}" class="text-decoration-none">
+                        {% else %}
+                            <a href="{% url 'module_or_component' modules.0.previous_path_slug_field %}" class="text-decoration-none">
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'home' %}" class="text-decoration-none">
+                    {% endif %}
+                            <h6 class="fst-italic text-uppercase text-dark">Назад</h6>
+                        </a>
+                </div>
+                <div class="card-header">
+                    {% if modules %}
+                        {% if modules.0.type_slug_field == '0_module' %}
+                            <a href="{% url 'home' %}" class="text-decoration-none">
+                        {% else %}
+                            <a href="{% url 'module_or_component' modules.0.previous_path_slug_field %}" class="text-decoration-none">
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'home' %}" class="text-decoration-none">
+                    {% endif %}
+                            <small class="text-muted text-lowercase">вернуться в предыдущее меню.</small>
+                        </a>
+                </div>
+            </div>
+            {% for module in modules %}
+                {% access_tag module.next_path_slug_field as access %}
+                {% if access %}
+                    <div class="border shadow text-center">
+                        <div class="card-img align-content-center">
+                            {% if modules.0.type_slug_field == '2_component' %}
+                                <a href="{% url module.next_path_slug_field %}">
+                            {% else %}
+                                <a href="{% url 'module_or_component' module.next_path_slug_field %}">
+                            {% endif %}
+                                {% if module.image_field %}
+                                    <img src="{{ module.image_field.url }}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
+                                {% else %}
+                                    <img src="{% static 'img/modules.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            {% if modules.0.type_slug_field == '2_component' %}
+                                <a href="{% url module.next_path_slug_field %}" class="text-decoration-none">
+                            {% else %}
+                                <a href="{% url 'module_or_component' module.next_path_slug_field %}" class="text-decoration-none">
+                            {% endif %}
+                                    <h6 class="fst-italic text-uppercase text-dark">{{ module.name_char_field }}</h6>
+                                </a>
+                        </div>
+                        <div class="card-header">
+                            {% if modules.0.type_slug_field == '2_component' %}
+                                <a href="{% url module.next_path_slug_field %}" class="text-decoration-none">
+                            {% else %}
+                                <a href="{% url 'module_or_component' module.next_path_slug_field %}" class="text-decoration-none">
+                            {% endif %}
+                                    <small class="text-muted text-lowercase">{{ module.text_field }}</small>
+                                </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

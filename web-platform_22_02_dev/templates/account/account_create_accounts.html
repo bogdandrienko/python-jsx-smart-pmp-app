@@ -1,0 +1,153 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Создание/изменение пользователей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Создание/изменение пользователей
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит шаблон и форму для создания или изменения пользователей.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+
+    {% include 'components/success.html' %}
+
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="container">
+        <div class="text-center">
+            <a class="btn btn-lg btn-outline-success"
+               href="{% static 'media/admin/account/create_users.xlsx' %}"
+            >Скачать шаблон для заполнения</a>
+        </div>
+
+        <form action="{% url 'account_create_or_change_accounts' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="account_create_or_change_accounts many"
+              autocomplete="on"
+              class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label class="form-control-lg m-1">
+                        Заполненный шаблон для создания пользователей:
+                        <input type="file"
+                               id="excel_file"
+                               name="excel_file"
+                               required=""
+                               accept=".xlsx, .xls"
+                               class="form-control form-control-lg"
+                        />
+                        <small class="text-muted">шаблон: заполненный excel-шаблон с пользователями (xlsx/xls)</small>
+                    </label>
+                </div>
+
+                <div>
+                    <label class="form-check-label form-control-lg m-1" for="force_change_account">
+                        Перезаписать данные уже существующего пользователя?
+                        <div class="form-switch">
+                            <input type="checkbox"
+                                   id="force_change_account"
+                                   name="force_change_account"
+    {#                                               required=""#}
+                                   value=""
+    {#                                               checked="checked"#}
+                                   class="form-check-input"
+                            />
+                        </div>
+                        <small class="text-muted">отметьте, если нужно заменить данные</small>
+                    </label>
+
+                    <label class="form-check-label form-control-lg m-1 for="force_change_password">
+                        Перезаписать пароль уже существующего пользователя?
+                        <div class="form-switch">
+                            <input type="checkbox"
+                                   id="force_change_password"
+                                   name="force_change_password"
+    {#                                               required=""#}
+                                   value=""
+    {#                                               checked="checked"#}
+                                   class="form-check-input"
+                            />
+                        </div>
+                        <small class="text-muted">отметьте, если нужно заменить пароль</small>
+                    </label>
+
+                    <label class="form-check-label form-control-lg m-1" for="force_clear_groups">
+                        Очистить группы уже существующего пользователя?
+                        <div class="form-switch">
+                            <input type="checkbox"
+                                   id="force_clear_groups"
+                                   name="force_clear_groups"
+    {#                                               required=""#}
+                                   value=""
+    {#                                               checked="checked"#}
+                                   class="form-check-input"
+                            />
+                        </div>
+                        <small class="text-muted">отметьте, если нужно очистить группы</small>
+                    </label>
+                </div>
+            </div>
+            <hr/>
+            <div class="container text-center">
+                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <div class="m-1">
+                        <button href=""
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary form-control"
+                        >Подтвердить</button>
+                    </div>
+
+                    <div class="m-1">
+                        <button href=""
+                                type="reset"
+                                class="btn btn-lg btn-outline-warning form-control"
+                        >Сбросить</button>
+                    </div>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

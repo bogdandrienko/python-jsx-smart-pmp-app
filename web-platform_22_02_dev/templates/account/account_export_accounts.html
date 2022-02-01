@@ -1,0 +1,100 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Выгрузить пользователей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Выгрузить пользователей
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит форму для выгрузки пользователей.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+
+    {% include 'components/success.html' %}
+
+    <div class="text-center m-1">
+        <a class="btn btn-lg btn-outline-success"
+           href="{% static 'media/admin/account/export_users.xlsx' %}"
+        >Скачать результат</a>
+    </div>
+
+    {% if data %}
+
+        {% include 'components/table.html' %}
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="container">
+        <form action="{% url 'account_export_accounts' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="account_export_accounts"
+              autocomplete="on"
+              class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <label class="form-control-lg m-1">
+                    Нажмите, чтобы выгрузить пользователей системы:
+                    <small class="text-muted">данные будут доступны в виде таблицы и excel-файла</small>
+                </label>
+            </div>
+            <hr/>
+            <div class="container text-center">
+                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <div class="m-1">
+                        <button href=""
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary form-control"
+                        >Подтвердить</button>
+                    </div>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

@@ -1,0 +1,104 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Обновить пользователей из 1С
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Обновить пользователей из 1С
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит форму для обновления пользователей из внутренней базы 1С.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+
+    {% include 'components/success.html' %}
+
+    {% if data %}
+
+        {% include 'components/table.html' %}
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+    {% if data %}
+
+        {% include 'components/table.html' %}
+
+    {% else %}
+
+        {% include 'components/aborted.html' %}
+
+    {% endif %}
+
+{% else %}
+
+    <div class="container">
+        <form action="{% url 'account_update_accounts_1c' %}" {# action="/home" #} {# action="http://127.0.0.1:8000/examples/" #}
+              method="POST" {# method="GET" #}
+              target="_self" {# target="_self" #} {# target="_blank" #} {# target="_parent" #} {# target="_top" #}
+              enctype="multipart/form-data"
+              name="account_update_accounts_1c"
+              autocomplete="on"
+              class="text-center" {# class="text-center form-control form-control-lg" #}
+        >
+            {% csrf_token %}
+            <div>
+                <label class="form-control-lg">
+                    Нажмите, чтобы обновить пользователей системы из базы данных 1С:
+                    <small class="text-muted">данные обновленных пользователей будут доступны в виде таблицы</small>
+                </label>
+            </div>
+            <hr/>
+            <div class="container text-center">
+                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <div class="m-1">
+                        <button href=""
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary form-control"
+                        >Подтвердить</button>
+                    </div>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

@@ -1,0 +1,157 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load idea_list_tag %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Рейтинги в банке идей
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Рейтинги
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Содержит список рейтингов в банке идей.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == -1 %}
+    {% include 'components/aborted.html' %}
+{% else %}
+
+    <div class="container-fluid text-center">
+        <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+            <li class="p-1">
+                <label class="form-control-lg">
+                    Сортировка рейтинга:
+                    <small class="text-muted">выберите тип сортировки.</small>
+                </label>
+            </li>
+            <li class="p-1">
+                <form action="{% url 'idea_rating' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="form-control" type="hidden" name="sorted" value="rating">
+                    {% if sorted %}
+                        <button class="btn btn-lg btn-success" type="submit">По рейтингу</button>
+                    {% else %}
+                        <button class="btn btn-lg btn-outline-success" type="submit">По рейтингу</button>
+                    {% endif %}
+                </form>
+            </li>
+            <li class="p-1">
+                <form action="{% url 'idea_rating' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="form-control" type="hidden" name="sorted" value="count">
+                    {% if sorted %}
+                        <button class="btn btn-lg btn-outline-success" type="submit">По количеству</button>
+                    {% else %}
+                        <button class="btn btn-lg btn-success" type="submit">По количеству</button>
+                    {% endif %}
+                </form>
+            </li>
+        </ul>
+    </div>
+    {% if page %}
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+        <div class="container-fluid text-center">
+            <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                {% for account in page %}
+                    <li class="m-1">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h4 class="text-dark fw-normal text-end">
+                                    <strong># {{ forloop.counter }}</strong>
+                                </h4>
+                                {% if account.author.last_name_char_field or account.author.first_name_char_field or account.author.patronymic_char_field %}
+                                    <a class="text-decoration-none lead text-dark" href="{% url 'account_profile' account.author.id %}">
+                                        <strong>
+                                            {% if account.author.last_name_char_field %}{{ account.author.last_name_char_field }} {% endif %}
+                                            {% if account.author.first_name_char_field %}{{ account.author.first_name_char_field }} {% endif %}
+                                            {% if account.author.patronymic_char_field %}{{ account.author.patronymic_char_field }} {% endif %}
+                                        </strong>
+                                    </a>
+                                {% else %}
+                                    <a class="text-decoration-none lead text-dark" href="{% url 'account_profile' account.author.id %}">
+                                        <strong>Данные аккаунта не заполнены</strong>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            {% if account.author.position_char_field or account.author.subdivision_char_field %}
+                                <div class="card-body">
+                                    <div class="container-fluid">
+                                        <div class="text-start">
+                                            {% if account.author.position_char_field %}
+                                                <small class="text-link-dark">{{ account.author.position_char_field }}</small>
+                                            {% endif %}
+                                        </div>
+                                        <div class="text-end">
+                                            {% if account.author.subdivision_char_field %}
+                                                <small class="text-link-dark">{{ account.author.subdivision_char_field }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="card-body">
+                                <a href="{% url 'account_profile' account.author.id %}">
+                                    {% if account.author.image_field %}
+                                        <img src="{{ account.author.image_field.url }}" class="img-fluid" alt="{{ account.author.id }}" style="width: 256px;">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a class="btn btn-lg btn-outline-primary w-100 p-1" href="{% url 'account_profile' account.author.id %}">Подробнее</a>
+                                <div class="container-fluid d-flex justify-content-between">
+                                    <strong class="p-1">Идеи: {{ account.count }}</strong>
+                                    {% if account.rating > 0 %}
+                                        <strong class="p-1 text-success">Рейтинг: {{ account.rating }}</strong>
+                                    {% else %}
+                                        <strong class="p-1 text-danger">Рейтинг: {{ account.rating }}</strong>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-header">
+                                Дата регистрации:
+                                <small class="text-end">{{ account.author.user_foreign_key_field.date_joined }}</small>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+    {% else %}
+        {% include 'components/aborted.html' %}
+    {% endif %}
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

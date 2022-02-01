@@ -1,0 +1,89 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Скрытый чат
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Скрытый чат
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Скрытый чат, могут видеть только те, у кого есть ссылка.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<main class="container-fluid">
+    <div class="container">
+        <form action="{% url 'react' %}"
+                  method="POST"
+                  target="_self"
+                  enctype="multipart/form-data"
+                  name="react"
+                  autocomplete="on"
+                  class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label class="form-control form-control-lg m-1">
+                        Введите текст сообщения и нажмите отправить:
+                        <textarea type="text"
+                                  id="text"
+                                  name="text"
+                                  required=""
+                                  placeholder="вводить текст тут..."
+                                  minlength="1"
+                                  maxlength="1024"
+                                  rows="3"
+                                  class="form-control form-control-lg"
+                        ></textarea>
+                        <small class="text-muted">длина: не более 1024 символов</small>
+                    </label>
+                </div>
+            </div>
+            <hr/>
+            <div class="container-fluid text-center">
+                <ul class="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                    <li class="m-1">
+                        <button class="btn btn-lg btn-outline-primary" type="submit">Отправить</button>
+                    </li>
+                    <li class="m-1">
+                        <button class="btn btn-lg btn-outline-warning" type="reset">Сбросить</button>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div id="list" class=""></div>
+</main>
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}
+        <script src="{% static 'js/react.js' %}"></script>
+{% endblock script %}
