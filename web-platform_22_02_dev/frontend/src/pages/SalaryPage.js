@@ -22,7 +22,9 @@ const SalaryPage = () => {
 
   const [headers, setHeaders] = useState([]);
   const [tables, setTables] = useState([]);
+  const [excel, setExcel] = useState([]);
   const [error, setError] = useState(false);
+  const [errorText, setErrorText] = useState({});
   const [finishLoading, setFinishLoading] = useState(false);
 
   const getSalary = async () => {
@@ -43,11 +45,20 @@ const SalaryPage = () => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.post(
-      `/api/salary`,
-      { Datetime: `${year_}${month_}` },
-      config
-    );
+    const { data } = await axios
+      .post(`/api/salary`, { Datetime: `${year_}${month_}` }, config)
+      .catch((error) => {
+        if (error.response) {
+          setErrorText({'data': `${error.response.status} : ${error.response.statusText}`})
+          setError(true);
+          setFinishLoading(true);
+          const newType = loader.getAttribute("class") === "d-none" ? "" : "d-none";
+          loader.setAttribute("class", newType);
+        }
+      });
+    if (data['texterror']) {
+      setErrorText({'data': `${data['texterror']}`})
+    }
 
     const newType = loader.getAttribute("class") === "d-none" ? "" : "d-none";
     loader.setAttribute("class", newType);
@@ -56,7 +67,7 @@ const SalaryPage = () => {
     } else {
       const headers = [];
       for (let i in data) {
-        if (i !== "global_objects") {
+        if (i !== "global_objects" && i !== "excel_path") {
           headers.push([i, data[i]]);
         }
       }
@@ -75,6 +86,8 @@ const SalaryPage = () => {
       setHeaders(headers);
       setTables(tables);
       setError(false);
+
+      setExcel(data["excel_path"]);
     }
     setFinishLoading(true);
   };
@@ -208,9 +221,14 @@ const SalaryPage = () => {
               <Loader />
             </div>
             {finishLoading && error ? (
-              <p className="lead text-danger">
-                Произошла ошибка, попробуйте повторить позднее!
-              </p>
+              <div>
+                <p className="lead text-danger">
+                  Произошла ошибка! Перезагрузите страницу или ожидайте исправления.
+                </p>
+                <p className="lead text-warning">
+                  код и статус ошибки: "{errorText['data']}"
+                </p>
+              </div>
             ) : (
               ""
             )}
@@ -219,9 +237,16 @@ const SalaryPage = () => {
                 <p className="text-muted">
                   Ниже расположены данные, соответствующие выбранному периоду:
                 </p>
+                {excel ? (
+                  <a class="btn btn-lg btn-success m-1" href={`./${excel}`}>
+                    Скачать excel-документ
+                  </a>
+                ) : (
+                  ""
+                )}
                 <button
                   onClick={window.print}
-                  className="btn btn-lg btn-outline-primary"
+                  className="btn btn-lg btn-outline-success m-1"
                 >
                   печать или сохранить в pdf
                 </button>

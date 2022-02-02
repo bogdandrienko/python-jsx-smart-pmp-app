@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import Title from "../components/Title";
 import Footer from "../components/Footer";
 import Modules from "../components/Modules";
+import News from "../components/News";
 
 const HomePage = () => {
   return (
@@ -19,21 +20,31 @@ const HomePage = () => {
         second={"основная страница веб платформы."}
       />
       <main className="container text-center">
-        <div>
-          <small className="lead fw-bold">Первый вход в систему:</small>
-          <div className="embed-responsive embed-responsive-16by9">
-            <iframe
-              className="embed-responsive-item"
-              width="80%"
-              height="80%"
-              src="https://www.youtube.com/embed/WlC8iXpn2vA"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              controls
-            />
+        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 align-content-between">
+          <div className="text-center">
+            <small className="lead fw-bold">Первый вход в систему:</small>
+            <div className="embed-responsive embed-responsive-16by9">
+              <iframe
+                className="embed-responsive-item"
+                width="80%"
+                height="80%"
+                src="https://www.youtube.com/embed/WlC8iXpn2vA"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                controls
+              />
+            </div>
+            <LinkContainer to="/video_study">
+              <Nav.Link>
+                <small className="fw-bold btn btn-warning">
+                  Все видео-инструкции
+                </small>
+              </Nav.Link>
+            </LinkContainer>
           </div>
+          <News />
         </div>
         <div>
           <Modules />

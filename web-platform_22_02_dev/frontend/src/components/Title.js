@@ -15,10 +15,12 @@ const Title = ({ first = "Заголовок", second = "подзаголово�
   }, [location.pathname, navigate, userInfo]);
 
   return (
-    <header className="text-center container">
-      <h1 className="display-6">{first}</h1>
-      <p className="lead text-secondary">{second}</p>
-    </header>
+    <div className="text-center m-1">
+      <header className="text-center container card">
+        <h6 className="lead">{first}</h6>
+        <small className="text-muted">{second}</small>
+      </header>
+    </div>
   );
 };
 

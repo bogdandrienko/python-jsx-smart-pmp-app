@@ -225,7 +225,8 @@ def note_api(request, pk=None):
             return Response(serializer.data)
     elif request.method == 'POST':
         data = request.data
-        note = backend_models.NoteModel.objects.create(body=data['body'], user=User.objects.get(username=request.user.username))
+        note = backend_models.NoteModel.objects.create(body=data['body'],
+                                                       user=User.objects.get(username=request.user.username))
         serializer = backend_serializers.NoteSerializer(note, many=False)
         return Response(serializer.data)
     elif request.method == 'PUT':
@@ -405,55 +406,363 @@ def get_product(request, pk):
 @permission_classes([IsAuthenticated])
 def salary_(request):
     try:
+
+        # Временное чтение файла для отладки без доступа к 1С
+        with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
+            json_data = json.loads(json.load(file))
+
+        print('\n\n\n\n\n')
+        print("json_data: ")
+        print(type(json_data))
+        print('\n\n')
+        print(json_data)
+        print('\n\n\n\n\n')
+
         key = backend_service.UtilsClass.create_encrypted_password(
             _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-            _length=10
+            _length=24
         )
-        hash_key_obj = hashlib.sha256()
-        hash_key_obj.update(key.encode('utf-8'))
-        key_hash = str(hash_key_obj.hexdigest().strip().upper())
-        key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-        iin = request.user.username
-        if str(request.user.username).lower() == 'bogdan':
-            iin = 970801351179
-        iin_base64 = base64.b64encode(str(iin).encode()).decode()
-        date_base64 = base64.b64encode(f'{request.data["Datetime"]}'.encode()).decode()
-        url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-        h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-        _login = 'Web_adm_1c'
-        password = '159159qqww!'
-        h.add_credentials(_login, password)
-        try:
-            response, content = h.request(url)
-        except Exception as error:
-            # print(error)
-            content = None
-        if content:
-            _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-            success = True
-            error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
-            for error_word in error_word_list:
-                if _message.find(error_word) >= 0:
+        excel_file = f"static/media/salary/salary_{key}.xlsx"
+        workbook = backend_utils.ExcelClass.workbook_create()
+        sheet = backend_utils.ExcelClass.workbook_activate(workbook)
+
+        # Заголовки
+        header_arr = []
+        for key, value in json_data.items():
+            if key != 'global_objects':
+                if isinstance(value, int) or isinstance(value, float):
+                    if len(f'{value:.2f}') < 10:
+                        value = f'{value:.2f}'[:-6] + ' ' + f'{value:.2f}'[-6:]
+                    else:
+                        value = f'{value:.2f}'[:-9] + ' ' + f'{value:.2f}'[-9:-6] + ' ' + f'{value:.2f}'[-6:]
+                header_arr.append([f'{key}: ', value])
+        print('\n\n\n\n\n')
+        print("header_arr: ")
+        print(type(header_arr))
+        print('\n\n')
+        print(header_arr)
+        print('\n\n\n\n\n')
+
+        row_i = 1
+        for header in header_arr[0:4]:
+            col_i = 1
+            for value in header:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=row_i,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            row_i += 1
+
+        row_i = 1
+        for header in header_arr[4:8]:
+            col_i = 3
+            for value in header:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=row_i,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            row_i += 1
+
+        row_i_2 = row_i
+        for header in header_arr[8:13]:
+            col_i = 1
+            for value in header:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=row_i,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            row_i += 1
+
+        for header in header_arr[13:]:
+            col_i = 3
+            for value in header:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=row_i_2,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            row_i_2 += 1
+
+        # Массив тел
+        body_arr = []
+
+
+
+        summ = 0
+        days = 0
+        hours = 0
+        for key in json_data['global_objects']['1.Начислено'].keys():
+            if key != 'Fields':
+                days += json_data['global_objects']['1.Начислено'][f'{key}']['ВсегоДни']
+                hours += json_data['global_objects']['1.Начислено'][f'{key}']['ВсегоЧасы']
+                summ += json_data['global_objects']['1.Начислено'][f'{key}']['Сумма']
+                print('\n')
+        json_data['global_objects']['1.Начислено']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Дни': days, 'Часы': hours,
+                                                              'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': round(summ, 2)}
+
+        summ = 0
+        for key in json_data['global_objects']['2.Удержано'].keys():
+            if key != 'Fields':
+                summ += json_data['global_objects']['2.Удержано'][f'{key}']['Сумма']
+                print('\n')
+        json_data['global_objects']['2.Удержано']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Сумма': round(summ, 2)}
+
+        print(json_data['global_objects']["2.Удержано"])
+
+        summ = 0
+        for key in json_data['global_objects']['4.Выплачено'].keys():
+            if key != 'Fields':
+                summ += json_data['global_objects']['4.Выплачено'][f'{key}']['Сумма']
+                print('\n')
+        json_data['global_objects']['4.Выплачено']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Сумма': round(summ, 2)}
+
+        print(json_data['global_objects']["4.Выплачено"])
+
+        summ = 0
+        for key in json_data['global_objects']['5.Налоговые вычеты'].keys():
+            if key != 'Fields':
+                summ += json_data['global_objects']['5.Налоговые вычеты'][f'{key}']['Сумма']
+                print('\n')
+        json_data['global_objects']['5.Налоговые вычеты']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Сумма': round(summ, 2)}
+
+        print(json_data['global_objects']["5.Налоговые вычеты"])
+
+        # body_arr = []
+        # for key, value in json_data['global_objects']["1.Начислено"].items():
+        #     print('\n')
+        #     print(key)
+        #     print('\n')
+        #     print(value)
+        #     print('\n')
+        #
+        #     body_arr.append(value)
+        # print('\n\n\n\n\n')
+        # print("body_arr[0]: ")
+        # print(type(body_arr[0]))
+        # print('\n\n')
+        # print(body_arr[0])
+        # print('\n\n\n\n\n')
+
+        backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=excel_file)
+        json_data["excel_path"] = excel_file
+
+        if False:
+            key = backend_service.UtilsClass.create_encrypted_password(
+                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                _length=10
+            )
+            hash_key_obj = hashlib.sha256()
+            hash_key_obj.update(key.encode('utf-8'))
+            key_hash = str(hash_key_obj.hexdigest().strip().upper())
+            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+            iin = request.user.username
+            if str(request.user.username).lower() == 'bogdan':
+                iin = 970801351179
+            iin_base64 = base64.b64encode(str(iin).encode()).decode()
+            date_base64 = base64.b64encode(f'{request.data["Datetime"]}'.encode()).decode()
+            url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+            h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+            _login = 'Web_adm_1c'
+            password = '159159qqww!'
+            h.add_credentials(_login, password)
+            try:
+                response, content = h.request(url)
+            except Exception as error:
+                # print(error)
+                content = None
+            if content:
+                _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                success = True
+                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+                texterror = ''
+                for error_word in error_word_list:
+                    if _message.find(error_word) >= 0:
+                        success = False
+                if _message.find('send') == 0:
+                    texterror = _message.split('send')[1].strip()
                     success = False
-            if _message.find('send') == 0:
-                data = _message.split('send')[1].strip()
+            else:
                 success = False
-        else:
-            success = False
-        if success:
-            json_data = json.loads(backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
-        try:
-            json_data["global_objects"]["3.Доходы в натуральной форме"]
-        except Exception as error:
-            print(error)
-            json_data["global_objects"]["3.Доходы в натуральной форме"] = {
-                "Fields": {
-                    "1": "Вид",
-                    "2": "Период",
-                    "3": "Сумма"
-                },
-            }
+                texterror = 'Неизвестная ошибка'
+
+            if success:
+                json_data = json.loads(
+                    backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                try:
+                    json_data["global_objects"]["3.Доходы в натуральной форме"]
+                except Exception as error:
+                    print(error)
+                    json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                        "Fields": {
+                            "1": "Вид",
+                            "2": "Период",
+                            "3": "Сумма"
+                        },
+                    }
+                # with open("static/media/data/json_data.json", "w", encoding="utf-8") as file:
+                #     encode_data = json.dumps(json_data, ensure_ascii=False)
+                #     json.dump(encode_data, file, ensure_ascii=False)
+
+                key = backend_service.UtilsClass.create_encrypted_password(
+                    _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                    _length=24
+                )
+                excel_file = f"static/media/salary/salary_{key}.xlsx"
+                workbook = backend_utils.ExcelClass.workbook_create()
+                sheet = backend_utils.ExcelClass.workbook_activate(workbook)
+
+                json_data_temp = json_data.copy()
+                # print(json_data_temp)
+
+                header_arr = []
+                for key, value in json_data_temp.items():
+                    if key != 'global_objects':
+                        if isinstance(value, int) or isinstance(value, float):
+                            if len(f'{value:.2f}') < 10:
+                                value = f'{value:.2f}'[:-6] + ' ' + f'{value:.2f}'[-6:]
+                            else:
+                                value = f'{value:.2f}'[:-9] + ' ' + f'{value:.2f}'[-9:-6] + ' ' + f'{value:.2f}'[-6:]
+                        header_arr.append([f'{key}: ', value])
+
+                row_i = 1
+                for header in header_arr[0:4]:
+                    col_i = 1
+                    for value in header:
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i,
+                            value=value,
+                            sheet=sheet
+                        )
+                        col_i += 1
+                    row_i += 1
+
+                row_i = 1
+                for header in header_arr[4:8]:
+                    col_i = 3
+                    for value in header:
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i,
+                            value=value,
+                            sheet=sheet
+                        )
+                        col_i += 1
+                    row_i += 1
+
+                row_i_2 = row_i
+                for header in header_arr[8:13]:
+                    col_i = 1
+                    for value in header:
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i,
+                            value=value,
+                            sheet=sheet
+                        )
+                        col_i += 1
+                    row_i += 1
+
+                for header in header_arr[13:]:
+                    col_i = 3
+                    for value in header:
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_2,
+                            value=value,
+                            sheet=sheet
+                        )
+                        col_i += 1
+                    row_i_2 += 1
+
+                body_arr = []
+                for key, value in json_data_temp['global_objects'].items():
+                    body_arr.append(value)
+                # print(body_arr)
+                print(body_arr[0])
+
+                # row_i = 1
+                # for row in header_arr_1:
+                #     col_i = 1
+                #     for value in row:
+                #         backend_service.ExcelClass.set_sheet_value(
+                #             col=col_i,
+                #             row=row_i,
+                #             value=value,
+                #             sheet=sheet
+                #         )
+                #         if col_i == 1:
+                #             col_i = 2
+                #         else:
+                #             col_i = 1
+                #     row_i += 1
+                #
+                # row_i = 1
+                # for row in header_arr_2:
+                #     col_i = 1 + 2
+                #     for value in row:
+                #         backend_service.ExcelClass.set_sheet_value(
+                #             col=col_i,
+                #             row=row_i,
+                #             value=value,
+                #             sheet=sheet
+                #         )
+                #         if col_i == 1 + 2:
+                #             col_i = 2 + 2
+                #         else:
+                #             col_i = 1 + 2
+                #     row_i += 1
+
+                # col_i = 1
+                # for row in titles:
+                #     row_i = 1
+                #     for title in row:
+                #         backend_service.ExcelClass.set_sheet_value(
+                #             col=col_i,
+                #             row=row_i,
+                #             value=title,
+                #             sheet=sheet
+                #         )
+                #         row_i += 1
+                #     col_i += 1
+
+                # body = [
+                #     ["100000.00", "130000.00", "30000.00"],
+                #     ["100000.00", "130000.00", "30000.00"],
+                #     ["100000.00", "130000.00", "30000.00"]
+                # ]
+                # row_i = 2
+                # for row in body:
+                #     col_i = 1
+                #     for value in row:
+                #         backend_service.ExcelClass.set_sheet_value(
+                #             col=col_i,
+                #             row=row_i,
+                #             value=value,
+                #             sheet=sheet
+                #         )
+                #         col_i += 1
+                #     row_i += 1
+
+                backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=excel_file)
+                json_data["excel_path"] = excel_file
+            else:
+                json_data = {'texterror': texterror, 'error': 'error'}
+
+
+
     except Exception as error:
         print(error)
         json_data = {'error': 'error'}

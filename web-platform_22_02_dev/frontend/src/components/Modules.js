@@ -256,7 +256,7 @@ const Modules = () => {
 
   return (
     <div>
-      <h1>Модули:</h1>
+      <h2>Модули:</h2>
       <div className="container-fluid">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
           {modules
