@@ -29,8 +29,13 @@ const SalaryPage = () => {
 
   const getSalary = async () => {
     const loader = document.getElementById("div_loader");
-    const type = loader.getAttribute("class") === "d-none" ? "" : "d-none";
-    loader.setAttribute("class", type);
+    const typeLoader =
+      loader.getAttribute("class") === "d-none" ? "" : "d-none";
+    loader.setAttribute("class", typeLoader);
+    const button = document.getElementById("div_button");
+    const typeButton =
+      button.getAttribute("class") === "d-none" ? "" : "d-none";
+    button.setAttribute("class", typeButton);
     setError(false);
     setFinishLoading(false);
 
@@ -49,19 +54,27 @@ const SalaryPage = () => {
       .post(`/api/salary`, { Datetime: `${year_}${month_}` }, config)
       .catch((error) => {
         if (error.response) {
-          setErrorText({'data': `${error.response.status} : ${error.response.statusText}`})
+          setErrorText({
+            data: `${error.response.status} : ${error.response.statusText}`,
+          });
           setError(true);
           setFinishLoading(true);
-          const newType = loader.getAttribute("class") === "d-none" ? "" : "d-none";
-          loader.setAttribute("class", newType);
+          const newTypeLoader =
+            loader.getAttribute("class") === "d-none" ? "" : "d-none";
+          loader.setAttribute("class", newTypeLoader);
+          const newTypeButton =
+            button.getAttribute("class") === "d-none" ? "" : "d-none";
+          button.setAttribute("class", newTypeButton);
         }
       });
-    if (data['texterror']) {
-      setErrorText({'data': `${data['texterror']}`})
+    if (data["texterror"]) {
+      setErrorText({ data: `${data["texterror"]}` });
     }
 
-    const newType = loader.getAttribute("class") === "d-none" ? "" : "d-none";
-    loader.setAttribute("class", newType);
+    const newLoader = loader.getAttribute("class") === "d-none" ? "" : "d-none";
+    loader.setAttribute("class", newLoader);
+    const newButton = button.getAttribute("class") === "d-none" ? "" : "d-none";
+    button.setAttribute("class", newButton);
     if (data["error"] === "error") {
       setError(true);
     } else {
@@ -97,14 +110,14 @@ const SalaryPage = () => {
     // getSalary();
   }, [dispatch]);
 
-  function getValue(value) {
-    if (typeof value === "number") {
-      return value.toFixed(2);
-    } else {
-      return value;
-    }
-  }
-
+  // function getValue(value) {
+  //   if (typeof value === "number") {
+  //     return value.toFixed(2);
+  //   } else {
+  //     return value;
+  //   }
+  // }
+  //
   // let month = "01";
   // const setMonth = (month_) => {
   //   if (month_.length <= 1) {
@@ -204,10 +217,10 @@ const SalaryPage = () => {
               </label>
             </li>
           </ul>
-          <div className="m-1">
+          <div className="" id="div_button">
             <button
               onClick={getSalary}
-              className="btn btn-lg btn-outline-primary"
+              className="btn btn-lg btn-outline-primary m-1"
               type="button"
             >
               выгрузить
@@ -223,10 +236,11 @@ const SalaryPage = () => {
             {finishLoading && error ? (
               <div>
                 <p className="lead text-danger">
-                  Произошла ошибка! Перезагрузите страницу или ожидайте исправления.
+                  Произошла ошибка! Перезагрузите страницу или ожидайте
+                  исправления.
                 </p>
                 <p className="lead text-warning">
-                  код и статус ошибки: "{errorText['data']}"
+                  код и статус ошибки: "{errorText["data"]}"
                 </p>
               </div>
             ) : (
@@ -272,7 +286,7 @@ const SalaryPage = () => {
                         <tr key={index}>
                           <td className="text-start">{head[0]}</td>
                           <td className="text-end table-active fw-bold">
-                            {getValue(head[1])}
+                            {head[1]}
                           </td>
                         </tr>
                       ))}
@@ -300,7 +314,7 @@ const SalaryPage = () => {
                       {headers.slice(0, 8).map((head, index) => (
                         <tr key={index}>
                           <td className="text-start">{head[0]}</td>
-                          <td className="text-end">{getValue(head[1])}</td>
+                          <td className="text-end">{head[1]}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -325,7 +339,7 @@ const SalaryPage = () => {
                       {headers.slice(8, -2).map((head, index) => (
                         <tr key={index}>
                           <td className="text-start">{head[0]}</td>
-                          <td className="text-end">{getValue(head[1])}</td>
+                          <td className="text-end">{head[1]}</td>
                         </tr>
                       ))}
                     </tbody>

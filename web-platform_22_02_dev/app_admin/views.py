@@ -11,6 +11,7 @@ from django.template.loader import get_template
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
+from openpyxl.utils import get_column_letter
 from rest_framework import status
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -411,12 +412,95 @@ def salary_(request):
         with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
             json_data = json.loads(json.load(file))
 
-        print('\n\n\n\n\n')
+        # print('\n\n')
+        # print("json_data: ")
+        # print(type(json_data))
+        # print('\n')
+        # print(json_data)
+        # print('\n\n')
+
+        # Return pretty integer and float value
+        ################################################################################################################
+        def return_float_value(_value):
+            if isinstance(_value, int) or isinstance(_value, float):
+                if len(f'{_value:.2f}') < 10:
+                    _value = f'{_value:.2f}'[:-6] + ' ' + f'{_value:.2f}'[-6:]
+                else:
+                    _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[-6:]
+            return _value
+
+        ################################################################################################################
+
+        # Create 'Ends' and pretty integer and float value
+        ################################################################################################################
+        def create_ends(table: str, extracols=False):
+            if extracols:
+                _days = 0
+                _hours = 0
+                _summ = 0
+                for _key in json_data['global_objects'][table].keys():
+                    if _key != 'Fields':
+                        try:
+                            _days += json_data['global_objects'][table][f'{_key}']['ВсегоДни']
+                            _hours += json_data['global_objects'][table][f'{_key}']['ВсегоЧасы']
+                            _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
+                            json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
+                            _summ += _summ_local
+                        except Exception as _error:
+                            print(_error)
+                json_data['global_objects'][table]['Ends'] = {
+                    'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
+                    'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
+                }
+            else:
+                _summ = 0
+                for _key in json_data['global_objects'][table].keys():
+                    if _key != 'Fields':
+                        try:
+                            _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
+                            json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
+                            _summ += _summ_local
+                        except Exception as _error:
+                            print(_error)
+                json_data['global_objects'][table]['Ends'] = {
+                    'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
+                }
+
+        create_ends(table='1.Начислено', extracols=True)
+        create_ends(table='2.Удержано', extracols=False)
+        create_ends(table='3.Доходы в натуральной форме', extracols=False)
+        create_ends(table='4.Выплачено', extracols=False)
+        create_ends(table='5.Налоговые вычеты', extracols=False)
+        # print('\n\n')
+        # print("json_data['global_objects']: ")
+        # print(type(json_data['global_objects']))
+        # print('\n')
+        # print(json_data['global_objects'])
+        # print('\n\n')
+        ################################################################################################################
+
+        # pretty integer and float value in headers
+        ################################################################################################################
+        for _key in json_data.keys():
+            if _key != 'global_objects':
+                json_data[_key] = return_float_value(json_data[_key])
+        # print('\n\n')
+        # print("json_data: ")
+        # print(type(json_data))
+        # print('\n')
+        # print(json_data)
+        # print('\n\n')
+        ################################################################################################################
+
+        # create excel
+        ################################################################################################################
+
+        print('\n\n')
         print("json_data: ")
         print(type(json_data))
-        print('\n\n')
+        print('\n')
         print(json_data)
-        print('\n\n\n\n\n')
+        print('\n\n')
 
         key = backend_service.UtilsClass.create_encrypted_password(
             _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -426,22 +510,18 @@ def salary_(request):
         workbook = backend_utils.ExcelClass.workbook_create()
         sheet = backend_utils.ExcelClass.workbook_activate(workbook)
 
-        # Заголовки
+        # Create 'Headers'
+        #######################################################
         header_arr = []
         for key, value in json_data.items():
             if key != 'global_objects':
-                if isinstance(value, int) or isinstance(value, float):
-                    if len(f'{value:.2f}') < 10:
-                        value = f'{value:.2f}'[:-6] + ' ' + f'{value:.2f}'[-6:]
-                    else:
-                        value = f'{value:.2f}'[:-9] + ' ' + f'{value:.2f}'[-9:-6] + ' ' + f'{value:.2f}'[-6:]
                 header_arr.append([f'{key}: ', value])
-        print('\n\n\n\n\n')
+        print('\n\n')
         print("header_arr: ")
         print(type(header_arr))
-        print('\n\n')
+        print('\n')
         print(header_arr)
-        print('\n\n\n\n\n')
+        print('\n\n')
 
         row_i = 1
         for header in header_arr[0:4]:
@@ -493,66 +573,131 @@ def salary_(request):
                 )
                 col_i += 1
             row_i_2 += 1
+        header_low_row = row_i_2
 
-        # Массив тел
-        body_arr = []
+        #######################################################
 
+        # Create 'Bodyes'
+        #######################################################
+        def create_bodyes(table: str, extracols=False):
+            bodyes_arr = [[''], [table]]
+            for __key, _value in json_data['global_objects'][table].items():
+                local_bodyes_arr = []
+                for ___key, __value in json_data['global_objects'][table][__key].items():
+                    if extracols:
+                        if ___key != '6' and ___key != '7' and ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
+                            local_bodyes_arr.append(__value)
+                    else:
+                        local_bodyes_arr.append(__value)
+                bodyes_arr.append(local_bodyes_arr)
+            return bodyes_arr
 
+        bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
+        bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
+        bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
+        bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
+        bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
 
-        summ = 0
-        days = 0
-        hours = 0
-        for key in json_data['global_objects']['1.Начислено'].keys():
-            if key != 'Fields':
-                days += json_data['global_objects']['1.Начислено'][f'{key}']['ВсегоДни']
-                hours += json_data['global_objects']['1.Начислено'][f'{key}']['ВсегоЧасы']
-                summ += json_data['global_objects']['1.Начислено'][f'{key}']['Сумма']
-                print('\n')
-        json_data['global_objects']['1.Начислено']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Дни': days, 'Часы': hours,
-                                                              'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': round(summ, 2)}
+        body_low_row_1 = header_low_row
+        for body in bodyes_arr_1:
+            col_i = 1
+            for value in body:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=body_low_row_1,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            body_low_row_1 += 1
 
-        summ = 0
-        for key in json_data['global_objects']['2.Удержано'].keys():
-            if key != 'Fields':
-                summ += json_data['global_objects']['2.Удержано'][f'{key}']['Сумма']
-                print('\n')
-        json_data['global_objects']['2.Удержано']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Сумма': round(summ, 2)}
+        body_low_row_2 = header_low_row
+        for body in bodyes_arr_2:
+            col_i = 7
+            for value in body:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=body_low_row_2,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            body_low_row_2 += 1
 
-        print(json_data['global_objects']["2.Удержано"])
+        if body_low_row_1 >= body_low_row_2:
+            body_low_row_3 = body_low_row_1
+            body_low_row_4 = body_low_row_1
+        else:
+            body_low_row_3 = body_low_row_2
+            body_low_row_4 = body_low_row_2
 
-        summ = 0
-        for key in json_data['global_objects']['4.Выплачено'].keys():
-            if key != 'Fields':
-                summ += json_data['global_objects']['4.Выплачено'][f'{key}']['Сумма']
-                print('\n')
-        json_data['global_objects']['4.Выплачено']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Сумма': round(summ, 2)}
+        for body in bodyes_arr_3:
+            col_i = 1
+            for value in body:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=body_low_row_3,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            body_low_row_3 += 1
 
-        print(json_data['global_objects']["4.Выплачено"])
+        for body in bodyes_arr_4:
+            col_i = 7
+            for value in body:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=body_low_row_4,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            body_low_row_4 += 1
 
-        summ = 0
-        for key in json_data['global_objects']['5.Налоговые вычеты'].keys():
-            if key != 'Fields':
-                summ += json_data['global_objects']['5.Налоговые вычеты'][f'{key}']['Сумма']
-                print('\n')
-        json_data['global_objects']['5.Налоговые вычеты']['Ends'] = {'Вид': 'Итого', 'Период': '', 'Сумма': round(summ, 2)}
+        if body_low_row_3 >= body_low_row_4:
+            body_low_row_5 = body_low_row_3
+        else:
+            body_low_row_5 = body_low_row_4
 
-        print(json_data['global_objects']["5.Налоговые вычеты"])
+        for body in bodyes_arr_5:
+            col_i = 1
+            for value in body:
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=body_low_row_5,
+                    value=value,
+                    sheet=sheet
+                )
+                col_i += 1
+            body_low_row_5 += 1
 
-        # body_arr = []
-        # for key, value in json_data['global_objects']["1.Начислено"].items():
-        #     print('\n')
-        #     print(key)
-        #     print('\n')
-        #     print(value)
-        #     print('\n')
-        #
-        #     body_arr.append(value)
-        # print('\n\n\n\n\n')
-        # print("body_arr[0]: ")
-        # print(type(body_arr[0]))
-        # print('\n\n')
-        # print(body_arr[0])
-        # print('\n\n\n\n\n')
+        from openpyxl.styles import Font, Alignment, Side, Border
+        from openpyxl.worksheet.dimensions import ColumnDimension, DimensionHolder
+        ft1 = Font(name='Arial', size=8)
+        thin = Side(border_style="thin", color="00000000")
+        sheet.page_setup.orientation = sheet.ORIENTATION_LANDSCAPE
+        sheet.page_setup.paperSize = sheet.PAPERSIZE_TABLOID
+        sheet.page_setup.fitToHeight = 0
+        sheet.page_setup.fitToWidth = 1
+        for row in range(1, body_low_row_5):
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 9+1)]:
+                cell = sheet[f'{col}{row}']
+                cell.font = ft1
+                cell.alignment = Alignment(horizontal='left', vertical='center')
+                cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)
+        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 9 + 1)]:
+            # sheet.column_dimensions[col].thickBottom = True
+            # sheet.column_dimensions[col].thickTop = True
+            # sheet.column_dimensions[col].bestFit = True
+            widht = 1
+            for row in range(1, body_low_row_5):
+                val = (len(str(sheet[f'{col}{row}'].value)) + 1)*0.85//1.0
+                if widht <= val:
+                    widht = val
+            sheet.column_dimensions[col].width = widht
+
+        #######################################################
 
         backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=excel_file)
         json_data["excel_path"] = excel_file
@@ -760,9 +905,6 @@ def salary_(request):
                 json_data["excel_path"] = excel_file
             else:
                 json_data = {'texterror': texterror, 'error': 'error'}
-
-
-
     except Exception as error:
         print(error)
         json_data = {'error': 'error'}
