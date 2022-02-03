@@ -409,7 +409,7 @@ def get_product(request, pk):
 def salary_(request):
     try:
         try:
-            is_local = True
+            is_local = False
             if not is_local:
                 key = backend_service.UtilsClass.create_encrypted_password(
                     _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
