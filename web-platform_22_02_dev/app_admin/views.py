@@ -9,8 +9,6 @@ from django.template.loader import get_template
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
-from openpyxl.styles import PatternFill
-from openpyxl.utils import get_column_letter
 from rest_framework import status
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -32,8 +30,9 @@ import bs4
 import httplib2
 import requests
 from xhtml2pdf import pisa
-from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
+from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.dimensions import ColumnDimension, DimensionHolder
+from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 
 from app_settings import settings as backend_settings
 from app_admin import models as backend_models
@@ -410,7 +409,7 @@ def get_product(request, pk):
 def salary_(request):
     try:
         try:
-            local = True
+            local = False
             if local:
                 key = backend_service.UtilsClass.create_encrypted_password(
                     _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -479,7 +478,7 @@ def salary_(request):
             # print('\n\n')
 
             # Return pretty integer and float value
-            ################################################################################################################
+            ############################################################################################################
             def return_float_value(_value):
                 if isinstance(_value, int) or isinstance(_value, float):
                     if len(f'{_value:.2f}') < 10:
@@ -488,10 +487,10 @@ def salary_(request):
                         _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[-6:]
                 return _value
 
-            ################################################################################################################
+            ############################################################################################################
 
             # Create 'Ends' and pretty integer and float value
-            ################################################################################################################
+            ############################################################################################################
             def create_ends(table: str, extracols=False):
                 if extracols:
                     _days = 0
@@ -536,10 +535,10 @@ def salary_(request):
             # print('\n')
             # print(json_data['global_objects'])
             # print('\n\n')
-            ################################################################################################################
+            ############################################################################################################
 
             # pretty integer and float value in headers
-            ################################################################################################################
+            ############################################################################################################
             for _key in json_data.keys():
                 if _key != 'global_objects':
                     json_data[_key] = return_float_value(json_data[_key])
@@ -549,10 +548,10 @@ def salary_(request):
             # print('\n')
             # print(json_data)
             # print('\n\n')
-            ################################################################################################################
+            ############################################################################################################
 
             # create excel
-            ################################################################################################################
+            ############################################################################################################
 
             # print('\n\n')
             # print("json_data: ")
@@ -565,9 +564,23 @@ def salary_(request):
                 _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                 _length=24
             )
-            excel_file = f"static/media/salary/salary_{key}.xlsx"
+            date = backend_utils.DateTimeUtils.get_current_date()
+            excel_file = f"static/media/salary/salary_{key}_{date}.xlsx"
+            path = 'static/media/salary'
             workbook = backend_utils.ExcelClass.workbook_create()
             sheet = backend_utils.ExcelClass.workbook_activate(workbook)
+
+            # Delete old files
+            #######################################################
+            for root, dirs, files in os.walk(path, topdown=True):
+                for file in files:
+                    try:
+                        date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
+                        if date != date_file:
+                            os.remove(f'{path}/{file}')
+                    except Exception as error:
+                        print(error)
+            #######################################################
 
             # Create 'Title'
             #######################################################
@@ -816,14 +829,16 @@ def salary_(request):
                     cell = sheet[f'{col}{row}']
                     if col == 'A' or col == 'F':
                         cell.alignment = aligment_left
+                    elif col == 'E' or col == 'H':
+                        cell.alignment = aligment_right
                     else:
                         cell.alignment = aligment_center
             #######################################################
 
             # Set borders
             #######################################################
-            side_medium = Side(border_style="thin", color="00808080")
-            side_think = Side(border_style="thin", color="00808080")
+            side_medium = Side(border_style="thin", color="FF808080")
+            side_think = Side(border_style="thin", color="FF808080")
             border_horizontal_middle = Border(
                 top=side_medium,
                 # left=side_medium,
@@ -855,7 +870,7 @@ def salary_(request):
                 cell.border = border_vertical_middle
                 cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(9)}{row}']
                 cell.border = border_vertical_middle
-            side_think = Side(border_style="dotted", color="00808080")
+            side_think = Side(border_style="dotted", color="FF808080")
             # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick', 'medium', 'dashDot',
             #  'dashDotDot', 'hair', 'mediumDashDot', 'slantDashDot'}
             border_think = Border(
@@ -868,7 +883,7 @@ def salary_(request):
                 for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                     cell = sheet[f'{col}{row}']
                     cell.border = border_think
-            side_medium = Side(border_style="thin", color="00808080")
+            side_medium = Side(border_style="thin", color="FF808080")
             border_medium = Border(
                 top=side_medium,
                 left=side_medium,
@@ -886,14 +901,14 @@ def salary_(request):
 
             # Colored styles
             #######################################################
-            color_green = PatternFill(fgColor="9099CC99", fill_type="solid")
+            color_green = PatternFill(fgColor="FF99CC99", fill_type="solid")
             for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                 for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
                     cell = sheet[f'{col}{row}']
                     cell.fill = color_green
                     cell = sheet[f'{col}{row - 1}']
                     cell.border = border_medium
-            color_yellow = PatternFill(fgColor="00CCCC99", fill_type="solid")
+            color_yellow = PatternFill(fgColor="FFCCCC99", fill_type="solid")
             for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
                 cell = sheet[f'{col}{body_low_row_1 - 1}']
                 cell.fill = color_yellow
@@ -941,16 +956,16 @@ def salary_(request):
             #######################################################
             sheet.page_setup.orientation = sheet.ORIENTATION_PORTRAIT
             sheet.page_setup.paperSize = sheet.PAPERSIZE_LETTER
-            sheet.page_margins.left = 0.25
-            sheet.page_margins.right = 0.25
+            sheet.page_margins.left = 0.1
+            sheet.page_margins.right = 0.1
             sheet.page_margins.header = 0.1
             sheet.page_margins.bottom = 0.2
             sheet.page_margins.footer = 0.1
             sheet.page_margins.top = 0.2
             sheet.print_options.horizontalCentered = True
-            sheet.print_options.verticalCentered = True
+            # sheet.print_options.verticalCentered = True
             sheet.page_setup.fitToHeight = 1
-            sheet.page_setup.scale = 85
+            sheet.page_setup.scale = 90
             sheet.page_setup.fitToHeight = 1
             sheet.page_setup.fitToWidth = 1
             sheet.protection.password = key + '_1'
