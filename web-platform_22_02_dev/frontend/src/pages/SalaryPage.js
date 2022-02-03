@@ -252,18 +252,12 @@ const SalaryPage = () => {
                   Ниже расположены данные, соответствующие выбранному периоду:
                 </p>
                 {excel ? (
-                  <a class="btn btn-lg btn-success m-1" href={`./${excel}`}>
+                  <a class="btn btn-lg btn-outline-success m-1" href={`./${excel}`}>
                     Скачать excel-документ
                   </a>
                 ) : (
                   ""
                 )}
-                <button
-                  onClick={window.print}
-                  className="btn btn-lg btn-outline-success m-1"
-                >
-                  печать или сохранить в pdf
-                </button>
               </div>
             ) : (
               ""

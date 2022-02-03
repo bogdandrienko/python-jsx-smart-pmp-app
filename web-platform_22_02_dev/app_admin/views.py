@@ -1,5 +1,3 @@
-import time
-
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group, update_last_login
@@ -11,6 +9,7 @@ from django.template.loader import get_template
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
+from openpyxl.styles import PatternFill
 from openpyxl.utils import get_column_letter
 from rest_framework import status
 from rest_framework import viewsets, permissions
@@ -22,6 +21,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 # from rest_framework_simplejwt.tokens import RefreshToken
 
 import datetime
+import time
 from email import message
 import base64
 import hashlib
@@ -32,6 +32,8 @@ import bs4
 import httplib2
 import requests
 from xhtml2pdf import pisa
+from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
+from openpyxl.worksheet.dimensions import ColumnDimension, DimensionHolder
 
 from app_settings import settings as backend_settings
 from app_admin import models as backend_models
@@ -407,504 +409,563 @@ def get_product(request, pk):
 @permission_classes([IsAuthenticated])
 def salary_(request):
     try:
-
-        # Временное чтение файла для отладки без доступа к 1С
-        with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
-            json_data = json.loads(json.load(file))
-
-        # print('\n\n')
-        # print("json_data: ")
-        # print(type(json_data))
-        # print('\n')
-        # print(json_data)
-        # print('\n\n')
-
-        # Return pretty integer and float value
-        ################################################################################################################
-        def return_float_value(_value):
-            if isinstance(_value, int) or isinstance(_value, float):
-                if len(f'{_value:.2f}') < 10:
-                    _value = f'{_value:.2f}'[:-6] + ' ' + f'{_value:.2f}'[-6:]
+        try:
+            local = True
+            if local:
+                key = backend_service.UtilsClass.create_encrypted_password(
+                    _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                    _length=10
+                )
+                hash_key_obj = hashlib.sha256()
+                hash_key_obj.update(key.encode('utf-8'))
+                key_hash = str(hash_key_obj.hexdigest().strip().upper())
+                key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+                iin = request.user.username
+                if str(request.user.username).lower() == 'bogdan':
+                    iin = 970801351179
+                iin_base64 = base64.b64encode(str(iin).encode()).decode()
+                date_base64 = base64.b64encode(f'{request.data["Datetime"]}'.encode()).decode()
+                url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+                relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+                h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+                _login = 'Web_adm_1c'
+                password = '159159qqww!'
+                h.add_credentials(_login, password)
+                try:
+                    response, content = h.request(url)
+                except Exception as error:
+                    # print(error)
+                    content = None
+                if content:
+                    _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    success = True
+                    error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+                    texterror = ''
+                    for error_word in error_word_list:
+                        if _message.find(error_word) >= 0:
+                            success = False
+                    if _message.find('send') == 0:
+                        texterror = _message.split('send')[1].strip()
+                        success = False
                 else:
-                    _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[-6:]
-            return _value
+                    success = False
+                    texterror = 'Неизвестная ошибка'
 
-        ################################################################################################################
-
-        # Create 'Ends' and pretty integer and float value
-        ################################################################################################################
-        def create_ends(table: str, extracols=False):
-            if extracols:
-                _days = 0
-                _hours = 0
-                _summ = 0
-                for _key in json_data['global_objects'][table].keys():
-                    if _key != 'Fields':
-                        try:
-                            _days += json_data['global_objects'][table][f'{_key}']['ВсегоДни']
-                            _hours += json_data['global_objects'][table][f'{_key}']['ВсегоЧасы']
-                            _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
-                            json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
-                            _summ += _summ_local
-                        except Exception as _error:
-                            print(_error)
-                json_data['global_objects'][table]['Ends'] = {
-                    'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
-                    'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
-                }
+                if success:
+                    json_data = json.loads(
+                        backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                    try:
+                        json_data["global_objects"]["3.Доходы в натуральной форме"]
+                    except Exception as error:
+                        print(error)
+                        json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                            "Fields": {
+                                "1": "Вид",
+                                "2": "Период",
+                                "3": "Сумма"
+                            },
+                        }
             else:
-                _summ = 0
-                for _key in json_data['global_objects'][table].keys():
-                    if _key != 'Fields':
-                        try:
-                            _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
-                            json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
-                            _summ += _summ_local
-                        except Exception as _error:
-                            print(_error)
-                json_data['global_objects'][table]['Ends'] = {
-                    'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
-                }
+                # Временное чтение файла для отладки без доступа к 1С
+                with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
+                    json_data = json.loads(json.load(file))
+                texterror = ''
 
-        create_ends(table='1.Начислено', extracols=True)
-        create_ends(table='2.Удержано', extracols=False)
-        create_ends(table='3.Доходы в натуральной форме', extracols=False)
-        create_ends(table='4.Выплачено', extracols=False)
-        create_ends(table='5.Налоговые вычеты', extracols=False)
-        # print('\n\n')
-        # print("json_data['global_objects']: ")
-        # print(type(json_data['global_objects']))
-        # print('\n')
-        # print(json_data['global_objects'])
-        # print('\n\n')
-        ################################################################################################################
+            # print('\n\n')
+            # print("json_data: ")
+            # print(type(json_data))
+            # print('\n')
+            # print(json_data)
+            # print('\n\n')
 
-        # pretty integer and float value in headers
-        ################################################################################################################
-        for _key in json_data.keys():
-            if _key != 'global_objects':
-                json_data[_key] = return_float_value(json_data[_key])
-        # print('\n\n')
-        # print("json_data: ")
-        # print(type(json_data))
-        # print('\n')
-        # print(json_data)
-        # print('\n\n')
-        ################################################################################################################
+            # Return pretty integer and float value
+            ################################################################################################################
+            def return_float_value(_value):
+                if isinstance(_value, int) or isinstance(_value, float):
+                    if len(f'{_value:.2f}') < 10:
+                        _value = f'{_value:.2f}'[:-6] + ' ' + f'{_value:.2f}'[-6:]
+                    else:
+                        _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[-6:]
+                return _value
 
-        # create excel
-        ################################################################################################################
+            ################################################################################################################
 
-        print('\n\n')
-        print("json_data: ")
-        print(type(json_data))
-        print('\n')
-        print(json_data)
-        print('\n\n')
+            # Create 'Ends' and pretty integer and float value
+            ################################################################################################################
+            def create_ends(table: str, extracols=False):
+                if extracols:
+                    _days = 0
+                    _hours = 0
+                    _summ = 0
+                    for _key in json_data['global_objects'][table].keys():
+                        if _key != 'Fields':
+                            try:
+                                _days += json_data['global_objects'][table][f'{_key}']['ВсегоДни']
+                                _hours += json_data['global_objects'][table][f'{_key}']['ВсегоЧасы']
+                                _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
+                                json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
+                                _summ += _summ_local
+                            except Exception as _error:
+                                print(_error)
+                    json_data['global_objects'][table]['Ends'] = {
+                        'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
+                        'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
+                    }
+                else:
+                    _summ = 0
+                    for _key in json_data['global_objects'][table].keys():
+                        if _key != 'Fields':
+                            try:
+                                _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
+                                json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
+                                _summ += _summ_local
+                            except Exception as _error:
+                                print(_error)
+                    json_data['global_objects'][table]['Ends'] = {
+                        'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
+                    }
 
-        key = backend_service.UtilsClass.create_encrypted_password(
-            _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-            _length=24
-        )
-        excel_file = f"static/media/salary/salary_{key}.xlsx"
-        workbook = backend_utils.ExcelClass.workbook_create()
-        sheet = backend_utils.ExcelClass.workbook_activate(workbook)
+            create_ends(table='1.Начислено', extracols=True)
+            create_ends(table='2.Удержано', extracols=False)
+            create_ends(table='3.Доходы в натуральной форме', extracols=False)
+            create_ends(table='4.Выплачено', extracols=False)
+            create_ends(table='5.Налоговые вычеты', extracols=False)
+            # print('\n\n')
+            # print("json_data['global_objects']: ")
+            # print(type(json_data['global_objects']))
+            # print('\n')
+            # print(json_data['global_objects'])
+            # print('\n\n')
+            ################################################################################################################
 
-        # Create 'Headers'
-        #######################################################
-        header_arr = []
-        for key, value in json_data.items():
-            if key != 'global_objects':
-                header_arr.append([f'{key}: ', value])
-        print('\n\n')
-        print("header_arr: ")
-        print(type(header_arr))
-        print('\n')
-        print(header_arr)
-        print('\n\n')
+            # pretty integer and float value in headers
+            ################################################################################################################
+            for _key in json_data.keys():
+                if _key != 'global_objects':
+                    json_data[_key] = return_float_value(json_data[_key])
+            # print('\n\n')
+            # print("json_data: ")
+            # print(type(json_data))
+            # print('\n')
+            # print(json_data)
+            # print('\n\n')
+            ################################################################################################################
 
-        row_i = 1
-        for header in header_arr[0:4]:
-            col_i = 1
-            for value in header:
+            # create excel
+            ################################################################################################################
+
+            # print('\n\n')
+            # print("json_data: ")
+            # print(type(json_data))
+            # print('\n')
+            # print(json_data)
+            # print('\n\n')
+
+            key = backend_service.UtilsClass.create_encrypted_password(
+                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                _length=24
+            )
+            excel_file = f"static/media/salary/salary_{key}.xlsx"
+            workbook = backend_utils.ExcelClass.workbook_create()
+            sheet = backend_utils.ExcelClass.workbook_activate(workbook)
+
+            # Create 'Title'
+            #######################################################
+            backend_service.ExcelClass.set_sheet_value(
+                col=1,
+                row=1,
+                value='РАСЧЕТНЫЙ ЛИСТ',
+                sheet=sheet
+            )
+            sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8)
+            #######################################################
+
+            # Create 'Headers'
+            #######################################################
+            header_arr = []
+            for key, value in json_data.items():
+                if key != 'global_objects':
+                    header_arr.append(f'{key}: {value}')
+
+            row_i_1 = 1 + 1
+            for header in header_arr[0:4]:
+                col_i = 1
                 backend_service.ExcelClass.set_sheet_value(
                     col=col_i,
-                    row=row_i,
-                    value=value,
+                    row=row_i_1,
+                    value=header,
                     sheet=sheet
                 )
-                col_i += 1
-            row_i += 1
+                sheet.merge_cells(start_row=row_i_1, start_column=col_i, end_row=row_i_1, end_column=col_i + 4)
+                row_i_1 += 1
 
-        row_i = 1
-        for header in header_arr[4:8]:
-            col_i = 3
-            for value in header:
-                backend_service.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=row_i,
-                    value=value,
-                    sheet=sheet
-                )
-                col_i += 1
-            row_i += 1
-
-        row_i_2 = row_i
-        for header in header_arr[8:13]:
-            col_i = 1
-            for value in header:
-                backend_service.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=row_i,
-                    value=value,
-                    sheet=sheet
-                )
-                col_i += 1
-            row_i += 1
-
-        for header in header_arr[13:]:
-            col_i = 3
-            for value in header:
+            row_i_2 = 1 + 1
+            for header in header_arr[4:8]:
+                col_i = 6
                 backend_service.ExcelClass.set_sheet_value(
                     col=col_i,
                     row=row_i_2,
-                    value=value,
+                    value=header,
                     sheet=sheet
                 )
-                col_i += 1
-            row_i_2 += 1
-        header_low_row = row_i_2
+                sheet.merge_cells(start_row=row_i_2, start_column=col_i, end_row=row_i_2, end_column=col_i + 2)
+                row_i_2 += 1
 
-        #######################################################
+            row_i_3 = row_i_1
+            for header in header_arr[8:12]:
+                col_i = 1
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=row_i_3,
+                    value=header,
+                    sheet=sheet
+                )
+                sheet.merge_cells(start_row=row_i_3, start_column=col_i, end_row=row_i_3, end_column=col_i + 4)
+                row_i_3 += 1
 
-        # Create 'Bodyes'
-        #######################################################
-        def create_bodyes(table: str, extracols=False):
-            bodyes_arr = [[''], [table]]
-            for __key, _value in json_data['global_objects'][table].items():
-                local_bodyes_arr = []
-                for ___key, __value in json_data['global_objects'][table][__key].items():
-                    if extracols:
-                        if ___key != '6' and ___key != '7' and ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
+            row_i_4 = row_i_2
+            for header in header_arr[12:-2]:
+                col_i = 6
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=row_i_4,
+                    value=header,
+                    sheet=sheet
+                )
+                sheet.merge_cells(start_row=row_i_4, start_column=col_i, end_row=row_i_4, end_column=col_i + 2)
+                row_i_4 += 1
+            header_low_row = row_i_4
+
+            #######################################################
+
+            # Create 'Bodyes'
+            #######################################################
+            def create_bodyes(table: str, extracols=False):
+                bodyes_arr = [[table]]
+                for __key, _value in json_data['global_objects'][table].items():
+                    local_bodyes_arr = []
+                    for ___key, __value in json_data['global_objects'][table][__key].items():
+                        if extracols:
+                            if ___key != '6' and ___key != '7' and ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
+                                local_bodyes_arr.append(__value)
+                        else:
                             local_bodyes_arr.append(__value)
+                    bodyes_arr.append(local_bodyes_arr)
+                return bodyes_arr
+
+            bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
+            bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
+            bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
+            bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
+            bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
+            bold_arr = []
+
+            body_low_row_1 = header_low_row
+            bold_arr.append(body_low_row_1)
+            sheet.merge_cells(start_row=body_low_row_1, start_column=1, end_row=body_low_row_1, end_column=1 + 4)
+            for body in bodyes_arr_1:
+                col_i = 1
+                for value in body:
+                    if isinstance(value, int) and value == 0:
+                        value = ''
+                    backend_service.ExcelClass.set_sheet_value(
+                        col=col_i,
+                        row=body_low_row_1,
+                        value=value,
+                        sheet=sheet
+                    )
+                    col_i += 1
+                body_low_row_1 += 1
+
+            body_low_row_2 = header_low_row
+            bold_arr.append(body_low_row_2)
+            sheet.merge_cells(start_row=body_low_row_2, start_column=6, end_row=body_low_row_2, end_column=6 + 2)
+            for body in bodyes_arr_2:
+                col_i = 6
+                for value in body:
+                    backend_service.ExcelClass.set_sheet_value(
+                        col=col_i,
+                        row=body_low_row_2,
+                        value=value,
+                        sheet=sheet
+                    )
+                    col_i += 1
+                body_low_row_2 += 1
+
+            if body_low_row_1 >= body_low_row_2:
+                body_low_row_3 = body_low_row_1
+                body_low_row_4 = body_low_row_1
+            else:
+                body_low_row_3 = body_low_row_2
+                body_low_row_4 = body_low_row_2
+
+            # body_low_row_3 = body_low_row_1
+            bold_arr.append(body_low_row_3)
+            sheet.merge_cells(start_row=body_low_row_3, start_column=1, end_row=body_low_row_3, end_column=1 + 4)
+            for body in bodyes_arr_3:
+                col_i = 1
+                for value in body:
+                    backend_service.ExcelClass.set_sheet_value(
+                        col=col_i,
+                        row=body_low_row_3,
+                        value=value,
+                        sheet=sheet
+                    )
+                    col_i += 1
+                body_low_row_3 += 1
+
+            # body_low_row_4 = body_low_row_2
+            bold_arr.append(body_low_row_4)
+            sheet.merge_cells(start_row=body_low_row_4, start_column=6, end_row=body_low_row_4, end_column=6 + 2)
+            for body in bodyes_arr_4:
+                col_i = 6
+                for value in body:
+                    backend_service.ExcelClass.set_sheet_value(
+                        col=col_i,
+                        row=body_low_row_4,
+                        value=value,
+                        sheet=sheet
+                    )
+                    col_i += 1
+                body_low_row_4 += 1
+
+            if body_low_row_3 >= body_low_row_4:
+                body_low_row_5 = body_low_row_3
+                body_low_row_6 = body_low_row_3
+            else:
+                body_low_row_5 = body_low_row_4
+                body_low_row_6 = body_low_row_4
+
+            # body_low_row_5 = body_low_row_3
+            bold_arr.append(body_low_row_5)
+            sheet.merge_cells(start_row=body_low_row_5, start_column=1, end_row=body_low_row_5, end_column=1 + 4)
+            for body in bodyes_arr_5:
+                col_i = 1
+                for value in body:
+                    backend_service.ExcelClass.set_sheet_value(
+                        col=col_i,
+                        row=body_low_row_5,
+                        value=value,
+                        sheet=sheet
+                    )
+                    col_i += 1
+                body_low_row_5 += 1
+
+            # body_low_row_6 = body_low_row_4
+            bold_arr.append(body_low_row_6)
+            sheet.merge_cells(start_row=body_low_row_6, start_column=1, end_row=body_low_row_6, end_column=1 + 4)
+            for body in ['.', 'Вид', *header_arr[-2:]]:
+                col_i = 6
+                backend_service.ExcelClass.set_sheet_value(
+                    col=col_i,
+                    row=body_low_row_6,
+                    value=body,
+                    sheet=sheet
+                )
+                sheet.merge_cells(start_row=body_low_row_6, start_column=col_i, end_row=body_low_row_6,
+                                  end_column=col_i + 2)
+                body_low_row_6 += 1
+
+            if body_low_row_6 >= body_low_row_5:
+                body_low_row = body_low_row_6
+            else:
+                body_low_row = body_low_row_5
+
+            if body_low_row_1 >= body_low_row_2:
+                body_color_2 = body_low_row_1
+            else:
+                body_color_2 = body_low_row_2
+            if body_low_row_3 >= body_low_row_4:
+                body_color_3 = body_low_row_3
+            else:
+                body_color_3 = body_low_row_4
+            #######################################################
+
+            # Set fonts
+            #######################################################
+            font_headers = Font(name='Arial', size=8, bold=True)
+            for row in range(1, header_low_row):
+                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                    cell = sheet[f'{col}{row}']
+                    cell.font = font_headers
+
+            font_bodyes = Font(name='Arial', size=7, bold=False)
+            for row in range(header_low_row, body_low_row + 1):
+                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                    cell = sheet[f'{col}{row}']
+                    cell.font = font_bodyes
+            #######################################################
+
+            # Set aligments
+            #######################################################
+            wrap_text = Alignment(wrap_text=True)
+            shrink_to_fit = Alignment(shrink_to_fit=True)
+            aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True, shrink_to_fit=True)
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                cell = sheet[f'{col}{1}']
+                cell.alignment = aligment_center
+            aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True, shrink_to_fit=True)
+            for row in range(2, header_low_row):
+                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                    cell = sheet[f'{col}{row}']
+                    cell.alignment = aligment_left
+
+            aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True, shrink_to_fit=True)
+            for row in range(header_low_row, body_low_row + 1):
+                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                    cell = sheet[f'{col}{row}']
+                    if col == 'A' or col == 'F':
+                        cell.alignment = aligment_left
                     else:
-                        local_bodyes_arr.append(__value)
-                bodyes_arr.append(local_bodyes_arr)
-            return bodyes_arr
+                        cell.alignment = aligment_center
+            #######################################################
 
-        bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
-        bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
-        bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
-        bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
-        bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
-
-        body_low_row_1 = header_low_row
-        for body in bodyes_arr_1:
-            col_i = 1
-            for value in body:
-                backend_service.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=body_low_row_1,
-                    value=value,
-                    sheet=sheet
-                )
-                col_i += 1
-            body_low_row_1 += 1
-
-        body_low_row_2 = header_low_row
-        for body in bodyes_arr_2:
-            col_i = 7
-            for value in body:
-                backend_service.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=body_low_row_2,
-                    value=value,
-                    sheet=sheet
-                )
-                col_i += 1
-            body_low_row_2 += 1
-
-        if body_low_row_1 >= body_low_row_2:
-            body_low_row_3 = body_low_row_1
-            body_low_row_4 = body_low_row_1
-        else:
-            body_low_row_3 = body_low_row_2
-            body_low_row_4 = body_low_row_2
-
-        for body in bodyes_arr_3:
-            col_i = 1
-            for value in body:
-                backend_service.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=body_low_row_3,
-                    value=value,
-                    sheet=sheet
-                )
-                col_i += 1
-            body_low_row_3 += 1
-
-        for body in bodyes_arr_4:
-            col_i = 7
-            for value in body:
-                backend_service.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=body_low_row_4,
-                    value=value,
-                    sheet=sheet
-                )
-                col_i += 1
-            body_low_row_4 += 1
-
-        if body_low_row_3 >= body_low_row_4:
-            body_low_row_5 = body_low_row_3
-        else:
-            body_low_row_5 = body_low_row_4
-
-        for body in bodyes_arr_5:
-            col_i = 1
-            for value in body:
-                backend_service.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=body_low_row_5,
-                    value=value,
-                    sheet=sheet
-                )
-                col_i += 1
-            body_low_row_5 += 1
-
-        from openpyxl.styles import Font, Alignment, Side, Border
-        from openpyxl.worksheet.dimensions import ColumnDimension, DimensionHolder
-        ft1 = Font(name='Arial', size=8)
-        thin = Side(border_style="thin", color="00000000")
-        sheet.page_setup.orientation = sheet.ORIENTATION_LANDSCAPE
-        sheet.page_setup.paperSize = sheet.PAPERSIZE_TABLOID
-        sheet.page_setup.fitToHeight = 0
-        sheet.page_setup.fitToWidth = 1
-        for row in range(1, body_low_row_5):
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 9+1)]:
-                cell = sheet[f'{col}{row}']
-                cell.font = ft1
-                cell.alignment = Alignment(horizontal='left', vertical='center')
-                cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)
-        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 9 + 1)]:
-            # sheet.column_dimensions[col].thickBottom = True
-            # sheet.column_dimensions[col].thickTop = True
-            # sheet.column_dimensions[col].bestFit = True
-            widht = 1
-            for row in range(1, body_low_row_5):
-                val = (len(str(sheet[f'{col}{row}'].value)) + 1)*0.85//1.0
-                if widht <= val:
-                    widht = val
-            sheet.column_dimensions[col].width = widht
-
-        #######################################################
-
-        backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=excel_file)
-        json_data["excel_path"] = excel_file
-
-        if False:
-            key = backend_service.UtilsClass.create_encrypted_password(
-                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                _length=10
+            # Set borders
+            #######################################################
+            side_medium = Side(border_style="thin", color="00808080")
+            side_think = Side(border_style="thin", color="00808080")
+            border_horizontal_middle = Border(
+                top=side_medium,
+                # left=side_medium,
+                # right=side_medium,
+                # bottom=side_medium
             )
-            hash_key_obj = hashlib.sha256()
-            hash_key_obj.update(key.encode('utf-8'))
-            key_hash = str(hash_key_obj.hexdigest().strip().upper())
-            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-            iin = request.user.username
-            if str(request.user.username).lower() == 'bogdan':
-                iin = 970801351179
-            iin_base64 = base64.b64encode(str(iin).encode()).decode()
-            date_base64 = base64.b64encode(f'{request.data["Datetime"]}'.encode()).decode()
-            url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-            h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-            _login = 'Web_adm_1c'
-            password = '159159qqww!'
-            h.add_credentials(_login, password)
-            try:
-                response, content = h.request(url)
-            except Exception as error:
-                # print(error)
-                content = None
-            if content:
-                _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-                success = True
-                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
-                texterror = ''
-                for error_word in error_word_list:
-                    if _message.find(error_word) >= 0:
-                        success = False
-                if _message.find('send') == 0:
-                    texterror = _message.split('send')[1].strip()
-                    success = False
-            else:
-                success = False
-                texterror = 'Неизвестная ошибка'
+            border_vertical_middle = Border(
+                # top=side_think,
+                left=side_medium,
+                # right=side_think,
+                # bottom=side_think
+            )
+            border_vertical_light = Border(
+                # top=side_think,
+                left=side_medium,
+                # right=side_think,
+                # bottom=side_think
+            )
+            for row in range(header_low_row, body_low_row):
+                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                    if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
+                        pass
+                    else:
+                        cell = sheet[f'{col}{row}']
+                        cell.border = border_vertical_light
+                cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(1)}{row}']
+                cell.border = border_vertical_middle
+                cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(6)}{row}']
+                cell.border = border_vertical_middle
+                cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(9)}{row}']
+                cell.border = border_vertical_middle
+            side_think = Side(border_style="dotted", color="00808080")
+            # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick', 'medium', 'dashDot',
+            #  'dashDotDot', 'hair', 'mediumDashDot', 'slantDashDot'}
+            border_think = Border(
+                top=side_think,
+                left=side_think,
+                right=side_think,
+                bottom=side_think
+            )
+            for row in range(1, header_low_row):
+                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                    cell = sheet[f'{col}{row}']
+                    cell.border = border_think
+            side_medium = Side(border_style="thin", color="00808080")
+            border_medium = Border(
+                top=side_medium,
+                left=side_medium,
+                right=side_medium,
+                bottom=side_medium
+            )
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                    cell = sheet[f'{col}{row - 1}']
+                    cell.border = border_medium
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                cell = sheet[f'{col}{body_low_row}']
+                cell.border = border_horizontal_middle
+            #######################################################
 
-            if success:
-                json_data = json.loads(
-                    backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
-                try:
-                    json_data["global_objects"]["3.Доходы в натуральной форме"]
-                except Exception as error:
-                    print(error)
-                    json_data["global_objects"]["3.Доходы в натуральной форме"] = {
-                        "Fields": {
-                            "1": "Вид",
-                            "2": "Период",
-                            "3": "Сумма"
-                        },
-                    }
-                # with open("static/media/data/json_data.json", "w", encoding="utf-8") as file:
-                #     encode_data = json.dumps(json_data, ensure_ascii=False)
-                #     json.dump(encode_data, file, ensure_ascii=False)
+            # Colored styles
+            #######################################################
+            color_green = PatternFill(fgColor="9099CC99", fill_type="solid")
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                    cell = sheet[f'{col}{row}']
+                    cell.fill = color_green
+                    cell = sheet[f'{col}{row - 1}']
+                    cell.border = border_medium
+            color_yellow = PatternFill(fgColor="00CCCC99", fill_type="solid")
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
+                cell = sheet[f'{col}{body_low_row_1 - 1}']
+                cell.fill = color_yellow
 
-                key = backend_service.UtilsClass.create_encrypted_password(
-                    _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                    _length=24
-                )
-                excel_file = f"static/media/salary/salary_{key}.xlsx"
-                workbook = backend_utils.ExcelClass.workbook_create()
-                sheet = backend_utils.ExcelClass.workbook_activate(workbook)
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                cell = sheet[f'{col}{body_low_row_2 - 1}']
+                cell.fill = color_yellow
 
-                json_data_temp = json_data.copy()
-                # print(json_data_temp)
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                cell = sheet[f'{col}{body_low_row_3 - 1}']
+                cell.fill = color_yellow
+                cell.fill = color_yellow
 
-                header_arr = []
-                for key, value in json_data_temp.items():
-                    if key != 'global_objects':
-                        if isinstance(value, int) or isinstance(value, float):
-                            if len(f'{value:.2f}') < 10:
-                                value = f'{value:.2f}'[:-6] + ' ' + f'{value:.2f}'[-6:]
-                            else:
-                                value = f'{value:.2f}'[:-9] + ' ' + f'{value:.2f}'[-9:-6] + ' ' + f'{value:.2f}'[-6:]
-                        header_arr.append([f'{key}: ', value])
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                cell = sheet[f'{col}{body_low_row_4 - 1}']
+                cell.fill = color_yellow
 
-                row_i = 1
-                for header in header_arr[0:4]:
-                    col_i = 1
-                    for value in header:
-                        backend_service.ExcelClass.set_sheet_value(
-                            col=col_i,
-                            row=row_i,
-                            value=value,
-                            sheet=sheet
-                        )
-                        col_i += 1
-                    row_i += 1
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                cell = sheet[f'{col}{body_low_row_5 - 1}']
+                cell.fill = color_yellow
+                cell.fill = color_yellow
 
-                row_i = 1
-                for header in header_arr[4:8]:
-                    col_i = 3
-                    for value in header:
-                        backend_service.ExcelClass.set_sheet_value(
-                            col=col_i,
-                            row=row_i,
-                            value=value,
-                            sheet=sheet
-                        )
-                        col_i += 1
-                    row_i += 1
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                cell = sheet[f'{col}{body_low_row_6 - 1}']
+                cell.fill = color_yellow
 
-                row_i_2 = row_i
-                for header in header_arr[8:13]:
-                    col_i = 1
-                    for value in header:
-                        backend_service.ExcelClass.set_sheet_value(
-                            col=col_i,
-                            row=row_i,
-                            value=value,
-                            sheet=sheet
-                        )
-                        col_i += 1
-                    row_i += 1
+            #######################################################
 
-                for header in header_arr[13:]:
-                    col_i = 3
-                    for value in header:
-                        backend_service.ExcelClass.set_sheet_value(
-                            col=col_i,
-                            row=row_i_2,
-                            value=value,
-                            sheet=sheet
-                        )
-                        col_i += 1
-                    row_i_2 += 1
+            # Height and width styles
+            #######################################################
+            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                width = 1
+                for row in range(1, body_low_row + 1):
+                    cell = sheet[f'{col}{row}']
+                    value = len(str(cell.value))
+                    if value > width:
+                        width = value
+                if col == 'A' or col == 'F':
+                    width = width / 2
+                sheet.column_dimensions[col].height = 1
+                sheet.column_dimensions[col].width = round((width * 0.95), 3)
+            #######################################################
 
-                body_arr = []
-                for key, value in json_data_temp['global_objects'].items():
-                    body_arr.append(value)
-                # print(body_arr)
-                print(body_arr[0])
+            # Set global page and book settings
+            #######################################################
+            sheet.page_setup.orientation = sheet.ORIENTATION_PORTRAIT
+            sheet.page_setup.paperSize = sheet.PAPERSIZE_LETTER
+            sheet.page_margins.left = 0.25
+            sheet.page_margins.right = 0.25
+            sheet.page_margins.header = 0.1
+            sheet.page_margins.bottom = 0.2
+            sheet.page_margins.footer = 0.1
+            sheet.page_margins.top = 0.2
+            sheet.print_options.horizontalCentered = True
+            sheet.print_options.verticalCentered = True
+            sheet.page_setup.fitToHeight = 1
+            sheet.page_setup.scale = 85
+            sheet.page_setup.fitToHeight = 1
+            sheet.page_setup.fitToWidth = 1
+            sheet.protection.password = key + '_1'
+            sheet.protection.sheet = True
+            sheet.protection.enable()
 
-                # row_i = 1
-                # for row in header_arr_1:
-                #     col_i = 1
-                #     for value in row:
-                #         backend_service.ExcelClass.set_sheet_value(
-                #             col=col_i,
-                #             row=row_i,
-                #             value=value,
-                #             sheet=sheet
-                #         )
-                #         if col_i == 1:
-                #             col_i = 2
-                #         else:
-                #             col_i = 1
-                #     row_i += 1
-                #
-                # row_i = 1
-                # for row in header_arr_2:
-                #     col_i = 1 + 2
-                #     for value in row:
-                #         backend_service.ExcelClass.set_sheet_value(
-                #             col=col_i,
-                #             row=row_i,
-                #             value=value,
-                #             sheet=sheet
-                #         )
-                #         if col_i == 1 + 2:
-                #             col_i = 2 + 2
-                #         else:
-                #             col_i = 1 + 2
-                #     row_i += 1
+            # workbook.security.workbookPassword = key + '_1'
+            # workbook.security.lockStructure = True
+            #######################################################
 
-                # col_i = 1
-                # for row in titles:
-                #     row_i = 1
-                #     for title in row:
-                #         backend_service.ExcelClass.set_sheet_value(
-                #             col=col_i,
-                #             row=row_i,
-                #             value=title,
-                #             sheet=sheet
-                #         )
-                #         row_i += 1
-                #     col_i += 1
-
-                # body = [
-                #     ["100000.00", "130000.00", "30000.00"],
-                #     ["100000.00", "130000.00", "30000.00"],
-                #     ["100000.00", "130000.00", "30000.00"]
-                # ]
-                # row_i = 2
-                # for row in body:
-                #     col_i = 1
-                #     for value in row:
-                #         backend_service.ExcelClass.set_sheet_value(
-                #             col=col_i,
-                #             row=row_i,
-                #             value=value,
-                #             sheet=sheet
-                #         )
-                #         col_i += 1
-                #     row_i += 1
-
-                backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=excel_file)
-                json_data["excel_path"] = excel_file
-            else:
-                json_data = {'texterror': texterror, 'error': 'error'}
+            backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=excel_file)
+            json_data["excel_path"] = excel_file
+        except Exception as error:
+            print(error)
+            json_data = {'texterror': texterror, 'error': 'error'}
     except Exception as error:
         print(error)
         json_data = {'error': 'error'}
