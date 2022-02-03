@@ -409,7 +409,7 @@ def get_product(request, pk):
 def salary_(request):
     try:
         try:
-            is_local = False
+            is_local = True
             if not is_local:
                 key = backend_service.UtilsClass.create_encrypted_password(
                     _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -565,8 +565,8 @@ def salary_(request):
                 _length=24
             )
             date = backend_utils.DateTimeUtils.get_current_date()
-            excel_file = f"static/media/salary/salary_{key}_{date}.xlsx"
-            path = 'static/media/salary'
+            path = 'static/media/salary/'
+            path_excel_file = f"{path}salary_{key}_{date}.xlsx"
             workbook = backend_utils.ExcelClass.workbook_create()
             sheet = backend_utils.ExcelClass.workbook_activate(workbook)
 
@@ -577,7 +577,7 @@ def salary_(request):
                     try:
                         date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
                         if date != date_file:
-                            os.remove(f'{path}/{file}')
+                            os.remove(f'{path}{file}')
                     except Exception as error:
                         print(error)
             #######################################################
@@ -976,8 +976,8 @@ def salary_(request):
             # workbook.security.lockStructure = True
             #######################################################
 
-            backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=excel_file)
-            json_data["excel_path"] = excel_file
+            backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=path_excel_file)
+            json_data["excel_path"] = path_excel_file
         except Exception as error:
             print(error)
             json_data = {'texterror': texterror, 'error': 'error'}
