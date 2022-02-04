@@ -43,6 +43,10 @@ def index(request):
     React app page
     """
 
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
+        redirect('http://192.168.1.68:8000/home/')
+
     context = {}
     return render(request, 'index.html', context)
 
@@ -51,6 +55,10 @@ def admin_(request):
     """
     Admin page
     """
+
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
+        redirect('http://192.168.1.68:8000/admin/')
 
     context = {}
     return render(request, admin.site.urls)
@@ -149,20 +157,27 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
 
-        serializer = backend_serializers.UserSerializerWithToken(self.user).data
+        serializer = backend_serializers.UserSerializerWithToken(self.user)
+        for k, v in serializer.data.items():
+            data[f'{k}'] = v
 
-        for k, v in serializer.items():
-            data[k] = v
+        try:
+            user = User.objects.get(username=data["username"])
+            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+            user_model_serializer = backend_serializers.UserModelSerializer(instance=user_model, many=False)
+            data['user_model'] = user_model_serializer.data
+        except Exception as error:
+            data['user_model'] = {'error': f'{error}'}
 
-        # refresh = self.get_token(self.user)
-        #
-        product_model = backend_models.ProductModel.objects.filter(user=self.user)
-        #
-        # data['refresh'] = str(refresh)
-        # data['access'] = str(refresh.access_token),
-        # data['username'] = str(self.user.username),
-        data['groups'] = list([x.name for x in product_model])
-        #
+        try:
+            user = User.objects.get(username=data["username"])
+            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+            group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+            group_model_serializer = backend_serializers.GroupModelSerializer(instance=group_model, many=True)
+            data['group_model'] = group_model_serializer.data
+        except Exception as error:
+            data['group_model'] = {'error': f'{error}'}
+
         if settings.SIMPLE_JWT["UPDATE_LAST_LOGIN"]:
             update_last_login(None, self.user)
 
@@ -208,7 +223,7 @@ def get_user_profile(request):
 def salary(request):
     try:
         try:
-            is_local = False
+            is_local = True
             if not is_local:
                 key = backend_service.UtilsClass.create_encrypted_password(
                     _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -381,7 +396,7 @@ def salary(request):
                         print(error)
             #######################################################
 
-            # Create 'Title'
+            # Create 'TitleComponent'
             #######################################################
             backend_utils.ExcelClass.set_sheet_value(
                 col=1,
@@ -811,7 +826,7 @@ def note_api(request, pk=None):
                     'method': 'GET',
                     'body': None,
                     'descriptions': 'Returns an array of notes objects',
-                    'code': '''notes = Note.objects.all().order_by('-updated')
+                    'code': '''notes = NoteComponent.objects.all().order_by('-updated')
                     serializer = NoteSerializer(notes, many=True)
                     return Response(serializer.data)'''
                 },
@@ -820,7 +835,7 @@ def note_api(request, pk=None):
                     'method': 'GET',
                     'body': None,
                     'descriptions': 'Returns a single note object',
-                    'code': '''note = Note.objects.get(id=pk)
+                    'code': '''note = NoteComponent.objects.get(id=pk)
                     serializer = NoteSerializer(note, many=False)
                     return Response(serializer.data)'''
                 },
@@ -830,7 +845,7 @@ def note_api(request, pk=None):
                     'body': {'body': ""},
                     'descriptions': 'Creates new note with data sent in request',
                     'code': '''data = request.data
-                    note = Note.objects.create(body=data['body'])
+                    note = NoteComponent.objects.create(body=data['body'])
                     serializer = NoteSerializer(note, many=False)
                     return Response(serializer.data)'''
                 },
@@ -840,7 +855,7 @@ def note_api(request, pk=None):
                     'body': None,
                     'descriptions': 'Updates note with data sent in request',
                     'code': '''data = request.data
-                    note = Note.objects.get(id=pk)
+                    note = NoteComponent.objects.get(id=pk)
                     equal = data['body'] != note.body
                     serializer = NoteSerializer(instance=note, data=data)
                     if serializer.is_valid() and equal:
@@ -852,7 +867,7 @@ def note_api(request, pk=None):
                     'method': 'DELETE',
                     'body': None,
                     'descriptions': 'Deletes note',
-                    'code': '''note = Note.objects.get(id=pk)
+                    'code': '''note = NoteComponent.objects.get(id=pk)
                     note.delete()
                     return Response(f'delete note №{pk} successfull')'''
                 },
@@ -901,7 +916,7 @@ def _products(request, pk=None):
                     'method': 'GET',
                     'body': None,
                     'descriptions': 'Returns an array of notes objects',
-                    'code': '''notes = Note.objects.all().order_by('-updated')
+                    'code': '''notes = NoteComponent.objects.all().order_by('-updated')
                     serializer = NoteSerializer(notes, many=True)
                     return Response(serializer.data)'''
                 },
@@ -910,7 +925,7 @@ def _products(request, pk=None):
                     'method': 'GET',
                     'body': None,
                     'descriptions': 'Returns a single note object',
-                    'code': '''note = Note.objects.get(id=pk)
+                    'code': '''note = NoteComponent.objects.get(id=pk)
                     serializer = NoteSerializer(note, many=False)
                     return Response(serializer.data)'''
                 },
@@ -920,7 +935,7 @@ def _products(request, pk=None):
                     'body': {'body': ""},
                     'descriptions': 'Creates new note with data sent in request',
                     'code': '''data = request.data
-                    note = Note.objects.create(body=data['body'])
+                    note = NoteComponent.objects.create(body=data['body'])
                     serializer = NoteSerializer(note, many=False)
                     return Response(serializer.data)'''
                 },
@@ -930,7 +945,7 @@ def _products(request, pk=None):
                     'body': None,
                     'descriptions': 'Updates note with data sent in request',
                     'code': '''data = request.data
-                    note = Note.objects.get(id=pk)
+                    note = NoteComponent.objects.get(id=pk)
                     equal = data['body'] != note.body
                     serializer = NoteSerializer(instance=note, data=data)
                     if serializer.is_valid() and equal:
@@ -942,7 +957,7 @@ def _products(request, pk=None):
                     'method': 'DELETE',
                     'body': None,
                     'descriptions': 'Deletes note',
-                    'code': '''note = Note.objects.get(id=pk)
+                    'code': '''note = NoteComponent.objects.get(id=pk)
                     note.delete()
                     return Response(f'delete note №{pk} successfull')'''
                 },
@@ -991,7 +1006,7 @@ def _note_api(request, pk=None):
                     'method': 'GET',
                     'body': None,
                     'descriptions': 'Returns an array of notes objects',
-                    'code': '''notes = Note.objects.all().order_by('-updated')
+                    'code': '''notes = NoteComponent.objects.all().order_by('-updated')
                     serializer = backend_serializers.NoteSerializer(notes, many=True)
                     return Response(serializer.data)'''
                 },
@@ -1000,7 +1015,7 @@ def _note_api(request, pk=None):
                     'method': 'GET',
                     'body': None,
                     'descriptions': 'Returns a single note object',
-                    'code': '''note = Note.objects.get(id=pk)
+                    'code': '''note = NoteComponent.objects.get(id=pk)
                     serializer = backend_serializers.(note, many=False)
                     return Response(serializer.data)'''
                 },
@@ -1010,7 +1025,7 @@ def _note_api(request, pk=None):
                     'body': {'body': ""},
                     'descriptions': 'Creates new note with data sent in request',
                     'code': '''data = request.data
-                    note = Note.objects.create(body=data['body'])
+                    note = NoteComponent.objects.create(body=data['body'])
                     serializer = backend_serializers.NoteSerializer(note, many=False)
                     return Response(serializer.data)'''
                 },
@@ -1020,7 +1035,7 @@ def _note_api(request, pk=None):
                     'body': None,
                     'descriptions': 'Updates note with data sent in request',
                     'code': '''data = request.data
-                    note = Note.objects.get(id=pk)
+                    note = NoteComponent.objects.get(id=pk)
                     equal = data['body'] != note.body
                     serializer = backend_serializers.NoteSerializer(instance=note, data=data)
                     if serializer.is_valid() and equal:
@@ -1032,7 +1047,7 @@ def _note_api(request, pk=None):
                     'method': 'DELETE',
                     'body': None,
                     'descriptions': 'Deletes note',
-                    'code': '''note = Note.objects.get(id=pk)
+                    'code': '''note = NoteComponent.objects.get(id=pk)
                     note.delete()
                     return Response(f'delete note №{pk} successfull')'''
                 },
@@ -1095,7 +1110,7 @@ def get_products(request):
 
     products = backend_models.ProductModel.objects.all().order_by('-createdAt')
     serializer = backend_serializers.ProductSerializer(products, many=True)
-    return Response({'products': serializer.data})
+    return Response({'productsTest': serializer.data})
 
 
 @api_view(http_method_names=['GET'])

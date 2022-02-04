@@ -13,11 +13,17 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-    def get_name(self, obj):
-        name = obj.username
-        if name == '':
-            name = obj.email
-        return name
+    def get_user_model(self, obj):
+        user_model = obj.user_model
+        if not user_model:
+            user_model = {}
+        return user_model
+
+
+class UserModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = backend_models.UserModel
+        fields = '__all__'
 
 
 class UserSerializerWithToken(UserSerializer):
@@ -25,7 +31,7 @@ class UserSerializerWithToken(UserSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'name', 'token']
+        fields = ['id', 'username', 'token']
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
@@ -35,6 +41,12 @@ class UserSerializerWithToken(UserSerializer):
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
+        fields = '__all__'
+
+
+class GroupModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = backend_models.GroupModel
         fields = '__all__'
 
 

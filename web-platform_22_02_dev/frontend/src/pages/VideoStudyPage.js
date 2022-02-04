@@ -5,15 +5,15 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, getUserDetails } from "../actions/userActions";
 
-import Header from "../components/Header";
-import Title from "../components/Title";
-import Footer from "../components/Footer";
+import HeaderComponent from "../components/HeaderComponent";
+import TitleComponent from "../components/TitleComponent";
+import FooterComponent from "../components/FooterComponent";
 
 const VideoStudyPage = () => {
   return (
     <div>
-      <Header />
-      <Title
+      <HeaderComponent />
+      <TitleComponent
         first={"Видео инструкции"}
         second={"страница с видеоинструкциями по функционалу."}
       />
@@ -51,7 +51,7 @@ const VideoStudyPage = () => {
           </div>
         </div>
       </main>
-      <Footer />
+      <FooterComponent />
     </div>
   );
 };

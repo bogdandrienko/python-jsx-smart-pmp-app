@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  Form,
-  Button,
-  Navbar,
-  Nav,
-  Container,
-  Row,
-  NavDropdown,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import FormContainer from "../components/FormContainer";
-import { login } from "../actions/userActions";
 
-import Header from "../components/Header";
-import Title from "../components/Title";
-import Footer from "../components/Footer";
+import HeaderComponent from "../components/HeaderComponent";
+import TitleComponent from "../components/TitleComponent";
+import FooterComponent from "../components/FooterComponent";
+
+import LoaderComponent from "../components/LoaderComponent";
+import MessageComponent from "../components/MessageComponent";
+import FormContainerComponent from "../components/FormContainerComponent";
+import { login } from "../actions/userActions";
 
 function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -57,15 +49,15 @@ function LoginScreen() {
 
   return (
     <div>
-      <Header />
-      <Title
+      <HeaderComponent />
+      <TitleComponent
         first={"Вход в систему"}
         second={"страница для входа в систему."}
       />
       <main className="container text-center">
-        <FormContainer>
-          {error && <Message variant="danger">{error}</Message>}
-          {loading && <Loader />}
+        <FormContainerComponent>
+          {error && <MessageComponent variant="danger">{error}</MessageComponent>}
+          {loading && <LoaderComponent />}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="email">
               <Form.Label>Имя пользователя:</Form.Label>
@@ -101,9 +93,9 @@ function LoginScreen() {
               видимость пароля
             </Button>
           </Form>
-        </FormContainer>
+        </FormContainerComponent>
       </main>
-      <Footer />
+      <FooterComponent />
     </div>
   );
 }

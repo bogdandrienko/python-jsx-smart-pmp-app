@@ -26,14 +26,11 @@ urlpatterns = [
     path('', backend_views.index, name=''),
     path('', backend_views.index, name='index'),
     path('home/', backend_views.index, name='home'),
-    # path(r'^(?P<username>[^/]+)/forms/(?P<id_string>[^/]+)/', backend_views.index, name=''),
-    # re_path(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<slug>[\w-]+)/$', backend_views.index, name=''),
     ####################################################################################################################
 
     # django default admin
     ####################################################################################################################
     # admin page
-    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('admin/', backend_views.admin_, name='admin'),
     ####################################################################################################################
@@ -72,8 +69,8 @@ urlpatterns = [
     # path('api/note_api/', TemplateView.as_view(template_name='chat_react.html'), name='api_chat_react'),
 
     # shop
-    path('api/products/', backend_views.get_products, name='api_products'),
-    path('api/products/<str:pk>/', backend_views.get_product, name='api_product'),
+    path('api/productsTest/', backend_views.get_products, name='api_products'),
+    path('api/productsTest/<str:pk>/', backend_views.get_product, name='api_product'),
 
     # django templates
     ####################################################################################################################

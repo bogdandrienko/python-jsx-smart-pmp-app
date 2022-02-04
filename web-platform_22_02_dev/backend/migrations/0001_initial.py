@@ -63,8 +63,8 @@ class Migration(migrations.Migration):
                 ('error_text_field', models.TextField(blank=True, db_column='error_text_field_db_column', db_index=True, db_tablespace='error_text_field_db_tablespace', default='', error_messages=False, help_text='<small class="text-muted">описание исключения и/или ошибки модуля</small><hr><br>', max_length=2048, null=True, unique_for_date=False, unique_for_month=False, unique_for_year=False, validators=[django.core.validators.MinLengthValidator(0), django.core.validators.MaxLengthValidator(2048)], verbose_name='Текст исключения-ошибки модуля:')),
             ],
             options={
-                'verbose_name': 'Computer Vision Module',
-                'verbose_name_plural': 'Computer Vision Modules',
+                'verbose_name': 'Computer Vision ModuleComponent',
+                'verbose_name_plural': 'Computer Vision ModulesComponent',
                 'db_table': 'computer_vision_module_model_table',
                 'ordering': ('name_char_field', 'path_slug_field'),
             },
@@ -167,7 +167,7 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='auth.user')),
             ],
             options={
-                'verbose_name': 'Product',
+                'verbose_name': 'ProductComponent',
                 'verbose_name_plural': 'Products',
                 'db_table': 'product_model_table',
                 'ordering': ('-createdAt',),
@@ -305,7 +305,7 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='auth.user')),
             ],
             options={
-                'verbose_name': 'Note',
+                'verbose_name': 'NoteComponent',
                 'verbose_name_plural': 'Notes',
                 'db_table': 'task_model_table',
                 'ordering': ('-id',),

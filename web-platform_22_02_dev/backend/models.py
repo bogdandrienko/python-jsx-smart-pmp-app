@@ -24,9 +24,9 @@ class ExamplesModel(models.Model):
         db_tablespace='binary_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(1), MaxLengthValidator(1024), ],
         unique=False,
@@ -46,9 +46,9 @@ class ExamplesModel(models.Model):
         db_tablespace='boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         unique=False,
         editable=True,
@@ -65,9 +65,9 @@ class ExamplesModel(models.Model):
         db_tablespace='null_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         unique=False,
         editable=True,
@@ -84,9 +84,9 @@ class ExamplesModel(models.Model):
         db_tablespace='char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
@@ -106,9 +106,9 @@ class ExamplesModel(models.Model):
         db_tablespace='text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
@@ -128,9 +128,9 @@ class ExamplesModel(models.Model):
         db_tablespace='slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
         unique=False,
@@ -151,9 +151,9 @@ class ExamplesModel(models.Model):
         db_tablespace='email_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
         unique=False,
@@ -173,9 +173,9 @@ class ExamplesModel(models.Model):
         db_tablespace='url_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(200), ],
         unique=False,
@@ -195,9 +195,9 @@ class ExamplesModel(models.Model):
         db_tablespace='genericipaddress_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
@@ -218,9 +218,9 @@ class ExamplesModel(models.Model):
         db_tablespace='integer_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinValueValidator(-2147483648), MaxValueValidator(2147483647), ],
         unique=False,
@@ -270,9 +270,9 @@ class ExamplesModel(models.Model):
         db_tablespace='float_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
         unique=False,
@@ -289,9 +289,9 @@ class ExamplesModel(models.Model):
         db_tablespace='decimal_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
         unique=False,
@@ -311,9 +311,9 @@ class ExamplesModel(models.Model):
         db_tablespace='datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=False,
@@ -333,9 +333,9 @@ class ExamplesModel(models.Model):
         db_tablespace='date_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=False,
@@ -355,9 +355,9 @@ class ExamplesModel(models.Model):
         db_tablespace='time_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=False,
@@ -377,9 +377,9 @@ class ExamplesModel(models.Model):
         db_tablespace='duration_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=False,
@@ -395,9 +395,9 @@ class ExamplesModel(models.Model):
         db_index=True,
         db_tablespace='file_field_db_tablespace',
         error_messages=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[FileExtensionValidator(['xlsx', 'xls'])],
         unique=False,
@@ -417,9 +417,9 @@ class ExamplesModel(models.Model):
         db_index=True,
         db_tablespace='image_field_db_tablespace',
         error_messages=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         validators=[FileExtensionValidator(['jpg', 'png'])],
         unique=False,
@@ -442,9 +442,9 @@ class ExamplesModel(models.Model):
         db_tablespace='foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=False,
@@ -471,9 +471,9 @@ class ExamplesModel(models.Model):
         db_tablespace='one_to_one_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=True,
@@ -499,9 +499,9 @@ class ExamplesModel(models.Model):
         db_tablespace='many_to_many_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=False,
@@ -587,7 +587,7 @@ class ExamplesModel(models.Model):
                 # the value of the date field.
                 # For example, if you have a field title that has unique_for_date="pub_date", then Django wouldn’t allow
                 # the entry of two records with the same title and pub_date.
-                # Note that if you set this to point to a DateTimeField, only the date portion of the field will be
+                # NoteComponent that if you set this to point to a DateTimeField, only the date portion of the field will be
                 # considered. Besides, when USE_TZ is True, the check will be performed in the current time zone at the
                 # time the object gets saved.
                 # This is enforced by Model.validate_unique() during model validation but not at the database level. If
@@ -623,7 +623,7 @@ class ExamplesModel(models.Model):
 
                 blank=False,
                 # If True, the field is allowed to be blank. Default is False.
-                # Note that this is different than null. null is purely database-related, whereas blank is validation-
+                # NoteComponent that this is different than null. null is purely database-related, whereas blank is validation-
                 # related. If a field has blank=True, form validation will allow entry of an empty value. If a field has
                 # blank=False, the field will be required.
 
@@ -652,7 +652,7 @@ class ExamplesModel(models.Model):
                 help_text='<small class="text-muted underline">подсказка, с поддержкой HTML</small><hr><br>',
                 # Extra “help” text to be displayed with the form widget. It’s useful for documentation even if your
                 # field isn’t used on a form.
-                # Note that this value is not HTML-escaped in automatically-generated forms. This lets you include HTML
+                # NoteComponent that this value is not HTML-escaped in automatically-generated forms. This lets you include HTML
                 # in help_text if you so desire. For example: help_text="Please use the following format:
                 # <em>YYYY-MM-DD</em>."
             )
@@ -918,7 +918,7 @@ class ExamplesModel(models.Model):
                             DecimalValidator(max_digits=5, decimal_places=10), ],
 
                 max_digits=None,
-                # The maximum number of digits allowed in the number. Note that this number must be greater than
+                # The maximum number of digits allowed in the number. NoteComponent that this number must be greater than
                 # or equal to decimal_places.
 
                 decimal_places=None,
@@ -940,7 +940,7 @@ class ExamplesModel(models.Model):
             datetime_field = models.DateTimeField(
                 auto_now=False,
                 # Automatically set the field to now every time the object is saved. Useful for “last-modified”
-                # timestamps. Note that the current date is always used; it’s not just a default value that you
+                # timestamps. NoteComponent that the current date is always used; it’s not just a default value that you
                 # can override.
                 # The field is only automatically updated when calling Model.save(). The field isn’t updated when
                 # making updates to backend fields in backend ways such as QuerySet.update(), though you
@@ -948,7 +948,7 @@ class ExamplesModel(models.Model):
 
                 auto_now_add=False,
                 # Automatically set the field to now when the object is first created. Useful for creation of
-                # timestamps. Note that the current date is always used; it’s not just a default value that you
+                # timestamps. NoteComponent that the current date is always used; it’s not just a default value that you
                 # can override. So even if you set a value for this field when creating the object, it will be
                 # ignored. If you want to be able to modify this field, set the following instead of auto_now_add=True:
                 # For DateField: default=date.today - from datetime.date.today()
@@ -970,7 +970,7 @@ class ExamplesModel(models.Model):
             date_field = models.DateField(
                 auto_now=False,
                 # Automatically set the field to now every time the object is saved. Useful for “last-modified”
-                # timestamps. Note that the current date is always used; it’s not just a default value that you
+                # timestamps. NoteComponent that the current date is always used; it’s not just a default value that you
                 # can override.
                 # The field is only automatically updated when calling Model.save(). The field isn’t updated when
                 # making updates to backend fields in backend ways such as QuerySet.update(), though you
@@ -978,7 +978,7 @@ class ExamplesModel(models.Model):
 
                 auto_now_add=False,
                 # Automatically set the field to now when the object is first created. Useful for creation of
-                # timestamps. Note that the current date is always used; it’s not just a default value that you
+                # timestamps. NoteComponent that the current date is always used; it’s not just a default value that you
                 # can override. So even if you set a value for this field when creating the object, it will be
                 # ignored. If you want to be able to modify this field, set the following instead of auto_now_add=True:
                 # For DateField: default=date.today - from datetime.date.today()
@@ -1002,7 +1002,7 @@ class ExamplesModel(models.Model):
             time_field = models.TimeField(
                 auto_now=False,
                 # Automatically set the field to now every time the object is saved. Useful for “last-modified”
-                # timestamps. Note that the current date is always used; it’s not just a default value that you
+                # timestamps. NoteComponent that the current date is always used; it’s not just a default value that you
                 # can override.
                 # The field is only automatically updated when calling Model.save(). The field isn’t updated when
                 # making updates to backend fields in backend ways such as QuerySet.update(), though you
@@ -1010,7 +1010,7 @@ class ExamplesModel(models.Model):
 
                 auto_now_add=False,
                 # Automatically set the field to now when the object is first created. Useful for creation of
-                # timestamps. Note that the current date is always used; it’s not just a default value that you
+                # timestamps. NoteComponent that the current date is always used; it’s not just a default value that you
                 # can override. So even if you set a value for this field when creating the object, it will be
                 # ignored. If you want to be able to modify this field, set the following instead of auto_now_add=True:
                 # For DateField: default=date.today - from datetime.date.today()
@@ -1163,7 +1163,7 @@ class ExamplesModel(models.Model):
                 related_name='foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
-                # See the related objects documentation for a full explanation and example. Note that you must set
+                # See the related objects documentation for a full explanation and example. NoteComponent that you must set
                 # this value when defining relations on abstract models; and when you do so some special syntax
                 # is available.
                 # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
@@ -1259,7 +1259,7 @@ class ExamplesModel(models.Model):
                 related_name='foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
-                # See the related objects documentation for a full explanation and example. Note that you must set
+                # See the related objects documentation for a full explanation and example. NoteComponent that you must set
                 # this value when defining relations on abstract models; and when you do so some special syntax
                 # is available.
                 # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
@@ -1344,7 +1344,7 @@ class ExamplesModel(models.Model):
                 related_name='foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
-                # See the related objects documentation for a full explanation and example. Note that you must set
+                # See the related objects documentation for a full explanation and example. NoteComponent that you must set
                 # this value when defining relations on abstract models; and when you do so some special syntax
                 # is available.
                 # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
@@ -1432,9 +1432,9 @@ class LoggingModel(models.Model):
         db_tablespace='username_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
+        unique_for_date=False,  # Error with JSON serialize
+        unique_for_month=False,  # Error with JSON serialize
+        unique_for_year=False,  # Error with JSON serialize
         validators=[MinLengthValidator(0), MaxLengthValidator(12), ],
         unique=False,
         editable=True,
@@ -1453,9 +1453,6 @@ class LoggingModel(models.Model):
         db_tablespace='ip_genericipaddress_field_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(12), ],
         unique=False,
         editable=True,
@@ -1475,9 +1472,6 @@ class LoggingModel(models.Model):
         db_tablespace='request_path_slug_field_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
@@ -1497,9 +1491,6 @@ class LoggingModel(models.Model):
         db_tablespace='request_method_slug_field_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(4), ],
         unique=False,
         editable=True,
@@ -1518,9 +1509,6 @@ class LoggingModel(models.Model):
         db_tablespace='error_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
@@ -1538,9 +1526,6 @@ class LoggingModel(models.Model):
         db_tablespace='datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -1584,9 +1569,6 @@ class UserModel(models.Model):
         db_tablespace='user_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -1605,9 +1587,6 @@ class UserModel(models.Model):
         db_tablespace='password_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(8), MaxLengthValidator(16), ],
         unique=False,
         editable=True,
@@ -1626,9 +1605,6 @@ class UserModel(models.Model):
         db_tablespace='activity_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -1643,9 +1619,6 @@ class UserModel(models.Model):
         db_tablespace='email_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
         unique=False,
         editable=True,
@@ -1664,9 +1637,6 @@ class UserModel(models.Model):
         db_tablespace='secret_question_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
@@ -1684,9 +1654,6 @@ class UserModel(models.Model):
         db_tablespace='secret_answer_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
         unique=False,
         editable=True,
@@ -1704,9 +1671,6 @@ class UserModel(models.Model):
         db_tablespace='last_name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
@@ -1724,9 +1688,6 @@ class UserModel(models.Model):
         db_tablespace='first_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
@@ -1744,9 +1705,6 @@ class UserModel(models.Model):
         db_tablespace='patronymic_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
@@ -1764,9 +1722,6 @@ class UserModel(models.Model):
         db_tablespace='personnel_number_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
@@ -1785,9 +1740,6 @@ class UserModel(models.Model):
         db_tablespace='subdivision_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -1805,9 +1757,6 @@ class UserModel(models.Model):
         db_tablespace='workshop_service_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -1825,9 +1774,6 @@ class UserModel(models.Model):
         db_tablespace='department_site_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -1845,9 +1791,6 @@ class UserModel(models.Model):
         db_tablespace='position_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -1865,9 +1808,6 @@ class UserModel(models.Model):
         db_tablespace='category_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -1885,9 +1825,6 @@ class UserModel(models.Model):
         db_tablespace='education_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
@@ -1905,9 +1842,6 @@ class UserModel(models.Model):
         db_tablespace='achievements_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
@@ -1925,9 +1859,6 @@ class UserModel(models.Model):
         db_tablespace='biography_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
@@ -1945,9 +1876,6 @@ class UserModel(models.Model):
         db_tablespace='hobbies_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
@@ -1964,9 +1892,6 @@ class UserModel(models.Model):
         db_index=True,
         db_tablespace='image_field_db_tablespace',
         error_messages=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[FileExtensionValidator(['jpg', 'png'])],
         unique=False,
         editable=True,
@@ -2031,9 +1956,6 @@ class ActionModel(models.Model):
         db_tablespace='type_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
@@ -2054,9 +1976,6 @@ class ActionModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
@@ -2075,9 +1994,6 @@ class ActionModel(models.Model):
         db_tablespace='name_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
@@ -2124,9 +2040,6 @@ class GroupModel(models.Model):
         db_tablespace='group_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2145,9 +2058,6 @@ class GroupModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
@@ -2166,9 +2076,6 @@ class GroupModel(models.Model):
         db_tablespace='name_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
@@ -2188,9 +2095,6 @@ class GroupModel(models.Model):
         db_tablespace='user_many_to_many_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2208,9 +2112,6 @@ class GroupModel(models.Model):
         db_tablespace='path_many_to_many_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2228,9 +2129,6 @@ class GroupModel(models.Model):
         db_tablespace='position_float_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
         unique=False,
         editable=True,
@@ -2286,9 +2184,6 @@ class ModulesModel(models.Model):
         db_tablespace='type_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
@@ -2309,9 +2204,6 @@ class ModulesModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
@@ -2329,9 +2221,6 @@ class ModulesModel(models.Model):
         db_tablespace='previous_path_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
@@ -2351,9 +2240,6 @@ class ModulesModel(models.Model):
         db_tablespace='current_path_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
@@ -2373,9 +2259,6 @@ class ModulesModel(models.Model):
         db_tablespace='next_path_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
         editable=True,
@@ -2395,9 +2278,6 @@ class ModulesModel(models.Model):
         db_tablespace='position_float_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
         unique=False,
         editable=True,
@@ -2412,9 +2292,6 @@ class ModulesModel(models.Model):
         db_index=True,
         db_tablespace='image_field_db_tablespace',
         error_messages=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[FileExtensionValidator(['jpg', 'png'])],
         unique=False,
         editable=True,
@@ -2434,9 +2311,6 @@ class ModulesModel(models.Model):
         db_tablespace='text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
         unique=False,
         editable=True,
@@ -2477,9 +2351,6 @@ class NotificationModel(models.Model):
         db_tablespace='user_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2503,9 +2374,6 @@ class NotificationModel(models.Model):
         db_tablespace='type_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
@@ -2525,9 +2393,6 @@ class NotificationModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
@@ -2546,9 +2411,6 @@ class NotificationModel(models.Model):
         db_tablespace='text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
         unique=False,
         editable=True,
@@ -2566,9 +2428,6 @@ class NotificationModel(models.Model):
         db_tablespace='status_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2584,9 +2443,6 @@ class NotificationModel(models.Model):
         db_tablespace='created_datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2604,9 +2460,6 @@ class NotificationModel(models.Model):
         db_tablespace='decision_datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2653,9 +2506,6 @@ class IdeaModel(models.Model):
         db_tablespace='author_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2673,9 +2523,6 @@ class IdeaModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
@@ -2699,9 +2546,6 @@ class IdeaModel(models.Model):
         db_tablespace='category_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         choices=LIST_DB_VIEW_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(16), ],
         unique=False,
@@ -2721,9 +2565,6 @@ class IdeaModel(models.Model):
         db_tablespace='short_description_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -2741,9 +2582,6 @@ class IdeaModel(models.Model):
         db_tablespace='full_description_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
         unique=False,
         editable=True,
@@ -2760,9 +2598,6 @@ class IdeaModel(models.Model):
         db_index=True,
         db_tablespace='avatar_image_field_db_tablespace',
         error_messages=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[FileExtensionValidator(['jpg', 'png'])],
         unique=False,
         editable=True,
@@ -2780,9 +2615,6 @@ class IdeaModel(models.Model):
         db_index=True,
         db_tablespace='addiction_file_field_db_tablespace',
         error_messages=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[FileExtensionValidator(['xlsx', 'xls', 'docx', 'doc', 'pdf'])],
         unique=False,
         editable=True,
@@ -2801,9 +2633,6 @@ class IdeaModel(models.Model):
         db_tablespace='visibility_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2818,9 +2647,6 @@ class IdeaModel(models.Model):
         db_tablespace='created_datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2838,9 +2664,6 @@ class IdeaModel(models.Model):
         db_tablespace='register_datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2899,9 +2722,6 @@ class IdeaCommentModel(models.Model):
         db_tablespace='author_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2919,9 +2739,6 @@ class IdeaCommentModel(models.Model):
         db_tablespace='idea_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -2939,9 +2756,6 @@ class IdeaCommentModel(models.Model):
         db_tablespace='text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
@@ -2959,9 +2773,6 @@ class IdeaCommentModel(models.Model):
         db_tablespace='datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         # choices=LIST_DB_VIEW_CHOICES,
         # validators=[MinValueValidator(8), MaxValueValidator(12), ],
         unique=False,
@@ -2990,7 +2801,7 @@ class IdeaCommentModel(models.Model):
 
 class IdeaRatingModel(models.Model):
     """
-    Idea Rating Model
+    Idea RatingComponent Model
     """
     author_foreign_key_field = models.ForeignKey(
         db_column='author_foreign_key_field_db_column',
@@ -2998,9 +2809,6 @@ class IdeaRatingModel(models.Model):
         db_tablespace='author_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3018,9 +2826,6 @@ class IdeaRatingModel(models.Model):
         db_tablespace='idea_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3038,9 +2843,6 @@ class IdeaRatingModel(models.Model):
         db_tablespace='status_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3055,9 +2857,6 @@ class IdeaRatingModel(models.Model):
         db_tablespace='datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3160,9 +2959,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -3180,9 +2976,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='description_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
         unique=False,
         editable=True,
@@ -3205,9 +2998,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='path_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         choices=LIST_DB_VIEW_MODULES_CHOICES,
         validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=True,
@@ -3227,9 +3017,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='play_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3245,9 +3032,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='delay_float_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(3600), ],
         unique=False,
         editable=True,
@@ -3263,9 +3047,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3283,9 +3064,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='duration_float_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(3600), ],
         unique=False,
         editable=True,
@@ -3301,9 +3079,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='restart_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3318,9 +3093,6 @@ class ComputerVisionModuleModel(models.Model):
         db_tablespace='error_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(2048), ],
         unique=False,
         editable=True,
@@ -3336,8 +3108,8 @@ class ComputerVisionModuleModel(models.Model):
     class Meta:
         app_label = 'backend'
         ordering = ('name_char_field', 'path_slug_field')
-        verbose_name = 'Computer Vision Module'
-        verbose_name_plural = 'Computer Vision Modules'
+        verbose_name = 'Computer Vision ModuleComponent'
+        verbose_name_plural = 'Computer Vision ModulesComponent'
         db_table = 'computer_vision_module_model_table'
 
     def __str__(self):
@@ -3358,9 +3130,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='module_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3378,9 +3147,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='play_boolean_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         unique=False,
         editable=True,
         blank=True,
@@ -3395,9 +3161,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='alias_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -3416,9 +3179,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='protocol_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
         unique=False,
         editable=True,
@@ -3438,9 +3198,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='port_integer_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(9999999), ],
         unique=False,
         editable=True,
@@ -3456,9 +3213,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='genericipaddress_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
@@ -3477,9 +3231,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='login_protocol_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
         unique=False,
         editable=True,
@@ -3498,9 +3249,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='password_protocol_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
         unique=False,
         editable=True,
@@ -3519,9 +3267,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='mask_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
         unique=False,
         editable=True,
@@ -3540,9 +3285,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='bright_level_integer_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(100), ],
         unique=False,
         editable=True,
@@ -3558,9 +3300,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='bright_level_integer_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3576,9 +3315,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='in_range_set_to_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3594,9 +3330,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='count_not_zero_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3612,9 +3345,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='point_1_1_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3630,9 +3360,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='point_1_2_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3648,9 +3375,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='point_1_3_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3666,9 +3390,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='point_2_1_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3684,9 +3405,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='point_2_2_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3702,9 +3420,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='point_2_3_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3720,9 +3435,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='alarm_level_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(100), ],
         unique=False,
         editable=True,
@@ -3738,9 +3450,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='null_level_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(256), ],
         unique=False,
         editable=True,
@@ -3756,9 +3465,6 @@ class ComputerVisionComponentModel(models.Model):
         db_tablespace='correct_coefficient_float_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        unique_for_date=False,
-        unique_for_month=False,
-        unique_for_year=False,
         validators=[MinValueValidator(0), MaxValueValidator(100), ],
         unique=False,
         editable=True,
@@ -3788,7 +3494,7 @@ class NoteModel(models.Model):
 
     class Meta:
         ordering = ('-id',)
-        verbose_name = 'Note'
+        verbose_name = 'NoteComponent'
         verbose_name_plural = 'Notes'
         db_table = 'task_model_table'
 
@@ -3830,7 +3536,7 @@ class ProductModel(models.Model):
 
     class Meta:
         ordering = ('-createdAt',)
-        verbose_name = 'Product'
+        verbose_name = 'ProductComponent'
         verbose_name_plural = 'Products'
         db_table = 'product_model_table'
 

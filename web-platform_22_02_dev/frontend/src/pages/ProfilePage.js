@@ -5,9 +5,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, getUserDetails } from "../actions/userActions";
 
-import Header from "../components/Header";
-import Title from "../components/Title";
-import Footer from "../components/Footer";
+import HeaderComponent from "../components/HeaderComponent";
+import TitleComponent from "../components/TitleComponent";
+import FooterComponent from "../components/FooterComponent";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -43,8 +43,8 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <Header />
-      <Title
+      <HeaderComponent />
+      <TitleComponent
         first={"Личная страница"}
         second={"страница Вашего личного профиля."}
       />
@@ -111,7 +111,7 @@ const ProfilePage = () => {
           </table>
         </div>
       </main>
-      <Footer />
+      <FooterComponent />
     </div>
   );
 };

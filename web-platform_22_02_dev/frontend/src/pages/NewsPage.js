@@ -5,23 +5,23 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, getUserDetails } from "../actions/userActions";
 
-import Header from "../components/Header";
-import Title from "../components/Title";
-import Footer from "../components/Footer";
-import News from "../components/News";
+import HeaderComponent from "../components/HeaderComponent";
+import TitleComponent from "../components/TitleComponent";
+import FooterComponent from "../components/FooterComponent";
+import NewsComponent from "../components/NewsComponent";
 
 const NewsPage = () => {
   return (
     <div>
-      <Header />
-      <Title
+      <HeaderComponent />
+      <TitleComponent
         first={"Новости"}
         second={"страница новостей веб-платформы."}
       />
       <main className="container text-center">
-        <News/>
+        <NewsComponent/>
       </main>
-      <Footer />
+      <FooterComponent />
     </div>
   );
 };

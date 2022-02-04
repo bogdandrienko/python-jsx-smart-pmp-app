@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Navbar, Nav, Container, Row, NavDropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import { logout, getUserDetails } from "../actions/userActions";
 
-import Header from "../components/Header";
-import Title from "../components/Title";
-import Footer from "../components/Footer";
-import Loader from "../components/Loader";
-import Table from "../components/Table";
+import HeaderComponent from "../components/HeaderComponent";
+import TitleComponent from "../components/TitleComponent";
+import FooterComponent from "../components/FooterComponent";
+import LoaderComponent from "../components/LoaderComponent";
+import TableComponent from "../components/TableComponent";
 
 const SalaryPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const [excel, setExcel] = useState([]);
   const [headers, setHeaders] = useState([]);
   const [tables, setTables] = useState([]);
-  const [excel, setExcel] = useState([]);
   const [error, setError] = useState(false);
   const [errorText, setErrorText] = useState({});
   const [finishLoading, setFinishLoading] = useState(false);
@@ -32,10 +24,12 @@ const SalaryPage = () => {
     const typeLoader =
       loader.getAttribute("class") === "d-none" ? "" : "d-none";
     loader.setAttribute("class", typeLoader);
+
     const button = document.getElementById("div_button");
     const typeButton =
       button.getAttribute("class") === "d-none" ? "" : "d-none";
     button.setAttribute("class", typeButton);
+
     setError(false);
     setFinishLoading(false);
 
@@ -59,9 +53,11 @@ const SalaryPage = () => {
           });
           setError(true);
           setFinishLoading(true);
+
           const newTypeLoader =
             loader.getAttribute("class") === "d-none" ? "" : "d-none";
           loader.setAttribute("class", newTypeLoader);
+
           const newTypeButton =
             button.getAttribute("class") === "d-none" ? "" : "d-none";
           button.setAttribute("class", newTypeButton);
@@ -73,8 +69,10 @@ const SalaryPage = () => {
 
     const newLoader = loader.getAttribute("class") === "d-none" ? "" : "d-none";
     loader.setAttribute("class", newLoader);
+
     const newButton = button.getAttribute("class") === "d-none" ? "" : "d-none";
     button.setAttribute("class", newButton);
+
     if (data["error"] === "error") {
       setError(true);
     } else {
@@ -84,6 +82,8 @@ const SalaryPage = () => {
           headers.push([i, data[i]]);
         }
       }
+      setHeaders(headers);
+
       const tables = [];
       tables.push(["1.Начислено", data["global_objects"]["1.Начислено"]]);
       tables.push(["2.Удержано", data["global_objects"]["2.Удержано"]]);
@@ -96,69 +96,21 @@ const SalaryPage = () => {
         "5.Налоговые вычеты",
         data["global_objects"]["5.Налоговые вычеты"],
       ]);
-      setHeaders(headers);
       setTables(tables);
-      setError(false);
 
       setExcel(data["excel_path"]);
+
+      setError(false);
     }
     setFinishLoading(true);
   };
 
-  useEffect(() => {
-    dispatch(getUserDetails("profile"));
-    // getSalary();
-  }, [dispatch]);
-
-  // function getValue(value) {
-  //   if (typeof value === "number") {
-  //     return value.toFixed(2);
-  //   } else {
-  //     return value;
-  //   }
-  // }
-  //
-  // let month = "01";
-  // const setMonth = (month_) => {
-  //   if (month_.length <= 1) {
-  //     month = "0" + month_;
-  //   } else {
-  //     month = month_;
-  //   }
-  // };
-  //
-  // let year = "2022";
-  // const setYear = (year_) => {
-  //   year = year_;
-  // };
-  //
-  // async function renderTable() {
-  //   const config = {
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       Authorization: `Bearer ${userInfo.token}`,
-  //     },
-  //   };
-  //   const { data } = await axios.get(`/api/salary`, config);
-  //   console.log(data);
-  //   document.getElementById("salary").innerHTML = JSON.stringify(data);
-  // }
-  //
-  // const data = () => async () => {
-  //   const config = {
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       Authorization: `Bearer ${userInfo.token}`,
-  //     },
-  //   };
-  //   const { data } = await axios.get(`/api/salary`, config);
-  //   return data;
-  // };
+  useEffect(() => {}, []);
 
   return (
     <div>
-      <Header />
-      <Title
+      <HeaderComponent />
+      <TitleComponent
         first={"Расчётный лист"}
         second={"страница выгрузки Вашего расчётного листа."}
       />
@@ -231,7 +183,7 @@ const SalaryPage = () => {
         <div className="pricing-header px-0 py-0 pt-md-0 pb-md-0 mx-auto text-center">
           <div className="">
             <div id="div_loader" class="d-none">
-              <Loader />
+              <LoaderComponent />
             </div>
             {finishLoading && error ? (
               <div>
@@ -252,7 +204,10 @@ const SalaryPage = () => {
                   Ниже расположены данные, соответствующие выбранному периоду:
                 </p>
                 {excel ? (
-                  <a class="btn btn-lg btn-outline-success m-1" href={`./${excel}`}>
+                  <a
+                    class="btn btn-lg btn-outline-success m-1"
+                    href={`./${excel}`}
+                  >
                     Скачать excel-документ
                   </a>
                 ) : (
@@ -343,13 +298,13 @@ const SalaryPage = () => {
                 ""
               )}
               {finishLoading && !error && tables
-                ? tables.map((tab, index) => <Table key={index} tab={tab} />)
+                ? tables.map((tab, index) => <TableComponent key={index} tab={tab} />)
                 : ""}
             </ul>
           </div>
         </div>
       </main>
-      <Footer />
+      <FooterComponent />
     </div>
   );
 };

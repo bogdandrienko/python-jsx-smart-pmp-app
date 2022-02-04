@@ -743,7 +743,7 @@ class ParserBeautifulSoupClass:
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
-                <title>Title</title>
+                <title>TitleComponent</title>
             </head>
             <body>
                 """

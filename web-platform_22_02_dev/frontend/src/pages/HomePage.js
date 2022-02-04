@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Navbar, Nav, Container, Row, NavDropdown } from "react-bootstrap";
+import React from "react";
+import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../actions/userActions";
 
-import Header from "../components/Header";
-import Title from "../components/Title";
-import Footer from "../components/Footer";
-import Modules from "../components/Modules";
-import News from "../components/News";
+import HeaderComponent from "../components/HeaderComponent";
+import TitleComponent from "../components/TitleComponent";
+import FooterComponent from "../components/FooterComponent";
+import ModulesComponent from "../components/ModulesComponent";
+import NewsComponent from "../components/NewsComponent";
 
 const HomePage = () => {
   return (
     <div>
-      <Header />
-      <Title
+      <HeaderComponent />
+      <TitleComponent
         first={"Домашняя страница"}
         second={"основная страница веб платформы."}
       />
@@ -44,13 +41,13 @@ const HomePage = () => {
               </Nav.Link>
             </LinkContainer>
           </div>
-          <News />
+          <NewsComponent />
         </div>
         <div>
-          <Modules />
+          <ModulesComponent />
         </div>
       </main>
-      <Footer />
+      <FooterComponent />
     </div>
   );
 };
