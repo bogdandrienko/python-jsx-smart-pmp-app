@@ -1,4 +1,4 @@
-import HomeScreen from "../screens/HomeScreen";
+import HomeScreen from "./HomeScreen";
 import React, { useState, useEffect } from "react";
 import PrivateRoute from "../utils/PrivateRoute";
 import axios from "axios";

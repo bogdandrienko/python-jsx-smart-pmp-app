@@ -35478,3 +35478,153 @@ Bogdan, 127.0.0.1, /account_create_or_change_accounts/, POST, 2022-02-02 09:37:3
 , 192.168.1.61, /account_login/, POST, 2022-02-03 15:55:23.703303
 
 831127350161, 192.168.1.61, /home/, GET, 2022-02-03 15:55:26.794658
+
+, 192.168.1.202, /django/, GET, 2022-02-04 08:42:20.570075
+
+, 192.168.1.202, /django/, GET, 2022-02-04 08:42:38.757342
+
+, 192.168.1.202, /django/account_login/, GET, 2022-02-04 08:42:40.123138
+
+, 192.168.1.202, /django/account_login/, POST, 2022-02-04 08:42:42.431223
+
+Bogdan, 192.168.1.202, /django/account_login/, GET, 2022-02-04 08:42:47.995211
+
+Bogdan, 192.168.1.202, /django/account_login/, POST, 2022-02-04 08:42:51.441109
+
+Bogdan, 192.168.1.202, /django/account_login/, GET, 2022-02-04 08:42:52.920668
+
+, 127.0.0.1, /django/, GET, 2022-02-04 13:11:54.739242
+
+, 127.0.0.1, /django/account_login/, GET, 2022-02-04 13:11:55.960848
+
+, 127.0.0.1, /django/account_login/, POST, 2022-02-04 13:11:57.254388
+
+Bogdan, 127.0.0.1, /django/passages_select/, GET, 2022-02-04 13:12:01.706866
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:04.979496
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:30.010921
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:34.427927
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:36.267043
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:38.897944
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:41.513193
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:43.074953
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:12:44.362505
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:13:17.602435
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:13:27.099392
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:14:41.235287
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:14:43.435130
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:14:45.833226
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:14:47.554901
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:14:48.875376
+
+Bogdan, 127.0.0.1, /django/passages_select/, GET, 2022-02-04 13:14:55.891272
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:14:57.642214
+
+Bogdan, 127.0.0.1, /django/passages_select/, GET, 2022-02-04 13:17:36.190069
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:17:37.729857
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:17:51.613147
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:18:11.235464
+
+Bogdan, 127.0.0.1, /django/passages_select/, POST, 2022-02-04 13:19:08.865604
+
+, 127.0.0.1, /admin/, GET, 2022-02-04 14:32:45.592646
+
+, 127.0.0.1, /admin/, GET, 2022-02-04 14:32:59.683577
+
+, 127.0.0.1, /admin/, GET, 2022-02-04 14:33:51.666900
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 14:58:37.295671
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 14:59:07.164963
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 14:59:12.309827
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:00:33.394601
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:00:48.098023
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:02:50.513583
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:04:13.880446
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:04:48.441106
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:04:49.469605
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:04:52.990001
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:05:14.735478
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:05:44.332388
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:09:31.373693
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:24:50.421064
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:25:15.587460
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:25:46.977975
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:27:03.491169
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:28:53.521768
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:29:34.210364
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:30:05.793096
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:30:16.503986
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:30:17.307099
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:30:17.546367
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:30:22.180978
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:31:25.306114
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:32:10.885064
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 15:37:37.946349
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:13:29.476071
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:13:31.575606
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:16:50.094003
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:17:25.507428
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:17:28.863030
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:17:33.994525
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:17:43.732782
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:18:19.430459
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:18:56.845073
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:19:05.470806
+
+Bogdan, 127.0.0.1, /django/account_profile/0/, GET, 2022-02-04 16:19:08.647940
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-04 16:19:12.383344

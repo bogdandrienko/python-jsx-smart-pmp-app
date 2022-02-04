@@ -95,9 +95,9 @@ const Modules = () => {
           Image: "./static/img/modules.png",
           Links: [
             {
-              Type: "disable",
-              Link: "#",
-              Header: "Просмотр",
+              Type: "active",
+              Link: "/news",
+              Header: "Новости платформы",
             },
             {
               Type: "disable",

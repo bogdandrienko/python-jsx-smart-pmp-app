@@ -20,7 +20,7 @@ const Header = () => {
       <Navbar expand="lg">
         <Container>
           <a className="navbar-brand" href="/">
-            ГЛАВНАЯ
+            Обновить
           </a>
           <LinkContainer to="/home">
             <Navbar.Brand>Домашняя</Navbar.Brand>
@@ -118,11 +118,27 @@ const Header = () => {
                     </a>
                     <a
                       className="dropdown-item"
-                      href="http://localhost:8000/home"
+                      href="http://localhost:3000/home"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Npm react app
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      href="http://localhost:8000/django"
                       target="_blank"
                       rel="noreferrer"
                     >
                       Домашняя Django
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      href="http://localhost:8000/api/routes"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Api Django rest_framework
                     </a>
                     <LinkContainer to="/logging" className="disabled">
                       <Nav.Link>
@@ -246,8 +262,8 @@ const Header = () => {
                   <strong className="dropdown-header text-center">
                     Новости предприятия
                   </strong>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Просмотр</Nav.Link>
+                  <LinkContainer to="/news">
+                    <Nav.Link>Новости платформы</Nav.Link>
                   </LinkContainer>
                   <LinkContainer to="#" className="disabled">
                     <Nav.Link>Поиск</Nav.Link>

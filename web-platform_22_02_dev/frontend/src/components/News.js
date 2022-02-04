@@ -11,7 +11,7 @@ const News = () => {
         <li className="lead list-group-item active">
           <h3 className="lead list-group-item active">Информация: </h3>
         </li>
-        <li className="list-group-item">
+        <li className="list-group-item bg-success bg-opacity-10">
           <div className="d-flex">
             <strong className="text-success text-start">(завершено)</strong>
             <LinkContainer to="/salary" className="text-success text-end">
@@ -26,7 +26,7 @@ const News = () => {
             )
           </small>
         </li>
-        <li className="list-group-item">
+        <li className="list-group-item bg-success bg-opacity-10">
           <div className="d-flex">
             <strong className="text-success text-start">(завершено)</strong>
             <LinkContainer to="/video_study" className="text-success text-end">
@@ -44,7 +44,7 @@ const News = () => {
             )
           </small>
         </li>
-        <li className="list-group-item">
+        <li className="list-group-item bg-secondary bg-opacity-10">
           <div className="d-flex">
             <strong className="text-secondary text-start">
               (в разработке)
@@ -55,7 +55,7 @@ const News = () => {
           </div>
           <small>выдача данных по отпускам за период</small>
         </li>
-        <li className="list-group-item">
+        <li className="list-group-item bg-secondary bg-opacity-10">
           <div className="d-flex">
             <strong className="text-secondary text-start">
               (в разработке)
@@ -66,7 +66,7 @@ const News = () => {
           </div>
           <small>весь функционал для банка идей</small>
         </li>
-        <li className="list-group-item">
+        <li className="list-group-item bg-secondary bg-opacity-10">
           <div className="d-flex">
             <strong className="text-secondary text-start">
               (в разработке)
