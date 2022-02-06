@@ -40,22 +40,23 @@ urlpatterns = [
     # rest_framework routes
     path('api/', include('rest_framework.urls')),
     path('api/routes/', backend_views.routes, name='api_routes'),
-    path('api/token/routes/', backend_views.routes, name='api_token_routes'),
-    path('api/users/routes/', backend_views.routes, name='api_users_routes'),
 
     # rest_framework routers.DefaultRouter()
     path('api/router/', include(router.urls)),
 
     # JWT token
-    path('api/token/', backend_views.MyTokenObtainPairView.as_view(), name='api_token'),
-    # path('api/token/', TokenObtainPairView.as_view(), name='api_token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='api_token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='api_token_verify'),
+    path('api/tokens/routes/', backend_views.routes, name='api_token_routes'),
+    path('api/tokens/token/', backend_views.MyTokenObtainPairView.as_view(), name='api_token'),
+    # path('api/tokens/token/', TokenObtainPairView.as_view(), name='api_token_obtain_pair'),
+    path('api/tokens/token/refresh/', TokenRefreshView.as_view(), name='api_token_refresh'),
+    path('api/tokens/token/verify/', TokenVerifyView.as_view(), name='api_token_verify'),
 
     # api authentication
+    path('api/users/routes/', backend_views.routes, name='api_users_routes'),
     path('api/users/login/', backend_views.MyTokenObtainPairView.as_view(), name='api_users_login'),
     path('api/users/profile/', backend_views.get_user_profile, name='api_users_profile'),
-    # path('api/users/', backend_views.get_users, name='api_users'),
+    path('api/users/change_profile/', backend_views.change_user_profile, name='api_users_change_profile'),
+    path('api/users/all/', backend_views.get_users, name='api_users_all'),
     # path('api/users/register/', backend_views.register_user, name='api_users_register'),
 
     # salary

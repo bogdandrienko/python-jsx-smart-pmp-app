@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../actions/userActions";
+import { userLogoutAction } from "../actions/userActions";
 
 const HeaderComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -11,7 +11,7 @@ const HeaderComponent = () => {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    dispatch(logout());
+    dispatch(userLogoutAction());
   };
 
   return (
@@ -158,6 +158,16 @@ const HeaderComponent = () => {
                       Аккаунты
                     </strong>
                     <LinkContainer
+                      to="/users_list"
+                    >
+                      <Nav.Link>Список пользователей</Nav.Link>
+                    </LinkContainer>
+                  </li>
+                  <li>
+                    <strong className="dropdown-header text-center">
+                      Аккаунты
+                    </strong>
+                    <LinkContainer
                       to="/account_create_or_change_accounts"
                       className="disabled"
                     >
@@ -223,8 +233,7 @@ const HeaderComponent = () => {
                     <Nav.Link>Профиль</Nav.Link>
                   </LinkContainer>
                   <LinkContainer
-                    to="/account_change_profile"
-                    className="disabled"
+                    to="/change_profile/"
                   >
                     <Nav.Link>Изменить профиль</Nav.Link>
                   </LinkContainer>

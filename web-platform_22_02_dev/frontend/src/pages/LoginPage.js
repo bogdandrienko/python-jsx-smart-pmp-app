@@ -10,7 +10,7 @@ import FooterComponent from "../components/FooterComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import MessageComponent from "../components/MessageComponent";
 import FormContainerComponent from "../components/FormContainerComponent";
-import { login } from "../actions/userActions";
+import { userLoginAction } from "../actions/userActions";
 
 function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ function LoginScreen() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    dispatch(userLoginAction(email, password));
     navigate("/");
   };
 
@@ -66,7 +66,7 @@ function LoginScreen() {
                 placeholder="пример: 970801351179"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-              ></Form.Control>
+              />
             </Form.Group>
 
             <Form.Group controlId="password">
@@ -77,7 +77,7 @@ function LoginScreen() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 controlid="password"
-              ></Form.Control>
+              />
             </Form.Group>
 
             <Button type="submit" variant="outline-primary" className="m-1">

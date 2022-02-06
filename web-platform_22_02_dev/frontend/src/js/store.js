@@ -3,27 +3,38 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { productListReducer } from "../test/productReducers";
 import { notesListReducer, notesDetailsReducer } from "../test/noteReducers";
+import { salaryUserReducer } from "../reducers/salaryReducers";
 
 import {
-  userLoginReducer,
-  userRegisterReducer,
-  userDetailsReducer,
-  userUpdateProfileReducer,
   userListReducer,
+  userChangeReducer,
+
+
+
+  userLoginReducer,
+  userDetailsReducer,
+  userRegisterReducer,
+  userUpdateProfileReducer,
   userDeleteReducer,
   userUpdateReducer,
 } from "../reducers/userReducers";
 
 const reducer = combineReducers({
+  userList: userListReducer,
+  userChange: userChangeReducer,
+
+  salaryUser: salaryUserReducer,
+
+
+
+  userLogin: userLoginReducer,
+  userDetails: userDetailsReducer,
+
+  userUpdateProfile: userUpdateProfileReducer,
   productList: productListReducer,
   notesList: notesListReducer,
   notesDetails: notesDetailsReducer,
-
-  userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  userDetails: userDetailsReducer,
-  userUpdateProfile: userUpdateProfileReducer,
-  userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
 });

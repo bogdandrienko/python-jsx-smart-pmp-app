@@ -1,3 +1,5 @@
+import time
+
 from django.contrib.auth import login, authenticate, logout
 import base64
 import datetime
@@ -44,8 +46,8 @@ def index(request):
     """
 
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-        redirect('http://192.168.1.68:8000/home/')
+    # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
+    #     redirect('http://192.168.1.68:8000/home/')
 
     context = {}
     return render(request, 'index.html', context)
@@ -57,8 +59,8 @@ def admin_(request):
     """
 
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-        redirect('http://192.168.1.68:8000/admin/')
+    # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
+    #     redirect('http://192.168.1.68:8000/admin/')
 
     context = {}
     return render(request, admin.site.urls)
@@ -157,39 +159,36 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
 
+        if settings.SIMPLE_JWT["UPDATE_LAST_LOGIN"]:
+            update_last_login(None, self.user)
+
         serializer = backend_serializers.UserSerializerWithToken(self.user)
         for k, v in serializer.data.items():
             data[f'{k}'] = v
 
-        try:
-            user = User.objects.get(username=data["username"])
-            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-            user_model_serializer = backend_serializers.UserModelSerializer(instance=user_model, many=False)
-            data['user_model'] = user_model_serializer.data
-        except Exception as error:
-            data['user_model'] = {'error': f'{error}'}
-
-        try:
-            user = User.objects.get(username=data["username"])
-            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-            group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
-            group_model_serializer = backend_serializers.GroupModelSerializer(instance=group_model, many=True)
-            data['group_model'] = group_model_serializer.data
-        except Exception as error:
-            data['group_model'] = {'error': f'{error}'}
-
-        if settings.SIMPLE_JWT["UPDATE_LAST_LOGIN"]:
-            update_last_login(None, self.user)
+        # try:
+        #     user = User.objects.get(username=data["username"])
+        #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        #     user_model_serializer = backend_serializers.UserModelSerializer(instance=user_model, many=False)
+        #     data['user_model'] = user_model_serializer.data
+        # except Exception as error:
+        #     data['user_model'] = {'error': f'{error}'}
+        #
+        # try:
+        #     user = User.objects.get(username=data["username"])
+        #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        #     group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+        #     group_model_serializer = backend_serializers.GroupModelSerializer(instance=group_model, many=True)
+        #     data['group_model'] = group_model_serializer.data
+        # except Exception as error:
+        #     data['group_model'] = {'error': f'{error}'}
 
         return data
 
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-
-        # Add custom claims
         token['username'] = user.username
-        # ...
 
         return token
 
@@ -215,6 +214,34 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def get_user_profile(request):
     user = request.user
     serializer = backend_serializers.UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
+@api_view(http_method_names=['POST'])
+@permission_classes([IsAuthenticated])
+def change_user_profile(request):
+    user = request.user
+    print('user: ', user)
+    print('data: ', request.data)
+    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=request.user)
+    if request.data["password"] and request.data["password2"] and \
+            request.data["password"] == request.data["password2"] != user_model.password_slug_field:
+        user_model.password_slug_field = request.data["password"]
+    if request.data["email"] and request.data["email"] != user_model.email_field:
+        user_model.email_field = request.data["email"]
+    if request.data["secretQuestion"] and request.data["secretQuestion"] != user_model.secret_question_char_field:
+        user_model.secret_question_char_field = request.data["secretQuestion"]
+    if request.data["secretAnswer"] and request.data["secretAnswer"] != user_model.secret_answer_char_field:
+        user_model.secret_answer_char_field = request.data["secretAnswer"]
+    user_model.save()
+    # serializer = backend_serializers.UserSerializer(user, many=False)
+    return Response({'error': False})
+
+
+@api_view(http_method_names=['GET'])
+def get_users(request):
+    user = User.objects.all()
+    serializer = backend_serializers.UserSerializer(user, many=True)
     return Response(serializer.data)
 
 
@@ -283,6 +310,7 @@ def salary(request):
                 with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
                     json_data = json.loads(json.load(file))
                 texterror = ''
+                time.sleep(1)
 
             # print('\n\n')
             # print("json_data: ")
@@ -1111,14 +1139,6 @@ def get_products(request):
     products = backend_models.ProductModel.objects.all().order_by('-createdAt')
     serializer = backend_serializers.ProductSerializer(products, many=True)
     return Response({'productsTest': serializer.data})
-
-
-@api_view(http_method_names=['GET'])
-@permission_classes([IsAuthenticated, IsAdminUser])
-def get_users(request):
-    user = User.objects.all()
-    serializer = backend_serializers.UserSerializer(user, many=True)
-    return Response(serializer.data)
 
 
 @api_view(http_method_names=['POST'])

@@ -1,44 +1,48 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Navbar, Nav, Container, Row, NavDropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, getUserDetails } from "../actions/userActions";
+import { userDetailsAction, userListAction } from "../actions/userActions";
 
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userDetails = useSelector((state) => state.userDetails);
+  const { error, loading, user } = userDetails;
+  // console.log("userInfo: ", userInfo);
+  // console.log("user: ", user);
+
+  useEffect(() => {
+    dispatch(userDetailsAction());
+  }, [dispatch]);
+
   let groups = "";
-  if (userInfo != null) {
+  if (userInfo != null && userInfo.groups) {
     for (let i = 0; i < userInfo.groups.length; i++) {
       groups += userInfo.groups[i] + ", ";
     }
     groups = groups.slice(0, -2);
+  } else {
+    groups = "-";
   }
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { error, loading, user } = userDetails;
-  // console.log(user);
-
-  let last_login = "";
+  let lastLogin = "";
   if (user !== null) {
-    try{
-      last_login = `${user["last_login"].split("T")[0]} ${user["last_login"].split("T")[1].slice(0, -13)}`;
-    }catch(error){
-    }
+    try {
+      lastLogin = `${user["last_login"].split("T")[0]} ${user["last_login"]
+        .split("T")[1]
+        .slice(0, -13)}`;
+    } catch (error) {}
   }
 
   useEffect(() => {
-    dispatch(getUserDetails("profile"));
+    dispatch(userDetailsAction());
   }, [dispatch]);
 
   return (
@@ -61,51 +65,57 @@ const ProfilePage = () => {
             <tbody>
               <tr>
                 <td className="text-start">Идентификатор</td>
-                <td className="text-end">{user.id ? user.id : "-"}</td>
+                <td className="text-end">{user ? user.id : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Имя пользователя</td>
-                <td className="text-end">{user.username ? user.username : "-"}</td>
+                <td className="text-end">{user ? user.username : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Пароль</td>
-                <td className="text-end">{user["password"] ? user["password"] : "-"}</td>
+                <td className="text-end">{user ? user["password"] : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Последний логин</td>
-                <td className="text-end">{last_login ? last_login : "-"}</td>
+                <td className="text-end">{lastLogin ? lastLogin : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Права</td>
-                <td className="text-end">{user["user_permissions"] ? user["user_permissions"] : "-"}</td>
+                <td className="text-end">
+                  {user ? user["user_permissions"] : "-"}
+                </td>
               </tr>
               <tr>
                 <td className="text-start">Группы</td>
-                <td className="text-end">{user["groups"] ? user["groups"] : "-"}</td>
+                <td className="text-end">{user ? user["groups"] : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Почта</td>
-                <td className="text-end">{user.email ? user.email : "-"}</td>
+                <td className="text-end">
+                  {user["user_model"] && !loading && !error
+                    ? user["user_model"]["email_field"]
+                    : "-"}
+                </td>
               </tr>
               <tr>
                 <td className="text-start">Имя</td>
-                <td className="text-end">{user["first_name"] ? user["first_name"] : "-"}</td>
+                <td className="text-end">{user ? user["first_name"] : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Фамилия</td>
-                <td className="text-end">{user["last_name"] ? user["last_name"] : "-"}</td>
+                <td className="text-end">{user ? user["last_name"] : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Активность аккаунта</td>
-                <td className="text-end">{user["is_active"] ? "+" : "-"}</td>
+                <td className="text-end">{user ? "+" : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Модератор</td>
-                <td className="text-end">{user["is_staff"] ? "+" : "-"}</td>
+                <td className="text-end">{user ? "+" : "-"}</td>
               </tr>
               <tr>
                 <td className="text-start">Суперпользователь</td>
-                <td className="text-end">{user["is_superuser"] ? "+" : "-"}</td>
+                <td className="text-end">{user ? "+" : "-"}</td>
               </tr>
             </tbody>
           </table>

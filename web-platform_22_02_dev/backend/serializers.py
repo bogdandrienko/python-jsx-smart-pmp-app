@@ -7,23 +7,19 @@ from backend import models as backend_models
 
 
 class UserSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField(read_only=True)
+    user_model = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
         fields = '__all__'
 
     def get_user_model(self, obj):
-        user_model = obj.user_model
-        if not user_model:
-            user_model = {}
-        return user_model
-
-
-class UserModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = backend_models.UserModel
-        fields = '__all__'
+        user = User.objects.get(username=obj.username)
+        user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+        if not user_model_serializer.data:
+            user_model_serializer = {'data': None}
+        return user_model_serializer.data
 
 
 class UserSerializerWithToken(UserSerializer):
@@ -31,11 +27,17 @@ class UserSerializerWithToken(UserSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'token']
+        fields = ['token', 'id', 'username']
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
+
+
+class UserModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = backend_models.UserModel
+        fields = '__all__'
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -49,6 +51,8 @@ class GroupModelSerializer(serializers.ModelSerializer):
         model = backend_models.GroupModel
         fields = '__all__'
 
+
+########################################################################################################################
 
 class ChatModelSerializer(serializers.ModelSerializer):
     class Meta:

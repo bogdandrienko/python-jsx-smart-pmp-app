@@ -7,6 +7,8 @@ import NewsPage from "../pages/NewsPage";
 import ProfilePage from "../pages/ProfilePage";
 import SalaryPage from "../pages/SalaryPage";
 import VideoStudyPage from "../pages/VideoStudyPage";
+import ChangeProfilePage from "../pages/ChangeProfilePage"
+import UsersListPage from "../pages/UsersListPage";
 
 // import Home1Page from "../test/Home1Page";
 // import ProductPage from "../test/ProductPage";
@@ -32,6 +34,8 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/salary" element={<SalaryPage />} />
           <Route path="/video_study" element={<VideoStudyPage />} />
+          <Route path="/change_profile" element={<ChangeProfilePage />} />
+          <Route path="/users_list" element={<UsersListPage />} />
 
           {/*<Route path="/chat" element={<ChatPage />} />*/}
           {/*<Route path="/test" element={<TestPage />} />*/}
