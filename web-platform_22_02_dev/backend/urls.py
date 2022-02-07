@@ -56,6 +56,7 @@ urlpatterns = [
     path('api/users/login/', backend_views.MyTokenObtainPairView.as_view(), name='api_users_login'),
     path('api/users/profile/', backend_views.get_user_profile, name='api_users_profile'),
     path('api/users/change_profile/', backend_views.change_user_profile, name='api_users_change_profile'),
+    path('api/users/recover_password/', backend_views.recover_user_password, name='api_users_recover_password'),
     path('api/users/all/', backend_views.get_users, name='api_users_all'),
     # path('api/users/register/', backend_views.register_user, name='api_users_register'),
 

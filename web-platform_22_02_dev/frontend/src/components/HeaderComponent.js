@@ -238,14 +238,12 @@ const HeaderComponent = () => {
                     <Nav.Link>Изменить профиль</Nav.Link>
                   </LinkContainer>
                   <LinkContainer
-                    to="/account_change_password"
-                    className="disabled"
+                    to="/change_password"
                   >
                     <Nav.Link>Изменить пароль</Nav.Link>
                   </LinkContainer>
                   <LinkContainer
-                    to="/account_recover_password"
-                    className="disabled"
+                    to="/recover_password"
                   >
                     <Nav.Link>Восстановить пароль</Nav.Link>
                   </LinkContainer>
@@ -254,7 +252,7 @@ const HeaderComponent = () => {
                   </LinkContainer>
                   <LinkContainer to="/home/" onClick={logoutHandler}>
                     <Nav.Link>
-                      Выйти{userInfo ? ` [ ${userInfo.username} ]` : ""}
+                      Выйти{userInfo ? ` [ ${userInfo.name} ]` : ""}
                     </Nav.Link>
                   </LinkContainer>
                 </li>

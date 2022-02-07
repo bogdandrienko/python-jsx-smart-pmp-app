@@ -45,7 +45,7 @@
                 </p>
             {% endif %}
         {% endif %}
-        <form action="{% url 'account_login' %}"
+        <form action="{% url 'django_account_login' %}"
               method="POST"
               target="_self"
               enctype="multipart/form-data"
@@ -100,7 +100,7 @@
                         >Сбросить</button>
                     </div>
                     <div class="m-1">
-                        <a href="{% url 'account_recover_password' '_' %}"
+                        <a href="{% url 'django_account_recover_password' '_' %}"
                                 type="button"
                                 class="btn btn-lg btn-outline-danger form-control"
                         >Восстановить</a>

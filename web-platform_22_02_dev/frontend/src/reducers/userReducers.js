@@ -4,11 +4,18 @@ import {
   USER_LIST_ERROR_CONSTANT,
   USER_LIST_RESET_CONSTANT,
   USER_LIST_DEFAULT_CONSTANT,
+
   USER_CHANGE_LOADING_CONSTANT,
   USER_CHANGE_DATA_CONSTANT,
   USER_CHANGE_ERROR_CONSTANT,
   USER_CHANGE_RESET_CONSTANT,
   USER_CHANGE_DEFAULT_CONSTANT,
+  
+  USER_RECOVER_PASSWORD_LOADING_CONSTANT,
+  USER_RECOVER_PASSWORD_DATA_CONSTANT,
+  USER_RECOVER_PASSWORD_ERROR_CONSTANT,
+  USER_RECOVER_PASSWORD_RESET_CONSTANT,
+  USER_RECOVER_PASSWORD_DEFAULT_CONSTANT,
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -93,6 +100,34 @@ export const userChangeReducer = (state = {}, action = null) => {
 
     case USER_CHANGE_DEFAULT_CONSTANT:
       return { userChangeDataReducer: [] };
+
+    default:
+      return state;
+  }
+};
+
+export const userRecoverPasswordReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case USER_RECOVER_PASSWORD_LOADING_CONSTANT:
+      return { userRecoverPasswordLoadingReducer: true };
+
+    case USER_RECOVER_PASSWORD_DATA_CONSTANT:
+      return {
+        userRecoverPasswordLoadingReducer: false,
+        userRecoverPasswordDataReducer: action.payload,
+      };
+
+    case USER_RECOVER_PASSWORD_ERROR_CONSTANT:
+      return {
+        userRecoverPasswordLoadingReducer: false,
+        userRecoverPasswordErrorReducer: action.payload,
+      };
+
+    case USER_RECOVER_PASSWORD_RESET_CONSTANT:
+      return { userRecoverPasswordDataReducer: [] };
+
+    case USER_RECOVER_PASSWORD_DEFAULT_CONSTANT:
+      return { userRecoverPasswordDataReducer: [] };
 
     default:
       return state;

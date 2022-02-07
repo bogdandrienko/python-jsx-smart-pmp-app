@@ -7,8 +7,10 @@ import NewsPage from "../pages/NewsPage";
 import ProfilePage from "../pages/ProfilePage";
 import SalaryPage from "../pages/SalaryPage";
 import VideoStudyPage from "../pages/VideoStudyPage";
-import ChangeProfilePage from "../pages/ChangeProfilePage"
 import UsersListPage from "../pages/UsersListPage";
+import ChangeProfilePage from "../pages/ChangeProfilePage"
+import ChangePasswordPage from "../pages/ChangePasswordPage"
+import RecoverPasswordPage from "../pages/RecoverPasswordPage"
 
 // import Home1Page from "../test/Home1Page";
 // import ProductPage from "../test/ProductPage";
@@ -35,11 +37,14 @@ function App() {
           <Route path="/salary" element={<SalaryPage />} />
           <Route path="/video_study" element={<VideoStudyPage />} />
           <Route path="/change_profile" element={<ChangeProfilePage />} />
+          <Route path="/change_password" element={<ChangePasswordPage />} />
+          <Route path="/recover_password" element={<RecoverPasswordPage />} />
+
           <Route path="/users_list" element={<UsersListPage />} />
 
+          {/* <Route path="/gologram" element={<GologramPage />} /> */}
           {/*<Route path="/chat" element={<ChatPage />} />*/}
           {/*<Route path="/test" element={<TestPage />} />*/}
-          {/*<Route path="/gologram" element={<GologramPage />} />*/}
           {/*<Route path="/shop" element={<Home1Page />} />*/}
           {/*<Route path="/product/:id" element={<ProductPage />} />*/}
           {/*<Route path="/notes" element={<Notes1Page />} />*/}

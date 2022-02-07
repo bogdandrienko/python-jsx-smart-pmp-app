@@ -17,8 +17,6 @@ const ChangeProfilePage = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
 
@@ -40,8 +38,6 @@ const ChangeProfilePage = () => {
     if (userChangeDataReducer) {
       if (userChangeDataReducer["email_field"]) {
         setEmail(userChangeDataReducer["email_field"]);
-        setPassword(userChangeDataReducer["password_slug_field"]);
-        setPassword2(userChangeDataReducer["password_slug_field"]);
         setSecretQuestion(userChangeDataReducer["secret_question_char_field"]);
         setSecretAnswer(userChangeDataReducer["secret_answer_char_field"]);
       }
@@ -55,22 +51,11 @@ const ChangeProfilePage = () => {
     dispatch(
       changeUserProfileAction({
         email: email,
-        password: password,
-        password2: password2,
         secretQuestion: secretQuestion,
         secretAnswer: secretAnswer,
       })
     );
     dispatch(userChangeAction());
-  };
-
-  const changeVisibility = () => {
-    const password = document.getElementById("password");
-    const password2 = document.getElementById("password2");
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-    password2.setAttribute("type", type);
   };
 
   return (
@@ -95,30 +80,6 @@ const ChangeProfilePage = () => {
             )}
             {userChangeLoadingReducer && <LoaderComponent />}
             <Form onSubmit={submitHandler}>
-              <Form.Group controlId="password">
-                <Form.Label>Новый пароль от аккаунта:</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="пример: 12345Qq$"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="none"
-                  aria-autocomplete="none"
-                />
-              </Form.Group>
-
-              <Form.Group controlId="password2">
-                <Form.Label>Повторите Пароль от аккаунта:</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="пример: 12345Qq$"
-                  value={password2}
-                  onChange={(e) => setPassword2(e.target.value)}
-                  autoComplete="none"
-                  aria-autocomplete="none"
-                />
-              </Form.Group>
-
               <Form.Group controlId="email">
                 <Form.Label>Почта для восстановления доступа:</Form.Label>
                 <Form.Control
@@ -128,6 +89,8 @@ const ChangeProfilePage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="none"
                   aria-autocomplete={"none"}
+                  minLength="1"
+                  maxLength="64"
                 />
               </Form.Group>
 
@@ -142,6 +105,8 @@ const ChangeProfilePage = () => {
                   onChange={(e) => setSecretQuestion(e.target.value)}
                   autoComplete="none"
                   aria-autocomplete="none"
+                  minLength="4"
+                  maxLength="32"
                 />
               </Form.Group>
 
@@ -154,20 +119,14 @@ const ChangeProfilePage = () => {
                   onChange={(e) => setSecretAnswer(e.target.value)}
                   autoComplete="none"
                   aria-autocomplete="none"
+                  minLength="1"
+                  maxLength="32"
                 />
               </Form.Group>
 
               <Form.Group controlId="button">
                 <Button type="submit" variant="outline-primary" className="m-1">
                   Сохранить
-                </Button>
-                <Button
-                  onClick={changeVisibility}
-                  type="button"
-                  variant="outline-warning"
-                  className="m-1"
-                >
-                  видимость паролей
                 </Button>
               </Form.Group>
             </Form>

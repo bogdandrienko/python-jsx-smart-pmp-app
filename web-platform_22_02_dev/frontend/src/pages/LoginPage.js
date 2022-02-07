@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -56,7 +58,9 @@ function LoginScreen() {
       />
       <main className="container text-center">
         <FormContainerComponent>
-          {error && <MessageComponent variant="danger">{error}</MessageComponent>}
+          {error && (
+            <MessageComponent variant="danger">{error}</MessageComponent>
+          )}
           {loading && <LoaderComponent />}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="email">
@@ -66,6 +70,8 @@ function LoginScreen() {
                 placeholder="пример: 970801351179"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                minLength="12"
+                maxLength="12"
               />
             </Form.Group>
 
@@ -77,21 +83,31 @@ function LoginScreen() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 controlid="password"
+                minLength="8"
+                maxLength="16"
               />
             </Form.Group>
 
-            <Button type="submit" variant="outline-primary" className="m-1">
-              Войти
-            </Button>
+            <div className="btn-group">
+              <Button type="submit" variant="outline-primary" className="m-1">
+                Войти
+              </Button>
 
-            <Button
-              onClick={changeVisibility}
-              type="button"
-              variant="outline-warning"
-              className="m-1"
-            >
-              видимость пароля
-            </Button>
+              <Button
+                onClick={changeVisibility}
+                type="button"
+                variant="outline-warning"
+                className="m-1"
+              >
+                видимость пароля
+              </Button>
+
+              <Button type="button" variant="outline-danger" className="m-1">
+                <LinkContainer to="/recover_password">
+                  <Nav.Link className="text-danger">восстановить пароль</Nav.Link>
+                </LinkContainer>
+              </Button>
+            </div>
           </Form>
         </FormContainerComponent>
       </main>

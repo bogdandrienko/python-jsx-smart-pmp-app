@@ -8,8 +8,7 @@ import { salaryUserReducer } from "../reducers/salaryReducers";
 import {
   userListReducer,
   userChangeReducer,
-
-
+  userRecoverPasswordReducer,
 
   userLoginReducer,
   userDetailsReducer,
@@ -22,6 +21,7 @@ import {
 const reducer = combineReducers({
   userList: userListReducer,
   userChange: userChangeReducer,
+  userRecoverPassword: userRecoverPasswordReducer,
 
   salaryUser: salaryUserReducer,
 

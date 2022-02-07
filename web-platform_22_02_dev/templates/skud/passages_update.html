@@ -25,7 +25,7 @@
         <h1 class="display-4">ОБНОВЛЕНИЕ ЗАПИСЕЙ.</h1>
         <p class="lead">Эта страница содержит форму для обновления записей.</p>
         <div class="d-block">
-            <form class="form-control" action="{% url 'passages_update' %}" method="POST">
+            <form class="form-control" action="{% url 'django_passages_update' %}" method="POST">
                 {% csrf_token %}
                 <label class="d-flex text-lg-start" for="party">id, данные которого необходимо изменить</label>
                 <input class="form-control" type="number" required="" placeholder="931777" value="931777" name="personid_old">

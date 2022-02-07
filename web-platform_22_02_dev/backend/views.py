@@ -1,6 +1,5 @@
 import time
 
-from django.contrib.auth import login, authenticate, logout
 import base64
 import datetime
 import hashlib
@@ -8,10 +7,10 @@ import json
 import os
 import random
 from email import message
-
 import bs4
 import httplib2
 import requests
+
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
@@ -68,6 +67,7 @@ def admin_(request):
 
 @api_view(http_method_names=['GET'])
 def routes(request):
+    print(f'\n\nroutes:\n\n')
     _routes = [
         {
             'Endpoints': '$BASEPATH$/router/',
@@ -166,6 +166,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         for k, v in serializer.data.items():
             data[f'{k}'] = v
 
+        try:
+            user = User.objects.get(username=data["username"])
+            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+            data['name'] = f'{user_model.last_name_char_field} {user_model.first_name_char_field}'
+        except Exception as error:
+            data['name'] = f'Данные не заполнены'
+
         # try:
         #     user = User.objects.get(username=data["username"])
         #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
@@ -212,6 +219,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(http_method_names=['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_profile(request):
+    print(f'\n\nget_user_profile:\n\n')
     user = request.user
     serializer = backend_serializers.UserSerializer(user, many=False)
     return Response(serializer.data)
@@ -220,26 +228,182 @@ def get_user_profile(request):
 @api_view(http_method_names=['POST'])
 @permission_classes([IsAuthenticated])
 def change_user_profile(request):
-    user = request.user
-    print('user: ', user)
+    print(f'\n\nchange_user_profile:\n\n')
     print('data: ', request.data)
-    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=request.user)
-    if request.data["password"] and request.data["password2"] and \
-            request.data["password"] == request.data["password2"] != user_model.password_slug_field:
-        user_model.password_slug_field = request.data["password"]
-    if request.data["email"] and request.data["email"] != user_model.email_field:
-        user_model.email_field = request.data["email"]
-    if request.data["secretQuestion"] and request.data["secretQuestion"] != user_model.secret_question_char_field:
-        user_model.secret_question_char_field = request.data["secretQuestion"]
-    if request.data["secretAnswer"] and request.data["secretAnswer"] != user_model.secret_answer_char_field:
-        user_model.secret_answer_char_field = request.data["secretAnswer"]
+    user = User.objects.get(username=request.user.username)
+    print('user: ', user)
+    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+    try:
+        password = str(request.data["password"]).strip()
+        password2 = str(request.data["password2"]).strip()
+        if password and password2 and password != user_model.password_slug_field:
+            user_model.password_slug_field = password
+            user.set_password(password)
+            print(f'password changed to "{password}"')
+            # print(make_password(request.data["password"]))
+            user.save()
+    except Exception as error:
+        print(error)
+    try:
+        if request.data["email"] and request.data["email"] != user_model.email_field:
+            user_model.email_field = request.data["email"]
+        if request.data["secretQuestion"] and request.data["secretQuestion"] != user_model.secret_question_char_field:
+            user_model.secret_question_char_field = request.data["secretQuestion"]
+        if request.data["secretAnswer"] and request.data["secretAnswer"] != user_model.secret_answer_char_field:
+            user_model.secret_answer_char_field = request.data["secretAnswer"]
+    except Exception as error:
+        print(error)
     user_model.save()
-    # serializer = backend_serializers.UserSerializer(user, many=False)
     return Response({'error': False})
+
+
+@api_view(http_method_names=['POST'])
+def recover_user_password(request):
+    print(f'\n\nrecover_user_password:\n\n')
+    response = {"error": "error"}
+    if request.method == "POST":
+        try:
+            username = request.data["username"]
+        except Exception as error:
+            username = ''
+
+        try:
+            secret_answer_char_field = request.data["secret_answer_char_field"]
+        except Exception as error:
+            secret_answer_char_field = ''
+
+        try:
+            password = str(request.data["password"]).strip().lower()
+            password2 = str(request.data["password2"]).strip().lower()
+        except Exception as error:
+            password = ''
+            password2 = ''
+
+        if username and not secret_answer_char_field and not password:
+            try:
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                secret_question_char_field = user_model.secret_question_char_field
+                response = {
+                    "username": user.username,
+                    "secret_question_char_field": secret_question_char_field,
+                    "success": False
+                }
+            except Exception as error:
+                print(error)
+        elif username and secret_answer_char_field and not password:
+            try:
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                if str(secret_answer_char_field).strip().lower() == \
+                        str(user_model.secret_answer_char_field).strip().lower():
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": True
+                    }
+                else:
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": False
+                    }
+            except Exception as error:
+                print(error)
+        elif username and not secret_answer_char_field and password:
+            try:
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                if password == password2 and str(user_model.password_slug_field).strip().lower():
+                    user.set_password(password)
+                    user.save()
+                    user_model.password_slug_field = password
+                    user_model.save()
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": False
+                    }
+                else:
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": False
+                    }
+            except Exception as error:
+                print(error)
+
+    print("response: ", response)
+    return Response(response)
+
+
+@api_view(http_method_names=['GET'])
+def recover_user_password_email(request):
+    print(f'\n\nrecover_user_password:\n\n')
+    response = {"error": "error"}
+    if request.method == "POST":
+        try:
+            username = request.data["username"]
+            user = User.objects.get(username=username)
+            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        except Exception as error:
+            username = None
+            user = None
+            user_model = None
+
+        try:
+            password = user_model.password_slug_field
+            email_ = user_model.email_field
+            if password and email_:
+                subject = 'Восстановление пароля от веб платформы'
+                encrypt_message = backend_utils.EncryptingClass.encrypt_text(
+                    text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
+                    hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+                )
+                message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
+                            f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/ , ' \
+                            f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
+                # from_email = 'eevee.cycle@yandex.ru'
+                from_email = 'web.km.kz'
+                to_email = email_
+                if subject and message and to_email:
+                    send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+                    response = 2
+                else:
+                    response = -2
+            else:
+                response = -2
+        except Exception as error:
+            backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+        try:
+            encrypt_text = backend_service.DjangoClass.RequestClass.get_value(request, "recover")
+            decrypt_text = backend_utils.EncryptingClass.decrypt_text(
+                text=encrypt_text,
+                hash_chars=f'_{user_model.password_slug_field}_'
+                           f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+            )
+            if decrypt_text.split('_')[2] >= \
+                    (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M') and \
+                    decrypt_text.split('_')[1] == user_model.password_slug_field:
+                login(request, user)
+                user_model.secret_question_char_field = ''
+                user_model.secret_answer_char_field = ''
+                user_model.save()
+                response = 2
+            else:
+                response = -2
+        except Exception as error:
+            backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+
+    print("response: ", response)
+    return Response(response)
 
 
 @api_view(http_method_names=['GET'])
 def get_users(request):
+    print(f'\n\nget_users:\n\n')
     user = User.objects.all()
     serializer = backend_serializers.UserSerializer(user, many=True)
     return Response(serializer.data)
@@ -248,6 +412,7 @@ def get_users(request):
 @api_view(http_method_names=['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def salary(request):
+    print(f'\n\nsalary:\n\n')
     try:
         try:
             is_local = False
@@ -3619,7 +3784,7 @@ def passages_select(request):
             backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             sql_select_query = f"SELECT * " \
                                f"FROM dbtable " \
-                               f"WHERE date1 BETWEEN '2021-07-30' AND '2023-12-31' AND personid = '931777' " \
+                               f"WHERE date1 BETWEEN '2021-07-30' AND '2023-12-31' AND personid = '{personid}' " \
                                f"ORDER BY date1 DESC, date2 DESC;"
         cursor.execute(sql_select_query)
         print(sql_select_query)
@@ -3686,7 +3851,7 @@ def passages_update(request):
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         value = f"UPDATE dbtable SET accessdateandtime = '{accessdateandtime_new}', date1 = '{date_new}', " \
-                f"date2 = '{time_new}' " \
+                f"date2 = '{time_new}', alko = '0' " \
                 f"WHERE date1 = '{date_old}' AND date2 BETWEEN '{time_old}:00' AND '{time_old}:59' " \
                 f"AND personid = '{personid_old}' "
         cursor.execute(value)
@@ -3738,9 +3903,9 @@ def passages_insert(request):
         cursor = connection.cursor()
         cursor.fast_executemany = True
         rows = ['personid', 'accessdateandtime', 'date1', 'date2', 'personname', 'devicename', 'cardno',
-                'temperature', 'mask']
+                'temperature', 'mask', 'alko']
         values = [personid, accessdateandtime, date, time,
-                  personname, devicename, cardno, temperature, mask]
+                  personname, devicename, cardno, temperature, mask, 0]
         _rows = ''
         for x in rows:
             _rows = f"{_rows}{str(x)}, "

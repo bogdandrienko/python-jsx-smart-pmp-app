@@ -10,6 +10,11 @@ import {
   USER_CHANGE_ERROR_CONSTANT,
   USER_CHANGE_RESET_CONSTANT,
   USER_CHANGE_DEFAULT_CONSTANT,
+  USER_RECOVER_PASSWORD_LOADING_CONSTANT,
+  USER_RECOVER_PASSWORD_DATA_CONSTANT,
+  USER_RECOVER_PASSWORD_ERROR_CONSTANT,
+  USER_RECOVER_PASSWORD_RESET_CONSTANT,
+  USER_RECOVER_PASSWORD_DEFAULT_CONSTANT,
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   USER_LOGIN_REQUEST,
@@ -113,6 +118,43 @@ export const userChangeAction = () => async (dispatch, getState) => {
   }
 };
 
+export const userPasswordRecoverAction =
+  (username, secretAnswer, password, password2) => async (dispatch) => {
+    try {
+      dispatch({
+        type: USER_RECOVER_PASSWORD_LOADING_CONSTANT,
+      });
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        `/api/users/recover_password/`,
+        { "username": username, "secret_answer_char_field": secretAnswer, "password": password, "password2": password2 },
+        config
+      );
+
+      dispatch({
+        type: USER_RECOVER_PASSWORD_DATA_CONSTANT,
+        payload: {
+          username: data["username"],
+          secretQuestion: data["secret_question_char_field"],
+          success: data["success"],
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: USER_RECOVER_PASSWORD_ERROR_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const userLoginAction = (email, password) => async (dispatch) => {
@@ -151,6 +193,7 @@ export const userLoginAction = (email, password) => async (dispatch) => {
 };
 
 export const userLogoutAction = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });

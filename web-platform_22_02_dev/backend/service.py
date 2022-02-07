@@ -27,7 +27,7 @@ class DjangoClass:
         def try_to_access(request, access: str):
             DjangoClass.LoggingClass.logging_actions(request=request)
             if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-                return 'local'
+                return 'django_local'
             if access == 'only_logging':
                 return False
             if request.user.is_authenticated:
@@ -37,7 +37,7 @@ class DjangoClass:
                     if user.is_superuser:
                         return False
                     if user_model.activity_boolean_field is False:
-                        return 'account_logout'
+                        return 'django_account_logout'
                     else:
                         if user_model.email_field and user_model.secret_question_char_field and \
                                 user_model.secret_answer_char_field:
@@ -51,17 +51,17 @@ class DjangoClass:
                                     if groups:
                                         return False
                                     else:
-                                        return 'home'
+                                        return 'django_home'
                             except Exception as error:
                                 print(error)
-                                return 'home'
+                                return 'django_home'
                         else:
-                            return 'account_change_password'
+                            return 'django_account_change_password'
                 except Exception as error:
                     print(error)
-                    return 'home'
+                    return 'django_home'
             else:
-                return 'account_login'
+                return 'django_account_login'
 
     class LoggingClass:
         @staticmethod
