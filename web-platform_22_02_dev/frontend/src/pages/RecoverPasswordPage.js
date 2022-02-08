@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import {
-  changeUserProfileAction,
-  userChangeAction,
+  userChangeProfileAction,
+  userRecoverPasswordAction,
   userLogoutAction,
-  userPasswordRecoverAction,
 } from "../actions/userActions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -36,18 +35,18 @@ const ChangePasswordPage = () => {
 
   const postSecretQuestionHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userPasswordRecoverAction(username, "", "", ""));
+    dispatch(userRecoverPasswordAction(username, "", "", ""));
   };
 
   const postSecretAnswerHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userPasswordRecoverAction(username, secretAnswer, "", ""));
+    dispatch(userRecoverPasswordAction(username, secretAnswer, "", ""));
   };
 
   const postRecoverPasswordHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userPasswordRecoverAction(username, "", password, password2));
-    dispatch(userChangeAction());
+    dispatch(userRecoverPasswordAction(username, "", password, password2));
+    dispatch(userChangeProfileAction());
     dispatch(userLogoutAction());
     navigate("/login");
   };
@@ -71,7 +70,13 @@ const ChangePasswordPage = () => {
       }
     } else {
     }
-  }, [dispatch, userRecoverPasswordDataReducer, username]);
+  }, [dispatch, userRecoverPasswordDataReducer]);
+
+  const cleanUsername = () => {
+    setUsername("");
+    setSecretQuestion("");
+    setSuccess(false);
+  };
 
   const changeVisibility = () => {
     const password = document.getElementById("password");
@@ -178,7 +183,7 @@ const ChangePasswordPage = () => {
                       className="m-1"
                       onClick={postSecretAnswerHandlerSubmit}
                     >
-                      Найти
+                      Проверить
                     </Button>
                   </Form.Group>
                 </Form>
@@ -207,6 +212,14 @@ const ChangePasswordPage = () => {
                     onClick={postSecretQuestionHandlerSubmit}
                   >
                     Найти
+                  </Button>
+                  <Button
+                    onClick={cleanUsername}
+                    type="button"
+                    variant="outline-warning"
+                    className="m-1"
+                  >
+                    очистить поле
                   </Button>
                 </Form.Group>
               </Form>

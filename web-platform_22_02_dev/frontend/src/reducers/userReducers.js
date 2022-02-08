@@ -50,6 +50,95 @@ import {
   USER_CHANGE_FAIL,
 } from "../constants/userConstants";
 
+
+
+
+
+
+
+// export const userLoginReducer = (state = {}, action = {}) => {
+//   switch (action.type) {
+//     case USER_LOGIN_LOADING_CONSTANT:
+//       return { userLoginLoadingReducer: true };
+
+//     case USER_LOGIN_DATA_CONSTANT:
+//       return {
+//         userLoginLoadingReducer: false,
+//         userLoginDataReducer: action.payload,
+//       };
+
+//     case USER_LOGIN_ERROR_CONSTANT:
+//       return {
+//         userLoginLoadingReducer: false,
+//         userLoginErrorReducer: action.payload,
+//       };
+
+//     case USER_LOGIN_RESET_CONSTANT:
+//       return { userLoginDataReducer: {} };
+
+//     case USER_LOGIN_DEFAULT_CONSTANT:
+//       return { userLoginDataReducer: {} };
+
+//     case USER_LOGOUT_CONSTANT:
+//       return { };
+
+//     default:
+//       return state;
+//   }
+// };
+
+// export const userProfileReducer = (state = { userProfileDataReducer: {} }, action) => {
+//   switch (action.type) {
+//     case USER_PROFILE_LOADING_CONSTANT:
+//       return { ...state, userProfileLoadingReducer: true };
+
+//     case USER_PROFILE_DATA_CONSTANT:
+//       return { userProfileLoadingReducer: false, userProfileDataReducer: action.payload };
+
+//     case USER_PROFILE_ERROR_CONSTANT:
+//       return { userProfileLoadingReducer: false, userProfileErrorReducer: action.payload };
+
+//     case USER_PROFILE_RESET_CONSTANT:
+//       return { userProfileDataReducer: {} };
+
+//     case USER_PROFILE_DEFAULT_CONSTANT:
+//       return { userProfileDataReducer: {} };
+
+//     default:
+//       return state;
+//   }
+// };
+
+// export const userListReducer = (state = { users: [] }, action = null) => {
+//   switch (action.type) {
+//     case USER_LIST_LOADING_CONSTANT:
+//       return { usersListLoadingReducer: true };
+
+//     case USER_LIST_DATA_CONSTANT:
+//       return {
+//         usersListLoadingReducer: false,
+//         usersListDataReducer: action.payload,
+//       };
+
+//     case USER_LIST_ERROR_CONSTANT:
+//       return {
+//         usersListLoadingReducer: false,
+//         usersListErrorReducer: action.payload,
+//       };
+
+//     case USER_LIST_RESET_CONSTANT:
+//       return { usersListDataReducer: [] };
+
+//     case USER_LIST_DEFAULT_CONSTANT:
+//       return { usersListDataReducer: [] };
+
+//     default:
+//       return state;
+//   }
+// };
+
+
+
 export const userListReducer = (state = { users: [] }, action = null) => {
   switch (action.type) {
     case USER_LIST_LOADING_CONSTANT:

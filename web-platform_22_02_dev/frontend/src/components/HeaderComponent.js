@@ -229,11 +229,11 @@ const HeaderComponent = () => {
                   <strong className="dropdown-header text-center">
                     Личный профиль
                   </strong>
-                  <LinkContainer to="/profile/">
+                  <LinkContainer to="/profile" className="disabled">
                     <Nav.Link>Профиль</Nav.Link>
                   </LinkContainer>
                   <LinkContainer
-                    to="/change_profile/"
+                    to="/change_profile"
                   >
                     <Nav.Link>Изменить профиль</Nav.Link>
                   </LinkContainer>

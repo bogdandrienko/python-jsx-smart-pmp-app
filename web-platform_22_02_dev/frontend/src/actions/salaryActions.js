@@ -16,38 +16,43 @@ export const salaryUserAction = (dateTime) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-    const config = {
+
+    const { data } = await axios({
+      url: "api/salary/",
+      method: "POST",
+      timeout: 15000,
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
-    };
-    const { data } = await axios.post(
-      `/api/salary`,
-      { Datetime: `${dateTime}` },
-      config
-    );
+      data: {
+        "Action-type": "SALARY",
+        body: { "dateTime": dateTime },
+      },
+    });
+    const response = data["response"];
+    console.log("SALARY: ", response);
 
-    const excel_path = data["excel_path"];
+    const excel_path = response["excel_path"];
 
     const headers = [];
-    for (let i in data) {
+    for (let i in response) {
       if (i !== "global_objects" && i !== "excel_path") {
-        headers.push([i, data[i]]);
+        headers.push([i, response[i]]);
       }
     }
 
     const tables = [];
-    tables.push(["1.Начислено", data["global_objects"]["1.Начислено"]]);
-    tables.push(["2.Удержано", data["global_objects"]["2.Удержано"]]);
+    tables.push(["1.Начислено", response["global_objects"]["1.Начислено"]]);
+    tables.push(["2.Удержано", response["global_objects"]["2.Удержано"]]);
     tables.push([
       "3.Доходы в натуральной форме",
-      data["global_objects"]["3.Доходы в натуральной форме"],
+      response["global_objects"]["3.Доходы в натуральной форме"],
     ]);
-    tables.push(["4.Выплачено", data["global_objects"]["4.Выплачено"]]);
+    tables.push(["4.Выплачено", response["global_objects"]["4.Выплачено"]]);
     tables.push([
       "5.Налоговые вычеты",
-      data["global_objects"]["5.Налоговые вычеты"],
+      response["global_objects"]["5.Налоговые вычеты"],
     ]);
 
     dispatch({

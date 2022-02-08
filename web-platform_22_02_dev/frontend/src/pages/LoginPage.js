@@ -22,16 +22,17 @@ function LoginScreen() {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { error, loading, userInfo } = userLogin;
+  const { error: errorvar, loading: loadingvar, userInfo: userInfovar } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfovar) {
       navigate("/");
     }
-  }, [navigate, userInfo]);
+  }, [navigate, userInfovar]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // dispatch(userLoginAction({email: email, password: password}));
     dispatch(userLoginAction(email, password));
     navigate("/");
   };
@@ -42,12 +43,6 @@ function LoginScreen() {
       password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
   };
-  // function changeVisibility() {
-  //   const password = document.getElementById("password");
-  //   const type =
-  //     password.getAttribute("type") === "password" ? "text" : "password";
-  //   password.setAttribute("type", type);
-  // }
 
   return (
     <div>
@@ -58,10 +53,10 @@ function LoginScreen() {
       />
       <main className="container text-center">
         <FormContainerComponent>
-          {error && (
-            <MessageComponent variant="danger">{error}</MessageComponent>
+          {errorvar && (
+            <MessageComponent variant="danger">{errorvar}</MessageComponent>
           )}
-          {loading && <LoaderComponent />}
+          {loadingvar && <LoaderComponent />}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="email">
               <Form.Label>Имя пользователя:</Form.Label>

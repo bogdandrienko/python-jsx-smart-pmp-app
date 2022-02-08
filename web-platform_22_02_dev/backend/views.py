@@ -29,14 +29,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from xhtml2pdf import pisa
 
 from backend import models as backend_models, settings as backend_settings, serializers as backend_serializers, \
     forms as backend_forms, service as backend_service, utils as backend_utils
-
-
-# from rest_framework_simplejwt.tokens import RefreshToken
 
 
 def index(request):
@@ -127,6 +125,300 @@ def routes(request):
     return Response(_routes)
 
 
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+def api_login_user(request):
+    print('\n\n\n')
+    print('get_tokens_for_user:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"request_method: {request_method}")
+    print(f"request_action_type: {request_action_type}")
+    print(f"request_user: {request_user}")
+    print(f"request_body: {request_body}")
+
+    if request_method == 'GET':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'POST':
+        if request_action_type == "LOGIN":
+            #  { "body": {"Action-type": "USER_LOGIN", "username": "Bogdan", "password": "31284bogdan"} }
+            try:
+                username = request.data["body"]["username"]
+                password = request.data["body"]["password"]
+                is_authenticated = authenticate(username=username, password=password)
+                if is_authenticated is not None:
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    update_last_login(sender=None, user=user)
+                    refresh = RefreshToken.for_user(user=user)
+                    response = {"response": {
+                        "refresh": str(refresh),
+                        "access": str(refresh.access_token),
+                        "token": str(refresh.access_token),
+                        "username": str(user.username),
+                        "name": str(f'{user_model.last_name_char_field} {user_model.first_name_char_field}'),
+                    }}
+                else:
+                    response = {
+                        "error": "Bad request."
+                    }
+            except Exception as error:
+                print(error)
+                backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                response = {"error": f"{error}"}
+            print(f"response: {response}")
+            return Response(response)
+        else:
+            return Response({"error": "This action not allowed for this method."})
+    elif request_method == 'PUT':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'DELETE':
+        return Response({"error": "This method not allowed for endpoint."})
+    else:
+        return Response({"error": "This method not allowed for endpoint."})
+
+
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def api_user_profile(request):
+    print('\n\n\n')
+    print('api_user_profile:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"request_method: {request_method}")
+    print(f"request_action_type: {request_action_type}")
+    print(f"request_user: {request_user}")
+    print(f"request_body: {request_body}")
+
+    if request_method == 'GET':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'POST':
+        if request_action_type == "PROFILE":
+            try:
+                serializer = backend_serializers.UserSerializer(request_user, many=False)
+                response = {"response": serializer.data}
+            except Exception as error:
+                print(error)
+                backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                response = {"error": error}
+            print(f"response: {response}")
+            return Response(response)
+        else:
+            return Response({"error": "This action not allowed for this method."})
+    elif request_method == 'PUT':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'DELETE':
+        return Response({"error": "This method not allowed for endpoint."})
+    else:
+        return Response({"error": "This method not allowed for endpoint."})
+
+
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def api_user_change_profile(request):
+    print('\n\n\n')
+    print('api_user_change_profile:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"request_method: {request_method}")
+    print(f"request_action_type: {request_action_type}")
+    print(f"request_user: {request_user}")
+    print(f"request_body: {request_body}")
+
+    if request_method == 'GET':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'POST':
+        if request_action_type == "CHANGE":
+            try:
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=request_user)
+
+                try:
+                    password = str(request_body["password"]).strip()
+                    password2 = str(request_body["password2"]).strip()
+                    if password and password2 and password != user_model.password_slug_field:
+                        user_model.password_slug_field = password
+                        request_user.set_password(password)
+                        print(f'password changed to "{password}"')
+                        # print(make_password(request.data["password"]))
+                        request_user.save()
+                        if request_body["email"] and request_body["email"] != user_model.email_field:
+                            user_model.email_field = request_body["email"]
+                        if request_body["secretQuestion"] and request_body[
+                            "secretQuestion"] != user_model.secret_question_char_field:
+                            user_model.secret_question_char_field = request_body["secretQuestion"]
+                        if request_body["secretAnswer"] and request_body[
+                            "secretAnswer"] != user_model.secret_answer_char_field:
+                            user_model.secret_answer_char_field = request_body["secretAnswer"]
+                except Exception as error:
+                    print(error)
+
+                user_model.save()
+                return Response({'error': False})
+            except Exception as error:
+                print(error)
+                backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                response = {"error": error}
+            print(f"response: {response}")
+            return Response(response)
+        else:
+            return Response({"error": "This action not allowed for this method."})
+    elif request_method == 'PUT':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'DELETE':
+        return Response({"error": "This method not allowed for endpoint."})
+    else:
+        return Response({"error": "This method not allowed for endpoint."})
+
+
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+def api_user_recover_password(request):
+    print('\n\n\n')
+    print('api_user_recover_password:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"request_method: {request_method}")
+    print(f"request_action_type: {request_action_type}")
+    print(f"request_user: {request_user}")
+    print(f"request_body: {request_body}")
+
+    if request_method == 'GET':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'POST':
+        if request_action_type == "RECOVER":
+            response = {
+                "error": "error"
+            }
+            try:
+                username = request_body["username"]
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+            except Exception as error:
+                user = None
+                user_model = None
+
+            try:
+                secret_answer_char_field = request_body["secret_answer_char_field"]
+            except Exception as error:
+                secret_answer_char_field = None
+
+            try:
+                password = str(request_body["password"]).strip()
+                password2 = str(request_body["password2"]).strip()
+            except Exception as error:
+                password = None
+                password2 = None
+
+            if user_model and not secret_answer_char_field and not password:
+                try:
+                    secret_question_char_field = user_model.secret_question_char_field
+                    response = {"response": {
+                        "username": user.username,
+                        "secret_question_char_field": secret_question_char_field,
+                        "success": False
+                    }}
+                except Exception as error:
+                    print(error)
+                    response = {
+                        "error": f"{error}"
+                    }
+            elif user_model and secret_answer_char_field and not password:
+                try:
+                    if str(secret_answer_char_field).strip().lower() == \
+                            str(user_model.secret_answer_char_field).strip().lower():
+                        response = {"response": {
+                            "username": user.username,
+                            "secret_question_char_field": None,
+                            "success": True
+                        }}
+                    else:
+                        response = {"response": {
+                            "username": user.username,
+                            "secret_question_char_field": None,
+                            "success": False
+                        }}
+                except Exception as error:
+                    print(error)
+                    response = {
+                        "error": f"{error}"
+                    }
+            elif user_model and not secret_answer_char_field and password:
+                try:
+                    if password == password2 and str(user_model.password_slug_field).strip():
+                        print(f'password changed to {password}')
+                        user.set_password(password)
+                        user.save()
+                        user_model.password_slug_field = password
+                        user_model.save()
+                        response = {"response": {
+                            "username": user.username,
+                            "secret_question_char_field": None,
+                            "success": False
+                        }}
+                    else:
+                        response = {"response": {
+                            "username": user.username,
+                            "secret_question_char_field": None,
+                            "success": False
+                        }}
+                except Exception as error:
+                    print(error)
+                    response = {
+                        "error": f"{error}"
+                    }
+
+            print("response: ", response)
+            return Response(response)
+        else:
+            return Response({"error": "This action not allowed for this method."})
+    elif request_method == 'PUT':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'DELETE':
+        return Response({"error": "This method not allowed for endpoint."})
+    else:
+        return Response({"error": "This method not allowed for endpoint."})
+
+
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated, IsAdminUser])
+def api_user_all(request):
+    print('\n\n\n')
+    print('api_user_all:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"request_method: {request_method}")
+    print(f"request_action_type: {request_action_type}")
+    print(f"request_user: {request_user}")
+    print(f"request_body: {request_body}")
+
+    if request_method == 'GET':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'POST':
+        if request_action_type == "ALL":
+            #  { "body": {"Action-type": "USER_LOGIN", "username": "Bogdan", "password": "31284bogdan"} }
+            try:
+                users = User.objects.all()
+                serializer = backend_serializers.UserSerializer(users, many=True)
+                response = {"response": serializer.data}
+            except Exception as error:
+                print(error)
+                backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                response = {"error": error}
+            print(f"response: {response}")
+            return Response(response)
+        else:
+            return Response({"error": "This action not allowed for this method."})
+    elif request_method == 'PUT':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'DELETE':
+        return Response({"error": "This method not allowed for endpoint."})
+    else:
+        return Response({"error": "This method not allowed for endpoint."})
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = backend_serializers.UserSerializer
@@ -145,6 +437,809 @@ class ChatViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def api_salary(request):
+    print('\n\n\n')
+    print('api_salary:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"request_method: {request_method}")
+    print(f"request_action_type: {request_action_type}")
+    print(f"request_user: {request_user}")
+    print(f"request_body: {request_body}")
+
+    if request_method == 'GET':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'POST':
+        if request_action_type == "SALARY":
+            try:
+                try:
+                    is_local = False
+                    # Get json response from 1c
+                    ####################################################################################################
+                    if not is_local:
+                        key = backend_service.UtilsClass.create_encrypted_password(
+                            _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                            _length=10
+                        )
+                        hash_key_obj = hashlib.sha256()
+                        hash_key_obj.update(key.encode('utf-8'))
+                        key_hash = str(hash_key_obj.hexdigest().strip().upper())
+                        key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+                        iin = request_user.username
+                        if str(iin).lower() == 'bogdan':
+                            iin = 970801351179
+                        iin_base64 = base64.b64encode(str(iin).encode()).decode()
+                        date_base64 = base64.b64encode(f'{request_body["dateTime"]}'.encode()).decode()
+                        url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+                        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+                        h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+                        _login = 'Web_adm_1c'
+                        password = '159159qqww!'
+                        h.add_credentials(_login, password)
+                        try:
+                            response, content = h.request(url)
+                        except Exception as error:
+                            # print(error)
+                            content = None
+                        if content:
+                            _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                            success = True
+                            error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+                            texterror = ''
+                            for error_word in error_word_list:
+                                if _message.find(error_word) >= 0:
+                                    success = False
+                            if _message.find('send') == 0:
+                                texterror = _message.split('send')[1].strip()
+                                success = False
+                        else:
+                            success = False
+                            texterror = 'Неизвестная ошибка'
+
+                        if success:
+                            json_data = json.loads(
+                                backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                            try:
+                                json_data["global_objects"]["3.Доходы в натуральной форме"]
+                            except Exception as error:
+                                print(error)
+                                json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                                    "Fields": {
+                                        "1": "Вид",
+                                        "2": "Период",
+                                        "3": "Сумма"
+                                    },
+                                }
+                    else:
+                        # Временное чтение файла для отладки без доступа к 1С
+                        with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
+                            json_data = json.loads(json.load(file))
+                        texterror = ''
+                        time.sleep(1)
+
+                    ####################################################################################################
+
+                    # Return pretty integer and float value
+                    ####################################################################################################
+                    def return_float_value(_value):
+                        if isinstance(_value, int) or isinstance(_value, float):
+                            if len(f'{_value:.2f}') < 10:
+                                _value = f'{_value:.2f}'[:-6] + ' ' + f'{_value:.2f}'[-6:]
+                            else:
+                                _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[
+                                                                                                     -6:]
+                        return _value
+
+                    ####################################################################################################
+
+                    # Create 'Ends' and pretty integer and float value
+                    ####################################################################################################
+                    def create_ends(table: str, extracols=False):
+                        if extracols:
+                            _days = 0
+                            _hours = 0
+                            _summ = 0
+                            for _key in json_data['global_objects'][table].keys():
+                                if _key != 'Fields':
+                                    try:
+                                        _days += json_data['global_objects'][table][f'{_key}']['ВсегоДни']
+                                        _hours += json_data['global_objects'][table][f'{_key}']['ВсегоЧасы']
+                                        _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
+                                        json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(
+                                            _summ_local)
+                                        _summ += _summ_local
+                                    except Exception as _error:
+                                        print(_error)
+                            json_data['global_objects'][table]['Ends'] = {
+                                'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
+                                'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
+                            }
+                        else:
+                            _summ = 0
+                            for _key in json_data['global_objects'][table].keys():
+                                if _key != 'Fields':
+                                    try:
+                                        _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
+                                        json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(
+                                            _summ_local)
+                                        _summ += _summ_local
+                                    except Exception as _error:
+                                        print(_error)
+                            json_data['global_objects'][table]['Ends'] = {
+                                'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
+                            }
+
+                    create_ends(table='1.Начислено', extracols=True)
+                    create_ends(table='2.Удержано', extracols=False)
+                    create_ends(table='3.Доходы в натуральной форме', extracols=False)
+                    create_ends(table='4.Выплачено', extracols=False)
+                    create_ends(table='5.Налоговые вычеты', extracols=False)
+                    # print('\n\n')
+                    # print("json_data['global_objects']: ")
+                    # print(type(json_data['global_objects']))
+                    # print('\n')
+                    # print(json_data['global_objects'])
+                    # print('\n\n')
+                    ####################################################################################################
+
+                    # pretty integer and float value in headers
+                    ####################################################################################################
+                    for _key in json_data.keys():
+                        if _key != 'global_objects':
+                            json_data[_key] = return_float_value(json_data[_key])
+                    # print('\n\n')
+                    # print("json_data: ")
+                    # print(type(json_data))
+                    # print('\n')
+                    # print(json_data)
+                    # print('\n\n')
+                    ####################################################################################################
+
+                    # create excel
+                    ####################################################################################################
+                    key = backend_service.UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=24
+                    )
+                    date = backend_utils.DateTimeUtils.get_current_date()
+                    path = 'static/media/salary/'
+                    path_excel_file = f"{path}salary_{key}_{date}.xlsx"
+                    workbook = backend_utils.ExcelClass.workbook_create()
+                    sheet = backend_utils.ExcelClass.workbook_activate(workbook)
+
+                    # Delete old files
+                    #######################################################
+                    for root, dirs, files in os.walk(path, topdown=True):
+                        for file in files:
+                            try:
+                                date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
+                                if date != date_file:
+                                    os.remove(f'{path}{file}')
+                            except Exception as error:
+                                print(error)
+                    #######################################################
+
+                    # Create 'TitleComponent'
+                    #######################################################
+                    backend_utils.ExcelClass.set_sheet_value(
+                        col=1,
+                        row=1,
+                        value='РАСЧЕТНЫЙ ЛИСТ',
+                        sheet=sheet
+                    )
+                    sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8)
+                    #######################################################
+
+                    # Create 'Headers'
+                    #######################################################
+                    header_arr = []
+                    for key, value in json_data.items():
+                        if key != 'global_objects':
+                            header_arr.append(f'{key}: {value}')
+
+                    row_i_1 = 1 + 1
+                    for header in header_arr[0:4]:
+                        col_i = 1
+                        backend_utils.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_1,
+                            value=header,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=row_i_1, start_column=col_i, end_row=row_i_1, end_column=col_i + 4)
+                        row_i_1 += 1
+
+                    row_i_2 = 1 + 1
+                    for header in header_arr[4:8]:
+                        col_i = 6
+                        backend_utils.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_2,
+                            value=header,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=row_i_2, start_column=col_i, end_row=row_i_2, end_column=col_i + 2)
+                        row_i_2 += 1
+
+                    row_i_3 = row_i_1
+                    for header in header_arr[8:12]:
+                        col_i = 1
+                        backend_utils.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_3,
+                            value=header,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=row_i_3, start_column=col_i, end_row=row_i_3, end_column=col_i + 4)
+                        row_i_3 += 1
+
+                    row_i_4 = row_i_2
+                    for header in header_arr[12:-2]:
+                        col_i = 6
+                        backend_utils.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_4,
+                            value=header,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=row_i_4, start_column=col_i, end_row=row_i_4, end_column=col_i + 2)
+                        row_i_4 += 1
+                    header_low_row = row_i_4
+
+                    #######################################################
+
+                    # Create 'Bodyes'
+                    #######################################################
+                    def create_bodyes(table: str, extracols=False):
+                        bodyes_arr = [[table]]
+                        for __key, _value in json_data['global_objects'][table].items():
+                            local_bodyes_arr = []
+                            for ___key, __value in json_data['global_objects'][table][__key].items():
+                                if extracols:
+                                    if ___key != '6' and ___key != '7' and \
+                                            ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
+                                        local_bodyes_arr.append(__value)
+                                else:
+                                    local_bodyes_arr.append(__value)
+                            bodyes_arr.append(local_bodyes_arr)
+                        return bodyes_arr
+
+                    bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
+                    bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
+                    bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
+                    bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
+                    bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
+                    bold_arr = []
+
+                    body_low_row_1 = header_low_row
+                    bold_arr.append(body_low_row_1)
+                    sheet.merge_cells(start_row=body_low_row_1, start_column=1, end_row=body_low_row_1,
+                                      end_column=1 + 4)
+                    for body in bodyes_arr_1:
+                        col_i = 1
+                        for value in body:
+                            if isinstance(value, int) and value == 0:
+                                value = ''
+                            backend_utils.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_1,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_1 += 1
+
+                    body_low_row_2 = header_low_row
+                    bold_arr.append(body_low_row_2)
+                    sheet.merge_cells(start_row=body_low_row_2, start_column=6, end_row=body_low_row_2,
+                                      end_column=6 + 2)
+                    for body in bodyes_arr_2:
+                        col_i = 6
+                        for value in body:
+                            backend_utils.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_2,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_2 += 1
+
+                    if body_low_row_1 >= body_low_row_2:
+                        body_low_row_3 = body_low_row_1
+                        body_low_row_4 = body_low_row_1
+                    else:
+                        body_low_row_3 = body_low_row_2
+                        body_low_row_4 = body_low_row_2
+
+                    bold_arr.append(body_low_row_3)
+                    sheet.merge_cells(start_row=body_low_row_3, start_column=1, end_row=body_low_row_3,
+                                      end_column=1 + 4)
+                    for body in bodyes_arr_3:
+                        col_i = 1
+                        for value in body:
+                            backend_utils.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_3,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_3 += 1
+
+                    bold_arr.append(body_low_row_4)
+                    sheet.merge_cells(start_row=body_low_row_4, start_column=6, end_row=body_low_row_4,
+                                      end_column=6 + 2)
+                    for body in bodyes_arr_4:
+                        col_i = 6
+                        for value in body:
+                            backend_utils.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_4,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_4 += 1
+
+                    if body_low_row_3 >= body_low_row_4:
+                        body_low_row_5 = body_low_row_3
+                        body_low_row_6 = body_low_row_3
+                    else:
+                        body_low_row_5 = body_low_row_4
+                        body_low_row_6 = body_low_row_4
+
+                    bold_arr.append(body_low_row_5)
+                    sheet.merge_cells(start_row=body_low_row_5, start_column=1, end_row=body_low_row_5,
+                                      end_column=1 + 4)
+                    for body in bodyes_arr_5:
+                        col_i = 1
+                        for value in body:
+                            backend_utils.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_5,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_5 += 1
+
+                    bold_arr.append(body_low_row_6)
+                    sheet.merge_cells(start_row=body_low_row_6, start_column=1, end_row=body_low_row_6,
+                                      end_column=1 + 4)
+                    for body in ['.', 'Вид', *header_arr[-2:]]:
+                        col_i = 6
+                        backend_utils.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=body_low_row_6,
+                            value=body,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=body_low_row_6, start_column=col_i, end_row=body_low_row_6,
+                                          end_column=col_i + 2)
+                        body_low_row_6 += 1
+
+                    if body_low_row_6 >= body_low_row_5:
+                        body_low_row = body_low_row_6
+                    else:
+                        body_low_row = body_low_row_5
+
+                    if body_low_row_1 >= body_low_row_2:
+                        body_color_2 = body_low_row_1
+                    else:
+                        body_color_2 = body_low_row_2
+                    if body_low_row_3 >= body_low_row_4:
+                        body_color_3 = body_low_row_3
+                    else:
+                        body_color_3 = body_low_row_4
+                    #######################################################
+
+                    # Set fonts
+                    #######################################################
+                    font_headers = Font(name='Arial', size=8, bold=False)
+                    for row in range(1, header_low_row):
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_headers
+
+                    font_bodyes = Font(name='Arial', size=7, bold=False)
+                    for row in range(header_low_row, body_low_row + 1):
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_bodyes
+
+                    font_tables = Font(name='Arial', size=8, bold=True)
+                    for row in [header_low_row, body_color_2, body_color_3]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_tables
+                    #######################################################
+
+                    # Set aligments
+                    #######################################################
+                    wrap_text = Alignment(wrap_text=True)
+                    shrink_to_fit = Alignment(shrink_to_fit=True)
+                    aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True,
+                                                shrink_to_fit=True)
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        cell = sheet[f'{col}{1}']
+                        cell.alignment = aligment_center
+                    aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True, shrink_to_fit=True)
+                    for row in range(2, header_low_row):
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.alignment = aligment_left
+
+                    aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True,
+                                               shrink_to_fit=True)
+                    for row in range(header_low_row, body_low_row + 1):
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            if col == 'A' or col == 'F':
+                                cell.alignment = aligment_left
+                            elif col == 'E' or col == 'H':
+                                cell.alignment = aligment_right
+                            else:
+                                cell.alignment = aligment_center
+                    #######################################################
+
+                    # Set borders
+                    #######################################################
+                    side_medium = Side(border_style="thin", color="FF808080")
+                    side_think = Side(border_style="thin", color="FF808080")
+                    border_horizontal_middle = Border(
+                        top=side_medium,
+                        # left=side_medium,
+                        # right=side_medium,
+                        # bottom=side_medium
+                    )
+                    border_vertical_middle = Border(
+                        # top=side_think,
+                        left=side_medium,
+                        # right=side_think,
+                        # bottom=side_think
+                    )
+                    border_vertical_light = Border(
+                        # top=side_think,
+                        left=side_medium,
+                        # right=side_think,
+                        # bottom=side_think
+                    )
+                    for row in range(header_low_row, body_low_row):
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
+                                pass
+                            else:
+                                cell = sheet[f'{col}{row}']
+                                cell.border = border_vertical_light
+                        cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(1)}{row}']
+                        cell.border = border_vertical_middle
+                        cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(6)}{row}']
+                        cell.border = border_vertical_middle
+                        cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(9)}{row}']
+                        cell.border = border_vertical_middle
+                    side_think = Side(border_style="dotted", color="FF808080")
+                    # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick',
+                    # 'medium', 'dashDot','dashDotDot', 'hair', 'mediumDashDot', 'slantDashDot'}
+                    border_think = Border(
+                        top=side_think,
+                        left=side_think,
+                        right=side_think,
+                        bottom=side_think
+                    )
+                    for row in range(1, header_low_row):
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.border = border_think
+                    side_medium = Side(border_style="thin", color="FF808080")
+                    border_medium = Border(
+                        top=side_medium,
+                        left=side_medium,
+                        right=side_medium,
+                        bottom=side_medium
+                    )
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                            cell = sheet[f'{col}{row - 1}']
+                            cell.border = border_medium
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row}']
+                        cell.border = border_horizontal_middle
+                    #######################################################
+
+                    # Colored styles
+                    #######################################################
+                    color_green = PatternFill(fgColor="E6E6FF", fill_type="solid")
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                            cell = sheet[f'{col}{row}']
+                            cell.fill = color_green
+                            cell = sheet[f'{col}{row - 1}']
+                            cell.border = border_medium
+                    color_yellow = PatternFill(fgColor="d0ffd8", fill_type="solid")
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_1 - 1}']
+                        cell.fill = color_yellow
+
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_2 - 1}']
+                        cell.fill = color_yellow
+
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_3 - 1}']
+                        cell.fill = color_yellow
+                        cell.fill = color_yellow
+
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_4 - 1}']
+                        cell.fill = color_yellow
+
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_5 - 1}']
+                        cell.fill = color_yellow
+                        cell.fill = color_yellow
+
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_6 - 1}']
+                        cell.fill = color_yellow
+
+                    #######################################################
+
+                    # Height and width styles
+                    #######################################################
+                    for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        width = 1
+                        for row in range(1, body_low_row + 1):
+                            cell = sheet[f'{col}{row}']
+                            value = len(str(cell.value))
+                            if value > width:
+                                width = value
+                        if col == 'A' or col == 'F':
+                            width = width / 2
+                        sheet.column_dimensions[col].height = 1
+                        sheet.column_dimensions[col].width = round((width * 0.95), 3)
+                    #######################################################
+
+                    # Set global page and book settings
+                    #######################################################
+                    sheet.page_setup.orientation = sheet.ORIENTATION_PORTRAIT
+                    sheet.page_setup.paperSize = sheet.PAPERSIZE_LETTER
+                    sheet.page_margins.left = 0.05
+                    sheet.page_margins.right = 0.05
+                    sheet.page_margins.header = 0.1
+                    sheet.page_margins.bottom = 0.2
+                    sheet.page_margins.footer = 0.2
+                    sheet.page_margins.top = 0.1
+                    sheet.print_options.horizontalCentered = True
+                    # sheet.print_options.verticalCentered = True
+                    sheet.page_setup.fitToHeight = 1
+                    sheet.page_setup.scale = 80
+                    sheet.page_setup.fitToHeight = 1
+                    sheet.page_setup.fitToWidth = 1
+                    sheet.protection.password = key + '_1'
+                    sheet.protection.sheet = True
+                    sheet.protection.enable()
+                    #######################################################
+
+                    backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=path_excel_file)
+                    json_data["excel_path"] = path_excel_file
+                    response = {"response": json_data}
+                except Exception as error:
+                    print(error)
+                    json_data = {'texterror': texterror, 'error': 'error'}
+                    response = {"response": json_data}
+            except Exception as error:
+                print(error)
+                response = {"response": {'error': 'error'}}
+            print(f"response: {response}")
+            return Response(response)
+        else:
+            return Response({"error": "This action not allowed for this method."})
+    elif request_method == 'PUT':
+        return Response({"error": "This method not allowed for endpoint."})
+    elif request_method == 'DELETE':
+        return Response({"error": "This method not allowed for endpoint."})
+    else:
+        return Response({"error": "This method not allowed for endpoint."})
+
+
+########################################################################################################################
+
+# @api_view(http_method_names=['GET'])
+# @permission_classes([IsAuthenticated])
+# def get_user_profile(request):
+#     print(f'\n\nget_user_profile:\n\n')
+#     user = request.user
+#     serializer = backend_serializers.UserSerializer(user, many=False)
+#     return Response(serializer.data)
+#
+#
+# @api_view(http_method_names=['POST'])
+# @permission_classes([IsAuthenticated])
+# def change_user_profile(request):
+#     print(f'\n\nchange_user_profile:\n\n')
+#     print('data: ', request.data)
+#     user = User.objects.get(username=request.user.username)
+#     print('user: ', user)
+#     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#     try:
+#         password = str(request.data["password"]).strip()
+#         password2 = str(request.data["password2"]).strip()
+#         if password and password2 and password != user_model.password_slug_field:
+#             user_model.password_slug_field = password
+#             user.set_password(password)
+#             print(f'password changed to "{password}"')
+#             # print(make_password(request.data["password"]))
+#             user.save()
+#     except Exception as error:
+#         print(error)
+#     try:
+#         if request.data["email"] and request.data["email"] != user_model.email_field:
+#             user_model.email_field = request.data["email"]
+#         if request.data["secretQuestion"] and request.data["secretQuestion"] != user_model.secret_question_char_field:
+#             user_model.secret_question_char_field = request.data["secretQuestion"]
+#         if request.data["secretAnswer"] and request.data["secretAnswer"] != user_model.secret_answer_char_field:
+#             user_model.secret_answer_char_field = request.data["secretAnswer"]
+#     except Exception as error:
+#         print(error)
+#     user_model.save()
+#     return Response({'error': False})
+#
+#
+# @api_view(http_method_names=['POST'])
+# def recover_user_password(request):
+#     print(f'\n\nrecover_user_password:\n\n')
+#     response = {"error": "error"}
+#     if request.method == "POST":
+#         try:
+#             username = request.data["username"]
+#         except Exception as error:
+#             username = ''
+#
+#         try:
+#             secret_answer_char_field = request.data["secret_answer_char_field"]
+#         except Exception as error:
+#             secret_answer_char_field = ''
+#
+#         try:
+#             password = str(request.data["password"]).strip().lower()
+#             password2 = str(request.data["password2"]).strip().lower()
+#         except Exception as error:
+#             password = ''
+#             password2 = ''
+#
+#         if username and not secret_answer_char_field and not password:
+#             try:
+#                 user = User.objects.get(username=username)
+#                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#                 secret_question_char_field = user_model.secret_question_char_field
+#                 response = {
+#                     "username": user.username,
+#                     "secret_question_char_field": secret_question_char_field,
+#                     "success": False
+#                 }
+#             except Exception as error:
+#                 print(error)
+#         elif username and secret_answer_char_field and not password:
+#             try:
+#                 user = User.objects.get(username=username)
+#                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#                 if str(secret_answer_char_field).strip().lower() == \
+#                         str(user_model.secret_answer_char_field).strip().lower():
+#                     response = {
+#                         "username": user.username,
+#                         "secret_question_char_field": None,
+#                         "success": True
+#                     }
+#                 else:
+#                     response = {
+#                         "username": user.username,
+#                         "secret_question_char_field": None,
+#                         "success": False
+#                     }
+#             except Exception as error:
+#                 print(error)
+#         elif username and not secret_answer_char_field and password:
+#             try:
+#                 user = User.objects.get(username=username)
+#                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#                 if password == password2 and str(user_model.password_slug_field).strip().lower():
+#                     user.set_password(password)
+#                     user.save()
+#                     user_model.password_slug_field = password
+#                     user_model.save()
+#                     response = {
+#                         "username": user.username,
+#                         "secret_question_char_field": None,
+#                         "success": False
+#                     }
+#                 else:
+#                     response = {
+#                         "username": user.username,
+#                         "secret_question_char_field": None,
+#                         "success": False
+#                     }
+#             except Exception as error:
+#                 print(error)
+#
+#     print("response: ", response)
+#     return Response(response)
+#
+#
+# @api_view(http_method_names=['GET'])
+# def recover_user_password_email(request):
+#     print(f'\n\nrecover_user_password:\n\n')
+#     response = {"error": "error"}
+#     if request.method == "POST":
+#         try:
+#             username = request.data["username"]
+#             user = User.objects.get(username=username)
+#             user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#         except Exception as error:
+#             username = None
+#             user = None
+#             user_model = None
+#
+#         try:
+#             password = user_model.password_slug_field
+#             email_ = user_model.email_field
+#             if password and email_:
+#                 subject = 'Восстановление пароля от веб платформы'
+#                 encrypt_message = backend_utils.EncryptingClass.encrypt_text(
+#                     text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
+#                     hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+#                 )
+#                 message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
+#                             f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/ , ' \
+#                             f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
+#                 # from_email = 'eevee.cycle@yandex.ru'
+#                 from_email = 'web.km.kz'
+#                 to_email = email_
+#                 if subject and message and to_email:
+#                     send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+#                     response = 2
+#                 else:
+#                     response = -2
+#             else:
+#                 response = -2
+#         except Exception as error:
+#             backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+#
+#         try:
+#             encrypt_text = backend_service.DjangoClass.RequestClass.get_value(request, "recover")
+#             decrypt_text = backend_utils.EncryptingClass.decrypt_text(
+#                 text=encrypt_text,
+#                 hash_chars=f'_{user_model.password_slug_field}_'
+#                            f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+#             )
+#             if decrypt_text.split('_')[2] >= \
+#                     (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M') and \
+#                     decrypt_text.split('_')[1] == user_model.password_slug_field:
+#                 login(request, user)
+#                 user_model.secret_question_char_field = ''
+#                 user_model.secret_answer_char_field = ''
+#                 user_model.save()
+#                 response = 2
+#             else:
+#                 response = -2
+#         except Exception as error:
+#             backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+#
+#     print("response: ", response)
+#     return Response(response)
+#
+#
+# @api_view(http_method_names=['GET'])
+# def get_users(request):
+#     print(f'\n\nget_users:\n\n')
+#     user = User.objects.all()
+#     serializer = backend_serializers.UserSerializer(user, many=True)
+#     return Response(serializer.data)
+
+
 # def get_tokens_for_user(user):
 #     refresh = RefreshToken.for_user(user)
 #
@@ -155,49 +1250,49 @@ class ChatViewSet(viewsets.ModelViewSet):
 #     }
 
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-
-        if settings.SIMPLE_JWT["UPDATE_LAST_LOGIN"]:
-            update_last_login(None, self.user)
-
-        serializer = backend_serializers.UserSerializerWithToken(self.user)
-        for k, v in serializer.data.items():
-            data[f'{k}'] = v
-
-        try:
-            user = User.objects.get(username=data["username"])
-            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-            data['name'] = f'{user_model.last_name_char_field} {user_model.first_name_char_field}'
-        except Exception as error:
-            data['name'] = f'Данные не заполнены'
-
-        # try:
-        #     user = User.objects.get(username=data["username"])
-        #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-        #     user_model_serializer = backend_serializers.UserModelSerializer(instance=user_model, many=False)
-        #     data['user_model'] = user_model_serializer.data
-        # except Exception as error:
-        #     data['user_model'] = {'error': f'{error}'}
-        #
-        # try:
-        #     user = User.objects.get(username=data["username"])
-        #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-        #     group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
-        #     group_model_serializer = backend_serializers.GroupModelSerializer(instance=group_model, many=True)
-        #     data['group_model'] = group_model_serializer.data
-        # except Exception as error:
-        #     data['group_model'] = {'error': f'{error}'}
-
-        return data
-
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['username'] = user.username
-
-        return token
+# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+#     def validate(self, attrs):
+#         data = super().validate(attrs)
+#
+#         if settings.SIMPLE_JWT["UPDATE_LAST_LOGIN"]:
+#             update_last_login(None, self.user)
+#
+#         serializer = backend_serializers.UserSerializerWithToken(self.user)
+#         for k, v in serializer.data.items():
+#             data[f'{k}'] = v
+#
+#         try:
+#             user = User.objects.get(username=data["username"])
+#             user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#             data['name'] = f'{user_model.last_name_char_field} {user_model.first_name_char_field}'
+#         except Exception as error:
+#             data['name'] = f'Данные не заполнены'
+#
+#         # try:
+#         #     user = User.objects.get(username=data["username"])
+#         #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#         #     user_model_serializer = backend_serializers.UserModelSerializer(instance=user_model, many=False)
+#         #     data['user_model'] = user_model_serializer.data
+#         # except Exception as error:
+#         #     data['user_model'] = {'error': f'{error}'}
+#         #
+#         # try:
+#         #     user = User.objects.get(username=data["username"])
+#         #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+#         #     group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+#         #     group_model_serializer = backend_serializers.GroupModelSerializer(instance=group_model, many=True)
+#         #     data['group_model'] = group_model_serializer.data
+#         # except Exception as error:
+#         #     data['group_model'] = {'error': f'{error}'}
+#
+#         return data
+#
+#     @classmethod
+#     def get_token(cls, user):
+#         token = super().get_token(user)
+#         token['username'] = user.username
+#
+#         return token
 
 
 # class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -212,796 +1307,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 #         return token
 
 
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
+# class MyTokenObtainPairView(TokenObtainPairView):
+#     serializer_class = MyTokenObtainPairSerializer
 
-
-@api_view(http_method_names=['GET'])
-@permission_classes([IsAuthenticated])
-def get_user_profile(request):
-    print(f'\n\nget_user_profile:\n\n')
-    user = request.user
-    serializer = backend_serializers.UserSerializer(user, many=False)
-    return Response(serializer.data)
-
-
-@api_view(http_method_names=['POST'])
-@permission_classes([IsAuthenticated])
-def change_user_profile(request):
-    print(f'\n\nchange_user_profile:\n\n')
-    print('data: ', request.data)
-    user = User.objects.get(username=request.user.username)
-    print('user: ', user)
-    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-    try:
-        password = str(request.data["password"]).strip()
-        password2 = str(request.data["password2"]).strip()
-        if password and password2 and password != user_model.password_slug_field:
-            user_model.password_slug_field = password
-            user.set_password(password)
-            print(f'password changed to "{password}"')
-            # print(make_password(request.data["password"]))
-            user.save()
-    except Exception as error:
-        print(error)
-    try:
-        if request.data["email"] and request.data["email"] != user_model.email_field:
-            user_model.email_field = request.data["email"]
-        if request.data["secretQuestion"] and request.data["secretQuestion"] != user_model.secret_question_char_field:
-            user_model.secret_question_char_field = request.data["secretQuestion"]
-        if request.data["secretAnswer"] and request.data["secretAnswer"] != user_model.secret_answer_char_field:
-            user_model.secret_answer_char_field = request.data["secretAnswer"]
-    except Exception as error:
-        print(error)
-    user_model.save()
-    return Response({'error': False})
-
-
-@api_view(http_method_names=['POST'])
-def recover_user_password(request):
-    print(f'\n\nrecover_user_password:\n\n')
-    response = {"error": "error"}
-    if request.method == "POST":
-        try:
-            username = request.data["username"]
-        except Exception as error:
-            username = ''
-
-        try:
-            secret_answer_char_field = request.data["secret_answer_char_field"]
-        except Exception as error:
-            secret_answer_char_field = ''
-
-        try:
-            password = str(request.data["password"]).strip().lower()
-            password2 = str(request.data["password2"]).strip().lower()
-        except Exception as error:
-            password = ''
-            password2 = ''
-
-        if username and not secret_answer_char_field and not password:
-            try:
-                user = User.objects.get(username=username)
-                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                secret_question_char_field = user_model.secret_question_char_field
-                response = {
-                    "username": user.username,
-                    "secret_question_char_field": secret_question_char_field,
-                    "success": False
-                }
-            except Exception as error:
-                print(error)
-        elif username and secret_answer_char_field and not password:
-            try:
-                user = User.objects.get(username=username)
-                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                if str(secret_answer_char_field).strip().lower() == \
-                        str(user_model.secret_answer_char_field).strip().lower():
-                    response = {
-                        "username": user.username,
-                        "secret_question_char_field": None,
-                        "success": True
-                    }
-                else:
-                    response = {
-                        "username": user.username,
-                        "secret_question_char_field": None,
-                        "success": False
-                    }
-            except Exception as error:
-                print(error)
-        elif username and not secret_answer_char_field and password:
-            try:
-                user = User.objects.get(username=username)
-                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                if password == password2 and str(user_model.password_slug_field).strip().lower():
-                    user.set_password(password)
-                    user.save()
-                    user_model.password_slug_field = password
-                    user_model.save()
-                    response = {
-                        "username": user.username,
-                        "secret_question_char_field": None,
-                        "success": False
-                    }
-                else:
-                    response = {
-                        "username": user.username,
-                        "secret_question_char_field": None,
-                        "success": False
-                    }
-            except Exception as error:
-                print(error)
-
-    print("response: ", response)
-    return Response(response)
-
-
-@api_view(http_method_names=['GET'])
-def recover_user_password_email(request):
-    print(f'\n\nrecover_user_password:\n\n')
-    response = {"error": "error"}
-    if request.method == "POST":
-        try:
-            username = request.data["username"]
-            user = User.objects.get(username=username)
-            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-        except Exception as error:
-            username = None
-            user = None
-            user_model = None
-
-        try:
-            password = user_model.password_slug_field
-            email_ = user_model.email_field
-            if password and email_:
-                subject = 'Восстановление пароля от веб платформы'
-                encrypt_message = backend_utils.EncryptingClass.encrypt_text(
-                    text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
-                    hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
-                )
-                message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-                            f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/ , ' \
-                            f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
-                # from_email = 'eevee.cycle@yandex.ru'
-                from_email = 'web.km.kz'
-                to_email = email_
-                if subject and message and to_email:
-                    send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
-                    response = 2
-                else:
-                    response = -2
-            else:
-                response = -2
-        except Exception as error:
-            backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-        try:
-            encrypt_text = backend_service.DjangoClass.RequestClass.get_value(request, "recover")
-            decrypt_text = backend_utils.EncryptingClass.decrypt_text(
-                text=encrypt_text,
-                hash_chars=f'_{user_model.password_slug_field}_'
-                           f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
-            )
-            if decrypt_text.split('_')[2] >= \
-                    (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M') and \
-                    decrypt_text.split('_')[1] == user_model.password_slug_field:
-                login(request, user)
-                user_model.secret_question_char_field = ''
-                user_model.secret_answer_char_field = ''
-                user_model.save()
-                response = 2
-            else:
-                response = -2
-        except Exception as error:
-            backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-
-
-    print("response: ", response)
-    return Response(response)
-
-
-@api_view(http_method_names=['GET'])
-def get_users(request):
-    print(f'\n\nget_users:\n\n')
-    user = User.objects.all()
-    serializer = backend_serializers.UserSerializer(user, many=True)
-    return Response(serializer.data)
-
-
-@api_view(http_method_names=['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def salary(request):
-    print(f'\n\nsalary:\n\n')
-    try:
-        try:
-            is_local = False
-            if not is_local:
-                key = backend_service.UtilsClass.create_encrypted_password(
-                    _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                    _length=10
-                )
-                hash_key_obj = hashlib.sha256()
-                hash_key_obj.update(key.encode('utf-8'))
-                key_hash = str(hash_key_obj.hexdigest().strip().upper())
-                key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-                iin = request.user.username
-                if str(request.user.username).lower() == 'bogdan':
-                    iin = 970801351179
-                iin_base64 = base64.b64encode(str(iin).encode()).decode()
-                date_base64 = base64.b64encode(f'{request.data["Datetime"]}'.encode()).decode()
-                url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-                relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-                h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-                _login = 'Web_adm_1c'
-                password = '159159qqww!'
-                h.add_credentials(_login, password)
-                try:
-                    response, content = h.request(url)
-                except Exception as error:
-                    # print(error)
-                    content = None
-                if content:
-                    _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-                    success = True
-                    error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
-                    texterror = ''
-                    for error_word in error_word_list:
-                        if _message.find(error_word) >= 0:
-                            success = False
-                    if _message.find('send') == 0:
-                        texterror = _message.split('send')[1].strip()
-                        success = False
-                else:
-                    success = False
-                    texterror = 'Неизвестная ошибка'
-
-                if success:
-                    json_data = json.loads(
-                        backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
-                    try:
-                        json_data["global_objects"]["3.Доходы в натуральной форме"]
-                    except Exception as error:
-                        print(error)
-                        json_data["global_objects"]["3.Доходы в натуральной форме"] = {
-                            "Fields": {
-                                "1": "Вид",
-                                "2": "Период",
-                                "3": "Сумма"
-                            },
-                        }
-            else:
-                # Временное чтение файла для отладки без доступа к 1С
-                with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
-                    json_data = json.loads(json.load(file))
-                texterror = ''
-                time.sleep(1)
-
-            # print('\n\n')
-            # print("json_data: ")
-            # print(type(json_data))
-            # print('\n')
-            # print(json_data)
-            # print('\n\n')
-
-            # Return pretty integer and float value
-            ############################################################################################################
-            def return_float_value(_value):
-                if isinstance(_value, int) or isinstance(_value, float):
-                    if len(f'{_value:.2f}') < 10:
-                        _value = f'{_value:.2f}'[:-6] + ' ' + f'{_value:.2f}'[-6:]
-                    else:
-                        _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[-6:]
-                return _value
-
-            ############################################################################################################
-
-            # Create 'Ends' and pretty integer and float value
-            ############################################################################################################
-            def create_ends(table: str, extracols=False):
-                if extracols:
-                    _days = 0
-                    _hours = 0
-                    _summ = 0
-                    for _key in json_data['global_objects'][table].keys():
-                        if _key != 'Fields':
-                            try:
-                                _days += json_data['global_objects'][table][f'{_key}']['ВсегоДни']
-                                _hours += json_data['global_objects'][table][f'{_key}']['ВсегоЧасы']
-                                _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
-                                json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
-                                _summ += _summ_local
-                            except Exception as _error:
-                                print(_error)
-                    json_data['global_objects'][table]['Ends'] = {
-                        'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
-                        'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
-                    }
-                else:
-                    _summ = 0
-                    for _key in json_data['global_objects'][table].keys():
-                        if _key != 'Fields':
-                            try:
-                                _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
-                                json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(_summ_local)
-                                _summ += _summ_local
-                            except Exception as _error:
-                                print(_error)
-                    json_data['global_objects'][table]['Ends'] = {
-                        'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
-                    }
-
-            create_ends(table='1.Начислено', extracols=True)
-            create_ends(table='2.Удержано', extracols=False)
-            create_ends(table='3.Доходы в натуральной форме', extracols=False)
-            create_ends(table='4.Выплачено', extracols=False)
-            create_ends(table='5.Налоговые вычеты', extracols=False)
-            # print('\n\n')
-            # print("json_data['global_objects']: ")
-            # print(type(json_data['global_objects']))
-            # print('\n')
-            # print(json_data['global_objects'])
-            # print('\n\n')
-            ############################################################################################################
-
-            # pretty integer and float value in headers
-            ############################################################################################################
-            for _key in json_data.keys():
-                if _key != 'global_objects':
-                    json_data[_key] = return_float_value(json_data[_key])
-            # print('\n\n')
-            # print("json_data: ")
-            # print(type(json_data))
-            # print('\n')
-            # print(json_data)
-            # print('\n\n')
-            ############################################################################################################
-
-            # create excel
-            ############################################################################################################
-
-            # print('\n\n')
-            # print("json_data: ")
-            # print(type(json_data))
-            # print('\n')
-            # print(json_data)
-            # print('\n\n')
-
-            key = backend_service.UtilsClass.create_encrypted_password(
-                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                _length=24
-            )
-            date = backend_utils.DateTimeUtils.get_current_date()
-            path = 'static/media/salary/'
-            path_excel_file = f"{path}salary_{key}_{date}.xlsx"
-            workbook = backend_utils.ExcelClass.workbook_create()
-            sheet = backend_utils.ExcelClass.workbook_activate(workbook)
-
-            # Delete old files
-            #######################################################
-            for root, dirs, files in os.walk(path, topdown=True):
-                for file in files:
-                    try:
-                        date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
-                        if date != date_file:
-                            os.remove(f'{path}{file}')
-                    except Exception as error:
-                        print(error)
-            #######################################################
-
-            # Create 'TitleComponent'
-            #######################################################
-            backend_utils.ExcelClass.set_sheet_value(
-                col=1,
-                row=1,
-                value='РАСЧЕТНЫЙ ЛИСТ',
-                sheet=sheet
-            )
-            sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8)
-            #######################################################
-
-            # Create 'Headers'
-            #######################################################
-            header_arr = []
-            for key, value in json_data.items():
-                if key != 'global_objects':
-                    header_arr.append(f'{key}: {value}')
-
-            row_i_1 = 1 + 1
-            for header in header_arr[0:4]:
-                col_i = 1
-                backend_utils.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=row_i_1,
-                    value=header,
-                    sheet=sheet
-                )
-                sheet.merge_cells(start_row=row_i_1, start_column=col_i, end_row=row_i_1, end_column=col_i + 4)
-                row_i_1 += 1
-
-            row_i_2 = 1 + 1
-            for header in header_arr[4:8]:
-                col_i = 6
-                backend_utils.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=row_i_2,
-                    value=header,
-                    sheet=sheet
-                )
-                sheet.merge_cells(start_row=row_i_2, start_column=col_i, end_row=row_i_2, end_column=col_i + 2)
-                row_i_2 += 1
-
-            row_i_3 = row_i_1
-            for header in header_arr[8:12]:
-                col_i = 1
-                backend_utils.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=row_i_3,
-                    value=header,
-                    sheet=sheet
-                )
-                sheet.merge_cells(start_row=row_i_3, start_column=col_i, end_row=row_i_3, end_column=col_i + 4)
-                row_i_3 += 1
-
-            row_i_4 = row_i_2
-            for header in header_arr[12:-2]:
-                col_i = 6
-                backend_utils.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=row_i_4,
-                    value=header,
-                    sheet=sheet
-                )
-                sheet.merge_cells(start_row=row_i_4, start_column=col_i, end_row=row_i_4, end_column=col_i + 2)
-                row_i_4 += 1
-            header_low_row = row_i_4
-
-            #######################################################
-
-            # Create 'Bodyes'
-            #######################################################
-            def create_bodyes(table: str, extracols=False):
-                bodyes_arr = [[table]]
-                for __key, _value in json_data['global_objects'][table].items():
-                    local_bodyes_arr = []
-                    for ___key, __value in json_data['global_objects'][table][__key].items():
-                        if extracols:
-                            if ___key != '6' and ___key != '7' and ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
-                                local_bodyes_arr.append(__value)
-                        else:
-                            local_bodyes_arr.append(__value)
-                    bodyes_arr.append(local_bodyes_arr)
-                return bodyes_arr
-
-            bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
-            bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
-            bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
-            bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
-            bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
-            bold_arr = []
-
-            body_low_row_1 = header_low_row
-            bold_arr.append(body_low_row_1)
-            sheet.merge_cells(start_row=body_low_row_1, start_column=1, end_row=body_low_row_1, end_column=1 + 4)
-            for body in bodyes_arr_1:
-                col_i = 1
-                for value in body:
-                    if isinstance(value, int) and value == 0:
-                        value = ''
-                    backend_utils.ExcelClass.set_sheet_value(
-                        col=col_i,
-                        row=body_low_row_1,
-                        value=value,
-                        sheet=sheet
-                    )
-                    col_i += 1
-                body_low_row_1 += 1
-
-            body_low_row_2 = header_low_row
-            bold_arr.append(body_low_row_2)
-            sheet.merge_cells(start_row=body_low_row_2, start_column=6, end_row=body_low_row_2, end_column=6 + 2)
-            for body in bodyes_arr_2:
-                col_i = 6
-                for value in body:
-                    backend_utils.ExcelClass.set_sheet_value(
-                        col=col_i,
-                        row=body_low_row_2,
-                        value=value,
-                        sheet=sheet
-                    )
-                    col_i += 1
-                body_low_row_2 += 1
-
-            if body_low_row_1 >= body_low_row_2:
-                body_low_row_3 = body_low_row_1
-                body_low_row_4 = body_low_row_1
-            else:
-                body_low_row_3 = body_low_row_2
-                body_low_row_4 = body_low_row_2
-
-            # body_low_row_3 = body_low_row_1
-            bold_arr.append(body_low_row_3)
-            sheet.merge_cells(start_row=body_low_row_3, start_column=1, end_row=body_low_row_3, end_column=1 + 4)
-            for body in bodyes_arr_3:
-                col_i = 1
-                for value in body:
-                    backend_utils.ExcelClass.set_sheet_value(
-                        col=col_i,
-                        row=body_low_row_3,
-                        value=value,
-                        sheet=sheet
-                    )
-                    col_i += 1
-                body_low_row_3 += 1
-
-            # body_low_row_4 = body_low_row_2
-            bold_arr.append(body_low_row_4)
-            sheet.merge_cells(start_row=body_low_row_4, start_column=6, end_row=body_low_row_4, end_column=6 + 2)
-            for body in bodyes_arr_4:
-                col_i = 6
-                for value in body:
-                    backend_utils.ExcelClass.set_sheet_value(
-                        col=col_i,
-                        row=body_low_row_4,
-                        value=value,
-                        sheet=sheet
-                    )
-                    col_i += 1
-                body_low_row_4 += 1
-
-            if body_low_row_3 >= body_low_row_4:
-                body_low_row_5 = body_low_row_3
-                body_low_row_6 = body_low_row_3
-            else:
-                body_low_row_5 = body_low_row_4
-                body_low_row_6 = body_low_row_4
-
-            # body_low_row_5 = body_low_row_3
-            bold_arr.append(body_low_row_5)
-            sheet.merge_cells(start_row=body_low_row_5, start_column=1, end_row=body_low_row_5, end_column=1 + 4)
-            for body in bodyes_arr_5:
-                col_i = 1
-                for value in body:
-                    backend_utils.ExcelClass.set_sheet_value(
-                        col=col_i,
-                        row=body_low_row_5,
-                        value=value,
-                        sheet=sheet
-                    )
-                    col_i += 1
-                body_low_row_5 += 1
-
-            # body_low_row_6 = body_low_row_4
-            bold_arr.append(body_low_row_6)
-            sheet.merge_cells(start_row=body_low_row_6, start_column=1, end_row=body_low_row_6, end_column=1 + 4)
-            for body in ['.', 'Вид', *header_arr[-2:]]:
-                col_i = 6
-                backend_utils.ExcelClass.set_sheet_value(
-                    col=col_i,
-                    row=body_low_row_6,
-                    value=body,
-                    sheet=sheet
-                )
-                sheet.merge_cells(start_row=body_low_row_6, start_column=col_i, end_row=body_low_row_6,
-                                  end_column=col_i + 2)
-                body_low_row_6 += 1
-
-            if body_low_row_6 >= body_low_row_5:
-                body_low_row = body_low_row_6
-            else:
-                body_low_row = body_low_row_5
-
-            if body_low_row_1 >= body_low_row_2:
-                body_color_2 = body_low_row_1
-            else:
-                body_color_2 = body_low_row_2
-            if body_low_row_3 >= body_low_row_4:
-                body_color_3 = body_low_row_3
-            else:
-                body_color_3 = body_low_row_4
-            #######################################################
-
-            # Set fonts
-            #######################################################
-            font_headers = Font(name='Arial', size=8, bold=False)
-            for row in range(1, header_low_row):
-                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                    cell = sheet[f'{col}{row}']
-                    cell.font = font_headers
-
-            font_bodyes = Font(name='Arial', size=7, bold=False)
-            for row in range(header_low_row, body_low_row + 1):
-                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                    cell = sheet[f'{col}{row}']
-                    cell.font = font_bodyes
-
-            font_tables = Font(name='Arial', size=8, bold=True)
-            for row in [header_low_row, body_color_2, body_color_3]:
-                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                    cell = sheet[f'{col}{row}']
-                    cell.font = font_tables
-            #######################################################
-
-            # Set aligments
-            #######################################################
-            wrap_text = Alignment(wrap_text=True)
-            shrink_to_fit = Alignment(shrink_to_fit=True)
-            aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True, shrink_to_fit=True)
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                cell = sheet[f'{col}{1}']
-                cell.alignment = aligment_center
-            aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True, shrink_to_fit=True)
-            for row in range(2, header_low_row):
-                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                    cell = sheet[f'{col}{row}']
-                    cell.alignment = aligment_left
-
-            aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True, shrink_to_fit=True)
-            for row in range(header_low_row, body_low_row + 1):
-                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                    cell = sheet[f'{col}{row}']
-                    if col == 'A' or col == 'F':
-                        cell.alignment = aligment_left
-                    elif col == 'E' or col == 'H':
-                        cell.alignment = aligment_right
-                    else:
-                        cell.alignment = aligment_center
-            #######################################################
-
-            # Set borders
-            #######################################################
-            side_medium = Side(border_style="thin", color="FF808080")
-            side_think = Side(border_style="thin", color="FF808080")
-            border_horizontal_middle = Border(
-                top=side_medium,
-                # left=side_medium,
-                # right=side_medium,
-                # bottom=side_medium
-            )
-            border_vertical_middle = Border(
-                # top=side_think,
-                left=side_medium,
-                # right=side_think,
-                # bottom=side_think
-            )
-            border_vertical_light = Border(
-                # top=side_think,
-                left=side_medium,
-                # right=side_think,
-                # bottom=side_think
-            )
-            for row in range(header_low_row, body_low_row):
-                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                    if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
-                        pass
-                    else:
-                        cell = sheet[f'{col}{row}']
-                        cell.border = border_vertical_light
-                cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(1)}{row}']
-                cell.border = border_vertical_middle
-                cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(6)}{row}']
-                cell.border = border_vertical_middle
-                cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(9)}{row}']
-                cell.border = border_vertical_middle
-            side_think = Side(border_style="dotted", color="FF808080")
-            # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick', 'medium', 'dashDot',
-            #  'dashDotDot', 'hair', 'mediumDashDot', 'slantDashDot'}
-            border_think = Border(
-                top=side_think,
-                left=side_think,
-                right=side_think,
-                bottom=side_think
-            )
-            for row in range(1, header_low_row):
-                for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                    cell = sheet[f'{col}{row}']
-                    cell.border = border_think
-            side_medium = Side(border_style="thin", color="FF808080")
-            border_medium = Border(
-                top=side_medium,
-                left=side_medium,
-                right=side_medium,
-                bottom=side_medium
-            )
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
-                    cell = sheet[f'{col}{row - 1}']
-                    cell.border = border_medium
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                cell = sheet[f'{col}{body_low_row}']
-                cell.border = border_horizontal_middle
-            #######################################################
-
-            # Colored styles
-            #######################################################
-            color_green = PatternFill(fgColor="E6E6FF", fill_type="solid")
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
-                    cell = sheet[f'{col}{row}']
-                    cell.fill = color_green
-                    cell = sheet[f'{col}{row - 1}']
-                    cell.border = border_medium
-            color_yellow = PatternFill(fgColor="d0ffd8", fill_type="solid")
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
-                cell = sheet[f'{col}{body_low_row_1 - 1}']
-                cell.fill = color_yellow
-
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
-                cell = sheet[f'{col}{body_low_row_2 - 1}']
-                cell.fill = color_yellow
-
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
-                cell = sheet[f'{col}{body_low_row_3 - 1}']
-                cell.fill = color_yellow
-                cell.fill = color_yellow
-
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
-                cell = sheet[f'{col}{body_low_row_4 - 1}']
-                cell.fill = color_yellow
-
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
-                cell = sheet[f'{col}{body_low_row_5 - 1}']
-                cell.fill = color_yellow
-                cell.fill = color_yellow
-
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
-                cell = sheet[f'{col}{body_low_row_6 - 1}']
-                cell.fill = color_yellow
-
-            #######################################################
-
-            # Height and width styles
-            #######################################################
-            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                width = 1
-                for row in range(1, body_low_row + 1):
-                    cell = sheet[f'{col}{row}']
-                    value = len(str(cell.value))
-                    if value > width:
-                        width = value
-                if col == 'A' or col == 'F':
-                    width = width / 2
-                sheet.column_dimensions[col].height = 1
-                sheet.column_dimensions[col].width = round((width * 0.95), 3)
-            #######################################################
-
-            # Set global page and book settings
-            #######################################################
-            sheet.page_setup.orientation = sheet.ORIENTATION_PORTRAIT
-            sheet.page_setup.paperSize = sheet.PAPERSIZE_LETTER
-            sheet.page_margins.left = 0.05
-            sheet.page_margins.right = 0.05
-            sheet.page_margins.header = 0.1
-            sheet.page_margins.bottom = 0.2
-            sheet.page_margins.footer = 0.2
-            sheet.page_margins.top = 0.1
-            sheet.print_options.horizontalCentered = True
-            # sheet.print_options.verticalCentered = True
-            sheet.page_setup.fitToHeight = 1
-            sheet.page_setup.scale = 80
-            sheet.page_setup.fitToHeight = 1
-            sheet.page_setup.fitToWidth = 1
-            sheet.protection.password = key + '_1'
-            sheet.protection.sheet = True
-            sheet.protection.enable()
-
-            # workbook.security.workbookPassword = key + '_1'
-            # workbook.security.lockStructure = True
-            #######################################################
-
-            backend_utils.ExcelClass.workbook_save(workbook=workbook, excel_file=path_excel_file)
-            json_data["excel_path"] = path_excel_file
-        except Exception as error:
-            print(error)
-            json_data = {'texterror': texterror, 'error': 'error'}
-    except Exception as error:
-        print(error)
-        json_data = {'error': 'error'}
-
-    return Response(json_data)
-
-
-########################################################################################################################
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])

@@ -39,7 +39,7 @@ const ModulesComponent = () => {
             "./static/modules/1_module_profile/section_self_profile/section_self_profile.png",
           Links: [
             {
-              Type: "active",
+              Type: "disable",
               Link: "/profile",
               Header: "Профиль",
             },

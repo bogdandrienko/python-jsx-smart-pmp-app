@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import {
-  changeUserProfileAction,
-  userChangeAction,
+  userChangeProfileAction,
+  userDetailsAction,
   userLogoutAction,
+  userRecoverPasswordAction,
 } from "../actions/userActions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -17,12 +18,9 @@ import FormContainerComponent from "../components/FormContainerComponent";
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [secretQuestion, setSecretQuestion] = useState("");
-  const [secretAnswer, setSecretAnswer] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -34,33 +32,43 @@ const ChangePasswordPage = () => {
     userChangeDataReducer,
     userChangeErrorReducer,
   } = userChange;
-  // console.log("userChangeLoadingReducer: ", userChangeLoadingReducer);
-  // console.log("userChangeDataReducer: ", userChangeDataReducer);
-  // console.log("userChangeErrorReducer: ", userChangeErrorReducer);
+  console.log("userChangeLoadingReducer: ", userChangeLoadingReducer);
+  console.log("userChangeDataReducer: ", userChangeDataReducer);
+  console.log("userChangeErrorReducer: ", userChangeErrorReducer);
+
+  const userDetails = useSelector((state) => state.userDetails);
+  const { error, loading, user } = userDetails;
+  console.log("loading: ", loading);
+  console.log("user: ", user);
+  console.log("error: ", error);
 
   useEffect(() => {
-    if (userChangeDataReducer) {
-      if (userChangeDataReducer["email_field"]) {
-        // setEmail(userChangeDataReducer["email_field"]);
-        setSecretQuestion(userChangeDataReducer["secret_question_char_field"]);
-        setSecretAnswer(userChangeDataReducer["secret_answer_char_field"]);
+    if (user && loading === false) {
+      if (user["user_model"]) {
+        if (user["user_model"]["password_slug_field"]) {
+          setPassword(user["user_model"]["password_slug_field"]);
+          setPassword2(user["user_model"]["password_slug_field"]);
+        }
       }
     } else {
-      dispatch(userChangeAction());
+      dispatch(userDetailsAction());
     }
-  }, [dispatch, userChangeDataReducer]);
+  }, [dispatch, loading, user]);
+  
+  useEffect(() => {
+    dispatch(userDetailsAction());
+  }, [dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      changeUserProfileAction({
+      userChangeProfileAction({
         password: password,
         password2: password2,
       })
     );
-    dispatch(userChangeAction());
+    dispatch(userDetailsAction());
     dispatch(userLogoutAction());
-    navigate("/login");
   };
 
   const changeVisibility = () => {
@@ -94,20 +102,6 @@ const ChangePasswordPage = () => {
             )}
             {userChangeLoadingReducer && <LoaderComponent />}
             <Form onSubmit={submitHandler}>
-              <Form.Group controlId="secret_answer_char_field">
-                <Form.Label>Ответ на секретный вопрос:</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="пример: 4"
-                  value={secretAnswer}
-                  onChange={(e) => setSecretAnswer(e.target.value)}
-                  autoComplete="none"
-                  aria-autocomplete="none"
-                  minLength="1"
-                  maxLength="32"
-                />
-              </Form.Group>
-
               <Form.Group controlId="password">
                 <Form.Label>Новый пароль от аккаунта:</Form.Label>
                 <Form.Control

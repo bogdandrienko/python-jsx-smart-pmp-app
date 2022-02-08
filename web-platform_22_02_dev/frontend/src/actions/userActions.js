@@ -47,140 +47,33 @@ import {
   USER_CHANGE_FAIL,
 } from "../constants/userConstants";
 
-export const userListAction = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_LIST_LOADING_CONSTANT,
-    });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-    const { data } = await axios.get(`/api/users/all/`, config);
-
-    dispatch({
-      type: USER_LIST_DATA_CONSTANT,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: USER_LIST_ERROR_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-
-export const userChangeAction = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_CHANGE_LOADING_CONSTANT,
-    });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-    const { data } = await axios.get(`/api/users/profile/`, config);
-
-    dispatch({
-      type: USER_CHANGE_DATA_CONSTANT,
-      payload: {
-        password_slug_field: data["user_model"]["password_slug_field"],
-        email_field: data["user_model"]["email_field"],
-        secret_question_char_field:
-          data["user_model"]["secret_question_char_field"],
-        secret_answer_char_field:
-          data["user_model"]["secret_answer_char_field"],
-      },
-    });
-  } catch (error) {
-    dispatch({
-      type: USER_CHANGE_ERROR_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-
-export const userPasswordRecoverAction =
-  (username, secretAnswer, password, password2) => async (dispatch) => {
-    try {
-      dispatch({
-        type: USER_RECOVER_PASSWORD_LOADING_CONSTANT,
-      });
-
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        `/api/users/recover_password/`,
-        { "username": username, "secret_answer_char_field": secretAnswer, "password": password, "password2": password2 },
-        config
-      );
-
-      dispatch({
-        type: USER_RECOVER_PASSWORD_DATA_CONSTANT,
-        payload: {
-          username: data["username"],
-          secretQuestion: data["secret_question_char_field"],
-          success: data["success"],
-        },
-      });
-    } catch (error) {
-      dispatch({
-        type: USER_RECOVER_PASSWORD_ERROR_CONSTANT,
-        payload:
-          error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
-      });
-    }
-  };
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 export const userLoginAction = (email, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
 
-    const config = {
+    const { data } = await axios({
+      url: "api/user/login/",
+      method: "POST",
+      timeout: 5000,
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
       },
-    };
-
-    const { data } = await axios.post(
-      "/api/users/login/",
-      { username: email, password: password },
-      config
-    );
+      data: {
+        "Action-type": "LOGIN",
+        body: { username: email, password: password },
+      },
+    });
+    const response = data["response"];
+    console.log("LOGIN: ", response);
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
-      payload: data,
+      payload: response,
     });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(response));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -197,9 +90,309 @@ export const userLogoutAction = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
-  // dispatch({ type: ORDER_LIST_MY_RESET })
   dispatch({ type: USER_LIST_RESET });
 };
+
+export const userDetailsAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_DETAILS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const { data } = await axios({
+      url: "api/user/profile/",
+      method: "POST",
+      timeout: 5000,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+      data: {
+        "Action-type": "PROFILE",
+        body: {},
+      },
+    });
+    const response = data["response"];
+    console.log("PROFILE: ", response);
+
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const userChangeProfileAction = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_CHANGE_LOADING_CONSTANT,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const { data } = await axios({
+      url: "api/user/change_profile/",
+      method: "POST",
+      timeout: 5000,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+      data: {
+        "Action-type": "CHANGE",
+        body: user,
+      },
+    });
+    const response = data["response"];
+    console.log("CHANGE: ", response);
+
+    dispatch({
+      type: USER_CHANGE_DATA_CONSTANT,
+      payload: response,
+    });
+    dispatch({ type: USER_DETAILS_RESET });
+  } catch (error) {
+    dispatch({
+      type: USER_CHANGE_ERROR_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const userRecoverPasswordAction =
+  (username, secretAnswer, password, password2) => async (dispatch) => {
+    try {
+      dispatch({
+        type: USER_RECOVER_PASSWORD_LOADING_CONSTANT,
+      });
+  
+      const { data } = await axios({
+        url: "api/user/recover_password/",
+        method: "POST",
+        timeout: 5000,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          "Action-type": "RECOVER",
+          body: {
+            username: username,
+            secret_answer_char_field: secretAnswer,
+            password: password,
+            password2: password2,
+          },
+        },
+      });
+      const response = data["response"];
+      console.log("CHANGE: ", response);
+
+      dispatch({
+        type: USER_RECOVER_PASSWORD_DATA_CONSTANT,
+        payload: {
+          username: response["username"],
+          secretQuestion: response["secret_question_char_field"],
+          success: response["success"],
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: USER_RECOVER_PASSWORD_ERROR_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+
+export const userListAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_LIST_LOADING_CONSTANT,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const { data } = await axios({
+      url: "api/user/all/",
+      method: "POST",
+      timeout: 5000,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+      data: {
+        "Action-type": "ALL",
+        body: {},
+      },
+    });
+    const response = data["response"];
+    console.log("ALL: ", response);
+
+    dispatch({
+      type: USER_LIST_DATA_CONSTANT,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_LIST_ERROR_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// export const userLoginAction = (email, password) => async (dispatch) => {
+//   try {
+//     dispatch({
+//       type: USER_LOGIN_LOADING_CONSTANT,
+//     });
+
+//     const { data } = await axios({
+//       url: "api/user/login/",
+//       method: "POST",
+//       timeout: 5000,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       data: {
+//         "Action-type": "LOGIN",
+//         body: { username: email, password: password },
+//       },
+//     });
+//     const response = data["response"];
+//     console.log("LOGIN: ", response);
+
+//     dispatch({
+//       type: USER_LOGIN_DATA_CONSTANT,
+//       payload: response,
+//     });
+
+//     dispatch({ type: USER_PROFILE_RESET_CONSTANT });
+
+//     localStorage.setItem("userInfo", JSON.stringify(response));
+//   } catch (error) {
+//     dispatch({
+//       type: USER_LOGIN_ERROR_CONSTANT,
+//       payload:
+//         error.response && error.response.data.detail
+//           ? error.response.data.detail
+//           : error.message,
+//     });
+//   }
+// };
+
+// export const userLogoutAction = () => (dispatch) => {
+//   localStorage.removeItem("userInfo");
+//   localStorage.removeItem("userInfo");
+//   dispatch({ type: USER_LOGOUT_CONSTANT });
+//   dispatch({ type: USER_PROFILE_RESET_CONSTANT });
+// };
+
+// export const userProfileAction = () => async (dispatch, getState) => {
+//   try {
+//     dispatch({
+//       type: USER_PROFILE_LOADING_CONSTANT,
+//     });
+
+//     const {
+//       userLogin: { userInfo },
+//     } = getState();
+//     const { data } = await axios({
+//       url: "/api/user/profile/",
+//       method: "POST",
+//       timeout: 5000,
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${userInfo["access_token"]}`,
+//       },
+//       data: {
+//         "Action-type": "PROFILE",
+//         body: {},
+//       },
+//     });
+//     const response = data["response"];
+//     console.log("PROFILE: ", response);
+
+//     dispatch({
+//       type: USER_PROFILE_DATA_CONSTANT,
+//       payload: response,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: USER_PROFILE_ERROR_CONSTANT,
+//       payload:
+//         error.response && error.response.data.detail
+//           ? error.response.data.detail
+//           : error.message,
+//     });
+//   }
+// };
+
+// export const userListAction = () => async (dispatch, getState) => {
+//   try {
+//     dispatch({
+//       type: USER_LIST_LOADING_CONSTANT,
+//     });
+
+//     const {
+//       userTokenDataStore: { userTokenDataStore },
+//     } = getState();
+//     const { data } = await axios({
+//       url: "/api/user/all/",
+//       method: "POST",
+//       timeout: 5000,
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${userTokenDataStore["access_token"]}`,
+//       },
+//       data: {
+//         "Action-type": "USERS",
+//         body: {},
+//       },
+//     });
+//     const response = data["response"];
+//     // console.log("USERS: ", response);
+
+//     dispatch({
+//       type: USER_LIST_DATA_CONSTANT,
+//       payload: response,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: USER_LIST_ERROR_CONSTANT,
+//       payload:
+//         error.response && error.response.data.detail
+//           ? error.response.data.detail
+//           : error.message,
+//     });
+//   }
+// };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const userRegisterAction =
   (name, email, password) => async (dispatch) => {
@@ -242,41 +435,7 @@ export const userRegisterAction =
     }
   };
 
-export const userDetailsAction = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_DETAILS_REQUEST,
-    });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.get(`/api/users/profile/`, config);
-
-    dispatch({
-      type: USER_DETAILS_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: USER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-
-export const changeUserProfileAction = (user) => async (dispatch, getState) => {
+export const oldChangeUserProfileAction = (user) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_CHANGE_REQUEST,
@@ -376,18 +535,34 @@ export const listUsersAction = () => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const config = {
+    const { data } = await axios({
+      url: "api/user/all/",
+      method: "POST",
+      timeout: 5000,
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
-    };
+      data: {
+        "Action-type": "ALL",
+        body: {},
+      },
+    });
+    const response = data["response"];
+    console.log("PROFILE: ", response);
 
-    const { data } = await axios.get(`/api/users/all/`, config);
+    // const config = {
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     Authorization: `Bearer ${userInfo.token}`,
+    //   },
+    // };
+
+    // const { data } = await axios.get(`/api/users/all/`, config);
 
     dispatch({
       type: USER_LIST_SUCCESS,
-      payload: data,
+      payload: response,
     });
   } catch (error) {
     dispatch({

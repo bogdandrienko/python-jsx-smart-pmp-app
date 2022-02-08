@@ -4,7 +4,7 @@ import "../css/bootstrap_5.1.3/bootstrap.min.css";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import NewsPage from "../pages/NewsPage";
-import ProfilePage from "../pages/ProfilePage";
+// import ProfilePage from "../pages/ProfilePage";
 import SalaryPage from "../pages/SalaryPage";
 import VideoStudyPage from "../pages/VideoStudyPage";
 import UsersListPage from "../pages/UsersListPage";
@@ -33,7 +33,7 @@ function App() {
           <Route path="/home" element={<HomePage />} exact />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          {/* <Route path="/profile" element={<ProfilePage />} /> */}
           <Route path="/salary" element={<SalaryPage />} />
           <Route path="/video_study" element={<VideoStudyPage />} />
           <Route path="/change_profile" element={<ChangeProfilePage />} />

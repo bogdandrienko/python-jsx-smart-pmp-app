@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "react-bootstrap";
 
 import {
-  changeUserProfileAction,
-  userChangeAction,
+  userChangeProfileAction,
+  userDetailsAction,
+  userLogoutAction,
 } from "../actions/userActions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -19,6 +20,8 @@ const ChangeProfilePage = () => {
   const [email, setEmail] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -30,32 +33,66 @@ const ChangeProfilePage = () => {
     userChangeDataReducer,
     userChangeErrorReducer,
   } = userChange;
-  // console.log("userChangeLoadingReducer: ", userChangeLoadingReducer);
-  // console.log("userChangeDataReducer: ", userChangeDataReducer);
-  // console.log("userChangeErrorReducer: ", userChangeErrorReducer);
+  console.log("userChangeLoadingReducer: ", userChangeLoadingReducer);
+  console.log("userChangeDataReducer: ", userChangeDataReducer);
+  console.log("userChangeErrorReducer: ", userChangeErrorReducer);
+
+  const userDetails = useSelector((state) => state.userDetails);
+  const { error, loading, user } = userDetails;
+  console.log("loading: ", loading);
+  console.log("user: ", user);
+  console.log("error: ", error);
 
   useEffect(() => {
-    if (userChangeDataReducer) {
-      if (userChangeDataReducer["email_field"]) {
-        setEmail(userChangeDataReducer["email_field"]);
-        setSecretQuestion(userChangeDataReducer["secret_question_char_field"]);
-        setSecretAnswer(userChangeDataReducer["secret_answer_char_field"]);
+    if (user && loading === false) {
+      if (user["user_model"]) {
+        if (user["user_model"]["email_field"]) {
+          setEmail(user["user_model"]["email_field"]);
+        }
+        if (user["user_model"]["secret_question_char_field"]) {
+          setSecretQuestion(user["user_model"]["secret_question_char_field"]);
+        }
+        if (user["user_model"]["secret_answer_char_field"]) {
+          setSecretAnswer(user["user_model"]["secret_answer_char_field"]);
+        }
+        if (user["user_model"]["password_slug_field"]) {
+          setPassword("");
+          setPassword2("");
+        }
       }
     } else {
-      dispatch(userChangeAction());
+      dispatch(userDetailsAction());
+      setPassword("");
+      setPassword2("");
     }
-  }, [dispatch, userChangeDataReducer]);
+  }, [dispatch, loading, user]);
+
+  useEffect(() => {
+    dispatch(userDetailsAction());
+  }, [dispatch]);
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     dispatch(
-      changeUserProfileAction({
+      userChangeProfileAction({
         email: email,
         secretQuestion: secretQuestion,
         secretAnswer: secretAnswer,
+        password: password,
+        password2: password2,
       })
     );
-    dispatch(userChangeAction());
+    dispatch(userDetailsAction());
+    dispatch(userLogoutAction());
+  };
+
+  const changeVisibility = () => {
+    const password = document.getElementById("password");
+    const password2 = document.getElementById("password2");
+    const type =
+      password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+    password2.setAttribute("type", type);
   };
 
   return (
@@ -67,11 +104,14 @@ const ChangeProfilePage = () => {
       />
       <main className="container text-center">
         <div className="m-1">
-          <h1>
-            {userInfo
-              ? `Идентификатор пользователя: '${userInfo.username}'`
-              : "Идентификатор пользователя: ''"}
-          </h1>
+          <div>
+            <h2 className="text-danger display-6 lead">
+              Внимание, все эти поля необходимо заполнить!
+            </h2>
+            <h5>
+              Идентификатор пользователя: '{userInfo ? (userInfo.username) : ('')}'
+            </h5>
+          </div>
           <FormContainerComponent>
             {userChangeErrorReducer && (
               <MessageComponent variant="danger">
@@ -88,7 +128,7 @@ const ChangeProfilePage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="none"
-                  aria-autocomplete={"none"}
+                  aria-autocomplete="none"
                   minLength="1"
                   maxLength="64"
                 />
@@ -123,10 +163,45 @@ const ChangeProfilePage = () => {
                   maxLength="32"
                 />
               </Form.Group>
+              <Form.Group controlId="password">
+                <Form.Label>Новый пароль от аккаунта:</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="пример: 12345Qq$"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="none"
+                  aria-autocomplete="none"
+                  minLength="8"
+                  maxLength="16"
+                />
+              </Form.Group>
+
+              <Form.Group controlId="password2">
+                <Form.Label>Повторите Пароль от аккаунта:</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="пример: 12345Qq$"
+                  value={password2}
+                  onChange={(e) => setPassword2(e.target.value)}
+                  autoComplete="none"
+                  aria-autocomplete="none"
+                  minLength="8"
+                  maxLength="16"
+                />
+              </Form.Group>
 
               <Form.Group controlId="button">
                 <Button type="submit" variant="outline-primary" className="m-1">
                   Сохранить
+                </Button>
+                <Button
+                  onClick={changeVisibility}
+                  type="button"
+                  variant="outline-warning"
+                  className="m-1"
+                >
+                  видимость паролей
                 </Button>
               </Form.Group>
             </Form>

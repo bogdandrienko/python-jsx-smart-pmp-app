@@ -41,29 +41,35 @@ urlpatterns = [
     path('api/', include('rest_framework.urls')),
     path('api/routes/', backend_views.routes, name='api_routes'),
 
-    # rest_framework routers.DefaultRouter()
+    # JWT token
+    # path('api/tokens/routes/', backend_views.routes, name='api_token_routes'),
+    # path('api/tokens/token/', backend_views.MyTokenObtainPairView.as_view(), name='api_token'),
+    # path('api/tokens/token/', TokenObtainPairView.as_view(), name='api_token_obtain_pair'),
+    # path('api/tokens/token/refresh/', TokenRefreshView.as_view(), name='api_token_refresh'),
+    # path('api/tokens/token/verify/', TokenVerifyView.as_view(), name='api_token_verify'),
+
+    # api user
+    path('api/users/routes/', backend_views.routes, name='api_users_routes'),
+    path('api/user/login/', backend_views.api_login_user, name='api_user_login'),
+    path('api/user/profile/', backend_views.api_user_profile, name='api_user_profile'),
+    path('api/user/change_profile/', backend_views.api_user_change_profile, name='api_user_change_profile'),
+    path('api/user/recover_password/', backend_views.api_user_recover_password, name='api_user_recover_password'),
+    path('api/user/all/', backend_views.api_user_all, name='api_user_all'),
+
+    # rest_framework routers.DefaultRouter
     path('api/router/', include(router.urls)),
 
-    # JWT token
-    path('api/tokens/routes/', backend_views.routes, name='api_token_routes'),
-    path('api/tokens/token/', backend_views.MyTokenObtainPairView.as_view(), name='api_token'),
-    # path('api/tokens/token/', TokenObtainPairView.as_view(), name='api_token_obtain_pair'),
-    path('api/tokens/token/refresh/', TokenRefreshView.as_view(), name='api_token_refresh'),
-    path('api/tokens/token/verify/', TokenVerifyView.as_view(), name='api_token_verify'),
-
-    # api authentication
-    path('api/users/routes/', backend_views.routes, name='api_users_routes'),
-    path('api/users/login/', backend_views.MyTokenObtainPairView.as_view(), name='api_users_login'),
-    path('api/users/profile/', backend_views.get_user_profile, name='api_users_profile'),
-    path('api/users/change_profile/', backend_views.change_user_profile, name='api_users_change_profile'),
-    path('api/users/recover_password/', backend_views.recover_user_password, name='api_users_recover_password'),
-    path('api/users/all/', backend_views.get_users, name='api_users_all'),
-    # path('api/users/register/', backend_views.register_user, name='api_users_register'),
-
     # salary
-    path('api/salary', backend_views.salary, name='api_salary'),
+    path('api/salary/', backend_views.api_salary, name='api_salary'),
 
     #################################################################
+
+    # path('api/users/login/', backend_views.MyTokenObtainPairView.as_view(), name='api_users_login'),
+    # path('api/users/profile/', backend_views.get_user_profile, name='api_users_profile'),
+    # path('api/users/change_profile/', backend_views.change_user_profile, name='api_users_change_profile'),
+    # path('api/users/recover_password/', backend_views.recover_user_password, name='api_users_recover_password'),
+    # path('api/users/register/', backend_views.register_user, name='api_users_register'),
+    # path('api/users/all/', backend_views.get_users, name='api_users_all'),
 
     # note_api
     path('api/note_api/', backend_views.note_api, name='api_note_api'),

@@ -1,32 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetailsAction, userListAction } from "../actions/userActions";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
-import { useLocation, useNavigate } from "react-router-dom";
+import MessageComponent from "../components/MessageComponent";
+import LoaderComponent from "../components/LoaderComponent";
 
 const UsersListPage = () => {
   const dispatch = useDispatch();
+  const [usersList, setUsersList] = useState([]);
 
-  useEffect(() => {
-    dispatch(userDetailsAction());
-  }, [dispatch]);
-
-  const usersList = useSelector((state) => state.usersList);
+  const userList = useSelector((state) => state.userList);
   const {
     usersListLoadingReducer,
     usersListDataReducer,
     usersListErrorReducer,
-  } = usersList;
-  // console.log("usersListLoadingReducer: ", usersListLoadingReducer);
-  // console.log("usersListDataReducer: ", usersListDataReducer);
-  // console.log("usersListErrorReducer: ", usersListErrorReducer);
+  } = userList;
+  console.log("usersListLoadingReducer: ", usersListLoadingReducer);
+  console.log("usersListDataReducer: ", usersListDataReducer);
+  console.log("usersListErrorReducer: ", usersListErrorReducer);
 
   useEffect(() => {
-    dispatch(userListAction());
-  }, [dispatch]);
+    if (usersListDataReducer) {
+      setUsersList(usersListDataReducer);
+    } else {
+      dispatch(userListAction());
+    }
+  }, [dispatch, usersListDataReducer]);
 
   return (
     <div>
@@ -37,6 +40,12 @@ const UsersListPage = () => {
       />
       <main className="container text-center">
         <div className="m-1">
+          {usersListErrorReducer && (
+              <MessageComponent variant="danger">
+                {usersListErrorReducer}
+              </MessageComponent>
+            )}
+            {usersListLoadingReducer && <LoaderComponent />}
           <table className="table table-striped table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
             <thead>
               <tr>
@@ -48,13 +57,8 @@ const UsersListPage = () => {
               </tr>
             </thead>
             <tbody>
-              {usersListLoadingReducer === true
-                ? "идёт загрузка"
-                : usersListErrorReducer !== undefined
-                ? `ошибка: ${usersListErrorReducer}`
-                : !usersListDataReducer
-                ? ""
-                : usersListDataReducer.map((user, index) => (
+              {!usersList ? ""
+                : usersList.map((user, index) => (
                     <tr key={index}>
                       <td className="text-center">{user.id}</td>
                       <td className="text-center">{user.username}</td>
