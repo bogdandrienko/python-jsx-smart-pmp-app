@@ -287,87 +287,132 @@ def api_user_recover_password(request):
     if request_method == 'GET':
         return Response({"error": "This method not allowed for endpoint."})
     elif request_method == 'POST':
-        if request_action_type == "RECOVER":
-            response = {
-                "error": "error"
-            }
+        if request_action_type == "FIND_USER":
             try:
                 username = request_body["username"]
+
                 user = User.objects.get(username=username)
                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-            except Exception as error:
-                user = None
-                user_model = None
 
+                response = {"response": {
+                    "username": str(user.username),
+                    "secret_question_char_field": str(user_model.secret_question_char_field),
+                    "email_field": str(user_model.email_field),
+                    "success": False
+                }}
+            except Exception as error:
+                response = {"error": f"{error}"}
+
+            print("response: ", response)
+            return Response(response)
+        if request_action_type == "CHECK_ANSWER":
             try:
-                secret_answer_char_field = request_body["secret_answer_char_field"]
-            except Exception as error:
-                secret_answer_char_field = None
+                username = request_body["username"]
+                secret_answer_char_field = request_body["secretAnswer"]
 
-            try:
-                password = str(request_body["password"]).strip()
-                password2 = str(request_body["password2"]).strip()
-            except Exception as error:
-                password = None
-                password2 = None
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
 
-            if user_model and not secret_answer_char_field and not password:
-                try:
-                    secret_question_char_field = user_model.secret_question_char_field
+                if str(secret_answer_char_field).strip().lower() == \
+                        str(user_model.secret_answer_char_field).strip().lower():
                     response = {"response": {
                         "username": user.username,
-                        "secret_question_char_field": secret_question_char_field,
+                        "secret_question_char_field": None,
+                        "success": True
+                    }}
+                else:
+                    response = {"error": f"Ответ не верный!"}
+            except Exception as error:
+                response = {"error": f"{error}"}
+
+            print("response: ", response)
+            return Response(response)
+        if request_action_type == "SEND_EMAIL_PASSWORD":
+            try:
+                username = request_body["username"]
+
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                password = str(user_model.password_slug_field)
+                email_ = str(user_model.email_field)
+
+                text = f"{password[-1]}{datetime.datetime.now().strftime('%Y-%m-%dT%H')}" \
+                       f"{str(user_model.user_foreign_key_field)}{password}"
+                encrypt_text = backend_utils.EncryptingClass.encrypt_text(
+                    text,
+                    '31284'
+                )
+                print(f"send pass to email: {encrypt_text}")
+
+                subject = 'Восстановление пароля от веб платформы'
+                message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
+                            f'перейдите по ссылке: http://web.km.kz:8000/ => восстановление пароля, ' \
+                            f'введите Ваш идентификатор и затем в окне почты введите код (без кавычек): "{encrypt_text}"'
+                from_email = 'web@km.kz'
+                to_email = email_
+                if subject and message_s and to_email:
+                    send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+
+                response = {"response": {
+                    "username": str(user.username),
+                    "secret_question_char_field": str(user_model.secret_question_char_field),
+                    "email_field": str(user_model.email_field),
+                    "success": False
+                }}
+            except Exception as error:
+                response = {"error": f"{error}"}
+
+            print("response: ", response)
+            return Response(response)
+        if request_action_type == "CHECK_EMAIL_PASSWORD":
+            try:
+                username = request_body["username"]
+                recover_password = request_body["recoverPassword"]
+
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                password = str(user_model.password_slug_field)
+
+                decrypt_text = backend_utils.EncryptingClass.decrypt_text(recover_password, '31284')
+                text = f"{password[-1]}{datetime.datetime.now().strftime('%Y-%m-%dT%H')}" \
+                       f"{str(user_model.user_foreign_key_field)}{password}"
+                print(f"decrypt_text: {decrypt_text}")
+                print(f"text: {text}")
+                if str(decrypt_text).strip() == str(text).strip():
+                    response = {"response": {
+                        "username": user.username,
+                        "recoverPassword": None,
+                        "success": True
+                    }}
+                else:
+                    response = {"error": f"Код не верный!"}
+            except Exception as error:
+                response = {"error": f"{error}"}
+
+            print("response: ", response)
+            return Response(response)
+        if request_action_type == "CHANGE_PASSWORD":
+            try:
+                username = request_body["username"]
+                password = str(request_body["password"]).strip()
+                password2 = str(request_body["password2"]).strip()
+
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+
+                if password == password2 and password != str(user_model.password_slug_field).strip():
+                    user.set_password(password)
+                    user.save()
+                    user_model.password_slug_field = password
+                    user_model.save()
+                    response = {"response": {
+                        "username": user.username,
                         "success": False
                     }}
-                except Exception as error:
-                    print(error)
-                    response = {
-                        "error": f"{error}"
-                    }
-            elif user_model and secret_answer_char_field and not password:
-                try:
-                    if str(secret_answer_char_field).strip().lower() == \
-                            str(user_model.secret_answer_char_field).strip().lower():
-                        response = {"response": {
-                            "username": user.username,
-                            "secret_question_char_field": None,
-                            "success": True
-                        }}
-                    else:
-                        response = {"response": {
-                            "username": user.username,
-                            "secret_question_char_field": None,
-                            "success": False
-                        }}
-                except Exception as error:
-                    print(error)
-                    response = {
-                        "error": f"{error}"
-                    }
-            elif user_model and not secret_answer_char_field and password:
-                try:
-                    if password == password2 and str(user_model.password_slug_field).strip():
-                        print(f'password changed to {password}')
-                        user.set_password(password)
-                        user.save()
-                        user_model.password_slug_field = password
-                        user_model.save()
-                        response = {"response": {
-                            "username": user.username,
-                            "secret_question_char_field": None,
-                            "success": False
-                        }}
-                    else:
-                        response = {"response": {
-                            "username": user.username,
-                            "secret_question_char_field": None,
-                            "success": False
-                        }}
-                except Exception as error:
-                    print(error)
-                    response = {
-                        "error": f"{error}"
-                    }
+                else:
+                    response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
+            except Exception as error:
+                response = {"error": f"{error}"}
 
             print("response: ", response)
             return Response(response)
@@ -2248,7 +2293,7 @@ def account_recover_password(request, type_slug='iin'):
                         # from_email = 'eevee.cycle@yandex.ru'
                         from_email = 'webapp@km.kz'
                         to_email = email_
-                        if subject and message and to_email:
+                        if subject and message_s and to_email:
                             send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
                             response = 2
                         else:

@@ -20,9 +20,15 @@ const ChangePasswordPage = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
+
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
+
+  const [email, setEmail] = useState("");
+  const [recoverPassword, setRecoverPassword] = useState("");
+
   const [success, setSuccess] = useState("");
+
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -35,20 +41,63 @@ const ChangePasswordPage = () => {
 
   const postSecretQuestionHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction(username, "", "", ""));
+    dispatch(userRecoverPasswordAction({
+      actionType: "FIND_USER",
+      username: username, 
+      secretAnswer: "",
+      recoverPassword: "",
+      password: "",
+      password2: ""
+    }));
   };
 
   const postSecretAnswerHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction(username, secretAnswer, "", ""));
+    dispatch(userRecoverPasswordAction({
+      actionType: "CHECK_ANSWER",
+      username: username, 
+      secretAnswer: secretAnswer,
+      recoverPassword: "",
+      password: "",
+      password2: ""
+    }));
+  };
+
+  const postSendEmailHandlerSubmit = (e) => {
+    e.preventDefault();
+    dispatch(userRecoverPasswordAction({
+      actionType: "SEND_EMAIL_PASSWORD",
+      username: username, 
+      secretAnswer: "",
+      recoverPassword: "",
+      password: "",
+      password2: ""
+    }));
+  };
+
+  const postRecoverEmailHandlerSubmit = (e) => {
+    e.preventDefault();
+    dispatch(userRecoverPasswordAction({
+      actionType: "CHECK_EMAIL_PASSWORD",
+      username: username, 
+      secretAnswer: "",
+      recoverPassword: recoverPassword,
+      password: "",
+      password2: ""
+    }));
   };
 
   const postRecoverPasswordHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction(username, "", password, password2));
+    dispatch(userRecoverPasswordAction({
+      actionType: "CHANGE_PASSWORD",
+      username: username, 
+      secretAnswer: "",
+      recoverPassword: "",
+      password: password,
+      password2: password2
+    }));
     dispatch(userChangeProfileAction());
-    dispatch(userLogoutAction());
-    navigate("/login");
   };
 
   useEffect(() => {
@@ -62,6 +111,11 @@ const ChangePasswordPage = () => {
         setSecretQuestion(userRecoverPasswordDataReducer["secretQuestion"]);
       } else {
         setSecretQuestion("");
+      }
+      if (userRecoverPasswordDataReducer["email"]) {
+        setEmail(userRecoverPasswordDataReducer["email"]);
+      } else {
+        setEmail("");
       }
       if (userRecoverPasswordDataReducer["success"]) {
         setSuccess(userRecoverPasswordDataReducer["success"]);
@@ -156,38 +210,83 @@ const ChangePasswordPage = () => {
               </FormContainerComponent>
             </div>
           ) : secretQuestion ? (
-            <div>
-              <div className="text-danger lead">
-                Секретный вопрос: '
-                <small className="text-danger lead fw-bold">{`${secretQuestion}`}</small>
-                '
-              </div>
-              <FormContainerComponent>
-                <Form>
-                  <Form.Group controlId="email">
-                    <Form.Label>Ответ:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="пример: 4"
-                      value={secretAnswer}
-                      onChange={(e) => setSecretAnswer(e.target.value)}
-                      minLength="1"
-                      maxLength="16"
-                    />
-                  </Form.Group>
+            <div className="row">
+              <div className="form-control col">
+                <h3 className="lead">Восстановление через секретный вопрос/ответ.</h3>
+                <div className="text-danger lead">
+                  Секретный вопрос: '
+                  <small className="text-warning lead fw-bold">{`${secretQuestion}`}</small>
+                  '
+                </div>
+                <FormContainerComponent>
+                  <Form>
+                    <Form.Group controlId="text">
+                      <Form.Label>Ответ:</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="пример: 4"
+                        value={secretAnswer}
+                        onChange={(e) => setSecretAnswer(e.target.value)}
+                        minLength="1"
+                        maxLength="16"
+                      />
+                    </Form.Group>
 
-                  <Form.Group controlId="button">
-                    <Button
-                      type="button"
-                      variant="outline-primary"
-                      className="m-1"
-                      onClick={postSecretAnswerHandlerSubmit}
-                    >
-                      Проверить
-                    </Button>
-                  </Form.Group>
-                </Form>
-              </FormContainerComponent>
+                    <Form.Group controlId="button">
+                      <Button
+                        type="button"
+                        variant="outline-success"
+                        className="m-1"
+                        onClick={postSecretAnswerHandlerSubmit}
+                      >
+                        Проверить
+                      </Button>
+                    </Form.Group>
+                  </Form>
+                </FormContainerComponent>
+              </div>
+              <div className="form-control col">
+                <h3 className="lead">Восстановление через введённую ранее почту.</h3>
+                <div className="text-danger lead">
+                  Первая часть почты: '
+                  <small className="text-warning lead fw-bold">{`${email}`.slice(0, 3)} ... {`${email}`.slice(-9)}</small>
+                  '
+                </div>
+                <FormContainerComponent>
+                  <Form>
+                    <Form.Group controlId="email">
+                      <Form.Label>Код восстановления отправленный на почту (<small className="text-danger">вводить без кавычек</small>):</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="пример: 4"
+                        value={recoverPassword}
+                        onChange={(e) => setRecoverPassword(e.target.value)}
+                        minLength="1"
+                        maxLength="64"
+                      />
+                    </Form.Group>
+
+                    <Form.Group controlId="button">
+                      <Button
+                        type="button"
+                        variant="outline-success"
+                        className="m-1"
+                        onClick={postRecoverEmailHandlerSubmit}
+                      >
+                        Проверить
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline-danger"
+                        className="m-1"
+                        onClick={postSendEmailHandlerSubmit}
+                      >
+                        Отправить код восстановления на почту
+                      </Button>
+                    </Form.Group>
+                  </Form>
+                </FormContainerComponent>
+              </div>
             </div>
           ) : (
             <FormContainerComponent>

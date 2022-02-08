@@ -177,7 +177,7 @@ export const userChangeProfileAction = (user) => async (dispatch, getState) => {
 };
 
 export const userRecoverPasswordAction =
-  (username, secretAnswer, password, password2) => async (dispatch) => {
+  (attrs) => async (dispatch) => {
     try {
       dispatch({
         type: USER_RECOVER_PASSWORD_LOADING_CONSTANT,
@@ -191,26 +191,34 @@ export const userRecoverPasswordAction =
           "Content-Type": "application/json",
         },
         data: {
-          "Action-type": "RECOVER",
+          "Action-type": attrs.actionType,
           body: {
-            username: username,
-            secret_answer_char_field: secretAnswer,
-            password: password,
-            password2: password2,
+            username: attrs.username,
+            secretAnswer: attrs.secretAnswer,
+            recoverPassword: attrs.recoverPassword,
+            password: attrs.password,
+            password2: attrs.password2,
           },
         },
       });
-      const response = data["response"];
-      console.log("CHANGE: ", response);
-
-      dispatch({
-        type: USER_RECOVER_PASSWORD_DATA_CONSTANT,
-        payload: {
-          username: response["username"],
-          secretQuestion: response["secret_question_char_field"],
-          success: response["success"],
-        },
-      });
+      try{
+        const response = data["response"];
+        console.log("CHANGE: ", response);
+        dispatch({
+          type: USER_RECOVER_PASSWORD_DATA_CONSTANT,
+          payload: {
+            username: response["username"],
+            secretQuestion: response["secret_question_char_field"],
+            email: response["email_field"],
+            success: response["success"],
+          },
+        });
+      } catch (error) {
+        dispatch({
+          type: USER_RECOVER_PASSWORD_ERROR_CONSTANT,
+          payload: data["error"],
+        });
+      }
     } catch (error) {
       dispatch({
         type: USER_RECOVER_PASSWORD_ERROR_CONSTANT,
