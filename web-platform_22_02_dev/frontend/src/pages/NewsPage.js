@@ -14,7 +14,7 @@ const NewsPage = () => {
         second={"страница новостей веб-платформы."}
       />
       <main className="container text-center">
-        <NewsComponent/>
+        <NewsComponent count={100} />
       </main>
       <FooterComponent />
     </div>

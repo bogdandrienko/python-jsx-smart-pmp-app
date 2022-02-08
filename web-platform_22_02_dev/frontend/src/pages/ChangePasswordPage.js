@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import {
   userChangeProfileAction,
   userDetailsAction,
   userLogoutAction,
-  userRecoverPasswordAction,
 } from "../actions/userActions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -32,15 +30,15 @@ const ChangePasswordPage = () => {
     userChangeDataReducer,
     userChangeErrorReducer,
   } = userChange;
-  console.log("userChangeLoadingReducer: ", userChangeLoadingReducer);
-  console.log("userChangeDataReducer: ", userChangeDataReducer);
-  console.log("userChangeErrorReducer: ", userChangeErrorReducer);
+  // console.log("userChangeLoadingReducer: ", userChangeLoadingReducer);
+  // console.log("userChangeDataReducer: ", userChangeDataReducer);
+  // console.log("userChangeErrorReducer: ", userChangeErrorReducer);
 
   const userDetails = useSelector((state) => state.userDetails);
   const { error, loading, user } = userDetails;
-  console.log("loading: ", loading);
-  console.log("user: ", user);
-  console.log("error: ", error);
+  // console.log("loading: ", loading);
+  // console.log("user: ", user);
+  // console.log("error: ", error);
 
   useEffect(() => {
     if (user && loading === false) {
@@ -54,7 +52,7 @@ const ChangePasswordPage = () => {
       dispatch(userDetailsAction());
     }
   }, [dispatch, loading, user]);
-  
+
   useEffect(() => {
     dispatch(userDetailsAction());
   }, [dispatch]);

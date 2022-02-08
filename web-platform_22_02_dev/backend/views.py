@@ -145,23 +145,56 @@ def api_login_user(request):
             try:
                 username = request.data["body"]["username"]
                 password = request.data["body"]["password"]
-                is_authenticated = authenticate(username=username, password=password)
-                if is_authenticated is not None:
-                    user = User.objects.get(username=username)
-                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    update_last_login(sender=None, user=user)
-                    refresh = RefreshToken.for_user(user=user)
-                    response = {"response": {
-                        "refresh": str(refresh),
-                        "access": str(refresh.access_token),
-                        "token": str(refresh.access_token),
-                        "username": str(user.username),
-                        "name": str(f'{user_model.last_name_char_field} {user_model.first_name_char_field}'),
-                    }}
+
+                ip = request.META.get("REMOTE_ADDR")
+                request_path = request.path
+                request_method = request.method
+                now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                access_count = 0
+                for dat in backend_models.LoggingModel.objects.filter(
+                    username_slug_field=username,
+                    ip_genericipaddress_field=ip,
+                    request_path_slug_field=request_path,
+                    request_method_slug_field=request_method,
+                    error_text_field=f'action: LOGIN'
+                ):
+                    # print((dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M'))
+                    # print(now)
+                    if (dat.datetime_field + datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') >= now:
+                        access_count += 1
+
+                print(f"access_count: {access_count}")
+
+                if access_count < 10:
+                    backend_models.LoggingModel.objects.create(
+                        username_slug_field=username,
+                        ip_genericipaddress_field=ip,
+                        request_path_slug_field=request_path,
+                        request_method_slug_field=request_method,
+                        error_text_field=f'action: LOGIN'
+                    )
+
+                    is_authenticated = authenticate(username=username, password=password)
+                    if is_authenticated is not None:
+                        user = User.objects.get(username=username)
+                        user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                        update_last_login(sender=None, user=user)
+                        refresh = RefreshToken.for_user(user=user)
+                        response = {"response": {
+                            "refresh": str(refresh),
+                            "access": str(refresh.access_token),
+                            "token": str(refresh.access_token),
+                            "username": str(user.username),
+                            "name": str(f'{user_model.last_name_char_field} {user_model.first_name_char_field}'),
+                        }}
+                    else:
+                        response = {
+                            "error": "Bad request."
+                        }
                 else:
-                    response = {
-                        "error": "Bad request."
-                    }
+                    response = {'error': 'Внимение, попыток входа можно совершать не более 10 в час!'}
+                print(f"response: {response}")
+                return Response(response)
             except Exception as error:
                 print(error)
                 backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
@@ -336,29 +369,60 @@ def api_user_recover_password(request):
                 password = str(user_model.password_slug_field)
                 email_ = str(user_model.email_field)
 
-                text = f"{password[-1]}{datetime.datetime.now().strftime('%Y-%m-%dT%H')}" \
-                       f"{str(user_model.user_foreign_key_field)}{password}"
-                encrypt_text = backend_utils.EncryptingClass.encrypt_text(
-                    text,
-                    '31284'
-                )
-                print(f"send pass to email: {encrypt_text}")
+                ip = request.META.get("REMOTE_ADDR")
+                request_path = request.path
+                request_method = request.method
+                now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                access_count = 0
+                for dat in backend_models.LoggingModel.objects.filter(
+                    username_slug_field=username,
+                    ip_genericipaddress_field=ip,
+                    request_path_slug_field=request_path,
+                    request_method_slug_field=request_method,
+                    error_text_field=f'action: SEND_EMAIL_PASSWORD'
+                ):
+                    # print((dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M'))
+                    # print(now)
+                    if (dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') >= now:
+                        access_count += 1
 
-                subject = 'Восстановление пароля от веб платформы'
-                message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-                            f'перейдите по ссылке: http://web.km.kz:8000/ => восстановление пароля, ' \
-                            f'введите Ваш идентификатор и затем в окне почты введите код (без кавычек): "{encrypt_text}"'
-                from_email = 'web@km.kz'
-                to_email = email_
-                if subject and message_s and to_email:
-                    send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+                # print(f"access_count: {access_count}")
 
-                response = {"response": {
-                    "username": str(user.username),
-                    "secret_question_char_field": str(user_model.secret_question_char_field),
-                    "email_field": str(user_model.email_field),
-                    "success": False
-                }}
+                if access_count < 1:
+                    backend_models.LoggingModel.objects.create(
+                        username_slug_field=username,
+                        ip_genericipaddress_field=ip,
+                        request_path_slug_field=request_path,
+                        request_method_slug_field=request_method,
+                        error_text_field=f'action: SEND_EMAIL_PASSWORD'
+                    )
+
+                    text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
+                           f"{str(user_model.user_foreign_key_field)}{password}"
+                    encrypt_text = backend_utils.EncryptingClass.encrypt_text(
+                        text,
+                        '31284'
+                    )
+                    # print(f"send pass to email: {encrypt_text}")
+
+                    subject = 'Восстановление пароля от веб платформы'
+                    message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
+                                f'перейдите по ссылке: http://web.km.kz:8000/ => восстановление пароля, ' \
+                                f'введите Ваш идентификатор и затем в окне почты введите код (без кавычек): ' \
+                                f'"{encrypt_text}". Внимание, этот код действует в течении часа с момента отправки!'
+                    from_email = 'web@km.kz'
+                    to_email = email_
+                    # if subject and message_s and to_email:
+                    #     send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+
+                    response = {"response": {
+                        "username": str(user.username),
+                        "secret_question_char_field": str(user_model.secret_question_char_field),
+                        "email_field": str(user_model.email_field),
+                        "success": False
+                    }}
+                else:
+                    response = {"error": f"Внимание, отправлять письмо можно не чаще раза в 3 минуты!"}
             except Exception as error:
                 response = {"error": f"{error}"}
 
@@ -374,18 +438,28 @@ def api_user_recover_password(request):
                 password = str(user_model.password_slug_field)
 
                 decrypt_text = backend_utils.EncryptingClass.decrypt_text(recover_password, '31284')
-                text = f"{password[-1]}{datetime.datetime.now().strftime('%Y-%m-%dT%H')}" \
+                text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
                        f"{str(user_model.user_foreign_key_field)}{password}"
-                print(f"decrypt_text: {decrypt_text}")
-                print(f"text: {text}")
-                if str(decrypt_text).strip() == str(text).strip():
-                    response = {"response": {
+
+                time1 = int(decrypt_text.split('_')[0].split('T')[1])
+                time2 = int(text.split('_')[0].split('T')[1])
+
+                # vxvvyxvyxpTvvssMwoqxpxwuswwqowvutsrqpM:H1Mw
+
+                if time1 - time2 > -60:
+                    if str(decrypt_text.split('_')[1]).strip() == str(text.split('_')[1]).strip():
+                        response = {"response": {
                         "username": user.username,
                         "recoverPassword": None,
                         "success": True
                     }}
+                    else:
+                        response = {"error": f"Код не верный!"}
                 else:
                     response = {"error": f"Код не верный!"}
+
+                # print(f"decrypt_text: {decrypt_text}")
+                # print(f"text: {text}")
             except Exception as error:
                 response = {"error": f"{error}"}
 

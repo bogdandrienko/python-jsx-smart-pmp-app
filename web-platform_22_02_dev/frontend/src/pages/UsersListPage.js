@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetailsAction, userListAction } from "../actions/userActions";
-import { useLocation, useNavigate } from "react-router-dom";
+import { userListAction } from "../actions/userActions";
 
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -41,11 +40,11 @@ const UsersListPage = () => {
       <main className="container text-center">
         <div className="m-1">
           {usersListErrorReducer && (
-              <MessageComponent variant="danger">
-                {usersListErrorReducer}
-              </MessageComponent>
-            )}
-            {usersListLoadingReducer && <LoaderComponent />}
+            <MessageComponent variant="danger">
+              {usersListErrorReducer}
+            </MessageComponent>
+          )}
+          {usersListLoadingReducer && <LoaderComponent />}
           <table className="table table-striped table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
             <thead>
               <tr>
@@ -57,7 +56,8 @@ const UsersListPage = () => {
               </tr>
             </thead>
             <tbody>
-              {!usersList ? ""
+              {!usersList
+                ? ""
                 : usersList.map((user, index) => (
                     <tr key={index}>
                       <td className="text-center">{user.id}</td>

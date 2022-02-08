@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import {
   userChangeProfileAction,
   userRecoverPasswordAction,
-  userLogoutAction,
 } from "../actions/userActions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -14,12 +12,13 @@ import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import FormContainerComponent from "../components/FormContainerComponent";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
+  const [capcha, setCapcha] = useState("");
 
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
@@ -41,62 +40,74 @@ const ChangePasswordPage = () => {
 
   const postSecretQuestionHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction({
-      actionType: "FIND_USER",
-      username: username, 
-      secretAnswer: "",
-      recoverPassword: "",
-      password: "",
-      password2: ""
-    }));
+    if (capcha !== "") {
+      dispatch(
+        userRecoverPasswordAction({
+          actionType: "FIND_USER",
+          username: username,
+          secretAnswer: "",
+          recoverPassword: "",
+          password: "",
+          password2: "",
+        })
+      );
+    }
   };
 
   const postSecretAnswerHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction({
-      actionType: "CHECK_ANSWER",
-      username: username, 
-      secretAnswer: secretAnswer,
-      recoverPassword: "",
-      password: "",
-      password2: ""
-    }));
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "CHECK_ANSWER",
+        username: username,
+        secretAnswer: secretAnswer,
+        recoverPassword: "",
+        password: "",
+        password2: "",
+      })
+    );
   };
 
   const postSendEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction({
-      actionType: "SEND_EMAIL_PASSWORD",
-      username: username, 
-      secretAnswer: "",
-      recoverPassword: "",
-      password: "",
-      password2: ""
-    }));
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "SEND_EMAIL_PASSWORD",
+        username: username,
+        secretAnswer: "",
+        recoverPassword: "",
+        password: "",
+        password2: "",
+      })
+    );
   };
 
   const postRecoverEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction({
-      actionType: "CHECK_EMAIL_PASSWORD",
-      username: username, 
-      secretAnswer: "",
-      recoverPassword: recoverPassword,
-      password: "",
-      password2: ""
-    }));
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "CHECK_EMAIL_PASSWORD",
+        username: username,
+        secretAnswer: "",
+        recoverPassword: recoverPassword,
+        password: "",
+        password2: "",
+      })
+    );
   };
 
   const postRecoverPasswordHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(userRecoverPasswordAction({
-      actionType: "CHANGE_PASSWORD",
-      username: username, 
-      secretAnswer: "",
-      recoverPassword: "",
-      password: password,
-      password2: password2
-    }));
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "CHANGE_PASSWORD",
+        username: username,
+        secretAnswer: "",
+        recoverPassword: "",
+        password: password,
+        password2: password2,
+      })
+    );
     dispatch(userChangeProfileAction());
   };
 
@@ -140,6 +151,10 @@ const ChangePasswordPage = () => {
     password.setAttribute("type", type);
     password2.setAttribute("type", type);
   };
+
+  function changeCapcha(value) {
+    setCapcha(value);
+  }
 
   return (
     <div>
@@ -212,7 +227,9 @@ const ChangePasswordPage = () => {
           ) : secretQuestion ? (
             <div className="row">
               <div className="form-control col">
-                <h3 className="lead">Восстановление через секретный вопрос/ответ.</h3>
+                <h3 className="lead">
+                  Восстановление через секретный вопрос/ответ.
+                </h3>
                 <div className="text-danger lead">
                   Секретный вопрос: '
                   <small className="text-warning lead fw-bold">{`${secretQuestion}`}</small>
@@ -246,16 +263,27 @@ const ChangePasswordPage = () => {
                 </FormContainerComponent>
               </div>
               <div className="form-control col">
-                <h3 className="lead">Восстановление через введённую ранее почту.</h3>
+                <h3 className="lead">
+                  Восстановление через введённую ранее почту.
+                </h3>
                 <div className="text-danger lead">
-                  Первая часть почты: '
-                  <small className="text-warning lead fw-bold">{`${email}`.slice(0, 3)} ... {`${email}`.slice(-9)}</small>
+                  Первая и последняя часть почты: '
+                  <small className="text-warning lead fw-bold">
+                    {`${email}`.slice(0, 3)} ... {`${email}`.slice(-9)}
+                  </small>
                   '
                 </div>
                 <FormContainerComponent>
                   <Form>
                     <Form.Group controlId="email">
-                      <Form.Label>Код восстановления отправленный на почту (<small className="text-danger">вводить без кавычек</small>):</Form.Label>
+                      <Form.Label>
+                        Код восстановления отправленный на почту (
+                        <small className="text-danger">
+                          вводить без кавычек, код действует в течении часа с
+                          момента отправки
+                        </small>
+                        ):
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="пример: 4"
@@ -277,7 +305,7 @@ const ChangePasswordPage = () => {
                       </Button>
                       <Button
                         type="button"
-                        variant="outline-danger"
+                        variant="outline-primary"
                         className="m-1"
                         onClick={postSendEmailHandlerSubmit}
                       >
@@ -290,6 +318,13 @@ const ChangePasswordPage = () => {
             </div>
           ) : (
             <FormContainerComponent>
+              <div className="form-control">
+                <small className="lead text-danger">Пройдите проверку!</small>
+                <ReCAPTCHA
+                  sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                  onChange={changeCapcha}
+                />
+              </div>
               <Form>
                 <Form.Group controlId="email">
                   <Form.Label>Имя пользователя:</Form.Label>

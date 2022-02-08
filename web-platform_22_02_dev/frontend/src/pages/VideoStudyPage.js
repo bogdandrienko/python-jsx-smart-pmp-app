@@ -1,9 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Navbar, Nav, Container, Row, NavDropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogoutAction, userDetailsAction } from "../actions/userActions";
+import React from "react";
 
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -15,7 +10,8 @@ const VideoStudyPage = () => {
       <HeaderComponent />
       <TitleComponent
         first={"Видео инструкции"}
-        second={"страница с видеоинструкциями по функционалу."}
+        second={"страница с видеоинструкциями по функционалу веб-платформы."}
+        logic={false}
       />
       <main className="container text-center">
         <div>

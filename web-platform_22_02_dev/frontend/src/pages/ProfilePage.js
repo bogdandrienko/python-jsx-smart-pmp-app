@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetailsAction, userListAction } from "../actions/userActions";
+import { userDetailsAction } from "../actions/userActions";
 
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();

@@ -3,14 +3,19 @@ import "../css/bootstrap_5.1.3/bootstrap.min.css";
 
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
+import LogoutPage from "../pages/LogoutPage";
+import ChangeProfilePage from "../pages/ChangeProfilePage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
+import RecoverPasswordPage from "../pages/RecoverPasswordPage";
+
 import NewsPage from "../pages/NewsPage";
-// import ProfilePage from "../pages/ProfilePage";
-import SalaryPage from "../pages/SalaryPage";
 import VideoStudyPage from "../pages/VideoStudyPage";
+import TextStudyPage from "../pages/TextStudyPage";
+
+import SalaryPage from "../pages/SalaryPage";
+
 import UsersListPage from "../pages/UsersListPage";
-import ChangeProfilePage from "../pages/ChangeProfilePage"
-import ChangePasswordPage from "../pages/ChangePasswordPage"
-import RecoverPasswordPage from "../pages/RecoverPasswordPage"
+// import ProfilePage from "../pages/ProfilePage";
 
 // import Home1Page from "../test/Home1Page";
 // import ProductPage from "../test/ProductPage";
@@ -32,15 +37,19 @@ function App() {
           <Route path="/" element={<HomePage />} exact />
           <Route path="/home" element={<HomePage />} exact />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          {/* <Route path="/profile" element={<ProfilePage />} /> */}
-          <Route path="/salary" element={<SalaryPage />} />
-          <Route path="/video_study" element={<VideoStudyPage />} />
+          <Route path="/logout" element={<LogoutPage />} />
           <Route path="/change_profile" element={<ChangeProfilePage />} />
           <Route path="/change_password" element={<ChangePasswordPage />} />
           <Route path="/recover_password" element={<RecoverPasswordPage />} />
 
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/video_study" element={<VideoStudyPage />} />
+          <Route path="/text_study" element={<TextStudyPage />} />
+
+          <Route path="/salary" element={<SalaryPage />} />
+
           <Route path="/users_list" element={<UsersListPage />} />
+          {/* <Route path="/profile" element={<ProfilePage />} /> */}
 
           {/* <Route path="/gologram" element={<GologramPage />} /> */}
           {/*<Route path="/chat" element={<ChatPage />} />*/}

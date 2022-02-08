@@ -33,6 +33,12 @@ const FooterComponent = () => {
                 >
                   km-open
                 </NavDropdown.Item>
+                <NavDropdown.Item
+                  className="dropdown-item"
+                  href="https://web.cplus.kz/"
+                >
+                  web-cplus
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
               </li>
               <li>

@@ -1,18 +1,12 @@
 import React from "react";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogoutAction } from "../actions/userActions";
+import { useSelector } from "react-redux";
+import modules from "../constants/modulesConstants";
 
 const HeaderComponent = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const dispatch = useDispatch();
-
-  const logoutHandler = () => {
-    dispatch(userLogoutAction());
-  };
 
   return (
     <header className="text-center">
@@ -157,9 +151,7 @@ const HeaderComponent = () => {
                     <strong className="dropdown-header text-center">
                       Аккаунты
                     </strong>
-                    <LinkContainer
-                      to="/users_list"
-                    >
+                    <LinkContainer to="/users_list">
                       <Nav.Link>Список пользователей</Nav.Link>
                     </LinkContainer>
                   </li>
@@ -203,185 +195,30 @@ const HeaderComponent = () => {
                 ""
               )}
 
-              <NavDropdown title="Профиль" id="basic-nav-dropdown">
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Основной функционал
-                  </strong>
-                  <LinkContainer to="/home/">
-                    <Nav.Link>Домашняя страница</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer
-                    to="/account_notification"
-                    className="disabled"
-                  >
-                    <Nav.Link>
-                      Уведомления{" "}
-                      <span className="badge bg-warning rounded-pill">99</span>
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Достижения</Nav.Link>
-                  </LinkContainer>
-                  <NavDropdown.Divider />
-                </li>
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Личный профиль
-                  </strong>
-                  <LinkContainer to="/profile" className="disabled">
-                    <Nav.Link>Профиль</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer
-                    to="/change_profile"
-                  >
-                    <Nav.Link>Изменить профиль</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer
-                    to="/change_password"
-                  >
-                    <Nav.Link>Изменить пароль</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer
-                    to="/recover_password"
-                  >
-                    <Nav.Link>Восстановить пароль</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/login/">
-                    <Nav.Link>Войти</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/home/" onClick={logoutHandler}>
-                    <Nav.Link>
-                      Выйти{userInfo ? ` [ ${userInfo.name} ]` : ""}
-                    </Nav.Link>
-                  </LinkContainer>
-                </li>
-              </NavDropdown>
-
-              <NavDropdown title="Новости" id="basic-nav-dropdown">
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Обучение
-                  </strong>
-                  <LinkContainer to="/video_study">
-                    <Nav.Link>Видео инструкции</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Текстовые инструкции</Nav.Link>
-                  </LinkContainer>
-                  <NavDropdown.Divider />
-                </li>
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Новости предприятия
-                  </strong>
-                  <LinkContainer to="/news">
-                    <Nav.Link>Новости платформы</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Поиск</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Предложить</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Зал славы</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Алтын Канат</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Лучшие работники Комбината</Nav.Link>
-                  </LinkContainer>
-                </li>
-              </NavDropdown>
-
-              <NavDropdown title="Развитие" id="basic-nav-dropdown">
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Банк идей
-                  </strong>
-                  <LinkContainer to="/idea_create" className="disabled">
-                    <Nav.Link>Подать идею</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/idea_list" className="disabled">
-                    <Nav.Link>Список идей</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/idea_rating" className="disabled">
-                    <Nav.Link>Рейтинги среди идей</Nav.Link>
-                  </LinkContainer>
-                  <NavDropdown.Divider />
-                </li>
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Рационализаторство
-                  </strong>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Подать рац. предложение</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Список рац. предложений</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Рейтинги среди рац. предложений</Nav.Link>
-                  </LinkContainer>
-                  <NavDropdown.Divider />
-                </li>
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Проектная деятельность
-                  </strong>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Подать проект</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Список проектов</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Рейтинги среди проектов</Nav.Link>
-                  </LinkContainer>
-                </li>
-              </NavDropdown>
-
-              <NavDropdown title="Бухгалтерия" id="basic-nav-dropdown">
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Сектор расчёта заработной платы
-                  </strong>
-                  <LinkContainer to="/salary">
-                    <Nav.Link>Выгрузка расчётного листа</Nav.Link>
-                  </LinkContainer>
-                </li>
-              </NavDropdown>
-
-              <NavDropdown title="СУП" id="basic-nav-dropdown">
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Отдел кадров
-                  </strong>
-                  <LinkContainer to="/career" className="disabled">
-                    <Nav.Link>Вакансии</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Выгрузка отпусков</Nav.Link>
-                  </LinkContainer>
-                  <NavDropdown.Divider />
-                </li>
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Отдел охраны труда
-                  </strong>
-                  <LinkContainer
-                    to="/passages_thermometry"
-                    className="disabled"
-                  >
-                    <Nav.Link>Термометрия</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="#" className="disabled">
-                    <Nav.Link>Алкометрия</Nav.Link>
-                  </LinkContainer>
-                </li>
-              </NavDropdown>
+              {modules.map((module, module_i) => (
+                <NavDropdown
+                  key={module_i}
+                  title={module.Header}
+                  id="basic-nav-dropdown"
+                >
+                  {module.Sections.map((section, section_i) => (
+                    <li key={section_i}>
+                      <strong className="dropdown-header text-center">
+                        {section.Header}
+                      </strong>
+                      {section.Links.map((link, link_i) => (
+                        <LinkContainer
+                          key={link_i}
+                          to={link.Link}
+                          className={link.Type === "active" ? "" : "disabled"}
+                        >
+                          <Nav.Link>{link.Header}</Nav.Link>
+                        </LinkContainer>
+                      ))}
+                    </li>
+                  ))}
+                </NavDropdown>
+              ))}
             </Nav>
           </Navbar.Collapse>
         </Container>

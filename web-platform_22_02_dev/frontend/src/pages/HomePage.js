@@ -15,6 +15,7 @@ const HomePage = () => {
       <TitleComponent
         first={"Домашняя страница"}
         second={"основная страница веб платформы."}
+        logic={false}
       />
       <main className="container text-center">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 align-content-between">
@@ -33,15 +34,24 @@ const HomePage = () => {
                 controls
               />
             </div>
-            <LinkContainer to="/video_study">
-              <Nav.Link>
-                <small className="fw-bold btn btn-warning">
-                  Все видео-инструкции
-                </small>
-              </Nav.Link>
-            </LinkContainer>
+            <div className="row">
+              <LinkContainer to="/video_study" className="col">
+                <Nav.Link>
+                  <small className="fw-bold btn btn-warning">
+                    Все видео-инструкции (нажмите для перехода)
+                  </small>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/text_study" className="col">
+                <Nav.Link>
+                  <small className="fw-bold btn btn-primary">
+                    Инструкции в текстовом формате (нажмите для перехода)
+                  </small>
+                </Nav.Link>
+              </LinkContainer>
+            </div>
           </div>
-          <NewsComponent />
+          <NewsComponent count={7} />
         </div>
         <div>
           <ModulesComponent />

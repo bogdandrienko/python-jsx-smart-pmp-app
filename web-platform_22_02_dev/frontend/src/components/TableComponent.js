@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from "react";
 
 const TableComponent = ({ tab = {} }) => {
   // console.log("tab: ", tab);

@@ -14,4 +14,6 @@ npm install react-router-bootstrap
 
 npm install redux react-redux redux-thunk redux-devtools-extension
 
+npm install --save react-google-recaptcha
+
 call cmd
