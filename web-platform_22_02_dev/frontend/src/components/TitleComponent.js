@@ -3,7 +3,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetailsAction, userLogoutAction } from "../actions/userActions";
 
-const TitleComponent = ({ first = "Заголовок", second = "подзаголовок.", logic=true}) => {
+const TitleComponent = ({
+  first = "Заголовок",
+  second = "подзаголовок.",
+  logic = true,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -27,18 +31,22 @@ const TitleComponent = ({ first = "Заголовок", second = "подзаго
       } else {
         if (error !== undefined) {
           dispatch(userLogoutAction());
-        } else if (userInfo !== undefined) {
-          if (user && user["user_model"]) {
-            // console.log("user_model: ", user["user_model"]);
-            if (user["user_model"]["activity_boolean_field"] === false) {
-              dispatch(userLogoutAction());
-            }
-            if (
-              user["user_model"]["email_field"] == null ||
-              user["user_model"]["secret_question_char_field"] == null ||
-              user["user_model"]["secret_answer_char_field"] == null
-            ) {
-              navigate("/change_profile");
+        } else {
+          if (userInfo !== undefined) {
+            if (user && user["user_model"]) {
+
+              console.log("user['user_model']: ", user["user_model"])
+
+              if (user["user_model"]["activity_boolean_field"] === false) {
+                dispatch(userLogoutAction());
+              }
+              if (
+                !user["user_model"]["email_field"] ||
+                !user["user_model"]["secret_question_char_field"] ||
+                !user["user_model"]["secret_answer_char_field"]
+              ) {
+                navigate("/change_profile");
+              }
             }
           }
         }

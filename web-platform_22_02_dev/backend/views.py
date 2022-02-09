@@ -39,10 +39,12 @@ from backend import models as backend_models, settings as backend_settings, seri
 
 def index(request):
     """
-    React app page
+    React app index page
     """
 
+    # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
     #     redirect('http://192.168.1.68:8000/home/')
 
@@ -55,7 +57,9 @@ def admin_(request):
     Admin page
     """
 
+    # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
     #     redirect('http://192.168.1.68:8000/admin/')
 
@@ -65,6 +69,13 @@ def admin_(request):
 
 @api_view(http_method_names=['GET'])
 def routes(request):
+    """
+    All django-rest-framework routes
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     print(f'\n\nroutes:\n\n')
     _routes = [
         {
@@ -127,6 +138,13 @@ def routes(request):
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 def api_login_user(request):
+    """
+    Api django-rest-framework login
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     print('\n\n\n')
     print('get_tokens_for_user:')
     print('\n')
@@ -188,11 +206,9 @@ def api_login_user(request):
                             "name": str(f'{user_model.last_name_char_field} {user_model.first_name_char_field}'),
                         }}
                     else:
-                        response = {
-                            "error": "Bad request."
-                        }
+                        response = {'error': 'Внимание, данные не совпадают!'}
                 else:
-                    response = {'error': 'Внимение, попыток входа можно совершать не более 10 в час!'}
+                    response = {'error': 'Внимание, попыток входа можно совершать не более 10 в час!'}
                 print(f"response: {response}")
                 return Response(response)
             except Exception as error:
@@ -214,6 +230,13 @@ def api_login_user(request):
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def api_user_profile(request):
+    """
+    Api django-rest-framework profile
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     print('\n\n\n')
     print('api_user_profile:')
     print('\n')
@@ -250,6 +273,13 @@ def api_user_profile(request):
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def api_user_change_profile(request):
+    """
+    Api django-rest-framework change profile
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     print('\n\n\n')
     print('api_user_change_profile:')
     print('\n')
@@ -264,17 +294,18 @@ def api_user_change_profile(request):
         return Response({"error": "This method not allowed for endpoint."})
     elif request_method == 'POST':
         if request_action_type == "CHANGE":
-            try:
+            # try:
+            if True:
                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=request_user)
 
-                try:
+                # try:
+                if True:
                     password = str(request_body["password"]).strip()
                     password2 = str(request_body["password2"]).strip()
-                    if password and password2 and password != user_model.password_slug_field:
+                    if len(password) > 1 and password == password2 and password != user_model.password_slug_field:
                         user_model.password_slug_field = password
                         request_user.set_password(password)
                         print(f'password changed to "{password}"')
-                        # print(make_password(request.data["password"]))
                         request_user.save()
                         if request_body["email"] and request_body["email"] != user_model.email_field:
                             user_model.email_field = request_body["email"]
@@ -284,15 +315,15 @@ def api_user_change_profile(request):
                         if request_body["secretAnswer"] and request_body[
                             "secretAnswer"] != user_model.secret_answer_char_field:
                             user_model.secret_answer_char_field = request_body["secretAnswer"]
-                except Exception as error:
-                    print(error)
+                # except Exception as error:
+                #     print(error)
 
                 user_model.save()
-                return Response({'error': False})
-            except Exception as error:
-                print(error)
-                backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                response = {"error": error}
+                response = {"error": False}
+            # except Exception as error:
+            #     print(error)
+            #     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+            #     response = {"error": error}
             print(f"response: {response}")
             return Response(response)
         else:
@@ -307,6 +338,13 @@ def api_user_change_profile(request):
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 def api_user_recover_password(request):
+    """
+    Api django-rest-framework recover password
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     print('\n\n\n')
     print('api_user_recover_password:')
     print('\n')
@@ -412,8 +450,8 @@ def api_user_recover_password(request):
                                 f'"{encrypt_text}". Внимание, этот код действует в течении часа с момента отправки!'
                     from_email = 'web@km.kz'
                     to_email = email_
-                    # if subject and message_s and to_email:
-                    #     send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+                    if subject and message_s and to_email:
+                        send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
 
                     response = {"response": {
                         "username": str(user.username),
@@ -503,6 +541,13 @@ def api_user_recover_password(request):
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated, IsAdminUser])
 def api_user_all(request):
+    """
+    Api django-rest-framework user all
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     print('\n\n\n')
     print('api_user_all:')
     print('\n')
@@ -559,6 +604,13 @@ class ChatViewSet(viewsets.ModelViewSet):
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def api_salary(request):
+    """
+    Api django-rest-framework salary
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
     print('\n\n\n')
     print('api_salary:')
     print('\n')
@@ -1763,7 +1815,7 @@ def example(request):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='example')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -1801,7 +1853,7 @@ def examples_forms(request):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='examples_forms')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -1851,7 +1903,7 @@ def logging(request):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='logging')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -1989,7 +2041,7 @@ def create_modules(request):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='moderator')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -2102,7 +2154,7 @@ def modules(request, url_slug='module_modules'):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='user')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -2248,7 +2300,7 @@ def account_change_profile(request):
     """
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='account_change_profile')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -2422,7 +2474,7 @@ def account_profile(request, user_id=0):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_profile')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -2455,7 +2507,7 @@ def account_notification(request, type_slug='All'):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_notification')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -2503,7 +2555,7 @@ def account_create_notification(request):
 
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='account_create_notification')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -2535,7 +2587,7 @@ def account_delete_or_change_notification(request, notification_id: int):
 
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='account_delete_or_change_notification')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -2569,7 +2621,7 @@ def account_create_or_change_accounts(request):
 
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='account_create_or_change_accounts')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -2584,39 +2636,39 @@ def account_create_or_change_accounts(request):
                     for row in range(2, backend_utils.ExcelClass.get_max_num_rows(sheet) + 1):
                         try:
                             # authorization data
-                            username = backend_service.ExcelClass.get_sheet_value('J', row, sheet)
-                            password = backend_service.ExcelClass.get_sheet_value('K', row, sheet)
+                            username = backend_utils.ExcelClass.get_sheet_value('J', row, sheet)
+                            password = backend_utils.ExcelClass.get_sheet_value('K', row, sheet)
                             # technical data
-                            is_active = backend_service.ExcelClass.get_sheet_value('L', row, sheet)
+                            is_active = backend_utils.ExcelClass.get_sheet_value('L', row, sheet)
                             if is_active.lower() == 'true':
                                 is_active = True
                             else:
                                 is_active = False
-                            is_staff = backend_service.ExcelClass.get_sheet_value('M', row, sheet)
+                            is_staff = backend_utils.ExcelClass.get_sheet_value('M', row, sheet)
                             if is_staff.lower() == 'true':
                                 is_staff = True
                             else:
                                 is_staff = False
-                            is_superuser = backend_service.ExcelClass.get_sheet_value('N', row, sheet)
+                            is_superuser = backend_utils.ExcelClass.get_sheet_value('N', row, sheet)
                             if is_superuser.lower() == 'true':
                                 is_superuser = True
                             else:
                                 is_superuser = False
-                            groups = backend_service.ExcelClass.get_sheet_value('O', row, sheet)
-                            email_ = backend_service.ExcelClass.get_sheet_value('P', row, sheet)
-                            secret_question = backend_service.ExcelClass.get_sheet_value('Q', row, sheet)
-                            secret_answer = backend_service.ExcelClass.get_sheet_value('R', row, sheet)
+                            groups = backend_utils.ExcelClass.get_sheet_value('O', row, sheet)
+                            email_ = backend_utils.ExcelClass.get_sheet_value('P', row, sheet)
+                            secret_question = backend_utils.ExcelClass.get_sheet_value('Q', row, sheet)
+                            secret_answer = backend_utils.ExcelClass.get_sheet_value('R', row, sheet)
                             # first data
-                            last_name = backend_service.ExcelClass.get_sheet_value('D', row, sheet)
-                            first_name = backend_service.ExcelClass.get_sheet_value('E', row, sheet)
-                            patronymic = backend_service.ExcelClass.get_sheet_value('F', row, sheet)
+                            last_name = backend_utils.ExcelClass.get_sheet_value('D', row, sheet)
+                            first_name = backend_utils.ExcelClass.get_sheet_value('E', row, sheet)
+                            patronymic = backend_utils.ExcelClass.get_sheet_value('F', row, sheet)
                             # second data
-                            personnel_number = backend_service.ExcelClass.get_sheet_value('G', row, sheet)
-                            subdivision = backend_service.ExcelClass.get_sheet_value('A', row, sheet)
-                            workshop_service = backend_service.ExcelClass.get_sheet_value('B', row, sheet)
-                            department_site = backend_service.ExcelClass.get_sheet_value('C', row, sheet)
-                            position = backend_service.ExcelClass.get_sheet_value('H', row, sheet)
-                            category = backend_service.ExcelClass.get_sheet_value('I', row, sheet)
+                            personnel_number = backend_utils.ExcelClass.get_sheet_value('G', row, sheet)
+                            subdivision = backend_utils.ExcelClass.get_sheet_value('A', row, sheet)
+                            workshop_service = backend_utils.ExcelClass.get_sheet_value('B', row, sheet)
+                            department_site = backend_utils.ExcelClass.get_sheet_value('C', row, sheet)
+                            position = backend_utils.ExcelClass.get_sheet_value('H', row, sheet)
+                            category = backend_utils.ExcelClass.get_sheet_value('I', row, sheet)
                             # utils
                             force_change_account = backend_service.DjangoClass.RequestClass.get_check(
                                 request, 'force_change_account'
@@ -2730,7 +2782,7 @@ def account_export_accounts(request):
 
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='account_export_accounts')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -2884,14 +2936,14 @@ def account_export_accounts(request):
     return render(request, 'account/account_export_accounts.html', context)
 
 
-def account_generate_passwords(request):
+def django_account_generate_passwords(request):
     """
     Страница генерации паролей для аккаунтов пользователей
     """
 
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='account_generate_passwords')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -2907,7 +2959,7 @@ def account_generate_passwords(request):
                 sheet = backend_utils.ExcelClass.workbook_activate(workbook=workbook)
                 titles = ['Пароль']
                 for title in titles:
-                    backend_service.ExcelClass.set_sheet_value(
+                    backend_utils.ExcelClass.set_sheet_value(
                         col=titles.index(title) + 1,
                         row=1,
                         value=title,
@@ -2919,8 +2971,8 @@ def account_generate_passwords(request):
                         chars=passwords_chars,
                         length=int(passwords_length)
                     )
-                    sheet[f'A{n}'] = password
-                    body.append([password])
+                    sheet[f'A{n}'] = f'temp_{password}'
+                    body.append([f'temp_{password}'])
                 backend_utils.ExcelClass.workbook_save(
                     workbook=workbook, excel_file='static/media/admin/account/generate_passwords.xlsx'
                 )
@@ -2941,7 +2993,7 @@ def account_generate_passwords(request):
             'data': None,
         }
 
-    return render(request, 'account/account_generate_passwords.html', context)
+    return render(request, 'account/django_account_generate_passwords.html', context)
 
 
 def account_update_accounts_1c(request):
@@ -2951,7 +3003,7 @@ def account_update_accounts_1c(request):
 
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='account_update_accounts_1c')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -3128,7 +3180,7 @@ def account_change_groups(request):
     """
 
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='account_change_groups')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3207,7 +3259,7 @@ def account_change_groups(request):
 
 def idea_create(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_create')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3253,7 +3305,7 @@ def idea_create(request):
 
 def idea_change(request, idea_int):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_change')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3323,7 +3375,7 @@ def idea_change(request, idea_int):
 
 def idea_list(request, category_slug='All'):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_list')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3363,7 +3415,7 @@ def idea_list(request, category_slug='All'):
 def idea_change_visibility(request, idea_int):
     # access and logging
     page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request,
-                                                                        access='idea_change_visibility')
+                                                                        access='superuser')
     if page:
         return redirect(page)
 
@@ -3386,7 +3438,7 @@ def idea_change_visibility(request, idea_int):
 
 def idea_view(request, idea_int):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_view')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3417,7 +3469,7 @@ def idea_view(request, idea_int):
 
 def idea_like(request, idea_int):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_like')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3481,7 +3533,7 @@ def idea_like(request, idea_int):
 
 def idea_comment(request, idea_int):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_comment')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3500,7 +3552,7 @@ def idea_comment(request, idea_int):
 
 def idea_rating(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='idea_rating')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3551,7 +3603,7 @@ def idea_rating(request):
 
 def salary_(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='salary')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3724,7 +3776,7 @@ def salary_(request):
 
 def salary_pdf_(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='salary')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3894,7 +3946,7 @@ def salary_pdf_(request):
 
 def career(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='career')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3936,7 +3988,7 @@ def career(request):
 
 def video_study(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='video_study')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3951,7 +4003,7 @@ def video_study(request):
 
 def chat(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='chat')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3980,7 +4032,7 @@ def chat(request):
 
 def chat_react(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='chat_react')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -3995,7 +4047,7 @@ def chat_react(request):
 
 def react(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='react')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -4010,7 +4062,7 @@ def react(request):
 
 def geo(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='geo')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -4080,7 +4132,7 @@ def analyse(request):
     Машинное зрение
     """
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='analyse')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -4109,7 +4161,7 @@ def analyse(request):
 
 def passages_thermometry(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_thermometry')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -4186,7 +4238,7 @@ def passages_thermometry(request):
 
 def passages_select(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_select')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -4260,7 +4312,7 @@ def passages_select(request):
 
 def passages_update(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_update')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -4291,7 +4343,7 @@ def passages_update(request):
 
 def passages_insert(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_insert')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 
@@ -4348,7 +4400,7 @@ def passages_insert(request):
 
 def passages_delete(request):
     # access and logging
-    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='passages_delete')
+    page = backend_service.DjangoClass.AuthorizationClass.try_to_access(request=request, access='superuser')
     if page:
         return redirect(page)
 

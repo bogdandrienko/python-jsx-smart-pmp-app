@@ -20,6 +20,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
+  USER_LOGIN_SUCCESS_CONSTANT,
   USER_LOGOUT,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -172,6 +173,8 @@ export const userChangeProfileAction = (user) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
+
+    console.log("user: ", user);
 
     const { data } = await axios({
       url: "api/user/change_profile/",

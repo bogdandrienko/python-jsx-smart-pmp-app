@@ -96,13 +96,15 @@ const SalaryPage = () => {
             </li>
           </ul>
           <div className="" id="div_button">
+          {!salaryUserLoadingReducer === true ? (
             <button
               onClick={salaryHundlerSubmit}
               className="btn btn-lg btn-outline-primary m-1"
               type="button"
             >
               выгрузить
-            </button>
+            </button>)
+            : ''}
           </div>
         </div>
         <hr />

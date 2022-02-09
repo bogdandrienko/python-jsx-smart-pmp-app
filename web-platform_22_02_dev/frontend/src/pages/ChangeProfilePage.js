@@ -61,17 +61,17 @@ const ChangeProfilePage = () => {
         }
       }
     } else {
-      dispatch(userDetailsAction());
+      // dispatch(userDetailsAction());
       setPassword("");
       setPassword2("");
     }
   }, [dispatch, loading, user]);
 
   useEffect(() => {
-    dispatch(userDetailsAction());
+    // dispatch(userDetailsAction());
   }, [dispatch]);
 
-  const submitHandler = (e) => {
+  const submitHandler = () => {
     // e.preventDefault();
     dispatch(
       userChangeProfileAction({
@@ -82,8 +82,6 @@ const ChangeProfilePage = () => {
         password2: password2,
       })
     );
-    dispatch(userDetailsAction());
-    dispatch(userLogoutAction());
   };
 
   const changeVisibility = () => {
@@ -146,7 +144,7 @@ const ChangeProfilePage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                   minLength="4"
-                  maxLength="32"
+                  maxLength="64"
                 />
               </Form.Group>
 
@@ -160,7 +158,7 @@ const ChangeProfilePage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                   minLength="1"
-                  maxLength="32"
+                  maxLength="64"
                 />
               </Form.Group>
               <Form.Group controlId="password">
@@ -173,7 +171,7 @@ const ChangeProfilePage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                   minLength="8"
-                  maxLength="16"
+                  maxLength="32"
                 />
               </Form.Group>
 
@@ -187,12 +185,12 @@ const ChangeProfilePage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                   minLength="8"
-                  maxLength="16"
+                  maxLength="32"
                 />
               </Form.Group>
 
               <Form.Group controlId="button">
-                <Button type="submit" variant="outline-primary" className="m-1">
+                <Button type="button" variant="outline-primary" className="m-1" onClick={submitHandler}>
                   Сохранить
                 </Button>
                 <Button

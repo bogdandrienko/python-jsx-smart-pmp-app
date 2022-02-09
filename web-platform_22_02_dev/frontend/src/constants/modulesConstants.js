@@ -1,12 +1,12 @@
 const modules = [
   {
     Header: "Профиль",
-    Image: "./static/modules/1_module_profile/module_profile.png",
+    Image: "/static/modules/1_module_profile/module_profile.png",
     Sections: [
       {
         Header: "Основной функционал",
         Image:
-          "./static/modules/1_module_profile/section_main/section_main.png",
+          "/static/modules/1_module_profile/section_main/section_main.png",
         Links: [
           {
             Type: "active",
@@ -28,26 +28,26 @@ const modules = [
       {
         Header: "Личный профиль",
         Image:
-          "./static/modules/1_module_profile/section_self_profile/section_self_profile.png",
+          "/static/modules/1_module_profile/section_self_profile/section_self_profile.png",
         Links: [
           {
             Type: "disable",
-            Link: "/profile",
+            Link: "#",
             Header: "Профиль",
           },
           {
-            Type: "disable",
-            Link: "#",
+            Type: "active",
+            Link: "/change_profile",
             Header: "Изменить профиль",
           },
           {
-            Type: "disable",
-            Link: "#",
+            Type: "active",
+            Link: "/change_password",
             Header: "Изменить пароль",
           },
           {
-            Type: "disable",
-            Link: "#",
+            Type: "active",
+            Link: "/recover_password",
             Header: "Восстановить пароль",
           },
           {
@@ -66,11 +66,11 @@ const modules = [
   },
   {
     Header: "Новости",
-    Image: "./static/modules/2_module_news/module_news.png",
+    Image: "/static/modules/2_module_news/module_news.png",
     Sections: [
       {
         Header: "Обучение",
-        Image: "./static/modules/2_module_news/section_study/section_study.png",
+        Image: "/static/modules/2_module_news/section_study/section_study.png",
         Links: [
           {
             Type: "active",
@@ -86,7 +86,7 @@ const modules = [
       },
       {
         Header: "Новости Предприятия",
-        Image: "./static/img/modules.png",
+        Image: "/static/img/modules.png",
         Links: [
           {
             Type: "active",
@@ -124,12 +124,12 @@ const modules = [
   },
   {
     Header: "Развитие",
-    Image: "./static/modules/3_module_progress/module_progress.png",
+    Image: "/static/modules/3_module_progress/module_progress.png",
     Sections: [
       {
         Header: "Банк идей",
         Image:
-          "./static/modules/3_module_progress/1_section_idea/section_idea.png",
+          "/static/modules/3_module_progress/1_section_idea/section_idea.png",
         Links: [
           {
             Type: "disable",
@@ -151,7 +151,7 @@ const modules = [
       {
         Header: "Рационализаторство",
         Image:
-          "./static/modules/3_module_progress/2_section_rational/sectional_rational.png",
+          "/static/modules/3_module_progress/2_section_rational/sectional_rational.png",
         Links: [
           {
             Type: "disable",
@@ -173,7 +173,7 @@ const modules = [
       {
         Header: "Проектная деятельность",
         Image:
-          "./static/modules/3_module_progress/3_section_project/section_project.png",
+          "/static/modules/3_module_progress/3_section_project/section_project.png",
         Links: [
           {
             Type: "disable",
@@ -196,12 +196,12 @@ const modules = [
   },
   {
     Header: "Бухгалтерия",
-    Image: "./static/modules/4_module_buhgalteria/module_buhgalteria.png",
+    Image: "/static/modules/4_module_buhgalteria/module_buhgalteria.png",
     Sections: [
       {
         Header: "Сектор расчёта заработной платы",
         Image:
-          "./static/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
+          "/static/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
         Links: [
           {
             Type: "active",
@@ -214,12 +214,12 @@ const modules = [
   },
   {
     Header: "СУП",
-    Image: "./static/modules/5_module_human_resourse/module_hr.png",
+    Image: "/static/modules/5_module_human_resourse/module_hr.png",
     Sections: [
       {
         Header: "Отдел кадров",
         Image:
-          "./static/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+          "/static/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
             Type: "disable",
@@ -236,7 +236,7 @@ const modules = [
       {
         Header: "Отдел охраны труда",
         Image:
-          "./static/modules/5_module_human_resourse/1_section_hr/section_hr.png",
+          "/static/modules/5_module_human_resourse/1_section_hr/section_hr.png",
         Links: [
           {
             Type: "disable",

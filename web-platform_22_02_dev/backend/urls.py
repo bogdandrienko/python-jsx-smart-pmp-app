@@ -138,7 +138,7 @@ urlpatterns = [
          name='django_account_create_or_change_accounts'),
     path('django/account_export_accounts/', backend_views.account_export_accounts,
          name='django_account_export_accounts'),
-    path('django/account_generate_passwords/', backend_views.account_generate_passwords,
+    path('django/django_account_generate_passwords/', backend_views.django_account_generate_passwords,
          name='django_account_generate_passwords'),
     path('django/account_update_accounts_1c/', backend_views.account_update_accounts_1c,
          name='django_account_update_accounts_1c'),

@@ -186,7 +186,7 @@ const ChangePasswordPage = () => {
                       autoComplete="none"
                       aria-autocomplete="none"
                       minLength="8"
-                      maxLength="16"
+                      maxLength="32"
                     />
                   </Form.Group>
 
@@ -200,7 +200,7 @@ const ChangePasswordPage = () => {
                       autoComplete="none"
                       aria-autocomplete="none"
                       minLength="8"
-                      maxLength="16"
+                      maxLength="32"
                     />
                   </Form.Group>
 
@@ -245,7 +245,7 @@ const ChangePasswordPage = () => {
                         value={secretAnswer}
                         onChange={(e) => setSecretAnswer(e.target.value)}
                         minLength="1"
-                        maxLength="16"
+                        maxLength="32"
                       />
                     </Form.Group>
 
@@ -290,7 +290,7 @@ const ChangePasswordPage = () => {
                         value={recoverPassword}
                         onChange={(e) => setRecoverPassword(e.target.value)}
                         minLength="1"
-                        maxLength="64"
+                        maxLength="128"
                       />
                     </Form.Group>
 

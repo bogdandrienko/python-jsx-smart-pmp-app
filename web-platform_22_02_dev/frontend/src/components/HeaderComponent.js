@@ -12,6 +12,13 @@ const HeaderComponent = () => {
     <header className="text-center">
       <Navbar expand="lg">
         <Container>
+          <div className="m-1">
+            <img
+              src="static/logo_small.png"
+              className="img-thumbnail w-10"
+              alt="id"
+            />
+          </div>
           <a className="navbar-brand" href="/">
             Обновить
           </a>

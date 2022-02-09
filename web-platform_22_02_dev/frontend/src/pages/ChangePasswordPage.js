@@ -110,7 +110,7 @@ const ChangePasswordPage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                   minLength="8"
-                  maxLength="16"
+                  maxLength="32"
                 />
               </Form.Group>
 
@@ -124,7 +124,7 @@ const ChangePasswordPage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                   minLength="8"
-                  maxLength="16"
+                  maxLength="32"
                 />
               </Form.Group>
 
