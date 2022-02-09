@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 
 export const listNotes =
-  (userInfo = {}) =>
+  (userToken = {}) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -20,7 +20,7 @@ export const listNotes =
         headers: {
           "Content-type": "application/json",
         },
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userToken.token}`,
       };
 
       const { data } = await axios.get(`/api/note_api/`, config);

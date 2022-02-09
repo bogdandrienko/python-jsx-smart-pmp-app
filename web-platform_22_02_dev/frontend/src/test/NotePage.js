@@ -9,7 +9,7 @@ const NotePage = () => {
   let [note, setNote] = useState(null);
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const { userToken } = userLogin;
 
   useEffect(() => {
     let getNote = async () => {
@@ -17,7 +17,7 @@ const NotePage = () => {
         const config = {
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${userToken.token}`,
           },
         };
         const { data } = await axios.get(`/api/note_api/${noteId}/`, config);
@@ -25,13 +25,13 @@ const NotePage = () => {
       }
     };
     getNote();
-  }, [noteId, userInfo.token]);
+  }, [noteId, userToken.token]);
 
   let createNote = async () => {
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userToken.token}`,
       },
     };
     const { data } = await axios.post(
@@ -46,7 +46,7 @@ const NotePage = () => {
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userToken.token}`,
       },
     };
     const { data } = await axios.put(
@@ -61,7 +61,7 @@ const NotePage = () => {
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userToken.token}`,
       },
     };
     const { data } = await axios.delete(`/api/note_api/${noteId}/`, config);
@@ -119,13 +119,14 @@ const NotePage = () => {
         )}
       </div>
       <div className="card-body">
-        <h6>{userInfo.username}</h6>
+        <h6>{userToken.username}</h6>
         <textarea
           onChange={(e) => {
             setNote({ ...note, body: e.target.value });
           }}
           className="lead form-control"
-          value={note?.body} />
+          value={note?.body}
+        />
       </div>
     </div>
   );

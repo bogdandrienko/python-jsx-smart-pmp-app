@@ -10,11 +10,11 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const { userToken } = userLogin;
 
   const userDetails = useSelector((state) => state.userDetails);
   const { error, loading, user } = userDetails;
-  // console.log("userInfo: ", userInfo);
+  // console.log("userToken: ", userToken);
   // console.log("user: ", user);
 
   useEffect(() => {
@@ -22,9 +22,9 @@ const ProfilePage = () => {
   }, [dispatch]);
 
   let groups = "";
-  if (userInfo != null && userInfo.groups) {
-    for (let i = 0; i < userInfo.groups.length; i++) {
-      groups += userInfo.groups[i] + ", ";
+  if (userToken != null && userToken.groups) {
+    for (let i = 0; i < userToken.groups.length; i++) {
+      groups += userToken.groups[i] + ", ";
     }
     groups = groups.slice(0, -2);
   } else {

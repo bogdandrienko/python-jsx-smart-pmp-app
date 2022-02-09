@@ -12,11 +12,21 @@ const TitleComponent = ({
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userLoginState = useSelector((state) => state.userLoginState);
+  const {
+    load: loadUserLogin,
+    data: dataUserLogin,
+    error: errorUserLogin,
+    fail: failUserLogin,
+  } = userLoginState;
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, user, error } = userDetails;
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const {
+    load: loadUserDetails,
+    data: dataUserDetails,
+    error: errorUserDetails,
+    fail: failUserDetails,
+  } = userDetailsStore;
 
   useEffect(() => {
     if (logic) {
@@ -26,24 +36,24 @@ const TitleComponent = ({
 
   useEffect(() => {
     if (logic) {
-      if (userInfo == null && location.pathname !== "/login") {
+      if (dataUserLogin == null && location.pathname !== "/login") {
         navigate("/login");
       } else {
-        if (error !== undefined) {
+        if (errorUserDetails !== undefined) {
           dispatch(userLogoutAction());
         } else {
-          if (userInfo !== undefined) {
-            if (user && user["user_model"]) {
-
-              console.log("user['user_model']: ", user["user_model"])
-
-              if (user["user_model"]["activity_boolean_field"] === false) {
+          if (dataUserLogin !== undefined) {
+            if (dataUserDetails && dataUserDetails["user_model"]) {
+              if (
+                dataUserDetails["user_model"]["activity_boolean_field"] ===
+                false
+              ) {
                 dispatch(userLogoutAction());
               }
               if (
-                !user["user_model"]["email_field"] ||
-                !user["user_model"]["secret_question_char_field"] ||
-                !user["user_model"]["secret_answer_char_field"]
+                !dataUserDetails["user_model"]["email_field"] ||
+                !dataUserDetails["user_model"]["secret_question_char_field"] ||
+                !dataUserDetails["user_model"]["secret_answer_char_field"]
               ) {
                 navigate("/change_profile");
               }
@@ -52,7 +62,15 @@ const TitleComponent = ({
         }
       }
     }
-  }, [userInfo, location.pathname, navigate, error, dispatch, user, logic]);
+  }, [
+    dataUserLogin,
+    location.pathname,
+    navigate,
+    dispatch,
+    logic,
+    errorUserDetails,
+    dataUserDetails,
+  ]);
 
   return (
     <div className="text-center m-1">

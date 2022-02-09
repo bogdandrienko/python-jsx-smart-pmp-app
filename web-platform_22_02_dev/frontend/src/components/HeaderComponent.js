@@ -5,9 +5,13 @@ import { useSelector } from "react-redux";
 import modules from "../constants/modulesConstants";
 
 const HeaderComponent = () => {
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
+  const userLoginState = useSelector((state) => state.userLoginState);
+  const {
+    load: loadUserLogin,
+    data: dataUserLogin,
+    error: errorUserLogin,
+    fail: failUserLogin,
+  } = userLoginState;
   return (
     <header className="text-center">
       <Navbar expand="lg">
@@ -28,7 +32,7 @@ const HeaderComponent = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {userInfo && userInfo.username === "Bogdan" ? (
+              {dataUserLogin && dataUserLogin.username === "Bogdan" ? (
                 <NavDropdown title="Разработка" id="basic-nav-dropdown">
                   <li>
                     <strong className="dropdown-header text-center">
@@ -105,7 +109,7 @@ const HeaderComponent = () => {
                 ""
               )}
 
-              {userInfo && userInfo.username === "Bogdan" ? (
+              {dataUserLogin && dataUserLogin.username === "Bogdan" ? (
                 <NavDropdown title="Модератор" id="basic-nav-dropdown">
                   <li>
                     <strong className="dropdown-header text-center">

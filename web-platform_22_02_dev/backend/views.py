@@ -170,11 +170,11 @@ def api_login_user(request):
                 now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                 access_count = 0
                 for dat in backend_models.LoggingModel.objects.filter(
-                    username_slug_field=username,
-                    ip_genericipaddress_field=ip,
-                    request_path_slug_field=request_path,
-                    request_method_slug_field=request_method,
-                    error_text_field=f'action: LOGIN'
+                        username_slug_field=username,
+                        ip_genericipaddress_field=ip,
+                        request_path_slug_field=request_path,
+                        request_method_slug_field=request_method,
+                        error_text_field=f'action: LOGIN'
                 ):
                     # print((dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M'))
                     # print(now)
@@ -413,11 +413,11 @@ def api_user_recover_password(request):
                 now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                 access_count = 0
                 for dat in backend_models.LoggingModel.objects.filter(
-                    username_slug_field=username,
-                    ip_genericipaddress_field=ip,
-                    request_path_slug_field=request_path,
-                    request_method_slug_field=request_method,
-                    error_text_field=f'action: SEND_EMAIL_PASSWORD'
+                        username_slug_field=username,
+                        ip_genericipaddress_field=ip,
+                        request_path_slug_field=request_path,
+                        request_method_slug_field=request_method,
+                        error_text_field=f'action: SEND_EMAIL_PASSWORD'
                 ):
                     # print((dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M'))
                     # print(now)
@@ -487,10 +487,10 @@ def api_user_recover_password(request):
                 if time1 - time2 > -60:
                     if str(decrypt_text.split('_')[1]).strip() == str(text.split('_')[1]).strip():
                         response = {"response": {
-                        "username": user.username,
-                        "recoverPassword": None,
-                        "success": True
-                    }}
+                            "username": user.username,
+                            "recoverPassword": None,
+                            "success": True
+                        }}
                     else:
                         response = {"error": f"Код не верный!"}
                 else:
@@ -581,6 +581,44 @@ def api_user_all(request):
         return Response({"error": "This method not allowed for endpoint."})
     else:
         return Response({"error": "This method not allowed for endpoint."})
+
+
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+def api_user_temp_all(request):
+    """
+    Api django-rest-framework user temp_all
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
+    print('\n\n\n')
+    print('api_user_temp_all:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"request_method: {request_method}")
+    print(f"request_action_type: {request_action_type}")
+    print(f"request_user: {request_user}")
+    print(f"request_body: {request_body}")
+
+    user_models = backend_models.UserModel.objects.filter(temp_password_boolean_field=True)
+
+    objects = []
+    for user_model in user_models:
+        if not user_model.user_foreign_key_field.is_superuser:
+            objects.append(
+                {
+                    f"{str(user_model.user_foreign_key_field)}":
+                        base64.b64encode(str(f"12{user_model.password_slug_field}345").encode()).decode()
+                }
+            )
+
+    # for obj in objects:
+    #     for key, value in obj.items():
+    #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
+
+    return Response({"response": objects})
 
 
 class UserViewSet(viewsets.ModelViewSet):

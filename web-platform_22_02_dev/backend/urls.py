@@ -55,6 +55,7 @@ urlpatterns = [
     path('api/user/change_profile/', backend_views.api_user_change_profile, name='api_user_change_profile'),
     path('api/user/recover_password/', backend_views.api_user_recover_password, name='api_user_recover_password'),
     path('api/user/all/', backend_views.api_user_all, name='api_user_all'),
+    path('api/user/temp_all/', backend_views.api_user_temp_all, name='api_user_temp_all'),
 
     # rest_framework routers.DefaultRouter
     path('api/router/', include(router.urls)),

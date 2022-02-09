@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import ListItemComponent from "./ListItemComponent";
 import AddButtonComponent from "./AddButtonComponent";
 import axios from "axios";
-import {useLocation, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const NotesListPage = () => {
   const navigate = useNavigate();
@@ -11,10 +11,10 @@ const NotesListPage = () => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const { userToken } = userLogin;
   let [notes, setNotes] = useState([]);
 
-  console.log(notes)
+  console.log(notes);
 
   useEffect(() => {
     getNotes();
@@ -24,12 +24,10 @@ const NotesListPage = () => {
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userToken.token}`,
       },
     };
-    const { data } = await axios.get(
-      `/api/note_api/`, config
-    );
+    const { data } = await axios.get(`/api/note_api/`, config);
 
     setNotes(data);
   };

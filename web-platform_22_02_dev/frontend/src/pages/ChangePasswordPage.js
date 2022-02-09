@@ -20,38 +20,54 @@ const ChangePasswordPage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-  // console.log("userInfo: ", userInfo);
-
-  const userChange = useSelector((state) => state.userChange);
+  const userLoginState = useSelector((state) => state.userLoginState);
   const {
-    userChangeLoadingReducer,
-    userChangeDataReducer,
-    userChangeErrorReducer,
-  } = userChange;
-  // console.log("userChangeLoadingReducer: ", userChangeLoadingReducer);
-  // console.log("userChangeDataReducer: ", userChangeDataReducer);
-  // console.log("userChangeErrorReducer: ", userChangeErrorReducer);
+    load: loadUserLogin,
+    data: dataUserLogin,
+    error: errorUserLogin,
+    fail: failUserLogin,
+  } = userLoginState;
+  // console.log("loadUserLogin: ", loadUserLogin);
+  // console.log("dataUserLogin: ", dataUserLogin);
+  // console.log("errorUserLogin: ", errorUserLogin);
+  // console.log("failUserLogin: ", failUserLogin);
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { error, loading, user } = userDetails;
-  // console.log("loading: ", loading);
-  // console.log("user: ", user);
-  // console.log("error: ", error);
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const {
+    load: loadUserDetails,
+    data: dataUserDetails,
+    error: errorUserDetails,
+    fail: failUserDetails,
+  } = userDetailsStore;
+  // console.log("loadUserDetails: ", loadUserDetails);
+  // console.log("dataUserDetails: ", dataUserDetails);
+  // console.log("errorUserDetails: ", errorUserDetails);
+  // console.log("failUserDetails: ", failUserDetails);
+
+  const userChangeStore = useSelector((state) => state.userChangeStore);
+  const {
+    load: loadUserChange,
+    data: dataUserChange,
+    error: errorUserChange,
+    fail: failUserChange,
+  } = userChangeStore;
+  // console.log("loadUserChange: ", loadUserChange);
+  // console.log("dataUserChange: ", dataUserChange);
+  // console.log("errorUserChange: ", errorUserChange);
+  // console.log("failUserChange: ", failUserChange);
 
   useEffect(() => {
-    if (user && loading === false) {
-      if (user["user_model"]) {
-        if (user["user_model"]["password_slug_field"]) {
-          setPassword(user["user_model"]["password_slug_field"]);
-          setPassword2(user["user_model"]["password_slug_field"]);
+    if (dataUserDetails) {
+      if (dataUserDetails["user_model"]) {
+        if (dataUserDetails["user_model"]["password_slug_field"]) {
+          setPassword(dataUserDetails["user_model"]["password_slug_field"]);
+          setPassword2(dataUserDetails["user_model"]["password_slug_field"]);
         }
       }
     } else {
       dispatch(userDetailsAction());
     }
-  }, [dispatch, loading, user]);
+  }, [dispatch, dataUserDetails]);
 
   useEffect(() => {
     dispatch(userDetailsAction());
@@ -88,61 +104,108 @@ const ChangePasswordPage = () => {
       <main className="container text-center">
         <div className="m-1">
           <h1>
-            {userInfo
-              ? `Идентификатор пользователя: '${userInfo.username}'`
+            {dataUserLogin
+              ? `Идентификатор пользователя: '${dataUserLogin.username}'`
               : "Идентификатор пользователя: ''"}
           </h1>
-          <FormContainerComponent>
-            {userChangeErrorReducer && (
-              <MessageComponent variant="danger">
-                {userChangeErrorReducer}
-              </MessageComponent>
-            )}
-            {userChangeLoadingReducer && <LoaderComponent />}
-            <Form onSubmit={submitHandler}>
-              <Form.Group controlId="password">
-                <Form.Label>Новый пароль от аккаунта:</Form.Label>
-                <Form.Control
+          {errorUserChange && (
+            <MessageComponent variant="danger">
+              {errorUserChange}
+            </MessageComponent>
+          )}
+          {loadUserChange && <LoaderComponent />}
+        </div>
+
+        <div className="m-1">
+          <form
+            method="POST"
+            target="_self"
+            encType="multipart/form-data"
+            name="account_login"
+            autoComplete="on"
+            className="text-center p-1 m-1"
+            onSubmit={submitHandler}
+          >
+            <div>
+              <label className="form-control-lg m-1">
+                Введите пароль для входа в аккаунт:
+                <input
                   type="password"
-                  placeholder="пример: 12345Qq$"
+                  id="password"
+                  name="password"
+                  required=""
+                  placeholder=""
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="none"
-                  aria-autocomplete="none"
                   minLength="8"
                   maxLength="32"
+                  className="form-control form-control-lg"
+                  autoComplete="none"
+                  aria-autocomplete="none"
                 />
-              </Form.Group>
-
-              <Form.Group controlId="password2">
-                <Form.Label>Повторите Пароль от аккаунта:</Form.Label>
-                <Form.Control
+                <small className="text-muted">
+                  количество символов: от 8 до 32
+                </small>
+              </label>
+              <label className="form-control-lg m-1">
+                Повторите новый пароль:
+                <input
                   type="password"
-                  placeholder="пример: 12345Qq$"
+                  id="password2"
+                  name="password2"
+                  required=""
+                  placeholder=""
                   value={password2}
                   onChange={(e) => setPassword2(e.target.value)}
-                  autoComplete="none"
-                  aria-autocomplete="none"
                   minLength="8"
                   maxLength="32"
+                  className="form-control form-control-lg"
+                  autoComplete="none"
+                  aria-autocomplete="none"
                 />
-              </Form.Group>
-
-              <Form.Group controlId="button">
-                <Button type="submit" variant="outline-primary" className="m-1">
-                  Сохранить
-                </Button>
-                <Button
-                  onClick={changeVisibility}
-                  type="button"
-                  variant="outline-warning"
-                  className="m-1"
-                >
-                  видимость паролей
-                </Button>
-              </Form.Group>
-            </Form>
-          </FormContainerComponent>
+                <small className="text-muted">
+                  количество символов: от 8 до 32
+                </small>
+              </label>
+            </div>
+            <hr />
+            <div className="container text-center">
+              <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                <div className="m-1">
+                  <button
+                    href=""
+                    type="submit"
+                    className="btn btn-lg btn-outline-primary form-control"
+                  >
+                    Сохранить новые данные
+                  </button>
+                </div>
+                <div className="m-1">
+                  <button
+                    href=""
+                    type="reset"
+                    onClick={(e) => {
+                      setPassword("");
+                      setPassword2("");
+                    }}
+                    className="btn btn-lg btn-outline-warning form-control"
+                  >
+                    Сбросить данные
+                  </button>
+                </div>
+                <div className="m-1">
+                  <button
+                    href=""
+                    type="button"
+                    onClick={changeVisibility}
+                    className="btn btn-lg btn-outline-danger form-control"
+                  >
+                    Видимость пароля
+                  </button>
+                </div>
+              </ul>
+            </div>
+          </form>
         </div>
       </main>
       <FooterComponent />

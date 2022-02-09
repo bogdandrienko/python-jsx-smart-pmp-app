@@ -12,6 +12,7 @@ const NewsPage = () => {
       <TitleComponent
         first={"Новости"}
         second={"страница новостей веб-платформы."}
+        logic={true}
       />
       <main className="container text-center">
         <NewsComponent count={100} />

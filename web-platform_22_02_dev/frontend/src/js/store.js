@@ -6,42 +6,37 @@ import { notesListReducer, notesDetailsReducer } from "../test/noteReducers";
 import { salaryUserReducer } from "../reducers/salaryReducers";
 
 import {
-  userListReducer,
-  userChangeReducer,
-  userRecoverPasswordReducer,
   userLoginReducer,
   userDetailsReducer,
-  userRegisterReducer,
-  userUpdateProfileReducer,
-  userDeleteReducer,
-  userUpdateReducer,
+  userChangeReducer,
+
+  ///////////////////////////////////////////////////////////
+  userRecoverPasswordReducer,
+  userListReducer,
 } from "../reducers/userReducers";
 
 const reducer = combineReducers({
-  userList: userListReducer,
-  userChange: userChangeReducer,
+  userLoginState: userLoginReducer,
+  userDetailsStore: userDetailsReducer,
+  userChangeStore: userChangeReducer,
+
+  ///////////////////////////////////////////////////////////
   userRecoverPassword: userRecoverPasswordReducer,
+  userList: userListReducer,
 
   salaryUser: salaryUserReducer,
 
-  userLogin: userLoginReducer,
-  userDetails: userDetailsReducer,
-
-  userUpdateProfile: userUpdateProfileReducer,
   productList: productListReducer,
   notesList: notesListReducer,
   notesDetails: notesDetailsReducer,
-  userRegister: userRegisterReducer,
-  userDelete: userDeleteReducer,
-  userUpdate: userUpdateReducer,
 });
 
-const userInfoFromStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
+const userTokenFromStorage = localStorage.getItem("userToken")
+  ? JSON.parse(localStorage.getItem("userToken"))
   : null;
 
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage },
+  userLoginState: { data: userTokenFromStorage },
 };
 
 const middleware = [thunk];
