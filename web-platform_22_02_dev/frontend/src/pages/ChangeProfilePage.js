@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form } from "react-bootstrap";
-
 import {
-  userDetailsAction,
   userChangeProfileAction,
+  userDetailsAction,
+  userLogoutAction,
 } from "../actions/userActions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
-import FormContainerComponent from "../components/FormContainerComponent";
-import ReCAPTCHA from "react-google-recaptcha";
+import { USER_CHANGE_RESET_CONSTANT } from "../constants/userConstants";
 
 const ChangeProfilePage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -23,18 +23,6 @@ const ChangeProfilePage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userLoginState = useSelector((state) => state.userLoginState);
-  const {
-    load: loadUserLogin,
-    data: dataUserLogin,
-    error: errorUserLogin,
-    fail: failUserLogin,
-  } = userLoginState;
-  // console.log("loadUserLogin: ", loadUserLogin);
-  // console.log("dataUserLogin: ", dataUserLogin);
-  // console.log("errorUserLogin: ", errorUserLogin);
-  // console.log("failUserLogin: ", failUserLogin);
-
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
     load: loadUserDetails,
@@ -42,10 +30,6 @@ const ChangeProfilePage = () => {
     error: errorUserDetails,
     fail: failUserDetails,
   } = userDetailsStore;
-  // console.log("loadUserDetails: ", loadUserDetails);
-  // console.log("dataUserDetails: ", dataUserDetails);
-  // console.log("errorUserDetails: ", errorUserDetails);
-  // console.log("failUserDetails: ", failUserDetails);
 
   const userChangeStore = useSelector((state) => state.userChangeStore);
   const {
@@ -54,10 +38,6 @@ const ChangeProfilePage = () => {
     error: errorUserChange,
     fail: failUserChange,
   } = userChangeStore;
-  // console.log("loadUserChange: ", loadUserChange);
-  // console.log("dataUserChange: ", dataUserChange);
-  // console.log("errorUserChange: ", errorUserChange);
-  // console.log("failUserChange: ", failUserChange);
 
   useEffect(() => {
     if (dataUserDetails) {
@@ -86,10 +66,15 @@ const ChangeProfilePage = () => {
       setPassword2("");
     }
   }, [dispatch, dataUserDetails]);
-
+  
   useEffect(() => {
-    dispatch(userDetailsAction());
-  }, [dispatch]);
+    if (dataUserChange) {
+      sleep(1000).then(() => {
+        dispatch({ type: USER_CHANGE_RESET_CONSTANT });
+        dispatch(userLogoutAction());
+        navigate("/login");
+      });}
+  }, [dispatch, dataUserChange, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -113,6 +98,10 @@ const ChangeProfilePage = () => {
     password2.setAttribute("type", type);
   };
 
+  function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
   return (
     <div>
       <HeaderComponent />
@@ -122,23 +111,58 @@ const ChangeProfilePage = () => {
         logic={true}
       />
       <main className="container text-center">
-        <div className="m-1">
-          <div>
-            <h2 className="text-danger display-6 lead">
-              Внимание, все эти поля необходимо заполнить!
-            </h2>
-            <h5>
-              Идентификатор пользователя: '
-              {dataUserLogin && dataUserLogin.username}'
-            </h5>
-            {errorUserChange && (
+        <div className="text-center">
+          {loadUserDetails && <LoaderComponent />}
+          {dataUserDetails && (
+            <div className="m-1">
+              <MessageComponent variant="success">
+                Данные успешно получены!
+              </MessageComponent>
+            </div>
+          )}
+          {errorUserDetails && (
+            <div className="m-1">
+              <MessageComponent variant="danger">
+                {errorUserDetails}
+              </MessageComponent>
+            </div>
+          )}
+          {failUserDetails && (
+            <div className="m-1">
+              <MessageComponent variant="warning">
+                {failUserChange}
+              </MessageComponent>
+            </div>
+          )}
+        </div>
+        <div className="text-center">
+          {loadUserChange && <LoaderComponent />}
+          {dataUserChange && (
+            <div className="m-1">
+              <MessageComponent variant="success">
+                Данные успешно изменены!
+              </MessageComponent>
+            </div>
+          )}
+          {errorUserChange && (
+            <div className="m-1">
               <MessageComponent variant="danger">
                 {errorUserChange}
               </MessageComponent>
-            )}
-            {loadUserChange && <LoaderComponent />}
-          </div>
-
+            </div>
+          )}
+          {failUserChange && (
+            <div className="m-1">
+              <MessageComponent variant="warning">
+                {failUserChange}
+              </MessageComponent>
+            </div>
+          )}
+        </div>
+        <div className="m-1">
+          <h2 className="text-danger display-6 lead">
+            Внимание, все эти поля необходимо заполнить!
+          </h2>
           <form
             method="POST"
             target="_self"

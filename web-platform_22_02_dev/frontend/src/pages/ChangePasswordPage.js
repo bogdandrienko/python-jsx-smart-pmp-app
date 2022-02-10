@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form } from "react-bootstrap";
 
 import {
   userChangeProfileAction,
@@ -12,37 +12,14 @@ import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
-import FormContainerComponent from "../components/FormContainerComponent";
+import { USER_CHANGE_RESET_CONSTANT } from "../constants/userConstants";
 
 const ChangePasswordPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
-  const userLoginState = useSelector((state) => state.userLoginState);
-  const {
-    load: loadUserLogin,
-    data: dataUserLogin,
-    error: errorUserLogin,
-    fail: failUserLogin,
-  } = userLoginState;
-  // console.log("loadUserLogin: ", loadUserLogin);
-  // console.log("dataUserLogin: ", dataUserLogin);
-  // console.log("errorUserLogin: ", errorUserLogin);
-  // console.log("failUserLogin: ", failUserLogin);
-
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
-  const {
-    load: loadUserDetails,
-    data: dataUserDetails,
-    error: errorUserDetails,
-    fail: failUserDetails,
-  } = userDetailsStore;
-  // console.log("loadUserDetails: ", loadUserDetails);
-  // console.log("dataUserDetails: ", dataUserDetails);
-  // console.log("errorUserDetails: ", errorUserDetails);
-  // console.log("failUserDetails: ", failUserDetails);
 
   const userChangeStore = useSelector((state) => state.userChangeStore);
   const {
@@ -51,27 +28,16 @@ const ChangePasswordPage = () => {
     error: errorUserChange,
     fail: failUserChange,
   } = userChangeStore;
-  // console.log("loadUserChange: ", loadUserChange);
-  // console.log("dataUserChange: ", dataUserChange);
-  // console.log("errorUserChange: ", errorUserChange);
-  // console.log("failUserChange: ", failUserChange);
 
   useEffect(() => {
-    if (dataUserDetails) {
-      if (dataUserDetails["user_model"]) {
-        if (dataUserDetails["user_model"]["password_slug_field"]) {
-          setPassword(dataUserDetails["user_model"]["password_slug_field"]);
-          setPassword2(dataUserDetails["user_model"]["password_slug_field"]);
-        }
-      }
-    } else {
-      dispatch(userDetailsAction());
+    if (dataUserChange) {
+      sleep(1000).then(() => {
+        dispatch({ type: USER_CHANGE_RESET_CONSTANT });
+        dispatch(userLogoutAction());
+        navigate("/login");
+      });
     }
-  }, [dispatch, dataUserDetails]);
-
-  useEffect(() => {
-    dispatch(userDetailsAction());
-  }, [dispatch]);
+  }, [navigate, dataUserChange, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -81,8 +47,6 @@ const ChangePasswordPage = () => {
         password2: password2,
       })
     );
-    dispatch(userDetailsAction());
-    dispatch(userLogoutAction());
   };
 
   const changeVisibility = () => {
@@ -94,28 +58,43 @@ const ChangePasswordPage = () => {
     password2.setAttribute("type", type);
   };
 
+  function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
   return (
     <div>
       <HeaderComponent />
       <TitleComponent
         first={"Изменение пароля"}
         second={"страница редактирования Вашего пароля от аккаунта."}
+        logic={true}
       />
       <main className="container text-center">
-        <div className="m-1">
-          <h1>
-            {dataUserLogin
-              ? `Идентификатор пользователя: '${dataUserLogin.username}'`
-              : "Идентификатор пользователя: ''"}
-          </h1>
-          {errorUserChange && (
-            <MessageComponent variant="danger">
-              {errorUserChange}
-            </MessageComponent>
-          )}
+        <div className="text-center">
           {loadUserChange && <LoaderComponent />}
+          {dataUserChange && (
+            <div className="m-1">
+              <MessageComponent variant="success">
+                Пароль успешно изменён!
+              </MessageComponent>
+            </div>
+          )}
+          {errorUserChange && (
+            <div className="m-1">
+              <MessageComponent variant="danger">
+                {errorUserChange}
+              </MessageComponent>
+            </div>
+          )}
+          {failUserChange && (
+            <div className="m-1">
+              <MessageComponent variant="warning">
+                {failUserChange}
+              </MessageComponent>
+            </div>
+          )}
         </div>
-
         <div className="m-1">
           <form
             method="POST"

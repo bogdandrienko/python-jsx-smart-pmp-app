@@ -15,7 +15,7 @@ export const salaryUserAction = (dateTime) => async (dispatch, getState) => {
     });
 
     const {
-      userLogin: { userToken },
+      userLoginState: { data: userLogin },
     } = getState();
 
     const { data } = await axios({
@@ -24,7 +24,7 @@ export const salaryUserAction = (dateTime) => async (dispatch, getState) => {
       timeout: 15000,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken.token}`,
+        Authorization: `Bearer ${userLogin.token}`,
       },
       data: {
         "Action-type": "SALARY",

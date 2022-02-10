@@ -406,7 +406,7 @@ const ChangePasswordPage = () => {
               </div>
               <div>
                 <label className="form-control-lg m-1">
-                  Введите Ваш идентификатор пользователя:
+                  Введите Ваш ИИН:
                   <input
                     type="text"
                     id="username"
@@ -419,7 +419,7 @@ const ChangePasswordPage = () => {
                     maxLength="12"
                     className="form-control form-control-lg"
                   />
-                  <small className="text-muted">ИИН: 12 цифр</small>
+                  <small className="text-muted">количество символов: 12</small>
                 </label>
               </div>
               <hr />

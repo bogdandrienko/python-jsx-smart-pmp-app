@@ -14,6 +14,7 @@ export const USER_CHANGE_LOAD_CONSTANT = "USER_CHANGE_LOAD_CONSTANT";
 export const USER_CHANGE_DATA_CONSTANT = "USER_CHANGE_DATA_CONSTANT";
 export const USER_CHANGE_ERROR_CONSTANT = "USER_CHANGE_ERROR_CONSTANT";
 export const USER_CHANGE_FAIL_CONSTANT = "USER_CHANGE_FAIL_CONSTANT";
+export const USER_CHANGE_RESET_CONSTANT = "USER_CHANGE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_RECOVER_PASSWORD_LOADING_CONSTANT =
   "USER_RECOVER_PASSWORD_LOADING_CONSTANT";

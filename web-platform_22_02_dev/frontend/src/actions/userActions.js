@@ -152,7 +152,7 @@ export const userChangeProfileAction = (user) => async (dispatch, getState) => {
     const { data } = await axios({
       url: "api/user/change_profile/",
       method: "POST",
-      timeout: 5000,
+      timeout: 3000,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${userLogin.token}`,

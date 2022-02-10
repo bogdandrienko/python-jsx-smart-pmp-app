@@ -17,11 +17,13 @@ const HeaderComponent = () => {
       <Navbar expand="lg">
         <Container>
           <div className="m-1">
-            <img
-              src="static/logo_small.png"
-              className="img-thumbnail w-10"
-              alt="id"
-            />
+            <a className="navbar-brand" href="https://km.kz/">
+              <img
+                src="static/logo_small.png"
+                className="img-thumbnail img-fluid w-75"
+                alt="id"
+              />
+            </a>
           </div>
           <a className="navbar-brand" href="/">
             Обновить

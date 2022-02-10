@@ -9,7 +9,6 @@ import FooterComponent from "../components/FooterComponent";
 
 import LoaderComponent from "../components/LoaderComponent";
 import MessageComponent from "../components/MessageComponent";
-import FormContainerComponent from "../components/FormContainerComponent";
 import { userLoginAction } from "../actions/userActions";
 
 function LoginScreen() {
@@ -107,7 +106,7 @@ function LoginScreen() {
         >
           <div>
             <label className="form-control-lg m-1">
-              Введите Ваш идентификатор пользователя:
+              Введите Ваш ИИН:
               <input
                 type="text"
                 id="username"
@@ -120,7 +119,7 @@ function LoginScreen() {
                 maxLength="12"
                 className="form-control form-control-lg"
               />
-              <small className="text-muted">ИИН: 12 цифр</small>
+              <small className="text-muted">количество символов: 12</small>
             </label>
             <label className="form-control-lg m-1">
               Введите пароль для входа в аккаунт:
@@ -136,7 +135,7 @@ function LoginScreen() {
                 maxLength="32"
                 className="form-control form-control-lg"
               />
-              <small className="text-muted">пароль: от 8 до 32 символов</small>
+              <small className="text-muted">количество символов: от 8 до 32</small>
             </label>
             <label className="form-control-lg m-1">
               <small className="lead text-danger">

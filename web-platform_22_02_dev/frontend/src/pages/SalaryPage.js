@@ -53,7 +53,7 @@ const SalaryPage = () => {
                   required=""
                   className="form-control form-control-lg"
                 >
-                  <option value="1">Январь</option>
+                  <option value="1" defaultValue selected>Январь</option>
                   <option value="2">Февраль</option>
                   <option value="3">Март</option>
                   <option value="4">Апрель</option>
@@ -64,7 +64,7 @@ const SalaryPage = () => {
                   <option value="9">Сентябрь</option>
                   <option value="10">Октябрь</option>
                   <option value="11">Ноябрь</option>
-                  <option value="12" defaultValue selected>
+                  <option value="12">
                     Декабрь
                   </option>
                 </select>
@@ -83,10 +83,10 @@ const SalaryPage = () => {
                   required=""
                   className="form-control form-control-lg"
                 >
-                  <option value="2021" defaultValue selected>
+                  <option value="2021">
                     2021
                   </option>
-                  <option value="2022">2022</option>
+                  <option value="2022" defaultValue selected>2022</option>
                   <option value="2023">2023</option>
                 </select>
                 <small className="text-muted">

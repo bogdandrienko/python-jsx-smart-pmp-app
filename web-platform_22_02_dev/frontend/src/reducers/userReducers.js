@@ -15,6 +15,7 @@ import {
   USER_CHANGE_DATA_CONSTANT,
   USER_CHANGE_ERROR_CONSTANT,
   USER_CHANGE_FAIL_CONSTANT,
+  USER_CHANGE_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   USER_RECOVER_PASSWORD_LOADING_CONSTANT,
   USER_RECOVER_PASSWORD_DATA_CONSTANT,
@@ -87,6 +88,9 @@ export const userChangeReducer = (state = {}, action = null) => {
 
     case USER_CHANGE_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
+
+      case USER_CHANGE_RESET_CONSTANT:
+        return {};
 
     default:
       return state;
