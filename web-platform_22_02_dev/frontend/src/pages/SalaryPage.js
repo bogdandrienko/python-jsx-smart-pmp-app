@@ -41,7 +41,7 @@ const SalaryPage = () => {
         logic={true}
       />
       <main className="container text-center">
-        <div className="form-control bg-success bg-opacity-10">
+        <div className="">
           <form className="">
             <div className="input-group m-1">
               <select
@@ -90,74 +90,6 @@ const SalaryPage = () => {
               )}
             </div>
           </form>
-        </div>
-        <div className="form-control bg-warning bg-opacity-10">
-          <div className="container-fluid text-center">
-            <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-              <li className="m-1">
-                <label className="form-control-lg">
-                  Выберите месяц выгрузки:
-                  <select
-                    type="select"
-                    id="month"
-                    name="month"
-                    required=""
-                    className="form-control form-control-lg"
-                  >
-                    <option value="1" defaultValue selected>
-                      Январь
-                    </option>
-                    <option value="2">Февраль</option>
-                    <option value="3">Март</option>
-                    <option value="4">Апрель</option>
-                    <option value="5">Май</option>
-                    <option value="6">Июнь</option>
-                    <option value="7">Июль</option>
-                    <option value="8">Август</option>
-                    <option value="9">Сентябрь</option>
-                    <option value="10">Октябрь</option>
-                    <option value="11">Ноябрь</option>
-                    <option value="12">Декабрь</option>
-                  </select>
-                  <small className="text-muted">
-                    месяц: выберите месяц из выпадающего списка
-                  </small>
-                </label>
-              </li>
-              <li className="m-1">
-                <label className="form-control-lg">
-                  Выберите год выгрузки:
-                  <select
-                    type="select"
-                    id="year"
-                    name="year"
-                    required=""
-                    className="form-control form-control-lg"
-                  >
-                    <option value="2021">2021</option>
-                    <option value="2022" defaultValue selected>
-                      2022
-                    </option>
-                    <option value="2023">2023</option>
-                  </select>
-                  <small className="text-muted">
-                    год: выберите год из выпадающего списка
-                  </small>
-                </label>
-              </li>
-            </ul>
-            <div className="" id="div_button">
-              {!loadSalaryUser && (
-                <button
-                  onClick={salaryHundlerSubmit}
-                  className="btn btn-lg btn-outline-primary m-1"
-                  type="button"
-                >
-                  получить
-                </button>
-              )}
-            </div>
-          </div>
         </div>
         <hr />
         <div>

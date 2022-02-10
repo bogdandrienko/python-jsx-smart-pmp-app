@@ -20,7 +20,6 @@ const ChangeProfilePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [capcha, setCapcha] = useState("");
   const [email, setEmail] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
@@ -83,17 +82,15 @@ const ChangeProfilePage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
-      dispatch(
-        userChangeProfileAction({
-          email: email,
-          secretQuestion: secretQuestion,
-          secretAnswer: secretAnswer,
-          password: password,
-          password2: password2,
-        })
-      );
-    }
+    dispatch(
+      userChangeProfileAction({
+        email: email,
+        secretQuestion: secretQuestion,
+        secretAnswer: secretAnswer,
+        password: password,
+        password2: password2,
+      })
+    );
   };
 
   const changeVisibility = () => {
@@ -107,10 +104,6 @@ const ChangeProfilePage = () => {
 
   function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
-  }
-
-  function changeCapcha(value) {
-    setCapcha(value);
   }
 
   return (
@@ -157,127 +150,9 @@ const ChangeProfilePage = () => {
               {failUserChange}
             </MessageComponent>
           )}
-          {!capcha && (
-            <MessageComponent variant="danger">
-              Пройдите проверку на робота!
-            </MessageComponent>
-          )}
         </div>
-
         <div>
-          <div className="form-control bg-success bg-opacity-10">
-            <form className="">
-              <label className="form-control-lg m-1">
-                <ReCAPTCHA
-                  sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                  onChange={changeCapcha}
-                />
-              </label>
-              <div className="input-group m-1">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required=""
-                  placeholder="Введите почту для восстановления доступа"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  minLength="1"
-                  maxLength="128"
-                  className="form-control form-control-lg"
-                />
-              </div>
-              <div className="input-group m-1">
-                <input
-                  type="text"
-                  id="secretQuestion"
-                  name="secretQuestion"
-                  required=""
-                  placeholder="Введите секретный вопрос для восстановления доступа"
-                  value={secretQuestion}
-                  onChange={(e) => setSecretQuestion(e.target.value)}
-                  minLength="8"
-                  maxLength="32"
-                  className="form-control form-control-lg"
-                />
-                <input
-                  type="text"
-                  id="secretAnswer"
-                  name="secretAnswer"
-                  required=""
-                  placeholder="Введите секретный ответ на вопрос"
-                  value={secretAnswer}
-                  onChange={(e) => setSecretAnswer(e.target.value)}
-                  minLength="8"
-                  maxLength="32"
-                  className="form-control form-control-lg"
-                />
-              </div>
-              <div className="input-group m-1">
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  required=""
-                  placeholder="Введите новый пароль от аккаунта"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  minLength="8"
-                  maxLength="32"
-                  className="form-control form-control-lg"
-                  autoComplete="none"
-                  aria-autocomplete="none"
-                />
-                <input
-                  type="password"
-                  id="password2"
-                  name="password2"
-                  required=""
-                  placeholder="Повторите новый пароль"
-                  value={password2}
-                  onChange={(e) => setPassword2(e.target.value)}
-                  minLength="8"
-                  maxLength="32"
-                  className="form-control form-control-lg"
-                  autoComplete="none"
-                  aria-autocomplete="none"
-                />
-                <button
-                  href=""
-                  type="button"
-                  onClick={changeVisibility}
-                  className="btn btn-lg btn-outline-danger"
-                >
-                  Видимость пароля
-                </button>
-              </div>
-              <div className="btn-group m-1">
-                <button
-                  href=""
-                  type="submit"
-                  className="btn btn-lg btn-outline-primary form-control"
-                >
-                  Сохранить новые данные
-                </button>
-                <button
-                  href=""
-                  type="reset"
-                  onClick={(e) => {
-                    setEmail("");
-                    setSecretQuestion("");
-                    setSecretAnswer("");
-                    setPassword("");
-                    setPassword2("");
-                  }}
-                  className="btn btn-lg btn-outline-warning form-control"
-                >
-                  Сбросить данные
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div className="form-control bg-warning bg-opacity-10">
+          <div className="form-control">
             <h2 className="text-danger display-6 lead">
               Внимание, все эти поля необходимо заполнить!
             </h2>
@@ -290,14 +165,6 @@ const ChangeProfilePage = () => {
               className="text-center p-1 m-1"
               onSubmit={submitHandler}
             >
-              <div>
-                <label className="form-control-lg m-1">
-                  <ReCAPTCHA
-                    sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                    onChange={changeCapcha}
-                  />
-                </label>
-              </div>
               <div>
                 <label className="form-control-lg m-1 lead">
                   Почта для восстановления доступа:

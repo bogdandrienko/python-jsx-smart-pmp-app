@@ -53,77 +53,64 @@ const ChangePasswordPage = () => {
           password2: "",
         })
       );
-      setCapcha("");
     }
   };
 
   const postCheckAnswerHandlerSubmit = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
-      dispatch(
-        userRecoverPasswordAction({
-          actionType: "CHECK_ANSWER",
-          username: username,
-          secretAnswer: secretAnswer,
-          recoverPassword: "",
-          password: "",
-          password2: "",
-        })
-      );
-      setCapcha("");
-    }
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "CHECK_ANSWER",
+        username: username,
+        secretAnswer: secretAnswer,
+        recoverPassword: "",
+        password: "",
+        password2: "",
+      })
+    );
   };
 
   const postSendEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
-      dispatch(
-        userRecoverPasswordAction({
-          actionType: "SEND_EMAIL_PASSWORD",
-          username: username,
-          secretAnswer: "",
-          recoverPassword: "",
-          password: "",
-          password2: "",
-        })
-      );
-      setCapcha("");
-    }
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "SEND_EMAIL_PASSWORD",
+        username: username,
+        secretAnswer: "",
+        recoverPassword: "",
+        password: "",
+        password2: "",
+      })
+    );
   };
 
   const postRecoverEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
-      dispatch(
-        userRecoverPasswordAction({
-          actionType: "CHECK_EMAIL_PASSWORD",
-          username: username,
-          secretAnswer: "",
-          recoverPassword: recoverPassword,
-          password: "",
-          password2: "",
-        })
-      );
-      setCapcha("");
-    }
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "CHECK_EMAIL_PASSWORD",
+        username: username,
+        secretAnswer: "",
+        recoverPassword: recoverPassword,
+        password: "",
+        password2: "",
+      })
+    );
   };
 
   const postRecoverPasswordHandlerSubmit = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
-      dispatch(
-        userRecoverPasswordAction({
-          actionType: "CHANGE_PASSWORD",
-          username: username,
-          secretAnswer: "",
-          recoverPassword: "",
-          password: password,
-          password2: password2,
-        })
-      );
-      dispatch(userChangeProfileAction());
-      setCapcha("");
-    }
+    dispatch(
+      userRecoverPasswordAction({
+        actionType: "CHANGE_PASSWORD",
+        username: username,
+        secretAnswer: "",
+        recoverPassword: "",
+        password: password,
+        password2: password2,
+      })
+    );
+    dispatch(userChangeProfileAction());
   };
 
   useEffect(() => {
@@ -149,7 +136,6 @@ const ChangePasswordPage = () => {
         setSuccess(false);
       }
     } else {
-      setCapcha("");
     }
   }, [dispatch, dataUserRecoverPassword]);
 
@@ -199,51 +185,7 @@ const ChangePasswordPage = () => {
         <div className="m-1">
           {!success && !secretQuestion && !email ? (
             <div>
-              <form className="form-control bg-success bg-opacity-10">
-                <div>
-                  <label className="form-control-lg m-1">
-                    <ReCAPTCHA
-                      sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                      onChange={changeCapcha}
-                    />
-                  </label>
-                </div>
-                <div className="input-group">
-                  <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    required=""
-                    placeholder="Введите в это поле Ваш ИИН"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    minLength="12"
-                    maxLength="12"
-                    className="form-control form-control-lg"
-                  />
-                  <button
-                    href=""
-                    type="submit"
-                    className="btn btn-lg btn-outline-primary"
-                    onClick={postFindUserHandlerSubmit}
-                  >
-                    Проверить идентификатор
-                  </button>
-                  <button
-                    href=""
-                    type="reset"
-                    onClick={(e) => {
-                      setUsername("");
-                      setSecretQuestion("");
-                      setSuccess(false);
-                    }}
-                    className="btn btn-lg btn-outline-warning"
-                  >
-                    Сбросить данные
-                  </button>
-                </div>
-              </form>
-              <div className="form-control bg-warning bg-opacity-10">
+              <div className="form-control">
                 <form
                   method="POST"
                   target="_self"
@@ -317,14 +259,6 @@ const ChangePasswordPage = () => {
           )}
           {!success && secretQuestion && email ? (
             <div>
-              <div>
-                <label className="form-control-lg m-1">
-                  <ReCAPTCHA
-                    sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                    onChange={changeCapcha}
-                  />
-                </label>
-              </div>
               <div className="row">
                 <div className="form-control col">
                   <h3 className="lead display-6">
@@ -467,14 +401,6 @@ const ChangePasswordPage = () => {
               className="text-center p-1 m-1"
               onSubmit={postRecoverPasswordHandlerSubmit}
             >
-              <div>
-                <label className="form-control-lg m-1">
-                  <ReCAPTCHA
-                    sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                    onChange={changeCapcha}
-                  />
-                </label>
-              </div>
               <div>
                 <label className="form-control-lg m-1">
                   Введите пароль для входа в аккаунт:

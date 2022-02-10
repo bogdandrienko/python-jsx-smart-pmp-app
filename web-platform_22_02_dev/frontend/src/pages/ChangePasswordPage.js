@@ -16,7 +16,6 @@ const ChangePasswordPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [capcha, setCapcha] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -36,18 +35,16 @@ const ChangePasswordPage = () => {
         navigate("/login");
       });
     }
-  }, [navigate, dataUserChange, dispatch, capcha]);
+  }, [navigate, dataUserChange, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
-      dispatch(
-        userChangeProfileAction({
-          password: password,
-          password2: password2,
-        })
-      );
-    }
+    dispatch(
+      userChangeProfileAction({
+        password: password,
+        password2: password2,
+      })
+    );
   };
 
   const changeVisibility = () => {
@@ -61,10 +58,6 @@ const ChangePasswordPage = () => {
 
   function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
-  }
-
-  function changeCapcha(value) {
-    setCapcha(value);
   }
 
   return (
@@ -99,84 +92,9 @@ const ChangePasswordPage = () => {
               </MessageComponent>
             </div>
           )}
-          {!capcha && (
-            <MessageComponent variant="danger">
-              Пройдите проверку на робота!
-            </MessageComponent>
-          )}
         </div>
         <div>
-          <div className="form-control bg-success bg-opacity-10">
-            <div>
-              <label className="form-control-lg m-1">
-                <ReCAPTCHA
-                  sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                  onChange={changeCapcha}
-                />
-              </label>
-            </div>
-            <form className="">
-              <div className="input-group m-1">
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  required=""
-                  placeholder=""
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  minLength="8"
-                  maxLength="32"
-                  className="form-control form-control-lg"
-                  autoComplete="none"
-                  aria-autocomplete="none"
-                />
-                <input
-                  type="password"
-                  id="password2"
-                  name="password2"
-                  required=""
-                  placeholder=""
-                  value={password2}
-                  onChange={(e) => setPassword2(e.target.value)}
-                  minLength="8"
-                  maxLength="32"
-                  className="form-control form-control-lg"
-                  autoComplete="none"
-                  aria-autocomplete="none"
-                />
-                <button
-                  href=""
-                  type="button"
-                  onClick={changeVisibility}
-                  className="btn btn-lg btn-outline-danger"
-                >
-                  Видимость пароля
-                </button>
-              </div>
-              <div className="text-center btn-group m-1">
-                <button
-                  href=""
-                  type="submit"
-                  className="btn btn-lg btn-outline-primary"
-                >
-                  Сохранить новые данные
-                </button>
-                <button
-                  href=""
-                  type="reset"
-                  onClick={(e) => {
-                    setPassword("");
-                    setPassword2("");
-                  }}
-                  className="btn btn-lg btn-outline-warning"
-                >
-                  Сбросить данные
-                </button>
-              </div>
-            </form>
-          </div>
-          <div className="form-control bg-warning bg-opacity-10">
+          <div className="form-control">
             <form
               method="POST"
               target="_self"

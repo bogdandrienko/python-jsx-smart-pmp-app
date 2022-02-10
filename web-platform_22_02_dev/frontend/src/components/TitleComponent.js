@@ -74,10 +74,10 @@ const TitleComponent = ({
 
   return (
     <div>
-      <header className="py-3">
+      <header className="pb-3 m-1">
         <div className="container d-flex flex-wrap justify-content-center shadow">
           <div className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-            <span className="fw-normal fs-4 text-start p-1">
+            <span className="fw-normal fs-4 text-start">
               <p className="display-6 fw-normal text-start">{first}</p>
               <small className="lead fw-normal text-start">{second}</small>
             </span>

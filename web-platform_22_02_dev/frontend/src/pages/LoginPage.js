@@ -94,80 +94,7 @@ const LoginPage = () => {
             </MessageComponent>
           )}
         </div>
-
-        <div className="form-control bg-success bg-opacity-10">
-          <form className="">
-            <label className="form-control-lg m-1">
-              <ReCAPTCHA
-                sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                onChange={changeCapcha}
-              />
-            </label>
-            <div className="input-group m-1">
-              <input
-                type="text"
-                id="username"
-                name="username"
-                required=""
-                placeholder=""
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                minLength="12"
-                maxLength="12"
-                className="form-control form-control-lg"
-              />
-              <input
-                type="password"
-                id="password"
-                name="password"
-                required=""
-                placeholder=""
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                minLength="8"
-                maxLength="32"
-                className="form-control form-control-lg"
-              />
-              <button
-                href=""
-                type="button"
-                onClick={changeVisibility}
-                className="btn btn-lg btn-outline-danger"
-              >
-                Видимость пароля
-              </button>
-            </div>
-            <div className="btn-group m-1">
-              <button
-                href=""
-                type="submit"
-                className="btn btn-lg btn-outline-primary"
-              >
-                Войти в систему
-              </button>
-              <button
-                href=""
-                type="reset"
-                onClick={(e) => {
-                  setPassword("");
-                  setUsername("");
-                }}
-                className="btn btn-lg btn-outline-warning"
-              >
-                Сбросить данные
-              </button>
-              <a
-                href="/recover_password"
-                type="button"
-                className="btn btn-lg btn-outline-success"
-              >
-                Восстановить доступ к аккаунту
-              </a>
-            </div>
-          </form>
-        </div>
-
-        <div className="form-control bg-warning bg-opacity-10">
+        <div className="form-control">
           <form
             method="POST"
             target="_self"
@@ -213,9 +140,6 @@ const LoginPage = () => {
                 </small>
               </label>
               <label className="form-control-lg m-1">
-                <small className="lead text-danger">
-                  Докажите, что Вы не робот!
-                </small>
                 <ReCAPTCHA
                   sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
                   onChange={changeCapcha}
