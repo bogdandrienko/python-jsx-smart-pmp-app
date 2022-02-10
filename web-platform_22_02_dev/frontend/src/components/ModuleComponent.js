@@ -7,13 +7,13 @@ const ModuleComponent = (module = {}) => {
     <div className="border shadow text-center p-0 m-0">
       <div className="card-header lead">{module.module["Header"]}</div>
       <div className="text-center">
-        <img src={module.module["Image"]} className="img-fluid w-50" alt="id" />
+        <img src={module.module["Image"]} className="img-fluid w-25" alt="id" />
       </div>
       {module.module["Sections"]
         ? module.module["Sections"].map((section, section_i) => (
             <div key={section_i} className="card-body text-end p-0 m-0">
               <div className="card">
-                <li className="list-group-item list-group-item-action active disabled d-flex">
+                <li className="list-group-item list-group-item-action active disabled d-flex p-0 m-0">
                   <div className="">
                     <img
                       src={section["Image"]}
@@ -29,13 +29,13 @@ const ModuleComponent = (module = {}) => {
                     </Nav.Link>
                   </LinkContainer>
                 </li>
-                <ul className="list-group-flush">
+                <ul className="list-group-flush p-0 m-1">
                   {section["Links"]
                     ? section["Links"].map((link, link_i) =>
                         link["Type"] === "active" ? (
                           <li
                             key={link_i}
-                            className="list-group-item list-group-item-action"
+                            className="list-group-item list-group-item-action p-0 m-0"
                           >
                             <LinkContainer to={link["Link"]}>
                               <Nav.Link>
@@ -48,7 +48,7 @@ const ModuleComponent = (module = {}) => {
                         ) : (
                           <li
                             key={link_i}
-                            className="list-group-item list-group-item-action disabled"
+                            className="list-group-item list-group-item-action disabled p-0 m-1"
                           >
                             <LinkContainer
                               to={link["Link"] ? link["Link"] : "#"}

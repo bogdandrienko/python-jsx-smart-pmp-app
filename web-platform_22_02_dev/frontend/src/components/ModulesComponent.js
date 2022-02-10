@@ -1,6 +1,6 @@
 import React from "react";
 import ModuleComponent from "./ModuleComponent";
-import modules from "../constants/modulesConstants";
+import { modules } from "../js/constants";
 
 const ModulesComponent = () => {
   return (

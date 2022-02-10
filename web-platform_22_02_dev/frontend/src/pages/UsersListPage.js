@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userListAction } from "../actions/userActions";
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { userListAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const UsersListPage = () => {
   const dispatch = useDispatch();
   const [usersList, setUsersList] = useState([]);
 
-  const userList = useSelector((state) => state.userList);
+  const userListStore = useSelector((state) => state.userListStore);
   const {
     usersListLoadingReducer,
     usersListDataReducer,
     usersListErrorReducer,
-  } = userList;
+  } = userListStore;
   console.log("usersListLoadingReducer: ", usersListLoadingReducer);
   console.log("usersListDataReducer: ", usersListDataReducer);
   console.log("usersListErrorReducer: ", usersListErrorReducer);

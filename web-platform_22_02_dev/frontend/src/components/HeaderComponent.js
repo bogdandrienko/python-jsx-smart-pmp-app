@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector } from "react-redux";
-import modules from "../constants/modulesConstants";
+import { modules } from "../js/constants";
 
 const HeaderComponent = () => {
   const userLoginState = useSelector((state) => state.userLoginState);
@@ -13,14 +13,14 @@ const HeaderComponent = () => {
     fail: failUserLogin,
   } = userLoginState;
   return (
-    <header className="text-center">
+    <header className="navbar-fixed-top bg-secondary bg-opacity-10 m-0 p-0">
       <Navbar expand="lg">
         <Container>
           <div className="m-1">
             <a className="navbar-brand" href="https://km.kz/">
               <img
                 src="static/logo_small.png"
-                className="img-thumbnail img-fluid w-75"
+                className="img-thumbnail img-fluid w-25"
                 alt="id"
               />
             </a>

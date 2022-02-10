@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetailsAction, userLogoutAction } from "../actions/userActions";
+import { userDetailsAction, userLogoutAction } from "../js/actions";
 
 const TitleComponent = ({
   first = "Заголовок",
@@ -73,10 +73,24 @@ const TitleComponent = ({
   ]);
 
   return (
-    <div className="text-center m-1">
-      <header className="text-center container card">
-        <h6 className="lead">{first}</h6>
-        <small className="text-muted">{second}</small>
+    <div>
+      <header className="py-3">
+        <div className="container d-flex flex-wrap justify-content-center shadow">
+          <div className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+            <span className="fw-normal fs-4 text-start p-1">
+              <p className="display-6 fw-normal text-start">{first}</p>
+              <small className="lead fw-normal text-start">{second}</small>
+            </span>
+          </div>
+          <form className="col-12 col-lg-auto mb-3 mb-lg-0">
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Поиск..."
+              aria-label="Search"
+            />
+          </form>
+        </div>
       </header>
     </div>
   );

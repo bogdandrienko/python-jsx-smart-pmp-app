@@ -1,17 +1,13 @@
-import time
-
 import base64
 import datetime
 import hashlib
 import json
 import os
 import random
-from email import message
 import bs4
 import httplib2
 import requests
 
-from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.hashers import make_password
@@ -28,9 +24,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
 from xhtml2pdf import pisa
 
 from backend import models as backend_models, settings as backend_settings, serializers as backend_serializers, \
@@ -63,7 +57,6 @@ def admin_(request):
     # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
     #     redirect('http://192.168.1.68:8000/admin/')
 
-    context = {}
     return render(request, admin.site.urls)
 
 
@@ -175,9 +168,8 @@ def api_login_user(request):
                             request_method_slug_field=request_method,
                             error_text_field=f'action: LOGIN'
                     ):
-                        # print((dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M'))
-                        # print(now)
-                        if (dat.datetime_field + datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') >= now:
+                        if (dat.datetime_field + datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') \
+                                >= now:
                             access_count += 1
 
                     print(f"access_count: {access_count}")
@@ -306,18 +298,27 @@ def api_user_change_profile(request):
                         request_user.save()
                         user_model.password_slug_field = password
                         user_model.temp_password_boolean_field = False
-                        if request_body["email"] and request_body["email"] != user_model.email_field:
-                            user_model.email_field = request_body["email"]
-                        if request_body["secretQuestion"] and request_body["secretQuestion"] != \
-                                user_model.secret_question_char_field:
-                            user_model.secret_question_char_field = request_body["secretQuestion"]
-                        if request_body["secretAnswer"] and request_body["secretAnswer"] != \
-                                user_model.secret_answer_char_field:
-                            user_model.secret_answer_char_field = request_body["secretAnswer"]
+                        try:
+                            if request_body["email"] and request_body["email"] != user_model.email_field:
+                                user_model.email_field = request_body["email"]
+                        except Exception as error:
+                            pass
+                        try:
+                            if request_body["secretQuestion"] and request_body["secretQuestion"] != \
+                                    user_model.secret_question_char_field:
+                                user_model.secret_question_char_field = request_body["secretQuestion"]
+                        except Exception as error:
+                            pass
+                        try:
+                            if request_body["secretAnswer"] and request_body["secretAnswer"] != \
+                                    user_model.secret_answer_char_field:
+                                user_model.secret_answer_char_field = request_body["secretAnswer"]
+                        except Exception as error:
+                            pass
                         user_model.save()
                         response = {"response": "Изменение пароля успешно проведено!"}
                     else:
-                        response = {"error": "Пароли не совпадают или идентичны предыдущему"}
+                        response = {"error": "Пароли пустые, не совпадают или идентичны предыдущему"}
                     print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -390,11 +391,10 @@ def api_user_recover_password(request):
                             str(user_model.secret_answer_char_field).strip().lower():
                         response = {"response": {
                             "username": user.username,
-                            "secret_question_char_field": None,
                             "success": True
                         }}
                     else:
-                        response = {"error": f"Ответ не верный!"}
+                        response = {"error": "Ответ не верный!"}
                     print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -422,12 +422,9 @@ def api_user_recover_password(request):
                             request_method_slug_field=request_method,
                             error_text_field=f'action: SEND_EMAIL_PASSWORD'
                     ):
-                        # print((dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M'))
-                        # print(now)
-                        if (dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') >= now:
+                        if (dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') \
+                                >= now:
                             access_count += 1
-
-                    # print(f"access_count: {access_count}")
 
                     if access_count < 1:
                         backend_models.LoggingModel.objects.create(
@@ -448,9 +445,10 @@ def api_user_recover_password(request):
 
                         subject = 'Восстановление пароля от веб платформы'
                         message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-                                    f'перейдите по ссылке: http://web.km.kz:8000/ => восстановление пароля, ' \
-                                    f'введите Ваш идентификатор и затем в окне почты введите код (без кавычек): ' \
-                                    f'"{encrypt_text}". Внимание, этот код действует в течении часа с момента отправки!'
+                                    f'перейдите по ссылке: http://web.km.kz:88/recover_password => ' \
+                                    f'восстановление пароля, введите Ваш идентификатор и затем в окне почты ' \
+                                    f'введите код (без кавычек): "{encrypt_text}". Внимание, этот код действует ' \
+                                    f'в течении часа с момента отправки!'
                         from_email = 'web@km.kz'
                         to_email = email_
                         if subject and message_s and to_email:
@@ -492,7 +490,6 @@ def api_user_recover_password(request):
                         if str(decrypt_text.split('_')[1]).strip() == str(text.split('_')[1]).strip():
                             response = {"response": {
                                 "username": user.username,
-                                "recoverPassword": None,
                                 "success": True
                             }}
                         else:
@@ -742,13 +739,13 @@ def api_salary(request):
                             _days = 0
                             _hours = 0
                             _summ = 0
-                            for _key in json_data['global_objects'][table].keys():
-                                if _key != 'Fields':
+                            for __key in json_data['global_objects'][table].keys():
+                                if __key != 'Fields':
                                     try:
-                                        _days += json_data['global_objects'][table][f'{_key}']['ВсегоДни']
-                                        _hours += json_data['global_objects'][table][f'{_key}']['ВсегоЧасы']
-                                        _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
-                                        json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(
+                                        _days += json_data['global_objects'][table][f'{__key}']['ВсегоДни']
+                                        _hours += json_data['global_objects'][table][f'{__key}']['ВсегоЧасы']
+                                        _summ_local = json_data['global_objects'][table][f'{__key}']['Сумма']
+                                        json_data['global_objects'][table][f'{__key}']['Сумма'] = return_float_value(
                                             _summ_local)
                                         _summ += _summ_local
                                     except Exception as _error:
@@ -759,11 +756,11 @@ def api_salary(request):
                             }
                         else:
                             _summ = 0
-                            for _key in json_data['global_objects'][table].keys():
-                                if _key != 'Fields':
+                            for __key in json_data['global_objects'][table].keys():
+                                if __key != 'Fields':
                                     try:
-                                        _summ_local = json_data['global_objects'][table][f'{_key}']['Сумма']
-                                        json_data['global_objects'][table][f'{_key}']['Сумма'] = return_float_value(
+                                        _summ_local = json_data['global_objects'][table][f'{__key}']['Сумма']
+                                        json_data['global_objects'][table][f'{__key}']['Сумма'] = return_float_value(
                                             _summ_local)
                                         _summ += _summ_local
                                     except Exception as _error:
@@ -1063,8 +1060,8 @@ def api_salary(request):
 
                         # Set aligments
                         #######################################################
-                        wrap_text = Alignment(wrap_text=True)
-                        shrink_to_fit = Alignment(shrink_to_fit=True)
+                        # wrap_text = Alignment(wrap_text=True)
+                        # shrink_to_fit = Alignment(shrink_to_fit=True)
                         aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True,
                                                     shrink_to_fit=True)
                         for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
@@ -1093,7 +1090,7 @@ def api_salary(request):
                         # Set borders
                         #######################################################
                         side_medium = Side(border_style="thin", color="FF808080")
-                        side_think = Side(border_style="thin", color="FF808080")
+                        # side_think = Side(border_style="thin", color="FF808080")
                         border_horizontal_middle = Border(
                             top=side_medium,
                             # left=side_medium,
@@ -2150,7 +2147,7 @@ def create_modules(request):
                         group_model.save()
                     except Exception as error:
                         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                backend_service.ExcelClass.workbook_close(workbook=workbook)
+                backend_utils.ExcelClass.workbook_close(workbook=workbook)
             if _modules:
                 workbook = backend_utils.ExcelClass.workbook_load(excel_file=_modules)
                 sheet = backend_utils.ExcelClass.workbook_activate(workbook=workbook)
@@ -2837,7 +2834,7 @@ def account_export_accounts(request):
                           'Права суперпользователя', 'Группы доступа', 'Электронная почта', 'Секретный вопрос',
                           'Секретный ответ']
                 for title in titles:
-                    backend_service.ExcelClass.set_sheet_value(
+                    backend_utils.ExcelClass.set_sheet_value(
                         col=titles.index(title) + 1,
                         row=1,
                         value=title,
@@ -2856,10 +2853,10 @@ def account_export_accounts(request):
                         username = user_object.username
                         user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user_object)[
                             0]
-                        backend_service.ExcelClass.set_sheet_value('J', _index, username, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('J', _index, username, sheet)
 
                         password = user_model.password_slug_field
-                        backend_service.ExcelClass.set_sheet_value('K', _index, password, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('K', _index, password, sheet)
 
                         # technical data
                         is_active = user_model.activity_boolean_field
@@ -2867,21 +2864,21 @@ def account_export_accounts(request):
                             is_active = 'true'
                         else:
                             is_active = 'false'
-                        backend_service.ExcelClass.set_sheet_value('L', _index, is_active, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('L', _index, is_active, sheet)
 
                         is_staff = user_object.is_staff
                         if is_staff:
                             is_staff = 'true'
                         else:
                             is_staff = 'false'
-                        backend_service.ExcelClass.set_sheet_value('M', _index, is_staff, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('M', _index, is_staff, sheet)
 
                         is_superuser = user_object.is_superuser
                         if is_superuser:
                             is_superuser = 'true'
                         else:
                             is_superuser = 'false'
-                        backend_service.ExcelClass.set_sheet_value('N', _index, is_superuser, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('N', _index, is_superuser, sheet)
 
                         group_string = ''
                         groups = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
@@ -2891,45 +2888,45 @@ def account_export_accounts(request):
                             groups = group_string[2:]
                         else:
                             groups = ''
-                        backend_service.ExcelClass.set_sheet_value('P', _index, groups, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('P', _index, groups, sheet)
 
                         _email = user_model.email_field
-                        backend_service.ExcelClass.set_sheet_value('O', _index, _email, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('O', _index, _email, sheet)
 
                         secret_question = user_model.secret_question_char_field
-                        backend_service.ExcelClass.set_sheet_value('Q', _index, secret_question, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('Q', _index, secret_question, sheet)
 
                         secret_answer = user_model.secret_answer_char_field
-                        backend_service.ExcelClass.set_sheet_value('R', _index, secret_answer, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('R', _index, secret_answer, sheet)
 
                         # first data
                         last_name = user_model.last_name_char_field
-                        backend_service.ExcelClass.set_sheet_value('D', _index, last_name, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('D', _index, last_name, sheet)
 
                         first_name = user_model.first_name_char_field
-                        backend_service.ExcelClass.set_sheet_value('E', _index, first_name, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('E', _index, first_name, sheet)
 
                         patronymic = user_model.patronymic_char_field
-                        backend_service.ExcelClass.set_sheet_value('F', _index, patronymic, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('F', _index, patronymic, sheet)
                         # second data
 
                         personnel_number = user_model.personnel_number_slug_field
-                        backend_service.ExcelClass.set_sheet_value('G', _index, personnel_number, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('G', _index, personnel_number, sheet)
 
                         subdivision = user_model.subdivision_char_field
-                        backend_service.ExcelClass.set_sheet_value('A', _index, subdivision, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('A', _index, subdivision, sheet)
 
                         workshop_service = user_model.workshop_service_char_field
-                        backend_service.ExcelClass.set_sheet_value('B', _index, workshop_service, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('B', _index, workshop_service, sheet)
 
                         department_site = user_model.department_site_char_field
-                        backend_service.ExcelClass.set_sheet_value('C', _index, department_site, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('C', _index, department_site, sheet)
 
                         position = user_model.position_char_field
-                        backend_service.ExcelClass.set_sheet_value('H', _index, position, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('H', _index, position, sheet)
 
                         category = user_model.category_char_field
-                        backend_service.ExcelClass.set_sheet_value('I', _index, category, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('I', _index, category, sheet)
 
                         sub_body.append(subdivision)
                         sub_body.append(workshop_service)
@@ -3695,32 +3692,32 @@ def salary_(request):
             year = backend_service.DjangoClass.RequestClass.get_value(request, "year")
             date_base64 = base64.b64encode(f'{year}{month}'.encode()).decode()
             # url = f'http://192.168.1.158/Tanya_perenos/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-            # url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-            # relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-            # h = httplib2.Http(
-            #     relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-            # _login = 'Web_adm_1c'
-            # password = '159159qqww!'
-            # h.add_credentials(_login, password)
-            # response, content = h.request(url)
-            # if content:
-            #     _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-            #     success = True
-            #     error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
-            #     for error_word in error_word_list:
-            #         if _message.find(error_word) >= 0:
-            #             success = False
-            #     if _message.find('send') == 0:
-            #         data = _message.split('send')[1].strip()
-            #         success = False
-            # else:
-            #     success = False
-            # if success:
-            #     json_data = json.loads(
-            #         backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
-            #     with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
-            #         encode_data = json.dumps(json_data, ensure_ascii=False)
-            #         json.dump(encode_data, file, ensure_ascii=False)
+            url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+            h = httplib2.Http(
+                relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+            _login = 'Web_adm_1c'
+            password = '159159qqww!'
+            h.add_credentials(_login, password)
+            response, content = h.request(url)
+            if content:
+                _message = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                success = True
+                error_word_list = ['Ошибка', 'ошибка', 'Error', 'error', 'Failed', 'failed']
+                for error_word in error_word_list:
+                    if _message.find(error_word) >= 0:
+                        success = False
+                if _message.find('send') == 0:
+                    data = _message.split('send')[1].strip()
+                    success = False
+            else:
+                success = False
+            if success:
+                json_data = json.loads(
+                    backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash))
+                with open("static/media/data/zarplata.json", "w", encoding="utf-8") as file:
+                    encode_data = json.dumps(json_data, ensure_ascii=False)
+                    json.dump(encode_data, file, ensure_ascii=False)
             if True:
                 # Временное чтение файла для отладки без доступа к 1С
                 with open("static/media/data/zarplata_temp.json", "r", encoding="utf-8") as file:
@@ -3792,8 +3789,6 @@ def salary_(request):
                     ],
                 }
                 response = 1
-            else:
-                response = -1
         context = {
             'response': response,
             'months': months,

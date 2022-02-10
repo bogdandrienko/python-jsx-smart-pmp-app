@@ -3,8 +3,8 @@ import { Navbar, NavDropdown } from "react-bootstrap";
 
 const FooterComponent = () => {
   return (
-    <footer className="container-fluid mt-auto footer page-footer">
-      <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+    <footer className="footer bg-secondary bg-opacity-10 m-0 p-0">
+      <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
         <li className="m-1">
           <a className="btn btn-sm btn-outline-secondary" href="#">
             <i className="fa fa-arrow-up">{"  "} вверх</i>

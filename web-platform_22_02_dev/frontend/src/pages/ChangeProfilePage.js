@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { USER_CHANGE_RESET_CONSTANT } from "../js/constants";
 import {
   userChangeProfileAction,
   userDetailsAction,
   userLogoutAction,
-} from "../actions/userActions";
+} from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
-import { USER_CHANGE_RESET_CONSTANT } from "../constants/userConstants";
+import ReCAPTCHA from "react-google-recaptcha";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangeProfilePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [capcha, setCapcha] = useState("");
   const [email, setEmail] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
@@ -66,27 +70,30 @@ const ChangeProfilePage = () => {
       setPassword2("");
     }
   }, [dispatch, dataUserDetails]);
-  
+
   useEffect(() => {
     if (dataUserChange) {
       sleep(1000).then(() => {
         dispatch({ type: USER_CHANGE_RESET_CONSTANT });
         dispatch(userLogoutAction());
         navigate("/login");
-      });}
+      });
+    }
   }, [dispatch, dataUserChange, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      userChangeProfileAction({
-        email: email,
-        secretQuestion: secretQuestion,
-        secretAnswer: secretAnswer,
-        password: password,
-        password2: password2,
-      })
-    );
+    if (capcha !== "") {
+      dispatch(
+        userChangeProfileAction({
+          email: email,
+          secretQuestion: secretQuestion,
+          secretAnswer: secretAnswer,
+          password: password,
+          password2: password2,
+        })
+      );
+    }
   };
 
   const changeVisibility = () => {
@@ -102,6 +109,10 @@ const ChangeProfilePage = () => {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
+  function changeCapcha(value) {
+    setCapcha(value);
+  }
+
   return (
     <div>
       <HeaderComponent />
@@ -111,136 +122,104 @@ const ChangeProfilePage = () => {
         logic={true}
       />
       <main className="container text-center">
-        <div className="text-center">
+        <div>
           {loadUserDetails && <LoaderComponent />}
           {dataUserDetails && (
-            <div className="m-1">
-              <MessageComponent variant="success">
-                Данные успешно получены!
-              </MessageComponent>
-            </div>
+            <MessageComponent variant="success">
+              Данные успешно получены!
+            </MessageComponent>
           )}
           {errorUserDetails && (
-            <div className="m-1">
-              <MessageComponent variant="danger">
-                {errorUserDetails}
-              </MessageComponent>
-            </div>
+            <MessageComponent variant="danger">
+              {errorUserDetails}
+            </MessageComponent>
           )}
           {failUserDetails && (
-            <div className="m-1">
-              <MessageComponent variant="warning">
-                {failUserChange}
-              </MessageComponent>
-            </div>
+            <MessageComponent variant="warning">
+              {failUserChange}
+            </MessageComponent>
           )}
         </div>
-        <div className="text-center">
+        <div>
           {loadUserChange && <LoaderComponent />}
           {dataUserChange && (
-            <div className="m-1">
-              <MessageComponent variant="success">
-                Данные успешно изменены!
-              </MessageComponent>
-            </div>
+            <MessageComponent variant="success">
+              Данные успешно изменены!
+            </MessageComponent>
           )}
           {errorUserChange && (
-            <div className="m-1">
-              <MessageComponent variant="danger">
-                {errorUserChange}
-              </MessageComponent>
-            </div>
+            <MessageComponent variant="danger">
+              {errorUserChange}
+            </MessageComponent>
           )}
           {failUserChange && (
-            <div className="m-1">
-              <MessageComponent variant="warning">
-                {failUserChange}
-              </MessageComponent>
-            </div>
+            <MessageComponent variant="warning">
+              {failUserChange}
+            </MessageComponent>
+          )}
+          {!capcha && (
+            <MessageComponent variant="danger">
+              Пройдите проверку на робота!
+            </MessageComponent>
           )}
         </div>
-        <div className="m-1">
-          <h2 className="text-danger display-6 lead">
-            Внимание, все эти поля необходимо заполнить!
-          </h2>
-          <form
-            method="POST"
-            target="_self"
-            encType="multipart/form-data"
-            name="account_login"
-            autoComplete="on"
-            className="text-center p-1 m-1"
-            onSubmit={submitHandler}
-          >
-            <div>
-              <label className="form-control-lg m-1 lead">
-                Почта для восстановления доступа:
+
+        <div>
+          <div className="form-control bg-success bg-opacity-10">
+            <form className="">
+              <label className="form-control-lg m-1">
+                <ReCAPTCHA
+                  sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                  onChange={changeCapcha}
+                />
+              </label>
+              <div className="input-group m-1">
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required=""
-                  placeholder=""
+                  placeholder="Введите почту для восстановления доступа"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   minLength="1"
                   maxLength="128"
                   className="form-control form-control-lg"
                 />
-                <small className="text-muted">
-                  формат: bogdandrienko@gmail.com
-                </small>
-              </label>
-            </div>
-
-            <div>
-              <label className="form-control-lg m-1 lead">
-                Введите секретный вопрос для восстановления доступа:
+              </div>
+              <div className="input-group m-1">
                 <input
                   type="text"
                   id="secretQuestion"
                   name="secretQuestion"
                   required=""
-                  placeholder=""
+                  placeholder="Введите секретный вопрос для восстановления доступа"
                   value={secretQuestion}
                   onChange={(e) => setSecretQuestion(e.target.value)}
                   minLength="8"
                   maxLength="32"
                   className="form-control form-control-lg"
                 />
-                <small className="text-muted">
-                  количество символов: от 8 до 32
-                </small>
-              </label>
-              <label className="form-control-lg m-1 lead">
-                Введите ответ на секретный вопрос:
                 <input
                   type="text"
                   id="secretAnswer"
                   name="secretAnswer"
                   required=""
-                  placeholder=""
+                  placeholder="Введите секретный ответ на вопрос"
                   value={secretAnswer}
                   onChange={(e) => setSecretAnswer(e.target.value)}
                   minLength="8"
                   maxLength="32"
                   className="form-control form-control-lg"
                 />
-                <small className="text-muted">
-                  количество символов: от 8 до 32
-                </small>
-              </label>
-            </div>
-
-            <div>
-              <label className="form-control-lg m-1 lead">
-                Введите пароль для входа в аккаунт:
+              </div>
+              <div className="input-group m-1">
                 <input
                   type="password"
                   id="password"
                   name="password"
                   required=""
-                  placeholder=""
+                  placeholder="Введите новый пароль от аккаунта"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   minLength="8"
@@ -249,18 +228,12 @@ const ChangeProfilePage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
-                <small className="text-muted">
-                  количество символов: от 8 до 32
-                </small>
-              </label>
-              <label className="form-control-lg m-1 lead">
-                Повторите новый пароль:
                 <input
                   type="password"
                   id="password2"
                   name="password2"
                   required=""
-                  placeholder=""
+                  placeholder="Повторите новый пароль"
                   value={password2}
                   onChange={(e) => setPassword2(e.target.value)}
                   minLength="8"
@@ -269,52 +242,206 @@ const ChangeProfilePage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
-                <small className="text-muted">
-                  количество символов: от 8 до 32
-                </small>
-              </label>
-            </div>
-            <hr />
-            <div className="container text-center">
-              <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                <div className="m-1">
-                  <button
-                    href=""
-                    type="submit"
-                    className="btn btn-lg btn-outline-primary form-control"
-                  >
-                    Сохранить новые данные
-                  </button>
-                </div>
-                <div className="m-1">
-                  <button
-                    href=""
-                    type="reset"
-                    onClick={(e) => {
-                      setEmail("");
-                      setSecretQuestion("");
-                      setSecretAnswer("");
-                      setPassword("");
-                      setPassword2("");
-                    }}
-                    className="btn btn-lg btn-outline-warning form-control"
-                  >
-                    Сбросить данные
-                  </button>
-                </div>
-                <div className="m-1">
-                  <button
-                    href=""
-                    type="button"
-                    onClick={changeVisibility}
-                    className="btn btn-lg btn-outline-danger form-control"
-                  >
-                    Видимость пароля
-                  </button>
-                </div>
-              </ul>
-            </div>
-          </form>
+                <button
+                  href=""
+                  type="button"
+                  onClick={changeVisibility}
+                  className="btn btn-lg btn-outline-danger"
+                >
+                  Видимость пароля
+                </button>
+              </div>
+              <div className="btn-group m-1">
+                <button
+                  href=""
+                  type="submit"
+                  className="btn btn-lg btn-outline-primary form-control"
+                >
+                  Сохранить новые данные
+                </button>
+                <button
+                  href=""
+                  type="reset"
+                  onClick={(e) => {
+                    setEmail("");
+                    setSecretQuestion("");
+                    setSecretAnswer("");
+                    setPassword("");
+                    setPassword2("");
+                  }}
+                  className="btn btn-lg btn-outline-warning form-control"
+                >
+                  Сбросить данные
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div className="form-control bg-warning bg-opacity-10">
+            <h2 className="text-danger display-6 lead">
+              Внимание, все эти поля необходимо заполнить!
+            </h2>
+            <form
+              method="POST"
+              target="_self"
+              encType="multipart/form-data"
+              name="account_login"
+              autoComplete="on"
+              className="text-center p-1 m-1"
+              onSubmit={submitHandler}
+            >
+              <div>
+                <label className="form-control-lg m-1">
+                  <ReCAPTCHA
+                    sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                    onChange={changeCapcha}
+                  />
+                </label>
+              </div>
+              <div>
+                <label className="form-control-lg m-1 lead">
+                  Почта для восстановления доступа:
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required=""
+                    placeholder=""
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    minLength="1"
+                    maxLength="128"
+                    className="form-control form-control-lg"
+                  />
+                  <small className="text-muted">
+                    формат: bogdandrienko@gmail.com
+                  </small>
+                </label>
+              </div>
+
+              <div>
+                <label className="form-control-lg m-1 lead">
+                  Введите секретный вопрос для восстановления доступа:
+                  <input
+                    type="text"
+                    id="secretQuestion"
+                    name="secretQuestion"
+                    required=""
+                    placeholder=""
+                    value={secretQuestion}
+                    onChange={(e) => setSecretQuestion(e.target.value)}
+                    minLength="8"
+                    maxLength="32"
+                    className="form-control form-control-lg"
+                  />
+                  <small className="text-muted">
+                    количество символов: от 8 до 32
+                  </small>
+                </label>
+                <label className="form-control-lg m-1 lead">
+                  Введите ответ на секретный вопрос:
+                  <input
+                    type="text"
+                    id="secretAnswer"
+                    name="secretAnswer"
+                    required=""
+                    placeholder=""
+                    value={secretAnswer}
+                    onChange={(e) => setSecretAnswer(e.target.value)}
+                    minLength="8"
+                    maxLength="32"
+                    className="form-control form-control-lg"
+                  />
+                  <small className="text-muted">
+                    количество символов: от 8 до 32
+                  </small>
+                </label>
+              </div>
+
+              <div>
+                <label className="form-control-lg m-1 lead">
+                  Введите пароль для входа в аккаунт:
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required=""
+                    placeholder=""
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    minLength="8"
+                    maxLength="32"
+                    className="form-control form-control-lg"
+                    autoComplete="none"
+                    aria-autocomplete="none"
+                  />
+                  <small className="text-muted">
+                    количество символов: от 8 до 32
+                  </small>
+                </label>
+                <label className="form-control-lg m-1 lead">
+                  Повторите новый пароль:
+                  <input
+                    type="password"
+                    id="password2"
+                    name="password2"
+                    required=""
+                    placeholder=""
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
+                    minLength="8"
+                    maxLength="32"
+                    className="form-control form-control-lg"
+                    autoComplete="none"
+                    aria-autocomplete="none"
+                  />
+                  <small className="text-muted">
+                    количество символов: от 8 до 32
+                  </small>
+                </label>
+              </div>
+              <hr />
+              <div className="container text-center">
+                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                  <div className="m-1">
+                    <button
+                      href=""
+                      type="submit"
+                      className="btn btn-lg btn-outline-primary form-control"
+                    >
+                      Сохранить новые данные
+                    </button>
+                  </div>
+                  <div className="m-1">
+                    <button
+                      href=""
+                      type="reset"
+                      onClick={(e) => {
+                        setEmail("");
+                        setSecretQuestion("");
+                        setSecretAnswer("");
+                        setPassword("");
+                        setPassword2("");
+                      }}
+                      className="btn btn-lg btn-outline-warning form-control"
+                    >
+                      Сбросить данные
+                    </button>
+                  </div>
+                  <div className="m-1">
+                    <button
+                      href=""
+                      type="button"
+                      onClick={changeVisibility}
+                      className="btn btn-lg btn-outline-danger form-control"
+                    >
+                      Видимость пароля
+                    </button>
+                  </div>
+                </ul>
+              </div>
+            </form>
+          </div>
         </div>
       </main>
       <FooterComponent />

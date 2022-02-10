@@ -1,66 +1,74 @@
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav } from "react-bootstrap";
-import news from "../constants/newsConstants";
+import { news } from "../js/constants";
 
 const NewsComponent = (count = 100) => {
   return (
     <div className="">
-      <ul className="list-group">
-        <li className="lead list-group-item active">
-          <strong className="lead list-group-item active">Информация: </strong>
-        </li>
+      <div className="list-group list-group-flush border-bottom scrollarea">
+        <a
+          href="/news"
+          className="list-group-item list-group-item-action active py-3 lh-tight"
+          aria-current="true"
+        >
+          <div className="d-flex w-100 align-items-center justify-content-between">
+            <strong className="mb-1 lead">Информация</strong>
+            <strong className="text-warning">Свежие сверху</strong>
+          </div>
+          <div className="col-10 mb-1 small">
+            нажмите для перехода на страницу со всеми новостями
+          </div>
+        </a>
+
         {news.slice(0, count.count).map((news_elem, index) => (
-          <li
-            key={index}
-            className={
-              news_elem.Status !== "active"
-                ? "list-group-item bg-secondary bg-opacity-10"
-                : "list-group-item bg-success bg-opacity-10"
-            }
-          >
-            <div className="d-flex">
-              {news_elem.Status !== "active" ? (
-                <strong className="text-secondary text-start">
-                  (в разработке)
-                </strong>
-              ) : (
-                <strong className="text-success text-start">(завершено)</strong>
-              )}
-              <LinkContainer
-                to={news_elem.Link}
-                className={
-                  news_elem.Link !== "#"
-                    ? "text-secondary text-end"
-                    : "text-secondary text-end disabled"
-                }
-              >
-                <Nav.Link className="">
+          <div>
+            <a
+              href={news_elem.Link}
+              className={
+                news_elem.Status !== "active"
+                  ? "list-group-item list-group-item-action py-1 lh-tight bg-secondary bg-opacity-10"
+                  : "list-group-item list-group-item-action py-1 lh-tight bg-success bg-opacity-10"
+              }
+            >
+              <div className="d-flex w-100 align-items-center justify-content-between">
+                <strong className="mb-1">
                   {news_elem.Title}
                   {news_elem.Link !== "#" ? (
                     <small className="text-primary"> (ссылка)</small>
                   ) : (
                     ""
                   )}
-                </Nav.Link>
-              </LinkContainer>
-            </div>
-            <small>
-              {news_elem.Description}
-              {news_elem.Helps ? (
-                <small className="text-secondary"> ({news_elem.Helps})</small>
-              ) : (
-                ""
-              )}
-              {news_elem.Danger ? (
-                <small className="text-danger"> ({news_elem.Danger})</small>
-              ) : (
-                ""
-              )}
-            </small>
-          </li>
+                </strong>
+                <small className="text-muted">
+                  {news_elem.Status !== "active" ? (
+                    <strong className="text-secondary text-start">
+                      (в разработке)
+                    </strong>
+                  ) : (
+                    <strong className="text-success text-start">
+                      (завершено)
+                    </strong>
+                  )}
+                </small>
+              </div>
+              <div className="col-10 mb-1 small">
+                {news_elem.Description}
+                {news_elem.Helps ? (
+                  <small className="text-secondary"> ({news_elem.Helps})</small>
+                ) : (
+                  ""
+                )}
+                {news_elem.Danger ? (
+                  <small className="text-danger"> ({news_elem.Danger})</small>
+                ) : (
+                  ""
+                )}
+              </div>
+            </a>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

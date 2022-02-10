@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogoutAction } from "../actions/userActions";
-
-function LoginScreen() {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { userLogoutAction } from "../js/actions";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const LogoutPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -13,6 +14,6 @@ function LoginScreen() {
   }, [dispatch, navigate]);
 
   return <div>.</div>;
-}
+};
 
-export default LoginScreen;
+export default LogoutPage;

@@ -1,6 +1,6 @@
 import Home1Page from "./Home1Page";
 import React, { useState, useEffect } from "react";
-import PrivateRoute from "../utils/PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import axios from "axios";
 
 const TestPage = () => {

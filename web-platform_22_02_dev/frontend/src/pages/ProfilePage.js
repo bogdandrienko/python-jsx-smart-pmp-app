@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetailsAction } from "../actions/userActions";
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { userDetailsAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userToken } = userLogin;
+  const userLoginStore = useSelector((state) => state.userLoginStore);
+  const { userToken } = userLoginStore;
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { error, loading, user } = userDetails;
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const { error, loading, user } = userDetailsStore;
   // console.log("userToken: ", userToken);
   // console.log("user: ", user);
 

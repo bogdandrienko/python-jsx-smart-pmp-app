@@ -1,31 +1,30 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { productListReducer } from "../test/productReducers";
-import { notesListReducer, notesDetailsReducer } from "../test/noteReducers";
-import { salaryUserReducer } from "../reducers/salaryReducers";
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import {
   userLoginReducer,
   userDetailsReducer,
   userChangeReducer,
-
   ///////////////////////////////////////////////////////////
   userRecoverPasswordReducer,
   userListReducer,
-} from "../reducers/userReducers";
+  ///////////////////////////////////////////////////////////
+  salaryUserReducer,
+} from "./reducers";
+import { productListReducer } from "../test/productReducers";
+import { notesListReducer, notesDetailsReducer } from "../test/noteReducers";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const reducer = combineReducers({
   userLoginState: userLoginReducer,
   userDetailsStore: userDetailsReducer,
   userChangeStore: userChangeReducer,
-
+  userRecoverPasswordStore: userRecoverPasswordReducer,
+  userListStore: userListReducer,
   ///////////////////////////////////////////////////////////
-  userRecoverPassword: userRecoverPasswordReducer,
-  userList: userListReducer,
-
-  salaryUser: salaryUserReducer,
-
+  salaryUserStore: salaryUserReducer,
+  ///////////////////////////////////////////////////////////
   productList: productListReducer,
   notesList: notesListReducer,
   notesDetails: notesDetailsReducer,

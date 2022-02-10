@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import {
-  userChangeProfileAction,
-  userDetailsAction,
-  userLogoutAction,
-} from "../actions/userActions";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { USER_CHANGE_RESET_CONSTANT } from "../js/constants";
+import { userChangeProfileAction, userLogoutAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
-import { USER_CHANGE_RESET_CONSTANT } from "../constants/userConstants";
+import ReCAPTCHA from "react-google-recaptcha";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangePasswordPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [capcha, setCapcha] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -37,16 +36,18 @@ const ChangePasswordPage = () => {
         navigate("/login");
       });
     }
-  }, [navigate, dataUserChange, dispatch]);
+  }, [navigate, dataUserChange, dispatch, capcha]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      userChangeProfileAction({
-        password: password,
-        password2: password2,
-      })
-    );
+    if (capcha !== "") {
+      dispatch(
+        userChangeProfileAction({
+          password: password,
+          password2: password2,
+        })
+      );
+    }
   };
 
   const changeVisibility = () => {
@@ -60,6 +61,10 @@ const ChangePasswordPage = () => {
 
   function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  function changeCapcha(value) {
+    setCapcha(value);
   }
 
   return (
@@ -94,20 +99,24 @@ const ChangePasswordPage = () => {
               </MessageComponent>
             </div>
           )}
+          {!capcha && (
+            <MessageComponent variant="danger">
+              Пройдите проверку на робота!
+            </MessageComponent>
+          )}
         </div>
-        <div className="m-1">
-          <form
-            method="POST"
-            target="_self"
-            encType="multipart/form-data"
-            name="account_login"
-            autoComplete="on"
-            className="text-center p-1 m-1"
-            onSubmit={submitHandler}
-          >
+        <div>
+          <div className="form-control bg-success bg-opacity-10">
             <div>
               <label className="form-control-lg m-1">
-                Введите пароль для входа в аккаунт:
+                <ReCAPTCHA
+                  sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                  onChange={changeCapcha}
+                />
+              </label>
+            </div>
+            <form className="">
+              <div className="input-group m-1">
                 <input
                   type="password"
                   id="password"
@@ -122,12 +131,6 @@ const ChangePasswordPage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
-                <small className="text-muted">
-                  количество символов: от 8 до 32
-                </small>
-              </label>
-              <label className="form-control-lg m-1">
-                Повторите новый пароль:
                 <input
                   type="password"
                   id="password2"
@@ -142,49 +145,128 @@ const ChangePasswordPage = () => {
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
-                <small className="text-muted">
-                  количество символов: от 8 до 32
-                </small>
-              </label>
-            </div>
-            <hr />
-            <div className="container text-center">
-              <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                <div className="m-1">
-                  <button
-                    href=""
-                    type="submit"
-                    className="btn btn-lg btn-outline-primary form-control"
-                  >
-                    Сохранить новые данные
-                  </button>
-                </div>
-                <div className="m-1">
-                  <button
-                    href=""
-                    type="reset"
-                    onClick={(e) => {
-                      setPassword("");
-                      setPassword2("");
-                    }}
-                    className="btn btn-lg btn-outline-warning form-control"
-                  >
-                    Сбросить данные
-                  </button>
-                </div>
-                <div className="m-1">
-                  <button
-                    href=""
-                    type="button"
-                    onClick={changeVisibility}
-                    className="btn btn-lg btn-outline-danger form-control"
-                  >
-                    Видимость пароля
-                  </button>
-                </div>
-              </ul>
-            </div>
-          </form>
+                <button
+                  href=""
+                  type="button"
+                  onClick={changeVisibility}
+                  className="btn btn-lg btn-outline-danger"
+                >
+                  Видимость пароля
+                </button>
+              </div>
+              <div className="text-center btn-group m-1">
+                <button
+                  href=""
+                  type="submit"
+                  className="btn btn-lg btn-outline-primary"
+                >
+                  Сохранить новые данные
+                </button>
+                <button
+                  href=""
+                  type="reset"
+                  onClick={(e) => {
+                    setPassword("");
+                    setPassword2("");
+                  }}
+                  className="btn btn-lg btn-outline-warning"
+                >
+                  Сбросить данные
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="form-control bg-warning bg-opacity-10">
+            <form
+              method="POST"
+              target="_self"
+              encType="multipart/form-data"
+              name="account_login"
+              autoComplete="on"
+              className="text-center p-1 m-1"
+              onSubmit={submitHandler}
+            >
+              <div>
+                <label className="form-control-lg m-1">
+                  Введите пароль для входа в аккаунт:
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required=""
+                    placeholder=""
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    minLength="8"
+                    maxLength="32"
+                    className="form-control form-control-lg"
+                    autoComplete="none"
+                    aria-autocomplete="none"
+                  />
+                  <small className="text-muted">
+                    количество символов: от 8 до 32
+                  </small>
+                </label>
+                <label className="form-control-lg m-1">
+                  Повторите новый пароль:
+                  <input
+                    type="password"
+                    id="password2"
+                    name="password2"
+                    required=""
+                    placeholder=""
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
+                    minLength="8"
+                    maxLength="32"
+                    className="form-control form-control-lg"
+                    autoComplete="none"
+                    aria-autocomplete="none"
+                  />
+                  <small className="text-muted">
+                    количество символов: от 8 до 32
+                  </small>
+                </label>
+              </div>
+              <hr />
+              <div className="container text-center">
+                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                  <div className="m-1">
+                    <button
+                      href=""
+                      type="submit"
+                      className="btn btn-lg btn-outline-primary form-control"
+                    >
+                      Сохранить новые данные
+                    </button>
+                  </div>
+                  <div className="m-1">
+                    <button
+                      href=""
+                      type="reset"
+                      onClick={(e) => {
+                        setPassword("");
+                        setPassword2("");
+                      }}
+                      className="btn btn-lg btn-outline-warning form-control"
+                    >
+                      Сбросить данные
+                    </button>
+                  </div>
+                  <div className="m-1">
+                    <button
+                      href=""
+                      type="button"
+                      onClick={changeVisibility}
+                      className="btn btn-lg btn-outline-danger form-control"
+                    >
+                      Видимость пароля
+                    </button>
+                  </div>
+                </ul>
+              </div>
+            </form>
+          </div>
         </div>
       </main>
       <FooterComponent />

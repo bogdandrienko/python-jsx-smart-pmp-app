@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form } from "react-bootstrap";
-
+import ReCAPTCHA from "react-google-recaptcha";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import {
   userChangeProfileAction,
   userRecoverPasswordAction,
-} from "../actions/userActions";
+} from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
-import ReCAPTCHA from "react-google-recaptcha";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch();
 
-  const [username, setUsername] = useState("");
   const [capcha, setCapcha] = useState("");
+  const [username, setUsername] = useState("");
 
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
@@ -30,14 +30,17 @@ const ChangePasswordPage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userRecoverPassword = useSelector((state) => state.userRecoverPassword);
+  const userRecoverPasswordStore = useSelector(
+    (state) => state.userRecoverPasswordStore
+  );
   const {
-    userRecoverPasswordLoadingReducer,
-    userRecoverPasswordDataReducer,
-    userRecoverPasswordErrorReducer,
-  } = userRecoverPassword;
+    load: loadUserRecoverPassword,
+    data: dataUserRecoverPassword,
+    error: errorUserRecoverPassword,
+    fail: failUserRecoverPassword,
+  } = userRecoverPasswordStore;
 
-  const postSecretQuestionHandlerSubmit = (e) => {
+  const postFindUserHandlerSubmit = (e) => {
     e.preventDefault();
     if (capcha !== "") {
       dispatch(
@@ -50,91 +53,105 @@ const ChangePasswordPage = () => {
           password2: "",
         })
       );
+      setCapcha("");
     }
   };
 
-  const postSecretAnswerHandlerSubmit = (e) => {
+  const postCheckAnswerHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "CHECK_ANSWER",
-        username: username,
-        secretAnswer: secretAnswer,
-        recoverPassword: "",
-        password: "",
-        password2: "",
-      })
-    );
+    if (capcha !== "") {
+      dispatch(
+        userRecoverPasswordAction({
+          actionType: "CHECK_ANSWER",
+          username: username,
+          secretAnswer: secretAnswer,
+          recoverPassword: "",
+          password: "",
+          password2: "",
+        })
+      );
+      setCapcha("");
+    }
   };
 
   const postSendEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "SEND_EMAIL_PASSWORD",
-        username: username,
-        secretAnswer: "",
-        recoverPassword: "",
-        password: "",
-        password2: "",
-      })
-    );
+    if (capcha !== "") {
+      dispatch(
+        userRecoverPasswordAction({
+          actionType: "SEND_EMAIL_PASSWORD",
+          username: username,
+          secretAnswer: "",
+          recoverPassword: "",
+          password: "",
+          password2: "",
+        })
+      );
+      setCapcha("");
+    }
   };
 
   const postRecoverEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "CHECK_EMAIL_PASSWORD",
-        username: username,
-        secretAnswer: "",
-        recoverPassword: recoverPassword,
-        password: "",
-        password2: "",
-      })
-    );
+    if (capcha !== "") {
+      dispatch(
+        userRecoverPasswordAction({
+          actionType: "CHECK_EMAIL_PASSWORD",
+          username: username,
+          secretAnswer: "",
+          recoverPassword: recoverPassword,
+          password: "",
+          password2: "",
+        })
+      );
+      setCapcha("");
+    }
   };
 
   const postRecoverPasswordHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "CHANGE_PASSWORD",
-        username: username,
-        secretAnswer: "",
-        recoverPassword: "",
-        password: password,
-        password2: password2,
-      })
-    );
-    dispatch(userChangeProfileAction());
+    if (capcha !== "") {
+      dispatch(
+        userRecoverPasswordAction({
+          actionType: "CHANGE_PASSWORD",
+          username: username,
+          secretAnswer: "",
+          recoverPassword: "",
+          password: password,
+          password2: password2,
+        })
+      );
+      dispatch(userChangeProfileAction());
+      setCapcha("");
+    }
   };
 
   useEffect(() => {
-    if (userRecoverPasswordDataReducer) {
-      if (userRecoverPasswordDataReducer["username"]) {
-        setUsername(userRecoverPasswordDataReducer["username"]);
+    if (dataUserRecoverPassword) {
+      if (dataUserRecoverPassword["username"]) {
+        setUsername(dataUserRecoverPassword["username"]);
       } else {
         setUsername("");
       }
-      if (userRecoverPasswordDataReducer["secretQuestion"]) {
-        setSecretQuestion(userRecoverPasswordDataReducer["secretQuestion"]);
+      if (dataUserRecoverPassword["secretQuestion"]) {
+        setSecretQuestion(dataUserRecoverPassword["secretQuestion"]);
       } else {
         setSecretQuestion("");
       }
-      if (userRecoverPasswordDataReducer["email"]) {
-        setEmail(userRecoverPasswordDataReducer["email"]);
+      if (dataUserRecoverPassword["email"]) {
+        setEmail(dataUserRecoverPassword["email"]);
       } else {
         setEmail("");
       }
-      if (userRecoverPasswordDataReducer["success"]) {
-        setSuccess(userRecoverPasswordDataReducer["success"]);
+      if (dataUserRecoverPassword["success"]) {
+        setSuccess(dataUserRecoverPassword["success"]);
       } else {
         setSuccess(false);
       }
     } else {
+      setCapcha("");
     }
-  }, [dispatch, userRecoverPasswordDataReducer]);
+  }, [dispatch, dataUserRecoverPassword]);
 
   const changeVisibility = () => {
     const password = document.getElementById("password");
@@ -158,14 +175,289 @@ const ChangePasswordPage = () => {
         logic={false}
       />
       <main className="container text-center">
-        <div className="m-1">
-          {userRecoverPasswordErrorReducer && (
+        <div>
+          {loadUserRecoverPassword && <LoaderComponent />}
+          {dataUserRecoverPassword && (
+            <MessageComponent variant="success">Успешно!</MessageComponent>
+          )}
+          {errorUserRecoverPassword && (
             <MessageComponent variant="danger">
-              {userRecoverPasswordErrorReducer}
+              {errorUserRecoverPassword}
             </MessageComponent>
           )}
-          {userRecoverPasswordLoadingReducer && <LoaderComponent />}
-          {success ? (
+          {failUserRecoverPassword && (
+            <MessageComponent variant="warning">
+              {failUserRecoverPassword}
+            </MessageComponent>
+          )}
+          {!capcha && (
+            <MessageComponent variant="danger">
+              Пройдите проверку на робота!
+            </MessageComponent>
+          )}
+        </div>
+        <div className="m-1">
+          {!success && !secretQuestion && !email ? (
+            <div>
+              <form className="form-control bg-success bg-opacity-10">
+                <div>
+                  <label className="form-control-lg m-1">
+                    <ReCAPTCHA
+                      sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                      onChange={changeCapcha}
+                    />
+                  </label>
+                </div>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required=""
+                    placeholder="Введите в это поле Ваш ИИН"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    minLength="12"
+                    maxLength="12"
+                    className="form-control form-control-lg"
+                  />
+                  <button
+                    href=""
+                    type="submit"
+                    className="btn btn-lg btn-outline-primary"
+                    onClick={postFindUserHandlerSubmit}
+                  >
+                    Проверить идентификатор
+                  </button>
+                  <button
+                    href=""
+                    type="reset"
+                    onClick={(e) => {
+                      setUsername("");
+                      setSecretQuestion("");
+                      setSuccess(false);
+                    }}
+                    className="btn btn-lg btn-outline-warning"
+                  >
+                    Сбросить данные
+                  </button>
+                </div>
+              </form>
+              <div className="form-control bg-warning bg-opacity-10">
+                <form
+                  method="POST"
+                  target="_self"
+                  encType="multipart/form-data"
+                  name="account_login"
+                  autoComplete="on"
+                  className="text-center p-1 m-1"
+                >
+                  <div>
+                    <label className="form-control-lg m-1">
+                      <ReCAPTCHA
+                        sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                        onChange={changeCapcha}
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label className="form-control-lg m-1">
+                      Введите Ваш ИИН:
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required=""
+                        placeholder=""
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        minLength="12"
+                        maxLength="12"
+                        className="form-control form-control-lg"
+                      />
+                      <small className="text-muted">
+                        количество символов: 12
+                      </small>
+                    </label>
+                  </div>
+                  <hr />
+                  <div className="container text-center">
+                    <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                      <div className="m-1">
+                        <button
+                          href=""
+                          type="submit"
+                          className="btn btn-lg btn-outline-primary form-control"
+                          onClick={postFindUserHandlerSubmit}
+                        >
+                          Проверить идентификатор
+                        </button>
+                      </div>
+                      <div className="m-1">
+                        <button
+                          href=""
+                          type="reset"
+                          onClick={(e) => {
+                            setUsername("");
+                            setSecretQuestion("");
+                            setSuccess(false);
+                          }}
+                          className="btn btn-lg btn-outline-warning form-control"
+                        >
+                          Сбросить данные
+                        </button>
+                      </div>
+                    </ul>
+                  </div>
+                </form>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+          {!success && secretQuestion && email ? (
+            <div>
+              <div>
+                <label className="form-control-lg m-1">
+                  <ReCAPTCHA
+                    sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                    onChange={changeCapcha}
+                  />
+                </label>
+              </div>
+              <div className="row">
+                <div className="form-control col">
+                  <h3 className="lead display-6">
+                    Восстановление через секретный вопрос/ответ.
+                  </h3>
+                  <form
+                    method="POST"
+                    target="_self"
+                    encType="multipart/form-data"
+                    name="account_login"
+                    autoComplete="on"
+                    className="text-center p-1 m-1"
+                  >
+                    <div>
+                      <label className="form-control-lg m-1">
+                        <div className="text-danger lead">
+                          Секретный вопрос: '
+                          <small className="text-warning lead fw-bold">{`${secretQuestion}`}</small>
+                          '
+                        </div>
+                        <input
+                          type="text"
+                          id="secretAnswer"
+                          name="secretAnswer"
+                          required=""
+                          placeholder=""
+                          value={secretAnswer}
+                          onChange={(e) => setSecretAnswer(e.target.value)}
+                          minLength="8"
+                          maxLength="32"
+                          className="form-control form-control-lg"
+                        />
+                        <small className="text-muted">
+                          количество символов: от 8 до 32
+                        </small>
+                      </label>
+                    </div>
+                    <hr />
+                    <div className="container text-center">
+                      <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                        <div className="m-1">
+                          <button
+                            href=""
+                            type="submit"
+                            className="btn btn-lg btn-outline-primary form-control"
+                            onClick={postCheckAnswerHandlerSubmit}
+                          >
+                            Проверить ответ
+                          </button>
+                        </div>
+                      </ul>
+                    </div>
+                  </form>
+                </div>
+                <div className="form-control col">
+                  <h3 className="lead display-6">
+                    Восстановление через введённую ранее почту.
+                  </h3>
+                  <form
+                    method="POST"
+                    target="_self"
+                    encType="multipart/form-data"
+                    name="account_login"
+                    autoComplete="on"
+                    className="text-center p-1 m-1"
+                  >
+                    <div>
+                      <label className="form-control-lg m-1">
+                        Код восстановления отправленный на почту (
+                        <small className="text-danger">
+                          вводить без кавычек, код действует в течении часа с
+                          момента отправки
+                        </small>
+                        ):
+                        <div className="m-1">
+                          Часть почты, на которую будет отправлен код
+                          восстановления: '
+                          <small className="text-warning">
+                            {email &&
+                              `${email.slice(0, 5)} ... ${email.slice(-7)}`}
+                          </small>
+                          '
+                        </div>
+                        <input
+                          type="text"
+                          id="recoverPassword"
+                          name="recoverPassword"
+                          required=""
+                          placeholder=""
+                          value={recoverPassword}
+                          onChange={(e) => setRecoverPassword(e.target.value)}
+                          minLength="1"
+                          maxLength="64"
+                          className="form-control form-control-lg"
+                        />
+                        <small className="text-muted">
+                          количество символов: от 1 до 64
+                        </small>
+                      </label>
+                    </div>
+                    <hr />
+                    <div className="container text-center">
+                      <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                        <div className="m-1">
+                          <button
+                            href=""
+                            type="submit"
+                            className="btn btn-lg btn-outline-success form-control"
+                            onClick={postRecoverEmailHandlerSubmit}
+                          >
+                            Проверить код
+                          </button>
+                        </div>
+                        <div className="m-1">
+                          <button
+                            href=""
+                            type="reset"
+                            onClick={postSendEmailHandlerSubmit}
+                            className="btn btn-lg btn-outline-danger form-control"
+                          >
+                            Отправить код на почту
+                          </button>
+                        </div>
+                      </ul>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+          {success && (
             <form
               method="POST"
               target="_self"
@@ -175,6 +467,14 @@ const ChangePasswordPage = () => {
               className="text-center p-1 m-1"
               onSubmit={postRecoverPasswordHandlerSubmit}
             >
+              <div>
+                <label className="form-control-lg m-1">
+                  <ReCAPTCHA
+                    sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                    onChange={changeCapcha}
+                  />
+                </label>
+              </div>
               <div>
                 <label className="form-control-lg m-1">
                   Введите пароль для входа в аккаунт:
@@ -250,203 +550,6 @@ const ChangePasswordPage = () => {
                       className="btn btn-lg btn-outline-danger form-control"
                     >
                       Видимость пароля
-                    </button>
-                  </div>
-                </ul>
-              </div>
-            </form>
-          ) : secretQuestion ? (
-            <div className="row">
-              <div className="form-control col">
-                <h3 className="lead display-6">
-                  Восстановление через секретный вопрос/ответ.
-                </h3>
-                <form
-                  method="POST"
-                  target="_self"
-                  encType="multipart/form-data"
-                  name="account_login"
-                  autoComplete="on"
-                  className="text-center p-1 m-1"
-                >
-                  <div>
-                    <label className="form-control-lg m-1">
-                      <div className="text-danger lead">
-                        Секретный вопрос: '
-                        <small className="text-warning lead fw-bold">{`${secretQuestion}`}</small>
-                        '
-                      </div>
-                      <input
-                        type="text"
-                        id="secretAnswer"
-                        name="secretAnswer"
-                        required=""
-                        placeholder=""
-                        value={secretAnswer}
-                        onChange={(e) => setSecretAnswer(e.target.value)}
-                        minLength="8"
-                        maxLength="32"
-                        className="form-control form-control-lg"
-                      />
-                      <small className="text-muted">
-                        количество символов: от 8 до 32
-                      </small>
-                    </label>
-                  </div>
-                  <hr />
-                  <div className="container text-center">
-                    <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                      <div className="m-1">
-                        <button
-                          href=""
-                          type="submit"
-                          className="btn btn-lg btn-outline-primary form-control"
-                          onClick={postSecretAnswerHandlerSubmit}
-                        >
-                          Проверить секретный ответ
-                        </button>
-                      </div>
-                    </ul>
-                  </div>
-                </form>
-              </div>
-              <div className="form-control col">
-                <h3 className="lead display-6">
-                  Восстановление через введённую ранее почту.
-                </h3>
-                <form
-                  method="POST"
-                  target="_self"
-                  encType="multipart/form-data"
-                  name="account_login"
-                  autoComplete="on"
-                  className="text-center p-1 m-1"
-                >
-                  <div>
-                    <label className="form-control-lg m-1">
-                      Код восстановления отправленный на почту (
-                      <small className="text-danger">
-                        вводить без кавычек, код действует в течении часа с
-                        момента отправки
-                      </small>
-                      ):
-                      <div className="m-1">
-                        Часть почты, на которую будет отправлен код
-                        восстановления: '
-                        <small className="text-warning">
-                          {email &&
-                            `${email.slice(0, 5)} ... ${email.slice(-7)}`}
-                        </small>
-                        '
-                      </div>
-                      <input
-                        type="text"
-                        id="recoverPassword"
-                        name="recoverPassword"
-                        required=""
-                        placeholder=""
-                        value={recoverPassword}
-                        onChange={(e) => setRecoverPassword(e.target.value)}
-                        minLength="1"
-                        maxLength="64"
-                        className="form-control form-control-lg"
-                      />
-                      <small className="text-muted">
-                        количество символов: от 1 до 64
-                      </small>
-                    </label>
-                  </div>
-                  <hr />
-                  <div className="container text-center">
-                    <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                      <div className="m-1">
-                        <button
-                          href=""
-                          type="submit"
-                          className="btn btn-lg btn-outline-success form-control"
-                          onClick={postSecretQuestionHandlerSubmit}
-                        >
-                          Проверить код восстановления
-                        </button>
-                      </div>
-                      <div className="m-1">
-                        <button
-                          href=""
-                          type="reset"
-                          onClick={postSendEmailHandlerSubmit}
-                          className="btn btn-lg btn-outline-danger form-control"
-                        >
-                          Отправить код восстановления на почту
-                        </button>
-                      </div>
-                    </ul>
-                  </div>
-                </form>
-              </div>
-            </div>
-          ) : (
-            <form
-              method="POST"
-              target="_self"
-              encType="multipart/form-data"
-              name="account_login"
-              autoComplete="on"
-              className="text-center p-1 m-1"
-            >
-              <div>
-                <label className="form-control-lg m-1">
-                  <small className="lead text-danger">
-                    Докажите, что Вы не робот!
-                  </small>
-                  <ReCAPTCHA
-                    sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                    onChange={changeCapcha}
-                  />
-                </label>
-              </div>
-              <div>
-                <label className="form-control-lg m-1">
-                  Введите Ваш ИИН:
-                  <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    required=""
-                    placeholder=""
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    minLength="12"
-                    maxLength="12"
-                    className="form-control form-control-lg"
-                  />
-                  <small className="text-muted">количество символов: 12</small>
-                </label>
-              </div>
-              <hr />
-              <div className="container text-center">
-                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                  <div className="m-1">
-                    <button
-                      href=""
-                      type="submit"
-                      className="btn btn-lg btn-outline-primary form-control"
-                      onClick={postSecretQuestionHandlerSubmit}
-                    >
-                      Проверить идентификатор
-                    </button>
-                  </div>
-                  <div className="m-1">
-                    <button
-                      href=""
-                      type="reset"
-                      onClick={(e) => {
-                        setUsername("");
-                        setSecretQuestion("");
-                        setSuccess(false);
-                      }}
-                      className="btn btn-lg btn-outline-warning form-control"
-                    >
-                      Сбросить данные
                     </button>
                   </div>
                 </ul>

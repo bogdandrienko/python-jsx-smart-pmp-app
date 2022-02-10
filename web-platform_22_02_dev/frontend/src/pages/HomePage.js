@@ -1,12 +1,13 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import ModulesComponent from "../components/ModulesComponent";
 import NewsComponent from "../components/NewsComponent";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const HomePage = () => {
   return (

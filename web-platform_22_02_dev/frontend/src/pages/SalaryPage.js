@@ -1,26 +1,27 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { salaryUserAction } from "../actions/salaryActions";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { salaryUserAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import TableComponent from "../components/TableComponent";
-import ErrorComponent from "../components/ErrorComponent";
-
+import MessageComponent from "../components/MessageComponent";
+import ReCAPTCHA from "react-google-recaptcha";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const SalaryPage = () => {
   const dispatch = useDispatch();
 
-  const salaryUser = useSelector((state) => state.salaryUser);
+  const salaryUserStore = useSelector((state) => state.salaryUserStore);
   const {
-    salaryUserLoadingReducer,
-    salaryUserDataReducer,
-    salaryUserErrorReducer,
-  } = salaryUser;
-  // console.log("salaryUserLoadingReducer: ", salaryUserLoadingReducer);
-  // console.log("salaryUserDataReducer: ", salaryUserDataReducer);
-  // console.log("salaryUserErrorReducer: ", salaryUserErrorReducer);
+    load: loadSalaryUser,
+    data: dataSalaryUser,
+    error: errorSalaryUser,
+    fail: failSalaryUser,
+  } = salaryUserStore;
+
+  useEffect(() => {}, [dispatch]);
 
   const salaryHundlerSubmit = async () => {
     let month_ = document.getElementById("month").value;
@@ -31,96 +32,165 @@ const SalaryPage = () => {
     dispatch(salaryUserAction(`${year_}${month_}`));
   };
 
-  useEffect(() => {}, []);
-
   return (
     <div>
       <HeaderComponent />
       <TitleComponent
         first={"Расчётный лист"}
         second={"страница выгрузки Вашего расчётного листа."}
+        logic={true}
       />
       <main className="container text-center">
-        <div className="container-fluid text-center">
-          <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-            <li className="m-1">
-              <label className="form-control-lg">
-                Выберите месяц выгрузки:
-                <select
-                  type="select"
-                  id="month"
-                  name="month"
-                  required=""
-                  className="form-control form-control-lg"
+        <div className="form-control bg-success bg-opacity-10">
+          <form className="">
+            <div className="input-group m-1">
+              <select
+                type="select"
+                id="month"
+                name="month"
+                required=""
+                className="form-control form-control-lg"
+              >
+                <option value="1" defaultValue selected>
+                  Январь
+                </option>
+                <option value="2">Февраль</option>
+                <option value="3">Март</option>
+                <option value="4">Апрель</option>
+                <option value="5">Май</option>
+                <option value="6">Июнь</option>
+                <option value="7">Июль</option>
+                <option value="8">Август</option>
+                <option value="9">Сентябрь</option>
+                <option value="10">Октябрь</option>
+                <option value="11">Ноябрь</option>
+                <option value="12">Декабрь</option>
+              </select>
+              <select
+                type="select"
+                id="year"
+                name="year"
+                required=""
+                className="form-control form-control-lg"
+              >
+                <option value="2021">2021</option>
+                <option value="2022" defaultValue selected>
+                  2022
+                </option>
+                <option value="2023">2023</option>
+              </select>
+              {!loadSalaryUser && (
+                <button
+                  onClick={salaryHundlerSubmit}
+                  className="btn btn-lg btn-outline-primary"
+                  type="button"
                 >
-                  <option value="1" defaultValue selected>Январь</option>
-                  <option value="2">Февраль</option>
-                  <option value="3">Март</option>
-                  <option value="4">Апрель</option>
-                  <option value="5">Май</option>
-                  <option value="6">Июнь</option>
-                  <option value="7">Июль</option>
-                  <option value="8">Август</option>
-                  <option value="9">Сентябрь</option>
-                  <option value="10">Октябрь</option>
-                  <option value="11">Ноябрь</option>
-                  <option value="12">
-                    Декабрь
-                  </option>
-                </select>
-                <small className="text-muted">
-                  месяц: выберите месяц из выпадающего списка
-                </small>
-              </label>
-            </li>
-            <li className="m-1">
-              <label className="form-control-lg">
-                Выберите год выгрузки:
-                <select
-                  type="select"
-                  id="year"
-                  name="year"
-                  required=""
-                  className="form-control form-control-lg"
+                  получить
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+        <div className="form-control bg-warning bg-opacity-10">
+          <div className="container-fluid text-center">
+            <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+              <li className="m-1">
+                <label className="form-control-lg">
+                  Выберите месяц выгрузки:
+                  <select
+                    type="select"
+                    id="month"
+                    name="month"
+                    required=""
+                    className="form-control form-control-lg"
+                  >
+                    <option value="1" defaultValue selected>
+                      Январь
+                    </option>
+                    <option value="2">Февраль</option>
+                    <option value="3">Март</option>
+                    <option value="4">Апрель</option>
+                    <option value="5">Май</option>
+                    <option value="6">Июнь</option>
+                    <option value="7">Июль</option>
+                    <option value="8">Август</option>
+                    <option value="9">Сентябрь</option>
+                    <option value="10">Октябрь</option>
+                    <option value="11">Ноябрь</option>
+                    <option value="12">Декабрь</option>
+                  </select>
+                  <small className="text-muted">
+                    месяц: выберите месяц из выпадающего списка
+                  </small>
+                </label>
+              </li>
+              <li className="m-1">
+                <label className="form-control-lg">
+                  Выберите год выгрузки:
+                  <select
+                    type="select"
+                    id="year"
+                    name="year"
+                    required=""
+                    className="form-control form-control-lg"
+                  >
+                    <option value="2021">2021</option>
+                    <option value="2022" defaultValue selected>
+                      2022
+                    </option>
+                    <option value="2023">2023</option>
+                  </select>
+                  <small className="text-muted">
+                    год: выберите год из выпадающего списка
+                  </small>
+                </label>
+              </li>
+            </ul>
+            <div className="" id="div_button">
+              {!loadSalaryUser && (
+                <button
+                  onClick={salaryHundlerSubmit}
+                  className="btn btn-lg btn-outline-primary m-1"
+                  type="button"
                 >
-                  <option value="2021">
-                    2021
-                  </option>
-                  <option value="2022" defaultValue selected>2022</option>
-                  <option value="2023">2023</option>
-                </select>
-                <small className="text-muted">
-                  год: выберите год из выпадающего списка
-                </small>
-              </label>
-            </li>
-          </ul>
-          <div className="" id="div_button">
-          {!salaryUserLoadingReducer === true ? (
-            <button
-              onClick={salaryHundlerSubmit}
-              className="btn btn-lg btn-outline-primary m-1"
-              type="button"
-            >
-              выгрузить
-            </button>)
-            : ''}
+                  получить
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <hr />
         <div>
-          {salaryUserLoadingReducer === true ? (
-            <LoaderComponent />
-          ) : salaryUserErrorReducer !== undefined ? (
-            <ErrorComponent children={salaryUserErrorReducer} />
-          ) : salaryUserDataReducer === undefined ? (
-            ""
-          ) : (
+          <div className="text-center">
+            {loadSalaryUser && <LoaderComponent />}
+            {dataSalaryUser && (
+              <div className="m-1">
+                <MessageComponent variant="success">
+                  Данные успешно получены!
+                </MessageComponent>
+              </div>
+            )}
+            {errorSalaryUser && (
+              <div className="m-1">
+                <MessageComponent variant="danger">
+                  {errorSalaryUser}
+                </MessageComponent>
+              </div>
+            )}
+            {failSalaryUser && (
+              <div className="m-1">
+                <MessageComponent variant="warning">
+                  {failSalaryUser}
+                </MessageComponent>
+              </div>
+            )}
+          </div>
+          {dataSalaryUser && (
             <div>
               <div>
                 <a
                   className="btn btn-lg btn-outline-success m-1"
-                  href={`./${salaryUserDataReducer["excel_path"]}`}
+                  href={`./${dataSalaryUser["excel_path"]}`}
                 >
                   Скачать excel-документ
                 </a>
@@ -137,7 +207,7 @@ const SalaryPage = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {salaryUserDataReducer["headers"]
+                        {dataSalaryUser["headers"]
                           .slice(-2)
                           .map((head, index) => (
                             <tr key={index}>
@@ -164,7 +234,7 @@ const SalaryPage = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {salaryUserDataReducer["headers"]
+                        {dataSalaryUser["headers"]
                           .slice(0, 8)
                           .map((head, index) => (
                             <tr key={index}>
@@ -187,7 +257,7 @@ const SalaryPage = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {salaryUserDataReducer["headers"]
+                        {dataSalaryUser["headers"]
                           .slice(8, -2)
                           .map((head, index) => (
                             <tr key={index}>
@@ -198,7 +268,7 @@ const SalaryPage = () => {
                       </tbody>
                     </table>
                   </li>
-                  {salaryUserDataReducer["tables"].map((tab, index) => (
+                  {dataSalaryUser["tables"].map((tab, index) => (
                     <TableComponent key={index} tab={tab} />
                   ))}
                 </ul>
