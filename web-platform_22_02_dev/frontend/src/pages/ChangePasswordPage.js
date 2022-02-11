@@ -148,7 +148,7 @@ const ChangePasswordPage = () => {
               </div>
               <hr />
               <div className="container text-center">
-                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center">
                   <div className="m-1">
                     <button
                       href=""

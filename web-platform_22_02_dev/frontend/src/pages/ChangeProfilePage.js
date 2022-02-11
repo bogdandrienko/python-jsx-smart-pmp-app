@@ -215,12 +215,12 @@ const ChangeProfilePage = () => {
                     placeholder=""
                     value={secretAnswer}
                     onChange={(e) => setSecretAnswer(e.target.value)}
-                    minLength="8"
+                    minLength="6"
                     maxLength="32"
                     className="form-control form-control-lg"
                   />
                   <small className="text-muted">
-                    количество символов: от 8 до 32
+                    количество символов: от 6 до 32
                   </small>
                 </label>
               </div>
@@ -269,7 +269,7 @@ const ChangeProfilePage = () => {
               </div>
               <hr />
               <div className="container text-center">
-                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center">
                   <div className="m-1">
                     <button
                       href=""

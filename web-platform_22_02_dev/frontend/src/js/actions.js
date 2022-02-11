@@ -324,7 +324,7 @@ export const salaryUserAction = (dateTime) => async (dispatch, getState) => {
     const { data } = await axios({
       url: "api/salary/",
       method: "POST",
-      timeout: 15000,
+      timeout: 30000,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${userLogin.token}`,

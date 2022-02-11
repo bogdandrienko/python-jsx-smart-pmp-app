@@ -1596,7 +1596,7 @@ class UserModel(models.Model):
         verbose_name='Пароль от аккаунта пользователя',
         help_text='<small class="text-muted">password_slug_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
         allow_unicode=False,
     )
     activity_boolean_field = models.BooleanField(
@@ -1629,7 +1629,7 @@ class UserModel(models.Model):
         help_text='<small class="text-muted">Строка содержащая почту, example: "bogdandrienko@gmail.com"'
                   '</small><hr><br>',
 
-        max_length=128,
+        max_length=256,
     )
     secret_question_char_field = models.CharField(
         db_column='secret_question_char_field_db_column',
@@ -1646,7 +1646,7 @@ class UserModel(models.Model):
         verbose_name='Секретный вопрос',
         help_text='<small class="text-muted">secret_question_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     secret_answer_char_field = models.CharField(
         db_column='secret_answer_char_field_db_column',
@@ -1663,7 +1663,7 @@ class UserModel(models.Model):
         verbose_name='Секретный ответ',
         help_text='<small class="text-muted">secret_answer_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     temp_password_boolean_field = models.BooleanField(
         db_column='temp_password_boolean_field_db_column',
@@ -1694,7 +1694,7 @@ class UserModel(models.Model):
         verbose_name='Фамилия',
         help_text='<small class="text-muted">last_name_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     first_name_char_field = models.CharField(
         db_column='first_char_field_db_column',
@@ -1711,7 +1711,7 @@ class UserModel(models.Model):
         verbose_name='Имя',
         help_text='<small class="text-muted">first_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     patronymic_char_field = models.CharField(
         db_column='patronymic_char_field_db_column',
@@ -1728,7 +1728,7 @@ class UserModel(models.Model):
         verbose_name='Отчество',
         help_text='<small class="text-muted">patronymic_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     personnel_number_slug_field = models.SlugField(
         db_column='personnel_number_slug_field_db_column',
@@ -1763,7 +1763,7 @@ class UserModel(models.Model):
         verbose_name='Подразделение',
         help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     workshop_service_char_field = models.CharField(
         db_column='workshop_service_char_field_db_column',
@@ -1780,7 +1780,7 @@ class UserModel(models.Model):
         verbose_name='Цех/Служба',
         help_text='<small class="text-muted">workshop_service_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     department_site_char_field = models.CharField(
         db_column='department_site_char_field_db_column',
@@ -1797,7 +1797,7 @@ class UserModel(models.Model):
         verbose_name='Отдел/Участок',
         help_text='<small class="text-muted">department_site_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     position_char_field = models.CharField(
         db_column='position_char_field_db_column',
@@ -1814,7 +1814,7 @@ class UserModel(models.Model):
         verbose_name='Должность',
         help_text='<small class="text-muted">position_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     category_char_field = models.CharField(
         db_column='category_char_field_db_column',
@@ -1831,7 +1831,7 @@ class UserModel(models.Model):
         verbose_name='Категория',
         help_text='<small class="text-muted">category_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=128,
     )
     education_text_field = models.TextField(
         db_column='education_text_field_db_column',
@@ -1848,7 +1848,7 @@ class UserModel(models.Model):
         verbose_name='Образование',
         help_text='<small class="text-muted">education_text_field</small><hr><br>',
 
-        max_length=256,
+        max_length=1024,
     )
     achievements_text_field = models.TextField(
         db_column='achievements_text_field_db_column',
@@ -1865,7 +1865,7 @@ class UserModel(models.Model):
         verbose_name='Достижения',
         help_text='<small class="text-muted">achievements_text_field</small><hr><br>',
 
-        max_length=256,
+        max_length=1024,
     )
     biography_text_field = models.TextField(
         db_column='biography_text_field_db_column',
@@ -1882,7 +1882,7 @@ class UserModel(models.Model):
         verbose_name='Биография',
         help_text='<small class="text-muted">biography_text_field</small><hr><br>',
 
-        max_length=256,
+        max_length=1024,
     )
     hobbies_text_field = models.TextField(
         db_column='hobbies_text_field_db_column',
@@ -1899,7 +1899,7 @@ class UserModel(models.Model):
         verbose_name='Увлечения',
         help_text='<small class="text-muted">hobbies_text_field</small><hr><br>',
 
-        max_length=256,
+        max_length=1024,
     )
     image_field = models.ImageField(
         db_column='image_field_db_column',
@@ -1916,7 +1916,7 @@ class UserModel(models.Model):
         help_text='<small class="text-muted">image_field_db_column</small><hr><br>',
 
         upload_to='uploads/admin/account/avatar',
-        max_length=100,
+        max_length=200,
     )
 
     class Meta:

@@ -16,21 +16,12 @@ const HeaderComponent = () => {
     <header className="navbar-fixed-top bg-secondary bg-opacity-10 m-0 p-0">
       <Navbar expand="lg">
         <Container>
-          <div className="m-1">
-            <a className="navbar-brand" href="https://km.kz/">
-              <img
-                src="static/logo_small.png"
-                className="img-thumbnail img-fluid w-25"
-                alt="id"
-              />
-            </a>
-          </div>
-          <a className="navbar-brand" href="/">
-            Обновить
+          <a className="navbar-brand img-thumbnail" href="https://km.kz/">
+            <img src="static/logo_small.png" className="w-25" alt="id" />
           </a>
-          <LinkContainer to="/home">
-            <Navbar.Brand>Домашняя</Navbar.Brand>
-          </LinkContainer>
+          <a className="navbar-brand" href="/">
+          Домашняя
+          </a>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -232,6 +223,20 @@ const HeaderComponent = () => {
                   ))}
                 </NavDropdown>
               ))}
+
+              {dataUserLogin ? (
+                <LinkContainer to="/logout">
+                  <Nav.Link>
+                    <button className="btn btn-danger">Выйти  <i class="fa-solid fa-user"></i></button>
+                  </Nav.Link>
+                </LinkContainer>
+              ) : (
+                <LinkContainer to="/login">
+                  <Nav.Link>
+                    <button className="btn btn-primary">Войти  <i class="fa-solid fa-user"></i></button>
+                  </Nav.Link>
+                </LinkContainer>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

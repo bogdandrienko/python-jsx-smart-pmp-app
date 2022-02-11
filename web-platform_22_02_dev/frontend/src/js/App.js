@@ -16,6 +16,7 @@ import TextStudyPage from "../pages/TextStudyPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import SalaryPage from "../pages/SalaryPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import GologramPage from "../test/GologramPage";
 // import UsersListPage from "../pages/UsersListPage";
 // import ProfilePage from "../pages/ProfilePage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +28,6 @@ import SalaryPage from "../pages/SalaryPage";
 // import Note1Page from "../test/Note1Page";
 // import ChatPage from "../test/ChatPage";
 // import TestPage from "../test/TestPage";
-// import GologramPage from "../test/GologramPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
@@ -48,9 +48,10 @@ function App() {
           <Route path="/text_study" element={<TextStudyPage />} />
           <Route path="/salary" element={<SalaryPage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          <Route path="/gologram" element={<GologramPage />} />
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {/*<Route path="/users_list" element={<UsersListPage />} />*/}
           {/* <Route path="/profile" element={<ProfilePage />} /> */}
-          {/* <Route path="/gologram" element={<GologramPage />} /> */}
           {/*<Route path="/chat" element={<ChatPage />} />*/}
           {/*<Route path="/test" element={<TestPage />} />*/}
           {/*<Route path="/shop" element={<Home1Page />} />*/}

@@ -20,14 +20,14 @@ const HomePage = () => {
       />
       <main className="container text-center">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 align-content-between">
-          <div className="text-center">
+          <div className="text-center container-fluid">
             <small className="lead fw-bold">Первый вход в систему:</small>
             <div className="embed-responsive embed-responsive-16by9">
               <iframe
                 className="embed-responsive-item"
-                width="80%"
-                height="80%"
-                src="https://www.youtube.com/embed/WlC8iXpn2vA"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/1ba_rLHMWbs"
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

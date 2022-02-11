@@ -287,12 +287,12 @@ const ChangePasswordPage = () => {
                           placeholder=""
                           value={secretAnswer}
                           onChange={(e) => setSecretAnswer(e.target.value)}
-                          minLength="8"
+                          minLength="6"
                           maxLength="32"
                           className="form-control form-control-lg"
                         />
                         <small className="text-muted">
-                          количество символов: от 8 до 32
+                          количество символов: от 6 до 32
                         </small>
                       </label>
                     </div>
