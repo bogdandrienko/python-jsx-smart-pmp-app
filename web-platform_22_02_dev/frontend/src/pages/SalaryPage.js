@@ -8,7 +8,6 @@ import FooterComponent from "../components/FooterComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import TableComponent from "../components/TableComponent";
 import MessageComponent from "../components/MessageComponent";
-import ReCAPTCHA from "react-google-recaptcha";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const SalaryPage = () => {
   const dispatch = useDispatch();

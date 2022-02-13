@@ -4,6 +4,8 @@ import hashlib
 import json
 import os
 import random
+import time
+
 import bs4
 import httplib2
 import requests
@@ -42,8 +44,12 @@ def index(request):
     # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
     #     redirect('http://192.168.1.68:8000/home/')
 
-    context = {}
-    return render(request, 'index.html', context)
+    try:
+        context = {}
+        return render(request, 'index.html', context)
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.logging_errors(error=error, request=request)
+        return render(request, 'backend/404.html')
 
 
 def admin_(request):
@@ -685,19 +691,27 @@ def api_salary(request):
                     iin_base64 = base64.b64encode(str(iin).encode()).decode()
                     date_base64 = base64.b64encode(f'{request_body["dateTime"]}'.encode()).decode()
                     url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-                    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-                    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-                    _login = 'Web_adm_1c'
-                    password = '159159qqww!'
-                    h.add_credentials(_login, password)
-                    response, content = h.request(url)
-                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-                    error_word_list = ['ошибка', 'error', 'failed']
-                    if data.find('send') == 0:
-                        return Response({"error": f"{data.split('send')[1].strip()}"})
-                    for error_word in error_word_list:
-                        if data.find(error_word.lower()) >= 0:
-                            return Response({"error": f"Неизвестная ошибка."})
+                    # relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+                    # h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+                    # _login = 'Web_adm_1c'
+                    # password = '159159qqww!'
+                    # h.add_credentials(_login, password)
+                    # response, content = h.request(url)
+                    # data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    # error_word_list = ['ошибка', 'error', 'failed']
+                    # if data.find('send') == 0:
+                    #     return Response({"error": f"{data.split('send')[1].strip()}"})
+                    # for error_word in error_word_list:
+                    #     if data.find(error_word.lower()) >= 0:
+                    #         return Response({"error": f"Неизвестная ошибка."})
+
+                    # Get local test json response from 1c
+                    #############################################
+                    # Временное чтение файла для отладки без доступа к 1С
+                    with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
+                        data = json.load(file)
+                        time.sleep(3)
+                    ###############################################
 
                     json_data = json.loads(data)
                     try:
@@ -710,15 +724,6 @@ def api_salary(request):
                                 "3": "Сумма"
                             },
                         }
-                    ####################################################################################################
-
-                    # Get local test json response from 1c
-                    ####################################################################################################
-                    # Временное чтение файла для отладки без доступа к 1С
-                    # with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
-                    #     json_data = json.loads(json.load(file))
-                    # time.sleep(1)
-                    print(json_data)
                     ####################################################################################################
 
                     # Return pretty integer and float value
