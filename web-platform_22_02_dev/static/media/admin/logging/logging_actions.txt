@@ -44398,3 +44398,55 @@ Web_adm_1c, 192.168.1.158, /api/user/temp_all/, GET, 2022-02-14 16:31:31.851182
 Web_adm_1c, 192.168.1.158, /api/user/temp_all/, GET, 2022-02-14 16:32:39.264058
 
 Web_adm_1c, 192.168.1.158, /api/user/temp_all/, GET, 2022-02-14 16:34:22.015276
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 22:28:22.062479
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:23.375164
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:39.288775
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:39.328790
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:50.091153
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:50.126260
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:50.957451
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:50.991609
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:51.814350
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:51.872911
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:52.651755
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:28:52.689818
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:08.592698
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:08.631737
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:09.249567
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:09.287606
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:10.470514
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:10.519339
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:11.067823
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:11.106891
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:11.443581
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:11.479693
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:11.738365
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:29:11.767613
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 22:46:14.558020
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 22:46:15.854851

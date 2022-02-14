@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import ReactPlayer from 'react-player'
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
@@ -22,7 +23,33 @@ const HomePage = () => {
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 align-content-between">
           <div className="text-center container-fluid">
             <small className="lead fw-bold">Первый вход в систему:</small>
+            
             <div className="embed-responsive embed-responsive-16by9">
+              <div className='player-wrapper'>
+                    <ReactPlayer
+                    url= 'static/first_login.MP4'
+                    title="Первый вход в систему:"
+                    width="100%"
+                    height="100%"
+                    controls={true}
+                    className="embed-responsive-item"
+                    />
+                </div>
+            </div>
+            
+            <div className="embed-responsive embed-responsive-16by9">
+              <div className='player-wrapper'>
+                    <ReactPlayer
+                    url= 'static/first_login_mobile.MP4'
+                    title="Первый вход в систему:"
+                    width="100%"
+                    height="100%"
+                    controls={true}
+                    className="embed-responsive-item"
+                    />
+                </div>
+            </div>
+            {/* <div className="embed-responsive embed-responsive-16by9">
               <iframe
                 className="embed-responsive-item"
                 width="100%"
@@ -47,7 +74,7 @@ const HomePage = () => {
                 allowFullScreen
                 controls
               />
-            </div>
+            </div> */}
             <div className="row">
               <LinkContainer to="/video_study" className="col">
                 <Nav.Link>

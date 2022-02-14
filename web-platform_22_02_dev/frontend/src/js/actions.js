@@ -154,6 +154,11 @@ export const userDetailsAction = () => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    console.log(error.response)
+    if (error.response.status === 401 && error.response.statusText === "Unauthorized") {
+      dispatch(userLogoutAction());
+      console.log("logout")
+    }
     dispatch({
       type: USER_DETAILS_FAIL_CONSTANT,
       payload:

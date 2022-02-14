@@ -24,7 +24,7 @@ from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from rest_framework import status
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -137,6 +137,7 @@ def routes(request):
 
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@permission_classes([AllowAny])
 def api_login_user(request):
     """
     Api django-rest-framework login
