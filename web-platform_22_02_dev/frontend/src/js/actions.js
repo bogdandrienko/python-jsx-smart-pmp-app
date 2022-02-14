@@ -25,17 +25,23 @@ import {
   USER_RECOVER_PASSWORD_FAIL_CONSTANT,
   USER_RECOVER_PASSWORD_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  USER_SALARY_DATA_CONSTANT,
+  USER_SALARY_ERROR_CONSTANT,
+  USER_SALARY_FAIL_CONSTANT,
+  USER_SALARY_LOAD_CONSTANT,
+  USER_SALARY_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   USER_LIST_LOADING_CONSTANT,
   USER_LIST_DATA_CONSTANT,
   USER_LIST_ERROR_CONSTANT,
   USER_LIST_RESET_CONSTANT,
   USER_LIST_DEFAULT_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  USER_SALARY_DATA_CONSTANT,
-  USER_SALARY_ERROR_CONSTANT,
-  USER_SALARY_FAIL_CONSTANT,
-  USER_SALARY_LOAD_CONSTANT,
-  USER_SALARY_RESET_CONSTANT,
+  BANK_IDEA_LIST_LOADING_CONSTANT,
+  BANK_IDEA_LIST_DATA_CONSTANT,
+  BANK_IDEA_LIST_ERROR_CONSTANT,
+  BANK_IDEA_LIST_FAIL_CONSTANT,
+  BANK_IDEA_LIST_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } from "./constants";
 
@@ -131,7 +137,7 @@ export const userDetailsAction = () => async (dispatch, getState) => {
     if (data["response"]) {
       const response = data["response"];
 
-      console.log("userDetailsAction response: ", response);
+      // console.log("userDetailsAction response: ", response);
 
       dispatch({
         type: USER_DETAILS_DATA_CONSTANT,
@@ -372,13 +378,66 @@ export const salaryUserAction = (dateTime) => async (dispatch, getState) => {
       console.log("salaryUserAction error: ", response);
 
       dispatch({
-        type: USER_SALARY_FAIL_CONSTANT,
+        type: USER_SALARY_ERROR_CONSTANT,
         payload: response,
       });
     }
   } catch (error) {
     dispatch({
-      type: USER_SALARY_ERROR_CONSTANT,
+      type: USER_SALARY_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const bankIdeaListAction = (category) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: BANK_IDEA_LIST_LOADING_CONSTANT,
+    });
+
+    const {
+      userLoginState: { data: userLogin },
+    } = getState();
+    const { data } = await axios({
+      url: "api/bank_idea_list/",
+      method: "POST",
+      timeout: 5000,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: {
+        "Action-type": "BANK_IDEA_LIST",
+        body: { category: category },
+      },
+    });
+
+    if (data["response"]) {
+      const response = data["response"];
+
+      console.log("bankIdeaListAction response: ", response);
+
+      dispatch({
+        type: BANK_IDEA_LIST_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+
+      console.log("bankIdeaListAction error: ", response);
+
+      dispatch({
+        type: BANK_IDEA_LIST_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: BANK_IDEA_LIST_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

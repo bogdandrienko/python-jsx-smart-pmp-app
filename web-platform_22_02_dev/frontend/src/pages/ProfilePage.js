@@ -37,7 +37,7 @@ const ProfilePage = () => {
     try {
       lastLogin = `${user["last_login"].split("T")[0]} ${user["last_login"]
         .split("T")[1]
-        .slice(0, -13)}`;
+        .slice(0, -14)}`;
     } catch (error) {}
   }
 

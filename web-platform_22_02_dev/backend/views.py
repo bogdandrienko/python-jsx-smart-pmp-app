@@ -1257,6 +1257,52 @@ def api_salary(request):
         return Response({"error": "This endpoint has error."})
 
 
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def api_bank_idea_all(request):
+    """
+    Api django-rest-framework bank_idea_all
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+
+    print('\n\n\n')
+    print('api_salary:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
+          f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
+
+    try:
+        if request_method == 'GET':
+            return Response({"error": "This method not allowed for endpoint."})
+        elif request_method == 'POST':
+            if request_action_type == "BANK_IDEA_LIST":
+                try:
+                    ideas = backend_models.IdeaModel.objects.all()
+                    serializer = backend_serializers.IdeaModelSerializer(instance=ideas, many=True)
+                    response = {"response": serializer.data}
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "This action has error."})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        elif request_method == 'PUT':
+            return Response({"error": "This method not allowed for endpoint."})
+        elif request_method == 'DELETE':
+            return Response({"error": "This method not allowed for endpoint."})
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return Response({"error": "This endpoint has error."})
+
 ########################################################################################################################
 
 # @api_view(http_method_names=['GET'])

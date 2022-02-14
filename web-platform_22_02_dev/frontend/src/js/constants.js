@@ -27,17 +27,23 @@ export const USER_RECOVER_PASSWORD_FAIL_CONSTANT =
 export const USER_RECOVER_PASSWORD_RESET_CONSTANT =
   "USER_RECOVER_PASSWORD_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const USER_SALARY_LOAD_CONSTANT = "USER_SALARY_LOAD_CONSTANT";
+export const USER_SALARY_DATA_CONSTANT = "USER_SALARY_DATA_CONSTANT";
+export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
+export const USER_SALARY_FAIL_CONSTANT = "USER_SALARY_FAIL_CONSTANT";
+export const USER_SALARY_RESET_CONSTANT = "USER_SALARY_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LIST_LOADING_CONSTANT = "USER_LIST_LOADING_CONSTANT";
 export const USER_LIST_DATA_CONSTANT = "USER_LIST_DATA_CONSTANT";
 export const USER_LIST_ERROR_CONSTANT = "USER_LIST_ERROR_CONSTANT";
 export const USER_LIST_RESET_CONSTANT = "USER_LIST_RESET_CONSTANT";
 export const USER_LIST_DEFAULT_CONSTANT = "USER_LIST_DEFAULT_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_SALARY_LOAD_CONSTANT = "USER_SALARY_LOAD_CONSTANT";
-export const USER_SALARY_DATA_CONSTANT = "USER_SALARY_DATA_CONSTANT";
-export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
-export const USER_SALARY_FAIL_CONSTANT = "USER_SALARY_FAIL_CONSTANT";
-export const USER_SALARY_RESET_CONSTANT = "USER_SALARY_RESET_CONSTANT";
+export const BANK_IDEA_LIST_LOADING_CONSTANT = "BANK_IDEA_LIST_LOADING_CONSTANT";
+export const BANK_IDEA_LIST_DATA_CONSTANT = "BANK_IDEA_LIST_DATA_CONSTANT";
+export const BANK_IDEA_LIST_ERROR_CONSTANT = "BANK_IDEA_LIST_ERROR_CONSTANT";
+export const BANK_IDEA_LIST_FAIL_CONSTANT = "BANK_IDEA_LIST_FAIL_CONSTANT";
+export const BANK_IDEA_LIST_RESET_CONSTANT = "BANK_IDEA_LIST_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {

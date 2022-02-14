@@ -8,9 +8,12 @@ import {
   userChangeReducer,
   ///////////////////////////////////////////////////////////
   userRecoverPasswordReducer,
-  userListReducer,
   ///////////////////////////////////////////////////////////
   salaryUserReducer,
+  ///////////////////////////////////////////////////////////
+  bankIdeaListReducer,
+  ///////////////////////////////////////////////////////////
+  userListReducer,
 } from "./reducers";
 import { productListReducer } from "../test/productReducers";
 import { notesListReducer, notesDetailsReducer } from "../test/noteReducers";
@@ -21,9 +24,12 @@ const reducer = combineReducers({
   userDetailsStore: userDetailsReducer,
   userChangeStore: userChangeReducer,
   userRecoverPasswordStore: userRecoverPasswordReducer,
-  userListStore: userListReducer,
   ///////////////////////////////////////////////////////////
   salaryUserStore: salaryUserReducer,
+  ///////////////////////////////////////////////////////////
+  bankIdeaListStore: bankIdeaListReducer,
+  ///////////////////////////////////////////////////////////
+  userListStore: userListReducer,
   ///////////////////////////////////////////////////////////
   productList: productListReducer,
   notesList: notesListReducer,

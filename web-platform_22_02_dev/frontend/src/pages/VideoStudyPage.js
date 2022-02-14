@@ -30,6 +30,19 @@ const VideoStudyPage = () => {
               controls
             />
           </div>
+          <div className="embed-responsive embed-responsive-16by9">
+            <iframe
+              className="embed-responsive-item"
+              width="80%"
+              height="80%"
+              src="https://www.youtube.com/embed/8L6EVU2vEZ8"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              controls
+            />
+          </div>
         </div>
         <div>
           <small className="lead fw-bold">Выгрузка расчётного листа:</small>
@@ -39,6 +52,19 @@ const VideoStudyPage = () => {
               width="80%"
               height="80%"
               src="https://www.youtube.com/embed/dyaPqpWdlHw"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              controls
+            />
+          </div>
+          <div className="embed-responsive embed-responsive-16by9">
+            <iframe
+              className="embed-responsive-item"
+              width="80%"
+              height="80%"
+              src="https://www.youtube.com/embed/ntOfbJaDF24"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

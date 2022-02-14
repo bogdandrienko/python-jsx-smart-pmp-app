@@ -2,6 +2,8 @@ from django.contrib import admin
 
 from backend import models as backend_models
 
+from rest_framework_simplejwt import token_blacklist
+
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Администрирование'  # default: "Django site admin"
@@ -149,6 +151,16 @@ class ExamplesModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(backend_models.ExamplesModel, ExamplesModelAdmin)
+
+
+class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
+
+    def has_delete_permission(self, *args, **kwargs):
+        return True  # or whatever logic you want
+
+
+admin.site.unregister(token_blacklist.models.OutstandingToken)
+admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
 
 
 class LoggingModelAdmin(admin.ModelAdmin):
@@ -457,6 +469,47 @@ class GroupModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.GroupModel, GroupModelAdmin)
 
 
+########################################################################################################################
+
+
+class IdeaModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
+    """
+
+    list_display = (
+        'type_slug_field',
+        'name_char_field',
+        'name_slug_field',
+    )
+    list_filter = (
+        'type_slug_field',
+        'name_char_field',
+        'name_slug_field',
+    )
+    fieldsets = (
+        ('Тип', {'fields': (
+            'type_slug_field',
+        )}),
+        ('Имя отображения', {'fields': (
+            'name_char_field',
+        )}),
+        ('Имя валидации', {'fields': (
+            'name_slug_field',
+        )}),
+    )
+    search_fields = [
+        'type_slug_field',
+        'name_char_field',
+        'name_slug_field',
+    ]
+
+
+# admin.site.register(backend_models.IdeaModel, IdeaModelAdmin)
+admin.site.register(backend_models.IdeaModel)
+
+
+########################################################################################################################
 class NotificationModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'NotificationModel' на панели администратора
@@ -616,15 +669,3 @@ admin.site.register(backend_models.ReviewModel)
 admin.site.register(backend_models.OrderModel)
 admin.site.register(backend_models.OrderItemModel)
 admin.site.register(backend_models.ShippingAddressModel)
-
-from rest_framework_simplejwt import token_blacklist
-
-
-class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
-
-    def has_delete_permission(self, *args, **kwargs):
-        return True  # or whatever logic you want
-
-
-admin.site.unregister(token_blacklist.models.OutstandingToken)
-admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)

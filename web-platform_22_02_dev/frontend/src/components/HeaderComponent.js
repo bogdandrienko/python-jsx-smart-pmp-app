@@ -27,6 +27,22 @@ const HeaderComponent = () => {
             <Nav className="me-auto">
               {dataUserLogin && dataUserLogin.username === "Bogdan" ? (
                 <NavDropdown title="Разработка" id="basic-nav-dropdown">
+                <li>
+                  <strong className="dropdown-header text-center">
+                    Банк идей
+                  </strong>
+                  <LinkContainer to="/bank_idea_list">
+                    <Nav.Link>Все идеи</Nav.Link>
+                  </LinkContainer>
+                </li>
+                <li>
+                  <strong className="dropdown-header text-center">
+                    Аккаунты
+                  </strong>
+                  <LinkContainer to="/users_list">
+                    <Nav.Link>Список пользователей</Nav.Link>
+                  </LinkContainer>
+                </li>
                   <li>
                     <strong className="dropdown-header text-center">
                       Шаблоны
@@ -150,14 +166,6 @@ const HeaderComponent = () => {
                       <Nav.Link>Создание действий, групп или модулей</Nav.Link>
                     </LinkContainer>
                     <NavDropdown.Divider />
-                  </li>
-                  <li>
-                    <strong className="dropdown-header text-center">
-                      Аккаунты
-                    </strong>
-                    <LinkContainer to="/users_list">
-                      <Nav.Link>Список пользователей</Nav.Link>
-                    </LinkContainer>
                   </li>
                   <li>
                     <strong className="dropdown-header text-center">

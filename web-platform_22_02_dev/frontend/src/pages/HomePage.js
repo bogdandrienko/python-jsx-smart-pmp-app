@@ -35,6 +35,19 @@ const HomePage = () => {
                 controls
               />
             </div>
+            <div className="embed-responsive embed-responsive-16by9">
+              <iframe
+                className="embed-responsive-item"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/8L6EVU2vEZ8"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                controls
+              />
+            </div>
             <div className="row">
               <LinkContainer to="/video_study" className="col">
                 <Nav.Link>

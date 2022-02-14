@@ -43246,3 +43246,701 @@ Bogdan, 127.0.0.1, /, GET, 2022-02-13 15:48:58.682075
 970801351179, 127.0.0.1, /api/salary/, POST, 2022-02-13 15:49:04.321075
 
 Bogdan, 127.0.0.1, /, GET, 2022-02-13 15:49:19.819446
+
+, 127.0.0.1, /, GET, 2022-02-14 09:15:41.532168
+
+, 127.0.0.1, /, GET, 2022-02-14 09:15:47.409220
+
+, 127.0.0.1, /, GET, 2022-02-14 09:15:49.004967
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 09:15:52.570266
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 09:15:56.054568
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-14 09:16:01.070369
+
+Bogdan, 127.0.0.1, /django/account_create_or_change_accounts/, GET, 2022-02-14 09:16:03.621210
+
+Bogdan, 127.0.0.1, /django/, GET, 2022-02-14 09:16:05.581087
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 10:45:38.084237
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 10:45:41.758475
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:45:43.077045
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:45:43.132677
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:45:43.171716
+
+Bogdan, 127.0.0.1, /api/user/change_profile/, POST, 2022-02-14 10:45:54.900733
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:45:55.148636
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 10:46:03.375142
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:46:04.740666
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 10:46:13.026113
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:46:14.328242
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:46:16.137775
+
+Bogdan, 127.0.0.1, /api/user/change_profile/, POST, 2022-02-14 10:46:21.913857
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 10:46:27.522822
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:46:28.818311
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:46:35.024623
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:46:35.025622
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:46:36.438367
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:46:36.440319
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:47:06.418711
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:47:06.963105
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:47:06.993360
+
+, 127.0.0.1, /, GET, 2022-02-14 10:47:19.664210
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 10:47:23.144573
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 10:50:20.181596
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 10:50:22.825686
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 10:50:48.020705
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 10:50:48.769314
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 10:50:59.969814
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:51:02.781057
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:51:02.782035
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:53:05.729082
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:53:05.766171
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:53:59.898595
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:53:59.953386
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:55:16.826939
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:55:45.223919
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:57:22.915028
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:57:22.948477
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:57:35.845187
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:57:52.024108
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 10:57:59.627724
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 10:57:59.644315
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:02:40.189978
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:02:58.606395
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:02:58.608345
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:03:55.047080
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:03:55.056840
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:04:09.947946
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:04:26.875951
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:04:29.975878
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:04:30.013096
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:10:11.232331
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:10:11.233307
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:10:13.296333
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:10:13.297309
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:10:47.748529
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:10:47.757314
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:11:00.900712
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:11:00.938775
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:11:04.019756
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:11:04.021707
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:11:32.585298
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:11:32.602865
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:12:03.708859
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:12:03.709835
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:12:35.389743
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:12:35.434638
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:12:53.090229
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:12:53.131429
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:12:54.583143
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:12:54.584120
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:13:45.551040
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:13:49.758926
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:13:49.766733
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:14:06.761360
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:14:06.826728
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:14:29.262945
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:14:29.275633
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:14:34.326650
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:14:34.327628
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:15:07.582023
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:15:07.621064
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:15:38.794342
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:15:38.795317
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:15:47.581566
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:15:47.582540
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:16:07.584918
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:16:17.209972
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:16:17.210947
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:17:07.676624
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:17:18.975713
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:17:18.990353
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:17:26.044517
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:17:26.069893
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:17:29.037222
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:17:29.050888
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:17:30.197162
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:17:30.198138
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:17:46.885135
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:17:46.911488
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:17:59.230234
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:17:59.231209
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:18:07.812448
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:18:07.838799
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:19:58.674679
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:19:58.711766
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:05.914764
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:05.926475
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:13.497435
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:13.525739
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:17.248573
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:17.260284
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:21.079699
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:21.080674
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:25.056930
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:25.057905
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:28.181108
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:28.201605
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:31.255496
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:31.272088
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:20:32.683133
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:20:32.683133
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:21:11.226300
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:21:11.227277
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:21:23.137355
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:21:23.163683
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:21:24.595573
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:21:24.596549
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:21:32.068945
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:21:32.094295
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:21:34.504580
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:21:34.505556
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:21:43.748636
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:21:43.749611
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:22:25.795380
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:22:25.796361
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:22:33.515330
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:22:33.539758
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:22:37.077559
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:22:37.078535
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:23:21.349436
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:24:50.431564
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:24:50.432540
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:25:18.018937
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:25:21.520121
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:25:21.521097
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:27:01.020126
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:27:01.022078
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:27:19.514559
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:27:19.527247
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:27:37.980960
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:27:37.995600
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:30:21.704058
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:30:21.706010
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:30:43.782016
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:30:43.792449
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:31:00.016113
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:31:00.029778
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:31:20.353494
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:31:20.368131
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:31:42.670090
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:31:42.672042
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:31:50.586551
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:31:52.002154
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:32:02.631025
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:32:08.184388
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:32:08.188292
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:36:25.047000
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:36:25.063594
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:36:29.777089
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:36:29.791729
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:38:38.865601
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:38:38.867553
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:40:00.794309
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:40:00.806022
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:40:04.550460
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:40:04.565120
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:40:26.440644
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:40:26.441591
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:40:42.168700
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:40:42.169677
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:40:45.996614
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:40:45.997590
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:40:50.214903
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:40:50.226615
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:40:51.655074
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:40:51.657026
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:41:01.809030
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:41:04.649197
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:41:05.720483
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:41:12.474023
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:41:14.630274
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:41:14.633202
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:41:17.826198
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:41:17.848644
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:42:35.130806
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:42:35.200102
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:42:45.078693
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:42:47.222964
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:42:48.518755
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:42:52.913108
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:42:52.927748
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:43:57.393358
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:43:57.409949
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:44:09.651116
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:44:10.658458
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:44:12.048041
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:44:14.374082
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:44:14.376036
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:45:18.391724
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:45:18.463010
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:45:31.036096
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:45:31.046832
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:45:47.447810
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:45:48.376976
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:45:55.799861
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:45:58.042857
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:45:58.094865
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:47:22.669098
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:47:25.633831
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:47:27.759555
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:47:27.799572
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 11:47:36.090848
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:47:37.400935
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:47:40.570583
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:47:43.845254
+
+, 127.0.0.1, /api/user/login/, POST, 2022-02-14 11:47:46.650361
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:47:48.001378
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:47:50.088238
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:47:51.696682
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:47:51.738650
+
+Bogdan, 127.0.0.1, /, GET, 2022-02-14 11:48:01.395611
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:48:59.605521
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:48:59.606498
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:49:00.522362
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:49:00.528218
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:49:01.681573
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:49:01.685476
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:49:44.459946
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:49:44.485322
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:50:30.807240
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:50:30.849208
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:50:31.758035
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:50:31.759012
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:50:57.344729
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:50:57.344729
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:50:58.145012
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:50:58.177219
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:50:59.029158
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:50:59.035014
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:50:59.800593
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:50:59.807423
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:00.706433
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:00.710338
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:02.461278
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:02.570952
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:03.592463
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:03.611983
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:04.584294
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:04.589172
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:05.392002
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:05.439826
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:17.960617
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:17.961593
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:18.821447
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:18.835111
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:19.747217
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:19.774544
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:20.623400
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:20.630232
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:21.324440
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:21.388856
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:22.192762
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:22.193739
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:54.075196
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:54.075196
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:51:54.914959
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:51:54.918862
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:52:05.000207
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:52:05.028511
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:52:06.376480
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:52:06.393072
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:52:19.319970
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:52:19.335586
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:52:57.565982
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:52:57.566958
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:52:58.393578
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:52:58.398458
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:53:09.041043
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:53:09.074226
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:53:16.936981
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:53:16.937958
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:53:18.026039
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:53:18.027016
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:53:32.858267
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:53:32.889498
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:53:34.347643
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:53:34.349594
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:54:30.855198
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:54:30.856174
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:54:39.133679
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:54:39.150271
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:55:31.214345
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:55:31.240698
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:55:32.331428
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:55:32.335332
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:55:33.673253
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:55:33.678133
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:55:47.162894
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:55:47.203887
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:56:01.086456
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:56:01.186083
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:56:21.573811
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:56:21.626046
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 11:56:33.467555
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 11:56:33.468531
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 12:55:26.850624
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 12:55:26.862338
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 12:59:56.501609
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 12:59:56.502585
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:00:26.688501
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:00:26.710950
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:00:47.078070
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:00:47.132725
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:00:57.259677
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:00:57.260653
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:01:08.042595
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:01:08.048451
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:01:13.965707
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:01:14.034025
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:01:49.919052
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:01:49.937595
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:02:59.691693
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:02:59.723900
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:11:28.170165
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:11:28.178949
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:13:11.518401
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:13:11.519378
+
+Bogdan, 127.0.0.1, /api/user/profile/, POST, 2022-02-14 13:14:50.180586
+
+Bogdan, 127.0.0.1, /api/bank_idea_list/, POST, 2022-02-14 13:14:50.213123
