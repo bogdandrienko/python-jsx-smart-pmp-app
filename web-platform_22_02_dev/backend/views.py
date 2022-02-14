@@ -23,10 +23,11 @@ from django.urls import reverse
 from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from rest_framework import status
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from xhtml2pdf import pisa
 
 from backend import models as backend_models, settings as backend_settings, serializers as backend_serializers, \
@@ -598,6 +599,7 @@ def api_user_all(request):
 
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@authentication_classes([BasicAuthentication])
 def api_user_temp_all(request):
     """
     Api django-rest-framework user temp_all
@@ -614,14 +616,21 @@ def api_user_temp_all(request):
     print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
           f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
 
+    if request_method != 'GET':
+        return Response({"error": "This method not allowed for endpoint."})
+    # Body: {"body": {"username": "Web_adm_1c", "password": "159159qqww!"}}
+
     user_models = backend_models.UserModel.objects.filter(temp_password_boolean_field=True)
+    if not request.user.is_superuser:
+        return Response({"error": "Your user in not superuser."})
 
     objects = []
     for user_model in user_models:
-        if not user_model.user_foreign_key_field.is_superuser:
+        if not user_model.user_foreign_key_field.is_superuser and \
+                user_model.user_foreign_key_field.username != "Web_adm_1c":
             objects.append(
                 {
-                    f"{str(user_model.user_foreign_key_field)}":
+                    f"""{base64.b64encode(str(user_model.user_foreign_key_field.username)[::-1].encode()).decode()}""":
                         base64.b64encode(str(f"12{user_model.password_slug_field}345").encode()).decode()
                 }
             )
@@ -629,6 +638,17 @@ def api_user_temp_all(request):
     # for obj in objects:
     #     for key, value in obj.items():
     #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
+    #
+    # try:
+    #     print('PATH: ', request.path)
+    # except Exception as error:
+    #     print(error)
+    #
+    # try:
+    #     for k, v in request.headers.items():
+    #         print(f"{k}: ", v)
+    # except Exception as error:
+    #     print(error)
 
     return Response({"response": objects})
 
@@ -691,26 +711,26 @@ def api_salary(request):
                     iin_base64 = base64.b64encode(str(iin).encode()).decode()
                     date_base64 = base64.b64encode(f'{request_body["dateTime"]}'.encode()).decode()
                     url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-                    # relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-                    # h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
-                    # _login = 'Web_adm_1c'
-                    # password = '159159qqww!'
-                    # h.add_credentials(_login, password)
-                    # response, content = h.request(url)
-                    # data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-                    # error_word_list = ['ошибка', 'error', 'failed']
-                    # if data.find('send') == 0:
-                    #     return Response({"error": f"{data.split('send')[1].strip()}"})
-                    # for error_word in error_word_list:
-                    #     if data.find(error_word.lower()) >= 0:
-                    #         return Response({"error": f"Неизвестная ошибка."})
+                    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+                    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+                    _login = 'Web_adm_1c'
+                    password = '159159qqww!'
+                    h.add_credentials(_login, password)
+                    response, content = h.request(url)
+                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    error_word_list = ['ошибка', 'error', 'failed']
+                    if data.find('send') == 0:
+                        return Response({"error": f"{data.split('send')[1].strip()}"})
+                    for error_word in error_word_list:
+                        if data.find(error_word.lower()) >= 0:
+                            return Response({"error": f"Неизвестная ошибка."})
 
                     # Get local test json response from 1c
                     #############################################
                     # Временное чтение файла для отладки без доступа к 1С
-                    with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
-                        data = json.load(file)
-                        time.sleep(3)
+                    # with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
+                    #     data = json.load(file)
+                    #     time.sleep(3)
                     ###############################################
 
                     json_data = json.loads(data)
@@ -724,6 +744,7 @@ def api_salary(request):
                                 "3": "Сумма"
                             },
                         }
+
                     ####################################################################################################
 
                     # Return pretty integer and float value
@@ -736,6 +757,7 @@ def api_salary(request):
                                 _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[
                                                                                                      -6:]
                         return _value
+
                     ####################################################################################################
 
                     # Create 'Ends' and pretty integer and float value
@@ -1302,6 +1324,7 @@ def api_bank_idea_all(request):
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
         return Response({"error": "This endpoint has error."})
+
 
 ########################################################################################################################
 
