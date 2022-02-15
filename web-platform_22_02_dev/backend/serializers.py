@@ -67,6 +67,21 @@ class IdeaModelSerializer(serializers.ModelSerializer):
         return user_model_serializer.data
 
 
+class RationalModelSerializer(serializers.ModelSerializer):
+    user_model = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = backend_models.RationalModel
+        fields = '__all__'
+
+    def get_user_model(self, obj):
+        user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
+        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+        if not user_model_serializer.data:
+            user_model_serializer = {'data': None}
+        return user_model_serializer.data
+
+
 ########################################################################################################################
 
 class ChatModelSerializer(serializers.ModelSerializer):

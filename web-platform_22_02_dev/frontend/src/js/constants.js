@@ -39,11 +39,11 @@ export const USER_LIST_ERROR_CONSTANT = "USER_LIST_ERROR_CONSTANT";
 export const USER_LIST_RESET_CONSTANT = "USER_LIST_RESET_CONSTANT";
 export const USER_LIST_DEFAULT_CONSTANT = "USER_LIST_DEFAULT_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const BANK_IDEA_LIST_LOADING_CONSTANT = "BANK_IDEA_LIST_LOADING_CONSTANT";
-export const BANK_IDEA_LIST_DATA_CONSTANT = "BANK_IDEA_LIST_DATA_CONSTANT";
-export const BANK_IDEA_LIST_ERROR_CONSTANT = "BANK_IDEA_LIST_ERROR_CONSTANT";
-export const BANK_IDEA_LIST_FAIL_CONSTANT = "BANK_IDEA_LIST_FAIL_CONSTANT";
-export const BANK_IDEA_LIST_RESET_CONSTANT = "BANK_IDEA_LIST_RESET_CONSTANT";
+export const RATIONAL_LIST_LOADING_CONSTANT = "RATIONAL_LIST_LOADING_CONSTANT";
+export const RATIONAL_LIST_DATA_CONSTANT = "RATIONAL_LIST_DATA_CONSTANT";
+export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
+export const RATIONAL_LIST_FAIL_CONSTANT = "RATIONAL_LIST_FAIL_CONSTANT";
+export const RATIONAL_LIST_RESET_CONSTANT = "RATIONAL_LIST_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {

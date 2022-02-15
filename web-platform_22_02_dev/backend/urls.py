@@ -63,6 +63,9 @@ urlpatterns = [
     # salary
     path('api/salary/', backend_views.api_salary, name='api_salary'),
 
+    # rational
+    path('api/rational/', backend_views.api_rational, name='api_rational'),
+
     # bank_idea
     path('api/bank_idea_list/', backend_views.api_bank_idea_all, name='api_bank_idea_all'),
 

@@ -2895,6 +2895,189 @@ class IdeaRatingModel(models.Model):
                f':: {self.datetime_field}'
 
 
+class RationalModel(models.Model):
+    """
+    Rational Model
+    """
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+    )
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название',
+        help_text='<small class="text-muted">name_char_field</small><hr><br>',
+
+        max_length=128,
+    )
+    category_char_field = models.CharField(
+        db_column='category_char_field_db_column',
+        db_index=True,
+        db_tablespace='category_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название',
+        help_text='<small class="text-muted">category_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    short_description_char_field = models.CharField(
+        db_column='short_description_char_field_db_column',
+        db_index=True,
+        db_tablespace='short_description_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Краткое описание',
+        help_text='<small class="text-muted">short_description_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+    full_description_text_field = models.TextField(
+        db_column='full_description_text_field_db_column',
+        db_index=True,
+        db_tablespace='full_description_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Полное описание',
+        help_text='<small class="text-muted">full_description_text_field</small><hr><br>',
+
+        max_length=2048,
+    )
+    avatar_image_field = models.ImageField(
+        db_column='avatar_image_field_db_column',
+        db_index=True,
+        db_tablespace='avatar_image_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='uploads/idea/default_avatar.jpg',
+        verbose_name='Аватарка-заставка для идеи',
+        help_text='<small class="text-muted">>avatar_image_field</small><hr><br>',
+
+        upload_to='uploads/idea/avatar/',
+        max_length=200,
+    )
+    addiction_file_field = models.FileField(
+        db_column='addiction_file_field_db_column',
+        db_index=True,
+        db_tablespace='addiction_file_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['xlsx', 'xls', 'docx', 'doc', 'pdf'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Файл-приложение',
+        help_text='<small class="text-muted">addiction_file_field</small><hr><br>',
+
+        upload_to='uploads/idea/files/',
+        max_length=200,
+    )
+    visibility_boolean_field = models.BooleanField(
+        db_column='visibility_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='visibility_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=False,
+        verbose_name='Видимость идеи в общем списке',
+        help_text='<small class="text-muted">visibility_boolean_field</small><hr><br>',
+    )
+    created_datetime_field = models.DateTimeField(
+        db_column='created_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='created_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата создания',
+        help_text='<small class="text-muted">created_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    register_datetime_field = models.DateTimeField(
+        db_column='register_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='register_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата регистрации',
+        help_text='<small class="text-muted">register_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-created_datetime_field',)
+        verbose_name = 'Рац. предложение'
+        verbose_name_plural = 'Рац. предложения'
+        db_table = 'rational_model_table'
+
+    def __str__(self):
+        return f'{self.name_char_field} : {self.category_char_field} : {self.author_foreign_key_field}'
+
+
 class ChatModel(models.Model):
     """
     Ideas Model

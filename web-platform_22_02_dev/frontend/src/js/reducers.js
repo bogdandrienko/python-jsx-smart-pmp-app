@@ -35,11 +35,11 @@ import {
   USER_LIST_RESET_CONSTANT,
   USER_LIST_DEFAULT_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  BANK_IDEA_LIST_LOADING_CONSTANT,
-  BANK_IDEA_LIST_DATA_CONSTANT,
-  BANK_IDEA_LIST_ERROR_CONSTANT,
-  BANK_IDEA_LIST_FAIL_CONSTANT,
-  BANK_IDEA_LIST_RESET_CONSTANT,
+  RATIONAL_LIST_LOADING_CONSTANT,
+  RATIONAL_LIST_DATA_CONSTANT,
+  RATIONAL_LIST_ERROR_CONSTANT,
+  RATIONAL_LIST_FAIL_CONSTANT,
+  RATIONAL_LIST_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } from "./constants";
 
@@ -194,27 +194,27 @@ export const salaryUserReducer = (state = {}, action = null) => {
 };
 
 
-export const bankIdeaListReducer = (state = {}, action = null) => {
+export const raionalListReducer = (state = {}, action = null) => {
   switch (action.type) {
-    case BANK_IDEA_LIST_LOADING_CONSTANT:
+    case RATIONAL_LIST_LOADING_CONSTANT:
       return { load: true };
 
-    case BANK_IDEA_LIST_DATA_CONSTANT:
+    case RATIONAL_LIST_DATA_CONSTANT:
       return {
         load: false,
         data: action.payload,
       };
 
-    case BANK_IDEA_LIST_ERROR_CONSTANT:
+    case RATIONAL_LIST_ERROR_CONSTANT:
       return {
         load: false,
         error: action.payload,
       };
 
-    case BANK_IDEA_LIST_FAIL_CONSTANT:
+    case RATIONAL_LIST_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
 
-    case BANK_IDEA_LIST_RESET_CONSTANT:
+    case RATIONAL_LIST_RESET_CONSTANT:
       return {};
 
     default:

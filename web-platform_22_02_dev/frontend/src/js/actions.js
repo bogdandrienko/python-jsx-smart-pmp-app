@@ -37,11 +37,11 @@ import {
   USER_LIST_RESET_CONSTANT,
   USER_LIST_DEFAULT_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  BANK_IDEA_LIST_LOADING_CONSTANT,
-  BANK_IDEA_LIST_DATA_CONSTANT,
-  BANK_IDEA_LIST_ERROR_CONSTANT,
-  BANK_IDEA_LIST_FAIL_CONSTANT,
-  BANK_IDEA_LIST_RESET_CONSTANT,
+  RATIONAL_LIST_LOADING_CONSTANT,
+  RATIONAL_LIST_DATA_CONSTANT,
+  RATIONAL_LIST_ERROR_CONSTANT,
+  RATIONAL_LIST_FAIL_CONSTANT,
+  RATIONAL_LIST_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } from "./constants";
 
@@ -398,17 +398,17 @@ export const salaryUserAction = (dateTime) => async (dispatch, getState) => {
   }
 };
 
-export const bankIdeaListAction = (category) => async (dispatch, getState) => {
+export const rationalListAction = (category) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: BANK_IDEA_LIST_LOADING_CONSTANT,
+      type: RATIONAL_LIST_LOADING_CONSTANT,
     });
 
     const {
       userLoginState: { data: userLogin },
     } = getState();
     const { data } = await axios({
-      url: "api/bank_idea_list/",
+      url: "api/rational/",
       method: "POST",
       timeout: 5000,
       headers: {
@@ -416,7 +416,7 @@ export const bankIdeaListAction = (category) => async (dispatch, getState) => {
         Authorization: `Bearer ${userLogin.token}`,
       },
       data: {
-        "Action-type": "BANK_IDEA_LIST",
+        "Action-type": "RATIONAL_LIST",
         body: { category: category },
       },
     });
@@ -427,7 +427,7 @@ export const bankIdeaListAction = (category) => async (dispatch, getState) => {
       console.log("bankIdeaListAction response: ", response);
 
       dispatch({
-        type: BANK_IDEA_LIST_DATA_CONSTANT,
+        type: RATIONAL_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
@@ -436,13 +436,13 @@ export const bankIdeaListAction = (category) => async (dispatch, getState) => {
       console.log("bankIdeaListAction error: ", response);
 
       dispatch({
-        type: BANK_IDEA_LIST_ERROR_CONSTANT,
+        type: RATIONAL_LIST_ERROR_CONSTANT,
         payload: response,
       });
     }
   } catch (error) {
     dispatch({
-      type: BANK_IDEA_LIST_FAIL_CONSTANT,
+      type: RATIONAL_LIST_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

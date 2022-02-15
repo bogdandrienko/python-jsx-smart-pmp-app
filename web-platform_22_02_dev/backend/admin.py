@@ -472,37 +472,74 @@ admin.site.register(backend_models.GroupModel, GroupModelAdmin)
 ########################################################################################################################
 
 
-class IdeaModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
-    """
+# class RationalModelAdmin(admin.ModelAdmin):
+#     """
+#     Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
+#     """
+#
+#     list_display = (
+#         'type_slug_field',
+#         'name_char_field',
+#         'name_slug_field',
+#     )
+#     list_filter = (
+#         'type_slug_field',
+#         'name_char_field',
+#         'name_slug_field',
+#     )
+#     fieldsets = (
+#         ('Тип', {'fields': (
+#             'type_slug_field',
+#         )}),
+#         ('Имя отображения', {'fields': (
+#             'name_char_field',
+#         )}),
+#         ('Имя валидации', {'fields': (
+#             'name_slug_field',
+#         )}),
+#     )
+#     search_fields = [
+#         'type_slug_field',
+#         'name_char_field',
+#         'name_slug_field',
+#     ]
 
-    list_display = (
-        'type_slug_field',
-        'name_char_field',
-        'name_slug_field',
-    )
-    list_filter = (
-        'type_slug_field',
-        'name_char_field',
-        'name_slug_field',
-    )
-    fieldsets = (
-        ('Тип', {'fields': (
-            'type_slug_field',
-        )}),
-        ('Имя отображения', {'fields': (
-            'name_char_field',
-        )}),
-        ('Имя валидации', {'fields': (
-            'name_slug_field',
-        )}),
-    )
-    search_fields = [
-        'type_slug_field',
-        'name_char_field',
-        'name_slug_field',
-    ]
+
+# admin.site.register(backend_models.RationalModel, RationalModelAdmin)
+admin.site.register(backend_models.RationalModel)
+
+
+# class IdeaModelAdmin(admin.ModelAdmin):
+#     """
+#     Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
+#     """
+#
+#     list_display = (
+#         'type_slug_field',
+#         'name_char_field',
+#         'name_slug_field',
+#     )
+#     list_filter = (
+#         'type_slug_field',
+#         'name_char_field',
+#         'name_slug_field',
+#     )
+#     fieldsets = (
+#         ('Тип', {'fields': (
+#             'type_slug_field',
+#         )}),
+#         ('Имя отображения', {'fields': (
+#             'name_char_field',
+#         )}),
+#         ('Имя валидации', {'fields': (
+#             'name_slug_field',
+#         )}),
+#     )
+#     search_fields = [
+#         'type_slug_field',
+#         'name_char_field',
+#         'name_slug_field',
+#     ]
 
 
 # admin.site.register(backend_models.IdeaModel, IdeaModelAdmin)

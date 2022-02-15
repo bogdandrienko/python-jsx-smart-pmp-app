@@ -43,7 +43,7 @@
                 </label>
             </li>
             <li class="p-1">
-                <form action="{% url 'idea_rating' %}" method="POST">
+                <form action="{% url 'django_idea_rating' %}" method="POST">
                     {% csrf_token %}
                     <input class="form-control" type="hidden" name="sorted" value="rating">
                     {% if sorted %}
@@ -54,7 +54,7 @@
                 </form>
             </li>
             <li class="p-1">
-                <form action="{% url 'idea_rating' %}" method="POST">
+                <form action="{% url 'django_idea_rating' %}" method="POST">
                     {% csrf_token %}
                     <input class="form-control" type="hidden" name="sorted" value="count">
                     {% if sorted %}
@@ -80,7 +80,7 @@
                                     <strong># {{ forloop.counter }}</strong>
                                 </h4>
                                 {% if account.author.last_name_char_field or account.author.first_name_char_field or account.author.patronymic_char_field %}
-                                    <a class="text-decoration-none lead text-dark" href="{% url 'account_profile' account.author.id %}">
+                                    <a class="text-decoration-none lead text-dark" href="{% url 'django_account_profile' account.author.id %}">
                                         <strong>
                                             {% if account.author.last_name_char_field %}{{ account.author.last_name_char_field }} {% endif %}
                                             {% if account.author.first_name_char_field %}{{ account.author.first_name_char_field }} {% endif %}
@@ -88,7 +88,7 @@
                                         </strong>
                                     </a>
                                 {% else %}
-                                    <a class="text-decoration-none lead text-dark" href="{% url 'account_profile' account.author.id %}">
+                                    <a class="text-decoration-none lead text-dark" href="{% url 'django_account_profile' account.author.id %}">
                                         <strong>Данные аккаунта не заполнены</strong>
                                     </a>
                                 {% endif %}
@@ -110,14 +110,14 @@
                                 </div>
                             {% endif %}
                             <div class="card-body">
-                                <a href="{% url 'account_profile' account.author.id %}">
+                                <a href="{% url 'django_account_profile' account.author.id %}">
                                     {% if account.author.image_field %}
                                         <img src="{{ account.author.image_field.url }}" class="img-fluid" alt="{{ account.author.id }}" style="width: 256px;">
                                     {% endif %}
                                 </a>
                             </div>
                             <div class="card-body">
-                                <a class="btn btn-lg btn-outline-primary w-100 p-1" href="{% url 'account_profile' account.author.id %}">Подробнее</a>
+                                <a class="btn btn-lg btn-outline-primary w-100 p-1" href="{% url 'django_account_profile' account.author.id %}">Подробнее</a>
                                 <div class="container-fluid d-flex justify-content-between">
                                     <strong class="p-1">Идеи: {{ account.count }}</strong>
                                     {% if account.rating > 0 %}

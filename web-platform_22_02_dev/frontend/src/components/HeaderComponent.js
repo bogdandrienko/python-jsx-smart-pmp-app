@@ -29,10 +29,13 @@ const HeaderComponent = () => {
                 <NavDropdown title="Разработка" id="basic-nav-dropdown">
                 <li>
                   <strong className="dropdown-header text-center">
-                    Банк идей
+                    Рац. предложения
                   </strong>
-                  <LinkContainer to="/bank_idea_list">
-                    <Nav.Link>Все идеи</Nav.Link>
+                  <LinkContainer to="/rational_create">
+                    <Nav.Link>Подать рац. предложение</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/rational_list">
+                    <Nav.Link>Список предложений</Nav.Link>
                   </LinkContainer>
                 </li>
                 <li>
