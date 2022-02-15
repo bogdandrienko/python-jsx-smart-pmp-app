@@ -193,8 +193,7 @@ export const salaryUserReducer = (state = {}, action = null) => {
   }
 };
 
-
-export const raionalListReducer = (state = {}, action = null) => {
+export const rationalListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case RATIONAL_LIST_LOADING_CONSTANT:
       return { load: true };

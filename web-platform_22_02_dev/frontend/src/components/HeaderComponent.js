@@ -16,36 +16,39 @@ const HeaderComponent = () => {
     <header className="navbar-fixed-top bg-secondary bg-opacity-10 m-0 p-0">
       <Navbar expand="lg">
         <Container>
-          <a className="navbar-brand img-thumbnail" href="https://km.kz/">
+          <a
+            className="navbar-brand img-fluid img-thumbnail"
+            href="https://km.kz/"
+          >
             <img src="static/logo_small.png" className="w-25" alt="id" />
           </a>
           <a className="navbar-brand" href="/">
-          Домашняя
+            Домашняя
           </a>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {dataUserLogin && dataUserLogin.username === "Bogdan" ? (
                 <NavDropdown title="Разработка" id="basic-nav-dropdown">
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Рац. предложения
-                  </strong>
-                  <LinkContainer to="/rational_create">
-                    <Nav.Link>Подать рац. предложение</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/rational_list">
-                    <Nav.Link>Список предложений</Nav.Link>
-                  </LinkContainer>
-                </li>
-                <li>
-                  <strong className="dropdown-header text-center">
-                    Аккаунты
-                  </strong>
-                  <LinkContainer to="/users_list">
-                    <Nav.Link>Список пользователей</Nav.Link>
-                  </LinkContainer>
-                </li>
+                  <li>
+                    <strong className="dropdown-header text-center">
+                      Рац. предложения
+                    </strong>
+                    <LinkContainer to="/rational_create">
+                      <Nav.Link>Подать рац. предложение</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/rational_list">
+                      <Nav.Link>Список предложений</Nav.Link>
+                    </LinkContainer>
+                  </li>
+                  <li>
+                    <strong className="dropdown-header text-center">
+                      Аккаунты
+                    </strong>
+                    <LinkContainer to="/users_list">
+                      <Nav.Link>Список пользователей</Nav.Link>
+                    </LinkContainer>
+                  </li>
                   <li>
                     <strong className="dropdown-header text-center">
                       Шаблоны
@@ -238,13 +241,17 @@ const HeaderComponent = () => {
               {dataUserLogin ? (
                 <LinkContainer to="/logout">
                   <Nav.Link>
-                    <button className="btn btn-danger">Выйти  <i class="fa-solid fa-user"></i></button>
+                    <button className="btn btn-danger">
+                      Выйти <i class="fa-solid fa-user"></i>
+                    </button>
                   </Nav.Link>
                 </LinkContainer>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <button className="btn btn-primary">Войти  <i class="fa-solid fa-user"></i></button>
+                    <button className="btn btn-primary">
+                      Войти <i class="fa-solid fa-user"></i>
+                    </button>
                   </Nav.Link>
                 </LinkContainer>
               )}

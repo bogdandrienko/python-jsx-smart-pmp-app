@@ -1315,6 +1315,11 @@ def api_rational(request):
                     return Response({"error": "This action has error."})
             elif request_action_type == "RATIONAL_CREATE":
                 try:
+
+                    print('\n\n\n')
+                    print('RATIONAL_CREATE:', request_body)
+                    print('\n\n\n')
+
                     ideas = backend_models.RationalModel.objects.all()
                     serializer = backend_serializers.RationalModelSerializer(instance=ideas, many=True)
                     response = {"response": serializer.data}
@@ -1325,7 +1330,7 @@ def api_rational(request):
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                     return Response({"error": "This action has error."})
             else:
-                return Response({"error": "This action not allowed for this method."})
+                return Response({"error": "This action not allowed for this Action-type."})
         elif request_method == 'PUT':
             return Response({"error": "This method not allowed for endpoint."})
         elif request_method == 'DELETE':
