@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { rationalListAction, userChangeProfileAction } from "../js/actions";
+import {
+  rationalListAction,
+  userChangeProfileAction,
+  userDetailsAction,
+} from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import MessageComponent from "../components/MessageComponent";
@@ -41,6 +45,22 @@ const BankIdeaListPage = () => {
       });
     }
   }, [navigate, dataBankIdeaList]);
+
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const {
+    load: loadUserDetails,
+    data: dataUserDetails,
+    error: errorUserDetails,
+    fail: failUserDetails,
+  } = userDetailsStore;
+  console.log("dataUserDetails: ", dataUserDetails);
+
+  useEffect(() => {
+    if (dataUserDetails) {
+    } else {
+      dispatch(userDetailsAction());
+    }
+  }, [dispatch, dataUserDetails]);
 
   const submitHandler = (e) => {
     // e.preventDefault();
@@ -95,8 +115,6 @@ const BankIdeaListPage = () => {
             <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
               <div className="container">
                 <br />
-                <hr />
-                <br />
                 <form
                   action="#"
                   method="POST"
@@ -108,7 +126,7 @@ const BankIdeaListPage = () => {
                   onSubmit={submitHandler}
                 >
                   <div>
-                    <div className="bg-success bg-opacity-10">
+                    <div className="">
                       <div>
                         <h6 className="lead fw-bold">ЗАЯВЛЕНИЕ</h6>
                         <h6 className="lead">
@@ -139,9 +157,7 @@ const BankIdeaListPage = () => {
                               Энергоуправление
                             </option>
                           </select>
-                          <small className="text-muted">
-                            обязательно выбрать одну из категорий
-                          </small>
+                          <small className="text-danger">* обязательно</small>
                         </label>
                         <label className="w-100 form-control-sm m-1">
                           Зарегистрировано за №{" "}
@@ -149,35 +165,31 @@ const BankIdeaListPage = () => {
                           от
                           <small className="text-danger"> текущей </small>даты
                           <p>
-                            <small className="text-muted">
-                              номер будет создан автоматически при отправке
-                              предложения
+                            <small className="text-success">
+                              * номер будет создан автоматически
                             </small>
                           </p>
                         </label>
                       </div>
                       <div>
-                        <label className="w-100 form-control-sm m-1">
-                          Название рац. предложения:
-                          <input
-                            type="text"
-                            id="name_char_field"
-                            name="name_char_field"
-                            required=""
-                            placeholder="Название"
-                            minLength="1"
-                            maxLength="64"
+                        <label className="form-control-sm m-1">
+                          Сфера рац. предложения:
+                          <select
+                            id="category_slug_field"
+                            name="category_slug_field"
+                            required
                             className="form-control form-control-sm"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                          />
-                          <small className="text-muted">
-                            длина: не более 64 символов
-                          </small>
+                          >
+                            <option value="">Не выбрано</option>
+                            <option value="Технологическая">
+                              Технологическая
+                            </option>
+                            <option value="Не технологическая">
+                              Не технологическая
+                            </option>
+                          </select>
+                          <small className="text-danger">* обязательно</small>
                         </label>
-                      </div>
-                      <br />
-                      <div>
                         <label className="form-control-sm m-1">
                           Категория:
                           <select
@@ -194,9 +206,7 @@ const BankIdeaListPage = () => {
                             <option value="Улучшение">Улучшение</option>
                             <option value="Индустрия 4.0">Индустрия 4.0</option>
                           </select>
-                          <small className="text-muted">
-                            обязательно выбрать одну из категорий
-                          </small>
+                          <small className="text-danger">* обязательно</small>
                         </label>
                         <label className="form-control-sm m-1">
                           Аватарка-заставка для идеи:
@@ -207,9 +217,31 @@ const BankIdeaListPage = () => {
                             accept=".jpg, .png"
                             className="form-control form-control-sm"
                           />
-                          <small className="text-muted">
-                            только для форматов изображений: .jpg / .png
-                          </small>
+                          <small className="text-muted">* не обязательно</small>
+                        </label>
+                      </div>
+                      <br />
+                      <div>
+                        <label className="w-100 form-control-sm m-1">
+                          Название рац. предложения:
+                          <input
+                            type="text"
+                            id="name_char_field"
+                            name="name_char_field"
+                            required
+                            placeholder="Название"
+                            minLength="1"
+                            maxLength="100"
+                            className="form-control form-control-sm"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                          <small className="text-danger">* обязательно</small>
+                          <p>
+                            <small className="text-muted">
+                              длина: не более 100 символов
+                            </small>
+                          </p>
                         </label>
                       </div>
                       <br />
@@ -220,15 +252,18 @@ const BankIdeaListPage = () => {
                             type="text"
                             id="name_char_field"
                             name="name_char_field"
-                            required=""
+                            required
                             placeholder="Цех / участок / отдел / лаборатория и т.п."
                             minLength="1"
-                            maxLength="64"
+                            maxLength="100"
                             className="form-control form-control-sm"
                           />
-                          <small className="text-muted">
-                            длина: не более 64 символов
-                          </small>
+                          <small className="text-danger">* обязательно</small>
+                          <p>
+                            <small className="text-muted">
+                              длина: не более 100 символов
+                            </small>
+                          </p>
                         </label>
                       </div>
                       <br />
@@ -238,32 +273,38 @@ const BankIdeaListPage = () => {
                           <textarea
                             id="short_description_char_field"
                             name="short_description_char_field"
-                            required=""
+                            required
                             placeholder="Краткое описание"
                             minLength="1"
-                            maxLength="64"
+                            maxLength="200"
                             rows="1"
                             className="form-control form-control-sm"
                           />
-                          <small className="text-muted">
-                            длина: не более 64 символов
-                          </small>
+                          <small className="text-danger">* обязательно</small>
+                          <p>
+                            <small className="text-muted">
+                              длина: не более 200 символов
+                            </small>
+                          </p>
                         </label>
                         <label className="w-100 form-control-sm m-1">
                           Полное описание:
                           <textarea
                             id="full_description_text_field"
                             name="full_description_text_field"
-                            required=""
+                            required
                             placeholder="Полное описание"
                             minLength="1"
-                            maxLength="2048"
+                            maxLength="5000"
                             rows="3"
                             className="form-control form-control-sm"
                           />
-                          <small className="text-muted">
-                            длина: не более 2048 символов
-                          </small>
+                          <small className="text-danger">* обязательно</small>
+                          <p>
+                            <small className="text-muted">
+                              длина: не более 5000 символов
+                            </small>
+                          </p>
                         </label>
                       </div>
                       <br />
@@ -277,9 +318,7 @@ const BankIdeaListPage = () => {
                             accept=".docx, .doc"
                             className="form-control form-control-sm"
                           />
-                          <small className="text-muted">
-                            только для форматов файлов: .docx / .doc
-                          </small>
+                          <small className="text-muted">* не обязательно</small>
                         </label>
                         <label className="form-control-sm m-1">
                           Pdf файл-приложение:
@@ -290,9 +329,7 @@ const BankIdeaListPage = () => {
                             accept=".pdf"
                             className="form-control form-control-sm"
                           />
-                          <small className="text-muted">
-                            только для форматов файлов: .pdf
-                          </small>
+                          <small className="text-muted">* не обязательно</small>
                         </label>
                         <label className="form-control-sm m-1">
                           Excel файл-приложение:
@@ -303,9 +340,7 @@ const BankIdeaListPage = () => {
                             accept=".xlsx, .xls"
                             className="form-control form-control-sm"
                           />
-                          <small className="text-muted">
-                            только для форматов файлов: .xlsx / .xls
-                          </small>
+                          <small className="text-muted">* не обязательно</small>
                         </label>
                       </div>
                       <br />
@@ -329,22 +364,83 @@ const BankIdeaListPage = () => {
                           </p>
                           <p>
                             <small className="fw-bold">
-                              (Фамилия) (Имя) (Отчество) (Табельный) (%
-                              участия);
+                              Фамилия Имя Отчество Табельный Вклад в проект %
                             </small>
                           </p>
-                          <textarea
-                            id="full_description_text_field"
-                            name="full_description_text_field"
-                            required=""
-                            placeholder="формат ввода: Андриенко Богдан Николаевич 93177 60%; Пышный Виктор Юрьевич 4405 40%;"
-                            minLength="1"
-                            maxLength="2048"
-                            rows="2"
+                          {dataUserDetails && dataUserDetails["user_model"] && (
+                            <div>
+                              участник № 1, Вы:{" "}
+                              {
+                                dataUserDetails["user_model"][
+                                  "last_name_char_field"
+                                ]
+                              }{" "}
+                              {
+                                dataUserDetails["user_model"][
+                                  "first_name_char_field"
+                                ]
+                              }{" "}
+                              {
+                                dataUserDetails["user_model"][
+                                  "patronymic_char_field"
+                                ]
+                              }{" "}
+                              {
+                                dataUserDetails["user_model"][
+                                  "personnel_number_slug_field"
+                                ]
+                              }{" "}
+                              <input
+                                type="text"
+                                id="name_char_field"
+                                name="name_char_field"
+                                required
+                                placeholder={`введите Ваш % вклада:`}
+                                minLength="1"
+                                maxLength="200"
+                                className="form-control form-control-sm"
+                              />
+                            </div>
+                          )}
+                          <input
+                            type="text"
+                            id="name_char_field"
+                            name="name_char_field"
+                            placeholder="участник № 2, пример: Андриенко Богдан Николаевич 931777 70%"
+                            minLength="0"
+                            maxLength="200"
+                            className="form-control form-control-sm"
+                          />
+                          <input
+                            type="text"
+                            id="name_char_field"
+                            name="name_char_field"
+                            placeholder="участник № 3, пример: Андриенко Богдан Николаевич 931777 70%"
+                            minLength="0"
+                            maxLength="200"
+                            className="form-control form-control-sm"
+                          />
+                          <input
+                            type="text"
+                            id="name_char_field"
+                            name="name_char_field"
+                            placeholder="участник № 4, пример: Андриенко Богдан Николаевич 931777 70%"
+                            minLength="0"
+                            maxLength="200"
+                            className="form-control form-control-sm"
+                          />
+                          <input
+                            type="text"
+                            id="name_char_field"
+                            name="name_char_field"
+                            placeholder="участник № 5, пример: Андриенко Богдан Николаевич 931777 70%"
+                            minLength="0"
+                            maxLength="200"
                             className="form-control form-control-sm"
                           />
                           <small className="text-muted">
-                            длина: не более 2048 символов
+                            * общая сумма вклада всех участников не должна не
+                            превышать 100%
                           </small>
                         </label>
                       </div>
@@ -363,7 +459,7 @@ const BankIdeaListPage = () => {
                               className="btn btn-sm btn-outline-warning"
                               type="reset"
                             >
-                              Сбросить
+                              Сбросить все данные
                             </button>
                           </li>
                         </ul>
@@ -371,208 +467,6 @@ const BankIdeaListPage = () => {
                     </div>
                   </div>
                 </form>
-                <br />
-                <hr />
-                <br />
-                <form
-                  action="#"
-                  method="POST"
-                  target="_self"
-                  encType="multipart/form-data"
-                  name="idea_create"
-                  autoComplete="on"
-                  className="text-center"
-                  onSubmit={submitHandler}
-                >
-                  <div>
-                    <div className="bg-warning bg-opacity-10">
-                      <div>
-                        <label className="w-25 form-control-sm m-1">
-                          Заключение:
-                          <select
-                            id="category_slug_field"
-                            name="category_slug_field"
-                            required
-                            className="form-control form-control-sm"
-                          >
-                            <option value="Приостановлено">
-                              Приостановлено
-                            </option>
-                            <option value="Принято">Принято</option>
-                            <option value="Принято с замечаниями">
-                              Принято с замечаниями
-                            </option>
-                            <option value="Отклонено">Отклонено</option>
-                          </select>
-                          <small className="text-muted">
-                            обязательно выбрать одну из категорий
-                          </small>
-                        </label>
-                        <label className="w-50 form-control-sm m-1">
-                          Должность, название отдела:
-                          <input
-                            type="text"
-                            id="name_char_field"
-                            name="name_char_field"
-                            required=""
-                            placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
-                            minLength="1"
-                            maxLength="64"
-                            className="form-control form-control-sm"
-                          />
-                          <small className="text-muted">
-                            длина: не более 64 символов
-                          </small>
-                        </label>
-                      </div>
-                      <div className="container-fluid text-center">
-                        <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                          <li className="m-1">
-                            <button
-                              className="btn btn-sm btn-outline-primary"
-                              type="submit"
-                            >
-                              Подтвердить
-                            </button>
-                          </li>
-                          <li className="m-1">
-                            <button
-                              className="btn btn-sm btn-outline-warning"
-                              type="reset"
-                            >
-                              Сбросить
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <br />
-                <hr />
-                <br />
-                <form
-                  action="#"
-                  method="POST"
-                  target="_self"
-                  encType="multipart/form-data"
-                  name="idea_create"
-                  autoComplete="on"
-                  className="text-center"
-                  onSubmit={submitHandler}
-                >
-                  <div>
-                    <div className="bg-danger bg-opacity-10">
-                      <div>
-                        <label className="w-25 form-control-sm m-1">
-                          Принятое решение:
-                          <select
-                            id="category_slug_field"
-                            name="category_slug_field"
-                            required
-                            className="form-control form-control-sm"
-                          >
-                            <option value="Приостановлено">
-                              Приостановлено
-                            </option>
-                            <option value="Принято">Принято</option>
-                            <option value="Принято с замечаниями">
-                              Принято с замечаниями
-                            </option>
-                            <option value="Отклонено">Отклонено</option>
-                          </select>
-                          <small className="text-muted">
-                            обязательно выбрать одну из категорий
-                          </small>
-                        </label>
-                        <label className="w-50 form-control-sm m-1">
-                          Должность, название отдела:
-                          <input
-                            type="text"
-                            id="name_char_field"
-                            name="name_char_field"
-                            required=""
-                            placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
-                            minLength="1"
-                            maxLength="64"
-                            className="form-control form-control-sm"
-                          />
-                          <small className="text-muted">
-                            длина: не более 64 символов
-                          </small>
-                        </label>
-                      </div>
-                      <div>
-                        <label className="w-100 form-control-sm m-1">
-                          Ответственные за внедрение:
-                          <p>
-                            <small className="text-danger">
-                              внимание, вводить участников согласно нужного
-                              формата:
-                            </small>
-                          </p>
-                          <p>
-                            <small className="fw-bold">
-                              (Фамилия) (Имя) (Отчество) (Табельный)
-                              (Должность);
-                            </small>
-                          </p>
-                          <textarea
-                            id="full_description_text_field"
-                            name="full_description_text_field"
-                            required=""
-                            placeholder="формат ввода: Андриенко Богдан Николаевич 93177 Техник-программист; Пышный Виктор Юрьевич 4405 Инженер-программист;"
-                            minLength="1"
-                            maxLength="2048"
-                            rows="2"
-                            className="form-control form-control-sm"
-                          />
-                          <small className="text-muted">
-                            длина: не более 2048 символов
-                          </small>
-                        </label>
-                      </div>
-                      <div className="d-flex w-100 align-items-center justify-content-between">
-                        <label className="form-control-sm m-1">
-                          Удостоверение на рац. предложение получено:
-                        </label>
-                        <label className="w-100 form-control-sm m-1">
-                          «
-                          <input
-                            type="text"
-                            id="avatar_image_field"
-                            name="avatar_image_field"
-                            accept=".jpg, .png"
-                            className="w-25 form-control-sm"
-                          />
-                          » от 15 02 2022 г.
-                        </label>
-                      </div>
-                      <div className="container-fluid text-center">
-                        <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                          <li className="m-1">
-                            <button
-                              className="btn btn-sm btn-outline-primary"
-                              type="submit"
-                            >
-                              Подтвердить
-                            </button>
-                          </li>
-                          <li className="m-1">
-                            <button
-                              className="btn btn-sm btn-outline-warning"
-                              type="reset"
-                            >
-                              Сбросить
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <br />
-                <hr />
                 <br />
               </div>
             </ul>

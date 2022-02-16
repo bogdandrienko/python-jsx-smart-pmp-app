@@ -11,12 +11,14 @@ const NewsComponent = (count = 100) => {
           aria-current="true"
         >
           <div className="d-flex w-100 align-items-center justify-content-between">
-            <strong className="mb-1 lead">Информация</strong>
+            <strong className="mb-1 lead">Лента</strong>
             <strong className="text-warning">Свежие сверху</strong>
           </div>
-          <div className="col-10 mb-1 small">
-            нажмите для перехода на страницу со всеми новостями
-          </div>
+          {count.count <= 7 && (
+            <div className="col-10 mb-1 small">
+              нажмите сюда для просмотра всех изменений
+            </div>
+          )}
         </a>
 
         {news.slice(0, count.count).map((news_elem, index) => (
