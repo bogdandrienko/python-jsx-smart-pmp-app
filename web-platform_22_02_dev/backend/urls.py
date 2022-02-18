@@ -67,6 +67,9 @@ urlpatterns = [
     path('api/rational/', backend_views.api_rational, name='api_rational'),
 
     # bank_idea
+    path('api/update_users/', backend_views.api_update_users, name='api_update_users'),
+
+    # bank_idea
     path('api/bank_idea_list/', backend_views.api_bank_idea_all, name='api_bank_idea_all'),
 
     #################################################################

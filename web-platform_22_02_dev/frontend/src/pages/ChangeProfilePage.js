@@ -152,10 +152,11 @@ const ChangeProfilePage = () => {
           )}
         </div>
         <div>
-          <div className="form-control">
-            <h2 className="text-danger display-6 lead">
-              Внимание, все эти поля необходимо заполнить!
-            </h2>
+          <div className="">
+            <h6 className="text-danger lead">
+              Внимание, без правильного заполнения обязательных данных Вас будет
+              перенаправлять на эту страницу постоянно!
+            </h6>
             <form
               method="POST"
               target="_self"
@@ -166,105 +167,134 @@ const ChangeProfilePage = () => {
               onSubmit={submitHandler}
             >
               <div>
-                <label className="form-control-lg m-1 lead">
-                  Почта для восстановления доступа:
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required=""
-                    placeholder=""
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    minLength="1"
-                    maxLength="128"
-                    className="form-control form-control-lg"
-                  />
-                  <small className="text-muted">
-                    формат: bogdandrienko@gmail.com
-                  </small>
-                </label>
-              </div>
-
-              <div>
-                <label className="form-control-lg m-1 lead">
+                <label className="form-control-md m-1 lead">
                   Введите секретный вопрос для восстановления доступа:
                   <input
                     type="text"
                     id="secretQuestion"
                     name="secretQuestion"
-                    required=""
+                    required
                     placeholder=""
                     value={secretQuestion}
                     onChange={(e) => setSecretQuestion(e.target.value)}
-                    minLength="8"
+                    minLength="6"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                   />
-                  <small className="text-muted">
-                    количество символов: от 8 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 6 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
-                <label className="form-control-lg m-1 lead">
+                <label className="form-control-md m-1 lead">
                   Введите ответ на секретный вопрос:
                   <input
                     type="text"
                     id="secretAnswer"
                     name="secretAnswer"
-                    required=""
+                    required
                     placeholder=""
                     value={secretAnswer}
                     onChange={(e) => setSecretAnswer(e.target.value)}
-                    minLength="6"
+                    minLength="4"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                   />
-                  <small className="text-muted">
-                    количество символов: от 6 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 4 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
               </div>
 
               <div>
-                <label className="form-control-lg m-1 lead">
+                <label className="form-control-md m-1 lead">
+                  Почта для восстановления доступа:
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder=""
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    minLength="1"
+                    maxLength="128"
+                    className="form-control form-control-md"
+                  />
+                  <p>
+                    <small className="text-success">* не обязательно</small>
+                  </p>
+                </label>
+              </div>
+
+              <div>
+                <label className="form-control-md m-1 lead">
                   Введите пароль для входа в аккаунт:
+                  <p>
+                    <small className="text-danger">
+                      Только латинские буквы и цифры!
+                    </small>
+                  </p>
                   <input
                     type="password"
                     id="password"
                     name="password"
-                    required=""
+                    required
                     placeholder=""
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                     autoComplete="none"
                     aria-autocomplete="none"
                   />
-                  <small className="text-muted">
-                    количество символов: от 8 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 8 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
-                <label className="form-control-lg m-1 lead">
+                <label className="form-control-md m-1 lead">
                   Повторите новый пароль:
+                  <p>
+                    <small className="text-danger">
+                      Только латинские буквы и цифры!
+                    </small>
+                  </p>
                   <input
                     type="password"
                     id="password2"
                     name="password2"
-                    required=""
+                    required
                     placeholder=""
                     value={password2}
                     onChange={(e) => setPassword2(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                     autoComplete="none"
                     aria-autocomplete="none"
                   />
-                  <small className="text-muted">
-                    количество символов: от 8 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 8 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
               </div>
               <hr />
@@ -274,7 +304,7 @@ const ChangeProfilePage = () => {
                     <button
                       href=""
                       type="submit"
-                      className="btn btn-lg btn-outline-primary form-control"
+                      className="btn btn-md btn-primary form-control"
                     >
                       Сохранить новые данные
                     </button>
@@ -290,7 +320,7 @@ const ChangeProfilePage = () => {
                         setPassword("");
                         setPassword2("");
                       }}
-                      className="btn btn-lg btn-outline-warning form-control"
+                      className="btn btn-md btn-warning form-control"
                     >
                       Сбросить данные
                     </button>
@@ -300,7 +330,7 @@ const ChangeProfilePage = () => {
                       href=""
                       type="button"
                       onClick={changeVisibility}
-                      className="btn btn-lg btn-outline-danger form-control"
+                      className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля
                     </button>

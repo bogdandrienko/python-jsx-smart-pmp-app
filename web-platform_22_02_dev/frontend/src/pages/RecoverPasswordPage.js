@@ -193,9 +193,10 @@ const ChangePasswordPage = () => {
                   name="account_login"
                   autoComplete="on"
                   className="text-center p-1 m-1"
+                  onSubmit={postFindUserHandlerSubmit}
                 >
                   <div>
-                    <label className="form-control-lg m-1">
+                    <label className="m-1">
                       <ReCAPTCHA
                         sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
                         onChange={changeCapcha}
@@ -203,23 +204,28 @@ const ChangePasswordPage = () => {
                     </label>
                   </div>
                   <div>
-                    <label className="form-control-lg m-1">
+                    <label className="form-control-md m-1 lead">
                       Введите Ваш ИИН:
                       <input
                         type="text"
                         id="username"
                         name="username"
-                        required=""
+                        required
                         placeholder=""
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         minLength="12"
                         maxLength="12"
-                        className="form-control form-control-lg"
+                        className="form-control form-control-md"
                       />
-                      <small className="text-muted">
-                        количество символов: 12
-                      </small>
+                      <p>
+                        <small className="text-danger">* обязательно</small>
+                        <p>
+                          <small className="text-muted">
+                            количество символов: 12
+                          </small>
+                        </p>
+                      </p>
                     </label>
                   </div>
                   <hr />
@@ -229,8 +235,7 @@ const ChangePasswordPage = () => {
                         <button
                           href=""
                           type="submit"
-                          className="btn btn-lg btn-outline-primary form-control"
-                          onClick={postFindUserHandlerSubmit}
+                          className="btn btn-md btn-primary form-control"
                         >
                           Проверить идентификатор
                         </button>
@@ -244,7 +249,7 @@ const ChangePasswordPage = () => {
                             setSecretQuestion("");
                             setSuccess(false);
                           }}
-                          className="btn btn-lg btn-outline-warning form-control"
+                          className="btn btn-md btn-warning form-control"
                         >
                           Сбросить данные
                         </button>
@@ -260,10 +265,10 @@ const ChangePasswordPage = () => {
           {!success && secretQuestion && email ? (
             <div>
               <div className="row">
-                <div className="form-control col">
-                  <h3 className="lead display-6">
+                <div className="col">
+                  <h4 className="lead">
                     Восстановление через секретный вопрос/ответ.
-                  </h3>
+                  </h4>
                   <form
                     method="POST"
                     target="_self"
@@ -271,9 +276,10 @@ const ChangePasswordPage = () => {
                     name="account_login"
                     autoComplete="on"
                     className="text-center p-1 m-1"
+                    onSubmit={postCheckAnswerHandlerSubmit}
                   >
                     <div>
-                      <label className="form-control-lg m-1">
+                      <label className="form-control-md">
                         <div className="text-danger lead">
                           Секретный вопрос: '
                           <small className="text-warning lead fw-bold">{`${secretQuestion}`}</small>
@@ -283,16 +289,16 @@ const ChangePasswordPage = () => {
                           type="text"
                           id="secretAnswer"
                           name="secretAnswer"
-                          required=""
+                          required
                           placeholder=""
                           value={secretAnswer}
                           onChange={(e) => setSecretAnswer(e.target.value)}
-                          minLength="6"
+                          minLength="4"
                           maxLength="32"
-                          className="form-control form-control-lg"
+                          className="form-control form-control-md"
                         />
                         <small className="text-muted">
-                          количество символов: от 6 до 32
+                          количество символов: от 4 до 32
                         </small>
                       </label>
                     </div>
@@ -303,8 +309,7 @@ const ChangePasswordPage = () => {
                           <button
                             href=""
                             type="submit"
-                            className="btn btn-lg btn-outline-primary form-control"
-                            onClick={postCheckAnswerHandlerSubmit}
+                            className="btn btn-md btn-primary"
                           >
                             Проверить ответ
                           </button>
@@ -313,10 +318,10 @@ const ChangePasswordPage = () => {
                     </div>
                   </form>
                 </div>
-                <div className="form-control col">
-                  <h3 className="lead display-6">
+                <div className="col">
+                  <h4 className="lead">
                     Восстановление через введённую ранее почту.
-                  </h3>
+                  </h4>
                   <form
                     method="POST"
                     target="_self"
@@ -324,35 +329,36 @@ const ChangePasswordPage = () => {
                     name="account_login"
                     autoComplete="on"
                     className="text-center p-1 m-1"
+                    onSubmit={postRecoverEmailHandlerSubmit}
                   >
                     <div>
-                      <label className="form-control-lg m-1">
-                        Код восстановления отправленный на почту (
-                        <small className="text-danger">
-                          вводить без кавычек, код действует в течении часа с
-                          момента отправки
-                        </small>
-                        ):
-                        <div className="m-1">
-                          Часть почты, на которую будет отправлен код
-                          восстановления: '
-                          <small className="text-warning">
-                            {email &&
-                              `${email.slice(0, 5)} ... ${email.slice(-7)}`}
-                          </small>
-                          '
-                        </div>
+                      <label className="form-control-md">
+                        Код восстановления отправленный на почту
+                        <p className="text-danger">
+                          * вводить без кавычек
+                          <p className="text-danger">
+                            * код действует в течении часа с момента отправки
+                          </p>
+                          <p className="text-success">
+                            Часть почты, куда будет отправлено письмо: '
+                            <small className="text-warning">
+                              {email &&
+                                `${email.slice(0, 5)} ... ${email.slice(-7)}`}
+                            </small>
+                            '
+                          </p>
+                        </p>
                         <input
                           type="text"
                           id="recoverPassword"
                           name="recoverPassword"
-                          required=""
+                          required
                           placeholder=""
                           value={recoverPassword}
                           onChange={(e) => setRecoverPassword(e.target.value)}
                           minLength="1"
                           maxLength="64"
-                          className="form-control form-control-lg"
+                          className="form-control form-control-md"
                         />
                         <small className="text-muted">
                           количество символов: от 1 до 64
@@ -366,8 +372,7 @@ const ChangePasswordPage = () => {
                           <button
                             href=""
                             type="submit"
-                            className="btn btn-lg btn-outline-success form-control"
-                            onClick={postRecoverEmailHandlerSubmit}
+                            className="btn btn-md btn-success"
                           >
                             Проверить код
                           </button>
@@ -377,7 +382,7 @@ const ChangePasswordPage = () => {
                             href=""
                             type="reset"
                             onClick={postSendEmailHandlerSubmit}
-                            className="btn btn-lg btn-outline-danger form-control"
+                            className="btn btn-md btn-danger"
                           >
                             Отправить код на почту
                           </button>
@@ -402,33 +407,48 @@ const ChangePasswordPage = () => {
               onSubmit={postRecoverPasswordHandlerSubmit}
             >
               <div>
-                <label className="form-control-lg m-1">
+                <label className="form-control-md m-1 lead">
                   Введите пароль для входа в аккаунт:
+                  <p>
+                    <small className="text-danger">
+                      Только латинские буквы и цифры!
+                    </small>
+                  </p>
                   <input
                     type="password"
                     id="password"
                     name="password"
-                    required=""
+                    required
                     placeholder=""
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                     autoComplete="none"
                     aria-autocomplete="none"
                   />
-                  <small className="text-muted">
-                    количество символов: от 8 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 8 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
-                <label className="form-control-lg m-1">
+                <label className="form-control-lg m-1 lead">
                   Повторите новый пароль:
+                  <p>
+                    <small className="text-danger">
+                      Только латинские буквы и цифры!
+                    </small>
+                  </p>
                   <input
                     type="password"
                     id="password2"
                     name="password2"
-                    required=""
+                    required
                     placeholder=""
                     value={password2}
                     onChange={(e) => setPassword2(e.target.value)}
@@ -438,9 +458,14 @@ const ChangePasswordPage = () => {
                     autoComplete="none"
                     aria-autocomplete="none"
                   />
-                  <small className="text-muted">
-                    количество символов: от 8 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 8 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
               </div>
               <hr />
@@ -450,7 +475,7 @@ const ChangePasswordPage = () => {
                     <button
                       href=""
                       type="submit"
-                      className="btn btn-lg btn-outline-primary form-control"
+                      className="btn btn-lg btn-primary form-control"
                     >
                       Сохранить новые данные
                     </button>
@@ -463,7 +488,7 @@ const ChangePasswordPage = () => {
                         setPassword("");
                         setPassword2("");
                       }}
-                      className="btn btn-lg btn-outline-warning form-control"
+                      className="btn btn-lg btn-warning form-control"
                     >
                       Сбросить данные
                     </button>
@@ -473,7 +498,7 @@ const ChangePasswordPage = () => {
                       href=""
                       type="button"
                       onClick={changeVisibility}
-                      className="btn btn-lg btn-outline-danger form-control"
+                      className="btn btn-lg btn-danger form-control"
                     >
                       Видимость пароля
                     </button>

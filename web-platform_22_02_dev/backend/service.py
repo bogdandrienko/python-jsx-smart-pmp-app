@@ -138,11 +138,14 @@ class DjangoClass:
 
         @staticmethod
         def create_password_from_chars(chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                       length=8):
+                                       length=8, need_temp=False):
             password = ''
             for i in range(1, length + 1):
                 password += random.choice(chars)
-            return password
+            if need_temp:
+                return 'temp_' + password
+            else:
+                return password
 
     class RequestClass:
         @staticmethod

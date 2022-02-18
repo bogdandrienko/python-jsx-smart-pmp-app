@@ -1,11 +1,8 @@
 import openpyxl
-from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 
 
-wb = openpyxl.load_workbook('12.xlsx')
-
-# grab the active worksheet
+wb = openpyxl.load_workbook('pzdht.xlsx')
 ws = wb.active
 max_row = ws.max_row
 
@@ -41,22 +38,7 @@ for row in range(1, 610):
             local_list.append(value)
     global_list.append(local_list)
 
-for local in global_list:
-    print(local)
-
 print(len(id_inx))
-
-# # Data can be assigned directly to cells
-# ws['A1'] = 42
-#
-# # Rows can also be appended
-# ws.append([1, 2, 3])
-#
-# # Python types will automatically be converted
-# import datetime
-# ws['A2'] = datetime.datetime.now()
-#
-# # Save the file
 
 wb = openpyxl.Workbook()
 ws = wb.active
@@ -70,4 +52,4 @@ for row in global_list:
             print(error)
         col_index += 1
     row_index += 1
-wb.save("12_1.xlsx")
+wb.save("pzdht_1.xlsx")

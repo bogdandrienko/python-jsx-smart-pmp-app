@@ -4,7 +4,7 @@ import hashlib
 import json
 import os
 import random
-import time
+import threading
 
 import bs4
 import httplib2
@@ -27,13 +27,178 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import BasicAuthentication
 from xhtml2pdf import pisa
 
 from backend import models as backend_models, settings as backend_settings, serializers as backend_serializers, \
     forms as backend_forms, service as backend_service, utils as backend_utils
 
 
+def update_users():
+    key = backend_service.UtilsClass.create_encrypted_password(
+        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+        _length=10
+    )
+    hash_key_obj = hashlib.sha256()
+    hash_key_obj.update(key.encode('utf-8'))
+    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+    date = datetime.datetime.now().strftime("%Y%m%d")
+    date_base64 = base64.b64encode(str(date).encode()).decode()
+    url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
+    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
+    _login = 'Web_adm_1c'
+    password = '159159qqww!'
+    h.add_credentials(_login, password)
+    response_, content = h.request(url)
+    json_data = json.loads(
+        backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+    )
+
+    class Worker:
+        def __init__(self, date_time_: str, status_: str, username_: str, last_name_: str, first_name_: str,
+                     patronymic_: str, personnel_number_: str, subdivision_: str, workshop_service_: str,
+                     department_site_: str, position_: str, category_: str):
+            self.date_time_ = date_time_
+            self.status_ = status_
+            self.username_ = username_
+            self.last_name_ = last_name_
+            self.first_name_ = first_name_
+            self.patronymic_ = patronymic_
+            self.personnel_number_ = personnel_number_
+            self.subdivision_ = subdivision_
+            self.workshop_service_ = workshop_service_
+            self.department_site_ = department_site_
+            self.position_ = position_
+            self.category_ = category_
+
+        @staticmethod
+        def get_value(dict_: dict, user_, key_: str):
+            try:
+                value = dict_["global_objects"][user_][key_]
+                return value
+            except Exception as error__:
+                print(error__)
+                return ''
+
+    for user in json_data["global_objects"]:
+        worker = Worker(
+            date_time_=Worker.get_value(dict_=json_data, user_=user, key_="Период"),
+            status_=Worker.get_value(dict_=json_data, user_=user, key_="Статус"),
+            username_=Worker.get_value(dict_=json_data, user_=user, key_="ИИН"),
+            last_name_=Worker.get_value(dict_=json_data, user_=user, key_="Фамилия"),
+            first_name_=Worker.get_value(dict_=json_data, user_=user, key_="Имя"),
+            patronymic_=Worker.get_value(dict_=json_data, user_=user, key_="Отчество"),
+            personnel_number_=Worker.get_value(dict_=json_data, user_=user, key_="ТабельныйНомер"),
+            subdivision_=Worker.get_value(dict_=json_data, user_=user, key_="Подразделение"),
+            workshop_service_=Worker.get_value(dict_=json_data, user_=user, key_="Цех_Служба"),
+            department_site_=Worker.get_value(dict_=json_data, user_=user, key_="Отдел_Участок"),
+            position_=Worker.get_value(dict_=json_data, user_=user, key_="Должность"),
+            category_=Worker.get_value(dict_=json_data, user_=user, key_="Категория")
+        )
+        print(worker.username_)
+        try:
+            user = User.objects.get(username=worker.username_)
+            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+        except Exception as error_:
+            print(error_)
+            user = User.objects.create(username=worker.username_)
+            password = backend_service.DjangoClass.AccountClass.create_password_from_chars(
+                length=6, need_temp=True
+            )
+            user.set_password(password)
+            user.save()
+            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+            user_model.password_slug_field = password
+            user_model.temp_password_boolean_field = True
+            user_model.save()
+
+        try:
+            if user_model.last_name_char_field != worker.last_name_:
+                user_model.last_name_char_field = worker.last_name_
+            if user_model.first_name_char_field != worker.first_name_:
+                user_model.first_name_char_field = worker.first_name_
+            if user_model.patronymic_char_field != worker.patronymic_:
+                user_model.patronymic_char_field = worker.patronymic_
+            if user_model.personnel_number_slug_field != worker.personnel_number_:
+                user_model.personnel_number_slug_field = worker.personnel_number_
+            if user_model.subdivision_char_field != worker.subdivision_:
+                user_model.subdivision_char_field = worker.subdivision_
+            if user_model.workshop_service_char_field != worker.workshop_service_:
+                user_model.workshop_service_char_field = worker.workshop_service_
+            if user_model.department_site_char_field != worker.department_site_:
+                user_model.department_site_char_field = worker.department_site_
+            if user_model.position_char_field != worker.position_:
+                user_model.position_char_field = worker.position_
+            if user_model.category_char_field != worker.category_:
+                user_model.category_char_field = worker.category_
+            user_model.save()
+        except Exception as error_:
+            print(error_)
+
+        try:
+            if worker.status_ == 'created':
+                user_model.activity_boolean_field = True
+                user_model.save()
+            elif worker.status_ == 'changed':
+                pass
+            elif worker.status_ == 'disabled':
+                user_model.activity_boolean_field = False
+                user_model.save()
+            else:
+                print('unknown status')
+        except Exception as error_:
+            print(error_)
+    return json_data
+
+
+def start_sheduler(request):
+    threading.Thread(target=scheduler, args=(request,)).start()
+
+
+def scheduler(request):
+
+    # create superuser 'Web_adm_1c'
+    ####################################################################################################################
+    username_ = 'Web_adm_1c'
+    password_ = '159159qqww!'
+    try:
+        user = User.objects.get(username=username_)
+    except Exception as error__:
+        print(error__)
+        user = User.objects.create(username=username_)
+        user.set_password(password_)
+        user.is_superuser = True
+        user.save()
+        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+        user_model.password_slug_field = password_
+        user_model.save()
+    ####################################################################################################################
+
+    # api/update_users/
+    ####################################################################################################################
+    try:
+        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+        update = True
+        for dat in backend_models.LoggingModel.objects.filter(
+                request_path_slug_field='/api/update_users/'
+        ):
+            if (dat.datetime_field + datetime.timedelta(hours=24)).strftime('%Y-%m-%d %H:%M') >= now:
+                update = False
+                break
+        if update:
+            request.path = '/api/update_users/'
+            backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+            threading.Thread(target=update_users, args=(request,)).start()
+    except Exception as error:
+        print(error)
+    ####################################################################################################################
+
+    return True
+
+
+@permission_classes([AllowAny])
 def index(request):
     """
     React app index page
@@ -41,6 +206,7 @@ def index(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
     #     redirect('http://192.168.1.68:8000/home/')
@@ -60,14 +226,20 @@ def admin_(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
     #     redirect('http://192.168.1.68:8000/admin/')
 
-    return render(request, admin.site.urls)
+    try:
+        return render(request, admin.site.urls)
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.logging_errors(error=error, request=request)
+        return render(request, 'backend/404.html')
 
 
 @api_view(http_method_names=['GET'])
+@permission_classes([AllowAny])
 def routes(request):
     """
     All django-rest-framework routes
@@ -75,6 +247,7 @@ def routes(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print(f'\n\nroutes:\n\n')
     _routes = [
@@ -145,6 +318,7 @@ def api_login_user(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('get_tokens_for_user:')
@@ -213,7 +387,7 @@ def api_login_user(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         elif request_method == 'PUT':
@@ -237,6 +411,7 @@ def api_user_profile(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_user_profile:')
@@ -259,7 +434,7 @@ def api_user_profile(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         elif request_method == 'PUT':
@@ -283,6 +458,7 @@ def api_user_change_profile(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_user_change_profile:')
@@ -310,19 +486,19 @@ def api_user_change_profile(request):
                             if request_body["email"] and request_body["email"] != user_model.email_field:
                                 user_model.email_field = request_body["email"]
                         except Exception as error:
-                            pass
+                            print(error)
                         try:
                             if request_body["secretQuestion"] and request_body["secretQuestion"] != \
                                     user_model.secret_question_char_field:
                                 user_model.secret_question_char_field = request_body["secretQuestion"]
                         except Exception as error:
-                            pass
+                            print(error)
                         try:
                             if request_body["secretAnswer"] and request_body["secretAnswer"] != \
                                     user_model.secret_answer_char_field:
                                 user_model.secret_answer_char_field = request_body["secretAnswer"]
                         except Exception as error:
-                            pass
+                            print(error)
                         user_model.save()
                         response = {"response": "Изменение пароля успешно проведено!"}
                     else:
@@ -332,7 +508,7 @@ def api_user_change_profile(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         elif request_method == 'PUT':
@@ -348,6 +524,7 @@ def api_user_change_profile(request):
 
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@permission_classes([AllowAny])
 def api_user_recover_password(request):
     """
     Api django-rest-framework recover password
@@ -355,6 +532,7 @@ def api_user_recover_password(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_user_recover_password:')
@@ -387,15 +565,13 @@ def api_user_recover_password(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             if request_action_type == "CHECK_ANSWER":
                 try:
                     username = request_body["username"]
                     secret_answer_char_field = request_body["secretAnswer"]
-
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-
                     if str(secret_answer_char_field).strip().lower() == \
                             str(user_model.secret_answer_char_field).strip().lower():
                         response = {"response": {
@@ -409,7 +585,7 @@ def api_user_recover_password(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             if request_action_type == "SEND_EMAIL_PASSWORD":
                 try:
                     username = request_body["username"]
@@ -476,7 +652,7 @@ def api_user_recover_password(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             if request_action_type == "CHECK_EMAIL_PASSWORD":
                 try:
                     username = request_body["username"]
@@ -510,7 +686,7 @@ def api_user_recover_password(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             if request_action_type == "CHANGE_PASSWORD":
                 try:
                     username = request_body["username"]
@@ -537,7 +713,7 @@ def api_user_recover_password(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         elif request_method == 'PUT':
@@ -561,6 +737,7 @@ def api_user_all(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_user_all:')
@@ -584,7 +761,7 @@ def api_user_all(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         elif request_method == 'PUT':
@@ -608,6 +785,7 @@ def api_user_temp_all(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_user_temp_all:')
@@ -619,16 +797,17 @@ def api_user_temp_all(request):
 
     if request_method != 'GET':
         return Response({"error": "This method not allowed for endpoint."})
-    # Body: {"body": {"username": "Web_adm_1c", "password": "159159qqww!"}}
 
-    user_models = backend_models.UserModel.objects.filter(temp_password_boolean_field=True)
+    user_models = backend_models.UserModel.objects.filter(
+        temp_password_boolean_field=True,
+        activity_boolean_field=True
+    )
     if not request.user.is_superuser:
         return Response({"error": "Your user in not superuser."})
 
     objects = []
     for user_model in user_models:
-        if not user_model.user_foreign_key_field.is_superuser and \
-                user_model.user_foreign_key_field.username != "Web_adm_1c":
+        if not user_model.user_foreign_key_field.is_superuser:
             objects.append(
                 {
                     f"""{base64.b64encode(str(user_model.user_foreign_key_field.username)[::-1].encode()).decode()}""":
@@ -681,6 +860,7 @@ def api_salary(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_salary:')
@@ -738,6 +918,7 @@ def api_salary(request):
                     try:
                         json_data["global_objects"]["3.Доходы в натуральной форме"]
                     except Exception as error:
+                        print(error)
                         json_data["global_objects"]["3.Доходы в натуральной форме"] = {
                             "Fields": {
                                 "1": "Вид",
@@ -1265,7 +1446,7 @@ def api_salary(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         elif request_method == 'PUT':
@@ -1289,6 +1470,7 @@ def api_rational(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_rational:')
@@ -1312,7 +1494,7 @@ def api_rational(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             elif request_action_type == "RATIONAL_CREATE":
                 try:
 
@@ -1328,7 +1510,7 @@ def api_rational(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this Action-type."})
         elif request_method == 'PUT':
@@ -1352,6 +1534,7 @@ def api_bank_idea_all(request):
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
 
     print('\n\n\n')
     print('api_salary:')
@@ -1375,9 +1558,50 @@ def api_bank_idea_all(request):
                 except Exception as error:
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                    return Response({"error": "This action has error."})
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
+        elif request_method == 'PUT':
+            return Response({"error": "This method not allowed for endpoint."})
+        elif request_method == 'DELETE':
+            return Response({"error": "This method not allowed for endpoint."})
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return Response({"error": "This endpoint has error."})
+
+
+@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@authentication_classes([BasicAuthentication])
+def api_update_users(request):
+    """
+    Api django-rest-framework update_users
+    """
+
+    # logging
+    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+    start_sheduler(request=request)
+
+    print('\n\n\n')
+    print('update_users:')
+    print('\n')
+    request_method, request_action_type, request_user, request_body = \
+        backend_service.DjangoClass.DRFClass.request_utils(request=request)
+    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
+          f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
+
+    try:
+        if request_method == 'GET':
+            try:
+                json_data = update_users()
+                return Response({"json_data": json_data})
+            except Exception as error:
+                backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                return Response({"error": "This method not allowed for endpoint."})
+        elif request_method == 'POST':
+            return Response({"error": "This method not allowed for endpoint."})
         elif request_method == 'PUT':
             return Response({"error": "This method not allowed for endpoint."})
         elif request_method == 'DELETE':
@@ -3027,10 +3251,10 @@ def account_export_accounts(request):
                             groups = group_string[2:]
                         else:
                             groups = ''
-                        backend_utils.ExcelClass.set_sheet_value('P', _index, groups, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('O', _index, groups, sheet)
 
                         _email = user_model.email_field
-                        backend_utils.ExcelClass.set_sheet_value('O', _index, _email, sheet)
+                        backend_utils.ExcelClass.set_sheet_value('P', _index, _email, sheet)
 
                         secret_question = user_model.secret_question_char_field
                         backend_utils.ExcelClass.set_sheet_value('Q', _index, secret_question, sheet)

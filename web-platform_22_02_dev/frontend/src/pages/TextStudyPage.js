@@ -17,48 +17,81 @@ const TextStudyPage = () => {
         logic={false}
       />
       <main className="container text-center">
-        <div class="accordion" id="accordionExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_1">
+        <div className="accordion" id="accordionExample">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="accordion_heading_1">
               <button
-                class="accordion-button "
+                className="accordion-button "
                 type="button"
                 data-bs-toggle=""
                 data-bs-target="#accordion_collapse_1"
                 aria-expanded="false"
                 aria-controls="accordion_collapse_1"
               >
-                <p className="lead text-danger">Первый вход в систему:
-              <div>
-                <a
-                  className="btn btn-lg btn-outline-primary m-1"
-                  href="/static/first_login.pdf"
-                >
-                  Скачать инструкцию в pdf-формате
-                </a>
-              </div></p>
+                <p className="lead text-danger">
+                  Первый вход в систему:
+                  <div>
+                    <a
+                      className="btn btn-lg btn-outline-primary m-1"
+                      href="/static/study/first_login.pdf"
+                    >
+                      Скачать инструкцию в pdf-формате
+                    </a>
+                  </div>
+                </p>
               </button>
             </h2>
             <div
               id="accordion_collapse_1"
-              class="accordion-collapse "
+              className="accordion-collapse "
               aria-labelledby="accordion_collapse_1"
               data-bs-parent="#accordionExample"
             >
-              <div class="accordion-body">
+              <div className="accordion-body">
                 <ol className="card">
+                  <li className="m-1 text-start">
+                    Обновите Ваш браузер до последней доступной версии!
+                    <p className="text-center">
+                      Компьютер:
+                      <img
+                        src="static/study/input_0_0.png"
+                        className="w-75 img-fluid img-thumbnail"
+                        alt="id"
+                      />
+                    </p>
+                    <p className="text-center">
+                      Мобильный вид:
+                      <img
+                        src="static/study/input_0_1.jpg"
+                        className="w-25 img-fluid img-thumbnail"
+                        alt="id"
+                      />
+                    </p>
+                    <p className="text-center text-success">
+                      Рекомендуемые типы браузеров: 1) Google Chrome 2) Firefox
+                    </p>
+                    <p>
+                      <small className="text-muted">
+                        Функционал и работоспособность системы может отличаться
+                        в зависимости от типа и версии браузера.
+                      </small>
+                    </p>
+                    <hr />
+                  </li>
                   <li className="m-1 text-start">
                     Перейдите по ссылке:{" "}
                     <small className="text-decoration-underline text-success">
-                      <a href="http://web.km.kz:88/">
-                        http://web.km.kz:88/
-                      </a>
+                      <a href="http://web.km.kz:88/">http://web.km.kz:88/</a>
                     </small>
                     <p className="text-center text-success">
                       Либо отсканируйте QR код
-                      <img src="static/qr_link.png" className="w-25" alt="id" />
+                      <img
+                        src="static/study/qr_link.png"
+                        className="w-25"
+                        alt="id"
+                      />
                     </p>
-                    <hr/>
+                    <hr />
                   </li>
                   <li className="m-1 text-start">
                     Нажмите на кнопку "Войти", на верхней панели.
@@ -71,12 +104,12 @@ const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/input_1.png"
+                        src="static/study/input_1.png"
                         className="w-100"
                         alt="id"
                       />
                     </p>
-                    <hr/>
+                    <hr />
                   </li>
                   <li className="m-1 text-start">
                     После предыдущего действия Вас перенаправит на страницу
@@ -90,7 +123,7 @@ const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/input_2.png"
+                        src="static/study/input_2.png"
                         className="w-100"
                         alt="id"
                       />
@@ -101,19 +134,25 @@ const TextStudyPage = () => {
                         ввода.
                       </small>
                     </p>
-                    <hr/>
+                    <hr />
                   </li>
                   <li className="m-1 text-start">
                     После успешного первого входа Вас перенаправит на страницу
                     обязательного заполнения дополнительных данных.
                     <p>
                       <small className="text-danger">
-                        Внимание, первый пароль является временным, его необходимо заменить!
+                        Пароль должен состоять только из латинских букв и цифр!
                       </small>
+                      <p>
+                        <small className="text-danger">
+                          Внимание, первый пароль является временным, его
+                          необходимо заменить!
+                        </small>
+                      </p>
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/input_3.png"
+                        src="static/study/input_3.png"
                         className="w-100"
                         alt="id"
                       />
@@ -124,10 +163,37 @@ const TextStudyPage = () => {
                         в случае утери пароля.
                       </small>
                     </p>
-                    <hr/>
+                    <hr />
                   </li>
                   <li className="m-1 text-start">
-                    После успешного действия Вас снова перенаправит на страницу входа, где уже нужно использовать новый пароль.
+                    Для быстрого доступа к сайту можно сделать закладку и
+                    перенести её для быстрого доступа.
+                    <p className="text-center">
+                      Компьютеры:
+                      <img
+                        src="static/study/input_4_1.png"
+                        className="w-75"
+                        alt="id"
+                      />
+                    </p>
+                    <p className="text-center">
+                      Мобильный вид:
+                      <img
+                        src="static/study/input_4_2.png"
+                        className="w-50"
+                        alt="id"
+                      />
+                    </p>
+                    <p>
+                      <small className="text-muted">
+                        Закладку потом можно перенести на рабочий стол /
+                        главный. экран
+                      </small>
+                    </p>
+                  </li>
+                  <li className="m-1 text-start">
+                    После успешного действия Вас снова перенаправит на страницу
+                    входа, где уже нужно использовать новый пароль.
                     <p>
                       <small className="text-success">
                         Успешного пользования Платформой!
@@ -139,10 +205,10 @@ const TextStudyPage = () => {
             </div>
           </div>
 
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="accordion_heading_2">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="accordion_heading_2">
               <button
-                class="accordion-button"
+                className="accordion-button"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#accordion_collapse_2"
@@ -154,7 +220,7 @@ const TextStudyPage = () => {
                   <div>
                     <a
                       className="btn btn-lg btn-outline-primary m-1"
-                      href="/static/salary.pdf"
+                      href="/static/study/salary.pdf"
                     >
                       Скачать инструкцию в pdf-формате
                     </a>
@@ -164,11 +230,11 @@ const TextStudyPage = () => {
             </h2>
             <div
               id="accordion_collapse_2"
-              class="accordion-collapse"
+              className="accordion-collapse"
               aria-labelledby="accordion_collapse_2"
               data-bs-parent="#accordionExample"
             >
-              <div class="accordion-body">
+              <div className="accordion-body">
                 <ol className="card">
                   <li className="m-1 text-start">
                     Войдите в систему, а затем нажмите на кнопку "Выгрузка
@@ -176,7 +242,7 @@ const TextStudyPage = () => {
                     заработной платы" на верхней панели.
                     <p className="text-center">
                       <img
-                        src="static/salary_1.png"
+                        src="static/study/salary_1.png"
                         className="w-100"
                         alt="id"
                       />
@@ -200,7 +266,7 @@ const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/salary_2.png"
+                        src="static/study/salary_2.png"
                         className="w-100"
                         alt="id"
                       />
@@ -223,7 +289,7 @@ const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/salary_3.png"
+                        src="static/study/salary_3.png"
                         className="w-100"
                         alt="id"
                       />
@@ -238,34 +304,39 @@ const TextStudyPage = () => {
                     <hr />
                   </li>
                   <li className="m-1 text-start">
-                    При успешном получении данных они отобразятся в таблицах ниже.
+                    При успешном получении данных они отобразятся в таблицах
+                    ниже.
                     <p>
                       <small className="text-success">
-                        Также можно скачать расчётный лист в привычном excel-формате, для распечатки!
+                        Также можно скачать расчётный лист в привычном
+                        excel-формате, для распечатки!
                       </small>
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/salary_4.png"
+                        src="static/study/salary_4.png"
                         className="w-100"
                         alt="id"
                       />
                     </p>
                     <p>
                       <small className="text-muted">
-                        Данные в excel-формате. Внимание, изменение ячеек запрещено!
+                        Данные в excel-формате. Внимание, изменение ячеек
+                        запрещено!
                       </small>
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/salary_5.png"
+                        src="static/study/salary_5.png"
                         className="w-50"
                         alt="id"
                       />
                     </p>
                     <p>
                       <small className="text-danger">
-                        В случае каких либо неполадок, можете обратиться к администратору системы. Данные указаны в самом низу страницы.
+                        В случае каких либо неполадок, можете обратиться к
+                        администратору системы. Данные указаны в самом низу
+                        страницы.
                       </small>
                     </p>
                   </li>

@@ -94,7 +94,7 @@ const LoginPage = () => {
             </MessageComponent>
           )}
         </div>
-        <div className="form-control">
+        <div className="">
           <form
             method="POST"
             target="_self"
@@ -105,41 +105,60 @@ const LoginPage = () => {
             onSubmit={submitHandler}
           >
             <div>
-              <label className="form-control-lg m-1">
+              <label className="form-control-md m-1 lead">
                 Введите Ваш ИИН:
                 <input
                   type="text"
                   id="username"
                   name="username"
-                  required=""
+                  required
                   placeholder=""
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   minLength="12"
                   maxLength="12"
-                  className="form-control form-control-lg"
+                  className="form-control form-control-md"
                 />
-                <small className="text-muted">количество символов: 12</small>
+                <p>
+                  <small className="text-danger">* обязательно</small>
+                  <p>
+                    <small className="text-muted">
+                      количество символов: 12
+                    </small>
+                  </p>
+                </p>
               </label>
-              <label className="form-control-lg m-1">
+              <label className="form-control-md m-1 lead">
                 Введите пароль для входа в аккаунт:
+                <p>
+                  <small className="text-danger">
+                    Только латинские буквы и цифры!
+                  </small>
+                </p>
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  required=""
+                  required
                   placeholder=""
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   minLength="8"
                   maxLength="32"
-                  className="form-control form-control-lg"
+                  className="form-control form-control-md"
+                  autoComplete="none"
+                  aria-autocomplete="none"
                 />
-                <small className="text-muted">
-                  количество символов: от 8 до 32
-                </small>
+                <p>
+                  <small className="text-danger">* обязательно</small>
+                  <p>
+                    <small className="text-muted">
+                      количество символов: от 8 до 32
+                    </small>
+                  </p>
+                </p>
               </label>
-              <label className="form-control-lg m-1">
+              <label className="m-1">
                 <ReCAPTCHA
                   sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
                   onChange={changeCapcha}
@@ -153,7 +172,7 @@ const LoginPage = () => {
                   <button
                     href=""
                     type="submit"
-                    className="btn btn-lg btn-outline-primary form-control"
+                    className="btn btn-md btn-primary form-control"
                   >
                     Войти в систему
                   </button>
@@ -166,7 +185,7 @@ const LoginPage = () => {
                       setPassword("");
                       setUsername("");
                     }}
-                    className="btn btn-lg btn-outline-warning form-control"
+                    className="btn btn-md btn-warning form-control"
                   >
                     Сбросить данные
                   </button>
@@ -176,7 +195,7 @@ const LoginPage = () => {
                     href=""
                     type="button"
                     onClick={changeVisibility}
-                    className="btn btn-lg btn-outline-danger form-control"
+                    className="btn btn-md btn-danger form-control"
                   >
                     Видимость пароля
                   </button>
@@ -185,7 +204,7 @@ const LoginPage = () => {
                   <a
                     href="/recover_password"
                     type="button"
-                    className="btn btn-lg btn-outline-success form-control"
+                    className="btn btn-md btn-success form-control"
                   >
                     Восстановить доступ к аккаунту
                   </a>

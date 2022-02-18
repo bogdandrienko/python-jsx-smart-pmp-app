@@ -105,45 +105,65 @@ const ChangePasswordPage = () => {
               onSubmit={submitHandler}
             >
               <div>
-                <label className="form-control-lg m-1">
+                <label className="form-control-md m-1 lead">
                   Введите пароль для входа в аккаунт:
+                  <p>
+                    <small className="text-danger">
+                      Только латинские буквы и цифры!
+                    </small>
+                  </p>
                   <input
                     type="password"
                     id="password"
                     name="password"
-                    required=""
+                    required
                     placeholder=""
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                     autoComplete="none"
                     aria-autocomplete="none"
                   />
-                  <small className="text-muted">
-                    количество символов: от 8 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 8 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
-                <label className="form-control-lg m-1">
+                <label className="form-control-md m-1 lead">
                   Повторите новый пароль:
+                  <p>
+                    <small className="text-danger">
+                      Только латинские буквы и цифры!
+                    </small>
+                  </p>
                   <input
                     type="password"
                     id="password2"
                     name="password2"
-                    required=""
+                    required
                     placeholder=""
                     value={password2}
                     onChange={(e) => setPassword2(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                     autoComplete="none"
                     aria-autocomplete="none"
                   />
-                  <small className="text-muted">
-                    количество символов: от 8 до 32
-                  </small>
+                  <p>
+                    <small className="text-danger">* обязательно</small>
+                    <p>
+                      <small className="text-muted">
+                        количество символов: от 8 до 32
+                      </small>
+                    </p>
+                  </p>
                 </label>
               </div>
               <hr />
@@ -153,7 +173,7 @@ const ChangePasswordPage = () => {
                     <button
                       href=""
                       type="submit"
-                      className="btn btn-lg btn-outline-primary form-control"
+                      className="btn btn-md btn-primary form-control"
                     >
                       Сохранить новые данные
                     </button>
@@ -166,7 +186,7 @@ const ChangePasswordPage = () => {
                         setPassword("");
                         setPassword2("");
                       }}
-                      className="btn btn-lg btn-outline-warning form-control"
+                      className="btn btn-md btn-warning form-control"
                     >
                       Сбросить данные
                     </button>
@@ -176,7 +196,7 @@ const ChangePasswordPage = () => {
                       href=""
                       type="button"
                       onClick={changeVisibility}
-                      className="btn btn-lg btn-outline-danger form-control"
+                      className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля
                     </button>

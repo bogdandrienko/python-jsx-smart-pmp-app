@@ -51,7 +51,6 @@ const TitleComponent = ({
                 dispatch(userLogoutAction());
               }
               if (
-                !dataUserDetails["user_model"]["email_field"] ||
                 !dataUserDetails["user_model"]["secret_question_char_field"] ||
                 !dataUserDetails["user_model"]["secret_answer_char_field"]
               ) {

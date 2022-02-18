@@ -40,6 +40,30 @@ const SalaryPage = () => {
         logic={true}
       />
       <main className="container text-center">
+        <div className="text-center">
+          {loadSalaryUser && <LoaderComponent />}
+          {dataSalaryUser && (
+            <div className="m-1">
+              <MessageComponent variant="success">
+                Данные успешно получены!
+              </MessageComponent>
+            </div>
+          )}
+          {errorSalaryUser && (
+            <div className="m-1">
+              <MessageComponent variant="danger">
+                {errorSalaryUser}
+              </MessageComponent>
+            </div>
+          )}
+          {failSalaryUser && (
+            <div className="m-1">
+              <MessageComponent variant="warning">
+                {failSalaryUser}
+              </MessageComponent>
+            </div>
+          )}
+        </div>
         <div className="">
           <form className="">
             <div className="input-group m-1">
@@ -48,7 +72,7 @@ const SalaryPage = () => {
                 id="month"
                 name="month"
                 required=""
-                className="form-control form-control-lg"
+                className="form-control form-control-md"
               >
                 <option value="1" defaultValue selected>
                   Январь
@@ -70,7 +94,7 @@ const SalaryPage = () => {
                 id="year"
                 name="year"
                 required=""
-                className="form-control form-control-lg"
+                className="form-control form-control-md"
               >
                 <option value="2021">2021</option>
                 <option value="2022" defaultValue selected>
@@ -81,7 +105,7 @@ const SalaryPage = () => {
               {!loadSalaryUser && (
                 <button
                   onClick={salaryHundlerSubmit}
-                  className="btn btn-lg btn-outline-primary"
+                  className="btn btn-md btn-primary"
                   type="button"
                 >
                   получить
@@ -92,35 +116,11 @@ const SalaryPage = () => {
         </div>
         <hr />
         <div>
-          <div className="text-center">
-            {loadSalaryUser && <LoaderComponent />}
-            {dataSalaryUser && (
-              <div className="m-1">
-                <MessageComponent variant="success">
-                  Данные успешно получены!
-                </MessageComponent>
-              </div>
-            )}
-            {errorSalaryUser && (
-              <div className="m-1">
-                <MessageComponent variant="danger">
-                  {errorSalaryUser}
-                </MessageComponent>
-              </div>
-            )}
-            {failSalaryUser && (
-              <div className="m-1">
-                <MessageComponent variant="warning">
-                  {failSalaryUser}
-                </MessageComponent>
-              </div>
-            )}
-          </div>
           {dataSalaryUser && (
             <div>
               <div>
                 <a
-                  className="btn btn-lg btn-outline-success m-1"
+                  className="btn btn-md btn-success m-1"
                   href={`./${dataSalaryUser["excel_path"]}`}
                 >
                   Скачать excel-документ

@@ -7,20 +7,21 @@ import { modules } from "../js/constants";
 const HeaderComponent = () => {
   const userLoginState = useSelector((state) => state.userLoginState);
   const {
-    load: loadUserLogin,
+    // load: loadUserLogin,
     data: dataUserLogin,
-    error: errorUserLogin,
-    fail: failUserLogin,
+    // error: errorUserLogin,
+    // fail: failUserLogin,
   } = userLoginState;
   return (
     <header className="navbar-fixed-top bg-secondary bg-opacity-10 m-0 p-0">
       <Navbar expand="lg">
         <Container>
-          <a
-            className="navbar-brand img-fluid img-thumbnail"
-            href="https://km.kz/"
-          >
-            <img src="static/logo_small.png" className="w-25" alt="id" />
+          <a className="navbar-brand w-25" href="https://km.kz/">
+            <img
+              src="static/logo.png"
+              className="w-25 img-responsive"
+              alt="id"
+            />
           </a>
           <a className="navbar-brand" href="/">
             Домашняя
@@ -241,16 +242,16 @@ const HeaderComponent = () => {
               {dataUserLogin ? (
                 <LinkContainer to="/logout">
                   <Nav.Link>
-                    <button className="btn btn-danger">
-                      Выйти <i class="fa-solid fa-user"></i>
+                    <button className="btn btn-sm btn-danger">
+                      Выйти <i className="fa-solid fa-user" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <button className="btn btn-primary">
-                      Войти <i class="fa-solid fa-user"></i>
+                    <button className="btn btn-sm btn-primary">
+                      Войти <i className="fa-solid fa-user" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>

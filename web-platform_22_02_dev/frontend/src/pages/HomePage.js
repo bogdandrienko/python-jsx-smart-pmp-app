@@ -19,33 +19,34 @@ const HomePage = () => {
         second={"основная страница веб платформы."}
         logic={false}
       />
-      <main className="container text-center">
-        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 align-content-between">
-          <div className="text-center container-fluid">
+      <main className="container">
+        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+          <div className="">
             <small className="lead fw-bold">Первый вход в систему:</small>
-
-            <div className="embed-responsive embed-responsive-16by9">
-              <div className="player-wrapper">
+            <div className="w-75">
+              С компьютера:
+              <div className="">
                 <ReactPlayer
-                  url="static/first_login.MP4"
+                  url="static/video/first_login_desktop.MP4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"
                   controls={true}
-                  className="embed-responsive-item"
+                  className=""
                 />
               </div>
             </div>
 
-            <div className="embed-responsive embed-responsive-16by9">
-              <div className="player-wrapper">
+            <div className="w-75">
+              С смартфона:
+              <div className="">
                 <ReactPlayer
-                  url="static/first_login_mobile.MP4"
+                  url="static/video/first_login_mobile.MP4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"
                   controls={true}
-                  className="embed-responsive-item"
+                  className=""
                 />
               </div>
             </div>
