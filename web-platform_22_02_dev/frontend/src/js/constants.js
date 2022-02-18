@@ -45,6 +45,17 @@ export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
 export const RATIONAL_LIST_FAIL_CONSTANT = "RATIONAL_LIST_FAIL_CONSTANT";
 export const RATIONAL_LIST_RESET_CONSTANT = "RATIONAL_LIST_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {
     Title: "Личный профиль:",

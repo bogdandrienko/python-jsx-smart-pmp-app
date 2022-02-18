@@ -437,7 +437,7 @@ const ChangePasswordPage = () => {
                     </p>
                   </p>
                 </label>
-                <label className="form-control-lg m-1 lead">
+                <label className="form-control-md m-1 lead">
                   Повторите новый пароль:
                   <p>
                     <small className="text-danger">
@@ -454,7 +454,7 @@ const ChangePasswordPage = () => {
                     onChange={(e) => setPassword2(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-md"
                     autoComplete="none"
                     aria-autocomplete="none"
                   />
@@ -475,7 +475,7 @@ const ChangePasswordPage = () => {
                     <button
                       href=""
                       type="submit"
-                      className="btn btn-lg btn-primary form-control"
+                      className="btn btn-md btn-primary form-control"
                     >
                       Сохранить новые данные
                     </button>
@@ -488,7 +488,7 @@ const ChangePasswordPage = () => {
                         setPassword("");
                         setPassword2("");
                       }}
-                      className="btn btn-lg btn-warning form-control"
+                      className="btn btn-md btn-warning form-control"
                     >
                       Сбросить данные
                     </button>
@@ -498,7 +498,7 @@ const ChangePasswordPage = () => {
                       href=""
                       type="button"
                       onClick={changeVisibility}
-                      className="btn btn-lg btn-danger form-control"
+                      className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля
                     </button>

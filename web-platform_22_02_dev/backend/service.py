@@ -1,7 +1,11 @@
+import base64
 import datetime
+import hashlib
+import json
 import math
 import os
 import random
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 
@@ -91,7 +95,7 @@ class DjangoClass:
         def logging_errors_local(error, function_error):
             datetime_now = datetime.datetime.now()
             backend_models.LoggingModel.objects.create(username='', ip='', request_path=function_error,
-                                        request_method='', error=error)
+                                                       request_method='', error=error)
             text = [function_error, datetime_now, error]
             string = ''
             for val in text:
@@ -216,6 +220,171 @@ class DjangoClass:
 
             return [request_method, request_action_type, request_user, request_body]
 
+    class SchedulerClass:
+        @staticmethod
+        def update_users():
+            key = UtilsClass.create_encrypted_password(
+                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                _length=10
+            )
+            hash_key_obj = hashlib.sha256()
+            hash_key_obj.update(key.encode('utf-8'))
+            key_hash = str(hash_key_obj.hexdigest().strip().upper())
+            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+            date = datetime.datetime.now().strftime("%Y%m%d")
+            date_base64 = base64.b64encode(str(date).encode()).decode()
+            url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
+            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+            h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
+            _login = 'Web_adm_1c'
+            password = '159159qqww!'
+            h.add_credentials(_login, password)
+            response_, content = h.request(url)
+            json_data = json.loads(
+                UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+            )
+
+            class Worker:
+                def __init__(self, date_time_: str, status_: str, username_: str, last_name_: str, first_name_: str,
+                             patronymic_: str, personnel_number_: str, subdivision_: str, workshop_service_: str,
+                             department_site_: str, position_: str, category_: str):
+                    self.date_time_ = date_time_
+                    self.status_ = status_
+                    self.username_ = username_
+                    self.last_name_ = last_name_
+                    self.first_name_ = first_name_
+                    self.patronymic_ = patronymic_
+                    self.personnel_number_ = personnel_number_
+                    self.subdivision_ = subdivision_
+                    self.workshop_service_ = workshop_service_
+                    self.department_site_ = department_site_
+                    self.position_ = position_
+                    self.category_ = category_
+
+                @staticmethod
+                def get_value(dict_: dict, user_, key_: str):
+                    try:
+                        value = dict_["global_objects"][user_][key_]
+                        return value
+                    except Exception as error__:
+                        print(error__)
+                        return ''
+
+            for user in json_data["global_objects"]:
+                worker = Worker(
+                    date_time_=Worker.get_value(dict_=json_data, user_=user, key_="Период"),
+                    status_=Worker.get_value(dict_=json_data, user_=user, key_="Статус"),
+                    username_=Worker.get_value(dict_=json_data, user_=user, key_="ИИН"),
+                    last_name_=Worker.get_value(dict_=json_data, user_=user, key_="Фамилия"),
+                    first_name_=Worker.get_value(dict_=json_data, user_=user, key_="Имя"),
+                    patronymic_=Worker.get_value(dict_=json_data, user_=user, key_="Отчество"),
+                    personnel_number_=Worker.get_value(dict_=json_data, user_=user, key_="ТабельныйНомер"),
+                    subdivision_=Worker.get_value(dict_=json_data, user_=user, key_="Подразделение"),
+                    workshop_service_=Worker.get_value(dict_=json_data, user_=user, key_="Цех_Служба"),
+                    department_site_=Worker.get_value(dict_=json_data, user_=user, key_="Отдел_Участок"),
+                    position_=Worker.get_value(dict_=json_data, user_=user, key_="Должность"),
+                    category_=Worker.get_value(dict_=json_data, user_=user, key_="Категория")
+                )
+                print(worker.username_)
+                try:
+                    user = User.objects.get(username=worker.username_)
+                    user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                except Exception as error_:
+                    print(error_)
+                    user = User.objects.create(username=worker.username_)
+                    password = DjangoClass.AccountClass.create_password_from_chars(
+                        length=6, need_temp=True
+                    )
+                    user.set_password(password)
+                    user.save()
+                    user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                    user_model.password_slug_field = password
+                    user_model.temp_password_boolean_field = True
+                    user_model.save()
+
+                try:
+                    if user_model.last_name_char_field != worker.last_name_:
+                        user_model.last_name_char_field = worker.last_name_
+                    if user_model.first_name_char_field != worker.first_name_:
+                        user_model.first_name_char_field = worker.first_name_
+                    if user_model.patronymic_char_field != worker.patronymic_:
+                        user_model.patronymic_char_field = worker.patronymic_
+                    if user_model.personnel_number_slug_field != worker.personnel_number_:
+                        user_model.personnel_number_slug_field = worker.personnel_number_
+                    if user_model.subdivision_char_field != worker.subdivision_:
+                        user_model.subdivision_char_field = worker.subdivision_
+                    if user_model.workshop_service_char_field != worker.workshop_service_:
+                        user_model.workshop_service_char_field = worker.workshop_service_
+                    if user_model.department_site_char_field != worker.department_site_:
+                        user_model.department_site_char_field = worker.department_site_
+                    if user_model.position_char_field != worker.position_:
+                        user_model.position_char_field = worker.position_
+                    if user_model.category_char_field != worker.category_:
+                        user_model.category_char_field = worker.category_
+                    user_model.save()
+                except Exception as error_:
+                    print(error_)
+
+                try:
+                    if worker.status_ == 'created':
+                        user_model.activity_boolean_field = True
+                        user_model.save()
+                    elif worker.status_ == 'changed':
+                        pass
+                    elif worker.status_ == 'disabled':
+                        user_model.activity_boolean_field = False
+                        user_model.save()
+                    else:
+                        print('unknown status')
+                except Exception as error_:
+                    print(error_)
+            return json_data
+
+        @staticmethod
+        def scheduler(request):
+
+            # create superuser 'Web_adm_1c'
+            ############################################################################################################
+            username_ = 'Web_adm_1c'
+            password_ = '159159qqww!'
+            try:
+                user = User.objects.get(username=username_)
+            except Exception as error__:
+                print(error__)
+                user = User.objects.create(username=username_)
+                user.set_password(password_)
+                user.is_superuser = True
+                user.save()
+                user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                user_model.password_slug_field = password_
+                user_model.save()
+            ############################################################################################################
+
+            # api/update_users/
+            ############################################################################################################
+            try:
+                now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                update = True
+                for dat in backend_models.LoggingModel.objects.filter(
+                        request_path_slug_field='/api/update_users/'
+                ):
+                    if (dat.datetime_field + datetime.timedelta(hours=24)).strftime('%Y-%m-%d %H:%M') >= now:
+                        update = False
+                        break
+                if update:
+                    request.path = '/api/update_users/'
+                    DjangoClass.LoggingClass.logging_actions(request=request)
+                    threading.Thread(target=DjangoClass.SchedulerClass.update_users, args=(request,)).start()
+            except Exception as error:
+                print(error)
+            ############################################################################################################
+
+            return True
+
+        @staticmethod
+        def start_scheduler(request):
+            threading.Thread(target=DjangoClass.SchedulerClass.scheduler, args=(request,)).start()
+
 
 class PaginationClass:
     @staticmethod
@@ -270,7 +439,8 @@ class ComputerVisionClass:
                         for module in modules:
                             # Проверка, что цикл модуля отработал в последний раз не позже задержки цикла
                             if module.datetime_field and (module.datetime_field + datetime.timedelta(hours=6)) > \
-                                    backend_utils.DateTimeUtils.get_difference_datetime(seconds=-module.delay_float_field):
+                                    backend_utils.DateTimeUtils.get_difference_datetime(
+                                        seconds=-module.delay_float_field):
                                 continue
                             # Получение имени модуля из константы в модели ComputerVisionModuleModel
                             name_module = dict_modules[module.path_slug_field]
@@ -311,13 +481,15 @@ class ComputerVisionClass:
                         for component in components:
                             executor.submit(ComputerVisionClass.EventLoopClass.Grohota16OperationClass.
                                             component_grohota_16_operation, component=component)
-                    module = backend_models.ComputerVisionModuleModel.objects.get(path_slug_field=module.path_slug_field)
+                    module = backend_models.ComputerVisionModuleModel.objects.get(
+                        path_slug_field=module.path_slug_field)
                     module.duration_float_field = round(time.time() - start_time, 2)
                     module.datetime_field = timezone.now()
                     module.save()
                 except Exception as error:
                     error_text_field = f'loop_module_grohota_16_operation | {timezone.now()} | error : {error}'
-                    module = backend_models.ComputerVisionModuleModel.objects.get(path_slug_field=module.path_slug_field)
+                    module = backend_models.ComputerVisionModuleModel.objects.get(
+                        path_slug_field=module.path_slug_field)
                     module.error_text_field = error_text_field
                     module.save()
                     print(f'\n{error_text_field}\n')

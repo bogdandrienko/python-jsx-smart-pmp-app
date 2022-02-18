@@ -49,6 +49,9 @@ const HeaderComponent = () => {
                     <LinkContainer to="/users_list">
                       <Nav.Link>Список пользователей</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="/admin_change_user_password">
+                      <Nav.Link>Смена пароля пользователя</Nav.Link>
+                    </LinkContainer>
                   </li>
                   <li>
                     <strong className="dropdown-header text-center">

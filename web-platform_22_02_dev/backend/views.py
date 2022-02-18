@@ -4,11 +4,13 @@ import hashlib
 import json
 import os
 import random
-import threading
 
 import bs4
 import httplib2
 import requests
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from xhtml2pdf import pisa
 
 from django.contrib import admin
 from django.contrib.auth import login, authenticate, logout
@@ -28,319 +30,389 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.authentication import BasicAuthentication
-from xhtml2pdf import pisa
 
 from backend import models as backend_models, settings as backend_settings, serializers as backend_serializers, \
     forms as backend_forms, service as backend_service, utils as backend_utils
 
 
-def update_users():
-    key = backend_service.UtilsClass.create_encrypted_password(
-        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-        _length=10
-    )
-    hash_key_obj = hashlib.sha256()
-    hash_key_obj.update(key.encode('utf-8'))
-    key_hash = str(hash_key_obj.hexdigest().strip().upper())
-    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-    date = datetime.datetime.now().strftime("%Y%m%d")
-    date_base64 = base64.b64encode(str(date).encode()).decode()
-    url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
-    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
-    _login = 'Web_adm_1c'
-    password = '159159qqww!'
-    h.add_credentials(_login, password)
-    response_, content = h.request(url)
-    json_data = json.loads(
-        backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-    )
-
-    class Worker:
-        def __init__(self, date_time_: str, status_: str, username_: str, last_name_: str, first_name_: str,
-                     patronymic_: str, personnel_number_: str, subdivision_: str, workshop_service_: str,
-                     department_site_: str, position_: str, category_: str):
-            self.date_time_ = date_time_
-            self.status_ = status_
-            self.username_ = username_
-            self.last_name_ = last_name_
-            self.first_name_ = first_name_
-            self.patronymic_ = patronymic_
-            self.personnel_number_ = personnel_number_
-            self.subdivision_ = subdivision_
-            self.workshop_service_ = workshop_service_
-            self.department_site_ = department_site_
-            self.position_ = position_
-            self.category_ = category_
-
-        @staticmethod
-        def get_value(dict_: dict, user_, key_: str):
-            try:
-                value = dict_["global_objects"][user_][key_]
-                return value
-            except Exception as error__:
-                print(error__)
-                return ''
-
-    for user in json_data["global_objects"]:
-        worker = Worker(
-            date_time_=Worker.get_value(dict_=json_data, user_=user, key_="Период"),
-            status_=Worker.get_value(dict_=json_data, user_=user, key_="Статус"),
-            username_=Worker.get_value(dict_=json_data, user_=user, key_="ИИН"),
-            last_name_=Worker.get_value(dict_=json_data, user_=user, key_="Фамилия"),
-            first_name_=Worker.get_value(dict_=json_data, user_=user, key_="Имя"),
-            patronymic_=Worker.get_value(dict_=json_data, user_=user, key_="Отчество"),
-            personnel_number_=Worker.get_value(dict_=json_data, user_=user, key_="ТабельныйНомер"),
-            subdivision_=Worker.get_value(dict_=json_data, user_=user, key_="Подразделение"),
-            workshop_service_=Worker.get_value(dict_=json_data, user_=user, key_="Цех_Служба"),
-            department_site_=Worker.get_value(dict_=json_data, user_=user, key_="Отдел_Участок"),
-            position_=Worker.get_value(dict_=json_data, user_=user, key_="Должность"),
-            category_=Worker.get_value(dict_=json_data, user_=user, key_="Категория")
-        )
-        print(worker.username_)
-        try:
-            user = User.objects.get(username=worker.username_)
-            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-        except Exception as error_:
-            print(error_)
-            user = User.objects.create(username=worker.username_)
-            password = backend_service.DjangoClass.AccountClass.create_password_from_chars(
-                length=6, need_temp=True
-            )
-            user.set_password(password)
-            user.save()
-            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-            user_model.password_slug_field = password
-            user_model.temp_password_boolean_field = True
-            user_model.save()
-
-        try:
-            if user_model.last_name_char_field != worker.last_name_:
-                user_model.last_name_char_field = worker.last_name_
-            if user_model.first_name_char_field != worker.first_name_:
-                user_model.first_name_char_field = worker.first_name_
-            if user_model.patronymic_char_field != worker.patronymic_:
-                user_model.patronymic_char_field = worker.patronymic_
-            if user_model.personnel_number_slug_field != worker.personnel_number_:
-                user_model.personnel_number_slug_field = worker.personnel_number_
-            if user_model.subdivision_char_field != worker.subdivision_:
-                user_model.subdivision_char_field = worker.subdivision_
-            if user_model.workshop_service_char_field != worker.workshop_service_:
-                user_model.workshop_service_char_field = worker.workshop_service_
-            if user_model.department_site_char_field != worker.department_site_:
-                user_model.department_site_char_field = worker.department_site_
-            if user_model.position_char_field != worker.position_:
-                user_model.position_char_field = worker.position_
-            if user_model.category_char_field != worker.category_:
-                user_model.category_char_field = worker.category_
-            user_model.save()
-        except Exception as error_:
-            print(error_)
-
-        try:
-            if worker.status_ == 'created':
-                user_model.activity_boolean_field = True
-                user_model.save()
-            elif worker.status_ == 'changed':
-                pass
-            elif worker.status_ == 'disabled':
-                user_model.activity_boolean_field = False
-                user_model.save()
-            else:
-                print('unknown status')
-        except Exception as error_:
-            print(error_)
-    return json_data
-
-
-def start_sheduler(request):
-    threading.Thread(target=scheduler, args=(request,)).start()
-
-
-def scheduler(request):
-
-    # create superuser 'Web_adm_1c'
-    ####################################################################################################################
-    username_ = 'Web_adm_1c'
-    password_ = '159159qqww!'
-    try:
-        user = User.objects.get(username=username_)
-    except Exception as error__:
-        print(error__)
-        user = User.objects.create(username=username_)
-        user.set_password(password_)
-        user.is_superuser = True
-        user.save()
-        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-        user_model.password_slug_field = password_
-        user_model.save()
-    ####################################################################################################################
-
-    # api/update_users/
-    ####################################################################################################################
-    try:
-        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
-        update = True
-        for dat in backend_models.LoggingModel.objects.filter(
-                request_path_slug_field='/api/update_users/'
-        ):
-            if (dat.datetime_field + datetime.timedelta(hours=24)).strftime('%Y-%m-%d %H:%M') >= now:
-                update = False
-                break
-        if update:
-            request.path = '/api/update_users/'
-            backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-            threading.Thread(target=update_users, args=(request,)).start()
-    except Exception as error:
-        print(error)
-    ####################################################################################################################
-
-    return True
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
 
 
 @permission_classes([AllowAny])
 def index(request):
     """
-    React app index page
+    index React
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-    #     redirect('http://192.168.1.68:8000/home/')
-
     try:
-        context = {}
-        return render(request, 'index.html', context)
+        print('\n\n\n')
+        print('index: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
+            context = {}
+            return render(request, 'index.html', context)
+        #######################################################################
+        elif request_method == "POST":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.logging_errors(error=error, request=request)
-        return render(request, 'backend/404.html')
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
 
 
+@permission_classes([BasicAuthentication])
 def admin_(request):
     """
-    Admin page
+    admin_ django
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-    #     redirect('http://192.168.1.68:8000/admin/')
-
     try:
-        return render(request, admin.site.urls)
+        print('\n\n\n')
+        print('admin_: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
+            try:
+                return render(request, admin.site.urls)
+            except Exception as error:
+                print(error)
+                return Response({"error": "This action has error."})
+        #######################################################################
+        elif request_method == "POST":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.logging_errors(error=error, request=request)
-        return render(request, 'backend/404.html')
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET'])
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
 def routes(request):
     """
-    All django-rest-framework routes
+    routes django-rest-framework
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
+    try:
+        print('\n\n\n')
+        print('routes: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
 
-    print(f'\n\nroutes:\n\n')
-    _routes = [
-        {
-            'Endpoints': '$BASEPATH$/router/',
-            'methods': 'GET, HEAD, OPTIONS',
-            'descriptions': 'default router for rest_framework ViewSet',
-            'helps': '''$BASEPATH$/router/''',
-            'code': '''from rest_framework import routers\n
-            router = routers.DefaultRouter()\n
-            router.register(prefix=r'users', viewset=views.UserViewSet, basename='users')'''
-        },
-        {
-            'name': '''JWT token''',
-            'endpoint': '''$BASEPATH$/tokens/''',
-            'method': '''...''',
-            'body': '''...''',
-            'descriptions': '''All endpoints for "JWT token" with django-rest_framework api''',
-            'helps': '''$BASEPATH$/tokens/''',
-            'code': '''...'''
-        },
-        {
-            'name': '''get token''',
-            'endpoint': '''$BASEPATH$/token/''',
-            'method': '''...''',
-            'body': '''...''',
-            'descriptions': '''All actions for "note" with django-rest_framework api''',
-            'helps': '''...''',
-            'code': '''...'''
-        },
-        {
-            'name': '''refresh token''',
-            'endpoint': '''$BASEPATH$/token/refresh/''',
-            'method': '''...''',
-            'body': '''...''',
-            'descriptions': '''refresh token with django-rest_framework api''',
-            'helps': '''-''',
-            'code': '''...'''
-        },
-        {
-            'name': '''verify token''',
-            'endpoint': '''$BASEPATH$/token/verify/''',
-            'method': '''...''',
-            'body': '''...''',
-            'descriptions': '''verify token with django-rest_framework api''',
-            'helps': '''-''',
-            'code': '''...'''
-        },
-        {
-            'name': '''note_api''',
-            'endpoint': '''$BASEPATH$/note_api/ && $BASEPATH$/note_api/<id>/''',
-            'method': '''...''',
-            'body': '''...''',
-            'descriptions': '''All actions for "note" with django-rest_framework api''',
-            'helps': '''$BASEPATH$/note_api/-1/''',
-            'code': '''...'''
-        },
-    ]
-    return Response(_routes)
+        #######################################################################
+        if request_method == "GET":
+            try:
+                _routes = [
+                    {
+                        'Endpoints': '$BASEPATH$/router/',
+                        'methods': 'GET, HEAD, OPTIONS',
+                        'descriptions': 'default router for rest_framework ViewSet',
+                        'helps': '''$BASEPATH$/router/''',
+                        'code': '''from rest_framework import routers\n
+                        router = routers.DefaultRouter()\n
+                        router.register(prefix=r'users', viewset=views.UserViewSet, basename='users')'''
+                    },
+                    {
+                        'name': '''JWT token''',
+                        'endpoint': '''$BASEPATH$/tokens/''',
+                        'method': '''...''',
+                        'body': '''...''',
+                        'descriptions': '''All endpoints for "JWT token" with django-rest_framework api''',
+                        'helps': '''$BASEPATH$/tokens/''',
+                        'code': '''...'''
+                    },
+                    {
+                        'name': '''get token''',
+                        'endpoint': '''$BASEPATH$/token/''',
+                        'method': '''...''',
+                        'body': '''...''',
+                        'descriptions': '''All actions for "note" with django-rest_framework api''',
+                        'helps': '''...''',
+                        'code': '''...'''
+                    },
+                    {
+                        'name': '''refresh token''',
+                        'endpoint': '''$BASEPATH$/token/refresh/''',
+                        'method': '''...''',
+                        'body': '''...''',
+                        'descriptions': '''refresh token with django-rest_framework api''',
+                        'helps': '''-''',
+                        'code': '''...'''
+                    },
+                    {
+                        'name': '''verify token''',
+                        'endpoint': '''$BASEPATH$/token/verify/''',
+                        'method': '''...''',
+                        'body': '''...''',
+                        'descriptions': '''verify token with django-rest_framework api''',
+                        'helps': '''-''',
+                        'code': '''...'''
+                    },
+                    {
+                        'name': '''note_api''',
+                        'endpoint': '''$BASEPATH$/note_api/ && $BASEPATH$/note_api/<id>/''',
+                        'method': '''...''',
+                        'body': '''...''',
+                        'descriptions': '''All actions for "note" with django-rest_framework api''',
+                        'helps': '''$BASEPATH$/note_api/-1/''',
+                        'code': '''...'''
+                    },
+                ]
+                return Response({"response": _routes})
+            except Exception as error:
+                print(error)
+                return Response({"error": "This action has error."})
+        #######################################################################
+        elif request_method == "POST":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = backend_serializers.UserSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = backend_serializers.GroupSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ChatViewSet(viewsets.ModelViewSet):
+    queryset = backend_models.ChatModel.objects.all()
+    serializer_class = backend_serializers.ChatModelSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@authentication_classes([BasicAuthentication])
+def api_get_all_users_with_temp_password(request):
+    """
+    api_get_all_users_with_temp_password django-rest-framework
+    """
+
+    try:
+        print('\n\n\n')
+        print('api_get_all_users_with_temp_password: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
+            try:
+                user_models = backend_models.UserModel.objects.filter(
+                    temp_password_boolean_field=True,
+                    activity_boolean_field=True
+                )
+                if not request.user.is_superuser:
+                    return Response({"error": "Your user in not superuser."})
+                objects = []
+                for user_model in user_models:
+                    if not user_model.user_foreign_key_field.is_superuser:
+                        objects.append(
+                            {
+                                f"""{base64.b64encode(
+                                    str(user_model.user_foreign_key_field.username)[::-1].encode()
+                                ).decode()}""":
+                                    base64.b64encode(str(f"12{user_model.password_slug_field}345").encode()).decode()
+                            }
+                        )
+                # for obj in objects:
+                #     for key, value in obj.items():
+                #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
+                return Response({"response": objects})
+            except Exception as error:
+                print(error)
+                return Response({"error": "This action has error."})
+        #######################################################################
+        elif request_method == "POST":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@authentication_classes([BasicAuthentication])
+def api_update_users_from_1c(request):
+    """
+    api_get_all_users_with_temp_password django-rest-framework
+    """
+
+    try:
+        print('\n\n\n')
+        print('api_get_all_users_with_temp_password: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
+            try:
+                json_data = backend_service.DjangoClass.SchedulerClass.update_users()
+                return Response({"response": json_data})
+            except Exception as error:
+                print(error)
+                return Response({"error": "This action has error."})
+        #######################################################################
+        elif request_method == "POST":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
 def api_login_user(request):
     """
-    Api django-rest-framework login
+    api_login_user django-rest-framework
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('get_tokens_for_user:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}", f"method: {request_method}",
-          f"action_type: {request_action_type}", f"user: {request_user}", f"body: {request_body}")
-
     try:
-        if request_method == 'GET':
+        print('\n\n\n')
+        print('api_login_user: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
+        #######################################################################
+        elif request_method == "POST":
             if request_action_type == "LOGIN":
                 #  { "body": {"Action-type": "USER_LOGIN", "username": "Bogdan", "password": "31284bogdan"} }
                 try:
-                    username = request.data["body"]["username"]
-                    password = request.data["body"]["password"]
+                    username = request_body["username"]
+                    password = request_body["password"]
 
                     ip = request.META.get("REMOTE_ADDR")
                     request_path = request.path
-                    request_method = request.method
                     now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                     access_count = 0
                     for dat in backend_models.LoggingModel.objects.filter(
@@ -353,9 +425,6 @@ def api_login_user(request):
                         if (dat.datetime_field + datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') \
                                 >= now:
                             access_count += 1
-
-                    print(f"access_count: {access_count}")
-
                     if access_count < 10:
                         backend_models.LoggingModel.objects.create(
                             username_slug_field=username,
@@ -364,7 +433,6 @@ def api_login_user(request):
                             request_method_slug_field=request_method,
                             error_text_field=f'action: LOGIN'
                         )
-
                         is_authenticated = authenticate(username=username, password=password)
                         if is_authenticated is not None:
                             user = User.objects.get(username=username)
@@ -382,7 +450,6 @@ def api_login_user(request):
                             response = {'error': 'Внимание, данные не совпадают!'}
                     else:
                         response = {'error': 'Внимание, попыток входа можно совершать не более 10 в час!'}
-                    print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -390,41 +457,49 @@ def api_login_user(request):
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
-        elif request_method == 'PUT':
+        #######################################################################
+        elif request_method == "PUT":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
+        #######################################################################
+        elif request_method == "DELETE":
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
         else:
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 def api_user_profile(request):
     """
-    Api django-rest-framework profile
+    api_user_profile django-rest-framework
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('api_user_profile:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}", f"method: {request_method}",
-          f"action_type: {request_action_type}", f"user: {request_user}", f"body: {request_body}")
-
     try:
-        if request_method == 'GET':
+        print('\n\n\n')
+        print('api_user_profile: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
+        #######################################################################
+        elif request_method == "POST":
             if request_action_type == "PROFILE":
                 try:
                     serializer = backend_serializers.UserSerializer(request_user, many=False)
@@ -437,41 +512,49 @@ def api_user_profile(request):
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
-        elif request_method == 'PUT':
+        #######################################################################
+        elif request_method == "PUT":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
+        #######################################################################
+        elif request_method == "DELETE":
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
         else:
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 def api_user_change_profile(request):
     """
-    Api django-rest-framework change profile
+    api_user_change_profile django-rest-framework
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('api_user_change_profile:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}", f"method: {request_method}",
-          f"action_type: {request_action_type}", f"user: {request_user}", f"body: {request_body}")
-
     try:
-        if request_method == 'GET':
+        print('\n\n\n')
+        print('api_user_change_profile: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
+        #######################################################################
+        elif request_method == "POST":
             if request_action_type == "CHANGE":
                 try:
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=request_user)
@@ -502,8 +585,7 @@ def api_user_change_profile(request):
                         user_model.save()
                         response = {"response": "Изменение пароля успешно проведено!"}
                     else:
-                        response = {"error": "Пароли пустые, не совпадают или идентичны предыдущему"}
-                    print(f"response: {response}")
+                        response = {"error": "Данные пустые, или не соответствуют требованиям совпадают."}
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -511,41 +593,50 @@ def api_user_change_profile(request):
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
-        elif request_method == 'PUT':
+        #######################################################################
+        elif request_method == "PUT":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
+        #######################################################################
+        elif request_method == "DELETE":
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
         else:
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-@permission_classes([AllowAny])
-def api_user_recover_password(request):
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_user_change_password(request):
     """
-    Api django-rest-framework recover password
+    api_user_change_password django-rest-framework
     """
-
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('api_user_recover_password:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}", f"method: {request_method}",
-          f"action_type: {request_action_type}", f"user: {request_user}", f"body: {request_body}")
 
     try:
-        if request_method == 'GET':
+        print('\n\n\n')
+        print('api_user_change_password: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
+        #######################################################################
+        elif request_method == "POST":
             if request_action_type == "FIND_USER":
                 try:
                     username = request_body["username"]
@@ -716,46 +807,212 @@ def api_user_recover_password(request):
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
-        elif request_method == 'PUT':
+        #######################################################################
+        elif request_method == "PUT":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
+        #######################################################################
+        elif request_method == "DELETE":
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
         else:
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated, IsAdminUser])
-def api_user_all(request):
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([AllowAny])
+def api_user_recover_password(request):
     """
-    Api django-rest-framework user all
+    api_user_recover_password django-rest-framework
     """
-
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('api_user_all:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
-          f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
 
     try:
-        if request_method == 'GET':
+        print('\n\n\n')
+        print('api_user_recover_password: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
-            if request_action_type == "ALL":
+        #######################################################################
+        elif request_method == "POST":
+            if request_action_type == "FIND_USER":
                 try:
-                    users = User.objects.all()
-                    serializer = backend_serializers.UserSerializer(users, many=True)
-                    response = {"response": serializer.data}
+                    username = request_body["username"]
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    if user_model.temp_password_boolean_field:
+                        return Response({"error": {"Пользователь ещё ни разу не менял пароль!"}})
+                    response = {"response": {
+                        "username": str(user.username),
+                        "secret_question_char_field": str(user_model.secret_question_char_field),
+                        "email_field": str(user_model.email_field),
+                        "success": False
+                    }}
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if request_action_type == "CHECK_ANSWER":
+                try:
+                    username = request_body["username"]
+                    secret_answer_char_field = request_body["secretAnswer"]
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    if str(secret_answer_char_field).strip().lower() == \
+                            str(user_model.secret_answer_char_field).strip().lower():
+                        response = {"response": {
+                            "username": user.username,
+                            "success": True
+                        }}
+                    else:
+                        response = {"error": "Ответ не верный!"}
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if request_action_type == "SEND_EMAIL_PASSWORD":
+                try:
+                    username = request_body["username"]
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    password = str(user_model.password_slug_field)
+                    email_ = str(user_model.email_field)
+
+                    ip = request.META.get("REMOTE_ADDR")
+                    request_path = request.path
+                    request_method = request.method
+                    now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                    access_count = 0
+                    for dat in backend_models.LoggingModel.objects.filter(
+                            username_slug_field=username,
+                            ip_genericipaddress_field=ip,
+                            request_path_slug_field=request_path,
+                            request_method_slug_field=request_method,
+                            error_text_field=f'action: SEND_EMAIL_PASSWORD'
+                    ):
+                        if (dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') \
+                                >= now:
+                            access_count += 1
+
+                    if access_count < 1:
+                        backend_models.LoggingModel.objects.create(
+                            username_slug_field=username,
+                            ip_genericipaddress_field=ip,
+                            request_path_slug_field=request_path,
+                            request_method_slug_field=request_method,
+                            error_text_field=f'action: SEND_EMAIL_PASSWORD'
+                        )
+
+                        text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
+                               f"{str(user_model.user_foreign_key_field)}{password}"
+                        encrypt_text = backend_utils.EncryptingClass.encrypt_text(
+                            text,
+                            '31284'
+                        )
+                        # print(f"send pass to email: {encrypt_text}")
+
+                        subject = 'Восстановление пароля от веб платформы'
+                        message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
+                                    f'перейдите по ссылке: http://web.km.kz:88/recover_password => ' \
+                                    f'восстановление пароля, введите Ваш идентификатор и затем в окне почты ' \
+                                    f'введите код (без кавычек): "{encrypt_text}". Внимание, этот код действует ' \
+                                    f'в течении часа с момента отправки!'
+                        from_email = 'web@km.kz'
+                        to_email = email_
+                        if subject and message_s and to_email:
+                            send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+
+                        response = {"response": {
+                            "username": str(user.username),
+                            "secret_question_char_field": str(user_model.secret_question_char_field),
+                            "email_field": str(user_model.email_field),
+                            "success": False
+                        }}
+                    else:
+                        response = {"error": f"Внимание, отправлять письмо можно не чаще раза в 3 минуты!"}
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if request_action_type == "CHECK_EMAIL_PASSWORD":
+                try:
+                    username = request_body["username"]
+                    recover_password = request_body["recoverPassword"]
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    password = str(user_model.password_slug_field)
+
+                    decrypt_text = backend_utils.EncryptingClass.decrypt_text(recover_password, '31284')
+                    text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
+                           f"{str(user_model.user_foreign_key_field)}{password}"
+
+                    time1 = int(decrypt_text.split('_')[0].split('T')[1])
+                    time2 = int(text.split('_')[0].split('T')[1])
+
+                    # vxvvyxvyxpTvvssMwoqxpxwuswwqowvutsrqpM:H1Mw
+
+                    if time1 - time2 > -60:
+                        if str(decrypt_text.split('_')[1]).strip() == str(text.split('_')[1]).strip():
+                            response = {"response": {
+                                "username": user.username,
+                                "success": True
+                            }}
+                        else:
+                            response = {"error": f"Код не верный!"}
+                    else:
+                        response = {"error": f"Код не верный!"}
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if request_action_type == "CHANGE_PASSWORD":
+                try:
+                    username = request_body["username"]
+                    password = str(request_body["password"]).strip()
+                    password2 = str(request_body["password2"]).strip()
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+
+                    if password == password2 and password != str(user_model.password_slug_field).strip():
+                        user.set_password(password)
+                        user.save()
+                        user_model.password_slug_field = password
+                        user_model.temp_password_boolean_field = False
+                        user_model.save()
+                        response = {"response": {
+                            "username": user.username,
+                            "success": False
+                        }}
+                    else:
+                        response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
                     print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -764,116 +1021,50 @@ def api_user_all(request):
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
-        elif request_method == 'PUT':
+        #######################################################################
+        elif request_method == "PUT":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
+        #######################################################################
+        elif request_method == "DELETE":
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
         else:
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-@authentication_classes([BasicAuthentication])
-def api_user_temp_all(request):
-    """
-    Api django-rest-framework user temp_all
-    """
-
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('api_user_temp_all:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
-          f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
-
-    if request_method != 'GET':
-        return Response({"error": "This method not allowed for endpoint."})
-
-    user_models = backend_models.UserModel.objects.filter(
-        temp_password_boolean_field=True,
-        activity_boolean_field=True
-    )
-    if not request.user.is_superuser:
-        return Response({"error": "Your user in not superuser."})
-
-    objects = []
-    for user_model in user_models:
-        if not user_model.user_foreign_key_field.is_superuser:
-            objects.append(
-                {
-                    f"""{base64.b64encode(str(user_model.user_foreign_key_field.username)[::-1].encode()).decode()}""":
-                        base64.b64encode(str(f"12{user_model.password_slug_field}345").encode()).decode()
-                }
-            )
-
-    # for obj in objects:
-    #     for key, value in obj.items():
-    #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
-    #
-    # try:
-    #     print('PATH: ', request.path)
-    # except Exception as error:
-    #     print(error)
-    #
-    # try:
-    #     for k, v in request.headers.items():
-    #         print(f"{k}: ", v)
-    # except Exception as error:
-    #     print(error)
-
-    return Response({"response": objects})
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = backend_serializers.UserSerializer
-    permission_classes = [permissions.AllowAny]
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = backend_serializers.GroupSerializer
-    permission_classes = [permissions.AllowAny]
-
-
-class ChatViewSet(viewsets.ModelViewSet):
-    queryset = backend_models.ChatModel.objects.all()
-    serializer_class = backend_serializers.ChatModelSerializer
-    permission_classes = [permissions.AllowAny]
-
-
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_salary(request):
     """
-    Api django-rest-framework salary
+    api_salary django-rest-framework
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('api_salary:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
-          f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
-
     try:
-        if request_method == 'GET':
+        print('\n\n\n')
+        print('api_salary: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
+        #######################################################################
+        elif request_method == "POST":
             if request_action_type == "SALARY":
                 try:
                     # Get json response from 1c
@@ -1449,41 +1640,50 @@ def api_salary(request):
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
-        elif request_method == 'PUT':
+        #######################################################################
+        elif request_method == "PUT":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
+        #######################################################################
+        elif request_method == "DELETE":
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
         else:
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+        return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_rational(request):
     """
-    Api django-rest-framework rational
+    api_rational django-rest-framework
     """
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
-
-    print('\n\n\n')
-    print('api_rational:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
-          f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
-
     try:
-        if request_method == 'GET':
+        print('\n\n\n')
+        print('api_rational: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
+        #######################################################################
+        elif request_method == "POST":
             if request_action_type == "RATIONAL_LIST":
                 try:
                     ideas = backend_models.RationalModel.objects.all()
@@ -1513,31 +1713,135 @@ def api_rational(request):
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this Action-type."})
-        elif request_method == 'PUT':
+        #######################################################################
+        elif request_method == "PUT":
             return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
+        #######################################################################
+        elif request_method == "DELETE":
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
         else:
             return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
     except Exception as error:
         print(error)
         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_admin_change_user_password(request):
+    """
+    api_admin_change_user_password django-rest-framework
+    """
+
+    try:
+        print('\n\n\n')
+        print('api_admin_change_user_password: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "POST":
+            if request_action_type == "CHECK_USER":
+                try:
+                    username = request_body["username"]
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    if user_model.temp_password_boolean_field:
+                        return Response({"error": {"Пользователь ещё ни разу не менял пароль!"}})
+                    response = {"response": {
+                        "username": str(user.username),
+                        "password_slug_field": str(user_model.password_slug_field),
+                        "temp_password_boolean_field": str(user_model.temp_password_boolean_field),
+                        "success": False
+                    }}
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if request_action_type == "CHANGE_PASSWORD":
+                try:
+                    username = request_body["username"]
+                    password = str(request_body["password"]).strip()
+                    password2 = str(request_body["password2"]).strip()
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+
+                    if password == password2 and password != str(user_model.password_slug_field).strip():
+                        user.set_password(password)
+                        user.save()
+                        user_model.password_slug_field = password
+                        user_model.temp_password_boolean_field = False
+                        user_model.save()
+                        response = {"response": {
+                            "username": user.username,
+                            "success": False
+                        }}
+                    else:
+                        response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
 
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
-def api_bank_idea_all(request):
+@permission_classes([IsAuthenticated, IsAdminUser])
+def api_user_all_(request):
     """
-    Api django-rest-framework bank_idea_all
+    Api django-rest-framework user all
     """
 
     # logging
     backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
+    backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
 
     print('\n\n\n')
-    print('api_salary:')
+    print('api_user_all:')
     print('\n')
     request_method, request_action_type, request_user, request_body = \
         backend_service.DjangoClass.DRFClass.request_utils(request=request)
@@ -1548,10 +1852,10 @@ def api_bank_idea_all(request):
         if request_method == 'GET':
             return Response({"error": "This method not allowed for endpoint."})
         elif request_method == 'POST':
-            if request_action_type == "BANK_IDEA_LIST":
+            if request_action_type == "ALL":
                 try:
-                    ideas = backend_models.IdeaModel.objects.all()
-                    serializer = backend_serializers.IdeaModelSerializer(instance=ideas, many=True)
+                    users = User.objects.all()
+                    serializer = backend_serializers.UserSerializer(users, many=True)
                     response = {"response": serializer.data}
                     print(f"response: {response}")
                     return Response(response)
@@ -1573,294 +1877,206 @@ def api_bank_idea_all(request):
         return Response({"error": "This endpoint has error."})
 
 
-@api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-@authentication_classes([BasicAuthentication])
-def api_update_users(request):
-    """
-    Api django-rest-framework update_users
-    """
+@api_view(http_method_names=['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_profile_(request):
+    print(f'\n\nget_user_profile:\n\n')
+    user = request.user
+    serializer = backend_serializers.UserSerializer(user, many=False)
+    return Response(serializer.data)
 
-    # logging
-    backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
-    start_sheduler(request=request)
 
-    print('\n\n\n')
-    print('update_users:')
-    print('\n')
-    request_method, request_action_type, request_user, request_body = \
-        backend_service.DjangoClass.DRFClass.request_utils(request=request)
-    print(f"datetime: {backend_utils.DateTimeUtils.get_current_datetime()} | ", f"method: {request_method} | ",
-          f"action_type: {request_action_type} | ", f"user: {request_user} | ", f"body: {request_body} | ")
-
+@api_view(http_method_names=['POST'])
+@permission_classes([IsAuthenticated])
+def change_user_profile_(request):
+    print(f'\n\nchange_user_profile:\n\n')
+    print('data: ', request.data)
+    user = User.objects.get(username=request.user.username)
+    print('user: ', user)
+    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
     try:
-        if request_method == 'GET':
-            try:
-                json_data = update_users()
-                return Response({"json_data": json_data})
-            except Exception as error:
-                backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-                return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'POST':
-            return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'PUT':
-            return Response({"error": "This method not allowed for endpoint."})
-        elif request_method == 'DELETE':
-            return Response({"error": "This method not allowed for endpoint."})
-        else:
-            return Response({"error": "This method not allowed for endpoint."})
+        password = str(request.data["password"]).strip()
+        password2 = str(request.data["password2"]).strip()
+        if password and password2 and password != user_model.password_slug_field:
+            user_model.password_slug_field = password
+            user.set_password(password)
+            print(f'password changed to "{password}"')
+            # print(make_password(request.data["password"]))
+            user.save()
     except Exception as error:
         print(error)
-        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-        return Response({"error": "This endpoint has error."})
+    try:
+        if request.data["email"] and request.data["email"] != user_model.email_field:
+            user_model.email_field = request.data["email"]
+        if request.data["secretQuestion"] and request.data["secretQuestion"] != user_model.secret_question_char_field:
+            user_model.secret_question_char_field = request.data["secretQuestion"]
+        if request.data["secretAnswer"] and request.data["secretAnswer"] != user_model.secret_answer_char_field:
+            user_model.secret_answer_char_field = request.data["secretAnswer"]
+    except Exception as error:
+        print(error)
+    user_model.save()
+    return Response({'error': False})
 
 
-########################################################################################################################
+@api_view(http_method_names=['POST'])
+def recover_user_password_(request):
+    print(f'\n\nrecover_user_password:\n\n')
+    response = {"error": "error"}
+    if request.method == "POST":
+        try:
+            username = request.data["username"]
+        except Exception as error:
+            username = ''
 
-# @api_view(http_method_names=['GET'])
-# @permission_classes([IsAuthenticated])
-# def get_user_profile(request):
-#     print(f'\n\nget_user_profile:\n\n')
-#     user = request.user
-#     serializer = backend_serializers.UserSerializer(user, many=False)
-#     return Response(serializer.data)
-#
-#
-# @api_view(http_method_names=['POST'])
-# @permission_classes([IsAuthenticated])
-# def change_user_profile(request):
-#     print(f'\n\nchange_user_profile:\n\n')
-#     print('data: ', request.data)
-#     user = User.objects.get(username=request.user.username)
-#     print('user: ', user)
-#     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#     try:
-#         password = str(request.data["password"]).strip()
-#         password2 = str(request.data["password2"]).strip()
-#         if password and password2 and password != user_model.password_slug_field:
-#             user_model.password_slug_field = password
-#             user.set_password(password)
-#             print(f'password changed to "{password}"')
-#             # print(make_password(request.data["password"]))
-#             user.save()
-#     except Exception as error:
-#         print(error)
-#     try:
-#         if request.data["email"] and request.data["email"] != user_model.email_field:
-#             user_model.email_field = request.data["email"]
-#         if request.data["secretQuestion"] and request.data["secretQuestion"] != user_model.secret_question_char_field:
-#             user_model.secret_question_char_field = request.data["secretQuestion"]
-#         if request.data["secretAnswer"] and request.data["secretAnswer"] != user_model.secret_answer_char_field:
-#             user_model.secret_answer_char_field = request.data["secretAnswer"]
-#     except Exception as error:
-#         print(error)
-#     user_model.save()
-#     return Response({'error': False})
-#
-#
-# @api_view(http_method_names=['POST'])
-# def recover_user_password(request):
-#     print(f'\n\nrecover_user_password:\n\n')
-#     response = {"error": "error"}
-#     if request.method == "POST":
-#         try:
-#             username = request.data["username"]
-#         except Exception as error:
-#             username = ''
-#
-#         try:
-#             secret_answer_char_field = request.data["secret_answer_char_field"]
-#         except Exception as error:
-#             secret_answer_char_field = ''
-#
-#         try:
-#             password = str(request.data["password"]).strip().lower()
-#             password2 = str(request.data["password2"]).strip().lower()
-#         except Exception as error:
-#             password = ''
-#             password2 = ''
-#
-#         if username and not secret_answer_char_field and not password:
-#             try:
-#                 user = User.objects.get(username=username)
-#                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#                 secret_question_char_field = user_model.secret_question_char_field
-#                 response = {
-#                     "username": user.username,
-#                     "secret_question_char_field": secret_question_char_field,
-#                     "success": False
-#                 }
-#             except Exception as error:
-#                 print(error)
-#         elif username and secret_answer_char_field and not password:
-#             try:
-#                 user = User.objects.get(username=username)
-#                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#                 if str(secret_answer_char_field).strip().lower() == \
-#                         str(user_model.secret_answer_char_field).strip().lower():
-#                     response = {
-#                         "username": user.username,
-#                         "secret_question_char_field": None,
-#                         "success": True
-#                     }
-#                 else:
-#                     response = {
-#                         "username": user.username,
-#                         "secret_question_char_field": None,
-#                         "success": False
-#                     }
-#             except Exception as error:
-#                 print(error)
-#         elif username and not secret_answer_char_field and password:
-#             try:
-#                 user = User.objects.get(username=username)
-#                 user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#                 if password == password2 and str(user_model.password_slug_field).strip().lower():
-#                     user.set_password(password)
-#                     user.save()
-#                     user_model.password_slug_field = password
-#                     user_model.save()
-#                     response = {
-#                         "username": user.username,
-#                         "secret_question_char_field": None,
-#                         "success": False
-#                     }
-#                 else:
-#                     response = {
-#                         "username": user.username,
-#                         "secret_question_char_field": None,
-#                         "success": False
-#                     }
-#             except Exception as error:
-#                 print(error)
-#
-#     print("response: ", response)
-#     return Response(response)
-#
-#
-# @api_view(http_method_names=['GET'])
-# def recover_user_password_email(request):
-#     print(f'\n\nrecover_user_password:\n\n')
-#     response = {"error": "error"}
-#     if request.method == "POST":
-#         try:
-#             username = request.data["username"]
-#             user = User.objects.get(username=username)
-#             user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#         except Exception as error:
-#             username = None
-#             user = None
-#             user_model = None
-#
-#         try:
-#             password = user_model.password_slug_field
-#             email_ = user_model.email_field
-#             if password and email_:
-#                 subject = 'Восстановление пароля от веб платформы'
-#                 encrypt_message = backend_utils.EncryptingClass.encrypt_text(
-#                     text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
-#                     hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
-#                 )
-#                 message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-#                             f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/ , ' \
-#                             f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
-#                 # from_email = 'eevee.cycle@yandex.ru'
-#                 from_email = 'web.km.kz'
-#                 to_email = email_
-#                 if subject and message and to_email:
-#                     send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
-#                     response = 2
-#                 else:
-#                     response = -2
-#             else:
-#                 response = -2
-#         except Exception as error:
-#             backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-#
-#         try:
-#             encrypt_text = backend_service.DjangoClass.RequestClass.get_value(request, "recover")
-#             decrypt_text = backend_utils.EncryptingClass.decrypt_text(
-#                 text=encrypt_text,
-#                 hash_chars=f'_{user_model.password_slug_field}_'
-#                            f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
-#             )
-#             if decrypt_text.split('_')[2] >= \
-#                     (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M') and \
-#                     decrypt_text.split('_')[1] == user_model.password_slug_field:
-#                 login(request, user)
-#                 user_model.secret_question_char_field = ''
-#                 user_model.secret_answer_char_field = ''
-#                 user_model.save()
-#                 response = 2
-#             else:
-#                 response = -2
-#         except Exception as error:
-#             backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
-#
-#     print("response: ", response)
-#     return Response(response)
-#
-#
-# @api_view(http_method_names=['GET'])
-# def get_users(request):
-#     print(f'\n\nget_users:\n\n')
-#     user = User.objects.all()
-#     serializer = backend_serializers.UserSerializer(user, many=True)
-#     return Response(serializer.data)
+        try:
+            secret_answer_char_field = request.data["secret_answer_char_field"]
+        except Exception as error:
+            secret_answer_char_field = ''
+
+        try:
+            password = str(request.data["password"]).strip().lower()
+            password2 = str(request.data["password2"]).strip().lower()
+        except Exception as error:
+            password = ''
+            password2 = ''
+
+        if username and not secret_answer_char_field and not password:
+            try:
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                secret_question_char_field = user_model.secret_question_char_field
+                response = {
+                    "username": user.username,
+                    "secret_question_char_field": secret_question_char_field,
+                    "success": False
+                }
+            except Exception as error:
+                print(error)
+        elif username and secret_answer_char_field and not password:
+            try:
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                if str(secret_answer_char_field).strip().lower() == \
+                        str(user_model.secret_answer_char_field).strip().lower():
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": True
+                    }
+                else:
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": False
+                    }
+            except Exception as error:
+                print(error)
+        elif username and not secret_answer_char_field and password:
+            try:
+                user = User.objects.get(username=username)
+                user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                if password == password2 and str(user_model.password_slug_field).strip().lower():
+                    user.set_password(password)
+                    user.save()
+                    user_model.password_slug_field = password
+                    user_model.save()
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": False
+                    }
+                else:
+                    response = {
+                        "username": user.username,
+                        "secret_question_char_field": None,
+                        "success": False
+                    }
+            except Exception as error:
+                print(error)
+
+    print("response: ", response)
+    return Response(response)
 
 
-# def get_tokens_for_user(user):
-#     refresh = RefreshToken.for_user(user)
-#
-#     return {
-#         'refresh': str(refresh),
-#         'access': str(refresh.access_token),
-#         'username': str(refresh.username),
-#     }
+@api_view(http_method_names=['GET'])
+def recover_user_password_email_(request):
+    print(f'\n\nrecover_user_password:\n\n')
+    response = {"error": "error"}
+    if request.method == "POST":
+        try:
+            username = request.data["username"]
+            user = User.objects.get(username=username)
+            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        except Exception as error:
+            username = None
+            user = None
+            user_model = None
+
+        try:
+            password = user_model.password_slug_field
+            email_ = user_model.email_field
+            if password and email_:
+                subject = 'Восстановление пароля от веб платформы'
+                encrypt_message = backend_utils.EncryptingClass.encrypt_text(
+                    text=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_',
+                    hash_chars=f'_{password}_{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+                )
+                message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
+                            f'перейдите по ссылке: http://192.168.1.68:80/account_recover_password/ , ' \
+                            f'введите иин и затем в окне почты введите код (без кавычек): "{encrypt_message}"'
+                # from_email = 'eevee.cycle@yandex.ru'
+                from_email = 'web.km.kz'
+                to_email = email_
+                if subject and message_s and to_email:
+                    send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
+                    response = 2
+                else:
+                    response = -2
+            else:
+                response = -2
+        except Exception as error:
+            backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+        try:
+            encrypt_text = backend_service.DjangoClass.RequestClass.get_value(request, "recover")
+            decrypt_text = backend_utils.EncryptingClass.decrypt_text(
+                text=encrypt_text,
+                hash_chars=f'_{user_model.password_slug_field}_'
+                           f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")}_'
+            )
+            if decrypt_text.split('_')[2] >= \
+                    (datetime.datetime.now() - datetime.timedelta(hours=1)).strftime('%Y-%m-%d %H:%M') and \
+                    decrypt_text.split('_')[1] == user_model.password_slug_field:
+                login(request, user)
+                user_model.secret_question_char_field = ''
+                user_model.secret_answer_char_field = ''
+                user_model.save()
+                response = 2
+            else:
+                response = -2
+        except Exception as error:
+            backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+
+    print("response: ", response)
+    return Response(response)
 
 
-# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-#     def validate(self, attrs):
-#         data = super().validate(attrs)
-#
-#         if settings.SIMPLE_JWT["UPDATE_LAST_LOGIN"]:
-#             update_last_login(None, self.user)
-#
-#         serializer = backend_serializers.UserSerializerWithToken(self.user)
-#         for k, v in serializer.data.items():
-#             data[f'{k}'] = v
-#
-#         try:
-#             user = User.objects.get(username=data["username"])
-#             user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#             data['name'] = f'{user_model.last_name_char_field} {user_model.first_name_char_field}'
-#         except Exception as error:
-#             data['name'] = f'Данные не заполнены'
-#
-#         # try:
-#         #     user = User.objects.get(username=data["username"])
-#         #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#         #     user_model_serializer = backend_serializers.UserModelSerializer(instance=user_model, many=False)
-#         #     data['user_model'] = user_model_serializer.data
-#         # except Exception as error:
-#         #     data['user_model'] = {'error': f'{error}'}
-#         #
-#         # try:
-#         #     user = User.objects.get(username=data["username"])
-#         #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-#         #     group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
-#         #     group_model_serializer = backend_serializers.GroupModelSerializer(instance=group_model, many=True)
-#         #     data['group_model'] = group_model_serializer.data
-#         # except Exception as error:
-#         #     data['group_model'] = {'error': f'{error}'}
-#
-#         return data
-#
-#     @classmethod
-#     def get_token(cls, user):
-#         token = super().get_token(user)
-#         token['username'] = user.username
-#
-#         return token
+@api_view(http_method_names=['GET'])
+def get_users_(request):
+    print(f'\n\nget_users:\n\n')
+    user = User.objects.all()
+    serializer = backend_serializers.UserSerializer(user, many=True)
+    return Response(serializer.data)
+
+
+def get_tokens_for_user_(user):
+    refresh = RefreshToken.for_user(user)
+
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+        'username': str(refresh.username),
+    }
 
 
 # class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -1874,14 +2090,58 @@ def api_update_users(request):
 #
 #         return token
 
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
 
-# class MyTokenObtainPairView(TokenObtainPairView):
-#     serializer_class = MyTokenObtainPairSerializer
+        if backend_settings.SIMPLE_JWT["UPDATE_LAST_LOGIN"]:
+            update_last_login(None, self.user)
+
+        serializer = backend_serializers.UserSerializerWithToken(self.user)
+        for k, v in serializer.data.items():
+            data[f'{k}'] = v
+
+        try:
+            user = User.objects.get(username=data["username"])
+            user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+            data['name'] = f'{user_model.last_name_char_field} {user_model.first_name_char_field}'
+        except Exception as error:
+            data['name'] = f'Данные не заполнены'
+
+        # try:
+        #     user = User.objects.get(username=data["username"])
+        #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        #     user_model_serializer = backend_serializers.UserModelSerializer(instance=user_model, many=False)
+        #     data['user_model'] = user_model_serializer.data
+        # except Exception as error:
+        #     data['user_model'] = {'error': f'{error}'}
+        #
+        # try:
+        #     user = User.objects.get(username=data["username"])
+        #     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        #     group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+        #     group_model_serializer = backend_serializers.GroupModelSerializer(instance=group_model, many=True)
+        #     data['group_model'] = group_model_serializer.data
+        # except Exception as error:
+        #     data['group_model'] = {'error': f'{error}'}
+
+        return data
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+
+        return token
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
-def note_api(request, pk=None):
+def note_api_(request, pk=None):
     # for key, value in request.META.items():
     #     print(f'{key}: {value}')
     # print(request)
@@ -1971,7 +2231,7 @@ def note_api(request, pk=None):
 
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
-def _products(request, pk=None):
+def _products_(request, pk=None):
     # for key, value in request.META.items():
     #     print(f'{key}: {value}')
     # print(request)
@@ -2061,7 +2321,7 @@ def _products(request, pk=None):
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
-def _note_api(request, pk=None):
+def _note_api_(request, pk=None):
     # for key, value in request.META.items():
     #     print(f'{key}: {value}')
     # print(request)
@@ -2151,7 +2411,7 @@ def _note_api(request, pk=None):
 
 @api_view(http_method_names=['GET'])
 @permission_classes([IsAuthenticated])
-def get_products(request):
+def get_products_(request):
     query = request.query_params.get('keyword')
     if query is None:
         query = ''
@@ -2183,7 +2443,7 @@ def get_products(request):
 
 
 @api_view(http_method_names=['POST'])
-def register_user(request):
+def register_user_(request):
     try:
         data = request.data['body']
         user = User.objects.create(
@@ -2197,12 +2457,16 @@ def register_user(request):
 
 
 @api_view(http_method_names=['GET'])
-def get_product(request, pk):
+def get_product_(request, pk):
     product = backend_models.ProductModel.objects.get(_id=pk)
     serializer = backend_serializers.ProductSerializer(product, many=False)
     return Response(serializer.data)
 
 
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
 ########################################################################################################################
 
 

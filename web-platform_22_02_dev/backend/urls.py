@@ -4,12 +4,6 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path, include, re_path
 from rest_framework import routers
-# from django.views.generic import TemplateView, RedirectView
-from rest_framework_simplejwt.views import (
-    # TokenObtainPairView,
-    TokenRefreshView,
-)
-from rest_framework_simplejwt.views import TokenVerifyView
 
 from backend import views as backend_views
 
@@ -37,58 +31,51 @@ urlpatterns = [
 
     # django rest_framework
     ####################################################################################################################
+
     # rest_framework routes
+    #################################################################
     path('api/', include('rest_framework.urls')),
     path('api/routes/', backend_views.routes, name='api_routes'),
+    #################################################################
 
-    # JWT token
-    # path('api/tokens/routes/', backend_views.routes, name='api_token_routes'),
-    # path('api/tokens/token/', backend_views.MyTokenObtainPairView.as_view(), name='api_token'),
-    # path('api/tokens/token/', TokenObtainPairView.as_view(), name='api_token_obtain_pair'),
-    # path('api/tokens/token/refresh/', TokenRefreshView.as_view(), name='api_token_refresh'),
-    # path('api/tokens/token/verify/', TokenVerifyView.as_view(), name='api_token_verify'),
+    # rest_framework routers.DefaultRouter
+    #################################################################
+    path('api/router/', include(router.urls)),
+    #################################################################
+
+    # 1c api
+    #################################################################
+    path('api/user/temp_all/', backend_views.api_get_all_users_with_temp_password,
+         name='api_get_all_users_with_temp_password'),
+    path('api/user/update_1c/', backend_views.api_update_users_from_1c, name='api_update_users_from_1c'),
+    #################################################################
 
     # api user
+    #################################################################
     path('api/users/routes/', backend_views.routes, name='api_users_routes'),
     path('api/user/login/', backend_views.api_login_user, name='api_user_login'),
     path('api/user/profile/', backend_views.api_user_profile, name='api_user_profile'),
     path('api/user/change_profile/', backend_views.api_user_change_profile, name='api_user_change_profile'),
     path('api/user/recover_password/', backend_views.api_user_recover_password, name='api_user_recover_password'),
-    path('api/user/all/', backend_views.api_user_all, name='api_user_all'),
-    path('api/user/temp_all/', backend_views.api_user_temp_all, name='api_user_temp_all'),
-
-    # rest_framework routers.DefaultRouter
-    path('api/router/', include(router.urls)),
-
-    # salary
-    path('api/salary/', backend_views.api_salary, name='api_salary'),
-
-    # rational
-    path('api/rational/', backend_views.api_rational, name='api_rational'),
-
-    # bank_idea
-    path('api/update_users/', backend_views.api_update_users, name='api_update_users'),
-
-    # bank_idea
-    path('api/bank_idea_list/', backend_views.api_bank_idea_all, name='api_bank_idea_all'),
-
+    path('api/user/change_password/', backend_views.api_user_change_password, name='api_user_change_password'),
+    path('api/user/all/', backend_views.api_user_all_, name='api_user_all'),
     #################################################################
 
-    # path('api/users/login/', backend_views.MyTokenObtainPairView.as_view(), name='api_users_login'),
-    # path('api/users/profile/', backend_views.get_user_profile, name='api_users_profile'),
-    # path('api/users/change_profile/', backend_views.change_user_profile, name='api_users_change_profile'),
-    # path('api/users/recover_password/', backend_views.recover_user_password, name='api_users_recover_password'),
-    # path('api/users/register/', backend_views.register_user, name='api_users_register'),
-    # path('api/users/all/', backend_views.get_users, name='api_users_all'),
+    # admin
+    #################################################################
+    path('api/admin/change_user_password/', backend_views.api_admin_change_user_password,
+         name='api_admin_change_user_password'),
+    #################################################################
 
-    # note_api
-    path('api/note_api/', backend_views.note_api, name='api_note_api'),
-    path('api/note_api/<str:pk>/', backend_views.note_api, name='api_note_api'),
-    # path('api/note_api/', TemplateView.as_view(template_name='chat_react.html'), name='api_chat_react'),
+    # salary
+    #################################################################
+    path('api/salary/', backend_views.api_salary, name='api_salary'),
+    #################################################################
 
-    # shop
-    path('api/productsTest/', backend_views.get_products, name='api_products'),
-    path('api/productsTest/<str:pk>/', backend_views.get_product, name='api_product'),
+    # rational
+    #################################################################
+    path('api/rational/', backend_views.api_rational, name='api_rational'),
+    #################################################################
 
     # django templates
     ####################################################################################################################
