@@ -552,7 +552,7 @@ def api_user_recover_password(request):
 
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    if user_model.temp_password_boolean_field == True:
+                    if user_model.temp_password_boolean_field:
                         return Response({"error": {"Пользователь ещё ни разу не менял пароль!"}})
                     response = {"response": {
                         "username": str(user.username),
