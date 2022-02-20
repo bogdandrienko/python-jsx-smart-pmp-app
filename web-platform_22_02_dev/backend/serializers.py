@@ -144,3 +144,17 @@ class ShippingAddressModelSerializer(ModelSerializer):
     class Meta:
         model = backend_models.ShippingAddressModel
         fields = '__all__'
+
+
+# Todo serializer
+class TodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = backend_models.Todo
+        fields = '__all__'
+
+
+# Category serializer
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = backend_models.Category
+        fields = '__all__'

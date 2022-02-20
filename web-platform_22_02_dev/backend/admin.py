@@ -296,6 +296,10 @@ class UserModelAdmin(admin.ModelAdmin):
         'hobbies_text_field',
         'image_field',
     )
+    ####################################################################################################################
+    # list_display_links = ('id', 'title')
+    # list_editable = ('done',)
+    ####################################################################################################################
     list_filter = (
         'user_foreign_key_field',
         'password_slug_field',
@@ -706,3 +710,21 @@ admin.site.register(backend_models.ReviewModel)
 admin.site.register(backend_models.OrderModel)
 admin.site.register(backend_models.OrderItemModel)
 admin.site.register(backend_models.ShippingAddressModel)
+
+
+class TodoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'category', 'description', 'date', 'done')
+    list_display_links = ('id', 'title')
+    search_fields = ('id', 'title')
+    list_editable = ('done',)
+    list_filter = ('done', 'category')
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('title',)
+    search_fields = ('title',)
+
+
+admin.site.register(backend_models.Todo, TodoAdmin)
+admin.site.register(backend_models.Category, CategoryAdmin)

@@ -49,6 +49,9 @@ const HeaderComponent = () => {
                     <LinkContainer to="/users_list">
                       <Nav.Link>Список пользователей</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="/todo">
+                      <Nav.Link>Todo</Nav.Link>
+                    </LinkContainer>
                     <LinkContainer to="/admin_change_user_password">
                       <Nav.Link>Смена пароля пользователя</Nav.Link>
                     </LinkContainer>

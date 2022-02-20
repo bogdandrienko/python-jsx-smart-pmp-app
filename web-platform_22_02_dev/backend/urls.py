@@ -13,6 +13,9 @@ router.register(prefix=r'users', viewset=backend_views.UserViewSet, basename='us
 router.register(prefix=r'groups', viewset=backend_views.GroupViewSet, basename='groups')
 router.register(prefix=r'chat', viewset=backend_views.ChatViewSet, basename='chat')
 
+router.register('api/todo', backend_views.TodoViewSet, 'todo')
+router.register('api/categories', backend_views.CategoryViewSet, 'categories')
+
 urlpatterns = [
     # react SPA (single page applications)
     ####################################################################################################################

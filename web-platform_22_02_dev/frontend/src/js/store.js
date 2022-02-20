@@ -14,6 +14,7 @@ import {
   rationalListReducer,
   ///////////////////////////////////////////////////////////
   userListReducer,
+  todos,
 } from "./reducers";
 import { productListReducer } from "../test/productReducers";
 import { notesListReducer, notesDetailsReducer } from "../test/noteReducers";
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   productList: productListReducer,
   notesList: notesListReducer,
   notesDetails: notesDetailsReducer,
+  todos,
 });
 
 const userTokenFromStorage = localStorage.getItem("userToken")

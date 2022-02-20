@@ -1828,6 +1828,23 @@ def api_admin_change_user_password(request):
 ########################################################################################################################
 ########################################################################################################################
 
+# Todo ViewSet
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = backend_models.Todo.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = backend_serializers.TodoSerializer
+
+
+# Category ViewSet
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = backend_models.Category.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = backend_serializers.CategorySerializer
+
 
 @api_view(http_method_names=['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated, IsAdminUser])

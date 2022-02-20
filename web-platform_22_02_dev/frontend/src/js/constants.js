@@ -56,6 +56,11 @@ export const ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT =
 export const ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT =
   "ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GET_TODO_LIST = "GET_TODO_LIST";
+export const DELETE_TODO = "DELETE_TODO";
+export const ADD_TODO = "ADD_TODO";
+export const TOGGLE_TODO = "TOGGLE_TODO";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {
     Title: "Личный профиль:",

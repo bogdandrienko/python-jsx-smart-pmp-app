@@ -41,6 +41,11 @@ import {
   RATIONAL_LIST_FAIL_CONSTANT,
   RATIONAL_LIST_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  GET_TODO_LIST,
+  DELETE_TODO,
+  ADD_TODO,
+  TOGGLE_TODO,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } from "./constants";
 
 export const userLoginReducer = (state = {}, action = {}) => {
@@ -216,6 +221,37 @@ export const rationalListReducer = (state = {}, action = null) => {
     case RATIONAL_LIST_RESET_CONSTANT:
       return {};
 
+    default:
+      return state;
+  }
+};
+
+const initialState = {
+  todos: [],
+};
+
+export const todos = (state = initialState, action = null) => {
+  switch (action.type) {
+    case GET_TODO_LIST:
+      return {
+        ...state,
+        todos: action.payload,
+      };
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id != action.payload),
+      };
+    case ADD_TODO:
+      return {
+        ...state,
+        todos: [...state.todos, action.payload],
+      };
+    case TOGGLE_TODO:
+      return {
+        ...state,
+        todos: [...state.todos],
+      };
     default:
       return state;
   }
