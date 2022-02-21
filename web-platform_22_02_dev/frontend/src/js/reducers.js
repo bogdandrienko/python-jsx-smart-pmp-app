@@ -35,6 +35,12 @@ import {
   USER_LIST_RESET_CONSTANT,
   USER_LIST_DEFAULT_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  RATIONAL_CREATE_LOADING_CONSTANT,
+  RATIONAL_CREATE_DATA_CONSTANT,
+  RATIONAL_CREATE_ERROR_CONSTANT,
+  RATIONAL_CREATE_FAIL_CONSTANT,
+  RATIONAL_CREATE_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   RATIONAL_LIST_LOADING_CONSTANT,
   RATIONAL_LIST_DATA_CONSTANT,
   RATIONAL_LIST_ERROR_CONSTANT,
@@ -191,6 +197,34 @@ export const salaryUserReducer = (state = {}, action = null) => {
       };
 
     case USER_SALARY_RESET_CONSTANT:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const rationalCreateReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case RATIONAL_CREATE_LOADING_CONSTANT:
+      return { load: true };
+
+    case RATIONAL_CREATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+
+    case RATIONAL_CREATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+
+    case RATIONAL_CREATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+
+    case RATIONAL_CREATE_RESET_CONSTANT:
       return {};
 
     default:

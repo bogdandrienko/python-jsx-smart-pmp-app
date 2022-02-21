@@ -2899,6 +2899,7 @@ class RationalModel(models.Model):
     """
     Rational Model
     """
+
     author_foreign_key_field = models.ForeignKey(
         db_column='author_foreign_key_field_db_column',
         db_index=True,
@@ -2910,26 +2911,43 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default=None,
-        verbose_name='Автор',
+        verbose_name='Автор рац. предложения',
         help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
     )
-    name_char_field = models.CharField(
-        db_column='name_char_field_db_column',
+    subdivision_char_field = models.CharField(
+        db_column='subdivision_char_field_db_column',
         db_index=True,
-        db_tablespace='name_char_field_db_tablespace',
+        db_tablespace='subdivision_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='Название',
-        help_text='<small class="text-muted">name_char_field</small><hr><br>',
+        verbose_name='Наименование структурного подразделения',
+        help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
+
+        max_length=128,
+    )
+    sphere_char_field = models.CharField(
+        db_column='sphere_char_field_db_column',
+        db_index=True,
+        db_tablespace='sphere_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Сфера рац. предложения',
+        help_text='<small class="text-muted">sphere_char_field</small><hr><br>',
 
         max_length=128,
     )
@@ -2939,50 +2957,16 @@ class RationalModel(models.Model):
         db_tablespace='category_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='Название',
+        verbose_name='Категория',
         help_text='<small class="text-muted">category_char_field</small><hr><br>',
 
-        max_length=64,
-    )
-    short_description_char_field = models.CharField(
-        db_column='short_description_char_field_db_column',
-        db_index=True,
-        db_tablespace='short_description_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Краткое описание',
-        help_text='<small class="text-muted">short_description_char_field</small><hr><br>',
-
-        max_length=256,
-    )
-    full_description_text_field = models.TextField(
-        db_column='full_description_text_field_db_column',
-        db_index=True,
-        db_tablespace='full_description_text_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(1024), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Полное описание',
-        help_text='<small class="text-muted">full_description_text_field</small><hr><br>',
-
-        max_length=2048,
+        max_length=128,
     )
     avatar_image_field = models.ImageField(
         db_column='avatar_image_field_db_column',
@@ -2994,30 +2978,142 @@ class RationalModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default='uploads/idea/default_avatar.jpg',
+        default='uploads/rational/default_rational.jpg',
         verbose_name='Аватарка-заставка для идеи',
         help_text='<small class="text-muted">>avatar_image_field</small><hr><br>',
 
-        upload_to='uploads/idea/avatar/',
+        upload_to='uploads/rational/avatar/',
         max_length=200,
     )
-    addiction_file_field = models.FileField(
-        db_column='addiction_file_field_db_column',
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
         db_index=True,
-        db_tablespace='addiction_file_field_db_tablespace',
+        db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
-        validators=[FileExtensionValidator(['xlsx', 'xls', 'docx', 'doc', 'pdf'])],
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название рац. предложения',
+        help_text='<small class="text-muted">name_char_field</small><hr><br>',
+
+        max_length=128,
+    )
+    place_char_field = models.CharField(
+        db_column='place_char_field_db_column',
+        db_index=True,
+        db_tablespace='place_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Предполагаемое место внедрения',
+        help_text='<small class="text-muted">place_char_field</small><hr><br>',
+
+        max_length=128,
+    )
+    short_description_char_field = models.CharField(
+        db_column='short_description_char_field_db_column',
+        db_index=True,
+        db_tablespace='short_description_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Краткое описание',
+        help_text='<small class="text-muted">short_description_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+    description_text_field = models.TextField(
+        db_column='description_text_field_db_column',
+        db_index=True,
+        db_tablespace='description_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(2048), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Полное описание',
+        help_text='<small class="text-muted">description_text_field</small><hr><br>',
+
+        max_length=2048,
+    )
+    additional_word_file_field = models.FileField(
+        db_column='additional_word_file_field_db_column',
+        db_index=True,
+        db_tablespace='additional_word_file_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['docx', 'doc'])],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default=None,
-        verbose_name='Файл-приложение',
-        help_text='<small class="text-muted">addiction_file_field</small><hr><br>',
+        verbose_name='Word файл-приложение',
+        help_text='<small class="text-muted">additional_word_file_field</small><hr><br>',
 
         upload_to='uploads/idea/files/',
         max_length=200,
     )
+    additional_pdf_file_field = models.FileField(
+        db_column='additional_pdf_file_field_db_column',
+        db_index=True,
+        db_tablespace='additional_pdf_file_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['pdf'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Pdf файл-приложение',
+        help_text='<small class="text-muted">additional_pdf_file_field</small><hr><br>',
+
+        upload_to='uploads/idea/files/',
+        max_length=200,
+    )
+    additional_excel_file_field = models.FileField(
+        db_column='additional_excel_file_field_db_column',
+        db_index=True,
+        db_tablespace='additional_excel_file_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['xlsx', 'xls'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Excel файл-приложение',
+        help_text='<small class="text-muted">additional_excel_file_field</small><hr><br>',
+
+        upload_to='uploads/idea/files/',
+        max_length=200,
+    )
+
+    # user1 = request.data.get("user1")
+    # user2 = request.data.get("user2")
+    # user3 = request.data.get("user3")
+    # user4 = request.data.get("user4")
+    # user5 = request.data.get("user5")
+
+
+
+
     visibility_boolean_field = models.BooleanField(
         db_column='visibility_boolean_field_db_column',
         db_index=True,

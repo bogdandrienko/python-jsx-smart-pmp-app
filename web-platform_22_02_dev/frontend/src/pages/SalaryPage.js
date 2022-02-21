@@ -121,7 +121,7 @@ const SalaryPage = () => {
               <div>
                 <a
                   className="btn btn-md btn-success m-1"
-                  href={`./${dataSalaryUser["excel_path"]}`}
+                  href={`/${dataSalaryUser["excel_path"]}`}
                 >
                   Скачать excel-документ
                 </a>

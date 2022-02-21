@@ -1702,9 +1702,40 @@ def api_rational(request):
                     print('RATIONAL_CREATE:', request_body)
                     print('\n\n\n')
 
-                    ideas = backend_models.RationalModel.objects.all()
-                    serializer = backend_serializers.RationalModelSerializer(instance=ideas, many=True)
-                    response = {"response": serializer.data}
+                    author = backend_models.UserModel.objects.get(user_foreign_key_field=request_user)
+                    subdivision = request.data.get("subdivision")
+                    sphere = request.data.get("sphere")
+                    category = request.data.get("category")
+                    avatar = request.data.get("avatar")
+                    name = request.data.get("name")
+                    place = request.data.get("place")
+                    short_description = request.data.get("short_description")
+                    description = request.data.get("description")
+                    additional_word = request.data.get("additional_word")
+                    additional_pdf = request.data.get("additional_pdf")
+                    additional_excel = request.data.get("additionalExcel")
+                    user1 = request.data.get("user1")
+                    user2 = request.data.get("user2")
+                    user3 = request.data.get("user3")
+                    user4 = request.data.get("user4")
+                    user5 = request.data.get("user5")
+
+                    backend_models.RationalModel.objects.create(
+                        author_foreign_key_field=author,
+                        subdivision_char_field=subdivision,
+                        sphere_char_field=sphere,
+                        category_char_field=category,
+                        avatar_image_field=avatar,
+                        name_char_field=name,
+                        place_char_field=place,
+                        short_description_char_field=short_description,
+                        description_text_field=description,
+                        additional_word_file_field=additional_word,
+                        additional_pdf_file_field=additional_pdf,
+                        additional_excel_file_field=additional_excel,
+                    )
+
+                    response = {"response": "success"}
                     print(f"response: {response}")
                     return Response(response)
                 except Exception as error:

@@ -22,7 +22,7 @@ const NewsComponent = (count = 100) => {
         </a>
 
         {news.slice(0, count.count).map((news_elem, index) => (
-          <div>
+          <div key={index}>
             <a
               href={news_elem.Link}
               className={

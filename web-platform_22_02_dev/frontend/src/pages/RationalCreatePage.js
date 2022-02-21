@@ -1,75 +1,99 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import {
-  rationalListAction,
-  userChangeProfileAction,
-  userDetailsAction,
-} from "../js/actions";
+import { userDetailsAction, rationalCreateAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import FooterComponent from "../components/FooterComponent";
 import { useNavigate } from "react-router-dom";
-import {
-  RATIONAL_LIST_LOADING_CONSTANT,
-  RATIONAL_LIST_RESET_CONSTANT,
-} from "../js/constants";
+import { RATIONAL_CREATE_RESET_CONSTANT } from "../js/constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const BankIdeaListPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [subdivision, setSubdivision] = useState("");
+  const [sphere, setSphere] = useState("");
   const [category, setCategory] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [name, setName] = useState("");
-
-  const rationalListStore = useSelector((state) => state.rationalListStore);
-  const {
-    load: loadBankIdeaList,
-    data: dataBankIdeaList,
-    error: errorBankIdeaList,
-    fail: failBankIdeaList,
-  } = rationalListStore;
-  console.log("dataBankIdeaList: ", dataBankIdeaList);
-
-  useEffect(() => {
-    if (dataBankIdeaList) {
-      navigate("#");
-      sleep(1000).then(() => {
-        dispatch({
-          type: RATIONAL_LIST_RESET_CONSTANT,
-        });
-        navigate("/home");
-      });
-    }
-  }, [navigate, dataBankIdeaList]);
+  const [place, setPlace] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [description, setDescription] = useState("");
+  const [additionalWord, setAdditionalWord] = useState("");
+  const [additionalPdf, setAdditionalPdf] = useState("");
+  const [additionalExcel, setAdditionalExcel] = useState(null);
+  const [user1, setUser1] = useState("");
+  const [user2, setUser2] = useState("");
+  const [user3, setUser3] = useState("");
+  const [user4, setUser4] = useState("");
+  const [user5, setUser5] = useState("");
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
-    load: loadUserDetails,
+    // load: loadUserDetails,
     data: dataUserDetails,
-    error: errorUserDetails,
-    fail: failUserDetails,
+    // error: errorUserDetails,
+    // fail: failUserDetails,
   } = userDetailsStore;
   console.log("dataUserDetails: ", dataUserDetails);
 
   useEffect(() => {
     if (dataUserDetails) {
+      if (dataUserDetails["user_model"] && user1 === "") {
+        setUser1(
+          `${dataUserDetails["user_model"]["last_name_char_field"]} ${dataUserDetails["user_model"]["first_name_char_field"]} ${dataUserDetails["user_model"]["patronymic_char_field"]} ${dataUserDetails["user_model"]["personnel_number_slug_field"]} 100%`
+        );
+      }
     } else {
       dispatch(userDetailsAction());
     }
   }, [dispatch, dataUserDetails]);
 
+  const rationalCreateStore = useSelector((state) => state.rationalCreateStore);
+  const {
+    load: loadRationalCreate,
+    data: dataRationalCreate,
+    error: errorRationalCreate,
+    fail: failRationalCreate,
+  } = rationalCreateStore;
+  console.log("dataBankIdeaList: ", dataRationalCreate);
+
+  useEffect(() => {
+    if (dataRationalCreate) {
+      navigate("#");
+      sleep(5000).then(() => {
+        dispatch({
+          type: RATIONAL_CREATE_RESET_CONSTANT,
+        });
+      });
+    }
+  }, [navigate, dataRationalCreate]);
+
   const submitHandler = (e) => {
-    // e.preventDefault();
-    dispatch(
-      rationalListAction("RATIONAL_CREATE", "", {
-        category_slug_field: category,
-        name: name,
-      })
-    );
+    e.preventDefault();
+    let form = {
+      subdivision: subdivision,
+      sphere: sphere,
+      category: category,
+      avatar: avatar,
+      name: name,
+      place: place,
+      shortDescription: shortDescription,
+      description: description,
+      additionalWord: additionalWord,
+      additionalPdf: additionalPdf,
+      additionalExcel: additionalExcel,
+      user1: user1,
+      user2: user2,
+      user3: user3,
+      user4: user4,
+      user5: user5,
+    };
+    dispatch(rationalCreateAction(form));
   };
 
   function sleep(time) {
@@ -87,40 +111,39 @@ const BankIdeaListPage = () => {
       />
       <main className="container text-center">
         <div className="text-center">
-          {loadBankIdeaList && <LoaderComponent />}
-          {dataBankIdeaList && (
+          {loadRationalCreate && <LoaderComponent />}
+          {dataRationalCreate && (
             <div className="m-1">
               <MessageComponent variant="success">
                 Данные успешно отправлены!
               </MessageComponent>
             </div>
           )}
-          {errorBankIdeaList && (
+          {errorRationalCreate && (
             <div className="m-1">
               <MessageComponent variant="danger">
-                {errorBankIdeaList}
+                {errorRationalCreate}
               </MessageComponent>
             </div>
           )}
-          {failBankIdeaList && (
+          {failRationalCreate && (
             <div className="m-1">
               <MessageComponent variant="warning">
-                {failBankIdeaList}
+                {failRationalCreate}
               </MessageComponent>
             </div>
           )}
         </div>
-        {!dataBankIdeaList && (
+        {!dataRationalCreate && (
           <div className="container-fluid text-center">
             <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
               <div className="container">
                 <br />
                 <form
-                  action="#"
                   method="POST"
                   target="_self"
                   encType="multipart/form-data"
-                  name="idea_create"
+                  name="RATIONAL_CREATE"
                   autoComplete="on"
                   className="text-center"
                   onSubmit={submitHandler}
@@ -137,10 +160,12 @@ const BankIdeaListPage = () => {
                         <label className="form-control-sm m-1">
                           Наименование структурного подразделения:
                           <select
-                            id="category_slug_field"
-                            name="category_slug_field"
+                            id="subdivision"
+                            name="subdivision"
                             required
                             className="form-control form-control-sm"
+                            value={subdivision}
+                            onChange={(e) => setSubdivision(e.target.value)}
                           >
                             <option value="">Не выбрано</option>
                             <option value="Индустрия 4.0">Управление</option>
@@ -175,10 +200,12 @@ const BankIdeaListPage = () => {
                         <label className="form-control-sm m-1">
                           Сфера рац. предложения:
                           <select
-                            id="category_slug_field"
-                            name="category_slug_field"
+                            id="sphere"
+                            name="sphere"
                             required
                             className="form-control form-control-sm"
+                            value={sphere}
+                            onChange={(e) => setSphere(e.target.value)}
                           >
                             <option value="">Не выбрано</option>
                             <option value="Технологическая">
@@ -193,8 +220,8 @@ const BankIdeaListPage = () => {
                         <label className="form-control-sm m-1">
                           Категория:
                           <select
-                            id="category_slug_field"
-                            name="category_slug_field"
+                            id="category"
+                            name="category"
                             required
                             className="form-control form-control-sm"
                             value={category}
@@ -216,6 +243,7 @@ const BankIdeaListPage = () => {
                             name="avatar_image_field"
                             accept=".jpg, .png"
                             className="form-control form-control-sm"
+                            onChange={(e) => setAvatar(e.target.files[0])}
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>
@@ -230,10 +258,10 @@ const BankIdeaListPage = () => {
                             name="name_char_field"
                             required
                             placeholder="Название"
+                            value={name}
                             minLength="1"
                             maxLength="100"
                             className="form-control form-control-sm"
-                            value={name}
                             onChange={(e) => setName(e.target.value)}
                           />
                           <small className="text-danger">* обязательно</small>
@@ -254,9 +282,11 @@ const BankIdeaListPage = () => {
                             name="name_char_field"
                             required
                             placeholder="Цех / участок / отдел / лаборатория и т.п."
+                            value={place}
                             minLength="1"
                             maxLength="100"
                             className="form-control form-control-sm"
+                            onChange={(e) => setPlace(e.target.value)}
                           />
                           <small className="text-danger">* обязательно</small>
                           <p>
@@ -275,10 +305,14 @@ const BankIdeaListPage = () => {
                             name="short_description_char_field"
                             required
                             placeholder="Краткое описание"
+                            value={shortDescription}
                             minLength="1"
                             maxLength="200"
                             rows="1"
                             className="form-control form-control-sm"
+                            onChange={(e) =>
+                              setShortDescription(e.target.value)
+                            }
                           />
                           <small className="text-danger">* обязательно</small>
                           <p>
@@ -294,10 +328,12 @@ const BankIdeaListPage = () => {
                             name="full_description_text_field"
                             required
                             placeholder="Полное описание"
+                            value={description}
                             minLength="1"
                             maxLength="5000"
                             rows="3"
                             className="form-control form-control-sm"
+                            onChange={(e) => setDescription(e.target.value)}
                           />
                           <small className="text-danger">* обязательно</small>
                           <p>
@@ -317,6 +353,7 @@ const BankIdeaListPage = () => {
                             name="addiction_file_field"
                             accept=".docx, .doc"
                             className="form-control form-control-sm"
+                            onChange={(e) => setAdditionalWord(e.target.value)}
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>
@@ -328,6 +365,7 @@ const BankIdeaListPage = () => {
                             name="addiction_file_field"
                             accept=".pdf"
                             className="form-control form-control-sm"
+                            onChange={(e) => setAdditionalPdf(e.target.value)}
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>
@@ -339,6 +377,9 @@ const BankIdeaListPage = () => {
                             name="addiction_file_field"
                             accept=".xlsx, .xls"
                             className="form-control form-control-sm"
+                            onChange={(e) =>
+                              setAdditionalExcel(e.target.files[0])
+                            }
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>
@@ -369,36 +410,17 @@ const BankIdeaListPage = () => {
                           </p>
                           {dataUserDetails && dataUserDetails["user_model"] && (
                             <div>
-                              участник № 1, Вы:{" "}
-                              {
-                                dataUserDetails["user_model"][
-                                  "last_name_char_field"
-                                ]
-                              }{" "}
-                              {
-                                dataUserDetails["user_model"][
-                                  "first_name_char_field"
-                                ]
-                              }{" "}
-                              {
-                                dataUserDetails["user_model"][
-                                  "patronymic_char_field"
-                                ]
-                              }{" "}
-                              {
-                                dataUserDetails["user_model"][
-                                  "personnel_number_slug_field"
-                                ]
-                              }{" "}
                               <input
                                 type="text"
                                 id="name_char_field"
                                 name="name_char_field"
                                 required
                                 placeholder={`введите Ваш % вклада:`}
+                                value={user1}
                                 minLength="1"
                                 maxLength="200"
                                 className="form-control form-control-sm"
+                                onChange={(e) => setUser1(e.target.value)}
                               />
                             </div>
                           )}
@@ -407,36 +429,44 @@ const BankIdeaListPage = () => {
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 2, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={user2}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
+                            onChange={(e) => setUser2(e.target.value)}
                           />
                           <input
                             type="text"
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 3, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={user3}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
+                            onChange={(e) => setUser3(e.target.value)}
                           />
                           <input
                             type="text"
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 4, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={user4}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
+                            onChange={(e) => setUser4(e.target.value)}
                           />
                           <input
                             type="text"
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 5, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={user5}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
+                            onChange={(e) => setUser5(e.target.value)}
                           />
                           <small className="text-muted">
                             * общая сумма вклада всех участников не должна не

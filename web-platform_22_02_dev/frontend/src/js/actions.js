@@ -37,6 +37,12 @@ import {
   USER_LIST_RESET_CONSTANT,
   USER_LIST_DEFAULT_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  RATIONAL_CREATE_LOADING_CONSTANT,
+  RATIONAL_CREATE_DATA_CONSTANT,
+  RATIONAL_CREATE_ERROR_CONSTANT,
+  RATIONAL_CREATE_FAIL_CONSTANT,
+  RATIONAL_CREATE_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   RATIONAL_LIST_LOADING_CONSTANT,
   RATIONAL_LIST_DATA_CONSTANT,
   RATIONAL_LIST_ERROR_CONSTANT,
@@ -409,6 +415,61 @@ export const salaryUserAction = (dateTime) => async (dispatch, getState) => {
   }
 };
 
+export const rationalCreateAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: RATIONAL_CREATE_LOADING_CONSTANT,
+    });
+
+    const {
+      userLoginState: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    formData.append("Action-type", "RATIONAL_CREATE");
+    Object.entries(form).map(([k, v]) => {
+      formData.append(k, v);
+    });
+    const { data } = await axios({
+      url: "api/rational/",
+      method: "POST",
+      timeout: 5000,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+
+    if (data["response"]) {
+      const response = data["response"];
+
+      console.log("rationalCreateAction response: ", response);
+
+      dispatch({
+        type: RATIONAL_CREATE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+
+      console.log("rationalCreateAction error: ", response);
+
+      dispatch({
+        type: RATIONAL_CREATE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: RATIONAL_CREATE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
 export const rationalListAction =
   (type, category = null, form = null) =>
   async (dispatch, getState) => {
@@ -430,7 +491,7 @@ export const rationalListAction =
         },
 
         data: {
-          "Action-type": type,
+          "Action-type": "RATIONAL_LIST",
           body: { category: category, form: form },
         },
       });
