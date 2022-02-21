@@ -168,17 +168,17 @@ const BankIdeaListPage = () => {
                             onChange={(e) => setSubdivision(e.target.value)}
                           >
                             <option value="">Не выбрано</option>
-                            <option value="Индустрия 4.0">Управление</option>
-                            <option value="Инновации">
+                            <option value="Управление">Управление</option>
+                            <option value="Обогатительный комплекс">
                               Обогатительный комплекс
                             </option>
-                            <option value="Улучшение">
+                            <option value="Горно-транспортный комплекс">
                               Горно-транспортный комплекс
                             </option>
-                            <option value="Инновации">
+                            <option value="Автотранспортное предприятие">
                               Автотранспортное предприятие
                             </option>
-                            <option value="Модернизация">
+                            <option value="Энергоуправление">
                               Энергоуправление
                             </option>
                           </select>

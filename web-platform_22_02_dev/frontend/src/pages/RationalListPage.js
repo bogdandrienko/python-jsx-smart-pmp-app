@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { rationalListAction } from "../js/actions";
+import {
+  rationalCreateAction,
+  rationalListAction,
+  userDetailsAction,
+} from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
@@ -43,6 +47,10 @@ const RationalListPage = () => {
     }
   }
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       <HeaderComponent />
@@ -80,154 +88,237 @@ const RationalListPage = () => {
             {!dataBankIdeaList
               ? ""
               : dataBankIdeaList.map((rational, index) => (
-                  <li key={index} className="m-3">
+                  <li key={index} className="container-fluid m-1">
                     <div className="card shadow">
-                      <div className="card-header p-0">
-                        <a
-                          className="text-decoration-none lead text-dark"
-                          href="#"
-                        >
-                          <strong>{rational["name_char_field"]}</strong>
-                        </a>
-                      </div>
-                      <div className="card-header p-0">
-                        <form action="#" method="POST" className="">
-                          <label className="form-control-sm">
-                            Скрыть идею:
-                            <input
-                              type="text"
-                              id="hidden"
-                              name="hidden"
-                              required=""
-                              placeholder=""
-                              value="false"
-                              minLength="0"
-                              maxLength="64"
-                              className="form-control form-control-sm d-none"
-                            />
-                            <small className="text-muted">
-                              ! функционал модератора !
-                            </small>
-                          </label>
-                          <button
-                            className="btn btn-sm btn-outline-danger"
-                            type="submit"
-                          >
-                            скрыть
-                          </button>
-                        </form>
-                        <form action="#" method="POST" className="">
-                          <label className="form-control-sm">
-                            Одобрить идею:
-                            <input
-                              type="text"
-                              id="hidden"
-                              name="hidden"
-                              required=""
-                              placeholder=""
-                              value="true"
-                              minLength="0"
-                              maxLength="64"
-                              className="form-control form-control-sm d-none"
-                            />
-                            <small className="text-muted">
-                              ! функционал модератора !
-                            </small>
-                          </label>
-                          <button
-                            className="btn btn-sm btn-outline-success"
-                            type="submit"
-                          >
-                            одобрить
-                          </button>
-                        </form>
-                        <div className="form-control-sm">
-                          Редактировать идею:
-                          <a
-                            className="btn btn-sm btn-outline-warning"
-                            target="_blank"
-                            href="#"
-                          >
-                            Редактировать
-                          </a>
+                      <div>
+                        <div className="">
+                          <div className="card-header">
+                            <h6 className="lead fw-bold">
+                              {rational["name_char_field"]}
+                            </h6>
+                          </div>
+                          <div className="d-flex w-100 align-items-center justify-content-between">
+                            <label className="form-control-sm m-1">
+                              Наименование структурного подразделения:
+                              <select
+                                id="subdivision"
+                                name="subdivision"
+                                required
+                                className="form-control form-control-sm"
+                              >
+                                <option value="">
+                                  {rational["subdivision_char_field"]}
+                                </option>
+                              </select>
+                            </label>
+                            <label className="w-100 form-control-sm m-1">
+                              Зарегистрировано за №{" "}
+                              <strong className="btn btn-light">
+                                XXX.XXX.XXX
+                              </strong>
+                            </label>
+                          </div>
+                          <div>
+                            <label className="form-control-sm m-1">
+                              Сфера рац. предложения:
+                              <select
+                                id="sphere"
+                                name="sphere"
+                                required
+                                className="form-control form-control-sm"
+                              >
+                                <option value="">
+                                  {rational["sphere_char_field"]}
+                                </option>
+                              </select>
+                            </label>
+                            <label className="form-control-sm m-1">
+                              Категория:
+                              <select
+                                id="category"
+                                name="category"
+                                required
+                                className="form-control form-control-sm"
+                              >
+                                <option value="">
+                                  {rational["category_char_field"]}
+                                </option>
+                              </select>
+                            </label>
+                            <label className="form-control-sm m-1">
+                              <img
+                                src={getStaticFile(
+                                  rational["avatar_image_field"]
+                                )}
+                                className="card-img-top img-fluid w-50"
+                                alt="id"
+                              />
+                            </label>
+                          </div>
+                          <br />
+                          <div>
+                            <label className="w-100 form-control-sm m-1">
+                              Предполагаемое место внедрения:
+                              <input
+                                type="text"
+                                id="name_char_field"
+                                name="name_char_field"
+                                required
+                                placeholder="Цех / участок / отдел / лаборатория и т.п."
+                                value={rational["place_char_field"]}
+                                minLength="1"
+                                maxLength="100"
+                                className="form-control form-control-sm"
+                              />
+                            </label>
+                          </div>
+                          <br />
+                          <div>
+                            <label className="w-100 form-control-sm m-1">
+                              Краткое описание:
+                              <textarea
+                                id="short_description_char_field"
+                                name="short_description_char_field"
+                                required
+                                placeholder="Краткое описание"
+                                value={rational["short_description_char_field"]}
+                                minLength="1"
+                                maxLength="200"
+                                rows="1"
+                                className="form-control form-control-sm"
+                              />
+                            </label>
+                            <label className="w-100 form-control-sm m-1">
+                              Полное описание:
+                              <textarea
+                                id="full_description_text_field"
+                                name="full_description_text_field"
+                                required
+                                placeholder="Полное описание"
+                                value={rational["description_text_field"]}
+                                minLength="1"
+                                maxLength="5000"
+                                rows="3"
+                                className="form-control form-control-sm"
+                              />
+                            </label>
+                          </div>
+                          <br />
+                          <div>
+                            <label className="form-control-sm m-1">
+                              Word файл-приложение:
+                              <a
+                                className="btn btn-sm btn-primary m-1"
+                                href={getStaticFile(
+                                  rational["additional_word_file_field"]
+                                )}
+                              >
+                                Скачать excel-документ
+                              </a>
+                            </label>
+                            <label className="form-control-sm m-1">
+                              Pdf файл-приложение:
+                              <a
+                                className="btn btn-sm btn-danger m-1"
+                                href={getStaticFile(
+                                  rational["additional_pdf_file_field"]
+                                )}
+                              >
+                                Скачать excel-документ
+                              </a>
+                            </label>
+                            <label className="form-control-sm m-1">
+                              Excel файл-приложение:
+                              <a
+                                className="btn btn-sm btn-success m-1"
+                                href={getStaticFile(
+                                  rational["additional_excel_file_field"]
+                                )}
+                              >
+                                Скачать excel-документ
+                              </a>
+                            </label>
+                          </div>
+                          <div>
+                            <label className="w-100 form-control-sm m-1">
+                              Участники:
+                              <input
+                                type="text"
+                                id="name_char_field"
+                                name="name_char_field"
+                                placeholder="участник № 1, пример: Андриенко Богдан Николаевич 931777 70%"
+                                minLength="0"
+                                maxLength="200"
+                                className="form-control form-control-sm"
+                              />
+                              <input
+                                type="text"
+                                id="name_char_field"
+                                name="name_char_field"
+                                placeholder="участник № 2, пример: Андриенко Богдан Николаевич 931777 70%"
+                                minLength="0"
+                                maxLength="200"
+                                className="form-control form-control-sm"
+                              />
+                              <input
+                                type="text"
+                                id="name_char_field"
+                                name="name_char_field"
+                                placeholder="участник № 3, пример: Андриенко Богдан Николаевич 931777 70%"
+                                minLength="0"
+                                maxLength="200"
+                                className="form-control form-control-sm"
+                              />
+                              <input
+                                type="text"
+                                id="name_char_field"
+                                name="name_char_field"
+                                placeholder="участник № 4, пример: Андриенко Богдан Николаевич 931777 70%"
+                                minLength="0"
+                                maxLength="200"
+                                className="form-control form-control-sm"
+                              />
+                              <input
+                                type="text"
+                                id="name_char_field"
+                                name="name_char_field"
+                                placeholder="участник № 5, пример: Андриенко Богдан Николаевич 931777 70%"
+                                minLength="0"
+                                maxLength="200"
+                                className="form-control form-control-sm"
+                              />
+                            </label>
+                          </div>
                         </div>
+                      </div>
+                      <div>
                         <div className="container-fluid d-flex justify-content-between">
                           <a
-                            className="btn btn-sm btn-outline-success m-1"
+                            className="btn btn-sm btn-outline-warning m-1"
                             href="#"
                           >
                             Автор: {rational.user_model.last_name_char_field}{" "}
                             {rational.user_model.first_name_char_field}{" "}
                             {rational.user_model.patronymic_char_field}
                           </a>
-                          <a
-                            className="btn btn-sm btn-outline-secondary"
-                            href="#"
-                          >
-                            {rational.category_char_field}
-                          </a>
                         </div>
-                      </div>
-                      <div className="card-header p-0">
-                        <div className="container-fluid d-flex justify-content-between">
-                          <a
-                            className="btn btn-sm btn-outline-success m-1"
-                            href="#"
-                          >
-                            Место: {rational.place_char_field}
-                          </a>
-                          <a
-                            className="btn btn-sm btn-outline-secondary"
-                            href="#"
-                          >
-                            {rational.category_char_field}
-                          </a>
-                        </div>
-                      </div>
-                      <div className="card-body p-0">
-                        <a
-                          className="text-decoration-none lead text-dark"
-                          href="#"
-                        >
-                          <img
-                            src={getStaticFile(rational["avatar_image_field"])}
-                            className="card-img-top img-fluid w-100"
-                            alt="id"
-                          />
-                        </a>
-                      </div>
-                      <div className="card-body p-0">
-                        <div className="container-fluid">
-                          <small className="text-muted">
-                            {rational["short_description_char_field"]}
-                          </small>
-                        </div>
-                        <div className="container-fluid btn-group">
-                          <a
-                            className="btn btn-sm btn-outline-primary m-1"
-                            href="#"
-                          >
-                            Подробнее
-                          </a>
-                        </div>
-                        <div className="container-fluid p-0">
-                          <small className="text-muted text-end">
+                        <div className="container-fluid d-flex justify-content-between p-0">
+                          <small className="text-muted border">
                             подано:{" "}
-                            {getCleanDateTime(
-                              rational["created_datetime_field"]
-                            )}
-                            <p className="text-start">
-                              зарегистрировано:{" "}
+                            <p>
+                              {getCleanDateTime(
+                                rational["created_datetime_field"]
+                              )}
+                            </p>
+                          </small>
+                          <small className="text-muted border">
+                            зарегистрировано:{" "}
+                            <p>
                               {getCleanDateTime(
                                 rational["register_datetime_field"]
                               )}
                             </p>
                           </small>
-                        </div>
-                      </div>
-                      <div className="card-body p-0">
-                        <div className="text-end">
-                          <small># {rational["id"]}</small>
                         </div>
                       </div>
                     </div>
