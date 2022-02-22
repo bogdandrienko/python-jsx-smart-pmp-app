@@ -64,11 +64,10 @@ const LoginPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Вход в систему"}
         second={"страница для входа в систему."}
-        logic={true}
       />
       <main className="container text-center">
         <div>

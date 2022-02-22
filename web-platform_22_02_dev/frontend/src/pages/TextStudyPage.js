@@ -8,13 +8,12 @@ import FooterComponent from "../components/FooterComponent";
 const TextStudyPage = () => {
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={false} />
       <TitleComponent
         first={"Текстовые инструкции"}
         second={
           "страница с текстовыми инструкциями по функционалу веб-платформы."
         }
-        logic={false}
       />
       <main className="container text-center">
         <div className="accordion" id="accordionExample">

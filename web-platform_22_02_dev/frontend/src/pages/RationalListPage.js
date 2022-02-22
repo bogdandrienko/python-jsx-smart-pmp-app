@@ -73,7 +73,7 @@ const RationalListPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Все идеи"}
         second={"страница содержит все идеи в банке идей."}
@@ -163,7 +163,7 @@ const RationalListPage = () => {
                           <label className="w-100 form-control-sm m-1">
                             Зарегистрировано за №{" "}
                             <strong className="btn btn-light disabled">
-                              XXX.XXX.XXX
+                              {rational["number_char_field"]}
                             </strong>
                           </label>
                         </div>
@@ -194,19 +194,28 @@ const RationalListPage = () => {
                               </option>
                             </select>
                           </label>
-                          <label className="form-control-sm m-1">
-                            <img
-                              src={getStaticFile(
-                                rational["avatar_image_field"]
+                          <div>
+                            <label className="form-control-sm m-1">
+                              {rational["avatar_image_field"] ? (
+                                <img
+                                  src={getStaticFile(
+                                    rational["avatar_image_field"]
+                                  )}
+                                  className="card-img-top img-fluid w-50"
+                                  alt="id"
+                                />
+                              ) : (
+                                <img
+                                  src="/static/media/uploads/rational/default_rational.jpg"
+                                  className="card-img-top img-fluid w-50"
+                                  alt="id"
+                                />
                               )}
-                              className="card-img-top img-fluid w-50"
-                              alt="id"
-                            />
-                          </label>
+                            </label>
+                          </div>
                         </div>
-                        <br />
                         <div>
-                          <label className="w-100 form-control-sm m-1">
+                          <label className="w-100 form-control-sm">
                             Предполагаемое место внедрения:
                             <input
                               type="text"
@@ -221,9 +230,8 @@ const RationalListPage = () => {
                             />
                           </label>
                         </div>
-                        <br />
                         <div>
-                          <label className="w-100 form-control-sm m-1">
+                          <label className="w-100 form-control-sm">
                             Краткое описание:
                             <textarea
                               id="short_description_char_field"
@@ -233,7 +241,7 @@ const RationalListPage = () => {
                               value={rational["short_description_char_field"]}
                               minLength="1"
                               maxLength="200"
-                              rows="1"
+                              rows="2"
                               className="form-control form-control-sm"
                             />
                           </label>
@@ -241,7 +249,7 @@ const RationalListPage = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="container-fluid d-flex justify-content-between">
+                      <div className="container-fluid text-center">
                         <a
                           className="btn btn-sm btn-warning m-1 disabled"
                           href="#"

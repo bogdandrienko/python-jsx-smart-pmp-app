@@ -1,4 +1,4 @@
-import FormContainerComponent from "../components/FormContainerComponent";
+import FormContainerComponent from "./FormContainerComponent";
 import React from "react";
 
 console.log("hello");

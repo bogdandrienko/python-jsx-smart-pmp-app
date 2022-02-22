@@ -47,7 +47,7 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Личная страница"}
         second={"страница Вашего личного профиля."}

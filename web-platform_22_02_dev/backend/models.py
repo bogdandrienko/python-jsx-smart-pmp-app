@@ -2917,6 +2917,23 @@ class RationalModel(models.Model):
         to=UserModel,
         on_delete=models.SET_NULL,
     )
+    number_char_field = models.CharField(
+        db_column='number_char_field_db_column',
+        db_index=True,
+        db_tablespace='number_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='number',
+        help_text='<small class="text-muted">number_char_field</small><hr><br>',
+
+        max_length=256,
+    )
     subdivision_char_field = models.CharField(
         db_column='subdivision_char_field_db_column',
         db_index=True,
@@ -3104,12 +3121,91 @@ class RationalModel(models.Model):
         upload_to='uploads/idea/files/',
         max_length=200,
     )
+    user1_char_field = models.CharField(
+        db_column='user1_char_field_db_column',
+        db_index=True,
+        db_tablespace='user1_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='user1',
+        help_text='<small class="text-muted">user1_char_field</small><hr><br>',
 
-    # user1 = request.data.get("user1")
-    # user2 = request.data.get("user2")
-    # user3 = request.data.get("user3")
-    # user4 = request.data.get("user4")
-    # user5 = request.data.get("user5")
+        max_length=256,
+    )
+    user2_char_field = models.CharField(
+        db_column='user2_char_field_db_column',
+        db_index=True,
+        db_tablespace='user2_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='user2',
+        help_text='<small class="text-muted">user2_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+    user3_char_field = models.CharField(
+        db_column='user3_char_field_db_column',
+        db_index=True,
+        db_tablespace='user3_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='user3',
+        help_text='<small class="text-muted">user3_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+    user4_char_field = models.CharField(
+        db_column='user4_char_field_db_column',
+        db_index=True,
+        db_tablespace='user4_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='user4',
+        help_text='<small class="text-muted">user4_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+    user5_char_field = models.CharField(
+        db_column='user5_char_field_db_column',
+        db_index=True,
+        db_tablespace='user5_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='user5',
+        help_text='<small class="text-muted">user5_char_field</small><hr><br>',
+
+        max_length=256,
+    )
 
 
 

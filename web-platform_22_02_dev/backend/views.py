@@ -1708,16 +1708,15 @@ def api_rational(request):
                     print('\n\n\n')
 
                     author = backend_models.UserModel.objects.get(user_foreign_key_field=request_user)
+                    count = backend_models.RationalModel.objects.order_by('-id')[0].id
+                    number = f"{count}_{backend_utils.DateTimeUtils.get_current_date()}"
                     subdivision = request.data.get("subdivision")
-                    print(subdivision)
                     sphere = request.data.get("sphere")
                     category = request.data.get("category")
-                    print(category)
                     avatar = request.data.get("avatar")
                     name = request.data.get("name")
                     place = request.data.get("place")
                     short_description = request.data.get("shortDescription")
-                    print(short_description)
                     description = request.data.get("description")
                     additional_word = request.data.get("additional_word")
                     additional_pdf = request.data.get("additional_pdf")
@@ -1730,6 +1729,7 @@ def api_rational(request):
 
                     backend_models.RationalModel.objects.create(
                         author_foreign_key_field=author,
+                        number_char_field=number,
                         subdivision_char_field=subdivision,
                         sphere_char_field=sphere,
                         category_char_field=category,
@@ -1741,6 +1741,11 @@ def api_rational(request):
                         additional_word_file_field=additional_word,
                         additional_pdf_file_field=additional_pdf,
                         additional_excel_file_field=additional_excel,
+                        user1_char_field=user1,
+                        user2_char_field=user2,
+                        user3_char_field=user3,
+                        user4_char_field=user4,
+                        user5_char_field=user5,
                     )
 
                     response = {"response": "success"}
@@ -1752,8 +1757,8 @@ def api_rational(request):
                     return Response({"error": "Произошла ошибка!"})
             elif request_action_type == "RATIONAL_DETAIL":
                 try:
-                    ideas = backend_models.RationalModel.objects.get(id=request.data.get("id"))
-                    serializer = backend_serializers.RationalModelSerializer(instance=ideas, many=False)
+                    rational = backend_models.RationalModel.objects.order_by('-id')[0]
+                    serializer = backend_serializers.RationalModelSerializer(instance=rational, many=False)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")
                     return Response(response)

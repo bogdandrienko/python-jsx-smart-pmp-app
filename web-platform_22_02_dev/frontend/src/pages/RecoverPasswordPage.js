@@ -154,11 +154,10 @@ const ChangePasswordPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={false} />
       <TitleComponent
         first={"Восстановление пароля"}
         second={"страница восстановления доступа к Вашему аккаунту."}
-        logic={false}
       />
       <main className="container text-center">
         <div>

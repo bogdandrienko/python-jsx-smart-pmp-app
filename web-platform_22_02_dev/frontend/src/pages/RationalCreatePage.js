@@ -102,7 +102,7 @@ const BankIdeaListPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Подача рац. предложения"}
         second={
@@ -186,8 +186,7 @@ const BankIdeaListPage = () => {
                         </label>
                         <label className="w-100 form-control-sm m-1">
                           Зарегистрировано за №{" "}
-                          <strong className="btn btn-light">XXX.XXX.XXX</strong>{" "}
-                          от
+                          <strong className="btn btn-light">XXX</strong> от
                           <small className="text-danger"> текущей </small>даты
                           <p>
                             <small className="text-success">
@@ -308,7 +307,7 @@ const BankIdeaListPage = () => {
                             value={shortDescription}
                             minLength="1"
                             maxLength="200"
-                            rows="1"
+                            rows="2"
                             className="form-control form-control-sm"
                             onChange={(e) =>
                               setShortDescription(e.target.value)

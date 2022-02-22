@@ -9,11 +9,10 @@ import FooterComponent from "../components/FooterComponent";
 const VideoStudyPage = () => {
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={false} />
       <TitleComponent
         first={"Видео инструкции"}
         second={"страница с видеоинструкциями по функционалу веб-платформы."}
-        logic={false}
       />
       <main className="container">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">

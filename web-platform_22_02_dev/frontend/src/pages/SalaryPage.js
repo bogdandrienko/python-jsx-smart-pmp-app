@@ -6,7 +6,7 @@ import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import LoaderComponent from "../components/LoaderComponent";
-import TableComponent from "../components/TableComponent";
+import SalaryTableComponent from "../components/SalaryTableComponent";
 import MessageComponent from "../components/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const SalaryPage = () => {
@@ -33,11 +33,10 @@ const SalaryPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Расчётный лист"}
         second={"страница выгрузки Вашего расчётного листа."}
-        logic={true}
       />
       <main className="container text-center">
         <div className="text-center">
@@ -200,7 +199,7 @@ const SalaryPage = () => {
                     </table>
                   </li>
                   {dataSalaryUser["tables"].map((tab, index) => (
-                    <TableComponent key={index} tab={tab} />
+                    <SalaryTableComponent key={index} tab={tab} />
                   ))}
                 </ul>
               </div>

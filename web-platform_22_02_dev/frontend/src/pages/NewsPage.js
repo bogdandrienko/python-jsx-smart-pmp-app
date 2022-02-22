@@ -9,11 +9,10 @@ import NewsComponent from "../components/NewsComponent";
 const NewsPage = () => {
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Новости"}
         second={"страница новостей веб-платформы."}
-        logic={true}
       />
       <main className="container text-center">
         <NewsComponent count={100} />

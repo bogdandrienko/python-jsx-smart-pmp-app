@@ -108,11 +108,10 @@ const ChangeProfilePage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={false} />
       <TitleComponent
         first={"Изменение профиля"}
         second={"страница редактирования Вашего личного профиля."}
-        logic={true}
       />
       <main className="container text-center">
         <div>

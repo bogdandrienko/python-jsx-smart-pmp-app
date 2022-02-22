@@ -25,7 +25,7 @@ import RationalDetailPage from "../pages/RationalDetailPage";
 import RationalPreModeratePage from "../pages/RationalPreModeratePage";
 import RationalPostModeratePage from "../pages/RationalPostModeratePage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import TodoPage from "../pages/TodoPage";
+// import TodoPage from "../test/TodoPage";
 import GologramPage from "../test/GologramPage";
 // import UsersListPage from "../pages/UsersListPage";
 // import ProfilePage from "../pages/ProfilePage";
@@ -73,7 +73,7 @@ function App() {
             path="/admin_change_user_password"
             element={<AdminChangeUserPasswordPage />}
           />
-          <Route path="/todo" element={<TodoPage />} />
+          {/*<Route path="/todo" element={<TodoPage />} />*/}
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/gologram" element={<GologramPage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -75,7 +75,7 @@ const RationalDetailPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Все идеи"}
         second={"страница содержит все идеи в банке идей."}
@@ -135,7 +135,9 @@ const RationalDetailPage = () => {
                         </label>
                         <label className="w-100 form-control-sm m-1">
                           Зарегистрировано за №{" "}
-                          <strong className="btn btn-light">XXX.XXX.XXX</strong>
+                          <strong className="btn btn-light disabled">
+                            {dataRationalDetail["number_char_field"]}
+                          </strong>
                         </label>
                       </div>
                       <div>
@@ -165,17 +167,26 @@ const RationalDetailPage = () => {
                             </option>
                           </select>
                         </label>
-                        <label className="form-control-sm m-1">
-                          <img
-                            src={getStaticFile(
-                              dataRationalDetail["avatar_image_field"]
+                        <div>
+                          <label className="form-control-sm m-1">
+                            {dataRationalDetail["avatar_image_field"] ? (
+                              <img
+                                src={getStaticFile(
+                                  dataRationalDetail["avatar_image_field"]
+                                )}
+                                className="card-img-top img-fluid w-50"
+                                alt="id"
+                              />
+                            ) : (
+                              <img
+                                src="/static/media/uploads/rational/default_rational.jpg"
+                                className="card-img-top img-fluid w-50"
+                                alt="id"
+                              />
                             )}
-                            className="card-img-top img-fluid w-50"
-                            alt="id"
-                          />
-                        </label>
+                          </label>
+                        </div>
                       </div>
-                      <br />
                       <div>
                         <label className="w-100 form-control-sm m-1">
                           Предполагаемое место внедрения:
@@ -192,7 +203,6 @@ const RationalDetailPage = () => {
                           />
                         </label>
                       </div>
-                      <br />
                       <div>
                         <label className="w-100 form-control-sm m-1">
                           Краткое описание:
@@ -206,7 +216,7 @@ const RationalDetailPage = () => {
                             }
                             minLength="1"
                             maxLength="200"
-                            rows="1"
+                            rows="2"
                             className="form-control form-control-sm"
                           />
                         </label>
@@ -225,7 +235,6 @@ const RationalDetailPage = () => {
                           />
                         </label>
                       </div>
-                      <br />
                       <div>
                         <label className="form-control-sm m-1">
                           Word файл-приложение:
@@ -269,6 +278,7 @@ const RationalDetailPage = () => {
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 1, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={dataRationalDetail["user1_char_field"]}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
@@ -278,6 +288,7 @@ const RationalDetailPage = () => {
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 2, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={dataRationalDetail["user2_char_field"]}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
@@ -287,6 +298,7 @@ const RationalDetailPage = () => {
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 3, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={dataRationalDetail["user3_char_field"]}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
@@ -296,6 +308,7 @@ const RationalDetailPage = () => {
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 4, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={dataRationalDetail["user4_char_field"]}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
@@ -305,6 +318,7 @@ const RationalDetailPage = () => {
                             id="name_char_field"
                             name="name_char_field"
                             placeholder="участник № 5, пример: Андриенко Богдан Николаевич 931777 70%"
+                            value={dataRationalDetail["user5_char_field"]}
                             minLength="0"
                             maxLength="200"
                             className="form-control form-control-sm"
@@ -314,7 +328,7 @@ const RationalDetailPage = () => {
                     </div>
                   </div>
                   <div>
-                    <div className="container-fluid d-flex justify-content-between">
+                    <div className="container-fluid text-center">
                       <a
                         className="btn btn-sm btn-outline-warning m-1"
                         href="#"
@@ -400,97 +414,7 @@ const RationalDetailPage = () => {
                     <small className="text-muted">* не обязательно</small>
                   </label>
                   <label className="w-50 form-control-sm m-1">
-                    Должность, название отдела:
-                    <input
-                      type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required=""
-                      placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
-                      value={preModerateAuthor}
-                      minLength="1"
-                      maxLength="64"
-                      className="form-control form-control-sm"
-                    />
-                    <small className="text-success">
-                      * данные будут введены автоматически
-                    </small>
-                  </label>
-                </div>
-                <div className="container-fluid text-center">
-                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                    <li className="m-1">
-                      <button
-                        className="btn btn-sm btn-outline-primary"
-                        type="submit"
-                      >
-                        Подтвердить
-                      </button>
-                    </li>
-                    <li className="m-1">
-                      <button
-                        className="btn btn-sm btn-outline-warning"
-                        type="reset"
-                      >
-                        Сбросить
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </form>
-          <br />
-          <hr />
-          <br />
-          <form
-            action="#"
-            method="POST"
-            target="_self"
-            encType="multipart/form-data"
-            name="idea_create"
-            autoComplete="on"
-            className="text-center"
-          >
-            <div>
-              <div className="bg-danger bg-opacity-10">
-                <div>
-                  <h4 className="lead fw-bold">Постмодерация</h4>
-                  <label className="w-25 form-control-sm m-1">
-                    Заключение:
-                    <select
-                      id="category_slug_field"
-                      name="category_slug_field"
-                      required
-                      className="form-control form-control-sm"
-                    >
-                      <option value="Приостановлено">Приостановлено</option>
-                      <option value="Принято">Принято</option>
-                      <option value="Принято с замечаниями">
-                        Принято с замечаниями
-                      </option>
-                      <option value="Отклонено">Отклонено</option>
-                    </select>
-                    <small className="text-muted">
-                      обязательно выбрать одну из категорий
-                    </small>
-                  </label>
-                  <label className="w-25 form-control-sm m-1">
-                    Комментарий к заключению:
-                    <input
-                      type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required=""
-                      placeholder="пример: дополнить описание"
-                      minLength="1"
-                      maxLength="64"
-                      className="form-control form-control-sm"
-                    />
-                    <small className="text-muted">* не обязательно</small>
-                  </label>
-                  <label className="w-50 form-control-sm m-1">
-                    Должность, название отдела:
+                    ФИО, должность:
                     <input
                       type="text"
                       id="name_char_field"

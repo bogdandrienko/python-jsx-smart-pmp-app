@@ -13,11 +13,10 @@ import NewsComponent from "../components/NewsComponent";
 const HomePage = () => {
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={false} />
       <TitleComponent
         first={"Домашняя страница"}
         second={"основная страница веб платформы."}
-        logic={false}
       />
       <main className="container">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">

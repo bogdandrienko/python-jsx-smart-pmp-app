@@ -33,7 +33,7 @@ const UsersListPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Все пользователи"}
         second={"страница со списком всех пользователей системы."}

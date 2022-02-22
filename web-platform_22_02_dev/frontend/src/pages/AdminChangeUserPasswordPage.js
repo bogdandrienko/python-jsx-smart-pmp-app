@@ -65,11 +65,10 @@ const AdminChangeUserPasswordPage = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Изменение пароля"}
         second={"страница редактирования Вашего пароля от аккаунта."}
-        logic={true}
       />
       <main className="container text-center">
         <div className="text-center">
