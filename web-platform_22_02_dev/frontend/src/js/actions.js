@@ -49,6 +49,12 @@ import {
   RATIONAL_LIST_FAIL_CONSTANT,
   RATIONAL_LIST_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  RATIONAL_DETAIL_LOADING_CONSTANT,
+  RATIONAL_DETAIL_DATA_CONSTANT,
+  RATIONAL_DETAIL_ERROR_CONSTANT,
+  RATIONAL_DETAIL_FAIL_CONSTANT,
+  RATIONAL_DETAIL_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   GET_TODO_LIST,
   DELETE_TODO,
   ADD_TODO,
@@ -147,6 +153,7 @@ export const userDetailsAction = () => async (dispatch, getState) => {
     dispatch({ type: USER_RECOVER_PASSWORD_RESET_CONSTANT });
     dispatch({ type: USER_LIST_RESET_CONSTANT });
     dispatch({ type: USER_SALARY_RESET_CONSTANT });
+    // dispatch({ type: RATIONAL_LIST_RESET_CONSTANT });
 
     if (data["response"]) {
       const response = data["response"];
@@ -525,6 +532,61 @@ export const rationalListAction =
       });
     }
   };
+
+export const rationalDetailAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: RATIONAL_DETAIL_LOADING_CONSTANT,
+    });
+
+    const {
+      userLoginState: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    formData.append("Action-type", "RATIONAL_DETAIL");
+    Object.entries(form).map(([k, v]) => {
+      formData.append(k, v);
+    });
+    const { data } = await axios({
+      url: "api/rational/",
+      method: "POST",
+      timeout: 5000,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+
+    if (data["response"]) {
+      const response = data["response"];
+
+      console.log("rationalDetailAction response: ", response);
+
+      dispatch({
+        type: RATIONAL_DETAIL_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+
+      console.log("rationalDetailAction error: ", response);
+
+      dispatch({
+        type: RATIONAL_DETAIL_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: RATIONAL_DETAIL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
 
 // GET TODO LIST
 export const getTodos = () => (dispatch) => {

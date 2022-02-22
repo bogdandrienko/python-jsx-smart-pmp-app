@@ -651,7 +651,7 @@ def api_user_change_password(request):
                         "email_field": str(user_model.email_field),
                         "success": False
                     }}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -671,7 +671,7 @@ def api_user_change_password(request):
                         }}
                     else:
                         response = {"error": "Ответ не верный!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -738,7 +738,7 @@ def api_user_change_password(request):
                         }}
                     else:
                         response = {"error": f"Внимание, отправлять письмо можно не чаще раза в 3 минуты!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -772,7 +772,7 @@ def api_user_change_password(request):
                             response = {"error": f"Код не верный!"}
                     else:
                         response = {"error": f"Код не верный!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -799,7 +799,7 @@ def api_user_change_password(request):
                         }}
                     else:
                         response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -865,7 +865,7 @@ def api_user_recover_password(request):
                         "email_field": str(user_model.email_field),
                         "success": False
                     }}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -885,7 +885,7 @@ def api_user_recover_password(request):
                         }}
                     else:
                         response = {"error": "Ответ не верный!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -952,7 +952,7 @@ def api_user_recover_password(request):
                         }}
                     else:
                         response = {"error": f"Внимание, отправлять письмо можно не чаще раза в 3 минуты!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -986,7 +986,7 @@ def api_user_recover_password(request):
                             response = {"error": f"Код не верный!"}
                     else:
                         response = {"error": f"Код не верный!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -1013,7 +1013,7 @@ def api_user_recover_password(request):
                         }}
                     else:
                         response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -1686,10 +1686,15 @@ def api_rational(request):
         elif request_method == "POST":
             if request_action_type == "RATIONAL_LIST":
                 try:
-                    ideas = backend_models.RationalModel.objects.all()
+                    category = request_body["category"]
+                    print("category: ", category)
+                    if category:
+                        ideas = backend_models.RationalModel.objects.filter(subdivision_char_field=category)
+                    else:
+                        ideas = backend_models.RationalModel.objects.all()
                     serializer = backend_serializers.RationalModelSerializer(instance=ideas, many=True)
                     response = {"response": serializer.data}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -1739,7 +1744,18 @@ def api_rational(request):
                     )
 
                     response = {"response": "success"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            elif request_action_type == "RATIONAL_DETAIL":
+                try:
+                    ideas = backend_models.RationalModel.objects.get(id=request.data.get("id"))
+                    serializer = backend_serializers.RationalModelSerializer(instance=ideas, many=False)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -1805,7 +1821,7 @@ def api_admin_change_user_password(request):
                         "temp_password_boolean_field": str(user_model.temp_password_boolean_field),
                         "success": False
                     }}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -1832,7 +1848,7 @@ def api_admin_change_user_password(request):
                         }}
                     else:
                         response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -1908,7 +1924,7 @@ def api_user_all_(request):
                     users = User.objects.all()
                     serializer = backend_serializers.UserSerializer(users, many=True)
                     response = {"response": serializer.data}
-                    print(f"response: {response}")
+                    # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)

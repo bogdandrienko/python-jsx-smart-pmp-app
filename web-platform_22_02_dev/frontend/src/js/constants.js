@@ -52,6 +52,13 @@ export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
 export const RATIONAL_LIST_FAIL_CONSTANT = "RATIONAL_LIST_FAIL_CONSTANT";
 export const RATIONAL_LIST_RESET_CONSTANT = "RATIONAL_LIST_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const RATIONAL_DETAIL_LOADING_CONSTANT =
+  "RATIONAL_DETAIL_LOADING_CONSTANT";
+export const RATIONAL_DETAIL_DATA_CONSTANT = "RATIONAL_DETAIL_DATA_CONSTANT";
+export const RATIONAL_DETAIL_ERROR_CONSTANT = "RATIONAL_DETAIL_ERROR_CONSTANT";
+export const RATIONAL_DETAIL_FAIL_CONSTANT = "RATIONAL_DETAIL_FAIL_CONSTANT";
+export const RATIONAL_DETAIL_RESET_CONSTANT = "RATIONAL_DETAIL_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT =
   "ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT";
 export const ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT =
@@ -131,32 +138,47 @@ export const news = [
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const modules = [
   {
-    Header: "Профиль",
+    Header: "Модератор",
+    Access: "moderator",
     Image: "/static/modules/1_module_profile/module_profile.png",
     Sections: [
       {
         Header: "Основной функционал",
+        Access: "moderator",
         Image: "/static/modules/1_module_profile/section_main/section_main.png",
         Links: [
           {
             Type: "active",
-            Link: "/login",
-            Header: "Домашняя страница",
+            Link: "/admin/",
+            ExternalLink: true,
+            Header: "Панель Администрирования",
+            Access: "moderator",
           },
           {
-            Type: "disable",
-            Link: "#",
-            Header: "Уведомления",
+            Type: "active",
+            Link: "/home",
+            ExternalLink: true,
+            Header: "Npm react app",
+            Access: "moderator",
           },
           {
-            Type: "disable",
-            Link: "#",
-            Header: "Достижения",
+            Type: "active",
+            Link: "/django/",
+            Header: "Домашняя Django",
+            Access: "moderator",
+          },
+          {
+            Type: "active",
+            Link: "/api/routes/",
+            ExternalLink: true,
+            Header: "Api Django rest_framework",
+            Access: "moderator",
           },
         ],
       },
       {
         Header: "Личный профиль",
+        Access: "moderator",
         Image:
           "/static/modules/1_module_profile/section_self_profile/section_self_profile.png",
         Links: [
@@ -164,31 +186,113 @@ export const modules = [
             Type: "disable",
             Link: "#",
             Header: "Профиль",
+            Access: "moderator",
           },
           {
             Type: "active",
             Link: "/change_profile",
             Header: "Изменить профиль",
+            Access: "moderator",
           },
           {
             Type: "active",
             Link: "/change_password",
             Header: "Изменить пароль",
+            Access: "moderator",
           },
           {
             Type: "active",
             Link: "/recover_password",
             Header: "Восстановить пароль",
+            Access: "moderator",
           },
           {
             Type: "active",
             Link: "/login",
             Header: "Войти",
+            Access: "moderator",
           },
           {
             Type: "active",
             Link: "/logout",
             Header: "Выйти",
+            Access: "moderator",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    Header: "Профиль",
+    Access: "user",
+    Image: "/static/modules/1_module_profile/module_profile.png",
+    Sections: [
+      {
+        Header: "Основной функционал",
+        Access: "user",
+        Image: "/static/modules/1_module_profile/section_main/section_main.png",
+        Links: [
+          {
+            Type: "active",
+            Link: "/login",
+            Header: "Домашняя страница",
+            Access: "user",
+          },
+          {
+            Type: "disable",
+            Link: "#",
+            Header: "Уведомления",
+            Access: "user",
+          },
+          {
+            Type: "disable",
+            Link: "#",
+            Header: "Достижения",
+            Access: "user",
+          },
+        ],
+      },
+      {
+        Header: "Личный профиль",
+        Access: "user",
+        Image:
+          "/static/modules/1_module_profile/section_self_profile/section_self_profile.png",
+        Links: [
+          {
+            Type: "disable",
+            Link: "#",
+            Header: "Профиль",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/change_profile",
+            Header: "Изменить профиль",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/change_password",
+            Header: "Изменить пароль",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/recover_password",
+            Header: "Восстановить пароль",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/login",
+            Header: "Войти",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/logout",
+            Header: "Выйти",
+            Access: "user",
           },
         ],
       },
@@ -196,57 +300,68 @@ export const modules = [
   },
   {
     Header: "Новости",
+    Access: "user",
     Image: "/static/modules/2_module_news/module_news.png",
     Sections: [
       {
         Header: "Обучение",
+        Access: "user",
         Image: "/static/modules/2_module_news/section_study/section_study.png",
         Links: [
           {
             Type: "active",
             Link: "/video_study",
             Header: "Видео-инструкции",
+            Access: "user",
           },
           {
             Type: "active",
             Link: "/text_study",
             Header: "Текстовые инструкции",
+            Access: "user",
           },
         ],
       },
       {
         Header: "Новости",
+        Access: "user",
         Image: "/static/img/modules.png",
         Links: [
           {
             Type: "active",
             Link: "/news",
             Header: "Новости платформы",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Поиск",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Предложить",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Зал славы",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Алтын Канат",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Лучшие работники Комбината",
+            Access: "user",
           },
         ],
       },
@@ -254,10 +369,50 @@ export const modules = [
   },
   {
     Header: "Развитие",
+    Access: "user",
     Image: "/static/modules/3_module_progress/module_progress.png",
     Sections: [
       {
+        Header: "Рационализаторство",
+        Access: "user",
+        Image:
+          "/static/modules/3_module_progress/2_section_rational/sectional_rational.png",
+        Links: [
+          {
+            Type: "active",
+            Link: "/rational_create",
+            Header: "Подать",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/rational_list",
+            Header: "Список",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/rational_detail",
+            Header: "Подробности",
+            Access: "user",
+          },
+          {
+            Type: "active",
+            Link: "/rational_premoderate",
+            Header: "Премодерация",
+            Access: "rational_premoderate",
+          },
+          {
+            Type: "active",
+            Link: "/rational_postmoderate",
+            Header: "Постмодерация",
+            Access: "rational_postmoderate",
+          },
+        ],
+      },
+      {
         Header: "Банк идей",
+        Access: "user",
         Image:
           "/static/modules/3_module_progress/1_section_idea/section_idea.png",
         Links: [
@@ -265,43 +420,25 @@ export const modules = [
             Type: "disable",
             Link: "#",
             Header: "Подать идею",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Список идей",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Рейтинги среди идей",
-          },
-        ],
-      },
-      {
-        Header: "Рационализаторство",
-        Image:
-          "/static/modules/3_module_progress/2_section_rational/sectional_rational.png",
-        Links: [
-          {
-            Type: "disable",
-            Link: "#",
-            Header: "Подать рац. предложение",
-          },
-          {
-            Type: "disable",
-            Link: "#",
-            Header: "Список рац. предложений",
-          },
-          {
-            Type: "disable",
-            Link: "#",
-            Header: "Рейтинги среди рац. предложений",
+            Access: "user",
           },
         ],
       },
       {
         Header: "Проектная деятельность",
+        Access: "user",
         Image:
           "/static/modules/3_module_progress/3_section_project/section_project.png",
         Links: [
@@ -309,16 +446,19 @@ export const modules = [
             Type: "disable",
             Link: "#",
             Header: "Подать проект",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Список проектов",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Рейтинги среди проектов",
+            Access: "user",
           },
         ],
       },
@@ -326,10 +466,12 @@ export const modules = [
   },
   {
     Header: "Бухгалтерия",
+    Access: "user",
     Image: "/static/modules/4_module_buhgalteria/module_buhgalteria.png",
     Sections: [
       {
         Header: "Сектор расчёта заработной платы",
+        Access: "user",
         Image:
           "/static/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
         Links: [
@@ -337,6 +479,7 @@ export const modules = [
             Type: "active",
             Link: "/salary",
             Header: "Выгрузка расчётного листа",
+            Access: "user",
           },
         ],
       },
@@ -344,10 +487,12 @@ export const modules = [
   },
   {
     Header: "СУП",
+    Access: "user",
     Image: "/static/modules/5_module_human_resourse/module_hr.png",
     Sections: [
       {
         Header: "Отдел кадров",
+        Access: "user",
         Image:
           "/static/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
@@ -355,16 +500,19 @@ export const modules = [
             Type: "disable",
             Link: "#",
             Header: "Вакансии",
+            Access: "user",
           },
           {
             Type: "disable",
             Link: "#",
             Header: "Выгрузка отпусков",
+            Access: "user",
           },
         ],
       },
       {
         Header: "Отдел развития и оценки персонала",
+        Access: "user",
         Image:
           "/static/modules/5_module_human_resourse/1_section_hr/section_hr.png",
         Links: [
@@ -372,6 +520,7 @@ export const modules = [
             Type: "disable",
             Link: "#",
             Header: "КЛО",
+            Access: "user",
           },
         ],
       },

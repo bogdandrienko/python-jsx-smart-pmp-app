@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modules } from "../js/constants";
+import { userDetailsAction } from "../js/actions";
 
 const HeaderComponent = () => {
+  const dispatch = useDispatch();
+
   const userLoginState = useSelector((state) => state.userLoginState);
   const {
     // load: loadUserLogin,
@@ -12,6 +15,29 @@ const HeaderComponent = () => {
     // error: errorUserLogin,
     // fail: failUserLogin,
   } = userLoginState;
+
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const {
+    // load: loadUserDetails,
+    data: dataUserDetails,
+    // error: errorUserDetails,
+    // fail: failUserDetails,
+  } = userDetailsStore;
+
+  useEffect(() => {
+    dispatch(userDetailsAction());
+  }, [dispatch]);
+
+  function checkAccess(slug = "") {
+    if (dataUserDetails) {
+      if (dataUserDetails["group_model"]) {
+        return dataUserDetails["group_model"].includes(slug);
+      }
+      return false;
+    }
+    return false;
+  }
+
   return (
     <header className="navbar-fixed-top bg-secondary bg-opacity-10 m-0 p-0">
       <Navbar expand="lg">
@@ -29,19 +55,8 @@ const HeaderComponent = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {dataUserLogin && dataUserLogin.username === "Bogdan" ? (
+              {checkAccess("superuser") && (
                 <NavDropdown title="Разработка" id="basic-nav-dropdown">
-                  <li>
-                    <strong className="dropdown-header text-center">
-                      Рац. предложения
-                    </strong>
-                    <LinkContainer to="/rational_create">
-                      <Nav.Link>Подать рац. предложение</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/rational_list">
-                      <Nav.Link>Список предложений</Nav.Link>
-                    </LinkContainer>
-                  </li>
                   <li>
                     <strong className="dropdown-header text-center">
                       Аккаунты
@@ -127,11 +142,9 @@ const HeaderComponent = () => {
                     </LinkContainer>
                   </li>
                 </NavDropdown>
-              ) : (
-                ""
               )}
 
-              {dataUserLogin && dataUserLogin.username === "Bogdan" ? (
+              {checkAccess("moderator") && (
                 <NavDropdown title="Модератор" id="basic-nav-dropdown">
                   <li>
                     <strong className="dropdown-header text-center">
@@ -216,34 +229,53 @@ const HeaderComponent = () => {
                     </LinkContainer>
                   </li>
                 </NavDropdown>
-              ) : (
-                ""
               )}
 
-              {modules.map((module, module_i) => (
-                <NavDropdown
-                  key={module_i}
-                  title={module.Header}
-                  id="basic-nav-dropdown"
-                >
-                  {module.Sections.map((section, section_i) => (
-                    <li key={section_i}>
-                      <strong className="dropdown-header text-center">
-                        {section.Header}
-                      </strong>
-                      {section.Links.map((link, link_i) => (
-                        <LinkContainer
-                          key={link_i}
-                          to={link.Link}
-                          className={link.Type === "active" ? "" : "disabled"}
-                        >
-                          <Nav.Link>{link.Header}</Nav.Link>
-                        </LinkContainer>
-                      ))}
-                    </li>
-                  ))}
-                </NavDropdown>
-              ))}
+              {modules.map(
+                (module, module_i) =>
+                  checkAccess(module.Access) && (
+                    <NavDropdown
+                      key={module_i}
+                      title={module.Header}
+                      id="basic-nav-dropdown"
+                    >
+                      {module.Sections.map(
+                        (section, section_i) =>
+                          checkAccess(section.Access) && (
+                            <li key={section_i}>
+                              <strong className="dropdown-header text-center">
+                                {section.Header}
+                              </strong>
+                              {
+                                section.Links.map(
+                                  (link, link_i) =>
+                                    checkAccess(link.Access) &&
+                                    link.ExternalLink && <div>эктернал</div>
+                                )
+                                //     link.ExternalLink ?
+                                //         <a
+                                //           className="dropdown-item"
+                                //           href="http://localhost:3000/home/"
+                                //           target="_blank"
+                                //           rel="noreferrer"
+                                //         >
+                                //           Npm react app
+                                //         </a> : <LinkContainer
+                                //   key={link_i}
+                                //   to={link.Link}
+                                //   className={
+                                //     link.Type === "active" ? "" : "disabled"
+                                //   }
+                                // >
+                                //   <Nav.Link>{link.Header}</Nav.Link>
+                                // </LinkContainer>
+                              }
+                            </li>
+                          )
+                      )}
+                    </NavDropdown>
+                  )
+              )}
 
               {dataUserLogin ? (
                 <LinkContainer to="/logout">

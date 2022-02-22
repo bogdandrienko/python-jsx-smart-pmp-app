@@ -47,6 +47,12 @@ import {
   RATIONAL_LIST_FAIL_CONSTANT,
   RATIONAL_LIST_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  RATIONAL_DETAIL_LOADING_CONSTANT,
+  RATIONAL_DETAIL_DATA_CONSTANT,
+  RATIONAL_DETAIL_ERROR_CONSTANT,
+  RATIONAL_DETAIL_FAIL_CONSTANT,
+  RATIONAL_DETAIL_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   GET_TODO_LIST,
   DELETE_TODO,
   ADD_TODO,
@@ -253,6 +259,34 @@ export const rationalListReducer = (state = {}, action = null) => {
       return { load: false, fail: action.payload };
 
     case RATIONAL_LIST_RESET_CONSTANT:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const rationalDetailReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case RATIONAL_DETAIL_LOADING_CONSTANT:
+      return { load: true };
+
+    case RATIONAL_DETAIL_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+
+    case RATIONAL_DETAIL_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+
+    case RATIONAL_DETAIL_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+
+    case RATIONAL_DETAIL_RESET_CONSTANT:
       return {};
 
     default:

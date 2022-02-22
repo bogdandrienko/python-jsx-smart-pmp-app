@@ -75,7 +75,7 @@ const BankIdeaListPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    let form = {
+    const form = {
       subdivision: subdivision,
       sphere: sphere,
       category: category,

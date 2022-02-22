@@ -8,6 +8,7 @@ from backend import models as backend_models
 
 class UserSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
+    group_model = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -20,6 +21,19 @@ class UserSerializer(serializers.ModelSerializer):
         if not user_model_serializer.data:
             user_model_serializer = {'data': None}
         return user_model_serializer.data
+
+    def get_group_model(self, obj):
+        user = User.objects.get(username=obj.username)
+        user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+        group_model = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+        actions = []
+        for group in group_model:
+            action_model = group.action_many_to_many_field.all()
+            for action in action_model:
+                actions.append(action.name_slug_field)
+        if len(actions) < 1:
+            actions = ['']
+        return actions
 
 
 class UserSerializerWithToken(UserSerializer):
