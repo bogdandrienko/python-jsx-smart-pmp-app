@@ -18,6 +18,8 @@ const RationalListPage = () => {
   const dispatch = useDispatch();
 
   const [subdivision, setSubdivision] = useState("");
+  const [premoderate, setPremoderate] = useState("");
+  const [postmoderate, setPostmoderate] = useState("");
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
@@ -47,7 +49,12 @@ const RationalListPage = () => {
   useEffect(() => {
     if (dataBankIdeaList) {
     } else {
-      dispatch(rationalListAction("RATIONAL_LIST", subdivision));
+      const form = {
+        subdivision: subdivision,
+        premoderate: premoderate,
+        postmoderate: postmoderate,
+      };
+      dispatch(rationalListAction(form));
     }
   }, [dispatch, dataBankIdeaList]);
 
@@ -65,10 +72,15 @@ const RationalListPage = () => {
     }
   }
 
-  const submitChangeSubdivisionHandler = (e) => {
+  const submitChangeHandler = (e) => {
     e.preventDefault();
-    setSubdivision(e.target.value);
-    dispatch(rationalListAction("RATIONAL_LIST", subdivision));
+
+    const form = {
+      subdivision: subdivision,
+      premoderate: premoderate,
+      postmoderate: postmoderate,
+    };
+    dispatch(rationalListAction(form));
   };
 
   return (
@@ -112,7 +124,7 @@ const RationalListPage = () => {
               required
               className="form-control form-control-sm"
               value={subdivision}
-              onChange={submitChangeSubdivisionHandler}
+              onChange={(e) => setSubdivision(e.target.value)}
             >
               <option value="">Не выбрано</option>
               <option value="Управление">Управление</option>
@@ -128,6 +140,56 @@ const RationalListPage = () => {
               <option value="Энергоуправление">Энергоуправление</option>
             </select>
             <small className="text-danger">* обязательно</small>
+          </label>
+          <label className="w-25 form-control-sm m-1">
+            Заключение премодерации:
+            <select
+              id="category_slug_field"
+              name="category_slug_field"
+              required
+              className="form-control form-control-sm"
+              value={premoderate}
+              onChange={(e) => setPremoderate(e.target.value)}
+            >
+              <option value="Приостановлено">Приостановлено</option>
+              <option value="Принято">Принято</option>
+              <option value="Принято с замечаниями">
+                Принято с замечаниями
+              </option>
+              <option value="Отклонено">Отклонено</option>
+            </select>
+            <small className="text-muted">
+              обязательно выбрать одну из категорий
+            </small>
+          </label>
+          <label className="w-25 form-control-sm m-1">
+            Заключение постмодерации:
+            <select
+              id="category_slug_field"
+              name="category_slug_field"
+              required
+              className="form-control form-control-sm"
+              value={postmoderate}
+              onChange={(e) => setPostmoderate(e.target.value)}
+            >
+              <option value="Приостановлено">Приостановлено</option>
+              <option value="Принято">Принято</option>
+              <option value="Принято с замечаниями">
+                Принято с замечаниями
+              </option>
+              <option value="Отклонено">Отклонено</option>
+            </select>
+            <small className="text-muted">
+              обязательно выбрать одну из категорий
+            </small>
+          </label>
+          <label className="form-control-sm m-1">
+            <button
+              onClick={submitChangeHandler}
+              className="btn btn-sm btn-primary"
+            >
+              Обновить
+            </button>
           </label>
           <ul className="row row-cols-1 row-cols-md-3 row-cols-lg-4 nav justify-content-center">
             {!dataBankIdeaList ? (

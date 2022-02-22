@@ -478,7 +478,7 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
 };
 
 export const rationalListAction =
-  (type, category = null, form = null) =>
+  (form = {}) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -488,6 +488,11 @@ export const rationalListAction =
       const {
         userLoginState: { data: userLogin },
       } = getState();
+      const formData = new FormData();
+      formData.append("Action-type", "RATIONAL_LIST");
+      Object.entries(form).map(([k, v]) => {
+        formData.append(k, v);
+      });
       const { data } = await axios({
         url: "api/rational/",
         method: "POST",
@@ -496,17 +501,13 @@ export const rationalListAction =
           "Content-Type": "application/json",
           Authorization: `Bearer ${userLogin.token}`,
         },
-
-        data: {
-          "Action-type": "RATIONAL_LIST",
-          body: { category: category, form: form },
-        },
+        data: formData,
       });
 
       if (data["response"]) {
         const response = data["response"];
 
-        console.log("bankIdeaListAction response: ", response);
+        console.log("rationalListAction response: ", response);
 
         dispatch({
           type: RATIONAL_LIST_DATA_CONSTANT,
@@ -515,7 +516,7 @@ export const rationalListAction =
       } else {
         const response = data["error"];
 
-        console.log("bankIdeaListAction error: ", response);
+        console.log("rationalListAction error: ", response);
 
         dispatch({
           type: RATIONAL_LIST_ERROR_CONSTANT,

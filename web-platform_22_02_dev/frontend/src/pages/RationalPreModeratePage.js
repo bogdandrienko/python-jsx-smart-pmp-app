@@ -330,7 +330,7 @@ const RationalDetailPage = () => {
                   <div>
                     <div className="container-fluid text-center">
                       <a
-                        className="btn btn-sm btn-outline-warning m-1"
+                        className="btn btn-sm btn-warning m-1 disabled"
                         href="#"
                       >
                         Автор:{" "}
@@ -380,6 +380,23 @@ const RationalDetailPage = () => {
               <div className="bg-warning bg-opacity-10">
                 <div>
                   <h4 className="lead fw-bold">Премодерация</h4>
+                  <label className="w-50 form-control-sm m-1">
+                    ФИО, должность:
+                    <input
+                      type="text"
+                      id="name_char_field"
+                      name="name_char_field"
+                      required=""
+                      placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
+                      value={preModerateAuthor}
+                      minLength="1"
+                      maxLength="64"
+                      className="form-control form-control-sm"
+                    />
+                    <small className="text-success">
+                      * данные будут введены автоматически
+                    </small>
+                  </label>
                   <label className="w-25 form-control-sm m-1">
                     Заключение:
                     <select
@@ -399,7 +416,7 @@ const RationalDetailPage = () => {
                       обязательно выбрать одну из категорий
                     </small>
                   </label>
-                  <label className="w-25 form-control-sm m-1">
+                  <label className="w-75 form-control-sm m-1">
                     Комментарий к заключению:
                     <input
                       type="text"
@@ -407,28 +424,11 @@ const RationalDetailPage = () => {
                       name="name_char_field"
                       required=""
                       placeholder="пример: дополнить описание"
-                      minLength="1"
-                      maxLength="64"
+                      minLength="0"
+                      maxLength="256"
                       className="form-control form-control-sm"
                     />
                     <small className="text-muted">* не обязательно</small>
-                  </label>
-                  <label className="w-50 form-control-sm m-1">
-                    ФИО, должность:
-                    <input
-                      type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required=""
-                      placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
-                      value={preModerateAuthor}
-                      minLength="1"
-                      maxLength="64"
-                      className="form-control form-control-sm"
-                    />
-                    <small className="text-success">
-                      * данные будут введены автоматически
-                    </small>
                   </label>
                 </div>
                 <div className="container-fluid text-center">

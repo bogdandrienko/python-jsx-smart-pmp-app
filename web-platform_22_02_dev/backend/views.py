@@ -1686,12 +1686,21 @@ def api_rational(request):
         elif request_method == "POST":
             if request_action_type == "RATIONAL_LIST":
                 try:
-                    category = request_body["category"]
-                    print("category: ", category)
-                    if category:
-                        ideas = backend_models.RationalModel.objects.filter(subdivision_char_field=category)
-                    else:
-                        ideas = backend_models.RationalModel.objects.all()
+                    subdivision = request.data.get("subdivision")
+                    premoderate = request.data.get("premoderate")
+                    postmoderate = request.data.get("postmoderate")
+
+                    ideas = backend_models.RationalModel.objects.all()
+
+                    if subdivision:
+                        ideas = ideas.filter(subdivision_char_field=subdivision)
+
+                    if premoderate:
+                        ideas = ideas.filter(conclusion_premoderate_char_field=premoderate)
+
+                    if postmoderate:
+                        ideas = ideas.filter(conclusion_postmoderate_char_field=postmoderate)
+
                     serializer = backend_serializers.RationalModelSerializer(instance=ideas, many=True)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")

@@ -3207,8 +3207,113 @@ class RationalModel(models.Model):
         max_length=256,
     )
 
+    ####################################################################################################################
 
+    author_premoderate_char_field = models.CharField(
+        db_column='author_premoderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='author_premoderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='author_premoderate_char_field',
+        help_text='<small class="text-muted">author_premoderate_char_field</small><hr><br>',
 
+        max_length=256,
+    )
+    conclusion_premoderate_char_field = models.CharField(
+        db_column='conclusion_premoderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='conclusion_premoderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='Приостановлено',
+        verbose_name='conclusion_premoderate_char_field',
+        help_text='<small class="text-muted">conclusion_premoderate_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    comment_premoderate_char_field = models.CharField(
+        db_column='comment_premoderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='comment_premoderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='comment_premoderate_char_field',
+        help_text='<small class="text-muted">comment_premoderate_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+
+    author_postmoderate_char_field = models.CharField(
+        db_column='author_postmoderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='author_postmoderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='author_postmoderate_char_field',
+        help_text='<small class="text-muted">author_postmoderate_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+    conclusion_postmoderate_char_field = models.CharField(
+        db_column='conclusion_postmoderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='conclusion_postmoderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='Приостановлено',
+        verbose_name='conclusion_postmoderate_char_field',
+        help_text='<small class="text-muted">conclusion_postmoderate_char_field</small><hr><br>',
+
+        max_length=64,
+    )
+    comment_postmoderate_char_field = models.CharField(
+        db_column='comment_postmoderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='comment_postmoderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='comment_postmoderate_char_field',
+        help_text='<small class="text-muted">comment_postmoderate_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+
+    ####################################################################################################################
 
     visibility_boolean_field = models.BooleanField(
         db_column='visibility_boolean_field_db_column',
