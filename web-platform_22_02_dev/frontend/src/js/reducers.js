@@ -29,6 +29,12 @@ import {
   USER_SALARY_LOAD_CONSTANT,
   USER_SALARY_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   USER_LIST_LOADING_CONSTANT,
   USER_LIST_DATA_CONSTANT,
   USER_LIST_ERROR_CONSTANT,
@@ -287,6 +293,34 @@ export const rationalDetailReducer = (state = {}, action = null) => {
       return { load: false, fail: action.payload };
 
     case RATIONAL_DETAIL_RESET_CONSTANT:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const adminChangeUserPasswordReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT:
+      return { load: true };
+
+    case ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+
+    case ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+
+    case ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+
+    case ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT:
       return {};
 
     default:

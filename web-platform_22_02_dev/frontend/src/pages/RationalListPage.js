@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import {
-  rationalCreateAction,
+  rationalDetailAction,
   rationalListAction,
   userDetailsAction,
 } from "../js/actions";
@@ -11,15 +11,19 @@ import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import MessageComponent from "../components/MessageComponent";
-// import BankIdeaComponent from "../components/BankIdeaComponent";
+import { Link } from "react-router-dom";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalListPage = () => {
   const dispatch = useDispatch();
 
   const [subdivision, setSubdivision] = useState("");
-  const [premoderate, setPremoderate] = useState("");
-  const [postmoderate, setPostmoderate] = useState("");
+  const [sphere, setSphere] = useState("");
+  const [premoderate, setPremoderate] = useState("Приостановлено");
+  const [postmoderate, setPostmoderate] = useState("Приостановлено");
+
+  const [preModerateAuthor, setPreModerateAuthor] = useState("");
+  const [postModerateAuthor, setPostModerateAuthor] = useState("");
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
@@ -28,35 +32,60 @@ const RationalListPage = () => {
     // error: errorUserDetails,
     // fail: failUserDetails,
   } = userDetailsStore;
-  console.log("dataUserDetails: ", dataUserDetails);
 
   useEffect(() => {
     if (dataUserDetails) {
+      if (dataUserDetails["user_model"] && preModerateAuthor === "") {
+        setPreModerateAuthor(
+          `${dataUserDetails["user_model"]["last_name_char_field"]} ${dataUserDetails["user_model"]["first_name_char_field"]} ${dataUserDetails["user_model"]["patronymic_char_field"]} ${dataUserDetails["user_model"]["personnel_number_slug_field"]} ${dataUserDetails["user_model"]["position_char_field"]}`
+        );
+        setPostModerateAuthor(
+          `${dataUserDetails["user_model"]["last_name_char_field"]} ${dataUserDetails["user_model"]["first_name_char_field"]} ${dataUserDetails["user_model"]["patronymic_char_field"]} ${dataUserDetails["user_model"]["personnel_number_slug_field"]} ${dataUserDetails["user_model"]["position_char_field"]}`
+        );
+      }
     } else {
       dispatch(userDetailsAction());
     }
   }, [dispatch, dataUserDetails]);
 
-  const rationalListStore = useSelector((state) => state.rationalListStore);
+  const rationalDetailStore = useSelector((state) => state.rationalDetailStore);
   const {
-    load: loadBankIdeaList,
-    data: dataBankIdeaList,
-    error: errorBankIdeaList,
-    fail: failBankIdeaList,
-  } = rationalListStore;
-  console.log("dataBankIdeaList: ", dataBankIdeaList);
+    // load: loadRationalDetail,
+    data: dataRationalDetail,
+    // error: errorRationalDetail,
+    // fail: failRationalDetail,
+  } = rationalDetailStore;
 
   useEffect(() => {
-    if (dataBankIdeaList) {
+    if (dataRationalDetail) {
     } else {
       const form = {
+        id: 41,
+      };
+      dispatch(rationalDetailAction(form));
+    }
+  }, [dispatch, dataRationalDetail]);
+
+  const rationalListStore = useSelector((state) => state.rationalListStore);
+  const {
+    load: loadRationalList,
+    data: dataRationalList,
+    error: errorRationalList,
+    fail: failRationalList,
+  } = rationalListStore;
+
+  useEffect(() => {
+    if (dataRationalList) {
+    } else {
+      const form = {
+        sphere: sphere,
         subdivision: subdivision,
         premoderate: premoderate,
         postmoderate: postmoderate,
       };
       dispatch(rationalListAction(form));
     }
-  }, [dispatch, dataBankIdeaList]);
+  }, [dispatch, dataRationalList]);
 
   function getStaticFile(str) {
     return `/static${str}`;
@@ -72,10 +101,11 @@ const RationalListPage = () => {
     }
   }
 
-  const submitChangeHandler = (e) => {
+  const submitUpdateHandler = (e) => {
     e.preventDefault();
 
     const form = {
+      sphere: sphere,
       subdivision: subdivision,
       premoderate: premoderate,
       postmoderate: postmoderate,
@@ -87,35 +117,53 @@ const RationalListPage = () => {
     <div>
       <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
-        first={"Все идеи"}
-        second={"страница содержит все идеи в банке идей."}
+        first={"Все рац. предложения"}
+        second={
+          "страница содержит форму для фильтрации всех рац. предложений по разным категориям."
+        }
       />
       <main className="container-fluid text-center">
         <div className="text-center">
-          {loadBankIdeaList && <LoaderComponent />}
-          {dataBankIdeaList && (
+          {loadRationalList && <LoaderComponent />}
+          {dataRationalList && (
             <div className="m-1">
               <MessageComponent variant="success">
                 Данные успешно получены!
               </MessageComponent>
             </div>
           )}
-          {errorBankIdeaList && (
+          {errorRationalList && (
             <div className="m-1">
               <MessageComponent variant="danger">
-                {errorBankIdeaList}
+                {errorRationalList}
               </MessageComponent>
             </div>
           )}
-          {failBankIdeaList && (
+          {failRationalList && (
             <div className="m-1">
               <MessageComponent variant="warning">
-                {failBankIdeaList}
+                {failRationalList}
               </MessageComponent>
             </div>
           )}
         </div>
         <div className="">
+          <label className="form-control-sm m-1">
+            Сфера рац. предложения:
+            <select
+              id="sphere"
+              name="sphere"
+              required
+              className="form-control form-control-sm"
+              value={sphere}
+              onChange={(e) => setSphere(e.target.value)}
+            >
+              <option value="">Не выбрано</option>
+              <option value="Технологическая">Технологическая</option>
+              <option value="Не технологическая">Не технологическая</option>
+            </select>
+            <small className="text-danger">* обязательно</small>
+          </label>
           <label className="form-control-sm m-1">
             Наименование структурного подразделения:
             <select
@@ -153,14 +201,9 @@ const RationalListPage = () => {
             >
               <option value="Приостановлено">Приостановлено</option>
               <option value="Принято">Принято</option>
-              <option value="Принято с замечаниями">
-                Принято с замечаниями
-              </option>
               <option value="Отклонено">Отклонено</option>
             </select>
-            <small className="text-muted">
-              обязательно выбрать одну из категорий
-            </small>
+            <small className="text-danger">* обязательно</small>
           </label>
           <label className="w-25 form-control-sm m-1">
             Заключение постмодерации:
@@ -174,39 +217,39 @@ const RationalListPage = () => {
             >
               <option value="Приостановлено">Приостановлено</option>
               <option value="Принято">Принято</option>
-              <option value="Принято с замечаниями">
-                Принято с замечаниями
-              </option>
               <option value="Отклонено">Отклонено</option>
             </select>
-            <small className="text-muted">
-              обязательно выбрать одну из категорий
-            </small>
+            <small className="text-danger">* обязательно</small>
           </label>
           <label className="form-control-sm m-1">
             <button
-              onClick={submitChangeHandler}
+              onClick={submitUpdateHandler}
               className="btn btn-sm btn-primary"
             >
               Обновить
             </button>
           </label>
           <ul className="row row-cols-1 row-cols-md-3 row-cols-lg-4 nav justify-content-center">
-            {!dataBankIdeaList ? (
+            {!dataRationalList ? (
               <div className="text-center text-danger lead">
                 Рац. предложения не получены! Попробуйте обновить страницу или
                 зайдите позже!
               </div>
             ) : (
-              dataBankIdeaList.map((rational, index) => (
+              dataRationalList.map((rational, index) => (
                 <li key={index} className="container-fluid m-1">
                   <div className="card shadow">
                     <div>
                       <div className="">
                         <div className="card-header">
-                          <h6 className="lead fw-bold">
-                            {rational["name_char_field"]}
-                          </h6>
+                          <Link
+                            to={`#`}
+                            className="btn btn-lg btn-outline-primary"
+                          >
+                            <h6 className="lead fw-bold">
+                              {rational["name_char_field"]}
+                            </h6>
+                          </Link>
                         </div>
                         <div className="d-flex w-100 align-items-center justify-content-between">
                           <label className="form-control-sm m-1">
@@ -351,6 +394,185 @@ const RationalListPage = () => {
               ))
             )}
           </ul>
+        </div>
+        <div className="container">
+          <br />
+          <hr />
+          <br />
+          <form
+            action="#"
+            method="POST"
+            target="_self"
+            encType="multipart/form-data"
+            name="idea_create"
+            autoComplete="on"
+            className="text-center"
+          >
+            <div>
+              <div className="bg-warning bg-opacity-10">
+                <div>
+                  <h4 className="lead fw-bold">Премодерация</h4>
+                  <label className="w-50 form-control-sm m-1">
+                    ФИО, должность:
+                    <input
+                      type="text"
+                      id="name_char_field"
+                      name="name_char_field"
+                      required=""
+                      placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
+                      value={preModerateAuthor}
+                      minLength="1"
+                      maxLength="64"
+                      className="form-control form-control-sm"
+                    />
+                    <small className="text-success">
+                      * данные будут введены автоматически
+                    </small>
+                  </label>
+                  <label className="w-25 form-control-sm m-1">
+                    Заключение:
+                    <select
+                      id="category_slug_field"
+                      name="category_slug_field"
+                      required
+                      className="form-control form-control-sm"
+                    >
+                      <option value="Приостановлено">Приостановлено</option>
+                      <option value="Принято">Принято</option>
+                      <option value="Отклонено">Отклонено</option>
+                    </select>
+                    <small className="text-muted">
+                      обязательно выбрать одну из категорий
+                    </small>
+                  </label>
+                  <label className="w-75 form-control-sm m-1">
+                    Комментарий к заключению:
+                    <input
+                      type="text"
+                      id="name_char_field"
+                      name="name_char_field"
+                      required=""
+                      placeholder="пример: дополнить описание"
+                      minLength="0"
+                      maxLength="256"
+                      className="form-control form-control-sm"
+                    />
+                    <small className="text-muted">* не обязательно</small>
+                  </label>
+                </div>
+                <div className="container-fluid text-center">
+                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                    <li className="m-1">
+                      <button
+                        className="btn btn-sm btn-outline-primary"
+                        type="submit"
+                      >
+                        Подтвердить
+                      </button>
+                    </li>
+                    <li className="m-1">
+                      <button
+                        className="btn btn-sm btn-outline-warning"
+                        type="reset"
+                      >
+                        Сбросить
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+          <br />
+          <hr />
+          <br />
+          <form
+            action="#"
+            method="POST"
+            target="_self"
+            encType="multipart/form-data"
+            name="idea_create"
+            autoComplete="on"
+            className="text-center"
+          >
+            <div>
+              <div className="bg-danger bg-opacity-10">
+                <div>
+                  <h4 className="lead fw-bold">Постмодерация</h4>
+                  <label className="w-50 form-control-sm m-1">
+                    ФИО, должность:
+                    <input
+                      type="text"
+                      id="name_char_field"
+                      name="name_char_field"
+                      required=""
+                      placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
+                      value={postModerateAuthor}
+                      minLength="1"
+                      maxLength="64"
+                      className="form-control form-control-sm"
+                    />
+                    <small className="text-success">
+                      * данные будут введены автоматически
+                    </small>
+                  </label>
+                  <label className="w-25 form-control-sm m-1">
+                    Заключение:
+                    <select
+                      id="category_slug_field"
+                      name="category_slug_field"
+                      required
+                      className="form-control form-control-sm"
+                    >
+                      <option value="Приостановлено">Приостановлено</option>
+                      <option value="Принято">Принято</option>
+                      <option value="Отклонено">Отклонено</option>
+                    </select>
+                    <small className="text-muted">
+                      обязательно выбрать одну из категорий
+                    </small>
+                  </label>
+                  <label className="w-75 form-control-sm m-1">
+                    Комментарий к заключению:
+                    <input
+                      type="text"
+                      id="name_char_field"
+                      name="name_char_field"
+                      required=""
+                      placeholder="пример: дополнить описание"
+                      minLength="0"
+                      maxLength="256"
+                      className="form-control form-control-sm"
+                    />
+                    <small className="text-muted">* не обязательно</small>
+                  </label>
+                </div>
+                <div className="container-fluid text-center">
+                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                    <li className="m-1">
+                      <button
+                        className="btn btn-sm btn-outline-primary"
+                        type="submit"
+                      >
+                        Подтвердить
+                      </button>
+                    </li>
+                    <li className="m-1">
+                      <button
+                        className="btn btn-sm btn-outline-warning"
+                        type="reset"
+                      >
+                        Сбросить
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+          <br />
+          <hr />
+          <br />
         </div>
       </main>
       <FooterComponent />

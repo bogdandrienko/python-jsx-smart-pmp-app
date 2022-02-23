@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="static/logo.png" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap_5.1.3/bootstrap.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Веб-платформа АО «Костанайские минералы»"
+    />
+    <title>АО «Костанайские минералы»</title>
+  </head>
+  <body>
+    <noscript>Вам нужно активировать JavaScript чтобы запустить это веб-приложение.</noscript>
+    <div id="root"></div>
+    <main>
+      <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4 img-fluid w-25" src="/static/img/error.jpg" alt=""/>
+        <h1 class="display-6 fw-bold">Произошла ошибка!</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead m-1">Страница будет постоянно <small class="text-danger">автоматически</small> перезагружаться!</p>
+            <p class="lead m-1">Если по прошествии 7-10 секунд ничего не меняется ожидайте исправления ошибки!</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <a href="/">
+                  <button type="button" class="btn btn-warning btn-lg px-4 gap-3">перезагрузить вручную</button>
+              </a>
+              <div class="">
+                <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;" role="status">
+                  <span class="visually-hidden">ждите</span>
+                    <small class="text-dark">ждите</small>
+                    <small id="timer"></small>
+                </div>
+              <script>
+                    {#function restart() {#}
+                    {#  let time = 3;#}
+                    {#  function sleep(time) {#}
+                    {#    return new Promise((resolve) => setTimeout(resolve, time));#}
+                    {#  }#}
+                    {#  function setText(time) {#}
+                    {#  }#}
+                    {#  setInterval()#}
+                    {#  function tick(t) {#}
+                    {#    sleep(1000).then(() => {#}
+                    {#        time = t - 1#}
+                    {#        setText(time)#}
+                    {#      });#}
+                    {#    return time#}
+                    {#  }#}
+                    {#  time = tick(time)#}
+                    function reload() {
+                        window.location.reload()
+                    }
+                    let timerId = setTimeout(function tick() {
+                      timerId = setTimeout(reload, 1000);
+                    }, 1000);
+                </script>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

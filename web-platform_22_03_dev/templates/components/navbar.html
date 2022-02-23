@@ -1,0 +1,330 @@
+{% load access_tag %}
+
+
+<nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url '' %}">ГЛАВНАЯ</a>
+    <a class="navbar-brand" href="{% url 'django_home' %}">Домашняя</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    {% access_tag 'module_modules' as module_modules %}
+    {% if module_modules %}
+        <ul class="navbar-nav navbar-collapse collapse" id="navbarSupportedContent">
+            {% access_tag 'superuser' as superuser %}
+            {% if superuser %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Development</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <strong class="dropdown-header">Веб-приложение</strong>
+                            {% access_tag 'product' as product %}
+                            {% if product %}
+                                <a class="dropdown-item" href="{% url 'home' %}">product</a>
+                            {% endif %}
+                            {% access_tag 'develop' as develop %}
+                            {% if develop %}
+                                <a class="dropdown-item" href="http://localhost:3000/">develop</a>
+                            {% endif %}
+                            <hr class="dropdown-divider">
+                        </li>
+
+
+                        <li>
+                            <strong class="dropdown-header">Шаблоны</strong>
+                            {% access_tag 'django_examples_forms' as django_examples_forms %}
+                            {% if django_examples_forms %}
+                                <a class="dropdown-item" href="{% url 'django_examples_forms' %}">Формы</a>
+                            {% endif %}
+                            {% access_tag 'django_example' as django_example %}
+                            {% if django_example %}
+                                <a class="dropdown-item" href="{% url 'django_example' %}">Шаблон</a>
+                            {% endif %}
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <strong class="dropdown-header">Экстра</strong>
+                            {% access_tag 'django_geo' as django_geo %}
+                            {% if django_geo %}
+                                <a class="dropdown-item" href="{% url 'django_geo' %}">Геолокация, устройства: список</a>
+                            {% endif %}
+                            {% access_tag 'django_analyse' as django_analyse %}
+                            {% if django_analyse %}
+                                <a class="dropdown-item" href="{% url 'django_analyse' %}">Машинное зрение: запуск анализа</a>
+                            {% endif %}
+                            {% access_tag 'django_react' as django_react %}
+                            {% if django_react %}
+                                <a class="dropdown-item" href="{% url 'django_react' %}">React</a>
+                            {% endif %}
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        {% access_tag 'section_chat' as section_chat %}
+                        {% if section_chat %}
+                            <li>
+                                <strong class="dropdown-header">Чат:</strong>
+                                {% access_tag 'django_chat' as django_chat %}
+                                {% if django_chat %}
+                                    <a class="dropdown-item" href="{% url 'django_chat' %}">Общий</a>
+                                {% endif %}
+                                {% access_tag 'django_chat_react' as django_chat %}
+                                {% if django_chat %}
+                                    <a class="dropdown-item" href="{% url 'django_chat_react' %}">Заметки</a>
+                                {% endif %}
+                                <a class="dropdown-item disabled" href="#">Личный</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+
+                        {% access_tag 'section_otiz' as section_otiz %}
+                        {% if section_otiz %}
+                            <li>
+                                <strong class="dropdown-header">Отдел труда и заработной платы:</strong>
+                                {% access_tag 'django_passages_select' as django_passages_select %}
+                                {% if django_passages_select %}
+                                    <a class="dropdown-item" href="{% url 'django_passages_select' %}">Выгрузка данных</a>
+                                {% endif %}
+                                {% access_tag 'django_passages_update' as django_passages_update %}
+                                {% if django_passages_update %}
+                                    <a class="dropdown-item" href="{% url 'django_passages_update' %}">Обновление данных</a>
+                                {% endif %}
+                                {% access_tag 'django_passages_insert' as django_passages_insert %}
+                                {% if django_passages_insert %}
+                                    <a class="dropdown-item" href="{% url 'django_passages_insert' %}">Добавление данных</a>
+                                {% endif %}
+                                {% access_tag 'django_passages_delete' as django_passages_delete %}
+                                {% if django_passages_delete %}
+                                    <a class="dropdown-item" href="{% url 'django_passages_delete' %}">Удаление данных</a>
+                                {% endif %}
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'moderator' as moderator %}
+            {% if moderator %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Модератор</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <strong class="dropdown-header">Основной функционал:</strong>
+                            <a class="dropdown-item" href="{% url 'admin' %}">Панель Администрирования</a>
+                            {% access_tag 'django_logging' as django_logging %}
+                            {% if django_logging %}
+                                <a class="dropdown-item" href="{% url 'django_logging' %}">Логи Системы <span class="badge bg-danger rounded-pill">{{ errors }}</span></a>
+                            {% endif %}
+                            {% access_tag 'django_create_modules' as django_create_modules %}
+                            {% if django_create_modules %}
+                                <a class="dropdown-item" href="{% url 'django_create_modules' %}">Создание действий, групп или модулей</a>
+                            {% endif %}
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <strong class="dropdown-header">Аккаунты</strong>
+                            {% access_tag 'django_account_create_or_change_accounts' as django_account_create_or_change_accounts %}
+                            {% if django_account_create_or_change_accounts %}
+                                <a class="dropdown-item" href="{% url 'django_account_create_or_change_accounts' %}">Создать/изменить пользователей</a>
+                            {% endif %}
+                            {% access_tag 'django_account_generate_passwords' as django_account_generate_passwords %}
+                            {% if django_account_generate_passwords %}
+                                <a class="dropdown-item" href="{% url 'django_account_generate_passwords' %}">Сгенерировать пароли для аккаунтов</a>
+                            {% endif %}
+                            {% access_tag 'django_account_export_accounts' as django_account_export_accounts %}
+                            {% if django_account_export_accounts %}
+                                <a class="dropdown-item" href="{% url 'django_account_export_accounts' %}">Выгрузить список пользователей</a>
+                            {% endif %}
+                            {% access_tag 'django_account_update_accounts_1c' as django_account_update_accounts_1c %}
+                            {% if account_update_accounts_1c %}
+                                <a class="dropdown-item" href="{% url 'django_account_update_accounts_1c' %}">Обновить пользователей из 1С</a>
+                            {% endif %}
+                            {% access_tag 'django_account_change_groups' as django_account_change_groups %}
+                            {% if account_change_groups %}
+                                <a class="dropdown-item" href="{% url 'django_account_change_groups' %}">Изменить группы пользователей</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'module_profile' as module_profile %}
+            {% if module_profile %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Профиль</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% access_tag 'section_main' as section_main %}
+                        {% if section_main %}
+                            <li>
+                                <strong class="dropdown-header">Основной функционал:</strong>
+                                <a class="dropdown-item" href="{% url 'home' %}">Главная страница</a>
+                                {% access_tag 'django_account_notification' as django_account_notification %}
+                                {% if django_account_notification %}
+                                    <a class="dropdown-item" href="{% url 'django_account_notification' 'All' %}">Уведомления <span class="badge bg-warning rounded-pill">{{ notifications }}</span></a>
+                                {% endif %}
+                                <a class="dropdown-item disabled" href="#">Достижения</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                        {% access_tag 'section_self_profile' as section_self_profile %}
+                        {% if section_main %}
+                            <li>
+                                <strong class="dropdown-header">Личный профиль:</strong>
+                                {% access_tag 'django_account_profile' as django_account_profile %}
+                                {% if django_account_profile %}
+                                    <a class="dropdown-item" href="{% url 'django_account_profile' 0 %}">Личный профиль [ {{ request.user.username }} ]</a>
+                                {% endif %}
+                                {% access_tag 'django_account_change_profile' as django_account_change_profile %}
+                                {% if django_account_change_profile %}
+                                    <a class="dropdown-item" href="{% url 'django_account_change_profile' %}">Изменить личный профиль</a>
+                                {% endif %}
+                                {% access_tag 'django_account_change_password' as django_account_change_password %}
+                                {% if django_account_change_password %}
+                                    <a class="dropdown-item" href="{% url 'django_account_change_password' %}">Изменить пароль</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{% url 'django_account_recover_password' 'iin' %}">Восстановить пароль</a>
+                                <a class="dropdown-item" href="{% url 'django_account_login' %}">Войти</a>
+                                <a class="dropdown-item" href="{% url 'django_account_logout' %}">Выйти</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'module_news' as module_news %}
+            {% if module_news %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Новости</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% access_tag 'section_study' as section_news %}
+                        {% if section_news %}
+                            <li>
+                                <strong class="dropdown-header">Обучение:</strong>
+                                {% access_tag 'django_video_study' as django_video_study %}
+                                {% if django_video_study %}
+                                    <a class="dropdown-item" href="{% url 'django_video_study' %}">Видео инструкции</a>
+                                {% endif %}
+                                <a class="dropdown-item disabled" href="#">Текстовые инструкции</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                        {% access_tag 'section_news' as section_news %}
+                        {% if section_news %}
+                            <li>
+                                <strong class="dropdown-header">Новости предприятия:</strong>
+                                <a class="dropdown-item disabled" href="#">Просмотр</a>
+                                <a class="dropdown-item disabled" href="#">Поиск</a>
+                                <a class="dropdown-item disabled" href="#">Предложить</a>
+                                <a class="dropdown-item disabled" href="#">Зал славы</a>
+                                <a class="dropdown-item disabled" href="#">Алтын Канат</a>
+                                <a class="dropdown-item disabled" href="#">Лучшие работники Комбината</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'module_progress' as module_progress %}
+            {% if module_progress %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Развитие</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% access_tag 'section_idea' as section_idea %}
+                        {% if section_idea %}
+                            <li>
+                                <strong class="dropdown-header">Банк идей:</strong>
+                                {% access_tag 'django_idea_create' as django_idea_create %}
+                                {% if django_idea_create %}
+                                    <a class="dropdown-item" href="{% url 'django_idea_create' %}">Подать идею</a>
+                                {% endif %}
+                                {% access_tag 'django_idea_list' as django_idea_list %}
+                                {% if django_idea_list %}
+                                    <a class="dropdown-item" href="{% url 'django_idea_list' 'All' %}">Список идей</a>
+                                {% endif %}
+                                {% access_tag 'django_idea_rating' as django_idea_rating %}
+                                {% if django_idea_rating %}
+                                    <a class="dropdown-item" href="{% url 'django_idea_rating' %}">Рейтинги среди идей</a>
+                                {% endif %}
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                        {% access_tag 'section_rational' as section_rational %}
+                        {% if section_rational %}
+                            <li>
+                                <strong class="dropdown-header">Рационализаторство:</strong>
+                                <a class="dropdown-item disabled" href="#">Подать рац. предложение</a>
+                                <a class="dropdown-item disabled" href="#">Список рац. предложений</a>
+                                <a class="dropdown-item disabled" href="#">Рейтинги среди рац. предложений</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                        {% access_tag 'section_project' as section_project %}
+                        {% if section_project %}
+                            <li>
+                                <strong class="dropdown-header">Проектная деятельность:</strong>
+                                <a class="dropdown-item disabled" href="#">Подать проект</a>
+                                <a class="dropdown-item disabled" href="#">Список проектов</a>
+                                <a class="dropdown-item disabled" href="#">Рейтинги среди проектов</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'module_buhgalteria' as module_buhgalteria %}
+            {% if module_buhgalteria %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Бухгалтерия</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% access_tag 'section_zarplata' as section_zarplata %}
+                        {% if section_zarplata %}
+                            <li>
+                                <strong class="dropdown-header">Сектор расчёта заработной платы:</strong>
+                                {% access_tag 'django_salary' as django_salary %}
+                                {% if django_salary %}
+                                    <a class="dropdown-item" href="{% url 'django_salary' %}">Выгрузка расчётного листа</a>
+                                {% endif %}
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'module_hr' as module_hr %}
+            {% if module_hr %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">СУП</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% access_tag 'section_hr' as section_hr %}
+                        {% if section_hr %}
+                            <li>
+                                <strong class="dropdown-header">Отдел кадров:</strong>
+                                {% access_tag 'django_career' as django_career %}
+                                {% if django_career %}
+                                    <a class="dropdown-item" href="{% url 'django_career' %}">Вакансии</a>
+                                {% endif %}
+                                <a class="dropdown-item disabled" href="#">Выгрузка отпусков</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                        {% access_tag 'section_otp' as section_otp %}
+                        {% if section_otp %}
+                            <li>
+                                <strong class="dropdown-header">Отдел охраны труда:</strong>
+                                {% access_tag 'django_passages_thermometry' as django_passages_thermometry %}
+                                {% if django_passages_thermometry %}
+                                    <a class="dropdown-item" href="{% url 'django_passages_thermometry' %}">Термометрия</a>
+                                {% endif %}
+                                <a class="dropdown-item disabled" href="#">Алкометрия</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</nav>

@@ -31,6 +31,12 @@ import {
   USER_SALARY_LOAD_CONSTANT,
   USER_SALARY_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
+  ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   USER_LIST_LOADING_CONSTANT,
   USER_LIST_DATA_CONSTANT,
   USER_LIST_ERROR_CONSTANT,
@@ -494,7 +500,7 @@ export const rationalListAction =
         formData.append(k, v);
       });
       const { data } = await axios({
-        url: "api/rational/",
+        url: "/api/rational/",
         method: "POST",
         timeout: 5000,
         headers: {
@@ -549,7 +555,7 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
       formData.append(k, v);
     });
     const { data } = await axios({
-      url: "api/rational/",
+      url: "/api/rational/",
       method: "POST",
       timeout: 5000,
       headers: {
@@ -588,11 +594,65 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     });
   }
 };
+export const adminChangeUserPasswordAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
+      });
+
+      const {
+        userLoginState: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([k, v]) => {
+        formData.append(k, v);
+      });
+      const { data } = await axios({
+        url: "/api/admin/change_user_password/",
+        method: "POST",
+        timeout: 10000,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userLogin.token}`,
+        },
+        data: formData,
+      });
+
+      if (data["response"]) {
+        const response = data["response"];
+
+        console.log("adminChangeUserPasswordAction response: ", response);
+
+        dispatch({
+          type: ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT,
+          payload: response,
+        });
+      } else {
+        const response = data["error"];
+
+        console.log("adminChangeUserPasswordAction error: ", response);
+
+        dispatch({
+          type: ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
 
 // GET TODO LIST
 export const getTodos = () => (dispatch) => {
   axios
-    .get("api/todo/")
+    .get("/api/todo/")
     .then((result) => {
       dispatch({
         type: GET_TODO_LIST,
@@ -605,7 +665,7 @@ export const getTodos = () => (dispatch) => {
 // DELETE TODO
 export const deleteTodo = (id) => (dispatch) => {
   axios
-    .delete(`api/todo/${id}/`)
+    .delete(`/api/todo/${id}/`)
     .then((result) => {
       dispatch({
         type: DELETE_TODO,
@@ -618,7 +678,7 @@ export const deleteTodo = (id) => (dispatch) => {
 // ADD TODO
 export const addTodo = (todo) => (dispatch) => {
   axios
-    .post("api/todo/", todo)
+    .post("/api/todo/", todo)
     .then((result) => {
       dispatch({
         type: ADD_TODO,
@@ -632,7 +692,7 @@ export const addTodo = (todo) => (dispatch) => {
 export const toggleTodo = (todo) => (dispatch) => {
   todo.done = !todo.done;
   axios
-    .put(`api/todo/${todo.id}/`, todo)
+    .put(`/api/todo/${todo.id}/`, todo)
     .then((result) => {
       dispatch({
         type: TOGGLE_TODO,

@@ -1686,22 +1686,26 @@ def api_rational(request):
         elif request_method == "POST":
             if request_action_type == "RATIONAL_LIST":
                 try:
+                    sphere = request.data.get("sphere")
                     subdivision = request.data.get("subdivision")
                     premoderate = request.data.get("premoderate")
                     postmoderate = request.data.get("postmoderate")
 
-                    ideas = backend_models.RationalModel.objects.all()
+                    rationals = backend_models.RationalModel.objects.all()
+
+                    if sphere:
+                        rationals = rationals.filter(sphere_char_field=sphere)
 
                     if subdivision:
-                        ideas = ideas.filter(subdivision_char_field=subdivision)
+                        rationals = rationals.filter(subdivision_char_field=subdivision)
 
                     if premoderate:
-                        ideas = ideas.filter(conclusion_premoderate_char_field=premoderate)
+                        rationals = rationals.filter(conclusion_premoderate_char_field=premoderate)
 
                     if postmoderate:
-                        ideas = ideas.filter(conclusion_postmoderate_char_field=postmoderate)
+                        rationals = rationals.filter(conclusion_postmoderate_char_field=postmoderate)
 
-                    serializer = backend_serializers.RationalModelSerializer(instance=ideas, many=True)
+                    serializer = backend_serializers.RationalModelSerializer(instance=rationals, many=True)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")
                     return Response(response)
@@ -1723,13 +1727,21 @@ def api_rational(request):
                     sphere = request.data.get("sphere")
                     category = request.data.get("category")
                     avatar = request.data.get("avatar")
+                    if not avatar:
+                        avatar = None
                     name = request.data.get("name")
                     place = request.data.get("place")
                     short_description = request.data.get("shortDescription")
                     description = request.data.get("description")
                     additional_word = request.data.get("additional_word")
+                    if not additional_word:
+                        additional_word = None
                     additional_pdf = request.data.get("additional_pdf")
+                    if not additional_pdf:
+                        additional_pdf = None
                     additional_excel = request.data.get("additionalExcel")
+                    if not additional_excel:
+                        additional_excel = None
                     user1 = request.data.get("user1")
                     user2 = request.data.get("user2")
                     user3 = request.data.get("user3")
@@ -1823,17 +1835,14 @@ def api_admin_change_user_password(request):
         elif request_method == "POST":
             if request_action_type == "CHECK_USER":
                 try:
-                    username = request_body["username"]
+                    username = request.data.get("username")
+                    print("username: ", username)
 
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    if user_model.temp_password_boolean_field:
-                        return Response({"error": {"Пользователь ещё ни разу не менял пароль!"}})
                     response = {"response": {
                         "username": str(user.username),
-                        "password_slug_field": str(user_model.password_slug_field),
-                        "temp_password_boolean_field": str(user_model.temp_password_boolean_field),
-                        "success": False
+                        "success": True
                     }}
                     # print(f"response: {response}")
                     return Response(response)
@@ -1841,11 +1850,11 @@ def api_admin_change_user_password(request):
                     print(error)
                     backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if request_action_type == "CHANGE_PASSWORD":
+            if request_action_type == "CHANGE_USER_PASSWORD":
                 try:
-                    username = request_body["username"]
-                    password = str(request_body["password"]).strip()
-                    password2 = str(request_body["password2"]).strip()
+                    username = request.data.get("username")
+                    password = str(request.data.get("password")).strip()
+                    password2 = str(request.data.get("password2")).strip()
 
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
@@ -1857,7 +1866,7 @@ def api_admin_change_user_password(request):
                         user_model.temp_password_boolean_field = False
                         user_model.save()
                         response = {"response": {
-                            "username": user.username,
+                            "username": str(user.username),
                             "success": False
                         }}
                     else:

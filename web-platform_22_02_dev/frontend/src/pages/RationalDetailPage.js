@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { rationalDetailAction, userDetailsAction } from "../js/actions";
+import { rationalDetailAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import MessageComponent from "../components/MessageComponent";
-// import BankIdeaComponent from "../components/BankIdeaComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalDetailPage = () => {
@@ -20,7 +19,6 @@ const RationalDetailPage = () => {
     error: errorRationalDetail,
     fail: failRationalDetail,
   } = rationalDetailStore;
-  console.log("dataRationalDetail: ", dataRationalDetail);
 
   useEffect(() => {
     if (dataRationalDetail) {
@@ -46,16 +44,12 @@ const RationalDetailPage = () => {
     }
   }
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div>
       <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
-        first={"Все идеи"}
-        second={"страница содержит все идеи в банке идей."}
+        first={"Подробности рац. предложения"}
+        second={"страница содержит подробности последнего рац. предложения"}
       />
       <main className="container-fluid text-center">
         <div className="text-center">

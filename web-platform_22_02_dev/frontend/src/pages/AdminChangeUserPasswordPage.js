@@ -2,52 +2,79 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { USER_CHANGE_RESET_CONSTANT } from "../js/constants";
-import { userChangeProfileAction, userLogoutAction } from "../js/actions";
+import { adminChangeUserPasswordAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import ReCAPTCHA from "react-google-recaptcha";
+import { ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT } from "../js/constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AdminChangeUserPasswordPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [capcha, setCapcha] = useState("");
   const [username, setUsername] = useState("");
+
+  const [success, setSuccess] = useState(false);
+
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [success, setSuccess] = useState(true);
-  const [changeCapcha, setChangeCapcha] = useState("");
 
-  const userChangeStore = useSelector((state) => state.userChangeStore);
+  const adminChangeUserPasswordStore = useSelector(
+    (state) => state.adminChangeUserPasswordStore
+  );
   const {
-    load: loadUserChange,
-    data: dataUserChange,
-    error: errorUserChange,
-    fail: failUserChange,
-  } = userChangeStore;
+    load: loadAdminChangeUserPassword,
+    data: dataAdminChangeUserPassword,
+    error: errorAdminChangeUserPassword,
+    fail: failAdminChangeUserPassword,
+  } = adminChangeUserPasswordStore;
+  console.log("dataAdminChangeUserPassword: ", dataAdminChangeUserPassword);
 
   useEffect(() => {
-    if (dataUserChange) {
-      sleep(1000).then(() => {
-        dispatch({ type: USER_CHANGE_RESET_CONSTANT });
-        dispatch(userLogoutAction());
-        navigate("/login");
-      });
+    if (dataAdminChangeUserPassword) {
+      if (dataAdminChangeUserPassword["success"]) {
+        setSuccess(dataAdminChangeUserPassword["success"]);
+      } else {
+        setSuccess(false);
+      }
+      if (dataAdminChangeUserPassword["username"]) {
+        setUsername(dataAdminChangeUserPassword["username"]);
+      } else {
+        setUsername("");
+      }
     }
-  }, [navigate, dataUserChange, dispatch]);
+  }, [navigate, dataAdminChangeUserPassword, dispatch]);
 
-  const submitHandler = (e) => {
+  const submitCheckUserHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      userChangeProfileAction({
+    if (capcha !== "") {
+      const form = {
+        "Action-type": "CHECK_USER",
+        username: username,
+      };
+      dispatch(adminChangeUserPasswordAction(form));
+    }
+  };
+
+  const submitChangeUserPasswordHandler = (e) => {
+    e.preventDefault();
+    if (success) {
+      const form = {
+        "Action-type": "CHANGE_USER_PASSWORD",
+        username: username,
         password: password,
         password2: password2,
-      })
-    );
+      };
+      dispatch(adminChangeUserPasswordAction(form));
+      sleep(5000).then(() => {
+        dispatch({ type: ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
+      });
+    }
   };
 
   const changeVisibility = () => {
@@ -59,6 +86,10 @@ const AdminChangeUserPasswordPage = () => {
     password2.setAttribute("type", type);
   };
 
+  function changeCapcha(value) {
+    setCapcha(value);
+  }
+
   function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
@@ -67,35 +98,40 @@ const AdminChangeUserPasswordPage = () => {
     <div>
       <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
-        first={"Изменение пароля"}
-        second={"страница редактирования Вашего пароля от аккаунта."}
+        first={"Изменение пароля выбранноого пользователя"}
+        second={"страница редактирования пароля от выбранного аккаунта."}
       />
       <main className="container text-center">
         <div className="text-center">
-          {loadUserChange && <LoaderComponent />}
-          {dataUserChange && (
+          {loadAdminChangeUserPassword && <LoaderComponent />}
+          {dataAdminChangeUserPassword && (
             <div className="m-1">
               <MessageComponent variant="success">
-                Пароль успешно изменён!
+                Пользователь найден или пароль успешно изменён!
               </MessageComponent>
             </div>
           )}
-          {errorUserChange && (
+          {errorAdminChangeUserPassword && (
             <div className="m-1">
               <MessageComponent variant="danger">
-                {errorUserChange}
+                {errorAdminChangeUserPassword}
               </MessageComponent>
             </div>
           )}
-          {failUserChange && (
+          {failAdminChangeUserPassword && (
             <div className="m-1">
               <MessageComponent variant="warning">
-                {failUserChange}
+                {failAdminChangeUserPassword}
               </MessageComponent>
             </div>
           )}
+          {!capcha && (
+            <MessageComponent variant="danger">
+              Пройдите проверку на робота!
+            </MessageComponent>
+          )}
         </div>
-        {success ? (
+        {!success ? (
           <div>
             <div className="form-control">
               <form
@@ -105,7 +141,7 @@ const AdminChangeUserPasswordPage = () => {
                 name="account_login"
                 autoComplete="on"
                 className="text-center p-1 m-1"
-                // onSubmit={postFindUserHandlerSubmit}
+                onSubmit={submitCheckUserHandler}
               >
                 <div>
                   <label className="m-1">
@@ -117,7 +153,7 @@ const AdminChangeUserPasswordPage = () => {
                 </div>
                 <div>
                   <label className="form-control-md m-1 lead">
-                    Введите Ваш ИИН:
+                    Введите ИИН пользователя для смены пароля:
                     <input
                       type="text"
                       id="username"
@@ -157,9 +193,7 @@ const AdminChangeUserPasswordPage = () => {
                         href=""
                         type="reset"
                         onClick={(e) => {
-                          // setUsername("");
-                          // setSecretQuestion("");
-                          // setSuccess(false);
+                          setUsername("");
                         }}
                         className="btn btn-md btn-warning form-control"
                       >
@@ -182,7 +216,7 @@ const AdminChangeUserPasswordPage = () => {
             name="account_login"
             autoComplete="on"
             className="text-center p-1 m-1"
-            // onSubmit={postFindUserHandlerSubmit}
+            onSubmit={submitChangeUserPasswordHandler}
           >
             <div>
               <label className="form-control-md m-1 lead">

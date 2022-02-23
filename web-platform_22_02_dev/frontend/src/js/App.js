@@ -22,8 +22,6 @@ import AdminChangeUserPasswordPage from "../pages/AdminChangeUserPasswordPage";
 import RationalCreatePage from "../pages/RationalCreatePage";
 import RationalListPage from "../pages/RationalListPage";
 import RationalDetailPage from "../pages/RationalDetailPage";
-import RationalPreModeratePage from "../pages/RationalPreModeratePage";
-import RationalPostModeratePage from "../pages/RationalPostModeratePage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // import TodoPage from "../test/TodoPage";
 import GologramPage from "../test/GologramPage";
@@ -61,14 +59,6 @@ function App() {
           <Route path="/rational_create" element={<RationalCreatePage />} />
           <Route path="/rational_list" element={<RationalListPage />} />
           <Route path="/rational_detail" element={<RationalDetailPage />} />
-          <Route
-            path="/rational_premoderate"
-            element={<RationalPreModeratePage />}
-          />
-          <Route
-            path="/rational_postmoderate"
-            element={<RationalPostModeratePage />}
-          />
           <Route
             path="/admin_change_user_password"
             element={<AdminChangeUserPasswordPage />}

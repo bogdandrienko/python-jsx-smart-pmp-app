@@ -162,13 +162,6 @@ export const modules = [
             Link: "/todo",
             ExternalLink: false,
           },
-          {
-            Header: "Смена пароля пользователя",
-            Access: "superuser",
-            Active: true,
-            Link: "/admin_change_user_password",
-            ExternalLink: false,
-          },
         ],
       },
       {
@@ -366,6 +359,13 @@ export const modules = [
         Access: "moderator",
         Image: "/static/img/modules.png",
         Links: [
+          {
+            Header: "Смена пароля пользователя",
+            Access: "moderator",
+            Active: true,
+            Link: "/admin_change_user_password",
+            ExternalLink: false,
+          },
           {
             Header: "Создать/изменить пользователей",
             Access: "moderator",
@@ -589,31 +589,17 @@ export const modules = [
             ExternalLink: false,
           },
           {
-            Header: "Премодерация",
-            Access: "moderator_oupibp",
-            Active: true,
-            Link: "/rational_premoderate",
-            ExternalLink: false,
-          },
-          {
-            Header: "Постмодерация",
-            Access: "moderator_oupibp",
-            Active: true,
-            Link: "/rational_postmoderate",
-            ExternalLink: false,
-          },
-          {
-            Header: "Список",
-            Access: "user",
-            Active: true,
-            Link: "/rational_list",
-            ExternalLink: false,
-          },
-          {
             Header: "Подробности",
             Access: "user",
             Active: true,
             Link: "/rational_detail",
+            ExternalLink: false,
+          },
+          {
+            Header: "Список [ функционал модератора ]",
+            Access: "moderator_oupibp",
+            Active: true,
+            Link: "/rational_list",
             ExternalLink: false,
           },
         ],

@@ -26,7 +26,6 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
     error: errorUserDetails,
     // fail: failUserDetails,
   } = userDetailsStore;
-  console.log("dataUserDetails: ", dataUserDetails);
 
   useEffect(() => {
     if (logic) {
@@ -39,10 +38,10 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
         navigate("/login");
       } else {
-        if (errorUserDetails !== undefined) {
+        if (errorUserDetails) {
           dispatch(userLogoutAction());
         } else {
-          if (dataUserLogin !== undefined) {
+          if (dataUserLogin) {
             if (dataUserDetails && dataUserDetails["user_model"]) {
               if (
                 dataUserDetails["user_model"]["activity_boolean_field"] ===

@@ -1,0 +1,196 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Изменить личный профиль
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Изменить личный профиль
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит форму для изменения личного профиля.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+
+    {% include 'components/success.html' %}
+
+{% elif response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="container">
+        <p class="lead text-center">Идентификатор пользователя: "{{ request.user.username }}"</p>
+
+        <form action="{% url 'account_change_profile' %}"
+              method="POST"
+              target="_self"
+              enctype="multipart/form-data"
+              name="account_change_profile"
+              autocomplete="on"
+              class="text-center"
+        >
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label class="form-control form-control-lg m-1">
+                        Образование:
+                        <textarea type="text"
+                                  id="education"
+                                  name="education"
+        {#                          required=""#}
+                                  {% if user_model.education_text_field %}
+                                        placeholder="{{ user_model.education_text_field }}"
+                                  {% else %}
+                                        placeholder=""
+                                  {% endif %}
+                                  minlength="1"
+                                  maxlength="500"
+                                  rows="2"
+                                  class="form-control form-control-lg"
+                        >{% if user_model.education_text_field %}{{ user_model.education_text_field }}{% endif %}</textarea>
+                        <small class="text-muted">введите информацию о своём образовании: максимум 500 символов</small>
+                    </label>
+
+                    <label class="form-control form-control-lg m-1">
+                        Достижения:
+                        <textarea type="text"
+                                  id="achievements"
+                                  name="achievements"
+        {#                          required=""#}
+                                  {% if user_model.achievements_text_field %}
+                                        placeholder="{{ user_model.achievements_text_field }}"
+                                  {% else %}
+                                        placeholder=""
+                                  {% endif %}
+                                  minlength="1"
+                                  maxlength="500"
+                                  rows="2"
+                                  class="form-control form-control-lg"
+                        >{% if user_model.achievements_text_field %}{{ user_model.achievements_text_field }}{% endif %}</textarea>
+                        <small class="text-muted">введите информацию о своих достижениях: максимум 500 символов</small>
+                    </label>
+
+                    <label class="form-control form-control-lg m-1">
+                        Биография:
+                        <textarea type="text"
+                                  id="biography"
+                                  name="biography"
+        {#                          required=""#}
+                                  {% if user_model.biography_text_field %}
+                                        placeholder="{{ user_model.biography_text_field }}"
+                                  {% else %}
+                                        placeholder=""
+                                  {% endif %}
+                                  minlength="1"
+                                  maxlength="500"
+                                  rows="2"
+                                  class="form-control form-control-lg"
+                        >{% if user_model.biography_text_field %}{{ user_model.biography_text_field }}{% endif %}</textarea>
+                        <small class="text-muted">введите информацию о своей биографии: максимум 500 символов</small>
+                    </label>
+
+                    <label class="form-control form-control-lg m-1">
+                        Хобби:
+                        <textarea type="text"
+                                  id="hobbies"
+                                  name="hobbies"
+        {#                          required=""#}
+                                  {% if user_model.biography_text_field %}
+                                        placeholder="{{ user_model.biography_text_field }}"
+                                  {% else %}
+                                        placeholder=""
+                                  {% endif %}
+                                  minlength="1"
+                                  maxlength="500"
+                                  rows="2"
+                                  class="form-control form-control-lg"
+                        >{% if user_model.biography_text_field %}{{ user_model.biography_text_field }}{% endif %}</textarea>
+                        <small class="text-muted">введите информацию о своём хобби: максимум 500 символов</small>
+                    </label>
+                </div>
+
+                <div>
+                    {% if user_model.image_field.url %}
+                        <img class="bd-placeholder-img m-1"
+                             src="{{ user_model.image_field.url }}"
+                             width="256px"
+                             height="100%"
+                             alt="{{ user_model.first_name_char_field }}"
+                        >
+                    {% else %}
+                        <img class="bd-placeholder-img m-1"
+                             src="{% static 'media/uploads/account/avatar/default_avatar.jpg' %}"
+                             width="256px"
+                             height="100%"
+                             alt="default"
+                        >
+                    {% endif %}
+
+                    <label class="form-control-lg m-1">
+                        Аватарка профиля:
+                        <input type="file"
+                               id="image_avatar"
+                               name="image_avatar"
+    {#                           required=""#}
+                               accept="image/*"
+                               class="form-control form-control-lg"
+                        />
+                        <small class="text-muted">выберите аватарку профиля, только формат изображений</small>
+                    </label>
+                </div>
+            </div>
+            <hr/>
+            <div class="text-center">
+                <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <div class="m-1">
+                        <button href=""
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary w-100 form-control"
+                        >Подтвердить</button>
+                    </div>
+
+                    <div class="m-1">
+                        <button href=""
+                                type="reset"
+                                class="btn btn-lg btn-outline-warning w-100 form-control"
+                        >Сбросить</button>
+                    </div>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
