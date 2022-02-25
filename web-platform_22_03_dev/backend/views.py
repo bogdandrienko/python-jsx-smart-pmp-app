@@ -46,6 +46,8 @@ def index(request):
     """
 
     try:
+        context = {}
+        return render(request, 'index.html', context)
         # print('\n\n\n')
         # print('index: ')
         # print('\n')
@@ -1188,8 +1190,8 @@ def api_salary(request):
                             _length=24
                         )
                         date = backend_service.DateTimeUtils.get_current_date()
-                        path = 'static/media/salary/'
-                        path_excel_file = f"{path}salary_{key}_{date}.xlsx"
+                        path = 'staticroot/media/salary'
+                        file_name = f"salary_{key}_{date}.xlsx"
                         workbook = backend_service.ExcelClass.workbook_create()
                         sheet = backend_service.ExcelClass.workbook_activate(workbook)
 
@@ -1622,8 +1624,11 @@ def api_salary(request):
                         sheet.protection.sheet = True
                         sheet.protection.enable()
                         #######################################################
-                        backend_service.ExcelClass.workbook_save(workbook=workbook, excel_file=path_excel_file)
-                        json_data["excel_path"] = path_excel_file
+                        backend_service.ExcelClass.workbook_save(
+                            workbook=workbook,
+                            excel_file=f"staticroot/media/salary/{file_name}"
+                        )
+                        json_data["excel_path"] = f"static/media/salary/{file_name}"
                     except Exception as error:
                         print(error)
                         backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)

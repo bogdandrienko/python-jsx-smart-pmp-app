@@ -6,6 +6,6 @@ source env/bin/activate
 
 
 
-sudo ufw allow 88
+sudo ufw allow 443
 
-python manage.py runserver 0.0.0.0:88
+python manage.py runserver 0.0.0.0:443
