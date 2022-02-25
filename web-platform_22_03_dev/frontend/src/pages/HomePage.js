@@ -26,7 +26,7 @@ const HomePage = () => {
               С компьютера:
               <div className="">
                 <ReactPlayer
-                  url="static/video/first_login_desktop.MP4"
+                  url="static/video/first_login_desktop.mp4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"
@@ -40,7 +40,7 @@ const HomePage = () => {
               С смартфона:
               <div className="">
                 <ReactPlayer
-                  url="static/video/first_login_mobile.MP4"
+                  url="static/video/first_login_mobile.mp4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"

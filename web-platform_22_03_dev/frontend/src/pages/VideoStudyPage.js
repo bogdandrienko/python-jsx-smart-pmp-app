@@ -22,7 +22,7 @@ const VideoStudyPage = () => {
               С компьютера:
               <div className="">
                 <ReactPlayer
-                  url="static/video/first_login_desktop.MP4"
+                  url="static/video/first_login_desktop.mp4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"
@@ -36,7 +36,7 @@ const VideoStudyPage = () => {
               С смартфона:
               <div className="">
                 <ReactPlayer
-                  url="static/video/first_login_mobile.MP4"
+                  url="static/video/first_login_mobile.mp4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"
@@ -53,7 +53,7 @@ const VideoStudyPage = () => {
                 С компьютера:
                 <div className="player-wrapper">
                   <ReactPlayer
-                    url="static/video/salary_desktop.MP4"
+                    url="static/video/salary_desktop.mp4"
                     title="Первый вход в систему:"
                     width="100%"
                     height="100%"
@@ -67,7 +67,7 @@ const VideoStudyPage = () => {
                 С смартфона:
                 <div className="player-wrapper">
                   <ReactPlayer
-                    url="static/video/salary_mobile.MP4"
+                    url="static/video/salary_mobile.mp4"
                     title="Первый вход в систему:"
                     width="100%"
                     height="100%"

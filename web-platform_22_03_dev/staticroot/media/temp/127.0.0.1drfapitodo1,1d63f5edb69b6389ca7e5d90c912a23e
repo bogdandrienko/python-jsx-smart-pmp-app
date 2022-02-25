@@ -1,0 +1,14 @@
+status: 200
+date: Tue, 21 Dec 2021 03:56:02 GMT
+server: WSGIServer/0.2 CPython/3.9.9
+content-type: application/json
+vary: Accept, Cookie
+allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+x-frame-options: DENY
+content-length: 92
+x-content-type-options: nosniff
+referrer-policy: same-origin
+cross-origin-opener-policy: same-origin
+content-location: http://127.0.0.1/drf/api/todo/1/
+
+{"id":1,"title":"1","description":"1","date":"2021-12-21T09:49:06.525100+06:00","done":true}

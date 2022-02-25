@@ -26,6 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build_move": "react-scripts build && move build ../static",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
