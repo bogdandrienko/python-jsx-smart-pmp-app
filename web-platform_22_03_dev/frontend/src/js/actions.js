@@ -36,6 +36,18 @@ import {
   ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
   ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
   ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT,
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ADMIN_EXPORT_USERS_LOAD_CONSTANT,
+  ADMIN_EXPORT_USERS_DATA_CONSTANT,
+  ADMIN_EXPORT_USERS_ERROR_CONSTANT,
+  ADMIN_EXPORT_USERS_FAIL_CONSTANT,
+  ADMIN_EXPORT_USERS_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   USER_LIST_LOADING_CONSTANT,
   USER_LIST_DATA_CONSTANT,
@@ -644,3 +656,112 @@ export const adminChangeUserPasswordAction =
       });
     }
   };
+
+export const adminCreateOrChangeUsersAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
+      });
+
+      const {
+        userLoginState: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([k, v]) => {
+        formData.append(k, v);
+      });
+      const { data } = await axios({
+        url: "/api/admin/create_or_change_users/",
+        method: "POST",
+        timeout: 10000,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userLogin.token}`,
+        },
+        data: formData,
+      });
+
+      if (data["response"]) {
+        const response = data["response"];
+
+        // console.log("adminCreateOrChangeUsersAction response: ", response);
+
+        dispatch({
+          type: ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT,
+          payload: response,
+        });
+      } else {
+        const response = data["error"];
+
+        // console.log("adminCreateOrChangeUsersAction error: ", response);
+
+        dispatch({
+          type: ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+
+export const adminExportUsersAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ADMIN_EXPORT_USERS_LOAD_CONSTANT,
+    });
+
+    const {
+      userLoginState: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([k, v]) => {
+      formData.append(k, v);
+    });
+    const { data } = await axios({
+      url: "/api/admin/export_users/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+
+    if (data["response"]) {
+      const response = data["response"];
+
+      // console.log("adminExportUsersAction response: ", response);
+
+      dispatch({
+        type: ADMIN_EXPORT_USERS_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+
+      // console.log("adminExportUsersAction error: ", response);
+
+      dispatch({
+        type: ADMIN_EXPORT_USERS_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: ADMIN_EXPORT_USERS_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};

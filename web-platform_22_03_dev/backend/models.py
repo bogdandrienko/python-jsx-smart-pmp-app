@@ -1411,7 +1411,7 @@ class ExamplesModel(models.Model):
         app_label = 'backend'
         ordering = ('-id',)
         verbose_name = 'Шаблон'
-        verbose_name_plural = 'Шаблоны'
+        verbose_name_plural = 'Admin Шаблоны'
         db_table = 'example_admin_model_table'
 
     def __str__(self):
@@ -1542,7 +1542,7 @@ class LoggingModel(models.Model):
         app_label = 'backend'
         ordering = ('-datetime_field',)
         verbose_name = 'Лог'
-        verbose_name_plural = 'Логи'
+        verbose_name_plural = 'Admin Логи'
         db_table = 'logging_admin_model_table'
 
     def __str__(self):
@@ -1579,7 +1579,7 @@ class UserModel(models.Model):
                   '(username="Bogdan")"</small><hr><br>',
 
         to=User,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
     )
     password_slug_field = models.SlugField(
         db_column='password_slug_field_db_column',
@@ -1923,7 +1923,7 @@ class UserModel(models.Model):
         app_label = 'backend'
         ordering = ('last_name_char_field', 'first_name_char_field', 'patronymic_char_field',)
         verbose_name = 'Пользователь расширенный'
-        verbose_name_plural = 'Пользователи расширение'
+        verbose_name_plural = 'Admin Пользователи расширение'
         db_table = 'user_extend_admin_model_table'
 
     def __str__(self):
@@ -2026,8 +2026,8 @@ class ActionModel(models.Model):
     class Meta:
         app_label = 'backend'
         ordering = ('type_slug_field', 'name_char_field')
-        verbose_name = 'Действия'
-        verbose_name_plural = 'Действия'
+        verbose_name = 'Действие'
+        verbose_name_plural = 'Admin Действия'
         db_table = 'actions_admin_model_table'
 
     def __str__(self):
@@ -2158,7 +2158,7 @@ class GroupModel(models.Model):
         app_label = 'backend'
         ordering = ('position_float_field', 'name_char_field', 'name_slug_field')
         verbose_name = 'Группа расширенная'
-        verbose_name_plural = 'Группы расширение'
+        verbose_name_plural = 'Admin Группы расширение'
         db_table = 'group_extend_admin_model_table'
 
     def __str__(self):
@@ -2342,7 +2342,7 @@ class ModulesModel(models.Model):
         app_label = 'backend'
         ordering = ('type_slug_field', 'current_path_slug_field', 'position_float_field', 'name_char_field')
         verbose_name = 'Модуль'
-        verbose_name_plural = 'Модули'
+        verbose_name_plural = 'Test Модули'
         db_table = 'modules_admin_model_table'
 
     def __str__(self):
@@ -2491,7 +2491,7 @@ class NotificationModel(models.Model):
         app_label = 'backend'
         ordering = ('created_datetime_field', 'user_foreign_key_field', 'type_slug_field')
         verbose_name = 'Уведомление'
-        verbose_name_plural = 'Уведомления'
+        verbose_name_plural = 'Test Уведомления'
         db_table = 'notification_admin_model_table'
 
     def __str__(self):
@@ -2695,7 +2695,7 @@ class IdeaModel(models.Model):
         app_label = 'backend'
         ordering = ('-id',)
         verbose_name = 'Идея'
-        verbose_name_plural = '0_Идеи'
+        verbose_name_plural = 'Test Идеи'
         db_table = 'idea_model_table'
 
     def __str__(self):
@@ -2806,7 +2806,7 @@ class IdeaCommentModel(models.Model):
         app_label = 'backend'
         ordering = ('-id',)
         verbose_name = 'Комментарий'
-        verbose_name_plural = '1_Идеи_Комментарии'
+        verbose_name_plural = 'Test Идеи_Комментарии'
         db_table = 'idea_comment_model_table'
 
     def __str__(self):
@@ -2888,7 +2888,7 @@ class IdeaRatingModel(models.Model):
         app_label = 'backend'
         ordering = ('-id',)
         verbose_name = 'Рейтинг'
-        verbose_name_plural = '1_Идеи_Рейтинги'
+        verbose_name_plural = 'Test Идеи_Рейтинги'
         db_table = 'idea_rating_model_table'
 
     def __str__(self):
@@ -3369,7 +3369,7 @@ class RationalModel(models.Model):
         app_label = 'backend'
         ordering = ('-created_datetime_field',)
         verbose_name = 'Рац. предложение'
-        verbose_name_plural = 'Рац. предложения'
+        verbose_name_plural = 'Rational Рац. предложения'
         db_table = 'rational_model_table'
 
     def __str__(self):
@@ -3437,7 +3437,7 @@ class ChatModel(models.Model):
         app_label = 'backend'
         ordering = ('-created_datetime_field',)
         verbose_name = 'Сообщение в общем чате'
-        verbose_name_plural = 'Сообщения в общем чате'
+        verbose_name_plural = 'Test Сообщения в общем чате'
         db_table = 'chat_model_table'
 
     def __str__(self):
@@ -3604,7 +3604,7 @@ class ComputerVisionModuleModel(models.Model):
         app_label = 'backend'
         ordering = ('name_char_field', 'path_slug_field')
         verbose_name = 'Computer Vision ModuleComponent'
-        verbose_name_plural = 'Computer Vision ModulesComponent'
+        verbose_name_plural = 'Test Computer Vision ModulesComponent'
         db_table = 'computer_vision_module_model_table'
 
     def __str__(self):
@@ -3974,7 +3974,7 @@ class ComputerVisionComponentModel(models.Model):
         app_label = 'backend'
         ordering = ('play_boolean_field', 'alias_char_field', 'genericipaddress_field')
         verbose_name = 'Computer Vision Component'
-        verbose_name_plural = 'Computer Vision Components'
+        verbose_name_plural = 'Test Computer Vision Components'
         db_table = 'computer_vision_component_model_table'
 
     def __str__(self):
@@ -3990,7 +3990,7 @@ class NoteModel(models.Model):
     class Meta:
         ordering = ('-id',)
         verbose_name = 'NoteComponent'
-        verbose_name_plural = 'Notes'
+        verbose_name_plural = 'Test Notes'
         db_table = 'task_model_table'
 
     def __str__(self):
@@ -4008,7 +4008,7 @@ class TaskModel(models.Model):
     class Meta:
         ordering = ('complete',)
         verbose_name = 'Task'
-        verbose_name_plural = 'Tasks'
+        verbose_name_plural = 'Test Tasks'
         db_table = 'note_model_table'
 
     def __str__(self):
@@ -4022,12 +4022,24 @@ class Todo(models.Model):
     done = models.BooleanField(default=False, null=False)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
 
+    class Meta:
+        ordering = ('id',)
+        verbose_name = 'Todo'
+        verbose_name_plural = 'Test Todos'
+        db_table = 'todo_model_table'
+
     def __str__(self):
         return self.title
 
 
 class Category(models.Model):
     title = models.CharField(max_length=150)
+
+    class Meta:
+        ordering = ('id',)
+        verbose_name = 'Category'
+        verbose_name_plural = 'Test Categories'
+        db_table = 'category_model_table'
 
     def __str__(self):
         return self.title
@@ -4050,7 +4062,7 @@ class ProductModel(models.Model):
     class Meta:
         ordering = ('-createdAt',)
         verbose_name = 'ProductComponent'
-        verbose_name_plural = 'Products'
+        verbose_name_plural = 'Test Products'
         db_table = 'product_model_table'
 
     def __str__(self):
@@ -4068,7 +4080,7 @@ class ReviewModel(models.Model):
     class Meta:
         ordering = ('-product',)
         verbose_name = 'Review'
-        verbose_name_plural = 'Reviews'
+        verbose_name_plural = 'Test Reviews'
         db_table = 'review_model_table'
 
     def __str__(self):
@@ -4091,7 +4103,7 @@ class OrderModel(models.Model):
     class Meta:
         ordering = ('-createdAt',)
         verbose_name = 'Order'
-        verbose_name_plural = 'Orders'
+        verbose_name_plural = 'Test Orders'
         db_table = 'order_model_table'
 
     def __str__(self):
@@ -4110,7 +4122,7 @@ class OrderItemModel(models.Model):
     class Meta:
         ordering = ('-name',)
         verbose_name = 'Order Item'
-        verbose_name_plural = 'Order Items'
+        verbose_name_plural = 'Test Order Items'
         db_table = 'order_item_model_table'
 
     def __str__(self):
@@ -4129,7 +4141,7 @@ class ShippingAddressModel(models.Model):
     class Meta:
         ordering = ('-address',)
         verbose_name = 'Shipping Address'
-        verbose_name_plural = 'Shipping Addresses'
+        verbose_name_plural = 'Test Shipping Addresses'
         db_table = 'shipping_address_model_table'
 
     def __str__(self):

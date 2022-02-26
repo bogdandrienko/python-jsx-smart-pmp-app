@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f60f8405-d267-4f6a-be37-36d97b53283e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/web-platform_22_03_dev.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0002_alter_usermodel_user_foreign_key_field.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0003_alter_actionmodel_options_alter_category_options_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.6f62ab6d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.6f62ab6d.js.LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.6f62ab6d.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/AdminCreateOrChangeUsersPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/AdminExportUsersPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/win_1_run_127_0_0_1_8001.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/js/main.a927552d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/js/main.a927552d.js.LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/js/main.a927552d.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/media/salary/salary_CnAoQNH17nkX1guaaLzM4KT0_2022-02-26.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/media/salary/salary_NMXqhvaqfiFteogTVF4ZdilU_2022-02-26.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/media/salary/salary_b2GOPCcOOaxXhPThWDX4vJKT_2022-02-26.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/media/salary/salary_g6InwbY6naEaKupr8PW7dBDT_2022-02-26.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/staticroot/media/users/users_SdfQwRdaIw3UxpU3BVNhw1XQ_2022-02-26.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web-platform_22_01_dev.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.b932cab0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.b932cab0.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.b932cab0.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/FooterComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FooterComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lin_0_create.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lin_0_create.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/win_0_run_ip.8000.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/win_0_run_ip.8000.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/win_1_run_local.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/admin/account/create_users.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/account/create_users.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticroot/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/staticroot/media/admin/logging/logging_actions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticroot/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/staticroot/media/admin/logging/logging_errors.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="25dQi6RlIQ5V3eovQq0kNQUYuEO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/pages" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="web-platform_22_03_dev" type="Python.DjangoServer" factoryName="Django server">
+      <module name="web-platform_22_03_dev" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f60f8405-d267-4f6a-be37-36d97b53283e" name="Changes" comment="" />
+      <created>1645854610058</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645854610058</updated>
+      <workItem from="1645854611243" duration="365000" />
+      <workItem from="1645855542613" duration="1320000" />
+      <workItem from="1645857250368" duration="11689000" />
+      <workItem from="1645869368204" duration="68000" />
+      <workItem from="1645869884321" duration="413000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

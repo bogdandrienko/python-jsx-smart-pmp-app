@@ -38,6 +38,28 @@ export const ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT =
 export const ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT =
   "ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_EXPORT_USERS_LOAD_CONSTANT =
+  "ADMIN_EXPORT_USERS_LOAD_CONSTANT";
+export const ADMIN_EXPORT_USERS_DATA_CONSTANT =
+  "ADMIN_EXPORT_USERS_DATA_CONSTANT";
+export const ADMIN_EXPORT_USERS_ERROR_CONSTANT =
+  "ADMIN_EXPORT_USERS_ERROR_CONSTANT";
+export const ADMIN_EXPORT_USERS_FAIL_CONSTANT =
+  "ADMIN_EXPORT_USERS_FAIL_CONSTANT";
+export const ADMIN_EXPORT_USERS_RESET_CONSTANT =
+  "ADMIN_EXPORT_USERS_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LIST_LOADING_CONSTANT = "USER_LIST_LOADING_CONSTANT";
 export const USER_LIST_DATA_CONSTANT = "USER_LIST_DATA_CONSTANT";
 export const USER_LIST_ERROR_CONSTANT = "USER_LIST_ERROR_CONSTANT";
@@ -364,8 +386,15 @@ export const modules = [
           {
             Header: "Создать/изменить пользователей",
             Access: "moderator",
-            Active: false,
-            Link: "/account_create_or_change_accounts",
+            Active: true,
+            Link: "/admin_create_or_change_users",
+            ExternalLink: false,
+          },
+          {
+            Header: "Выгрузить список пользователей",
+            Access: "moderator",
+            Active: true,
+            Link: "/admin_export_users",
             ExternalLink: false,
           },
           {
@@ -373,13 +402,6 @@ export const modules = [
             Access: "moderator",
             Active: false,
             Link: "/account_generate_passwords",
-            ExternalLink: false,
-          },
-          {
-            Header: "Выгрузить список пользователей",
-            Access: "moderator",
-            Active: false,
-            Link: "/account_export_accounts",
             ExternalLink: false,
           },
           {

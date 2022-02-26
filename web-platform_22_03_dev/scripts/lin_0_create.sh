@@ -7,6 +7,25 @@ Install updates for system: 'sudo apt-get update -y', 'sudo apt upgrade -y'
 
 if system on VirtualBox == install 'insert guest additions', and 'sudo adduser bogdan vboxsf', and reboot system
 
+sudo apt -y install postgresql postgresql-contrib
+
+sudo su - postgres
+
+psql
+
+postgres=# CREATE ROLE dbuser WITH LOGIN;
+
+postgres=# ALTER ROLE dbuser SET client_encoding TO 'utf8';
+postgres=# ALTER ROLE dbuser SET default_transaction_isolation TO 'read committed';
+postgres=# ALTER ROLE dbuser SET timezone TO 'UTC';
+
+postgres=# CREATE DATABASE dbname;
+
+postgres=# GRANT ALL PRIVILEGES ON DATABASE dbname TO dbuser;
+
+postgres=# \q
+exit
+
 sudo apt -y install build-essential python3-dev python3-pip python3-venv libpq-dev gunicorn nginx unixodbc-dev htop
 
 # DJANGO PROJECT
@@ -24,7 +43,9 @@ source env/bin/activate
 
 pip install --upgrade pip
 
-pip install Django gunicorn wheel psycopg2 pyodbc django-cors-headers
+pip install wheel
+
+pip install Django gunicorn psycopg2 pyodbc django-cors-headers
 
 pip install -r requirements.txt
 
@@ -61,6 +82,8 @@ STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 </file>
+
+#python manage.py check --database default
 
 python manage.py makemigrations
 
@@ -141,7 +164,7 @@ location / {
 
     proxy_buffering off;
 
-    proxy_pass http://127.0.0.1:8000;
+    proxy_pass http://127.0.0.1:8001;
 }
 }
 </file>
@@ -153,5 +176,11 @@ sudo usermod -aG bogdan www-data
 # sudo nginx -t
 
 sudo systemctl reload nginx.service
+
+sudo reboot
+
+########################################################################################################################
+
+create Group, create GroupModel, create ActionModel
 
 ########################################################################################################################

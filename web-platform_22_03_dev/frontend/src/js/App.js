@@ -18,6 +18,8 @@ import TextStudyPage from "../pages/TextStudyPage";
 import SalaryPage from "../pages/SalaryPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import AdminChangeUserPasswordPage from "../pages/AdminChangeUserPasswordPage";
+import AdminCreateOrChangeUsersPage from "../pages/AdminCreateOrChangeUsersPage";
+import AdminExportUsersPage from "../pages/AdminExportUsersPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import RationalCreatePage from "../pages/RationalCreatePage";
 import RationalListPage from "../pages/RationalListPage";
@@ -40,6 +42,14 @@ function App() {
           <Route
             path="/admin_change_user_password"
             element={<AdminChangeUserPasswordPage />}
+          />
+          <Route
+            path="/admin_create_or_change_users"
+            element={<AdminCreateOrChangeUsersPage />}
+          />
+          <Route
+            path="/admin_export_users"
+            element={<AdminExportUsersPage />}
           />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/news" element={<NewsPage />} />

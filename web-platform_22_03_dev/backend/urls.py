@@ -68,6 +68,10 @@ urlpatterns = [
     #################################################################
     path('api/admin/change_user_password/', backend_views.api_admin_change_user_password,
          name='api_admin_change_user_password'),
+    path('api/admin/create_or_change_users/', backend_views.api_admin_create_or_change_users,
+         name='api_admin_create_or_change_users'),
+    path('api/admin/export_users/', backend_views.api_admin_export_users,
+         name='api_admin_export_users'),
     #################################################################
 
     # salary

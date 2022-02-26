@@ -31,13 +31,19 @@ const FooterComponent = () => {
                   className="dropdown-item"
                   href="https://www.km-open.online/"
                 >
-                  km-open
+                  km-open.online
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   className="dropdown-item"
                   href="https://web.cplus.kz/"
                 >
-                  web-cplus
+                  web.cplus.kz
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  className="dropdown-item"
+                  href="https://chrysotile.kz/"
+                >
+                  chrysotile.kz
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
               </li>
@@ -119,13 +125,6 @@ const FooterComponent = () => {
                 <NavDropdown.Divider />
               </li>
               <li>
-                <strong className="dropdown-header">Сотовый номер</strong>
-                <NavDropdown.Item className="dropdown-item disabled" href="#">
-                  +7 747 261 03 59
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-              </li>
-              <li>
                 <strong className="dropdown-header">Telegram / WhatsApp</strong>
                 <NavDropdown.Item className="dropdown-item disabled" href="#">
                   +7 747 261 03 59
@@ -145,12 +144,6 @@ const FooterComponent = () => {
                   Andryenko@km.kz
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-              </li>
-              <li>
-                <strong className="dropdown-header">Почта, личная</strong>
-                <NavDropdown.Item className="dropdown-item disabled" href="#">
-                  bogdandrienko@gmail.com
-                </NavDropdown.Item>
               </li>
             </NavDropdown>
           </Navbar>

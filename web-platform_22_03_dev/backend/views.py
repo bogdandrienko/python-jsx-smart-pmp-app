@@ -4,9 +4,13 @@ import hashlib
 import json
 import os
 import random
+from typing import Union
 
 import bs4
 import httplib2
+import openpyxl
+from openpyxl.utils import get_column_letter
+from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 import requests
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -19,7 +23,6 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from rest_framework import status
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -1202,7 +1205,7 @@ def api_salary(request):
                                 try:
                                     date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
                                     if date != date_file:
-                                        os.remove(f'{path}{file}')
+                                        os.remove(f'{path}/{file}')
                                 except Exception as error:
                                     print(error)
                         #######################################################
@@ -1878,6 +1881,378 @@ def api_admin_change_user_password(request):
                     else:
                         response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
                     # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_admin_create_or_change_users(request):
+    """
+    api_admin_create_or_change_users django-rest-framework
+    """
+
+    try:
+        print('\n\n\n')
+        print('api_admin_create_or_change_users: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_service.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "POST":
+            if request_action_type == "CREATE_OR_CHANGE_USERS":
+                try:
+                    def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
+                        if isinstance(_col, int):
+                            _col = get_column_letter(_col)
+                        if isinstance(_row, str):
+                            _row = str(_row)
+                        value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
+                        if value.lower() == "none":
+                            return ""
+                        elif value.lower() == "true":
+                            return True
+                        elif value.lower() == "false":
+                            return False
+                        else:
+                            return value
+
+                    additional_excel = request.data.get("additionalExcel")
+                    change_user = request.data.get("changeUser")
+                    change_user_password = request.data.get("changeUserPassword")
+                    clear_user_groups = request.data.get("clearUserGroups")
+
+                    workbook = openpyxl.load_workbook(additional_excel)
+                    sheet = workbook.active
+                    max_rows = sheet.max_row
+                    max_cols = sheet.max_column
+                    for row in range(1 + 1, max_rows+1):
+                        subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
+                        workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
+                        department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
+                        last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
+                        first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
+                        patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
+                        personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
+                        position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
+                        category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
+                        username = get_value(_col="J", _row=row, _sheet=sheet)
+                        password_slug_field = get_value(_col="K", _row=row, _sheet=sheet)
+                        is_active = get_value(_col="L", _row=row, _sheet=sheet)
+                        is_staff = get_value(_col="M", _row=row, _sheet=sheet)
+                        is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
+                        is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
+                        groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
+                        email_field = get_value(_col="Q", _row=row, _sheet=sheet)
+                        secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
+                        secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
+
+                        if len(username) < 1:
+                            continue
+
+                        try:
+                            user = User.objects.get(username=username)
+                            if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                                continue
+                            new_user = False
+                        except Exception as error:
+                            user = User.objects.create(
+                                username=username,
+                                password=make_password(password=password_slug_field),
+                                is_active=True
+                            )
+                            new_user = True
+
+                        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+
+                        if new_user:
+                            user_model.password_slug_field = password_slug_field
+                        else:
+                            if change_user_password == "Изменять пароль уже существующего пользователя":
+                                user.password = make_password(password=password_slug_field)
+                                user_model.password_slug_field = password_slug_field
+
+                        user.is_staff = is_staff
+                        user.is_superuser = is_superuser
+                        user_model.activity_boolean_field = is_active
+                        user_model.email_field = email_field
+                        user.email = email_field
+                        user_model.secret_question_char_field = secret_question_char_field
+                        user_model.secret_answer_char_field = secret_answer_char_field
+                        user_model.is_temp_password = is_temp_password
+                        user_model.last_name_char_field = last_name_char_field
+                        user.last_name = last_name_char_field
+                        user_model.first_name_char_field = first_name_char_field
+                        user.first_name = first_name_char_field
+                        user_model.patronymic_char_field = patronymic_char_field
+                        user_model.personnel_number_slug_field = personnel_number_slug_field
+                        user_model.subdivision_char_field = subdivision_char_field
+                        user_model.workshop_service_char_field = workshop_service_char_field
+                        user_model.department_site_char_field = department_site_char_field
+                        user_model.position_char_field = position_char_field
+                        user_model.category_char_field = category_char_field
+                        user_model.save()
+                        user.save()
+
+                        if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
+                            for group in backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model):
+                                try:
+                                    group.user_many_to_many_field.remove(user_model)
+                                except Exception as error:
+                                    pass
+
+                        groups = [group.strip() for group in str(groups).lower().strip().split(',')]
+                        for group in groups:
+                            if len(group) > 0:
+                                group_object = Group.objects.get_or_create(name=group)[0]
+                                try:
+                                    group_model = backend_models.GroupModel.objects.get(
+                                        group_foreign_key_field=group_object
+                                    )
+                                except Exception as error:
+                                    group_model = backend_models.GroupModel.objects.create(
+                                        group_foreign_key_field=group_object,
+                                        name_char_field=group,
+                                        name_slug_field=group,
+                                    )
+                                group_model.user_many_to_many_field.add(user_model)
+
+                    response = {"response": "success"}
+
+                    print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    print(error)
+                    backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        #######################################################################
+        elif request_method == "PUT":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "DELETE":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        else:
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+    except Exception as error:
+        print(error)
+        backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_admin_export_users(request):
+    """
+    api_admin_export_users django-rest-framework
+    """
+
+    try:
+        print('\n\n\n')
+        print('api_admin_export_users: ')
+        print('\n')
+        backend_service.DjangoClass.LoggingClass.logging_actions(request=request)
+        backend_service.DjangoClass.SchedulerClass.start_scheduler(request=request)
+        request_method, request_action_type, request_user, request_body = \
+            backend_service.DjangoClass.DRFClass.request_utils(request=request)
+        print(f"datetime: {backend_service.DateTimeUtils.get_current_datetime()}")
+        print(f"method: {request_method}")
+        print(f"action_type: {request_action_type}")
+        print(f"user: {request_user}")
+        print(f"body: {request_body}")
+        print('\n')
+        ################################################################################################################
+
+        #######################################################################
+        if request_method == "GET":
+            return Response({"error": "This method not allowed for endpoint."})
+        #######################################################################
+        elif request_method == "POST":
+            if request_action_type == "EXPORT_USERS":
+                try:
+                    def set_value(_col: Union[str, int], _row: Union[str, int], _value, _sheet):
+                        if isinstance(_col, int):
+                            _col = get_column_letter(_col)
+                        if isinstance(_row, str):
+                            _row = str(_row)
+                        if isinstance(_value, bool):
+                            if _value:
+                                _value = "true"
+                            else:
+                                _value = "false"
+                        if _value is None:
+                            _value = ""
+                        _sheet[str(_col).upper() + str(_row)] = str(_value)
+
+                    key = backend_service.UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=24
+                    )
+                    date = backend_service.DateTimeUtils.get_current_date()
+                    path = 'staticroot/media/users'
+                    file_name = f"users_{key}_{date}.xlsx"
+                    workbook = openpyxl.Workbook()
+                    sheet = workbook.active
+
+                    # Delete old files
+                    #######################################################
+                    for root, dirs, files in os.walk(path, topdown=True):
+                        for file in files:
+                            try:
+                                date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
+                                if date != date_file:
+                                    os.remove(f'{path}/{file}')
+                            except Exception as error:
+                                print(error)
+                    #######################################################
+
+                    users = User.objects.filter(is_superuser=False)
+
+                    titles = ['Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Фамилия', 'Имя', 'Отчество',
+                              'Табельный номер', 'Должность', 'Категория работника', 'Имя пользователя',
+                              'Пароль аккаунта', 'Активность аккаунта', 'Доступ к панели управления',
+                              'Права суперпользователя', 'Временный пароль', 'Группы доступа', 'Электронная почта',
+                              'Секретный вопрос', 'Секретный ответ']
+                    for title in titles:
+                        set_value(_col=titles.index(title) + 1, _row=1, _value=title, _sheet=sheet)
+                    _index = 1
+                    for user in users:
+                        try:
+                            _index += 1
+                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+
+                            subdivision_char_field = user_model.subdivision_char_field
+                            set_value(_col="A", _row=_index, _value=subdivision_char_field, _sheet=sheet)
+
+                            workshop_service_char_field = user_model.workshop_service_char_field
+                            set_value(_col="B", _row=_index, _value=workshop_service_char_field,
+                                      _sheet=sheet)
+
+                            department_site_char_field = user_model.department_site_char_field
+                            set_value(_col="C", _row=_index, _value=department_site_char_field,
+                                      _sheet=sheet)
+
+                            last_name_char_field = user_model.last_name_char_field
+                            set_value(_col="D", _row=_index, _value=last_name_char_field, _sheet=sheet)
+
+                            first_name_char_field = user_model.first_name_char_field
+                            set_value(_col="E", _row=_index, _value=first_name_char_field, _sheet=sheet)
+
+                            patronymic_char_field = user_model.patronymic_char_field
+                            set_value(_col="F", _row=_index, _value=patronymic_char_field, _sheet=sheet)
+
+                            personnel_number_slug_field = user_model.personnel_number_slug_field
+                            set_value(_col="G", _row=_index, _value=personnel_number_slug_field,
+                                      _sheet=sheet)
+
+                            position_char_field = user_model.position_char_field
+                            set_value(_col="H", _row=_index, _value=position_char_field, _sheet=sheet)
+
+                            category_char_field = user_model.category_char_field
+                            set_value(_col="I", _row=_index, _value=category_char_field, _sheet=sheet)
+
+                            username = user.username
+                            set_value(_col="J", _row=_index, _value=username, _sheet=sheet)
+
+                            password_slug_field = user_model.password_slug_field
+                            set_value(_col="K", _row=_index, _value=password_slug_field, _sheet=sheet)
+
+                            is_active = user_model.activity_boolean_field
+                            set_value(_col="L", _row=_index, _value=is_active, _sheet=sheet)
+
+                            is_staff = user.is_staff
+                            set_value(_col="M", _row=_index, _value=is_staff, _sheet=sheet)
+
+                            is_superuser = user.is_superuser
+                            set_value(_col="N", _row=_index, _value=is_superuser, _sheet=sheet)
+
+                            is_temp_password = user_model.temp_password_boolean_field
+                            set_value(_col="O", _row=_index, _value=is_temp_password, _sheet=sheet)
+
+                            group_models = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+                            groups = ""
+                            for group_model in group_models:
+                                groups += f"{str(group_model.name_slug_field).lower().strip()}, "
+                            groups = groups[:-2]
+                            set_value(_col="P", _row=_index, _value=groups, _sheet=sheet)
+
+                            email_field = user_model.email_field
+                            set_value(_col="Q", _row=_index, _value=email_field, _sheet=sheet)
+
+                            secret_question_char_field = user_model.secret_question_char_field
+                            set_value(_col="R", _row=_index, _value=secret_question_char_field,
+                                      _sheet=sheet)
+
+                            secret_answer_char_field = user_model.secret_answer_char_field
+                            set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
+
+                        except Exception as error:
+                            print(error)
+
+                    # Set font
+                    #######################################################
+                    font_b = Font(name='Arial', size=8, bold=False)
+                    for row in range(1, _index+1):
+                        for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_b
+                    #######################################################
+
+                    # Height and width styles
+                    #######################################################
+                    for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
+                        width = 1
+                        for row in range(1, _index + 1):
+                            cell = sheet[f'{col}{row}']
+                            value = len(str(cell.value))
+                            if value > width:
+                                width = value
+                        sheet.column_dimensions[col].height = 1
+                        sheet.column_dimensions[col].width = round((width * 0.95), 3)
+                    #######################################################
+
+                    backend_service.ExcelClass.workbook_save(
+                        workbook=workbook,
+                        excel_file=f"staticroot/media/users/{file_name}"
+                    )
+                    response = {"response": {"excel": f"static/media/users/{file_name}"}}
+
+                    print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
                     print(error)
@@ -2762,7 +3137,7 @@ def logging(request):
                             sheet=sheet
                         )
                 backend_service.ExcelClass.workbook_save(workbook=workbook,
-                                                       excel_file='static/media/data/logging/logging.xlsx')
+                                                         excel_file='static/media/data/logging/logging.xlsx')
                 response = 1
             except Exception as error:
                 backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
@@ -3675,7 +4050,7 @@ def account_export_accounts(request):
                         response = -1
                     data = [titles, body]
                 backend_service.ExcelClass.workbook_save(workbook=workbook,
-                                                       excel_file='static/media/admin/account/export_users.xlsx')
+                                                         excel_file='static/media/admin/account/export_users.xlsx')
             except Exception as error:
                 backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
                 response = -1
@@ -4757,8 +5132,8 @@ def passages_thermometry(request):
         check = backend_service.DjangoClass.RequestClass.get_check(request, 'check')
         personid = backend_service.DjangoClass.RequestClass.get_value(request, 'personid')
         connect_db = backend_service.SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                                           database="thirdpartydb", username="sa",
-                                                           password="skud12345678")
+                                                             database="thirdpartydb", username="sa",
+                                                             password="skud12345678")
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         try:
@@ -4831,8 +5206,8 @@ def passages_select(request):
     if request.method == 'POST':
         personid = str(request.POST['personid'])
         connect_db = backend_service.SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                                           database="thirdpartydb", username="sa",
-                                                           password="skud12345678")
+                                                             database="thirdpartydb", username="sa",
+                                                             password="skud12345678")
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         try:
@@ -4910,8 +5285,8 @@ def passages_update(request):
         time_new = str(request.POST['datetime_new']).split('T')[1] + ':00'
         accessdateandtime_new = date_new + 'T' + time_new
         connect_db = backend_service.SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                                           database="thirdpartydb", username="sa",
-                                                           password="skud12345678")
+                                                             database="thirdpartydb", username="sa",
+                                                             password="skud12345678")
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         value = f"UPDATE dbtable SET accessdateandtime = '{accessdateandtime_new}', date1 = '{date_new}', " \
@@ -4962,8 +5337,8 @@ def passages_insert(request):
             backend_service.DjangoClass.LoggingClass.logging_errors(request=request, error=error)
             personname = 'None'
         connection = backend_service.SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                                           database="thirdpartydb", username="sa",
-                                                           password="skud12345678")
+                                                             database="thirdpartydb", username="sa",
+                                                             password="skud12345678")
         cursor = connection.cursor()
         cursor.fast_executemany = True
         rows = ['personid', 'accessdateandtime', 'date1', 'date2', 'personname', 'devicename', 'cardno',
@@ -4995,8 +5370,8 @@ def passages_delete(request):
         date = str(request.POST['datetime']).split('T')[0]
         time = str(request.POST['datetime']).split('T')[1]
         connect_db = backend_service.SQLClass.pyodbc_connect(ip="192.168.15.87", server="DESKTOP-SM7K050", port="1434",
-                                                           database="thirdpartydb", username="sa",
-                                                           password="skud12345678")
+                                                             database="thirdpartydb", username="sa",
+                                                             password="skud12345678")
         cursor = connect_db.cursor()
         cursor.fast_executemany = True
         value = f"DELETE FROM dbtable " \

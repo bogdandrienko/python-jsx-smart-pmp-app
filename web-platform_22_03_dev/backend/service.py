@@ -16,7 +16,7 @@ from fastkml import kml
 from typing import Union
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.staticfiles import finders
 from django.core.handlers.wsgi import WSGIRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -342,6 +342,25 @@ class DjangoClass:
 
         @staticmethod
         def scheduler(request):
+
+            # create default groups
+            ############################################################################################################
+            try:
+                groups = ["user", "moderator", "superuser"]
+                for grp in groups:
+                    try:
+                        Group.objects.get(name=grp)
+                    except Exception as error:
+                        group = Group.objects.create(name=grp)
+                        group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
+                        group_model.name_char_field = grp
+                        group_model.name_slug_field = grp
+                        action_model = backend_models.ActionModel.objects.get_or_create(name_slug_field=grp)[0]
+                        group_model.action_many_to_many_field.add(action_model)
+                        group_model.save()
+            except Exception as error__:
+                print(error__)
+            ############################################################################################################
 
             # create superuser 'Web_adm_1c'
             ############################################################################################################

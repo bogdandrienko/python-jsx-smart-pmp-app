@@ -34,6 +34,18 @@ import {
   ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
   ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
   ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT,
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT,
+  ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ADMIN_EXPORT_USERS_LOAD_CONSTANT,
+  ADMIN_EXPORT_USERS_DATA_CONSTANT,
+  ADMIN_EXPORT_USERS_ERROR_CONSTANT,
+  ADMIN_EXPORT_USERS_FAIL_CONSTANT,
+  ADMIN_EXPORT_USERS_RESET_CONSTANT,
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   USER_LIST_LOADING_CONSTANT,
   USER_LIST_DATA_CONSTANT,
@@ -316,6 +328,62 @@ export const adminChangeUserPasswordReducer = (state = {}, action = null) => {
       return { load: false, fail: action.payload };
 
     case ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const adminCreateOrChangeUsersReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT:
+      return { load: true };
+
+    case ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+
+    case ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+
+    case ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+
+    case ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const adminExportUsersReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case ADMIN_EXPORT_USERS_LOAD_CONSTANT:
+      return { load: true };
+
+    case ADMIN_EXPORT_USERS_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+
+    case ADMIN_EXPORT_USERS_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+
+    case ADMIN_EXPORT_USERS_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+
+    case ADMIN_EXPORT_USERS_RESET_CONSTANT:
       return {};
 
     default:
