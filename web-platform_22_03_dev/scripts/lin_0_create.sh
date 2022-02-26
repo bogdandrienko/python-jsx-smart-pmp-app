@@ -7,6 +7,9 @@ Install updates for system: 'sudo apt-get update -y', 'sudo apt upgrade -y'
 
 if system on VirtualBox == install 'insert guest additions', and 'sudo adduser bogdan vboxsf', and reboot system
 
+# Postgre SQL
+########################################################################################################################
+
 sudo apt -y install postgresql postgresql-contrib
 
 sudo su - postgres
