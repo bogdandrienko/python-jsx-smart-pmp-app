@@ -2,7 +2,7 @@ export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
 export const USER_LOGIN_ERROR_CONSTANT = "USER_LOGIN_ERROR_CONSTANT";
 export const USER_LOGIN_FAIL_CONSTANT = "USER_LOGIN_FAIL_CONSTANT";
-export const USER_LOGOUT_CONSTANT = "USER_LOGOUT_CONSTANT";
+export const USER_LOGIN_RESET_CONSTANT = "USER_LOGIN_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_DETAILS_LOAD_CONSTANT = "USER_DETAILS_LOAD_CONSTANT";
 export const USER_DETAILS_DATA_CONSTANT = "USER_DETAILS_DATA_CONSTANT";
@@ -16,8 +16,8 @@ export const USER_CHANGE_ERROR_CONSTANT = "USER_CHANGE_ERROR_CONSTANT";
 export const USER_CHANGE_FAIL_CONSTANT = "USER_CHANGE_FAIL_CONSTANT";
 export const USER_CHANGE_RESET_CONSTANT = "USER_CHANGE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_RECOVER_PASSWORD_LOADING_CONSTANT =
-  "USER_RECOVER_PASSWORD_LOADING_CONSTANT";
+export const USER_RECOVER_PASSWORD_LOAD_CONSTANT =
+  "USER_RECOVER_PASSWORD_LOAD_CONSTANT";
 export const USER_RECOVER_PASSWORD_DATA_CONSTANT =
   "USER_RECOVER_PASSWORD_DATA_CONSTANT";
 export const USER_RECOVER_PASSWORD_ERROR_CONSTANT =
@@ -60,7 +60,7 @@ export const ADMIN_EXPORT_USERS_FAIL_CONSTANT =
 export const ADMIN_EXPORT_USERS_RESET_CONSTANT =
   "ADMIN_EXPORT_USERS_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_LIST_LOADING_CONSTANT = "USER_LIST_LOADING_CONSTANT";
+export const USER_LIST_LOAD_CONSTANT = "USER_LIST_LOAD_CONSTANT";
 export const USER_LIST_DATA_CONSTANT = "USER_LIST_DATA_CONSTANT";
 export const USER_LIST_ERROR_CONSTANT = "USER_LIST_ERROR_CONSTANT";
 export const USER_LIST_RESET_CONSTANT = "USER_LIST_RESET_CONSTANT";
@@ -72,21 +72,19 @@ export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
 export const USER_SALARY_FAIL_CONSTANT = "USER_SALARY_FAIL_CONSTANT";
 export const USER_SALARY_RESET_CONSTANT = "USER_SALARY_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RATIONAL_CREATE_LOADING_CONSTANT =
-  "RATIONAL_CREATE_LOADING_CONSTANT";
+export const RATIONAL_CREATE_LOAD_CONSTANT = "RATIONAL_CREATE_LOAD_CONSTANT";
 export const RATIONAL_CREATE_DATA_CONSTANT = "RATIONAL_CREATE_DATA_CONSTANT";
 export const RATIONAL_CREATE_ERROR_CONSTANT = "RATIONAL_CREATE_ERROR_CONSTANT";
 export const RATIONAL_CREATE_FAIL_CONSTANT = "RATIONAL_CREATE_FAIL_CONSTANT";
 export const RATIONAL_CREATE_RESET_CONSTANT = "RATIONAL_CREATE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RATIONAL_DETAIL_LOADING_CONSTANT =
-  "RATIONAL_DETAIL_LOADING_CONSTANT";
+export const RATIONAL_DETAIL_LOAD_CONSTANT = "RATIONAL_DETAIL_LOAD_CONSTANT";
 export const RATIONAL_DETAIL_DATA_CONSTANT = "RATIONAL_DETAIL_DATA_CONSTANT";
 export const RATIONAL_DETAIL_ERROR_CONSTANT = "RATIONAL_DETAIL_ERROR_CONSTANT";
 export const RATIONAL_DETAIL_FAIL_CONSTANT = "RATIONAL_DETAIL_FAIL_CONSTANT";
 export const RATIONAL_DETAIL_RESET_CONSTANT = "RATIONAL_DETAIL_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RATIONAL_LIST_LOADING_CONSTANT = "RATIONAL_LIST_LOADING_CONSTANT";
+export const RATIONAL_LIST_LOAD_CONSTANT = "RATIONAL_LIST_LOAD_CONSTANT";
 export const RATIONAL_LIST_DATA_CONSTANT = "RATIONAL_LIST_DATA_CONSTANT";
 export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
 export const RATIONAL_LIST_FAIL_CONSTANT = "RATIONAL_LIST_FAIL_CONSTANT";
@@ -425,13 +423,14 @@ export const modules = [
   {
     Header: "Профиль",
     Access: "user",
-    Image: "/static/modules/1_module_profile/module_profile.png",
+    Image: "/static/img/modules/1_module_profile/module_profile.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Основной функционал",
         Access: "user",
-        Image: "/static/modules/1_module_profile/section_main/section_main.png",
+        Image:
+          "/static/img/modules/1_module_profile/section_main/section_main.png",
         Links: [
           {
             Header: "Домашняя страница",
@@ -460,7 +459,7 @@ export const modules = [
         Header: "Личный профиль",
         Access: "user",
         Image:
-          "/static/modules/1_module_profile/section_self_profile/section_self_profile.png",
+          "/static/img/modules/1_module_profile/section_self_profile/section_self_profile.png",
         Links: [
           {
             Header: "Профиль",
@@ -511,13 +510,14 @@ export const modules = [
   {
     Header: "Новости",
     Access: "user",
-    Image: "/static/modules/2_module_news/module_news.png",
+    Image: "/static/img/modules/2_module_news/module_news.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Обучение",
         Access: "user",
-        Image: "/static/modules/2_module_news/section_study/section_study.png",
+        Image:
+          "/static/img/modules/2_module_news/section_study/section_study.png",
         Links: [
           {
             Header: "Видео-инструкции",
@@ -589,14 +589,14 @@ export const modules = [
   {
     Header: "Развитие",
     Access: "user",
-    Image: "/static/modules/3_module_progress/module_progress.png",
+    Image: "/static/img/modules/3_module_progress/module_progress.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Рационализаторство",
         Access: "user",
         Image:
-          "/static/modules/3_module_progress/2_section_rational/sectional_rational.png",
+          "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
         Links: [
           {
             Header: "Подать",
@@ -625,7 +625,7 @@ export const modules = [
         Header: "Банк идей",
         Access: "user",
         Image:
-          "/static/modules/3_module_progress/1_section_idea/section_idea.png",
+          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
         Links: [
           {
             Header: "Подать идею",
@@ -654,7 +654,7 @@ export const modules = [
         Header: "Проектная деятельность",
         Access: "user",
         Image:
-          "/static/modules/3_module_progress/3_section_project/section_project.png",
+          "/static/img/modules/3_module_progress/3_section_project/section_project.png",
         Links: [
           {
             Header: "Подать проект",
@@ -684,14 +684,14 @@ export const modules = [
   {
     Header: "Бухгалтерия",
     Access: "user",
-    Image: "/static/modules/4_module_buhgalteria/module_buhgalteria.png",
+    Image: "/static/img/modules/4_module_buhgalteria/module_buhgalteria.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Сектор расчёта заработной платы",
         Access: "user",
         Image:
-          "/static/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
+          "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
         Links: [
           {
             Header: "Выгрузка расчётного листа",
@@ -707,14 +707,14 @@ export const modules = [
   {
     Header: "СУП",
     Access: "user",
-    Image: "/static/modules/5_module_human_resourse/module_hr.png",
+    Image: "/static/img/modules/5_module_human_resourse/module_hr.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Отдел кадров",
         Access: "user",
         Image:
-          "/static/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
             Header: "Вакансии",
@@ -736,7 +736,7 @@ export const modules = [
         Header: "Отдел развития и оценки персонала",
         Access: "user",
         Image:
-          "/static/modules/5_module_human_resourse/1_section_hr/section_hr.png",
+          "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
         Links: [
           {
             Header: "КЛО",

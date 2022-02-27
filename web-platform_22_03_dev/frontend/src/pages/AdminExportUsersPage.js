@@ -91,9 +91,6 @@ const AdminExportUsersPage = () => {
               >
                 Скачать excel-документ
               </a>
-              <small>
-                {dataExportUsers["excel"] && dataExportUsers["excel"]}
-              </small>
             </div>
           )}
         </div>

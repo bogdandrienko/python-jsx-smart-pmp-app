@@ -72,7 +72,6 @@ const ChangeProfilePage = () => {
   useEffect(() => {
     if (dataUserChange) {
       sleep(1000).then(() => {
-        dispatch({ type: USER_CHANGE_RESET_CONSTANT });
         dispatch(userLogoutAction());
         navigate("/login");
       });
@@ -81,15 +80,15 @@ const ChangeProfilePage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      userChangeProfileAction({
-        email: email,
-        secretQuestion: secretQuestion,
-        secretAnswer: secretAnswer,
-        password: password,
-        password2: password2,
-      })
-    );
+    const form = {
+      "Action-type": "CHANGE",
+      email: email,
+      secretQuestion: secretQuestion,
+      secretAnswer: secretAnswer,
+      password: password,
+      password2: password2,
+    };
+    dispatch(userChangeProfileAction(form));
   };
 
   const changeVisibility = () => {
@@ -115,11 +114,6 @@ const ChangeProfilePage = () => {
       <main className="container text-center">
         <div>
           {loadUserDetails && <LoaderComponent />}
-          {dataUserDetails && (
-            <MessageComponent variant="success">
-              Данные успешно получены!
-            </MessageComponent>
-          )}
           {errorUserDetails && (
             <MessageComponent variant="danger">
               {errorUserDetails}

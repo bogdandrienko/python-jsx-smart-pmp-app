@@ -1,12 +1,8 @@
+from rest_framework_simplejwt import token_blacklist
+
 from django.contrib import admin
 
 from backend import models as backend_models
-
-from rest_framework_simplejwt import token_blacklist
-
-admin.site.site_header = 'Панель управления'  # default: "Django Administration"
-admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
-admin.site.site_title = 'Администрирование'  # default: "Django site admin"
 
 
 class ExamplesModelAdmin(admin.ModelAdmin):
@@ -150,17 +146,10 @@ class ExamplesModelAdmin(admin.ModelAdmin):
     # inlines         = [ExamplesModelInline]
 
 
-admin.site.register(backend_models.ExamplesModel, ExamplesModelAdmin)
-
-
 class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
 
     def has_delete_permission(self, *args, **kwargs):
         return True  # or whatever logic you want
-
-
-admin.site.unregister(token_blacklist.models.OutstandingToken)
-admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
 
 
 class LoggingModelAdmin(admin.ModelAdmin):
@@ -212,61 +201,6 @@ class LoggingModelAdmin(admin.ModelAdmin):
         'error_text_field',
         'datetime_field'
     ]
-
-
-admin.site.register(backend_models.LoggingModel, LoggingModelAdmin)
-
-
-class ModulesModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'ModuleOrComponentModel' на панели администратора
-    """
-
-    list_display = (
-        'type_slug_field',
-        'name_char_field',
-        'previous_path_slug_field',
-        'current_path_slug_field',
-        'next_path_slug_field',
-        'position_float_field',
-        # 'image_field',
-        # 'text_field',
-    )
-    list_filter = (
-        'type_slug_field',
-        'name_char_field',
-        'previous_path_slug_field',
-        'current_path_slug_field',
-        'next_path_slug_field',
-        'position_float_field',
-        'image_field',
-        'text_field',
-    )
-    fieldsets = (
-        ('main', {'fields': (
-            'type_slug_field',
-            'name_char_field',
-            'previous_path_slug_field',
-            'current_path_slug_field',
-            'next_path_slug_field',
-            'position_float_field',
-            'image_field',
-            'text_field',
-        )}),
-    )
-    search_fields = [
-        'type_slug_field',
-        'name_char_field',
-        'previous_path_slug_field',
-        'current_path_slug_field',
-        'next_path_slug_field',
-        'position_float_field',
-        'image_field',
-        'text_field',
-    ]
-
-
-admin.site.register(backend_models.ModulesModel, ModulesModelAdmin)
 
 
 class UserModelAdmin(admin.ModelAdmin):
@@ -382,9 +316,6 @@ class UserModelAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(backend_models.UserModel, UserModelAdmin)
-
-
 class ActionModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
@@ -416,9 +347,6 @@ class ActionModelAdmin(admin.ModelAdmin):
         'name_char_field',
         'name_slug_field',
     ]
-
-
-admin.site.register(backend_models.ActionModel, ActionModelAdmin)
 
 
 class GroupModelAdmin(admin.ModelAdmin):
@@ -474,261 +402,183 @@ class GroupModelAdmin(admin.ModelAdmin):
     ]
 
 
+class RationalModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'RationalModel' на панели администратора
+    """
+
+    list_display = (
+        "author_foreign_key_field",
+        "number_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "short_description_char_field",
+        "description_text_field",
+        "additional_word_file_field",
+        "additional_pdf_file_field",
+        "additional_excel_file_field",
+        "user1_char_field",
+        "user2_char_field",
+        "user3_char_field",
+        "user4_char_field",
+        "user5_char_field",
+
+        "author_premoderate_char_field",
+        "conclusion_premoderate_char_field",
+        "comment_premoderate_char_field",
+        "author_postmoderate_char_field",
+        "conclusion_postmoderate_char_field",
+        "comment_postmoderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    )
+    list_links = (
+        "author_foreign_key_field",
+        "number_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "short_description_char_field",
+        "description_text_field",
+        "additional_word_file_field",
+        "additional_pdf_file_field",
+        "additional_excel_file_field",
+        "user1_char_field",
+        "user2_char_field",
+        "user3_char_field",
+        "user4_char_field",
+        "user5_char_field",
+
+        "author_premoderate_char_field",
+        "conclusion_premoderate_char_field",
+        "comment_premoderate_char_field",
+        "author_postmoderate_char_field",
+        "conclusion_postmoderate_char_field",
+        "comment_postmoderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    )
+    list_filter = (
+        "author_foreign_key_field",
+        "number_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "short_description_char_field",
+        "description_text_field",
+        "additional_word_file_field",
+        "additional_pdf_file_field",
+        "additional_excel_file_field",
+        "user1_char_field",
+        "user2_char_field",
+        "user3_char_field",
+        "user4_char_field",
+        "user5_char_field",
+
+        "author_premoderate_char_field",
+        "conclusion_premoderate_char_field",
+        "comment_premoderate_char_field",
+        "author_postmoderate_char_field",
+        "conclusion_postmoderate_char_field",
+        "comment_postmoderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "author_foreign_key_field",
+            "number_char_field",
+            "subdivision_char_field",
+            "sphere_char_field",
+            "category_char_field",
+            "avatar_image_field",
+            "name_char_field",
+            "place_char_field",
+            "short_description_char_field",
+            "description_text_field",
+            "additional_word_file_field",
+            "additional_pdf_file_field",
+            "additional_excel_file_field",
+            "user1_char_field",
+            "user2_char_field",
+            "user3_char_field",
+            "user4_char_field",
+            "user5_char_field",
+        )}),
+        ("Предмодерация", {"fields": (
+            "author_premoderate_char_field",
+            "conclusion_premoderate_char_field",
+            "comment_premoderate_char_field",
+        )}),
+        ("Постмодерация", {"fields": (
+            "author_postmoderate_char_field",
+            "conclusion_postmoderate_char_field",
+            "comment_postmoderate_char_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+            "visibility_boolean_field",
+            "created_datetime_field",
+            "register_datetime_field",
+        )}),
+    )
+    search_fields = [
+        "author_foreign_key_field",
+        "number_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "short_description_char_field",
+        "description_text_field",
+        "additional_word_file_field",
+        "additional_pdf_file_field",
+        "additional_excel_file_field",
+        "user1_char_field",
+        "user2_char_field",
+        "user3_char_field",
+        "user4_char_field",
+        "user5_char_field",
+
+        "author_premoderate_char_field",
+        "conclusion_premoderate_char_field",
+        "comment_premoderate_char_field",
+        "author_postmoderate_char_field",
+        "conclusion_postmoderate_char_field",
+        "comment_postmoderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    ]
+
+
+admin.site.site_header = 'Панель управления'  # default: "Django Administration"
+admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
+admin.site.site_title = 'Администрирование'  # default: "Django site admin"
+
+admin.site.register(backend_models.ExamplesModel, ExamplesModelAdmin)
+admin.site.unregister(token_blacklist.models.OutstandingToken)
+admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
+admin.site.register(backend_models.LoggingModel, LoggingModelAdmin)
+admin.site.register(backend_models.UserModel, UserModelAdmin)
+admin.site.register(backend_models.ActionModel, ActionModelAdmin)
 admin.site.register(backend_models.GroupModel, GroupModelAdmin)
-
-
-########################################################################################################################
-
-
-# class RationalModelAdmin(admin.ModelAdmin):
-#     """
-#     Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
-#     """
-#
-#     list_display = (
-#         'type_slug_field',
-#         'name_char_field',
-#         'name_slug_field',
-#     )
-#     list_filter = (
-#         'type_slug_field',
-#         'name_char_field',
-#         'name_slug_field',
-#     )
-#     fieldsets = (
-#         ('Тип', {'fields': (
-#             'type_slug_field',
-#         )}),
-#         ('Имя отображения', {'fields': (
-#             'name_char_field',
-#         )}),
-#         ('Имя валидации', {'fields': (
-#             'name_slug_field',
-#         )}),
-#     )
-#     search_fields = [
-#         'type_slug_field',
-#         'name_char_field',
-#         'name_slug_field',
-#     ]
-
-
-# admin.site.register(backend_models.RationalModel, RationalModelAdmin)
-admin.site.register(backend_models.RationalModel)
-
-
-# class IdeaModelAdmin(admin.ModelAdmin):
-#     """
-#     Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
-#     """
-#
-#     list_display = (
-#         'type_slug_field',
-#         'name_char_field',
-#         'name_slug_field',
-#     )
-#     list_filter = (
-#         'type_slug_field',
-#         'name_char_field',
-#         'name_slug_field',
-#     )
-#     fieldsets = (
-#         ('Тип', {'fields': (
-#             'type_slug_field',
-#         )}),
-#         ('Имя отображения', {'fields': (
-#             'name_char_field',
-#         )}),
-#         ('Имя валидации', {'fields': (
-#             'name_slug_field',
-#         )}),
-#     )
-#     search_fields = [
-#         'type_slug_field',
-#         'name_char_field',
-#         'name_slug_field',
-#     ]
-
-
-# admin.site.register(backend_models.IdeaModel, IdeaModelAdmin)
-admin.site.register(backend_models.IdeaModel)
-
-
-########################################################################################################################
-class NotificationModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'NotificationModel' на панели администратора
-    """
-
-    list_display = (
-        'user_foreign_key_field',
-        'type_slug_field',
-        'name_char_field',
-        'text_field',
-        'created_datetime_field',
-        'decision_datetime_field',
-    )
-    list_filter = (
-        'user_foreign_key_field',
-        'type_slug_field',
-        'name_char_field',
-        'text_field',
-        'created_datetime_field',
-        'decision_datetime_field',
-    )
-    fieldsets = (
-        ('main', {'fields': (
-            'user_foreign_key_field',
-            'type_slug_field',
-            'name_char_field',
-            'text_field',
-            'created_datetime_field',
-            'decision_datetime_field',
-        )}),
-    )
-    search_fields = [
-        'user_foreign_key_field',
-        'type_slug_field',
-        'name_char_field',
-        'text_field',
-        'created_datetime_field',
-        'decision_datetime_field',
-    ]
-
-
-admin.site.register(backend_models.NotificationModel, NotificationModelAdmin)
-
-
-class ChatModelAdmin(admin.ModelAdmin):
-    """
-    Ideas Model Admin
-    """
-    list_display = (
-        'author_char_field',
-        'text_field',
-        'created_datetime_field',
-    )
-    list_filter = (
-        'author_char_field',
-        'text_field',
-        'created_datetime_field',
-    )
-    fieldsets = (
-        ('Автор',
-         {'fields': ('author_char_field',)}
-         ),
-        ('Текст',
-         {'fields': ('text_field',)}
-         ),
-        ('Время',
-         {'fields': ('created_datetime_field',)}
-         ),
-    )
-    search_fields = [
-        'author_char_field',
-        'text_field',
-        'created_datetime_field',
-    ]
-
-
-admin.site.register(backend_models.ChatModel, ChatModelAdmin)
-
-
-class NoteModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'NoteModel' на панели администратора
-    """
-
-    list_display = (
-        'user',
-        'body',
-    )
-    list_filter = (
-        'user',
-        'body',
-    )
-    fieldsets = (
-        ('Text', {'fields': (
-            'user', 'body',
-        )}),
-    )
-    search_fields = [
-        'user',
-        'body',
-    ]
-
-
-admin.site.register(backend_models.NoteModel, NoteModelAdmin)
-
-
-class TaskModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'TaskModel' на панели администратора
-    """
-
-    list_display = (
-        'user', 'title', 'decription', 'complete',
-    )
-    list_filter = (
-        'user', 'title', 'decription', 'complete', 'update', 'create',
-    )
-    fieldsets = (
-        ('Text', {'fields': (
-            'user', 'title', 'decription', 'complete',
-        )}),
-    )
-    search_fields = [
-        'user', 'title', 'decription', 'complete', 'update', 'create',
-    ]
-
-
-admin.site.register(backend_models.TaskModel, TaskModelAdmin)
-
-# class ProductModelAdmin(admin.ModelAdmin):
-#     """
-#     Настройки отображения, фильтрации и поиска модели:'ProductModel' на панели администратора
-#     """
-#
-#     list_display = (
-#         'user', 'name', 'brand', 'category', 'description', 'rating', 'numReviews', 'price', 'countInStock',
-#         'createdAt', '_id',
-#     )
-#     list_filter = (
-#         'user', 'name', 'brand', 'category', 'description', 'rating', 'numReviews', 'price', 'countInStock',
-#         'createdAt', '_id',
-#     )
-#     fieldsets = (
-#         ('Text', {'fields': (
-#             'user', 'name', 'brand', 'category', 'description', 'rating', 'numReviews', 'price', 'countInStock',
-#             'createdAt', '_id',
-#         )}),
-#     )
-#     search_fields = [
-#         'user', 'name', 'brand', 'category', 'description', 'rating', 'numReviews', 'price', 'countInStock',
-#         'createdAt', '_id',
-#     ]
-
-
-admin.site.register(backend_models.ProductModel)
-admin.site.register(backend_models.ReviewModel)
-admin.site.register(backend_models.OrderModel)
-admin.site.register(backend_models.OrderItemModel)
-admin.site.register(backend_models.ShippingAddressModel)
-
-
-class TodoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'category', 'description', 'date', 'done')
-    list_display_links = ('id', 'title')
-    search_fields = ('id', 'title')
-    list_editable = ('done',)
-    list_filter = ('done', 'category')
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
-    list_display_links = ('title',)
-    search_fields = ('title',)
-
-
-admin.site.register(backend_models.Todo, TodoAdmin)
-admin.site.register(backend_models.Category, CategoryAdmin)
+admin.site.register(backend_models.RationalModel, RationalModelAdmin)

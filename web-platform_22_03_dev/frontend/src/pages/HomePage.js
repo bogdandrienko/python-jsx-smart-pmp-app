@@ -20,13 +20,13 @@ const HomePage = () => {
       />
       <main className="container">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
-          <div className="">
+          <div className="col-4 col-md-4 col-lg-4">
             <small className="lead fw-bold">Первый вход в систему:</small>
-            <div className="w-75">
+            <div className="w-100">
               С компьютера:
               <div className="">
                 <ReactPlayer
-                  url="static/video/first_login_desktop.mp4"
+                  url="static/study/first_login.mp4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"
@@ -36,11 +36,11 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="w-75">
+            <div className="w-100">
               С смартфона:
               <div className="">
                 <ReactPlayer
-                  url="static/video/first_login_mobile.mp4"
+                  url="static/study/first_login_mobile.mp4"
                   title="Первый вход в систему:"
                   width="100%"
                   height="100%"
@@ -66,7 +66,7 @@ const HomePage = () => {
               </LinkContainer>
             </div>
           </div>
-          <NewsComponent count={7} />
+          <NewsComponent count={9} />
         </div>
         <div>
           <ModulesComponent />

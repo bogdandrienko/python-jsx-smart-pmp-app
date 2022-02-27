@@ -28,7 +28,11 @@ const SalaryPage = () => {
       month_ = "0" + month_;
     }
     let year_ = document.getElementById("year").value;
-    dispatch(salaryUserAction(`${year_}${month_}`));
+    const form = {
+      "Action-type": "USER_SALARY",
+      dateTime: `${year_}${month_}`,
+    };
+    dispatch(salaryUserAction(form));
   };
 
   return (

@@ -5,7 +5,7 @@ import { Nav } from "react-bootstrap";
 
 const NewsComponent = (count = 100) => {
   return (
-    <div className="">
+    <div className="col-8 col-md-8 col-lg-8">
       <div className="list-group list-group-flush border-bottom scrollarea">
         <LinkContainer to="/news" className="m-0 p-0">
           <Nav.Link>
@@ -17,7 +17,7 @@ const NewsComponent = (count = 100) => {
                 <strong className="mb-1 lead">Лента</strong>
                 <strong className="text-warning">Свежие сверху</strong>
               </div>
-              {count.count <= 7 ? (
+              {count.count <= 9 ? (
                 <div className="col-10 mb-1 small">
                   нажмите сюда для просмотра всех изменений
                 </div>

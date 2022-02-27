@@ -26,11 +26,10 @@ SECRET_KEY = 'django-insecure-ywqo&h1qj$(vrw&wkv!ko-x6*0(ovqn653idp8e-(r%e44ut$7
 DEBUG = True
 SQLITE = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.83']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.233']
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,7 +63,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates', BASE_DIR / 'frontend/build'],
+        'DIRS': [BASE_DIR / 'frontend/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,7 +73,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'django.template.context_processors.request',
-                'backend.context_processors.user_counter'
             ],
         },
     },
@@ -141,9 +139,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = Path(BASE_DIR, 'staticroot/')
+STATIC_ROOT = Path(BASE_DIR, 'static/')
 STATIC_DIR = Path(BASE_DIR, 'static')
-STATICFILES_DIRS = [Path(BASE_DIR, 'static'), Path(BASE_DIR, 'frontend/build/static')]
+STATICFILES_DIRS = [Path(BASE_DIR, 'frontend/build/static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media/')
@@ -168,13 +166,9 @@ if yandex:
     EMAIL_USE_SSL = True
 else:
     EMAIL_HOST = '192.168.1.100'
-    # ip_ = '192.168.1.100'
     EMAIL_HOST_USER = ''
-    # password_ = 'webapp'
     EMAIL_HOST_PASSWORD = ''
-    # password_ = 'ddf770Tz4'
     EMAIL_PORT = 25
-    # pop = 995
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
 

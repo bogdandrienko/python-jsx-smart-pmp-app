@@ -39,7 +39,12 @@ const LoginPage = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (capcha !== "") {
-      dispatch(userLoginAction(username, password));
+      const form = {
+        "Action-type": "USER_LOGIN",
+        username: username,
+        password: password,
+      };
+      dispatch(userLoginAction(form));
     }
   };
 

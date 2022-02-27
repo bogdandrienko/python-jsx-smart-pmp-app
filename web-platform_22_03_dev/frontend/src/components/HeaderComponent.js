@@ -29,32 +29,32 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
 
   useEffect(() => {
     if (logic) {
-      dispatch(userDetailsAction());
+      const form = {
+        "Action-type": "USER_DETAIL",
+      };
+      dispatch(userDetailsAction(form));
     }
   }, [dispatch, logic]);
 
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
+        dispatch(userLogoutAction());
         navigate("/login");
       } else {
-        if (errorUserDetails || failUserDetails) {
-          dispatch(userLogoutAction());
-        } else {
-          if (dataUserLogin) {
-            if (dataUserDetails && dataUserDetails["user_model"]) {
-              if (
-                dataUserDetails["user_model"]["activity_boolean_field"] ===
-                false
-              ) {
-                dispatch(userLogoutAction());
-              }
-              if (
-                !dataUserDetails["user_model"]["secret_question_char_field"] ||
-                !dataUserDetails["user_model"]["secret_answer_char_field"]
-              ) {
-                navigate("/change_profile");
-              }
+        if (dataUserLogin) {
+          if (dataUserDetails && dataUserDetails["user_model"]) {
+            if (
+              dataUserDetails["user_model"]["activity_boolean_field"] === false
+            ) {
+              dispatch(userLogoutAction());
+              navigate("/login");
+            }
+            if (
+              !dataUserDetails["user_model"]["secret_question_char_field"] ||
+              !dataUserDetails["user_model"]["secret_answer_char_field"]
+            ) {
+              navigate("/change_profile");
             }
           }
         }
@@ -86,7 +86,7 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
         <Container>
           <a className="navbar-brand w-25" href="https://km.kz/">
             <img
-              src="static/logo.png"
+              src="static/img/logo.png"
               className="w-25 img-responsive"
               alt="id"
             />

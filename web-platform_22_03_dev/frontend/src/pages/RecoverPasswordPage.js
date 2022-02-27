@@ -4,6 +4,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import {
   userChangeProfileAction,
+  userLoginAction,
   userRecoverPasswordAction,
 } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
@@ -11,6 +12,7 @@ import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import MessageComponent from "../components/MessageComponent";
 import LoaderComponent from "../components/LoaderComponent";
+import { USER_DETAILS_RESET_CONSTANT } from "../js/constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangePasswordPage = () => {
@@ -39,78 +41,58 @@ const ChangePasswordPage = () => {
     error: errorUserRecoverPassword,
     fail: failUserRecoverPassword,
   } = userRecoverPasswordStore;
+  console.log("dataUserRecoverPassword: ", dataUserRecoverPassword);
 
   const postFindUserHandlerSubmit = (e) => {
     e.preventDefault();
     if (capcha !== "") {
-      dispatch(
-        userRecoverPasswordAction({
-          actionType: "FIND_USER",
-          username: username,
-          secretAnswer: "",
-          recoverPassword: "",
-          password: "",
-          password2: "",
-        })
-      );
+      const form = {
+        "Action-type": "FIND_USER",
+        username: username,
+      };
+      dispatch(userRecoverPasswordAction(form));
     }
   };
 
   const postCheckAnswerHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "CHECK_ANSWER",
-        username: username,
-        secretAnswer: secretAnswer,
-        recoverPassword: "",
-        password: "",
-        password2: "",
-      })
-    );
+    const form = {
+      "Action-type": "CHECK_ANSWER",
+      username: username,
+      secretAnswer: secretAnswer,
+    };
+    dispatch(userRecoverPasswordAction(form));
   };
 
   const postSendEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "SEND_EMAIL_PASSWORD",
-        username: username,
-        secretAnswer: "",
-        recoverPassword: "",
-        password: "",
-        password2: "",
-      })
-    );
+    const form = {
+      "Action-type": "SEND_EMAIL_PASSWORD",
+      username: username,
+    };
+    dispatch(userRecoverPasswordAction(form));
   };
 
   const postRecoverEmailHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "CHECK_EMAIL_PASSWORD",
-        username: username,
-        secretAnswer: "",
-        recoverPassword: recoverPassword,
-        password: "",
-        password2: "",
-      })
-    );
+    const form = {
+      "Action-type": "CHECK_EMAIL_PASSWORD",
+      username: username,
+      recoverPassword: recoverPassword,
+    };
+    dispatch(userRecoverPasswordAction(form));
   };
 
   const postRecoverPasswordHandlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      userRecoverPasswordAction({
-        actionType: "CHANGE_PASSWORD",
-        username: username,
-        secretAnswer: "",
-        recoverPassword: "",
-        password: password,
-        password2: password2,
-      })
-    );
-    dispatch(userChangeProfileAction());
+    const form = {
+      "Action-type": "CHANGE_PASSWORD",
+      username: username,
+      password: password,
+      password2: password2,
+    };
+    dispatch(userRecoverPasswordAction(form));
+    dispatch({ type: USER_DETAILS_RESET_CONSTANT });
   };
 
   useEffect(() => {
@@ -137,7 +119,7 @@ const ChangePasswordPage = () => {
       }
     } else {
     }
-  }, [dispatch, dataUserRecoverPassword]);
+  }, [dataUserRecoverPassword]);
 
   const changeVisibility = () => {
     const password = document.getElementById("password");

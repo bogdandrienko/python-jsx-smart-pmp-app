@@ -29,7 +29,6 @@ const ChangePasswordPage = () => {
   useEffect(() => {
     if (dataUserChange) {
       sleep(1000).then(() => {
-        dispatch({ type: USER_CHANGE_RESET_CONSTANT });
         dispatch(userLogoutAction());
         navigate("/login");
       });
@@ -38,12 +37,12 @@ const ChangePasswordPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      userChangeProfileAction({
-        password: password,
-        password2: password2,
-      })
-    );
+    const form = {
+      "Action-type": "CHANGE",
+      password: password,
+      password2: password2,
+    };
+    dispatch(userChangeProfileAction(form));
   };
 
   const changeVisibility = () => {

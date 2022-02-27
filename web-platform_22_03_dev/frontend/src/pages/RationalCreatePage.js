@@ -56,6 +56,7 @@ const BankIdeaListPage = () => {
     error: errorRationalCreate,
     fail: failRationalCreate,
   } = rationalCreateStore;
+  console.log("dataRationalCreate", dataRationalCreate);
 
   useEffect(() => {
     if (dataRationalCreate) {
@@ -70,6 +71,7 @@ const BankIdeaListPage = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const form = {
+      "Action-type": "RATIONAL_CREATE",
       subdivision: subdivision,
       sphere: sphere,
       category: category,
@@ -109,7 +111,7 @@ const BankIdeaListPage = () => {
           {dataRationalCreate && (
             <div className="m-1">
               <MessageComponent variant="success">
-                Данные успешно отправлены!
+                {dataRationalCreate}
               </MessageComponent>
             </div>
           )}
@@ -346,7 +348,9 @@ const BankIdeaListPage = () => {
                             name="addiction_file_field"
                             accept=".docx, .doc"
                             className="form-control form-control-sm"
-                            onChange={(e) => setAdditionalWord(e.target.value)}
+                            onChange={(e) =>
+                              setAdditionalWord(e.target.files[0])
+                            }
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>
@@ -358,7 +362,9 @@ const BankIdeaListPage = () => {
                             name="addiction_file_field"
                             accept=".pdf"
                             className="form-control form-control-sm"
-                            onChange={(e) => setAdditionalPdf(e.target.value)}
+                            onChange={(e) =>
+                              setAdditionalPdf(e.target.files[0])
+                            }
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>

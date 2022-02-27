@@ -5,7 +5,7 @@ Install full and clean ubuntu (Virtual Machine or desktop)
 
 Install updates for system: 'sudo apt-get update -y', 'sudo apt upgrade -y'
 
-if system on VirtualBox == install 'insert guest additions', and 'sudo adduser bogdan vboxsf', and reboot system
+if system on VirtualBox == install 'insert guest additions', and 'sudo adduser bogdan vboxsf', and 'sudo reboot'
 
 # Postgre SQL
 ########################################################################################################################
@@ -61,8 +61,9 @@ nano backend/settings.py
 
 <file>
 DEBUG = False
+SQLITE = True
 
-ALLOWED_HOSTS = ['192.168.1.83']
+ALLOWED_HOSTS = ['192.168.1.255']
 CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
@@ -71,19 +72,40 @@ INSTALLED_APPS = [
 ...
 ]
 
+
 TEMPLATES = [
-...
-'DIRS': [BASE_DIR / 'templates'],
-...
+    .........
+    'DIRS': [BASE_DIR / 'frontend/build'],
+    'APP_DIRS': True,
+    .........
 ]
 
+if SQLITE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'dbname',
+            'USER': 'dbuser',
+            'PASSWORD': 'dbpassword',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
+
 STATIC_URL = '/static/'
-STATIC_ROOT = Path(BASE_DIR, 'staticroot/') # '/home/bogdan/web/staticroot/'
+STATIC_ROOT = Path(BASE_DIR, 'static/')
 STATIC_DIR = Path(BASE_DIR, 'static')
-STATICFILES_DIRS = [Path(BASE_DIR, 'static')]
+STATICFILES_DIRS = [Path(BASE_DIR, 'frontend/build/static')]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = Path(BASE_DIR, 'static/media')
+MEDIA_ROOT = Path(BASE_DIR, 'static/media/')
 </file>
 
 #python manage.py check --database default
@@ -116,7 +138,7 @@ Group=bogdan
 
 RuntimeDirectory=gunicorn_example
 WorkingDirectory=/home/bogdan/web
-ExecStart=/home/bogdan/web/env/bin/gunicorn --workers 5 --bind 127.0.0.1:8001 backend.wsgi
+ExecStart=/home/bogdan/web/env/bin/gunicorn --workers 5 --bind 127.0.0.1:8000 backend.wsgi
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
@@ -140,16 +162,16 @@ server {
 listen 80;
 listen [::]:80;
 
-server_name 192.168.1.83;
+server_name 192.168.1.255;
 
 location /static/ {
-    alias /home/bogdan/web/staticroot/;
+    alias /home/bogdan/web/static/;
 
     expires max;
 }
 
 location /media/ {
-    alias /home/bogdan/web/staticroot/media/;
+    alias /home/bogdan/web/static/media/;
 
     expires max;
 }
@@ -167,7 +189,7 @@ location / {
 
     proxy_buffering off;
 
-    proxy_pass http://127.0.0.1:8001;
+    proxy_pass http://127.0.0.1:8000;
 }
 }
 </file>
@@ -181,9 +203,5 @@ sudo usermod -aG bogdan www-data
 sudo systemctl reload nginx.service
 
 sudo reboot
-
-########################################################################################################################
-
-create Group, create GroupModel, create ActionModel
 
 ########################################################################################################################

@@ -19,11 +19,13 @@ const RationalDetailPage = () => {
     error: errorRationalDetail,
     fail: failRationalDetail,
   } = rationalDetailStore;
+  console.log("dataRationalDetail: ", dataRationalDetail);
 
   useEffect(() => {
     if (dataRationalDetail) {
     } else {
       const form = {
+        "Action-type": "RATIONAL_DETAIL",
         id: 1,
       };
       dispatch(rationalDetailAction(form));
@@ -78,7 +80,7 @@ const RationalDetailPage = () => {
         </div>
         <div className="">
           <ul className="row row-cols-1 row-cols-md-2 row-cols-lg-2 nav justify-content-center">
-            {!dataRationalDetail ? (
+            {!dataRationalDetail || dataRationalDetail.length < 1 ? (
               ""
             ) : (
               <li className="container-fluid m-1">

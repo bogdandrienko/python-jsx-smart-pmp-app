@@ -60,6 +60,7 @@ const RationalListPage = () => {
     if (dataRationalDetail) {
     } else {
       const form = {
+        "Action-type": "RATIONAL_DETAIL",
         id: 41,
       };
       dispatch(rationalDetailAction(form));
@@ -78,6 +79,7 @@ const RationalListPage = () => {
     if (dataRationalList) {
     } else {
       const form = {
+        "Action-type": "RATIONAL_LIST",
         sphere: sphere,
         subdivision: subdivision,
         premoderate: premoderate,
@@ -105,6 +107,7 @@ const RationalListPage = () => {
     e.preventDefault();
 
     const form = {
+      "Action-type": "RATIONAL_LIST",
       sphere: sphere,
       subdivision: subdivision,
       premoderate: premoderate,
@@ -230,180 +233,188 @@ const RationalListPage = () => {
             </button>
           </label>
           <ul className="row row-cols-1 row-cols-md-3 row-cols-lg-4 nav justify-content-center">
-            {!dataRationalList ? (
+            {!dataRationalList || dataRationalList.length < 1 ? (
               <div className="text-center text-danger lead">
                 Рац. предложения не получены! Попробуйте обновить страницу или
                 зайдите позже!
               </div>
             ) : (
-              dataRationalList.map((rational, index) => (
-                <li key={index} className="container-fluid m-1">
-                  <div className="card shadow">
-                    <div>
-                      <div className="">
-                        <div className="card-header">
-                          <Link
-                            to={`#`}
-                            className="btn btn-lg btn-outline-primary"
-                          >
-                            <h6 className="lead fw-bold">
-                              {rational["name_char_field"]}
-                            </h6>
-                          </Link>
-                        </div>
-                        <div className="d-flex w-100 align-items-center justify-content-between">
-                          <label className="form-control-sm m-1">
-                            Наименование структурного подразделения:
-                            <select
-                              id="subdivision"
-                              name="subdivision"
-                              required
-                              className="form-control form-control-sm"
-                            >
-                              <option value="">
-                                {rational["subdivision_char_field"]}
-                              </option>
-                            </select>
-                          </label>
-                          <label className="w-100 form-control-sm m-1">
-                            Зарегистрировано за №{" "}
-                            <strong className="btn btn-light disabled">
-                              {rational["number_char_field"]}
-                            </strong>
-                          </label>
-                        </div>
+              dataRationalList.map(
+                (rational, index) =>
+                  rational && (
+                    <li key={index} className="container-fluid m-1">
+                      <div className="card shadow">
                         <div>
-                          <label className="form-control-sm m-1">
-                            Сфера рац. предложения:
-                            <select
-                              id="sphere"
-                              name="sphere"
-                              required
-                              className="form-control form-control-sm"
-                            >
-                              <option value="">
-                                {rational["sphere_char_field"]}
-                              </option>
-                            </select>
-                          </label>
-                          <label className="form-control-sm m-1">
-                            Категория:
-                            <select
-                              id="category"
-                              name="category"
-                              required
-                              className="form-control form-control-sm"
-                            >
-                              <option value="">
-                                {rational["category_char_field"]}
-                              </option>
-                            </select>
-                          </label>
-                          <div>
-                            <label className="form-control-sm m-1">
-                              {rational["avatar_image_field"] ? (
-                                <img
-                                  src={getStaticFile(
-                                    rational["avatar_image_field"]
+                          <div className="">
+                            <div className="card-header">
+                              <Link
+                                to={`#`}
+                                className="btn btn-lg btn-outline-primary"
+                              >
+                                <h6 className="lead fw-bold">
+                                  {rational["name_char_field"]}
+                                </h6>
+                              </Link>
+                            </div>
+                            <div className="d-flex w-100 align-items-center justify-content-between">
+                              <label className="form-control-sm m-1">
+                                Наименование структурного подразделения:
+                                <select
+                                  id="subdivision"
+                                  name="subdivision"
+                                  required
+                                  className="form-control form-control-sm"
+                                >
+                                  <option value="">
+                                    {rational["subdivision_char_field"]}
+                                  </option>
+                                </select>
+                              </label>
+                              <label className="w-100 form-control-sm m-1">
+                                Зарегистрировано за №{" "}
+                                <strong className="btn btn-light disabled">
+                                  {rational["number_char_field"]}
+                                </strong>
+                              </label>
+                            </div>
+                            <div>
+                              <label className="form-control-sm m-1">
+                                Сфера рац. предложения:
+                                <select
+                                  id="sphere"
+                                  name="sphere"
+                                  required
+                                  className="form-control form-control-sm"
+                                >
+                                  <option value="">
+                                    {rational["sphere_char_field"]}
+                                  </option>
+                                </select>
+                              </label>
+                              <label className="form-control-sm m-1">
+                                Категория:
+                                <select
+                                  id="category"
+                                  name="category"
+                                  required
+                                  className="form-control form-control-sm"
+                                >
+                                  <option value="">
+                                    {rational["category_char_field"]}
+                                  </option>
+                                </select>
+                              </label>
+                              <div>
+                                <label className="form-control-sm m-1">
+                                  {rational["avatar_image_field"] ? (
+                                    <img
+                                      src={getStaticFile(
+                                        rational["avatar_image_field"]
+                                      )}
+                                      className="card-img-top img-fluid w-50"
+                                      alt="id"
+                                    />
+                                  ) : (
+                                    <img
+                                      src="/static/media/uploads/rational/default_rational.jpg"
+                                      className="card-img-top img-fluid w-50"
+                                      alt="id"
+                                    />
                                   )}
-                                  className="card-img-top img-fluid w-50"
-                                  alt="id"
+                                </label>
+                              </div>
+                            </div>
+                            <div>
+                              <label className="w-100 form-control-sm">
+                                Предполагаемое место внедрения:
+                                <input
+                                  type="text"
+                                  id="name_char_field"
+                                  name="name_char_field"
+                                  required
+                                  placeholder="Цех / участок / отдел / лаборатория и т.п."
+                                  value={rational["place_char_field"]}
+                                  minLength="1"
+                                  maxLength="100"
+                                  className="form-control form-control-sm"
                                 />
-                              ) : (
-                                <img
-                                  src="/static/media/uploads/rational/default_rational.jpg"
-                                  className="card-img-top img-fluid w-50"
-                                  alt="id"
+                              </label>
+                            </div>
+                            <div>
+                              <label className="w-100 form-control-sm">
+                                Краткое описание:
+                                <textarea
+                                  id="short_description_char_field"
+                                  name="short_description_char_field"
+                                  required
+                                  placeholder="Краткое описание"
+                                  value={
+                                    rational["short_description_char_field"]
+                                  }
+                                  minLength="1"
+                                  maxLength="200"
+                                  rows="2"
+                                  className="form-control form-control-sm"
                                 />
-                              )}
-                            </label>
+                              </label>
+                            </div>
                           </div>
                         </div>
                         <div>
-                          <label className="w-100 form-control-sm">
-                            Предполагаемое место внедрения:
-                            <input
-                              type="text"
-                              id="name_char_field"
-                              name="name_char_field"
-                              required
-                              placeholder="Цех / участок / отдел / лаборатория и т.п."
-                              value={rational["place_char_field"]}
-                              minLength="1"
-                              maxLength="100"
-                              className="form-control form-control-sm"
-                            />
-                          </label>
+                          <div className="container-fluid text-center">
+                            <a
+                              className="btn btn-sm btn-outline-warning m-1"
+                              href="#"
+                            >
+                              Автор:{" "}
+                              {
+                                dataRationalDetail["user_model"][
+                                  "last_name_char_field"
+                                ]
+                              }{" "}
+                              {
+                                dataRationalDetail["user_model"][
+                                  "first_name_char_field"
+                                ]
+                              }{" "}
+                              {
+                                dataRationalDetail["user_model"][
+                                  "patronymic_char_field"
+                                ]
+                              }
+                            </a>
+                          </div>
+                          <div className="container-fluid d-flex justify-content-between p-0">
+                            <small className="text-muted border">
+                              подано:{" "}
+                              <p>
+                                {getCleanDateTime(
+                                  rational["created_datetime_field"]
+                                )}
+                              </p>
+                            </small>
+                            <small className="text-muted border">
+                              зарегистрировано:{" "}
+                              <p>
+                                {getCleanDateTime(
+                                  rational["register_datetime_field"]
+                                )}
+                              </p>
+                            </small>
+                          </div>
                         </div>
-                        <div>
-                          <label className="w-100 form-control-sm">
-                            Краткое описание:
-                            <textarea
-                              id="short_description_char_field"
-                              name="short_description_char_field"
-                              required
-                              placeholder="Краткое описание"
-                              value={rational["short_description_char_field"]}
-                              minLength="1"
-                              maxLength="200"
-                              rows="2"
-                              className="form-control form-control-sm"
-                            />
-                          </label>
+                        <div className="card-header">
+                          <a
+                            className="btn btn-sm btn-primary m-1 w-100"
+                            href="#"
+                          >
+                            Подробнее
+                          </a>
                         </div>
                       </div>
-                    </div>
-                    <div>
-                      <div className="container-fluid text-center">
-                        <a
-                          className="btn btn-sm btn-outline-warning m-1"
-                          href="#"
-                        >
-                          Автор:{" "}
-                          {
-                            dataRationalDetail["user_model"][
-                              "last_name_char_field"
-                            ]
-                          }{" "}
-                          {
-                            dataRationalDetail["user_model"][
-                              "first_name_char_field"
-                            ]
-                          }{" "}
-                          {
-                            dataRationalDetail["user_model"][
-                              "patronymic_char_field"
-                            ]
-                          }
-                        </a>
-                      </div>
-                      <div className="container-fluid d-flex justify-content-between p-0">
-                        <small className="text-muted border">
-                          подано:{" "}
-                          <p>
-                            {getCleanDateTime(
-                              rational["created_datetime_field"]
-                            )}
-                          </p>
-                        </small>
-                        <small className="text-muted border">
-                          зарегистрировано:{" "}
-                          <p>
-                            {getCleanDateTime(
-                              rational["register_datetime_field"]
-                            )}
-                          </p>
-                        </small>
-                      </div>
-                    </div>
-                    <div className="card-header">
-                      <a className="btn btn-sm btn-primary m-1 w-100" href="#">
-                        Подробнее
-                      </a>
-                    </div>
-                  </div>
-                </li>
-              ))
+                    </li>
+                  )
+              )
             )}
           </ul>
         </div>
