@@ -1,145 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f60f8405-d267-4f6a-be37-36d97b53283e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/win_0_run_ip.88.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/win_0_run_ip.89.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.e4bc8bc7.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.e4bc8bc7.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.e4bc8bc7.js.map" afterDir="false" />
+    <list default="true" id="6d0ad605-3bae-4316-b5fe-a2d8b7b64160" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d467b78d-ba78-4843-a52f-fcf1b4760033.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d467b78d-ba78-4843-a52f-fcf1b4760033/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web-platform_22_03_dev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-platform_22_03_dev.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.83e26a17.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.83e26a17.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.83e26a17.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/avatar/Python-Data-Types.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/avatar/Python-Data-Types_T2R1TRv.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/files/Webjs_react_python_django.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/files/Веб-платформа_управления_изменениями__3._Сроки_реализации.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/files/Веб-платформа_управления_изменениями__3._Сроки_реализации_qwvVyae.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/uploads/rational/files/Что_такое_Gunicorn_и_Nginx_в_двух_словах.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/study/first_login.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/static/study/first_login.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/study/salary.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/static/study/salary.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
-    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JavaScript File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectId" id="25dQi6RlIQ5V3eovQq0kNQUYuEO" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="25iVK7xdijqwx60AO6vKYOqm474" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/pages" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\backend\templates\backend" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\backend\templates" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="web-platform_22_03_dev" type="Python.DjangoServer" factoryName="Django server">
-      <module name="web-platform_22_03_dev" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method v="2" />
-    </configuration>
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f60f8405-d267-4f6a-be37-36d97b53283e" name="Changes" comment="" />
-      <created>1645854610058</created>
+      <changelist id="6d0ad605-3bae-4316-b5fe-a2d8b7b64160" name="Changes" comment="" />
+      <created>1646009830057</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1645854610058</updated>
-      <workItem from="1645854611243" duration="365000" />
-      <workItem from="1645855542613" duration="1320000" />
-      <workItem from="1645857250368" duration="11689000" />
-      <workItem from="1645869368204" duration="68000" />
-      <workItem from="1645869884321" duration="413000" />
-      <workItem from="1645873923030" duration="1914000" />
-      <workItem from="1645940251298" duration="21865000" />
-      <workItem from="1645963411194" duration="7193000" />
-      <workItem from="1645970983860" duration="498000" />
-      <workItem from="1645971518015" duration="4817000" />
-      <workItem from="1645976623660" duration="272000" />
-      <workItem from="1645977949307" duration="2526000" />
-      <workItem from="1646009128532" duration="82000" />
+      <updated>1646009830057</updated>
+      <workItem from="1646009831189" duration="39000" />
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="UnknownFeatures">
-    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

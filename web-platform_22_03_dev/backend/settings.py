@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ywqo&h1qj$(vrw&wkv!ko-x6*0(ovqn653idp8e-(r%e44ut$7
 DEBUG = True
 SQLITE = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.233']
+ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
