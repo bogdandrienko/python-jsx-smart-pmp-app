@@ -1,4 +1,0 @@
-
-Bogdan, 127.0.0.1, /api/rational/, POST, 2022-02-27 21:47:46.744082, list index out of range
-
-, 127.0.0.1, /api/user/recover/, POST, 2022-02-27 22:25:05.555579, User matching query does not exist.
