@@ -63,7 +63,7 @@ nano backend/settings.py
 DEBUG = False
 SQLITE = True
 
-ALLOWED_HOSTS = ['192.168.1.255']
+ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
@@ -149,7 +149,6 @@ WantedBy=multi-user.target
 </file>
 
 sudo systemctl daemon-reload
-
 sudo systemctl enable --now gunicorn-example.service
 
 # NGINX
@@ -159,8 +158,8 @@ sudo nano /etc/nginx/sites-available/example-http.conf
 
 <file>
 server {
-listen 80;
-listen [::]:80;
+listen 443;
+listen [::]:443;
 
 server_name web.km.kz;
 
@@ -195,11 +194,8 @@ location / {
 </file>
 
 sudo ln -s /etc/nginx/sites-available/example-http.conf /etc/nginx/sites-enabled/example-http.conf
-
 sudo usermod -aG bogdan www-data
-
 # sudo nginx -t
-
 sudo systemctl reload nginx.service
 
 sudo reboot
@@ -231,13 +227,11 @@ location /.well-known/acme-challenge/ {}
 
 sudo certbot certonly --webroot -w /home/bogdan/web -d web.km.kz -m bogdandrienko@gmail.com --agree-tos
 
-
 sudo nano /etc/nginx/sites-available/example-https.conf
 
+<file>
 # listen 80; =>
 # listen [::]:80; =>
-
-<file>
 listen 443 ssl http2;
 listen [::]:443 ssl http2;
 
@@ -262,7 +256,5 @@ resolver 1.1.1.1;
 </file>
 
 sudo ln -s /etc/nginx/sites-available/example-https.conf /etc/nginx/sites-enabled/example-https.conf
-
 # sudo nginx -t
-
 sudo systemctl reload nginx.service
