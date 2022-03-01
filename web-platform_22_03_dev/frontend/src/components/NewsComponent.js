@@ -5,7 +5,7 @@ import { Nav } from "react-bootstrap";
 
 const NewsComponent = (count = 100) => {
   return (
-    <div className="col-8 col-md-8 col-lg-8">
+    <div className="">
       <div className="list-group list-group-flush border-bottom scrollarea">
         <LinkContainer to="/news" className="m-0 p-0">
           <Nav.Link>

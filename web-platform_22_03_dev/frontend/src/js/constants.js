@@ -153,7 +153,7 @@ export const news = [
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const modules = [
   {
-    Header: "Разработка",
+    Header: "Разработка ver.01.03.22 15:16",
     Access: "superuser",
     Image: "/static/img/modules.png",
     ShowInModules: false,

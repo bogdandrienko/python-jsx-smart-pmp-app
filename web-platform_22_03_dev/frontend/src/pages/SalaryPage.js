@@ -9,6 +9,7 @@ import LoaderComponent from "../components/LoaderComponent";
 import SalaryTableComponent from "../components/SalaryTableComponent";
 import MessageComponent from "../components/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const SalaryPage = () => {
   const dispatch = useDispatch();
 

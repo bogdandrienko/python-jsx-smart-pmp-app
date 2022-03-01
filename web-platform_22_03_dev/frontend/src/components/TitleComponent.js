@@ -11,14 +11,6 @@ const TitleComponent = ({ first = "Заголовок", second = "подзаго
               <p className="lead fw-normal text-start m-0">{second}</p>
             </span>
           </div>
-          {/*<form className="col-12 col-lg-auto mb-0 mb-lg-0">*/}
-          {/*  <input*/}
-          {/*    type="search"*/}
-          {/*    className="form-control"*/}
-          {/*    placeholder="Поиск..."*/}
-          {/*    aria-label="Search"*/}
-          {/*  />*/}
-          {/*</form>*/}
         </div>
       </header>
     </div>

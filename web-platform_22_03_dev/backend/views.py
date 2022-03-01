@@ -1690,7 +1690,13 @@ def api_rational(request):
                     return Response({"error": "Произошла ошибка!"})
             elif req_inst.action_type == "RATIONAL_DETAIL":
                 try:
-                    rational = backend_models.RationalModel.objects.order_by('-id')[0]
+                    id = req_inst.get_value("id")
+                    print("id: ", id)
+
+                    if id:
+                        rational = backend_models.RationalModel.objects.get(id=id)
+                    else:
+                        rational = backend_models.RationalModel.objects.order_by('-id')[0]
                     serializer = backend_serializers.RationalModelSerializer(instance=rational, many=False)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")

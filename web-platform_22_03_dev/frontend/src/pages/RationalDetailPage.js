@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams, useNavigate } from "react-router-dom";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { rationalDetailAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
@@ -7,30 +8,54 @@ import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
 import LoaderComponent from "../components/LoaderComponent";
 import MessageComponent from "../components/MessageComponent";
+import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalDetailPage = () => {
+  let rationalId = useParams().id;
   const dispatch = useDispatch();
 
-  const rationalDetailStore = useSelector((state) => state.rationalDetailStore);
-  const {
-    load: loadRationalDetail,
-    data: dataRationalDetail,
-    error: errorRationalDetail,
-    fail: failRationalDetail,
-  } = rationalDetailStore;
+  let [dataRationalDetail, setRational] = useState(null);
   console.log("dataRationalDetail: ", dataRationalDetail);
 
+  const userLoginState = useSelector((state) => state.userLoginState);
+  const { data: dataUserLogin } = userLoginState;
+
+  // const rationalDetailStore = useSelector((state) => state.rationalDetailStore);
+  // const {
+  //   load: loadRationalDetail,
+  //   data: dataRationalDetail,
+  //   error: errorRationalDetail,
+  //   fail: failRationalDetail,
+  // } = rationalDetailStore;
+  // console.log("dataRationalDetail: ", dataRationalDetail);
+
   useEffect(() => {
-    if (dataRationalDetail) {
-    } else {
-      const form = {
-        "Action-type": "RATIONAL_DETAIL",
-        id: 1,
-      };
-      dispatch(rationalDetailAction(form));
-    }
-  }, [dispatch, dataRationalDetail]);
+    let getNote = async () => {
+      if (rationalId !== "new") {
+        const form = {
+          "Action-type": "RATIONAL_DETAIL",
+          id: rationalId,
+        };
+        const formData = new FormData();
+        Object.entries(form).map(([key, value]) => {
+          formData.append(key, value);
+        });
+        const { data } = await axios({
+          url: "/api/rational/",
+          method: "POST",
+          timeout: 10000,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${dataUserLogin.token}`,
+          },
+          data: formData,
+        });
+        setRational(data["response"]);
+      }
+    };
+    getNote();
+  }, [rationalId, dataUserLogin.token]);
 
   function getStaticFile(str) {
     return `/static${str}`;
@@ -54,30 +79,6 @@ const RationalDetailPage = () => {
         second={"страница содержит подробности последнего рац. предложения"}
       />
       <main className="container-fluid text-center">
-        <div className="text-center">
-          {loadRationalDetail && <LoaderComponent />}
-          {dataRationalDetail && (
-            <div className="m-1">
-              <MessageComponent variant="success">
-                Данные успешно получены!
-              </MessageComponent>
-            </div>
-          )}
-          {errorRationalDetail && (
-            <div className="m-1">
-              <MessageComponent variant="danger">
-                {errorRationalDetail}
-              </MessageComponent>
-            </div>
-          )}
-          {failRationalDetail && (
-            <div className="m-1">
-              <MessageComponent variant="warning">
-                {failRationalDetail}
-              </MessageComponent>
-            </div>
-          )}
-        </div>
         <div className="">
           <ul className="row row-cols-1 row-cols-md-2 row-cols-lg-2 nav justify-content-center">
             {!dataRationalDetail || dataRationalDetail.length < 1 ? (

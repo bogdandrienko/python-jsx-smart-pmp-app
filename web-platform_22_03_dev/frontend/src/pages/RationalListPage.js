@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import {
-  rationalDetailAction,
-  rationalListAction,
-  userDetailsAction,
-} from "../js/actions";
+import { rationalListAction, userDetailsAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
@@ -47,25 +43,6 @@ const RationalListPage = () => {
       dispatch(userDetailsAction());
     }
   }, [dispatch, dataUserDetails]);
-
-  const rationalDetailStore = useSelector((state) => state.rationalDetailStore);
-  const {
-    // load: loadRationalDetail,
-    data: dataRationalDetail,
-    // error: errorRationalDetail,
-    // fail: failRationalDetail,
-  } = rationalDetailStore;
-
-  useEffect(() => {
-    if (dataRationalDetail) {
-    } else {
-      const form = {
-        "Action-type": "RATIONAL_DETAIL",
-        id: 41,
-      };
-      dispatch(rationalDetailAction(form));
-    }
-  }, [dispatch, dataRationalDetail]);
 
   const rationalListStore = useSelector((state) => state.rationalListStore);
   const {
@@ -248,7 +225,7 @@ const RationalListPage = () => {
                           <div className="">
                             <div className="card-header">
                               <Link
-                                to={`#`}
+                                to={`/rational_detail/${rational.id}`}
                                 className="btn btn-lg btn-outline-primary"
                               >
                                 <h6 className="lead fw-bold">
@@ -367,21 +344,9 @@ const RationalListPage = () => {
                               href="#"
                             >
                               Автор:{" "}
-                              {
-                                dataRationalDetail["user_model"][
-                                  "last_name_char_field"
-                                ]
-                              }{" "}
-                              {
-                                dataRationalDetail["user_model"][
-                                  "first_name_char_field"
-                                ]
-                              }{" "}
-                              {
-                                dataRationalDetail["user_model"][
-                                  "patronymic_char_field"
-                                ]
-                              }
+                              {rational["user_model"]["last_name_char_field"]}{" "}
+                              {rational["user_model"]["first_name_char_field"]}{" "}
+                              {rational["user_model"]["patronymic_char_field"]}
                             </a>
                           </div>
                           <div className="container-fluid d-flex justify-content-between p-0">

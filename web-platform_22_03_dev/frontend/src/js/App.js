@@ -60,7 +60,7 @@ function App() {
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/rational_create" element={<RationalCreatePage />} />
           <Route path="/rational_list" element={<RationalListPage />} />
-          <Route path="/rational_detail" element={<RationalDetailPage />} />
+          <Route path="/rational_detail/:id" element={<RationalDetailPage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </Routes>
       </div>

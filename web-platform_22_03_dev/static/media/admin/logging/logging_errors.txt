@@ -1,0 +1,18 @@
+
+Bogdan, 192.168.1.68, /, GET, 2022-03-01 12:31:55.213660, index.html
+
+Bogdan, 192.168.1.68, /, GET, 2022-03-01 12:32:01.124426, index.html
+
+Bogdan, 192.168.1.68, /, GET, 2022-03-01 12:32:02.926615, index.html
+
+Bogdan, 127.0.0.1, /api/rational/, POST, 2022-03-01 16:40:35.155250, RationalModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/rational/, POST, 2022-03-01 16:40:37.405716, RationalModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/rational/, POST, 2022-03-01 16:40:39.155010, RationalModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/rational/, POST, 2022-03-01 16:40:40.142744, RationalModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/rational/, POST, 2022-03-01 16:41:01.399051, RationalModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/rational/, POST, 2022-03-01 16:41:07.139223, RationalModel matching query does not exist.

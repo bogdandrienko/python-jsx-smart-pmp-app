@@ -416,7 +416,7 @@ export const adminCreateOrChangeUsersAction =
       const { data } = await axios({
         url: "api/admin/create_or_change_users/",
         method: "POST",
-        timeout: 10000,
+        timeout: 100000,
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${userLogin.token}`,

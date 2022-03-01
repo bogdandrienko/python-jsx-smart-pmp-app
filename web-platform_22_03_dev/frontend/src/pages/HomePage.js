@@ -20,7 +20,7 @@ const HomePage = () => {
       />
       <main className="container">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
-          <div className="col-4 col-md-4 col-lg-4">
+          <div className="">
             <small className="lead fw-bold">Первый вход в систему:</small>
             <div className="w-100">
               С компьютера:

@@ -48,7 +48,7 @@ pip install --upgrade pip
 
 pip install wheel
 
-pip install Django gunicorn psycopg2 pyodbc django-cors-headers
+pip install Django gunicorn psycopg2 pyodbc django-cors-headers Pillow
 
 pip install -r requirements.txt
 
@@ -150,6 +150,7 @@ WantedBy=multi-user.target
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now gunicorn-example.service
+# systemctl status gunicorn-example.service
 
 # NGINX
 ########################################################################################################################
@@ -158,8 +159,11 @@ sudo nano /etc/nginx/sites-available/example-http.conf
 
 <file>
 server {
+# for web.km.kz:88 => http:88
+# for web.km.kz:89 => http:443
 listen 443;
-listen [::]:443;
+listen [::]:443
+};
 
 server_name web.km.kz;
 

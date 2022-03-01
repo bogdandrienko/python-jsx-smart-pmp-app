@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import {
-  userChangeProfileAction,
-  userLoginAction,
-  userRecoverPasswordAction,
-} from "../js/actions";
+import { userRecoverPasswordAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import FooterComponent from "../components/FooterComponent";
