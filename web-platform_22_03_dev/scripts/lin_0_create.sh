@@ -235,8 +235,8 @@ sudo nano /etc/nginx/sites-available/example-https.conf
 listen 443 ssl http2;
 listen [::]:443 ssl http2;
 
-ssl_certificate /etc/letsencrypt/live/web.km.kz/fullchain.pem;
-ssl_certificate_key /etc/letsencrypt/live/web.km.kz/privkey.pem;
+ssl_certificate /home/bogdan/web/letsencrypt/Certificate.crt;
+ssl_certificate_key /home/bogdan/web/letsencrypt/Certificate.key;
 
 ssl_session_timeout 1d;
 ssl_session_cache shared:MozSSL:10m;
@@ -250,7 +250,7 @@ ssl_prefer_server_ciphers off;
 ssl_stapling on;
 ssl_stapling_verify on;
 
-ssl_trusted_certificate /etc/letsencrypt/live/web.km.kz/chain.pem;
+ssl_trusted_certificate /home/bogdan/web/letsencrypt/lets.pem;
 
 resolver 1.1.1.1;
 </file>
