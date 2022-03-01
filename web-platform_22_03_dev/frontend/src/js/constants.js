@@ -90,6 +90,12 @@ export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
 export const RATIONAL_LIST_FAIL_CONSTANT = "RATIONAL_LIST_FAIL_CONSTANT";
 export const RATIONAL_LIST_RESET_CONSTANT = "RATIONAL_LIST_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const USER_LIST_ALL_LOAD_CONSTANT = "USER_LIST_ALL_LOAD_CONSTANT";
+export const USER_LIST_ALL_DATA_CONSTANT = "USER_LIST_ALL_DATA_CONSTANT";
+export const USER_LIST_ALL_ERROR_CONSTANT = "USER_LIST_ALL_ERROR_CONSTANT";
+export const USER_LIST_ALL_FAIL_CONSTANT = "USER_LIST_ALL_FAIL_CONSTANT";
+export const USER_LIST_ALL_RESET_CONSTANT = "USER_LIST_ALL_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {
     Title: "Личный профиль:",
@@ -606,15 +612,8 @@ export const modules = [
             ExternalLink: false,
           },
           {
-            Header: "Подробности",
+            Header: "Список",
             Access: "user",
-            Active: true,
-            Link: "/rational_detail",
-            ExternalLink: false,
-          },
-          {
-            Header: "Список [ функционал модератора ]",
-            Access: "moderator_oupibp",
             Active: true,
             Link: "/rational_list",
             ExternalLink: false,

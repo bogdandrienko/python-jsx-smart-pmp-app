@@ -57,6 +57,13 @@ import {
   RATIONAL_LIST_ERROR_CONSTANT,
   RATIONAL_LIST_FAIL_CONSTANT,
   RATIONAL_LIST_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  USER_LIST_ALL_LOAD_CONSTANT,
+  USER_LIST_ALL_DATA_CONSTANT,
+  USER_LIST_ALL_ERROR_CONSTANT,
+  USER_LIST_ALL_FAIL_CONSTANT,
+  USER_LIST_ALL_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } from "./constants";
 
 export const userLoginReducer = (state = {}, action = null) => {
@@ -345,6 +352,34 @@ export const rationalDetailReducer = (state = {}, action = null) => {
       return { load: false, fail: action.payload };
 
     case RATIONAL_DETAIL_RESET_CONSTANT:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const userListAllReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case USER_LIST_ALL_LOAD_CONSTANT:
+      return { load: true };
+
+    case USER_LIST_ALL_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+
+    case USER_LIST_ALL_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+
+    case USER_LIST_ALL_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+
+    case USER_LIST_ALL_RESET_CONSTANT:
       return {};
 
     default:

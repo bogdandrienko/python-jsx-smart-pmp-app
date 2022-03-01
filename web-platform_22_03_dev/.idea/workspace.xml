@@ -2,52 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d0ad605-3bae-4316-b5fe-a2d8b7b64160" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.9c078815.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.9c078815.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.9c078815.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/media/admin/export_old_users.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/main.65578247.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/main.65578247.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.03ae1525.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.03ae1525.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.03ae1525.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/admin/export_old_users.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMwNDIwNDUwMjM4_RTRBOTcyOTE3MDIyMzY4Q0E3MDBDMTBBMUFGQzlENUUzMTRGMU,2abca6b96ccf5c65a40a7347e533b806" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_OUExNDM1NjA4RDU2MTFFRUQxRjBDMTE2QjY0RDc2Q0VDMTE0NU,0a21f547c139c5fc32308faba3c9e686" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_RjIzMDJCQThGODEwNUI1MjVEOEFFODA4RjQ5M0FDNTkwOUIxNz,51b0c4da63ecc70b8b6fec3595b6ff5b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMjAzMDE=_MjUwNUVENUI1OTBFRUY0MUIxNjRBMEQ4ODMxRjA4Q0MwNDhE,ac2a0aef99e9f17f18370270440e7558" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_RVgMfphnXqGwNFRQhIzcrw9c_2022-03-01.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_U8URdJf46yHFx4Va1hunbUYo_2022-03-01.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_WoDsMtgQIkZS2XFd2dMAsF5B_2022-03-01.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.e4bc8bc7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.e4bc8bc7.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.e4bc8bc7.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/NewsComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/NewsComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/TitleComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TitleComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/js/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/HeaderComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HeaderComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AdminExportUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AdminExportUsersPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ChangePasswordPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ChangePasswordPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ChangeProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ChangeProfilePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/LogoutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/LogoutPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RationalCreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/RationalCreatePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/RationalDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/RationalDetailPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/RationalListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/RationalListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RecoverPasswordPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/RecoverPasswordPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/SalaryPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/SalaryPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/lin_0_create.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lin_0_create.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" afterDir="false" />
     </list>
@@ -76,8 +42,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.jsOptions" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -96,6 +62,7 @@
       <workItem from="1646112392561" duration="6604000" />
       <workItem from="1646124689290" duration="879000" />
       <workItem from="1646125784266" duration="5593000" />
+      <workItem from="1646140999919" duration="5825000" />
     </task>
     <servers />
   </component>

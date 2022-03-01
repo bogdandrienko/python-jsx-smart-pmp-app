@@ -59,6 +59,13 @@ import {
   RATIONAL_LIST_ERROR_CONSTANT,
   RATIONAL_LIST_FAIL_CONSTANT,
   RATIONAL_LIST_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  USER_LIST_ALL_LOAD_CONSTANT,
+  USER_LIST_ALL_DATA_CONSTANT,
+  USER_LIST_ALL_ERROR_CONSTANT,
+  USER_LIST_ALL_FAIL_CONSTANT,
+  USER_LIST_ALL_RESET_CONSTANT,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } from "./constants";
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -80,7 +87,7 @@ export const userLoginAction = (form) => async (dispatch) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/user/login/",
+      url: "/api/user/login/",
       method: "POST",
       timeout: 5000,
       headers: {
@@ -154,7 +161,7 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/user/detail/",
+      url: "/api/user/detail/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -228,7 +235,7 @@ export const userChangeProfileAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/user/change/",
+      url: "/api/user/change/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -287,7 +294,7 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/user/recover/",
+      url: "/api/user/recover/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -350,7 +357,7 @@ export const adminChangeUserPasswordAction =
 
       // Axios request
       const { data } = await axios({
-        url: "api/admin/change_user_password/",
+        url: "/api/admin/change_user_password/",
         method: "POST",
         timeout: 10000,
         headers: {
@@ -414,7 +421,7 @@ export const adminCreateOrChangeUsersAction =
 
       // Axios request
       const { data } = await axios({
-        url: "api/admin/create_or_change_users/",
+        url: "/api/admin/create_or_change_users/",
         method: "POST",
         timeout: 100000,
         headers: {
@@ -477,7 +484,7 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/admin/export_users/",
+      url: "/api/admin/export_users/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -540,7 +547,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/salary/",
+      url: "/api/salary/",
       method: "POST",
       timeout: 30000,
       headers: {
@@ -625,7 +632,7 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/rational/",
+      url: "/api/rational/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -688,7 +695,7 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/rational/",
+      url: "/api/rational/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -751,7 +758,7 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "api/rational/",
+      url: "/api/rational/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -785,6 +792,69 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     // console.log("rationalDetailAction fail: ", error.response);
     dispatch({
       type: RATIONAL_DETAIL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const userListAllAction = (form) => async (dispatch, getState) => {
+  try {
+    // LOAD dispatch
+    // console.log("rationalDetailAction load: ", data);
+    dispatch({
+      type: USER_LIST_ALL_LOAD_CONSTANT,
+    });
+
+    // State
+    const {
+      userLoginState: { data: userLogin },
+    } = getState();
+
+    // FormData class
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    // Axios request
+    const { data } = await axios({
+      url: "/api/user/list_all/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+
+    if (data["response"]) {
+      const response = data["response"];
+
+      // DATA dispatch
+      // console.log("rationalDetailAction response: ", response);
+      dispatch({
+        type: USER_LIST_ALL_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+
+      // ERROR dispatch
+      // console.log("rationalDetailAction error: ", response);
+      dispatch({
+        type: USER_LIST_ALL_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    // FAIL dispatch
+    // console.log("rationalDetailAction fail: ", error.response);
+    dispatch({
+      type: USER_LIST_ALL_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

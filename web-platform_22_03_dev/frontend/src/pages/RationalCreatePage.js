@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { rationalCreateAction } from "../js/actions";
+import { rationalCreateAction, userListAllAction } from "../js/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import TitleComponent from "../components/TitleComponent";
 import MessageComponent from "../components/MessageComponent";
@@ -37,6 +37,24 @@ const BankIdeaListPage = () => {
     // error: errorUserDetails,
     // fail: failUserDetails,
   } = userDetailsStore;
+
+  const userListAllStore = useSelector((state) => state.userListAllStore);
+  const {
+    load: loadUserListAll,
+    data: dataUserListAll,
+    error: errorUserListAll,
+    fail: failUserListAll,
+  } = userListAllStore;
+
+  useEffect(() => {
+    if (dataUserListAll) {
+    } else {
+      const form = {
+        "Action-type": "USER_LIST_ALL",
+      };
+      dispatch(userListAllAction(form));
+    }
+  }, [dispatch, dataUserListAll]);
 
   useEffect(() => {
     if (dataUserDetails) {
@@ -134,7 +152,6 @@ const BankIdeaListPage = () => {
           <div className="container-fluid text-center">
             <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
               <div className="container">
-                <br />
                 <form
                   method="POST"
                   target="_self"
@@ -144,16 +161,16 @@ const BankIdeaListPage = () => {
                   className="text-center"
                   onSubmit={submitHandler}
                 >
-                  <div>
-                    <div className="">
-                      <div>
+                  <div className="p-0 m-0">
+                    <div className="p-0 m-0">
+                      <div className="p-0 m-0">
                         <h6 className="lead fw-bold">ЗАЯВЛЕНИЕ</h6>
                         <h6 className="lead">
                           на рационализаторское предложение
                         </h6>
                       </div>
                       <div className="d-flex w-100 align-items-center justify-content-between">
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm">
                           Наименование структурного подразделения:
                           <select
                             id="subdivision"
@@ -180,7 +197,7 @@ const BankIdeaListPage = () => {
                           </select>
                           <small className="text-danger">* обязательно</small>
                         </label>
-                        <label className="w-100 form-control-sm m-1">
+                        <label className="w-100 form-control-sm">
                           Зарегистрировано за №{" "}
                           <strong className="btn btn-light">XXX</strong> от
                           <small className="text-danger"> текущей </small>даты
@@ -191,8 +208,8 @@ const BankIdeaListPage = () => {
                           </p>
                         </label>
                       </div>
-                      <div>
-                        <label className="form-control-sm m-1">
+                      <div className="p-0 m-0">
+                        <label className="form-control-sm">
                           Сфера рац. предложения:
                           <select
                             id="sphere"
@@ -212,7 +229,7 @@ const BankIdeaListPage = () => {
                           </select>
                           <small className="text-danger">* обязательно</small>
                         </label>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm">
                           Категория:
                           <select
                             id="category"
@@ -230,7 +247,7 @@ const BankIdeaListPage = () => {
                           </select>
                           <small className="text-danger">* обязательно</small>
                         </label>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm">
                           Аватарка-заставка для идеи:
                           <input
                             type="file"
@@ -244,8 +261,8 @@ const BankIdeaListPage = () => {
                         </label>
                       </div>
                       <br />
-                      <div>
-                        <label className="w-100 form-control-sm m-1">
+                      <div className="p-0 m-0">
+                        <label className="w-100 form-control-sm">
                           Название рац. предложения:
                           <input
                             type="text"
@@ -260,7 +277,7 @@ const BankIdeaListPage = () => {
                             onChange={(e) => setName(e.target.value)}
                           />
                           <small className="text-danger">* обязательно</small>
-                          <p>
+                          <p className="p-0 m-0">
                             <small className="text-muted">
                               длина: не более 100 символов
                             </small>
@@ -268,8 +285,8 @@ const BankIdeaListPage = () => {
                         </label>
                       </div>
                       <br />
-                      <div>
-                        <label className="w-100 form-control-sm m-1">
+                      <div className="p-0 m-0">
+                        <label className="w-100 form-control-sm">
                           Предполагаемое место внедрения:
                           <input
                             type="text"
@@ -284,7 +301,7 @@ const BankIdeaListPage = () => {
                             onChange={(e) => setPlace(e.target.value)}
                           />
                           <small className="text-danger">* обязательно</small>
-                          <p>
+                          <p className="p-0 m-0">
                             <small className="text-muted">
                               длина: не более 100 символов
                             </small>
@@ -292,8 +309,8 @@ const BankIdeaListPage = () => {
                         </label>
                       </div>
                       <br />
-                      <div>
-                        <label className="w-100 form-control-sm m-1">
+                      <div className="p-0 m-0">
+                        <label className="w-100 form-control-sm">
                           Краткое описание:
                           <textarea
                             id="short_description_char_field"
@@ -310,13 +327,14 @@ const BankIdeaListPage = () => {
                             }
                           />
                           <small className="text-danger">* обязательно</small>
-                          <p>
+                          <p className="p-0 m-0">
                             <small className="text-muted">
                               длина: не более 200 символов
                             </small>
                           </p>
                         </label>
-                        <label className="w-100 form-control-sm m-1">
+                        <br />
+                        <label className="w-100 form-control-sm">
                           Полное описание:
                           <textarea
                             id="full_description_text_field"
@@ -331,7 +349,7 @@ const BankIdeaListPage = () => {
                             onChange={(e) => setDescription(e.target.value)}
                           />
                           <small className="text-danger">* обязательно</small>
-                          <p>
+                          <p className="p-0 m-0">
                             <small className="text-muted">
                               длина: не более 5000 символов
                             </small>
@@ -339,8 +357,8 @@ const BankIdeaListPage = () => {
                         </label>
                       </div>
                       <br />
-                      <div>
-                        <label className="form-control-sm m-1">
+                      <div className="p-0 m-0">
+                        <label className="form-control-sm">
                           Word файл-приложение:
                           <input
                             type="file"
@@ -354,7 +372,7 @@ const BankIdeaListPage = () => {
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm">
                           Pdf файл-приложение:
                           <input
                             type="file"
@@ -368,7 +386,7 @@ const BankIdeaListPage = () => {
                           />
                           <small className="text-muted">* не обязательно</small>
                         </label>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm">
                           Excel файл-приложение:
                           <input
                             type="file"
@@ -394,7 +412,7 @@ const BankIdeaListPage = () => {
                         </p>
                       </div>
                       <div>
-                        <label className="w-100 form-control-sm m-1">
+                        <label className="w-100 form-control-sm">
                           Участники:
                           <p>
                             <small className="text-danger">
@@ -467,11 +485,79 @@ const BankIdeaListPage = () => {
                             className="form-control form-control-sm"
                             onChange={(e) => setUser5(e.target.value)}
                           />
-                          <small className="text-muted">
-                            * общая сумма вклада всех участников не должна не
-                            превышать 100%
-                          </small>
+                          {dataUserListAll && (
+                            <div>
+                              <div className="d-flex w-100 align-items-center justify-content-between">
+                                <label className="form-control-sm">
+                                  участник №4:
+                                  <select
+                                    id="subdivision"
+                                    name="subdivision"
+                                    required
+                                    className="form-control form-control-sm"
+                                    value={user4}
+                                    onChange={(e) => setUser4(e.target.value)}
+                                  >
+                                    <option value="">Не выбрано</option>
+                                    {dataUserListAll.map((user, index) => (
+                                      <option key={index} value={user}>
+                                        {user}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </label>
+                                <label className="form-control-sm">
+                                  % Вклада 4 участника
+                                  <input
+                                    type="text"
+                                    id="name_char_field"
+                                    name="name_char_field"
+                                    placeholder="пример: 70%"
+                                    minLength="0"
+                                    maxLength="200"
+                                    className="form-control form-control-sm"
+                                  />
+                                </label>
+                              </div>
+                              <div className="d-flex w-100 align-items-center justify-content-between">
+                                <label className="form-control-sm">
+                                  участник №5:
+                                  <select
+                                    id="subdivision"
+                                    name="subdivision"
+                                    required
+                                    className="form-control form-control-sm"
+                                    value={user5}
+                                    onChange={(e) => setUser5(e.target.value)}
+                                  >
+                                    <option value="">Не выбрано</option>
+                                    {dataUserListAll.map((user, index) => (
+                                      <option key={index} value={user}>
+                                        {user}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </label>
+                                <label className="form-control-sm">
+                                  % Вклада 5 участника
+                                  <input
+                                    type="text"
+                                    id="name_char_field"
+                                    name="name_char_field"
+                                    placeholder="пример: 70%"
+                                    minLength="0"
+                                    maxLength="200"
+                                    className="form-control form-control-sm"
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                          )}
                         </label>
+                        <small className="text-muted">
+                          * общая сумма вклада всех участников не должна не
+                          превышать 100%
+                        </small>
                       </div>
                       <div className="container-fluid text-center">
                         <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
@@ -496,7 +582,6 @@ const BankIdeaListPage = () => {
                     </div>
                   </div>
                 </form>
-                <br />
               </div>
             </ul>
           </div>

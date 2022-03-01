@@ -86,7 +86,7 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
         <Container>
           <a className="navbar-brand w-25" href="https://km.kz/">
             <img
-              src="static/img/logo.png"
+              src="/static/img/logo.png"
               className="w-25 img-responsive"
               alt="id"
             />

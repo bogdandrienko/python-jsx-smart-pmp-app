@@ -1640,7 +1640,7 @@ def api_rational(request):
                     author = backend_models.UserModel.objects.get(user_foreign_key_field=req_inst.user)
                     count = backend_models.RationalModel.objects.order_by('-id')
                     if len(count) > 0:
-                        count = count[0].id
+                        count = count[0].id + 1
                     else:
                         count = 1
                     number = f"{count}_{backend_service.DateTimeUtils.get_current_date()}"
@@ -1734,6 +1734,51 @@ def api_rational(request):
 
                     serializer = backend_serializers.RationalModelSerializer(instance=rationals, many=True)
                     response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_user_list_all(request):
+    """
+    api_user_list_all django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "USER_LIST_ALL":
+                try:
+                    user_models = backend_models.UserModel.objects.order_by("last_name_char_field")
+                    users = []
+                    for user_model in user_models:
+                        if user_model.user_foreign_key_field.is_superuser:
+                            continue
+                        users.append(f"{user_model.last_name_char_field} {user_model.first_name_char_field} "
+                                     f"{user_model.patronymic_char_field} {user_model.personnel_number_slug_field} "
+                                     f"{user_model.position_char_field}")
+                    response = {"response": users}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:

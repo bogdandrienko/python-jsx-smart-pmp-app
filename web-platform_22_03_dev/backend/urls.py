@@ -69,6 +69,7 @@ urlpatterns = [
     # rational
     ####################################################################################################################
     path('api/rational/', backend_views.api_rational, name='api_rational'),
+    path('api/user/list_all/', backend_views.api_user_list_all, name='api_user_list_all'),
     ####################################################################################################################
 ]
 
