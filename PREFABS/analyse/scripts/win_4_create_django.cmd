@@ -10,6 +10,8 @@ pip install django
 
 pip install pillow
 
+pip install lxml
+
 pip install -r requirements.txt
 
 python manage.py makemigrations
