@@ -8,6 +8,7 @@ sudo apt-get update -y
 sudo apt upgrade -y
 sudo apt -y install build-essential python3-dev python3-pip python3-venv libpq-dev gunicorn nginx unixodbc-dev htop postgresql postgresql-contrib
 sudo usermod -aG bogdan www-data
+# sudo usermod -aG sudo bogdan
 SETUP IP CONFIGS
 sudo reboot
 
@@ -74,7 +75,7 @@ Group=www-data
 
 RuntimeDirectory=gunicorn
 WorkingDirectory=/home/bogdan/web
-ExecStart=/home/bogdan/web/env/bin/gunicorn --workers 3 --bind unix:/run/gunicorn.sock backend.wsgi
+ExecStart=/home/bogdan/web/env/bin/gunicorn --workers 3 --bind unix:/run/gunicorn.sock backend.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
@@ -100,23 +101,17 @@ sudo systemctl restart gunicorn
 # for web.km.kz:443 => 192.168.1.157:443
 # for web.km.kz:8000 => 192.168.1.157:8000
 
-#sudo nano /etc/nginx/sites-available/example-http.conf
+# sudo rm /etc/nginx/sites-enabled/web.km.kz.conf # Удалить файл в папке
 sudo nano /etc/nginx/sites-available/web.km.kz.conf
 <file>
-upstream django {
-#    server 127.0.0.1:8001;
-    server http://unix:/run/gunicorn.sock
-    fail_timeout=0;
-}
 server {
+listen 127.0.0.1:8000;
 listen 8000;
 listen [::]:8000;
 
 server_name 89.218.132.130 www.web.km.kz web.km.kz localhost;
 
-charset utf-8;
-
-client_max_body_size 75M;
+root /home/bogdan/web;
 
 location /.well-known {
     alias /home/bogdan/web/letsencrypt/;
@@ -152,28 +147,20 @@ location /media/ {
     expires max;
 }
 
-location /env {
-    return 444;
-}
-
 location / {
+    include proxy_params;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header Host $http_host;
-
-    proxy_headers_hash_max_size 512;
-
     proxy_redirect off;
-
     proxy_buffering off;
-
-    proxy_pass http://127.0.0.1:8001;
+    proxy_pass http://unix:/run/gunicorn.sock;
 }
 }
 </file>
 
 
-sudo ln -s /etc/nginx/sites-available/example-http.conf /etc/nginx/sites-enabled/example-http.conf
+sudo ln -s /etc/nginx/sites-available/web.km.kz.conf /etc/nginx/sites-enabled/
 sudo service nginx start
 # sudo systemctl status nginx.service
 sudo ufw allow 'Nginx Full'
@@ -181,36 +168,3 @@ sudo systemctl reload nginx.service
 # sudo nginx -t
 
 ########################################################################################################################
-
-sudo nano /etc/nginx/sites-available/web.km.kz.conf
-<file>
-server {
-    listen 80;
-    listen [::]:8000;
-    server_name 89.218.132.130 www.web.km.kz web.km.kz localhost;
-
-    location /static/ {
-        alias /home/bogdan/web/static/;
-
-        expires max;
-    }
-
-    location /media/ {
-        alias /home/bogdan/web/static/media/;
-
-        expires max;
-    }
-
-    location /env {
-        return 444;
-    }
-
-    location / {
-        include proxy_params;
-        proxy_pass http://unix:/run/gunicorn.sock;
-    }
-}
-</file>
-sudo ln -s /etc/nginx/sites-available/web.km.kz.conf /etc/nginx/sites-enabled/
-
-# sudo rm /etc/nginx/sites-enabled/web.km.kz.conf  # Удалить файл в папке
