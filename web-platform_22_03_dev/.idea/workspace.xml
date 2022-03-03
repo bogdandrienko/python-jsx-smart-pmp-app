@@ -2,32 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d0ad605-3bae-4316-b5fe-a2d8b7b64160" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_0_create.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_0_run_ip.443.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/win_0_run_ip.80.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/win_0_run_ip.89.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/win_1_run_ip.8000.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMjAzMDI=_NEU5OEI1NTBDREJCOUI4ODg5Mjc5NEYwQzY0ODE2N0M0M0Qz,91524e654827f9275e4bdcb04ae0a3f6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/TODOLIST-master.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_0_run_ip.8000.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_0_run_ip.8000.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_1_run_local.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_1_run_local.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_2_create.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_2_create.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_3_env.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_3_env.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_4_pip_update.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/lin_4_pip_update.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/analyse/scripts/win_4_create_django.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../PREFABS/analyse/scripts/win_4_create_django.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PREFABS/new/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.4d6608dd.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/static/js/main.4d6608dd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.4d6608dd.js.LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/static/js/main.4d6608dd.js.LICENSE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.4d6608dd.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/static/js/main.4d6608dd.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/lin_0_create.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lin_0_create.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +55,12 @@
       <workItem from="1646140999919" duration="5825000" />
       <workItem from="1646185730201" duration="130000" />
       <workItem from="1646185930386" duration="3422000" />
+      <workItem from="1646275769708" duration="690000" />
+      <workItem from="1646278531481" duration="7301000" />
+      <workItem from="1646290177056" duration="974000" />
+      <workItem from="1646291189162" duration="1205000" />
+      <workItem from="1646292712607" duration="8634000" />
+      <workItem from="1646305040226" duration="47000" />
     </task>
     <servers />
   </component>

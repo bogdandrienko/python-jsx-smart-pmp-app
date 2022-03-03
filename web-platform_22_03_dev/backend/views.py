@@ -3,6 +3,7 @@ import datetime
 import hashlib
 import json
 import os
+import threading
 from typing import Union
 
 import httplib2
@@ -635,124 +636,127 @@ def api_admin_create_or_change_users(request):
             # Actions
             if req_inst.action_type == "CREATE_OR_CHANGE_USERS":
                 try:
-                    def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
-                        if isinstance(_col, int):
-                            _col = get_column_letter(_col)
-                        if isinstance(_row, str):
-                            _row = str(_row)
-                        value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
-                        if value.lower() == "none":
-                            return ""
-                        elif value.lower() == "true":
-                            return True
-                        elif value.lower() == "false":
-                            return False
-                        else:
-                            return value
-
                     additional_excel = req_inst.get_value("additionalExcel")
 
                     if additional_excel is False:
                         return Response({"error": "Ошибка чтения файла!"})
+
                     change_user = request.data.get("changeUser")
                     change_user_password = request.data.get("changeUserPassword")
                     clear_user_groups = request.data.get("clearUserGroups")
 
-                    workbook = openpyxl.load_workbook(additional_excel)
-                    sheet = workbook.active
-                    max_rows = sheet.max_row
-                    max_cols = sheet.max_column
-                    for row in range(1 + 1, max_rows + 1):
-                        subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
-                        workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
-                        department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
-                        last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
-                        first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
-                        patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
-                        personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
-                        position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
-                        category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
-                        username = get_value(_col="J", _row=row, _sheet=sheet)
-                        password_slug_field = get_value(_col="K", _row=row, _sheet=sheet)
-                        is_active = get_value(_col="L", _row=row, _sheet=sheet)
-                        is_staff = get_value(_col="M", _row=row, _sheet=sheet)
-                        is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
-                        is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
-                        groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
-                        email_field = get_value(_col="Q", _row=row, _sheet=sheet)
-                        secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
-                        secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
+                    def create_users():
+                        def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
+                            if isinstance(_col, int):
+                                _col = get_column_letter(_col)
+                            if isinstance(_row, str):
+                                _row = str(_row)
+                            value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
+                            if value.lower() == "none":
+                                return ""
+                            elif value.lower() == "true":
+                                return True
+                            elif value.lower() == "false":
+                                return False
+                            else:
+                                return value
 
-                        if len(username) < 1:
-                            continue
+                        workbook = openpyxl.load_workbook(additional_excel)
+                        sheet = workbook.active
+                        max_rows = sheet.max_row
+                        max_cols = sheet.max_column
+                        for row in range(1 + 1, max_rows + 1):
+                            subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
+                            workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
+                            department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
+                            last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
+                            first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
+                            patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
+                            personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
+                            position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
+                            category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
+                            username = get_value(_col="J", _row=row, _sheet=sheet)
+                            password_slug_field = get_value(_col="K", _row=row, _sheet=sheet)
+                            is_active = get_value(_col="L", _row=row, _sheet=sheet)
+                            is_staff = get_value(_col="M", _row=row, _sheet=sheet)
+                            is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
+                            is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
+                            groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
+                            email_field = get_value(_col="Q", _row=row, _sheet=sheet)
+                            secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
+                            secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
 
-                        try:
-                            user = User.objects.get(username=username)
-                            if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                            if len(username) < 1:
                                 continue
-                            new_user = False
-                        except Exception as error:
-                            user = User.objects.create(
-                                username=username,
-                                password=make_password(password=password_slug_field),
-                                is_active=True
-                            )
-                            new_user = True
 
-                        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                            try:
+                                user = User.objects.get(username=username)
+                                if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                                    continue
+                                new_user = False
+                            except Exception as error:
+                                user = User.objects.create(
+                                    username=username,
+                                    password=make_password(password=password_slug_field),
+                                    is_active=True
+                                )
+                                new_user = True
 
-                        if new_user:
-                            user_model.password_slug_field = password_slug_field
-                        else:
-                            if change_user_password == "Изменять пароль уже существующего пользователя":
-                                user.password = make_password(password=password_slug_field)
+                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+
+                            if new_user:
                                 user_model.password_slug_field = password_slug_field
+                            else:
+                                if change_user_password == "Изменять пароль уже существующего пользователя":
+                                    user.password = make_password(password=password_slug_field)
+                                    user_model.password_slug_field = password_slug_field
 
-                        user.is_staff = is_staff
-                        user.is_superuser = is_superuser
-                        user_model.activity_boolean_field = is_active
-                        user_model.email_field = email_field
-                        user.email = email_field
-                        user_model.secret_question_char_field = secret_question_char_field
-                        user_model.secret_answer_char_field = secret_answer_char_field
-                        user_model.is_temp_password = is_temp_password
-                        user_model.last_name_char_field = last_name_char_field
-                        user.last_name = last_name_char_field
-                        user_model.first_name_char_field = first_name_char_field
-                        user.first_name = first_name_char_field
-                        user_model.patronymic_char_field = patronymic_char_field
-                        user_model.personnel_number_slug_field = personnel_number_slug_field
-                        user_model.subdivision_char_field = subdivision_char_field
-                        user_model.workshop_service_char_field = workshop_service_char_field
-                        user_model.department_site_char_field = department_site_char_field
-                        user_model.position_char_field = position_char_field
-                        user_model.category_char_field = category_char_field
-                        user_model.save()
-                        user.save()
+                            user.is_staff = is_staff
+                            user.is_superuser = is_superuser
+                            user_model.activity_boolean_field = is_active
+                            user_model.email_field = email_field
+                            user.email = email_field
+                            user_model.secret_question_char_field = secret_question_char_field
+                            user_model.secret_answer_char_field = secret_answer_char_field
+                            user_model.is_temp_password = is_temp_password
+                            user_model.last_name_char_field = last_name_char_field
+                            user.last_name = last_name_char_field
+                            user_model.first_name_char_field = first_name_char_field
+                            user.first_name = first_name_char_field
+                            user_model.patronymic_char_field = patronymic_char_field
+                            user_model.personnel_number_slug_field = personnel_number_slug_field
+                            user_model.subdivision_char_field = subdivision_char_field
+                            user_model.workshop_service_char_field = workshop_service_char_field
+                            user_model.department_site_char_field = department_site_char_field
+                            user_model.position_char_field = position_char_field
+                            user_model.category_char_field = category_char_field
+                            user_model.save()
+                            user.save()
 
-                        if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
-                            for group in backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model):
-                                try:
-                                    group.user_many_to_many_field.remove(user_model)
-                                except Exception as error:
-                                    pass
+                            if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
+                                for group in backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model):
+                                    try:
+                                        group.user_many_to_many_field.remove(user_model)
+                                    except Exception as error:
+                                        pass
 
-                        groups = [group.strip() for group in str(groups).lower().strip().split(',')]
-                        for group in groups:
-                            if len(group) > 0:
-                                group_object = Group.objects.get_or_create(name=group)[0]
-                                try:
-                                    group_model = backend_models.GroupModel.objects.get(
-                                        group_foreign_key_field=group_object
-                                    )
-                                except Exception as error:
-                                    group_model = backend_models.GroupModel.objects.create(
-                                        group_foreign_key_field=group_object,
-                                        name_char_field=group,
-                                        name_slug_field=group,
-                                    )
-                                group_model.user_many_to_many_field.add(user_model)
+                            groups = [group.strip() for group in str(groups).lower().strip().split(',')]
+                            for group in groups:
+                                if len(group) > 0:
+                                    group_object = Group.objects.get_or_create(name=group)[0]
+                                    try:
+                                        group_model = backend_models.GroupModel.objects.get(
+                                            group_foreign_key_field=group_object
+                                        )
+                                    except Exception as error:
+                                        group_model = backend_models.GroupModel.objects.create(
+                                            group_foreign_key_field=group_object,
+                                            name_char_field=group,
+                                            name_slug_field=group,
+                                        )
+                                    group_model.user_many_to_many_field.add(user_model)
 
+                    threading.Thread(target=create_users, args=()).start()
                     return Response({"response": "Пользователи успешно созданы/изменены."})
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(
