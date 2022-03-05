@@ -445,7 +445,7 @@ class DjangoClass:
             # create default groups
             ############################################################################################################
             try:
-                groups = ["user", "moderator", "superuser"]
+                groups = ["user", "moderator", "superuser", "moderator_rational"]
                 for grp in groups:
                     try:
                         group = Group.objects.get(name=grp)

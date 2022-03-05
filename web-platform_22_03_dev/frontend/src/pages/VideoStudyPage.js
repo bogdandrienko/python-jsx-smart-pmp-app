@@ -32,7 +32,7 @@ const VideoStudyPage = () => {
               </div>
             </div>
 
-            <div className="w-75">
+            <div className="embed-responsive embed-responsive-16by9 w-50">
               С смартфона:
               <div className="">
                 <ReactPlayer
@@ -48,8 +48,7 @@ const VideoStudyPage = () => {
           </div>
           <div>
             <small className="lead fw-bold">Выгрузка расчётного листа:</small>
-            <div className="w-75">
-              <div className="embed-responsive embed-responsive-16by9">
+              <div className="embed-responsive embed-responsive-16by9 w-75">
                 С компьютера:
                 <div className="player-wrapper">
                   <ReactPlayer
@@ -63,7 +62,7 @@ const VideoStudyPage = () => {
                 </div>
               </div>
 
-              <div className="embed-responsive embed-responsive-16by9">
+              <div className="embed-responsive embed-responsive-16by9 w-50">
                 С смартфона:
                 <div className="player-wrapper">
                   <ReactPlayer
@@ -76,7 +75,6 @@ const VideoStudyPage = () => {
                   />
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </main>

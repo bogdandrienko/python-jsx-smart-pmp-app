@@ -22,7 +22,7 @@ const HomePage = () => {
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
           <div className="">
             <small className="lead fw-bold">Первый вход в систему:</small>
-            <div className="w-100">
+            <div className="w-75">
               С компьютера:
               <div className="">
                 <ReactPlayer
@@ -36,9 +36,9 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="w-100">
+            <div className="embed-responsive embed-responsive-16by9 w-50">
               С смартфона:
-              <div className="">
+              <div className="player-wrapper">
                 <ReactPlayer
                   url="static/study/first_login_mobile.mp4"
                   title="Первый вход в систему:"

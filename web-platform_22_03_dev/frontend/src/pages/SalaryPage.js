@@ -102,7 +102,6 @@ const SalaryPage = () => {
                 <option value="2022" defaultValue selected>
                   2022
                 </option>
-                <option value="2023">2023</option>
               </select>
               {!loadSalaryUser && (
                 <button

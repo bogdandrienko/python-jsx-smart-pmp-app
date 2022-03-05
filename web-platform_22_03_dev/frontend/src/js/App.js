@@ -24,6 +24,7 @@ import AdminExportUsersPage from "../pages/AdminExportUsersPage";
 import RationalCreatePage from "../pages/RationalCreatePage";
 import RationalListPage from "../pages/RationalListPage";
 import RationalDetailPage from "../pages/RationalDetailPage";
+import VacanciesListPage from "../pages/VacanciesListPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
@@ -61,6 +62,10 @@ function App() {
           <Route path="/rational_create" element={<RationalCreatePage />} />
           <Route path="/rational_list" element={<RationalListPage />} />
           <Route path="/rational_detail/:id" element={<RationalDetailPage />} />
+
+
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          <Route path="/vacancies_list" element={<VacanciesListPage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </Routes>
       </div>

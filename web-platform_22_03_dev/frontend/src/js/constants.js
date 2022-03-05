@@ -159,7 +159,7 @@ export const news = [
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const modules = [
   {
-    Header: "Разработка ver.01.03.22 15:16",
+    Header: "Разработка ver.05.03.22 08:02",
     Access: "superuser",
     Image: "/static/img/modules.png",
     ShowInModules: false,
@@ -181,6 +181,13 @@ export const modules = [
             Access: "superuser",
             Active: true,
             Link: "/todo",
+            ExternalLink: false,
+          },
+          {
+            Header: "Вакансии",
+            Access: "superuser",
+            Active: true,
+            Link: "/vacancies_list",
             ExternalLink: false,
           },
         ],
@@ -613,7 +620,7 @@ export const modules = [
           },
           {
             Header: "Список",
-            Access: "user",
+            Access: "moderator_rational",
             Active: true,
             Link: "/rational_list",
             ExternalLink: false,
@@ -745,6 +752,48 @@ export const modules = [
             ExternalLink: false,
           },
         ],
+      },
+    ],
+  },
+];
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const vacancies = [
+  {
+    Subdivision: "Обогатительный комплекс",
+    Status: true,
+    Link: "#",
+    Description: "вакансии для подразделения Обогатительный Комплекс...",
+    Image: "/static/img/modules/5_module_human_resourse/module_hr.png",
+    Vacancies: [
+      {
+        Title: "Машинист мотовоза",
+        Image:
+          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+        Date: "05-17-2022",
+        Education: "Высшее",
+        Qualification: "Машинист мотовоза",
+        Rank: "",
+        Description: "Опыт работы приветствуется",
+      },
+      {
+        Title: "Дорожно-путевой рабочий",
+        Image:
+          "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
+        Date: "08-06-2020",
+        Education: "Среднеe",
+        Qualification: "Монтер пути, дорожно-путевой рабочий",
+        Rank: "3",
+        Description: "Опыт работы приветствуется",
+      },
+      {
+        Title: "Инженер-программист, техник-программист",
+        Image:
+          "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
+        Date: "03-12-2022",
+        Education: "Высшее, Средне-специальное",
+        Qualification: "Инженер-программист, техник-программист",
+        Rank: "",
+        Description: "Знание таких языков программирования, как Python, C++, R",
       },
     ],
   },

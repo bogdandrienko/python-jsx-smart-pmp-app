@@ -87,7 +87,7 @@ Group=www-data
 
 RuntimeDirectory=gunicorn
 WorkingDirectory=/home/bogdan/web
-ExecStart=/home/bogdan/web/env/bin/gunicorn --workers 3 --bind unix:/run/gunicorn.sock backend.wsgi:application
+ExecStart=/home/bogdan/web/env/bin/gunicorn --workers 5 --bind unix:/run/gunicorn.sock backend.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
