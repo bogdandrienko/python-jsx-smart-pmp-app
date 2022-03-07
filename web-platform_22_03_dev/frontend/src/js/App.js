@@ -4,27 +4,31 @@ import "../css/App.css";
 import "../css/bootstrap_5.1.3/bootstrap.min.css";
 import "../css/font_awesome_6_0_0/css/all.min.css";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-import LogoutPage from "../pages/LogoutPage";
-import ChangeProfilePage from "../pages/ChangeProfilePage";
-import ChangePasswordPage from "../pages/ChangePasswordPage";
-import RecoverPasswordPage from "../pages/RecoverPasswordPage";
+import HomePage from "../pages/base/HomePage";
+import LoginPage from "../pages/user/LoginPage";
+import LogoutPage from "../pages/user/LogoutPage";
+import ChangeProfilePage from "../pages/user/ChangeProfilePage";
+import ChangePasswordPage from "../pages/user/ChangePasswordPage";
+import RecoverPasswordPage from "../pages/user/RecoverPasswordPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import NewsPage from "../pages/NewsPage";
-import VideoStudyPage from "../pages/VideoStudyPage";
-import TextStudyPage from "../pages/TextStudyPage";
+import NewsPage from "../pages/base/NewsPage";
+import VideoStudyPage from "../pages/base/VideoStudyPage";
+import TextStudyPage from "../pages/base/TextStudyPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import SalaryPage from "../pages/SalaryPage";
+import SalaryPage from "../pages/salary/SalaryPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import AdminChangeUserPasswordPage from "../pages/AdminChangeUserPasswordPage";
-import AdminCreateOrChangeUsersPage from "../pages/AdminCreateOrChangeUsersPage";
-import AdminExportUsersPage from "../pages/AdminExportUsersPage";
+import AdminChangeUserPasswordPage from "../pages/admin/AdminChangeUserPasswordPage";
+import AdminCreateOrChangeUsersPage from "../pages/admin/AdminCreateOrChangeUsersPage";
+import AdminExportUsersPage from "../pages/admin/AdminExportUsersPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import RationalCreatePage from "../pages/RationalCreatePage";
-import RationalListPage from "../pages/RationalListPage";
-import RationalDetailPage from "../pages/RationalDetailPage";
-import VacanciesListPage from "../pages/VacanciesListPage";
+import RationalCreatePage from "../pages/rational/RationalCreatePage";
+import RationalListPage from "../pages/rational/RationalListPage";
+import RationalDetailPage from "../pages/rational/RationalDetailPage";
+import VacancyListPage from "../pages/vacancy/VacancyListPage";
+import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
+import VacancyRespondPage from "../pages/vacancy/VacancyRespondPage";
+import VacancyChangePage from "../pages/vacancy/VacancyChangePage";
+import VacancyDetailPage from "../pages/vacancy/VacancyDetailPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
@@ -62,10 +66,12 @@ function App() {
           <Route path="/rational_create" element={<RationalCreatePage />} />
           <Route path="/rational_list" element={<RationalListPage />} />
           <Route path="/rational_detail/:id" element={<RationalDetailPage />} />
-
-
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/vacancies_list" element={<VacanciesListPage />} />
+          <Route path="/vacancy_list" element={<VacancyListPage />} />
+          <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />
+          <Route path="/vacancy_respond/:id" element={<VacancyRespondPage />} />
+          <Route path="/vacancy_create" element={<VacancyCreatePage />} />
+          <Route path="/vacancy_change/:id" element={<VacancyChangePage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </Routes>
       </div>

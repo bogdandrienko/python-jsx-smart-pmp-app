@@ -2637,6 +2637,193 @@ class RationalModel(models.Model):
         return f'{self.name_char_field} : {self.category_char_field} : {self.author_foreign_key_field}'
 
 
+class VacancyModel(models.Model):
+    """
+    Vacancy Model
+    """
+
+    author_field = models.ForeignKey(
+        db_column='author_field_db_column',
+        db_index=True,
+        db_tablespace='author_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='author_field',
+        help_text='<small class="text-muted">author_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+    )
+    qualification_field = models.CharField(
+        db_column='qualification_field_db_column',
+        db_index=True,
+        db_tablespace='qualification_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='qualification_field',
+        help_text='<small class="text-muted">qualification_field</small><hr><br>',
+
+        max_length=256,
+    )
+    image_field = models.ImageField(
+        db_column='image_field_db_column',
+        db_index=True,
+        db_tablespace='image_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='uploads/vacancy/default_vacancy.jpg',
+        verbose_name='image_field',
+        help_text='<small class="text-muted">>image_field</small><hr><br>',
+
+        upload_to='uploads/vacancy/image/',
+        max_length=200,
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='datetime_field',
+        help_text='<small class="text-muted">datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    sphere_field = models.CharField(
+        db_column='sphere_field_db_column',
+        db_index=True,
+        db_tablespace='sphere_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='sphere_field',
+        help_text='<small class="text-muted">sphere_field</small><hr><br>',
+
+        max_length=128,
+    )
+    education_field = models.CharField(
+        db_column='education_field_db_column',
+        db_index=True,
+        db_tablespace='education_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='education_field',
+        help_text='<small class="text-muted">education_field</small><hr><br>',
+
+        max_length=128,
+    )
+    rank_field = models.CharField(
+        db_column='rank_field_db_column',
+        db_index=True,
+        db_tablespace='rank_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='rank_field',
+        help_text='<small class="text-muted">rank_field</small><hr><br>',
+
+        max_length=128,
+    )
+    experience_field = models.CharField(
+        db_column='experience_field_db_column',
+        db_index=True,
+        db_tablespace='experience_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='experience_field',
+        help_text='<small class="text-muted">experience_field</small><hr><br>',
+
+        max_length=128,
+    )
+    schedule_field = models.CharField(
+        db_column='schedule_field_db_column',
+        db_index=True,
+        db_tablespace='schedule_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='schedule_field',
+        help_text='<small class="text-muted">schedule_field</small><hr><br>',
+
+        max_length=128,
+    )
+    description_field = models.TextField(
+        db_column='description_field_db_column',
+        db_index=True,
+        db_tablespace='description_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='description_field',
+        help_text='<small class="text-muted">description_field</small><hr><br>',
+
+        max_length=512,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-datetime_field',)
+        verbose_name = 'Вакансия'
+        verbose_name_plural = 'Вакансии'
+        db_table = 'vacancy_model_table'
+
+    def __str__(self):
+        return f'{self.qualification_field} : {self.datetime_field} : {self.author_field}'
+
+
 @receiver(post_save, sender=User)
 def create_user_model(sender, instance, created, **kwargs):
     if created:

@@ -84,3 +84,10 @@ class RationalModelSerializer(serializers.ModelSerializer):
         if not user_model_serializer.data:
             user_model_serializer = {'data': None}
         return user_model_serializer.data
+
+
+class VacancyModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = backend_models.VacancyModel
+        fields = '__all__'

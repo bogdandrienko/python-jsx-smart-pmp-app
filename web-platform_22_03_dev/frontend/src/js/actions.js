@@ -1,72 +1,7 @@
 import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import {
-  USER_LOGIN_LOAD_CONSTANT,
-  USER_LOGIN_DATA_CONSTANT,
-  USER_LOGIN_ERROR_CONSTANT,
-  USER_LOGIN_FAIL_CONSTANT,
-  USER_LOGIN_RESET_CONSTANT,
-  USER_DETAILS_LOAD_CONSTANT,
-  USER_DETAILS_DATA_CONSTANT,
-  USER_DETAILS_ERROR_CONSTANT,
-  USER_DETAILS_FAIL_CONSTANT,
-  USER_DETAILS_RESET_CONSTANT,
-  USER_CHANGE_LOAD_CONSTANT,
-  USER_CHANGE_DATA_CONSTANT,
-  USER_CHANGE_ERROR_CONSTANT,
-  USER_CHANGE_FAIL_CONSTANT,
-  USER_CHANGE_RESET_CONSTANT,
-  USER_RECOVER_PASSWORD_LOAD_CONSTANT,
-  USER_RECOVER_PASSWORD_DATA_CONSTANT,
-  USER_RECOVER_PASSWORD_ERROR_CONSTANT,
-  USER_RECOVER_PASSWORD_FAIL_CONSTANT,
-  USER_RECOVER_PASSWORD_RESET_CONSTANT,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
-  ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT,
-  ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
-  ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
-  ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT,
-  ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
-  ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT,
-  ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT,
-  ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT,
-  ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT,
-  ADMIN_EXPORT_USERS_LOAD_CONSTANT,
-  ADMIN_EXPORT_USERS_DATA_CONSTANT,
-  ADMIN_EXPORT_USERS_ERROR_CONSTANT,
-  ADMIN_EXPORT_USERS_FAIL_CONSTANT,
-  ADMIN_EXPORT_USERS_RESET_CONSTANT,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  USER_SALARY_DATA_CONSTANT,
-  USER_SALARY_ERROR_CONSTANT,
-  USER_SALARY_FAIL_CONSTANT,
-  USER_SALARY_LOAD_CONSTANT,
-  USER_SALARY_RESET_CONSTANT,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  RATIONAL_CREATE_LOAD_CONSTANT,
-  RATIONAL_CREATE_DATA_CONSTANT,
-  RATIONAL_CREATE_ERROR_CONSTANT,
-  RATIONAL_CREATE_FAIL_CONSTANT,
-  RATIONAL_CREATE_RESET_CONSTANT,
-  RATIONAL_DETAIL_LOAD_CONSTANT,
-  RATIONAL_DETAIL_DATA_CONSTANT,
-  RATIONAL_DETAIL_ERROR_CONSTANT,
-  RATIONAL_DETAIL_FAIL_CONSTANT,
-  RATIONAL_DETAIL_RESET_CONSTANT,
-  RATIONAL_LIST_LOAD_CONSTANT,
-  RATIONAL_LIST_DATA_CONSTANT,
-  RATIONAL_LIST_ERROR_CONSTANT,
-  RATIONAL_LIST_FAIL_CONSTANT,
-  RATIONAL_LIST_RESET_CONSTANT,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  USER_LIST_ALL_LOAD_CONSTANT,
-  USER_LIST_ALL_DATA_CONSTANT,
-  USER_LIST_ALL_ERROR_CONSTANT,
-  USER_LIST_ALL_FAIL_CONSTANT,
-  USER_LIST_ALL_RESET_CONSTANT,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-} from "./constants";
+import * as constants from "./constants";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -76,7 +11,7 @@ export const userLoginAction = (form) => async (dispatch) => {
     // LOAD dispatch
     // console.log("userLoginAction load: ", data);
     dispatch({
-      type: USER_LOGIN_LOAD_CONSTANT,
+      type: constants.USER_LOGIN_LOAD_CONSTANT,
     });
 
     // FormData class
@@ -102,18 +37,18 @@ export const userLoginAction = (form) => async (dispatch) => {
       // DATA dispatch
       // console.log("userLoginAction response: ", response);
       dispatch({
-        type: USER_LOGIN_DATA_CONSTANT,
+        type: constants.USER_LOGIN_DATA_CONSTANT,
         payload: response,
       });
       localStorage.setItem("userToken", JSON.stringify(response));
-      dispatch({ type: USER_DETAILS_RESET_CONSTANT });
+      dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
     } else {
       const response = data["error"];
 
       // ERROR dispatch
       // console.log("userLoginAction error: ", response);
       dispatch({
-        type: USER_LOGIN_ERROR_CONSTANT,
+        type: constants.USER_LOGIN_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -121,7 +56,7 @@ export const userLoginAction = (form) => async (dispatch) => {
     // FAIL dispatch
     // console.log("userLoginAction fail: ", error.response);
     dispatch({
-      type: USER_LOGIN_FAIL_CONSTANT,
+      type: constants.USER_LOGIN_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -133,11 +68,11 @@ export const userLoginAction = (form) => async (dispatch) => {
 export const userLogoutAction = () => (dispatch) => {
   localStorage.removeItem("userToken");
   localStorage.removeItem("userToken");
-  dispatch({ type: USER_LOGIN_RESET_CONSTANT });
-  dispatch({ type: USER_DETAILS_RESET_CONSTANT });
-  dispatch({ type: USER_CHANGE_RESET_CONSTANT });
-  dispatch({ type: USER_RECOVER_PASSWORD_RESET_CONSTANT });
-  dispatch({ type: USER_SALARY_RESET_CONSTANT });
+  dispatch({ type: constants.USER_LOGIN_RESET_CONSTANT });
+  dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
+  dispatch({ type: constants.USER_CHANGE_RESET_CONSTANT });
+  dispatch({ type: constants.USER_RECOVER_PASSWORD_RESET_CONSTANT });
+  dispatch({ type: constants.USER_SALARY_RESET_CONSTANT });
 };
 
 export const userDetailsAction = (form) => async (dispatch, getState) => {
@@ -145,12 +80,12 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     // LOAD dispatch
     // console.log("userDetailsAction load: ", data);
     dispatch({
-      type: USER_DETAILS_LOAD_CONSTANT,
+      type: constants.USER_DETAILS_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -177,19 +112,19 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
       // DATA dispatch
       // console.log("userDetailsAction response: ", response);
       dispatch({
-        type: USER_DETAILS_DATA_CONSTANT,
+        type: constants.USER_DETAILS_DATA_CONSTANT,
         payload: response,
       });
-      dispatch({ type: USER_CHANGE_RESET_CONSTANT });
-      dispatch({ type: USER_RECOVER_PASSWORD_RESET_CONSTANT });
-      dispatch({ type: USER_SALARY_RESET_CONSTANT });
+      dispatch({ type: constants.USER_CHANGE_RESET_CONSTANT });
+      dispatch({ type: constants.USER_RECOVER_PASSWORD_RESET_CONSTANT });
+      dispatch({ type: constants.USER_SALARY_RESET_CONSTANT });
     } else {
       const response = data["error"];
 
       // ERROR dispatch
       // console.log("userDetailsAction error: ", response);
       dispatch({
-        type: USER_DETAILS_ERROR_CONSTANT,
+        type: constants.USER_DETAILS_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -205,7 +140,7 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
       console.log("logout");
     }
     dispatch({
-      type: USER_DETAILS_FAIL_CONSTANT,
+      type: constants.USER_DETAILS_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -219,12 +154,12 @@ export const userChangeProfileAction = (form) => async (dispatch, getState) => {
     // LOAD dispatch
     // console.log("userChangeProfileAction load: ", data);
     dispatch({
-      type: USER_CHANGE_LOAD_CONSTANT,
+      type: constants.USER_CHANGE_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -251,17 +186,17 @@ export const userChangeProfileAction = (form) => async (dispatch, getState) => {
       // DATA dispatch
       // console.log("userChangeProfileAction response: ", response);
       dispatch({
-        type: USER_CHANGE_DATA_CONSTANT,
+        type: constants.USER_CHANGE_DATA_CONSTANT,
         payload: response,
       });
-      dispatch({ type: USER_DETAILS_RESET_CONSTANT });
+      dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
     } else {
       const response = data["error"];
 
       // ERROR dispatch
       // console.log("userChangeProfileAction error: ", response);
       dispatch({
-        type: USER_CHANGE_ERROR_CONSTANT,
+        type: constants.USER_CHANGE_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -269,7 +204,7 @@ export const userChangeProfileAction = (form) => async (dispatch, getState) => {
     // FAIL dispatch
     // console.log("userChangeProfileAction fail: ", error.response);
     dispatch({
-      type: USER_CHANGE_FAIL_CONSTANT,
+      type: constants.USER_CHANGE_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -283,7 +218,7 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
     // LOAD dispatch
     // console.log("userRecoverPasswordAction load: ", data);
     dispatch({
-      type: USER_RECOVER_PASSWORD_LOAD_CONSTANT,
+      type: constants.USER_RECOVER_PASSWORD_LOAD_CONSTANT,
     });
 
     // FormData class
@@ -309,7 +244,7 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
       // DATA dispatch
       // console.log("userRecoverPasswordAction response: ", response);
       dispatch({
-        type: USER_RECOVER_PASSWORD_DATA_CONSTANT,
+        type: constants.USER_RECOVER_PASSWORD_DATA_CONSTANT,
         payload: response,
       });
     } else {
@@ -318,7 +253,7 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
       // ERROR dispatch
       // console.log("userRecoverPasswordAction error: ", response);
       dispatch({
-        type: USER_RECOVER_PASSWORD_ERROR_CONSTANT,
+        type: constants.USER_RECOVER_PASSWORD_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -326,7 +261,7 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
     // FAIL dispatch
     // console.log("userRecoverPasswordAction fail: ", error.response);
     dispatch({
-      type: USER_RECOVER_PASSWORD_FAIL_CONSTANT,
+      type: constants.USER_RECOVER_PASSWORD_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -341,12 +276,12 @@ export const adminChangeUserPasswordAction =
       // LOAD dispatch
       // console.log("adminChangeUserPasswordAction load: ", data);
       dispatch({
-        type: ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
+        type: constants.ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
       });
 
       // State
       const {
-        userLoginState: { data: userLogin },
+        userLoginStore: { data: userLogin },
       } = getState();
 
       // FormData class
@@ -373,7 +308,7 @@ export const adminChangeUserPasswordAction =
         // DATA dispatch
         // console.log("adminChangeUserPasswordAction response: ", response);
         dispatch({
-          type: ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT,
+          type: constants.ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT,
           payload: response,
         });
       } else {
@@ -382,7 +317,7 @@ export const adminChangeUserPasswordAction =
         // ERROR dispatch
         // console.log("adminChangeUserPasswordAction error: ", response);
         dispatch({
-          type: ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
+          type: constants.ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
           payload: response,
         });
       }
@@ -390,7 +325,7 @@ export const adminChangeUserPasswordAction =
       // FAIL dispatch
       // console.log("adminChangeUserPasswordAction fail: ", error.response);
       dispatch({
-        type: ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
+        type: constants.ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
         payload:
           error.response && error.response.data.detail
             ? error.response.data.detail
@@ -405,12 +340,12 @@ export const adminCreateOrChangeUsersAction =
       // LOAD dispatch
       // console.log("adminCreateOrChangeUsersAction load: ", data);
       dispatch({
-        type: ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
+        type: constants.ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
       });
 
       // State
       const {
-        userLoginState: { data: userLogin },
+        userLoginStore: { data: userLogin },
       } = getState();
 
       // FormData class
@@ -437,7 +372,7 @@ export const adminCreateOrChangeUsersAction =
         // DATA dispatch
         // console.log("adminCreateOrChangeUsersAction response: ", response);
         dispatch({
-          type: ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT,
+          type: constants.ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT,
           payload: response,
         });
       } else {
@@ -446,7 +381,7 @@ export const adminCreateOrChangeUsersAction =
         // ERROR dispatch
         // console.log("adminCreateOrChangeUsersAction error: ", response);
         dispatch({
-          type: ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT,
+          type: constants.ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT,
           payload: response,
         });
       }
@@ -454,7 +389,7 @@ export const adminCreateOrChangeUsersAction =
       // FAIL dispatch
       // console.log("adminCreateOrChangeUsersAction fail: ", error.response);
       dispatch({
-        type: ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT,
+        type: constants.ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT,
         payload:
           error.response && error.response.data.detail
             ? error.response.data.detail
@@ -468,12 +403,12 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     // LOAD dispatch
     // console.log("adminExportUsersAction load: ", data);
     dispatch({
-      type: ADMIN_EXPORT_USERS_LOAD_CONSTANT,
+      type: constants.ADMIN_EXPORT_USERS_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -500,7 +435,7 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
       // DATA dispatch
       // console.log("adminExportUsersAction response: ", response);
       dispatch({
-        type: ADMIN_EXPORT_USERS_DATA_CONSTANT,
+        type: constants.ADMIN_EXPORT_USERS_DATA_CONSTANT,
         payload: response,
       });
     } else {
@@ -509,7 +444,7 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
       // ERROR dispatch
       // console.log("adminExportUsersAction error: ", response);
       dispatch({
-        type: ADMIN_EXPORT_USERS_ERROR_CONSTANT,
+        type: constants.ADMIN_EXPORT_USERS_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -517,7 +452,7 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     // FAIL dispatch
     // console.log("adminExportUsersAction fail: ", error.response);
     dispatch({
-      type: ADMIN_EXPORT_USERS_FAIL_CONSTANT,
+      type: constants.ADMIN_EXPORT_USERS_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -531,12 +466,12 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     // LOAD dispatch
     // console.log("salaryUserAction load: ", data);
     dispatch({
-      type: USER_SALARY_LOAD_CONSTANT,
+      type: constants.USER_SALARY_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -585,7 +520,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
       const excel_path = response["excel_path"];
 
       dispatch({
-        type: USER_SALARY_DATA_CONSTANT,
+        type: constants.USER_SALARY_DATA_CONSTANT,
         payload: { excel_path: excel_path, headers: headers, tables: tables },
       });
     } else {
@@ -594,7 +529,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
       // ERROR dispatch
       // console.log("salaryUserAction error: ", response);
       dispatch({
-        type: USER_SALARY_ERROR_CONSTANT,
+        type: constants.USER_SALARY_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -602,7 +537,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     // FAIL dispatch
     // console.log("salaryUserAction fail: ", error.response);
     dispatch({
-      type: USER_SALARY_FAIL_CONSTANT,
+      type: constants.USER_SALARY_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -616,12 +551,12 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
     // LOAD dispatch
     // console.log("rationalCreateAction load: ", data);
     dispatch({
-      type: RATIONAL_CREATE_LOAD_CONSTANT,
+      type: constants.RATIONAL_CREATE_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -648,7 +583,7 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
       // DATA dispatch
       // console.log("rationalCreateAction response: ", response);
       dispatch({
-        type: RATIONAL_CREATE_DATA_CONSTANT,
+        type: constants.RATIONAL_CREATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
@@ -657,7 +592,7 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
       // ERROR dispatch
       // console.log("rationalCreateAction error: ", response);
       dispatch({
-        type: RATIONAL_CREATE_ERROR_CONSTANT,
+        type: constants.RATIONAL_CREATE_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -665,7 +600,7 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
     // FAIL dispatch
     // console.log("rationalCreateAction fail: ", error.response);
     dispatch({
-      type: RATIONAL_CREATE_FAIL_CONSTANT,
+      type: constants.RATIONAL_CREATE_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -679,12 +614,12 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
     // LOAD dispatch
     // console.log("rationalListAction load: ", data);
     dispatch({
-      type: RATIONAL_LIST_LOAD_CONSTANT,
+      type: constants.RATIONAL_LIST_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -711,7 +646,7 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
       // DATA dispatch
       // console.log("rationalListAction response: ", response);
       dispatch({
-        type: RATIONAL_LIST_DATA_CONSTANT,
+        type: constants.RATIONAL_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
@@ -720,7 +655,7 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
       // ERROR dispatch
       // console.log("rationalListAction error: ", response);
       dispatch({
-        type: RATIONAL_LIST_ERROR_CONSTANT,
+        type: constants.RATIONAL_LIST_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -728,7 +663,7 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
     // FAIL dispatch
     // console.log("rationalListAction fail: ", error.response);
     dispatch({
-      type: RATIONAL_LIST_FAIL_CONSTANT,
+      type: constants.RATIONAL_LIST_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -742,12 +677,12 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     // LOAD dispatch
     // console.log("rationalDetailAction load: ", data);
     dispatch({
-      type: RATIONAL_DETAIL_LOAD_CONSTANT,
+      type: constants.RATIONAL_DETAIL_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -774,7 +709,7 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
       // DATA dispatch
       // console.log("rationalDetailAction response: ", response);
       dispatch({
-        type: RATIONAL_DETAIL_DATA_CONSTANT,
+        type: constants.RATIONAL_DETAIL_DATA_CONSTANT,
         payload: response,
       });
     } else {
@@ -783,7 +718,7 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
       // ERROR dispatch
       // console.log("rationalDetailAction error: ", response);
       dispatch({
-        type: RATIONAL_DETAIL_ERROR_CONSTANT,
+        type: constants.RATIONAL_DETAIL_ERROR_CONSTANT,
         payload: response,
       });
     }
@@ -791,7 +726,7 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     // FAIL dispatch
     // console.log("rationalDetailAction fail: ", error.response);
     dispatch({
-      type: RATIONAL_DETAIL_FAIL_CONSTANT,
+      type: constants.RATIONAL_DETAIL_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -803,14 +738,14 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
 export const userListAllAction = (form) => async (dispatch, getState) => {
   try {
     // LOAD dispatch
-    // console.log("rationalDetailAction load: ", data);
+    // console.log("userListAllAction load: ", data);
     dispatch({
-      type: USER_LIST_ALL_LOAD_CONSTANT,
+      type: constants.USER_LIST_ALL_LOAD_CONSTANT,
     });
 
     // State
     const {
-      userLoginState: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
 
     // FormData class
@@ -821,7 +756,7 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
 
     // Axios request
     const { data } = await axios({
-      url: "/api/user/list_all/",
+      url: "/api/user/all/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -835,26 +770,186 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
       const response = data["response"];
 
       // DATA dispatch
-      // console.log("rationalDetailAction response: ", response);
+      // console.log("userListAllAction response: ", response);
       dispatch({
-        type: USER_LIST_ALL_DATA_CONSTANT,
+        type: constants.USER_LIST_ALL_DATA_CONSTANT,
         payload: response,
       });
     } else {
       const response = data["error"];
 
       // ERROR dispatch
-      // console.log("rationalDetailAction error: ", response);
+      // console.log("userListAllAction error: ", response);
       dispatch({
-        type: USER_LIST_ALL_ERROR_CONSTANT,
+        type: constants.USER_LIST_ALL_ERROR_CONSTANT,
         payload: response,
       });
     }
   } catch (error) {
     // FAIL dispatch
-    // console.log("rationalDetailAction fail: ", error.response);
+    // console.log("userListAllAction fail: ", error.response);
     dispatch({
-      type: USER_LIST_ALL_FAIL_CONSTANT,
+      type: constants.USER_LIST_ALL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const vacancyListAction = (form) => async (dispatch) => {
+  try {
+    // LOAD dispatch
+    // console.log("vacancyListAction load: ", data);
+    dispatch({
+      type: constants.VACANCY_LIST_LOAD_CONSTANT,
+    });
+
+    // FormData class
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    // Axios request
+    const { data } = await axios({
+      url: "/api/any/vacancy/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+
+    if (data["response"]) {
+      const response = data["response"];
+
+      // DATA dispatch
+      // console.log("vacancyListAction response: ", response);
+      dispatch({
+        type: constants.VACANCY_LIST_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+
+      // ERROR dispatch
+      // console.log("vacancyListAction error: ", response);
+      dispatch({
+        type: constants.VACANCY_LIST_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    // FAIL dispatch
+    // console.log("vacancyListAction fail: ", error.response);
+    dispatch({
+      type: constants.VACANCY_LIST_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const vacancyDetailAction = (form) => async (dispatch) => {
+  try {
+    // LOAD dispatch
+    // console.log("vacancyDetailAction load: ", data);
+    dispatch({
+      type: constants.VACANCY_DETAIL_LOAD_CONSTANT,
+    });
+
+    // FormData class
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    // Axios request
+    const { data } = await axios({
+      url: "/api/auth/vacancy/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+
+    if (data["response"]) {
+      const response = data["response"];
+
+      // DATA dispatch
+      // console.log("vacancyDetailAction response: ", response);
+      dispatch({
+        type: constants.VACANCY_DETAIL_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+
+      // ERROR dispatch
+      // console.log("vacancyDetailAction error: ", response);
+      dispatch({
+        type: constants.VACANCY_DETAIL_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    // FAIL dispatch
+    // console.log("vacancyDetailAction fail: ", error.response);
+    dispatch({
+      type: constants.VACANCY_DETAIL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.VACANCY_DELETE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/vacancy/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.VACANCY_DELETE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.VACANCY_DELETE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.VACANCY_DELETE_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

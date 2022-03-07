@@ -570,6 +570,67 @@ class RationalModelAdmin(admin.ModelAdmin):
     ]
 
 
+class VacancyModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'VacancyModel' на панели администратора
+    """
+
+    list_display = (
+        "author_field",
+        "qualification_field",
+        "image_field",
+        "datetime_field",
+        "sphere_field",
+        "education_field",
+        "rank_field",
+        "experience_field",
+        "schedule_field",
+        "description_field",
+    )
+    list_display_links = (
+        "author_field",
+        "qualification_field",
+    )
+    list_filter = (
+        "author_field",
+        "qualification_field",
+        "image_field",
+        "datetime_field",
+        "sphere_field",
+        "education_field",
+        "rank_field",
+        "experience_field",
+        "schedule_field",
+        "description_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+        "author_field",
+        "qualification_field",
+        "image_field",
+        "datetime_field",
+        "sphere_field",
+        "education_field",
+        "rank_field",
+        "experience_field",
+        "schedule_field",
+        "description_field",
+        )}),
+    )
+    search_fields = [
+        "author_field",
+        "qualification_field",
+        "image_field",
+        "datetime_field",
+        "sphere_field",
+        "education_field",
+        "rank_field",
+        "experience_field",
+        "schedule_field",
+        "description_field",
+    ]
+
+
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Администрирование'  # default: "Django site admin"
@@ -582,3 +643,4 @@ admin.site.register(backend_models.UserModel, UserModelAdmin)
 admin.site.register(backend_models.ActionModel, ActionModelAdmin)
 admin.site.register(backend_models.GroupModel, GroupModelAdmin)
 admin.site.register(backend_models.RationalModel, RationalModelAdmin)
+admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)

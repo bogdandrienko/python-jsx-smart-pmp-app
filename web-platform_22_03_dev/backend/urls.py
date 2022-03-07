@@ -71,6 +71,12 @@ urlpatterns = [
     path('api/rational/', backend_views.api_rational, name='api_rational'),
     path('api/user/list_all/', backend_views.api_user_list_all, name='api_user_list_all'),
     ####################################################################################################################
+
+    # vacancy
+    ####################################################################################################################
+    path('api/any/vacancy/', backend_views.api_any_vacancy, name='api_any_vacancy'),
+    path('api/auth/vacancy/', backend_views.api_auth_vacancy, name='api_auth_vacancy'),
+    ####################################################################################################################
 ]
 
 # Redirect from reboot react app

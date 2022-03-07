@@ -2,44 +2,31 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import {
-  userLoginReducer,
-  userDetailsReducer,
-  userChangeReducer,
-  userRecoverPasswordReducer,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  adminChangeUserPasswordReducer,
-  adminCreateOrChangeUsersReducer,
-  adminExportUsersReducer,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  salaryUserReducer,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  rationalCreateReducer,
-  rationalDetailReducer,
-  rationalListReducer,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  userListAllReducer,
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-} from "./reducers";
+import * as reducers from "./reducers";
+import { vacancyDeleteReducer } from "./reducers";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const reducer = combineReducers({
-  userLoginState: userLoginReducer,
-  userDetailsStore: userDetailsReducer,
-  userChangeStore: userChangeReducer,
-  userRecoverPasswordStore: userRecoverPasswordReducer,
+const globalReducer = combineReducers({
+  userLoginStore: reducers.userLoginReducer,
+  userDetailsStore: reducers.userDetailsReducer,
+  userChangeStore: reducers.userChangeReducer,
+  userRecoverPasswordStore: reducers.userRecoverPasswordReducer,
   ///////////////////////////////////////////////////////////
-  adminChangeUserPasswordStore: adminChangeUserPasswordReducer,
-  adminCreateOrChangeUsersStore: adminCreateOrChangeUsersReducer,
-  adminExportUsersStore: adminExportUsersReducer,
+  adminChangeUserPasswordStore: reducers.adminChangeUserPasswordReducer,
+  adminCreateOrChangeUsersStore: reducers.adminCreateOrChangeUsersReducer,
+  adminExportUsersStore: reducers.adminExportUsersReducer,
   ///////////////////////////////////////////////////////////
-  salaryUserStore: salaryUserReducer,
+  salaryUserStore: reducers.salaryUserReducer,
   ///////////////////////////////////////////////////////////
-  rationalCreateStore: rationalCreateReducer,
-  rationalListStore: rationalListReducer,
-  rationalDetailStore: rationalDetailReducer,
+  rationalCreateStore: reducers.rationalCreateReducer,
+  rationalListStore: reducers.rationalListReducer,
+  rationalDetailStore: reducers.rationalDetailReducer,
   ///////////////////////////////////////////////////////////
-  userListAllStore: userListAllReducer,
+  userListAllStore: reducers.userListAllReducer,
+  ///////////////////////////////////////////////////////////
+  vacancyListStore: reducers.vacancyListReducer,
+  vacancyDetailStore: reducers.vacancyDetailReducer,
+  vacancyDeleteStore: reducers.vacancyDeleteReducer,
   ///////////////////////////////////////////////////////////
 });
 
@@ -48,13 +35,13 @@ const userTokenFromStorage = localStorage.getItem("userToken")
   : null;
 
 const initialState = {
-  userLoginState: { data: userTokenFromStorage },
+  userLoginStore: { data: userTokenFromStorage },
 };
 
 const middleware = [thunk];
 
 const store = createStore(
-  reducer,
+  globalReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );

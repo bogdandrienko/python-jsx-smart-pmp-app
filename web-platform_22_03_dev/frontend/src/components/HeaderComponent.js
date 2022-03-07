@@ -11,13 +11,13 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const userLoginState = useSelector((state) => state.userLoginState);
+  const userLoginStore = useSelector((state) => state.userLoginStore);
   const {
     // load: loadUserLogin,
     data: dataUserLogin,
     // error: errorUserLogin,
     // fail: failUserLogin,
-  } = userLoginState;
+  } = userLoginStore;
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {

@@ -96,6 +96,24 @@ export const USER_LIST_ALL_ERROR_CONSTANT = "USER_LIST_ALL_ERROR_CONSTANT";
 export const USER_LIST_ALL_FAIL_CONSTANT = "USER_LIST_ALL_FAIL_CONSTANT";
 export const USER_LIST_ALL_RESET_CONSTANT = "USER_LIST_ALL_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const VACANCY_LIST_LOAD_CONSTANT = "VACANCY_LIST_LOAD_CONSTANT";
+export const VACANCY_LIST_DATA_CONSTANT = "VACANCY_LIST_DATA_CONSTANT";
+export const VACANCY_LIST_ERROR_CONSTANT = "VACANCY_LIST_ERROR_CONSTANT";
+export const VACANCY_LIST_FAIL_CONSTANT = "VACANCY_LIST_FAIL_CONSTANT";
+export const VACANCY_LIST_RESET_CONSTANT = "VACANCY_LIST_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const VACANCY_DETAIL_LOAD_CONSTANT = "VACANCY_DETAIL_LOAD_CONSTANT";
+export const VACANCY_DETAIL_DATA_CONSTANT = "VACANCY_DETAIL_DATA_CONSTANT";
+export const VACANCY_DETAIL_ERROR_CONSTANT = "VACANCY_DETAIL_ERROR_CONSTANT";
+export const VACANCY_DETAIL_FAIL_CONSTANT = "VACANCY_DETAIL_FAIL_CONSTANT";
+export const VACANCY_DETAIL_RESET_CONSTANT = "VACANCY_DETAIL_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const VACANCY_DELETE_LOAD_CONSTANT = "VACANCY_DELETE_LOAD_CONSTANT";
+export const VACANCY_DELETE_DATA_CONSTANT = "VACANCY_DELETE_DATA_CONSTANT";
+export const VACANCY_DELETE_ERROR_CONSTANT = "VACANCY_DELETE_ERROR_CONSTANT";
+export const VACANCY_DELETE_FAIL_CONSTANT = "VACANCY_DELETE_FAIL_CONSTANT";
+export const VACANCY_DELETE_RESET_CONSTANT = "VACANCY_DELETE_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {
     Title: "Личный профиль:",
@@ -181,13 +199,6 @@ export const modules = [
             Access: "superuser",
             Active: true,
             Link: "/todo",
-            ExternalLink: false,
-          },
-          {
-            Header: "Вакансии",
-            Access: "superuser",
-            Active: true,
-            Link: "/vacancies_list",
             ExternalLink: false,
           },
         ],
@@ -723,10 +734,38 @@ export const modules = [
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
-            Header: "Вакансии",
+            Header: "Список вакансий",
             Access: "user",
-            Active: false,
-            Link: "#",
+            Active: true,
+            Link: "/vacancy_list",
+            ExternalLink: false,
+          },
+          {
+            Header: "Описание вакансии",
+            Access: "user",
+            Active: true,
+            Link: "/vacancy_detail/0",
+            ExternalLink: false,
+          },
+          {
+            Header: "Откликнуться на вакансию",
+            Access: "user",
+            Active: true,
+            Link: "/vacancy_respond/0",
+            ExternalLink: false,
+          },
+          {
+            Header: "Создать вакансию",
+            Access: "moderator_vacancy",
+            Active: true,
+            Link: "/vacancy_create",
+            ExternalLink: false,
+          },
+          {
+            Header: "Изменить вакансию",
+            Access: "moderator_vacancy",
+            Active: true,
+            Link: "/vacancy_change/0",
             ExternalLink: false,
           },
           {
@@ -757,45 +796,42 @@ export const modules = [
   },
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const vacancies = [
+export const vacancyList = [
   {
-    Subdivision: "Обогатительный комплекс",
-    Status: true,
-    Link: "#",
-    Description: "вакансии для подразделения Обогатительный Комплекс...",
-    Image: "/static/img/modules/5_module_human_resourse/module_hr.png",
-    Vacancies: [
-      {
-        Title: "Машинист мотовоза",
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
-        Date: "05-17-2022",
-        Education: "Высшее",
-        Qualification: "Машинист мотовоза",
-        Rank: "",
-        Description: "Опыт работы приветствуется",
-      },
-      {
-        Title: "Дорожно-путевой рабочий",
-        Image:
-          "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
-        Date: "08-06-2020",
-        Education: "Среднеe",
-        Qualification: "Монтер пути, дорожно-путевой рабочий",
-        Rank: "3",
-        Description: "Опыт работы приветствуется",
-      },
-      {
-        Title: "Инженер-программист, техник-программист",
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
-        Date: "03-12-2022",
-        Education: "Высшее, Средне-специальное",
-        Qualification: "Инженер-программист, техник-программист",
-        Rank: "",
-        Description: "Знание таких языков программирования, как Python, C++, R",
-      },
-    ],
+    Qualification: "Машинист мотовоза",
+    Image:
+      "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+    Datetime: "05-17-2022",
+    Sphere: "Технологическая",
+    Education: "Высшее",
+    Rank: "",
+    Experience: "Не имеет значения",
+    Schedule: "Полный день",
+    Description: "Опыт работы приветствуется",
+  },
+  {
+    Qualification: "Монтер пути, дорожно-путевой рабочий",
+    Image:
+      "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
+    Datetime: "08-06-2020",
+    Sphere: "Технологическая",
+    Education: "Среднеe",
+    Rank: "3",
+    Experience: "от 1 года до 3 лет",
+    Schedule: "Сменный график",
+    Description: "Опыт работы приветствуется",
+  },
+  {
+    Qualification: "Инженер-программист, техник-программист",
+    Image:
+      "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
+    Datetime: "03-12-2022",
+    Sphere: "Не технологическая",
+    Education: "Высшее, Средне-специальное",
+    Rank: "",
+    Experience: "более 3 лет",
+    Schedule: "Удаленная работа",
+    Description: "Знание таких языков программирования, как Python, C++, R",
   },
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

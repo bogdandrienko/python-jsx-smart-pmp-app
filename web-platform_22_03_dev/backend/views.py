@@ -1799,3 +1799,137 @@ def api_user_list_all(request):
             request=request, error=error, print_error=backend_settings.DEBUG
         )
         return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([AllowAny])
+def api_any_vacancy(request):
+    """
+    api_rational django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "VACANCY_LIST":
+                try:
+
+                    sphere = req_inst.get_value("sphere")
+                    education = req_inst.get_value("education")
+                    experience = req_inst.get_value("experience")
+                    sort = req_inst.get_value("sort")
+                    search = req_inst.get_value("search")
+
+                    vacancy_list = backend_models.VacancyModel.objects.all().order_by("-id")
+
+                    if sphere:
+                        vacancy_list = vacancy_list.filter(sphere_field=sphere)
+                    if education:
+                        vacancy_list = vacancy_list.filter(education_field=education)
+                    if experience:
+                        vacancy_list = vacancy_list.filter(experience_field=experience)
+                    if sort:
+                        if sort == "Дате публикации (сначала свежие)":
+                            vacancy_list = vacancy_list.order_by("-datetime_field")
+                        elif sort == "Дате публикации (сначала старые)":
+                            vacancy_list = vacancy_list.order_by("datetime_field")
+                        elif sort == "Названию вакансии (С начала алфавита)":
+                            vacancy_list = vacancy_list.order_by("qualification_field")
+                        elif sort == "Названию вакансии (С конца алфавита)":
+                            vacancy_list = vacancy_list.order_by("-qualification_field")
+
+                    if search:
+                        vacancy_list = vacancy_list.filter(qualification_field__icontains=search)
+
+                    serializer = backend_serializers.VacancyModelSerializer(instance=vacancy_list, many=True)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            elif req_inst.action_type == "VACANCY_DETAIL":
+                try:
+                    id = req_inst.get_value("id")
+
+                    if id:
+                        vacancy = backend_models.VacancyModel.objects.get(id=id)
+                    else:
+                        vacancy = backend_models.VacancyModel.objects.order_by('-id')[0]
+                    serializer = backend_serializers.VacancyModelSerializer(instance=vacancy, many=False)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_vacancy(request):
+    """
+    api_rational django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "VACANCY_CREATE":
+                try:
+                    id = req_inst.get_value("id")
+                    response = {"response": "success"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "VACANCY_DELETE":
+                try:
+                    _id = req_inst.get_value("id")
+                    print(f"id: {_id}")
+                    # backend_models.VacancyModel.objects.get(id=_id).delete()
+                    response = {"response": "Успешно удалено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")

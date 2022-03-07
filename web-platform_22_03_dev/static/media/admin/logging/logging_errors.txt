@@ -1,0 +1,8 @@
+
+, 127.0.0.1, /api/vacancy/, POST, 2022-03-07 11:54:12.950014, 'VacancyModelSerializer' object has no attribute 'get_user_model'
+
+, 127.0.0.1, /api/vacancy/, POST, 2022-03-07 11:54:13.843244, 'VacancyModelSerializer' object has no attribute 'get_user_model'
+
+, 127.0.0.1, /api/vacancy/, POST, 2022-03-07 11:54:14.544829, 'VacancyModelSerializer' object has no attribute 'get_user_model'
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-07 15:12:51.495444, VacancyModel matching query does not exist.
