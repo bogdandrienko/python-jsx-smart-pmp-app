@@ -14,7 +14,7 @@ import StoreStatusComponent from "../../components/StoreStatusComponent";
 import { vacancyDetailAction } from "../../js/actions";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const VacancyListPage = () => {
+const VacancyDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useParams().id;
@@ -107,7 +107,7 @@ const VacancyListPage = () => {
           </Link>
           {dataVacancyDetail && (
             <Link
-              to={`/vacancy_respond/${dataVacancyDetail.id}`}
+              to={`/resume_create/${dataVacancyDetail.id}`}
               className="btn btn-sm btn-success"
             >
               отправить резюме
@@ -263,4 +263,4 @@ const VacancyListPage = () => {
   );
 };
 
-export default VacancyListPage;
+export default VacancyDetailPage;

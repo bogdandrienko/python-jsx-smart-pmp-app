@@ -2824,6 +2824,211 @@ class VacancyModel(models.Model):
         return f'{self.qualification_field} : {self.datetime_field} : {self.author_field}'
 
 
+class ResumeModel(models.Model):
+    """
+    Resume Model
+    """
+
+    qualification_field = models.CharField(
+        db_column='qualification_field_db_column',
+        db_index=True,
+        db_tablespace='qualification_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='qualification_field',
+        help_text='<small class="text-muted">qualification_field</small><hr><br>',
+
+        max_length=256,
+    )
+    last_name_field = models.CharField(
+        db_column='last_name_field_db_column',
+        db_index=True,
+        db_tablespace='last_name_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='last_name_field',
+        help_text='<small class="text-muted">last_name_field</small><hr><br>',
+
+        max_length=256,
+    )
+    first_name_field = models.CharField(
+        db_column='first_name_field_db_column',
+        db_index=True,
+        db_tablespace='first_name_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='first_name_field',
+        help_text='<small class="text-muted">first_name_field</small><hr><br>',
+
+        max_length=256,
+    )
+    patronymic_field = models.CharField(
+        db_column='patronymic_field_db_column',
+        db_index=True,
+        db_tablespace='patronymic_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='patronymic_field',
+        help_text='<small class="text-muted">patronymic_field</small><hr><br>',
+
+        max_length=256,
+    )
+    image_field = models.ImageField(
+        db_column='image_field_db_column',
+        db_index=True,
+        db_tablespace='image_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='uploads/vacancy/default_vacancy.jpg',
+        verbose_name='image_field',
+        help_text='<small class="text-muted">>image_field</small><hr><br>',
+
+        upload_to='uploads/vacancy/image/',
+        max_length=200,
+    )
+    datetime_birth_field = models.DateTimeField(
+        db_column='datetime_birth_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_birth_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='datetime_birth_field',
+        help_text='<small class="text-muted">datetime_birth_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    datetime_create_field = models.DateTimeField(
+        db_column='datetime_create_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_create_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='datetime_create_field',
+        help_text='<small class="text-muted">datetime_create_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    education_field = models.CharField(
+        db_column='education_field_db_column',
+        db_index=True,
+        db_tablespace='education_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='education_field',
+        help_text='<small class="text-muted">education_field</small><hr><br>',
+
+        max_length=128,
+    )
+    experience_field = models.CharField(
+        db_column='experience_field_db_column',
+        db_index=True,
+        db_tablespace='experience_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='experience_field',
+        help_text='<small class="text-muted">experience_field</small><hr><br>',
+
+        max_length=128,
+    )
+    sex_field = models.CharField(
+        db_column='sex_field_db_column',
+        db_index=True,
+        db_tablespace='sex_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='sex_field',
+        help_text='<small class="text-muted">sex_field</small><hr><br>',
+
+        max_length=32,
+    )
+    contact_data_field = models.TextField(
+        db_column='contact_data_field_db_column',
+        db_index=True,
+        db_tablespace='contact_data_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(250), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='contact_data_field',
+        help_text='<small class="text-muted">contact_data_field</small><hr><br>',
+
+        max_length=250,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-datetime_create_field',)
+        verbose_name = 'Резюме'
+        verbose_name_plural = 'Резюме'
+        db_table = 'resume_model_table'
+
+    def __str__(self):
+        return f'{self.qualification_field} : {self.last_name_field} : {self.first_name_field} : ' \
+               f'{self.datetime_create_field}'
+
+
 @receiver(post_save, sender=User)
 def create_user_model(sender, instance, created, **kwargs):
     if created:

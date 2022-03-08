@@ -14,7 +14,7 @@ import StoreStatusComponent from "../../components/StoreStatusComponent";
 import MessageComponent from "../../components/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const VacancyListPage = () => {
+const VacancyCreatePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useParams().id;
@@ -268,4 +268,4 @@ const VacancyListPage = () => {
   );
 };
 
-export default VacancyListPage;
+export default VacancyCreatePage;

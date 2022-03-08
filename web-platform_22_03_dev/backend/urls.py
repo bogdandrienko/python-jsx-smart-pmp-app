@@ -76,6 +76,8 @@ urlpatterns = [
     ####################################################################################################################
     path('api/any/vacancy/', backend_views.api_any_vacancy, name='api_any_vacancy'),
     path('api/auth/vacancy/', backend_views.api_auth_vacancy, name='api_auth_vacancy'),
+    path('api/any/resume/', backend_views.api_any_resume, name='api_any_resume'),
+    path('api/auth/resume/', backend_views.api_auth_resume, name='api_auth_resume'),
     ####################################################################################################################
 ]
 

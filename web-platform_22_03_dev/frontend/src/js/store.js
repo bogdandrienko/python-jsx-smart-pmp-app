@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import * as reducers from "./reducers";
-import { vacancyDeleteReducer, vacancyRespondReducer } from "./reducers";
+import { vacancyDeleteReducer, resumeCreateReducer } from "./reducers";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const globalReducer = combineReducers({
@@ -26,10 +26,14 @@ const globalReducer = combineReducers({
   ///////////////////////////////////////////////////////////
   vacancyListStore: reducers.vacancyListReducer,
   vacancyDetailStore: reducers.vacancyDetailReducer,
-  vacancyRespondStore: reducers.vacancyRespondReducer,
   vacancyCreateStore: reducers.vacancyCreateReducer,
   vacancyChangeStore: reducers.vacancyChangeReducer,
   vacancyDeleteStore: reducers.vacancyDeleteReducer,
+  ///////////////////////////////////////////////////////////
+  resumeListStore: reducers.resumeListReducer,
+  resumeDetailStore: reducers.resumeDetailReducer,
+  resumeCreateStore: reducers.resumeCreateReducer,
+  resumeDeleteStore: reducers.resumeDeleteReducer,
   ///////////////////////////////////////////////////////////
 });
 

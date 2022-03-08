@@ -57,7 +57,7 @@ export const GetCleanDateTime = (dateTime, withTime = true) => {
 export const GetSliceString = (string = "", length = 30) => {
   try {
     if (string.length >= length) {
-      return string.slice(1, length) + "...";
+      return string.slice(0, length) + "...";
     } else {
       return string;
     }

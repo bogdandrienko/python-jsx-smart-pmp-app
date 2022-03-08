@@ -13,7 +13,7 @@ import { vacancyDetailAction } from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const VacancyListPage = () => {
+const VacancyChangePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useParams().id;
@@ -354,4 +354,4 @@ const VacancyListPage = () => {
   );
 };
 
-export default VacancyListPage;
+export default VacancyChangePage;

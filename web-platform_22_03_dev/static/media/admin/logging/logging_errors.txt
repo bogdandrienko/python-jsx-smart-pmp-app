@@ -16,3 +16,179 @@ Bogdan, 127.0.0.1, /api/auth/vacancy/, POST, 2022-03-07 23:36:48.762800, Vacancy
 , 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 14:04:19.463072, VacancyModel matching query does not exist.
 
 , 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 14:17:39.158387, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:09:33.458851, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:13:29.370313, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:13:41.103294, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:27:26.854201, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:38:44.833064, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:40:29.850186, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:40:46.184726, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:41:22.974078, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:41:24.175490, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:41:28.419113, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:41:34.725056, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:41:47.739667, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:41:52.964571, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:42:53.110285, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:42:59.927664, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:43:01.422705, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:43:03.867852, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:43:10.014828, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:43:32.140798, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:43:35.157745, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:43:40.462309, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:44:13.455952, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:44:15.582530, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:44:21.415974, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:44:24.469754, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:44:26.612970, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:44:30.788436, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:44:59.932303, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:45:04.768425, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:45:32.989380, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:45:40.995003, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:45:41.922213, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:45:59.009102, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:46:12.910868, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:46:15.866230, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:46:47.545860, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:46:49.165935, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:46:57.372212, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:47:01.590598, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:47:16.790029, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:47:23.173606, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:47:25.143203, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:47:40.257760, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:47:52.061214, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:48:10.113079, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:48:15.399275, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:48:33.003213, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:48:35.213371, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:49:27.922990, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:49:30.534241, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:49:37.994414, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:50:08.219730, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 15:52:37.072720, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 16:38:11.090301, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 20:38:13.917802, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 20:38:19.309894, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:06:30.637544, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/resume/, POST, 2022-03-08 21:06:45.016520, VacancyModel() got an unexpected keyword argument 'last_name_field'
+
+, 127.0.0.1, /api/any/resume/, POST, 2022-03-08 21:07:19.007575, ResumeModel() got an unexpected keyword argument 'contact_data_field_field'
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:11:46.139956, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:14:13.801041, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:15:32.556558, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:15:49.802615, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:17:14.899330, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:22:59.863220, Field 'id' expected a number but got 'undefined'.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:23:26.250964, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/resume/, POST, 2022-03-08 21:27:05.109439, Cannot resolve keyword 'datetime_field' into field. Choices are: contact_data_field, datetime_birth_field, datetime_create_field, education_field, experience_field, first_name_field, id, image_field, last_name_field, patronymic_field, qualification_field, sex_field
+
+Bogdan, 127.0.0.1, /api/auth/resume/, POST, 2022-03-08 21:27:08.041912, Cannot resolve keyword 'datetime_field' into field. Choices are: contact_data_field, datetime_birth_field, datetime_create_field, education_field, experience_field, first_name_field, id, image_field, last_name_field, patronymic_field, qualification_field, sex_field
+
+Bogdan, 127.0.0.1, /api/auth/resume/, POST, 2022-03-08 21:27:12.648458, Cannot resolve keyword 'datetime_field' into field. Choices are: contact_data_field, datetime_birth_field, datetime_create_field, education_field, experience_field, first_name_field, id, image_field, last_name_field, patronymic_field, qualification_field, sex_field
+
+Bogdan, 127.0.0.1, /api/auth/resume/, POST, 2022-03-08 21:28:59.371374, Cannot resolve keyword 'datetime_field' into field. Choices are: contact_data_field, datetime_birth_field, datetime_create_field, education_field, experience_field, first_name_field, id, image_field, last_name_field, patronymic_field, qualification_field, sex_field
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:47:28.243163, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:47:33.364362, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:50:35.568223, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:50:37.527689, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:50:40.225749, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 21:50:43.566530, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 22:53:52.554048, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 22:55:46.160193, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 22:59:37.428862, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2022-03-08 23:01:07.342007, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-08 23:01:08.977022, index.html
+
+, 127.0.0.1, /, GET, 2022-03-08 23:01:13.625311, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-08 23:01:15.065119, index.html
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 23:01:26.783621, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 23:06:35.323095, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2022-03-08 23:17:49.436474, index.html
+
+, 127.0.0.1, /, GET, 2022-03-08 23:17:55.672426, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-08 23:17:57.020486, index.html

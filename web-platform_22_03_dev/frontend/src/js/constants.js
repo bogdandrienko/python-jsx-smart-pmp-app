@@ -110,12 +110,6 @@ export const VACANCY_DETAIL_ERROR_CONSTANT = "VACANCY_DETAIL_ERROR_CONSTANT";
 export const VACANCY_DETAIL_FAIL_CONSTANT = "VACANCY_DETAIL_FAIL_CONSTANT";
 export const VACANCY_DETAIL_RESET_CONSTANT = "VACANCY_DETAIL_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const VACANCY_RESPOND_LOAD_CONSTANT = "VACANCY_RESPOND_LOAD_CONSTANT";
-export const VACANCY_RESPOND_DATA_CONSTANT = "VACANCY_RESPOND_DATA_CONSTANT";
-export const VACANCY_RESPOND_ERROR_CONSTANT = "VACANCY_RESPOND_ERROR_CONSTANT";
-export const VACANCY_RESPOND_FAIL_CONSTANT = "VACANCY_RESPOND_FAIL_CONSTANT";
-export const VACANCY_RESPOND_RESET_CONSTANT = "VACANCY_RESPOND_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_CREATE_LOAD_CONSTANT = "VACANCY_CREATE_LOAD_CONSTANT";
 export const VACANCY_CREATE_DATA_CONSTANT = "VACANCY_CREATE_DATA_CONSTANT";
 export const VACANCY_CREATE_ERROR_CONSTANT = "VACANCY_CREATE_ERROR_CONSTANT";
@@ -133,6 +127,30 @@ export const VACANCY_DELETE_DATA_CONSTANT = "VACANCY_DELETE_DATA_CONSTANT";
 export const VACANCY_DELETE_ERROR_CONSTANT = "VACANCY_DELETE_ERROR_CONSTANT";
 export const VACANCY_DELETE_FAIL_CONSTANT = "VACANCY_DELETE_FAIL_CONSTANT";
 export const VACANCY_DELETE_RESET_CONSTANT = "VACANCY_DELETE_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const RESUME_LIST_LOAD_CONSTANT = "RESUME_LIST_LOAD_CONSTANT";
+export const RESUME_LIST_DATA_CONSTANT = "RESUME_LIST_DATA_CONSTANT";
+export const RESUME_LIST_ERROR_CONSTANT = "RESUME_LIST_ERROR_CONSTANT";
+export const RESUME_LIST_FAIL_CONSTANT = "RESUME_LIST_FAIL_CONSTANT";
+export const RESUME_LIST_RESET_CONSTANT = "RESUME_LIST_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const RESUME_DETAIL_LOAD_CONSTANT = "RESUME_DETAIL_LOAD_CONSTANT";
+export const RESUME_DETAIL_DATA_CONSTANT = "RESUME_DETAIL_DATA_CONSTANT";
+export const RESUME_DETAIL_ERROR_CONSTANT = "RESUME_DETAIL_ERROR_CONSTANT";
+export const RESUME_DETAIL_FAIL_CONSTANT = "RESUME_DETAIL_FAIL_CONSTANT";
+export const RESUME_DETAIL_RESET_CONSTANT = "RESUME_DETAIL_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const RESUME_CREATE_LOAD_CONSTANT = "RESUME_CREATE_LOAD_CONSTANT";
+export const RESUME_CREATE_DATA_CONSTANT = "RESUME_CREATE_DATA_CONSTANT";
+export const RESUME_CREATE_ERROR_CONSTANT = "RESUME_CREATE_ERROR_CONSTANT";
+export const RESUME_CREATE_FAIL_CONSTANT = "RESUME_CREATE_FAIL_CONSTANT";
+export const RESUME_CREATE_RESET_CONSTANT = "RESUME_CREATE_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const RESUME_DELETE_LOAD_CONSTANT = "RESUME_DELETE_LOAD_CONSTANT";
+export const RESUME_DELETE_DATA_CONSTANT = "RESUME_DELETE_DATA_CONSTANT";
+export const RESUME_DELETE_ERROR_CONSTANT = "RESUME_DELETE_ERROR_CONSTANT";
+export const RESUME_DELETE_FAIL_CONSTANT = "RESUME_DELETE_FAIL_CONSTANT";
+export const RESUME_DELETE_RESET_CONSTANT = "RESUME_DELETE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {
@@ -197,32 +215,11 @@ export const news = [
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const modules = [
   {
-    Header: "Разработка ver.05.03.22 08:02",
+    Header: "Разработка ver.08.03.22 22:55",
     Access: "superuser",
     Image: "/static/img/modules.png",
     ShowInModules: false,
     Sections: [
-      {
-        Header: "Аккаунты",
-        Access: "superuser",
-        Image: "/static/img/modules.png",
-        Links: [
-          {
-            Header: "Список пользователей",
-            Access: "superuser",
-            Active: true,
-            Link: "/users_list",
-            ExternalLink: false,
-          },
-          {
-            Header: "Todo",
-            Access: "superuser",
-            Active: true,
-            Link: "/todo",
-            ExternalLink: false,
-          },
-        ],
-      },
       {
         Header: "Шаблоны",
         Access: "superuser",
@@ -764,7 +761,7 @@ export const modules = [
             Header: "Отправить резюме",
             Access: "user",
             Active: true,
-            Link: "/vacancy_respond/0",
+            Link: "/resume_create/0",
             ExternalLink: false,
           },
           {
@@ -772,6 +769,13 @@ export const modules = [
             Access: "moderator_vacancy",
             Active: true,
             Link: "/vacancy_create",
+            ExternalLink: false,
+          },
+          {
+            Header: "Список резюме",
+            Access: "moderator_vacancy",
+            Active: true,
+            Link: "/resume_list",
             ExternalLink: false,
           },
           {

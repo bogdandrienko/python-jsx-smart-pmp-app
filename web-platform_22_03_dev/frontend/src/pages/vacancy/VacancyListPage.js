@@ -211,14 +211,12 @@ const VacancyListPage = () => {
                 >
                   сбросить фильтры
                 </button>
-                {utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
-                  <Link
-                    to={`/vacancy_respond/0`}
-                    className="btn btn-sm btn-success"
-                  >
-                    отправить резюме
-                  </Link>
-                )}
+                <Link
+                  to={`/resume_create/0`}
+                  className="btn btn-sm btn-success"
+                >
+                  отправить резюме
+                </Link>
                 {utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
                   <Link
                     to={`/vacancy_create`}
@@ -235,23 +233,23 @@ const VacancyListPage = () => {
           {dataVacancyList && dataVacancyList.length > 0 ? (
             !detailView ? (
               <ul className="bg-opacity-10 bg-primary shadow">
-                {dataVacancyList.map((vacancy, module_i) => (
+                {dataVacancyList.map((vacancy, index) => (
                   <Link
-                    key={module_i}
+                    key={index}
                     to={`/vacancy_detail/${vacancy.id}`}
                     className="text-decoration-none"
                   >
                     <li className="lead border list-group-item-action">
-                      {vacancy["qualification_field"].slice(0, 36)}...
+                      {utils.GetSliceString(vacancy["qualification_field"], 30)}
                     </li>
                   </Link>
                 ))}
               </ul>
             ) : (
               <div className="row justify-content-center p-0 m-0">
-                {dataVacancyList.map((vacancy, module_i) => (
+                {dataVacancyList.map((vacancy, index) => (
                   <Link
-                    key={module_i}
+                    key={index}
                     to={`/vacancy_detail/${vacancy.id}`}
                     className="text-decoration-none border shadow text-center p-0 m-0 col-md-6"
                   >
@@ -386,7 +384,6 @@ const VacancyListPage = () => {
                                           vacancy["description_field"],
                                           30
                                         )}
-                                        {}
                                       </td>
                                     </tr>
                                   )}

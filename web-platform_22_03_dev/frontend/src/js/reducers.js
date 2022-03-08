@@ -368,29 +368,6 @@ export const vacancyDetailReducer = (state = {}, action = null) => {
   }
 };
 
-export const vacancyRespondReducer = (state = {}, action = null) => {
-  switch (action.type) {
-    case constants.VACANCY_RESPOND_LOAD_CONSTANT:
-      return { load: true };
-    case constants.VACANCY_RESPOND_DATA_CONSTANT:
-      return {
-        load: false,
-        data: action.payload,
-      };
-    case constants.VACANCY_RESPOND_ERROR_CONSTANT:
-      return {
-        load: false,
-        error: action.payload,
-      };
-    case constants.VACANCY_RESPOND_FAIL_CONSTANT:
-      return { load: false, fail: action.payload };
-    case constants.VACANCY_RESPOND_RESET_CONSTANT:
-      return {};
-    default:
-      return state;
-  }
-};
-
 export const vacancyCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_CREATE_LOAD_CONSTANT:
@@ -454,6 +431,98 @@ export const vacancyDeleteReducer = (state = {}, action = null) => {
     case constants.VACANCY_DELETE_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
     case constants.VACANCY_DELETE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const resumeListReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.RESUME_LIST_LOAD_CONSTANT:
+      return { load: true };
+    case constants.RESUME_LIST_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.RESUME_LIST_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.RESUME_LIST_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.RESUME_LIST_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const resumeDetailReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.RESUME_DETAIL_LOAD_CONSTANT:
+      return { load: true };
+    case constants.RESUME_DETAIL_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.RESUME_DETAIL_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.RESUME_DETAIL_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.RESUME_DETAIL_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const resumeCreateReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.RESUME_CREATE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.RESUME_CREATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.RESUME_CREATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.RESUME_CREATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.RESUME_CREATE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const resumeDeleteReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.RESUME_DELETE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.RESUME_DELETE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.RESUME_DELETE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.RESUME_DELETE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.RESUME_DELETE_RESET_CONSTANT:
       return {};
     default:
       return state;

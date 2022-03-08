@@ -605,16 +605,16 @@ class VacancyModelAdmin(admin.ModelAdmin):
     )
     fieldsets = (
         ("Основная информация", {"fields": (
-        "author_field",
-        "qualification_field",
-        "image_field",
-        "datetime_field",
-        "sphere_field",
-        "education_field",
-        "rank_field",
-        "experience_field",
-        "schedule_field",
-        "description_field",
+            "author_field",
+            "qualification_field",
+            "image_field",
+            "datetime_field",
+            "sphere_field",
+            "education_field",
+            "rank_field",
+            "experience_field",
+            "schedule_field",
+            "description_field",
         )}),
     )
     search_fields = [
@@ -631,6 +631,67 @@ class VacancyModelAdmin(admin.ModelAdmin):
     ]
 
 
+class ResumeModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'ResumeModel' на панели администратора
+    """
+
+    list_display = (
+        "qualification_field",
+        "last_name_field",
+        "first_name_field",
+        "patronymic_field",
+        "image_field",
+        "datetime_birth_field",
+        "education_field",
+        "experience_field",
+        "sex_field",
+    )
+    list_display_links = (
+        "qualification_field",
+        "last_name_field",
+        "first_name_field",
+    )
+    list_filter = (
+        "qualification_field",
+        "last_name_field",
+        "first_name_field",
+        "patronymic_field",
+        "image_field",
+        "datetime_birth_field",
+        "education_field",
+        "experience_field",
+        "sex_field",
+        "contact_data_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "qualification_field",
+            "last_name_field",
+            "first_name_field",
+            "patronymic_field",
+            "image_field",
+            "datetime_birth_field",
+            "education_field",
+            "experience_field",
+            "sex_field",
+            "contact_data_field",
+        )}),
+    )
+    search_fields = [
+        "qualification_field",
+        "last_name_field",
+        "first_name_field",
+        "patronymic_field",
+        "image_field",
+        "datetime_birth_field",
+        "education_field",
+        "experience_field",
+        "sex_field",
+        "contact_data_field",
+    ]
+
+
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Администрирование'  # default: "Django site admin"
@@ -644,3 +705,4 @@ admin.site.register(backend_models.ActionModel, ActionModelAdmin)
 admin.site.register(backend_models.GroupModel, GroupModelAdmin)
 admin.site.register(backend_models.RationalModel, RationalModelAdmin)
 admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)
+admin.site.register(backend_models.ResumeModel, ResumeModelAdmin)

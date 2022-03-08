@@ -2,48 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="706b6942-640f-4237-bef4-6b7a4ae07a68" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.21667d8d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.21667d8d.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.21667d8d.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/SMART-Project-Managment-Platform_Ez0u42m.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/SMART-Project-Managment-Platform_QpXJsxQ.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_OI4freu.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_Ty6t4KA.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_WSxToCj.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_fK0itqC.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_hYT0IbZ.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_ofAatVo.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_rBZ6mCc.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_z2Xfs3s.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_4Ocmx2P.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_BEwIFLe.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_Qjdbede.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_T8fostL.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_ZSKWpWx.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0004_resumemodel_alter_vacancymodel_rank_field.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.73d40dfb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.73d40dfb.js.LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.73d40dfb.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/resume/ResumeDetailPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/resume/ResumeListPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_XJaNIpm.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_YnncBxG.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_oxsVqfb.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_6zv63Rw.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_D2qm8qL.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_U8nLxIl.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_ZdZDtOl.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_coDebl8.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_dkmexe2.JPG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.7c208f12.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.7c208f12.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.7c208f12.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/FooterComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FooterComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/StoreStatusComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/StoreStatusComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.cc2fd651.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.cc2fd651.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.cc2fd651.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/reducers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalCreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalCreatePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/base/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/HomePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyChangePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyChangePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyCreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyCreatePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyDetailPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyRespondPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyRespondPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyRespondPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/resume/ResumeCreatePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" afterDir="false" />
     </list>
@@ -90,23 +87,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/pages/resume" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript.Linters.JSHint" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\resume" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\components" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\vacancy" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\extra" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\resume" />
+      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\vacancy" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\user" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\salary" />
       <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\base" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\admin" />
-      <recent name="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\src\pages\rational" />
     </key>
   </component>
   <component name="RunManager">
@@ -147,6 +145,7 @@
       <workItem from="1646623303372" duration="25077000" />
       <workItem from="1646672118348" duration="4745000" />
       <workItem from="1646707326585" duration="20867000" />
+      <workItem from="1646730490455" duration="13171000" />
     </task>
     <servers />
   </component>

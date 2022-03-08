@@ -882,48 +882,6 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
   }
 };
 
-export const vacancyRespondAction = (form) => async (dispatch) => {
-  try {
-    dispatch({
-      type: constants.VACANCY_RESPOND_LOAD_CONSTANT,
-    });
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      formData.append(key, value);
-    });
-    const { data } = await axios({
-      url: "/api/any/vacancy/",
-      method: "POST",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      data: formData,
-    });
-    if (data["response"]) {
-      const response = data["response"];
-      dispatch({
-        type: constants.VACANCY_RESPOND_DATA_CONSTANT,
-        payload: response,
-      });
-    } else {
-      const response = data["error"];
-      dispatch({
-        type: constants.VACANCY_RESPOND_ERROR_CONSTANT,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    dispatch({
-      type: constants.VACANCY_RESPOND_FAIL_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-
 export const vacancyCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1054,6 +1012,186 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: constants.VACANCY_DELETE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const resumeListAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.RESUME_LIST_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/resume/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RESUME_LIST_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RESUME_LIST_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.RESUME_LIST_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const resumeDetailAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.RESUME_DETAIL_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/resume/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RESUME_DETAIL_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RESUME_DETAIL_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.RESUME_DETAIL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const resumeCreateAction = (form) => async (dispatch) => {
+  try {
+    dispatch({
+      type: constants.RESUME_CREATE_LOAD_CONSTANT,
+    });
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/any/resume/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RESUME_CREATE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RESUME_CREATE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.RESUME_CREATE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const resumeDeleteAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.RESUME_DELETE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/resume/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RESUME_DELETE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RESUME_DELETE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.RESUME_DELETE_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

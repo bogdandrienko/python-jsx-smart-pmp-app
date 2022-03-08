@@ -64,6 +64,13 @@ const HomePage = () => {
                   </small>
                 </Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/vacancy_list" className="col">
+                <Nav.Link>
+                  <small className="fw-bold btn btn-success">
+                    Вакансии предприятия (нажмите для перехода)
+                  </small>
+                </Nav.Link>
+              </LinkContainer>
             </div>
           </div>
           <NewsComponent count={9} />

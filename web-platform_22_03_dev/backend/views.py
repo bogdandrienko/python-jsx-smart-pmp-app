@@ -1857,7 +1857,7 @@ def api_any_vacancy(request):
                         request=request, error=error, print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
-            elif req_inst.action_type == "VACANCY_DETAIL":
+            if req_inst.action_type == "VACANCY_DETAIL":
                 try:
                     id = req_inst.get_value("id")
 
@@ -1867,22 +1867,6 @@ def api_any_vacancy(request):
                         vacancy = backend_models.VacancyModel.objects.order_by('-id')[0]
                     serializer = backend_serializers.VacancyModelSerializer(instance=vacancy, many=False)
                     response = {"response": serializer.data}
-                    # print(f"response: {response}")
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
-                    return Response({"error": "Произошла ошибка!"})
-            elif req_inst.action_type == "VACANCY_RESPOND":
-                try:
-                    qualification = req_inst.get_value("qualification")
-                    last_name = req_inst.get_value("lastName")
-
-                    print("qualification: ", qualification)
-                    print("last_name: ", last_name)
-
-                    response = {"response": "Ваше резюме успешно сохранено!"}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -1971,25 +1955,25 @@ def api_auth_vacancy(request):
 
                     vacancy = backend_models.VacancyModel.objects.get(id=_id)
 
-                    if req_inst.user_model:
+                    if req_inst.user_model and vacancy.author_field != req_inst.user_model:
                         vacancy.author_field = req_inst.user_model
-                    if qualification:
+                    if qualification and vacancy.qualification_field != qualification:
                         vacancy.qualification_field = qualification
-                    if rank:
+                    if rank and vacancy.rank_field != rank:
                         vacancy.rank_field = rank
-                    if sphere:
+                    if sphere and vacancy.sphere_field != sphere:
                         vacancy.sphere_field = sphere
-                    if education:
+                    if education and vacancy.education_field != education:
                         vacancy.education_field = education
-                    if experience:
+                    if experience and vacancy.experience_field != experience:
                         vacancy.experience_field = experience
-                    if schedule:
+                    if schedule and vacancy.schedule_field != schedule:
                         vacancy.schedule_field = schedule
                     if clear_image:
                         vacancy.image_field = None
-                    if image:
+                    if image and vacancy.image_field != image:
                         vacancy.image_field = image
-                    if description:
+                    if description and vacancy.description_field != description:
                         vacancy.description_field = description
 
                     vacancy.save()
@@ -2023,3 +2007,168 @@ def api_auth_vacancy(request):
             request=request, error=error, print_error=backend_settings.DEBUG
         )
         return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([AllowAny])
+def api_any_resume(request):
+    """
+    api_rational django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "RESUME_CREATE":
+                try:
+
+                    qualification = req_inst.get_value("qualification")
+                    last_name = req_inst.get_value("lastName")
+                    first_name = req_inst.get_value("firstName")
+                    patronymic = req_inst.get_value("patronymic")
+                    image = req_inst.get_value("image")
+                    if image and image != "null":
+                        pass
+                    else:
+                        image = None
+                    birth_date = req_inst.get_value("birthDate")
+                    education = req_inst.get_value("education")
+                    experience = req_inst.get_value("experience")
+                    sex = req_inst.get_value("sex")
+                    contact_data = req_inst.get_value("contactData")
+
+                    backend_models.ResumeModel.objects.create(
+                        qualification_field=qualification,
+                        last_name_field=last_name,
+                        first_name_field=first_name,
+                        patronymic_field=patronymic,
+                        image_field=image,
+                        datetime_birth_field=birth_date,
+                        education_field=education,
+                        experience_field=experience,
+                        sex_field=sex,
+                        contact_data_field=contact_data,
+                    )
+
+                    response = {"response": "Ваше резюме успешно сохранено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_resume(request):
+    """
+    api_rational django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "RESUME_LIST":
+                try:
+
+                    education = req_inst.get_value("education")
+                    experience = req_inst.get_value("experience")
+                    sex = req_inst.get_value("sex")
+                    sort = req_inst.get_value("sort")
+                    search_qualification = req_inst.get_value("searchQualification")
+                    search_last_name = req_inst.get_value("searchLastName")
+
+                    resume_list = backend_models.ResumeModel.objects.all().order_by("-id")
+
+                    if education:
+                        resume_list = resume_list.filter(education_field=education)
+                    if experience:
+                        resume_list = resume_list.filter(experience_field=experience)
+                    if sex:
+                        resume_list = resume_list.filter(sex_field=sex)
+                    if sort:
+                        if sort == "Дате публикации (сначала свежие)":
+                            resume_list = resume_list.order_by("-datetime_create_field")
+                        elif sort == "Дате публикации (сначала старые)":
+                            resume_list = resume_list.order_by("datetime_create_field")
+                        elif sort == "Названию вакансии (С начала алфавита)":
+                            resume_list = resume_list.order_by("qualification_field")
+                        elif sort == "Названию вакансии (С конца алфавита)":
+                            resume_list = resume_list.order_by("-qualification_field")
+
+                    if search_qualification:
+                        resume_list = resume_list.filter(qualification_field__icontains=search_qualification)
+                    if search_last_name:
+                        resume_list = resume_list.filter(last_name_field__icontains=search_last_name)
+
+                    serializer = backend_serializers.ResumeModelSerializer(instance=resume_list, many=True)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "RESUME_DETAIL":
+                try:
+                    id = req_inst.get_value("id")
+
+                    if id:
+                        vacancy = backend_models.ResumeModel.objects.get(id=id)
+                    else:
+                        vacancy = backend_models.ResumeModel.objects.order_by('-id')[0]
+                    serializer = backend_serializers.ResumeModelSerializer(instance=vacancy, many=False)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "RESUME_DELETE":
+                try:
+                    _id = req_inst.get_value("id")
+                    backend_models.ResumeModel.objects.get(id=_id).delete()
+                    response = {"response": "Успешно удалено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")
+

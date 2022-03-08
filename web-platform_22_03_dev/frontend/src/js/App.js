@@ -26,9 +26,11 @@ import RationalListPage from "../pages/rational/RationalListPage";
 import RationalDetailPage from "../pages/rational/RationalDetailPage";
 import VacancyListPage from "../pages/vacancy/VacancyListPage";
 import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
-import VacancyRespondPage from "../pages/vacancy/VacancyRespondPage";
 import VacancyChangePage from "../pages/vacancy/VacancyChangePage";
 import VacancyDetailPage from "../pages/vacancy/VacancyDetailPage";
+import ResumeListPage from "../pages/resume/ResumeListPage";
+import ResumeCreatePage from "../pages/resume/ResumeCreatePage";
+import ResumeDetailPage from "../pages/resume/ResumeDetailPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
@@ -69,9 +71,12 @@ function App() {
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/vacancy_list" element={<VacancyListPage />} />
           <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />
-          <Route path="/vacancy_respond/:id" element={<VacancyRespondPage />} />
           <Route path="/vacancy_create" element={<VacancyCreatePage />} />
           <Route path="/vacancy_change/:id" element={<VacancyChangePage />} />
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          <Route path="/resume_create/:id" element={<ResumeCreatePage />} />
+          <Route path="/resume_list" element={<ResumeListPage />} />
+          <Route path="/resume_detail/:id" element={<ResumeDetailPage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </Routes>
       </div>
