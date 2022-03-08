@@ -1,3 +1,5 @@
+export const DEBUG_CONSTANT = true;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
 export const USER_LOGIN_ERROR_CONSTANT = "USER_LOGIN_ERROR_CONSTANT";
@@ -107,6 +109,24 @@ export const VACANCY_DETAIL_DATA_CONSTANT = "VACANCY_DETAIL_DATA_CONSTANT";
 export const VACANCY_DETAIL_ERROR_CONSTANT = "VACANCY_DETAIL_ERROR_CONSTANT";
 export const VACANCY_DETAIL_FAIL_CONSTANT = "VACANCY_DETAIL_FAIL_CONSTANT";
 export const VACANCY_DETAIL_RESET_CONSTANT = "VACANCY_DETAIL_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const VACANCY_RESPOND_LOAD_CONSTANT = "VACANCY_RESPOND_LOAD_CONSTANT";
+export const VACANCY_RESPOND_DATA_CONSTANT = "VACANCY_RESPOND_DATA_CONSTANT";
+export const VACANCY_RESPOND_ERROR_CONSTANT = "VACANCY_RESPOND_ERROR_CONSTANT";
+export const VACANCY_RESPOND_FAIL_CONSTANT = "VACANCY_RESPOND_FAIL_CONSTANT";
+export const VACANCY_RESPOND_RESET_CONSTANT = "VACANCY_RESPOND_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const VACANCY_CREATE_LOAD_CONSTANT = "VACANCY_CREATE_LOAD_CONSTANT";
+export const VACANCY_CREATE_DATA_CONSTANT = "VACANCY_CREATE_DATA_CONSTANT";
+export const VACANCY_CREATE_ERROR_CONSTANT = "VACANCY_CREATE_ERROR_CONSTANT";
+export const VACANCY_CREATE_FAIL_CONSTANT = "VACANCY_CREATE_FAIL_CONSTANT";
+export const VACANCY_CREATE_RESET_CONSTANT = "VACANCY_CREATE_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const VACANCY_CHANGE_LOAD_CONSTANT = "VACANCY_CHANGE_LOAD_CONSTANT";
+export const VACANCY_CHANGE_DATA_CONSTANT = "VACANCY_CHANGE_DATA_CONSTANT";
+export const VACANCY_CHANGE_ERROR_CONSTANT = "VACANCY_CHANGE_ERROR_CONSTANT";
+export const VACANCY_CHANGE_FAIL_CONSTANT = "VACANCY_CHANGE_FAIL_CONSTANT";
+export const VACANCY_CHANGE_RESET_CONSTANT = "VACANCY_CHANGE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_DELETE_LOAD_CONSTANT = "VACANCY_DELETE_LOAD_CONSTANT";
 export const VACANCY_DELETE_DATA_CONSTANT = "VACANCY_DELETE_DATA_CONSTANT";
@@ -741,14 +761,7 @@ export const modules = [
             ExternalLink: false,
           },
           {
-            Header: "Описание вакансии",
-            Access: "user",
-            Active: true,
-            Link: "/vacancy_detail/0",
-            ExternalLink: false,
-          },
-          {
-            Header: "Откликнуться на вакансию",
+            Header: "Отправить резюме",
             Access: "user",
             Active: true,
             Link: "/vacancy_respond/0",
@@ -759,13 +772,6 @@ export const modules = [
             Access: "moderator_vacancy",
             Active: true,
             Link: "/vacancy_create",
-            ExternalLink: false,
-          },
-          {
-            Header: "Изменить вакансию",
-            Access: "moderator_vacancy",
-            Active: true,
-            Link: "/vacancy_change/0",
             ExternalLink: false,
           },
           {

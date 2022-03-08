@@ -734,7 +734,8 @@ def api_admin_create_or_change_users(request):
                             user.save()
 
                             if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
-                                for group in backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model):
+                                for group in backend_models.GroupModel.objects.filter(
+                                        user_many_to_many_field=user_model):
                                     try:
                                         group.user_many_to_many_field.remove(user_model)
                                     except Exception as error:
@@ -1873,6 +1874,22 @@ def api_any_vacancy(request):
                         request=request, error=error, print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
+            elif req_inst.action_type == "VACANCY_RESPOND":
+                try:
+                    qualification = req_inst.get_value("qualification")
+                    last_name = req_inst.get_value("lastName")
+
+                    print("qualification: ", qualification)
+                    print("last_name: ", last_name)
+
+                    response = {"response": "Ваше резюме успешно сохранено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
@@ -1902,8 +1919,82 @@ def api_auth_vacancy(request):
             # Actions
             if req_inst.action_type == "VACANCY_CREATE":
                 try:
-                    id = req_inst.get_value("id")
-                    response = {"response": "success"}
+                    qualification = req_inst.get_value("qualification")
+                    rank = req_inst.get_value("rank")
+                    sphere = req_inst.get_value("sphere")
+                    education = req_inst.get_value("education")
+                    experience = req_inst.get_value("experience")
+                    schedule = req_inst.get_value("schedule")
+                    image = req_inst.get_value("image")
+                    if image and image != "null":
+                        pass
+                    else:
+                        image = None
+                    description = req_inst.get_value("description")
+
+                    backend_models.VacancyModel.objects.create(
+                        author_field=req_inst.user_model,
+                        qualification_field=qualification,
+                        rank_field=rank,
+                        sphere_field=sphere,
+                        education_field=education,
+                        experience_field=experience,
+                        schedule_field=schedule,
+                        image_field=image,
+                        description_field=description,
+                    )
+
+                    response = {"response": "Успешно создано!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "VACANCY_CHANGE":
+                try:
+                    _id = req_inst.get_value("id")
+                    qualification = req_inst.get_value("qualification")
+                    rank = req_inst.get_value("rank")
+                    sphere = req_inst.get_value("sphere")
+                    education = req_inst.get_value("education")
+                    experience = req_inst.get_value("experience")
+                    schedule = req_inst.get_value("schedule")
+                    image = req_inst.get_value("image")
+                    if image and image != "null":
+                        pass
+                    else:
+                        image = None
+                    clear_image = req_inst.get_value("clearImage")
+                    description = req_inst.get_value("description")
+
+                    vacancy = backend_models.VacancyModel.objects.get(id=_id)
+
+                    if req_inst.user_model:
+                        vacancy.author_field = req_inst.user_model
+                    if qualification:
+                        vacancy.qualification_field = qualification
+                    if rank:
+                        vacancy.rank_field = rank
+                    if sphere:
+                        vacancy.sphere_field = sphere
+                    if education:
+                        vacancy.education_field = education
+                    if experience:
+                        vacancy.experience_field = experience
+                    if schedule:
+                        vacancy.schedule_field = schedule
+                    if clear_image:
+                        vacancy.image_field = None
+                    if image:
+                        vacancy.image_field = image
+                    if description:
+                        vacancy.description_field = description
+
+                    vacancy.save()
+
+                    response = {"response": "Успешно изменено!"}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -1914,8 +2005,7 @@ def api_auth_vacancy(request):
             if req_inst.action_type == "VACANCY_DELETE":
                 try:
                     _id = req_inst.get_value("id")
-                    print(f"id: {_id}")
-                    # backend_models.VacancyModel.objects.get(id=_id).delete()
+                    backend_models.VacancyModel.objects.get(id=_id).delete()
                     response = {"response": "Успешно удалено!"}
                     # print(f"response: {response}")
                     return Response(response)

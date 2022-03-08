@@ -800,19 +800,13 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
 
 export const vacancyListAction = (form) => async (dispatch) => {
   try {
-    // LOAD dispatch
-    // console.log("vacancyListAction load: ", data);
     dispatch({
       type: constants.VACANCY_LIST_LOAD_CONSTANT,
     });
-
-    // FormData class
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
       formData.append(key, value);
     });
-
-    // Axios request
     const { data } = await axios({
       url: "/api/any/vacancy/",
       method: "POST",
@@ -822,29 +816,20 @@ export const vacancyListAction = (form) => async (dispatch) => {
       },
       data: formData,
     });
-
     if (data["response"]) {
       const response = data["response"];
-
-      // DATA dispatch
-      // console.log("vacancyListAction response: ", response);
       dispatch({
         type: constants.VACANCY_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
       const response = data["error"];
-
-      // ERROR dispatch
-      // console.log("vacancyListAction error: ", response);
       dispatch({
         type: constants.VACANCY_LIST_ERROR_CONSTANT,
         payload: response,
       });
     }
   } catch (error) {
-    // FAIL dispatch
-    // console.log("vacancyListAction fail: ", error.response);
     dispatch({
       type: constants.VACANCY_LIST_FAIL_CONSTANT,
       payload:
@@ -857,21 +842,15 @@ export const vacancyListAction = (form) => async (dispatch) => {
 
 export const vacancyDetailAction = (form) => async (dispatch) => {
   try {
-    // LOAD dispatch
-    // console.log("vacancyDetailAction load: ", data);
     dispatch({
       type: constants.VACANCY_DETAIL_LOAD_CONSTANT,
     });
-
-    // FormData class
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
       formData.append(key, value);
     });
-
-    // Axios request
     const { data } = await axios({
-      url: "/api/auth/vacancy/",
+      url: "/api/any/vacancy/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -879,31 +858,156 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
       },
       data: formData,
     });
-
     if (data["response"]) {
       const response = data["response"];
-
-      // DATA dispatch
-      // console.log("vacancyDetailAction response: ", response);
       dispatch({
         type: constants.VACANCY_DETAIL_DATA_CONSTANT,
         payload: response,
       });
     } else {
       const response = data["error"];
-
-      // ERROR dispatch
-      // console.log("vacancyDetailAction error: ", response);
       dispatch({
         type: constants.VACANCY_DETAIL_ERROR_CONSTANT,
         payload: response,
       });
     }
   } catch (error) {
-    // FAIL dispatch
-    // console.log("vacancyDetailAction fail: ", error.response);
     dispatch({
       type: constants.VACANCY_DETAIL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const vacancyRespondAction = (form) => async (dispatch) => {
+  try {
+    dispatch({
+      type: constants.VACANCY_RESPOND_LOAD_CONSTANT,
+    });
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/any/vacancy/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.VACANCY_RESPOND_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.VACANCY_RESPOND_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.VACANCY_RESPOND_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const vacancyCreateAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.VACANCY_CREATE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/vacancy/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.VACANCY_CREATE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.VACANCY_CREATE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.VACANCY_CREATE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const vacancyChangeAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.VACANCY_CHANGE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/vacancy/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.VACANCY_CHANGE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.VACANCY_CHANGE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.VACANCY_CHANGE_FAIL_CONSTANT,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

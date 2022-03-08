@@ -2750,7 +2750,7 @@ class VacancyModel(models.Model):
         db_tablespace='rank_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2759,7 +2759,7 @@ class VacancyModel(models.Model):
         verbose_name='rank_field',
         help_text='<small class="text-muted">rank_field</small><hr><br>',
 
-        max_length=128,
+        max_length=32,
     )
     experience_field = models.CharField(
         db_column='experience_field_db_column',

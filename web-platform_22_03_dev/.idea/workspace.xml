@@ -2,70 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="706b6942-640f-4237-bef4-6b7a4ae07a68" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/migrations/0002_vacancymodel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/migrations/0003_alter_vacancymodel_description_field_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.fc549ed9.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.fc549ed9.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.fc549ed9.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/media/uploads/vacancy/default_vacancy.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/static/media/uploads/vacancy/default_vacancy.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/StoreStatusComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/js/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/extra/FormCreatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyChangePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyCreatePage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyDetailPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyListPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyRespondPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/SMART-Project-Managment-Platform.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web-platform_22_03_dev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-platform_22_03_dev.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.21667d8d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.21667d8d.js.LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.21667d8d.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/SMART-Project-Managment-Platform_Ez0u42m.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/SMART-Project-Managment-Platform_QpXJsxQ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_OI4freu.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_Ty6t4KA.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_WSxToCj.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_fK0itqC.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_hYT0IbZ.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_ofAatVo.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_rBZ6mCc.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок1_z2Xfs3s.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_4Ocmx2P.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_BEwIFLe.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_Qjdbede.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_T8fostL.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/uploads/vacancy/image/Снимок_ZSKWpWx.JPG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.5cb39d7e.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.5cb39d7e.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.5cb39d7e.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/.jshintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.7c208f12.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.7c208f12.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.7c208f12.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/FooterComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FooterComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/HeaderComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HeaderComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/TitleComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TitleComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/js/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/StoreStatusComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/StoreStatusComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/reducers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AdminChangeUserPasswordPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminChangeUserPasswordPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AdminCreateOrChangeUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminCreateOrChangeUsersPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AdminExportUsersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminExportUsersPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ChangePasswordPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/ChangePasswordPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ChangeProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/ChangeProfilePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/LogoutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/LogoutPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/NewsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/NewsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RationalCreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalCreatePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RationalDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalDetailPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RationalListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RecoverPasswordPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/RecoverPasswordPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/SalaryPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/salary/SalaryPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/TextStudyPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/TextStudyPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/UsersListPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/VacanciesListPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/VideoStudyPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/VideoStudyPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalCreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalCreatePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyChangePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyChangePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyCreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyCreatePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyDetailPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyListPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyRespondPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyRespondPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" afterDir="false" />
     </list>
@@ -167,6 +145,8 @@
       <workItem from="1646533397649" duration="7285000" />
       <workItem from="1646560254360" duration="616000" />
       <workItem from="1646623303372" duration="25077000" />
+      <workItem from="1646672118348" duration="4745000" />
+      <workItem from="1646707326585" duration="20867000" />
     </task>
     <servers />
   </component>

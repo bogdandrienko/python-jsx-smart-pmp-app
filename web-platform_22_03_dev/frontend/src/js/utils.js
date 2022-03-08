@@ -1,15 +1,40 @@
-export const CheckAccess = (dataUserDetails, slug = "") => {
-  if (dataUserDetails) {
-    if (dataUserDetails["group_model"]) {
-      return dataUserDetails["group_model"].includes(slug);
+import * as constants from "./constants";
+
+export const CheckAccess = (userDetailsStore, slug = "") => {
+  try {
+    const {
+      // load: loadUserDetails,
+      data: dataUserDetails,
+      // error: errorUserDetails,
+      // fail: failUserDetails,
+    } = userDetailsStore;
+    if (dataUserDetails) {
+      if (dataUserDetails["group_model"]) {
+        return dataUserDetails["group_model"].includes(slug);
+      }
+      return false;
+    }
+    return false;
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
     }
     return false;
   }
-  return false;
 };
 
 export const GetStaticFile = (path = "") => {
-  return `/static${path}`;
+  try {
+    if (path === "null" || path === "/media/null" || path == null) {
+      return "";
+    }
+    return `/static${path}`;
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
+  }
 };
 
 export const GetCleanDateTime = (dateTime, withTime = true) => {
@@ -22,10 +47,35 @@ export const GetCleanDateTime = (dateTime, withTime = true) => {
       return `${date}`;
     }
   } catch (error) {
-    return "-";
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
+  }
+};
+
+export const GetSliceString = (string = "", length = 30) => {
+  try {
+    if (string.length >= length) {
+      return string.slice(1, length) + "...";
+    } else {
+      return string;
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
   }
 };
 
 export const Sleep = (time = 1000) => {
-  return new Promise((resolve) => setTimeout(resolve, time));
+  try {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
 };

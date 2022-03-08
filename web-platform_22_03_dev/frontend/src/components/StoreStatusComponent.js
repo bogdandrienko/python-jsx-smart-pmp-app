@@ -6,7 +6,7 @@ function StoreStatusComponent(
   StoreStatus,
   key = "StoreStatus",
   showSuccess = true,
-  successText = null,
+  successText = "",
   consoleLog = false
 ) {
   const {
@@ -41,9 +41,7 @@ function StoreStatusComponent(
       {dataStatus && showSuccess && (
         <div className="m-0 p-0">
           <Alert variant={"success"} className="m-0 p-1">
-            {successText !== null && successText !== ""
-              ? successText
-              : dataStatus}
+            {successText !== "" ? successText : dataStatus}
           </Alert>
         </div>
       )}

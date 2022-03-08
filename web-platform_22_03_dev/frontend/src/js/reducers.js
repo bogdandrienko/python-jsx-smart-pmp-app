@@ -326,25 +326,20 @@ export const vacancyListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_LIST_LOAD_CONSTANT:
       return { load: true };
-
     case constants.VACANCY_LIST_DATA_CONSTANT:
       return {
         load: false,
         data: action.payload,
       };
-
     case constants.VACANCY_LIST_ERROR_CONSTANT:
       return {
         load: false,
         error: action.payload,
       };
-
     case constants.VACANCY_LIST_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
-
     case constants.VACANCY_LIST_RESET_CONSTANT:
       return {};
-
     default:
       return state;
   }
@@ -354,25 +349,89 @@ export const vacancyDetailReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_DETAIL_LOAD_CONSTANT:
       return { load: true };
-
     case constants.VACANCY_DETAIL_DATA_CONSTANT:
       return {
         load: false,
         data: action.payload,
       };
-
     case constants.VACANCY_DETAIL_ERROR_CONSTANT:
       return {
         load: false,
         error: action.payload,
       };
-
     case constants.VACANCY_DETAIL_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
-
     case constants.VACANCY_DETAIL_RESET_CONSTANT:
       return {};
+    default:
+      return state;
+  }
+};
 
+export const vacancyRespondReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.VACANCY_RESPOND_LOAD_CONSTANT:
+      return { load: true };
+    case constants.VACANCY_RESPOND_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.VACANCY_RESPOND_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.VACANCY_RESPOND_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.VACANCY_RESPOND_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const vacancyCreateReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.VACANCY_CREATE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.VACANCY_CREATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.VACANCY_CREATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.VACANCY_CREATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.VACANCY_CREATE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const vacancyChangeReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.VACANCY_CHANGE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.VACANCY_CHANGE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.VACANCY_CHANGE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.VACANCY_CHANGE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.VACANCY_CHANGE_RESET_CONSTANT:
+      return {};
     default:
       return state;
   }
@@ -382,25 +441,20 @@ export const vacancyDeleteReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_DELETE_LOAD_CONSTANT:
       return { load: true };
-
     case constants.VACANCY_DELETE_DATA_CONSTANT:
       return {
         load: false,
         data: action.payload,
       };
-
     case constants.VACANCY_DELETE_ERROR_CONSTANT:
       return {
         load: false,
         error: action.payload,
       };
-
     case constants.VACANCY_DELETE_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
-
     case constants.VACANCY_DELETE_RESET_CONSTANT:
       return {};
-
     default:
       return state;
   }

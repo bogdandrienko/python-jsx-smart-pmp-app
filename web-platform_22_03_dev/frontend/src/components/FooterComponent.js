@@ -3,7 +3,7 @@ import { Navbar, NavDropdown } from "react-bootstrap";
 
 const FooterComponent = () => {
   return (
-    <footer className="footer m-0 p-0 py-3">
+    <footer className="footer m-0 p-0 pt-3">
       <div className="bg-secondary bg-opacity-10">
         <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
           <li className="m-1">

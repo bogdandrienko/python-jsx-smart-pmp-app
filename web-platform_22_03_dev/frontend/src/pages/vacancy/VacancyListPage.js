@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
-import { useDispatch, useSelector } from "react-redux";
-import { vacancyDeleteAction, vacancyListAction } from "../../js/actions";
-import * as utils from "../../js/utils";
-import LoaderComponent from "../../components/LoaderComponent";
-import MessageComponent from "../../components/MessageComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
-import { Link, useNavigate } from "react-router-dom";
-import { Sleep } from "../../js/utils";
-import * as constants from "../../js/constants";
-
+import MessageComponent from "../../components/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const id = useParams().id;
 
   const [detailView, setDetailView] = useState(true);
   const [sphere, sphereSet] = useState("");
@@ -26,31 +26,15 @@ const VacancyListPage = () => {
   const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
   const [search, searchSet] = useState("");
 
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
-  const {
-    // load: loadUserDetails,
-    data: dataUserDetails,
-    // error: errorUserDetails,
-    // fail: failUserDetails,
-  } = userDetailsStore;
+  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
 
   const vacancyListStore = useSelector((state) => state.vacancyListStore); // store.js
   const {
-    // load: loadVacancyList,
+    load: loadVacancyList,
     data: dataVacancyList,
     // error: errorVacancyList,
     // fail: failVacancyList,
   } = vacancyListStore;
-  // console.log("dataVacancyList: ", dataVacancyList);
-
-  const vacancyDeleteStore = useSelector((state) => state.vacancyDeleteStore); // store.js
-  const {
-    // load: loadVacancyDelete,
-    data: dataVacancyDelete,
-    // error: errorVacancyDelete,
-    // fail: failVacancyDelete,
-  } = vacancyDeleteStore;
-  // console.log("dataVacancyDelete: ", dataVacancyDelete);
 
   const getData = () => {
     const form = {
@@ -61,23 +45,17 @@ const VacancyListPage = () => {
       sort: sort,
       search: search,
     };
-    dispatch(vacancyListAction(form));
+    dispatch(actions.vacancyListAction(form));
   };
 
   useEffect(() => {
     if (dataVacancyList) {
     } else {
-      getData();
+      if (!loadVacancyList) {
+        getData();
+      }
     }
-  }, [dispatch, dataVacancyList]);
-
-  useEffect(() => {
-    if (dataVacancyDelete) {
-      utils.Sleep(3000).then(() => {
-        dispatch({ type: constants.VACANCY_DELETE_RESET_CONSTANT });
-      });
-    }
-  }, [dataVacancyDelete]);
+  }, [dataVacancyList]);
 
   const formHandlerSubmit = async (e) => {
     e.preventDefault();
@@ -94,18 +72,9 @@ const VacancyListPage = () => {
     getData();
   };
 
-  const formHandlerDelete = async (e, id) => {
-    e.preventDefault();
-    const form = {
-      "Action-type": "VACANCY_DELETE",
-      id: id,
-    };
-    dispatch(vacancyDeleteAction(form));
-  };
-
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
+      <HeaderComponent logic={true} redirect={false} />
       <TitleComponent
         first={"Список вакансий"}
         second={
@@ -117,60 +86,47 @@ const VacancyListPage = () => {
           {StoreStatusComponent(
             vacancyListStore,
             "vacancyListStore",
-            true,
+            false,
             "Данные успешно получены!",
-            true
-          )}
-          {StoreStatusComponent(
-            vacancyDeleteStore,
-            "vacancyDeleteStore",
-            true,
-            "",
-            true
+            constants.DEBUG_CONSTANT
           )}
         </div>
-        <div className="form-control p-3 bg-opacity-10 bg-success">
-          <form className="" onSubmit={formHandlerSubmit}>
-            <div className="d-flex w-100 align-items-center justify-content-between">
-              <div className="lead">
-                Выберите нужные настройки фильтрации и сортировки, затем нажмите
-                кнопку "Фильтровать"
-              </div>
-              <div className="form-check form-switch">
-                <label
-                  className="form-check-label"
-                  htmlFor="flexSwitchCheckDefault"
-                >
+        <div className="container-fluid form-control bg-opacity-10 bg-success">
+          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+            <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+              <div className="p-0 m-0">
+                <label className="lead">
+                  Выберите нужные настройки фильтрации и сортировки, затем
+                  нажмите кнопку{" "}
+                  <p className="fw-bold text-primary">"фильтровать вакансии"</p>
+                </label>
+                <label className="form-control-md form-switch m-1">
+                  Детальное отображение:
                   <input
                     type="checkbox"
                     className="form-check-input m-1"
                     id="flexSwitchCheckDefault"
-                    checked={detailView}
+                    defaultChecked={detailView}
                     onClick={(e) => setDetailView(!detailView)}
                   />
-                  Детальное отображение
                 </label>
               </div>
-            </div>
-            <div className="">
-              <div className="d-flex w-100 align-items-center justify-content-between">
-                <label className="form-control-sm">
+              <div className="p-0 m-0">
+                <label className="form-control-md m-1">
                   Сфера:
                   <select
-                    id="sphere"
-                    name="sphere"
-                    className="form-control form-control-sm"
                     value={sphere}
+                    className="form-control form-control-sm"
                     onChange={(e) => sphereSet(e.target.value)}
                   >
-                    <option value="">Все варианты</option>
+                    <option value="">все варианты</option>
                     <option value="Технологическая">Технологическая</option>
                     <option value="Не технологическая">
                       Не технологическая
                     </option>
                   </select>
                 </label>
-                <label className="form-control-sm w-25">
+                <label className="form-control-md m-1">
                   Образование:
                   <select
                     id="education"
@@ -179,9 +135,9 @@ const VacancyListPage = () => {
                     value={education}
                     onChange={(e) => educationSet(e.target.value)}
                   >
-                    <option value="">Все варианты</option>
+                    <option value="">все варианты</option>
                     <option value="Высшее, Средне-специальное">
-                      Высшее, Средне-специальное
+                      Высшее / Средне-специальное
                     </option>
                     <option value="Высшее">Высшее</option>
                     <option value="Средне-специальное">
@@ -190,7 +146,7 @@ const VacancyListPage = () => {
                     <option value="Среднее">Среднее</option>
                   </select>
                 </label>
-                <label className="form-control-sm w-25">
+                <label className="form-control-md m-1">
                   Опыт:
                   <select
                     id="experience"
@@ -199,7 +155,8 @@ const VacancyListPage = () => {
                     value={experience}
                     onChange={(e) => experienceSet(e.target.value)}
                   >
-                    <option value="">Все варианты</option>
+                    <option value="">все варианты</option>
+                    <option value="не имеет значения">не имеет значения</option>
                     <option value="от 1 года до 3 лет">
                       от 1 года до 3 лет
                     </option>
@@ -207,7 +164,19 @@ const VacancyListPage = () => {
                     <option value="более 6 лет">более 6 лет</option>
                   </select>
                 </label>
-                <label className="form-control-sm">
+              </div>
+              <div className="p-0 m-0">
+                <label className="w-75 form-control-md m-1">
+                  Поле поиска по части названия или квалификации:
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="вводите часть названия тут..."
+                    value={search}
+                    onChange={(e) => searchSet(e.target.value)}
+                  />
+                </label>
+                <label className="form-control-md m-1">
                   Сортировка вакансий по:
                   <select
                     id="sort"
@@ -231,299 +200,211 @@ const VacancyListPage = () => {
                   </select>
                 </label>
               </div>
-              <div>
-                <div className="d-flex w-100 align-items-center justify-content-between">
-                  <input
-                    type="text"
-                    className="form-control m-1 w-75"
-                    placeholder="введите сюда часть названия или квалификации..."
-                    value={search}
-                    onChange={(e) => searchSet(e.target.value)}
-                  />
-                  <button className="btn btn-md btn-success m-1">
-                    Фильтровать
-                  </button>
-                  <button
-                    className="btn btn-md btn-warning m-1"
-                    type="button"
-                    onClick={formHandlerReset}
+              <div className="btn-group p-1 m-0 text-start w-100">
+                <button className="btn btn-sm btn-primary" type="submit">
+                  фильтровать вакансии
+                </button>
+                <button
+                  className="btn btn-sm btn-warning"
+                  type="button"
+                  onClick={formHandlerReset}
+                >
+                  сбросить фильтры
+                </button>
+                {utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+                  <Link
+                    to={`/vacancy_respond/0`}
+                    className="btn btn-sm btn-success"
                   >
-                    Сбросить
-                  </button>
-                  {utils.CheckAccess(
-                    dataUserDetails,
-                    "moderator_vacancies"
-                  ) && (
-                    <Link to={`/vacancy_create`} className="">
-                      <button
-                        className="btn btn-md btn-primary m-1"
-                        type="button"
-                      >
-                        Создать
-                      </button>
-                    </Link>
-                  )}
-                </div>
+                    отправить резюме
+                  </Link>
+                )}
+                {utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+                  <Link
+                    to={`/vacancy_create`}
+                    className="btn btn-sm btn-secondary"
+                  >
+                    создать новую вакансию
+                  </Link>
+                )}
               </div>
-            </div>
-          </form>
+            </form>
+          </ul>
         </div>
-        <div className="container-fluid">
+        <div className="container-fluid p-0 m-0">
           {dataVacancyList && dataVacancyList.length > 0 ? (
             !detailView ? (
-              <div className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1">
+              <ul className="bg-opacity-10 bg-primary shadow">
                 {dataVacancyList.map((vacancy, module_i) => (
-                  <div
+                  <Link
                     key={module_i}
-                    className="border shadow text-center p-0 m-0"
+                    to={`/vacancy_detail/${vacancy.id}`}
+                    className="text-decoration-none"
                   >
-                    <div className="list-group-item-action lh-tight p-0 m-0">
-                      <div className="card p-0 m-0">
-                        <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
-                          <div className="card-body d-flex w-100 align-items-center justify-content-between p-0 m-0">
-                            <div className="w-75 p-0 m-0">
-                              <Link
-                                to={`/vacancy_detail/${vacancy.id}`}
-                                className="text-decoration-none text-dark"
-                              >
-                                {vacancy["qualification_field"].slice(0, 36)}...
-                              </Link>
-                            </div>
-                            <div className="card-body d-flex align-items-center justify-content-between p-0">
-                              <div className="btn-group">
-                                <Link
-                                  to={`/vacancy_respond/${vacancy.id}`}
-                                  className=""
-                                >
-                                  <button
-                                    className="btn btn-md btn-outline-success m-1"
-                                    type="button"
-                                  >
-                                    Откликнуться
-                                  </button>
-                                </Link>
-                                {utils.CheckAccess(
-                                  dataUserDetails,
-                                  "moderator_vacancies"
-                                ) && (
-                                  <Link
-                                    to={`/vacancy_change/${vacancy.id}`}
-                                    className=""
-                                  >
-                                    <button
-                                      className="btn btn-md btn-outline-warning m-1"
-                                      type="button"
-                                    >
-                                      Редактировать
-                                    </button>
-                                  </Link>
-                                )}
-                                {utils.CheckAccess(
-                                  dataUserDetails,
-                                  "moderator_vacancies"
-                                ) && (
-                                  <button
-                                    className="btn btn-md btn-outline-danger m-1"
-                                    onClick={(e) =>
-                                      formHandlerDelete(e, vacancy.id)
-                                    }
-                                  >
-                                    Удалить
-                                  </button>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    <li className="lead border list-group-item-action">
+                      {vacancy["qualification_field"].slice(0, 36)}...
+                    </li>
+                  </Link>
                 ))}
-              </div>
+              </ul>
             ) : (
-              <div className="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
+              <div className="row justify-content-center p-0 m-0">
                 {dataVacancyList.map((vacancy, module_i) => (
-                  <div
+                  <Link
                     key={module_i}
-                    className="border shadow text-center p-0 m-0"
+                    to={`/vacancy_detail/${vacancy.id}`}
+                    className="text-decoration-none border shadow text-center p-0 m-0 col-md-6"
                   >
-                    <div className="list-group-item-action lh-tight p-0 m-0">
-                      <div className="card p-0 m-0">
-                        <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
-                          <Link
-                            to={`/vacancy_detail/${vacancy.id}`}
-                            className="text-decoration-none text-dark"
-                          >
-                            {vacancy["qualification_field"].slice(0, 36)}...
-                          </Link>
-                        </div>
-                        <div className="d-flex w-100 align-items-center justify-content-between p-0 m-0">
-                          <div className="w-25 shadow p-0 m-1">
+                    <div className="card p-0 m-0 list-group-item-action">
+                      <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
+                        {utils.GetSliceString(
+                          vacancy["qualification_field"],
+                          30
+                        )}
+                      </div>
+                      <div className="card-body p-0 m-0">
+                        <div className="row justify-content-center p-0 m-0">
+                          <div className="col-md-6 shadow w-25 p-0 m-0">
                             <img
                               src={utils.GetStaticFile(vacancy["image_field"])}
-                              className="img-fluid w-50 p-0 m-0"
+                              className="img-fluid img-thumbnail"
                               alt="изображение"
                             />
                           </div>
-                          <div className="w-75 bg-light bg-opacity-10">
-                            {vacancy["datetime_field"] !== "" &&
-                              vacancy["datetime_field"] !== null && (
-                                <div className="card-body p-1">
-                                  <div className="d-flex w-100 align-items-center justify-content-between">
-                                    <strong className="fw-bold text-secondary">
-                                      Опубликовано:
-                                    </strong>
-                                    <text className="small">
-                                      {utils.GetCleanDateTime(
-                                        vacancy["datetime_field"],
-                                        true
-                                      )}
-                                    </text>
-                                  </div>
-                                </div>
-                              )}
-                            {vacancy["sphere_field"] !== "" && (
-                              <div className="card-body p-1">
-                                <div className="d-flex w-100 align-items-center justify-content-between">
-                                  <strong className="fw-bold text-secondary">
-                                    Сфера:
-                                  </strong>
-                                  <text className="small">
-                                    {vacancy["sphere_field"]}
-                                  </text>
-                                </div>
-                              </div>
-                            )}
-                            {vacancy["education_field"] !== "" && (
-                              <div className="card-body p-1">
-                                <div className="d-flex w-100 align-items-center justify-content-between">
-                                  <strong className="fw-bold text-secondary">
-                                    Образование:
-                                  </strong>
-                                  <text className="small">
-                                    {vacancy["education_field"]}
-                                  </text>
-                                </div>
-                              </div>
-                            )}
-                            {vacancy["qualification_field"] !== "" && (
-                              <div className="card-body p-1">
-                                <div className="d-flex w-100 align-items-center justify-content-between">
-                                  <strong className="fw-bold text-secondary">
-                                    Квалификация:
-                                  </strong>
-                                  <text className="small">
-                                    {vacancy["qualification_field"]}
-                                  </text>
-                                </div>
-                              </div>
-                            )}
-                            {vacancy["rank_field"] !== "" &&
-                              vacancy["rank_field"] !== null && (
-                                <div className="card-body p-1">
-                                  <div className="d-flex w-100 align-items-center justify-content-between">
-                                    <strong className="fw-bold text-secondary">
-                                      Разряд:
-                                    </strong>
-                                    <text className="small">
-                                      {vacancy["rank_field"]}
-                                    </text>
-                                  </div>
-                                </div>
-                              )}
-                            {vacancy["experience_field"] !== "" && (
-                              <div className="card-body p-1">
-                                <div className="d-flex w-100 align-items-center justify-content-between">
-                                  <strong className="fw-bold text-secondary">
-                                    Опыт:
-                                  </strong>
-                                  <text className="small">
-                                    {vacancy["experience_field"]}
-                                  </text>
-                                </div>
-                              </div>
-                            )}
-                            {vacancy["schedule_field"] !== "" && (
-                              <div className="card-body p-1">
-                                <div className="d-flex w-100 align-items-center justify-content-between">
-                                  <strong className="fw-bold text-secondary">
-                                    График:
-                                  </strong>
-                                  <text className="small">
-                                    {vacancy["schedule_field"]}
-                                  </text>
-                                </div>
-                              </div>
-                            )}
-                            {vacancy["description_field"] !== "" && (
-                              <div className="card-body p-1">
-                                <div className="d-flex w-100 align-items-center justify-content-between">
-                                  <strong className="fw-bold text-secondary">
-                                    Описание:
-                                  </strong>
-                                  <text className="small">
-                                    {vacancy["description_field"]}
-                                  </text>
-                                </div>
-                              </div>
-                            )}
-                            <div className="card-body d-flex align-items-center justify-content-between p-0">
-                              <div className="btn-group">
-                                <Link
-                                  to={`/vacancy_respond/${vacancy.id}`}
-                                  className="m-1"
-                                >
-                                  <button
-                                    className="btn btn-md btn-outline-success"
-                                    type="button"
-                                  >
-                                    Откликнуться
-                                  </button>
-                                </Link>
-                                {utils.CheckAccess(
-                                  dataUserDetails,
-                                  "moderator_vacancies"
-                                ) && (
-                                  <Link
-                                    to={`/vacancy_change/${vacancy.id}`}
-                                    className="m-1"
-                                  >
-                                    <button
-                                      className="btn btn-md btn-outline-warning"
-                                      type="button"
-                                    >
-                                      Редактировать
-                                    </button>
-                                  </Link>
-                                )}
-                                {utils.CheckAccess(
-                                  dataUserDetails,
-                                  "moderator_vacancies"
-                                ) && (
-                                  <button
-                                    className="btn btn-md btn-outline-danger m-1"
-                                    onClick={(e) =>
-                                      formHandlerDelete(e, vacancy.id)
-                                    }
-                                  >
-                                    Удалить
-                                  </button>
-                                )}
-                              </div>
-                            </div>
+                          <div className="card-body col-md-6 p-0 m-0">
+                            <table className="table table-sm table-hover table-borderless table-striped p-0 m-0">
+                              <tbody>
+                                {vacancy["datetime_field"] !== "" &&
+                                  vacancy["datetime_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        Опубликовано:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          utils.GetCleanDateTime(
+                                            vacancy["datetime_field"],
+                                            true
+                                          ),
+                                          30
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )}
+                                {vacancy["sphere_field"] !== "" &&
+                                  vacancy["sphere_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        Сфера:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          vacancy["sphere_field"],
+                                          30
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )}
+                                {vacancy["education_field"] !== "" &&
+                                  vacancy["education_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        Образование:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          vacancy["education_field"],
+                                          30
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )}
+                                {vacancy["qualification_field"] !== "" &&
+                                  vacancy["qualification_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        Квалификация:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          vacancy["qualification_field"],
+                                          30
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )}
+                                {vacancy["rank_field"] !== "" &&
+                                  vacancy["rank_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        Разряд:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          vacancy["rank_field"],
+                                          30
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )}
+                                {vacancy["experience_field"] !== "" &&
+                                  vacancy["experience_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        Опыт:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          vacancy["experience_field"],
+                                          30
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )}
+                                {vacancy["schedule_field"] !== "" &&
+                                  vacancy["schedule_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        График:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          vacancy["schedule_field"],
+                                          30
+                                        )}
+                                      </td>
+                                    </tr>
+                                  )}
+                                {vacancy["description_field"] !== "" &&
+                                  vacancy["description_field"] !== null && (
+                                    <tr className="">
+                                      <td className="fw-bold text-secondary text-start">
+                                        Описание:
+                                      </td>
+                                      <td className="small text-end">
+                                        {utils.GetSliceString(
+                                          vacancy["description_field"],
+                                          30
+                                        )}
+                                        {}
+                                      </td>
+                                    </tr>
+                                  )}
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )
           ) : (
-            <div className="lead text-danger">
+            <MessageComponent variant={"danger"}>
               Вакансии не найдены! Попробуйте изменить условия фильтрации или
               очистить строку поиска.
-            </div>
+            </MessageComponent>
           )}
         </div>
       </main>

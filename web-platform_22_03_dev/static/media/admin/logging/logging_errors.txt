@@ -6,3 +6,13 @@
 , 127.0.0.1, /api/vacancy/, POST, 2022-03-07 11:54:14.544829, 'VacancyModelSerializer' object has no attribute 'get_user_model'
 
 , 127.0.0.1, /api/any/vacancy/, POST, 2022-03-07 15:12:51.495444, VacancyModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/vacancy/, POST, 2022-03-07 23:36:48.762800, VacancyModel() got an unexpected keyword argument 'qualification'
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 13:01:15.940476, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 14:01:49.136664, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 14:04:19.463072, VacancyModel matching query does not exist.
+
+, 127.0.0.1, /api/any/vacancy/, POST, 2022-03-08 14:17:39.158387, VacancyModel matching query does not exist.

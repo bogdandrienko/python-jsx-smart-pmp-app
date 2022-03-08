@@ -153,10 +153,6 @@ const BankIdeaListPage = () => {
             <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
               <div className="container">
                 <form
-                  method="POST"
-                  target="_self"
-                  encType="multipart/form-data"
-                  name="RATIONAL_CREATE"
                   autoComplete="on"
                   className="text-center"
                   onSubmit={submitHandler}
