@@ -11920,3 +11920,31 @@ Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:19:55.390194
 Bogdan, 127.0.0.1, /, GET, 2022-03-08 23:20:58.370269
 
 Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:20:58.511269
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:33:11.003359
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:33:58.539651
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:34:00.306258
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:35:11.259976
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:35:12.968452
+
+Bogdan, 127.0.0.1, /api/rational/, POST, 2022-03-08 23:35:12.971455
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:35:18.529697
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:38:15.447348
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:41:36.948246
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:44:08.787825
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:46:12.835526
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:46:15.349546
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:46:59.525428
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-08 23:47:02.245686

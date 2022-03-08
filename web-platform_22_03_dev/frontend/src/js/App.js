@@ -28,9 +28,12 @@ import VacancyListPage from "../pages/vacancy/VacancyListPage";
 import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
 import VacancyChangePage from "../pages/vacancy/VacancyChangePage";
 import VacancyDetailPage from "../pages/vacancy/VacancyDetailPage";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import ResumeListPage from "../pages/resume/ResumeListPage";
 import ResumeCreatePage from "../pages/resume/ResumeCreatePage";
 import ResumeDetailPage from "../pages/resume/ResumeDetailPage";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import IdeaCreatePage from "../pages/idea/IdeaCreatePage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
@@ -77,6 +80,8 @@ function App() {
           <Route path="/resume_create/:id" element={<ResumeCreatePage />} />
           <Route path="/resume_list" element={<ResumeListPage />} />
           <Route path="/resume_detail/:id" element={<ResumeDetailPage />} />
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          <Route path="/idea_create" element={<IdeaCreatePage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         </Routes>
       </div>
