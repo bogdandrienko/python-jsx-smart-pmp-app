@@ -45,7 +45,7 @@ const VacancyListPage = () => {
       sort: sort,
       search: search,
     };
-    dispatch(actions.vacancyListAction(form));
+    dispatch(actions.vacancyListAnyAction(form));
   };
 
   useEffect(() => {

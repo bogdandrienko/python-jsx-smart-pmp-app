@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { adminCreateOrChangeUsersAction } from "../../js/actions";
+import { adminCreateOrChangeUsersAuthAction } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import MessageComponent from "../../components/MessageComponent";
@@ -57,7 +57,7 @@ const AdminCreateOrChangeUsersPage = () => {
       clearUserGroups: clearUserGroups,
       additionalExcel: additionalExcel,
     };
-    dispatch(adminCreateOrChangeUsersAction(form));
+    dispatch(adminCreateOrChangeUsersAuthAction(form));
   };
 
   function sleep(time) {

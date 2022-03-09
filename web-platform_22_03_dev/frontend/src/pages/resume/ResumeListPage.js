@@ -45,7 +45,7 @@ const VacancyListPage = () => {
       searchQualification: searchQualification,
       searchLastName: searchLastName,
     };
-    dispatch(actions.resumeListAction(form));
+    dispatch(actions.resumeListAuthAction(form));
   };
 
   useEffect(() => {
@@ -223,198 +223,193 @@ const VacancyListPage = () => {
           </ul>
         </div>
         <div className="container-fluid p-0 m-0">
-          {dataResumeList && dataResumeList.length > 0 ? (
-            !detailView ? (
-              <ul className="bg-opacity-10 bg-primary shadow">
-                {dataResumeList.map((resume, index) => (
-                  <Link
-                    key={index}
-                    to={`/resume_detail/${resume.id}`}
-                    className="text-decoration-none"
-                  >
-                    <li className="lead border list-group-item-action">
-                      {utils.GetSliceString(resume["qualification_field"], 30)}{" "}
-                      {utils.GetSliceString(resume["last_name_field"], 30)}{" "}
-                      {utils.GetSliceString(resume["first_name_field"], 30)}
-                    </li>
-                  </Link>
-                ))}
-              </ul>
-            ) : (
-              <div className="row justify-content-center p-0 m-0">
-                {dataResumeList.map((resume, index) => (
-                  <Link
-                    key={index}
-                    to={`/resume_detail/${resume.id}`}
-                    className="text-decoration-none border shadow text-center p-0 m-0 col-md-6"
-                  >
-                    <div className="card p-0 m-0 list-group-item-action">
-                      <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
-                        {utils.GetSliceString(
-                          resume["qualification_field"],
-                          30
-                        )}
-                      </div>
-                      <div className="card-body p-0 m-0">
-                        <div className="row justify-content-center p-0 m-0">
-                          <div className="col-md-6 shadow w-25 p-0 m-0">
-                            <img
-                              src={utils.GetStaticFile(resume["image_field"])}
-                              className="img-fluid img-thumbnail"
-                              alt="изображение"
-                            />
-                          </div>
-                          <div className="card-body col-md-6 p-0 m-0">
-                            <table className="table table-sm table-hover table-borderless table-striped p-0 m-0">
-                              <tbody>
-                                {resume["datetime_create_field"] !== "" &&
-                                  resume["datetime_create_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Опубликовано:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          utils.GetCleanDateTime(
-                                            resume["datetime_create_field"],
-                                            true
-                                          ),
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["last_name_field"] !== "" &&
-                                  resume["last_name_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Фамилия:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          resume["last_name_field"],
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["first_name_field"] !== "" &&
-                                  resume["first_name_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Имя:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          resume["first_name_field"],
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["patronymic_field"] !== "" &&
-                                  resume["patronymic_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Отчество:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          resume["patronymic_field"],
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["datetime_birth_field"] !== "" &&
-                                  resume["datetime_birth_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Дата рождения:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          utils.GetCleanDateTime(
-                                            resume["datetime_birth_field"],
-                                            false
-                                          ),
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["education_field"] !== "" &&
-                                  resume["education_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Образование:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          resume["education_field"],
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["qualification_field"] !== "" &&
-                                  resume["qualification_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Квалификация:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          resume["qualification_field"],
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["experience_field"] !== "" &&
-                                  resume["experience_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Опыт:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          resume["experience_field"],
-                                          30
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )}
-                                {resume["contact_data_field"] !== "" &&
-                                  resume["contact_data_field"] !== null && (
-                                    <tr className="">
-                                      <td className="fw-bold text-secondary text-start">
-                                        Контактные данные:
-                                      </td>
-                                      <td className="small text-end">
-                                        {utils.GetSliceString(
-                                          resume["contact_data_field"],
-                                          30
-                                        )}
-                                        {}
-                                      </td>
-                                    </tr>
-                                  )}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )
-          ) : (
+          {!dataResumeList && dataResumeList.length < 1 ? (
             <MessageComponent variant={"danger"}>
               Вакансии не найдены! Попробуйте изменить условия фильтрации или
               очистить строку поиска.
             </MessageComponent>
+          ) : !detailView ? (
+            <ul className="bg-opacity-10 bg-primary shadow">
+              {dataResumeList.map((resume, index) => (
+                <Link
+                  key={index}
+                  to={`/resume_detail/${resume.id}`}
+                  className="text-decoration-none"
+                >
+                  <li className="lead border list-group-item-action">
+                    {utils.GetSliceString(resume["qualification_field"], 30)}{" "}
+                    {utils.GetSliceString(resume["last_name_field"], 30)}{" "}
+                    {utils.GetSliceString(resume["first_name_field"], 30)}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          ) : (
+            <div className="row justify-content-center p-0 m-0">
+              {dataResumeList.map((resume, index) => (
+                <Link
+                  key={index}
+                  to={`/resume_detail/${resume.id}`}
+                  className="text-decoration-none border shadow text-center p-0 m-0 col-md-6"
+                >
+                  <div className="card p-0 m-0 list-group-item-action">
+                    <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
+                      {utils.GetSliceString(resume["qualification_field"], 30)}
+                    </div>
+                    <div className="card-body p-0 m-0">
+                      <div className="row justify-content-center p-0 m-0">
+                        <div className="col-md-6 shadow w-25 p-0 m-0">
+                          <img
+                            src={utils.GetStaticFile(resume["image_field"])}
+                            className="img-fluid img-thumbnail"
+                            alt="изображение"
+                          />
+                        </div>
+                        <div className="card-body col-md-6 p-0 m-0">
+                          <table className="table table-sm table-hover table-borderless table-striped p-0 m-0">
+                            <tbody>
+                              {resume["datetime_create_field"] !== "" &&
+                                resume["datetime_create_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Опубликовано:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        utils.GetCleanDateTime(
+                                          resume["datetime_create_field"],
+                                          true
+                                        ),
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["last_name_field"] !== "" &&
+                                resume["last_name_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Фамилия:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        resume["last_name_field"],
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["first_name_field"] !== "" &&
+                                resume["first_name_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Имя:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        resume["first_name_field"],
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["patronymic_field"] !== "" &&
+                                resume["patronymic_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Отчество:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        resume["patronymic_field"],
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["datetime_birth_field"] !== "" &&
+                                resume["datetime_birth_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Дата рождения:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        utils.GetCleanDateTime(
+                                          resume["datetime_birth_field"],
+                                          false
+                                        ),
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["education_field"] !== "" &&
+                                resume["education_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Образование:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        resume["education_field"],
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["qualification_field"] !== "" &&
+                                resume["qualification_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Квалификация:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        resume["qualification_field"],
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["experience_field"] !== "" &&
+                                resume["experience_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Опыт:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        resume["experience_field"],
+                                        30
+                                      )}
+                                    </td>
+                                  </tr>
+                                )}
+                              {resume["contact_data_field"] !== "" &&
+                                resume["contact_data_field"] !== null && (
+                                  <tr className="">
+                                    <td className="fw-bold text-secondary text-start">
+                                      Контактные данные:
+                                    </td>
+                                    <td className="small text-end">
+                                      {utils.GetSliceString(
+                                        resume["contact_data_field"],
+                                        30
+                                      )}
+                                      {}
+                                    </td>
+                                  </tr>
+                                )}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           )}
         </div>
       </main>

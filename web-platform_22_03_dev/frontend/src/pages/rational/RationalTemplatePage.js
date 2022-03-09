@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { rationalDetailAction } from "../../js/actions";
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
-import LoaderComponent from "../../components/LoaderComponent";
+import StoreStatusComponent from "../../components/StoreStatusComponent";
 import MessageComponent from "../../components/MessageComponent";
-import axios from "axios";
+import LoaderComponent from "../../components/LoaderComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalTemplatePage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const id = useParams().id;
+
   return (
     <div>
       <HeaderComponent logic={true} redirect={true} />
@@ -35,10 +43,8 @@ const RationalTemplatePage = () => {
                       <label className="form-control-sm m-1">
                         Наименование структурного подразделения:
                         <select
-                          id="subdivision"
-                          name="subdivision"
-                          required
                           className="form-control form-control-sm"
+                          required
                         >
                           <option value="">Энергоуправление</option>
                         </select>
@@ -54,10 +60,8 @@ const RationalTemplatePage = () => {
                       <label className="form-control-sm m-1">
                         Сфера рац. предложения:
                         <select
-                          id="sphere"
-                          name="sphere"
-                          required
                           className="form-control form-control-sm"
+                          required
                         >
                           <option value="">Технологическая</option>
                         </select>
@@ -65,10 +69,8 @@ const RationalTemplatePage = () => {
                       <label className="form-control-sm m-1">
                         Категория:
                         <select
-                          id="category"
-                          name="category"
-                          required
                           className="form-control form-control-sm"
+                          required
                         >
                           <option value="">Инновации</option>
                         </select>
@@ -88,14 +90,13 @@ const RationalTemplatePage = () => {
                         Предполагаемое место внедрения:
                         <input
                           type="text"
-                          id="name_char_field"
-                          name="name_char_field"
-                          required
+                          className="form-control form-control-sm"
+                          defaultValue="Участок связи"
                           placeholder="Цех / участок / отдел / лаборатория и т.п."
-                          value="Участок связи"
+                          readOnly={true}
+                          required
                           minLength="1"
                           maxLength="100"
-                          className="form-control form-control-sm"
                         />
                       </label>
                     </div>
@@ -103,27 +104,27 @@ const RationalTemplatePage = () => {
                       <label className="w-100 form-control-sm m-1">
                         Краткое описание:
                         <textarea
+                          className="form-control form-control-sm"
+                          defaultValue="Зелёная экономика предлагает современные средства энергообеспечения"
+                          readOnly={true}
                           required
                           placeholder="Краткое описание"
-                          value="Зелёная экономика предлагает современные средства энергообеспечения"
                           minLength="1"
                           maxLength="200"
                           rows="2"
-                          className="form-control form-control-sm"
                         />
                       </label>
                       <label className="w-100 form-control-sm m-1">
                         Полное описание:
                         <textarea
-                          id="full_description_text_field"
-                          name="full_description_text_field"
+                          className="form-control form-control-sm"
+                          defaultValue="Зелёная экономика предлагает современные средства энергообеспечения"
+                          readOnly={true}
                           required
                           placeholder="Полное описание"
-                          value="Зелёная экономика предлагает современные средства энергообеспечения"
                           minLength="1"
                           maxLength="5000"
                           rows="3"
-                          className="form-control form-control-sm"
                         />
                       </label>
                     </div>
@@ -152,23 +153,19 @@ const RationalTemplatePage = () => {
                         Участники:
                         <input
                           type="text"
-                          id="name_char_field"
-                          name="name_char_field"
-                          placeholder="участник № 1, пример: Андриенко Богдан Николаевич 931777 70%"
-                          value="Андриенко Богдан Николаевич 931777 70%"
+                          className="form-control form-control-sm m-1"
+                          defaultValue="Иванов Иван Иванович 931778 70%"
+                          readOnly={true}
                           minLength="0"
                           maxLength="200"
-                          className="form-control form-control-sm"
                         />
                         <input
                           type="text"
-                          id="name_char_field"
-                          name="name_char_field"
-                          placeholder="участник № 2, пример: Андриенко Богдан Николаевич 931777 30%"
-                          value="пример: Андриенко Богдан Николаевич 931777 30%"
+                          className="form-control form-control-sm m-1"
+                          defaultValue="Иванов Иван Николаевич 931779 30%"
+                          readOnly={true}
                           minLength="0"
                           maxLength="200"
-                          className="form-control form-control-sm"
                         />
                       </label>
                     </div>
@@ -177,7 +174,7 @@ const RationalTemplatePage = () => {
                 <div>
                   <div className="container-fluid text-center">
                     <a className="btn btn-sm btn-warning m-1" href="#">
-                      Автор: Андриенко Богдан Николаевич
+                      Автор: Иванов Иван Иванович
                     </a>
                   </div>
                   <div className="container-fluid d-flex justify-content-between p-0">

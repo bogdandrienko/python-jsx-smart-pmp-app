@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { rationalCreateAction, userListAllAction } from "../../js/actions";
+import {
+  rationalCreateAuthAction,
+  userListAllAuthAction,
+} from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import MessageComponent from "../../components/MessageComponent";
@@ -52,7 +55,7 @@ const BankIdeaListPage = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(userListAllAction(form));
+      dispatch(userListAllAuthAction(form));
     }
   }, [dispatch, dataUserListAll]);
 
@@ -107,7 +110,7 @@ const BankIdeaListPage = () => {
       user4: user4,
       user5: user5,
     };
-    dispatch(rationalCreateAction(form));
+    dispatch(rationalCreateAuthAction(form));
   };
 
   function sleep(time) {

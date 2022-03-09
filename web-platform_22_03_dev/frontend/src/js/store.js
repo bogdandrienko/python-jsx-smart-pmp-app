@@ -3,37 +3,36 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import * as reducers from "./reducers";
-import { vacancyDeleteReducer, resumeCreateReducer } from "./reducers";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const globalReducer = combineReducers({
-  userLoginStore: reducers.userLoginReducer,
-  userDetailsStore: reducers.userDetailsReducer,
-  userChangeStore: reducers.userChangeReducer,
-  userRecoverPasswordStore: reducers.userRecoverPasswordReducer,
+  userLoginStore: reducers.userLoginAnyReducer,
+  userDetailsStore: reducers.userDetailsAuthReducer,
+  userChangeStore: reducers.userChangeAuthReducer,
+  userRecoverPasswordStore: reducers.userRecoverPasswordAnyReducer,
   ///////////////////////////////////////////////////////////
-  adminChangeUserPasswordStore: reducers.adminChangeUserPasswordReducer,
-  adminCreateOrChangeUsersStore: reducers.adminCreateOrChangeUsersReducer,
-  adminExportUsersStore: reducers.adminExportUsersReducer,
+  adminChangeUserPasswordStore: reducers.adminChangeUserPasswordAuthReducer,
+  adminCreateOrChangeUsersStore: reducers.adminCreateOrChangeUsersAuthReducer,
+  adminExportUsersStore: reducers.adminExportUsersAuthReducer,
   ///////////////////////////////////////////////////////////
-  salaryUserStore: reducers.salaryUserReducer,
+  salaryUserStore: reducers.salaryUserAuthReducer,
   ///////////////////////////////////////////////////////////
-  rationalCreateStore: reducers.rationalCreateReducer,
-  rationalListStore: reducers.rationalListReducer,
-  rationalDetailStore: reducers.rationalDetailReducer,
+  rationalCreateStore: reducers.rationalCreateAuthReducer,
+  rationalListStore: reducers.rationalListAuthReducer,
+  rationalDetailStore: reducers.rationalDetailAuthReducer,
   ///////////////////////////////////////////////////////////
-  userListAllStore: reducers.userListAllReducer,
+  userListAllStore: reducers.userListAllAuthReducer,
   ///////////////////////////////////////////////////////////
-  vacancyListStore: reducers.vacancyListReducer,
-  vacancyDetailStore: reducers.vacancyDetailReducer,
-  vacancyCreateStore: reducers.vacancyCreateReducer,
-  vacancyChangeStore: reducers.vacancyChangeReducer,
-  vacancyDeleteStore: reducers.vacancyDeleteReducer,
+  vacancyListStore: reducers.vacancyCreateAuthReducer,
+  vacancyDetailStore: reducers.vacancyListAnyReducer,
+  vacancyCreateStore: reducers.vacancyDetailAnyReducer,
+  vacancyChangeStore: reducers.vacancyChangeAuthReducer,
+  vacancyDeleteStore: reducers.vacancyDeleteAuthReducer,
   ///////////////////////////////////////////////////////////
-  resumeListStore: reducers.resumeListReducer,
-  resumeDetailStore: reducers.resumeDetailReducer,
-  resumeCreateStore: reducers.resumeCreateReducer,
-  resumeDeleteStore: reducers.resumeDeleteReducer,
+  resumeListStore: reducers.resumeListAuthReducer,
+  resumeDetailStore: reducers.resumeDetailAuthReducer,
+  resumeCreateStore: reducers.resumeCreateAnyReducer,
+  resumeDeleteStore: reducers.resumeDeleteAuthReducer,
   ///////////////////////////////////////////////////////////
 });
 

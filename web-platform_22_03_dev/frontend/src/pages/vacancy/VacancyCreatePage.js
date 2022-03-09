@@ -12,6 +12,7 @@ import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
 import MessageComponent from "../../components/MessageComponent";
+import LoaderComponent from "../../components/LoaderComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyCreatePage = () => {
@@ -59,7 +60,7 @@ const VacancyCreatePage = () => {
       image: image,
       description: description,
     };
-    dispatch(actions.vacancyCreateAction(form));
+    dispatch(actions.vacancyCreateAuthAction(form));
   };
 
   return (
@@ -84,184 +85,188 @@ const VacancyCreatePage = () => {
             {"<="} назад к списку
           </Link>
         </div>
-        <div className="container-fluid">
-          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
-            <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-              <div className="p-0 m-0">
-                <h6 className="lead">Свободная вакансия</h6>
-              </div>
-              <div className="p-0 m-0">
-                <label className="w-50 form-control-md m-1">
-                  Квалификация:
-                  <input
-                    type="text"
-                    value={qualification}
-                    required
-                    minLength="1"
-                    maxLength="256"
-                    placeholder="вводите квалификацию тут..."
-                    className="form-control form-control-sm"
-                    onChange={(e) => qualificationSet(e.target.value)}
-                  />
-                  <small className="text-danger">* обязательно</small>
-                  <p className="p-0 m-0">
-                    <small className="text-muted">
-                      длина: не более 256 символов
-                    </small>
-                  </p>
-                </label>
-                <label className="form-control-md m-1">
-                  Разряд:
-                  <input
-                    type="text"
-                    placeholder="вводите разряд тут..."
-                    value={rank}
-                    minLength="1"
-                    maxLength="32"
-                    className="form-control form-control-sm"
-                    onChange={(e) => rankSet(e.target.value)}
-                  />
-                  <small className="text-secondary">* не обязательно</small>
-                  <p className="p-0 m-0">
-                    <small className="text-muted">
-                      длина: не более 32 символов
-                    </small>
-                  </p>
-                </label>
-              </div>
-              <br />
-              <div className="p-0 m-0">
-                <label className="form-control-md m-1">
-                  Изображение:
-                  <input
-                    type="file"
-                    accept=".jpg, .png"
-                    className="form-control form-control-sm"
-                    onChange={(e) => imageSet(e.target.files[0])}
-                  />
-                  <small className="text-muted">* не обязательно</small>
-                </label>
-                <label className="form-control-md m-1">
-                  Сфера:
-                  <select
-                    value={sphere}
-                    required
-                    className="form-control form-control-sm"
-                    onChange={(e) => sphereSet(e.target.value)}
-                  >
-                    <option value="">не выбрано</option>
-                    <option value="Технологическая">Технологическая</option>
-                    <option value="Не технологическая">
-                      Не технологическая
-                    </option>
-                  </select>
-                  <small className="text-danger">* обязательно</small>
-                </label>
-              </div>
-              <br />
-              <div className="p-0 m-0">
-                <label className="form-control-md m-1">
-                  Образование:
-                  <select
-                    value={education}
-                    required
-                    className="form-control form-control-sm"
-                    onChange={(e) => educationSet(e.target.value)}
-                  >
-                    <option value="">не выбрано</option>
-                    <option value="Высшее, Средне-специальное">
-                      Высшее / Средне-специальное
-                    </option>
-                    <option value="Высшее">Высшее</option>
-                    <option value="Средне-специальное">
-                      Средне-специальное
-                    </option>
-                    <option value="Среднее">Среднее</option>
-                  </select>
-                  <small className="text-danger">* обязательно</small>
-                </label>
-                <label className="form-control-md m-1">
-                  Опыт:
-                  <select
-                    value={experience}
-                    required
-                    className="form-control form-control-sm"
-                    onChange={(e) => experienceSet(e.target.value)}
-                  >
-                    <option value="">не выбрано</option>
-                    <option value="не имеет значения">не имеет значения</option>
-                    <option value="от 1 года до 3 лет">
-                      от 1 года до 3 лет
-                    </option>
-                    <option value="от 3 до 6 лет">от 3 до 6 лет</option>
-                    <option value="более 6 лет">более 6 лет</option>
-                  </select>
-                  <small className="text-danger">* обязательно</small>
-                </label>
-                <label className="form-control-md m-1">
-                  График:
-                  <select
-                    value={schedule}
-                    required
-                    className="form-control form-control-sm"
-                    onChange={(e) => scheduleSet(e.target.value)}
-                  >
-                    <option value="">не выбрано</option>
-                    <option value="Полный день(5/2)">Полный день</option>
-                    <option value="Сменный">Сменный</option>
-                    <option value="Удалённая работа">Удалённая работа</option>
-                    <option value="Особый">Особый</option>
-                  </select>
-                  <small className="text-danger">* обязательно</small>
-                </label>
-              </div>
-              <br />
-              <div className="p-0 m-0">
-                <label className="w-75 form-control-md m-1">
-                  Описание:
-                  <textarea
-                    id="short_description_char_field"
-                    name="short_description_char_field"
-                    placeholder="вводите описание тут..."
-                    value={description}
-                    minLength="1"
-                    maxLength="512"
-                    rows="2"
-                    className="form-control form-control-sm"
-                    onChange={(e) => descriptionSet(e.target.value)}
-                  />
-                  <small className="text-secondary">* не обязательно</small>
-                  <p className="p-0 m-0">
-                    <small className="text-muted">
-                      длина: не более 512 символов
-                    </small>
-                  </p>
-                </label>
-              </div>
-              <br />
-              <div className="container-fluid text-center">
-                <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                  <li className="m-1">
-                    <button
-                      className="btn btn-sm btn-outline-primary"
-                      type="submit"
+        {!dataVacancyCreate && (
+          <div className="container-fluid">
+            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+              <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+                <div className="p-0 m-0">
+                  <h6 className="lead">Свободная вакансия</h6>
+                </div>
+                <div className="p-0 m-0">
+                  <label className="w-50 form-control-md m-1">
+                    Квалификация:
+                    <input
+                      type="text"
+                      value={qualification}
+                      required
+                      minLength="1"
+                      maxLength="256"
+                      placeholder="вводите квалификацию тут..."
+                      className="form-control form-control-sm"
+                      onChange={(e) => qualificationSet(e.target.value)}
+                    />
+                    <small className="text-danger">* обязательно</small>
+                    <p className="p-0 m-0">
+                      <small className="text-muted">
+                        длина: не более 256 символов
+                      </small>
+                    </p>
+                  </label>
+                  <label className="form-control-md m-1">
+                    Разряд:
+                    <input
+                      type="text"
+                      placeholder="вводите разряд тут..."
+                      value={rank}
+                      minLength="1"
+                      maxLength="32"
+                      className="form-control form-control-sm"
+                      onChange={(e) => rankSet(e.target.value)}
+                    />
+                    <small className="text-secondary">* не обязательно</small>
+                    <p className="p-0 m-0">
+                      <small className="text-muted">
+                        длина: не более 32 символов
+                      </small>
+                    </p>
+                  </label>
+                </div>
+                <br />
+                <div className="p-0 m-0">
+                  <label className="form-control-md m-1">
+                    Изображение:
+                    <input
+                      type="file"
+                      accept=".jpg, .png"
+                      className="form-control form-control-sm"
+                      onChange={(e) => imageSet(e.target.files[0])}
+                    />
+                    <small className="text-muted">* не обязательно</small>
+                  </label>
+                  <label className="form-control-md m-1">
+                    Сфера:
+                    <select
+                      value={sphere}
+                      required
+                      className="form-control form-control-sm"
+                      onChange={(e) => sphereSet(e.target.value)}
                     >
-                      Отправить
-                    </button>
-                  </li>
-                  <li className="m-1">
-                    <button
-                      className="btn btn-sm btn-outline-warning"
-                      type="reset"
+                      <option value="">не выбрано</option>
+                      <option value="Технологическая">Технологическая</option>
+                      <option value="Не технологическая">
+                        Не технологическая
+                      </option>
+                    </select>
+                    <small className="text-danger">* обязательно</small>
+                  </label>
+                </div>
+                <br />
+                <div className="p-0 m-0">
+                  <label className="form-control-md m-1">
+                    Образование:
+                    <select
+                      value={education}
+                      required
+                      className="form-control form-control-sm"
+                      onChange={(e) => educationSet(e.target.value)}
                     >
-                      Сбросить все данные
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </form>
-          </ul>
-        </div>
+                      <option value="">не выбрано</option>
+                      <option value="Высшее, Средне-специальное">
+                        Высшее / Средне-специальное
+                      </option>
+                      <option value="Высшее">Высшее</option>
+                      <option value="Средне-специальное">
+                        Средне-специальное
+                      </option>
+                      <option value="Среднее">Среднее</option>
+                    </select>
+                    <small className="text-danger">* обязательно</small>
+                  </label>
+                  <label className="form-control-md m-1">
+                    Опыт:
+                    <select
+                      value={experience}
+                      required
+                      className="form-control form-control-sm"
+                      onChange={(e) => experienceSet(e.target.value)}
+                    >
+                      <option value="">не выбрано</option>
+                      <option value="не имеет значения">
+                        не имеет значения
+                      </option>
+                      <option value="от 1 года до 3 лет">
+                        от 1 года до 3 лет
+                      </option>
+                      <option value="от 3 до 6 лет">от 3 до 6 лет</option>
+                      <option value="более 6 лет">более 6 лет</option>
+                    </select>
+                    <small className="text-danger">* обязательно</small>
+                  </label>
+                  <label className="form-control-md m-1">
+                    График:
+                    <select
+                      value={schedule}
+                      required
+                      className="form-control form-control-sm"
+                      onChange={(e) => scheduleSet(e.target.value)}
+                    >
+                      <option value="">не выбрано</option>
+                      <option value="Полный день(5/2)">Полный день</option>
+                      <option value="Сменный">Сменный</option>
+                      <option value="Удалённая работа">Удалённая работа</option>
+                      <option value="Особый">Особый</option>
+                    </select>
+                    <small className="text-danger">* обязательно</small>
+                  </label>
+                </div>
+                <br />
+                <div className="p-0 m-0">
+                  <label className="w-75 form-control-md m-1">
+                    Описание:
+                    <textarea
+                      id="short_description_char_field"
+                      name="short_description_char_field"
+                      placeholder="вводите описание тут..."
+                      value={description}
+                      minLength="1"
+                      maxLength="512"
+                      rows="2"
+                      className="form-control form-control-sm"
+                      onChange={(e) => descriptionSet(e.target.value)}
+                    />
+                    <small className="text-secondary">* не обязательно</small>
+                    <p className="p-0 m-0">
+                      <small className="text-muted">
+                        длина: не более 512 символов
+                      </small>
+                    </p>
+                  </label>
+                </div>
+                <br />
+                <div className="container-fluid text-center">
+                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                    <li className="m-1">
+                      <button
+                        className="btn btn-sm btn-outline-primary"
+                        type="submit"
+                      >
+                        Отправить
+                      </button>
+                    </li>
+                    <li className="m-1">
+                      <button
+                        className="btn btn-sm btn-outline-warning"
+                        type="reset"
+                      >
+                        Сбросить все данные
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </form>
+            </ul>
+          </div>
+        )}
       </main>
       <FooterComponent />
     </div>

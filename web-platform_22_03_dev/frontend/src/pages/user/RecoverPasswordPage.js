@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { userRecoverPasswordAction } from "../../js/actions";
+import { userRecoverPasswordAnyAction } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
@@ -46,7 +46,7 @@ const ChangePasswordPage = () => {
         "Action-type": "FIND_USER",
         username: username,
       };
-      dispatch(userRecoverPasswordAction(form));
+      dispatch(userRecoverPasswordAnyAction(form));
     }
   };
 
@@ -57,7 +57,7 @@ const ChangePasswordPage = () => {
       username: username,
       secretAnswer: secretAnswer,
     };
-    dispatch(userRecoverPasswordAction(form));
+    dispatch(userRecoverPasswordAnyAction(form));
   };
 
   const postSendEmailHandlerSubmit = (e) => {
@@ -66,7 +66,7 @@ const ChangePasswordPage = () => {
       "Action-type": "SEND_EMAIL_PASSWORD",
       username: username,
     };
-    dispatch(userRecoverPasswordAction(form));
+    dispatch(userRecoverPasswordAnyAction(form));
   };
 
   const postRecoverEmailHandlerSubmit = (e) => {
@@ -76,7 +76,7 @@ const ChangePasswordPage = () => {
       username: username,
       recoverPassword: recoverPassword,
     };
-    dispatch(userRecoverPasswordAction(form));
+    dispatch(userRecoverPasswordAnyAction(form));
   };
 
   const postRecoverPasswordHandlerSubmit = (e) => {
@@ -87,7 +87,7 @@ const ChangePasswordPage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(userRecoverPasswordAction(form));
+    dispatch(userRecoverPasswordAnyAction(form));
     dispatch({ type: USER_DETAILS_RESET_CONSTANT });
   };
 

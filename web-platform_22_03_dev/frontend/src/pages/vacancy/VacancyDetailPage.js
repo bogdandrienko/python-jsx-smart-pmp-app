@@ -11,7 +11,7 @@ import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
-import { vacancyDetailAction } from "../../js/actions";
+import { vacancyDetailAnyAction } from "../../js/actions";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyDetailPage = () => {
@@ -46,17 +46,14 @@ const VacancyDetailPage = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (dataVacancyDetail) {
-    } else {
-      if (!loadVacancyDetail) {
-        const form = {
-          "Action-type": "VACANCY_DETAIL",
-          id: id,
-        };
-        dispatch(vacancyDetailAction(form));
-      }
+    if (!dataVacancyDetail && !loadVacancyDetail) {
+      const form = {
+        "Action-type": "VACANCY_DETAIL",
+        id: id,
+      };
+      dispatch(vacancyDetailAnyAction(form));
     }
-  }, [dispatch, id, dataVacancyDetail]);
+  }, [dispatch, id, dataVacancyDetail, loadVacancyDetail]);
 
   useEffect(() => {
     if (dataVacancyDelete) {
@@ -74,7 +71,7 @@ const VacancyDetailPage = () => {
       "Action-type": "VACANCY_DELETE",
       id: id,
     };
-    dispatch(actions.vacancyDeleteAction(form));
+    dispatch(actions.vacancyDeleteAuthAction(form));
   };
 
   return (

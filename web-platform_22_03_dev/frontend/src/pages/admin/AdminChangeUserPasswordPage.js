@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { adminChangeUserPasswordAction } from "../../js/actions";
+import { adminChangeUserPasswordAuthAction } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
@@ -56,7 +56,7 @@ const AdminChangeUserPasswordPage = () => {
         "Action-type": "CHECK_USER",
         username: username,
       };
-      dispatch(adminChangeUserPasswordAction(form));
+      dispatch(adminChangeUserPasswordAuthAction(form));
     }
   };
 
@@ -69,7 +69,7 @@ const AdminChangeUserPasswordPage = () => {
         password: password,
         password2: password2,
       };
-      dispatch(adminChangeUserPasswordAction(form));
+      dispatch(adminChangeUserPasswordAuthAction(form));
       sleep(5000).then(() => {
         dispatch({ type: ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
       });

@@ -1781,8 +1781,7 @@ def api_user_list_all(request):
                         if user_model.user_foreign_key_field.is_superuser:
                             continue
                         users.append(f"{user_model.last_name_char_field} {user_model.first_name_char_field} "
-                                     f"{user_model.patronymic_char_field} {user_model.personnel_number_slug_field} "
-                                     f"{user_model.position_char_field}")
+                                     f"{user_model.personnel_number_slug_field} ")
                     response = {"response": users}
                     # print(f"response: {response}")
                     return Response(response)

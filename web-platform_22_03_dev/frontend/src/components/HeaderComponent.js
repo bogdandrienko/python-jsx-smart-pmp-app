@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { modules } from "../js/constants";
-import { userDetailsAction, userLogoutAction } from "../js/actions";
+import { userDetailsAuthAction, userLogoutAnyAction } from "../js/actions";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const HeaderComponent = ({ logic = true, redirect = true }) => {
@@ -32,14 +32,14 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
       const form = {
         "Action-type": "USER_DETAIL",
       };
-      dispatch(userDetailsAction(form));
+      dispatch(userDetailsAuthAction(form));
     }
   }, [dispatch, logic]);
 
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
-        dispatch(userLogoutAction());
+        dispatch(userLogoutAnyAction());
         navigate("/login");
       } else {
         if (dataUserLogin) {
@@ -47,7 +47,7 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
             if (
               dataUserDetails["user_model"]["activity_boolean_field"] === false
             ) {
-              dispatch(userLogoutAction());
+              dispatch(userLogoutAnyAction());
               navigate("/login");
             }
             if (

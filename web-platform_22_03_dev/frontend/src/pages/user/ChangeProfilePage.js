@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import {
-  userChangeProfileAction,
-  userDetailsAction,
-  userLogoutAction,
+  userChangeAuthAction,
+  userDetailsAuthAction,
+  userLogoutAnyAction,
 } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
@@ -62,7 +62,7 @@ const ChangeProfilePage = () => {
         }
       }
     } else {
-      dispatch(userDetailsAction());
+      dispatch(userDetailsAuthAction());
       setPassword("");
       setPassword2("");
     }
@@ -71,7 +71,7 @@ const ChangeProfilePage = () => {
   useEffect(() => {
     if (dataUserChange) {
       sleep(1000).then(() => {
-        dispatch(userLogoutAction());
+        dispatch(userLogoutAnyAction());
         navigate("/login");
       });
     }
@@ -87,7 +87,7 @@ const ChangeProfilePage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(userChangeProfileAction(form));
+    dispatch(userChangeAuthAction(form));
   };
 
   const changeVisibility = () => {

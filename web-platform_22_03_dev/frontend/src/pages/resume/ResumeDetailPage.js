@@ -11,7 +11,7 @@ import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
-import { vacancyDetailAction } from "../../js/actions";
+import { vacancyDetailAnyAction } from "../../js/actions";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ResumeDetailPage = () => {
@@ -46,17 +46,14 @@ const ResumeDetailPage = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (dataResumeDetail) {
-    } else {
-      if (!loadResumeDetail) {
-        const form = {
-          "Action-type": "RESUME_DETAIL",
-          id: id,
-        };
-        dispatch(actions.resumeDetailAction(form));
-      }
+    if (!dataResumeDetail && !loadResumeDetail) {
+      const form = {
+        "Action-type": "RESUME_DETAIL",
+        id: id,
+      };
+      dispatch(actions.resumeDetailAuthAction(form));
     }
-  }, [dispatch, id, dataResumeDetail]);
+  }, [dispatch, id, dataResumeDetail, loadResumeDetail]);
 
   useEffect(() => {
     if (dataResumeDelete) {
@@ -74,7 +71,7 @@ const ResumeDetailPage = () => {
       "Action-type": "RESUME_DELETE",
       id: id,
     };
-    dispatch(actions.resumeDeleteAction(form));
+    dispatch(actions.resumeDeleteAuthAction(form));
   };
 
   return (

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
-import { vacancyList } from "../../js/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import * as actions from "../../js/actions";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
-import * as constants from "../../js/constants";
-import { vacancyDetailAction } from "../../js/actions";
-import * as utils from "../../js/utils";
+import MessageComponent from "../../components/MessageComponent";
+import LoaderComponent from "../../components/LoaderComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyChangePage = () => {
@@ -90,7 +92,7 @@ const VacancyChangePage = () => {
           "Action-type": "VACANCY_DETAIL",
           id: id,
         };
-        dispatch(vacancyDetailAction(form));
+        dispatch(actions.vacancyDetailAnyAction(form));
       }
     }
   }, [dispatch, id, dataVacancyDetail]);
@@ -110,7 +112,7 @@ const VacancyChangePage = () => {
       clearImage: clearImage,
       description: description,
     };
-    dispatch(actions.vacancyChangeAction(form));
+    dispatch(actions.vacancyChangeAuthAction(form));
   };
 
   return (

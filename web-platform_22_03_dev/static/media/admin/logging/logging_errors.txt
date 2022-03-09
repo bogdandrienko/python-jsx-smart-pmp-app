@@ -1,0 +1,16 @@
+
+, 85.117.112.240, /api/any/vacancy/, POST, 2022-03-09 13:34:01.293410, VacancyModel matching query does not exist.
+
+Bogdan, 192.168.1.202, /, GET, 2022-03-09 13:37:43.263245, index.html
+
+, 192.168.1.202, /api/any/vacancy/, POST, 2022-03-09 13:37:59.624050, VacancyModel matching query does not exist.
+
+, 85.117.112.240, /api/any/vacancy/, POST, 2022-03-09 13:38:12.347024, VacancyModel matching query does not exist.
+
+Bogdan, 192.168.1.202, /, GET, 2022-03-09 16:02:11.408717, index.html
+
+Bogdan, 192.168.1.202, /, GET, 2022-03-09 16:02:21.368901, index.html
+
+Bogdan, 192.168.1.202, /, GET, 2022-03-09 16:06:30.822600, index.html
+
+Bogdan, 192.168.1.202, /, GET, 2022-03-09 16:06:36.937090, index.html

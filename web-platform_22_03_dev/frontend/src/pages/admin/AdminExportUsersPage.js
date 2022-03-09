@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { adminExportUsersAction } from "../../js/actions";
+import { adminExportUsersAuthAction } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
@@ -30,7 +30,7 @@ const AdminExportUsersPage = () => {
     const form = {
       "Action-type": "EXPORT_USERS",
     };
-    dispatch(adminExportUsersAction(form));
+    dispatch(adminExportUsersAuthAction(form));
   };
 
   return (

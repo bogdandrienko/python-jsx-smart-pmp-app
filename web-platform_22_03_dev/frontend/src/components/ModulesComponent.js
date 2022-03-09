@@ -3,7 +3,7 @@ import { modules } from "../js/constants";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetailsAction } from "../js/actions";
+import { userDetailsAuthAction } from "../js/actions";
 
 const ModulesComponent = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ModulesComponent = () => {
 
   useEffect(() => {
     if (!dataUserDetails) {
-      dispatch(userDetailsAction());
+      dispatch(userDetailsAuthAction());
     }
   }, [dispatch]);
 

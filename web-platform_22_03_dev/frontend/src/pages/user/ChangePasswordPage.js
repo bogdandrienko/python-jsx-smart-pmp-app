@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { userChangeProfileAction, userLogoutAction } from "../../js/actions";
+import { userChangeAuthAction, userLogoutAnyAction } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
@@ -28,7 +28,7 @@ const ChangePasswordPage = () => {
   useEffect(() => {
     if (dataUserChange) {
       sleep(1000).then(() => {
-        dispatch(userLogoutAction());
+        dispatch(userLogoutAnyAction());
         navigate("/login");
       });
     }
@@ -41,7 +41,7 @@ const ChangePasswordPage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(userChangeProfileAction(form));
+    dispatch(userChangeAuthAction(form));
   };
 
   const changeVisibility = () => {

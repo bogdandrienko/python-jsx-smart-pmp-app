@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { salaryUserAction } from "../../js/actions";
+import { salaryUserAuthAction } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
@@ -33,7 +33,7 @@ const SalaryPage = () => {
       "Action-type": "USER_SALARY",
       dateTime: `${year_}${month_}`,
     };
-    dispatch(salaryUserAction(form));
+    dispatch(salaryUserAuthAction(form));
   };
 
   return (

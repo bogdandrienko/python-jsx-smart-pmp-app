@@ -59,7 +59,7 @@ const IdeaCreatePage = () => {
       image: image,
       description: description,
     };
-    dispatch(actions.vacancyCreateAction(form));
+    dispatch(actions.vacancyCreateAuthAction(form));
   };
 
   return (

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { userLogoutAction } from "../../js/actions";
+import { userLogoutAnyAction } from "../../js/actions";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const LogoutPage = () => {
@@ -10,7 +10,7 @@ const LogoutPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userLogoutAction());
+    dispatch(userLogoutAnyAction());
     navigate("/login");
   }, [dispatch, navigate]);
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { userLoginAction } from "../../js/actions";
+import { userLoginAnyAction } from "../../js/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
@@ -45,7 +45,7 @@ const LoginPage = () => {
         username: username,
         password: password,
       };
-      dispatch(userLoginAction(form));
+      dispatch(userLoginAnyAction(form));
     }
   };
 

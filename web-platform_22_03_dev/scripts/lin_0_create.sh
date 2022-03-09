@@ -224,6 +224,8 @@ ssl_trusted_certificate /etc/letsencrypt/live/web.km.kz/chain.pem;
 
 resolver 1.1.1.1;
 
+client_max_body_size 100M;
+
 server_name web.km.kz www.web.km.kz;
 
 root /home/bogdan/web;
