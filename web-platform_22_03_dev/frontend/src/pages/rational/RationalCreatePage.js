@@ -25,10 +25,15 @@ const BankIdeaListPage = () => {
   const [additionalPdf, setAdditionalPdf] = useState(null);
   const [additionalExcel, setAdditionalExcel] = useState(null);
   const [user1, setUser1] = useState("");
+  const [user1Perc, setUser1Perc] = useState("");
   const [user2, setUser2] = useState("");
+  const [user2Perc, setUser2Perc] = useState("");
   const [user3, setUser3] = useState("");
+  const [user3Perc, setUser3Perc] = useState("");
   const [user4, setUser4] = useState("");
+  const [user4Perc, setUser4Perc] = useState("");
   const [user5, setUser5] = useState("");
+  const [user5Perc, setUser5Perc] = useState("");
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
@@ -101,11 +106,11 @@ const BankIdeaListPage = () => {
       additionalWord: additionalWord,
       additionalPdf: additionalPdf,
       additionalExcel: additionalExcel,
-      user1: user1,
-      user2: user2,
-      user3: user3,
-      user4: user4,
-      user5: user5,
+      user1: user1 + " : " + user1Perc,
+      user2: user2 + " : " + user2Perc,
+      user3: user3 + " : " + user3Perc,
+      user4: user4 + " : " + user4Perc,
+      user5: user5 + " : " + user5Perc,
     };
     dispatch(rationalCreateAction(form));
   };
@@ -411,85 +416,120 @@ const BankIdeaListPage = () => {
                         <label className="w-100 form-control-sm">
                           Участники:
                           <p>
-                            <small className="text-danger">
-                              внимание, вводить участников согласно нужного
-                              формата:
-                            </small>
-                          </p>
-                          <p>
                             <small className="fw-bold">
-                              Фамилия Имя Отчество Табельный Вклад в проект %
+                              Фамилия Имя Отчество Табельный Должность Вклад в
+                              проект %
                             </small>
                           </p>
-                          {dataUserDetails && dataUserDetails["user_model"] && (
-                            <div>
-                              <input
-                                type="text"
-                                id="name_char_field"
-                                name="name_char_field"
-                                required
-                                placeholder={`введите Ваш % вклада:`}
-                                value={user1}
-                                minLength="1"
-                                maxLength="200"
-                                className="form-control form-control-sm"
-                                onChange={(e) => setUser1(e.target.value)}
-                              />
-                            </div>
-                          )}
-                          <input
-                            type="text"
-                            id="name_char_field"
-                            name="name_char_field"
-                            placeholder="участник № 2, пример: Андриенко Богдан Николаевич 931777 70%"
-                            value={user2}
-                            minLength="0"
-                            maxLength="200"
-                            className="form-control form-control-sm"
-                            onChange={(e) => setUser2(e.target.value)}
-                          />
-                          <input
-                            type="text"
-                            id="name_char_field"
-                            name="name_char_field"
-                            placeholder="участник № 3, пример: Андриенко Богдан Николаевич 931777 70%"
-                            value={user3}
-                            minLength="0"
-                            maxLength="200"
-                            className="form-control form-control-sm"
-                            onChange={(e) => setUser3(e.target.value)}
-                          />
-                          <input
-                            type="text"
-                            id="name_char_field"
-                            name="name_char_field"
-                            placeholder="участник № 4, пример: Андриенко Богдан Николаевич 931777 70%"
-                            value={user4}
-                            minLength="0"
-                            maxLength="200"
-                            className="form-control form-control-sm"
-                            onChange={(e) => setUser4(e.target.value)}
-                          />
-                          <input
-                            type="text"
-                            id="name_char_field"
-                            name="name_char_field"
-                            placeholder="участник № 5, пример: Андриенко Богдан Николаевич 931777 70%"
-                            value={user5}
-                            minLength="0"
-                            maxLength="200"
-                            className="form-control form-control-sm"
-                            onChange={(e) => setUser5(e.target.value)}
-                          />
                           {dataUserListAll && (
                             <div>
+                              <div className="d-flex w-100 align-items-center justify-content-between">
+                                <label className="form-control-sm">
+                                  участник №1:
+                                  <select
+                                    id="subdivision"
+                                    name="subdivision"
+                                    required
+                                    className="form-control form-control-sm"
+                                    value={user1}
+                                    onChange={(e) => setUser1(e.target.value)}
+                                  >
+                                    <option value="">Не выбрано</option>
+                                    {dataUserListAll.map((user, index) => (
+                                      <option key={index} value={user}>
+                                        {user}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </label>
+                                <label className="form-control-sm">
+                                  % Вклада 1 участника
+                                  <input
+                                    type="text"
+                                    placeholder="пример: 70%"
+                                    minLength="0"
+                                    maxLength="10"
+                                    className="form-control form-control-sm"
+                                    value={user1Perc}
+                                    required
+                                    onChange={(e) =>
+                                      setUser1Perc(e.target.value)
+                                    }
+                                  />
+                                </label>
+                              </div>
+                              <div className="d-flex w-100 align-items-center justify-content-between">
+                                <label className="form-control-sm">
+                                  участник №2:
+                                  <select
+                                    id="subdivision"
+                                    name="subdivision"
+                                    className="form-control form-control-sm"
+                                    value={user2}
+                                    onChange={(e) => setUser2(e.target.value)}
+                                  >
+                                    <option value="">Не выбрано</option>
+                                    {dataUserListAll.map((user, index) => (
+                                      <option key={index} value={user}>
+                                        {user}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </label>
+                                <label className="form-control-sm">
+                                  % Вклада 2 участника
+                                  <input
+                                    type="text"
+                                    placeholder="пример: 70%"
+                                    minLength="0"
+                                    maxLength="200"
+                                    className="form-control form-control-sm"
+                                    value={user2Perc}
+                                    onChange={(e) =>
+                                      setUser2Perc(e.target.value)
+                                    }
+                                  />
+                                </label>
+                              </div>
+                              <div className="d-flex w-100 align-items-center justify-content-between">
+                                <label className="form-control-sm">
+                                  участник №3:
+                                  <select
+                                    id="subdivision"
+                                    name="subdivision"
+                                    className="form-control form-control-sm"
+                                    value={user3}
+                                    onChange={(e) => setUser3(e.target.value)}
+                                  >
+                                    <option value="">Не выбрано</option>
+                                    {dataUserListAll.map((user, index) => (
+                                      <option key={index} value={user}>
+                                        {user}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </label>
+                                <label className="form-control-sm">
+                                  % Вклада 3 участника
+                                  <input
+                                    type="text"
+                                    placeholder="пример: 70%"
+                                    minLength="0"
+                                    maxLength="200"
+                                    className="form-control form-control-sm"
+                                    value={user3Perc}
+                                    onChange={(e) =>
+                                      setUser3Perc(e.target.value)
+                                    }
+                                  />
+                                </label>
+                              </div>
                               <div className="d-flex w-100 align-items-center justify-content-between">
                                 <label className="form-control-sm">
                                   участник №4:
                                   <select
                                     id="subdivision"
                                     name="subdivision"
-                                    required
                                     className="form-control form-control-sm"
                                     value={user4}
                                     onChange={(e) => setUser4(e.target.value)}
@@ -506,12 +546,14 @@ const BankIdeaListPage = () => {
                                   % Вклада 4 участника
                                   <input
                                     type="text"
-                                    id="name_char_field"
-                                    name="name_char_field"
                                     placeholder="пример: 70%"
                                     minLength="0"
                                     maxLength="200"
                                     className="form-control form-control-sm"
+                                    value={user4Perc}
+                                    onChange={(e) =>
+                                      setUser4Perc(e.target.value)
+                                    }
                                   />
                                 </label>
                               </div>
@@ -521,7 +563,6 @@ const BankIdeaListPage = () => {
                                   <select
                                     id="subdivision"
                                     name="subdivision"
-                                    required
                                     className="form-control form-control-sm"
                                     value={user5}
                                     onChange={(e) => setUser5(e.target.value)}
@@ -538,12 +579,14 @@ const BankIdeaListPage = () => {
                                   % Вклада 5 участника
                                   <input
                                     type="text"
-                                    id="name_char_field"
-                                    name="name_char_field"
                                     placeholder="пример: 70%"
                                     minLength="0"
                                     maxLength="200"
                                     className="form-control form-control-sm"
+                                    value={user5Perc}
+                                    onChange={(e) =>
+                                      setUser5Perc(e.target.value)
+                                    }
                                   />
                                 </label>
                               </div>

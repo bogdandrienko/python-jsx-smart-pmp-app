@@ -737,26 +737,18 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
 
 export const userListAllAction = (form) => async (dispatch, getState) => {
   try {
-    // LOAD dispatch
-    // console.log("userListAllAction load: ", data);
     dispatch({
       type: constants.USER_LIST_ALL_LOAD_CONSTANT,
     });
-
-    // State
     const {
       userLoginStore: { data: userLogin },
     } = getState();
-
-    // FormData class
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
       formData.append(key, value);
     });
-
-    // Axios request
     const { data } = await axios({
-      url: "/api/user/all/",
+      url: "/api/user/list_all/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -765,29 +757,20 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
       },
       data: formData,
     });
-
     if (data["response"]) {
       const response = data["response"];
-
-      // DATA dispatch
-      // console.log("userListAllAction response: ", response);
       dispatch({
         type: constants.USER_LIST_ALL_DATA_CONSTANT,
         payload: response,
       });
     } else {
       const response = data["error"];
-
-      // ERROR dispatch
-      // console.log("userListAllAction error: ", response);
       dispatch({
         type: constants.USER_LIST_ALL_ERROR_CONSTANT,
         payload: response,
       });
     }
   } catch (error) {
-    // FAIL dispatch
-    // console.log("userListAllAction fail: ", error.response);
     dispatch({
       type: constants.USER_LIST_ALL_FAIL_CONSTANT,
       payload:

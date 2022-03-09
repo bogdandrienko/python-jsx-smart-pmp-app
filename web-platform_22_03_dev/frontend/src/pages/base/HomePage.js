@@ -8,6 +8,7 @@ import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import ModulesComponent from "../../components/ModulesComponent";
 import NewsComponent from "../../components/NewsComponent";
+import { Link } from "react-router-dom";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const HomePage = () => {
@@ -49,31 +50,30 @@ const HomePage = () => {
                 />
               </div>
             </div>
-            <div className="row">
-              <LinkContainer to="/video_study" className="col">
-                <Nav.Link>
-                  <small className="fw-bold btn btn-warning">
-                    Все видео-инструкции (нажмите для перехода)
-                  </small>
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/text_study" className="col">
-                <Nav.Link>
-                  <small className="fw-bold btn btn-primary">
-                    Инструкции в текстовом формате (нажмите для перехода)
-                  </small>
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/vacancy_list" className="col">
-                <Nav.Link>
-                  <small className="fw-bold btn btn-success">
-                    Вакансии предприятия (нажмите для перехода)
-                  </small>
-                </Nav.Link>
-              </LinkContainer>
-            </div>
           </div>
-          <NewsComponent count={9} />
+          <div className="">
+            <div className="btn-group p-1 m-0">
+              <Link
+                to={"/video_study"}
+                className="btn btn-sm btn-warning p-2 m-1"
+              >
+                Инструкции в видео формате
+              </Link>
+              <Link
+                to={"/text_study"}
+                className="btn btn-sm btn-primary p-2 m-1"
+              >
+                Инструкции в текстовом формате
+              </Link>
+              {/*<Link*/}
+              {/*  to={"/vacancy_lis"}*/}
+              {/*  className="btn btn-sm btn-success p-2 m-1"*/}
+              {/*>*/}
+              {/*  Вакансии предприятия*/}
+              {/*</Link>*/}
+            </div>
+            <NewsComponent count={9} />
+          </div>
         </div>
         <div>
           <ModulesComponent />

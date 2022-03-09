@@ -221,6 +221,42 @@ export const modules = [
     ShowInModules: false,
     Sections: [
       {
+        Header: "Отдел кадров",
+        Access: "user",
+        Image:
+          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+        Links: [
+          {
+            Header: "Список вакансий",
+            Access: "user",
+            Active: true,
+            Link: "/vacancy_list",
+            ExternalLink: false,
+          },
+          {
+            Header: "Отправить резюме",
+            Access: "user",
+            Active: true,
+            Link: "/resume_create/0",
+            ExternalLink: false,
+          },
+          {
+            Header: "Создать вакансию",
+            Access: "moderator_vacancy",
+            Active: true,
+            Link: "/vacancy_create",
+            ExternalLink: false,
+          },
+          {
+            Header: "Список резюме",
+            Access: "moderator_vacancy",
+            Active: true,
+            Link: "/resume_list",
+            ExternalLink: false,
+          },
+        ],
+      },
+      {
         Header: "Шаблоны",
         Access: "superuser",
         Image: "/static/img/modules.png",
@@ -640,6 +676,13 @@ export const modules = [
           "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
         Links: [
           {
+            Header: "Шаблон рац. предложения",
+            Access: "user",
+            Active: true,
+            Link: "/rational_template",
+            ExternalLink: false,
+          },
+          {
             Header: "Подать рац. предложение",
             Access: "user",
             Active: true,
@@ -750,34 +793,6 @@ export const modules = [
         Image:
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
-          {
-            Header: "Список вакансий",
-            Access: "user",
-            Active: true,
-            Link: "/vacancy_list",
-            ExternalLink: false,
-          },
-          {
-            Header: "Отправить резюме",
-            Access: "user",
-            Active: true,
-            Link: "/resume_create/0",
-            ExternalLink: false,
-          },
-          {
-            Header: "Создать вакансию",
-            Access: "moderator_vacancy",
-            Active: true,
-            Link: "/vacancy_create",
-            ExternalLink: false,
-          },
-          {
-            Header: "Список резюме",
-            Access: "moderator_vacancy",
-            Active: true,
-            Link: "/resume_list",
-            ExternalLink: false,
-          },
           {
             Header: "Выгрузка отпусков",
             Access: "user",

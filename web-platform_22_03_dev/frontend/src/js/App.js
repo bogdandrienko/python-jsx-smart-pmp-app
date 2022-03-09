@@ -21,9 +21,11 @@ import AdminChangeUserPasswordPage from "../pages/admin/AdminChangeUserPasswordP
 import AdminCreateOrChangeUsersPage from "../pages/admin/AdminCreateOrChangeUsersPage";
 import AdminExportUsersPage from "../pages/admin/AdminExportUsersPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import RationalTemplatePage from "../pages/rational/RationalTemplatePage";
 import RationalCreatePage from "../pages/rational/RationalCreatePage";
 import RationalListPage from "../pages/rational/RationalListPage";
 import RationalDetailPage from "../pages/rational/RationalDetailPage";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import VacancyListPage from "../pages/vacancy/VacancyListPage";
 import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
 import VacancyChangePage from "../pages/vacancy/VacancyChangePage";
@@ -68,6 +70,7 @@ function App() {
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/salary" element={<SalaryPage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          <Route path="/rational_template" element={<RationalTemplatePage />} />
           <Route path="/rational_create" element={<RationalCreatePage />} />
           <Route path="/rational_list" element={<RationalListPage />} />
           <Route path="/rational_detail/:id" element={<RationalDetailPage />} />
