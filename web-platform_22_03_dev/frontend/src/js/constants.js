@@ -1,4 +1,4 @@
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -215,43 +215,22 @@ export const news = [
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const modules = [
   {
-    Header: "Разработка ver.08.03.22 22:55",
+    Header: "Разработка",
     Access: "superuser",
     Image: "/static/img/modules.png",
     ShowInModules: false,
     Sections: [
       {
-        Header: "Отдел кадров",
+        Header: "web version",
         Access: "user",
         Image:
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
-            Header: "Список вакансий",
+            Header: "10.03.22 00:31",
             Access: "user",
-            Active: true,
-            Link: "/vacancy_list",
-            ExternalLink: false,
-          },
-          {
-            Header: "Отправить резюме",
-            Access: "user",
-            Active: true,
-            Link: "/resume_create/0",
-            ExternalLink: false,
-          },
-          {
-            Header: "Создать вакансию",
-            Access: "moderator_vacancy",
-            Active: true,
-            Link: "/vacancy_create",
-            ExternalLink: false,
-          },
-          {
-            Header: "Список резюме",
-            Access: "moderator_vacancy",
-            Active: true,
-            Link: "/resume_list",
+            Active: false,
+            Link: "#",
             ExternalLink: false,
           },
         ],

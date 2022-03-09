@@ -1,66 +1,80 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
+import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { adminChangeUserPasswordAuthAction } from "../../js/actions";
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
+import StoreStatusComponent from "../../components/StoreStatusComponent";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import MessageComponent from "../../components/MessageComponent";
-import LoaderComponent from "../../components/LoaderComponent";
-import ReCAPTCHA from "react-google-recaptcha";
-import { ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT } from "../../js/constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AdminChangeUserPasswordPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
 
-  const [capcha, setCapcha] = useState("");
-  const [username, setUsername] = useState("");
-
-  const [success, setSuccess] = useState(false);
-
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [captcha, captchaSet] = useState("");
+  const [username, usernameSet] = useState("");
+  const [success, successSet] = useState(false);
+  const [password, passwordSet] = useState("");
+  const [password2, password2Set] = useState("");
 
   const adminChangeUserPasswordStore = useSelector(
     (state) => state.adminChangeUserPasswordStore
-  );
+  ); // store.js
   const {
-    load: loadAdminChangeUserPassword,
+    // load: loadAdminChangeUserPassword,
     data: dataAdminChangeUserPassword,
-    error: errorAdminChangeUserPassword,
-    fail: failAdminChangeUserPassword,
+    // error: errorAdminChangeUserPassword,
+    // fail: failAdminChangeUserPassword,
   } = adminChangeUserPasswordStore;
 
   useEffect(() => {
     if (dataAdminChangeUserPassword) {
       if (dataAdminChangeUserPassword["success"]) {
-        setSuccess(dataAdminChangeUserPassword["success"]);
+        successSet(dataAdminChangeUserPassword["success"]);
       } else {
-        setSuccess(false);
+        successSet(false);
       }
       if (dataAdminChangeUserPassword["username"]) {
-        setUsername(dataAdminChangeUserPassword["username"]);
+        usernameSet(dataAdminChangeUserPassword["username"]);
       } else {
-        setUsername("");
+        usernameSet("");
       }
     }
   }, [navigate, dataAdminChangeUserPassword, dispatch]);
 
-  const submitCheckUserHandler = (e) => {
+  const formHandlerSubmitCheckUser = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
+    if (captcha !== "") {
       const form = {
         "Action-type": "CHECK_USER",
         username: username,
       };
-      dispatch(adminChangeUserPasswordAuthAction(form));
+      dispatch(actions.adminChangeUserPasswordAuthAction(form));
     }
   };
 
-  const submitChangeUserPasswordHandler = (e) => {
+  const formHandlerSubmitChangeUserPassword = (e) => {
     e.preventDefault();
     if (success) {
       const form = {
@@ -69,62 +83,30 @@ const AdminChangeUserPasswordPage = () => {
         password: password,
         password2: password2,
       };
-      dispatch(adminChangeUserPasswordAuthAction(form));
-      sleep(5000).then(() => {
-        dispatch({ type: ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
+      dispatch(actions.adminChangeUserPasswordAuthAction(form));
+      utils.Sleep(5000).then(() => {
+        dispatch({ type: constants.ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
       });
     }
   };
-
-  const changeVisibility = () => {
-    const password = document.getElementById("password");
-    const password2 = document.getElementById("password2");
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-    password2.setAttribute("type", type);
-  };
-
-  function changeCapcha(value) {
-    setCapcha(value);
-  }
-
-  function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
 
   return (
     <div>
       <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
-        first={"Изменение пароля выбранноого пользователя"}
+        first={"Изменение пароля выбранного пользователя"}
         second={"страница редактирования пароля от выбранного аккаунта."}
       />
-      <main className="container text-center">
-        <div className="text-center">
-          {loadAdminChangeUserPassword && <LoaderComponent />}
-          {dataAdminChangeUserPassword && (
-            <div className="m-1">
-              <MessageComponent variant="success">
-                Пользователь найден или пароль успешно изменён!
-              </MessageComponent>
-            </div>
+      <main className="container p-0">
+        <div className="m-0 p-0">
+          {StoreStatusComponent(
+            adminChangeUserPasswordStore,
+            "adminChangeUserPasswordStore",
+            true,
+            "Пользователь найден или пароль успешно изменён!",
+            constants.DEBUG_CONSTANT
           )}
-          {errorAdminChangeUserPassword && (
-            <div className="m-1">
-              <MessageComponent variant="danger">
-                {errorAdminChangeUserPassword}
-              </MessageComponent>
-            </div>
-          )}
-          {failAdminChangeUserPassword && (
-            <div className="m-1">
-              <MessageComponent variant="warning">
-                {failAdminChangeUserPassword}
-              </MessageComponent>
-            </div>
-          )}
-          {!capcha && (
+          {!captcha && (
             <MessageComponent variant="danger">
               Пройдите проверку на робота!
             </MessageComponent>
@@ -140,13 +122,13 @@ const AdminChangeUserPasswordPage = () => {
                 name="account_login"
                 autoComplete="on"
                 className="text-center p-1 m-1"
-                onSubmit={submitCheckUserHandler}
+                onSubmit={formHandlerSubmitCheckUser}
               >
                 <div>
                   <label className="m-1">
                     <ReCAPTCHA
                       sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                      onChange={changeCapcha}
+                      onChange={(e) => captchaSet(e)}
                     />
                   </label>
                 </div>
@@ -160,7 +142,7 @@ const AdminChangeUserPasswordPage = () => {
                       required
                       placeholder=""
                       value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      onChange={(e) => usernameSet(e.target.value)}
                       minLength="12"
                       maxLength="12"
                       className="form-control form-control-md"
@@ -190,7 +172,7 @@ const AdminChangeUserPasswordPage = () => {
                       <button
                         type="reset"
                         onClick={(e) => {
-                          setUsername("");
+                          usernameSet("");
                         }}
                         className="btn btn-md btn-warning form-control"
                       >
@@ -213,7 +195,7 @@ const AdminChangeUserPasswordPage = () => {
             name="account_login"
             autoComplete="on"
             className="text-center p-1 m-1"
-            onSubmit={submitChangeUserPasswordHandler}
+            onSubmit={formHandlerSubmitChangeUserPassword}
           >
             <div>
               <label className="form-control-md m-1 lead">
@@ -230,7 +212,7 @@ const AdminChangeUserPasswordPage = () => {
                   required
                   placeholder=""
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => passwordSet(e.target.value)}
                   minLength="8"
                   maxLength="32"
                   className="form-control form-control-md"
@@ -260,7 +242,7 @@ const AdminChangeUserPasswordPage = () => {
                   required
                   placeholder=""
                   value={password2}
-                  onChange={(e) => setPassword2(e.target.value)}
+                  onChange={(e) => password2Set(e.target.value)}
                   minLength="8"
                   maxLength="32"
                   className="form-control form-control-md"
@@ -292,8 +274,8 @@ const AdminChangeUserPasswordPage = () => {
                   <button
                     type="reset"
                     onClick={(e) => {
-                      setPassword("");
-                      setPassword2("");
+                      passwordSet("");
+                      password2Set("");
                     }}
                     className="btn btn-md btn-warning form-control"
                   >
@@ -303,7 +285,9 @@ const AdminChangeUserPasswordPage = () => {
                 <div className="m-1">
                   <button
                     type="button"
-                    onClick={changeVisibility}
+                    onClick={(e) =>
+                      utils.ChangePasswordVisibility(["password", "password2"])
+                    }
                     className="btn btn-md btn-danger form-control"
                   >
                     Видимость пароля

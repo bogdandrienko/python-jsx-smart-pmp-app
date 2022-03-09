@@ -1,30 +1,42 @@
-import React, { useEffect } from "react";
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { modules } from "../js/constants";
-import { userDetailsAuthAction, userLogoutAnyAction } from "../js/actions";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import * as constants from "../js/constants";
+import * as actions from "../js/actions";
+import * as utils from "../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const HeaderComponent = ({ logic = true, redirect = true }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const id = useParams().id;
 
-  const userLoginStore = useSelector((state) => state.userLoginStore);
+  const userLoginStore = useSelector((state) => state.userLoginStore); // store.js
   const {
     // load: loadUserLogin,
     data: dataUserLogin,
     // error: errorUserLogin,
     // fail: failUserLogin,
   } = userLoginStore;
-
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
     error: errorUserDetails,
-    fail: failUserDetails,
+    // fail: failUserDetails,
   } = userDetailsStore;
 
   useEffect(() => {
@@ -32,30 +44,28 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
       const form = {
         "Action-type": "USER_DETAIL",
       };
-      dispatch(userDetailsAuthAction(form));
+      dispatch(actions.userDetailsAuthAction(form));
     }
   }, [dispatch, logic]);
 
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
-        dispatch(userLogoutAnyAction());
+        dispatch(actions.userLogoutAnyAction());
         navigate("/login");
       } else {
-        if (dataUserLogin) {
-          if (dataUserDetails && dataUserDetails["user_model"]) {
-            if (
-              dataUserDetails["user_model"]["activity_boolean_field"] === false
-            ) {
-              dispatch(userLogoutAnyAction());
-              navigate("/login");
-            }
-            if (
-              !dataUserDetails["user_model"]["secret_question_char_field"] ||
-              !dataUserDetails["user_model"]["secret_answer_char_field"]
-            ) {
-              navigate("/change_profile");
-            }
+        if (dataUserDetails && dataUserDetails["user_model"]) {
+          if (
+            dataUserDetails["user_model"]["activity_boolean_field"] === false
+          ) {
+            dispatch(actions.userLogoutAnyAction());
+            navigate("/login");
+          }
+          if (
+            !dataUserDetails["user_model"]["secret_question_char_field"] ||
+            !dataUserDetails["user_model"]["secret_answer_char_field"]
+          ) {
+            navigate("/change_profile");
           }
         }
       }
@@ -69,16 +79,6 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
     errorUserDetails,
     dataUserDetails,
   ]);
-
-  function checkAccess(slug = "") {
-    if (dataUserDetails) {
-      if (dataUserDetails["group_model"]) {
-        return dataUserDetails["group_model"].includes(slug);
-      }
-      return false;
-    }
-    return false;
-  }
 
   return (
     <header className="navbar-fixed-top bg-secondary bg-opacity-10 m-0 p-0">
@@ -97,9 +97,9 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {modules.map(
+              {constants.modules.map(
                 (module, module_i) =>
-                  checkAccess(module.Access) && (
+                  utils.CheckAccess(userDetailsStore, module.Access) && (
                     <NavDropdown
                       key={module_i}
                       title={module.Header}
@@ -107,14 +107,20 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
                     >
                       {module.Sections.map(
                         (section, section_i) =>
-                          checkAccess(section.Access) && (
+                          utils.CheckAccess(
+                            userDetailsStore,
+                            section.Access
+                          ) && (
                             <li key={section_i}>
                               <strong className="dropdown-header text-center">
                                 {section.Header}
                               </strong>
                               {section.Links.map((link, link_i) =>
                                 link.ExternalLink
-                                  ? checkAccess(link.Access) && (
+                                  ? utils.CheckAccess(
+                                      userDetailsStore,
+                                      link.Access
+                                    ) && (
                                       <a
                                         key={link_i}
                                         className={
@@ -128,7 +134,10 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
                                         {link.Header}
                                       </a>
                                     )
-                                  : checkAccess(link.Access) && (
+                                  : utils.CheckAccess(
+                                      userDetailsStore,
+                                      link.Access
+                                    ) && (
                                       <LinkContainer
                                         key={link_i}
                                         to={link.Link}

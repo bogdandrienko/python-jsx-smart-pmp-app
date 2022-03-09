@@ -80,3 +80,19 @@ export const Sleep = (time = 1000) => {
     return null;
   }
 };
+
+export const ChangePasswordVisibility = (objects = [""]) => {
+  try {
+    objects.forEach(function (object, index, array) {
+      const obj = document.getElementById(object);
+      const type =
+        obj.getAttribute("type") === "password" ? "text" : "password";
+      obj.setAttribute("type", type);
+    });
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};

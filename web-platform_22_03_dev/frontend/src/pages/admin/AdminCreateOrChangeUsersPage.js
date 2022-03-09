@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
+import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { adminCreateOrChangeUsersAuthAction } from "../../js/actions";
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
-import MessageComponent from "../../components/MessageComponent";
-import LoaderComponent from "../../components/LoaderComponent";
 import FooterComponent from "../../components/FooterComponent";
-import { ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT } from "../../js/constants";
+import StoreStatusComponent from "../../components/StoreStatusComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AdminCreateOrChangeUsersPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
 
   const [changeUser, setChangeUser] = useState(
     "Изменять уже существующего пользователя"
@@ -26,19 +43,19 @@ const AdminCreateOrChangeUsersPage = () => {
 
   const adminCreateOrChangeUsersStore = useSelector(
     (state) => state.adminCreateOrChangeUsersStore
-  );
+  ); // store.js
   const {
-    load: loadRationalCreate,
+    // load: loadRationalCreate,
     data: dataRationalCreate,
-    error: errorRationalCreate,
-    fail: failRationalCreate,
+    // error: errorRationalCreate,
+    // fail: failRationalCreate,
   } = adminCreateOrChangeUsersStore;
 
   useEffect(() => {
     if (dataRationalCreate) {
-      sleep(5000).then(() => {
+      utils.Sleep(5000).then(() => {
         dispatch({
-          type: ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT,
+          type: constants.ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT,
         });
         setChangeUser("Изменять уже существующего пользователя");
         setChangeUserPassword("Оставлять предыдущий пароль пользователя");
@@ -48,7 +65,7 @@ const AdminCreateOrChangeUsersPage = () => {
     }
   }, [dataRationalCreate]);
 
-  const submitHandler = (e) => {
+  const formHandlerSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CREATE_OR_CHANGE_USERS",
@@ -57,12 +74,8 @@ const AdminCreateOrChangeUsersPage = () => {
       clearUserGroups: clearUserGroups,
       additionalExcel: additionalExcel,
     };
-    dispatch(adminCreateOrChangeUsersAuthAction(form));
+    dispatch(actions.adminCreateOrChangeUsersAuthAction(form));
   };
-
-  function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
 
   return (
     <div>
@@ -70,32 +83,17 @@ const AdminCreateOrChangeUsersPage = () => {
       <TitleComponent
         first={"Создание или изменение пользователей"}
         second={
-          "страница содержит форму с полями и настройками для создание или измененеия пользователей."
+          "страница содержит форму с полями и настройками для создание или изменения пользователей."
         }
       />
-      <main className="container text-center">
-        <div className="text-center">
-          {loadRationalCreate && <LoaderComponent />}
-          {dataRationalCreate && (
-            <div className="m-1">
-              <MessageComponent variant="success">
-                Данные успешно отправлены!
-              </MessageComponent>
-            </div>
-          )}
-          {errorRationalCreate && (
-            <div className="m-1">
-              <MessageComponent variant="danger">
-                {errorRationalCreate}
-              </MessageComponent>
-            </div>
-          )}
-          {failRationalCreate && (
-            <div className="m-1">
-              <MessageComponent variant="warning">
-                {failRationalCreate}
-              </MessageComponent>
-            </div>
+      <main className="container p-0">
+        <div className="m-0 p-0">
+          {StoreStatusComponent(
+            adminCreateOrChangeUsersStore,
+            "adminCreateOrChangeUsersStore",
+            true,
+            "Данные успешно отправлены!",
+            constants.DEBUG_CONSTANT
           )}
         </div>
         {!dataRationalCreate && (
@@ -110,7 +108,7 @@ const AdminCreateOrChangeUsersPage = () => {
                   name="RATIONAL_CREATE"
                   autoComplete="on"
                   className="text-center"
-                  onSubmit={submitHandler}
+                  onSubmit={formHandlerSubmit}
                 >
                   <div>
                     <div className="">

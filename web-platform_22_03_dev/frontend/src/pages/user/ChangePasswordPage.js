@@ -1,61 +1,64 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
+import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { userChangeAuthAction, userLogoutAnyAction } from "../../js/actions";
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
-import MessageComponent from "../../components/MessageComponent";
-import LoaderComponent from "../../components/LoaderComponent";
+import StoreStatusComponent from "../../components/StoreStatusComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangePasswordPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userChangeStore = useSelector((state) => state.userChangeStore);
+  const userChangeStore = useSelector((state) => state.userChangeStore); // store.js
   const {
-    load: loadUserChange,
+    // load: loadUserChange,
     data: dataUserChange,
-    error: errorUserChange,
-    fail: failUserChange,
+    // error: errorUserChange,
+    // fail: failUserChange,
   } = userChangeStore;
 
   useEffect(() => {
     if (dataUserChange) {
-      sleep(1000).then(() => {
-        dispatch(userLogoutAnyAction());
+      utils.Sleep(1000).then(() => {
+        dispatch(actions.userLogoutAnyAction());
         navigate("/login");
       });
     }
   }, [navigate, dataUserChange, dispatch]);
 
-  const submitHandler = (e) => {
+  const formHandlerSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHANGE",
       password: password,
       password2: password2,
     };
-    dispatch(userChangeAuthAction(form));
+    dispatch(actions.userChangeAuthAction(form));
   };
-
-  const changeVisibility = () => {
-    const password = document.getElementById("password");
-    const password2 = document.getElementById("password2");
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-    password2.setAttribute("type", type);
-  };
-
-  function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
 
   return (
     <div>
@@ -64,29 +67,14 @@ const ChangePasswordPage = () => {
         first={"Изменение пароля"}
         second={"страница редактирования Вашего пароля от аккаунта."}
       />
-      <main className="container text-center">
-        <div className="text-center">
-          {loadUserChange && <LoaderComponent />}
-          {dataUserChange && (
-            <div className="m-1">
-              <MessageComponent variant="success">
-                Пароль успешно изменён!
-              </MessageComponent>
-            </div>
-          )}
-          {errorUserChange && (
-            <div className="m-1">
-              <MessageComponent variant="danger">
-                {errorUserChange}
-              </MessageComponent>
-            </div>
-          )}
-          {failUserChange && (
-            <div className="m-1">
-              <MessageComponent variant="warning">
-                {failUserChange}
-              </MessageComponent>
-            </div>
+      <main className="container p-0">
+        <div className="m-0 p-0">
+          {StoreStatusComponent(
+            userChangeStore,
+            "userChangeStore",
+            true,
+            "Пароль успешно изменён!",
+            constants.DEBUG_CONSTANT
           )}
         </div>
         <div>
@@ -98,7 +86,7 @@ const ChangePasswordPage = () => {
               name="account_login"
               autoComplete="on"
               className="text-center p-1 m-1"
-              onSubmit={submitHandler}
+              onSubmit={formHandlerSubmit}
             >
               <div>
                 <label className="form-control-md m-1 lead">
@@ -188,7 +176,10 @@ const ChangePasswordPage = () => {
                   <div className="m-1">
                     <button
                       type="button"
-                      onClick={changeVisibility}
+                      onClick={utils.ChangePasswordVisibility([
+                        "password",
+                        "password2",
+                      ])}
                       className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля

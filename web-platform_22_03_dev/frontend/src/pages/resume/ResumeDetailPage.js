@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
 import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "../../js/constants";
@@ -11,12 +22,12 @@ import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
-import { vacancyDetailAnyAction } from "../../js/actions";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ResumeDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const id = useParams().id;
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
@@ -83,6 +94,13 @@ const ResumeDetailPage = () => {
       />
       <main className="container p-0">
         <div className="p-0 m-0">
+          {StoreStatusComponent(
+            userDetailsStore,
+            "userDetailsStore",
+            false,
+            "",
+            constants.DEBUG_CONSTANT
+          )}
           {StoreStatusComponent(
             resumeDetailStore,
             "resumeDetailStore",

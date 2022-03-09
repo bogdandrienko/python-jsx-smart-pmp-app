@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
 import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "../../js/constants";
@@ -11,13 +22,12 @@ import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
-import MessageComponent from "../../components/MessageComponent";
-import LoaderComponent from "../../components/LoaderComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyChangePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const id = useParams().id;
 
   const [qualification, qualificationSet] = useState("");
@@ -31,7 +41,6 @@ const VacancyChangePage = () => {
   const [schedule, scheduleSet] = useState("");
   const [description, descriptionSet] = useState("");
 
-  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
   const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore); // store.js
   const {
     load: loadVacancyDetail,
@@ -46,8 +55,7 @@ const VacancyChangePage = () => {
     // error: errorVacancyDelete,
     // fail: failVacancyDelete,
   } = vacancyDeleteStore;
-
-  const vacancyChangeStore = useSelector((state) => state.vacancyChangeStore);
+  const vacancyChangeStore = useSelector((state) => state.vacancyChangeStore); // store.js
   const {
     // load: loadVacancyCreate,
     data: dataVacancyChange,

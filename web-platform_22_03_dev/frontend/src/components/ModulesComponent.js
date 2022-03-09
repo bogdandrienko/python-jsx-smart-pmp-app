@@ -1,12 +1,28 @@
-import React, { useEffect } from "react";
-import { modules } from "../js/constants";
-import { LinkContainer } from "react-router-bootstrap";
-import { Nav } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetailsAuthAction } from "../js/actions";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import * as constants from "../js/constants";
+import * as actions from "../js/actions";
+import * as utils from "../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ModulesComponent = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
@@ -18,7 +34,7 @@ const ModulesComponent = () => {
 
   useEffect(() => {
     if (!dataUserDetails) {
-      dispatch(userDetailsAuthAction());
+      dispatch(actions.userDetailsAuthAction());
     }
   }, [dispatch]);
 
@@ -37,8 +53,8 @@ const ModulesComponent = () => {
       <h2>Модули:</h2>
       <div className="container-fluid">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
-          {modules
-            ? modules.map(
+          {constants.modules
+            ? constants.modules.map(
                 (module, module_i) =>
                   checkAccess(module.Access) &&
                   module.ShowInModules && (

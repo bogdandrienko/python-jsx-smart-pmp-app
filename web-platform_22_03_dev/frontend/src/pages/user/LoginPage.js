@@ -1,68 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
+import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { userLoginAnyAction } from "../../js/actions";
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
-import LoaderComponent from "../../components/LoaderComponent";
+import StoreStatusComponent from "../../components/StoreStatusComponent";
 import MessageComponent from "../../components/MessageComponent";
-import { LinkContainer } from "react-router-bootstrap";
-import { Nav } from "react-bootstrap";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [capcha, setCapcha] = useState("");
+  const [captcha, captchaSet] = useState("");
 
-  const userLoginStore = useSelector((state) => state.userLoginStore);
+  const userLoginStore = useSelector((state) => state.userLoginStore); // store.js
   const {
-    load: loadUserLogin,
+    // load: loadUserLogin,
     data: dataUserLogin,
-    error: errorUserLogin,
-    fail: failUserLogin,
+    // error: errorUserLogin,
+    // fail: failUserLogin,
   } = userLoginStore;
 
   useEffect(() => {
     if (dataUserLogin) {
-      sleep(1000).then(() => {
+      utils.Sleep(1000).then(() => {
         navigate("/news");
       });
     }
   }, [navigate, dataUserLogin]);
 
-  const submitHandler = (e) => {
+  const formHandlerSubmit = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
+    if (captcha !== "") {
       const form = {
         "Action-type": "USER_LOGIN",
         username: username,
         password: password,
       };
-      dispatch(userLoginAnyAction(form));
+      dispatch(actions.userLoginAnyAction(form));
     }
   };
-
-  const changeVisibility = () => {
-    const password = document.getElementById("password");
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-  };
-
-  function changeCapcha(value) {
-    setCapcha(value);
-  }
-
-  function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
 
   return (
     <div>
@@ -71,25 +70,16 @@ const LoginPage = () => {
         first={"Вход в систему"}
         second={"страница для входа в систему."}
       />
-      <main className="container text-center">
-        <div>
-          {loadUserLogin && <LoaderComponent />}
-          {dataUserLogin && (
-            <MessageComponent variant="success">
-              Вы успешно вошли!
-            </MessageComponent>
+      <main className="container p-0">
+        <div className="m-0 p-0">
+          {StoreStatusComponent(
+            userLoginStore,
+            "userLoginStore",
+            true,
+            "Данные успешно получены!",
+            constants.DEBUG_CONSTANT
           )}
-          {errorUserLogin && (
-            <MessageComponent variant="danger">
-              {errorUserLogin}
-            </MessageComponent>
-          )}
-          {failUserLogin && (
-            <MessageComponent variant="warning">
-              {failUserLogin}
-            </MessageComponent>
-          )}
-          {!capcha && (
+          {!captcha && (
             <MessageComponent variant="danger">
               Пройдите проверку на робота!
             </MessageComponent>
@@ -103,7 +93,7 @@ const LoginPage = () => {
             name="account_login"
             autoComplete="on"
             className="text-center p-1 m-1"
-            onSubmit={submitHandler}
+            onSubmit={formHandlerSubmit}
           >
             <div>
               <label className="form-control-md m-1 lead">
@@ -162,7 +152,7 @@ const LoginPage = () => {
               <label className="m-1">
                 <ReCAPTCHA
                   sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                  onChange={changeCapcha}
+                  onChange={(e) => captchaSet(e)}
                 />
               </label>
             </div>
@@ -192,7 +182,9 @@ const LoginPage = () => {
                 <div className="m-1">
                   <button
                     type="button"
-                    onClick={changeVisibility}
+                    onClick={(e) =>
+                      utils.ChangePasswordVisibility(["password"])
+                    }
                     className="btn btn-md btn-danger form-control"
                   >
                     Видимость пароля

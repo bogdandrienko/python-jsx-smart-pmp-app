@@ -1713,31 +1713,63 @@ def api_rational(request):
                     return Response({"error": "Произошла ошибка!"})
             elif req_inst.action_type == "RATIONAL_LIST":
                 try:
-                    sphere = request.data.get("sphere")
                     subdivision = request.data.get("subdivision")
-                    premoderate = request.data.get("premoderate")
-                    postmoderate = request.data.get("postmoderate")
+                    category = request.data.get("category")
+                    author = request.data.get("author")
+                    search = request.data.get("search")
+                    sort = request.data.get("sort")
+                    moderate = request.data.get("moderate")
 
-                    rationals = backend_models.RationalModel.objects.all()
+                    objects = backend_models.RationalModel.objects.all().order_by("-created_datetime_field")
 
-                    search = ""
-
+                    # search
                     if search:
-                        rationals = rationals.filter(name_char_field__icontains=search)
+                        objects = objects.filter(name_char_field__icontains=search)
 
-                    if sphere:
-                        rationals = rationals.filter(sphere_char_field=sphere)
-
+                    # filter
                     if subdivision:
-                        rationals = rationals.filter(subdivision_char_field=subdivision)
+                        objects = objects.filter(subdivision_char_field=subdivision)
+                    if category:
+                        objects = objects.filter(category_char_field=category)
+                    if author:
+                        author = backend_models.UserModel.objects.get(
+                            personnel_number_slug_field=str(author).split(" ")[-2]
+                        )
+                        objects = objects.filter(author_foreign_key_field=author)
 
-                    if premoderate:
-                        rationals = rationals.filter(conclusion_premoderate_char_field=premoderate)
+                    if moderate == "Отклонено":
+                        objects = objects.filter(conclusion_premoderate_char_field="Отклонено")
+                        objects = objects.filter(conclusion_postmoderate_char_field="Отклонено")
+                    elif moderate == "ОУПиБП (не технологическая + пред модерация)":
+                        objects = objects.filter(sphere_char_field="Не технологическая")
+                        objects = objects.filter(conclusion_premoderate_char_field="Приостановлено")
+                        objects = objects.filter(conclusion_postmoderate_char_field="Приостановлено")
+                    elif moderate == "Зам. по развитию (технологическая + пред модерация)":
+                        objects = objects.filter(sphere_char_field="Технологическая")
+                        objects = objects.filter(conclusion_premoderate_char_field="Приостановлено")
+                        objects = objects.filter(conclusion_postmoderate_char_field="Приостановлено")
+                    elif moderate == "Тех. отдел (технологическая + пост модерация)":
+                        objects = objects.filter(sphere_char_field="Технологическая")
+                        objects = objects.filter(conclusion_premoderate_char_field="Принято")
+                        objects = objects.filter(conclusion_postmoderate_char_field="Приостановлено")
+                    elif moderate == "Принято":
+                        objects = objects.filter(conclusion_premoderate_char_field="Принято")
+                        objects = objects.filter(conclusion_postmoderate_char_field="Принято")
+                    else:
+                        pass
 
-                    if postmoderate:
-                        rationals = rationals.filter(conclusion_postmoderate_char_field=postmoderate)
+                    # sort
+                    if sort:
+                        if sort == "Дате публикации (сначала свежие)":
+                            objects = objects.order_by("-created_datetime_field")
+                        elif sort == "Дате публикации (сначала старые)":
+                            objects = objects.order_by("created_datetime_field")
+                        elif sort == "Названию (С начала алфавита)":
+                            objects = objects.order_by("name_char_field")
+                        elif sort == "Названию (С конца алфавита)":
+                            objects = objects.order_by("-name_char_field")
 
-                    serializer = backend_serializers.RationalModelSerializer(instance=rationals, many=True)
+                    serializer = backend_serializers.RationalModelSerializer(instance=objects, many=True)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")
                     return Response(response)
@@ -1826,28 +1858,28 @@ def api_any_vacancy(request):
                     sort = req_inst.get_value("sort")
                     search = req_inst.get_value("search")
 
-                    vacancy_list = backend_models.VacancyModel.objects.all().order_by("-id")
+                    objects = backend_models.VacancyModel.objects.all().order_by("-id")
 
                     if sphere:
-                        vacancy_list = vacancy_list.filter(sphere_field=sphere)
+                        objects = objects.filter(sphere_field=sphere)
                     if education:
-                        vacancy_list = vacancy_list.filter(education_field=education)
+                        objects = objects.filter(education_field=education)
                     if experience:
-                        vacancy_list = vacancy_list.filter(experience_field=experience)
+                        objects = objects.filter(experience_field=experience)
                     if sort:
                         if sort == "Дате публикации (сначала свежие)":
-                            vacancy_list = vacancy_list.order_by("-datetime_field")
+                            objects = objects.order_by("-datetime_field")
                         elif sort == "Дате публикации (сначала старые)":
-                            vacancy_list = vacancy_list.order_by("datetime_field")
-                        elif sort == "Названию вакансии (С начала алфавита)":
-                            vacancy_list = vacancy_list.order_by("qualification_field")
-                        elif sort == "Названию вакансии (С конца алфавита)":
-                            vacancy_list = vacancy_list.order_by("-qualification_field")
+                            objects = objects.order_by("datetime_field")
+                        elif sort == "Названию (С начала алфавита)":
+                            objects = objects.order_by("qualification_field")
+                        elif sort == "Названию (С конца алфавита)":
+                            objects = objects.order_by("-qualification_field")
 
                     if search:
-                        vacancy_list = vacancy_list.filter(qualification_field__icontains=search)
+                        objects = objects.filter(qualification_field__icontains=search)
 
-                    serializer = backend_serializers.VacancyModelSerializer(instance=vacancy_list, many=True)
+                    serializer = backend_serializers.VacancyModelSerializer(instance=objects, many=True)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")
                     return Response(response)

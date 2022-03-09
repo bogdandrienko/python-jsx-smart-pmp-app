@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
 import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "../../js/constants";
@@ -11,23 +22,33 @@ import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import MessageComponent from "../../components/MessageComponent";
-import LoaderComponent from "../../components/LoaderComponent";
 import RationalComponent from "../../components/RationalComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const id = useParams().id;
 
-  const [detailView, setDetailView] = useState(true);
-  const [subdivision, setSubdivision] = useState("");
-  const [sphere, setSphere] = useState("");
-  const [premoderate, setPremoderate] = useState("Приостановлено");
-  const [postmoderate, setPostmoderate] = useState("Приостановлено");
+  const [detailView, detailViewSet] = useState(true);
+  const [subdivision, subdivisionSet] = useState("");
+  const [category, categorySet] = useState("");
+  const [author, authorSet] = useState("");
+  const [search, searchSet] = useState("");
+  const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
+  const [moderate, moderateSet] = useState("");
 
-  const rationalListStore = useSelector((state) => state.rationalListStore);
+  const userListAllStore = useSelector((state) => state.userListAllStore); // store.js
+  const {
+    // load: loadUserListAll,
+    data: dataUserListAll,
+    // error: errorUserListAll,
+    // fail: failUserListAll,
+  } = userListAllStore;
+  const rationalListStore = useSelector((state) => state.rationalListStore); // store.js
   const {
     // load: loadRationalList,
     data: dataRationalList,
@@ -35,29 +56,48 @@ const RationalListPage = () => {
     // fail: failRationalList,
   } = rationalListStore;
 
+  const getData = () => {
+    const form = {
+      "Action-type": "RATIONAL_LIST",
+      subdivision: subdivision,
+      category: category,
+      author: author,
+      search: search,
+      sort: sort,
+      moderate: moderate,
+    };
+    dispatch(actions.rationalListAuthAction(form));
+  };
+
+  useEffect(() => {
+    if (!dataUserListAll) {
+      const form = {
+        "Action-type": "USER_LIST_ALL",
+      };
+      dispatch(actions.userListAllAuthAction(form));
+    }
+  }, [dispatch, dataUserListAll]);
+
   useEffect(() => {
     if (!dataRationalList) {
-      const form = {
-        "Action-type": "RATIONAL_LIST",
-        sphere: sphere,
-        subdivision: subdivision,
-        premoderate: premoderate,
-        postmoderate: postmoderate,
-      };
-      dispatch(actions.rationalListAuthAction(form));
+      getData();
     }
   }, [dispatch, dataRationalList]);
 
   const formHandlerSubmit = (e) => {
     e.preventDefault();
-    const form = {
-      "Action-type": "RATIONAL_LIST",
-      sphere: sphere,
-      subdivision: subdivision,
-      premoderate: premoderate,
-      postmoderate: postmoderate,
-    };
-    dispatch(actions.rationalListAuthAction(form));
+    getData();
+  };
+
+  const formHandlerReset = async (e) => {
+    e.preventDefault();
+    subdivisionSet("");
+    categorySet("");
+    authorSet("");
+    searchSet("");
+    sortSet("Дате публикации (сначала свежие)");
+    moderateSet("");
+    getData();
   };
 
   return (
@@ -72,6 +112,13 @@ const RationalListPage = () => {
       <main className="container p-0">
         <div className="m-0 p-0">
           {StoreStatusComponent(
+            userListAllStore,
+            "userListAllStore",
+            false,
+            "",
+            constants.DEBUG_CONSTANT
+          )}
+          {StoreStatusComponent(
             rationalListStore,
             "rationalListStore",
             true,
@@ -80,95 +127,155 @@ const RationalListPage = () => {
           )}
         </div>
         <div className="p-0 m-0">
-          <div className="p-0 m-0">
-            <label className="lead">
-              Выберите нужные настройки фильтрации и сортировки, затем нажмите
-              кнопку <p className="fw-bold text-primary">"обновить"</p>
-            </label>
-            <label className="form-control-md form-switch m-1">
-              Детальное отображение:
-              <input
-                type="checkbox"
-                className="form-check-input m-1"
-                id="flexSwitchCheckDefault"
-                defaultChecked={detailView}
-                onClick={(e) => setDetailView(!detailView)}
-              />
-            </label>
+          <div className="container-fluid form-control bg-opacity-10 bg-success">
+            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+              <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+                <div className="p-0 m-0">
+                  <label className="lead">
+                    Выберите нужные настройки фильтрации и сортировки, затем
+                    нажмите кнопку{" "}
+                    <p className="fw-bold text-primary">
+                      "фильтровать рац. предложения"
+                    </p>
+                  </label>
+                  <label className="form-control-md form-switch m-1">
+                    Детальное отображение:
+                    <input
+                      type="checkbox"
+                      className="form-check-input m-1"
+                      id="flexSwitchCheckDefault"
+                      defaultChecked={detailView}
+                      onClick={(e) => detailViewSet(!detailView)}
+                    />
+                  </label>
+                </div>
+                <div className="p-0 m-0">
+                  <label className="form-control-sm m-1">
+                    Наименование структурного подразделения:
+                    <select
+                      className="form-control form-control-sm"
+                      value={subdivision}
+                      onChange={(e) => subdivisionSet(e.target.value)}
+                    >
+                      <option value="">все варианты</option>
+                      <option value="Управление">Управление</option>
+                      <option value="Обогатительный комплекс">
+                        Обогатительный комплекс
+                      </option>
+                      <option value="Горно-транспортный комплекс">
+                        Горно-транспортный комплекс
+                      </option>
+                      <option value="Автотранспортное предприятие">
+                        Автотранспортное предприятие
+                      </option>
+                      <option value="Энергоуправление">Энергоуправление</option>
+                    </select>
+                  </label>
+                  <label className="form-control-sm">
+                    Категория:
+                    <select
+                      className="form-control form-control-sm"
+                      value={category}
+                      onChange={(e) => categorySet(e.target.value)}
+                    >
+                      <option value="">все варианты</option>
+                      <option value="Инновации">Инновации</option>
+                      <option value="Модернизация">Модернизация</option>
+                      <option value="Улучшение">Улучшение</option>
+                      <option value="Индустрия 4.0">Индустрия 4.0</option>
+                    </select>
+                  </label>
+                  {dataUserListAll && (
+                    <label className="form-control-sm m-1">
+                      Автор:
+                      <select
+                        className="form-control form-control-sm"
+                        value={author}
+                        onChange={(e) => authorSet(e.target.value)}
+                      >
+                        <option value="">все варианты</option>
+                        {dataUserListAll.map((user, index) => (
+                          <option key={index} value={user}>
+                            {user}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  )}
+                </div>
+                <div className="p-0 m-0">
+                  <label className="w-50 form-control-md">
+                    Поле поиска по части названия:
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="вводите часть названия тут..."
+                      value={search}
+                      onChange={(e) => searchSet(e.target.value)}
+                    />
+                  </label>
+                  <label className="form-control-md m-1">
+                    Сортировка по:
+                    <select
+                      className="form-control form-control-sm"
+                      value={sort}
+                      onChange={(e) => sortSet(e.target.value)}
+                    >
+                      <option value="Дате публикации (сначала свежие)">
+                        Дате публикации (сначала свежие)
+                      </option>
+                      <option value="Дате публикации (сначала старые)">
+                        Дате публикации (сначала старые)
+                      </option>
+                      <option value="Названию (С начала алфавита)">
+                        Названию (С начала алфавита)
+                      </option>
+                      <option value="Названию (С конца алфавита)">
+                        Названию (С конца алфавита)
+                      </option>
+                    </select>
+                  </label>
+                </div>
+                <div className="p-0 m-0 bg-opacity-10 bg-danger">
+                  <small className="text-danger">Временно!</small>
+                  <label className="form-control-sm m-1">
+                    Тип модерации:
+                    <select
+                      className="form-control form-control-sm"
+                      value={moderate}
+                      onChange={(e) => moderateSet(e.target.value)}
+                    >
+                      <option value="">все варианты</option>
+                      <option value="Отклонено">Отклонено</option>
+                      <option value="ОУПиБП (не технологическая + пред модерация)">
+                        ОУПиБП (не технологическая + пред модерация)
+                      </option>
+                      <option value="Зам. по развитию (технологическая + пред модерация)">
+                        Зам. по развитию (технологическая + пред модерация)
+                      </option>
+                      <option value="Тех. отдел (технологическая + пост модерация)">
+                        Тех. отдел (технологическая + пост модерация)
+                      </option>
+                      <option value="Принято">Принято</option>
+                    </select>
+                  </label>
+                  <small className="text-danger">Временно!</small>
+                </div>
+                <div className="btn-group p-1 m-0 text-start w-100">
+                  <button className="btn btn-sm btn-primary" type="submit">
+                    фильтровать рац. предложения
+                  </button>
+                  <button
+                    className="btn btn-sm btn-warning"
+                    type="button"
+                    onClick={formHandlerReset}
+                  >
+                    сбросить фильтры
+                  </button>
+                </div>
+              </form>
+            </ul>
           </div>
-          <label className="form-control-sm m-1">
-            Сфера рац. предложения:
-            <select
-              className="form-control form-control-sm"
-              value={sphere}
-              required
-              onChange={(e) => setSphere(e.target.value)}
-            >
-              <option value="">Не выбрано</option>
-              <option value="Технологическая">Технологическая</option>
-              <option value="Не технологическая">Не технологическая</option>
-            </select>
-            <small className="text-danger">* обязательно</small>
-          </label>
-          <label className="form-control-sm m-1">
-            Наименование структурного подразделения:
-            <select
-              className="form-control form-control-sm"
-              value={subdivision}
-              required
-              onChange={(e) => setSubdivision(e.target.value)}
-            >
-              <option value="">Не выбрано</option>
-              <option value="Управление">Управление</option>
-              <option value="Обогатительный комплекс">
-                Обогатительный комплекс
-              </option>
-              <option value="Горно-транспортный комплекс">
-                Горно-транспортный комплекс
-              </option>
-              <option value="Автотранспортное предприятие">
-                Автотранспортное предприятие
-              </option>
-              <option value="Энергоуправление">Энергоуправление</option>
-            </select>
-            <small className="text-danger">* обязательно</small>
-          </label>
-          <label className="w-25 form-control-sm m-1">
-            Заключение премодерации:
-            <select
-              className="form-control form-control-sm"
-              value={premoderate}
-              required
-              onChange={(e) => setPremoderate(e.target.value)}
-            >
-              <option value="Приостановлено">Приостановлено</option>
-              <option value="Принято">Принято</option>
-              <option value="Отклонено">Отклонено</option>
-            </select>
-            <small className="text-danger">* обязательно</small>
-          </label>
-          <label className="w-25 form-control-sm m-1">
-            Заключение постмодерации:
-            <select
-              className="form-control form-control-sm"
-              value={postmoderate}
-              required
-              onChange={(e) => setPostmoderate(e.target.value)}
-            >
-              <option value="Приостановлено">Приостановлено</option>
-              <option value="Принято">Принято</option>
-              <option value="Отклонено">Отклонено</option>
-            </select>
-            <small className="text-danger">* обязательно</small>
-          </label>
-          <label className="form-control-sm m-1">
-            <button
-              className="btn btn-sm btn-primary"
-              onClick={formHandlerSubmit}
-            >
-              Обновить
-            </button>
-          </label>
           {!dataRationalList || dataRationalList.length < 1 ? (
             <MessageComponent variant={"danger"}>
               Рац. предложения не найдены! Попробуйте изменить условия
@@ -192,6 +299,7 @@ const RationalListPage = () => {
             <div className="row justify-content-center p-0 m-0">
               {dataRationalList.map((rational, index) => (
                 <Link
+                  key={index}
                   to={`/rational_detail/${rational.id}`}
                   className="text-decoration-none text-center p-2 m-0 col-md-6"
                 >

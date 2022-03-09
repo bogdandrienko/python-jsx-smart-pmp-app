@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
 import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "../../js/constants";
@@ -11,15 +22,17 @@ import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
 import StoreStatusComponent from "../../components/StoreStatusComponent";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import MessageComponent from "../../components/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const id = useParams().id;
 
-  const [detailView, setDetailView] = useState(true);
+  const [detailView, detailViewSet] = useState(true);
   const [sphere, sphereSet] = useState("");
   const [education, educationSet] = useState("");
   const [experience, experienceSet] = useState("");
@@ -27,7 +40,6 @@ const VacancyListPage = () => {
   const [search, searchSet] = useState("");
 
   const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
-
   const vacancyListStore = useSelector((state) => state.vacancyListStore); // store.js
   const {
     load: loadVacancyList,
@@ -84,6 +96,13 @@ const VacancyListPage = () => {
       <main className="container p-0">
         <div className="m-0 p-0">
           {StoreStatusComponent(
+            userDetailsStore,
+            "userDetailsStore",
+            false,
+            "Данные успешно получены!",
+            constants.DEBUG_CONSTANT
+          )}
+          {StoreStatusComponent(
             vacancyListStore,
             "vacancyListStore",
             false,
@@ -107,7 +126,7 @@ const VacancyListPage = () => {
                     className="form-check-input m-1"
                     id="flexSwitchCheckDefault"
                     defaultChecked={detailView}
-                    onClick={(e) => setDetailView(!detailView)}
+                    onClick={(e) => detailViewSet(!detailView)}
                   />
                 </label>
               </div>
@@ -177,7 +196,7 @@ const VacancyListPage = () => {
                   />
                 </label>
                 <label className="form-control-md m-1">
-                  Сортировка вакансий по:
+                  Сортировка по:
                   <select
                     id="sort"
                     name="sort"
@@ -191,11 +210,11 @@ const VacancyListPage = () => {
                     <option value="Дате публикации (сначала старые)">
                       Дате публикации (сначала старые)
                     </option>
-                    <option value="Названию вакансии (С начала алфавита)">
-                      Названию вакансии (С начала алфавита)
+                    <option value="Названию (С начала алфавита)">
+                      Названию (С начала алфавита)
                     </option>
-                    <option value="Названию вакансии (С конца алфавита)">
-                      Названию вакансии (С конца алфавита)
+                    <option value="Названию (С конца алфавита)">
+                      Названию (С конца алфавита)
                     </option>
                   </select>
                 </label>

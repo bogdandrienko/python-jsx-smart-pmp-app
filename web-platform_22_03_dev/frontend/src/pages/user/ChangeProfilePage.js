@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
-  userChangeAuthAction,
-  userDetailsAuthAction,
-  userLogoutAnyAction,
-} from "../../js/actions";
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
+import axios from "axios";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
-import MessageComponent from "../../components/MessageComponent";
-import LoaderComponent from "../../components/LoaderComponent";
+import StoreStatusComponent from "../../components/StoreStatusComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangeProfilePage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
 
   const [email, setEmail] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
@@ -24,20 +36,19 @@ const ChangeProfilePage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
   const {
-    load: loadUserDetails,
+    // load: loadUserDetails,
     data: dataUserDetails,
-    error: errorUserDetails,
-    fail: failUserDetails,
+    // error: errorUserDetails,
+    // fail: failUserDetails,
   } = userDetailsStore;
-
-  const userChangeStore = useSelector((state) => state.userChangeStore);
+  const userChangeStore = useSelector((state) => state.userChangeStore); // store.js
   const {
-    load: loadUserChange,
+    // load: loadUserChange,
     data: dataUserChange,
-    error: errorUserChange,
-    fail: failUserChange,
+    // error: errorUserChange,
+    // fail: failUserChange,
   } = userChangeStore;
 
   useEffect(() => {
@@ -62,7 +73,7 @@ const ChangeProfilePage = () => {
         }
       }
     } else {
-      dispatch(userDetailsAuthAction());
+      dispatch(actions.userDetailsAuthAction());
       setPassword("");
       setPassword2("");
     }
@@ -70,14 +81,14 @@ const ChangeProfilePage = () => {
 
   useEffect(() => {
     if (dataUserChange) {
-      sleep(1000).then(() => {
-        dispatch(userLogoutAnyAction());
+      utils.Sleep(1000).then(() => {
+        dispatch(actions.userLogoutAnyAction());
         navigate("/login");
       });
     }
   }, [dispatch, dataUserChange, navigate]);
 
-  const submitHandler = (e) => {
+  const formHandlerSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHANGE",
@@ -87,21 +98,8 @@ const ChangeProfilePage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(userChangeAuthAction(form));
+    dispatch(actions.userChangeAuthAction(form));
   };
-
-  const changeVisibility = () => {
-    const password = document.getElementById("password");
-    const password2 = document.getElementById("password2");
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-    password2.setAttribute("type", type);
-  };
-
-  function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
 
   return (
     <div>
@@ -110,36 +108,21 @@ const ChangeProfilePage = () => {
         first={"Изменение профиля"}
         second={"страница редактирования Вашего личного профиля."}
       />
-      <main className="container text-center">
-        <div>
-          {loadUserDetails && <LoaderComponent />}
-          {errorUserDetails && (
-            <MessageComponent variant="danger">
-              {errorUserDetails}
-            </MessageComponent>
+      <main className="container p-0">
+        <div className="m-0 p-0">
+          {StoreStatusComponent(
+            userDetailsStore,
+            "userDetailsStore",
+            true,
+            "Данные успешно получены!",
+            constants.DEBUG_CONSTANT
           )}
-          {failUserDetails && (
-            <MessageComponent variant="warning">
-              {failUserChange}
-            </MessageComponent>
-          )}
-        </div>
-        <div>
-          {loadUserChange && <LoaderComponent />}
-          {dataUserChange && (
-            <MessageComponent variant="success">
-              Данные успешно изменены!
-            </MessageComponent>
-          )}
-          {errorUserChange && (
-            <MessageComponent variant="danger">
-              {errorUserChange}
-            </MessageComponent>
-          )}
-          {failUserChange && (
-            <MessageComponent variant="warning">
-              {failUserChange}
-            </MessageComponent>
+          {StoreStatusComponent(
+            userChangeStore,
+            "userChangeStore",
+            true,
+            "Данные успешно изменены!",
+            constants.DEBUG_CONSTANT
           )}
         </div>
         <div>
@@ -155,7 +138,7 @@ const ChangeProfilePage = () => {
               name="account_login"
               autoComplete="on"
               className="text-center p-1 m-1"
-              onSubmit={submitHandler}
+              onSubmit={formHandlerSubmit}
             >
               <div>
                 <label className="form-control-md m-1 lead">
@@ -316,9 +299,11 @@ const ChangeProfilePage = () => {
                   </div>
                   <div className="m-1">
                     <button
-                      href=""
                       type="button"
-                      onClick={changeVisibility}
+                      onClick={utils.ChangePasswordVisibility([
+                        "password",
+                        "password2",
+                      ])}
                       className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля

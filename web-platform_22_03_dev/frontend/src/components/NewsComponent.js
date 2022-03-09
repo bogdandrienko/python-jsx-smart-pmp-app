@@ -1,9 +1,29 @@
-import React from "react";
-import { news } from "../js/constants";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Nav } from "react-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import * as constants from "../js/constants";
+import * as actions from "../js/actions";
+import * as utils from "../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const NewsComponent = (count = 100) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
+
   return (
     <div className="">
       <div className="list-group list-group-flush border-bottom scrollarea">
@@ -28,7 +48,7 @@ const NewsComponent = (count = 100) => {
           </Nav.Link>
         </LinkContainer>
 
-        {news.slice(0, count.count).map((news_elem, index) => (
+        {constants.news.slice(0, count.count).map((news_elem, index) => (
           <div key={index}>
             <a
               href={news_elem.Link}

@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "../js/constants";
@@ -9,6 +19,11 @@ import * as utils from "../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalComponent = ({ rational, shortView = false }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
+
   return (
     <div
       className={
@@ -17,7 +32,7 @@ const RationalComponent = ({ rational, shortView = false }) => {
           : "card shadow p-0 m-0"
       }
     >
-      <div className="card-header p-0 m-0">
+      <div className="card-header p-0 m-0 bg-opacity-10 bg-primary">
         <h6 className="lead fw-bold">{rational["name_char_field"]}</h6>
       </div>
       <div className="card-body p-0 m-0">
@@ -162,65 +177,80 @@ const RationalComponent = ({ rational, shortView = false }) => {
         </div>
       )}
       <div className="card-body p-0 m-0">
-        <a className="btn btn-sm btn-warning m-1" href="#">
+        <Link to={`#`} className="text-decoration-none btn btn-sm btn-warning">
           Автор: {rational["user_model"]["last_name_char_field"]}{" "}
           {rational["user_model"]["first_name_char_field"]}{" "}
           {rational["user_model"]["patronymic_char_field"]}
-        </a>
+        </Link>
       </div>
       {!shortView && (
         <label className="w-100 form-control-sm m-1">
           Участники:
-          <input
-            type="text"
-            id="name_char_field"
-            name="name_char_field"
-            placeholder="участник № 1, пример: Андриенко Богдан Николаевич 931777 70%"
-            value={rational["user1_char_field"]}
-            minLength="0"
-            maxLength="200"
-            className="form-control form-control-sm"
-          />
-          <input
-            type="text"
-            id="name_char_field"
-            name="name_char_field"
-            placeholder="участник № 2, пример: Андриенко Богдан Николаевич 931777 70%"
-            value={rational["user2_char_field"]}
-            minLength="0"
-            maxLength="200"
-            className="form-control form-control-sm"
-          />
-          <input
-            type="text"
-            id="name_char_field"
-            name="name_char_field"
-            placeholder="участник № 3, пример: Андриенко Богдан Николаевич 931777 70%"
-            value={rational["user3_char_field"]}
-            minLength="0"
-            maxLength="200"
-            className="form-control form-control-sm"
-          />
-          <input
-            type="text"
-            id="name_char_field"
-            name="name_char_field"
-            placeholder="участник № 4, пример: Андриенко Богдан Николаевич 931777 70%"
-            value={rational["user4_char_field"]}
-            minLength="0"
-            maxLength="200"
-            className="form-control form-control-sm"
-          />
-          <input
-            type="text"
-            id="name_char_field"
-            name="name_char_field"
-            placeholder="участник № 5, пример: Андриенко Богдан Николаевич 931777 70%"
-            value={rational["user5_char_field"]}
-            minLength="0"
-            maxLength="200"
-            className="form-control form-control-sm"
-          />
+          {rational["user1_char_field"] &&
+            rational["user1_char_field"].length > 3 && (
+              <input
+                type="text"
+                id="name_char_field"
+                name="name_char_field"
+                placeholder="участник № 1"
+                value={rational["user1_char_field"]}
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {rational["user2_char_field"] &&
+            rational["user2_char_field"].length > 3 && (
+              <input
+                type="text"
+                id="name_char_field"
+                name="name_char_field"
+                placeholder="участник № 2"
+                value={rational["user2_char_field"]}
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {rational["user3_char_field"] &&
+            rational["user3_char_field"].length > 3 && (
+              <input
+                type="text"
+                id="name_char_field"
+                name="name_char_field"
+                placeholder="участник № 3"
+                value={rational["user3_char_field"]}
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {rational["user4_char_field"] &&
+            rational["user4_char_field"].length > 3 && (
+              <input
+                type="text"
+                id="name_char_field"
+                name="name_char_field"
+                placeholder="участник № 4"
+                value={rational["user4_char_field"]}
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {rational["user5_char_field"] &&
+            rational["user5_char_field"].length > 3 && (
+              <input
+                type="text"
+                id="name_char_field"
+                name="name_char_field"
+                placeholder="участник № 5"
+                value={rational["user5_char_field"]}
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
         </label>
       )}
       <div className="card-body p-0 m-0">

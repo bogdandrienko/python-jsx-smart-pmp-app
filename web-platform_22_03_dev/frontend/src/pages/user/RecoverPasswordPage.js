@@ -1,85 +1,97 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
+import ReactPlayer from "react-player";
+import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { userRecoverPasswordAnyAction } from "../../js/actions";
+import * as constants from "../../js/constants";
+import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import HeaderComponent from "../../components/HeaderComponent";
 import TitleComponent from "../../components/TitleComponent";
 import FooterComponent from "../../components/FooterComponent";
+import StoreStatusComponent from "../../components/StoreStatusComponent";
 import MessageComponent from "../../components/MessageComponent";
-import LoaderComponent from "../../components/LoaderComponent";
-import { USER_DETAILS_RESET_CONSTANT } from "../../js/constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangePasswordPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = useParams().id;
 
-  const [capcha, setCapcha] = useState("");
+  const [captcha, captchaSet] = useState("");
   const [username, setUsername] = useState("");
-
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
-
   const [email, setEmail] = useState("");
   const [recoverPassword, setRecoverPassword] = useState("");
-
   const [success, setSuccess] = useState(false);
-
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
   const userRecoverPasswordStore = useSelector(
     (state) => state.userRecoverPasswordStore
-  );
+  ); // store.js
   const {
-    load: loadUserRecoverPassword,
+    // load: loadUserRecoverPassword,
     data: dataUserRecoverPassword,
-    error: errorUserRecoverPassword,
-    fail: failUserRecoverPassword,
+    // error: errorUserRecoverPassword,
+    // fail: failUserRecoverPassword,
   } = userRecoverPasswordStore;
-  console.log("dataUserRecoverPassword: ", dataUserRecoverPassword);
 
-  const postFindUserHandlerSubmit = (e) => {
+  const formHandlerSubmitFindUser = (e) => {
     e.preventDefault();
-    if (capcha !== "") {
+    if (captcha !== "") {
       const form = {
         "Action-type": "FIND_USER",
         username: username,
       };
-      dispatch(userRecoverPasswordAnyAction(form));
+      dispatch(actions.userRecoverPasswordAnyAction(form));
     }
   };
 
-  const postCheckAnswerHandlerSubmit = (e) => {
+  const formHandlerSubmitCheckAnswer = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHECK_ANSWER",
       username: username,
       secretAnswer: secretAnswer,
     };
-    dispatch(userRecoverPasswordAnyAction(form));
+    dispatch(actions.userRecoverPasswordAnyAction(form));
   };
 
-  const postSendEmailHandlerSubmit = (e) => {
+  const formHandlerSubmitSendEmail = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "SEND_EMAIL_PASSWORD",
       username: username,
     };
-    dispatch(userRecoverPasswordAnyAction(form));
+    dispatch(actions.userRecoverPasswordAnyAction(form));
   };
 
-  const postRecoverEmailHandlerSubmit = (e) => {
+  const formHandlerSubmitRecoverEmail = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHECK_EMAIL_PASSWORD",
       username: username,
       recoverPassword: recoverPassword,
     };
-    dispatch(userRecoverPasswordAnyAction(form));
+    dispatch(actions.userRecoverPasswordAnyAction(form));
   };
 
-  const postRecoverPasswordHandlerSubmit = (e) => {
+  const formHandlerSubmitRecoverPassword = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHANGE_PASSWORD",
@@ -87,8 +99,8 @@ const ChangePasswordPage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(userRecoverPasswordAnyAction(form));
-    dispatch({ type: USER_DETAILS_RESET_CONSTANT });
+    dispatch(actions.userRecoverPasswordAnyAction(form));
+    dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
   };
 
   useEffect(() => {
@@ -117,19 +129,6 @@ const ChangePasswordPage = () => {
     }
   }, [dataUserRecoverPassword]);
 
-  const changeVisibility = () => {
-    const password = document.getElementById("password");
-    const password2 = document.getElementById("password2");
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-    password2.setAttribute("type", type);
-  };
-
-  function changeCapcha(value) {
-    setCapcha(value);
-  }
-
   return (
     <div>
       <HeaderComponent logic={true} redirect={false} />
@@ -137,23 +136,16 @@ const ChangePasswordPage = () => {
         first={"Восстановление пароля"}
         second={"страница восстановления доступа к Вашему аккаунту."}
       />
-      <main className="container text-center">
-        <div>
-          {loadUserRecoverPassword && <LoaderComponent />}
-          {dataUserRecoverPassword && (
-            <MessageComponent variant="success">Успешно!</MessageComponent>
+      <main className="container p-0">
+        <div className="m-0 p-0">
+          {StoreStatusComponent(
+            userRecoverPasswordStore,
+            "userRecoverPasswordStore",
+            true,
+            "Успешно!",
+            constants.DEBUG_CONSTANT
           )}
-          {errorUserRecoverPassword && (
-            <MessageComponent variant="danger">
-              {errorUserRecoverPassword}
-            </MessageComponent>
-          )}
-          {failUserRecoverPassword && (
-            <MessageComponent variant="warning">
-              {failUserRecoverPassword}
-            </MessageComponent>
-          )}
-          {!capcha && (
+          {!captcha && (
             <MessageComponent variant="danger">
               Пройдите проверку на робота!
             </MessageComponent>
@@ -170,13 +162,13 @@ const ChangePasswordPage = () => {
                   name="account_login"
                   autoComplete="on"
                   className="text-center p-1 m-1"
-                  onSubmit={postFindUserHandlerSubmit}
+                  onSubmit={formHandlerSubmitFindUser}
                 >
                   <div>
                     <label className="m-1">
                       <ReCAPTCHA
                         sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                        onChange={changeCapcha}
+                        onChange={(e) => captchaSet(e)}
                       />
                     </label>
                   </div>
@@ -251,7 +243,7 @@ const ChangePasswordPage = () => {
                     name="account_login"
                     autoComplete="on"
                     className="text-center p-1 m-1"
-                    onSubmit={postCheckAnswerHandlerSubmit}
+                    onSubmit={formHandlerSubmitCheckAnswer}
                   >
                     <div>
                       <label className="form-control-md">
@@ -303,7 +295,7 @@ const ChangePasswordPage = () => {
                     name="account_login"
                     autoComplete="on"
                     className="text-center p-1 m-1"
-                    onSubmit={postRecoverEmailHandlerSubmit}
+                    onSubmit={formHandlerSubmitRecoverEmail}
                   >
                     <div>
                       <label className="form-control-md">
@@ -353,7 +345,7 @@ const ChangePasswordPage = () => {
                         <div className="m-1">
                           <button
                             type="reset"
-                            onClick={postSendEmailHandlerSubmit}
+                            onClick={formHandlerSubmitSendEmail}
                             className="btn btn-md btn-danger"
                           >
                             Отправить код на почту
@@ -376,7 +368,7 @@ const ChangePasswordPage = () => {
               name="account_login"
               autoComplete="on"
               className="text-center p-1 m-1"
-              onSubmit={postRecoverPasswordHandlerSubmit}
+              onSubmit={formHandlerSubmitRecoverPassword}
             >
               <div>
                 <label className="form-control-md m-1 lead">
@@ -466,7 +458,12 @@ const ChangePasswordPage = () => {
                   <div className="m-1">
                     <button
                       type="button"
-                      onClick={changeVisibility}
+                      onClick={(e) =>
+                        utils.ChangePasswordVisibility([
+                          "password",
+                          "password2",
+                        ])
+                      }
                       className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля
