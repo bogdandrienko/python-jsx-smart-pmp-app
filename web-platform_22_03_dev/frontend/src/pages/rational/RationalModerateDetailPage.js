@@ -26,7 +26,7 @@ import StoreStatusComponent from "../../components/StoreStatusComponent";
 import RationalComponent from "../../components/RationalComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const RationalDetailPage = () => {
+const RationalModerateDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -75,13 +75,16 @@ const RationalDetailPage = () => {
           {StoreStatusComponent(
             rationalDetailStore,
             "rationalDetailStore",
-            true,
-            "Данные успешно получены!",
+            false,
+            "",
             constants.DEBUG_CONSTANT
           )}
         </div>
         <div className="btn-group p-1 m-0 text-start w-100">
-          <Link to={"/rational_list"} className="btn btn-sm btn-primary">
+          <Link
+            to={"/rational_moderate_list"}
+            className="btn btn-sm btn-primary"
+          >
             {"<="} назад к списку
           </Link>
         </div>
@@ -280,4 +283,4 @@ const RationalDetailPage = () => {
   );
 };
 
-export default RationalDetailPage;
+export default RationalModerateDetailPage;

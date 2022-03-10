@@ -16,7 +16,7 @@ export const userLoginAnyAction = (form) => async (dispatch) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/user/login/",
+      url: "/api/any/user/login/",
       method: "POST",
       timeout: 5000,
       headers: {
@@ -50,7 +50,7 @@ export const userLoginAnyAction = (form) => async (dispatch) => {
   }
 };
 
-export const userLogoutAnyAction = () => (dispatch) => {
+export const userLogoutAction = () => (dispatch) => {
   localStorage.removeItem("userToken");
   localStorage.removeItem("userToken");
   dispatch({ type: constants.USER_LOGIN_RESET_CONSTANT });
@@ -73,7 +73,7 @@ export const userDetailsAuthAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/user/detail/",
+      url: "/api/auth/user/detail/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -104,7 +104,7 @@ export const userDetailsAuthAction = (form) => async (dispatch, getState) => {
       error.response.statusText &&
       error.response.statusText === "Unauthorized"
     ) {
-      dispatch(userLogoutAnyAction());
+      dispatch(userLogoutAction());
       console.log("logout");
     }
     dispatch({
@@ -130,7 +130,7 @@ export const userChangeAuthAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/user/change/",
+      url: "/api/auth/user/change/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -174,7 +174,7 @@ export const userRecoverPasswordAnyAction = (form) => async (dispatch) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/user/recover/",
+      url: "/api/any/user/recover/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -219,7 +219,7 @@ export const userListAllAuthAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/user/list_all/",
+      url: "/api/auth/user/list_all/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -266,7 +266,7 @@ export const adminChangeUserPasswordAuthAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/admin/change_user_password/",
+        url: "/api/auth/admin/change_user_password/",
         method: "POST",
         timeout: 10000,
         headers: {
@@ -313,7 +313,7 @@ export const adminCreateOrChangeUsersAuthAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/admin/create_or_change_users/",
+        url: "/api/auth/admin/create_or_change_users/",
         method: "POST",
         timeout: 100000,
         headers: {
@@ -360,7 +360,7 @@ export const adminExportUsersAuthAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/admin/export_users/",
+        url: "/api/auth/admin/export_users/",
         method: "POST",
         timeout: 10000,
         headers: {
@@ -406,7 +406,7 @@ export const salaryUserAuthAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/salary/",
+      url: "/api/auth/salary/",
       method: "POST",
       timeout: 30000,
       headers: {
@@ -472,7 +472,7 @@ export const rationalCreateAuthAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/rational/",
+        url: "/api/auth/rational/",
         method: "POST",
         timeout: 10000,
         headers: {
@@ -518,7 +518,7 @@ export const rationalListAuthAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/rational/",
+      url: "/api/auth/rational/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -565,7 +565,7 @@ export const rationalDetailAuthAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/rational/",
+        url: "/api/auth/rational/",
         method: "POST",
         timeout: 10000,
         headers: {

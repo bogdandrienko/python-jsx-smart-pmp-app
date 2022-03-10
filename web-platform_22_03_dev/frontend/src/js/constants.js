@@ -606,7 +606,7 @@ export const modules = [
           "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
         Links: [
           {
-            Header: "Шаблон рац. предложения",
+            Header: "Пример рац. предложения",
             Access: "user",
             Active: true,
             Link: "/rational_template",
@@ -620,10 +620,10 @@ export const modules = [
             ExternalLink: false,
           },
           {
-            Header: "Список рац. предложений",
-            Access: "moderator_rational",
+            Header: "Модератор рац. предложений",
+            Access: "rational_moderator",
             Active: true,
-            Link: "/rational_list",
+            Link: "/rational_moderate_list",
             ExternalLink: false,
           },
         ],

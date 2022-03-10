@@ -316,36 +316,34 @@ class UserModelAdmin(admin.ModelAdmin):
     ]
 
 
-class ActionModelAdmin(admin.ModelAdmin):
+class AdminActionModelAdmin(admin.ModelAdmin):
     """
-    Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
+    Настройки отображения, фильтрации и поиска модели:'AdminActionModel' на панели администратора
     """
 
     list_display = (
-        'type_slug_field',
-        'name_char_field',
-        'name_slug_field',
+        'name_field',
+        'slug_field',
+    )
+    list_display_links = (
+        'name_field',
+        'slug_field',
     )
     list_filter = (
-        'type_slug_field',
-        'name_char_field',
-        'name_slug_field',
+        'name_field',
+        'slug_field',
     )
     fieldsets = (
-        ('Тип', {'fields': (
-            'type_slug_field',
-        )}),
         ('Имя отображения', {'fields': (
-            'name_char_field',
+            'name_field',
         )}),
         ('Имя валидации', {'fields': (
-            'name_slug_field',
+            'slug_field',
         )}),
     )
     search_fields = [
-        'type_slug_field',
-        'name_char_field',
-        'name_slug_field',
+        'name_field',
+        'slug_field',
     ]
 
 
@@ -416,7 +414,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         "avatar_image_field",
         "name_char_field",
         "place_char_field",
-        "short_description_char_field",
         "description_text_field",
         "additional_word_file_field",
         "additional_pdf_file_field",
@@ -447,7 +444,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         "avatar_image_field",
         "name_char_field",
         "place_char_field",
-        "short_description_char_field",
         "description_text_field",
         "additional_word_file_field",
         "additional_pdf_file_field",
@@ -478,7 +474,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         "avatar_image_field",
         "name_char_field",
         "place_char_field",
-        "short_description_char_field",
         "description_text_field",
         "additional_word_file_field",
         "additional_pdf_file_field",
@@ -510,7 +505,6 @@ class RationalModelAdmin(admin.ModelAdmin):
             "avatar_image_field",
             "name_char_field",
             "place_char_field",
-            "short_description_char_field",
             "description_text_field",
             "additional_word_file_field",
             "additional_pdf_file_field",
@@ -546,7 +540,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         "avatar_image_field",
         "name_char_field",
         "place_char_field",
-        "short_description_char_field",
         "description_text_field",
         "additional_word_file_field",
         "additional_pdf_file_field",
@@ -701,7 +694,7 @@ admin.site.unregister(token_blacklist.models.OutstandingToken)
 admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
 admin.site.register(backend_models.LoggingModel, LoggingModelAdmin)
 admin.site.register(backend_models.UserModel, UserModelAdmin)
-admin.site.register(backend_models.ActionModel, ActionModelAdmin)
+admin.site.register(backend_models.AdminActionModel, AdminActionModelAdmin)
 admin.site.register(backend_models.GroupModel, GroupModelAdmin)
 admin.site.register(backend_models.RationalModel, RationalModelAdmin)
 admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)

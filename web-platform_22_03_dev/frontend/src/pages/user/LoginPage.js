@@ -65,7 +65,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
+      {/*<HeaderComponent logic={true} redirect={true} />*/}
       <TitleComponent
         first={"Вход в систему"}
         second={"страница для входа в систему."}

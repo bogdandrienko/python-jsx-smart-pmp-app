@@ -86,12 +86,6 @@ const HomePage = () => {
               >
                 Инструкции в текстовом формате
               </Link>
-              {/*<Link*/}
-              {/*  to={"/vacancy_lis"}*/}
-              {/*  className="btn btn-sm btn-success p-2 m-1"*/}
-              {/*>*/}
-              {/*  Вакансии предприятия*/}
-              {/*</Link>*/}
             </div>
             <NewsComponent count={9} />
           </div>

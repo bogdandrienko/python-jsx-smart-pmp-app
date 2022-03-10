@@ -1,0 +1,38 @@
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:19:58.503486, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:20:01.843654, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:20:13.493282, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:20:14.537742, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:20:25.651118, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:20:28.455131, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:20:42.218884, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:20:48.910240, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:22:02.565769, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:22:09.047485, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:22:10.112305, 'AdminActionModel' object has no attribute 'name_slug_field'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:37:04.411522, '1.Начислено'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:37:14.218361, '1.Начислено'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:37:30.099933, '1.Начислено'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:41:23.932021, '1.Начислено'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:42:15.994650, '1.Начислено'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:44:03.038703, '1.Начислено'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:44:12.244381, '1.Начислено'
+
+931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:44:52.065830, '1.Начислено'

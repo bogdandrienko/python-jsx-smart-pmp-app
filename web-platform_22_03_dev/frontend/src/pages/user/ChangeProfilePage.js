@@ -52,28 +52,29 @@ const ChangeProfilePage = () => {
   } = userChangeStore;
 
   useEffect(() => {
-    if (dataUserDetails) {
-      if (dataUserDetails["user_model"]) {
-        if (dataUserDetails["user_model"]["email_field"]) {
-          setEmail(dataUserDetails["user_model"]["email_field"]);
-        }
-        if (dataUserDetails["user_model"]["secret_question_char_field"]) {
-          setSecretQuestion(
-            dataUserDetails["user_model"]["secret_question_char_field"]
-          );
-        }
-        if (dataUserDetails["user_model"]["secret_answer_char_field"]) {
-          setSecretAnswer(
-            dataUserDetails["user_model"]["secret_answer_char_field"]
-          );
-        }
-        if (dataUserDetails["user_model"]["password_slug_field"]) {
-          setPassword("");
-          setPassword2("");
-        }
+    if (dataUserDetails && dataUserDetails["user_model"]) {
+      if (dataUserDetails["user_model"]["email_field"]) {
+        setEmail(dataUserDetails["user_model"]["email_field"]);
+      }
+      if (dataUserDetails["user_model"]["secret_question_char_field"]) {
+        setSecretQuestion(
+          dataUserDetails["user_model"]["secret_question_char_field"]
+        );
+      }
+      if (dataUserDetails["user_model"]["secret_answer_char_field"]) {
+        setSecretAnswer(
+          dataUserDetails["user_model"]["secret_answer_char_field"]
+        );
+      }
+      if (dataUserDetails["user_model"]["password_slug_field"]) {
+        setPassword("");
+        setPassword2("");
       }
     } else {
-      dispatch(actions.userDetailsAuthAction());
+      const form = {
+        "Action-type": "USER_DETAIL",
+      };
+      dispatch(actions.userDetailsAuthAction(form));
       setPassword("");
       setPassword2("");
     }
@@ -82,7 +83,7 @@ const ChangeProfilePage = () => {
   useEffect(() => {
     if (dataUserChange) {
       utils.Sleep(1000).then(() => {
-        dispatch(actions.userLogoutAnyAction());
+        dispatch(actions.userLogoutAction());
         navigate("/login");
       });
     }
@@ -188,7 +189,6 @@ const ChangeProfilePage = () => {
                   </p>
                 </label>
               </div>
-
               <div>
                 <label className="form-control-md m-1 lead">
                   Почта для восстановления доступа:
@@ -208,7 +208,6 @@ const ChangeProfilePage = () => {
                   </p>
                 </label>
               </div>
-
               <div>
                 <label className="form-control-md m-1 lead">
                   Введите пароль для входа в аккаунт:
@@ -300,10 +299,12 @@ const ChangeProfilePage = () => {
                   <div className="m-1">
                     <button
                       type="button"
-                      onClick={utils.ChangePasswordVisibility([
-                        "password",
-                        "password2",
-                      ])}
+                      onClick={(e) =>
+                        utils.ChangePasswordVisibility([
+                          "password",
+                          "password2",
+                        ])
+                      }
                       className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля

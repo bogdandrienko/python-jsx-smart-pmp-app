@@ -107,33 +107,13 @@ const RationalComponent = ({ rational, shortView = false }) => {
           />
         </label>
       </div>
-      <div className="card-body p-0 m-0">
-        <label className="w-100 form-control-sm">
-          Краткое описание:
-          <textarea
-            id="short_description_char_field"
-            name="short_description_char_field"
-            required
-            placeholder="Краткое описание"
-            defaultValue={rational["short_description_char_field"]}
-            readOnly={true}
-            minLength="1"
-            maxLength="200"
-            rows="2"
-            className="form-control form-control-sm"
-          />
-        </label>
-      </div>
-      {!shortView && (
         <div className="card-body p-0 m-0">
           <label className="w-100 form-control-sm m-1">
             Полное описание:
             <textarea
-              id="full_description_text_field"
-              name="full_description_text_field"
               required
               placeholder="Полное описание"
-              defaultValue={rational["description_text_field"]}
+              defaultValue={!shortView ? (utils.GetSliceString(rational["description_text_field"], 50)) : rational["description_text_field"]}
               readOnly={true}
               minLength="1"
               maxLength="5000"
@@ -142,7 +122,6 @@ const RationalComponent = ({ rational, shortView = false }) => {
             />
           </label>
         </div>
-      )}
       {!shortView && (
         <div className="card-body p-0 m-0">
           <label className="form-control-sm m-1">

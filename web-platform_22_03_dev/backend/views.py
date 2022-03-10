@@ -65,7 +65,7 @@ def index(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([BasicAuthentication])
-def routes(request):
+def api_auth_routes(request):
     """
     routes django-rest-framework
     """
@@ -178,7 +178,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
-def api_login_user(request):
+def api_any_login_user(request):
     """
     api_login_user django-rest-framework
     """
@@ -253,7 +253,7 @@ def api_login_user(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_user_detail(request):
+def api_auth_user_detail(request):
     """
     api_user_detail django-rest-framework
     """
@@ -288,7 +288,7 @@ def api_user_detail(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_user_change(request):
+def api_auth_user_change(request):
     """
     api_user_change django-rest-framework
     """
@@ -364,7 +364,7 @@ def api_user_change(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
-def api_user_recover(request):
+def api_any_user_recover(request):
     """
     api_user_recover django-rest-framework
     """
@@ -457,7 +457,7 @@ def api_user_recover(request):
 
                         subject = 'Восстановление пароля от веб платформы'
                         message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-                                    f'перейдите по ссылке: http://web.km.kz:88/recover_password => ' \
+                                    f'перейдите по ссылке: https://web.km.kz/recover_password => ' \
                                     f'восстановление пароля, введите Ваш идентификатор и затем в окне почты ' \
                                     f'введите код (без кавычек): "{encrypt_text}". Внимание, этот код действует ' \
                                     f'в течении часа с момента отправки!'
@@ -547,11 +547,55 @@ def api_user_recover(request):
         return render(request, "backend/404.html")
 
 
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_user_list_all(request):
+    """
+    api_user_list_all django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "USER_LIST_ALL":
+                try:
+                    user_models = backend_models.UserModel.objects.order_by("last_name_char_field")
+                    users = []
+                    for user_model in user_models:
+                        if user_model.user_foreign_key_field.is_superuser:
+                            continue
+                        users.append(f"{user_model.last_name_char_field} {user_model.first_name_char_field} "
+                                     f"{user_model.personnel_number_slug_field} ")
+                    response = {"response": users}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")
+
+
 ########################################################################################################################
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_admin_change_user_password(request):
+def api_auth_admin_change_user_password(request):
     """
     api_admin_change_user_password django-rest-framework
     """
@@ -620,7 +664,7 @@ def api_admin_change_user_password(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_admin_create_or_change_users(request):
+def api_auth_admin_create_or_change_users(request):
     """
     api_admin_create_or_change_users django-rest-framework
     """
@@ -777,7 +821,7 @@ def api_admin_create_or_change_users(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_admin_export_users(request):
+def api_auth_admin_export_users(request):
     """
     api_admin_export_users django-rest-framework
     """
@@ -1019,7 +1063,7 @@ def api_get_all_users_with_temp_password(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_salary(request):
+def api_auth_salary(request):
     """
     api_salary django-rest-framework
     """
@@ -1626,7 +1670,7 @@ def api_salary(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_rational(request):
+def api_auth_rational(request):
     """
     api_rational django-rest-framework
     """
@@ -1655,7 +1699,6 @@ def api_rational(request):
                     avatar = req_inst.get_value("avatar")
                     name = req_inst.get_value("name")
                     place = req_inst.get_value("place")
-                    short_description = req_inst.get_value("shortDescription")
                     description = req_inst.get_value("description")
                     additional_word = req_inst.get_value("additionalWord")
                     additional_pdf = req_inst.get_value("additionalPdf")
@@ -1674,7 +1717,6 @@ def api_rational(request):
                         avatar_image_field=avatar,
                         name_char_field=name,
                         place_char_field=place,
-                        short_description_char_field=short_description,
                         description_text_field=description,
                         additional_word_file_field=additional_word,
                         additional_pdf_file_field=additional_pdf,
@@ -1788,49 +1830,7 @@ def api_rational(request):
         )
         return render(request, "backend/404.html")
 
-
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
-@permission_classes([IsAuthenticated])
-def api_user_list_all(request):
-    """
-    api_user_list_all django-rest-framework
-    """
-
-    try:
-        # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
-
-        # Methods
-        if req_inst.method == "POST":
-            # Actions
-            if req_inst.action_type == "USER_LIST_ALL":
-                try:
-                    user_models = backend_models.UserModel.objects.order_by("last_name_char_field")
-                    users = []
-                    for user_model in user_models:
-                        if user_model.user_foreign_key_field.is_superuser:
-                            continue
-                        users.append(f"{user_model.last_name_char_field} {user_model.first_name_char_field} "
-                                     f"{user_model.personnel_number_slug_field} ")
-                    response = {"response": users}
-                    # print(f"response: {response}")
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
-                    return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
-        else:
-            return Response({"error": "This method not allowed for this endpoint."})
-    except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
-        return render(request, "backend/404.html")
+########################################################################################################################
 
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
@@ -2202,4 +2202,3 @@ def api_auth_resume(request):
             request=request, error=error, print_error=backend_settings.DEBUG
         )
         return render(request, "backend/404.html")
-

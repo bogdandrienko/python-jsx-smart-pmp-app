@@ -51,14 +51,14 @@ const HeaderComponent = ({ logic = true, redirect = true }) => {
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
-        dispatch(actions.userLogoutAnyAction());
+        dispatch(actions.userLogoutAction());
         navigate("/login");
       } else {
         if (dataUserDetails && dataUserDetails["user_model"]) {
           if (
             dataUserDetails["user_model"]["activity_boolean_field"] === false
           ) {
-            dispatch(actions.userLogoutAnyAction());
+            dispatch(actions.userLogoutAction());
             navigate("/login");
           }
           if (

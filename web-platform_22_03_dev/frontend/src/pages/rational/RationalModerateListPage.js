@@ -55,6 +55,13 @@ const RationalListPage = () => {
     // error: errorRationalList,
     // fail: failRationalList,
   } = rationalListStore;
+  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
+  const {
+    load: loadUserDetails,
+    data: dataUserDetails,
+    error: errorUserDetails,
+    fail: failUserDetails,
+  } = userDetailsStore;
 
   const getData = () => {
     const form = {
@@ -79,10 +86,72 @@ const RationalListPage = () => {
   }, [dispatch, dataUserListAll]);
 
   useEffect(() => {
-    if (!dataRationalList) {
+    if (!dataRationalList && dataUserDetails) {
       getData();
     }
-  }, [dispatch, dataRationalList]);
+  }, [dispatch, dataRationalList, dataUserDetails]);
+
+  useEffect(() => {
+    if (dataUserDetails) {
+      if (
+        utils.CheckAccess(userDetailsStore, "rational_moderator_no_tech_pre")
+      ) {
+        moderateSet("ОУПиБП (не технологическая + пред модерация)");
+      } else {
+        if (
+          utils.CheckAccess(userDetailsStore, "rational_moderator_tech_post")
+        ) {
+          moderateSet("Тех. отдел (технологическая + пост модерация)");
+        } else {
+          if (
+            utils.CheckAccess(
+              userDetailsStore,
+              "rational_moderator_tech_pre_atp"
+            )
+          ) {
+            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            subdivisionSet("Автотранспортное предприятие");
+          }
+          if (
+            utils.CheckAccess(
+              userDetailsStore,
+              "rational_moderator_tech_pre_gtk"
+            )
+          ) {
+            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            subdivisionSet("Горно-транспортный комплекс");
+          }
+          if (
+            utils.CheckAccess(
+              userDetailsStore,
+              "rational_moderator_tech_pre_ok"
+            )
+          ) {
+            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            subdivisionSet("Обогатительный комплекс");
+          }
+          if (
+            utils.CheckAccess(
+              userDetailsStore,
+              "rational_moderator_tech_pre_uprav"
+            )
+          ) {
+            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            subdivisionSet("Управление предприятия");
+          }
+          if (
+            utils.CheckAccess(
+              userDetailsStore,
+              "rational_moderator_tech_pre_energouprav"
+            )
+          ) {
+            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            subdivisionSet("Энергоуправление");
+          }
+        }
+      }
+    }
+  }, [dispatch, dataUserDetails]);
 
   const formHandlerSubmit = (e) => {
     e.preventDefault();
@@ -104,10 +173,8 @@ const RationalListPage = () => {
     <div>
       <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
-        first={"Список рац. предложений"}
-        second={
-          "страница отправленных рац. предложений с возможностью фильтрации."
-        }
+        first={"Модератор рац. предложений"}
+        second={"страница модерации рац. предложений."}
       />
       <main className="container p-0">
         <div className="m-0 p-0">
@@ -121,8 +188,8 @@ const RationalListPage = () => {
           {StoreStatusComponent(
             rationalListStore,
             "rationalListStore",
-            true,
-            "Данные успешно получены!",
+            false,
+            "",
             constants.DEBUG_CONSTANT
           )}
         </div>
@@ -150,27 +217,43 @@ const RationalListPage = () => {
                   </label>
                 </div>
                 <div className="p-0 m-0">
-                  <label className="form-control-sm m-1">
-                    Наименование структурного подразделения:
-                    <select
-                      className="form-control form-control-sm"
-                      value={subdivision}
-                      onChange={(e) => subdivisionSet(e.target.value)}
-                    >
-                      <option value="">все варианты</option>
-                      <option value="Управление">Управление</option>
-                      <option value="Обогатительный комплекс">
-                        Обогатительный комплекс
-                      </option>
-                      <option value="Горно-транспортный комплекс">
-                        Горно-транспортный комплекс
-                      </option>
-                      <option value="Автотранспортное предприятие">
-                        Автотранспортное предприятие
-                      </option>
-                      <option value="Энергоуправление">Энергоуправление</option>
-                    </select>
-                  </label>
+                  {utils.CheckAccess(userDetailsStore, "rational_admin") ||
+                  utils.CheckAccess(
+                    userDetailsStore,
+                    "rational_moderator_no_tech_pre"
+                  ) ||
+                  utils.CheckAccess(
+                    userDetailsStore,
+                    "rational_moderator_tech_post"
+                  ) ? (
+                    <label className="form-control-sm m-1">
+                      Наименование структурного подразделения:
+                      <select
+                        className="form-control form-control-sm"
+                        value={subdivision}
+                        onChange={(e) => subdivisionSet(e.target.value)}
+                      >
+                        <option value="">все варианты</option>
+                        <option value="Автотранспортное предприятие">
+                          Автотранспортное предприятие
+                        </option>
+                        <option value="Горно-транспортный комплекс">
+                          Горно-транспортный комплекс
+                        </option>
+                        <option value="Обогатительный комплекс">
+                          Обогатительный комплекс
+                        </option>
+                        <option value="Управление">
+                          Управление предприятия
+                        </option>
+                        <option value="Энергоуправление">
+                          Энергоуправление
+                        </option>
+                      </select>
+                    </label>
+                  ) : (
+                    ""
+                  )}
                   <label className="form-control-sm">
                     Категория:
                     <select
@@ -179,10 +262,10 @@ const RationalListPage = () => {
                       onChange={(e) => categorySet(e.target.value)}
                     >
                       <option value="">все варианты</option>
-                      <option value="Инновации">Инновации</option>
-                      <option value="Модернизация">Модернизация</option>
-                      <option value="Улучшение">Улучшение</option>
                       <option value="Индустрия 4.0">Индустрия 4.0</option>
+                      <option value="Инвестиционное">Инвестиционное</option>
+                      <option value="Инновационное">Инновационное</option>
+                      <option value="Модернизационное">Модернизационное</option>
                     </select>
                   </label>
                   {dataUserListAll && (
@@ -199,6 +282,29 @@ const RationalListPage = () => {
                             {user}
                           </option>
                         ))}
+                      </select>
+                    </label>
+                  )}
+                  {utils.CheckAccess(userDetailsStore, "rational_admin") && (
+                    <label className="form-control-sm m-1">
+                      Статус:
+                      <select
+                        className="form-control form-control-sm"
+                        value={moderate}
+                        onChange={(e) => moderateSet(e.target.value)}
+                      >
+                        <option value="">все варианты</option>
+                        <option value="Отклонено">Отклонено</option>
+                        <option value="ОУПиБП (не технологическая + пред модерация)">
+                          ОУПиБП (не технологическая + пред модерация)
+                        </option>
+                        <option value="Зам. по развитию (технологическая + пред модерация)">
+                          Зам. по развитию (технологическая + пред модерация)
+                        </option>
+                        <option value="Тех. отдел (технологическая + пост модерация)">
+                          Тех. отдел (технологическая + пост модерация)
+                        </option>
+                        <option value="Принято">Принято</option>
                       </select>
                     </label>
                   )}
@@ -236,31 +342,6 @@ const RationalListPage = () => {
                     </select>
                   </label>
                 </div>
-                <div className="p-0 m-0 bg-opacity-10 bg-danger">
-                  <small className="text-danger">Временно!</small>
-                  <label className="form-control-sm m-1">
-                    Тип модерации:
-                    <select
-                      className="form-control form-control-sm"
-                      value={moderate}
-                      onChange={(e) => moderateSet(e.target.value)}
-                    >
-                      <option value="">все варианты</option>
-                      <option value="Отклонено">Отклонено</option>
-                      <option value="ОУПиБП (не технологическая + пред модерация)">
-                        ОУПиБП (не технологическая + пред модерация)
-                      </option>
-                      <option value="Зам. по развитию (технологическая + пред модерация)">
-                        Зам. по развитию (технологическая + пред модерация)
-                      </option>
-                      <option value="Тех. отдел (технологическая + пост модерация)">
-                        Тех. отдел (технологическая + пост модерация)
-                      </option>
-                      <option value="Принято">Принято</option>
-                    </select>
-                  </label>
-                  <small className="text-danger">Временно!</small>
-                </div>
                 <div className="btn-group p-1 m-0 text-start w-100">
                   <button className="btn btn-sm btn-primary" type="submit">
                     фильтровать рац. предложения
@@ -286,11 +367,27 @@ const RationalListPage = () => {
               {dataRationalList.map((rational, index) => (
                 <Link
                   key={index}
-                  to={`/rational_detail/${rational.id}`}
+                  to={`/rational_moderate_detail/${rational.id}`}
                   className="text-decoration-none"
                 >
                   <li className="lead border list-group-item-action">
-                    {utils.GetSliceString(rational["name_char_field"], 30)}
+                    {utils.GetSliceString(rational["name_char_field"], 20)}
+                    {" | "}
+                    {utils.GetSliceString(rational["number_char_field"], 20)}
+                    {" | "}
+                    {utils.GetSliceString(
+                      rational["subdivision_char_field"],
+                      30
+                    )}
+                    {" | "}
+                    {utils.GetSliceString(
+                      rational["user_model"]["last_name_char_field"],
+                      30
+                    )}{" "}
+                    {utils.GetSliceString(
+                      rational["user_model"]["first_name_char_field"],
+                      30
+                    )}
                   </li>
                 </Link>
               ))}
@@ -300,7 +397,7 @@ const RationalListPage = () => {
               {dataRationalList.map((rational, index) => (
                 <Link
                   key={index}
-                  to={`/rational_detail/${rational.id}`}
+                  to={`/rational_moderate_detail/${rational.id}`}
                   className="text-decoration-none text-center p-2 m-0 col-md-6"
                 >
                   <RationalComponent

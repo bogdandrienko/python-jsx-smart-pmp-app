@@ -30,27 +30,26 @@ const BankIdeaListPage = () => {
   const location = useLocation();
   const id = useParams().id;
 
-  const [subdivision, setSubdivision] = useState("");
-  const [sphere, setSphere] = useState("");
-  const [category, setCategory] = useState("");
-  const [avatar, setAvatar] = useState(null);
-  const [name, setName] = useState("");
-  const [place, setPlace] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [description, setDescription] = useState("");
-  const [additionalWord, setAdditionalWord] = useState(null);
-  const [additionalPdf, setAdditionalPdf] = useState(null);
-  const [additionalExcel, setAdditionalExcel] = useState(null);
-  const [user1, setUser1] = useState("");
-  const [user1Perc, setUser1Perc] = useState("");
-  const [user2, setUser2] = useState("");
-  const [user2Perc, setUser2Perc] = useState("");
-  const [user3, setUser3] = useState("");
-  const [user3Perc, setUser3Perc] = useState("");
-  const [user4, setUser4] = useState("");
-  const [user4Perc, setUser4Perc] = useState("");
-  const [user5, setUser5] = useState("");
-  const [user5Perc, setUser5Perc] = useState("");
+  const [subdivision, subdivisionSet] = useState("");
+  const [sphere, sphereSet] = useState("");
+  const [category, categorySet] = useState("");
+  const [avatar, avatarSet] = useState(null);
+  const [name, nameSet] = useState("");
+  const [place, placeSet] = useState("");
+  const [description, descriptionSet] = useState("");
+  const [additionalWord, additionalWordSet] = useState(null);
+  const [additionalPdf, additionalPdfSet] = useState(null);
+  const [additionalExcel, additionalExcelSet] = useState(null);
+  const [user1, user1Set] = useState("");
+  const [user1Perc, user1PercSet] = useState("");
+  const [user2, user2Set] = useState("");
+  const [user2Perc, user2PercSet] = useState("");
+  const [user3, user3Set] = useState("");
+  const [user3Perc, user3PercSet] = useState("");
+  const [user4, user4Set] = useState("");
+  const [user4Perc, user4PercSet] = useState("");
+  const [user5, user5Set] = useState("");
+  const [user5Perc, user5PercSet] = useState("");
 
   const userListAllStore = useSelector((state) => state.userListAllStore); // store.js
   const {
@@ -78,7 +77,7 @@ const BankIdeaListPage = () => {
 
   useEffect(() => {
     if (dataRationalCreate) {
-      utils.Sleep(3000).then(() => {
+      utils.Sleep(5000).then(() => {
         dispatch({
           type: constants.RATIONAL_CREATE_RESET_CONSTANT,
         });
@@ -96,7 +95,6 @@ const BankIdeaListPage = () => {
       avatar: avatar,
       name: name,
       place: place,
-      shortDescription: shortDescription,
       description: description,
       additionalWord: additionalWord,
       additionalPdf: additionalPdf,
@@ -154,19 +152,19 @@ const BankIdeaListPage = () => {
                       required
                       className="form-control form-control-sm"
                       value={subdivision}
-                      onChange={(e) => setSubdivision(e.target.value)}
+                      onChange={(e) => subdivisionSet(e.target.value)}
                     >
                       <option value="">Не указано</option>
-                      <option value="Управление">Управление</option>
-                      <option value="Обогатительный комплекс">
-                        Обогатительный комплекс
+                      <option value="Автотранспортное предприятие">
+                        Автотранспортное предприятие
                       </option>
                       <option value="Горно-транспортный комплекс">
                         Горно-транспортный комплекс
                       </option>
-                      <option value="Автотранспортное предприятие">
-                        Автотранспортное предприятие
+                      <option value="Обогатительный комплекс">
+                        Обогатительный комплекс
                       </option>
+                      <option value="Управление">Управление предприятия</option>
                       <option value="Энергоуправление">Энергоуправление</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
@@ -191,7 +189,7 @@ const BankIdeaListPage = () => {
                       required
                       className="form-control form-control-sm"
                       value={sphere}
-                      onChange={(e) => setSphere(e.target.value)}
+                      onChange={(e) => sphereSet(e.target.value)}
                     >
                       <option value="">Не указано</option>
                       <option value="Технологическая">Технологическая</option>
@@ -209,13 +207,13 @@ const BankIdeaListPage = () => {
                       required
                       className="form-control form-control-sm"
                       value={category}
-                      onChange={(e) => setCategory(e.target.value)}
+                      onChange={(e) => categorySet(e.target.value)}
                     >
                       <option value="">Не указано</option>
-                      <option value="Инновации">Инновации</option>
-                      <option value="Модернизация">Модернизация</option>
-                      <option value="Улучшение">Улучшение</option>
                       <option value="Индустрия 4.0">Индустрия 4.0</option>
+                      <option value="Инвестиционное">Инвестиционное</option>
+                      <option value="Инновационное">Инновационное</option>
+                      <option value="Модернизационное">Модернизационное</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
@@ -227,12 +225,11 @@ const BankIdeaListPage = () => {
                       name="avatar_image_field"
                       accept=".jpg, .png"
                       className="form-control form-control-sm"
-                      onChange={(e) => setAvatar(e.target.files[0])}
+                      onChange={(e) => avatarSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
                 </div>
-
                 <div className="p-0 m-0">
                   <label className="w-50 form-control-sm">
                     Название рац. предложения:
@@ -244,14 +241,14 @@ const BankIdeaListPage = () => {
                       placeholder="Название"
                       value={name}
                       minLength="1"
-                      maxLength="100"
+                      maxLength="250"
                       className="form-control form-control-sm"
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => nameSet(e.target.value)}
                     />
                     <small className="text-danger">* обязательно</small>
                     <p className="p-0 m-0">
                       <small className="text-muted">
-                        длина: не более 100 символов
+                        длина: не более 250 символов
                       </small>
                     </p>
                   </label>
@@ -267,45 +264,22 @@ const BankIdeaListPage = () => {
                       placeholder="Цех / участок / отдел / лаборатория и т.п."
                       value={place}
                       minLength="1"
-                      maxLength="100"
+                      maxLength="500"
                       className="form-control form-control-sm"
-                      onChange={(e) => setPlace(e.target.value)}
+                      onChange={(e) => placeSet(e.target.value)}
                     />
                     <small className="text-danger">* обязательно</small>
                     <p className="p-0 m-0">
                       <small className="text-muted">
-                        длина: не более 100 символов
+                        длина: не более 500 символов
                       </small>
                     </p>
                   </label>
                 </div>
                 <div className="p-0 m-0">
                   <label className="w-75 form-control-sm">
-                    Краткое описание:
+                    Описание:
                     <textarea
-                      id="short_description_char_field"
-                      name="short_description_char_field"
-                      required
-                      placeholder="Краткое описание"
-                      value={shortDescription}
-                      minLength="1"
-                      maxLength="200"
-                      rows="2"
-                      className="form-control form-control-sm"
-                      onChange={(e) => setShortDescription(e.target.value)}
-                    />
-                    <small className="text-danger">* обязательно</small>
-                    <p className="p-0 m-0">
-                      <small className="text-muted">
-                        длина: не более 200 символов
-                      </small>
-                    </p>
-                  </label>
-                  <label className="w-75 form-control-sm">
-                    Полное описание:
-                    <textarea
-                      id="full_description_text_field"
-                      name="full_description_text_field"
                       required
                       placeholder="Полное описание"
                       value={description}
@@ -313,7 +287,7 @@ const BankIdeaListPage = () => {
                       maxLength="5000"
                       rows="3"
                       className="form-control form-control-sm"
-                      onChange={(e) => setDescription(e.target.value)}
+                      onChange={(e) => descriptionSet(e.target.value)}
                     />
                     <small className="text-danger">* обязательно</small>
                     <p className="p-0 m-0">
@@ -332,7 +306,7 @@ const BankIdeaListPage = () => {
                       name="addiction_file_field"
                       accept=".docx, .doc"
                       className="form-control form-control-sm"
-                      onChange={(e) => setAdditionalWord(e.target.files[0])}
+                      onChange={(e) => additionalWordSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
@@ -344,7 +318,7 @@ const BankIdeaListPage = () => {
                       name="addiction_file_field"
                       accept=".pdf"
                       className="form-control form-control-sm"
-                      onChange={(e) => setAdditionalPdf(e.target.files[0])}
+                      onChange={(e) => additionalPdfSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
@@ -356,7 +330,7 @@ const BankIdeaListPage = () => {
                       name="addiction_file_field"
                       accept=".xlsx, .xls"
                       className="form-control form-control-sm"
-                      onChange={(e) => setAdditionalExcel(e.target.files[0])}
+                      onChange={(e) => additionalExcelSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
@@ -375,8 +349,8 @@ const BankIdeaListPage = () => {
                     Участники:
                     <p>
                       <small className="fw-bold">
-                        Фамилия Имя Отчество Табельный Должность Вклад в проект
-                        %
+                        (Фамилия Имя Отчество) (Табельный номер) (Вклад в рац.
+                        предложение) %
                       </small>
                     </p>
                   </label>
@@ -394,7 +368,7 @@ const BankIdeaListPage = () => {
                               required
                               className="form-control form-control-sm"
                               value={user1}
-                              onChange={(e) => setUser1(e.target.value)}
+                              onChange={(e) => user1Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
                               {dataUserListAll.map((user, index) => (
@@ -414,7 +388,7 @@ const BankIdeaListPage = () => {
                               className="form-control form-control-sm"
                               value={user1Perc}
                               required
-                              onChange={(e) => setUser1Perc(e.target.value)}
+                              onChange={(e) => user1PercSet(e.target.value)}
                             />
                           </label>
                         </div>
@@ -426,7 +400,7 @@ const BankIdeaListPage = () => {
                               name="subdivision"
                               className="form-control form-control-sm"
                               value={user2}
-                              onChange={(e) => setUser2(e.target.value)}
+                              onChange={(e) => user2Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
                               {dataUserListAll.map((user, index) => (
@@ -445,7 +419,7 @@ const BankIdeaListPage = () => {
                               maxLength="200"
                               className="form-control form-control-sm"
                               value={user2Perc}
-                              onChange={(e) => setUser2Perc(e.target.value)}
+                              onChange={(e) => user2PercSet(e.target.value)}
                             />
                           </label>
                         </div>
@@ -457,7 +431,7 @@ const BankIdeaListPage = () => {
                               name="subdivision"
                               className="form-control form-control-sm"
                               value={user3}
-                              onChange={(e) => setUser3(e.target.value)}
+                              onChange={(e) => user3Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
                               {dataUserListAll.map((user, index) => (
@@ -476,7 +450,7 @@ const BankIdeaListPage = () => {
                               maxLength="200"
                               className="form-control form-control-sm"
                               value={user3Perc}
-                              onChange={(e) => setUser3Perc(e.target.value)}
+                              onChange={(e) => user3PercSet(e.target.value)}
                             />
                           </label>
                         </div>
@@ -488,7 +462,7 @@ const BankIdeaListPage = () => {
                               name="subdivision"
                               className="form-control form-control-sm"
                               value={user4}
-                              onChange={(e) => setUser4(e.target.value)}
+                              onChange={(e) => user4Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
                               {dataUserListAll.map((user, index) => (
@@ -507,7 +481,7 @@ const BankIdeaListPage = () => {
                               maxLength="200"
                               className="form-control form-control-sm"
                               value={user4Perc}
-                              onChange={(e) => setUser4Perc(e.target.value)}
+                              onChange={(e) => user4PercSet(e.target.value)}
                             />
                           </label>
                         </div>
@@ -519,7 +493,7 @@ const BankIdeaListPage = () => {
                               name="subdivision"
                               className="form-control form-control-sm"
                               value={user5}
-                              onChange={(e) => setUser5(e.target.value)}
+                              onChange={(e) => user5Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
                               {dataUserListAll.map((user, index) => (
@@ -538,7 +512,7 @@ const BankIdeaListPage = () => {
                               maxLength="200"
                               className="form-control form-control-sm"
                               value={user5Perc}
-                              onChange={(e) => setUser5Perc(e.target.value)}
+                              onChange={(e) => user5PercSet(e.target.value)}
                             />
                           </label>
                         </div>

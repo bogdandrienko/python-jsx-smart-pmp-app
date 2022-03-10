@@ -1942,45 +1942,18 @@ class UserModel(models.Model):
         return int(self.user_foreign_key_field.username)
 
 
-class ActionModel(models.Model):
+class AdminActionModel(models.Model):
     """
     Модель, которая содержит объект для валидации и проверки на доступ действия веб-платформы
     """
 
-    LIST_DB_VIEW_CHOICES = [
-        ('0_main', 'Основное'),
-        ('1_module', 'Модуль'),
-        ('2_section', 'Секция'),
-        ('3_component', 'Компонент'),
-        ('4_utils', 'Вспомогательное'),
-    ]
-    type_slug_field = models.SlugField(
-        db_column='type_slug_field_db_column',
+    name_field = models.CharField(
+        db_column='name_field_db_column',
         db_index=True,
-        db_tablespace='type_slug_field_db_tablespace',
+        db_tablespace='name_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Тип:',
-        help_text='<small class="text-muted">Строка текста валидная для ссылок и системных вызовов, '
-                  'example: "success"</small><hr><br>',
-
-        max_length=128,
-        allow_unicode=False,
-    )
-    name_char_field = models.CharField(
-        db_column='name_char_field_db_column',
-        db_index=True,
-        db_tablespace='name_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1990,15 +1963,15 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
                   '"Модератор отдела ОУПиБП"</small><hr><br>',
 
-        max_length=128,
+        max_length=256,
     )
-    name_slug_field = models.SlugField(
-        db_column='name_slug_field_db_column',
+    slug_field = models.SlugField(
+        db_column='slug_field_db_column',
         db_index=True,
-        db_tablespace='name_slug_field_db_tablespace',
+        db_tablespace='slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2008,28 +1981,19 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
                   '"moderator_oupibp"</small><hr><br>',
 
-        max_length=128,
+        max_length=256,
         allow_unicode=False,
     )
 
     class Meta:
         app_label = 'backend'
-        ordering = ('type_slug_field', 'name_char_field')
-        verbose_name = 'Действие'
+        ordering = ('name_field', 'slug_field')
+        verbose_name = 'Admin Действие'
         verbose_name_plural = 'Admin Действия'
-        db_table = 'actions_admin_model_table'
+        db_table = 'admin_actions_model_table'
 
     def __str__(self):
-        try:
-            dictionary = {x[0]: x[1] for x in self.LIST_DB_VIEW_CHOICES}
-            type_slug = dictionary[self.type_slug_field]
-        except Exception as error:
-            print(error)
-            type_slug = '_'
-        return f'{type_slug} | {self.name_char_field} | {self.name_slug_field}'
-
-    def get_id(self):
-        return self.id
+        return f'{self.name_field} | {self.slug_field}'
 
 
 class GroupModel(models.Model):
@@ -2124,7 +2088,7 @@ class GroupModel(models.Model):
         help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
 
-        to=ActionModel,
+        to=AdminActionModel,
         related_name='action_many_to_many_field',
     )
     position_float_field = models.FloatField(
@@ -2185,16 +2149,16 @@ class RationalModel(models.Model):
         db_tablespace='number_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='number',
+        verbose_name='number_char_field',
         help_text='<small class="text-muted">number_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=512,
     )
     subdivision_char_field = models.CharField(
         db_column='subdivision_char_field_db_column',
@@ -2202,7 +2166,7 @@ class RationalModel(models.Model):
         db_tablespace='subdivision_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2211,7 +2175,7 @@ class RationalModel(models.Model):
         verbose_name='Наименование структурного подразделения',
         help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=512,
     )
     sphere_char_field = models.CharField(
         db_column='sphere_char_field_db_column',
@@ -2219,7 +2183,7 @@ class RationalModel(models.Model):
         db_tablespace='sphere_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2228,7 +2192,7 @@ class RationalModel(models.Model):
         verbose_name='Сфера рац. предложения',
         help_text='<small class="text-muted">sphere_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=512,
     )
     category_char_field = models.CharField(
         db_column='category_char_field_db_column',
@@ -2236,7 +2200,7 @@ class RationalModel(models.Model):
         db_tablespace='category_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2245,7 +2209,7 @@ class RationalModel(models.Model):
         verbose_name='Категория',
         help_text='<small class="text-muted">category_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=512,
     )
     avatar_image_field = models.ImageField(
         db_column='avatar_image_field_db_column',
@@ -2270,7 +2234,7 @@ class RationalModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(250), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2279,7 +2243,7 @@ class RationalModel(models.Model):
         verbose_name='Название рац. предложения',
         help_text='<small class="text-muted">name_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=250,
     )
     place_char_field = models.CharField(
         db_column='place_char_field_db_column',
@@ -2287,7 +2251,7 @@ class RationalModel(models.Model):
         db_tablespace='place_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2296,24 +2260,7 @@ class RationalModel(models.Model):
         verbose_name='Предполагаемое место внедрения',
         help_text='<small class="text-muted">place_char_field</small><hr><br>',
 
-        max_length=128,
-    )
-    short_description_char_field = models.CharField(
-        db_column='short_description_char_field_db_column',
-        db_index=True,
-        db_tablespace='short_description_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Краткое описание',
-        help_text='<small class="text-muted">short_description_char_field</small><hr><br>',
-
-        max_length=256,
+        max_length=500,
     )
     description_text_field = models.TextField(
         db_column='description_text_field_db_column',
@@ -2321,7 +2268,7 @@ class RationalModel(models.Model):
         db_tablespace='description_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(2048), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2330,7 +2277,7 @@ class RationalModel(models.Model):
         verbose_name='Полное описание',
         help_text='<small class="text-muted">description_text_field</small><hr><br>',
 
-        max_length=2048,
+        max_length=5000,
     )
     additional_word_file_field = models.FileField(
         db_column='additional_word_file_field_db_column',
@@ -2389,7 +2336,7 @@ class RationalModel(models.Model):
         db_tablespace='user1_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2398,7 +2345,7 @@ class RationalModel(models.Model):
         verbose_name='user1',
         help_text='<small class="text-muted">user1_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=512,
     )
     user2_char_field = models.CharField(
         db_column='user2_char_field_db_column',
@@ -2406,7 +2353,7 @@ class RationalModel(models.Model):
         db_tablespace='user2_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2415,7 +2362,7 @@ class RationalModel(models.Model):
         verbose_name='user2',
         help_text='<small class="text-muted">user2_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=512,
     )
     user3_char_field = models.CharField(
         db_column='user3_char_field_db_column',
@@ -2423,7 +2370,7 @@ class RationalModel(models.Model):
         db_tablespace='user3_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2432,7 +2379,7 @@ class RationalModel(models.Model):
         verbose_name='user3',
         help_text='<small class="text-muted">user3_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=512,
     )
     user4_char_field = models.CharField(
         db_column='user4_char_field_db_column',
@@ -2440,7 +2387,7 @@ class RationalModel(models.Model):
         db_tablespace='user4_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2449,7 +2396,7 @@ class RationalModel(models.Model):
         verbose_name='user4',
         help_text='<small class="text-muted">user4_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=512,
     )
     user5_char_field = models.CharField(
         db_column='user5_char_field_db_column',
@@ -2457,7 +2404,7 @@ class RationalModel(models.Model):
         db_tablespace='user5_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2466,7 +2413,7 @@ class RationalModel(models.Model):
         verbose_name='user5',
         help_text='<small class="text-muted">user5_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=512,
     )
 
     ####################################################################################################################

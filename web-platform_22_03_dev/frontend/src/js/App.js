@@ -23,8 +23,8 @@ import AdminExportUsersPage from "../pages/admin/AdminExportUsersPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import RationalTemplatePage from "../pages/rational/RationalTemplatePage";
 import RationalCreatePage from "../pages/rational/RationalCreatePage";
-import RationalListPage from "../pages/rational/RationalListPage";
-import RationalDetailPage from "../pages/rational/RationalDetailPage";
+import RationalModerateDetailPage from "../pages/rational/RationalModerateDetailPage";
+import RationalModerateListPage from "../pages/rational/RationalModerateListPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import VacancyListPage from "../pages/vacancy/VacancyListPage";
 import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
@@ -70,8 +70,14 @@ function App() {
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/rational_template" element={<RationalTemplatePage />} />
           <Route path="/rational_create" element={<RationalCreatePage />} />
-          <Route path="/rational_list" element={<RationalListPage />} />
-          <Route path="/rational_detail/:id" element={<RationalDetailPage />} />
+          <Route
+            path="/rational_moderate_list"
+            element={<RationalModerateListPage />}
+          />
+          <Route
+            path="/rational_moderate_detail/:id"
+            element={<RationalModerateDetailPage />}
+          />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/vacancy_list" element={<VacancyListPage />} />
           <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />

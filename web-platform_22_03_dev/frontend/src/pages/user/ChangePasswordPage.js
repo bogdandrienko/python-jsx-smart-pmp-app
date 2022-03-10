@@ -44,7 +44,7 @@ const ChangePasswordPage = () => {
   useEffect(() => {
     if (dataUserChange) {
       utils.Sleep(1000).then(() => {
-        dispatch(actions.userLogoutAnyAction());
+        dispatch(actions.userLogoutAction());
         navigate("/login");
       });
     }
@@ -176,10 +176,12 @@ const ChangePasswordPage = () => {
                   <div className="m-1">
                     <button
                       type="button"
-                      onClick={utils.ChangePasswordVisibility([
-                        "password",
-                        "password2",
-                      ])}
+                      onClick={(e) =>
+                        utils.ChangePasswordVisibility([
+                          "password",
+                          "password2",
+                        ])
+                      }
                       className="btn btn-md btn-danger form-control"
                     >
                       Видимость пароля
