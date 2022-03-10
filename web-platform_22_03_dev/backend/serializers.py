@@ -35,7 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
         for group in group_model:
             action_model = group.action_many_to_many_field.all()
             for action in action_model:
-                actions.append(action.slug_field)
+                actions.append(action.access_slug_field)
         if len(actions) < 1:
             actions = ['']
         return actions

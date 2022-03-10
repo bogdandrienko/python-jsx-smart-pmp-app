@@ -38,6 +38,18 @@ class ExamplesModelAdmin(admin.ModelAdmin):
         'one_to_one_field',
     )
 
+    # Поля, которые отображаются как ссылки для перехода в детали модели
+    list_display_links = (
+        'binary_field',
+        'boolean_field',
+    )
+
+    # Поля, которые можно редактировать прям из общего списка
+    list_editable = (
+        'text_field',
+        'slug_field',
+    )
+
     # Поля, которые отображаются как поле "группы" в пользователе, для моделей many_to_many_field
     filter_horizontal = ('many_to_many_field',)
 
@@ -165,6 +177,16 @@ class LoggingModelAdmin(admin.ModelAdmin):
         'error_text_field',
         'datetime_field'
     )
+    list_display_links = (
+        'username_slug_field',
+        'ip_genericipaddress_field',
+        'request_path_slug_field',
+    )
+    list_editable = (
+        'request_method_slug_field',
+        'error_text_field',
+        'datetime_field'
+    )
     list_filter = (
         'username_slug_field',
         'ip_genericipaddress_field',
@@ -231,10 +253,14 @@ class UserModelAdmin(admin.ModelAdmin):
         'hobbies_text_field',
         'image_field',
     )
-    ####################################################################################################################
-    # list_display_links = ('id', 'title')
-    # list_editable = ('done',)
-    ####################################################################################################################
+    list_display_links = (
+        'user_foreign_key_field',
+        'email_field',
+    )
+    list_editable = (
+        'password_slug_field',
+        'activity_boolean_field',
+    )
     list_filter = (
         'user_foreign_key_field',
         'password_slug_field',
@@ -316,34 +342,36 @@ class UserModelAdmin(admin.ModelAdmin):
     ]
 
 
-class AdminActionModelAdmin(admin.ModelAdmin):
+class ActionModelAdmin(admin.ModelAdmin):
     """
-    Настройки отображения, фильтрации и поиска модели:'AdminActionModel' на панели администратора
+    Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
     """
 
     list_display = (
-        'name_field',
-        'slug_field',
+        'name_char_field',
+        'access_slug_field',
     )
     list_display_links = (
-        'name_field',
-        'slug_field',
+        'name_char_field',
+        'access_slug_field',
+    )
+    list_editable = (
     )
     list_filter = (
-        'name_field',
-        'slug_field',
+        'name_char_field',
+        'access_slug_field',
     )
     fieldsets = (
         ('Имя отображения', {'fields': (
-            'name_field',
+            'name_char_field',
         )}),
         ('Имя валидации', {'fields': (
-            'slug_field',
+            'access_slug_field',
         )}),
     )
     search_fields = [
-        'name_field',
-        'slug_field',
+        'name_char_field',
+        'access_slug_field',
     ]
 
 
@@ -353,29 +381,34 @@ class GroupModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
+        'name_char_field',
         'group_foreign_key_field',
+        'name_slug_field',
+    )
+    list_display_links = (
         'name_char_field',
         'name_slug_field',
-        'position_float_field',
+    )
+    list_editable = (
+        'group_foreign_key_field',
     )
     list_filter = (
-        'group_foreign_key_field',
         'name_char_field',
+        'group_foreign_key_field',
         'name_slug_field',
         'user_many_to_many_field',
         'action_many_to_many_field',
-        'position_float_field',
     )
     filter_horizontal = (
         'user_many_to_many_field',
         'action_many_to_many_field',
     )
     fieldsets = (
-        ('Группа', {'fields': (
-            'group_foreign_key_field',
-        )}),
         ('Имя отображения', {'fields': (
             'name_char_field',
+        )}),
+        ('Группа', {'fields': (
+            'group_foreign_key_field',
         )}),
         ('Имя валидации', {'fields': (
             'name_slug_field',
@@ -386,17 +419,13 @@ class GroupModelAdmin(admin.ModelAdmin):
         ('Действия', {'fields': (
             'action_many_to_many_field',
         )}),
-        ('Позиция в списке', {'fields': (
-            'position_float_field',
-        )}),
     )
     search_fields = [
-        'group_foreign_key_field',
         'name_char_field',
+        'group_foreign_key_field',
         'name_slug_field',
         'user_many_to_many_field',
         'action_many_to_many_field',
-        'position_float_field',
     ]
 
 
@@ -408,6 +437,7 @@ class RationalModelAdmin(admin.ModelAdmin):
     list_display = (
         "author_foreign_key_field",
         "number_char_field",
+        "status_moderate_char_field",
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
@@ -421,53 +451,30 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user1_char_field",
         "user2_char_field",
         "user3_char_field",
-        "user4_char_field",
-        "user5_char_field",
 
-        "author_premoderate_char_field",
-        "conclusion_premoderate_char_field",
+        "premoderate_foreign_key_field_1",
         "comment_premoderate_char_field",
-        "author_postmoderate_char_field",
-        "conclusion_postmoderate_char_field",
+        "postmoderate_foreign_key_field_2",
         "comment_postmoderate_char_field",
 
         "visibility_boolean_field",
         "created_datetime_field",
         "register_datetime_field",
     )
-    list_links = (
+    list_display_links = (
         "author_foreign_key_field",
         "number_char_field",
+    )
+    list_editable = (
+        "status_moderate_char_field",
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
-        "avatar_image_field",
-        "name_char_field",
-        "place_char_field",
-        "description_text_field",
-        "additional_word_file_field",
-        "additional_pdf_file_field",
-        "additional_excel_file_field",
-        "user1_char_field",
-        "user2_char_field",
-        "user3_char_field",
-        "user4_char_field",
-        "user5_char_field",
-
-        "author_premoderate_char_field",
-        "conclusion_premoderate_char_field",
-        "comment_premoderate_char_field",
-        "author_postmoderate_char_field",
-        "conclusion_postmoderate_char_field",
-        "comment_postmoderate_char_field",
-
-        "visibility_boolean_field",
-        "created_datetime_field",
-        "register_datetime_field",
     )
     list_filter = (
         "author_foreign_key_field",
         "number_char_field",
+        "status_moderate_char_field",
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
@@ -481,14 +488,10 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user1_char_field",
         "user2_char_field",
         "user3_char_field",
-        "user4_char_field",
-        "user5_char_field",
 
-        "author_premoderate_char_field",
-        "conclusion_premoderate_char_field",
+        "premoderate_foreign_key_field_1",
         "comment_premoderate_char_field",
-        "author_postmoderate_char_field",
-        "conclusion_postmoderate_char_field",
+        "postmoderate_foreign_key_field_2",
         "comment_postmoderate_char_field",
 
         "visibility_boolean_field",
@@ -499,6 +502,7 @@ class RationalModelAdmin(admin.ModelAdmin):
         ("Основная информация", {"fields": (
             "author_foreign_key_field",
             "number_char_field",
+        "status_moderate_char_field",
             "subdivision_char_field",
             "sphere_char_field",
             "category_char_field",
@@ -512,17 +516,13 @@ class RationalModelAdmin(admin.ModelAdmin):
             "user1_char_field",
             "user2_char_field",
             "user3_char_field",
-            "user4_char_field",
-            "user5_char_field",
         )}),
         ("Предмодерация", {"fields": (
-            "author_premoderate_char_field",
-            "conclusion_premoderate_char_field",
+            "premoderate_foreign_key_field_1",
             "comment_premoderate_char_field",
         )}),
         ("Постмодерация", {"fields": (
-            "author_postmoderate_char_field",
-            "conclusion_postmoderate_char_field",
+            "postmoderate_foreign_key_field_2",
             "comment_postmoderate_char_field",
         )}),
         ("Дополнительные данные", {"fields": (
@@ -534,6 +534,7 @@ class RationalModelAdmin(admin.ModelAdmin):
     search_fields = [
         "author_foreign_key_field",
         "number_char_field",
+        "status_moderate_char_field",
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
@@ -547,14 +548,10 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user1_char_field",
         "user2_char_field",
         "user3_char_field",
-        "user4_char_field",
-        "user5_char_field",
 
-        "author_premoderate_char_field",
-        "conclusion_premoderate_char_field",
+        "premoderate_foreign_key_field_1",
         "comment_premoderate_char_field",
-        "author_postmoderate_char_field",
-        "conclusion_postmoderate_char_field",
+        "postmoderate_foreign_key_field_2",
         "comment_postmoderate_char_field",
 
         "visibility_boolean_field",
@@ -582,6 +579,8 @@ class VacancyModelAdmin(admin.ModelAdmin):
     )
     list_display_links = (
         "author_field",
+    )
+    list_editable = (
         "qualification_field",
     )
     list_filter = (
@@ -645,6 +644,11 @@ class ResumeModelAdmin(admin.ModelAdmin):
         "last_name_field",
         "first_name_field",
     )
+    list_editable = (
+        "education_field",
+        "experience_field",
+        "sex_field",
+    )
     list_filter = (
         "qualification_field",
         "last_name_field",
@@ -694,7 +698,7 @@ admin.site.unregister(token_blacklist.models.OutstandingToken)
 admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
 admin.site.register(backend_models.LoggingModel, LoggingModelAdmin)
 admin.site.register(backend_models.UserModel, UserModelAdmin)
-admin.site.register(backend_models.AdminActionModel, AdminActionModelAdmin)
+admin.site.register(backend_models.ActionModel, ActionModelAdmin)
 admin.site.register(backend_models.GroupModel, GroupModelAdmin)
 admin.site.register(backend_models.RationalModel, RationalModelAdmin)
 admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)

@@ -2,85 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="706b6942-640f-4237-bef4-6b7a4ae07a68" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.10ab6a85.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.10ab6a85.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/build/static/js/main.10ab6a85.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalModerateDetailPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/main.65578247.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/main.65578247.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.9e3c8d88.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.9e3c8d88.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.9e3c8d88.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlNjgwNjMwMzUwNTc3_MkVGNzUzRUUyNzg2ODQ4Njg2M0FFQzc5NDA5MEU0NDEwNDVFRk,ad93a504d69f89661f2712f3abc82195" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlNjgwNjMwMzUwNTc3_MzUzM0Q3ODAzRkEzMUEzRkJDNjc0NjNCMzcwRDUzMzYzREU4Nz,880e7eeef81bdbfdb6985e355d4ab648" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlNjgwNjMwMzUwNTc3_QTBERTdDRjhEREM3N0E3MkQxMDYwNDI4MDNGRkI5Rjc0QjU2OD,fa48af1b891ca1a923603925dee82251" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_M0M5NjJDMURFOEM1QTk4MjM2NEIwNjhBOUI2OEQ3Qzg1MjlGMD,19880801d709d3868f7e1b888edcf145" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_MzRGMzQ0NjY1NjgyNzRBRUY0N0RDODVGRUNEMTRDNjQzNTQwOU,a7b0339b31c3790ebcc9e5f4db41bd45" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_NTNFNkQ4MThDMzlDOEE1Q0Q2RkI0MTA5MTU4OEVENUI0RDZGME,792bfb47d019a97d11ab3e588312548f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_NjZBOTg2OEI0MTRBRDAzQUZFNEE1ODhBNTEzRkYxNjg4ODdFQ0,5b52c4148c35993b9bea802d0eb54136" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_ODc5NTdFRjYwM0NCRDJFN0Q4OEE1RDdCRUMwOTExNEEyNzE5RT,8cc0dfd2fea92d9c62f585a42288ee53" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_OTlCNkE2NTcwNzkxRjZFNjREQ0Y0N0FERTIyNjg5MThBNjBCMD,aff49f81fc63ee402589f427b2b0a58e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_QTQ0RkEyRDk5NTc2OTQ1NkI3MDQ5NERGNEEyMEY1NDg3QzZEND,e3d925b2c72bc6de738a245b52039c7c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_RDQ4RTBFOTI0N0FCMjRGQUFGM0VBN0Q0NEYzQzZGRjBFM0E3Rj,218f25972182a8f50c04713ae98c09d3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_RUYzQzU2ODcxMTU3MzgyMDdEREU0MTU0RDU3QUIyOTU5QkJBOD,df4938c6cc9032922373126ba2b15cb5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTMxMDA2NDUxMjU4_RkUyMDc4NzkzNzkyODNCQzRDRkJCRjhBMkJEREU5QkU4MzA4NT,989d5c47ce2ad7d75ca3e4d2d057e7b0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTQwNzEyMzAxMTUz_Mzk2NzMzRTVFMDI2QTcwNDIzMEEyNkE3OTQzQ0MxQjkzQ0ZDRj,9a363f7ab5a69016db236ca4880efca6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTQwNzEyMzAxMTUz_Q0JCNDQ0QUUyMkY5M0Y0QThERkE5RjFFRUU5QTUwMUMxN0M0RD,db870b3bf20ff836dae6aef1542e6cc4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NjM1NDkwQTk3OUJCRTQ4QTNCODMyRjg2N0ZGQjQ1NDRBMzU3QT,274f435fa74d88f685c28229d775d8d3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/get_users/192.168.1.10KM_1ChsidenchangeMjAyMjAzMTA=_MEVDMTYxNjg0N0EzNDU3ODU4MjIzMkFBRTdBQjc1ODE4NUFF,ff716ee15973d4037f8db0eb205984a3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_1tE4AsfgXjx8l2zN9J39KRoK_2022-03-10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_4kNWrPqWT7hjJVbTyg1HKcs6_2022-03-10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_9ANsnO9JNJfnHBEsNdlZYugR_2022-03-10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_BgnDHSqcocby6Iuqol4Kdpp4_2022-03-10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_ZV56oHwvEjthc1Auu8974fvG_2022-03-10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_j7rEAN7G38H5G6bUw6943uXu_2022-03-10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_n0CPZjs3euHSTfM9zJUj2GOd_2022-03-10.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/media/data/temp/salary/salary_qrwYytGAM5L3dybpq7TcPnTI_2022-03-10.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/~$ан разработки.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/План разработки.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../DOCS/Веб-платформа управления изменениями/План разработки.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0002_alter_groupmodel_name_char_field.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0003_rationalmodel_status_moderate_char_field.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0004_remove_rationalmodel_conclusion_postmoderate_char_field_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0005_remove_rationalmodel_author_postmoderate_char_field_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/migrations/0006_alter_examplesmodel_foreign_key_field_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/migrations/0002_vacancymodel.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/migrations/0003_alter_vacancymodel_description_field_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/migrations/0004_resumemodel_alter_vacancymodel_rank_field.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.962d8d03.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.eb3d1636.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.eb3d1636.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.eb3d1636.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/HeaderComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HeaderComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/css/main.65578247.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.10ab6a85.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.10ab6a85.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.10ab6a85.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/RationalComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RationalComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/js/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/js/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/js/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/base/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/base/NewsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/NewsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/js/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/js/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalCreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalCreatePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalDetailPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalModerateListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalTemplatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalTemplatePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/ChangePasswordPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/ChangePasswordPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/ChangeProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/ChangeProfilePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/LogoutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/LogoutPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/user/RecoverPasswordPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/user/RecoverPasswordPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main.962d8d03.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main.962d8d03.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.9c83c25f.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.9c83c25f.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.9c83c25f.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalModerateDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalModerateDetailPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/rational/RationalModerateListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/rational/RationalModerateListPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/media/admin/logging/logging_errors.txt" afterDir="false" />
     </list>
@@ -129,7 +78,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/pages/rational" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Project\Github_Projects\python-jsx-smart-pmp-app\web-platform_22_03_dev\frontend\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
   </component>
   <component name="RecentsManager">
@@ -199,6 +148,7 @@
       <workItem from="1646851820357" duration="215000" />
       <workItem from="1646852088522" duration="22827000" />
       <workItem from="1646909516094" duration="28000" />
+      <workItem from="1646921095309" duration="14073000" />
     </task>
     <servers />
   </component>

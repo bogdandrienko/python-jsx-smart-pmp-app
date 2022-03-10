@@ -705,6 +705,8 @@ def api_auth_admin_create_or_change_users(request):
                             else:
                                 return value
 
+                        print("additional_excel: ", additional_excel)
+
                         workbook = openpyxl.load_workbook(additional_excel)
                         sheet = workbook.active
                         max_rows = sheet.max_row
@@ -801,7 +803,8 @@ def api_auth_admin_create_or_change_users(request):
                                         )
                                     group_model.user_many_to_many_field.add(user_model)
 
-                    threading.Thread(target=create_users, args=()).start()
+                    create_users()
+                    # threading.Thread(target=create_users, args=()).start()
                     return Response({"response": "Пользователи успешно созданы/изменены."})
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(
@@ -832,13 +835,11 @@ def api_auth_admin_export_users(request):
             request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
         )
 
-        print('try EXPORT_USERS')
         # Methods
         if req_inst.method == "POST":
             # Actions
             if req_inst.action_type == "EXPORT_USERS":
                 try:
-
                     def set_value(_col: Union[str, int], _row: Union[str, int], _value, _sheet):
                         if isinstance(_col, int):
                             _col = get_column_letter(_col)
@@ -1706,8 +1707,12 @@ def api_auth_rational(request):
                     user1 = req_inst.get_value("user1")
                     user2 = req_inst.get_value("user2")
                     user3 = req_inst.get_value("user3")
-                    user4 = req_inst.get_value("user4")
-                    user5 = req_inst.get_value("user5")
+
+                    if sphere == "Технологическая":
+                        status_moderate = "Предтехмодерация"
+                    else:
+                        status_moderate = "Постнетехмодерация"
+
                     backend_models.RationalModel.objects.create(
                         author_foreign_key_field=author,
                         number_char_field=number,
@@ -1724,28 +1729,9 @@ def api_auth_rational(request):
                         user1_char_field=user1,
                         user2_char_field=user2,
                         user3_char_field=user3,
-                        user4_char_field=user4,
-                        user5_char_field=user5,
+                        status_moderate_char_field=status_moderate,
                     )
                     response = {"response": "Рац. предложение успешно создано!"}
-                    # print(f"response: {response}")
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
-                    return Response({"error": "Произошла ошибка!"})
-            elif req_inst.action_type == "RATIONAL_DETAIL":
-                try:
-                    id = req_inst.get_value("id")
-                    print("id: ", id)
-
-                    if id:
-                        rational = backend_models.RationalModel.objects.get(id=id)
-                    else:
-                        rational = backend_models.RationalModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.RationalModelSerializer(instance=rational, many=False)
-                    response = {"response": serializer.data}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -1779,26 +1765,8 @@ def api_auth_rational(request):
                         )
                         objects = objects.filter(author_foreign_key_field=author)
 
-                    if moderate == "Отклонено":
-                        objects = objects.filter(conclusion_premoderate_char_field="Отклонено")
-                        objects = objects.filter(conclusion_postmoderate_char_field="Отклонено")
-                    elif moderate == "ОУПиБП (не технологическая + пред модерация)":
-                        objects = objects.filter(sphere_char_field="Не технологическая")
-                        objects = objects.filter(conclusion_premoderate_char_field="Приостановлено")
-                        objects = objects.filter(conclusion_postmoderate_char_field="Приостановлено")
-                    elif moderate == "Зам. по развитию (технологическая + пред модерация)":
-                        objects = objects.filter(sphere_char_field="Технологическая")
-                        objects = objects.filter(conclusion_premoderate_char_field="Приостановлено")
-                        objects = objects.filter(conclusion_postmoderate_char_field="Приостановлено")
-                    elif moderate == "Тех. отдел (технологическая + пост модерация)":
-                        objects = objects.filter(sphere_char_field="Технологическая")
-                        objects = objects.filter(conclusion_premoderate_char_field="Принято")
-                        objects = objects.filter(conclusion_postmoderate_char_field="Приостановлено")
-                    elif moderate == "Принято":
-                        objects = objects.filter(conclusion_premoderate_char_field="Принято")
-                        objects = objects.filter(conclusion_postmoderate_char_field="Принято")
-                    else:
-                        pass
+                    if moderate:
+                        objects = objects.filter(status_moderate_char_field=moderate)
 
                     # sort
                     if sort:
@@ -1813,6 +1781,73 @@ def api_auth_rational(request):
 
                     serializer = backend_serializers.RationalModelSerializer(instance=objects, many=True)
                     response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            elif req_inst.action_type == "RATIONAL_DETAIL":
+                try:
+                    id = req_inst.get_value("id")
+                    if id:
+                        rational = backend_models.RationalModel.objects.get(id=id)
+                    else:
+                        rational = backend_models.RationalModel.objects.order_by('-id')[0]
+                    serializer = backend_serializers.RationalModelSerializer(instance=rational, many=False)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            elif req_inst.action_type == "RATIONAL_MODERATE":
+                try:
+                    rational_id = req_inst.get_value("rationalId")
+                    print("rational_id: ", rational_id)
+                    moderate = req_inst.get_value("moderate")
+                    print("moderate: ", moderate)
+                    comment = req_inst.get_value("comment")
+                    print("comment: ", comment)
+                    user_model = req_inst.user_model
+                    print("user_model: ", user_model)
+
+                    rational = backend_models.RationalModel.objects.get(id=rational_id)
+
+                    if rational.status_moderate_char_field == "Предтехмодерация":
+                        if moderate == "Принято":
+                            rational.status_moderate_char_field = "Посттехмодерация"
+                            rational.premoderate_foreign_key_field_1 = req_inst.user_model
+                            rational.comment_premoderate_char_field = comment
+                        else:
+                            rational.status_moderate_char_field = "Отклонено"
+                            rational.premoderate_foreign_key_field_1 = req_inst.user_model
+                            rational.comment_premoderate_char_field = comment
+                    elif rational.status_moderate_char_field == "Посттехмодерация":
+                        if moderate == "Принято":
+                            rational.status_moderate_char_field = "Принято"
+                            rational.postmoderate_foreign_key_field_2 = req_inst.user_model
+                            rational.comment_postmoderate_char_field = comment
+                        else:
+                            rational.status_moderate_char_field = "Отклонено"
+                            rational.postmoderate_foreign_key_field_2 = req_inst.user_model
+                            rational.comment_postmoderate_char_field = comment
+                    elif rational.status_moderate_char_field == "Постнетехмодерация":
+                        if moderate == "Принято":
+                            rational.status_moderate_char_field = "Принято"
+                            rational.postmoderate_foreign_key_field_2 = req_inst.user_model
+                            rational.comment_postmoderate_char_field = comment
+                        else:
+                            rational.status_moderate_char_field = "Отклонено"
+                            rational.postmoderate_foreign_key_field_2 = req_inst.user_model
+                            rational.comment_postmoderate_char_field = comment
+                    rational.save()
+
+
+                    response = {"response": "Успешно"}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -1851,7 +1886,6 @@ def api_any_vacancy(request):
             # Actions
             if req_inst.action_type == "VACANCY_LIST":
                 try:
-
                     sphere = req_inst.get_value("sphere")
                     education = req_inst.get_value("education")
                     experience = req_inst.get_value("experience")

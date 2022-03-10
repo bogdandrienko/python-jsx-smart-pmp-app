@@ -24,6 +24,8 @@ const RationalComponent = ({ rational, shortView = false }) => {
   const location = useLocation();
   const id = useParams().id;
 
+  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
+
   return (
     <div
       className={
@@ -33,7 +35,16 @@ const RationalComponent = ({ rational, shortView = false }) => {
       }
     >
       <div className="card-header p-0 m-0 bg-opacity-10 bg-primary">
-        <h6 className="lead fw-bold">{rational["name_char_field"]}</h6>
+        <h6 className="lead fw-bold">
+          {rational["name_char_field"]}{" "}
+          {utils.CheckAccess(userDetailsStore, "rational_admin") && (
+            <small className="text-danger">
+              [
+              {utils.GetSliceString(rational["status_moderate_char_field"], 30)}
+              ]
+            </small>
+          )}
+        </h6>
       </div>
       <div className="card-body p-0 m-0">
         <label className="form-control-sm m-1">
@@ -107,21 +118,25 @@ const RationalComponent = ({ rational, shortView = false }) => {
           />
         </label>
       </div>
-        <div className="card-body p-0 m-0">
-          <label className="w-100 form-control-sm m-1">
-            Полное описание:
-            <textarea
-              required
-              placeholder="Полное описание"
-              defaultValue={!shortView ? (utils.GetSliceString(rational["description_text_field"], 50)) : rational["description_text_field"]}
-              readOnly={true}
-              minLength="1"
-              maxLength="5000"
-              rows="3"
-              className="form-control form-control-sm"
-            />
-          </label>
-        </div>
+      <div className="card-body p-0 m-0">
+        <label className="w-100 form-control-sm m-1">
+          Полное описание:
+          <textarea
+            required
+            placeholder="Полное описание"
+            defaultValue={
+              !shortView
+                ? utils.GetSliceString(rational["description_text_field"], 50)
+                : rational["description_text_field"]
+            }
+            readOnly={true}
+            minLength="1"
+            maxLength="5000"
+            rows="3"
+            className="form-control form-control-sm"
+          />
+        </label>
+      </div>
       {!shortView && (
         <div className="card-body p-0 m-0">
           <label className="form-control-sm m-1">
@@ -199,32 +214,6 @@ const RationalComponent = ({ rational, shortView = false }) => {
                 name="name_char_field"
                 placeholder="участник № 3"
                 value={rational["user3_char_field"]}
-                minLength="0"
-                maxLength="200"
-                className="form-control form-control-sm"
-              />
-            )}
-          {rational["user4_char_field"] &&
-            rational["user4_char_field"].length > 3 && (
-              <input
-                type="text"
-                id="name_char_field"
-                name="name_char_field"
-                placeholder="участник № 4"
-                value={rational["user4_char_field"]}
-                minLength="0"
-                maxLength="200"
-                className="form-control form-control-sm"
-              />
-            )}
-          {rational["user5_char_field"] &&
-            rational["user5_char_field"].length > 3 && (
-              <input
-                type="text"
-                id="name_char_field"
-                name="name_char_field"
-                placeholder="участник № 5"
-                value={rational["user5_char_field"]}
                 minLength="0"
                 maxLength="200"
                 className="form-control form-control-sm"

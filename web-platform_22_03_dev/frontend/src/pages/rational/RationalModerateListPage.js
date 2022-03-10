@@ -50,7 +50,7 @@ const RationalListPage = () => {
   } = userListAllStore;
   const rationalListStore = useSelector((state) => state.rationalListStore); // store.js
   const {
-    // load: loadRationalList,
+    load: loadRationalList,
     data: dataRationalList,
     // error: errorRationalList,
     // fail: failRationalList,
@@ -59,8 +59,8 @@ const RationalListPage = () => {
   const {
     load: loadUserDetails,
     data: dataUserDetails,
-    error: errorUserDetails,
-    fail: failUserDetails,
+    // error: errorUserDetails,
+    // fail: failUserDetails,
   } = userDetailsStore;
 
   const getData = () => {
@@ -86,22 +86,35 @@ const RationalListPage = () => {
   }, [dispatch, dataUserListAll]);
 
   useEffect(() => {
-    if (!dataRationalList && dataUserDetails) {
+    if (
+      !dataRationalList &&
+      !loadRationalList &&
+      dataUserDetails &&
+      !loadUserDetails &&
+      dataUserListAll
+    ) {
       getData();
     }
-  }, [dispatch, dataRationalList, dataUserDetails]);
+  }, [
+    dispatch,
+    dataRationalList,
+    loadRationalList,
+    dataUserDetails,
+    loadUserDetails,
+    dataUserListAll,
+  ]);
 
   useEffect(() => {
     if (dataUserDetails) {
       if (
-        utils.CheckAccess(userDetailsStore, "rational_moderator_no_tech_pre")
+        utils.CheckAccess(userDetailsStore, "rational_moderator_no_tech_post")
       ) {
-        moderateSet("ОУПиБП (не технологическая + пред модерация)");
+        moderateSet("Постнетехмодерация");
       } else {
         if (
           utils.CheckAccess(userDetailsStore, "rational_moderator_tech_post")
         ) {
-          moderateSet("Тех. отдел (технологическая + пост модерация)");
+          moderateSet("Посттехмодерация");
         } else {
           if (
             utils.CheckAccess(
@@ -109,7 +122,7 @@ const RationalListPage = () => {
               "rational_moderator_tech_pre_atp"
             )
           ) {
-            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            moderateSet("Предтехмодерация");
             subdivisionSet("Автотранспортное предприятие");
           }
           if (
@@ -118,7 +131,7 @@ const RationalListPage = () => {
               "rational_moderator_tech_pre_gtk"
             )
           ) {
-            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            moderateSet("Предтехмодерация");
             subdivisionSet("Горно-транспортный комплекс");
           }
           if (
@@ -127,7 +140,7 @@ const RationalListPage = () => {
               "rational_moderator_tech_pre_ok"
             )
           ) {
-            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            moderateSet("Предтехмодерация");
             subdivisionSet("Обогатительный комплекс");
           }
           if (
@@ -136,7 +149,7 @@ const RationalListPage = () => {
               "rational_moderator_tech_pre_uprav"
             )
           ) {
-            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            moderateSet("Предтехмодерация");
             subdivisionSet("Управление предприятия");
           }
           if (
@@ -145,7 +158,7 @@ const RationalListPage = () => {
               "rational_moderator_tech_pre_energouprav"
             )
           ) {
-            moderateSet("Зам. по развитию (технологическая + пред модерация)");
+            moderateSet("Предтехмодерация");
             subdivisionSet("Энергоуправление");
           }
         }
@@ -160,12 +173,10 @@ const RationalListPage = () => {
 
   const formHandlerReset = async (e) => {
     e.preventDefault();
-    subdivisionSet("");
     categorySet("");
     authorSet("");
     searchSet("");
     sortSet("Дате публикации (сначала свежие)");
-    moderateSet("");
     getData();
   };
 
@@ -220,7 +231,7 @@ const RationalListPage = () => {
                   {utils.CheckAccess(userDetailsStore, "rational_admin") ||
                   utils.CheckAccess(
                     userDetailsStore,
-                    "rational_moderator_no_tech_pre"
+                    "rational_moderator_no_tech_post"
                   ) ||
                   utils.CheckAccess(
                     userDetailsStore,
@@ -294,16 +305,16 @@ const RationalListPage = () => {
                         onChange={(e) => moderateSet(e.target.value)}
                       >
                         <option value="">все варианты</option>
+                        <option value="Предтехмодерация">
+                          Предтехмодерация
+                        </option>
+                        <option value="Посттехмодерация">
+                          Посттехмодерация
+                        </option>
+                        <option value="Постнетехмодерация">
+                          Постнетехмодерация
+                        </option>
                         <option value="Отклонено">Отклонено</option>
-                        <option value="ОУПиБП (не технологическая + пред модерация)">
-                          ОУПиБП (не технологическая + пред модерация)
-                        </option>
-                        <option value="Зам. по развитию (технологическая + пред модерация)">
-                          Зам. по развитию (технологическая + пред модерация)
-                        </option>
-                        <option value="Тех. отдел (технологическая + пост модерация)">
-                          Тех. отдел (технологическая + пост модерация)
-                        </option>
                         <option value="Принято">Принято</option>
                       </select>
                     </label>
@@ -386,6 +397,11 @@ const RationalListPage = () => {
                     )}{" "}
                     {utils.GetSliceString(
                       rational["user_model"]["first_name_char_field"],
+                      30
+                    )}
+                    {" | "}
+                    {utils.GetSliceString(
+                      rational["status_moderate_char_field"],
                       30
                     )}
                   </li>

@@ -36,3 +36,9 @@ Bogdan, 127.0.0.1, /api/user/detail/, POST, 2022-03-10 13:22:10.112305, 'AdminAc
 931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:44:12.244381, '1.Начислено'
 
 931006451258, 127.0.0.1, /api/auth/salary/, POST, 2022-03-10 16:44:52.065830, '1.Начислено'
+
+, 127.0.0.1, /, GET, 2022-03-10 21:43:07.016461, index.html
+
+, 127.0.0.1, /, GET, 2022-03-10 21:43:13.149460, index.html
+
+Bogdan, 127.0.0.1, /api/auth/rational/, POST, 2022-03-10 21:47:56.225314, RationalModel() got an unexpected keyword argument 'user4_char_field'

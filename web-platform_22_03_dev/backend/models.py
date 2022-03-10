@@ -458,8 +458,8 @@ class ExamplesModel(models.Model):
 
         to=User,
         on_delete=models.CASCADE,
+        related_name='foreign_key_field',
         # limit_choices_to={'is_staff': True},
-        # related_name='foreign_key_field',
         # related_query_name='foreign_key_field',
         # to_field='foreign_key_field',
         # db_constraint=True,
@@ -583,17 +583,15 @@ class ExamplesModel(models.Model):
                 # and then save it, a new object will be created alongside the old one.
 
                 unique_for_date=False,
-                # Set this to the name of a DateField or DateTimeField to require that this field be unique for
-                # the value of the date field.
-                # For example, if you have a field title that has unique_for_date="pub_date", then Django wouldn’t allow
-                # the entry of two records with the same title and pub_date.
-                # NoteComponent that if you set this to point to a DateTimeField, only the date portion of the field will be
-                # considered. Besides, when USE_TZ is True, the check will be performed in the current time zone at the
-                # time the object gets saved.
-                # This is enforced by Model.validate_unique() during model validation but not at the database level. If
-                # any unique_for_date constraint involves fields that are not part of a ModelForm (for example, if
-                # one of the fields is listed in exclude or has editable=False), Model.validate_unique() will skip
-                # validation for that particular constraint.
+                # Set this to the name of a DateField or DateTimeField to require that this field be unique for the
+                # value of the date field. For example, if you have a field title that has
+                # unique_for_date="pub_date", then Django wouldn’t allow the entry of two records with the same title
+                # and pub_date. NoteComponent that if you set this to point to a DateTimeField, only the date portion
+                # of the field will be considered. Besides, when USE_TZ is True, the check will be performed in the
+                # current time zone at the time the object gets saved. This is enforced by Model.validate_unique()
+                # during model validation but not at the database level. If any unique_for_date constraint involves
+                # fields that are not part of a ModelForm (for example, if one of the fields is listed in exclude or
+                # has editable=False), Model.validate_unique() will skip validation for that particular constraint.
 
                 unique_for_month=False,
                 # Like unique_for_date, but requires the field to be unique with respect to the month.
@@ -622,10 +620,10 @@ class ExamplesModel(models.Model):
                 # skipped during model validation. Default is True.
 
                 blank=False,
-                # If True, the field is allowed to be blank. Default is False.
-                # NoteComponent that this is different than null. null is purely database-related, whereas blank is validation-
-                # related. If a field has blank=True, form validation will allow entry of an empty value. If a field has
-                # blank=False, the field will be required.
+                # If True, the field is allowed to be blank. Default is False. NoteComponent that this is different
+                # than null. null is purely database-related, whereas blank is validation- related. If a field has
+                # blank=True, form validation will allow entry of an empty value. If a field has blank=False,
+                # the field will be required.
 
                 null=False,
                 # If True, Django will store empty values as NULL in the database. Default is False.
@@ -651,10 +649,9 @@ class ExamplesModel(models.Model):
 
                 help_text='<small class="text-muted underline">подсказка, с поддержкой HTML</small><hr><br>',
                 # Extra “help” text to be displayed with the form widget. It’s useful for documentation even if your
-                # field isn’t used on a form.
-                # NoteComponent that this value is not HTML-escaped in automatically-generated forms. This lets you include HTML
-                # in help_text if you so desire. For example: help_text="Please use the following format:
-                # <em>YYYY-MM-DD</em>."
+                # field isn’t used on a form. NoteComponent that this value is not HTML-escaped in
+                # automatically-generated forms. This lets you include HTML in help_text if you so desire. For
+                # example: help_text="Please use the following format: <em>YYYY-MM-DD</em>."
             )
 
         #
@@ -918,8 +915,8 @@ class ExamplesModel(models.Model):
                             DecimalValidator(max_digits=5, decimal_places=10), ],
 
                 max_digits=None,
-                # The maximum number of digits allowed in the number. NoteComponent that this number must be greater than
-                # or equal to decimal_places.
+                # The maximum number of digits allowed in the number. NoteComponent that this number must be greater
+                # than or equal to decimal_places.
 
                 decimal_places=None,
                 # The number of decimal places to store with the number.
@@ -1163,11 +1160,11 @@ class ExamplesModel(models.Model):
                 related_name='foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
-                # See the related objects documentation for a full explanation and example. NoteComponent that you must set
-                # this value when defining relations on abstract models; and when you do so some special syntax
-                # is available.
-                # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
-                # '+'. For example, this will ensure that the User model won’t have a backwards relation to this model:
+                # See the related objects documentation for a full explanation and example. NoteComponent that you
+                # must set this value when defining relations on abstract models; and when you do so some special
+                # syntax is available. If you’d prefer Django not to create a backwards relation, set related_name to
+                # '+' or end it with '+'. For example, this will ensure that the User model won’t have a backwards
+                # relation to this model:
 
                 related_query_name='foreignkey_field',
                 # The name to use for the reverse filter name from the target model. It defaults to the value
@@ -1259,11 +1256,11 @@ class ExamplesModel(models.Model):
                 related_name='foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
-                # See the related objects documentation for a full explanation and example. NoteComponent that you must set
-                # this value when defining relations on abstract models; and when you do so some special syntax
-                # is available.
-                # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
-                # '+'. For example, this will ensure that the User model won’t have a backwards relation to this model:
+                # See the related objects documentation for a full explanation and example. NoteComponent that you
+                # must set this value when defining relations on abstract models; and when you do so some special
+                # syntax is available. If you’d prefer Django not to create a backwards relation, set related_name to
+                # '+' or end it with '+'. For example, this will ensure that the User model won’t have a backwards
+                # relation to this model:
 
                 related_query_name='foreignkey_field',
                 # The name to use for the reverse filter name from the target model. It defaults to the value
@@ -1344,11 +1341,11 @@ class ExamplesModel(models.Model):
                 related_name='foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
-                # See the related objects documentation for a full explanation and example. NoteComponent that you must set
-                # this value when defining relations on abstract models; and when you do so some special syntax
-                # is available.
-                # If you’d prefer Django not to create a backwards relation, set related_name to '+' or end it with
-                # '+'. For example, this will ensure that the User model won’t have a backwards relation to this model:
+                # See the related objects documentation for a full explanation and example. NoteComponent that you
+                # must set this value when defining relations on abstract models; and when you do so some special
+                # syntax is available. If you’d prefer Django not to create a backwards relation, set related_name to
+                # '+' or end it with '+'. For example, this will ensure that the User model won’t have a backwards
+                # relation to this model:
 
                 related_query_name='foreignkey_field',
                 # The name to use for the reverse filter name from the target model. It defaults to the value
@@ -1580,6 +1577,7 @@ class UserModel(models.Model):
 
         to=User,
         on_delete=models.CASCADE,
+        related_name='user_foreign_key_field',
     )
     password_slug_field = models.SlugField(
         db_column='password_slug_field_db_column',
@@ -1924,33 +1922,48 @@ class UserModel(models.Model):
         ordering = ('last_name_char_field', 'first_name_char_field', 'patronymic_char_field',)
         verbose_name = 'Пользователь расширенный'
         verbose_name_plural = 'Admin Пользователи расширение'
-        db_table = 'user_extend_admin_model_table'
+        db_table = 'user_extend_model_table'
 
     def __str__(self):
         if self.activity_boolean_field:
             activity = 'Активен'
         else:
             activity = 'Неактивен'
-        return f'{self.last_name_char_field} | {self.first_name_char_field} | {self.patronymic_char_field} | ' \
-               f'{activity} | {self.personnel_number_slug_field} | {self.position_char_field} | {self.id} | ' \
+        return f'{self.last_name_char_field} | {self.first_name_char_field} | active:{activity} | ' \
+               f'{self.personnel_number_slug_field} | {self.position_char_field} | {self.id} | ' \
                f'{self.user_foreign_key_field.username}'
-
-    def get_id(self):
-        return self.id
 
     def get_iin(self):
         return int(self.user_foreign_key_field.username)
 
 
-class AdminActionModel(models.Model):
+@receiver(post_save, sender=User)
+def create_user_model(sender, instance, created, **kwargs):
+    if created:
+        try:
+            UserModel.objects.get_or_create(user_foreign_key_field=instance)
+        except Exception as error:
+            print(f"error = {error}")
+
+
+@receiver(post_save, sender=UserModel)
+def create_user(sender, instance, created, **kwargs):
+    if created:
+        try:
+            User.objects.get_or_create(username=str(instance.user_foreign_key_field.username))
+        except Exception as error:
+            print(f"error = {error}")
+
+
+class ActionModel(models.Model):
     """
     Модель, которая содержит объект для валидации и проверки на доступ действия веб-платформы
     """
 
-    name_field = models.CharField(
-        db_column='name_field_db_column',
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
         db_index=True,
-        db_tablespace='name_field_db_tablespace',
+        db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
@@ -1965,10 +1978,10 @@ class AdminActionModel(models.Model):
 
         max_length=256,
     )
-    slug_field = models.SlugField(
-        db_column='slug_field_db_column',
+    access_slug_field = models.SlugField(
+        db_column='access_slug_field_db_column',
         db_index=True,
-        db_tablespace='slug_field_db_tablespace',
+        db_tablespace='access_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
@@ -1987,13 +2000,13 @@ class AdminActionModel(models.Model):
 
     class Meta:
         app_label = 'backend'
-        ordering = ('name_field', 'slug_field')
+        ordering = ('name_char_field', 'access_slug_field')
         verbose_name = 'Admin Действие'
         verbose_name_plural = 'Admin Действия'
-        db_table = 'admin_actions_model_table'
+        db_table = 'action_model_table'
 
     def __str__(self):
-        return f'{self.name_field} | {self.slug_field}'
+        return f'{self.name_char_field[0:30]} | {self.access_slug_field[0:30]}'
 
 
 class GroupModel(models.Model):
@@ -2001,7 +2014,24 @@ class GroupModel(models.Model):
     Модель, которая содержит расширение для стандартной модели групп пользователей веб-платформы
     """
 
-    # authorization data
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя группы для отображения',
+        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
+                  '"Модератор отдела ОУПиБП"</small><hr><br>',
+
+        max_length=128,
+    )
     group_foreign_key_field = models.ForeignKey(
         db_column='group_foreign_key_field_db_column',
         db_index=True,
@@ -2019,24 +2049,7 @@ class GroupModel(models.Model):
 
         to=Group,
         on_delete=models.SET_NULL,
-    )
-    name_char_field = models.CharField(
-        db_column='name_char_field_db_column',
-        db_index=True,
-        db_tablespace='name_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=True,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Имя группы для отображения',
-        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
-                  '"Модератор отдела ОУПиБП"</small><hr><br>',
-
-        max_length=128,
+        related_name='group_foreign_key_field',
     )
     name_slug_field = models.SlugField(
         db_column='name_slug_field_db_column',
@@ -2050,7 +2063,7 @@ class GroupModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Имя группы для валидации и ссылок',
+        verbose_name='Имя группы для валидации',
         help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
                   '"moderator_oupibp"</small><hr><br>',
 
@@ -2088,37 +2101,40 @@ class GroupModel(models.Model):
         help_text='<small class="text-muted underline">Связь, с каким-либо пользователем, example: '
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
 
-        to=AdminActionModel,
+        to=ActionModel,
         related_name='action_many_to_many_field',
-    )
-    position_float_field = models.FloatField(
-        db_column='position_float_field_db_column',
-        db_index=True,
-        db_tablespace='position_float_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=1.0,
-        verbose_name='Позиция в админ-панели:',
-        help_text='<small class="text-muted">Число с плавающей запятой, example: "0.0"</small><hr><br>',
     )
 
     class Meta:
         app_label = 'backend'
-        ordering = ('position_float_field', 'name_char_field', 'name_slug_field')
+        ordering = ('name_char_field', 'name_slug_field')
         verbose_name = 'Группа расширенная'
         verbose_name_plural = 'Admin Группы расширение'
-        db_table = 'group_extend_admin_model_table'
+        db_table = 'group_extend_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field}'
+        return f'{self.name_char_field[0:30]}'
 
-    def get_id(self):
-        return self.id
+
+@receiver(post_save, sender=Group)
+def create_group_model(sender, instance, created, **kwargs):
+    if created:
+        try:
+            GroupModel.objects.get_or_create(
+                group_foreign_key_field=instance,
+                name_slug_field=instance.name,
+            )
+        except Exception as error:
+            print(f"error = {error}")
+
+
+@receiver(post_save, sender=GroupModel)
+def create_group(sender, instance, created, **kwargs):
+    if created:
+        try:
+            Group.objects.get_or_create(name=str(instance.group_foreign_key_field.name))
+        except Exception as error:
+            print(f"error = {error}")
 
 
 class RationalModel(models.Model):
@@ -2142,6 +2158,7 @@ class RationalModel(models.Model):
 
         to=UserModel,
         on_delete=models.SET_NULL,
+        related_name='author_foreign_key_field',
     )
     number_char_field = models.CharField(
         db_column='number_char_field_db_column',
@@ -2160,6 +2177,25 @@ class RationalModel(models.Model):
 
         max_length=512,
     )
+
+    status_moderate_char_field = models.CharField(
+        db_column='status_moderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='status_moderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name='status_moderate_char_field',
+        help_text='<small class="text-muted">status_moderate_char_field</small><hr><br>',
+
+        max_length=256,
+    )
+
     subdivision_char_field = models.CharField(
         db_column='subdivision_char_field_db_column',
         db_index=True,
@@ -2381,76 +2417,26 @@ class RationalModel(models.Model):
 
         max_length=512,
     )
-    user4_char_field = models.CharField(
-        db_column='user4_char_field_db_column',
-        db_index=True,
-        db_tablespace='user4_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='user4',
-        help_text='<small class="text-muted">user4_char_field</small><hr><br>',
-
-        max_length=512,
-    )
-    user5_char_field = models.CharField(
-        db_column='user5_char_field_db_column',
-        db_index=True,
-        db_tablespace='user5_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='user5',
-        help_text='<small class="text-muted">user5_char_field</small><hr><br>',
-
-        max_length=512,
-    )
 
     ####################################################################################################################
 
-    author_premoderate_char_field = models.CharField(
-        db_column='author_premoderate_char_field_db_column',
+    premoderate_foreign_key_field_1 = models.ForeignKey(
+        db_column='premoderate_foreign_key_field_1_db_column',
         db_index=True,
-        db_tablespace='author_premoderate_char_field_db_tablespace',
+        db_tablespace='premoderate_foreign_key_field_1_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
-        default='',
-        verbose_name='author_premoderate_char_field',
-        help_text='<small class="text-muted">author_premoderate_char_field</small><hr><br>',
+        default=None,
+        verbose_name='premoderate_foreign_key_field_1',
+        help_text='<small class="text-muted">premoderate_foreign_key_field_1</small><hr><br>',
 
-        max_length=256,
-    )
-    conclusion_premoderate_char_field = models.CharField(
-        db_column='conclusion_premoderate_char_field_db_column',
-        db_index=True,
-        db_tablespace='conclusion_premoderate_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='Приостановлено',
-        verbose_name='conclusion_premoderate_char_field',
-        help_text='<small class="text-muted">conclusion_premoderate_char_field</small><hr><br>',
-
-        max_length=64,
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='premoderate_foreign_key_field_1',
     )
     comment_premoderate_char_field = models.CharField(
         db_column='comment_premoderate_char_field_db_column',
@@ -2470,39 +2456,23 @@ class RationalModel(models.Model):
         max_length=256,
     )
 
-    author_postmoderate_char_field = models.CharField(
-        db_column='author_postmoderate_char_field_db_column',
+    postmoderate_foreign_key_field_2 = models.ForeignKey(
+        db_column='postmoderate_foreign_key_field_2_db_column',
         db_index=True,
-        db_tablespace='author_postmoderate_char_field_db_tablespace',
+        db_tablespace='postmoderate_foreign_key_field_2_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
-        default='',
-        verbose_name='author_postmoderate_char_field',
-        help_text='<small class="text-muted">author_postmoderate_char_field</small><hr><br>',
+        default=None,
+        verbose_name='postmoderate_foreign_key_field_2',
+        help_text='<small class="text-muted">postmoderate_foreign_key_field_2</small><hr><br>',
 
-        max_length=256,
-    )
-    conclusion_postmoderate_char_field = models.CharField(
-        db_column='conclusion_postmoderate_char_field_db_column',
-        db_index=True,
-        db_tablespace='conclusion_postmoderate_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='Приостановлено',
-        verbose_name='conclusion_postmoderate_char_field',
-        help_text='<small class="text-muted">conclusion_postmoderate_char_field</small><hr><br>',
-
-        max_length=64,
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='postmoderate_foreign_key_field_2',
     )
     comment_postmoderate_char_field = models.CharField(
         db_column='comment_postmoderate_char_field_db_column',
@@ -2605,6 +2575,7 @@ class VacancyModel(models.Model):
 
         to=UserModel,
         on_delete=models.SET_NULL,
+        related_name='author_field',
     )
     qualification_field = models.CharField(
         db_column='qualification_field_db_column',
@@ -2974,43 +2945,3 @@ class ResumeModel(models.Model):
     def __str__(self):
         return f'{self.qualification_field} : {self.last_name_field} : {self.first_name_field} : ' \
                f'{self.datetime_create_field}'
-
-
-@receiver(post_save, sender=User)
-def create_user_model(sender, instance, created, **kwargs):
-    if created:
-        try:
-            UserModel.objects.get_or_create(user_foreign_key_field=instance)
-        except Exception as error:
-            print(f"error = {error}")
-
-
-@receiver(post_save, sender=UserModel)
-def create_user(sender, instance, created, **kwargs):
-    if created:
-        try:
-            User.objects.get_or_create(username=str(instance.user_foreign_key_field.username))
-        except Exception as error:
-            print(f"error = {error}")
-
-
-@receiver(post_save, sender=Group)
-def create_group_model(sender, instance, created, **kwargs):
-    if created:
-        try:
-            GroupModel.objects.get_or_create(
-                group_foreign_key_field=instance,
-                name_char_field=instance.name,
-                name_slug_field=instance.name,
-            )
-        except Exception as error:
-            print(f"error = {error}")
-
-
-@receiver(post_save, sender=GroupModel)
-def create_group(sender, instance, created, **kwargs):
-    if created:
-        try:
-            Group.objects.get_or_create(name=str(instance.group_foreign_key_field.name))
-        except Exception as error:
-            print(f"error = {error}")

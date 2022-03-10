@@ -46,10 +46,6 @@ const BankIdeaListPage = () => {
   const [user2Perc, user2PercSet] = useState("");
   const [user3, user3Set] = useState("");
   const [user3Perc, user3PercSet] = useState("");
-  const [user4, user4Set] = useState("");
-  const [user4Perc, user4PercSet] = useState("");
-  const [user5, user5Set] = useState("");
-  const [user5Perc, user5PercSet] = useState("");
 
   const userListAllStore = useSelector((state) => state.userListAllStore); // store.js
   const {
@@ -102,8 +98,6 @@ const BankIdeaListPage = () => {
       user1: user1 + " " + user1Perc,
       user2: user2 + " " + user2Perc,
       user3: user3 + " " + user3Perc,
-      user4: user4 + " " + user4Perc,
-      user5: user5 + " " + user5Perc,
     };
     dispatch(actions.rationalCreateAuthAction(form));
   };
@@ -454,75 +448,13 @@ const BankIdeaListPage = () => {
                             />
                           </label>
                         </div>
-                        <div className="p-0 m-0">
-                          <label className="form-control-sm">
-                            участник №4:
-                            <select
-                              id="subdivision"
-                              name="subdivision"
-                              className="form-control form-control-sm"
-                              value={user4}
-                              onChange={(e) => user4Set(e.target.value)}
-                            >
-                              <option value="">Не выбрано</option>
-                              {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
-                                  {user}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="form-control-sm">
-                            % Вклада 4 участника
-                            <input
-                              type="text"
-                              placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="200"
-                              className="form-control form-control-sm"
-                              value={user4Perc}
-                              onChange={(e) => user4PercSet(e.target.value)}
-                            />
-                          </label>
-                        </div>
-                        <div className="p-0 m-0">
-                          <label className="form-control-sm">
-                            участник №5:
-                            <select
-                              id="subdivision"
-                              name="subdivision"
-                              className="form-control form-control-sm"
-                              value={user5}
-                              onChange={(e) => user5Set(e.target.value)}
-                            >
-                              <option value="">Не выбрано</option>
-                              {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
-                                  {user}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="form-control-sm">
-                            % Вклада 5 участника
-                            <input
-                              type="text"
-                              placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="200"
-                              className="form-control form-control-sm"
-                              value={user5Perc}
-                              onChange={(e) => user5PercSet(e.target.value)}
-                            />
-                          </label>
-                        </div>
                       </div>
                     )}
                   </label>
                 </div>
                 <div className="p-0 m-0">
                   <small className="text-muted">
-                    * общая сумма вклада всех участников не должна не превышать
+                    * общая сумма вклада всех участников не должна превышать
                     100%
                   </small>
                 </div>

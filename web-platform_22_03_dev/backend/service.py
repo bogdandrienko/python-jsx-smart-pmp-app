@@ -72,7 +72,7 @@ class DjangoClass:
                         if user_model.email_field and user_model.secret_question_char_field and \
                                 user_model.secret_answer_char_field:
                             try:
-                                action_model = backend_models.AdminActionModel.objects.get(name_slug_field=access)
+                                action_model = backend_models.ActionModel.objects.get(name_slug_field=access)
                                 if action_model:
                                     groups = backend_models.GroupModel.objects.filter(
                                         user_many_to_many_field=user_model,
@@ -448,29 +448,42 @@ class DjangoClass:
                 # base
                 groups = ["user", "moderator", "superuser"]
                 # rational
-                groups += ["rational_admin", "rational_moderator", "rational_moderator_tech_pre_atp",
-                           "rational_moderator_tech_pre_gtk", "rational_moderator_tech_pre_ok",
-                           "rational_moderator_tech_pre_uprav", "rational_moderator_tech_pre_energouprav",
-                           "rational_moderator_tech_post", "rational_moderator_no_tech_pre"]
+                groups += ["rational_admin", "rational_moderator_tech_pre_atp", "rational_moderator_tech_pre_gtk",
+                           "rational_moderator_tech_pre_ok", "rational_moderator_tech_pre_uprav",
+                           "rational_moderator_tech_pre_energouprav", "rational_moderator_tech_post",
+                           "rational_moderator_no_tech_post"]
                 # tests
                 groups += ["moderator_vacancy"]
                 for grp in groups:
-                    try:
-                        group = Group.objects.get(name=grp)
-                        group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
-                        group_model.user_many_to_many_field.add(
-                            backend_models.UserModel.objects.get(
-                                user_foreign_key_field=User.objects.get(username="Bogdan")
-                            )
+                    group = Group.objects.get_or_create(name=grp)[0]
+                    group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
+                    group_model.user_many_to_many_field.add(
+                        backend_models.UserModel.objects.get(
+                            user_foreign_key_field=User.objects.get(username="Bogdan")
                         )
-                    except Exception as error:
-                        group = Group.objects.create(name=grp)
-                        group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
-                        group_model.name_char_field = grp
-                        group_model.name_slug_field = grp
-                        action_model = backend_models.AdminActionModel.objects.get_or_create(slug_field=grp)[0]
-                        group_model.action_many_to_many_field.add(action_model)
-                        group_model.save()
+                    )
+                    group_model.name_slug_field = grp
+                    action_model = backend_models.ActionModel.objects.get_or_create(access_slug_field=grp)[0]
+                    group_model.action_many_to_many_field.add(action_model)
+                    group_model.save()
+
+                    # try:
+                    #     group = Group.objects.get(name=grp)
+                    #     group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
+                    #     group_model.user_many_to_many_field.add(
+                    #         backend_models.UserModel.objects.get(
+                    #             user_foreign_key_field=User.objects.get(username="Bogdan")
+                    #         )
+                    #     )
+                    # except Exception as error:
+                    #     group = Group.objects.create(name=grp)
+                    #     group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
+                    #     group_model.name_char_field = grp
+                    #     group_model.name_slug_field = grp
+                    #     action_model = backend_models.ActionModel.objects.get_or_create(access_slug_field=grp)[0]
+                    #     group_model.action_many_to_many_field.add(action_model)
+                    #     group_model.save()
+
             except Exception as error__:
                 print(error__)
             ############################################################################################################

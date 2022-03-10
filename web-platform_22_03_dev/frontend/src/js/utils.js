@@ -1,7 +1,7 @@
 import * as constants from "./constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const CheckAccess = (userDetailsStore, slug = "") => {
+export const CheckAccess = (userDetailsStore, slug) => {
   try {
     const {
       // load: loadUserDetails,
@@ -11,7 +11,17 @@ export const CheckAccess = (userDetailsStore, slug = "") => {
     } = userDetailsStore;
     if (dataUserDetails) {
       if (dataUserDetails["group_model"]) {
-        return dataUserDetails["group_model"].includes(slug);
+        if (typeof slug === "string") {
+          return dataUserDetails["group_model"].includes(slug);
+        } else {
+          let access = false;
+          slug.forEach(function (object, index, array) {
+            if (dataUserDetails["group_model"].includes(object)) {
+              access = true;
+            }
+          });
+          return access;
+        }
       }
       return false;
     }

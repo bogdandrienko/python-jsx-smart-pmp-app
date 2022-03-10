@@ -32,8 +32,9 @@ const RationalModerateDetailPage = () => {
   const location = useLocation();
   const id = useParams().id;
 
-  const [preModerateAuthor, setPreModerateAuthor] = useState("");
-  const [postModerateAuthor, setPostModerateAuthor] = useState("");
+  const [rationalId, rationalIdSet] = useState("");
+  const [moderate, moderateSet] = useState("");
+  const [comment, commentSet] = useState("");
 
   const rationalDetailStore = useSelector((state) => state.rationalDetailStore); // store.js
   const {
@@ -62,6 +63,20 @@ const RationalModerateDetailPage = () => {
       dispatch(actions.rationalDetailAuthAction(form));
     }
   }, [dispatch, id, dataRationalDetail, loadRationalDetail]);
+
+  const formHandlerSubmit = (e) => {
+    e.preventDefault();
+    const form = {
+      "Action-type": "RATIONAL_MODERATE",
+      rationalId: id,
+      moderate: moderate,
+      comment: comment,
+    };
+    dispatch(actions.rationalCreateAuthAction(form));
+    navigate("/rational_moderate_list");
+    dispatch({ type: constants.RATIONAL_LIST_RESET_CONSTANT });
+    dispatch({ type: constants.RATIONAL_DETAIL_RESET_CONSTANT });
+  };
 
   return (
     <div>
@@ -99,183 +114,59 @@ const RationalModerateDetailPage = () => {
           )}
         </div>
         <div className="container">
-          <br />
           <hr />
-          <br />
-          <form
-            action="#"
-            method="POST"
-            target="_self"
-            encType="multipart/form-data"
-            name="idea_create"
-            autoComplete="on"
-            className="text-center"
-          >
-            <div>
-              <div className="bg-warning bg-opacity-10">
-                <div>
-                  <h4 className="lead fw-bold">Премодерация</h4>
-                  <label className="w-50 form-control-sm m-1">
-                    ФИО, должность:
-                    <input
-                      type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required=""
-                      placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
-                      value={preModerateAuthor}
-                      minLength="1"
-                      maxLength="64"
-                      className="form-control form-control-sm"
-                    />
-                    <small className="text-success">
-                      * данные будут введены автоматически
-                    </small>
-                  </label>
-                  <label className="w-25 form-control-sm m-1">
-                    Заключение:
-                    <select
-                      id="category_slug_field"
-                      name="category_slug_field"
-                      required
-                      className="form-control form-control-sm"
+          <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+            <div className="bg-danger bg-opacity-10">
+              <h4 className="lead fw-bold">Модерация</h4>
+              <label className="form-control-sm m-1">
+                Заключение:
+                <select
+                  required
+                  className="form-control form-control-sm"
+                  value={moderate}
+                  onChange={(e) => moderateSet(e.target.value)}
+                >
+                  <option value="">Не выбрано</option>
+                  <option value="Принято">Принято</option>
+                  <option value="Отклонено">Отклонено</option>
+                </select>
+                <small className="text-danger">* обязательно</small>
+              </label>
+              <label className="w-50 form-control-sm m-1">
+                Комментарий к отклонению:
+                <input
+                  type="text"
+                  value={comment}
+                  placeholder="пример: дополнить описание"
+                  minLength="0"
+                  maxLength="256"
+                  className="form-control form-control-sm"
+                  onChange={(e) => commentSet(e.target.value)}
+                />
+                <small className="text-muted">* не обязательно</small>
+              </label>
+              <div className="container-fluid text-center">
+                <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                  <li className="m-1">
+                    <button
+                      className="btn btn-sm btn-outline-primary"
+                      type="submit"
                     >
-                      <option value="Приостановлено">Приостановлено</option>
-                      <option value="Принято">Принято</option>
-                      <option value="Отклонено">Отклонено</option>
-                    </select>
-                    <small className="text-muted">
-                      обязательно выбрать одну из категорий
-                    </small>
-                  </label>
-                  <label className="w-75 form-control-sm m-1">
-                    Комментарий к заключению:
-                    <input
-                      type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required=""
-                      placeholder="пример: дополнить описание"
-                      minLength="0"
-                      maxLength="256"
-                      className="form-control form-control-sm"
-                    />
-                    <small className="text-muted">* не обязательно</small>
-                  </label>
-                </div>
-                <div className="container-fluid text-center">
-                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                    <li className="m-1">
-                      <button
-                        className="btn btn-sm btn-outline-primary"
-                        type="submit"
-                      >
-                        Подтвердить
-                      </button>
-                    </li>
-                    <li className="m-1">
-                      <button
-                        className="btn btn-sm btn-outline-warning"
-                        type="reset"
-                      >
-                        Сбросить
-                      </button>
-                    </li>
-                  </ul>
-                </div>
+                      Отправить
+                    </button>
+                  </li>
+                  <li className="m-1">
+                    <button
+                      className="btn btn-sm btn-outline-warning"
+                      type="reset"
+                    >
+                      Сбросить все данные
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
           </form>
-          <br />
-          <hr />
-          <br />
-          <form
-            action="#"
-            method="POST"
-            target="_self"
-            encType="multipart/form-data"
-            name="idea_create"
-            autoComplete="on"
-            className="text-center"
-          >
-            <div>
-              <div className="bg-danger bg-opacity-10">
-                <div>
-                  <h4 className="lead fw-bold">Постмодерация</h4>
-                  <label className="w-50 form-control-sm m-1">
-                    ФИО, должность:
-                    <input
-                      type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required=""
-                      placeholder="Ширшов А.А., зам. начальника по развитию ЭУ"
-                      value={postModerateAuthor}
-                      minLength="1"
-                      maxLength="64"
-                      className="form-control form-control-sm"
-                    />
-                    <small className="text-success">
-                      * данные будут введены автоматически
-                    </small>
-                  </label>
-                  <label className="w-25 form-control-sm m-1">
-                    Заключение:
-                    <select
-                      id="category_slug_field"
-                      name="category_slug_field"
-                      required
-                      className="form-control form-control-sm"
-                    >
-                      <option value="Приостановлено">Приостановлено</option>
-                      <option value="Принято">Принято</option>
-                      <option value="Отклонено">Отклонено</option>
-                    </select>
-                    <small className="text-muted">
-                      обязательно выбрать одну из категорий
-                    </small>
-                  </label>
-                  <label className="w-75 form-control-sm m-1">
-                    Комментарий к заключению:
-                    <input
-                      type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required=""
-                      placeholder="пример: дополнить описание"
-                      minLength="0"
-                      maxLength="256"
-                      className="form-control form-control-sm"
-                    />
-                    <small className="text-muted">* не обязательно</small>
-                  </label>
-                </div>
-                <div className="container-fluid text-center">
-                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                    <li className="m-1">
-                      <button
-                        className="btn btn-sm btn-outline-primary"
-                        type="submit"
-                      >
-                        Подтвердить
-                      </button>
-                    </li>
-                    <li className="m-1">
-                      <button
-                        className="btn btn-sm btn-outline-warning"
-                        type="reset"
-                      >
-                        Сбросить
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </form>
-          <br />
-          <hr />
-          <br />
         </div>
       </main>
       <FooterComponent />

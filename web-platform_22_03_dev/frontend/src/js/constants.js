@@ -621,7 +621,17 @@ export const modules = [
           },
           {
             Header: "Модератор рац. предложений",
-            Access: "rational_moderator",
+            Access: [
+              "rational_admin",
+              "rational_moderator_tech_pre_atp",
+              "rational_moderator_tech_pre_energouprav",
+              "rational_moderator_tech_pre_gtk",
+              "rational_moderator_tech_pre_ok",
+              "rational_moderator_tech_pre_uprav",
+              "rational_moderator_no_tech_post",
+              "rational_moderator_no_tech_post",
+              "rational_moderator_tech_post",
+            ],
             Active: true,
             Link: "/rational_moderate_list",
             ExternalLink: false,
