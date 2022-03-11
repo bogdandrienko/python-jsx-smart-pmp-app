@@ -114,8 +114,8 @@ const ChangeProfilePage = () => {
           {StoreStatusComponent(
             userDetailsStore,
             "userDetailsStore",
-            true,
-            "Данные успешно получены!",
+            false,
+            "",
             constants.DEBUG_CONSTANT
           )}
           {StoreStatusComponent(
@@ -132,29 +132,19 @@ const ChangeProfilePage = () => {
               Внимание, без правильного заполнения обязательных данных Вас будет
               перенаправлять на эту страницу постоянно!
             </h6>
-            <form
-              method="POST"
-              target="_self"
-              encType="multipart/form-data"
-              name="account_login"
-              autoComplete="on"
-              className="text-center p-1 m-1"
-              onSubmit={formHandlerSubmit}
-            >
+            <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
               <div>
                 <label className="form-control-md m-1 lead">
                   Введите секретный вопрос для восстановления доступа:
                   <input
                     type="text"
-                    id="secretQuestion"
-                    name="secretQuestion"
-                    required
-                    placeholder=""
+                    className="form-control form-control-md"
                     value={secretQuestion}
+                    placeholder="введите сюда секретный вопрос..."
+                    required
                     onChange={(e) => setSecretQuestion(e.target.value)}
                     minLength="6"
                     maxLength="32"
-                    className="form-control form-control-md"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -169,15 +159,13 @@ const ChangeProfilePage = () => {
                   Введите ответ на секретный вопрос:
                   <input
                     type="text"
-                    id="secretAnswer"
-                    name="secretAnswer"
-                    required
-                    placeholder=""
+                    className="form-control form-control-md"
                     value={secretAnswer}
+                    placeholder="введите сюда секретный ответ..."
+                    required
                     onChange={(e) => setSecretAnswer(e.target.value)}
                     minLength="4"
                     maxLength="32"
-                    className="form-control form-control-md"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -194,14 +182,12 @@ const ChangeProfilePage = () => {
                   Почта для восстановления доступа:
                   <input
                     type="email"
-                    id="email"
-                    name="email"
-                    placeholder=""
+                    className="form-control form-control-md"
                     value={email}
+                    placeholder="введите сюда почту..."
                     onChange={(e) => setEmail(e.target.value)}
                     minLength="1"
                     maxLength="128"
-                    className="form-control form-control-md"
                   />
                   <p>
                     <small className="text-success">* не обязательно</small>
@@ -218,17 +204,14 @@ const ChangeProfilePage = () => {
                   </p>
                   <input
                     type="password"
+                    className="form-control form-control-md"
                     id="password"
-                    name="password"
-                    required
-                    placeholder=""
                     value={password}
+                    placeholder="введите сюда новый пароль..."
+                    required
                     onChange={(e) => setPassword(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-md"
-                    autoComplete="none"
-                    aria-autocomplete="none"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -248,17 +231,14 @@ const ChangeProfilePage = () => {
                   </p>
                   <input
                     type="password"
+                    className="form-control form-control-md"
                     id="password2"
-                    name="password2"
-                    required
-                    placeholder=""
                     value={password2}
+                    placeholder="введите сюда новый пароль..."
+                    required
                     onChange={(e) => setPassword2(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-md"
-                    autoComplete="none"
-                    aria-autocomplete="none"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -271,45 +251,36 @@ const ChangeProfilePage = () => {
                 </label>
               </div>
               <hr />
-              <div className="container text-center">
-                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center">
-                  <div className="m-1">
-                    <button
-                      type="submit"
-                      className="btn btn-md btn-primary form-control"
-                    >
-                      Сохранить новые данные
-                    </button>
-                  </div>
-                  <div className="m-1">
-                    <button
-                      type="reset"
-                      onClick={(e) => {
-                        setEmail("");
-                        setSecretQuestion("");
-                        setSecretAnswer("");
-                        setPassword("");
-                        setPassword2("");
-                      }}
-                      className="btn btn-md btn-warning form-control"
-                    >
-                      Сбросить данные
-                    </button>
-                  </div>
-                  <div className="m-1">
-                    <button
-                      type="button"
-                      onClick={(e) =>
-                        utils.ChangePasswordVisibility([
-                          "password",
-                          "password2",
-                        ])
-                      }
-                      className="btn btn-md btn-danger form-control"
-                    >
-                      Видимость пароля
-                    </button>
-                  </div>
+              <div className="container">
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                  <button
+                    type="submit"
+                    className="btn btn-sm btn-primary p-2 m-1"
+                  >
+                    Сохранить новые данные
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      setEmail("");
+                      setSecretQuestion("");
+                      setSecretAnswer("");
+                      setPassword("");
+                      setPassword2("");
+                    }}
+                    className="btn btn-sm btn-warning p-2 m-1"
+                  >
+                    Сбросить данные
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) =>
+                      utils.ChangePasswordVisibility(["password", "password2"])
+                    }
+                    className="btn btn-sm btn-danger p-2 m-1"
+                  >
+                    Видимость пароля
+                  </button>
                 </ul>
               </div>
             </form>

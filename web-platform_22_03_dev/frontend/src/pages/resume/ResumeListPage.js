@@ -236,7 +236,7 @@ const VacancyListPage = () => {
           </ul>
         </div>
         <div className="container-fluid p-0 m-0">
-          {!dataResumeList && dataResumeList.length < 1 ? (
+          {!dataResumeList || dataResumeList.length < 1 ? (
             <MessageComponent variant={"danger"}>
               Вакансии не найдены! Попробуйте изменить условия фильтрации или
               очистить строку поиска.

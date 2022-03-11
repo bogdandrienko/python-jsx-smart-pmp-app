@@ -79,15 +79,7 @@ const ChangePasswordPage = () => {
         </div>
         <div>
           <div className="form-control">
-            <form
-              method="POST"
-              target="_self"
-              encType="multipart/form-data"
-              name="account_login"
-              autoComplete="on"
-              className="text-center p-1 m-1"
-              onSubmit={formHandlerSubmit}
-            >
+            <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
               <div>
                 <label className="form-control-md m-1 lead">
                   Введите пароль для входа в аккаунт:
@@ -99,16 +91,13 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password"
-                    name="password"
-                    required
-                    placeholder=""
+                    className="form-control form-control-md"
                     value={password}
+                    placeholder="введите сюда новый пароль..."
+                    required
                     onChange={(e) => setPassword(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-md"
-                    autoComplete="none"
-                    aria-autocomplete="none"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -129,16 +118,13 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password2"
-                    name="password2"
-                    required
-                    placeholder=""
+                    className="form-control form-control-md"
                     value={password2}
+                    placeholder="введите сюда новый пароль..."
+                    required
                     onChange={(e) => setPassword2(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-md"
-                    autoComplete="none"
-                    aria-autocomplete="none"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -151,42 +137,33 @@ const ChangePasswordPage = () => {
                 </label>
               </div>
               <hr />
-              <div className="container text-center">
-                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center">
-                  <div className="m-1">
-                    <button
-                      type="submit"
-                      className="btn btn-md btn-primary form-control"
-                    >
-                      Сохранить новые данные
-                    </button>
-                  </div>
-                  <div className="m-1">
-                    <button
-                      type="reset"
-                      onClick={(e) => {
-                        setPassword("");
-                        setPassword2("");
-                      }}
-                      className="btn btn-md btn-warning form-control"
-                    >
-                      Сбросить данные
-                    </button>
-                  </div>
-                  <div className="m-1">
-                    <button
-                      type="button"
-                      onClick={(e) =>
-                        utils.ChangePasswordVisibility([
-                          "password",
-                          "password2",
-                        ])
-                      }
-                      className="btn btn-md btn-danger form-control"
-                    >
-                      Видимость пароля
-                    </button>
-                  </div>
+              <div className="container">
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                  <button
+                    type="submit"
+                    className="btn btn-sm btn-primary p-2 m-1"
+                  >
+                    Сохранить новые данные
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      setPassword("");
+                      setPassword2("");
+                    }}
+                    className="btn btn-sm btn-warning p-2 m-1"
+                  >
+                    Сбросить данные
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) =>
+                      utils.ChangePasswordVisibility(["password", "password2"])
+                    }
+                    className="btn btn-sm btn-danger p-2 m-1"
+                  >
+                    Видимость пароля
+                  </button>
                 </ul>
               </div>
             </form>

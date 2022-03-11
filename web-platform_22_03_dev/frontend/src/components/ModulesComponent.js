@@ -38,25 +38,16 @@ const ModulesComponent = () => {
     }
   }, [dispatch]);
 
-  function checkAccess(slug = "") {
-    if (dataUserDetails) {
-      if (dataUserDetails["group_model"]) {
-        return dataUserDetails["group_model"].includes(slug);
-      }
-      return false;
-    }
-    return false;
-  }
-
   return (
     <div>
-      <h2>Модули:</h2>
-      <div className="container-fluid">
-        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
-          {constants.modules
-            ? constants.modules.map(
+      {constants.modules && (
+        <div>
+          <h2>Модули:</h2>
+          <div className="container-fluid">
+            <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+              {constants.modules.map(
                 (module, module_i) =>
-                  checkAccess(module.Access) &&
+                  utils.CheckAccess(userDetailsStore, module.Access) &&
                   module.ShowInModules && (
                     <div
                       key={module_i}
@@ -73,7 +64,10 @@ const ModulesComponent = () => {
                       {module["Sections"]
                         ? module["Sections"].map(
                             (section, section_i) =>
-                              checkAccess(section.Access) && (
+                              utils.CheckAccess(
+                                userDetailsStore,
+                                section.Access
+                              ) && (
                                 <div
                                   key={section_i}
                                   className="card-body text-end p-0 m-0"
@@ -102,7 +96,10 @@ const ModulesComponent = () => {
                                       {section["Links"]
                                         ? section["Links"].map((link, link_i) =>
                                             link["Active"]
-                                              ? checkAccess(link.Access) && (
+                                              ? utils.CheckAccess(
+                                                  userDetailsStore,
+                                                  link.Access
+                                                ) && (
                                                   <li
                                                     key={link_i}
                                                     className="list-group-item list-group-item-action p-0 m-0"
@@ -133,7 +130,10 @@ const ModulesComponent = () => {
                                                     )}
                                                   </li>
                                                 )
-                                              : checkAccess(link.Access) && (
+                                              : utils.CheckAccess(
+                                                  userDetailsStore,
+                                                  link.Access
+                                                ) && (
                                                   <li
                                                     key={link_i}
                                                     className="list-group-item list-group-item-action disabled p-0 m-1"
@@ -168,10 +168,11 @@ const ModulesComponent = () => {
                         : ""}
                     </div>
                   )
-              )
-            : ""}
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

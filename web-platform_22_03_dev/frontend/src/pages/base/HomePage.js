@@ -42,38 +42,8 @@ const HomePage = () => {
       />
       <main className="container">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
-          <div className="">
-            <small className="lead fw-bold">Первый вход в систему:</small>
-            <div className="w-75">
-              С компьютера:
-              <div className="">
-                <ReactPlayer
-                  url="static/study/first_login.mp4"
-                  title="Первый вход в систему:"
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  className=""
-                />
-              </div>
-            </div>
-
-            <div className="embed-responsive embed-responsive-16by9 w-50">
-              С смартфона:
-              <div className="player-wrapper">
-                <ReactPlayer
-                  url="static/study/first_login_mobile.mp4"
-                  title="Первый вход в систему:"
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  className=""
-                />
-              </div>
-            </div>
-          </div>
-          <div className="">
-            <div className="btn-group p-1 m-0">
+          <div className="embed-responsive embed-responsive-16by9">
+            <div className="btn-group p-1 m-0 text-start w-100">
               <Link
                 to={"/video_study"}
                 className="btn btn-sm btn-warning p-2 m-1"
@@ -87,6 +57,19 @@ const HomePage = () => {
                 Инструкции в текстовом формате
               </Link>
             </div>
+            <div className="player-wrapper">
+              <small className="lead fw-bold">Первый вход в систему:</small>
+              <ReactPlayer
+                url="static/study/first_login.mp4"
+                title="Первый вход в систему:"
+                width="100%"
+                height="100%"
+                controls={true}
+                className=""
+              />
+            </div>
+          </div>
+          <div className="">
             <NewsComponent count={9} />
           </div>
         </div>

@@ -142,7 +142,7 @@ const ChangePasswordPage = () => {
             userRecoverPasswordStore,
             "userRecoverPasswordStore",
             true,
-            "Успешно!",
+            "Пользователь найден или введённые данные успешно совпадают!",
             constants.DEBUG_CONSTANT
           )}
           {!captcha && (
@@ -156,11 +156,6 @@ const ChangePasswordPage = () => {
             <div>
               <div className="form-control">
                 <form
-                  method="POST"
-                  target="_self"
-                  encType="multipart/form-data"
-                  name="account_login"
-                  autoComplete="on"
                   className="text-center p-1 m-1"
                   onSubmit={formHandlerSubmitFindUser}
                 >
@@ -198,29 +193,37 @@ const ChangePasswordPage = () => {
                     </label>
                   </div>
                   <hr />
-                  <div className="container text-center">
-                    <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                      <div className="m-1">
-                        <button
-                          type="submit"
-                          className="btn btn-md btn-primary form-control"
-                        >
-                          Проверить идентификатор
-                        </button>
-                      </div>
-                      <div className="m-1">
-                        <button
-                          type="reset"
-                          onClick={(e) => {
-                            setUsername("");
-                            setSecretQuestion("");
-                            setSuccess(false);
-                          }}
-                          className="btn btn-md btn-warning form-control"
-                        >
-                          Сбросить данные
-                        </button>
-                      </div>
+                  <div className="container">
+                    <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                      <button
+                        type="submit"
+                        className="btn btn-sm btn-primary p-2 m-1"
+                      >
+                        Проверить идентификатор
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          setUsername("");
+                          setSecretQuestion("");
+                          setSuccess(false);
+                        }}
+                        className="btn btn-sm btn-warning p-2 m-1"
+                      >
+                        Сбросить данные
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) =>
+                          utils.ChangePasswordVisibility([
+                            "password",
+                            "password2",
+                          ])
+                        }
+                        className="btn btn-sm btn-danger p-2 m-1"
+                      >
+                        Видимость пароля
+                      </button>
                     </ul>
                   </div>
                 </form>
@@ -237,11 +240,6 @@ const ChangePasswordPage = () => {
                     Восстановление через секретный вопрос/ответ.
                   </h4>
                   <form
-                    method="POST"
-                    target="_self"
-                    encType="multipart/form-data"
-                    name="account_login"
-                    autoComplete="on"
                     className="text-center p-1 m-1"
                     onSubmit={formHandlerSubmitCheckAnswer}
                   >
@@ -289,11 +287,6 @@ const ChangePasswordPage = () => {
                     Восстановление через введённую ранее почту.
                   </h4>
                   <form
-                    method="POST"
-                    target="_self"
-                    encType="multipart/form-data"
-                    name="account_login"
-                    autoComplete="on"
                     className="text-center p-1 m-1"
                     onSubmit={formHandlerSubmitRecoverEmail}
                   >
@@ -332,25 +325,31 @@ const ChangePasswordPage = () => {
                       </label>
                     </div>
                     <hr />
-                    <div className="container text-center">
-                      <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                        <div className="m-1">
-                          <button
-                            type="submit"
-                            className="btn btn-md btn-success"
-                          >
-                            Проверить код
-                          </button>
-                        </div>
-                        <div className="m-1">
-                          <button
-                            type="reset"
-                            onClick={formHandlerSubmitSendEmail}
-                            className="btn btn-md btn-danger"
-                          >
-                            Отправить код на почту
-                          </button>
-                        </div>
+                    <div className="container">
+                      <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                        <button
+                          type="submit"
+                          className="btn btn-sm btn-primary p-2 m-1"
+                        >
+                          Проверить код
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            setPassword("");
+                            setPassword2("");
+                          }}
+                          className="btn btn-sm btn-warning p-2 m-1"
+                        >
+                          Сбросить данные
+                        </button>
+                        <button
+                          type="button"
+                          onClick={formHandlerSubmitSendEmail}
+                          className="btn btn-sm btn-danger p-2 m-1"
+                        >
+                          Отправить код на почту
+                        </button>
                       </ul>
                     </div>
                   </form>
@@ -362,11 +361,6 @@ const ChangePasswordPage = () => {
           )}
           {success && (
             <form
-              method="POST"
-              target="_self"
-              encType="multipart/form-data"
-              name="account_login"
-              autoComplete="on"
               className="text-center p-1 m-1"
               onSubmit={formHandlerSubmitRecoverPassword}
             >
@@ -381,16 +375,13 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password"
-                    name="password"
-                    required
-                    placeholder=""
+                    className="form-control form-control-md"
                     value={password}
+                    placeholder="введите сюда новый пароль..."
+                    required
                     onChange={(e) => setPassword(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-md"
-                    autoComplete="none"
-                    aria-autocomplete="none"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -411,16 +402,13 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password2"
-                    name="password2"
-                    required
-                    placeholder=""
+                    className="form-control form-control-md"
                     value={password2}
+                    placeholder="введите сюда новый пароль..."
+                    required
                     onChange={(e) => setPassword2(e.target.value)}
                     minLength="8"
                     maxLength="32"
-                    className="form-control form-control-md"
-                    autoComplete="none"
-                    aria-autocomplete="none"
                   />
                   <p>
                     <small className="text-danger">* обязательно</small>
@@ -433,42 +421,33 @@ const ChangePasswordPage = () => {
                 </label>
               </div>
               <hr />
-              <div className="container text-center">
-                <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                  <div className="m-1">
-                    <button
-                      type="submit"
-                      className="btn btn-md btn-primary form-control"
-                    >
-                      Сохранить новые данные
-                    </button>
-                  </div>
-                  <div className="m-1">
-                    <button
-                      type="reset"
-                      onClick={(e) => {
-                        setPassword("");
-                        setPassword2("");
-                      }}
-                      className="btn btn-md btn-warning form-control"
-                    >
-                      Сбросить данные
-                    </button>
-                  </div>
-                  <div className="m-1">
-                    <button
-                      type="button"
-                      onClick={(e) =>
-                        utils.ChangePasswordVisibility([
-                          "password",
-                          "password2",
-                        ])
-                      }
-                      className="btn btn-md btn-danger form-control"
-                    >
-                      Видимость пароля
-                    </button>
-                  </div>
+              <div className="container">
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                  <button
+                    type="submit"
+                    className="btn btn-sm btn-primary p-2 m-1"
+                  >
+                    Сохранить новые данные
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      setPassword("");
+                      setPassword2("");
+                    }}
+                    className="btn btn-sm btn-warning p-2 m-1"
+                  >
+                    Сбросить данные
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) =>
+                      utils.ChangePasswordVisibility(["password", "password2"])
+                    }
+                    className="btn btn-sm btn-danger p-2 m-1"
+                  >
+                    Видимость пароля
+                  </button>
                 </ul>
               </div>
             </form>

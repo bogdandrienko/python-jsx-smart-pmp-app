@@ -705,8 +705,6 @@ def api_auth_admin_create_or_change_users(request):
                             else:
                                 return value
 
-                        print("additional_excel: ", additional_excel)
-
                         workbook = openpyxl.load_workbook(additional_excel)
                         sheet = workbook.active
                         max_rows = sheet.max_row
@@ -802,6 +800,7 @@ def api_auth_admin_create_or_change_users(request):
                                             name_slug_field=group,
                                         )
                                     group_model.user_many_to_many_field.add(user_model)
+                            print(username)
 
                     create_users()
                     # threading.Thread(target=create_users, args=()).start()
@@ -1707,6 +1706,8 @@ def api_auth_rational(request):
                     user1 = req_inst.get_value("user1")
                     user2 = req_inst.get_value("user2")
                     user3 = req_inst.get_value("user3")
+                    user4 = req_inst.get_value("user4")
+                    user5 = req_inst.get_value("user5")
 
                     if sphere == "Технологическая":
                         status_moderate = "Предтехмодерация"
@@ -1729,9 +1730,11 @@ def api_auth_rational(request):
                         user1_char_field=user1,
                         user2_char_field=user2,
                         user3_char_field=user3,
+                        user4_char_field=user4,
+                        user5_char_field=user5,
                         status_moderate_char_field=status_moderate,
                     )
-                    response = {"response": "Рац. предложение успешно создано!"}
+                    response = {"response": "Рационализаторское предложение успешно отправлено на модерацию!"}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:

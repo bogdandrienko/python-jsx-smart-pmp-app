@@ -26,28 +26,25 @@ const NewsComponent = (count = 100) => {
 
   return (
     <div className="">
-      <div className="list-group list-group-flush border-bottom scrollarea">
+      <div className="list-group list-group-flush border-bottom scrollarea m-0 p-0">
         <LinkContainer to="/news" className="m-0 p-0">
           <Nav.Link>
             <div
-              className="list-group-item list-group-item-action active py-3 lh-tight"
+              className="list-group-item list-group-item-action active m-0 p-1 lh-tight shadow"
               aria-current="true"
             >
               <div className="d-flex w-100 align-items-center justify-content-between">
                 <strong className="mb-1 lead">Лента</strong>
                 <strong className="text-warning">Свежие сверху</strong>
               </div>
-              {count.count <= 9 ? (
+              {count.count <= 9 && (
                 <div className="col-10 mb-1 small">
                   нажмите сюда для просмотра всех изменений
                 </div>
-              ) : (
-                ""
               )}
             </div>
           </Nav.Link>
         </LinkContainer>
-
         {constants.news.slice(0, count.count).map((news_elem, index) => (
           <div key={index}>
             <a
@@ -61,10 +58,8 @@ const NewsComponent = (count = 100) => {
               <div className="d-flex w-100 align-items-center justify-content-between">
                 <strong className="mb-1">
                   {news_elem.Title}
-                  {news_elem.Link !== "#" ? (
+                  {news_elem.Link !== "#" && (
                     <small className="text-primary"> (ссылка)</small>
-                  ) : (
-                    ""
                   )}
                 </strong>
                 <small className="text-muted">
@@ -81,15 +76,11 @@ const NewsComponent = (count = 100) => {
               </div>
               <div className="col-10 mb-1 small">
                 {news_elem.Description}
-                {news_elem.Helps ? (
+                {news_elem.Helps && (
                   <small className="text-secondary"> ({news_elem.Helps})</small>
-                ) : (
-                  ""
                 )}
-                {news_elem.Danger ? (
+                {news_elem.Danger && (
                   <small className="text-danger"> ({news_elem.Danger})</small>
-                ) : (
-                  ""
                 )}
               </div>
             </a>

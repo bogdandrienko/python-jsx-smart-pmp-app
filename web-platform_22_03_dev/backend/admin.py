@@ -451,6 +451,8 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user1_char_field",
         "user2_char_field",
         "user3_char_field",
+        "user4_char_field",
+        "user5_char_field",
 
         "premoderate_foreign_key_field_1",
         "comment_premoderate_char_field",
@@ -488,6 +490,8 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user1_char_field",
         "user2_char_field",
         "user3_char_field",
+        "user4_char_field",
+        "user5_char_field",
 
         "premoderate_foreign_key_field_1",
         "comment_premoderate_char_field",
@@ -516,6 +520,8 @@ class RationalModelAdmin(admin.ModelAdmin):
             "user1_char_field",
             "user2_char_field",
             "user3_char_field",
+            "user4_char_field",
+            "user5_char_field",
         )}),
         ("Предмодерация", {"fields": (
             "premoderate_foreign_key_field_1",
@@ -548,6 +554,8 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user1_char_field",
         "user2_char_field",
         "user3_char_field",
+        "user4_char_field",
+        "user5_char_field",
 
         "premoderate_foreign_key_field_1",
         "comment_premoderate_char_field",

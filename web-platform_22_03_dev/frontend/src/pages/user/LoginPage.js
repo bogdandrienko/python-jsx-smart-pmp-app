@@ -53,7 +53,7 @@ const LoginPage = () => {
 
   const formHandlerSubmit = (e) => {
     e.preventDefault();
-    if (captcha !== "") {
+    if (captcha && captcha !== "") {
       const form = {
         "Action-type": "USER_LOGIN",
         username: username,
@@ -65,7 +65,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      {/*<HeaderComponent logic={true} redirect={true} />*/}
+      <HeaderComponent logic={true} redirect={true} />
       <TitleComponent
         first={"Вход в систему"}
         second={"страница для входа в систему."}
@@ -76,7 +76,7 @@ const LoginPage = () => {
             userLoginStore,
             "userLoginStore",
             true,
-            "Данные успешно получены!",
+            "Вы успешно вошли!",
             constants.DEBUG_CONSTANT
           )}
           {!captcha && (
@@ -86,29 +86,20 @@ const LoginPage = () => {
           )}
         </div>
         <div className="">
-          <form
-            method="POST"
-            target="_self"
-            encType="multipart/form-data"
-            name="account_login"
-            autoComplete="on"
-            className="text-center p-1 m-1"
-            onSubmit={formHandlerSubmit}
-          >
+          <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
             <div>
               <label className="form-control-md m-1 lead">
                 Введите Ваш ИИН:
                 <input
                   type="text"
+                  className="form-control form-control-md"
                   id="username"
-                  name="username"
-                  required
-                  placeholder=""
                   value={username}
+                  placeholder="введите сюда ИИН..."
+                  required
                   onChange={(e) => setUsername(e.target.value)}
                   minLength="12"
                   maxLength="12"
-                  className="form-control form-control-md"
                 />
                 <p>
                   <small className="text-danger">* обязательно</small>
@@ -128,17 +119,14 @@ const LoginPage = () => {
                 </p>
                 <input
                   type="password"
+                  className="form-control form-control-md"
                   id="password"
-                  name="password"
-                  required
-                  placeholder=""
                   value={password}
+                  placeholder="введите сюда пароль..."
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                   minLength="8"
                   maxLength="32"
-                  className="form-control form-control-md"
-                  autoComplete="none"
-                  aria-autocomplete="none"
                 />
                 <p>
                   <small className="text-danger">* обязательно</small>
@@ -157,48 +145,37 @@ const LoginPage = () => {
               </label>
             </div>
             <hr />
-            <div className="container text-center">
-              <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                <div className="m-1">
-                  <button
-                    type="submit"
-                    className="btn btn-md btn-primary form-control"
-                  >
-                    Войти в систему
-                  </button>
-                </div>
-                <div className="m-1">
-                  <button
-                    type="reset"
-                    onClick={(e) => {
-                      setPassword("");
-                      setUsername("");
-                    }}
-                    className="btn btn-md btn-warning form-control"
-                  >
-                    Сбросить данные
-                  </button>
-                </div>
-                <div className="m-1">
-                  <button
-                    type="button"
-                    onClick={(e) =>
-                      utils.ChangePasswordVisibility(["password"])
-                    }
-                    className="btn btn-md btn-danger form-control"
-                  >
-                    Видимость пароля
-                  </button>
-                </div>
-                <div className="m-1">
-                  <LinkContainer to="/recover_password" className="m-0 p-0">
-                    <Nav.Link>
-                      <button className="btn btn-md btn-success form-control">
-                        Восстановить доступ к аккаунту
-                      </button>
-                    </Nav.Link>
-                  </LinkContainer>
-                </div>
+            <div className="container">
+              <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                <button
+                  type="submit"
+                  className="btn btn-sm btn-primary p-2 m-1"
+                >
+                  Войти в систему
+                </button>
+                <button
+                  type="reset"
+                  onClick={(e) => {
+                    setPassword("");
+                    setUsername("");
+                  }}
+                  className="btn btn-sm btn-warning p-2 m-1"
+                >
+                  Сбросить данные
+                </button>
+                <button
+                  type="reset"
+                  onClick={(e) => utils.ChangePasswordVisibility(["password"])}
+                  className="btn btn-sm btn-danger p-2 m-1"
+                >
+                  Видимость пароля
+                </button>
+                <Link
+                  to="/recover_password"
+                  className="btn btn-sm btn-success p-2 m-1"
+                >
+                  Восстановить доступ к аккаунту
+                </Link>
               </ul>
             </div>
           </form>

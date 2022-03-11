@@ -181,7 +181,7 @@ const RationalComponent = ({ rational, shortView = false }) => {
         <label className="w-100 form-control-sm m-1">
           Участники:
           {rational["user1_char_field"] &&
-            rational["user1_char_field"].length > 3 && (
+            rational["user1_char_field"].length > 1 && (
               <input
                 type="text"
                 id="name_char_field"
@@ -194,7 +194,7 @@ const RationalComponent = ({ rational, shortView = false }) => {
               />
             )}
           {rational["user2_char_field"] &&
-            rational["user2_char_field"].length > 3 && (
+            rational["user2_char_field"].length > 1 && (
               <input
                 type="text"
                 id="name_char_field"
@@ -207,13 +207,39 @@ const RationalComponent = ({ rational, shortView = false }) => {
               />
             )}
           {rational["user3_char_field"] &&
-            rational["user3_char_field"].length > 3 && (
+            rational["user3_char_field"].length > 1 && (
               <input
                 type="text"
                 id="name_char_field"
                 name="name_char_field"
                 placeholder="участник № 3"
                 value={rational["user3_char_field"]}
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {rational["user4_char_field"] &&
+            rational["user4_char_field"].length > 1 && (
+              <input
+                type="text"
+                id="name_char_field"
+                name="name_char_field"
+                placeholder="участник № 4"
+                value={rational["user4_char_field"]}
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {rational["user5_char_field"] &&
+            rational["user5_char_field"].length > 1 && (
+              <input
+                type="text"
+                id="name_char_field"
+                name="name_char_field"
+                placeholder="участник № 5"
+                value={rational["user5_char_field"]}
                 minLength="0"
                 maxLength="200"
                 className="form-control form-control-sm"

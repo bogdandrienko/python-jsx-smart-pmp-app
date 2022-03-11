@@ -2153,7 +2153,7 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default=None,
-        verbose_name='Автор рац. предложения',
+        verbose_name='Автор рационализаторского предложения',
         help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
 
         to=UserModel,
@@ -2177,25 +2177,6 @@ class RationalModel(models.Model):
 
         max_length=512,
     )
-
-    status_moderate_char_field = models.CharField(
-        db_column='status_moderate_char_field_db_column',
-        db_index=True,
-        db_tablespace='status_moderate_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default="",
-        verbose_name='status_moderate_char_field',
-        help_text='<small class="text-muted">status_moderate_char_field</small><hr><br>',
-
-        max_length=256,
-    )
-
     subdivision_char_field = models.CharField(
         db_column='subdivision_char_field_db_column',
         db_index=True,
@@ -2225,7 +2206,7 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Сфера рац. предложения',
+        verbose_name='Сфера рационализаторского предложения',
         help_text='<small class="text-muted">sphere_char_field</small><hr><br>',
 
         max_length=512,
@@ -2310,7 +2291,7 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Полное описание',
+        verbose_name='Описание',
         help_text='<small class="text-muted">description_text_field</small><hr><br>',
 
         max_length=5000,
@@ -2378,7 +2359,7 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='user1',
+        verbose_name='user1_char_field',
         help_text='<small class="text-muted">user1_char_field</small><hr><br>',
 
         max_length=512,
@@ -2395,7 +2376,7 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='user2',
+        verbose_name='user2_char_field',
         help_text='<small class="text-muted">user2_char_field</small><hr><br>',
 
         max_length=512,
@@ -2412,14 +2393,64 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='user3',
+        verbose_name='user3_char_field',
         help_text='<small class="text-muted">user3_char_field</small><hr><br>',
+
+        max_length=512,
+    )
+    user4_char_field = models.CharField(
+        db_column='user4_char_field_db_column',
+        db_index=True,
+        db_tablespace='user4_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='user4_char_field',
+        help_text='<small class="text-muted">user4_char_field</small><hr><br>',
+
+        max_length=512,
+    )
+    user5_char_field = models.CharField(
+        db_column='user5_char_field_db_column',
+        db_index=True,
+        db_tablespace='user5_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='user5_char_field',
+        help_text='<small class="text-muted">user5_char_field</small><hr><br>',
 
         max_length=512,
     )
 
     ####################################################################################################################
+    status_moderate_char_field = models.CharField(
+        db_column='status_moderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='status_moderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name='status_moderate_char_field',
+        help_text='<small class="text-muted">status_moderate_char_field</small><hr><br>',
 
+        max_length=256,
+    )
     premoderate_foreign_key_field_1 = models.ForeignKey(
         db_column='premoderate_foreign_key_field_1_db_column',
         db_index=True,
@@ -2455,7 +2486,6 @@ class RationalModel(models.Model):
 
         max_length=256,
     )
-
     postmoderate_foreign_key_field_2 = models.ForeignKey(
         db_column='postmoderate_foreign_key_field_2_db_column',
         db_index=True,
@@ -2546,14 +2576,16 @@ class RationalModel(models.Model):
     class Meta:
         app_label = 'backend'
         ordering = ('-created_datetime_field',)
-        verbose_name = 'Рац. предложение'
-        verbose_name_plural = 'Rational Рац. предложения'
+        verbose_name = 'Рационализаторское предложение'
+        verbose_name_plural = 'Rational Рационализаторские предложения'
         db_table = 'rational_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field} : {self.category_char_field} : {self.author_foreign_key_field}'
+        return f'{self.name_char_field} : {self.category_char_field}: {self.status_moderate_char_field} : ' \
+               f'{self.author_foreign_key_field}'
 
 
+########################################################################################################################
 class VacancyModel(models.Model):
     """
     Vacancy Model
@@ -2945,3 +2977,4 @@ class ResumeModel(models.Model):
     def __str__(self):
         return f'{self.qualification_field} : {self.last_name_field} : {self.first_name_field} : ' \
                f'{self.datetime_create_field}'
+########################################################################################################################

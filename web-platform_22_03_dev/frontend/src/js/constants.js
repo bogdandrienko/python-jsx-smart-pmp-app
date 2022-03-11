@@ -236,85 +236,66 @@ export const modules = [
         ],
       },
       {
-        Header: "Шаблоны",
+        Header: "Отдел кадров",
         Access: "superuser",
-        Image: "/static/img/modules.png",
+        Image:
+          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
-            Header: "Формы",
+            Header: "Список свободных вакансий",
             Access: "superuser",
             Active: true,
-            Link: "/examples_forms",
+            Link: "/vacancy_list",
             ExternalLink: false,
           },
           {
-            Header: "Шаблон",
+            Header: "Создать новую вакансию",
             Access: "superuser",
             Active: true,
-            Link: "/example",
+            Link: "/vacancy_create",
+            ExternalLink: false,
+          },
+          {
+            Header: "Отправить резюме",
+            Access: "superuser",
+            Active: true,
+            Link: "/resume_create/0",
+            ExternalLink: false,
+          },
+          {
+            Header: "Список резюме",
+            Access: "superuser",
+            Active: true,
+            Link: "/resume_list",
             ExternalLink: false,
           },
         ],
       },
       {
-        Header: "Чат",
-        Access: "superuser",
-        Image: "/static/img/modules.png",
+        Header: "Банк идей",
+        Access: "user",
+        Image:
+          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
         Links: [
           {
-            Header: "Общий",
-            Access: "superuser",
+            Header: "Подать идею",
+            Access: "user",
             Active: true,
-            Link: "/chat",
+            Link: "/idea_create",
             ExternalLink: false,
           },
           {
-            Header: "Личный",
-            Access: "superuser",
+            Header: "Список идей",
+            Access: "user",
             Active: true,
-            Link: "/chat_react",
+            Link: "/idea_list",
             ExternalLink: false,
           },
           {
-            Header: "Заметки",
-            Access: "superuser",
+            Header: "Рейтинги среди идей",
+            Access: "user",
             Active: true,
-            Link: "/notes",
-            ExternalLink: false,
-          },
-        ],
-      },
-      {
-        Header: "ОТиЗ",
-        Access: "superuser",
-        Image: "/static/img/modules.png",
-        Links: [
-          {
-            Header: "Выгрузка данных",
-            Access: "superuser",
-            Active: true,
-            Link: "/passages_select",
-            ExternalLink: false,
-          },
-          {
-            Header: "Обновление данных",
-            Access: "superuser",
-            Active: true,
-            Link: "/passages_update",
-            ExternalLink: false,
-          },
-          {
-            Header: "Добавление данных",
-            Access: "superuser",
-            Active: true,
-            Link: "/passages_insert",
-            ExternalLink: false,
-          },
-          {
-            Header: "Удаление данных",
-            Access: "superuser",
-            Active: true,
-            Link: "/passages_delete",
+            Link: "/idea_ratings",
             ExternalLink: false,
           },
         ],
@@ -340,39 +321,25 @@ export const modules = [
             ExternalLink: true,
           },
           {
-            Header: "localhost:3000 react app",
-            Access: "moderator",
-            Active: true,
-            Link: "http://localhost:3000/",
-            ExternalLink: true,
-          },
-          {
-            Header: "Домашняя Django",
-            Access: "moderator",
-            Active: true,
-            Link: "/django/",
-            ExternalLink: true,
-          },
-          {
             Header: "Api Django rest_framework",
             Access: "moderator",
             Active: true,
-            Link: "/api/routes/",
+            Link: "/api/auth/routes/",
             ExternalLink: true,
           },
           {
-            Header: "Логи Системы",
+            Header: "127.0.0.1:3000",
             Access: "moderator",
             Active: true,
-            Link: "/django/logging/",
+            Link: "http://127.0.0.1:3000/",
             ExternalLink: true,
           },
           {
-            Header: "Создание действий, групп или модулей",
+            Header: "127.0.0.1:8000",
             Access: "moderator",
-            Active: false,
-            Link: "/create_modules",
-            ExternalLink: false,
+            Active: true,
+            Link: "http://127.0.0.1:8000/",
+            ExternalLink: true,
           },
         ],
       },
@@ -402,27 +369,6 @@ export const modules = [
             Link: "/admin_export_users",
             ExternalLink: false,
           },
-          {
-            Header: "Сгенерировать пароли для аккаунтов",
-            Access: "moderator",
-            Active: false,
-            Link: "/account_generate_passwords",
-            ExternalLink: false,
-          },
-          {
-            Header: "Обновить пользователей из 1С",
-            Access: "moderator",
-            Active: false,
-            Link: "/account_update_accounts_1c",
-            ExternalLink: false,
-          },
-          {
-            Header: "Изменить группы пользователей",
-            Access: "moderator",
-            Active: false,
-            Link: "/account_change_groups",
-            ExternalLink: false,
-          },
         ],
       },
     ],
@@ -446,20 +392,6 @@ export const modules = [
             Link: "/home",
             ExternalLink: false,
           },
-          {
-            Header: "Уведомления",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-          {
-            Header: "Достижения",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
         ],
       },
       {
@@ -468,13 +400,6 @@ export const modules = [
         Image:
           "/static/img/modules/1_module_profile/section_self_profile/section_self_profile.png",
         Links: [
-          {
-            Header: "Профиль",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
           {
             Header: "Изменить профиль",
             Access: "user",
@@ -515,27 +440,27 @@ export const modules = [
     ],
   },
   {
-    Header: "Новости",
-    Access: "user",
-    Image: "/static/img/modules/2_module_news/module_news.png",
+    Header: "Общее",
+    Access: "all",
+    Image: "/static/img/modules.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Обучение",
-        Access: "user",
+        Access: "all",
         Image:
           "/static/img/modules/2_module_news/section_study/section_study.png",
         Links: [
           {
             Header: "Видео-инструкции",
-            Access: "user",
+            Access: "all",
             Active: true,
             Link: "/video_study",
             ExternalLink: false,
           },
           {
             Header: "Текстовые инструкции",
-            Access: "user",
+            Access: "all",
             Active: true,
             Link: "/text_study",
             ExternalLink: false,
@@ -545,48 +470,13 @@ export const modules = [
       {
         Header: "Новости",
         Access: "user",
-        Image: "/static/img/modules.png",
+        Image: "/static/img/modules/2_module_news/module_news.png",
         Links: [
           {
             Header: "Новости платформы",
             Access: "user",
-            Active: false,
+            Active: true,
             Link: "/news",
-            ExternalLink: false,
-          },
-          {
-            Header: "Поиск",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-          {
-            Header: "Предложить",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-          {
-            Header: "Зал славы",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-          {
-            Header: "Алтын Канат",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-          {
-            Header: "Лучшие работники Комбината",
-            Access: "user",
-            Active: false,
-            Link: "#",
             ExternalLink: false,
           },
         ],
@@ -638,64 +528,6 @@ export const modules = [
           },
         ],
       },
-      {
-        Header: "Банк идей",
-        Access: "user",
-        Image:
-          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
-        Links: [
-          {
-            Header: "Подать идею",
-            Access: "user",
-            Active: true,
-            Link: "/idea_create",
-            ExternalLink: false,
-          },
-          {
-            Header: "Список идей",
-            Access: "user",
-            Active: true,
-            Link: "/idea_list",
-            ExternalLink: false,
-          },
-          {
-            Header: "Рейтинги среди идей",
-            Access: "user",
-            Active: true,
-            Link: "/idea_ratings",
-            ExternalLink: false,
-          },
-        ],
-      },
-      {
-        Header: "Проектная деятельность",
-        Access: "user",
-        Image:
-          "/static/img/modules/3_module_progress/3_section_project/section_project.png",
-        Links: [
-          {
-            Header: "Подать проект",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-          {
-            Header: "Список проектов",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-          {
-            Header: "Рейтинги среди проектов",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-        ],
-      },
     ],
   },
   {
@@ -720,83 +552,6 @@ export const modules = [
         ],
       },
     ],
-  },
-  {
-    Header: "СУП",
-    Access: "user",
-    Image: "/static/img/modules/5_module_human_resourse/module_hr.png",
-    ShowInModules: true,
-    Sections: [
-      {
-        Header: "Отдел кадров",
-        Access: "user",
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
-        Links: [
-          {
-            Header: "Выгрузка отпусков",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-        ],
-      },
-      {
-        Header: "Отдел развития и оценки персонала",
-        Access: "user",
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
-        Links: [
-          {
-            Header: "КЛО",
-            Access: "user",
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-          },
-        ],
-      },
-    ],
-  },
-];
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const vacancyList = [
-  {
-    Qualification: "Машинист мотовоза",
-    Image:
-      "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
-    Datetime: "05-17-2022",
-    Sphere: "Технологическая",
-    Education: "Высшее",
-    Rank: "",
-    Experience: "Не имеет значения",
-    Schedule: "Полный день",
-    Description: "Опыт работы приветствуется",
-  },
-  {
-    Qualification: "Монтер пути, дорожно-путевой рабочий",
-    Image:
-      "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
-    Datetime: "08-06-2020",
-    Sphere: "Технологическая",
-    Education: "Среднеe",
-    Rank: "3",
-    Experience: "от 1 года до 3 лет",
-    Schedule: "Сменный график",
-    Description: "Опыт работы приветствуется",
-  },
-  {
-    Qualification: "Инженер-программист, техник-программист",
-    Image:
-      "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
-    Datetime: "03-12-2022",
-    Sphere: "Не технологическая",
-    Education: "Высшее, Средне-специальное",
-    Rank: "",
-    Experience: "более 3 лет",
-    Schedule: "Удаленная работа",
-    Description: "Знание таких языков программирования, как Python, C++, R",
   },
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

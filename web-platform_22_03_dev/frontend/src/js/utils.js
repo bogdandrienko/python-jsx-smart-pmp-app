@@ -9,6 +9,10 @@ export const CheckAccess = (userDetailsStore, slug) => {
       // error: errorUserDetails,
       // fail: failUserDetails,
     } = userDetailsStore;
+    if (slug === "all") {
+      return true;
+    }
+
     if (dataUserDetails) {
       if (dataUserDetails["group_model"]) {
         if (typeof slug === "string") {
