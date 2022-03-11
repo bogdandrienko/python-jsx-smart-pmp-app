@@ -55,7 +55,7 @@ const TextStudyPage = () => {
                   Первый вход в систему:
                   <div>
                     <a
-                      className="btn btn-lg btn-outline-primary m-1"
+                      className="btn btn-sm btn-outline-primary m-1"
                       href="/static/study/first_login.pdf"
                     >
                       Скачать инструкцию в pdf-формате
@@ -242,7 +242,7 @@ const TextStudyPage = () => {
                   Выгрузка расчётного листа:
                   <div>
                     <a
-                      className="btn btn-lg btn-outline-primary m-1"
+                      className="btn btn-sm btn-outline-primary m-1"
                       href="/static/study/salary.pdf"
                     >
                       Скачать инструкцию в pdf-формате

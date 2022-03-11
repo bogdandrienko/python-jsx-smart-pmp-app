@@ -119,7 +119,7 @@ const VacancyListPage = () => {
                   нажмите кнопку{" "}
                   <p className="fw-bold text-primary">"фильтровать вакансии"</p>
                 </label>
-                <label className="form-control-md form-switch m-1">
+                <label className="form-control-sm form-switch m-1">
                   Детальное отображение:
                   <input
                     type="checkbox"
@@ -131,7 +131,7 @@ const VacancyListPage = () => {
                 </label>
               </div>
               <div className="p-0 m-0">
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Сфера:
                   <select
                     value={sphere}
@@ -145,7 +145,7 @@ const VacancyListPage = () => {
                     </option>
                   </select>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Образование:
                   <select
                     id="education"
@@ -165,7 +165,7 @@ const VacancyListPage = () => {
                     <option value="Среднее">Среднее</option>
                   </select>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Опыт:
                   <select
                     id="experience"
@@ -185,7 +185,7 @@ const VacancyListPage = () => {
                 </label>
               </div>
               <div className="p-0 m-0">
-                <label className="w-75 form-control-md m-1">
+                <label className="w-75 form-control-sm m-1">
                   Поле поиска по части названия или квалификации:
                   <input
                     type="text"
@@ -195,7 +195,7 @@ const VacancyListPage = () => {
                     onChange={(e) => searchSet(e.target.value)}
                   />
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Сортировка по:
                   <select
                     id="sort"

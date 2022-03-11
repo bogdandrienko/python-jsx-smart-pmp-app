@@ -79,7 +79,7 @@ const SalaryPage = () => {
                 id="month"
                 name="month"
                 required=""
-                className="form-control form-control-md"
+                className="form-control form-control-sm"
               >
                 <option value="1" defaultValue selected>
                   Январь
@@ -100,7 +100,7 @@ const SalaryPage = () => {
                 id="year"
                 name="year"
                 required=""
-                className="form-control form-control-md"
+                className="form-control form-control-sm"
               >
                 <option value="2021">2021</option>
                 <option value="2022" defaultValue selected>
@@ -110,7 +110,7 @@ const SalaryPage = () => {
               {!loadSalaryUser && (
                 <button
                   onClick={formHandlerSubmit}
-                  className="btn btn-md btn-primary"
+                  className="btn btn-sm btn-primary"
                   type="button"
                 >
                   получить
@@ -125,7 +125,7 @@ const SalaryPage = () => {
             <div>
               <div>
                 <a
-                  className="btn btn-md btn-success m-1"
+                  className="btn btn-sm btn-success m-1"
                   href={`/${dataSalaryUser["excel_path"]}`}
                 >
                   Скачать excel-документ

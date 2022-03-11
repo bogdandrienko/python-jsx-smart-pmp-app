@@ -76,7 +76,7 @@ const AdminExportUsersPage = () => {
               className="w-100"
               onSubmit={formHandlerSubmit}
             >
-              <button className="btn btn-md btn-primary" type="submit">
+              <button className="btn btn-sm btn-primary" type="submit">
                 получить
               </button>
             </form>
@@ -87,7 +87,7 @@ const AdminExportUsersPage = () => {
           {dataExportUsers && (
             <div>
               <a
-                className="btn btn-md btn-success m-1"
+                className="btn btn-sm btn-success m-1"
                 href={`/${dataExportUsers["excel"]}`}
               >
                 Скачать excel-документ

@@ -81,7 +81,7 @@ const ChangePasswordPage = () => {
           <div className="form-control">
             <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
               <div>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Введите пароль для входа в аккаунт:
                   <p>
                     <small className="text-danger">
@@ -91,7 +91,7 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     value={password}
                     placeholder="введите сюда новый пароль..."
                     required
@@ -108,7 +108,7 @@ const ChangePasswordPage = () => {
                     </p>
                   </p>
                 </label>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Повторите новый пароль:
                   <p>
                     <small className="text-danger">
@@ -118,7 +118,7 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password2"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     value={password2}
                     placeholder="введите сюда новый пароль..."
                     required

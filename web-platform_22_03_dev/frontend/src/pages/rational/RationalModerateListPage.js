@@ -216,7 +216,7 @@ const RationalListPage = () => {
                       "фильтровать рац. предложения"
                     </p>
                   </label>
-                  <label className="form-control-md form-switch m-1">
+                  <label className="form-control-sm form-switch m-1">
                     Детальное отображение:
                     <input
                       type="checkbox"
@@ -321,7 +321,7 @@ const RationalListPage = () => {
                   )}
                 </div>
                 <div className="p-0 m-0">
-                  <label className="w-50 form-control-md">
+                  <label className="w-50 form-control-sm">
                     Поле поиска по части названия:
                     <input
                       type="text"
@@ -331,7 +331,7 @@ const RationalListPage = () => {
                       onChange={(e) => searchSet(e.target.value)}
                     />
                   </label>
-                  <label className="form-control-md m-1">
+                  <label className="form-control-sm m-1">
                     Сортировка по:
                     <select
                       className="form-control form-control-sm"

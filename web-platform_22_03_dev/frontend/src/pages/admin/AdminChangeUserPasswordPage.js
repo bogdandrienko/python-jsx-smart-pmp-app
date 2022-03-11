@@ -133,7 +133,7 @@ const AdminChangeUserPasswordPage = () => {
                   </label>
                 </div>
                 <div>
-                  <label className="form-control-md m-1 lead">
+                  <label className="form-control-sm m-1 lead">
                     Введите ИИН пользователя для смены пароля:
                     <input
                       type="text"
@@ -145,7 +145,7 @@ const AdminChangeUserPasswordPage = () => {
                       onChange={(e) => usernameSet(e.target.value)}
                       minLength="12"
                       maxLength="12"
-                      className="form-control form-control-md"
+                      className="form-control form-control-sm"
                     />
                     <p>
                       <small className="text-danger">* обязательно</small>
@@ -163,7 +163,7 @@ const AdminChangeUserPasswordPage = () => {
                     <div className="m-1">
                       <button
                         type="submit"
-                        className="btn btn-md btn-primary form-control"
+                        className="btn btn-sm btn-primary form-control"
                       >
                         Проверить идентификатор
                       </button>
@@ -174,7 +174,7 @@ const AdminChangeUserPasswordPage = () => {
                         onClick={(e) => {
                           usernameSet("");
                         }}
-                        className="btn btn-md btn-warning form-control"
+                        className="btn btn-sm btn-warning form-control"
                       >
                         Сбросить данные
                       </button>
@@ -198,7 +198,7 @@ const AdminChangeUserPasswordPage = () => {
             onSubmit={formHandlerSubmitChangeUserPassword}
           >
             <div>
-              <label className="form-control-md m-1 lead">
+              <label className="form-control-sm m-1 lead">
                 Введите пароль для входа в аккаунт:
                 <p>
                   <small className="text-danger">
@@ -215,7 +215,7 @@ const AdminChangeUserPasswordPage = () => {
                   onChange={(e) => passwordSet(e.target.value)}
                   minLength="8"
                   maxLength="32"
-                  className="form-control form-control-md"
+                  className="form-control form-control-sm"
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
@@ -228,7 +228,7 @@ const AdminChangeUserPasswordPage = () => {
                   </p>
                 </p>
               </label>
-              <label className="form-control-md m-1 lead">
+              <label className="form-control-sm m-1 lead">
                 Повторите новый пароль:
                 <p>
                   <small className="text-danger">
@@ -245,7 +245,7 @@ const AdminChangeUserPasswordPage = () => {
                   onChange={(e) => password2Set(e.target.value)}
                   minLength="8"
                   maxLength="32"
-                  className="form-control form-control-md"
+                  className="form-control form-control-sm"
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
@@ -265,7 +265,7 @@ const AdminChangeUserPasswordPage = () => {
                 <div className="m-1">
                   <button
                     type="submit"
-                    className="btn btn-md btn-primary form-control"
+                    className="btn btn-sm btn-primary form-control"
                   >
                     Сохранить новые данные
                   </button>
@@ -277,7 +277,7 @@ const AdminChangeUserPasswordPage = () => {
                       passwordSet("");
                       password2Set("");
                     }}
-                    className="btn btn-md btn-warning form-control"
+                    className="btn btn-sm btn-warning form-control"
                   >
                     Сбросить данные
                   </button>
@@ -288,7 +288,7 @@ const AdminChangeUserPasswordPage = () => {
                     onClick={(e) =>
                       utils.ChangePasswordVisibility(["password", "password2"])
                     }
-                    className="btn btn-md btn-danger form-control"
+                    className="btn btn-sm btn-danger form-control"
                   >
                     Видимость пароля
                   </button>

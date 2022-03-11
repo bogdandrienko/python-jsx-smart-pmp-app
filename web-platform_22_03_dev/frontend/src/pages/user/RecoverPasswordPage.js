@@ -168,7 +168,7 @@ const ChangePasswordPage = () => {
                     </label>
                   </div>
                   <div>
-                    <label className="form-control-md m-1 lead">
+                    <label className="form-control-sm m-1 lead">
                       Введите Ваш ИИН:
                       <input
                         type="text"
@@ -180,7 +180,7 @@ const ChangePasswordPage = () => {
                         onChange={(e) => setUsername(e.target.value)}
                         minLength="12"
                         maxLength="12"
-                        className="form-control form-control-md"
+                        className="form-control form-control-sm"
                       />
                       <p>
                         <small className="text-danger">* обязательно</small>
@@ -244,7 +244,7 @@ const ChangePasswordPage = () => {
                     onSubmit={formHandlerSubmitCheckAnswer}
                   >
                     <div>
-                      <label className="form-control-md">
+                      <label className="form-control-sm">
                         <div className="text-danger lead">
                           Секретный вопрос: '
                           <small className="text-warning lead fw-bold">{`${secretQuestion}`}</small>
@@ -260,7 +260,7 @@ const ChangePasswordPage = () => {
                           onChange={(e) => setSecretAnswer(e.target.value)}
                           minLength="4"
                           maxLength="32"
-                          className="form-control form-control-md"
+                          className="form-control form-control-sm"
                         />
                         <small className="text-muted">
                           количество символов: от 4 до 32
@@ -273,7 +273,7 @@ const ChangePasswordPage = () => {
                         <div className="m-1">
                           <button
                             type="submit"
-                            className="btn btn-md btn-primary"
+                            className="btn btn-sm btn-primary"
                           >
                             Проверить ответ
                           </button>
@@ -291,7 +291,7 @@ const ChangePasswordPage = () => {
                     onSubmit={formHandlerSubmitRecoverEmail}
                   >
                     <div>
-                      <label className="form-control-md">
+                      <label className="form-control-sm">
                         Код восстановления отправленный на почту
                         <p className="text-danger">
                           * вводить без кавычек
@@ -317,7 +317,7 @@ const ChangePasswordPage = () => {
                           onChange={(e) => setRecoverPassword(e.target.value)}
                           minLength="1"
                           maxLength="64"
-                          className="form-control form-control-md"
+                          className="form-control form-control-sm"
                         />
                         <small className="text-muted">
                           количество символов: от 1 до 64
@@ -365,7 +365,7 @@ const ChangePasswordPage = () => {
               onSubmit={formHandlerSubmitRecoverPassword}
             >
               <div>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Введите пароль для входа в аккаунт:
                   <p>
                     <small className="text-danger">
@@ -375,7 +375,7 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     value={password}
                     placeholder="введите сюда новый пароль..."
                     required
@@ -392,7 +392,7 @@ const ChangePasswordPage = () => {
                     </p>
                   </p>
                 </label>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Повторите новый пароль:
                   <p>
                     <small className="text-danger">
@@ -402,7 +402,7 @@ const ChangePasswordPage = () => {
                   <input
                     type="password"
                     id="password2"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     value={password2}
                     placeholder="введите сюда новый пароль..."
                     required

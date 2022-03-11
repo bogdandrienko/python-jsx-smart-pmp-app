@@ -166,7 +166,7 @@ const VacancyChangePage = () => {
                 <h6 className="lead">Редактировать вакансию</h6>
               </div>
               <div className="p-0 m-0">
-                <label className="w-50 form-control-md m-1">
+                <label className="w-50 form-control-sm m-1">
                   Квалификация:
                   <input
                     type="text"
@@ -185,7 +185,7 @@ const VacancyChangePage = () => {
                     </small>
                   </p>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Разряд:
                   <input
                     type="text"
@@ -206,7 +206,7 @@ const VacancyChangePage = () => {
               </div>
               <br />
               <div className="p-0 m-0">
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Текущее изображение:
                   <img
                     src={utils.GetStaticFile(currentImage)}
@@ -215,7 +215,7 @@ const VacancyChangePage = () => {
                   />
                   <small className="text-muted">* не обязательно</small>
                 </label>
-                <label className="form-control-md form-switch m-1">
+                <label className="form-control-sm form-switch m-1">
                   Удалить текущее изображение:
                   <input
                     type="checkbox"
@@ -227,7 +227,7 @@ const VacancyChangePage = () => {
                 </label>
               </div>
               <div className="p-0 m-0">
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Изображение:
                   <input
                     type="file"
@@ -237,7 +237,7 @@ const VacancyChangePage = () => {
                   />
                   <small className="text-muted">* не обязательно</small>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Сфера:
                   <select
                     value={sphere}
@@ -256,7 +256,7 @@ const VacancyChangePage = () => {
               </div>
               <br />
               <div className="p-0 m-0">
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Образование:
                   <select
                     value={education}
@@ -276,7 +276,7 @@ const VacancyChangePage = () => {
                   </select>
                   <small className="text-danger">* обязательно</small>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Опыт:
                   <select
                     value={experience}
@@ -294,7 +294,7 @@ const VacancyChangePage = () => {
                   </select>
                   <small className="text-danger">* обязательно</small>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   График:
                   <select
                     value={schedule}
@@ -313,7 +313,7 @@ const VacancyChangePage = () => {
               </div>
               <br />
               <div className="p-0 m-0">
-                <label className="w-75 form-control-md m-1">
+                <label className="w-75 form-control-sm m-1">
                   Описание:
                   <textarea
                     id="short_description_char_field"

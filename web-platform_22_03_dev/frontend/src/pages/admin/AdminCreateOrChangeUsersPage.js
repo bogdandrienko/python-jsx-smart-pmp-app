@@ -117,7 +117,7 @@ const AdminCreateOrChangeUsersPage = () => {
                           Скачать шаблон для заполнения и проверки формата полей
                         </h6>
                         <a
-                          className="btn btn-md btn-success m-1"
+                          className="btn btn-sm btn-success m-1"
                           href="/static/media/admin/account/create_users.xlsx"
                         >
                           Скачать excel-документ

@@ -134,11 +134,11 @@ const ChangeProfilePage = () => {
             </h6>
             <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
               <div>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Введите секретный вопрос для восстановления доступа:
                   <input
                     type="text"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     value={secretQuestion}
                     placeholder="введите сюда секретный вопрос..."
                     required
@@ -155,11 +155,11 @@ const ChangeProfilePage = () => {
                     </p>
                   </p>
                 </label>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Введите ответ на секретный вопрос:
                   <input
                     type="text"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     value={secretAnswer}
                     placeholder="введите сюда секретный ответ..."
                     required
@@ -178,11 +178,11 @@ const ChangeProfilePage = () => {
                 </label>
               </div>
               <div>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Почта для восстановления доступа:
                   <input
                     type="email"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     value={email}
                     placeholder="введите сюда почту..."
                     onChange={(e) => setEmail(e.target.value)}
@@ -195,7 +195,7 @@ const ChangeProfilePage = () => {
                 </label>
               </div>
               <div>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Введите пароль для входа в аккаунт:
                   <p>
                     <small className="text-danger">
@@ -204,7 +204,7 @@ const ChangeProfilePage = () => {
                   </p>
                   <input
                     type="password"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     id="password"
                     value={password}
                     placeholder="введите сюда новый пароль..."
@@ -222,7 +222,7 @@ const ChangeProfilePage = () => {
                     </p>
                   </p>
                 </label>
-                <label className="form-control-md m-1 lead">
+                <label className="form-control-sm m-1 lead">
                   Повторите новый пароль:
                   <p>
                     <small className="text-danger">
@@ -231,7 +231,7 @@ const ChangeProfilePage = () => {
                   </p>
                   <input
                     type="password"
-                    className="form-control form-control-md"
+                    className="form-control form-control-sm"
                     id="password2"
                     value={password2}
                     placeholder="введите сюда новый пароль..."

@@ -88,11 +88,11 @@ const LoginPage = () => {
         <div className="">
           <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
             <div>
-              <label className="form-control-md m-1 lead">
+              <label className="form-control-sm m-1 lead">
                 Введите Ваш ИИН:
                 <input
                   type="text"
-                  className="form-control form-control-md"
+                  className="form-control form-control-sm"
                   id="username"
                   value={username}
                   placeholder="введите сюда ИИН..."
@@ -110,7 +110,7 @@ const LoginPage = () => {
                   </p>
                 </p>
               </label>
-              <label className="form-control-md m-1 lead">
+              <label className="form-control-sm m-1 lead">
                 Введите пароль для входа в аккаунт:
                 <p>
                   <small className="text-danger">
@@ -119,7 +119,7 @@ const LoginPage = () => {
                 </p>
                 <input
                   type="password"
-                  className="form-control form-control-md"
+                  className="form-control form-control-sm"
                   id="password"
                   value={password}
                   placeholder="введите сюда пароль..."

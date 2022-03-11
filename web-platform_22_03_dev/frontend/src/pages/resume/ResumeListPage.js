@@ -112,7 +112,7 @@ const VacancyListPage = () => {
                   нажмите кнопку{" "}
                   <p className="fw-bold text-primary">"фильтровать вакансии"</p>
                 </label>
-                <label className="form-control-md form-switch m-1">
+                <label className="form-control-sm form-switch m-1">
                   Детальное отображение:
                   <input
                     type="checkbox"
@@ -124,7 +124,7 @@ const VacancyListPage = () => {
                 </label>
               </div>
               <div className="p-0 m-0">
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Образование:
                   <select
                     id="education"
@@ -144,7 +144,7 @@ const VacancyListPage = () => {
                     <option value="Среднее">Среднее</option>
                   </select>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Опыт:
                   <select
                     id="experience"
@@ -162,7 +162,7 @@ const VacancyListPage = () => {
                     <option value="более 6 лет">более 6 лет</option>
                   </select>
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Пол:
                   <select
                     value={sex}
@@ -176,7 +176,7 @@ const VacancyListPage = () => {
                 </label>
               </div>
               <div className="p-0 m-0">
-                <label className="w-75 form-control-md m-1">
+                <label className="w-75 form-control-sm m-1">
                   Поле поиска по части вакансии или квалификации:
                   <input
                     type="text"
@@ -186,7 +186,7 @@ const VacancyListPage = () => {
                     onChange={(e) => searchQualificationSet(e.target.value)}
                   />
                 </label>
-                <label className="w-75 form-control-md m-1">
+                <label className="w-75 form-control-sm m-1">
                   Поле поиска по части фамилии:
                   <input
                     type="text"
@@ -196,7 +196,7 @@ const VacancyListPage = () => {
                     onChange={(e) => searchLastNameSet(e.target.value)}
                   />
                 </label>
-                <label className="form-control-md m-1">
+                <label className="form-control-sm m-1">
                   Сортировка вакансий по:
                   <select
                     id="sort"

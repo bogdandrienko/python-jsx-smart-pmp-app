@@ -220,6 +220,8 @@ def api_any_login_user(request):
                         if is_authenticated is not None:
                             user = User.objects.get(username=username)
                             user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                            if user_model.activity_boolean_field is False:
+                                return Response({"error": "Внимание, Ваш аккаунт заблокирован!"})
                             update_last_login(sender=None, user=user)
                             refresh = RefreshToken.for_user(user=user)
                             response = {"response": {
