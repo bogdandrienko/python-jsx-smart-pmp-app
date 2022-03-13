@@ -97,7 +97,6 @@ const VacancyChangePage = () => {
       educationSet(dataVacancyDetail["education_field"]);
       experienceSet(dataVacancyDetail["experience_field"]);
       scheduleSet(dataVacancyDetail["schedule_field"]);
-      currentImageSet(dataVacancyDetail["image_field"]);
       clearImageSet(false);
       descriptionSet(dataVacancyDetail["description_field"]);
     } else {

@@ -103,7 +103,6 @@ const RationalModerateDetailPage = () => {
       subdivisionSet(dataIdeaDetail["subdivision_char_field"]);
       sphereSet(dataIdeaDetail["sphere_char_field"]);
       categorySet(dataIdeaDetail["category_char_field"]);
-      avatarSet(dataIdeaDetail["avatar_image_field"]);
       nameSet(dataIdeaDetail["name_char_field"]);
       placeSet(dataIdeaDetail["place_char_field"]);
       descriptionSet(dataIdeaDetail["description_text_field"]);

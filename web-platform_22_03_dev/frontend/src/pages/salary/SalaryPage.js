@@ -63,22 +63,7 @@ const SalaryPage = () => {
         title={"Расчётный лист"}
         description={"страница выгрузки Вашего расчётного листа"}
       />
-      <main className="container  ">
-        <div className="">
-          <StoreStatusComponent
-            storeStatus={salaryUserAuthStore}
-            key={"salaryUserAuthStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={true}
-            dataText={"Данные успешно получены!"}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
+      <main className="container p-0">
         <div className="">
           <form className="">
             <div className="input-group m-0">
@@ -126,6 +111,19 @@ const SalaryPage = () => {
         </div>
         <hr />
         <div>
+          <StoreStatusComponent
+            storeStatus={salaryUserAuthStore}
+            key={"salaryUserAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Данные успешно получены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
           {dataSalaryUser && (
             <div>
               <div>

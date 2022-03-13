@@ -2960,8 +2960,8 @@ class IdeaModel(models.Model):
         verbose_name='Дата регистрации',
         help_text='<small class="text-muted">register_datetime_field</small><hr><br>',
 
-        auto_now=False,
-        auto_now_add=True,
+        auto_now=True,
+        auto_now_add=False,
     )
 
     class Meta:
@@ -3059,8 +3059,8 @@ class RatingIdeaModel(models.Model):
         verbose_name='Дата и время создания',
         help_text='<small class="text-muted">datetime_field</small><hr><br>',
 
-        auto_now=False,
-        auto_now_add=True,
+        auto_now=True,
+        auto_now_add=False,
     )
 
     class Meta:
@@ -3142,11 +3142,11 @@ class CommentIdeaModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default=timezone.now,
+        # default=timezone.now,
         verbose_name='Дата создания',
         help_text='<small class="text-muted">datetime_field</small><hr><br>',
 
-        auto_now=False,
+        auto_now=True,
         auto_now_add=False,
     )
 
