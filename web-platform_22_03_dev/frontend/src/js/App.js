@@ -26,11 +26,14 @@ import RationalCreatePage from "../pages/rational/RationalCreatePage";
 import RationalModerateListPage from "../pages/rational/RationalModerateListPage";
 import RationalModerateDetailPage from "../pages/rational/RationalModerateDetailPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import IdeaTemplatePage from "../pages/idea/IdeaTemplatePage";
 import IdeaCreatePage from "../pages/idea/IdeaCreatePage";
 import IdeaListPage from "../pages/idea/IdeaListPage";
 import IdeaDetailPage from "../pages/idea/IdeaDetailPage";
 import IdeaModerateListPage from "../pages/idea/IdeaModerateListPage";
 import IdeaModerateDetailPage from "../pages/idea/IdeaModerateDetailPage";
+import IdeaSelfListPage from "../pages/idea/IdeaSelfListPage";
+import IdeaChangePage from "../pages/idea/IdeaChangePage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import VacancyListPage from "../pages/vacancy/VacancyListPage";
 import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
@@ -85,6 +88,7 @@ function App() {
             element={<RationalModerateDetailPage />}
           />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          <Route path="/idea_template" element={<IdeaTemplatePage />} />
           <Route path="/idea_create" element={<IdeaCreatePage />} />
           <Route path="/idea_list" element={<IdeaListPage />} />
           <Route path="/idea_detail/:id" element={<IdeaDetailPage />} />
@@ -96,6 +100,8 @@ function App() {
             path="/idea_moderate_detail/:id"
             element={<IdeaModerateDetailPage />}
           />
+          <Route path="/idea_self_list" element={<IdeaSelfListPage />} />
+          <Route path="/idea_change/:id" element={<IdeaChangePage />} />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/vacancy_list" element={<VacancyListPage />} />
           <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />

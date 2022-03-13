@@ -1970,14 +1970,13 @@ def api_auth_idea(request):
                     if category:
                         objects = objects.filter(category_char_field=category)
                     if author:
-                        author = backend_models.UserModel.objects.filter(
-                            personnel_number_slug_field=str(author).split(" ")[-2]
+
+                        ath = (str(author).split(" ")[-2]).strip()
+                        print("ath: ", ath)
+
+                        author = backend_models.UserModel.objects.get(
+                            personnel_number_slug_field=(str(author).split(" ")[-2]).strip()
                         )
-                        if len(author) > 1:
-                            for auth in author:
-                                if auth.user_foreign_key_field.is_superuser is False:
-                                    author = auth
-                                    break
                         objects = objects.filter(idea_author_foreign_key_field=author)
 
                     if moderate:
@@ -2053,6 +2052,9 @@ def api_auth_idea(request):
                     place = req_inst.get_value("place")
                     description = req_inst.get_value("description")
 
+                    moderate = req_inst.get_value("moderate")
+                    moderate_comment = req_inst.get_value("moderateComment")
+
                     obj = backend_models.IdeaModel.objects.get(id=_id)
 
                     if subdivision and obj.subdivision_char_field != subdivision:
@@ -2071,6 +2073,10 @@ def api_auth_idea(request):
                         obj.place_char_field = place
                     if description and obj.description_text_field != description:
                         obj.description_text_field = description
+                    if moderate and obj.status_moderate_char_field != moderate:
+                        obj.status_moderate_char_field = moderate
+                    if moderate_comment and obj.comment_moderate_char_field != moderate_comment:
+                        obj.comment_moderate_char_field = moderate_comment
 
                     obj.save()
 

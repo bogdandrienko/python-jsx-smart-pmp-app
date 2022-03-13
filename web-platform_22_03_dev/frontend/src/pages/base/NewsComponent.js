@@ -25,12 +25,12 @@ const NewsComponent = (count = 100) => {
   const id = useParams().id;
 
   return (
-    <div className="">
-      <div className="list-group list-group-flush border-bottom scrollarea  ">
+    <div className="card list-group list-group-item-action list-group-flush">
+      <div className="border-bottom scrollarea">
         <LinkContainer to="/news" className=" ">
-          <Nav.Link>
+          <Nav.Link className="m-0 p-0">
             <div
-              className="list-group-item list-group-item-action active m-0 p-1 lh-tight shadow"
+              className="list-group-item active m-0 p-2 lh-tight shadow"
               aria-current="true"
             >
               <div className="d-flex w-100 align-items-center justify-content-between">

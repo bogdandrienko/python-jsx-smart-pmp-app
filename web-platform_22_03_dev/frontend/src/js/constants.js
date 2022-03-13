@@ -604,6 +604,14 @@ export const modules = [
           "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
         Links: [
           {
+            Header: "Пример идеи",
+            Access: "user",
+            Active: true,
+            Link: "/idea_template",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
             Header: "Подать идею",
             Access: "user",
             Active: true,
@@ -620,7 +628,7 @@ export const modules = [
             ShowLink: true,
           },
           {
-            Header: "Модерация подробности идеи [модератор]",
+            Header: "Модерация подробности идеи [модератор] [скрыто]",
             Access: "idea_moderator",
             Active: true,
             Link: "/idea_moderate_detail/0",
@@ -636,7 +644,7 @@ export const modules = [
             ShowLink: true,
           },
           {
-            Header: "Подробности идеи",
+            Header: "Подробности идеи [скрыто]",
             Access: "user",
             Active: true,
             Link: "/idea_detail/0",
@@ -644,12 +652,20 @@ export const modules = [
             ShowLink: false,
           },
           {
-            Header: "Мои идеи",
+            Header: "Мои идеи на доработку",
             Access: "user",
             Active: true,
             Link: "/idea_self_list",
             ExternalLink: false,
             ShowLink: true,
+          },
+          {
+            Header: "Редактировать свою идею [скрыто]",
+            Access: "user",
+            Active: true,
+            Link: "/idea_change/0",
+            ExternalLink: false,
+            ShowLink: false,
           },
         ],
       },

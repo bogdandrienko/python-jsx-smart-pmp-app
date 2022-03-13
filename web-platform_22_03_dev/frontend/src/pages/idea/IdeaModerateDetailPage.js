@@ -193,7 +193,12 @@ const RationalModerateDetailPage = () => {
                 aria-controls="collapseOne"
                 onClick={(e) => utils.ChangeAccordionCollapse(["collapseOne"])}
               >
-                <h4 className="lead fw-bold text-danger">Модерация</h4>
+                <h4 className="lead fw-bold text-danger">
+                  Модерация{" "}
+                  <small className="text-muted">
+                    (нажмите сюда, для переключения)
+                  </small>
+                </h4>
               </button>
             </h2>
             <div
@@ -380,7 +385,7 @@ const RationalModerateDetailPage = () => {
                         dataIdeaDetail["avatar_image_field"]
                       )}
                       className="card-img-top img-fluid w-25"
-                      alt="id"
+                      alt="изображение отсутствует"
                     />
                   )}
                   <label className="form-control-sm form-switch m-1">

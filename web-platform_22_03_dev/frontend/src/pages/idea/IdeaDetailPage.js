@@ -268,7 +268,7 @@ const Page = () => {
             )}
           <button
             type="button"
-            className="btn btn-sm btn-danger m-1 p-2"
+            className="btn btn-sm btn-outline-danger m-1 p-2"
             onClick={(e) =>
               formHandlerNotificationSubmit({
                 name: "жалоба на идею в банке идей",
@@ -330,7 +330,7 @@ const Page = () => {
               <img
                 src={utils.GetStaticFile(dataIdeaDetail["avatar_image_field"])}
                 className="card-img-top img-fluid w-75"
-                alt="id"
+                alt="изображение отсутствует"
               />
             </div>
             <div className="card-body m-0 p-0">
@@ -451,7 +451,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -471,7 +471,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -491,7 +491,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -511,7 +511,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -531,7 +531,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -551,7 +551,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -571,7 +571,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -591,7 +591,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -611,7 +611,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -631,7 +631,7 @@ const Page = () => {
                           dataIdeaDetail["total_rating"]["rate"] > 7
                             ? "#00ff00"
                             : dataIdeaDetail["total_rating"]["rate"] > 4
-                            ? "#ffff00"
+                            ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
@@ -729,7 +729,7 @@ const Page = () => {
                           )}
                           <button
                             type="button"
-                            className="btn btn-sm btn-danger m-0 p-0"
+                            className="btn btn-sm btn-outline-danger m-0 p-0"
                             onClick={(e) =>
                               formHandlerNotificationSubmit({
                                 name: "жалоба на комментарий в банке идей",
