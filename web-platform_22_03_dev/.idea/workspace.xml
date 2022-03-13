@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="706b6942-640f-4237-bef4-6b7a4ae07a68" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/base/StoreStatusComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/StoreStatusComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/idea/IdeaModerateDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/idea/IdeaModerateDetailPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/salary/SalaryPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/salary/SalaryPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyChangePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/vacancy/VacancyChangePage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +130,7 @@
       <workItem from="1647072879339" duration="36667000" />
       <workItem from="1647139260505" duration="14222000" />
       <workItem from="1647162150271" duration="8380000" />
-      <workItem from="1647170768176" duration="618000" />
+      <workItem from="1647170768176" duration="1066000" />
     </task>
     <servers />
   </component>

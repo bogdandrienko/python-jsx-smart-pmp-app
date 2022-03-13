@@ -47,7 +47,7 @@ const StoreStatusComponent = ({
   }
 
   return (
-    <div key={keyStatus} className="m-0 p-0">
+    <div key={keyStatus} className="m-0 p-0 my-1">
       {showLoad && loadStatus && (
         <div className="row justify-content-center m-0 p-0">
           {loadText !== "" ? (
