@@ -612,7 +612,7 @@ export const modules = [
             ShowLink: true,
           },
           {
-            Header: "Модерация идей",
+            Header: "Модерация идей [модератор]",
             Access: "idea_moderator",
             Active: true,
             Link: "/idea_moderate_list",
@@ -620,7 +620,7 @@ export const modules = [
             ShowLink: true,
           },
           {
-            Header: "Модерация подробности идеи",
+            Header: "Модерация подробности идеи [модератор]",
             Access: "idea_moderator",
             Active: true,
             Link: "/idea_moderate_detail/0",
