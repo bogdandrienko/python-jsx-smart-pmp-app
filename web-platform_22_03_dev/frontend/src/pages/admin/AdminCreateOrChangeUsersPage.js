@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AdminCreateOrChangeUsersPage = () => {
@@ -41,15 +41,15 @@ const AdminCreateOrChangeUsersPage = () => {
   );
   const [additionalExcel, setAdditionalExcel] = useState(null);
 
-  const adminCreateOrChangeUsersStore = useSelector(
-    (state) => state.adminCreateOrChangeUsersStore
+  const adminCreateOrChangeUsersAuthStore = useSelector(
+    (state) => state.adminCreateOrChangeUsersAuthStore
   ); // store.js
   const {
     // load: loadRationalCreate,
     data: dataRationalCreate,
     // error: errorRationalCreate,
     // fail: failRationalCreate,
-  } = adminCreateOrChangeUsersStore;
+  } = adminCreateOrChangeUsersAuthStore;
 
   useEffect(() => {
     if (dataRationalCreate) {
@@ -79,22 +79,29 @@ const AdminCreateOrChangeUsersPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Создание или изменение пользователей"}
-        second={
-          "страница содержит форму с полями и настройками для создание или изменения пользователей."
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Создание или изменение пользователей"}
+        description={
+          "страница содержит форму с полями и настройками для создание или изменения пользователей"
         }
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            adminCreateOrChangeUsersStore,
-            "adminCreateOrChangeUsersStore",
-            true,
-            "Данные успешно отправлены!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={adminCreateOrChangeUsersAuthStore}
+            key={"adminCreateOrChangeUsersAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Данные успешно отправлены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         {!dataRationalCreate && (
           <div className="container-fluid text-center">

@@ -18,11 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
-import MessageComponent from "../../components/MessageComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const LoginPage = () => {
@@ -31,17 +30,17 @@ const LoginPage = () => {
   const location = useLocation();
   const id = useParams().id;
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, usernameSet] = useState("");
+  const [password, passwordSet] = useState("");
   const [captcha, captchaSet] = useState("");
 
-  const userLoginStore = useSelector((state) => state.userLoginStore); // store.js
+  const userLoginAnyStore = useSelector((state) => state.userLoginAnyStore); // store.js
   const {
     // load: loadUserLogin,
     data: dataUserLogin,
     // error: errorUserLogin,
     // fail: failUserLogin,
-  } = userLoginStore;
+  } = userLoginAnyStore;
 
   useEffect(() => {
     if (dataUserLogin) {
@@ -65,20 +64,27 @@ const LoginPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Вход в систему"}
-        second={"страница для входа в систему."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Вход в систему"}
+        description={"страница для входа в систему"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            userLoginStore,
-            "userLoginStore",
-            true,
-            "Вы успешно вошли!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={userLoginAnyStore}
+            key={"userLoginAnyStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Вы успешно вошли!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
           {!captcha && (
             <MessageComponent variant="danger">
               Пройдите проверку на робота!
@@ -97,26 +103,22 @@ const LoginPage = () => {
                   value={username}
                   placeholder="введите сюда ИИН..."
                   required
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => usernameSet(e.target.value)}
                   minLength="12"
                   maxLength="12"
                 />
                 <p>
-                  <small className="text-danger">* обязательно</small>
-                  <p>
+                  <small className="text-danger">
+                    * обязательно
                     <small className="text-muted">
-                      количество символов: 12
+                      {" "}
+                      * количество символов: 12
                     </small>
-                  </p>
+                  </small>
                 </p>
               </label>
               <label className="form-control-sm m-1 lead">
                 Введите пароль для входа в аккаунт:
-                <p>
-                  <small className="text-danger">
-                    Только латинские буквы и цифры!
-                  </small>
-                </p>
                 <input
                   type="password"
                   className="form-control form-control-sm"
@@ -124,17 +126,18 @@ const LoginPage = () => {
                   value={password}
                   placeholder="введите сюда пароль..."
                   required
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => passwordSet(e.target.value)}
                   minLength="8"
                   maxLength="32"
                 />
-                <p>
-                  <small className="text-danger">* обязательно</small>
-                  <p>
+                <p className="m-0 p-0">
+                  <small className="text-danger">
+                    * обязательно
                     <small className="text-muted">
-                      количество символов: от 8 до 32
+                      {" "}
+                      * количество символов: от 8 до 32
                     </small>
-                  </p>
+                  </small>
                 </p>
               </label>
               <label className="m-1">
@@ -155,11 +158,11 @@ const LoginPage = () => {
                 </button>
                 <button
                   type="reset"
-                  onClick={(e) => {
-                    setPassword("");
-                    setUsername("");
-                  }}
                   className="btn btn-sm btn-warning p-2 m-1"
+                  onClick={(e) => {
+                    passwordSet("");
+                    usernameSet("");
+                  }}
                 >
                   Сбросить данные
                 </button>

@@ -29,6 +29,17 @@ export const USER_RECOVER_PASSWORD_FAIL_CONSTANT =
 export const USER_RECOVER_PASSWORD_RESET_CONSTANT =
   "USER_RECOVER_PASSWORD_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const NOTIFICATION_CREATE_LOAD_CONSTANT =
+  "NOTIFICATION_CREATE_LOAD_CONSTANT";
+export const NOTIFICATION_CREATE_DATA_CONSTANT =
+  "NOTIFICATION_CREATE_DATA_CONSTANT";
+export const NOTIFICATION_CREATE_ERROR_CONSTANT =
+  "NOTIFICATION_CREATE_ERROR_CONSTANT";
+export const NOTIFICATION_CREATE_FAIL_CONSTANT =
+  "NOTIFICATION_CREATE_FAIL_CONSTANT";
+export const NOTIFICATION_CREATE_RESET_CONSTANT =
+  "NOTIFICATION_CREATE_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT =
   "ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT";
 export const ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT =
@@ -68,6 +79,12 @@ export const USER_LIST_ERROR_CONSTANT = "USER_LIST_ERROR_CONSTANT";
 export const USER_LIST_RESET_CONSTANT = "USER_LIST_RESET_CONSTANT";
 export const USER_LIST_DEFAULT_CONSTANT = "USER_LIST_DEFAULT_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const USER_LIST_ALL_LOAD_CONSTANT = "USER_LIST_ALL_LOAD_CONSTANT";
+export const USER_LIST_ALL_DATA_CONSTANT = "USER_LIST_ALL_DATA_CONSTANT";
+export const USER_LIST_ALL_ERROR_CONSTANT = "USER_LIST_ALL_ERROR_CONSTANT";
+export const USER_LIST_ALL_FAIL_CONSTANT = "USER_LIST_ALL_FAIL_CONSTANT";
+export const USER_LIST_ALL_RESET_CONSTANT = "USER_LIST_ALL_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_SALARY_LOAD_CONSTANT = "USER_SALARY_LOAD_CONSTANT";
 export const USER_SALARY_DATA_CONSTANT = "USER_SALARY_DATA_CONSTANT";
 export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
@@ -92,11 +109,68 @@ export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
 export const RATIONAL_LIST_FAIL_CONSTANT = "RATIONAL_LIST_FAIL_CONSTANT";
 export const RATIONAL_LIST_RESET_CONSTANT = "RATIONAL_LIST_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_LIST_ALL_LOAD_CONSTANT = "USER_LIST_ALL_LOAD_CONSTANT";
-export const USER_LIST_ALL_DATA_CONSTANT = "USER_LIST_ALL_DATA_CONSTANT";
-export const USER_LIST_ALL_ERROR_CONSTANT = "USER_LIST_ALL_ERROR_CONSTANT";
-export const USER_LIST_ALL_FAIL_CONSTANT = "USER_LIST_ALL_FAIL_CONSTANT";
-export const USER_LIST_ALL_RESET_CONSTANT = "USER_LIST_ALL_RESET_CONSTANT";
+export const IDEA_CREATE_LOAD_CONSTANT = "IDEA_CREATE_LOAD_CONSTANT";
+export const IDEA_CREATE_DATA_CONSTANT = "IDEA_CREATE_DATA_CONSTANT";
+export const IDEA_CREATE_ERROR_CONSTANT = "IDEA_CREATE_ERROR_CONSTANT";
+export const IDEA_CREATE_FAIL_CONSTANT = "IDEA_CREATE_FAIL_CONSTANT";
+export const IDEA_CREATE_RESET_CONSTANT = "IDEA_CREATE_RESET_CONSTANT";
+//////////////////////////////////////////////////////////////////////////////
+export const IDEA_LIST_LOAD_CONSTANT = "IDEA_LIST_LOAD_CONSTANT";
+export const IDEA_LIST_DATA_CONSTANT = "IDEA_LIST_DATA_CONSTANT";
+export const IDEA_LIST_ERROR_CONSTANT = "IDEA_LIST_ERROR_CONSTANT";
+export const IDEA_LIST_FAIL_CONSTANT = "IDEA_LIST_FAIL_CONSTANT";
+export const IDEA_LIST_RESET_CONSTANT = "IDEA_LIST_RESET_CONSTANT";
+//////////////////////////////////////////////////////////////////////////////
+export const IDEA_DETAIL_LOAD_CONSTANT = "IDEA_DETAIL_LOAD_CONSTANT";
+export const IDEA_DETAIL_DATA_CONSTANT = "IDEA_DETAIL_DATA_CONSTANT";
+export const IDEA_DETAIL_ERROR_CONSTANT = "IDEA_DETAIL_ERROR_CONSTANT";
+export const IDEA_DETAIL_FAIL_CONSTANT = "IDEA_DETAIL_FAIL_CONSTANT";
+export const IDEA_DETAIL_RESET_CONSTANT = "IDEA_DETAIL_RESET_CONSTANT";
+//////////////////////////////////////////////////////////////////////////////
+export const IDEA_CHANGE_LOAD_CONSTANT = "IDEA_CHANGE_LOAD_CONSTANT";
+export const IDEA_CHANGE_DATA_CONSTANT = "IDEA_CHANGE_DATA_CONSTANT";
+export const IDEA_CHANGE_ERROR_CONSTANT = "IDEA_CHANGE_ERROR_CONSTANT";
+export const IDEA_CHANGE_FAIL_CONSTANT = "IDEA_CHANGE_FAIL_CONSTANT";
+export const IDEA_CHANGE_RESET_CONSTANT = "IDEA_CHANGE_RESET_CONSTANT";
+//////////////////////////////////////////////////////////////////////////////
+export const IDEA_MODERATE_LOAD_CONSTANT = "IDEA_MODERATE_LOAD_CONSTANT";
+export const IDEA_MODERATE_DATA_CONSTANT = "IDEA_MODERATE_DATA_CONSTANT";
+export const IDEA_MODERATE_ERROR_CONSTANT = "IDEA_MODERATE_ERROR_CONSTANT";
+export const IDEA_MODERATE_FAIL_CONSTANT = "IDEA_MODERATE_FAIL_CONSTANT";
+export const IDEA_MODERATE_RESET_CONSTANT = "IDEA_MODERATE_RESET_CONSTANT";
+//////////////////////////////////////////////////////////////////////////////
+export const IDEA_COMMENT_CREATE_LOAD_CONSTANT =
+  "IDEA_COMMENT_CREATE_LOAD_CONSTANT";
+export const IDEA_COMMENT_CREATE_DATA_CONSTANT =
+  "IDEA_COMMENT_CREATE_DATA_CONSTANT";
+export const IDEA_COMMENT_CREATE_ERROR_CONSTANT =
+  "IDEA_COMMENT_CREATE_ERROR_CONSTANT";
+export const IDEA_COMMENT_CREATE_FAIL_CONSTANT =
+  "IDEA_COMMENT_CREATE_FAIL_CONSTANT";
+export const IDEA_COMMENT_CREATE_RESET_CONSTANT =
+  "IDEA_COMMENT_CREATE_RESET_CONSTANT";
+//////////////////////////////////////////////////////////////////////////////
+export const IDEA_COMMENT_LIST_LOAD_CONSTANT =
+  "IDEA_COMMENT_LIST_LOAD_CONSTANT";
+export const IDEA_COMMENT_LIST_DATA_CONSTANT =
+  "IDEA_COMMENT_LIST_DATA_CONSTANT";
+export const IDEA_COMMENT_LIST_ERROR_CONSTANT =
+  "IDEA_COMMENT_LIST_ERROR_CONSTANT";
+export const IDEA_COMMENT_LIST_FAIL_CONSTANT =
+  "IDEA_COMMENT_LIST_FAIL_CONSTANT";
+export const IDEA_COMMENT_LIST_RESET_CONSTANT =
+  "IDEA_COMMENT_LIST_RESET_CONSTANT";
+//////////////////////////////////////////////////////////////////////////////
+export const IDEA_RATING_CREATE_LOAD_CONSTANT =
+  "IDEA_RATING_CREATE_LOAD_CONSTANT";
+export const IDEA_RATING_CREATE_DATA_CONSTANT =
+  "IDEA_RATING_CREATE_DATA_CONSTANT";
+export const IDEA_RATING_CREATE_ERROR_CONSTANT =
+  "IDEA_RATING_CREATE_ERROR_CONSTANT";
+export const IDEA_RATING_CREATE_FAIL_CONSTANT =
+  "IDEA_RATING_CREATE_FAIL_CONSTANT";
+export const IDEA_RATING_CREATE_RESET_CONSTANT =
+  "IDEA_RATING_CREATE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_LIST_LOAD_CONSTANT = "VACANCY_LIST_LOAD_CONSTANT";
 export const VACANCY_LIST_DATA_CONSTANT = "VACANCY_LIST_DATA_CONSTANT";
@@ -232,6 +306,7 @@ export const modules = [
             Active: false,
             Link: "#",
             ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -247,6 +322,7 @@ export const modules = [
             Active: true,
             Link: "/vacancy_list",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Создать новую вакансию",
@@ -254,6 +330,7 @@ export const modules = [
             Active: true,
             Link: "/vacancy_create",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Отправить резюме",
@@ -261,6 +338,7 @@ export const modules = [
             Active: true,
             Link: "/resume_create/0",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Список резюме",
@@ -268,35 +346,7 @@ export const modules = [
             Active: true,
             Link: "/resume_list",
             ExternalLink: false,
-          },
-        ],
-      },
-      {
-        Header: "Банк идей",
-        Access: "user",
-        Image:
-          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
-        Links: [
-          {
-            Header: "Подать идею",
-            Access: "user",
-            Active: true,
-            Link: "/idea_create",
-            ExternalLink: false,
-          },
-          {
-            Header: "Список идей",
-            Access: "user",
-            Active: true,
-            Link: "/idea_list",
-            ExternalLink: false,
-          },
-          {
-            Header: "Рейтинги среди идей",
-            Access: "user",
-            Active: true,
-            Link: "/idea_ratings",
-            ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -319,6 +369,7 @@ export const modules = [
             Active: true,
             Link: "/admin/",
             ExternalLink: true,
+            ShowLink: true,
           },
           {
             Header: "Api Django rest_framework",
@@ -326,6 +377,7 @@ export const modules = [
             Active: true,
             Link: "/api/auth/routes/",
             ExternalLink: true,
+            ShowLink: true,
           },
           {
             Header: "127.0.0.1:3000",
@@ -333,6 +385,7 @@ export const modules = [
             Active: true,
             Link: "http://127.0.0.1:3000/",
             ExternalLink: true,
+            ShowLink: true,
           },
           {
             Header: "127.0.0.1:8000",
@@ -340,6 +393,7 @@ export const modules = [
             Active: true,
             Link: "http://127.0.0.1:8000/",
             ExternalLink: true,
+            ShowLink: true,
           },
         ],
       },
@@ -354,6 +408,7 @@ export const modules = [
             Active: true,
             Link: "/admin_change_user_password",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Создать/изменить пользователей",
@@ -361,6 +416,7 @@ export const modules = [
             Active: true,
             Link: "/admin_create_or_change_users",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Выгрузить список пользователей",
@@ -368,6 +424,7 @@ export const modules = [
             Active: true,
             Link: "/admin_export_users",
             ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -391,6 +448,7 @@ export const modules = [
             Active: true,
             Link: "/home",
             ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -406,6 +464,7 @@ export const modules = [
             Active: true,
             Link: "/change_profile",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Изменить пароль",
@@ -413,6 +472,7 @@ export const modules = [
             Active: true,
             Link: "/change_password",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Восстановить пароль",
@@ -420,13 +480,15 @@ export const modules = [
             Active: true,
             Link: "/recover_password",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Войти",
-            Access: "user",
+            Access: "all",
             Active: true,
             Link: "/login",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Выйти",
@@ -434,6 +496,7 @@ export const modules = [
             Active: true,
             Link: "/logout",
             ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -457,6 +520,7 @@ export const modules = [
             Active: true,
             Link: "/video_study",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Текстовые инструкции",
@@ -464,6 +528,7 @@ export const modules = [
             Active: true,
             Link: "/text_study",
             ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -478,6 +543,7 @@ export const modules = [
             Active: true,
             Link: "/news",
             ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -501,6 +567,7 @@ export const modules = [
             Active: true,
             Link: "/rational_template",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Подать рац. предложение",
@@ -508,6 +575,7 @@ export const modules = [
             Active: true,
             Link: "/rational_create",
             ExternalLink: false,
+            ShowLink: true,
           },
           {
             Header: "Модератор рац. предложений",
@@ -525,6 +593,63 @@ export const modules = [
             Active: true,
             Link: "/rational_moderate_list",
             ExternalLink: false,
+            ShowLink: true,
+          },
+        ],
+      },
+      {
+        Header: "Банк идей",
+        Access: "user",
+        Image:
+          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
+        Links: [
+          {
+            Header: "Подать идею",
+            Access: "user",
+            Active: true,
+            Link: "/idea_create",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Модерация идей",
+            Access: "idea_moderator",
+            Active: true,
+            Link: "/idea_moderate_list",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Модерация подробности идеи",
+            Access: "idea_moderator",
+            Active: true,
+            Link: "/idea_moderate_detail/0",
+            ExternalLink: false,
+            ShowLink: false,
+          },
+          {
+            Header: "Список идей",
+            Access: "user",
+            Active: true,
+            Link: "/idea_list",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Подробности идеи",
+            Access: "user",
+            Active: true,
+            Link: "/idea_detail/0",
+            ExternalLink: false,
+            ShowLink: false,
+          },
+          {
+            Header: "Мои идеи",
+            Access: "user",
+            Active: true,
+            Link: "/idea_self_list",
+            ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },
@@ -548,6 +673,7 @@ export const modules = [
             Active: true,
             Link: "/salary",
             ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },

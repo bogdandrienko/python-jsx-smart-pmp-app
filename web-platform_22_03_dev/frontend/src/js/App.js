@@ -12,8 +12,8 @@ import ChangePasswordPage from "../pages/user/ChangePasswordPage";
 import RecoverPasswordPage from "../pages/user/RecoverPasswordPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import NewsPage from "../pages/base/NewsPage";
-import VideoStudyPage from "../pages/base/VideoStudyPage";
-import TextStudyPage from "../pages/base/TextStudyPage";
+import VideoStudyPage from "../pages/study/VideoStudyPage";
+import TextStudyPage from "../pages/study/TextStudyPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import SalaryPage from "../pages/salary/SalaryPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,8 +23,14 @@ import AdminExportUsersPage from "../pages/admin/AdminExportUsersPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import RationalTemplatePage from "../pages/rational/RationalTemplatePage";
 import RationalCreatePage from "../pages/rational/RationalCreatePage";
-import RationalModerateDetailPage from "../pages/rational/RationalModerateDetailPage";
 import RationalModerateListPage from "../pages/rational/RationalModerateListPage";
+import RationalModerateDetailPage from "../pages/rational/RationalModerateDetailPage";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import IdeaCreatePage from "../pages/idea/IdeaCreatePage";
+import IdeaListPage from "../pages/idea/IdeaListPage";
+import IdeaDetailPage from "../pages/idea/IdeaDetailPage";
+import IdeaModerateListPage from "../pages/idea/IdeaModerateListPage";
+import IdeaModerateDetailPage from "../pages/idea/IdeaModerateDetailPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import VacancyListPage from "../pages/vacancy/VacancyListPage";
 import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
@@ -77,6 +83,18 @@ function App() {
           <Route
             path="/rational_moderate_detail/:id"
             element={<RationalModerateDetailPage />}
+          />
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          <Route path="/idea_create" element={<IdeaCreatePage />} />
+          <Route path="/idea_list" element={<IdeaListPage />} />
+          <Route path="/idea_detail/:id" element={<IdeaDetailPage />} />
+          <Route
+            path="/idea_moderate_list"
+            element={<IdeaModerateListPage />}
+          />
+          <Route
+            path="/idea_moderate_detail/:id"
+            element={<IdeaModerateDetailPage />}
           />
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////
           <Route path="/vacancy_list" element={<VacancyListPage />} />

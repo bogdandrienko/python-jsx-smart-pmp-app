@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ResumeDetailPage = () => {
@@ -30,21 +30,27 @@ const ResumeDetailPage = () => {
   const location = useLocation();
   const id = useParams().id;
 
-  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
-  const resumeDetailStore = useSelector((state) => state.resumeDetailStore); // store.js
+  const userDetailsAuthStore = useSelector(
+    (state) => state.userDetailsAuthStore
+  ); // store.js
+  const resumeDetailAuthStore = useSelector(
+    (state) => state.resumeDetailAuthStore
+  ); // store.js
   const {
     load: loadResumeDetail,
     data: dataResumeDetail,
     // error: errorResumeDetail,
     // fail: failResumeDetail,
-  } = resumeDetailStore;
-  const resumeDeleteStore = useSelector((state) => state.resumeDeleteStore); // store.js
+  } = resumeDetailAuthStore;
+  const resumeDeleteAuthStore = useSelector(
+    (state) => state.resumeDeleteAuthStore
+  ); // store.js
   const {
     // load: loadResumeDelete,
     data: dataResumeDelete,
     // error: errorResumeDelete,
     // fail: failResumeDelete,
-  } = resumeDeleteStore;
+  } = resumeDeleteAuthStore;
 
   useEffect(() => {
     if (
@@ -87,41 +93,60 @@ const ResumeDetailPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Описание резюме"}
-        second={"страница подробного описания резюме."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Описание резюме"}
+        description={"страница подробного описания резюме"}
       />
-      <main className="container p-0">
-        <div className="p-0 m-0">
-          {StoreStatusComponent(
-            userDetailsStore,
-            "userDetailsStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {StoreStatusComponent(
-            resumeDetailStore,
-            "resumeDetailStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {StoreStatusComponent(
-            resumeDeleteStore,
-            "resumeDeleteStore",
-            true,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={userDetailsAuthStore}
+            key={"userDetailsAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
+          <StoreStatusComponent
+            storeStatus={resumeDetailAuthStore}
+            key={"resumeDetailAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
+          <StoreStatusComponent
+            storeStatus={resumeDeleteAuthStore}
+            key={"resumeDeleteAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Данные успешно получены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         <div className="btn-group p-1 m-0 text-start w-100">
           <Link to={"/resume_list"} className="btn btn-sm btn-primary">
             {"<="} назад к списку
           </Link>
           {dataResumeDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
               <button
                 className="btn btn-sm btn-danger"
                 onClick={(e) => formHandlerDelete(e, dataResumeDetail.id)}
@@ -131,22 +156,22 @@ const ResumeDetailPage = () => {
             )}
         </div>
         {dataResumeDetail && (
-          <div className="border shadow text-center p-0 m-0">
-            <div className="card p-0 m-0">
-              <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
+          <div className="border shadow text-center  ">
+            <div className="card  ">
+              <div className="card-header fw-bold lead bg-opacity-10 bg-primary  ">
                 {dataResumeDetail["qualification_field"]}
               </div>
-              <div className="card-body p-0 m-0">
-                <div className="row justify-content-center p-0 m-0">
-                  <div className="col-md-6 shadow w-25 p-0 m-0">
+              <div className="card-body  ">
+                <div className="row justify-content-center  ">
+                  <div className="col-md-6 shadow w-25  ">
                     <img
                       src={utils.GetStaticFile(dataResumeDetail["image_field"])}
                       className="img-fluid img-thumbnail"
                       alt="изображение"
                     />
                   </div>
-                  <div className="card-body col-md-6 p-0 m-0">
-                    <table className="table table-sm table-hover table-borderless table-striped p-0 m-0">
+                  <div className="card-body col-md-6  ">
+                    <table className="table table-sm table-hover table-borderless table-striped  ">
                       <tbody>
                         {dataResumeDetail["datetime_create_field"] !== "" &&
                           dataResumeDetail["datetime_create_field"] !==

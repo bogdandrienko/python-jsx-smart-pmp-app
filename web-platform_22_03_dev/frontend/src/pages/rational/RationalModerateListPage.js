@@ -18,13 +18,12 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import MessageComponent from "../../components/MessageComponent";
-import RationalComponent from "../../components/RationalComponent";
+import RationalComponent from "./RationalComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalListPage = () => {
@@ -41,27 +40,33 @@ const RationalListPage = () => {
   const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
   const [moderate, moderateSet] = useState("");
 
-  const userListAllStore = useSelector((state) => state.userListAllStore); // store.js
+  const userListAllAuthStore = useSelector(
+    (state) => state.userListAllAuthStore
+  ); // store.js
   const {
     // load: loadUserListAll,
     data: dataUserListAll,
     // error: errorUserListAll,
     // fail: failUserListAll,
-  } = userListAllStore;
-  const rationalListStore = useSelector((state) => state.rationalListStore); // store.js
+  } = userListAllAuthStore;
+  const rationalListAuthStore = useSelector(
+    (state) => state.rationalListAuthStore
+  ); // store.js
   const {
     load: loadRationalList,
     data: dataRationalList,
     // error: errorRationalList,
     // fail: failRationalList,
-  } = rationalListStore;
-  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
+  } = rationalListAuthStore;
+  const userDetailsAuthStore = useSelector(
+    (state) => state.userDetailsAuthStore
+  ); // store.js
   const {
     load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsStore;
+  } = userDetailsAuthStore;
 
   const getData = () => {
     const form = {
@@ -107,18 +112,24 @@ const RationalListPage = () => {
   useEffect(() => {
     if (dataUserDetails) {
       if (
-        utils.CheckAccess(userDetailsStore, "rational_moderator_no_tech_post")
+        utils.CheckAccess(
+          userDetailsAuthStore,
+          "rational_moderator_no_tech_post"
+        )
       ) {
         moderateSet("Постнетехмодерация");
       } else {
         if (
-          utils.CheckAccess(userDetailsStore, "rational_moderator_tech_post")
+          utils.CheckAccess(
+            userDetailsAuthStore,
+            "rational_moderator_tech_post"
+          )
         ) {
           moderateSet("Посттехмодерация");
         } else {
           if (
             utils.CheckAccess(
-              userDetailsStore,
+              userDetailsAuthStore,
               "rational_moderator_tech_pre_atp"
             )
           ) {
@@ -127,7 +138,7 @@ const RationalListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsStore,
+              userDetailsAuthStore,
               "rational_moderator_tech_pre_gtk"
             )
           ) {
@@ -136,7 +147,7 @@ const RationalListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsStore,
+              userDetailsAuthStore,
               "rational_moderator_tech_pre_ok"
             )
           ) {
@@ -145,7 +156,7 @@ const RationalListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsStore,
+              userDetailsAuthStore,
               "rational_moderator_tech_pre_uprav"
             )
           ) {
@@ -154,7 +165,7 @@ const RationalListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsStore,
+              userDetailsAuthStore,
               "rational_moderator_tech_pre_energouprav"
             )
           ) {
@@ -182,39 +193,50 @@ const RationalListPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Модератор рац. предложений"}
-        second={"страница модерации рац. предложений."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Модерация рационализаторских предложений"}
+        description={"страница модерации рационализаторских предложений"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            userListAllStore,
-            "userListAllStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {StoreStatusComponent(
-            rationalListStore,
-            "rationalListStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={userListAllAuthStore}
+            key={"userListAllAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
+          <StoreStatusComponent
+            storeStatus={rationalListAuthStore}
+            key={"rationalListAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
-        <div className="p-0 m-0">
+        <div className="">
           <div className="container-fluid form-control bg-opacity-10 bg-success">
-            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
               <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="lead">
                     Выберите нужные настройки фильтрации и сортировки, затем
                     нажмите кнопку{" "}
-                    <p className="fw-bold text-primary">
-                      "фильтровать рац. предложения"
-                    </p>
+                    <p className="fw-bold text-primary">"фильтровать"</p>
                   </label>
                   <label className="form-control-sm form-switch m-1">
                     Детальное отображение:
@@ -227,18 +249,18 @@ const RationalListPage = () => {
                     />
                   </label>
                 </div>
-                <div className="p-0 m-0">
-                  {utils.CheckAccess(userDetailsStore, "rational_admin") ||
+                <div className="">
+                  {utils.CheckAccess(userDetailsAuthStore, "rational_admin") ||
                   utils.CheckAccess(
-                    userDetailsStore,
+                    userDetailsAuthStore,
                     "rational_moderator_no_tech_post"
                   ) ||
                   utils.CheckAccess(
-                    userDetailsStore,
+                    userDetailsAuthStore,
                     "rational_moderator_tech_post"
                   ) ? (
                     <label className="form-control-sm m-1">
-                      Наименование структурного подразделения:
+                      Подразделение:
                       <select
                         className="form-control form-control-sm"
                         value={subdivision}
@@ -274,9 +296,10 @@ const RationalListPage = () => {
                     >
                       <option value="">все варианты</option>
                       <option value="Индустрия 4.0">Индустрия 4.0</option>
-                      <option value="Инвестиционное">Инвестиционное</option>
-                      <option value="Инновационное">Инновационное</option>
-                      <option value="Модернизационное">Модернизационное</option>
+                      <option value="Инвестиции">Инвестиции</option>
+                      <option value="Инновации">Инновации</option>
+                      <option value="Модернизация">Модернизация</option>
+                      <option value="Экология">Экология</option>
                     </select>
                   </label>
                   {dataUserListAll && (
@@ -296,7 +319,10 @@ const RationalListPage = () => {
                       </select>
                     </label>
                   )}
-                  {utils.CheckAccess(userDetailsStore, "rational_admin") && (
+                  {utils.CheckAccess(
+                    userDetailsAuthStore,
+                    "rational_admin"
+                  ) && (
                     <label className="form-control-sm m-1">
                       Статус:
                       <select
@@ -320,7 +346,7 @@ const RationalListPage = () => {
                     </label>
                   )}
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="w-50 form-control-sm">
                     Поле поиска по части названия:
                     <input
@@ -355,7 +381,7 @@ const RationalListPage = () => {
                 </div>
                 <div className="btn-group p-1 m-0 text-start w-100">
                   <button className="btn btn-sm btn-primary" type="submit">
-                    фильтровать рац. предложения
+                    фильтровать
                   </button>
                   <button
                     className="btn btn-sm btn-warning"
@@ -409,7 +435,7 @@ const RationalListPage = () => {
               ))}
             </ul>
           ) : (
-            <div className="row justify-content-center p-0 m-0">
+            <div className="row justify-content-center  ">
               {dataRationalList.map((rational, index) => (
                 <Link
                   key={index}
@@ -418,7 +444,7 @@ const RationalListPage = () => {
                 >
                   <RationalComponent
                     key={index}
-                    rational={rational}
+                    object={rational}
                     shortView={true}
                   />
                 </Link>

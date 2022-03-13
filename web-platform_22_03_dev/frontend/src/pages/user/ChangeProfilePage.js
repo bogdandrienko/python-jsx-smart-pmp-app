@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangeProfilePage = () => {
@@ -36,20 +36,22 @@ const ChangeProfilePage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
+  const userDetailsAuthStore = useSelector(
+    (state) => state.userDetailsAuthStore
+  ); // store.js
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsStore;
-  const userChangeStore = useSelector((state) => state.userChangeStore); // store.js
+  } = userDetailsAuthStore;
+  const userChangeAuthStore = useSelector((state) => state.userChangeAuthStore); // store.js
   const {
     // load: loadUserChange,
     data: dataUserChange,
     // error: errorUserChange,
     // fail: failUserChange,
-  } = userChangeStore;
+  } = userChangeAuthStore;
 
   useEffect(() => {
     if (dataUserDetails && dataUserDetails["user_model"]) {
@@ -104,27 +106,40 @@ const ChangeProfilePage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={false} />
-      <TitleComponent
-        first={"Изменение профиля"}
-        second={"страница редактирования Вашего личного профиля."}
+      <HeaderComponent
+        logic={true}
+        redirect={false}
+        title={"Изменение профиля"}
+        description={"страница редактирования Вашего личного профиля"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            userDetailsStore,
-            "userDetailsStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {StoreStatusComponent(
-            userChangeStore,
-            "userChangeStore",
-            true,
-            "Данные успешно изменены!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={userDetailsAuthStore}
+            key={"userDetailsAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
+          <StoreStatusComponent
+            storeStatus={userChangeAuthStore}
+            key={"userChangeAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Данные успешно изменены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         <div>
           <div className="">
@@ -146,13 +161,14 @@ const ChangeProfilePage = () => {
                     minLength="6"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 6 до 32
+                        {" "}
+                        * количество символов: от 6 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
                 <label className="form-control-sm m-1 lead">
@@ -167,13 +183,14 @@ const ChangeProfilePage = () => {
                     minLength="4"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 4 до 32
+                        {" "}
+                        * количество символов: от 4 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
               </div>
@@ -189,7 +206,7 @@ const ChangeProfilePage = () => {
                     minLength="1"
                     maxLength="128"
                   />
-                  <p>
+                  <p className="m-0 p-0">
                     <small className="text-success">* не обязательно</small>
                   </p>
                 </label>
@@ -197,7 +214,7 @@ const ChangeProfilePage = () => {
               <div>
                 <label className="form-control-sm m-1 lead">
                   Введите пароль для входа в аккаунт:
-                  <p>
+                  <p className="m-0 p-0">
                     <small className="text-danger">
                       Только латинские буквы и цифры!
                     </small>
@@ -213,18 +230,19 @@ const ChangeProfilePage = () => {
                     minLength="8"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 8 до 32
+                        {" "}
+                        * количество символов: от 8 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
                 <label className="form-control-sm m-1 lead">
                   Повторите новый пароль:
-                  <p>
+                  <p className="m-0 p-0">
                     <small className="text-danger">
                       Только латинские буквы и цифры!
                     </small>
@@ -240,13 +258,14 @@ const ChangeProfilePage = () => {
                     minLength="8"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 8 до 32
+                        {" "}
+                        * количество символов: от 8 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
               </div>

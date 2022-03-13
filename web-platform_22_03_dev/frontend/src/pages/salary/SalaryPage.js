@@ -18,12 +18,12 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import SalaryTableComponent from "../../components/SalaryTableComponent";
+import SalaryTableComponent from "./SalaryTableComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const SalaryPage = () => {
@@ -32,13 +32,13 @@ const SalaryPage = () => {
   const location = useLocation();
   const id = useParams().id;
 
-  const salaryUserStore = useSelector((state) => state.salaryUserStore); // store.js
+  const salaryUserAuthStore = useSelector((state) => state.salaryUserAuthStore); // store.js
   const {
     load: loadSalaryUser,
     data: dataSalaryUser,
     // error: errorSalaryUser,
     // fail: failSalaryUser,
-  } = salaryUserStore;
+  } = salaryUserAuthStore;
 
   useEffect(() => {}, [dispatch]);
 
@@ -57,29 +57,35 @@ const SalaryPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Расчётный лист"}
-        second={"страница выгрузки Вашего расчётного листа."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Расчётный лист"}
+        description={"страница выгрузки Вашего расчётного листа"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            salaryUserStore,
-            "salaryUserStore",
-            true,
-            "Данные успешно получены!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={salaryUserAuthStore}
+            key={"salaryUserAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Данные успешно получены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         <div className="">
           <form className="">
-            <div className="input-group m-1">
+            <div className="input-group m-0">
               <select
                 id="month"
-                name="month"
-                required=""
                 className="form-control form-control-sm"
+                required
               >
                 <option value="1" defaultValue selected>
                   Январь
@@ -98,9 +104,8 @@ const SalaryPage = () => {
               </select>
               <select
                 id="year"
-                name="year"
-                required=""
                 className="form-control form-control-sm"
+                required
               >
                 <option value="2021">2021</option>
                 <option value="2022" defaultValue selected>
@@ -125,7 +130,7 @@ const SalaryPage = () => {
             <div>
               <div>
                 <a
-                  className="btn btn-sm btn-success m-1"
+                  className="btn btn-sm btn-success m-0"
                   href={`/${dataSalaryUser["excel_path"]}`}
                 >
                   Скачать excel-документ
@@ -133,7 +138,7 @@ const SalaryPage = () => {
               </div>
               <div>
                 <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                  <li className="m-1">
+                  <li className="m-0">
                     <h6 className="lead fw-bold bold">Основная информация</h6>
                     <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
                       <thead>
@@ -158,7 +163,7 @@ const SalaryPage = () => {
                   </li>
                 </ul>
                 <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                  <li className="m-1">
+                  <li className="m-0">
                     <h6 className="lead fw-bold bold">
                       Вспомогательная информация
                     </h6>
@@ -181,7 +186,7 @@ const SalaryPage = () => {
                       </tbody>
                     </table>
                   </li>
-                  <li className="m-1">
+                  <li className="m-0">
                     <h6 className="lead fw-bold bold">
                       Вспомогательная информация
                     </h6>

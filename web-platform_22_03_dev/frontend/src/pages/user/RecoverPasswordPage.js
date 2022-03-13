@@ -18,11 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
-import MessageComponent from "../../components/MessageComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangePasswordPage = () => {
@@ -41,15 +40,15 @@ const ChangePasswordPage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userRecoverPasswordStore = useSelector(
-    (state) => state.userRecoverPasswordStore
+  const userRecoverPasswordAnyStore = useSelector(
+    (state) => state.userRecoverPasswordAnyStore
   ); // store.js
   const {
     // load: loadUserRecoverPassword,
     data: dataUserRecoverPassword,
     // error: errorUserRecoverPassword,
     // fail: failUserRecoverPassword,
-  } = userRecoverPasswordStore;
+  } = userRecoverPasswordAnyStore;
 
   const formHandlerSubmitFindUser = (e) => {
     e.preventDefault();
@@ -131,20 +130,29 @@ const ChangePasswordPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={false} />
-      <TitleComponent
-        first={"Восстановление пароля"}
-        second={"страница восстановления доступа к Вашему аккаунту."}
+      <HeaderComponent
+        logic={true}
+        redirect={false}
+        title={"Восстановление пароля"}
+        description={"страница восстановления доступа к Вашему аккаунту"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            userRecoverPasswordStore,
-            "userRecoverPasswordStore",
-            true,
-            "Пользователь найден или введённые данные успешно совпадают!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={userRecoverPasswordAnyStore}
+            key={"userRecoverPasswordAnyStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={
+              "Пользователь найден или введённые данные успешно совпадают!"
+            }
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
           {!captcha && (
             <MessageComponent variant="danger">
               Пройдите проверку на робота!
@@ -182,13 +190,14 @@ const ChangePasswordPage = () => {
                         maxLength="12"
                         className="form-control form-control-sm"
                       />
-                      <p>
-                        <small className="text-danger">* обязательно</small>
-                        <p>
+                      <p className="m-0 p-0">
+                        <small className="text-danger">
+                          * обязательно
                           <small className="text-muted">
-                            количество символов: 12
+                            {" "}
+                            * количество символов: 12
                           </small>
-                        </p>
+                        </small>
                       </p>
                     </label>
                   </div>
@@ -240,14 +249,14 @@ const ChangePasswordPage = () => {
                     Восстановление через секретный вопрос/ответ.
                   </h4>
                   <form
-                    className="text-center p-1 m-1"
+                    className="text-center m-0 p-0"
                     onSubmit={formHandlerSubmitCheckAnswer}
                   >
                     <div>
                       <label className="form-control-sm">
-                        <div className="text-danger lead">
+                        <div className="text-danger">
                           Секретный вопрос: '
-                          <small className="text-warning lead fw-bold">{`${secretQuestion}`}</small>
+                          <small className="text-warning fw-bold">{`${secretQuestion}`}</small>
                           '
                         </div>
                         <input
@@ -268,16 +277,14 @@ const ChangePasswordPage = () => {
                       </label>
                     </div>
                     <hr />
-                    <div className="container text-center">
-                      <ul className="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                        <div className="m-1">
-                          <button
-                            type="submit"
-                            className="btn btn-sm btn-primary"
-                          >
-                            Проверить ответ
-                          </button>
-                        </div>
+                    <div className="container">
+                      <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                        <button
+                          type="submit"
+                          className="btn btn-sm btn-primary p-2 m-1"
+                        >
+                          Проверить ответ
+                        </button>
                       </ul>
                     </div>
                   </form>
@@ -287,24 +294,24 @@ const ChangePasswordPage = () => {
                     Восстановление через введённую ранее почту.
                   </h4>
                   <form
-                    className="text-center p-1 m-1"
+                    className="text-center m-0 p-0"
                     onSubmit={formHandlerSubmitRecoverEmail}
                   >
                     <div>
                       <label className="form-control-sm">
                         Код восстановления отправленный на почту
-                        <p className="text-danger">
+                        <p className="text-danger m-0 p-0">
                           * вводить без кавычек
-                          <p className="text-danger">
+                          <p className="text-danger m-0 p-0">
                             * код действует в течении часа с момента отправки
                           </p>
-                          <p className="text-success">
-                            Часть почты, куда будет отправлено письмо: '
+                          <p className="text-success m-0 p-0">
+                            (Часть почты, куда будет отправлено письмо: '
                             <small className="text-warning">
                               {email &&
                                 `${email.slice(0, 5)} ... ${email.slice(-7)}`}
                             </small>
-                            '
+                            ')
                           </p>
                         </p>
                         <input
@@ -365,9 +372,9 @@ const ChangePasswordPage = () => {
               onSubmit={formHandlerSubmitRecoverPassword}
             >
               <div>
-                <label className="form-control-sm m-1 lead">
+                <label className="form-control-sm">
                   Введите пароль для входа в аккаунт:
-                  <p>
+                  <p className="m-0 p-0">
                     <small className="text-danger">
                       Только латинские буквы и цифры!
                     </small>
@@ -383,18 +390,19 @@ const ChangePasswordPage = () => {
                     minLength="8"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 8 до 32
+                        {" "}
+                        * количество символов: от 8 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
-                <label className="form-control-sm m-1 lead">
+                <label className="form-control-sm">
                   Повторите новый пароль:
-                  <p>
+                  <p className="m-0 p-0">
                     <small className="text-danger">
                       Только латинские буквы и цифры!
                     </small>
@@ -410,13 +418,14 @@ const ChangePasswordPage = () => {
                     minLength="8"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 8 до 32
+                        {" "}
+                        * количество символов: от 8 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
               </div>

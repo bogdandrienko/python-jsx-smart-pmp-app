@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyChangePage = () => {
@@ -41,27 +41,33 @@ const VacancyChangePage = () => {
   const [schedule, scheduleSet] = useState("");
   const [description, descriptionSet] = useState("");
 
-  const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore); // store.js
+  const vacancyDetailAnyStore = useSelector(
+    (state) => state.vacancyDetailAnyStore
+  ); // store.js
   const {
     load: loadVacancyDetail,
     data: dataVacancyDetail,
     // error: errorVacancyDetail,
     // fail: failVacancyDetail,
-  } = vacancyDetailStore;
-  const vacancyDeleteStore = useSelector((state) => state.vacancyDeleteStore); // store.js
+  } = vacancyDetailAnyStore;
+  const vacancyDeleteAuthStore = useSelector(
+    (state) => state.vacancyDeleteAuthStore
+  ); // store.js
   const {
     // load: loadVacancyDelete,
     data: dataVacancyDelete,
     // error: errorVacancyDelete,
     // fail: failVacancyDelete,
-  } = vacancyDeleteStore;
-  const vacancyChangeStore = useSelector((state) => state.vacancyChangeStore); // store.js
+  } = vacancyDeleteAuthStore;
+  const vacancyChangeAuthStore = useSelector(
+    (state) => state.vacancyChangeAuthStore
+  ); // store.js
   const {
     // load: loadVacancyCreate,
     data: dataVacancyChange,
     // error: errorVacancyCreate,
     // fail: failVacancyCreate,
-  } = vacancyChangeStore;
+  } = vacancyChangeAuthStore;
 
   useEffect(() => {
     if (dataVacancyChange) {
@@ -125,10 +131,11 @@ const VacancyChangePage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Изменить вакансию"}
-        second={"страница с формой для изменения вакансии."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Изменить вакансию"}
+        description={"страница с формой для изменения вакансии"}
       />
       <main className="container text-center">
         <div className="btn-group p-1 m-0 text-start w-100">
@@ -136,36 +143,36 @@ const VacancyChangePage = () => {
             {"<="} назад к списку
           </Link>
         </div>
-        <div className="p-0 m-0">
+        <div className="">
           {StoreStatusComponent(
-            vacancyDetailStore,
-            "vacancyDetailStore",
+            vacancyDetailAnyStore,
+            "vacancyDetailAnyStore",
             false,
             "",
             constants.DEBUG_CONSTANT
           )}
           {StoreStatusComponent(
-            vacancyChangeStore,
-            "vacancyChangeStore",
+            vacancyChangeAuthStore,
+            "vacancyChangeAuthStore",
             true,
             "",
             constants.DEBUG_CONSTANT
           )}
           {StoreStatusComponent(
-            vacancyDeleteStore,
-            "vacancyDeleteStore",
+            vacancyDeleteAuthStore,
+            "vacancyDeleteAuthStore",
             true,
             "",
             constants.DEBUG_CONSTANT
           )}
         </div>
         <div className="container-fluid">
-          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
             <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-              <div className="p-0 m-0">
+              <div className="">
                 <h6 className="lead">Редактировать вакансию</h6>
               </div>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="w-50 form-control-sm m-1">
                   Квалификация:
                   <input
@@ -179,7 +186,7 @@ const VacancyChangePage = () => {
                     onChange={(e) => qualificationSet(e.target.value)}
                   />
                   <small className="text-danger">* обязательно</small>
-                  <p className="p-0 m-0">
+                  <p className="">
                     <small className="text-muted">
                       длина: не более 256 символов
                     </small>
@@ -197,7 +204,7 @@ const VacancyChangePage = () => {
                     onChange={(e) => rankSet(e.target.value)}
                   />
                   <small className="text-secondary">* не обязательно</small>
-                  <p className="p-0 m-0">
+                  <p className="">
                     <small className="text-muted">
                       длина: не более 32 символов
                     </small>
@@ -205,7 +212,7 @@ const VacancyChangePage = () => {
                 </label>
               </div>
               <br />
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="form-control-sm m-1">
                   Текущее изображение:
                   <img
@@ -226,7 +233,7 @@ const VacancyChangePage = () => {
                   />
                 </label>
               </div>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="form-control-sm m-1">
                   Изображение:
                   <input
@@ -255,7 +262,7 @@ const VacancyChangePage = () => {
                 </label>
               </div>
               <br />
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="form-control-sm m-1">
                   Образование:
                   <select
@@ -312,7 +319,7 @@ const VacancyChangePage = () => {
                 </label>
               </div>
               <br />
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="w-75 form-control-sm m-1">
                   Описание:
                   <textarea
@@ -327,7 +334,7 @@ const VacancyChangePage = () => {
                     onChange={(e) => descriptionSet(e.target.value)}
                   />
                   <small className="text-secondary">* не обязательно</small>
-                  <p className="p-0 m-0">
+                  <p className="">
                     <small className="text-muted">
                       длина: не более 512 символов
                     </small>

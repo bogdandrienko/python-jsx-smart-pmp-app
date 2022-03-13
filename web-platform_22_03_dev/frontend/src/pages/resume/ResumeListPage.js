@@ -18,12 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import MessageComponent from "../../components/MessageComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyListPage = () => {
@@ -40,13 +38,13 @@ const VacancyListPage = () => {
   const [searchQualification, searchQualificationSet] = useState("");
   const [searchLastName, searchLastNameSet] = useState("");
 
-  const resumeListStore = useSelector((state) => state.resumeListStore); // store.js
+  const resumeListAuthStore = useSelector((state) => state.resumeListAuthStore); // store.js
   const {
     load: loadResumeList,
     data: dataResumeList,
     // error: errorResumeList,
     // fail: failResumeList,
-  } = resumeListStore;
+  } = resumeListAuthStore;
 
   const getData = () => {
     const form = {
@@ -88,25 +86,34 @@ const VacancyListPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Список резюме"}
-        second={"страница доступных резюме с возможностью поиска и фильтрации."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Список резюме"}
+        description={
+          "страница доступных резюме с возможностью поиска и фильтрации"
+        }
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            resumeListStore,
-            "resumeListStore",
-            false,
-            "Данные успешно получены!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={resumeListAuthStore}
+            key={"resumeListAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={"Данные успешно получены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         <div className="container-fluid form-control bg-opacity-10 bg-success">
-          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
             <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="lead">
                   Выберите нужные настройки фильтрации и сортировки, затем
                   нажмите кнопку{" "}
@@ -123,7 +130,7 @@ const VacancyListPage = () => {
                   />
                 </label>
               </div>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="form-control-sm m-1">
                   Образование:
                   <select
@@ -175,7 +182,7 @@ const VacancyListPage = () => {
                   </select>
                 </label>
               </div>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="w-75 form-control-sm m-1">
                   Поле поиска по части вакансии или квалификации:
                   <input
@@ -235,7 +242,7 @@ const VacancyListPage = () => {
             </form>
           </ul>
         </div>
-        <div className="container-fluid p-0 m-0">
+        <div className="container-fluid  ">
           {!dataResumeList || dataResumeList.length < 1 ? (
             <MessageComponent variant={"danger"}>
               Вакансии не найдены! Попробуйте изменить условия фильтрации или
@@ -258,28 +265,28 @@ const VacancyListPage = () => {
               ))}
             </ul>
           ) : (
-            <div className="row justify-content-center p-0 m-0">
+            <div className="row justify-content-center  ">
               {dataResumeList.map((resume, index) => (
                 <Link
                   key={index}
                   to={`/resume_detail/${resume.id}`}
-                  className="text-decoration-none border shadow text-center p-0 m-0 col-md-6"
+                  className="text-decoration-none border shadow text-center   col-md-6"
                 >
-                  <div className="card p-0 m-0 list-group-item-action">
-                    <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
+                  <div className="card   list-group-item-action">
+                    <div className="card-header fw-bold lead bg-opacity-10 bg-primary  ">
                       {utils.GetSliceString(resume["qualification_field"], 30)}
                     </div>
-                    <div className="card-body p-0 m-0">
-                      <div className="row justify-content-center p-0 m-0">
-                        <div className="col-md-6 shadow w-25 p-0 m-0">
+                    <div className="card-body  ">
+                      <div className="row justify-content-center  ">
+                        <div className="col-md-6 shadow w-25  ">
                           <img
                             src={utils.GetStaticFile(resume["image_field"])}
                             className="img-fluid img-thumbnail"
                             alt="изображение"
                           />
                         </div>
-                        <div className="card-body col-md-6 p-0 m-0">
-                          <table className="table table-sm table-hover table-borderless table-striped p-0 m-0">
+                        <div className="card-body col-md-6  ">
+                          <table className="table table-sm table-hover table-borderless table-striped  ">
                             <tbody>
                               {resume["datetime_create_field"] !== "" &&
                                 resume["datetime_create_field"] !== null && (

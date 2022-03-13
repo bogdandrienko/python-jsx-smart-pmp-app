@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AdminExportUsersPage = () => {
@@ -30,15 +30,15 @@ const AdminExportUsersPage = () => {
   const location = useLocation();
   const id = useParams().id;
 
-  const adminExportUsersStore = useSelector(
-    (state) => state.adminExportUsersStore
+  const adminExportUsersAuthStore = useSelector(
+    (state) => state.adminExportUsersAuthStore
   ); // store.js
   const {
     load: loadExportUsers,
     data: dataExportUsers,
     // error: errorExportUsers,
     // fail: failExportUsers,
-  } = adminExportUsersStore;
+  } = adminExportUsersAuthStore;
 
   const formHandlerSubmit = (e) => {
     e.preventDefault();
@@ -50,20 +50,29 @@ const AdminExportUsersPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Расчётный лист"}
-        second={"страница выгрузки Вашего расчётного листа."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Экспорт пользователей"}
+        description={
+          "страница содержит функционал выгрузки всех пользователей системы"
+        }
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            adminExportUsersStore,
-            "adminExportUsersStore",
-            true,
-            "Данные успешно отправлены!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={adminExportUsersAuthStore}
+            key={"adminExportUsersAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Данные успешно отправлены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         <div className="input-group m-1">
           {!loadExportUsers && (

@@ -2,3 +2,325 @@
 , 192.168.100.13, /, GET, 2022-03-11 12:36:46.567983, index.html
 
 , 192.168.100.13, /, GET, 2022-03-11 12:36:52.764654, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 13:29:50.949827, IdeaModel() got an unexpected keyword argument 'author_foreign_key_field'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 13:29:53.747034, IdeaModel() got an unexpected keyword argument 'author_foreign_key_field'
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:16.254229, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:19.798226, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:20.239226, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:21.099227, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:21.330229, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:21.434226, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:22.158231, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:22.887226, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:23.370226, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:23.536225, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:23.631226, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:24.771207, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:25.016801, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:25.761656, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:25.960657, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:26.479656, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:27.194961, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:27.721963, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 13:32:28.102379, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 15:01:44.859958, no such column: idea_model_table.moderate_foreign_key_field_db_column
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:09.160021, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:09.702540, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:09.977540, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:15.912302, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:16.964373, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:17.312186, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:17.650416, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:22.196645, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:22.546645, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:22.928645, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-12 17:33:23.459645, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:10:18.585843, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:11:19.221321, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:11:27.026887, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:12:39.844771, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:12:42.361186, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:13:00.616137, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:13:49.126926, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:13:53.684480, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:14:20.578217, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:51:01.190435, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:51:01.190435, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:55:41.573746, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 19:55:41.602200, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:05:37.495077, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:05:37.691626, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:05:40.382885, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:05:40.550759, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:30.491546, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:30.707544, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:30.767545, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:31.604254, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:32.045104, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:32.873855, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:33.645412, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:33.977865, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:34.285047, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:35.057877, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:36.066990, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:36.570987, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:36.740380, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:37.654900, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:37.964985, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:38.068984, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:38.651831, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:39.802785, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:40.207627, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:41.060154, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:41.281065, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:41.871098, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:42.040960, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:42.893288, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:43.156406, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:44.065659, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:44.660990, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:45.192649, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:45.936895, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:46.468323, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:46.819950, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:47.704313, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:48.101598, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:48.269813, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:49.283322, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 20:11:49.887360, int() argument must be a string, a bytes-like object or a number, not 'method'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 21:14:07.591637, integer division or modulo by zero
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 21:14:07.954743, integer division or modulo by zero
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 21:14:10.990775, integer division or modulo by zero
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 21:14:13.295872, integer division or modulo by zero
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 21:16:53.337101, int() argument must be a string, a bytes-like object or a number, not 'dict'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 21:16:53.515165, int() argument must be a string, a bytes-like object or a number, not 'dict'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-12 21:17:05.469868, int() argument must be a string, a bytes-like object or a number, not 'dict'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:07:16.913909, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:07:17.855805, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:25:55.293328, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:25:55.719717, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:27:07.974029, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:27:08.003694, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:27:14.939211, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:27:14.893694, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:29:32.552497, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:29:32.979281, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:29:37.417926, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:29:37.325320, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:29:48.598461, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 00:29:48.561459, IdeaModel matching query does not exist.
+
+, 127.0.0.1, /, GET, 2022-03-13 08:47:11.328150, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 08:47:17.491586, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-13 08:47:20.403582, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 08:47:23.531580, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 09:00:26.967689, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 09:00:33.091237, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 09:07:10.671513, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 09:07:16.778513, index.html
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:12.039183, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:12.007181, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:33.650853, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:34.812608, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:35.569606, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:43.191737, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:44.066144, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:47.369522, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:09:48.889354, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:10:36.431933, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:10:37.096805, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:10:38.074626, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:10:38.622676, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:10:39.786866, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:10:41.024154, get() returned more than one UserModel -- it returned 2!
+
+970801351179, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 09:10:41.844163, get() returned more than one UserModel -- it returned 2!
+
+, 127.0.0.1, /, GET, 2022-03-13 09:29:26.322013, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 09:30:42.065828, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 10:05:49.878042, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 10:05:56.361059, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-13 10:08:46.463215, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:17:22.706772, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:17:23.017236, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:18:00.878044, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:18:02.534920, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:18:27.103599, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:18:28.439078, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:18:29.969541, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:18:54.319408, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:18:55.311649, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:19:00.153721, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:19:18.600511, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:19:19.711721, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:19:31.548890, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:20:05.449946, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:20:38.497981, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:20:58.925223, 0
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:21:01.990661, 0
+
+, 127.0.0.1, /, GET, 2022-03-13 11:09:11.902627, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 11:09:18.103954, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 11:44:31.867050, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 11:44:37.937327, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 11:48:36.056172, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 11:48:42.110261, index.html
+
+, 127.0.0.1, /, GET, 2022-03-13 11:48:48.201190, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 17:12:55.180727, IdeaModel matching query does not exist.

@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyCreatePage = () => {
@@ -39,13 +39,15 @@ const VacancyCreatePage = () => {
   const [schedule, scheduleSet] = useState("");
   const [description, descriptionSet] = useState("");
 
-  const vacancyCreateStore = useSelector((state) => state.vacancyCreateStore); // store.js
+  const vacancyCreateAnyStore = useSelector(
+    (state) => state.vacancyCreateAnyStore
+  ); // store.js
   const {
     // load: loadVacancyCreate,
     data: dataVacancyCreate,
     // error: errorVacancyCreate,
     // fail: failVacancyCreate,
-  } = vacancyCreateStore;
+  } = vacancyCreateAnyStore;
 
   useEffect(() => {
     if (dataVacancyCreate) {
@@ -75,16 +77,17 @@ const VacancyCreatePage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Создать вакансию"}
-        second={"страница с формой для создания новой свободной вакансии."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Создать вакансию"}
+        description={"страница с формой для создания новой свободной вакансии"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
+      <main className="container">
+        <div className="">
           {StoreStatusComponent(
-            vacancyCreateStore,
-            "vacancyCreateStore",
+            vacancyCreateAnyStore,
+            "vacancyCreateAnyStore",
             true,
             "",
             constants.DEBUG_CONSTANT
@@ -97,12 +100,12 @@ const VacancyCreatePage = () => {
         </div>
         {!dataVacancyCreate && (
           <div className="container-fluid">
-            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
               <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-                <div className="p-0 m-0">
+                <div className="">
                   <h6 className="lead">Свободная вакансия</h6>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="w-50 form-control-sm m-1">
                     Квалификация:
                     <input
@@ -116,7 +119,7 @@ const VacancyCreatePage = () => {
                       onChange={(e) => qualificationSet(e.target.value)}
                     />
                     <small className="text-danger">* обязательно</small>
-                    <p className="p-0 m-0">
+                    <p className="">
                       <small className="text-muted">
                         длина: не более 256 символов
                       </small>
@@ -134,7 +137,7 @@ const VacancyCreatePage = () => {
                       onChange={(e) => rankSet(e.target.value)}
                     />
                     <small className="text-secondary">* не обязательно</small>
-                    <p className="p-0 m-0">
+                    <p className="">
                       <small className="text-muted">
                         длина: не более 32 символов
                       </small>
@@ -142,7 +145,7 @@ const VacancyCreatePage = () => {
                   </label>
                 </div>
                 <br />
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="form-control-sm m-1">
                     Изображение:
                     <input
@@ -171,7 +174,7 @@ const VacancyCreatePage = () => {
                   </label>
                 </div>
                 <br />
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="form-control-sm m-1">
                     Образование:
                     <select
@@ -230,7 +233,7 @@ const VacancyCreatePage = () => {
                   </label>
                 </div>
                 <br />
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="w-75 form-control-sm m-1">
                     Описание:
                     <textarea
@@ -245,7 +248,7 @@ const VacancyCreatePage = () => {
                       onChange={(e) => descriptionSet(e.target.value)}
                     />
                     <small className="text-secondary">* не обязательно</small>
-                    <p className="p-0 m-0">
+                    <p className="">
                       <small className="text-muted">
                         длина: не более 512 символов
                       </small>

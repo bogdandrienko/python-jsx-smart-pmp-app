@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalTemplatePage = () => {
@@ -32,21 +32,22 @@ const RationalTemplatePage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Пример рац. предложения"}
-        second={"страница содержит пример для рац. предложения"}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Пример рационализаторского предложения"}
+        description={"страница содержит пример рационализаторского предложения"}
       />
       <main className="container-fluid text-center">
         <div className="">
           <ul className="row row-cols-1 row-cols-md-2 row-cols-lg-2 nav justify-content-center">
-            <div className="card shadow p-0 m-0">
-              <div className="card-header p-0 m-0 bg-opacity-10 bg-primary">
+            <div className="card shadow  ">
+              <div className="card-header   bg-opacity-10 bg-primary">
                 <h6 className="lead fw-bold">Внедрение солнечных панелей.</h6>
               </div>
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <label className="form-control-sm m-1">
-                  Наименование структурного подразделения:
+                  Подразделение:
                   <select
                     id="subdivision"
                     name="subdivision"
@@ -64,9 +65,9 @@ const RationalTemplatePage = () => {
                 </label>
               </div>
 
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <label className="form-control-sm m-1">
-                  Сфера рац. предложения:
+                  Сфера:
                   <select
                     id="sphere"
                     name="sphere"
@@ -88,16 +89,16 @@ const RationalTemplatePage = () => {
                   </select>
                 </label>
               </div>
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <img
                   src="/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png"
                   className={"card-img-top img-fluid w-50"}
                   alt="id"
                 />
               </div>
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <label className="w-100 form-control-sm">
-                  Предполагаемое место внедрения:
+                  Место внедрения:
                   <input
                     type="text"
                     id="name_char_field"
@@ -112,9 +113,9 @@ const RationalTemplatePage = () => {
                   />
                 </label>
               </div>
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <label className="w-100 form-control-sm m-1">
-                  Полное описание:
+                  Описание:
                   <textarea
                     required
                     placeholder="Полное описание"
@@ -127,7 +128,7 @@ const RationalTemplatePage = () => {
                   />
                 </label>
               </div>
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <label className="form-control-sm m-1">
                   Word файл-приложение:
                   <a className="btn btn-sm btn-primary m-1" href="">
@@ -147,7 +148,7 @@ const RationalTemplatePage = () => {
                   </a>
                 </label>
               </div>
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <Link
                   to={`#`}
                   className="text-decoration-none btn btn-sm btn-warning"
@@ -159,31 +160,29 @@ const RationalTemplatePage = () => {
                 Участники:
                 <input
                   type="text"
-                  id="name_char_field"
-                  name="name_char_field"
+                  className="form-control form-control-sm"
+                  defaultValue="Иванов Иван Иванович 931778 70%"
+                  readOnly={true}
                   placeholder="участник № 1"
-                  value="Иванов Иван Иванович 931778 70%"
                   minLength="0"
                   maxLength="200"
-                  className="form-control form-control-sm"
                 />
                 <input
                   type="text"
-                  id="name_char_field"
-                  name="name_char_field"
+                  className="form-control form-control-sm"
+                  defaultValue="Иванов Иван Николаевич 931779 30%"
+                  readOnly={true}
                   placeholder="участник № 2"
-                  value="Иванов Иван Николаевич 931779 30%"
                   minLength="0"
                   maxLength="200"
-                  className="form-control form-control-sm"
                 />
               </label>
-              <div className="card-body p-0 m-0">
+              <div className="card-body  ">
                 <label className="text-muted border p-1 m-1">
-                  подано: <p className="p-0 m-0">09-03-22 11:20</p>
+                  подано: <p className="">09-03-22 11:20</p>
                 </label>
                 <label className="text-muted border p-1 m-1">
-                  зарегистрировано: <p className="p-0 m-0">09-03-22 11:55</p>
+                  зарегистрировано: <p className="">09-03-22 11:55</p>
                 </label>
               </div>
             </div>

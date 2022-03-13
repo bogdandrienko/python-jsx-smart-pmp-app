@@ -86,6 +86,59 @@ class RationalModelSerializer(serializers.ModelSerializer):
         return user_model_serializer.data
 
 
+class IdeaModelSerializer(serializers.ModelSerializer):
+    user_model = serializers.SerializerMethodField(read_only=True)
+    comment_count = serializers.SerializerMethodField(read_only=True)
+    total_rating = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = backend_models.IdeaModel
+        fields = '__all__'
+
+    def get_user_model(self, obj):
+        user_model = backend_models.UserModel.objects.get(id=obj.idea_author_foreign_key_field.id)
+        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+        if not user_model_serializer.data:
+            user_model_serializer = {'data': None}
+        return user_model_serializer.data
+
+    def get_comment_count(self, obj):
+        return obj.get_comment_count()
+
+    def get_total_rating(self, obj):
+        return obj.get_total_rating()
+
+
+class RatingIdeaModelSerializer(serializers.ModelSerializer):
+    user_model = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = backend_models.RatingIdeaModel
+        fields = '__all__'
+
+    def get_user_model(self, obj):
+        user_model = backend_models.UserModel.objects.get(id=obj.rating_idea_author_foreign_key_field.id)
+        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+        if not user_model_serializer.data:
+            user_model_serializer = {'data': None}
+        return user_model_serializer.data
+
+
+class CommentIdeaModelSerializer(serializers.ModelSerializer):
+    user_model = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = backend_models.CommentIdeaModel
+        fields = '__all__'
+
+    def get_user_model(self, obj):
+        user_model = backend_models.UserModel.objects.get(id=obj.comment_idea_author_foreign_key_field.id)
+        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+        if not user_model_serializer.data:
+            user_model_serializer = {'data': None}
+        return user_model_serializer.data
+
+
 class VacancyModelSerializer(serializers.ModelSerializer):
 
     class Meta:

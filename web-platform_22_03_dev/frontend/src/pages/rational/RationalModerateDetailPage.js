@@ -18,12 +18,12 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import RationalComponent from "../../components/RationalComponent";
+import RationalComponent from "./RationalComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalModerateDetailPage = () => {
@@ -36,13 +36,15 @@ const RationalModerateDetailPage = () => {
   const [moderate, moderateSet] = useState("");
   const [comment, commentSet] = useState("");
 
-  const rationalDetailStore = useSelector((state) => state.rationalDetailStore); // store.js
+  const rationalDetailAuthStore = useSelector(
+    (state) => state.rationalDetailAuthStore
+  ); // store.js
   const {
     load: loadRationalDetail,
     data: dataRationalDetail,
     // error: errorRationalDetail,
     // fail: failRationalDetail,
-  } = rationalDetailStore;
+  } = rationalDetailAuthStore;
 
   useEffect(() => {
     if (
@@ -80,20 +82,29 @@ const RationalModerateDetailPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Подробности рац. предложения"}
-        second={"страница содержит подробности последнего рац. предложения"}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Подробности рационализаторского предложения"}
+        description={
+          "страница содержит подробности рационализаторского предложения"
+        }
       />
-      <main className="container p-0">
-        <div className="p-0 m-0">
-          {StoreStatusComponent(
-            rationalDetailStore,
-            "rationalDetailStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={rationalDetailAuthStore}
+            key={"rationalDetailAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         <div className="btn-group p-1 m-0 text-start w-100">
           <Link
@@ -107,10 +118,7 @@ const RationalModerateDetailPage = () => {
           {!dataRationalDetail || dataRationalDetail.length < 1 ? (
             ""
           ) : (
-            <RationalComponent
-              rational={dataRationalDetail}
-              shortView={false}
-            />
+            <RationalComponent object={dataRationalDetail} shortView={false} />
           )}
         </div>
         <div className="container">

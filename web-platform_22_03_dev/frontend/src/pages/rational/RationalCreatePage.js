@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const BankIdeaListPage = () => {
@@ -51,29 +51,44 @@ const BankIdeaListPage = () => {
   const [user5, user5Set] = useState("");
   const [user5Perc, user5PercSet] = useState("");
 
-  const userListAllStore = useSelector((state) => state.userListAllStore); // store.js
+  const userListAllAuthStore = useSelector(
+    (state) => state.userListAllAuthStore
+  ); // store.js
   const {
     load: loadUserListAll,
     data: dataUserListAll,
-    // error: errorUserListAll,
-    // fail: failUserListAll,
-  } = userListAllStore;
-  const rationalCreateStore = useSelector((state) => state.rationalCreateStore); // store.js
+    error: errorUserListAll,
+    fail: failUserListAll,
+  } = userListAllAuthStore;
+  const rationalCreateAuthStore = useSelector(
+    (state) => state.rationalCreateAuthStore
+  ); // store.js
   const {
     // load: loadRationalCreate,
     data: dataRationalCreate,
     // error: errorRationalCreate,
     // fail: failRationalCreate,
-  } = rationalCreateStore;
+  } = rationalCreateAuthStore;
 
   useEffect(() => {
-    if (!dataUserListAll && !loadUserListAll) {
+    if (
+      !dataUserListAll &&
+      !loadUserListAll &&
+      !errorUserListAll &&
+      !failUserListAll
+    ) {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
       dispatch(actions.userListAllAuthAction(form));
     }
-  }, [dispatch, dataUserListAll, loadUserListAll]);
+  }, [
+    dispatch,
+    dataUserListAll,
+    loadUserListAll,
+    errorUserListAll,
+    failUserListAll,
+  ]);
 
   useEffect(() => {
     if (dataRationalCreate) {
@@ -110,48 +125,59 @@ const BankIdeaListPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Подача рац. предложения"}
-        second={
-          "страница содержит форму с полями для заполнения и подачи рац. предложения."
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Подача рационализаторского предложения"}
+        description={
+          "страница содержит форму с полями для заполнения и подачи рационализаторского предложения"
         }
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            userListAllStore,
-            "userListAllStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {StoreStatusComponent(
-            rationalCreateStore,
-            "rationalCreateStore",
-            true,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={userListAllAuthStore}
+            key={"userListAllAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={false}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
+          <StoreStatusComponent
+            storeStatus={rationalCreateAuthStore}
+            key={"rationalCreateAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         {!dataRationalCreate && (
           <div className="container-fluid">
-            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
               <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-                <div className="p-0 m-0">
+                <div className="">
                   <h6 className="lead fw-bold">ЗАЯВЛЕНИЕ</h6>
                   <h6 className="lead">на рационализаторское предложение</h6>
                 </div>
                 <br />
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="form-control-sm">
-                    Наименование структурного подразделения:
+                    Подразделение:
                     <select
-                      id="subdivision"
-                      name="subdivision"
-                      required
                       className="form-control form-control-sm"
                       value={subdivision}
+                      required
                       onChange={(e) => subdivisionSet(e.target.value)}
                     >
                       <option value="">Не указано</option>
@@ -180,15 +206,13 @@ const BankIdeaListPage = () => {
                     </p>
                   </label>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="form-control-sm">
-                    Сфера рац. предложения:
+                    Сфера:
                     <select
-                      id="sphere"
-                      name="sphere"
-                      required
                       className="form-control form-control-sm"
                       value={sphere}
+                      required
                       onChange={(e) => sphereSet(e.target.value)}
                     >
                       <option value="">Не указано</option>
@@ -202,110 +226,101 @@ const BankIdeaListPage = () => {
                   <label className="form-control-sm">
                     Категория:
                     <select
-                      id="category"
-                      name="category"
-                      required
                       className="form-control form-control-sm"
                       value={category}
+                      required
                       onChange={(e) => categorySet(e.target.value)}
                     >
                       <option value="">Не указано</option>
                       <option value="Индустрия 4.0">Индустрия 4.0</option>
-                      <option value="Инвестиционное">Инвестиционное</option>
-                      <option value="Инновационное">Инновационное</option>
-                      <option value="Модернизационное">Модернизационное</option>
+                      <option value="Инвестиции">Инвестиции</option>
+                      <option value="Инновации">Инновации</option>
+                      <option value="Модернизация">Модернизация</option>
+                      <option value="Экология">Экология</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
                   <label className="form-control-sm">
-                    Аватарка-заставка для идеи:
+                    Аватарка-заставка:
                     <input
                       type="file"
-                      id="avatar_image_field"
-                      name="avatar_image_field"
-                      accept=".jpg, .png"
                       className="form-control form-control-sm"
+                      accept=".jpg, .png"
                       onChange={(e) => avatarSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="w-50 form-control-sm">
-                    Название рац. предложения:
+                    Название:
                     <input
                       type="text"
-                      id="name_char_field"
-                      name="name_char_field"
-                      required
-                      placeholder="Название"
+                      className="form-control form-control-sm"
                       value={name}
+                      placeholder="введите название тут..."
+                      required
                       minLength="1"
                       maxLength="250"
-                      className="form-control form-control-sm"
                       onChange={(e) => nameSet(e.target.value)}
                     />
                     <small className="text-danger">* обязательно</small>
-                    <p className="p-0 m-0">
+                    <p className="">
                       <small className="text-muted">
                         длина: не более 250 символов
                       </small>
                     </p>
                   </label>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="w-50 form-control-sm">
-                    Предполагаемое место внедрения:
+                    Место внедрения:
                     <input
                       type="text"
-                      id="name_char_field"
-                      name="name_char_field"
+                      className="form-control form-control-sm"
+                      value={place}
                       required
                       placeholder="Цех / участок / отдел / лаборатория и т.п."
-                      value={place}
                       minLength="1"
                       maxLength="500"
-                      className="form-control form-control-sm"
                       onChange={(e) => placeSet(e.target.value)}
                     />
                     <small className="text-danger">* обязательно</small>
-                    <p className="p-0 m-0">
+                    <p className="">
                       <small className="text-muted">
                         длина: не более 500 символов
                       </small>
                     </p>
                   </label>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="w-75 form-control-sm">
                     Описание:
                     <textarea
+                      className="form-control form-control-sm"
+                      value={description}
                       required
                       placeholder="Полное описание"
-                      value={description}
                       minLength="1"
                       maxLength="5000"
                       rows="3"
-                      className="form-control form-control-sm"
                       onChange={(e) => descriptionSet(e.target.value)}
                     />
                     <small className="text-danger">* обязательно</small>
-                    <p className="p-0 m-0">
+                    <p className="">
                       <small className="text-muted">
                         длина: не более 5000 символов
                       </small>
                     </p>
                   </label>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="form-control-sm">
                     Word файл-приложение:
                     <input
                       type="file"
-                      id="addiction_file_field"
-                      name="addiction_file_field"
-                      accept=".docx, .doc"
                       className="form-control form-control-sm"
+                      accept=".docx, .doc"
                       onChange={(e) => additionalWordSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
@@ -314,10 +329,8 @@ const BankIdeaListPage = () => {
                     Pdf файл-приложение:
                     <input
                       type="file"
-                      id="addiction_file_field"
-                      name="addiction_file_field"
-                      accept=".pdf"
                       className="form-control form-control-sm"
+                      accept=".pdf"
                       onChange={(e) => additionalPdfSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
@@ -326,17 +339,15 @@ const BankIdeaListPage = () => {
                     Excel файл-приложение:
                     <input
                       type="file"
-                      id="addiction_file_field"
-                      name="addiction_file_field"
-                      accept=".xlsx, .xls"
                       className="form-control form-control-sm"
+                      accept=".xlsx, .xls"
                       onChange={(e) => additionalExcelSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
                 </div>
                 <br />
-                <div className="p-0 m-0">
+                <div className="">
                   <p className="text-danger">
                     Я(мы) утверждаю(ем), что являюсь(ся) автором(и) данного
                     предложения. Мне(нам) также известно, что в случае признания
@@ -344,7 +355,7 @@ const BankIdeaListPage = () => {
                     не разглашать его сущность.
                   </p>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="form-control-sm">
                     Участники:
                     <p>
@@ -355,19 +366,17 @@ const BankIdeaListPage = () => {
                     </p>
                   </label>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <label className="form-control-sm">
                     {dataUserListAll && (
                       <div>
-                        <div className="p-0 m-0">
+                        <div className="">
                           <label className="form-control-sm">
                             участник №1:
                             <select
-                              id="subdivision"
-                              name="subdivision"
-                              required
                               className="form-control form-control-sm"
                               value={user1}
+                              required
                               onChange={(e) => user1Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -382,24 +391,23 @@ const BankIdeaListPage = () => {
                             % Вклада 1 участника
                             <input
                               type="text"
-                              placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="10"
                               className="form-control form-control-sm"
                               value={user1Perc}
                               required
+                              placeholder="пример: 70%"
+                              minLength="0"
+                              maxLength="4"
                               onChange={(e) => user1PercSet(e.target.value)}
                             />
                           </label>
                         </div>
-                        <div className="p-0 m-0">
+                        <div className="">
                           <label className="form-control-sm">
                             участник №2:
                             <select
-                              id="subdivision"
-                              name="subdivision"
                               className="form-control form-control-sm"
                               value={user2}
+                              required
                               onChange={(e) => user2Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -414,23 +422,23 @@ const BankIdeaListPage = () => {
                             % Вклада 2 участника
                             <input
                               type="text"
-                              placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="200"
                               className="form-control form-control-sm"
                               value={user2Perc}
+                              required
+                              placeholder="пример: 70%"
+                              minLength="0"
+                              maxLength="4"
                               onChange={(e) => user2PercSet(e.target.value)}
                             />
                           </label>
                         </div>
-                        <div className="p-0 m-0">
+                        <div className="">
                           <label className="form-control-sm">
                             участник №3:
                             <select
-                              id="subdivision"
-                              name="subdivision"
                               className="form-control form-control-sm"
                               value={user3}
+                              required
                               onChange={(e) => user3Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -445,23 +453,23 @@ const BankIdeaListPage = () => {
                             % Вклада 3 участника
                             <input
                               type="text"
-                              placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="200"
                               className="form-control form-control-sm"
                               value={user3Perc}
+                              required
+                              placeholder="пример: 70%"
+                              minLength="0"
+                              maxLength="4"
                               onChange={(e) => user3PercSet(e.target.value)}
                             />
                           </label>
                         </div>
-                        <div className="p-0 m-0">
+                        <div className="">
                           <label className="form-control-sm">
                             участник №4:
                             <select
-                              id="subdivision"
-                              name="subdivision"
                               className="form-control form-control-sm"
                               value={user4}
+                              required
                               onChange={(e) => user4Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -476,23 +484,23 @@ const BankIdeaListPage = () => {
                             % Вклада 4 участника
                             <input
                               type="text"
-                              placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="200"
                               className="form-control form-control-sm"
                               value={user4Perc}
+                              required
+                              placeholder="пример: 70%"
+                              minLength="0"
+                              maxLength="4"
                               onChange={(e) => user4PercSet(e.target.value)}
                             />
                           </label>
                         </div>
-                        <div className="p-0 m-0">
+                        <div className="">
                           <label className="form-control-sm">
                             участник №5:
                             <select
-                              id="subdivision"
-                              name="subdivision"
                               className="form-control form-control-sm"
                               value={user5}
+                              required
                               onChange={(e) => user5Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -507,11 +515,12 @@ const BankIdeaListPage = () => {
                             % Вклада 5 участника
                             <input
                               type="text"
-                              placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="200"
                               className="form-control form-control-sm"
                               value={user5Perc}
+                              required
+                              placeholder="пример: 70%"
+                              minLength="0"
+                              maxLength="4"
                               onChange={(e) => user5PercSet(e.target.value)}
                             />
                           </label>
@@ -520,7 +529,7 @@ const BankIdeaListPage = () => {
                     )}
                   </label>
                 </div>
-                <div className="p-0 m-0">
+                <div className="">
                   <small className="text-muted">
                     * общая сумма вклада всех участников не должна превышать
                     100%
@@ -531,16 +540,38 @@ const BankIdeaListPage = () => {
                   <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
                     <li className="m-1">
                       <button
-                        className="btn btn-sm btn-outline-primary"
                         type="submit"
+                        className="btn btn-sm btn-outline-primary"
                       >
                         Отправить
                       </button>
                     </li>
                     <li className="m-1">
                       <button
-                        className="btn btn-sm btn-outline-warning"
                         type="reset"
+                        className="btn btn-sm btn-outline-warning"
+                        onClick={(e) => {
+                          subdivisionSet("");
+                          sphereSet("");
+                          categorySet("");
+                          avatarSet("");
+                          nameSet("");
+                          placeSet("");
+                          descriptionSet("");
+                          additionalWordSet("");
+                          additionalPdfSet("");
+                          additionalExcelSet("");
+                          user1Set("");
+                          user1PercSet("");
+                          user2Set("");
+                          user2PercSet("");
+                          user3Set("");
+                          user3PercSet("");
+                          user4Set("");
+                          user4PercSet("");
+                          user5Set("");
+                          user5PercSet("");
+                        }}
                       >
                         Сбросить все данные
                       </button>

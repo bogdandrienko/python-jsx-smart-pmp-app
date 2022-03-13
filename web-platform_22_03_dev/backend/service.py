@@ -454,6 +454,8 @@ class DjangoClass:
                            "rational_moderator_tech_pre_ok", "rational_moderator_tech_pre_uprav",
                            "rational_moderator_tech_pre_energouprav", "rational_moderator_tech_post",
                            "rational_moderator_no_tech_post"]
+                # idea
+                groups += ["idea_moderator"]
                 # tests
                 groups += ["moderator_vacancy"]
                 for grp in groups:

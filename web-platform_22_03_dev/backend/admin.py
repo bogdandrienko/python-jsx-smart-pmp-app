@@ -429,6 +429,59 @@ class GroupModelAdmin(admin.ModelAdmin):
     ]
 
 
+class NotificationModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'IdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "notification_author_foreign_key_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+    )
+    list_display_links = (
+        "notification_author_foreign_key_field",
+        "name_char_field",
+    )
+    list_editable = (
+        "visibility_boolean_field",
+    )
+    list_filter = (
+        "notification_author_foreign_key_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "notification_author_foreign_key_field",
+            "name_char_field",
+            "place_char_field",
+            "description_text_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+            "visibility_boolean_field",
+            "created_datetime_field",
+        )}),
+    )
+    search_fields = [
+        "notification_author_foreign_key_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+    ]
+
+
 class RationalModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'RationalModel' на панели администратора
@@ -506,7 +559,7 @@ class RationalModelAdmin(admin.ModelAdmin):
         ("Основная информация", {"fields": (
             "author_foreign_key_field",
             "number_char_field",
-        "status_moderate_char_field",
+            "status_moderate_char_field",
             "subdivision_char_field",
             "sphere_char_field",
             "category_char_field",
@@ -565,6 +618,182 @@ class RationalModelAdmin(admin.ModelAdmin):
         "visibility_boolean_field",
         "created_datetime_field",
         "register_datetime_field",
+    ]
+
+
+class IdeaModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'IdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "idea_author_foreign_key_field",
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "idea_moderate_foreign_key_field",
+        "comment_moderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    )
+    list_display_links = (
+        "idea_author_foreign_key_field",
+    )
+    list_editable = (
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+    )
+    list_filter = (
+        "idea_author_foreign_key_field",
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "idea_moderate_foreign_key_field",
+        "comment_moderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "idea_author_foreign_key_field",
+            "status_moderate_char_field",
+            "subdivision_char_field",
+            "sphere_char_field",
+            "category_char_field",
+            "avatar_image_field",
+            "name_char_field",
+            "place_char_field",
+            "description_text_field",
+        )}),
+        ("Модерация", {"fields": (
+            "idea_moderate_foreign_key_field",
+            "comment_moderate_char_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+            "visibility_boolean_field",
+            "created_datetime_field",
+            "register_datetime_field",
+        )}),
+    )
+    search_fields = [
+        "idea_author_foreign_key_field",
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "idea_moderate_foreign_key_field",
+        "comment_moderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    ]
+
+
+class RatingIdeaModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'RatingIdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "rating_idea_foreign_key_field",
+        "rating_idea_author_foreign_key_field",
+        "rating_integer_field",
+        "datetime_field",
+    )
+    list_display_links = (
+        "rating_idea_foreign_key_field",
+        "rating_idea_author_foreign_key_field",
+    )
+    list_editable = (
+        "rating_integer_field",
+    )
+    list_filter = (
+        "rating_idea_foreign_key_field",
+        "rating_idea_author_foreign_key_field",
+        "rating_integer_field",
+        "datetime_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "rating_idea_foreign_key_field",
+            "rating_idea_author_foreign_key_field",
+            "rating_integer_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+            "datetime_field",
+        )}),
+    )
+    search_fields = [
+        "rating_idea_foreign_key_field",
+        "rating_idea_author_foreign_key_field",
+        "rating_integer_field",
+        "datetime_field",
+    ]
+
+
+class CommentIdeaModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'CommentIdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "comment_idea_foreign_key_field",
+        "comment_idea_author_foreign_key_field",
+        "comment_text_field",
+        "datetime_field",
+    )
+    list_display_links = (
+        "comment_idea_foreign_key_field",
+        "comment_idea_author_foreign_key_field",
+    )
+    list_editable = (
+        "comment_text_field",
+    )
+    list_filter = (
+        "comment_idea_foreign_key_field",
+        "comment_idea_author_foreign_key_field",
+        "comment_text_field",
+        "datetime_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "comment_idea_foreign_key_field",
+            "comment_idea_author_foreign_key_field",
+            "comment_text_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+            "datetime_field",
+        )}),
+    )
+    search_fields = [
+        "comment_idea_foreign_key_field",
+        "comment_idea_author_foreign_key_field",
+        "comment_text_field",
+        "datetime_field",
     ]
 
 
@@ -708,6 +937,10 @@ admin.site.register(backend_models.LoggingModel, LoggingModelAdmin)
 admin.site.register(backend_models.UserModel, UserModelAdmin)
 admin.site.register(backend_models.ActionModel, ActionModelAdmin)
 admin.site.register(backend_models.GroupModel, GroupModelAdmin)
+admin.site.register(backend_models.NotificationModel, NotificationModelAdmin)
 admin.site.register(backend_models.RationalModel, RationalModelAdmin)
+admin.site.register(backend_models.IdeaModel, IdeaModelAdmin)
+admin.site.register(backend_models.RatingIdeaModel, RatingIdeaModelAdmin)
+admin.site.register(backend_models.CommentIdeaModel, CommentIdeaModelAdmin)
 admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)
 admin.site.register(backend_models.ResumeModel, ResumeModelAdmin)

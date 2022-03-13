@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyDetailPage = () => {
@@ -30,21 +30,27 @@ const VacancyDetailPage = () => {
   const location = useLocation();
   const id = useParams().id;
 
-  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
-  const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore); // store.js
+  const userDetailsAuthStore = useSelector(
+    (state) => state.userDetailsAuthStore
+  ); // store.js
+  const vacancyDetailAnyStore = useSelector(
+    (state) => state.vacancyDetailAnyStore
+  ); // store.js
   const {
     load: loadVacancyDetail,
     data: dataVacancyDetail,
     // error: errorVacancyDetail,
     // fail: failVacancyDetail,
-  } = vacancyDetailStore;
-  const vacancyDeleteStore = useSelector((state) => state.vacancyDeleteStore); // store.js
+  } = vacancyDetailAnyStore;
+  const vacancyDeleteAuthStore = useSelector(
+    (state) => state.vacancyDeleteAuthStore
+  ); // store.js
   const {
     // load: loadVacancyDelete,
     data: dataVacancyDelete,
     // error: errorVacancyDelete,
     // fail: failVacancyDelete,
-  } = vacancyDeleteStore;
+  } = vacancyDeleteAuthStore;
 
   useEffect(() => {
     if (
@@ -87,30 +93,31 @@ const VacancyDetailPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={false} />
-      <TitleComponent
-        first={"Описание вакансии"}
-        second={"страница подробного описания вакансии."}
+      <HeaderComponent
+        logic={true}
+        redirect={false}
+        title={"Описание вакансии"}
+        description={"страница подробного описания вакансии"}
       />
-      <main className="container p-0">
-        <div className="p-0 m-0">
+      <main className="container  ">
+        <div className="">
           {StoreStatusComponent(
-            userDetailsStore,
-            "userDetailsStore",
+            userDetailsAuthStore,
+            "userDetailsAuthStore",
             false,
             "",
             constants.DEBUG_CONSTANT
           )}
           {StoreStatusComponent(
-            vacancyDetailStore,
-            "vacancyDetailStore",
+            vacancyDetailAnyStore,
+            "vacancyDetailAnyStore",
             false,
             "",
             constants.DEBUG_CONSTANT
           )}
           {StoreStatusComponent(
-            vacancyDeleteStore,
-            "vacancyDeleteStore",
+            vacancyDeleteAuthStore,
+            "vacancyDeleteAuthStore",
             true,
             "",
             constants.DEBUG_CONSTANT
@@ -129,7 +136,7 @@ const VacancyDetailPage = () => {
             </Link>
           )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
               <Link
                 to={`/vacancy_change/${dataVacancyDetail.id}`}
                 className="btn btn-sm btn-warning"
@@ -138,7 +145,7 @@ const VacancyDetailPage = () => {
               </Link>
             )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
               <button
                 className="btn btn-sm btn-danger"
                 onClick={(e) => formHandlerDelete(e, dataVacancyDetail.id)}
@@ -147,21 +154,21 @@ const VacancyDetailPage = () => {
               </button>
             )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
               <Link to={`/vacancy_create`} className="btn btn-sm btn-secondary">
                 создать новую вакансию
               </Link>
             )}
         </div>
         {dataVacancyDetail && (
-          <div className="border shadow text-center p-0 m-0">
-            <div className="card p-0 m-0">
-              <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
+          <div className="border shadow text-center  ">
+            <div className="card  ">
+              <div className="card-header fw-bold lead bg-opacity-10 bg-primary  ">
                 {dataVacancyDetail["qualification_field"]}
               </div>
-              <div className="card-body p-0 m-0">
-                <div className="row justify-content-center p-0 m-0">
-                  <div className="col-md-6 shadow w-25 p-0 m-0">
+              <div className="card-body  ">
+                <div className="row justify-content-center  ">
+                  <div className="col-md-6 shadow w-25  ">
                     <img
                       src={utils.GetStaticFile(
                         dataVacancyDetail["image_field"]
@@ -170,8 +177,8 @@ const VacancyDetailPage = () => {
                       alt="изображение"
                     />
                   </div>
-                  <div className="card-body col-md-6 p-0 m-0">
-                    <table className="table table-sm table-hover table-borderless table-striped p-0 m-0">
+                  <div className="card-body col-md-6  ">
+                    <table className="table table-sm table-hover table-borderless table-striped  ">
                       <tbody>
                         {dataVacancyDetail["datetime_field"] !== "" &&
                           dataVacancyDetail["datetime_field"] !== null && (

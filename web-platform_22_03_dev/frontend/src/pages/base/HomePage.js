@@ -18,13 +18,13 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import ModulesComponent from "../../components/ModulesComponent";
-import NewsComponent from "../../components/NewsComponent";
+import ModulesComponent from "./ModulesComponent";
+import NewsComponent from "./NewsComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const HomePage = () => {
@@ -35,10 +35,11 @@ const HomePage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={false} />
-      <TitleComponent
-        first={"Домашняя страница"}
-        second={"основная страница веб платформы."}
+      <HeaderComponent
+        logic={true}
+        redirect={false}
+        title={"Домашняя страница"}
+        description={"основная страница веб платформы"}
       />
       <main className="container">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">

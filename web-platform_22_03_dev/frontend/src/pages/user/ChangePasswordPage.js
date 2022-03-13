@@ -18,10 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ChangePasswordPage = () => {
@@ -33,13 +33,13 @@ const ChangePasswordPage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userChangeStore = useSelector((state) => state.userChangeStore); // store.js
+  const userChangeAuthStore = useSelector((state) => state.userChangeAuthStore); // store.js
   const {
     // load: loadUserChange,
     data: dataUserChange,
     // error: errorUserChange,
     // fail: failUserChange,
-  } = userChangeStore;
+  } = userChangeAuthStore;
 
   useEffect(() => {
     if (dataUserChange) {
@@ -62,28 +62,35 @@ const ChangePasswordPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Изменение пароля"}
-        second={"страница редактирования Вашего пароля от аккаунта."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Изменение пароля"}
+        description={"страница редактирования Вашего пароля от аккаунта"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            userChangeStore,
-            "userChangeStore",
-            true,
-            "Пароль успешно изменён!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={userChangeAuthStore}
+            key={"userChangeAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Данные успешно изменены!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
         </div>
         <div>
           <div className="form-control">
             <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
               <div>
-                <label className="form-control-sm m-1 lead">
+                <label className="form-control-sm">
                   Введите пароль для входа в аккаунт:
-                  <p>
+                  <p className="m-0 p-0">
                     <small className="text-danger">
                       Только латинские буквы и цифры!
                     </small>
@@ -99,18 +106,19 @@ const ChangePasswordPage = () => {
                     minLength="8"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 8 до 32
+                        {" "}
+                        * количество символов: от 8 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
-                <label className="form-control-sm m-1 lead">
+                <label className="form-control-sm">
                   Повторите новый пароль:
-                  <p>
+                  <p className="m-0 p-0">
                     <small className="text-danger">
                       Только латинские буквы и цифры!
                     </small>
@@ -126,13 +134,14 @@ const ChangePasswordPage = () => {
                     minLength="8"
                     maxLength="32"
                   />
-                  <p>
-                    <small className="text-danger">* обязательно</small>
-                    <p>
+                  <p className="m-0 p-0">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
-                        количество символов: от 8 до 32
+                        {" "}
+                        * количество символов: от 8 до 32
                       </small>
-                    </p>
+                    </small>
                   </p>
                 </label>
               </div>

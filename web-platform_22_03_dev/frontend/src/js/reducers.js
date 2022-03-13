@@ -1,6 +1,5 @@
 import * as constants from "./constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 export const userLoginAnyReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_LOGIN_LOAD_CONSTANT:
@@ -17,7 +16,6 @@ export const userLoginAnyReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
 export const userDetailsAuthReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_DETAILS_LOAD_CONSTANT:
@@ -34,7 +32,6 @@ export const userDetailsAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
 export const userChangeAuthReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_CHANGE_LOAD_CONSTANT:
@@ -51,7 +48,6 @@ export const userChangeAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
 export const userRecoverPasswordAnyReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_RECOVER_PASSWORD_LOAD_CONSTANT:
@@ -74,7 +70,6 @@ export const userRecoverPasswordAnyReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
 export const userListAllAuthReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_LIST_ALL_LOAD_CONSTANT:
@@ -92,6 +87,28 @@ export const userListAllAuthReducer = (state = {}, action = null) => {
     case constants.USER_LIST_ALL_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
     case constants.USER_LIST_ALL_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const notificationCreateReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.NOTIFICATION_CREATE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.NOTIFICATION_CREATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.NOTIFICATION_CREATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.NOTIFICATION_CREATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.NOTIFICATION_CREATE_RESET_CONSTANT:
       return {};
     default:
       return state;
@@ -262,6 +279,183 @@ export const rationalDetailAuthReducer = (state = {}, action = null) => {
     case constants.RATIONAL_DETAIL_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
     case constants.RATIONAL_DETAIL_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaCreateAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_CREATE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_CREATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_CREATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_CREATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_CREATE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const ideaListAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_LIST_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_LIST_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_LIST_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_LIST_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_LIST_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const ideaDetailAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_DETAIL_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_DETAIL_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_DETAIL_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_DETAIL_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_DETAIL_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const ideaChangeAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_CHANGE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_CHANGE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_CHANGE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_CHANGE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_CHANGE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const ideaModerateAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_MODERATE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_MODERATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_MODERATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_MODERATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_MODERATE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const ideaCommentCreateAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_COMMENT_CREATE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_COMMENT_CREATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_COMMENT_CREATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_COMMENT_CREATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_COMMENT_CREATE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const ideaCommentListAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_COMMENT_LIST_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_COMMENT_LIST_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_COMMENT_LIST_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_COMMENT_LIST_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_COMMENT_LIST_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const ideaRatingCreateAuthReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.IDEA_RATING_CREATE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.IDEA_RATING_CREATE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.IDEA_RATING_CREATE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.IDEA_RATING_CREATE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.IDEA_RATING_CREATE_RESET_CONSTANT:
       return {};
     default:
       return state;

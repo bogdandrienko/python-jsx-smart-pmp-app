@@ -1,5 +1,5 @@
 main{
-  min-height: 75vh;
+  min-height: 73vh;
 }
 
 h3{
@@ -7,5 +7,6 @@ h3{
 }
 
 .rating span{
+  padding: 0.1em;
   margin: 0.1em;
 }

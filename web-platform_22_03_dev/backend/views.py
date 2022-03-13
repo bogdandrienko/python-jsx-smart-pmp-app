@@ -26,8 +26,6 @@ from backend import models as backend_models, serializers as backend_serializers
     settings as backend_settings
 
 
-########################################################################################################################
-
 @permission_classes([AllowAny])
 def index(request):
     """
@@ -154,8 +152,6 @@ def api_auth_routes(request):
         return render(request, "backend/404.html")
 
 
-########################################################################################################################
-
 class ExamplesModelViewSet(viewsets.ModelViewSet):
     queryset = backend_models.ExamplesModel.objects.all()
     serializer_class = backend_serializers.ExamplesModelSerializer
@@ -173,8 +169,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = backend_serializers.GroupSerializer
     permission_classes = [permissions.AllowAny]
 
-
-########################################################################################################################
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
@@ -593,7 +587,52 @@ def api_auth_user_list_all(request):
         return render(request, "backend/404.html")
 
 
-########################################################################################################################
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_user_notification(request):
+    """
+    api_any_user_notification django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "NOTIFICATION_CREATE":
+                try:
+                    name = req_inst.get_value("name")
+                    place = req_inst.get_value("place")
+                    description = req_inst.get_value("description")
+
+                    backend_models.NotificationModel.objects.create(
+                        notification_author_foreign_key_field=req_inst.user_model,
+                        name_char_field=name,
+                        place_char_field=place,
+                        description_text_field=description,
+                    )
+                    response = {"response": "Успешно отправлено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")
+
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
@@ -1003,8 +1042,6 @@ def api_auth_admin_export_users(request):
         return render(request, "backend/404.html")
 
 
-########################################################################################################################
-
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @authentication_classes([BasicAuthentication])
 def api_get_all_users_with_temp_password(request):
@@ -1060,8 +1097,6 @@ def api_get_all_users_with_temp_password(request):
         )
         return render(request, "backend/404.html")
 
-
-########################################################################################################################
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
@@ -1668,8 +1703,6 @@ def api_auth_salary(request):
         return render(request, "backend/404.html")
 
 
-########################################################################################################################
-
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_rational(request):
@@ -1851,7 +1884,6 @@ def api_auth_rational(request):
                             rational.comment_postmoderate_char_field = comment
                     rational.save()
 
-
                     response = {"response": "Успешно"}
                     # print(f"response: {response}")
                     return Response(response)
@@ -1870,7 +1902,272 @@ def api_auth_rational(request):
         )
         return render(request, "backend/404.html")
 
-########################################################################################################################
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_idea(request):
+    """
+    api_rational django-rest-framework
+    """
+
+    try:
+        # Request
+        req_inst = backend_service.DjangoClass.TemplateClass.request(
+            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
+        )
+
+        # Methods
+        if req_inst.method == "POST":
+            # Actions
+            if req_inst.action_type == "IDEA_CREATE":
+                try:
+                    status_moderate = "На модерации"
+                    subdivision = req_inst.get_value("subdivision")
+                    sphere = req_inst.get_value("sphere")
+                    category = req_inst.get_value("category")
+                    avatar = req_inst.get_value("avatar")
+                    name = req_inst.get_value("name")
+                    place = req_inst.get_value("place")
+                    description = req_inst.get_value("description")
+
+                    backend_models.IdeaModel.objects.create(
+                        idea_author_foreign_key_field=req_inst.user_model,
+                        subdivision_char_field=subdivision,
+                        sphere_char_field=sphere,
+                        category_char_field=category,
+                        avatar_image_field=avatar,
+                        name_char_field=name,
+                        place_char_field=place,
+                        description_text_field=description,
+                        status_moderate_char_field=status_moderate,
+                    )
+                    response = {"response": "Идея успешно отправлена на модерацию!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_LIST":
+                try:
+                    subdivision = request.data.get("subdivision")
+                    category = request.data.get("category")
+                    author = request.data.get("author")
+                    search = request.data.get("search")
+                    sort = request.data.get("sort")
+                    moderate = request.data.get("moderate")
+
+                    objects = backend_models.IdeaModel.objects.all().order_by("-created_datetime_field")
+
+                    # search
+                    if search:
+                        objects = objects.filter(name_char_field__icontains=search)
+
+                    # filter
+                    if subdivision:
+                        objects = objects.filter(subdivision_char_field=subdivision)
+                    if category:
+                        objects = objects.filter(category_char_field=category)
+                    if author:
+                        author = backend_models.UserModel.objects.filter(
+                            personnel_number_slug_field=str(author).split(" ")[-2]
+                        )
+                        if len(author) > 1:
+                            for auth in author:
+                                if auth.user_foreign_key_field.is_superuser is False:
+                                    author = auth
+                                    break
+                        objects = objects.filter(idea_author_foreign_key_field=author)
+
+                    if moderate:
+                        objects = objects.filter(status_moderate_char_field=moderate)
+
+                    # sort
+                    if sort:
+                        if sort == "Дате публикации (сначала свежие)":
+                            objects = objects.order_by("-created_datetime_field")
+                        elif sort == "Дате публикации (сначала старые)":
+                            objects = objects.order_by("created_datetime_field")
+                        elif sort == "Названию (С начала алфавита)":
+                            objects = objects.order_by("name_char_field")
+                        elif sort == "Названию (С конца алфавита)":
+                            objects = objects.order_by("-name_char_field")
+                        elif sort == "Рейтингу (Популярные в начале)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj.get_total_rating()["rate"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "Рейтингу (Популярные в конце)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj.get_total_rating()["rate"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+
+                    serializer = backend_serializers.IdeaModelSerializer(instance=objects, many=True)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_DETAIL":
+                try:
+                    id = req_inst.get_value("id")
+                    if id:
+                        rational = backend_models.IdeaModel.objects.get(id=id)
+                    else:
+                        rational = backend_models.IdeaModel.objects.order_by('-id')[0]
+                    serializer = backend_serializers.IdeaModelSerializer(instance=rational, many=False)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_CHANGE":
+                try:
+                    _id = req_inst.get_value("id")
+                    subdivision = req_inst.get_value("subdivision")
+                    sphere = req_inst.get_value("sphere")
+                    category = req_inst.get_value("category")
+                    clear_image = req_inst.get_value("clearImage")
+                    avatar = req_inst.get_value("avatar")
+                    name = req_inst.get_value("name")
+                    place = req_inst.get_value("place")
+                    description = req_inst.get_value("description")
+
+                    obj = backend_models.IdeaModel.objects.get(id=_id)
+
+                    if subdivision and obj.subdivision_char_field != subdivision:
+                        obj.subdivision_char_field = subdivision
+                    if sphere and obj.sphere_char_field != sphere:
+                        obj.sphere_char_field = sphere
+                    if category and obj.category_char_field != category:
+                        obj.category_char_field = category
+                    if clear_image:
+                        obj.avatar_image_field = None
+                    if avatar and obj.avatar_image_field != avatar:
+                        obj.avatar_image_field = avatar
+                    if name and obj.name_char_field != name:
+                        obj.name_char_field = name
+                    if place and obj.place_char_field != place:
+                        obj.place_char_field = place
+                    if description and obj.description_text_field != description:
+                        obj.description_text_field = description
+
+                    obj.save()
+
+                    response = {"response": "Успешно изменено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_MODERATE":
+                try:
+                    _id = req_inst.get_value("id")
+                    moderate = req_inst.get_value("moderate")
+                    moderate_comment = req_inst.get_value("moderateComment")
+
+                    obj = backend_models.IdeaModel.objects.get(id=_id)
+                    obj.status_moderate_char_field = moderate
+                    obj.idea_moderate_foreign_key_field = req_inst.user_model
+                    obj.comment_moderate_char_field = moderate_comment
+                    obj.save()
+
+                    response = {"response": "Модерация успешно прошла!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_COMMENT_CREATE":
+                try:
+                    _id = request.data.get("id")
+                    comment = req_inst.get_value("comment")
+
+                    obj = backend_models.IdeaModel.objects.get(id=_id)
+
+                    backend_models.CommentIdeaModel.objects.create(
+                        comment_idea_foreign_key_field=obj,
+                        comment_idea_author_foreign_key_field=req_inst.user_model,
+                        comment_text_field=comment,
+                    )
+                    response = {"response": "Комментарий успешно создан!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_COMMENT_LIST":
+                try:
+                    _id = request.data.get("id")
+
+                    obj = backend_models.IdeaModel.objects.get(id=_id)
+                    objects = backend_models.CommentIdeaModel.objects.filter(comment_idea_foreign_key_field=obj). \
+                        order_by("-datetime_field")
+                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_RATING_CREATE":
+                try:
+                    _id = request.data.get("id")
+                    rating = request.data.get("rating")
+
+                    obj = backend_models.IdeaModel.objects.get(id=_id)
+                    rating_obj = backend_models.RatingIdeaModel.objects.get_or_create(
+                        rating_idea_foreign_key_field=obj, rating_idea_author_foreign_key_field=req_inst.user_model)[0]
+                    rating_obj.rating_integer_field = rating
+                    rating_obj.save()
+
+                    objects = backend_models.CommentIdeaModel.objects.filter(comment_idea_foreign_key_field=obj). \
+                        order_by("-datetime_field")
+                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True)
+                    response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(
+            request=request, error=error, print_error=backend_settings.DEBUG
+        )
+        return render(request, "backend/404.html")
 
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])

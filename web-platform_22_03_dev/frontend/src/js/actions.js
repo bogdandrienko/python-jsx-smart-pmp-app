@@ -66,7 +66,7 @@ export const userDetailsAuthAction = (form) => async (dispatch, getState) => {
       type: constants.USER_DETAILS_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -123,7 +123,7 @@ export const userChangeAuthAction = (form) => async (dispatch, getState) => {
       type: constants.USER_CHANGE_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -205,14 +205,13 @@ export const userRecoverPasswordAnyAction = (form) => async (dispatch) => {
     });
   }
 };
-
 export const userListAllAuthAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.USER_LIST_ALL_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -251,6 +250,51 @@ export const userListAllAuthAction = (form) => async (dispatch, getState) => {
     });
   }
 };
+export const notificationAuthAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.NOTIFICATION_CREATE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginAnyStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/user/notification/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.NOTIFICATION_CREATE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.NOTIFICATION_CREATE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.NOTIFICATION_CREATE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const adminChangeUserPasswordAuthAction =
   (form) => async (dispatch, getState) => {
@@ -259,7 +303,7 @@ export const adminChangeUserPasswordAuthAction =
         type: constants.ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
       });
       const {
-        userLoginStore: { data: userLogin },
+        userLoginAnyStore: { data: userLogin },
       } = getState();
       const formData = new FormData();
       Object.entries(form).map(([key, value]) => {
@@ -306,7 +350,7 @@ export const adminCreateOrChangeUsersAuthAction =
         type: constants.ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
       });
       const {
-        userLoginStore: { data: userLogin },
+        userLoginAnyStore: { data: userLogin },
       } = getState();
       const formData = new FormData();
       Object.entries(form).map(([key, value]) => {
@@ -353,7 +397,7 @@ export const adminExportUsersAuthAction =
         type: constants.ADMIN_EXPORT_USERS_LOAD_CONSTANT,
       });
       const {
-        userLoginStore: { data: userLogin },
+        userLoginAnyStore: { data: userLogin },
       } = getState();
       const formData = new FormData();
       Object.entries(form).map(([key, value]) => {
@@ -399,7 +443,7 @@ export const salaryUserAuthAction = (form) => async (dispatch, getState) => {
       type: constants.USER_SALARY_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -465,7 +509,7 @@ export const rationalCreateAuthAction =
         type: constants.RATIONAL_CREATE_LOAD_CONSTANT,
       });
       const {
-        userLoginStore: { data: userLogin },
+        userLoginAnyStore: { data: userLogin },
       } = getState();
       const formData = new FormData();
       Object.entries(form).map(([key, value]) => {
@@ -511,7 +555,7 @@ export const rationalListAuthAction = (form) => async (dispatch, getState) => {
       type: constants.RATIONAL_LIST_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -558,7 +602,7 @@ export const rationalDetailAuthAction =
         type: constants.RATIONAL_DETAIL_LOAD_CONSTANT,
       });
       const {
-        userLoginStore: { data: userLogin },
+        userLoginAnyStore: { data: userLogin },
       } = getState();
       const formData = new FormData();
       Object.entries(form).map(([key, value]) => {
@@ -598,13 +642,377 @@ export const rationalDetailAuthAction =
     }
   };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaCreateAuthAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.IDEA_CREATE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginAnyStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/idea/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.IDEA_CREATE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.IDEA_CREATE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.IDEA_CREATE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+export const ideaListAuthAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.IDEA_LIST_LOAD_CONSTANT,
+    });
+    const {
+      userLoginAnyStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/idea/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.IDEA_LIST_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.IDEA_LIST_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.IDEA_LIST_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+export const ideaDetailAuthAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.IDEA_DETAIL_LOAD_CONSTANT,
+    });
+    const {
+      userLoginAnyStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/idea/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.IDEA_DETAIL_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.IDEA_DETAIL_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.IDEA_DETAIL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+export const ideaChangeAuthAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.IDEA_CHANGE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginAnyStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/idea/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.IDEA_CHANGE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.IDEA_CHANGE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.IDEA_CHANGE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+export const ideaModerateAuthAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.IDEA_MODERATE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginAnyStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/idea/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.IDEA_MODERATE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.IDEA_MODERATE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.IDEA_MODERATE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+export const ideaCommentCreateAuthAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: constants.IDEA_COMMENT_CREATE_LOAD_CONSTANT,
+      });
+      const {
+        userLoginAnyStore: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        formData.append(key, value);
+      });
+      const { data } = await axios({
+        url: "/api/auth/idea/",
+        method: "POST",
+        timeout: 10000,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userLogin.token}`,
+        },
+        data: formData,
+      });
+      if (data["response"]) {
+        const response = data["response"];
+        dispatch({
+          type: constants.IDEA_COMMENT_CREATE_DATA_CONSTANT,
+          payload: response,
+        });
+      } else {
+        const response = data["error"];
+        dispatch({
+          type: constants.IDEA_COMMENT_CREATE_ERROR_CONSTANT,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: constants.IDEA_COMMENT_CREATE_FAIL_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+export const ideaCommentListAuthAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: constants.IDEA_COMMENT_LIST_LOAD_CONSTANT,
+      });
+      const {
+        userLoginAnyStore: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        formData.append(key, value);
+      });
+      const { data } = await axios({
+        url: "/api/auth/idea/",
+        method: "POST",
+        timeout: 10000,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userLogin.token}`,
+        },
+        data: formData,
+      });
+      if (data["response"]) {
+        const response = data["response"];
+        dispatch({
+          type: constants.IDEA_COMMENT_LIST_DATA_CONSTANT,
+          payload: response,
+        });
+      } else {
+        const response = data["error"];
+        dispatch({
+          type: constants.IDEA_COMMENT_LIST_ERROR_CONSTANT,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: constants.IDEA_COMMENT_LIST_FAIL_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+export const ideaRatingCreateAuthAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: constants.IDEA_RATING_CREATE_LOAD_CONSTANT,
+      });
+      const {
+        userLoginAnyStore: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        formData.append(key, value);
+      });
+      const { data } = await axios({
+        url: "/api/auth/idea/",
+        method: "POST",
+        timeout: 10000,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userLogin.token}`,
+        },
+        data: formData,
+      });
+      if (data["response"]) {
+        const response = data["response"];
+        dispatch({
+          type: constants.IDEA_RATING_CREATE_DATA_CONSTANT,
+          payload: response,
+        });
+      } else {
+        const response = data["error"];
+        dispatch({
+          type: constants.IDEA_RATING_CREATE_ERROR_CONSTANT,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: constants.IDEA_RATING_CREATE_FAIL_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const vacancyCreateAuthAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.VACANCY_CREATE_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -734,7 +1142,7 @@ export const vacancyDeleteAuthAction = (form) => async (dispatch, getState) => {
       type: constants.VACANCY_DELETE_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -780,7 +1188,7 @@ export const vacancyChangeAuthAction = (form) => async (dispatch, getState) => {
       type: constants.VACANCY_CHANGE_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -868,7 +1276,7 @@ export const resumeListAuthAction = (form) => async (dispatch, getState) => {
       type: constants.RESUME_LIST_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -914,7 +1322,7 @@ export const resumeDetailAuthAction = (form) => async (dispatch, getState) => {
       type: constants.RESUME_DETAIL_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -960,7 +1368,7 @@ export const resumeDeleteAuthAction = (form) => async (dispatch, getState) => {
       type: constants.RESUME_DELETE_LOAD_CONSTANT,
     });
     const {
-      userLoginStore: { data: userLogin },
+      userLoginAnyStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {

@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/auth/user/change/', backend_views.api_auth_user_change, name='api_user_change'),
     path('api/any/user/recover/', backend_views.api_any_user_recover, name='api_any_user_recover'),
     path('api/auth/user/list_all/', backend_views.api_auth_user_list_all, name='api_auth_user_list_all'),
+    path('api/auth/user/notification/', backend_views.api_auth_user_notification, name='api_auth_user_notification'),
     ####################################################################################################################
     path('api/auth/admin/change_user_password/', backend_views.api_auth_admin_change_user_password,
          name='api_auth_admin_change_user_password'),
@@ -42,6 +43,8 @@ urlpatterns = [
     path('api/auth/salary/', backend_views.api_auth_salary, name='api_auth_salary'),
     ####################################################################################################################
     path('api/auth/rational/', backend_views.api_auth_rational, name='api_auth_rational'),
+    ####################################################################################################################
+    path('api/auth/idea/', backend_views.api_auth_idea, name='api_auth_idea'),
     ####################################################################################################################
     path('api/any/vacancy/', backend_views.api_any_vacancy, name='api_any_vacancy'),
     path('api/auth/vacancy/', backend_views.api_auth_vacancy, name='api_auth_vacancy'),

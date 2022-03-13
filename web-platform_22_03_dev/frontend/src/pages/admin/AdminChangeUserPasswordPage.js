@@ -18,12 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import MessageComponent from "../../components/MessageComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const AdminChangeUserPasswordPage = () => {
@@ -38,15 +36,15 @@ const AdminChangeUserPasswordPage = () => {
   const [password, passwordSet] = useState("");
   const [password2, password2Set] = useState("");
 
-  const adminChangeUserPasswordStore = useSelector(
-    (state) => state.adminChangeUserPasswordStore
+  const adminChangeUserPasswordAuthStore = useSelector(
+    (state) => state.adminChangeUserPasswordAuthStore
   ); // store.js
   const {
     // load: loadAdminChangeUserPassword,
     data: dataAdminChangeUserPassword,
     // error: errorAdminChangeUserPassword,
     // fail: failAdminChangeUserPassword,
-  } = adminChangeUserPasswordStore;
+  } = adminChangeUserPasswordAuthStore;
 
   useEffect(() => {
     if (dataAdminChangeUserPassword) {
@@ -92,20 +90,27 @@ const AdminChangeUserPasswordPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Изменение пароля выбранного пользователя"}
-        second={"страница редактирования пароля от выбранного аккаунта."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Изменение пароля выбранного пользователя"}
+        description={"страница редактирования пароля от выбранного аккаунта"}
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
-          {StoreStatusComponent(
-            adminChangeUserPasswordStore,
-            "adminChangeUserPasswordStore",
-            true,
-            "Пользователь найден или пароль успешно изменён!",
-            constants.DEBUG_CONSTANT
-          )}
+      <main className="container  ">
+        <div className="">
+          <StoreStatusComponent
+            storeStatus={adminChangeUserPasswordAuthStore}
+            key={"adminChangeUserPasswordAuthStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={true}
+            dataText={"Пользователь найден или пароль успешно изменён!"}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
           {!captcha && (
             <MessageComponent variant="danger">
               Пройдите проверку на робота!

@@ -18,12 +18,10 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import MessageComponent from "../../components/MessageComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const VacancyListPage = () => {
@@ -39,14 +37,18 @@ const VacancyListPage = () => {
   const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
   const [search, searchSet] = useState("");
 
-  const userDetailsStore = useSelector((state) => state.userDetailsStore); // store.js
-  const vacancyListStore = useSelector((state) => state.vacancyListStore); // store.js
+  const userDetailsAuthStore = useSelector(
+    (state) => state.userDetailsAuthStore
+  ); // store.js
+  const vacancyListAuthStore = useSelector(
+    (state) => state.vacancyListAuthStore
+  ); // store.js
   const {
     load: loadVacancyList,
     data: dataVacancyList,
     // error: errorVacancyList,
     // fail: failVacancyList,
-  } = vacancyListStore;
+  } = vacancyListAuthStore;
 
   const getData = () => {
     const form = {
@@ -86,34 +88,35 @@ const VacancyListPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={false} />
-      <TitleComponent
-        first={"Список вакансий"}
-        second={
-          "страница доступных вакансий с возможностью поиска и фильтрации."
+      <HeaderComponent
+        logic={true}
+        redirect={false}
+        title={"Список вакансий"}
+        description={
+          "страница доступных вакансий с возможностью поиска и фильтрации"
         }
       />
-      <main className="container p-0">
-        <div className="m-0 p-0">
+      <main className="container  ">
+        <div className="">
           {StoreStatusComponent(
-            userDetailsStore,
-            "userDetailsStore",
+            userDetailsAuthStore,
+            "userDetailsAuthStore",
             false,
             "Данные успешно получены!",
             constants.DEBUG_CONSTANT
           )}
           {StoreStatusComponent(
-            vacancyListStore,
-            "vacancyListStore",
+            vacancyListAuthStore,
+            "vacancyListAuthStore",
             false,
             "Данные успешно получены!",
             constants.DEBUG_CONSTANT
           )}
         </div>
         <div className="container-fluid form-control bg-opacity-10 bg-success">
-          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center p-0 m-0">
+          <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
             <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="lead">
                   Выберите нужные настройки фильтрации и сортировки, затем
                   нажмите кнопку{" "}
@@ -130,7 +133,7 @@ const VacancyListPage = () => {
                   />
                 </label>
               </div>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="form-control-sm m-1">
                   Сфера:
                   <select
@@ -184,7 +187,7 @@ const VacancyListPage = () => {
                   </select>
                 </label>
               </div>
-              <div className="p-0 m-0">
+              <div className="">
                 <label className="w-75 form-control-sm m-1">
                   Поле поиска по части названия или квалификации:
                   <input
@@ -236,7 +239,10 @@ const VacancyListPage = () => {
                 >
                   отправить резюме
                 </Link>
-                {utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+                {utils.CheckAccess(
+                  userDetailsAuthStore,
+                  "moderator_vacancies"
+                ) && (
                   <Link
                     to={`/vacancy_create`}
                     className="btn btn-sm btn-secondary"
@@ -248,7 +254,7 @@ const VacancyListPage = () => {
             </form>
           </ul>
         </div>
-        <div className="container-fluid p-0 m-0">
+        <div className="container-fluid  ">
           {dataVacancyList && dataVacancyList.length > 0 ? (
             !detailView ? (
               <ul className="bg-opacity-10 bg-primary shadow">
@@ -265,31 +271,31 @@ const VacancyListPage = () => {
                 ))}
               </ul>
             ) : (
-              <div className="row justify-content-center p-0 m-0">
+              <div className="row justify-content-center  ">
                 {dataVacancyList.map((vacancy, index) => (
                   <Link
                     key={index}
                     to={`/vacancy_detail/${vacancy.id}`}
-                    className="text-decoration-none border shadow text-center p-0 m-0 col-md-6"
+                    className="text-decoration-none border shadow text-center   col-md-6"
                   >
-                    <div className="card p-0 m-0 list-group-item-action">
-                      <div className="card-header fw-bold lead bg-opacity-10 bg-primary p-0 m-0">
+                    <div className="card   list-group-item-action">
+                      <div className="card-header fw-bold lead bg-opacity-10 bg-primary  ">
                         {utils.GetSliceString(
                           vacancy["qualification_field"],
                           30
                         )}
                       </div>
-                      <div className="card-body p-0 m-0">
-                        <div className="row justify-content-center p-0 m-0">
-                          <div className="col-md-6 shadow w-25 p-0 m-0">
+                      <div className="card-body  ">
+                        <div className="row justify-content-center  ">
+                          <div className="col-md-6 shadow w-25  ">
                             <img
                               src={utils.GetStaticFile(vacancy["image_field"])}
                               className="img-fluid img-thumbnail"
                               alt="изображение"
                             />
                           </div>
-                          <div className="card-body col-md-6 p-0 m-0">
-                            <table className="table table-sm table-hover table-borderless table-striped p-0 m-0">
+                          <div className="card-body col-md-6  ">
+                            <table className="table table-sm table-hover table-borderless table-striped  ">
                               <tbody>
                                 {vacancy["datetime_field"] !== "" &&
                                   vacancy["datetime_field"] !== null && (

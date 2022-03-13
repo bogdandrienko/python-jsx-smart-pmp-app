@@ -18,12 +18,12 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../../components/HeaderComponent";
-import TitleComponent from "../../components/TitleComponent";
-import FooterComponent from "../../components/FooterComponent";
-import StoreStatusComponent from "../../components/StoreStatusComponent";
+import HeaderComponent from "../base/HeaderComponent";
+import FooterComponent from "../base/FooterComponent";
+import StoreStatusComponent from "../base/StoreStatusComponent";
+import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import NewsComponent from "../../components/NewsComponent";
+import NewsComponent from "./NewsComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const NewsPage = () => {
@@ -34,10 +34,11 @@ const NewsPage = () => {
 
   return (
     <div>
-      <HeaderComponent logic={true} redirect={true} />
-      <TitleComponent
-        first={"Новости"}
-        second={"страница новостей веб-платформы."}
+      <HeaderComponent
+        logic={true}
+        redirect={true}
+        title={"Новости"}
+        description={"страница новостей веб-платформы"}
       />
       <main className="container text-center">
         <NewsComponent count={100} />
