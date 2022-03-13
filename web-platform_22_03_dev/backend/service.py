@@ -276,13 +276,17 @@ class DjangoClass:
 
             def get_value(self, key: str, except_error=False, strip=False):
                 try:
-                    if self.data[str(key)] == "null":
+                    if self.data[key] == "null":
                         return None
+                    elif self.data[key] == "true":
+                        return True
+                    elif self.data[key] == "false":
+                        return False
                     else:
                         if strip:
-                            return str(self.data[str(key)]).strip()
+                            return str(self.data[key]).strip()
                         else:
-                            return self.data[str(key)]
+                            return self.data[key]
                 except Exception as error:
                     if except_error:
                         DjangoClass.LoggingClass.error(request=self.request, error=error, print_error=True)

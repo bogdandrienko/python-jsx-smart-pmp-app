@@ -324,3 +324,7 @@ Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 10:21:01.990661, 0
 , 127.0.0.1, /, GET, 2022-03-13 11:48:48.201190, index.html
 
 Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 17:12:55.180727, IdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-13 18:02:53.062111, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-13 18:02:59.739176, index.html

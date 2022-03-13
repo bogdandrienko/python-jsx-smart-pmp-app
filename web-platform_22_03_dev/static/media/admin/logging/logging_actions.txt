@@ -13186,3 +13186,65 @@ Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 17:22:30.244281
 Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-13 17:22:30.244281
 
 Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-13 17:22:31.452311
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-13 18:02:53.059109
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-13 18:02:59.237164
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-13 18:03:05.806700
+
+, 127.0.0.1, /api/any/user/login/, POST, 2022-03-13 18:03:32.254856
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-13 18:03:33.743090
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-13 18:03:33.770090
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-13 18:03:36.676748
+
+Bogdan, 127.0.0.1, /api/auth/user/list_all/, POST, 2022-03-13 18:03:36.681747
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:03:36.676748
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:03:38.388029
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-13 18:03:38.453680
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:03:42.950019
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:03:46.194475
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:04:27.249601
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:04:30.481254
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:06:47.441910
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:06:50.864468
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:06:55.244305
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:06:58.512019
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:08:37.385301
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:08:40.725763
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:08:43.962747
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:08:47.007826
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:09:46.419978
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:09:49.495226
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:09:54.006793
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:09:57.545868
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:10:13.070026
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:10:16.596446
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:10:19.231121
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 18:10:22.479369
