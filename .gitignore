@@ -5,6 +5,7 @@
 .win_env
 .env_name
 .node_modules
+.idea
 
 # Cache
 .__pycache__
@@ -18,6 +19,7 @@ lin_env/
 win_env/
 env_name/
 node_modules/
+.idea/
 
 *lin_env/
 *win_env/

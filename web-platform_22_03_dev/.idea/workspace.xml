@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="706b6942-640f-4237-bef4-6b7a4ae07a68" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/base/StoreStatusComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/base/StoreStatusComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/idea/IdeaModerateDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/idea/IdeaModerateDetailPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/31288901-ca12-4ef0-b102-bd62aa60326d.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/31288901-ca12-4ef0-b102-bd62aa60326d/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/web-platform_22_03_dev.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +140,7 @@
       <workItem from="1647072879339" duration="36667000" />
       <workItem from="1647139260505" duration="14222000" />
       <workItem from="1647162150271" duration="8380000" />
-      <workItem from="1647170768176" duration="1066000" />
+      <workItem from="1647170768176" duration="1228000" />
     </task>
     <servers />
   </component>
