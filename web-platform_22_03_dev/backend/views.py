@@ -1970,7 +1970,6 @@ def api_auth_idea(request):
                     if category:
                         objects = objects.filter(category_char_field=category)
                     if author:
-
                         ath = (str(author).split(" ")[-2]).strip()
                         print("ath: ", ath)
 
@@ -1999,6 +1998,7 @@ def api_auth_idea(request):
 
                             def sort_rating(val):
                                 return val[0]
+
                             objects_arr.sort(key=sort_rating, reverse=True)
                             objects = []
                             for obj in objects_arr:
@@ -2010,6 +2010,7 @@ def api_auth_idea(request):
 
                             def sort_rating(val):
                                 return val[0]
+
                             objects_arr.sort(key=sort_rating, reverse=False)
                             objects = []
                             for obj in objects_arr:
@@ -2544,3 +2545,25 @@ def api_auth_resume(request):
             request=request, error=error, print_error=backend_settings.DEBUG
         )
         return render(request, "backend/404.html")
+
+
+def api_auth_reboot_terminal():
+    try:
+        url = "http://192.168.1.208/ISAPI/System/reboot"
+        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+        h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\reboot_terminal")
+        _login = 'admin'
+        password = 'snrg2017'
+        h.add_credentials(_login, password)
+        headers = {
+            'Content-type': 'text/plain;charset=UTF-8',
+            'Accept-Encoding': 'gzip, deflate',
+            'Accept-Language': 'de,en-US;q=0.7,en;q=0.3',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0',
+        }
+        response_, content = h.request(uri=url, method="PUT", headers=headers)
+        print("response_: ", response_)
+        print("content: ", content)
+        # """curl -H "Content-Type: text/plain;charset=UTF-8\r\n" -H "Accept-Encoding: gzip, deflate\r\n" -H "Accept-Language: de,en-US;q=0.7,en;q=0.3\r\n" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0\r\n" --digest --http1.1 -X PUT http://admin:snrg2017@192.168.19.253/System/reboot"""
+    except Exception as error:
+        print(error)

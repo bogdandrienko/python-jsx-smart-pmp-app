@@ -55,6 +55,99 @@ const HeaderComponent = ({
     }
   }, [dispatch, logic]);
 
+  // function reboot() {
+  //   console.log("reboot");
+  //   const { data } = axios({
+  //     url: "http://192.168.1.208/ISAPI/System/reboot",
+  //     method: "PUT",
+  //     timeout: 3000,
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //       Authorization: { username: "admin", password: "snrg2017" },
+  //     },
+  //     data: {},
+  //   });
+  //   console.log("data: ", data);
+  // }
+
+  const reboot = async () => {
+    console.log("reboot");
+    const { data } = axios({
+      url: "http://admin:snrg2017@192.168.1.208/ISAPI/System/reboot",
+      method: "PUT",
+      timeout: 3000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: { username: "admin", password: "snrg2017" },
+      },
+      data: {},
+    });
+    console.log("data: ", data);
+  };
+
+  // const reboot = () => async () => {
+  //   const { data } = await axios({
+  //     url: "http://192.168.1.208/ISAPI/System/reboot",
+  //     method: "PUT",
+  //     timeout: 10000,
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //       Authorization: { username: "admin", password: "snrg2017" },
+  //     },
+  //     data: {},
+  //   });
+  //   console.log("data: ", data);
+  // };
+  // // 1. Create a new XMLHttpRequest object
+  // var xhr = new XMLHttpRequest();
+  // // xhr.setRequestHeader("Access-Control-Allow-Headers", "*");
+  // // xhr.setRequestHeader("Content-type", "application/ecmascript");
+  // // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+  // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencode");
+  // let url = "http://%20:%20@192.168.1.208/ISAPI/System/reboot";
+  // let asyn = true;
+  // let username = "admin";
+  // let password = "snrg2017";
+  //
+  // // 2. Configure it: GET-request for the URL /article/.../load
+  // xhr.open("PUT", url, asyn, username, password);
+  //
+  // xhr.onload = function () {
+  //   alert(`Loaded: ${xhr.status} ${xhr.response}`);
+  // };
+  //
+  // xhr.onerror = function () {
+  //   // only triggers if the request couldn't be made at all
+  //   alert(`Network Error`);
+  // };
+  //
+  // xhr.onprogress = function (event) {
+  //   // triggers periodically
+  //   // event.loaded - how many bytes downloaded
+  //   // event.lengthComputable = true if the server sent Content-Length header
+  //   // event.total - total number of bytes (if lengthComputable)
+  //   alert(`Received ${event.loaded} of ${event.total}`);
+  // };
+  //
+  // // 3. Send the request over the network
+  // xhr.send();
+  //
+  // console.log("xhr: ", xhr);
+
+  // const { data } = await axios({
+  //   url: "http://%20:%20@192.168.1.208/ISAPI/System/reboot",
+  //   method: "PUT",
+  //   timeout: 10000,
+  //   headers: {
+  //     "Content-Type": "multipart/form-data",
+  //     Authorization: { username: "admin", password: "snrg2017" },
+  //   },
+  //   data: "",
+  // });
+  // console.log("data: ", data);
+  // };
+  // "http://admin:snrg2017@192.168.1.208/ISAPI/System/reboot"
+
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
@@ -109,6 +202,7 @@ const HeaderComponent = ({
           <a className="navbar-brand" href="/">
             Домашняя
           </a>
+          <button onClick={reboot}>reboot</button>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

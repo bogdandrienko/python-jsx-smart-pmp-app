@@ -1408,3 +1408,45 @@ export const resumeDeleteAuthAction = (form) => async (dispatch, getState) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const rebootAction = (form) => async (dispatch) => {
+  try {
+    dispatch({
+      type: constants.RESUME_DELETE_LOAD_CONSTANT,
+    });
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/resume/",
+      method: "PUT",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RESUME_DELETE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RESUME_DELETE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.RESUME_DELETE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};

@@ -3298,3 +3298,5 @@ Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 23:43:19.134286, Field 'id'
 Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 23:43:19.984115, Field 'id' expected a number but got 'undefined'.
 
 Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-13 23:43:20.746602, Field 'id' expected a number but got 'undefined'.
+
+, 192.168.1.68, /, GET, 2022-03-14 14:37:00.088554, index.html
