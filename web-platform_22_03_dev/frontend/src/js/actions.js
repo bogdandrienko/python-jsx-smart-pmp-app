@@ -1412,3 +1412,49 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const terminalRebootAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.TERMINAL_REBOOT_LOAD_CONSTANT,
+    });
+    const {
+      userLoginAnyStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/terminal/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.TERMINAL_REBOOT_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.TERMINAL_REBOOT_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.TERMINAL_REBOOT_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

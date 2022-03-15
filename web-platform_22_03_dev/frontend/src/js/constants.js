@@ -218,6 +218,12 @@ export const RESUME_DELETE_ERROR_CONSTANT = "RESUME_DELETE_ERROR_CONSTANT";
 export const RESUME_DELETE_FAIL_CONSTANT = "RESUME_DELETE_FAIL_CONSTANT";
 export const RESUME_DELETE_RESET_CONSTANT = "RESUME_DELETE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const TERMINAL_REBOOT_LOAD_CONSTANT = "TERMINAL_REBOOT_LOAD_CONSTANT";
+export const TERMINAL_REBOOT_DATA_CONSTANT = "TERMINAL_REBOOT_DATA_CONSTANT";
+export const TERMINAL_REBOOT_ERROR_CONSTANT = "TERMINAL_REBOOT_ERROR_CONSTANT";
+export const TERMINAL_REBOOT_FAIL_CONSTANT = "TERMINAL_REBOOT_FAIL_CONSTANT";
+export const TERMINAL_REBOOT_RESET_CONSTANT = "TERMINAL_REBOOT_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const DEBUG_CONSTANT = true;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
@@ -299,6 +305,135 @@ export const modules = [
             Access: "user",
             Active: false,
             Link: "#",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+        ],
+      },
+      {
+        Header: "Терминалы скуд",
+        Access: "moderator",
+        Image: "/static/img/modules.png",
+        Links: [
+          {
+            Header: "Перезагрузка",
+            Access: "moderator",
+            Active: true,
+            Link: "/terminal",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+        ],
+      },
+      {
+        Header: "Банк идей",
+        Access: "user",
+        Image:
+          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
+        Links: [
+          {
+            Header: "Пример идеи",
+            Access: "user",
+            Active: true,
+            Link: "/idea_template",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Подать идею",
+            Access: "user",
+            Active: true,
+            Link: "/idea_create",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Модерация идей [модератор]",
+            Access: "idea_moderator",
+            Active: true,
+            Link: "/idea_moderate_list",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Модерация подробности идеи [модератор] [скрыто]",
+            Access: "idea_moderator",
+            Active: true,
+            Link: "/idea_moderate_detail/0",
+            ExternalLink: false,
+            ShowLink: false,
+          },
+          {
+            Header: "Список идей",
+            Access: "user",
+            Active: true,
+            Link: "/idea_list",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Подробности идеи [скрыто]",
+            Access: "user",
+            Active: true,
+            Link: "/idea_detail/0",
+            ExternalLink: false,
+            ShowLink: false,
+          },
+          {
+            Header: "Мои идеи на доработку",
+            Access: "user",
+            Active: true,
+            Link: "/idea_self_list",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Редактировать свою идею [скрыто]",
+            Access: "user",
+            Active: true,
+            Link: "/idea_change/0",
+            ExternalLink: false,
+            ShowLink: false,
+          },
+        ],
+      },
+      {
+        Header: "Рационализаторство",
+        Access: "user",
+        Image:
+          "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
+        Links: [
+          {
+            Header: "Пример рац. предложения",
+            Access: "user",
+            Active: true,
+            Link: "/rational_template",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Подать рац. предложение",
+            Access: "user",
+            Active: true,
+            Link: "/rational_create",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Модератор рац. предложений",
+            Access: [
+              "rational_admin",
+              "rational_moderator_tech_pre_atp",
+              "rational_moderator_tech_pre_energouprav",
+              "rational_moderator_tech_pre_gtk",
+              "rational_moderator_tech_pre_ok",
+              "rational_moderator_tech_pre_uprav",
+              "rational_moderator_no_tech_post",
+              "rational_moderator_no_tech_post",
+              "rational_moderator_tech_post",
+            ],
+            Active: true,
+            Link: "/rational_moderate_list",
             ExternalLink: false,
             ShowLink: true,
           },
@@ -548,122 +683,7 @@ export const modules = [
     Access: "user",
     Image: "/static/img/modules/3_module_progress/module_progress.png",
     ShowInModules: true,
-    Sections: [
-      {
-        Header: "Рационализаторство",
-        Access: "user",
-        Image:
-          "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
-        Links: [
-          {
-            Header: "Пример рац. предложения",
-            Access: "user",
-            Active: true,
-            Link: "/rational_template",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Подать рац. предложение",
-            Access: "user",
-            Active: true,
-            Link: "/rational_create",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Модератор рац. предложений",
-            Access: [
-              "rational_admin",
-              "rational_moderator_tech_pre_atp",
-              "rational_moderator_tech_pre_energouprav",
-              "rational_moderator_tech_pre_gtk",
-              "rational_moderator_tech_pre_ok",
-              "rational_moderator_tech_pre_uprav",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_tech_post",
-            ],
-            Active: true,
-            Link: "/rational_moderate_list",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-        ],
-      },
-      {
-        Header: "Банк идей",
-        Access: "user",
-        Image:
-          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
-        Links: [
-          {
-            Header: "Пример идеи",
-            Access: "user",
-            Active: true,
-            Link: "/idea_template",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Подать идею",
-            Access: "user",
-            Active: true,
-            Link: "/idea_create",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Модерация идей [модератор]",
-            Access: "idea_moderator",
-            Active: true,
-            Link: "/idea_moderate_list",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Модерация подробности идеи [модератор] [скрыто]",
-            Access: "idea_moderator",
-            Active: true,
-            Link: "/idea_moderate_detail/0",
-            ExternalLink: false,
-            ShowLink: false,
-          },
-          {
-            Header: "Список идей",
-            Access: "user",
-            Active: true,
-            Link: "/idea_list",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Подробности идеи [скрыто]",
-            Access: "user",
-            Active: true,
-            Link: "/idea_detail/0",
-            ExternalLink: false,
-            ShowLink: false,
-          },
-          {
-            Header: "Мои идеи на доработку",
-            Access: "user",
-            Active: true,
-            Link: "/idea_self_list",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Редактировать свою идею [скрыто]",
-            Access: "user",
-            Active: true,
-            Link: "/idea_change/0",
-            ExternalLink: false,
-            ShowLink: false,
-          },
-        ],
-      },
-    ],
+    Sections: [],
   },
   {
     Header: "Бухгалтерия",
@@ -701,6 +721,16 @@ export const terminals = [
     Header: "Управление, выход",
     Name: "1_out_upravlenie",
     Ip: "192.168.1.208",
+  },
+  {
+    Header: "АТП, выход",
+    Name: "2_in_atp",
+    Ip: "192.168.1.209",
+  },
+  {
+    Header: "АТП, выход",
+    Name: "2_out_atp",
+    Ip: "192.168.1.210",
   },
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

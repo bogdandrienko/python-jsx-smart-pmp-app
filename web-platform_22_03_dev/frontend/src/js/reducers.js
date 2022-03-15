@@ -677,3 +677,26 @@ export const resumeDeleteReducer = (state = {}, action = null) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const terminalRebootReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.TERMINAL_REBOOT_LOAD_CONSTANT:
+      return { load: true };
+    case constants.TERMINAL_REBOOT_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.TERMINAL_REBOOT_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.TERMINAL_REBOOT_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.TERMINAL_REBOOT_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

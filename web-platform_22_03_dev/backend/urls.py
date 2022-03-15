@@ -51,7 +51,7 @@ urlpatterns = [
     path('api/any/resume/', backend_views.api_any_resume, name='api_any_resume'),
     path('api/auth/resume/', backend_views.api_auth_resume, name='api_auth_resume'),
     ####################################################################################################################
-    path('api/auth/reboot_terminal/', backend_views.api_auth_reboot_terminal, name='api_auth_reboot_terminal'),
+    path('api/auth/terminal/', backend_views.api_auth_terminal, name='api_auth_terminal'),
     ####################################################################################################################
 ]
 

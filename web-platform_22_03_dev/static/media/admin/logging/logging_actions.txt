@@ -10,3 +10,135 @@ Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 06:57:17.616900
 Bogdan, 127.0.0.1, /, GET, 2022-03-15 06:57:37.093269
 
 Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 06:57:37.264280
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-15 20:12:38.660574
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:12:42.218432
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-15 20:12:45.357230
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-15 20:12:51.399365
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:12:51.575367
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:13:10.520213
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:13:53.341426
+
+Bogdan, 127.0.0.1, /api/auth/user/list_all/, POST, 2022-03-15 20:13:53.346428
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-15 20:13:53.341426
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:13:55.965423
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-15 20:13:59.166991
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-15 20:14:00.603045
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-15 20:14:05.579732
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:14:05.580733
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-15 20:14:14.495465
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:14:14.859350
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:14:16.952824
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-15 20:14:16.953822
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-15 20:14:19.977131
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:14:20.096646
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:17:48.016565
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:17:50.714668
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:19:39.376519
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:19:39.413520
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:20:27.608288
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:22:06.078017
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:22:37.995079
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:23:09.770564
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:23:31.844497
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:23:56.969893
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:24:08.801006
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:24:22.713609
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:24:28.830746
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-15 20:24:40.562317
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:24:40.560317
+
+Bogdan, 127.0.0.1, /api/auth/user/list_all/, POST, 2022-03-15 20:24:40.565316
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-15 20:24:46.639077
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:24:48.754213
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:24:53.380308
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:25:11.360589
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:25:13.644699
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:30:46.320949
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:32:16.705245
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-15 20:42:50.495881
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-15 20:42:53.579988
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:44:52.905503
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:44:52.967087
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:44:55.381308
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-15 20:44:57.538489
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:45:08.140294
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:45:08.179300
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:45:10.045364
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-15 20:45:11.667344
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-15 20:45:13.501118
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:49:45.097742
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:50:20.186226
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:50:20.219229
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:50:23.460226
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:50:31.864317
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:50:33.679964
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:50:35.239200
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:51:00.367885
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:51:19.364797
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:51:20.924907
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:51:53.001672
+
+Bogdan, 127.0.0.1, /api/auth/user/detail/, POST, 2022-03-15 20:52:12.401513
