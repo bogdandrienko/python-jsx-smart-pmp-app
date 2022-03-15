@@ -105,7 +105,7 @@ export const TextStudyPage = () => {
                   <li className="m-1 text-start">
                     Перейдите по ссылке:{" "}
                     <small className="text-decoration-underline text-success">
-                      <a href="http://web.km.kz:88/">http://web.km.kz:88/</a>
+                      <a href="https://web.km.kz">https://web.km.kz</a>
                     </small>
                     <p className="text-center text-success">
                       Либо отсканируйте QR код
