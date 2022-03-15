@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const VacancyListPage = () => {
+export const ResumeListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,7 +56,7 @@ const VacancyListPage = () => {
       searchQualification: searchQualification,
       searchLastName: searchLastName,
     };
-    dispatch(actions.resumeListAuthAction(form));
+    dispatch(actions.resumeListAction(form));
   };
 
   useEffect(() => {
@@ -437,5 +437,3 @@ const VacancyListPage = () => {
     </div>
   );
 };
-
-export default VacancyListPage;

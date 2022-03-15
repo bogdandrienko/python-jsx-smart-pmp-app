@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../../js/actions";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const LogoutPage = () => {
+export const LogoutPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,5 +18,3 @@ const LogoutPage = () => {
 
   return <div>.</div>;
 };
-
-export default LogoutPage;

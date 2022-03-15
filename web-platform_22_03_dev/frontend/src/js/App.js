@@ -1,51 +1,52 @@
 import "../css/App.css";
 import "../css/bootstrap_5.1.3/bootstrap.min.css";
 import "../css/font_awesome_6_0_0/css/all.min.css";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HomePage from "../pages/base/HomePage";
-import LoginPage from "../pages/user/LoginPage";
-import LogoutPage from "../pages/user/LogoutPage";
-import ChangeProfilePage from "../pages/user/ChangeProfilePage";
-import ChangePasswordPage from "../pages/user/ChangePasswordPage";
-import RecoverPasswordPage from "../pages/user/RecoverPasswordPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import NewsPage from "../pages/base/NewsPage";
-import VideoStudyPage from "../pages/study/VideoStudyPage";
-import TextStudyPage from "../pages/study/TextStudyPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import SalaryPage from "../pages/salary/SalaryPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import AdminChangeUserPasswordPage from "../pages/admin/AdminChangeUserPasswordPage";
-import AdminCreateOrChangeUsersPage from "../pages/admin/AdminCreateOrChangeUsersPage";
-import AdminExportUsersPage from "../pages/admin/AdminExportUsersPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import RationalTemplatePage from "../pages/rational/RationalTemplatePage";
-import RationalCreatePage from "../pages/rational/RationalCreatePage";
-import RationalModerateListPage from "../pages/rational/RationalModerateListPage";
-import RationalModerateDetailPage from "../pages/rational/RationalModerateDetailPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import IdeaTemplatePage from "../pages/idea/IdeaTemplatePage";
-import IdeaCreatePage from "../pages/idea/IdeaCreatePage";
-import IdeaListPage from "../pages/idea/IdeaListPage";
-import IdeaDetailPage from "../pages/idea/IdeaDetailPage";
-import IdeaModerateListPage from "../pages/idea/IdeaModerateListPage";
-import IdeaModerateDetailPage from "../pages/idea/IdeaModerateDetailPage";
-import IdeaSelfListPage from "../pages/idea/IdeaSelfListPage";
-import IdeaChangePage from "../pages/idea/IdeaChangePage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import VacancyListPage from "../pages/vacancy/VacancyListPage";
-import VacancyCreatePage from "../pages/vacancy/VacancyCreatePage";
-import VacancyChangePage from "../pages/vacancy/VacancyChangePage";
-import VacancyDetailPage from "../pages/vacancy/VacancyDetailPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import ResumeListPage from "../pages/resume/ResumeListPage";
-import ResumeCreatePage from "../pages/resume/ResumeCreatePage";
-import ResumeDetailPage from "../pages/resume/ResumeDetailPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { HomePage } from "../pages/base/HomePage";
+import { LoginPage } from "../pages/user/LoginPage";
+import { LogoutPage } from "../pages/user/LogoutPage";
+import { ChangeProfilePage } from "../pages/user/ChangeProfilePage";
+import { ChangePasswordPage } from "../pages/user/ChangePasswordPage";
+import { RecoverPasswordPage } from "../pages/user/RecoverPasswordPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { NewsPage } from "../pages/base/NewsPage";
+import { VideoStudyPage } from "../pages/study/VideoStudyPage";
+import { TextStudyPage } from "../pages/study/TextStudyPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { SalaryPage } from "../pages/salary/SalaryPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { AdminChangeUserPasswordPage } from "../pages/admin/AdminChangeUserPasswordPage";
+import { AdminCreateOrChangeUsersPage } from "../pages/admin/AdminCreateOrChangeUsersPage";
+import { AdminExportUsersPage } from "../pages/admin/AdminExportUsersPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { RationalTemplatePage } from "../pages/rational/RationalTemplatePage";
+import { RationalCreatePage } from "../pages/rational/RationalCreatePage";
+import { RationalModerateListPage } from "../pages/rational/RationalModerateListPage";
+import { RationalModerateDetailPage } from "../pages/rational/RationalModerateDetailPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { IdeaTemplatePage } from "../pages/idea/IdeaTemplatePage";
+import { IdeaCreatePage } from "../pages/idea/IdeaCreatePage";
+import { IdeaListPage } from "../pages/idea/IdeaListPage";
+import { IdeaDetailPage } from "../pages/idea/IdeaDetailPage";
+import { IdeaModerateListPage } from "../pages/idea/IdeaModerateListPage";
+import { IdeaModerateDetailPage } from "../pages/idea/IdeaModerateDetailPage";
+import { IdeaSelfListPage } from "../pages/idea/IdeaSelfListPage";
+import { IdeaChangePage } from "../pages/idea/IdeaChangePage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { VacancyListPage } from "../pages/vacancy/VacancyListPage";
+import { VacancyCreatePage } from "../pages/vacancy/VacancyCreatePage";
+import { VacancyChangePage } from "../pages/vacancy/VacancyChangePage";
+import { VacancyDetailPage } from "../pages/vacancy/VacancyDetailPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+import { ResumeListPage } from "../pages/resume/ResumeListPage";
+import { ResumeCreatePage } from "../pages/resume/ResumeCreatePage";
+import { ResumeDetailPage } from "../pages/resume/ResumeDetailPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function App() {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const App = () => {
   return (
     <Router>
       <div className="container-fluid text-center m-0 p-0">
@@ -116,6 +117,4 @@ function App() {
       </div>
     </Router>
   );
-}
-
-export default App;
+};

@@ -1,6 +1,7 @@
 import * as constants from "./constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const CheckAccess = (userDetailsStore, slug) => {
   try {
     const {
@@ -36,7 +37,7 @@ export const CheckAccess = (userDetailsStore, slug) => {
     return false;
   }
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const CheckPageAccess = (userDetailsAuthStore, location) => {
   const {
     // load: loadUserDetails,
@@ -73,7 +74,7 @@ export const CheckPageAccess = (userDetailsAuthStore, location) => {
   });
   return access;
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetStaticFile = (path = "") => {
   try {
     if (path === "null" || path === "/media/null" || path == null) {
@@ -87,7 +88,7 @@ export const GetStaticFile = (path = "") => {
     return "";
   }
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetCleanDateTime = (dateTime, withTime = true) => {
   try {
     const date = dateTime.split("T")[0];
@@ -104,8 +105,8 @@ export const GetCleanDateTime = (dateTime, withTime = true) => {
     return "";
   }
 };
-
-export const GetSliceString = (string, length = 30, withDots = true) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GetSliceString = (string = "", length = 30, withDots = true) => {
   try {
     if (string == null) {
       return "";
@@ -126,7 +127,7 @@ export const GetSliceString = (string, length = 30, withDots = true) => {
     return "";
   }
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const Sleep = (time = 1000) => {
   try {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -137,7 +138,7 @@ export const Sleep = (time = 1000) => {
     return null;
   }
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ChangePasswordVisibility = (objects = [""]) => {
   try {
     objects.forEach(function (object, index, array) {
@@ -153,7 +154,7 @@ export const ChangePasswordVisibility = (objects = [""]) => {
     return null;
   }
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ChangeAccordionCollapse = (objects = [""]) => {
   try {
     objects.forEach(function (object, index, array) {
@@ -171,3 +172,4 @@ export const ChangeAccordionCollapse = (objects = [""]) => {
     return null;
   }
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

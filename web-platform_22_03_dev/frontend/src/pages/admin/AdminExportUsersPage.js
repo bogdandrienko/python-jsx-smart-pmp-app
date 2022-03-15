@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const AdminExportUsersPage = () => {
+export const AdminExportUsersPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,7 +45,7 @@ const AdminExportUsersPage = () => {
     const form = {
       "Action-type": "EXPORT_USERS",
     };
-    dispatch(actions.adminExportUsersAuthAction(form));
+    dispatch(actions.adminExportUsersAction(form));
   };
 
   return (
@@ -109,5 +109,3 @@ const AdminExportUsersPage = () => {
     </div>
   );
 };
-
-export default AdminExportUsersPage;

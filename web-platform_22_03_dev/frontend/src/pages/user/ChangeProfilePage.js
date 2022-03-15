@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ChangeProfilePage = () => {
+export const ChangeProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -76,7 +76,7 @@ const ChangeProfilePage = () => {
       const form = {
         "Action-type": "USER_DETAIL",
       };
-      dispatch(actions.userDetailsAuthAction(form));
+      dispatch(actions.userDetailsAction(form));
       setPassword("");
       setPassword2("");
     }
@@ -101,7 +101,7 @@ const ChangeProfilePage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(actions.userChangeAuthAction(form));
+    dispatch(actions.userChangeAction(form));
   };
 
   return (
@@ -310,5 +310,3 @@ const ChangeProfilePage = () => {
     </div>
   );
 };
-
-export default ChangeProfilePage;

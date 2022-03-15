@@ -1,6 +1,8 @@
 import * as constants from "./constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const userLoginAnyReducer = (state = {}, action = null) => {
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const userLoginReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_LOGIN_LOAD_CONSTANT:
       return { load: true };
@@ -16,7 +18,8 @@ export const userLoginAnyReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const userDetailsAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const userDetailsReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_DETAILS_LOAD_CONSTANT:
       return { load: true };
@@ -32,7 +35,8 @@ export const userDetailsAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const userChangeAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const userChangeReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_CHANGE_LOAD_CONSTANT:
       return { load: true };
@@ -48,7 +52,8 @@ export const userChangeAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const userRecoverPasswordAnyReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const userRecoverPasswordReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_RECOVER_PASSWORD_LOAD_CONSTANT:
       return { load: true };
@@ -70,7 +75,8 @@ export const userRecoverPasswordAnyReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const userListAllAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const userListAllReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_LIST_ALL_LOAD_CONSTANT:
       return { load: true };
@@ -92,6 +98,7 @@ export const userListAllAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const notificationCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.NOTIFICATION_CREATE_LOAD_CONSTANT:
@@ -115,10 +122,7 @@ export const notificationCreateReducer = (state = {}, action = null) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const adminChangeUserPasswordAuthReducer = (
-  state = {},
-  action = null
-) => {
+export const adminChangeUserPasswordReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT:
       return { load: true };
@@ -140,11 +144,8 @@ export const adminChangeUserPasswordAuthReducer = (
       return state;
   }
 };
-
-export const adminCreateOrChangeUsersAuthReducer = (
-  state = {},
-  action = null
-) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const adminCreateOrChangeUsersReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT:
       return { load: true };
@@ -166,8 +167,8 @@ export const adminCreateOrChangeUsersAuthReducer = (
       return state;
   }
 };
-
-export const adminExportUsersAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const adminExportUsersReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.ADMIN_EXPORT_USERS_LOAD_CONSTANT:
       return { load: true };
@@ -190,7 +191,7 @@ export const adminExportUsersAuthReducer = (state = {}, action = null) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const salaryUserAuthReducer = (state = {}, action = null) => {
+export const salaryUserReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_SALARY_LOAD_CONSTANT:
       return { load: true };
@@ -216,7 +217,7 @@ export const salaryUserAuthReducer = (state = {}, action = null) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const rationalCreateAuthReducer = (state = {}, action = null) => {
+export const rationalCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.RATIONAL_CREATE_LOAD_CONSTANT:
       return { load: true };
@@ -238,8 +239,8 @@ export const rationalCreateAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const rationalListAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const rationalListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.RATIONAL_LIST_LOAD_CONSTANT:
       return { load: true };
@@ -261,8 +262,8 @@ export const rationalListAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const rationalDetailAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const rationalDetailReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.RATIONAL_DETAIL_LOAD_CONSTANT:
       return { load: true };
@@ -285,7 +286,7 @@ export const rationalDetailAuthReducer = (state = {}, action = null) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ideaCreateAuthReducer = (state = {}, action = null) => {
+export const ideaCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_CREATE_LOAD_CONSTANT:
       return { load: true };
@@ -307,7 +308,8 @@ export const ideaCreateAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaListAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_LIST_LOAD_CONSTANT:
       return { load: true };
@@ -329,7 +331,8 @@ export const ideaListAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaDetailAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaDetailReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_DETAIL_LOAD_CONSTANT:
       return { load: true };
@@ -351,7 +354,8 @@ export const ideaDetailAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaChangeAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaChangeReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_CHANGE_LOAD_CONSTANT:
       return { load: true };
@@ -373,7 +377,8 @@ export const ideaChangeAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaModerateAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaModerateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_MODERATE_LOAD_CONSTANT:
       return { load: true };
@@ -395,7 +400,8 @@ export const ideaModerateAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaCommentCreateAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaCommentCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_COMMENT_CREATE_LOAD_CONSTANT:
       return { load: true };
@@ -417,7 +423,8 @@ export const ideaCommentCreateAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaCommentListAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaCommentListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_COMMENT_LIST_LOAD_CONSTANT:
       return { load: true };
@@ -439,7 +446,8 @@ export const ideaCommentListAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaRatingCreateAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ideaRatingCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_RATING_CREATE_LOAD_CONSTANT:
       return { load: true };
@@ -462,7 +470,7 @@ export const ideaRatingCreateAuthReducer = (state = {}, action = null) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const vacancyCreateAuthReducer = (state = {}, action = null) => {
+export const vacancyCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_LIST_LOAD_CONSTANT:
       return { load: true };
@@ -484,8 +492,8 @@ export const vacancyCreateAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const vacancyListAnyReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const vacancyListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_DETAIL_LOAD_CONSTANT:
       return { load: true };
@@ -507,8 +515,8 @@ export const vacancyListAnyReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const vacancyDetailAnyReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const vacancyDetailReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_CREATE_LOAD_CONSTANT:
       return { load: true };
@@ -530,8 +538,8 @@ export const vacancyDetailAnyReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const vacancyDeleteAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const vacancyDeleteReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_DELETE_LOAD_CONSTANT:
       return { load: true };
@@ -553,8 +561,8 @@ export const vacancyDeleteAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const vacancyChangeAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const vacancyChangeReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.VACANCY_CHANGE_LOAD_CONSTANT:
       return { load: true };
@@ -577,7 +585,7 @@ export const vacancyChangeAuthReducer = (state = {}, action = null) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const resumeCreateAnyReducer = (state = {}, action = null) => {
+export const resumeCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.RESUME_CREATE_LOAD_CONSTANT:
       return { load: true };
@@ -599,8 +607,8 @@ export const resumeCreateAnyReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const resumeListAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const resumeListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.RESUME_LIST_LOAD_CONSTANT:
       return { load: true };
@@ -622,8 +630,8 @@ export const resumeListAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const resumeDetailAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const resumeDetailReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.RESUME_DETAIL_LOAD_CONSTANT:
       return { load: true };
@@ -645,8 +653,8 @@ export const resumeDetailAuthReducer = (state = {}, action = null) => {
       return state;
   }
 };
-
-export const resumeDeleteAuthReducer = (state = {}, action = null) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const resumeDeleteReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.RESUME_DELETE_LOAD_CONSTANT:
       return { load: true };

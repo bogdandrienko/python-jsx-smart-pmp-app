@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const VideoStudyPage = () => {
+export const VideoStudyPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -74,5 +74,3 @@ const VideoStudyPage = () => {
     </div>
   );
 };
-
-export default VideoStudyPage;

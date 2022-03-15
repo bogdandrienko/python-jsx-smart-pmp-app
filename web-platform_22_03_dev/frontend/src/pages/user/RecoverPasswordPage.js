@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ChangePasswordPage = () => {
+export const RecoverPasswordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,7 +57,7 @@ const ChangePasswordPage = () => {
         "Action-type": "FIND_USER",
         username: username,
       };
-      dispatch(actions.userRecoverPasswordAnyAction(form));
+      dispatch(actions.userRecoverPasswordAction(form));
     }
   };
 
@@ -68,7 +68,7 @@ const ChangePasswordPage = () => {
       username: username,
       secretAnswer: secretAnswer,
     };
-    dispatch(actions.userRecoverPasswordAnyAction(form));
+    dispatch(actions.userRecoverPasswordAction(form));
   };
 
   const formHandlerSubmitSendEmail = (e) => {
@@ -77,7 +77,7 @@ const ChangePasswordPage = () => {
       "Action-type": "SEND_EMAIL_PASSWORD",
       username: username,
     };
-    dispatch(actions.userRecoverPasswordAnyAction(form));
+    dispatch(actions.userRecoverPasswordAction(form));
   };
 
   const formHandlerSubmitRecoverEmail = (e) => {
@@ -87,7 +87,7 @@ const ChangePasswordPage = () => {
       username: username,
       recoverPassword: recoverPassword,
     };
-    dispatch(actions.userRecoverPasswordAnyAction(form));
+    dispatch(actions.userRecoverPasswordAction(form));
   };
 
   const formHandlerSubmitRecoverPassword = (e) => {
@@ -98,7 +98,7 @@ const ChangePasswordPage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(actions.userRecoverPasswordAnyAction(form));
+    dispatch(actions.userRecoverPasswordAction(form));
     dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
   };
 
@@ -467,5 +467,3 @@ const ChangePasswordPage = () => {
     </div>
   );
 };
-
-export default ChangePasswordPage;

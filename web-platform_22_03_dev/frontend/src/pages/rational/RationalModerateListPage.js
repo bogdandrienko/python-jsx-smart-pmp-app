@@ -26,7 +26,7 @@ import MessageComponent from "../base/MessageComponent";
 import RationalComponent from "./RationalComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const RationalListPage = () => {
+export const RationalModerateListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -78,7 +78,7 @@ const RationalListPage = () => {
       sort: sort,
       moderate: moderate,
     };
-    dispatch(actions.rationalListAuthAction(form));
+    dispatch(actions.rationalListAction(form));
   };
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const RationalListPage = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.userListAllAuthAction(form));
+      dispatch(actions.userListAllAction(form));
     }
   }, [dispatch, dataUserListAll]);
 
@@ -457,5 +457,3 @@ const RationalListPage = () => {
     </div>
   );
 };
-
-export default RationalListPage;

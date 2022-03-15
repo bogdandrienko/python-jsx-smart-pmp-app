@@ -26,7 +26,7 @@ import MessageComponent from "../base/MessageComponent";
 import SalaryTableComponent from "./SalaryTableComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const SalaryPage = () => {
+export const SalaryPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,7 +52,7 @@ const SalaryPage = () => {
       "Action-type": "USER_SALARY",
       dateTime: `${year_}${month_}`,
     };
-    dispatch(actions.salaryUserAuthAction(form));
+    dispatch(actions.salaryUserAction(form));
   };
 
   return (
@@ -220,5 +220,3 @@ const SalaryPage = () => {
     </div>
   );
 };
-
-export default SalaryPage;

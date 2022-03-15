@@ -1921,7 +1921,7 @@ def api_auth_idea(request):
             # Actions
             if req_inst.action_type == "IDEA_CREATE":
                 try:
-                    status_moderate = "На модерации"
+                    status_moderate = "на модерации"
                     subdivision = req_inst.get_value("subdivision")
                     sphere = req_inst.get_value("sphere")
                     category = req_inst.get_value("category")
@@ -1983,15 +1983,15 @@ def api_auth_idea(request):
 
                     # sort
                     if sort:
-                        if sort == "Дате публикации (сначала свежие)":
+                        if sort == "дате публикации (сначала свежие)":
                             objects = objects.order_by("-created_datetime_field")
-                        elif sort == "Дате публикации (сначала старые)":
+                        elif sort == "дате публикации (сначала старые)":
                             objects = objects.order_by("created_datetime_field")
-                        elif sort == "Названию (С начала алфавита)":
+                        elif sort == "названию (С начала алфавита)":
                             objects = objects.order_by("name_char_field")
-                        elif sort == "Названию (С конца алфавита)":
+                        elif sort == "названию (С конца алфавита)":
                             objects = objects.order_by("-name_char_field")
-                        elif sort == "Рейтингу (Популярные в начале)":
+                        elif sort == "рейтингу (Популярные в начале)":
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_total_rating()["rate"], obj])
@@ -2003,7 +2003,7 @@ def api_auth_idea(request):
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
-                        elif sort == "Рейтингу (Популярные в конце)":
+                        elif sort == "рейтингу (Популярные в конце)":
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_total_rating()["rate"], obj])

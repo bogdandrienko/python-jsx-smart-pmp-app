@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Page = () => {
+export const IdeaTemplatePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,19 +49,19 @@ const Page = () => {
             <label className="form-control-sm">
               Подразделение:
               <select className="form-control form-control-sm" required>
-                <option value="">Управление</option>
+                <option value="">управление</option>
               </select>
             </label>
             <label className="form-control-sm">
               Сфера:
               <select className="form-control form-control-sm" required>
-                <option value="">Технологическая</option>
+                <option value="">технологическая</option>
               </select>
             </label>
             <label className="form-control-sm">
               Категория:
               <select className="form-control form-control-sm" required>
-                <option value="">Инновации</option>
+                <option value="">инновации</option>
               </select>
             </label>
           </div>
@@ -78,7 +78,7 @@ const Page = () => {
               <input
                 type="text"
                 className="form-control form-control-sm"
-                defaultValue=""
+                defaultValue="Учебный центр"
                 readOnly={true}
                 placeholder="введите место внедрения тут..."
                 required
@@ -92,7 +92,7 @@ const Page = () => {
               Описание:
               <textarea
                 className="form-control form-control-sm"
-                defaultValue=""
+                defaultValue="Описание"
                 readOnly={true}
                 required
                 placeholder="введите описание тут..."
@@ -124,5 +124,3 @@ const Page = () => {
     </div>
   );
 };
-
-export default Page;

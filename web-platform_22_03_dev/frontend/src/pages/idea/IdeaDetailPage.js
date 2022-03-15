@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Page = () => {
+export const IdeaDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -121,7 +121,7 @@ const Page = () => {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
-      dispatch(actions.ideaDetailAuthAction(form));
+      dispatch(actions.ideaDetailAction(form));
     }
   }, [dispatch, id, dataIdeaDetail]);
 
@@ -131,7 +131,7 @@ const Page = () => {
         "Action-type": "IDEA_COMMENT_LIST",
         id: id,
       };
-      dispatch(actions.ideaCommentListAuthAction(form));
+      dispatch(actions.ideaCommentListAction(form));
     }
   }, [dispatch, id, dataIdeaCommentList, loadIdeaCommentList]);
 
@@ -144,7 +144,7 @@ const Page = () => {
       id: id,
       comment: comment,
     };
-    dispatch(actions.ideaCommentCreateAuthAction(form));
+    dispatch(actions.ideaCommentCreateAction(form));
   };
 
   useEffect(() => {
@@ -162,7 +162,7 @@ const Page = () => {
       id: id,
       rating: value,
     };
-    dispatch(actions.ideaRatingCreateAuthAction(form));
+    dispatch(actions.ideaRatingCreateAction(form));
   };
 
   useEffect(() => {
@@ -184,7 +184,7 @@ const Page = () => {
       place: place,
       description: description,
     };
-    dispatch(actions.notificationAuthAction(form));
+    dispatch(actions.notificationAction(form));
   };
 
   const formHandlerHideSubmit = (e) => {
@@ -197,7 +197,7 @@ const Page = () => {
       moderate: "Скрыто",
       moderateComment: "Скрыто автором",
     };
-    dispatch(actions.ideaModerateAuthAction(form));
+    dispatch(actions.ideaModerateAction(form));
   };
 
   useEffect(() => {
@@ -754,5 +754,3 @@ const Page = () => {
     </div>
   );
 };
-
-export default Page;

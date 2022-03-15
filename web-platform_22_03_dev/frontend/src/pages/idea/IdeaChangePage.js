@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const RationalModerateDetailPage = () => {
+export const IdeaChangePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,7 +38,7 @@ const RationalModerateDetailPage = () => {
   const [name, nameSet] = useState("");
   const [place, placeSet] = useState("");
   const [description, descriptionSet] = useState("");
-  const [moderate, moderateSet] = useState("На модерации");
+  const [moderate, moderateSet] = useState("на модерации");
   const [moderateComment, moderateCommentSet] = useState(
     "автор внёс изменения"
   );
@@ -86,7 +86,7 @@ const RationalModerateDetailPage = () => {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
-      dispatch(actions.ideaDetailAuthAction(form));
+      dispatch(actions.ideaDetailAction(form));
     }
   }, [dispatch, id, dataIdeaDetail]);
 
@@ -120,7 +120,7 @@ const RationalModerateDetailPage = () => {
       moderate: moderate,
       moderateComment: moderateComment,
     };
-    dispatch(actions.ideaChangeAuthAction(form));
+    dispatch(actions.ideaChangeAction(form));
   };
 
   useEffect(() => {
@@ -224,18 +224,18 @@ const RationalModerateDetailPage = () => {
                       required
                       onChange={(e) => subdivisionSet(e.target.value)}
                     >
-                      <option value="">Не указано</option>
-                      <option value="Автотранспортное предприятие">
-                        Автотранспортное предприятие
+                      <option value="">не указано</option>
+                      <option value="автотранспортное предприятие">
+                        автотранспортное предприятие
                       </option>
-                      <option value="Горно-транспортный комплекс">
-                        Горно-транспортный комплекс
+                      <option value="горно-транспортный комплекс">
+                        горно-транспортный комплекс
                       </option>
-                      <option value="Обогатительный комплекс">
-                        Обогатительный комплекс
+                      <option value="обогатительный комплекс">
+                        обогатительный комплекс
                       </option>
-                      <option value="Управление">Управление предприятия</option>
-                      <option value="Энергоуправление">Энергоуправление</option>
+                      <option value="управление">управление предприятия</option>
+                      <option value="энергоуправление">энергоуправление</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
@@ -247,10 +247,10 @@ const RationalModerateDetailPage = () => {
                       required
                       onChange={(e) => sphereSet(e.target.value)}
                     >
-                      <option value="">Не указано</option>
-                      <option value="Технологическая">Технологическая</option>
-                      <option value="Не технологическая">
-                        Не технологическая
+                      <option value="">не указано</option>
+                      <option value="технологическая">технологическая</option>
+                      <option value="не технологическая">
+                        не технологическая
                       </option>
                     </select>
                     <small className="text-danger">* обязательно</small>
@@ -263,12 +263,14 @@ const RationalModerateDetailPage = () => {
                       required
                       onChange={(e) => categorySet(e.target.value)}
                     >
-                      <option value="">Не указано</option>
-                      <option value="Индустрия 4.0">Индустрия 4.0</option>
-                      <option value="Инвестиции">Инвестиции</option>
-                      <option value="Инновации">Инновации</option>
-                      <option value="Модернизация">Модернизация</option>
-                      <option value="Экология">Экология</option>
+                      <option value="">не указано</option>
+                      <option value="индустрия 4.0">индустрия 4.0</option>
+                      <option value="инвестиции">инвестиции</option>
+                      <option value="инновации">инновации</option>
+                      <option value="модернизация">модернизация</option>
+                      <option value="экология">экология</option>
+                      <option value="спорт/культура">спорт/культура</option>
+                      <option value="другое">другое</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
@@ -417,5 +419,3 @@ const RationalModerateDetailPage = () => {
     </div>
   );
 };
-
-export default RationalModerateDetailPage;

@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ChangePasswordPage = () => {
+export const ChangePasswordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,7 +57,7 @@ const ChangePasswordPage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(actions.userChangeAuthAction(form));
+    dispatch(actions.userChangeAction(form));
   };
 
   return (
@@ -183,5 +183,3 @@ const ChangePasswordPage = () => {
     </div>
   );
 };
-
-export default ChangePasswordPage;

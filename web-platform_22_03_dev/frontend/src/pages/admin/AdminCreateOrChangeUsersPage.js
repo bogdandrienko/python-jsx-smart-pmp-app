@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const AdminCreateOrChangeUsersPage = () => {
+export const AdminCreateOrChangeUsersPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -74,7 +74,7 @@ const AdminCreateOrChangeUsersPage = () => {
       clearUserGroups: clearUserGroups,
       additionalExcel: additionalExcel,
     };
-    dispatch(actions.adminCreateOrChangeUsersAuthAction(form));
+    dispatch(actions.adminCreateOrChangeUsersAction(form));
   };
 
   return (
@@ -243,5 +243,3 @@ const AdminCreateOrChangeUsersPage = () => {
     </div>
   );
 };
-
-export default AdminCreateOrChangeUsersPage;

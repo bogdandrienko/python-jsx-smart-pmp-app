@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const RationalModerateDetailPage = () => {
+export const IdeaModerateDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -94,7 +94,7 @@ const RationalModerateDetailPage = () => {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
-      dispatch(actions.ideaDetailAuthAction(form));
+      dispatch(actions.ideaDetailAction(form));
     }
   }, [dispatch, id, dataIdeaDetail]);
 
@@ -118,7 +118,7 @@ const RationalModerateDetailPage = () => {
       moderate: moderate,
       moderateComment: moderateComment,
     };
-    dispatch(actions.ideaModerateAuthAction(form));
+    dispatch(actions.ideaModerateAction(form));
   };
 
   useEffect(() => {
@@ -145,7 +145,7 @@ const RationalModerateDetailPage = () => {
       place: place,
       description: description,
     };
-    dispatch(actions.ideaChangeAuthAction(form));
+    dispatch(actions.ideaChangeAction(form));
   };
 
   useEffect(() => {
@@ -217,15 +217,15 @@ const RationalModerateDetailPage = () => {
                       value={moderate}
                       onChange={(e) => moderateSet(e.target.value)}
                     >
-                      <option value="">Не выбрано</option>
-                      <option value="На модерации">На модерации</option>
-                      <option value="На доработку">На доработку</option>
-                      <option value="Скрыто">Скрыто</option>
-                      <option value="Принято">Принято</option>
+                      <option value="">не выбрано</option>
+                      <option value="на модерации">на модерации</option>
+                      <option value="на доработку">на доработку</option>
+                      <option value="скрыто">скрыто</option>
+                      <option value="принято">принято</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
-                  {moderate === "На доработку" && (
+                  {moderate === "на доработку" && (
                     <label className="w-75 form-control-sm">
                       Комментарий:
                       <input
@@ -329,18 +329,18 @@ const RationalModerateDetailPage = () => {
                       required
                       onChange={(e) => subdivisionSet(e.target.value)}
                     >
-                      <option value="">Не указано</option>
-                      <option value="Автотранспортное предприятие">
-                        Автотранспортное предприятие
+                      <option value="">не указано</option>
+                      <option value="автотранспортное предприятие">
+                        автотранспортное предприятие
                       </option>
-                      <option value="Горно-транспортный комплекс">
-                        Горно-транспортный комплекс
+                      <option value="горно-транспортный комплекс">
+                        горно-транспортный комплекс
                       </option>
-                      <option value="Обогатительный комплекс">
-                        Обогатительный комплекс
+                      <option value="обогатительный комплекс">
+                        обогатительный комплекс
                       </option>
-                      <option value="Управление">Управление предприятия</option>
-                      <option value="Энергоуправление">Энергоуправление</option>
+                      <option value="управление">управление предприятия</option>
+                      <option value="энергоуправление">энергоуправление</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
@@ -352,10 +352,10 @@ const RationalModerateDetailPage = () => {
                       required
                       onChange={(e) => sphereSet(e.target.value)}
                     >
-                      <option value="">Не указано</option>
-                      <option value="Технологическая">Технологическая</option>
-                      <option value="Не технологическая">
-                        Не технологическая
+                      <option value="">не указано</option>
+                      <option value="технологическая">технологическая</option>
+                      <option value="не технологическая">
+                        не технологическая
                       </option>
                     </select>
                     <small className="text-danger">* обязательно</small>
@@ -368,12 +368,14 @@ const RationalModerateDetailPage = () => {
                       required
                       onChange={(e) => categorySet(e.target.value)}
                     >
-                      <option value="">Не указано</option>
-                      <option value="Индустрия 4.0">Индустрия 4.0</option>
-                      <option value="Инвестиции">Инвестиции</option>
-                      <option value="Инновации">Инновации</option>
-                      <option value="Модернизация">Модернизация</option>
-                      <option value="Экология">Экология</option>
+                      <option value="">не указано</option>
+                      <option value="индустрия 4.0">индустрия 4.0</option>
+                      <option value="инвестиции">инвестиции</option>
+                      <option value="инновации">инновации</option>
+                      <option value="модернизация">модернизация</option>
+                      <option value="экология">экология</option>
+                      <option value="спорт/культура">спорт/культура</option>
+                      <option value="другое">другое</option>
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
@@ -522,5 +524,3 @@ const RationalModerateDetailPage = () => {
     </div>
   );
 };
-
-export default RationalModerateDetailPage;

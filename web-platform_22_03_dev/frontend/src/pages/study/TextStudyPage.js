@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const TextStudyPage = () => {
+export const TextStudyPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -374,5 +374,3 @@ const TextStudyPage = () => {
     </div>
   );
 };
-
-export default TextStudyPage;

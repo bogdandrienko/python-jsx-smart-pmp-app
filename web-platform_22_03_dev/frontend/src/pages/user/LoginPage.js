@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,7 +58,7 @@ const LoginPage = () => {
         username: username,
         password: password,
       };
-      dispatch(actions.userLoginAnyAction(form));
+      dispatch(actions.userLoginAction(form));
     }
   };
 
@@ -188,5 +188,3 @@ const LoginPage = () => {
     </div>
   );
 };
-
-export default LoginPage;

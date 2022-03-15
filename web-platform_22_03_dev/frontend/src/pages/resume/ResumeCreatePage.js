@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ResumeCreatePage = () => {
+export const ResumeCreatePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -89,7 +89,7 @@ const ResumeCreatePage = () => {
           "Action-type": "VACANCY_DETAIL",
           id: id,
         };
-        dispatch(actions.vacancyDetailAnyAction(form));
+        dispatch(actions.vacancyDetailAction(form));
       }
     }
   }, [dispatch, id, dataVacancyDetail]);
@@ -109,7 +109,7 @@ const ResumeCreatePage = () => {
       sex: sex,
       contactData: contactData,
     };
-    dispatch(actions.resumeCreateAnyAction(form));
+    dispatch(actions.resumeCreateAction(form));
   };
 
   return (
@@ -376,5 +376,3 @@ const ResumeCreatePage = () => {
     </div>
   );
 };
-
-export default ResumeCreatePage;

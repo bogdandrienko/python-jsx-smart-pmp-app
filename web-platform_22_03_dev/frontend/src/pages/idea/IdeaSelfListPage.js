@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Page = () => {
+export const IdeaSelfListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,8 +35,8 @@ const Page = () => {
   const [category, categorySet] = useState("");
   const [author, authorSet] = useState("");
   const [search, searchSet] = useState("");
-  const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
-  const [moderate, moderateSet] = useState("На доработку");
+  const [sort, sortSet] = useState("дате публикации (сначала свежие)");
+  const [moderate, moderateSet] = useState("на доработку");
 
   const ideaListAuthStore = useSelector((state) => state.ideaListAuthStore); // store.js
   const {
@@ -71,7 +71,7 @@ const Page = () => {
         sort: sort,
         moderate: moderate,
       };
-      dispatch(actions.ideaListAuthAction(form));
+      dispatch(actions.ideaListAction(form));
     }
   }, [dispatch, dataIdeaList, loadIdeaList]);
 
@@ -90,7 +90,7 @@ const Page = () => {
     categorySet("");
     authorSet("");
     searchSet("");
-    sortSet("Дате публикации (сначала свежие)");
+    sortSet("дате публикации (сначала свежие)");
     dispatch({
       type: constants.IDEA_LIST_RESET_CONSTANT,
     });
@@ -517,5 +517,3 @@ const Page = () => {
     </div>
   );
 };
-
-export default Page;

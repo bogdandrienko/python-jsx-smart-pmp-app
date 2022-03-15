@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const AdminChangeUserPasswordPage = () => {
+export const AdminChangeUserPasswordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,7 +68,7 @@ const AdminChangeUserPasswordPage = () => {
         "Action-type": "CHECK_USER",
         username: username,
       };
-      dispatch(actions.adminChangeUserPasswordAuthAction(form));
+      dispatch(actions.adminChangeUserPasswordAction(form));
     }
   };
 
@@ -81,7 +81,7 @@ const AdminChangeUserPasswordPage = () => {
         password: password,
         password2: password2,
       };
-      dispatch(actions.adminChangeUserPasswordAuthAction(form));
+      dispatch(actions.adminChangeUserPasswordAction(form));
       utils.Sleep(5000).then(() => {
         dispatch({ type: constants.ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
       });
@@ -307,5 +307,3 @@ const AdminChangeUserPasswordPage = () => {
     </div>
   );
 };
-
-export default AdminChangeUserPasswordPage;

@@ -1,23 +1,21 @@
-export const DEBUG_CONSTANT = true;
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
 export const USER_LOGIN_ERROR_CONSTANT = "USER_LOGIN_ERROR_CONSTANT";
 export const USER_LOGIN_FAIL_CONSTANT = "USER_LOGIN_FAIL_CONSTANT";
 export const USER_LOGIN_RESET_CONSTANT = "USER_LOGIN_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_DETAILS_LOAD_CONSTANT = "USER_DETAILS_LOAD_CONSTANT";
 export const USER_DETAILS_DATA_CONSTANT = "USER_DETAILS_DATA_CONSTANT";
 export const USER_DETAILS_ERROR_CONSTANT = "USER_DETAILS_ERROR_CONSTANT";
 export const USER_DETAILS_FAIL_CONSTANT = "USER_DETAILS_FAIL_CONSTANT";
 export const USER_DETAILS_RESET_CONSTANT = "USER_DETAILS_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_CHANGE_LOAD_CONSTANT = "USER_CHANGE_LOAD_CONSTANT";
 export const USER_CHANGE_DATA_CONSTANT = "USER_CHANGE_DATA_CONSTANT";
 export const USER_CHANGE_ERROR_CONSTANT = "USER_CHANGE_ERROR_CONSTANT";
 export const USER_CHANGE_FAIL_CONSTANT = "USER_CHANGE_FAIL_CONSTANT";
 export const USER_CHANGE_RESET_CONSTANT = "USER_CHANGE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_RECOVER_PASSWORD_LOAD_CONSTANT =
   "USER_RECOVER_PASSWORD_LOAD_CONSTANT";
 export const USER_RECOVER_PASSWORD_DATA_CONSTANT =
@@ -28,6 +26,45 @@ export const USER_RECOVER_PASSWORD_FAIL_CONSTANT =
   "USER_RECOVER_PASSWORD_FAIL_CONSTANT";
 export const USER_RECOVER_PASSWORD_RESET_CONSTANT =
   "USER_RECOVER_PASSWORD_RESET_CONSTANT";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const USER_LIST_ALL_LOAD_CONSTANT = "USER_LIST_ALL_LOAD_CONSTANT";
+export const USER_LIST_ALL_DATA_CONSTANT = "USER_LIST_ALL_DATA_CONSTANT";
+export const USER_LIST_ALL_ERROR_CONSTANT = "USER_LIST_ALL_ERROR_CONSTANT";
+export const USER_LIST_ALL_FAIL_CONSTANT = "USER_LIST_ALL_FAIL_CONSTANT";
+export const USER_LIST_ALL_RESET_CONSTANT = "USER_LIST_ALL_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT";
+export const ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT =
+  "ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT";
+export const ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT =
+  "ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_EXPORT_USERS_LOAD_CONSTANT =
+  "ADMIN_EXPORT_USERS_LOAD_CONSTANT";
+export const ADMIN_EXPORT_USERS_DATA_CONSTANT =
+  "ADMIN_EXPORT_USERS_DATA_CONSTANT";
+export const ADMIN_EXPORT_USERS_ERROR_CONSTANT =
+  "ADMIN_EXPORT_USERS_ERROR_CONSTANT";
+export const ADMIN_EXPORT_USERS_FAIL_CONSTANT =
+  "ADMIN_EXPORT_USERS_FAIL_CONSTANT";
+export const ADMIN_EXPORT_USERS_RESET_CONSTANT =
+  "ADMIN_EXPORT_USERS_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const NOTIFICATION_CREATE_LOAD_CONSTANT =
   "NOTIFICATION_CREATE_LOAD_CONSTANT";
@@ -40,51 +77,6 @@ export const NOTIFICATION_CREATE_FAIL_CONSTANT =
 export const NOTIFICATION_CREATE_RESET_CONSTANT =
   "NOTIFICATION_CREATE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ADMIN_EXPORT_USERS_LOAD_CONSTANT =
-  "ADMIN_EXPORT_USERS_LOAD_CONSTANT";
-export const ADMIN_EXPORT_USERS_DATA_CONSTANT =
-  "ADMIN_EXPORT_USERS_DATA_CONSTANT";
-export const ADMIN_EXPORT_USERS_ERROR_CONSTANT =
-  "ADMIN_EXPORT_USERS_ERROR_CONSTANT";
-export const ADMIN_EXPORT_USERS_FAIL_CONSTANT =
-  "ADMIN_EXPORT_USERS_FAIL_CONSTANT";
-export const ADMIN_EXPORT_USERS_RESET_CONSTANT =
-  "ADMIN_EXPORT_USERS_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_LIST_LOAD_CONSTANT = "USER_LIST_LOAD_CONSTANT";
-export const USER_LIST_DATA_CONSTANT = "USER_LIST_DATA_CONSTANT";
-export const USER_LIST_ERROR_CONSTANT = "USER_LIST_ERROR_CONSTANT";
-export const USER_LIST_RESET_CONSTANT = "USER_LIST_RESET_CONSTANT";
-export const USER_LIST_DEFAULT_CONSTANT = "USER_LIST_DEFAULT_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_LIST_ALL_LOAD_CONSTANT = "USER_LIST_ALL_LOAD_CONSTANT";
-export const USER_LIST_ALL_DATA_CONSTANT = "USER_LIST_ALL_DATA_CONSTANT";
-export const USER_LIST_ALL_ERROR_CONSTANT = "USER_LIST_ALL_ERROR_CONSTANT";
-export const USER_LIST_ALL_FAIL_CONSTANT = "USER_LIST_ALL_FAIL_CONSTANT";
-export const USER_LIST_ALL_RESET_CONSTANT = "USER_LIST_ALL_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_SALARY_LOAD_CONSTANT = "USER_SALARY_LOAD_CONSTANT";
 export const USER_SALARY_DATA_CONSTANT = "USER_SALARY_DATA_CONSTANT";
 export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
@@ -96,13 +88,13 @@ export const RATIONAL_CREATE_DATA_CONSTANT = "RATIONAL_CREATE_DATA_CONSTANT";
 export const RATIONAL_CREATE_ERROR_CONSTANT = "RATIONAL_CREATE_ERROR_CONSTANT";
 export const RATIONAL_CREATE_FAIL_CONSTANT = "RATIONAL_CREATE_FAIL_CONSTANT";
 export const RATIONAL_CREATE_RESET_CONSTANT = "RATIONAL_CREATE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const RATIONAL_DETAIL_LOAD_CONSTANT = "RATIONAL_DETAIL_LOAD_CONSTANT";
 export const RATIONAL_DETAIL_DATA_CONSTANT = "RATIONAL_DETAIL_DATA_CONSTANT";
 export const RATIONAL_DETAIL_ERROR_CONSTANT = "RATIONAL_DETAIL_ERROR_CONSTANT";
 export const RATIONAL_DETAIL_FAIL_CONSTANT = "RATIONAL_DETAIL_FAIL_CONSTANT";
 export const RATIONAL_DETAIL_RESET_CONSTANT = "RATIONAL_DETAIL_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const RATIONAL_LIST_LOAD_CONSTANT = "RATIONAL_LIST_LOAD_CONSTANT";
 export const RATIONAL_LIST_DATA_CONSTANT = "RATIONAL_LIST_DATA_CONSTANT";
 export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
@@ -114,31 +106,31 @@ export const IDEA_CREATE_DATA_CONSTANT = "IDEA_CREATE_DATA_CONSTANT";
 export const IDEA_CREATE_ERROR_CONSTANT = "IDEA_CREATE_ERROR_CONSTANT";
 export const IDEA_CREATE_FAIL_CONSTANT = "IDEA_CREATE_FAIL_CONSTANT";
 export const IDEA_CREATE_RESET_CONSTANT = "IDEA_CREATE_RESET_CONSTANT";
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_LIST_LOAD_CONSTANT = "IDEA_LIST_LOAD_CONSTANT";
 export const IDEA_LIST_DATA_CONSTANT = "IDEA_LIST_DATA_CONSTANT";
 export const IDEA_LIST_ERROR_CONSTANT = "IDEA_LIST_ERROR_CONSTANT";
 export const IDEA_LIST_FAIL_CONSTANT = "IDEA_LIST_FAIL_CONSTANT";
 export const IDEA_LIST_RESET_CONSTANT = "IDEA_LIST_RESET_CONSTANT";
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_DETAIL_LOAD_CONSTANT = "IDEA_DETAIL_LOAD_CONSTANT";
 export const IDEA_DETAIL_DATA_CONSTANT = "IDEA_DETAIL_DATA_CONSTANT";
 export const IDEA_DETAIL_ERROR_CONSTANT = "IDEA_DETAIL_ERROR_CONSTANT";
 export const IDEA_DETAIL_FAIL_CONSTANT = "IDEA_DETAIL_FAIL_CONSTANT";
 export const IDEA_DETAIL_RESET_CONSTANT = "IDEA_DETAIL_RESET_CONSTANT";
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_CHANGE_LOAD_CONSTANT = "IDEA_CHANGE_LOAD_CONSTANT";
 export const IDEA_CHANGE_DATA_CONSTANT = "IDEA_CHANGE_DATA_CONSTANT";
 export const IDEA_CHANGE_ERROR_CONSTANT = "IDEA_CHANGE_ERROR_CONSTANT";
 export const IDEA_CHANGE_FAIL_CONSTANT = "IDEA_CHANGE_FAIL_CONSTANT";
 export const IDEA_CHANGE_RESET_CONSTANT = "IDEA_CHANGE_RESET_CONSTANT";
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_MODERATE_LOAD_CONSTANT = "IDEA_MODERATE_LOAD_CONSTANT";
 export const IDEA_MODERATE_DATA_CONSTANT = "IDEA_MODERATE_DATA_CONSTANT";
 export const IDEA_MODERATE_ERROR_CONSTANT = "IDEA_MODERATE_ERROR_CONSTANT";
 export const IDEA_MODERATE_FAIL_CONSTANT = "IDEA_MODERATE_FAIL_CONSTANT";
 export const IDEA_MODERATE_RESET_CONSTANT = "IDEA_MODERATE_RESET_CONSTANT";
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_COMMENT_CREATE_LOAD_CONSTANT =
   "IDEA_COMMENT_CREATE_LOAD_CONSTANT";
 export const IDEA_COMMENT_CREATE_DATA_CONSTANT =
@@ -149,7 +141,7 @@ export const IDEA_COMMENT_CREATE_FAIL_CONSTANT =
   "IDEA_COMMENT_CREATE_FAIL_CONSTANT";
 export const IDEA_COMMENT_CREATE_RESET_CONSTANT =
   "IDEA_COMMENT_CREATE_RESET_CONSTANT";
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_COMMENT_LIST_LOAD_CONSTANT =
   "IDEA_COMMENT_LIST_LOAD_CONSTANT";
 export const IDEA_COMMENT_LIST_DATA_CONSTANT =
@@ -160,7 +152,7 @@ export const IDEA_COMMENT_LIST_FAIL_CONSTANT =
   "IDEA_COMMENT_LIST_FAIL_CONSTANT";
 export const IDEA_COMMENT_LIST_RESET_CONSTANT =
   "IDEA_COMMENT_LIST_RESET_CONSTANT";
-//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_RATING_CREATE_LOAD_CONSTANT =
   "IDEA_RATING_CREATE_LOAD_CONSTANT";
 export const IDEA_RATING_CREATE_DATA_CONSTANT =
@@ -177,25 +169,25 @@ export const VACANCY_LIST_DATA_CONSTANT = "VACANCY_LIST_DATA_CONSTANT";
 export const VACANCY_LIST_ERROR_CONSTANT = "VACANCY_LIST_ERROR_CONSTANT";
 export const VACANCY_LIST_FAIL_CONSTANT = "VACANCY_LIST_FAIL_CONSTANT";
 export const VACANCY_LIST_RESET_CONSTANT = "VACANCY_LIST_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_DETAIL_LOAD_CONSTANT = "VACANCY_DETAIL_LOAD_CONSTANT";
 export const VACANCY_DETAIL_DATA_CONSTANT = "VACANCY_DETAIL_DATA_CONSTANT";
 export const VACANCY_DETAIL_ERROR_CONSTANT = "VACANCY_DETAIL_ERROR_CONSTANT";
 export const VACANCY_DETAIL_FAIL_CONSTANT = "VACANCY_DETAIL_FAIL_CONSTANT";
 export const VACANCY_DETAIL_RESET_CONSTANT = "VACANCY_DETAIL_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_CREATE_LOAD_CONSTANT = "VACANCY_CREATE_LOAD_CONSTANT";
 export const VACANCY_CREATE_DATA_CONSTANT = "VACANCY_CREATE_DATA_CONSTANT";
 export const VACANCY_CREATE_ERROR_CONSTANT = "VACANCY_CREATE_ERROR_CONSTANT";
 export const VACANCY_CREATE_FAIL_CONSTANT = "VACANCY_CREATE_FAIL_CONSTANT";
 export const VACANCY_CREATE_RESET_CONSTANT = "VACANCY_CREATE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_CHANGE_LOAD_CONSTANT = "VACANCY_CHANGE_LOAD_CONSTANT";
 export const VACANCY_CHANGE_DATA_CONSTANT = "VACANCY_CHANGE_DATA_CONSTANT";
 export const VACANCY_CHANGE_ERROR_CONSTANT = "VACANCY_CHANGE_ERROR_CONSTANT";
 export const VACANCY_CHANGE_FAIL_CONSTANT = "VACANCY_CHANGE_FAIL_CONSTANT";
 export const VACANCY_CHANGE_RESET_CONSTANT = "VACANCY_CHANGE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_DELETE_LOAD_CONSTANT = "VACANCY_DELETE_LOAD_CONSTANT";
 export const VACANCY_DELETE_DATA_CONSTANT = "VACANCY_DELETE_DATA_CONSTANT";
 export const VACANCY_DELETE_ERROR_CONSTANT = "VACANCY_DELETE_ERROR_CONSTANT";
@@ -207,25 +199,27 @@ export const RESUME_LIST_DATA_CONSTANT = "RESUME_LIST_DATA_CONSTANT";
 export const RESUME_LIST_ERROR_CONSTANT = "RESUME_LIST_ERROR_CONSTANT";
 export const RESUME_LIST_FAIL_CONSTANT = "RESUME_LIST_FAIL_CONSTANT";
 export const RESUME_LIST_RESET_CONSTANT = "RESUME_LIST_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const RESUME_DETAIL_LOAD_CONSTANT = "RESUME_DETAIL_LOAD_CONSTANT";
 export const RESUME_DETAIL_DATA_CONSTANT = "RESUME_DETAIL_DATA_CONSTANT";
 export const RESUME_DETAIL_ERROR_CONSTANT = "RESUME_DETAIL_ERROR_CONSTANT";
 export const RESUME_DETAIL_FAIL_CONSTANT = "RESUME_DETAIL_FAIL_CONSTANT";
 export const RESUME_DETAIL_RESET_CONSTANT = "RESUME_DETAIL_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const RESUME_CREATE_LOAD_CONSTANT = "RESUME_CREATE_LOAD_CONSTANT";
 export const RESUME_CREATE_DATA_CONSTANT = "RESUME_CREATE_DATA_CONSTANT";
 export const RESUME_CREATE_ERROR_CONSTANT = "RESUME_CREATE_ERROR_CONSTANT";
 export const RESUME_CREATE_FAIL_CONSTANT = "RESUME_CREATE_FAIL_CONSTANT";
 export const RESUME_CREATE_RESET_CONSTANT = "RESUME_CREATE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const RESUME_DELETE_LOAD_CONSTANT = "RESUME_DELETE_LOAD_CONSTANT";
 export const RESUME_DELETE_DATA_CONSTANT = "RESUME_DELETE_DATA_CONSTANT";
 export const RESUME_DELETE_ERROR_CONSTANT = "RESUME_DELETE_ERROR_CONSTANT";
 export const RESUME_DELETE_FAIL_CONSTANT = "RESUME_DELETE_FAIL_CONSTANT";
 export const RESUME_DELETE_RESET_CONSTANT = "RESUME_DELETE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const DEBUG_CONSTANT = true;
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {
     Title: "Личный профиль:",
@@ -286,7 +280,7 @@ export const news = [
     Danger: "контрактники пока не включены",
   },
 ];
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const modules = [
   {
     Header: "Разработка",

@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Page = () => {
+export const IdeaListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,8 +35,8 @@ const Page = () => {
   const [category, categorySet] = useState("");
   const [author, authorSet] = useState("");
   const [search, searchSet] = useState("");
-  const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
-  const [moderate, moderateSet] = useState("Принято");
+  const [sort, sortSet] = useState("дате публикации (сначала свежие)");
+  const [moderate, moderateSet] = useState("принято");
 
   const ideaListAuthStore = useSelector((state) => state.ideaListAuthStore); // store.js
   const {
@@ -71,7 +71,7 @@ const Page = () => {
         sort: sort,
         moderate: moderate,
       };
-      dispatch(actions.ideaListAuthAction(form));
+      dispatch(actions.ideaListAction(form));
     }
   }, [dispatch, dataIdeaList, loadIdeaList]);
 
@@ -80,7 +80,7 @@ const Page = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.userListAllAuthAction(form));
+      dispatch(actions.userListAllAction(form));
     }
   }, [dispatch, dataUserListAll, loadUserListAll]);
 
@@ -174,20 +174,20 @@ const Page = () => {
                         onChange={(e) => subdivisionSet(e.target.value)}
                       >
                         <option value="">все варианты</option>
-                        <option value="Автотранспортное предприятие">
-                          Автотранспортное предприятие
+                        <option value="автотранспортное предприятие">
+                          автотранспортное предприятие
                         </option>
-                        <option value="Горно-транспортный комплекс">
-                          Горно-транспортный комплекс
+                        <option value="горно-транспортный комплекс">
+                          горно-транспортный комплекс
                         </option>
-                        <option value="Обогатительный комплекс">
-                          Обогатительный комплекс
+                        <option value="обогатительный комплекс">
+                          обогатительный комплекс
                         </option>
-                        <option value="Управление">
-                          Управление предприятия
+                        <option value="управление">
+                          управление предприятия
                         </option>
-                        <option value="Энергоуправление">
-                          Энергоуправление
+                        <option value="энергоуправление">
+                          энергоуправление
                         </option>
                       </select>
                     </label>
@@ -199,11 +199,13 @@ const Page = () => {
                         onChange={(e) => categorySet(e.target.value)}
                       >
                         <option value="">все варианты</option>
-                        <option value="Индустрия 4.0">Индустрия 4.0</option>
-                        <option value="Инвестиции">Инвестиции</option>
-                        <option value="Инновации">Инновации</option>
-                        <option value="Модернизация">Модернизация</option>
-                        <option value="Экология">Экология</option>
+                        <option value="индустрия 4.0">индустрия 4.0</option>
+                        <option value="инвестиции">инвестиции</option>
+                        <option value="инновации">инновации</option>
+                        <option value="модернизация">модернизация</option>
+                        <option value="экология">экология</option>
+                        <option value="спорт/культура">спорт/культура</option>
+                        <option value="другое">другое</option>
                       </select>
                     </label>
                     {dataUserListAll && (
@@ -255,23 +257,23 @@ const Page = () => {
                         value={sort}
                         onChange={(e) => sortSet(e.target.value)}
                       >
-                        <option value="Дате публикации (сначала свежие)">
-                          Дате публикации (сначала свежие)
+                        <option value="дате публикации (сначала свежие)">
+                          дате публикации (сначала свежие)
                         </option>
-                        <option value="Дате публикации (сначала старые)">
-                          Дате публикации (сначала старые)
+                        <option value="дате публикации (сначала старые)">
+                          дате публикации (сначала старые)
                         </option>
-                        <option value="Названию (С начала алфавита)">
-                          Названию (С начала алфавита)
+                        <option value="названию (С начала алфавита)">
+                          названию (С начала алфавита)
                         </option>
-                        <option value="Названию (С конца алфавита)">
-                          Названию (С конца алфавита)
+                        <option value="названию (С конца алфавита)">
+                          названию (С конца алфавита)
                         </option>
-                        <option value="Рейтингу (Популярные в начале)">
-                          Рейтингу (Популярные в начале)
+                        <option value="рейтингу (Популярные в начале)">
+                          рейтингу (Популярные в начале)
                         </option>
-                        <option value="Рейтингу (Популярные в конце)">
-                          Рейтингу (Популярные в конце)
+                        <option value="рейтингу (Популярные в конце)">
+                          рейтингу (Популярные в конце)
                         </option>
                       </select>
                     </label>
@@ -723,5 +725,3 @@ const Page = () => {
     </div>
   );
 };
-
-export default Page;

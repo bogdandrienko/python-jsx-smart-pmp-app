@@ -27,7 +27,7 @@ import ModulesComponent from "./ModulesComponent";
 import NewsComponent from "./NewsComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const HomePage = () => {
+export const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -82,5 +82,3 @@ const HomePage = () => {
     </div>
   );
 };
-
-export default HomePage;

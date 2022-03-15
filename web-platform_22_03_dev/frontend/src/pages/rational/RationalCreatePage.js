@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const BankIdeaListPage = () => {
+export const RationalCreatePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -80,7 +80,7 @@ const BankIdeaListPage = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.userListAllAuthAction(form));
+      dispatch(actions.userListAllAction(form));
     }
   }, [
     dispatch,
@@ -120,7 +120,7 @@ const BankIdeaListPage = () => {
       user4: user4 + " " + user4Perc,
       user5: user5 + " " + user5Perc,
     };
-    dispatch(actions.rationalCreateAuthAction(form));
+    dispatch(actions.rationalCreateAction(form));
   };
 
   return (
@@ -587,5 +587,3 @@ const BankIdeaListPage = () => {
     </div>
   );
 };
-
-export default BankIdeaListPage;

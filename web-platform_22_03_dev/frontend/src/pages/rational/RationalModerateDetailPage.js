@@ -26,7 +26,7 @@ import MessageComponent from "../base/MessageComponent";
 import RationalComponent from "./RationalComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const RationalModerateDetailPage = () => {
+export const RationalModerateDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,7 +62,7 @@ const RationalModerateDetailPage = () => {
         "Action-type": "RATIONAL_DETAIL",
         id: id,
       };
-      dispatch(actions.rationalDetailAuthAction(form));
+      dispatch(actions.rationalDetailAction(form));
     }
   }, [dispatch, id, dataRationalDetail, loadRationalDetail]);
 
@@ -74,7 +74,7 @@ const RationalModerateDetailPage = () => {
       moderate: moderate,
       comment: comment,
     };
-    dispatch(actions.rationalCreateAuthAction(form));
+    dispatch(actions.rationalCreateAction(form));
     navigate("/rational_moderate_list");
     dispatch({ type: constants.RATIONAL_LIST_RESET_CONSTANT });
     dispatch({ type: constants.RATIONAL_DETAIL_RESET_CONSTANT });
@@ -181,5 +181,3 @@ const RationalModerateDetailPage = () => {
     </div>
   );
 };
-
-export default RationalModerateDetailPage;

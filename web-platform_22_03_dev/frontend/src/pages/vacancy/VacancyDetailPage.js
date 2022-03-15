@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const VacancyDetailPage = () => {
+export const VacancyDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,7 +68,7 @@ const VacancyDetailPage = () => {
         "Action-type": "VACANCY_DETAIL",
         id: id,
       };
-      dispatch(actions.vacancyDetailAnyAction(form));
+      dispatch(actions.vacancyDetailAction(form));
     }
   }, [dispatch, id, dataVacancyDetail, loadVacancyDetail]);
 
@@ -88,7 +88,7 @@ const VacancyDetailPage = () => {
       "Action-type": "VACANCY_DELETE",
       id: id,
     };
-    dispatch(actions.vacancyDeleteAuthAction(form));
+    dispatch(actions.vacancyDeleteAction(form));
   };
 
   return (
@@ -284,5 +284,3 @@ const VacancyDetailPage = () => {
     </div>
   );
 };
-
-export default VacancyDetailPage;

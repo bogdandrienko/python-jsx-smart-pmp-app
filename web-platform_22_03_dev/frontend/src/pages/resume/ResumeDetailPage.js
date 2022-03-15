@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ResumeDetailPage = () => {
+export const ResumeDetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,7 +68,7 @@ const ResumeDetailPage = () => {
         "Action-type": "RESUME_DETAIL",
         id: id,
       };
-      dispatch(actions.resumeDetailAuthAction(form));
+      dispatch(actions.resumeDetailAction(form));
     }
   }, [dispatch, id, dataResumeDetail, loadResumeDetail]);
 
@@ -88,7 +88,7 @@ const ResumeDetailPage = () => {
       "Action-type": "RESUME_DELETE",
       id: id,
     };
-    dispatch(actions.resumeDeleteAuthAction(form));
+    dispatch(actions.resumeDeleteAction(form));
   };
 
   return (
@@ -320,5 +320,3 @@ const ResumeDetailPage = () => {
     </div>
   );
 };
-
-export default ResumeDetailPage;

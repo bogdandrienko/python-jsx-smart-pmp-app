@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const RationalTemplatePage = () => {
+export const RationalTemplatePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -193,5 +193,3 @@ const RationalTemplatePage = () => {
     </div>
   );
 };
-
-export default RationalTemplatePage;

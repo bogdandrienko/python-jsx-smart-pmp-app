@@ -36,7 +36,7 @@ const ModulesComponent = () => {
 
   useEffect(() => {
     if (!dataUserDetails) {
-      dispatch(actions.userDetailsAuthAction());
+      dispatch(actions.userDetailsAction());
     }
   }, [dispatch]);
 

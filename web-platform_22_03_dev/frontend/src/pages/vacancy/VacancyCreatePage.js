@@ -24,7 +24,7 @@ import StoreStatusComponent from "../base/StoreStatusComponent";
 import MessageComponent from "../base/MessageComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const VacancyCreatePage = () => {
+export const VacancyCreatePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -72,7 +72,7 @@ const VacancyCreatePage = () => {
       image: image,
       description: description,
     };
-    dispatch(actions.vacancyCreateAuthAction(form));
+    dispatch(actions.vacancyCreateAction(form));
   };
 
   return (
@@ -285,5 +285,3 @@ const VacancyCreatePage = () => {
     </div>
   );
 };
-
-export default VacancyCreatePage;

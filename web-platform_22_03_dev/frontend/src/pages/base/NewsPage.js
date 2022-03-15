@@ -26,7 +26,7 @@ import MessageComponent from "../base/MessageComponent";
 import NewsComponent from "./NewsComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const NewsPage = () => {
+export const NewsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,5 +47,3 @@ const NewsPage = () => {
     </div>
   );
 };
-
-export default NewsPage;
