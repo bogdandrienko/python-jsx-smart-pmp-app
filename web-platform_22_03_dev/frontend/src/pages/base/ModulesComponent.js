@@ -52,7 +52,9 @@ const ModulesComponent = () => {
                   utils.CheckAccess(userDetailsAuthStore, module.Access) &&
                   module.ShowInModules && (
                     <div key={module_i} className="border shadow text-center  ">
-                      <div className="card-header lead">{module["Header"]}</div>
+                      <div className="card-header m-0 p-0 lead">
+                        {module["Header"]}
+                      </div>
                       <div className="text-center">
                         <img
                           src={module["Image"]}
@@ -69,7 +71,7 @@ const ModulesComponent = () => {
                               ) && (
                                 <div
                                   key={section_i}
-                                  className="card-body text-end  "
+                                  className="card-body m-0 p-0 text-end  "
                                 >
                                   <div className="card">
                                     <li className="list-group-item list-group-item-action active disabled d-flex  ">

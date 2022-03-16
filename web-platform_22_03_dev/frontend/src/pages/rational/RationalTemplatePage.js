@@ -35,100 +35,90 @@ export const RationalTemplatePage = () => {
       <HeaderComponent
         logic={true}
         redirect={true}
-        title={"Пример рационализаторского предложения"}
-        description={"страница содержит пример рационализаторского предложения"}
+        title={"Пример (шаблон) рационализаторского предложения"}
+        description={
+          "страница содержит пример (шаблон) рационализаторского предложения"
+        }
       />
-      <main className="container-fluid text-center">
-        <div className="">
-          <ul className="row row-cols-1 row-cols-md-2 row-cols-lg-2 nav justify-content-center">
-            <div className="card shadow  ">
-              <div className="card-header   bg-opacity-10 bg-primary">
-                <h6 className="lead fw-bold">Внедрение солнечных панелей.</h6>
+      <main className="container">
+        <div className="m-0 p-0">
+          <ul className="row row-cols-1 row-cols-md-2 row-cols-lg-2 justify-content-center m-0 p-0">
+            <div className="card shadow m-0 p-0">
+              <div className="card-header m-0 p-0 bg-warning bg-opacity-10 m-0 p-0">
+                <h6 className="lead fw-bold">
+                  Веб-платформа управления изменениями
+                </h6>
               </div>
-              <div className="card-body  ">
-                <label className="form-control-sm m-1">
-                  Подразделение:
-                  <select
-                    id="subdivision"
-                    name="subdivision"
-                    required
-                    className="form-control form-control-sm"
-                  >
-                    <option value="">Энергоуправление</option>
-                  </select>
-                </label>
-                <label className="form-control-sm m-1">
-                  Зарегистрировано за №{" "}
-                  <strong className="btn btn-light disabled">
-                    001-09-03-2022
-                  </strong>
-                </label>
+              <div className="card-body m-0 p-0">
+                <div className="m-0 p-0">
+                  <label className="form-control-sm m-1">
+                    Подразделение:
+                    <select className="form-control form-control-sm" required>
+                      <option value="">энергоуправление</option>
+                    </select>
+                  </label>
+                  <label className="form-control-sm m-1">
+                    Зарегистрировано за №{" "}
+                    <strong className="btn btn-light disabled">
+                      000-01-03-2020
+                    </strong>
+                  </label>
+                </div>
+                <div className="m-0 p-0">
+                  <label className="form-control-sm">
+                    Сфера:
+                    <select className="form-control form-control-sm" required>
+                      <option value="">не технологическая</option>
+                    </select>
+                  </label>
+                  <label className="form-control-sm">
+                    Категория:
+                    <select className="form-control form-control-sm" required>
+                      <option value="">инновации</option>
+                    </select>
+                  </label>
+                </div>
               </div>
-
-              <div className="card-body  ">
-                <label className="form-control-sm m-1">
-                  Сфера:
-                  <select
-                    id="sphere"
-                    name="sphere"
-                    required
-                    className="form-control form-control-sm"
-                  >
-                    <option value="">Технологическая</option>
-                  </select>
-                </label>
-                <label className="form-control-sm m-1">
-                  Категория:
-                  <select
-                    id="category"
-                    name="category"
-                    required
-                    className="form-control form-control-sm"
-                  >
-                    <option value="">Инновации</option>
-                  </select>
-                </label>
-              </div>
-              <div className="card-body  ">
+              <div className="card-body m-0 p-0">
                 <img
-                  src="/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png"
-                  className={"card-img-top img-fluid w-50"}
-                  alt="id"
+                  src={utils.GetStaticFile(
+                    "/media/default/rational/template_rational.jpg"
+                  )}
+                  className="card-img-top img-fluid w-75"
+                  alt="изображение отсутствует"
                 />
               </div>
-              <div className="card-body  ">
-                <label className="w-100 form-control-sm">
+              <div className="card-body m-0 p-0">
+                <label className="w-50 form-control-sm">
                   Место внедрения:
                   <input
                     type="text"
-                    id="name_char_field"
-                    name="name_char_field"
-                    required
-                    placeholder="Цех / участок / отдел / лаборатория и т.п."
-                    defaultValue="Участок связи"
+                    className="form-control form-control-sm"
+                    defaultValue="Учебный центр АО 'Костанайские Минералы'"
                     readOnly={true}
+                    placeholder="введите место внедрения тут..."
+                    required
                     minLength="1"
                     maxLength="100"
-                    className="form-control form-control-sm"
                   />
                 </label>
               </div>
-              <div className="card-body  ">
-                <label className="w-100 form-control-sm m-1">
+              <div className="card-body m-0 p-0">
+                <label className="w-100 form-control-sm">
                   Описание:
                   <textarea
-                    required
-                    placeholder="Полное описание"
-                    defaultValue="Зелёная экономика предлагает современные средства энергообеспечения"
-                    readOnly={true}
-                    minLength="1"
-                    maxLength="5000"
-                    rows="3"
                     className="form-control form-control-sm"
+                    defaultValue="Предлагаю разработать симулятор виртуальной реальности для обучения персонала особо опасным действиям в условиях, приближенных к реальности."
+                    readOnly={true}
+                    required
+                    placeholder="введите описание тут..."
+                    minLength="1"
+                    maxLength="3000"
+                    rows="3"
                   />
                 </label>
               </div>
-              <div className="card-body  ">
+              <div className="card-body m-0 p-0">
                 <label className="form-control-sm m-1">
                   Word файл-приложение:
                   <a className="btn btn-sm btn-primary m-1" href="">
@@ -148,43 +138,156 @@ export const RationalTemplatePage = () => {
                   </a>
                 </label>
               </div>
-              <div className="card-body  ">
+              <div className="card-body m-0 p-0">
                 <Link
                   to={`#`}
                   className="text-decoration-none btn btn-sm btn-warning"
                 >
-                  Автор: Иванов Иван Иванович
+                  Автор: Андриенко Богдан Техник-программист
                 </Link>
               </div>
-              <label className="w-100 form-control-sm m-1">
-                Участники:
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  defaultValue="Иванов Иван Иванович 931778 70%"
-                  readOnly={true}
-                  placeholder="участник № 1"
-                  minLength="0"
-                  maxLength="200"
-                />
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  defaultValue="Иванов Иван Николаевич 931779 30%"
-                  readOnly={true}
-                  placeholder="участник № 2"
-                  minLength="0"
-                  maxLength="200"
-                />
-              </label>
-              <div className="card-body  ">
-                <label className="text-muted border p-1 m-1">
-                  подано: <p className="">09-03-22 11:20</p>
-                </label>
-                <label className="text-muted border p-1 m-1">
-                  зарегистрировано: <p className="">09-03-22 11:55</p>
+              <div className="card-body m-0 p-0">
+                <label className="w-100 form-control-sm m-1">
+                  Участники:
+                  <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    defaultValue="Иванов Иван Иванович 931778 70%"
+                    readOnly={true}
+                    placeholder="участник № 1"
+                    minLength="0"
+                    maxLength="200"
+                  />
+                  <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    defaultValue="Иванов Иван Николаевич 931779 30%"
+                    readOnly={true}
+                    placeholder="участник № 2"
+                    minLength="0"
+                    maxLength="200"
+                  />
                 </label>
               </div>
+              <div className="card-body m-0 p-0">
+                <label className="text-muted border p-1 m-1">
+                  подано: <p className="m-0 p-0">15-02-2021 11:00</p>
+                </label>
+                <label className="text-muted border p-1 m-1">
+                  зарегистрировано: <p className="m-0 p-0">16-02-2021 14:00</p>
+                </label>
+              </div>
+              <div className="card p-2">
+                <div className="order-md-last">
+                  <h6 className="d-flex justify-content-between align-items-center m-0 p-0">
+                    <span className="text-success">Рейтинг</span>
+                    <span className="badge bg-success rounded-pill">
+                      10
+                      {"\\  "}
+                      <small className="text-uppercase">1</small>
+                    </span>
+                  </h6>
+                  <div>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                    <span>
+                      <i
+                        style={{
+                          color: "#00ff00",
+                        }}
+                        className="fas fa-star"
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div className="order-md-last">
+                  <h6 className="d-flex justify-content-between align-items-center m-0 p-0">
+                    <span className="text-secondary">Комментарии</span>
+                    <span className="badge bg-secondary rounded-pill">1</span>
+                  </h6>
+                </div>
+              </div>
+              <ul className="list-group">
+                <li className="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 className="my-0">Андриенко Богдан</h6>
+                    <small className="text-muted">
+                      Это очень полезная идея!
+                    </small>
+                  </div>
+                  <span className="text-muted">17-02-2021 15:00</span>
+                </li>
+              </ul>
             </div>
           </ul>
         </div>

@@ -34,7 +34,7 @@ const RationalComponent = ({ object, shortView = false }) => {
         shortView ? "card list-group-item-action shadow  " : "card shadow  "
       }
     >
-      <div className="card-header   bg-opacity-10 bg-primary">
+      <div className="card-header m-0 p-0   bg-opacity-10 bg-primary">
         <h6 className="lead fw-bold">
           {object["name_char_field"]}{" "}
           {utils.CheckAccess(userDetailsAuthStore, "rational_admin") && (
@@ -44,7 +44,7 @@ const RationalComponent = ({ object, shortView = false }) => {
           )}
         </h6>
       </div>
-      <div className="card-body  ">
+      <div className="card-body m-0 p-0  ">
         <label className="form-control-sm m-1">
           Подразделение:
           <select
@@ -64,7 +64,7 @@ const RationalComponent = ({ object, shortView = false }) => {
         </label>
       </div>
 
-      <div className="card-body  ">
+      <div className="card-body m-0 p-0  ">
         <label className="form-control-sm m-1">
           Сфера:
           <select
@@ -88,7 +88,7 @@ const RationalComponent = ({ object, shortView = false }) => {
           </select>
         </label>
       </div>
-      <div className="card-body  ">
+      <div className="card-body m-0 p-0  ">
         <img
           src={utils.GetStaticFile(object["avatar_image_field"])}
           className={
@@ -99,7 +99,7 @@ const RationalComponent = ({ object, shortView = false }) => {
           alt="id"
         />
       </div>
-      <div className="card-body  ">
+      <div className="card-body m-0 p-0  ">
         <label className="w-100 form-control-sm">
           Место внедрения:
           <input
@@ -116,7 +116,7 @@ const RationalComponent = ({ object, shortView = false }) => {
           />
         </label>
       </div>
-      <div className="card-body  ">
+      <div className="card-body m-0 p-0  ">
         <label className="w-100 form-control-sm m-1">
           Описание:
           <textarea
@@ -136,7 +136,7 @@ const RationalComponent = ({ object, shortView = false }) => {
         </label>
       </div>
       {!shortView && (
-        <div className="card-body  ">
+        <div className="card-body m-0 p-0  ">
           <label className="form-control-sm m-1">
             Word файл-приложение:
             <a
@@ -166,7 +166,7 @@ const RationalComponent = ({ object, shortView = false }) => {
           </label>
         </div>
       )}
-      <div className="card-body  ">
+      <div className="card-body m-0 p-0  ">
         <Link to={`#`} className="text-decoration-none btn btn-sm btn-warning">
           Автор: {object["user_model"]["last_name_char_field"]}{" "}
           {object["user_model"]["first_name_char_field"]}{" "}
@@ -233,7 +233,7 @@ const RationalComponent = ({ object, shortView = false }) => {
             )}
         </label>
       )}
-      <div className="card-body  ">
+      <div className="card-body m-0 p-0  ">
         <label className="text-muted border p-1 m-1">
           подано:{" "}
           <p className=" ">
@@ -248,7 +248,7 @@ const RationalComponent = ({ object, shortView = false }) => {
         </label>
       </div>
       {shortView && (
-        <div className="card-header  ">
+        <div className="card-header m-0 p-0  ">
           <Link
             className="btn btn-sm btn-primary w-100"
             to={`/rational_detail/${object.id}`}

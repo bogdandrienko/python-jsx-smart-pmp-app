@@ -172,7 +172,7 @@ export const IdeaModerateDetailPage = () => {
         title={"Модерация идеи"}
         description={"страница содержит функционал модерации идеи в банке идей"}
       />
-      <main className="container p-0">
+      <main className="container">
         <div className="btn-group m-0 p-1 text-start w-100">
           <Link
             to={"/idea_moderate_list"}
@@ -292,7 +292,7 @@ export const IdeaModerateDetailPage = () => {
           {!dataIdeaChange && dataIdeaDetail && (
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
               <form className="m-0 p-0" onSubmit={handlerChangeSubmit}>
-                <div className="card-header">
+                <div className="card-header m-0 p-0">
                   <h6 className="lead fw-bold">
                     {dataIdeaDetail["name_char_field"]}{" "}
                     <h6 className="lead text-danger">
@@ -320,7 +320,7 @@ export const IdeaModerateDetailPage = () => {
                     {dataIdeaDetail["user_model"]["position_char_field"]}
                   </Link>
                 </div>
-                <div className="card-body">
+                <div className="card-body m-0 p-0">
                   <label className="form-control-sm">
                     Подразделение:
                     <select
@@ -380,12 +380,18 @@ export const IdeaModerateDetailPage = () => {
                     <small className="text-danger">* обязательно</small>
                   </label>
                 </div>
-                <div className="card-body">
+                <div className="card-body m-0 p-0">
                   {dataIdeaDetail && (
                     <img
-                      src={utils.GetStaticFile(
+                      src={
                         dataIdeaDetail["avatar_image_field"]
-                      )}
+                          ? utils.GetStaticFile(
+                              dataIdeaDetail["avatar_image_field"]
+                            )
+                          : utils.GetStaticFile(
+                              "/media/default/idea/default_idea.jpg"
+                            )
+                      }
                       className="card-img-top img-fluid w-25"
                       alt="изображение отсутствует"
                     />
@@ -435,12 +441,12 @@ export const IdeaModerateDetailPage = () => {
                 </div>
                 <div className="">
                   <label className="w-50 form-control-sm">
-                    Место внедрения:
+                    Место изменения:
                     <input
                       type="text"
                       className="form-control form-control-sm"
                       value={place}
-                      placeholder="введите место внедрения тут..."
+                      placeholder="введите место изменения тут..."
                       required
                       minLength="1"
                       maxLength="100"

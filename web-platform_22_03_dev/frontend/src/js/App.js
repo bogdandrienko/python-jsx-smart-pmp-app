@@ -51,74 +51,66 @@ import { TerminalRebootPage } from "../pages/terminal/TerminalRebootPage";
 export const App = () => {
   return (
     <Router>
-      <div className="container-fluid text-center m-0 p-0">
-        <Routes>
-          <Route path="/" element={<HomePage />} exact />
-          <Route path="/home" element={<HomePage />} exact />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/logout" element={<LogoutPage />} />
-          <Route path="/change_profile" element={<ChangeProfilePage />} />
-          <Route path="/change_password" element={<ChangePasswordPage />} />
-          <Route path="/recover_password" element={<RecoverPasswordPage />} />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route
-            path="/admin_change_user_password"
-            element={<AdminChangeUserPasswordPage />}
-          />
-          <Route
-            path="/admin_create_or_change_users"
-            element={<AdminCreateOrChangeUsersPage />}
-          />
-          <Route
-            path="/admin_export_users"
-            element={<AdminExportUsersPage />}
-          />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/video_study" element={<VideoStudyPage />} />
-          <Route path="/text_study" element={<TextStudyPage />} />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/salary" element={<SalaryPage />} />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/rational_template" element={<RationalTemplatePage />} />
-          <Route path="/rational_create" element={<RationalCreatePage />} />
-          <Route
-            path="/rational_moderate_list"
-            element={<RationalModerateListPage />}
-          />
-          <Route
-            path="/rational_moderate_detail/:id"
-            element={<RationalModerateDetailPage />}
-          />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/idea_template" element={<IdeaTemplatePage />} />
-          <Route path="/idea_create" element={<IdeaCreatePage />} />
-          <Route path="/idea_list" element={<IdeaListPage />} />
-          <Route path="/idea_detail/:id" element={<IdeaDetailPage />} />
-          <Route
-            path="/idea_moderate_list"
-            element={<IdeaModerateListPage />}
-          />
-          <Route
-            path="/idea_moderate_detail/:id"
-            element={<IdeaModerateDetailPage />}
-          />
-          <Route path="/idea_self_list" element={<IdeaSelfListPage />} />
-          <Route path="/idea_change/:id" element={<IdeaChangePage />} />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/vacancy_list" element={<VacancyListPage />} />
-          <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />
-          <Route path="/vacancy_create" element={<VacancyCreatePage />} />
-          <Route path="/vacancy_change/:id" element={<VacancyChangePage />} />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/resume_create/:id" element={<ResumeCreatePage />} />
-          <Route path="/resume_list" element={<ResumeListPage />} />
-          <Route path="/resume_detail/:id" element={<ResumeDetailPage />} />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          <Route path="/terminal" element={<TerminalRebootPage />} />
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} exact />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/logout" element={<LogoutPage />} />
+        <Route path="/change_profile" element={<ChangeProfilePage />} />
+        <Route path="/change_password" element={<ChangePasswordPage />} />
+        <Route path="/recover_password" element={<RecoverPasswordPage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route
+          path="/admin_change_user_password"
+          element={<AdminChangeUserPasswordPage />}
+        />
+        <Route
+          path="/admin_create_or_change_users"
+          element={<AdminCreateOrChangeUsersPage />}
+        />
+        <Route path="/admin_export_users" element={<AdminExportUsersPage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/video_study" element={<VideoStudyPage />} />
+        <Route path="/text_study" element={<TextStudyPage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/salary" element={<SalaryPage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/rational_template" element={<RationalTemplatePage />} />
+        <Route path="/rational_create" element={<RationalCreatePage />} />
+        <Route
+          path="/rational_moderate_list"
+          element={<RationalModerateListPage />}
+        />
+        <Route
+          path="/rational_moderate_detail/:id"
+          element={<RationalModerateDetailPage />}
+        />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/idea_template" element={<IdeaTemplatePage />} />
+        <Route path="/idea_create" element={<IdeaCreatePage />} />
+        <Route path="/idea_list" element={<IdeaListPage />} />
+        <Route path="/idea_detail/:id" element={<IdeaDetailPage />} />
+        <Route path="/idea_moderate_list" element={<IdeaModerateListPage />} />
+        <Route
+          path="/idea_moderate_detail/:id"
+          element={<IdeaModerateDetailPage />}
+        />
+        <Route path="/idea_self_list" element={<IdeaSelfListPage />} />
+        <Route path="/idea_change/:id" element={<IdeaChangePage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/vacancy_list" element={<VacancyListPage />} />
+        <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />
+        <Route path="/vacancy_create" element={<VacancyCreatePage />} />
+        <Route path="/vacancy_change/:id" element={<VacancyChangePage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/resume_create/:id" element={<ResumeCreatePage />} />
+        <Route path="/resume_list" element={<ResumeListPage />} />
+        <Route path="/resume_detail/:id" element={<ResumeDetailPage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/terminal" element={<TerminalRebootPage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      </Routes>
     </Router>
   );
 };

@@ -96,15 +96,11 @@ const HeaderComponent = ({
   }, []);
 
   return (
-    <header className="navbar-fixed-top pb-3">
-      <Navbar expand="lg">
+    <header className="header navbar-fixed-top pb-3">
+      <Navbar expand="lg" className="text-center">
         <Container>
           <a className="w-25" href="https://km.kz/">
-            <img
-              src="/static/img/logo.png"
-              className="w-25 img-responsive"
-              alt="id"
-            />
+            <img src="/static/img/logo.png" className="w-25" alt="id" />
           </a>
           <a className="navbar-brand" href="/">
             Домашняя
@@ -119,6 +115,7 @@ const HeaderComponent = ({
                       key={module_i}
                       title={module.Header}
                       id="basic-nav-dropdown"
+                      className=""
                     >
                       {module.Sections.map(
                         (section, section_i) =>
@@ -127,7 +124,7 @@ const HeaderComponent = ({
                             section.Access
                           ) && (
                             <li key={section_i}>
-                              <strong className="dropdown-header text-center">
+                              <strong className="dropdown-header text-center m-1 p-0">
                                 {section.Header}
                               </strong>
                               {section.Links.map((link, link_i) =>
@@ -140,8 +137,8 @@ const HeaderComponent = ({
                                         key={link_i}
                                         className={
                                           link.Active
-                                            ? "dropdown-item"
-                                            : "disabled dropdown-item"
+                                            ? "dropdown-item m-1 p-0"
+                                            : "disabled dropdown-item m-1 p-0"
                                         }
                                         href={link.Link}
                                         target="_self"
@@ -158,14 +155,18 @@ const HeaderComponent = ({
                                         key={link_i}
                                         to={link.Link}
                                         className={
-                                          link.Active ? "" : "disabled"
+                                          link.Active
+                                            ? "m-1 p-1"
+                                            : "disabled m-1 p-1"
                                         }
                                       >
-                                        <Nav.Link>{link.Header}</Nav.Link>
+                                        <Nav.Link className="">
+                                          {link.Header}
+                                        </Nav.Link>
                                       </LinkContainer>
                                     )
                               )}
-                              <NavDropdown.Divider />
+                              <NavDropdown.Divider className="" />
                             </li>
                           )
                       )}
@@ -194,12 +195,14 @@ const HeaderComponent = ({
         </Container>
       </Navbar>
       {title !== "" && description !== "" && (
-        <div className="container card shadow text-start p-0">
-          <div className="card-header bg-primary bg-opacity-10 m-0 p-1">
-            <small className="display-6 fw-normal">{title}</small>
-          </div>
-          <div className="card-body m-0 p-1">
-            <p className="lead fw-normal card-body m-0 p-1">{description}</p>
+        <div className="container p-0">
+          <div className="card shadow">
+            <div className="card-header bg-primary bg-opacity-10 m-0 p-1">
+              <small className="display-6 fw-normal">{title}</small>
+            </div>
+            <div className="card-body m-0 p-1">
+              <p className="lead fw-normal m-0 p-1">{description}</p>
+            </div>
           </div>
         </div>
       )}

@@ -68,15 +68,15 @@ export const TerminalRebootPage = () => {
         title={"Терминалы"}
         description={"страница функционала по терминалам"}
       />
-      <main className="container p-0">
+      <main className="container">
         <div className="card m-0 p-0">
-          <div className="card-header bg-danger bg-opacity-10 lead fw-bold">
+          <div className="card-header m-0 p-0 bg-danger bg-opacity-10 lead fw-bold">
             Выберите какой терминал нужно перезагрузить:
           </div>
-          <div className="card-body">
+          <div className="card-body m-0 p-0">
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
               <form className="m-0 p-0" onSubmit={handlerRestartSubmit}>
-                <div className="card-body">
+                <div className="card-body m-0 p-0">
                   <label className="form-control-sm">
                     Точка:
                     <select

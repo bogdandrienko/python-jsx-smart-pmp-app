@@ -219,7 +219,7 @@ export const IdeaDetailPage = () => {
           "страница содержит подробную информацию об идеи в банке идей"
         }
       />
-      <main className="container p-0">
+      <main className="container">
         <div>
           <StoreStatusComponent
             storeStatus={notificationCreateAnyStore}
@@ -295,155 +295,151 @@ export const IdeaDetailPage = () => {
         />
         {dataIdeaDetail && (
           <div className="card shadow">
-            <div className="card-header bg-opacity-10 bg-primary m-0 p-0">
-              <h6 className="lead fw-bold">
-                {dataIdeaDetail["name_char_field"]}
-              </h6>
-            </div>
-            <div className="card-body m-0 p-0">
-              <label className="form-control-sm">
-                Подразделение:
-                <select className="form-control form-control-sm" required>
-                  <option value="">
-                    {dataIdeaDetail["subdivision_char_field"]}
-                  </option>
-                </select>
-              </label>
-              <label className="form-control-sm">
-                Сфера:
-                <select className="form-control form-control-sm" required>
-                  <option value="">
-                    {dataIdeaDetail["sphere_char_field"]}
-                  </option>
-                </select>
-              </label>
-              <label className="form-control-sm">
-                Категория:
-                <select className="form-control form-control-sm" required>
-                  <option value="">
-                    {dataIdeaDetail["category_char_field"]}
-                  </option>
-                </select>
-              </label>
-            </div>
-            <div className="card-body m-0 p-0">
-              <img
-                src={utils.GetStaticFile(dataIdeaDetail["avatar_image_field"])}
-                className="card-img-top img-fluid w-75"
-                alt="изображение отсутствует"
-              />
-            </div>
-            <div className="card-body m-0 p-0">
-              <label className="w-50 form-control-sm">
-                Место внедрения:
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  defaultValue={dataIdeaDetail["place_char_field"]}
-                  readOnly={true}
-                  placeholder="введите место внедрения тут..."
-                  required
-                  minLength="1"
-                  maxLength="100"
-                />
-              </label>
-            </div>
-            <div className="card-body m-0 p-0">
-              <label className="w-100 form-control-sm">
-                Описание:
-                <textarea
-                  className="form-control form-control-sm"
-                  defaultValue={dataIdeaDetail["description_text_field"]}
-                  readOnly={true}
-                  required
-                  placeholder="введите описание тут..."
-                  minLength="1"
-                  maxLength="3000"
-                  rows="3"
-                />
-              </label>
-            </div>
-            <div className="card-body m-0 p-0">
-              <Link
-                to={`#`}
-                className="text-decoration-none btn btn-sm btn-warning"
-              >
-                Автор: {dataIdeaDetail["user_model"]["last_name_char_field"]}{" "}
-                {dataIdeaDetail["user_model"]["first_name_char_field"]}{" "}
-                {dataIdeaDetail["user_model"]["position_char_field"]}
-              </Link>
-            </div>
-            <div className="card-body m-0 p-0">
-              <label className="text-muted border p-1 m-1">
-                подано:{" "}
-                <p className="m-0 p-0">
-                  {utils.GetCleanDateTime(
-                    dataIdeaDetail["created_datetime_field"],
-                    true
-                  )}
-                </p>
-              </label>
-              <label className="text-muted border p-1 m-1">
-                зарегистрировано:{" "}
-                <p className="m-0 p-0">
-                  {utils.GetCleanDateTime(
-                    dataIdeaDetail["register_datetime_field"],
-                    true
-                  )}
-                </p>
-              </label>
-            </div>
-            <StoreStatusComponent
-              storeStatus={ideaRatingCreateAuthStore}
-              keyStatus={"ideaRatingCreateAuthStore"}
-              consoleLog={constants.DEBUG_CONSTANT}
-              showLoad={true}
-              loadText={""}
-              showData={false}
-              dataText={""}
-              showError={true}
-              errorText={""}
-              showFail={true}
-              failText={""}
-            />
-            <div className="card p-2">
-              <div className="order-md-last">
-                <div className="order-md-last">
-                  <h6 className="d-flex justify-content-between align-items-center m-0 p-0">
-                    <span
-                      className={
-                        dataIdeaDetail["total_rating"]["rate"] > 7
-                          ? "text-success"
-                          : dataIdeaDetail["total_rating"]["rate"] > 4
-                          ? "text-warning"
-                          : "text-danger"
-                      }
-                    >
-                      Рейтинг
-                    </span>
-                    <span
-                      className={
-                        dataIdeaDetail["total_rating"]["rate"] > 7
-                          ? "badge bg-success rounded-pill"
-                          : dataIdeaDetail["total_rating"]["rate"] > 4
-                          ? "badge bg-warning rounded-pill"
-                          : "badge bg-danger rounded-pill"
-                      }
-                    >
-                      {utils.GetSliceString(
-                        dataIdeaDetail["total_rating"]["rate"],
-                        3,
-                        false
-                      )}{" "}
-                      {"\\  "}
-                      <small className="text-uppercase">
-                        {dataIdeaDetail["total_rating"]["count"]}
-                      </small>
-                    </span>
-                  </h6>
-                </div>
-                <div>Нажмите на одну из 10 звезд для оценки идеи:</div>
+            <div className="card shadow text-center p-0">
+              <div className="card-header bg-warning bg-opacity-10">
+                <h6 className="lead fw-bold">
+                  {dataIdeaDetail["name_char_field"]}
+                </h6>
+              </div>
+              <div className="card-body">
                 <div>
+                  <label className="form-control-sm">
+                    Подразделение:
+                    <select className="form-control form-control-sm" required>
+                      <option value="">
+                        {dataIdeaDetail["subdivision_char_field"]}
+                      </option>
+                    </select>
+                  </label>
+                  <label className="form-control-sm">
+                    Сфера:
+                    <select className="form-control form-control-sm" required>
+                      <option value="">
+                        {dataIdeaDetail["sphere_char_field"]}
+                      </option>
+                    </select>
+                  </label>
+                  <label className="form-control-sm">
+                    Категория:
+                    <select className="form-control form-control-sm" required>
+                      <option value="">
+                        {dataIdeaDetail["category_char_field"]}
+                      </option>
+                    </select>
+                  </label>
+                </div>
+                <div>
+                  <img
+                    src={
+                      dataIdeaDetail["avatar_image_field"]
+                        ? utils.GetStaticFile(
+                            dataIdeaDetail["avatar_image_field"]
+                          )
+                        : utils.GetStaticFile(
+                            "/media/default/idea/default_idea.jpg"
+                          )
+                    }
+                    className="card-img-top img-fluid w-75"
+                    alt="изображение отсутствует"
+                  />
+                </div>
+                <div>
+                  <label className="form-control-sm w-50">
+                    Место изменения:
+                    <input
+                      type="text"
+                      className="form-control form-control-sm"
+                      defaultValue={utils.GetSliceString(
+                        dataIdeaDetail["place_char_field"],
+                        50
+                      )}
+                      readOnly={true}
+                      placeholder="введите место изменения тут..."
+                      required
+                      minLength="1"
+                      maxLength="100"
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label className="form-control-sm w-100">
+                    Описание:
+                    <textarea
+                      className="form-control form-control-sm"
+                      defaultValue={utils.GetSliceString(
+                        dataIdeaDetail["description_text_field"],
+                        50
+                      )}
+                      readOnly={true}
+                      required
+                      placeholder="введите описание тут..."
+                      minLength="1"
+                      maxLength="3000"
+                      rows="3"
+                    />
+                  </label>
+                </div>
+                <div>
+                  <Link
+                    to={`#`}
+                    className="text-decoration-none btn btn-sm btn-warning"
+                  >
+                    Автор:{" "}
+                    {dataIdeaDetail["user_model"]["last_name_char_field"]}{" "}
+                    {dataIdeaDetail["user_model"]["first_name_char_field"]}{" "}
+                    {dataIdeaDetail["user_model"]["position_char_field"]}
+                  </Link>
+                </div>
+                <div>
+                  <label className="text-muted border p-1 m-1">
+                    подано:{" "}
+                    <p className="m-0 p-0">
+                      {utils.GetCleanDateTime(
+                        dataIdeaDetail["created_datetime_field"],
+                        true
+                      )}
+                    </p>
+                  </label>
+                  <label className="text-muted border p-1 m-1">
+                    зарегистрировано:{" "}
+                    <p className="m-0 p-0">
+                      {utils.GetCleanDateTime(
+                        dataIdeaDetail["register_datetime_field"],
+                        true
+                      )}
+                    </p>
+                  </label>
+                </div>
+              </div>
+              <div className="card-footer">
+                <div>
+                  <div>Нажмите на одну из 10 звезд для оценки идеи:</div>
+                </div>
+                <StoreStatusComponent
+                  storeStatus={ideaRatingCreateAuthStore}
+                  keyStatus={"ideaRatingCreateAuthStore"}
+                  consoleLog={constants.DEBUG_CONSTANT}
+                  showLoad={true}
+                  loadText={""}
+                  showData={false}
+                  dataText={""}
+                  showError={true}
+                  errorText={""}
+                  showFail={true}
+                  failText={""}
+                />
+                <div className="d-flex justify-content-between p-1">
+                  <span
+                    className={
+                      dataIdeaDetail["total_rating"]["rate"] > 7
+                        ? "text-success"
+                        : dataIdeaDetail["total_rating"]["rate"] > 4
+                        ? "text-warning"
+                        : "text-danger"
+                    }
+                  >
+                    Рейтинг
+                  </span>
                   <span>
                     <i
                       style={{
@@ -463,8 +459,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(1)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -483,8 +477,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(2)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -503,8 +495,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(3)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -523,8 +513,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(4)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -543,8 +531,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(5)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -563,8 +549,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(6)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -583,8 +567,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(7)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -603,8 +585,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(8)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -623,8 +603,6 @@ export const IdeaDetailPage = () => {
                       }
                       onClick={(e) => formHandlerRatingSubmit(9)}
                     />
-                  </span>
-                  <span>
                     <i
                       style={{
                         color:
@@ -644,13 +622,36 @@ export const IdeaDetailPage = () => {
                       onClick={(e) => formHandlerRatingSubmit(10)}
                     />
                   </span>
+                  <span
+                    className={
+                      dataIdeaDetail["total_rating"]["rate"] > 7
+                        ? "badge bg-success rounded-pill"
+                        : dataIdeaDetail["total_rating"]["rate"] > 4
+                        ? "badge bg-warning rounded-pill"
+                        : "badge bg-danger rounded-pill"
+                    }
+                  >
+                    {utils.GetSliceString(
+                      dataIdeaDetail["total_rating"]["rate"],
+                      3,
+                      false
+                    )}
+                    {" \\  "}
+                    <small className="text-uppercase">
+                      {dataIdeaDetail["total_rating"]["count"]}
+                    </small>
+                  </span>
                 </div>
-                <h6 className="d-flex justify-content-between align-items-center m-0 p-0">
-                  <span className="text-primary">Комментарии</span>
-                  <span className="badge bg-primary rounded-pill">
+                <div className="d-flex justify-content-between p-1">
+                  <span className="text-secondary">Комментарии</span>
+                  <span className="badge bg-secondary rounded-pill">
                     {dataIdeaDetail["comment_count"]}
                   </span>
-                </h6>
+                </div>
+              </div>
+            </div>
+            <div className="card p-2">
+              <div className="order-md-last">
                 <StoreStatusComponent
                   storeStatus={ideaCommentCreateAuthStore}
                   keyStatus={"ideaCommentCreateAuthStore"}
@@ -709,38 +710,37 @@ export const IdeaDetailPage = () => {
                 ) : (
                   <ul className="list-group">
                     {dataIdeaCommentList.map((object, index) => (
-                      <li
-                        key={index}
-                        className="list-group-item d-flex justify-content-between lh-sm"
-                      >
-                        <div>
-                          <h6 className="my-0">
+                      <li className="list-group-item">
+                        <div className="d-flex justify-content-between p-1">
+                          <h6 className="">
                             {object["user_model"]["last_name_char_field"]}{" "}
                             {object["user_model"]["first_name_char_field"]}
                           </h6>
+                          <span className="text-muted">
+                            {utils.GetCleanDateTime(
+                              object["datetime_field"],
+                              true
+                            )}
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-danger m-1 p-1"
+                              onClick={(e) =>
+                                formHandlerNotificationSubmit({
+                                  name: "жалоба на комментарий в банке идей",
+                                  place: `id идеи: ${id}, id комментария: ${object["id"]}`,
+                                  description: "",
+                                })
+                              }
+                            >
+                              пожаловаться
+                            </button>
+                          </span>
+                        </div>
+                        <div className="d-flex justify-content-center p-1">
                           <small className="text-muted">
                             {object["comment_text_field"]}
                           </small>
                         </div>
-                        <span className="text-muted">
-                          {utils.GetCleanDateTime(
-                            object["datetime_field"],
-                            true
-                          )}
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-danger m-0 p-0"
-                            onClick={(e) =>
-                              formHandlerNotificationSubmit({
-                                name: "жалоба на комментарий в банке идей",
-                                place: `id идеи: ${id}, id комментария: ${object["id"]}`,
-                                description: "",
-                              })
-                            }
-                          >
-                            пожаловаться
-                          </button>
-                        </span>
                       </li>
                     ))}
                   </ul>

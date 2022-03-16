@@ -118,7 +118,7 @@ export const IdeaModerateListPage = () => {
           "страница содержит функционал модерации списка идей в банке идей с возможностью поиска и фильтрации"
         }
       />
-      <main className="container p-0">
+      <main className="container">
         <div className="container-fluid bg-light m-0 p-0">
           <div className="accordion accordion-flush shadow card m-0 p-0 my-2">
             <div className="accordion-item m-0 p-0">
@@ -387,7 +387,7 @@ export const IdeaModerateListPage = () => {
                   className="text-decoration-none text-center m-0 p-1 col-sm-12 col-md-6 col-lg-4"
                 >
                   <div className="card list-group-item-action shadow">
-                    <div className="card-header bg-opacity-10 bg-primary m-0 p-0">
+                    <div className="card-header m-0 p-0 bg-opacity-10 bg-primary m-0 p-0">
                       <h6 className="lead fw-bold">
                         {object["name_char_field"]}
                         <p className="text-danger small m-0 p-0">
@@ -442,14 +442,20 @@ export const IdeaModerateListPage = () => {
                     </div>
                     <div className="card-body m-0 p-0">
                       <img
-                        src={utils.GetStaticFile(object["avatar_image_field"])}
+                        src={
+                          object["avatar_image_field"]
+                            ? utils.GetStaticFile(object["avatar_image_field"])
+                            : utils.GetStaticFile(
+                                "/media/default/idea/default_idea.jpg"
+                              )
+                        }
                         className="card-img-top img-fluid w-50"
                         alt="изображение отсутствует"
                       />
                     </div>
                     <div className="card-body m-0 p-0">
                       <label className="w-50 form-control-sm">
-                        Место внедрения:
+                        Место изменения:
                         <input
                           type="text"
                           className="form-control form-control-sm"
@@ -458,7 +464,7 @@ export const IdeaModerateListPage = () => {
                             50
                           )}
                           readOnly={true}
-                          placeholder="введите место внедрения тут..."
+                          placeholder="введите место изменения тут..."
                           required
                           minLength="1"
                           maxLength="100"

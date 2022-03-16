@@ -163,10 +163,10 @@ export const VacancyDetailPage = () => {
         {dataVacancyDetail && (
           <div className="border shadow text-center  ">
             <div className="card  ">
-              <div className="card-header fw-bold lead bg-opacity-10 bg-primary  ">
+              <div className="card-header m-0 p-0 fw-bold lead bg-opacity-10 bg-primary  ">
                 {dataVacancyDetail["qualification_field"]}
               </div>
-              <div className="card-body  ">
+              <div className="card-body m-0 p-0  ">
                 <div className="row justify-content-center  ">
                   <div className="col-md-6 shadow w-25  ">
                     <img
@@ -177,7 +177,7 @@ export const VacancyDetailPage = () => {
                       alt="изображение"
                     />
                   </div>
-                  <div className="card-body col-md-6  ">
+                  <div className="card-body m-0 p-0 col-md-6  ">
                     <table className="table table-sm table-hover table-borderless table-striped  ">
                       <tbody>
                         {dataVacancyDetail["datetime_field"] !== "" &&

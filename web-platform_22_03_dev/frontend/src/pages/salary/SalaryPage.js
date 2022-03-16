@@ -63,7 +63,7 @@ export const SalaryPage = () => {
         title={"Расчётный лист"}
         description={"страница выгрузки Вашего расчётного листа"}
       />
-      <main className="container p-0">
+      <main className="container">
         <div className="">
           <form className="">
             <div className="input-group m-0">

@@ -162,11 +162,15 @@ export const RationalCreatePage = () => {
             failText={""}
           />
         </div>
-        {!dataRationalCreate && (
-          <div className="container-fluid">
-            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
-              <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
-                <div className="">
+        <div className="m-0 p-0">
+          {!dataRationalCreate && (
+            <ul className="row row-cols-1 row-cols-md-2 row-cols-lg-2 justify-content-center m-0 p-0">
+              <form
+                autoComplete="on"
+                className="card shadow m-0 p-0"
+                onSubmit={formHandlerSubmit}
+              >
+                <div className="card-header m-0 p-0 bg-success bg-opacity-10">
                   <h6 className="lead fw-bold">ЗАЯВЛЕНИЕ</h6>
                   <h6 className="lead">на рационализаторское предложение</h6>
                 </div>
@@ -252,7 +256,7 @@ export const RationalCreatePage = () => {
                   </label>
                 </div>
                 <div className="">
-                  <label className="w-50 form-control-sm">
+                  <label className="w-75 form-control-sm">
                     Название:
                     <input
                       type="text"
@@ -294,7 +298,7 @@ export const RationalCreatePage = () => {
                   </label>
                 </div>
                 <div className="">
-                  <label className="w-75 form-control-sm">
+                  <label className="w-100 form-control-sm">
                     Описание:
                     <textarea
                       className="form-control form-control-sm"
@@ -580,8 +584,8 @@ export const RationalCreatePage = () => {
                 </div>
               </form>
             </ul>
-          </div>
-        )}
+          )}
+        </div>
       </main>
       <FooterComponent />
     </div>

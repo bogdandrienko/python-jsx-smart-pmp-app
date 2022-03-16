@@ -91,14 +91,14 @@ export const IdeaCreatePage = () => {
     subdivisionSet("");
     sphereSet("");
     categorySet("");
-    avatarSet("");
+    avatarSet(null);
     nameSet("");
     placeSet("");
     descriptionSet("");
   };
 
   return (
-    <div className="m-0 p-0">
+    <div>
       <HeaderComponent
         logic={true}
         redirect={true}
@@ -107,31 +107,16 @@ export const IdeaCreatePage = () => {
           "страница содержит форму с полями для заполнения и подачи идеи в банк идей"
         }
       />
-      <main className="container p-0">
-        <div>
-          <StoreStatusComponent
-            storeStatus={ideaCreateAuthStore}
-            keyStatus={"ideaCreateAuthStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={true}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
-        <div className="container-fluid card shadow bg-light m-0 p-0">
-          {!dataIdeaCreate && (
-            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-              <form className="m-0 p-0" onSubmit={formHandlerSubmit}>
-                <div className="card-header">
-                  <h6 className="lead fw-bold">Идея</h6>
-                  <h6 className="lead">в общий банк идей предприятия</h6>
-                </div>
-                <div className="card-body">
+      <main className="container">
+        <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center">
+          <form className="" onSubmit={formHandlerSubmit}>
+            <div className="card shadow text-center">
+              <div className="card-header bg-success bg-opacity-10">
+                <h6 className="lead fw-bold">Идея</h6>
+                <h6 className="lead">в общий банк идей предприятия</h6>
+              </div>
+              <div className="card-body">
+                <div>
                   <label className="form-control-sm">
                     Подразделение:
                     <select
@@ -190,6 +175,8 @@ export const IdeaCreatePage = () => {
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
+                </div>
+                <div>
                   <label className="form-control-sm">
                     Аватарка-заставка:
                     <input
@@ -201,8 +188,8 @@ export const IdeaCreatePage = () => {
                     <small className="text-muted">* не обязательно</small>
                   </label>
                 </div>
-                <div className="">
-                  <label className="w-75 form-control-sm">
+                <div>
+                  <label className="form-control-sm w-75">
                     Название:
                     <input
                       type="text"
@@ -223,14 +210,14 @@ export const IdeaCreatePage = () => {
                     </small>
                   </label>
                 </div>
-                <div className="">
+                <div>
                   <label className="w-50 form-control-sm">
-                    Место внедрения:
+                    Место изменения:
                     <input
                       type="text"
                       className="form-control form-control-sm"
                       value={place}
-                      placeholder="введите место внедрения тут..."
+                      placeholder="введите место изменения тут..."
                       required
                       minLength="1"
                       maxLength="100"
@@ -245,7 +232,7 @@ export const IdeaCreatePage = () => {
                     </small>
                   </label>
                 </div>
-                <div className="">
+                <div>
                   <label className="w-100 form-control-sm">
                     Описание:
                     <textarea
@@ -267,28 +254,41 @@ export const IdeaCreatePage = () => {
                     </small>
                   </label>
                 </div>
-                <div className="container">
-                  <hr />
-                  <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                    <button
-                      className="btn btn-sm btn-primary m-1 p-1"
-                      type="submit"
-                    >
-                      отправить данные
-                    </button>
-                    <button
-                      className="btn btn-sm btn-warning m-1 p-1"
-                      type="reset"
-                      onClick={(e) => formHandlerReset(e)}
-                    >
-                      сбросить данные
-                    </button>
-                  </ul>
-                </div>
-              </form>
-            </ul>
-          )}
-        </div>
+              </div>
+              <div className="card-footer">
+                <StoreStatusComponent
+                  storeStatus={ideaCreateAuthStore}
+                  keyStatus={"ideaCreateAuthStore"}
+                  consoleLog={constants.DEBUG_CONSTANT}
+                  showLoad={true}
+                  loadText={""}
+                  showData={true}
+                  dataText={""}
+                  showError={true}
+                  errorText={""}
+                  showFail={true}
+                  failText={""}
+                />
+                <hr />
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                  <button
+                    className="btn btn-sm btn-primary m-1 p-1"
+                    type="submit"
+                  >
+                    отправить данные
+                  </button>
+                  <button
+                    className="btn btn-sm btn-warning m-1 p-1"
+                    type="reset"
+                    onClick={(e) => formHandlerReset(e)}
+                  >
+                    сбросить данные
+                  </button>
+                </ul>
+              </div>
+            </div>
+          </form>
+        </ul>
       </main>
       <FooterComponent />
     </div>
