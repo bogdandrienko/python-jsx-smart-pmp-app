@@ -162,7 +162,23 @@ export const IdeaDetailPage = () => {
       id: id,
       rating: value,
     };
-    dispatch(actions.ideaRatingCreateAction(form));
+    if (value < 4) {
+      let prompt = window.prompt(
+        "Введите причину низкой оценки?",
+        "Мне не понравилась идея!"
+      );
+      if (prompt) {
+        dispatch(actions.ideaRatingCreateAction(form));
+        const form2 = {
+          "Action-type": "IDEA_COMMENT_CREATE",
+          id: id,
+          comment: prompt,
+        };
+        dispatch(actions.ideaCommentCreateAction(form2));
+      }
+    } else {
+      dispatch(actions.ideaRatingCreateAction(form));
+    }
   };
 
   useEffect(() => {
@@ -184,7 +200,10 @@ export const IdeaDetailPage = () => {
       place: place,
       description: description,
     };
-    dispatch(actions.notificationAction(form));
+    let isConfirm = window.confirm(name);
+    if (isConfirm) {
+      dispatch(actions.notificationAction(form));
+    }
   };
 
   const formHandlerHideSubmit = (e) => {
@@ -194,10 +213,13 @@ export const IdeaDetailPage = () => {
     const form = {
       "Action-type": "IDEA_MODERATE",
       id: id,
-      moderate: "Скрыто",
-      moderateComment: "Скрыто автором",
+      moderate: "скрыто",
+      moderateComment: "скрыто автором",
     };
-    dispatch(actions.ideaModerateAction(form));
+    let isConfirm = window.confirm("Вы действительно хотите скрыть свою идею?");
+    if (isConfirm) {
+      dispatch(actions.ideaModerateAction(form));
+    }
   };
 
   useEffect(() => {
@@ -215,9 +237,7 @@ export const IdeaDetailPage = () => {
         logic={true}
         redirect={true}
         title={"Подробности идеи"}
-        description={
-          "страница содержит подробную информацию об идеи в банке идей"
-        }
+        description={"подробная информацию об идеи в банке идей"}
       />
       <main className="container">
         <div>
@@ -263,7 +283,7 @@ export const IdeaDetailPage = () => {
                 className="btn btn-sm btn-warning m-1 p-2"
                 onClick={formHandlerHideSubmit}
               >
-                скрыть (Вы автор)
+                скрыть
               </button>
             )}
           <button
@@ -726,7 +746,7 @@ export const IdeaDetailPage = () => {
                               className="btn btn-sm btn-outline-danger m-1 p-1"
                               onClick={(e) =>
                                 formHandlerNotificationSubmit({
-                                  name: "жалоба на комментарий в банке идей",
+                                  name: "жалоба на комментарий к идеи в банке идей",
                                   place: `id идеи: ${id}, id комментария: ${object["id"]}`,
                                   description: "",
                                 })

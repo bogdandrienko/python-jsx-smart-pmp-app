@@ -36,7 +36,7 @@ export const IdeaTemplatePage = () => {
         logic={true}
         redirect={true}
         title={"Пример (шаблон) идеи"}
-        description={"страница содержит пример (шаблон) идеи в банке идей"}
+        description={"пример (шаблон) идеи в банке идей"}
       />
       <main className="container">
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center">

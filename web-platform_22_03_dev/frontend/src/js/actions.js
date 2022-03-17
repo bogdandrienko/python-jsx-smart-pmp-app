@@ -41,6 +41,13 @@ export const userLoginAction = (form) => async (dispatch) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.USER_LOGIN_FAIL_CONSTANT,
       payload:
@@ -106,7 +113,6 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
       error.response.statusText === "Unauthorized"
     ) {
       dispatch(userLogoutAction());
-      console.log("logout");
     }
     dispatch({
       type: constants.USER_DETAILS_FAIL_CONSTANT,
@@ -155,6 +161,13 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.USER_CHANGE_FAIL_CONSTANT,
       payload:
@@ -197,6 +210,13 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.USER_RECOVER_PASSWORD_FAIL_CONSTANT,
       payload:
@@ -243,6 +263,13 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.USER_LIST_ALL_FAIL_CONSTANT,
       payload:
@@ -290,6 +317,13 @@ export const adminChangeUserPasswordAction =
         });
       }
     } catch (error) {
+      if (
+        error.response &&
+        error.response.statusText &&
+        error.response.statusText === "Unauthorized"
+      ) {
+        dispatch(userLogoutAction());
+      }
       dispatch({
         type: constants.ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT,
         payload:
@@ -337,6 +371,13 @@ export const adminCreateOrChangeUsersAction =
         });
       }
     } catch (error) {
+      if (
+        error.response &&
+        error.response.statusText &&
+        error.response.statusText === "Unauthorized"
+      ) {
+        dispatch(userLogoutAction());
+      }
       dispatch({
         type: constants.ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT,
         payload:
@@ -383,6 +424,13 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.ADMIN_EXPORT_USERS_FAIL_CONSTANT,
       payload:
@@ -429,6 +477,13 @@ export const notificationAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.NOTIFICATION_CREATE_FAIL_CONSTANT,
       payload:
@@ -494,6 +549,13 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.USER_SALARY_FAIL_CONSTANT,
       payload:
@@ -540,6 +602,13 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.RATIONAL_CREATE_FAIL_CONSTANT,
       payload:
@@ -586,6 +655,13 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.RATIONAL_LIST_FAIL_CONSTANT,
       payload:
@@ -632,6 +708,13 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.RATIONAL_DETAIL_FAIL_CONSTANT,
       payload:
@@ -678,6 +761,13 @@ export const ideaCreateAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_CREATE_FAIL_CONSTANT,
       payload:
@@ -724,6 +814,13 @@ export const ideaListAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_LIST_FAIL_CONSTANT,
       payload:
@@ -770,6 +867,13 @@ export const ideaDetailAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_DETAIL_FAIL_CONSTANT,
       payload:
@@ -816,6 +920,13 @@ export const ideaChangeAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_CHANGE_FAIL_CONSTANT,
       payload:
@@ -862,6 +973,13 @@ export const ideaModerateAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_MODERATE_FAIL_CONSTANT,
       payload:
@@ -908,6 +1026,13 @@ export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_COMMENT_CREATE_FAIL_CONSTANT,
       payload:
@@ -954,6 +1079,13 @@ export const ideaCommentListAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_COMMENT_LIST_FAIL_CONSTANT,
       payload:
@@ -1000,6 +1132,13 @@ export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.IDEA_RATING_CREATE_FAIL_CONSTANT,
       payload:
@@ -1046,6 +1185,13 @@ export const vacancyCreateAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.VACANCY_CREATE_FAIL_CONSTANT,
       payload:
@@ -1088,6 +1234,13 @@ export const vacancyListAction = (form) => async (dispatch) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.VACANCY_LIST_FAIL_CONSTANT,
       payload:
@@ -1130,6 +1283,13 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.VACANCY_DETAIL_FAIL_CONSTANT,
       payload:
@@ -1176,6 +1336,13 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.VACANCY_DELETE_FAIL_CONSTANT,
       payload:
@@ -1222,6 +1389,13 @@ export const vacancyChangeAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.VACANCY_CHANGE_FAIL_CONSTANT,
       payload:
@@ -1264,6 +1438,13 @@ export const resumeCreateAction = (form) => async (dispatch) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.RESUME_CREATE_FAIL_CONSTANT,
       payload:
@@ -1310,6 +1491,13 @@ export const resumeListAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.RESUME_LIST_FAIL_CONSTANT,
       payload:
@@ -1356,6 +1544,13 @@ export const resumeDetailAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.RESUME_DETAIL_FAIL_CONSTANT,
       payload:
@@ -1402,6 +1597,13 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.RESUME_DELETE_FAIL_CONSTANT,
       payload:
@@ -1448,6 +1650,13 @@ export const terminalRebootAction = (form) => async (dispatch, getState) => {
       });
     }
   } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      dispatch(userLogoutAction());
+    }
     dispatch({
       type: constants.TERMINAL_REBOOT_FAIL_CONSTANT,
       payload:

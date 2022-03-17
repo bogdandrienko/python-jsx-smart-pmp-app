@@ -103,9 +103,7 @@ export const IdeaCreatePage = () => {
         logic={true}
         redirect={true}
         title={"Отправка новой идеи"}
-        description={
-          "страница содержит форму с полями для заполнения и подачи идеи в банк идей"
-        }
+        description={"форма для заполнения и подачи идеи в банк идей"}
       />
       <main className="container">
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center">

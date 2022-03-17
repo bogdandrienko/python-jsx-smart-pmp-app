@@ -54,9 +54,7 @@ export const AdminExportUsersPage = () => {
         logic={true}
         redirect={true}
         title={"Экспорт пользователей"}
-        description={
-          "страница содержит функционал выгрузки всех пользователей системы"
-        }
+        description={" функционал выгрузки всех пользователей системы"}
       />
       <main className="container  ">
         <div className="">

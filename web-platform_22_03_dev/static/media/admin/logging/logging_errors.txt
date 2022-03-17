@@ -2,3 +2,21 @@
 Bogdan, 127.0.0.1, /, GET, 2022-03-15 20:12:38.720570, index.html
 
 Bogdan, 127.0.0.1, /, GET, 2022-03-15 20:12:45.362229, index.html
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-17 08:11:55.620877, 'NoneType' object is not iterable
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-17 08:31:18.685262, 'NoneType' object has no attribute 'split'
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-17 08:32:32.698198, 'NoneType' object has no attribute 'split'
+
+Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-17 09:24:44.137677, [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+, 127.0.0.1, /, GET, 2022-03-17 10:47:31.920342, index.html
+
+, 127.0.0.1, /, GET, 2022-03-17 10:51:57.519829, index.html
+
+, 127.0.0.1, /, GET, 2022-03-17 10:52:03.665537, index.html
+
+, 127.0.0.1, /, GET, 2022-03-17 13:09:11.387563, index.html
+
+, 127.0.0.1, /, GET, 2022-03-17 13:09:17.540116, index.html

@@ -146,7 +146,7 @@ export const IdeaChangePage = () => {
         logic={true}
         redirect={true}
         title={"Модерация идеи"}
-        description={"страница содержит функционал модерации идеи в банке идей"}
+        description={"изменение идеи в банке идей"}
       />
       <main className="container">
         <div className="btn-group m-0 p-1 text-start w-100">
@@ -183,100 +183,94 @@ export const IdeaChangePage = () => {
           showFail={true}
           failText={""}
         />
-        <div className="container-fluid card shadow bg-light m-0 p-0">
-          {!dataIdeaChange && dataIdeaDetail && (
-            <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-              <form className="m-0 p-0" onSubmit={handlerChangeSubmit}>
-                <div className="card-header m-0 p-0">
+        {dataIdeaDetail && (
+          <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center">
+            <form className="" onSubmit={handlerChangeSubmit}>
+              <div className="card shadow text-center">
+                <div className="card-header bg-success bg-opacity-10">
                   <h6 className="lead fw-bold">
-                    {dataIdeaDetail["name_char_field"]}{" "}
-                    <h6 className="lead text-danger">
-                      статус:{" "}
-                      {utils.GetSliceString(
-                        dataIdeaDetail["status_moderate_char_field"],
-                        20
-                      )}{" "}
-                      {" : "}
-                      {utils.GetSliceString(
-                        dataIdeaDetail["comment_moderate_char_field"],
-                        30
-                      )}{" "}
-                    </h6>
+                    {dataIdeaDetail["name_char_field"]}
                   </h6>
+                  <p className="text-danger small m-0 p-0">
+                    {" [ "}
+                    {utils.GetSliceString(
+                      dataIdeaDetail["status_moderate_char_field"],
+                      30
+                    )}
+                    {" : "}
+                    {utils.GetSliceString(
+                      dataIdeaDetail["comment_moderate_char_field"],
+                      30
+                    )}
+                    {" ]"}
+                  </p>
                 </div>
-                <div className="card-body m-0 p-0">
-                  <Link
-                    to={`#`}
-                    className="text-decoration-none btn btn-sm btn-warning"
-                  >
-                    Автор:{" "}
-                    {dataIdeaDetail["user_model"]["last_name_char_field"]}{" "}
-                    {dataIdeaDetail["user_model"]["first_name_char_field"]}{" "}
-                    {dataIdeaDetail["user_model"]["position_char_field"]}
-                  </Link>
-                </div>
-                <div className="card-body m-0 p-0">
-                  <label className="form-control-sm">
-                    Подразделение:
-                    <select
-                      className="form-control form-control-sm"
-                      value={subdivision}
-                      required
-                      onChange={(e) => subdivisionSet(e.target.value)}
-                    >
-                      <option value="">не указано</option>
-                      <option value="автотранспортное предприятие">
-                        автотранспортное предприятие
-                      </option>
-                      <option value="горно-транспортный комплекс">
-                        горно-транспортный комплекс
-                      </option>
-                      <option value="обогатительный комплекс">
-                        обогатительный комплекс
-                      </option>
-                      <option value="управление">управление предприятия</option>
-                      <option value="энергоуправление">энергоуправление</option>
-                    </select>
-                    <small className="text-danger">* обязательно</small>
-                  </label>
-                  <label className="form-control-sm">
-                    Сфера:
-                    <select
-                      className="form-control form-control-sm"
-                      value={sphere}
-                      required
-                      onChange={(e) => sphereSet(e.target.value)}
-                    >
-                      <option value="">не указано</option>
-                      <option value="технологическая">технологическая</option>
-                      <option value="не технологическая">
-                        не технологическая
-                      </option>
-                    </select>
-                    <small className="text-danger">* обязательно</small>
-                  </label>
-                  <label className="form-control-sm">
-                    Категория:
-                    <select
-                      className="form-control form-control-sm"
-                      value={category}
-                      required
-                      onChange={(e) => categorySet(e.target.value)}
-                    >
-                      <option value="">не указано</option>
-                      <option value="индустрия 4.0">индустрия 4.0</option>
-                      <option value="инвестиции">инвестиции</option>
-                      <option value="инновации">инновации</option>
-                      <option value="модернизация">модернизация</option>
-                      <option value="экология">экология</option>
-                      <option value="спорт/культура">спорт/культура</option>
-                      <option value="другое">другое</option>
-                    </select>
-                    <small className="text-danger">* обязательно</small>
-                  </label>
-                </div>
-                <div className="card-body m-0 p-0">
-                  {dataIdeaDetail && (
+                <div className="card-body">
+                  <div>
+                    <label className="form-control-sm">
+                      Подразделение:
+                      <select
+                        className="form-control form-control-sm"
+                        value={subdivision}
+                        required
+                        onChange={(e) => subdivisionSet(e.target.value)}
+                      >
+                        <option value="">не указано</option>
+                        <option value="автотранспортное предприятие">
+                          автотранспортное предприятие
+                        </option>
+                        <option value="горно-транспортный комплекс">
+                          горно-транспортный комплекс
+                        </option>
+                        <option value="обогатительный комплекс">
+                          обогатительный комплекс
+                        </option>
+                        <option value="управление">
+                          управление предприятия
+                        </option>
+                        <option value="энергоуправление">
+                          энергоуправление
+                        </option>
+                      </select>
+                      <small className="text-danger">* обязательно</small>
+                    </label>
+                    <label className="form-control-sm">
+                      Сфера:
+                      <select
+                        className="form-control form-control-sm"
+                        value={sphere}
+                        required
+                        onChange={(e) => sphereSet(e.target.value)}
+                      >
+                        <option value="">не указано</option>
+                        <option value="технологическая">технологическая</option>
+                        <option value="не технологическая">
+                          не технологическая
+                        </option>
+                      </select>
+                      <small className="text-danger">* обязательно</small>
+                    </label>
+                    <label className="form-control-sm">
+                      Категория:
+                      <select
+                        className="form-control form-control-sm"
+                        value={category}
+                        required
+                        onChange={(e) => categorySet(e.target.value)}
+                      >
+                        <option value="">не указано</option>
+                        <option value="индустрия 4.0">индустрия 4.0</option>
+                        <option value="инвестиции">инвестиции</option>
+                        <option value="инновации">инновации</option>
+                        <option value="модернизация">модернизация</option>
+                        <option value="экология">экология</option>
+                        <option value="спорт/культура">спорт/культура</option>
+                        <option value="другое">другое</option>
+                      </select>
+                      <small className="text-danger">* обязательно</small>
+                    </label>
+                  </div>
+                  <div>
                     <img
                       src={utils.GetStaticFile(
                         dataIdeaDetail["avatar_image_field"]
@@ -284,115 +278,95 @@ export const IdeaChangePage = () => {
                       className="card-img-top img-fluid w-25"
                       alt="изображение отсутствует"
                     />
-                  )}
-                  <label className="form-control-sm form-switch m-1">
-                    Удалить текущее изображение:
-                    <input
-                      type="checkbox"
-                      className="form-check-input m-1"
-                      id="flexSwitchCheckDefault"
-                      defaultChecked={clearImage}
-                      onClick={(e) => clearImageSet(!clearImage)}
-                    />
-                  </label>
-                  <label className="form-control-sm">
-                    Аватарка-заставка:
-                    <input
-                      type="file"
-                      className="form-control form-control-sm"
-                      accept=".jpg, .png"
-                      onChange={(e) => avatarSet(e.target.files[0])}
-                    />
-                    <small className="text-muted">* не обязательно</small>
-                  </label>
-                </div>
-                <div className="">
-                  <label className="w-75 form-control-sm">
-                    Название:
-                    <input
-                      type="text"
-                      className="form-control form-control-sm"
-                      value={name}
-                      placeholder="введите название тут..."
-                      required
-                      minLength="1"
-                      maxLength="200"
-                      onChange={(e) => nameSet(e.target.value)}
-                    />
-                    <small className="text-danger">
-                      * обязательно
-                      <small className="text-muted">
-                        {" "}
-                        * длина: не более 200 символов
+                    <label className="form-control-sm form-switch m-1">
+                      Удалить текущее изображение:
+                      <input
+                        type="checkbox"
+                        className="form-check-input m-1"
+                        id="flexSwitchCheckDefault"
+                        defaultChecked={clearImage}
+                        onClick={(e) => clearImageSet(!clearImage)}
+                      />
+                    </label>
+                    <label className="form-control-sm">
+                      Аватарка-заставка:
+                      <input
+                        type="file"
+                        className="form-control form-control-sm"
+                        accept=".jpg, .png"
+                        onChange={(e) => avatarSet(e.target.files[0])}
+                      />
+                      <small className="text-muted">* не обязательно</small>
+                    </label>
+                  </div>
+                  <div>
+                    <label className="form-control-sm w-75">
+                      Название:
+                      <input
+                        type="text"
+                        className="form-control form-control-sm"
+                        value={name}
+                        placeholder="введите название тут..."
+                        required
+                        minLength="1"
+                        maxLength="200"
+                        onChange={(e) => nameSet(e.target.value)}
+                      />
+                      <small className="text-danger">
+                        * обязательно
+                        <small className="text-muted">
+                          {" "}
+                          * длина: не более 200 символов
+                        </small>
                       </small>
-                    </small>
-                  </label>
-                </div>
-                <div className="">
-                  <label className="w-50 form-control-sm">
-                    Место изменения:
-                    <input
-                      type="text"
-                      className="form-control form-control-sm"
-                      value={place}
-                      placeholder="введите место изменения тут..."
-                      required
-                      minLength="1"
-                      maxLength="100"
-                      onChange={(e) => placeSet(e.target.value)}
-                    />
-                    <small className="text-danger">
-                      * обязательно
-                      <small className="text-muted">
-                        {" "}
-                        * длина: не более 100 символов
+                    </label>
+                  </div>
+                  <div>
+                    <label className="w-50 form-control-sm">
+                      Место изменения:
+                      <input
+                        type="text"
+                        className="form-control form-control-sm"
+                        value={place}
+                        placeholder="введите место изменения тут..."
+                        required
+                        minLength="1"
+                        maxLength="100"
+                        onChange={(e) => placeSet(e.target.value)}
+                      />
+                      <small className="text-danger">
+                        * обязательно
+                        <small className="text-muted">
+                          {" "}
+                          * длина: не более 100 символов
+                        </small>
                       </small>
-                    </small>
-                  </label>
-                </div>
-                <div className="">
-                  <label className="w-100 form-control-sm">
-                    Описание:
-                    <textarea
-                      className="form-control form-control-sm"
-                      value={description}
-                      required
-                      placeholder="введите описание тут..."
-                      minLength="1"
-                      maxLength="3000"
-                      rows="3"
-                      onChange={(e) => descriptionSet(e.target.value)}
-                    />
-                    <small className="text-danger">
-                      * обязательно
-                      <small className="text-muted">
-                        {" "}
-                        * длина: не более 3000 символов
+                    </label>
+                  </div>
+                  <div>
+                    <label className="w-100 form-control-sm">
+                      Описание:
+                      <textarea
+                        className="form-control form-control-sm"
+                        value={description}
+                        required
+                        placeholder="введите описание тут..."
+                        minLength="1"
+                        maxLength="3000"
+                        rows="3"
+                        onChange={(e) => descriptionSet(e.target.value)}
+                      />
+                      <small className="text-danger">
+                        * обязательно
+                        <small className="text-muted">
+                          {" "}
+                          * длина: не более 3000 символов
+                        </small>
                       </small>
-                    </small>
-                  </label>
+                    </label>
+                  </div>
                 </div>
-                <div className="card-body m-0 p-0">
-                  <label className="text-muted border p-1 m-1">
-                    подано:{" "}
-                    <p className="m-0 p-0">
-                      {utils.GetCleanDateTime(
-                        dataIdeaDetail["created_datetime_field"],
-                        true
-                      )}
-                    </p>
-                  </label>
-                  <label className="text-muted border p-1 m-1">
-                    зарегистрировано:{" "}
-                    <p className="m-0 p-0">
-                      {utils.GetCleanDateTime(
-                        dataIdeaDetail["register_datetime_field"],
-                        true
-                      )}
-                    </p>
-                  </label>
-                </div>
-                <div className="container">
+                <div className="card-footer">
                   <hr />
                   <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
                     <button
@@ -410,10 +384,10 @@ export const IdeaChangePage = () => {
                     </button>
                   </ul>
                 </div>
-              </form>
-            </ul>
-          )}
-        </div>
+              </div>
+            </form>
+          </ul>
+        )}
       </main>
       <FooterComponent />
     </div>

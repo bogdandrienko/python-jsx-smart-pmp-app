@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import threading
+from concurrent.futures import ThreadPoolExecutor
 from typing import Union
 
 import httplib2
@@ -2547,7 +2548,6 @@ def api_auth_resume(request):
         return render(request, "backend/404.html")
 
 
-
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_terminal(request):
@@ -2566,31 +2566,36 @@ def api_auth_terminal(request):
             # Actions
             if req_inst.action_type == "TERMINAL_REBOOT":
                 try:
+                    ips = req_inst.get_value("ips")
+                    # ips = "192.168.15.136,192.168.15.134,192.168.15.132"
+                    arr = [str(str(x).strip()) for x in ips.split(",")]
+
+                    def reboot(_ip):
+                        url = f"http://{ip}/ISAPI/System/reboot"
+                        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
+                        h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\reboot_terminal")
+                        _login = 'admin'
+                        password = 'snrg2017'
+                        h.add_credentials(_login, password)
+                        headers = {
+                            'Content-type': 'text/plain;charset=UTF-8',
+                            'Accept-Encoding': 'gzip, deflate',
+                            'Accept-Language': 'de,en-US;q=0.7,en;q=0.3',
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 '
+                                          'Firefox/75.0',
+                        }
+                        response_, content = h.request(uri=url, method="PUT", headers=headers)
+                        print(content)
+
+                    for ip in arr:
+                        if len(str(ip)) < 3:
+                            continue
+                        with ThreadPoolExecutor() as executor:
+                            executor.submit(reboot, ip)
+
                     response = {"response": "Успешно перезагружено!"}
                     # print(f"response: {response}")
                     return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "all":
-                try:
-                    url = "http://192.168.1.208/ISAPI/System/reboot"
-                    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-                    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\reboot_terminal")
-                    _login = 'admin'
-                    password = 'snrg2017'
-                    h.add_credentials(_login, password)
-                    headers = {
-                        'Content-type': 'text/plain;charset=UTF-8',
-                        'Accept-Encoding': 'gzip, deflate',
-                        'Accept-Language': 'de,en-US;q=0.7,en;q=0.3',
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0',
-                    }
-                    response_, content = h.request(uri=url, method="PUT", headers=headers)
-                    print("response_: ", response_)
-                    print("content: ", content)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(
                         request=request, error=error, print_error=backend_settings.DEBUG

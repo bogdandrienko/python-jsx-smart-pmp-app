@@ -36,9 +36,7 @@ export const RationalTemplatePage = () => {
         logic={true}
         redirect={true}
         title={"Пример (шаблон) рационализаторского предложения"}
-        description={
-          "страница содержит пример (шаблон) рационализаторского предложения"
-        }
+        description={" пример (шаблон) рационализаторского предложения"}
       />
       <main className="container">
         <div className="m-0 p-0">

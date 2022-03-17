@@ -86,9 +86,7 @@ export const RationalModerateDetailPage = () => {
         logic={true}
         redirect={true}
         title={"Подробности рационализаторского предложения"}
-        description={
-          "страница содержит подробности рационализаторского предложения"
-        }
+        description={" подробности рационализаторского предложения"}
       />
       <main className="container  ">
         <div className="">

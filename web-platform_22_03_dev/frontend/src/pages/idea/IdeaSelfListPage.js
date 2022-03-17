@@ -61,7 +61,7 @@ export const IdeaSelfListPage = () => {
   };
 
   useEffect(() => {
-    if (!dataIdeaList && !loadIdeaList && dataDetailsStore) {
+    if (!dataIdeaList && dataDetailsStore) {
       const form = {
         "Action-type": "IDEA_LIST",
         subdivision: subdivision,
@@ -72,6 +72,17 @@ export const IdeaSelfListPage = () => {
         moderate: moderate,
       };
       dispatch(actions.ideaListAction(form));
+    }
+    if (dataIdeaList) {
+      let needReload = false;
+      dataIdeaList.forEach(function (object, index, array) {
+        if (object["status_moderate_char_field"] !== "на доработку") {
+          needReload = true;
+        }
+      });
+      if (needReload) {
+        dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
+      }
     }
   }, [dispatch, dataIdeaList, loadIdeaList]);
 
@@ -91,11 +102,6 @@ export const IdeaSelfListPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    subdivisionSet("");
-    categorySet("");
-    authorSet("");
-    searchSet("");
-    sortSet("дате публикации (сначала свежие)");
     dispatch({
       type: constants.IDEA_LIST_RESET_CONSTANT,
     });
@@ -108,10 +114,19 @@ export const IdeaSelfListPage = () => {
         redirect={true}
         title={"Список идей"}
         description={
-          "страница содержит список идей в банке идей с возможностью поиска и фильтрации"
+          "список идей в банке идей с возможностью поиска и фильтрации"
         }
       />
       <main className="container">
+        <div className="text-center display-6">
+          <button
+            type="button"
+            className="btn btn-sm btn-success"
+            onClick={(e) => formHandlerReset(e)}
+          >
+            <h4 className="lead fw-bold">Обновить</h4>
+          </button>
+        </div>
         <div className="container-fluid bg-light m-0 p-0">
           <StoreStatusComponent
             storeStatus={ideaListAuthStore}
@@ -129,8 +144,7 @@ export const IdeaSelfListPage = () => {
           {!dataIdeaList || dataIdeaList.length < 1 ? (
             <div className="my-1">
               <MessageComponent variant={"danger"}>
-                Ничего не найдено! Попробуйте изменить условия фильтрации и/или
-                очистить строку поиска.
+                Ничего не найдено!
               </MessageComponent>
             </div>
           ) : !detailView ? (
@@ -174,6 +188,19 @@ export const IdeaSelfListPage = () => {
                       <h6 className="lead fw-bold">
                         {object["name_char_field"]}
                       </h6>
+                      <p className="text-danger small m-0 p-0">
+                        {" [ "}
+                        {utils.GetSliceString(
+                          object["status_moderate_char_field"],
+                          30
+                        )}
+                        {" : "}
+                        {utils.GetSliceString(
+                          object["comment_moderate_char_field"],
+                          30
+                        )}
+                        {" ]"}
+                      </p>
                     </div>
                     <div className="card-body">
                       <div>

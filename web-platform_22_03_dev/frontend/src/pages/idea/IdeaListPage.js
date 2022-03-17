@@ -32,6 +32,7 @@ export const IdeaListPage = () => {
 
   const [detailView, detailViewSet] = useState(true);
   const [subdivision, subdivisionSet] = useState("");
+  const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
   const [author, authorSet] = useState("");
   const [search, searchSet] = useState("");
@@ -61,7 +62,7 @@ export const IdeaListPage = () => {
   };
 
   useEffect(() => {
-    if (!dataIdeaList && !loadIdeaList) {
+    if (!dataIdeaList) {
       const form = {
         "Action-type": "IDEA_LIST",
         subdivision: subdivision,
@@ -72,6 +73,16 @@ export const IdeaListPage = () => {
         moderate: moderate,
       };
       dispatch(actions.ideaListAction(form));
+    } else {
+      let needReload = false;
+      dataIdeaList.forEach(function (object, index, array) {
+        if (object["status_moderate_char_field"] !== "принято") {
+          needReload = true;
+        }
+      });
+      if (needReload) {
+        dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
+      }
     }
   }, [dispatch, dataIdeaList, loadIdeaList]);
 
@@ -112,7 +123,7 @@ export const IdeaListPage = () => {
         redirect={true}
         title={"Список идей"}
         description={
-          "страница содержит список идей в банке идей с возможностью поиска и фильтрации"
+          "список идей в банке идей с возможностью поиска и фильтрации"
         }
       />
       <main className="container">
@@ -186,6 +197,22 @@ export const IdeaListPage = () => {
                             </option>
                             <option value="энергоуправление">
                               энергоуправление
+                            </option>
+                          </select>
+                        </label>
+                        <label className="form-control-sm">
+                          Сфера:
+                          <select
+                            className="form-control form-control-sm"
+                            value={sphere}
+                            onChange={(e) => sphereSet(e.target.value)}
+                          >
+                            <option value="">все варианты</option>
+                            <option value="технологическая">
+                              технологическая
+                            </option>
+                            <option value="не технологическая">
+                              не технологическая
                             </option>
                           </select>
                         </label>
@@ -282,19 +309,6 @@ export const IdeaListPage = () => {
                       </div>
                     </div>
                     <div className="card-footer">
-                      <StoreStatusComponent
-                        storeStatus={ideaListAuthStore}
-                        keyStatus={"ideaListAuthStore"}
-                        consoleLog={constants.DEBUG_CONSTANT}
-                        showLoad={true}
-                        loadText={""}
-                        showData={false}
-                        dataText={""}
-                        showError={true}
-                        errorText={""}
-                        showFail={true}
-                        failText={""}
-                      />
                       <hr />
                       <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
                         <button
@@ -318,6 +332,19 @@ export const IdeaListPage = () => {
             </div>
           </div>
         </div>
+        <StoreStatusComponent
+          storeStatus={ideaListAuthStore}
+          keyStatus={"ideaListAuthStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         {!dataIdeaList || dataIdeaList.length < 1 ? (
           <div className="my-1">
             <MessageComponent variant={"danger"}>

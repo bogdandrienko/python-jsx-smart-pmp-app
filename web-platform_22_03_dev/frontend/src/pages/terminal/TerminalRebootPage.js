@@ -38,11 +38,18 @@ export const TerminalRebootPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
+    let ips = [];
+    ips.push(ip);
     const form = {
       "Action-type": "TERMINAL_REBOOT",
-      ip: [ip],
+      ips: ips,
     };
-    dispatch(actions.terminalRebootAction(form));
+    let isConfirm = window.confirm(
+      "Вы хотите перезагрузить выбранный терминал?"
+    );
+    if (isConfirm) {
+      dispatch(actions.terminalRebootAction(form));
+    }
   };
 
   const handlerRestartAllSubmit = async (e) => {
@@ -55,9 +62,12 @@ export const TerminalRebootPage = () => {
     });
     const form = {
       "Action-type": "TERMINAL_REBOOT",
-      ip: ips,
+      ips: ips,
     };
-    dispatch(actions.terminalRebootAction(form));
+    let isConfirm = window.confirm("Вы хотите перезагрузить ВСЕ терминалы?");
+    if (isConfirm) {
+      dispatch(actions.terminalRebootAction(form));
+    }
   };
 
   return (
