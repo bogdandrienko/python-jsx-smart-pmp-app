@@ -70,6 +70,38 @@ export const userLogoutAction = () => (dispatch) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const userDetailsAction = (form) => async (dispatch, getState) => {
   try {
+    /// valid action
+    const config = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${userLogin.token}`,
+    };
+    const { data } = await axios.put(
+      "/api/auth/user/detail/",
+      {
+        color: "red",
+        count: 12,
+      },
+      config
+    );
+    const { data } = await axios({
+      url: "/api/auth/user/detail/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+  } catch (error) {
+    /// error action
+    console.log("error: ", error);
+    console.log("error.response: ", error.response);
+    console.log("error.response.statusText: ", error.response.statusText);
+    console.log("error.message: ", error.message);
+  }
+
+  try {
     dispatch({
       type: constants.USER_DETAILS_LOAD_CONSTANT,
     });
@@ -80,6 +112,7 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     Object.entries(form).map(([key, value]) => {
       formData.append(key, value);
     });
+
     const { data } = await axios({
       url: "/api/auth/user/detail/",
       method: "POST",
@@ -1626,6 +1659,7 @@ export const terminalRebootAction = (form) => async (dispatch, getState) => {
     Object.entries(form).map(([key, value]) => {
       formData.append(key, value);
     });
+
     const { data } = await axios({
       url: "/api/auth/terminal/",
       method: "POST",
