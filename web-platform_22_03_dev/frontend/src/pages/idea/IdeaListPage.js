@@ -97,14 +97,7 @@ export const IdeaListPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <body>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Список идей"}
-        description={
-          "список идей в банке идей с возможностью поиска и фильтрации"
-        }
-      />
+      <components.HeaderComponent />
       <main>
         <div className="accordion accordion-flush shadow m-0 p-0 mb-2">
           <div className="accordion-item custom-background-transparent-low m-0 p-0">
@@ -291,7 +284,7 @@ export const IdeaListPage = () => {
                           Поле поиска по части названия:
                           <input
                             type="text"
-                            className="form-control m-0 p-1"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={search}
                             placeholder="введите часть названия тут..."
                             onChange={(e) => searchSet(e.target.value)}
@@ -461,7 +454,7 @@ export const IdeaListPage = () => {
                           Место изменения:
                           <input
                             type="text"
-                            className="form-control form-control-sm m-0 p-1"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             defaultValue={utils.GetSliceString(
                               object["place_char_field"],
                               50
@@ -478,7 +471,7 @@ export const IdeaListPage = () => {
                         <label className="form-control-sm w-100 m-0 p-1">
                           Описание:
                           <textarea
-                            className="form-control form-control-sm m-0 p-1"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             defaultValue={utils.GetSliceString(
                               object["description_text_field"],
                               50

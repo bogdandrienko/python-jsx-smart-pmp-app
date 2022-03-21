@@ -1,43 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { Link } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const VacancyListPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [detailView, detailViewSet] = useState(true);
   const [sphere, sphereSet] = useState("");
   const [education, educationSet] = useState("");
   const [experience, experienceSet] = useState("");
   const [sort, sortSet] = useState("дате публикации (свежие в начале)");
   const [search, searchSet] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  //////////////////////////////////////////////////////////
   const vacancyListStore = useSelector((state) => state.vacancyListStore);
   const {
     load: loadVacancyList,
@@ -45,7 +28,16 @@ export const VacancyListPage = () => {
     // error: errorVacancyList,
     // fail: failVacancyList,
   } = vacancyListStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
+  useEffect(() => {
+    if (dataVacancyList) {
+    } else {
+      if (!loadVacancyList) {
+        getData();
+      }
+    }
+  }, [dataVacancyList]);
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const getData = () => {
     const form = {
       "Action-type": "VACANCY_LIST",
@@ -57,22 +49,13 @@ export const VacancyListPage = () => {
     };
     dispatch(actions.vacancyListAction(form));
   };
-
-  useEffect(() => {
-    if (dataVacancyList) {
-    } else {
-      if (!loadVacancyList) {
-        getData();
-      }
-    }
-  }, [dataVacancyList]);
-
-  const formHandlerSubmit = async (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerSubmit = async (e) => {
     e.preventDefault();
     getData();
   };
-
-  const formHandlerReset = async (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerReset = async (e) => {
     e.preventDefault();
     sphereSet("");
     educationSet("");
@@ -81,38 +64,28 @@ export const VacancyListPage = () => {
     searchSet("");
     getData();
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={false}
-        title={"Список вакансий"}
-        description={
-          "страница доступных вакансий с возможностью поиска и фильтрации"
-        }
-      />
-      <main className="container  ">
-        <div className="">
-          {components.StoreStatusComponent(
-            userDetailsStore,
-            "userDetailsStore",
-            false,
-            "Данные успешно получены!",
-            constants.DEBUG_CONSTANT
-          )}
-          {components.StoreStatusComponent(
-            vacancyListStore,
-            "vacancyListStore",
-            false,
-            "Данные успешно получены!",
-            constants.DEBUG_CONSTANT
-          )}
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        {components.StoreStatusComponent(
+          userDetailsStore,
+          "userDetailsStore",
+          false,
+          "Данные успешно получены!",
+          constants.DEBUG_CONSTANT
+        )}
+        {components.StoreStatusComponent(
+          vacancyListStore,
+          "vacancyListStore",
+          false,
+          "Данные успешно получены!",
+          constants.DEBUG_CONSTANT
+        )}
         <div className="container-fluid form-control bg-opacity-10 bg-success">
           <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
-            <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+            <form autoComplete="on" className="" onSubmit={handlerSubmit}>
               <div className="">
                 <label className="lead">
                   Выберите нужные настройки фильтрации и сортировки, затем
@@ -226,7 +199,7 @@ export const VacancyListPage = () => {
                 <button
                   className="btn btn-sm btn-warning"
                   type="button"
-                  onClick={formHandlerReset}
+                  onClick={handlerReset}
                 >
                   сбросить фильтры
                 </button>
@@ -425,6 +398,6 @@ export const VacancyListPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

@@ -1,5 +1,4 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React from "react";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -13,6 +12,7 @@ const globalReducer = combineReducers({
   userRecoverPasswordStore: reducers.userRecoverPasswordReducer,
   userListAllStore: reducers.userListAllReducer,
   notificationCreateStore: reducers.notificationCreateReducer,
+  notificationDeleteStore: reducers.notificationDeleteReducer,
   notificationListStore: reducers.notificationListReducer,
   /////////////////////////////////////////////////////////////////////////////
   adminChangeUserPasswordStore: reducers.adminChangeUserPasswordReducer,

@@ -159,12 +159,7 @@ export const IdeaChangePage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <body>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Модерация идеи"}
-        description={"изменение идеи в банке идей"}
-      />
+      <components.HeaderComponent />
       <main>
         <div className="btn-group text-start w-100 m-0 p-0">
           <Link
@@ -370,7 +365,7 @@ export const IdeaChangePage = () => {
                       Название:
                       <input
                         type="text"
-                        className="form-control form-control-sm m-0 p-1"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={name}
                         placeholder="введите название тут..."
                         required
@@ -392,7 +387,7 @@ export const IdeaChangePage = () => {
                       Место изменения:
                       <input
                         type="text"
-                        className="form-control form-control-sm m-0 p-1"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={place}
                         placeholder="введите место изменения тут..."
                         required
@@ -413,7 +408,7 @@ export const IdeaChangePage = () => {
                     <label className="w-100 form-control-sm m-0 p-1">
                       Описание:
                       <textarea
-                        className="form-control form-control-sm m-0 p-1"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={description}
                         required
                         placeholder="введите описание тут..."

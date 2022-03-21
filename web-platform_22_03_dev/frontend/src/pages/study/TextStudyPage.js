@@ -1,47 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import React from "react";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
-import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
-import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const TextStudyPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={false}
-        title={"Текстовые инструкции"}
-        description={
-          "страница с текстовыми инструкциями по функционалу веб-платформы"
-        }
-      />
-      <main className="container text-center">
+    <body>
+      <components.HeaderComponent />
+      <main>
         <div className="accordion" id="accordionExample">
           <div className="accordion-item">
             <h2 className="accordion-header" id="accordion_heading_1">
@@ -79,7 +46,7 @@ export const TextStudyPage = () => {
                     <p className="text-center">
                       Компьютер:
                       <img
-                        src="static/study/input_0_0.png"
+                        src="/static/study/input_0_0.png"
                         className="w-75 img-fluid img-thumbnail"
                         alt="id"
                       />
@@ -87,7 +54,7 @@ export const TextStudyPage = () => {
                     <p className="text-center">
                       Мобильный вид:
                       <img
-                        src="static/study/input_0_1.jpg"
+                        src="/static/study/input_0_1.jpg"
                         className="w-25 img-fluid img-thumbnail"
                         alt="id"
                       />
@@ -111,7 +78,7 @@ export const TextStudyPage = () => {
                     <p className="text-center text-success">
                       Либо отсканируйте QR код
                       <img
-                        src="static/study/qr_link.png"
+                        src="/static/study/qr_link.png"
                         className="w-25"
                         alt="id"
                       />
@@ -129,7 +96,7 @@ export const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/study/input_1.png"
+                        src="/static/study/input_1.png"
                         className="w-100"
                         alt="id"
                       />
@@ -148,7 +115,7 @@ export const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/study/input_2.png"
+                        src="/static/study/input_2.png"
                         className="w-100"
                         alt="id"
                       />
@@ -177,7 +144,7 @@ export const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/study/input_3.png"
+                        src="/static/study/input_3.png"
                         className="w-100"
                         alt="id"
                       />
@@ -196,7 +163,7 @@ export const TextStudyPage = () => {
                     <p className="text-center">
                       Компьютеры:
                       <img
-                        src="static/study/input_4_1.png"
+                        src="/static/study/input_4_1.png"
                         className="w-75"
                         alt="id"
                       />
@@ -204,7 +171,7 @@ export const TextStudyPage = () => {
                     <p className="text-center">
                       Мобильный вид:
                       <img
-                        src="static/study/input_4_2.png"
+                        src="/static/study/input_4_2.png"
                         className="w-50"
                         alt="id"
                       />
@@ -267,7 +234,7 @@ export const TextStudyPage = () => {
                     заработной платы" на верхней панели.
                     <p className="text-center">
                       <img
-                        src="static/study/salary_1.png"
+                        src="/static/study/salary_1.png"
                         className="w-100"
                         alt="id"
                       />
@@ -291,7 +258,7 @@ export const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/study/salary_2.png"
+                        src="/static/study/salary_2.png"
                         className="w-100"
                         alt="id"
                       />
@@ -314,7 +281,7 @@ export const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/study/salary_3.png"
+                        src="/static/study/salary_3.png"
                         className="w-100"
                         alt="id"
                       />
@@ -339,7 +306,7 @@ export const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/study/salary_4.png"
+                        src="/static/study/salary_4.png"
                         className="w-100"
                         alt="id"
                       />
@@ -352,7 +319,7 @@ export const TextStudyPage = () => {
                     </p>
                     <p className="text-center">
                       <img
-                        src="static/study/salary_5.png"
+                        src="/static/study/salary_5.png"
                         className="w-50"
                         alt="id"
                       />
@@ -372,6 +339,6 @@ export const TextStudyPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

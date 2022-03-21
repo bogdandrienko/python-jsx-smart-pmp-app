@@ -1,38 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { Link } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
-import RationalComponent from "./RationalComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const RationalModerateListPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [detailView, detailViewSet] = useState(true);
   const [subdivision, subdivisionSet] = useState("");
   const [category, categorySet] = useState("");
@@ -40,7 +19,7 @@ export const RationalModerateListPage = () => {
   const [search, searchSet] = useState("");
   const [sort, sortSet] = useState("дате публикации (свежие в начале)");
   const [moderate, moderateSet] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userListAllStore = useSelector((state) => state.userListAllStore);
   const {
     // load: loadUserListAll,
@@ -48,6 +27,7 @@ export const RationalModerateListPage = () => {
     // error: errorUserListAll,
     // fail: failUserListAll,
   } = userListAllStore;
+  //////////////////////////////////////////////////////////
   const rationalListStore = useSelector((state) => state.rationalListStore);
   const {
     load: loadRationalList,
@@ -55,6 +35,7 @@ export const RationalModerateListPage = () => {
     // error: errorRationalList,
     // fail: failRationalList,
   } = rationalListStore;
+  //////////////////////////////////////////////////////////
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
     load: loadUserDetails,
@@ -62,20 +43,7 @@ export const RationalModerateListPage = () => {
     // error: errorUserDetails,
     // fail: failUserDetails,
   } = userDetailsStore;
-
-  const getData = () => {
-    const form = {
-      "Action-type": "RATIONAL_LIST",
-      subdivision: subdivision,
-      category: category,
-      author: author,
-      search: search,
-      sort: sort,
-      moderate: moderate,
-    };
-    dispatch(actions.rationalListAction(form));
-  };
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (!dataUserListAll) {
       const form = {
@@ -84,7 +52,7 @@ export const RationalModerateListPage = () => {
       dispatch(actions.userListAllAction(form));
     }
   }, [dispatch, dataUserListAll]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (
       !dataRationalList &&
@@ -103,7 +71,7 @@ export const RationalModerateListPage = () => {
     loadUserDetails,
     dataUserListAll,
   ]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserDetails) {
       if (
@@ -165,13 +133,26 @@ export const RationalModerateListPage = () => {
       }
     }
   }, [dispatch, dataUserDetails]);
-
-  const formHandlerSubmit = (e) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const getData = () => {
+    const form = {
+      "Action-type": "RATIONAL_LIST",
+      subdivision: subdivision,
+      category: category,
+      author: author,
+      search: search,
+      sort: sort,
+      moderate: moderate,
+    };
+    dispatch(actions.rationalListAction(form));
+  };
+  //////////////////////////////////////////////////////////
+  const handlerSubmit = (e) => {
     e.preventDefault();
     getData();
   };
-
-  const formHandlerReset = async (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerReset = async (e) => {
     e.preventDefault();
     categorySet("");
     authorSet("");
@@ -179,49 +160,41 @@ export const RationalModerateListPage = () => {
     sortSet("дате публикации (свежие в начале)");
     getData();
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Модерация рационализаторских предложений"}
-        description={"страница модерации рационализаторских предложений"}
-      />
-      <main className="container  ">
-        <div className="">
-          <components.StoreStatusComponent
-            storeStatus={userListAllStore}
-            key={"userListAllStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={false}
-            loadText={""}
-            showData={false}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-          <components.StoreStatusComponent
-            storeStatus={rationalListStore}
-            key={"rationalListStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={false}
-            loadText={""}
-            showData={false}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        <components.StoreStatusComponent
+          storeStatus={userListAllStore}
+          key={"userListAllStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={false}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        <components.StoreStatusComponent
+          storeStatus={rationalListStore}
+          key={"rationalListStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={false}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         <div className="">
           <div className="container-fluid form-control bg-opacity-10 bg-success">
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
-              <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+              <form autoComplete="on" className="" onSubmit={handlerSubmit}>
                 <div className="">
                   <label className="lead">
                     Выберите нужные настройки фильтрации и сортировки, затем
@@ -373,7 +346,7 @@ export const RationalModerateListPage = () => {
                   <button
                     className="btn btn-sm btn-warning"
                     type="button"
-                    onClick={formHandlerReset}
+                    onClick={handlerReset}
                   >
                     сбросить фильтры
                   </button>
@@ -429,7 +402,7 @@ export const RationalModerateListPage = () => {
                   to={`/rational_moderate_detail/${rational.id}`}
                   className="text-decoration-none text-center p-2 m-0 col-md-6"
                 >
-                  <RationalComponent
+                  <components.RationalComponent
                     key={index}
                     object={rational}
                     shortView={true}
@@ -441,6 +414,6 @@ export const RationalModerateListPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

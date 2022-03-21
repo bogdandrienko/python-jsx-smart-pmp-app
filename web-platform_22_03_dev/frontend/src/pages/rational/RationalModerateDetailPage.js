@@ -1,42 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { Link, useNavigate, useParams } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
-import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
-import RationalComponent from "./RationalComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const RationalModerateDetailPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const [rationalId, rationalIdSet] = useState("");
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [moderate, moderateSet] = useState("");
   const [comment, commentSet] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const rationalDetailStore = useSelector((state) => state.rationalDetailStore);
   const {
     load: loadRationalDetail,
@@ -44,7 +23,7 @@ export const RationalModerateDetailPage = () => {
     // error: errorRationalDetail,
     // fail: failRationalDetail,
   } = rationalDetailStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (
       dataRationalDetail &&
@@ -54,7 +33,7 @@ export const RationalModerateDetailPage = () => {
       dispatch({ type: constants.RATIONAL_DETAIL_RESET_CONSTANT });
     }
   }, [dispatch, id]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataRationalDetail && !loadRationalDetail) {
       const form = {
@@ -64,8 +43,8 @@ export const RationalModerateDetailPage = () => {
       dispatch(actions.rationalDetailAction(form));
     }
   }, [dispatch, id, dataRationalDetail, loadRationalDetail]);
-
-  const formHandlerSubmit = (e) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "RATIONAL_MODERATE",
@@ -78,10 +57,9 @@ export const RationalModerateDetailPage = () => {
     dispatch({ type: constants.RATIONAL_LIST_RESET_CONSTANT });
     dispatch({ type: constants.RATIONAL_DETAIL_RESET_CONSTANT });
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
+    <body>
       <components.HeaderComponent
         logic={true}
         redirect={true}
@@ -116,12 +94,15 @@ export const RationalModerateDetailPage = () => {
           {!dataRationalDetail || dataRationalDetail.length < 1 ? (
             ""
           ) : (
-            <RationalComponent object={dataRationalDetail} shortView={false} />
+            <components.RationalComponent
+              object={dataRationalDetail}
+              shortView={false}
+            />
           )}
         </div>
         <div className="container">
           <hr />
-          <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+          <form autoComplete="on" className="" onSubmit={handlerSubmit}>
             <div className="bg-danger bg-opacity-10">
               <h4 className="lead fw-bold">Модерация</h4>
               <label className="form-control-sm m-1">
@@ -176,6 +157,6 @@ export const RationalModerateDetailPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

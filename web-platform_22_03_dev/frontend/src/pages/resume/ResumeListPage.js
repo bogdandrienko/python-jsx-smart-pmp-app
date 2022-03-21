@@ -19,17 +19,11 @@ import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const ResumeListPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [detailView, detailViewSet] = useState(true);
   const [education, educationSet] = useState("");
   const [experience, experienceSet] = useState("");
@@ -37,7 +31,7 @@ export const ResumeListPage = () => {
   const [sort, sortSet] = useState("дате публикации (свежие в начале)");
   const [searchQualification, searchQualificationSet] = useState("");
   const [searchLastName, searchLastNameSet] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const resumeListStore = useSelector((state) => state.resumeListStore);
   const {
     load: loadResumeList,
@@ -45,7 +39,16 @@ export const ResumeListPage = () => {
     // error: errorResumeList,
     // fail: failResumeList,
   } = resumeListStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
+  useEffect(() => {
+    if (dataResumeList) {
+    } else {
+      if (!loadResumeList) {
+        getData();
+      }
+    }
+  }, [dataResumeList, loadResumeList]);
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const getData = () => {
     const form = {
       "Action-type": "RESUME_LIST",
@@ -58,22 +61,13 @@ export const ResumeListPage = () => {
     };
     dispatch(actions.resumeListAction(form));
   };
-
-  useEffect(() => {
-    if (dataResumeList) {
-    } else {
-      if (!loadResumeList) {
-        getData();
-      }
-    }
-  }, [dataResumeList, loadResumeList]);
-
-  const formHandlerSubmit = async (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerSubmit = async (e) => {
     e.preventDefault();
     getData();
   };
-
-  const formHandlerReset = async (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerReset = async (e) => {
     e.preventDefault();
     educationSet("");
     experienceSet("");
@@ -83,37 +77,27 @@ export const ResumeListPage = () => {
     searchLastNameSet("");
     getData();
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Список резюме"}
-        description={
-          "страница доступных резюме с возможностью поиска и фильтрации"
-        }
-      />
-      <main className="container  ">
-        <div className="">
-          <components.StoreStatusComponent
-            storeStatus={resumeListStore}
-            key={"resumeListStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={false}
-            loadText={""}
-            showData={false}
-            dataText={"Данные успешно получены!"}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        <components.StoreStatusComponent
+          storeStatus={resumeListStore}
+          key={"resumeListStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={false}
+          loadText={""}
+          showData={false}
+          dataText={"Данные успешно получены!"}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         <div className="container-fluid form-control bg-opacity-10 bg-success">
           <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
-            <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+            <form autoComplete="on" className="" onSubmit={handlerSubmit}>
               <div className="">
                 <label className="lead">
                   Выберите нужные настройки фильтрации и сортировки, затем
@@ -235,7 +219,7 @@ export const ResumeListPage = () => {
                 <button
                   className="btn btn-sm btn-warning"
                   type="button"
-                  onClick={formHandlerReset}
+                  onClick={handlerReset}
                 >
                   сбросить фильтры
                 </button>
@@ -435,6 +419,6 @@ export const ResumeListPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

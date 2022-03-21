@@ -1,36 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { Link, useNavigate, useParams } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const VacancyDetailPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  //////////////////////////////////////////////////////////
   const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore);
   const {
     load: loadVacancyDetail,
@@ -38,6 +23,7 @@ export const VacancyDetailPage = () => {
     // error: errorVacancyDetail,
     // fail: failVacancyDetail,
   } = vacancyDetailStore;
+  //////////////////////////////////////////////////////////
   const vacancyDeleteStore = useSelector((state) => state.vacancyDeleteStore);
   const {
     // load: loadVacancyDelete,
@@ -45,7 +31,7 @@ export const VacancyDetailPage = () => {
     // error: errorVacancyDelete,
     // fail: failVacancyDelete,
   } = vacancyDeleteStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (
       dataVacancyDetail &&
@@ -55,7 +41,7 @@ export const VacancyDetailPage = () => {
       dispatch({ type: constants.VACANCY_DETAIL_RESET_CONSTANT });
     }
   }, [dispatch, id]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataVacancyDetail && !loadVacancyDetail) {
       const form = {
@@ -65,7 +51,7 @@ export const VacancyDetailPage = () => {
       dispatch(actions.vacancyDetailAction(form));
     }
   }, [dispatch, id, dataVacancyDetail, loadVacancyDetail]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataVacancyDelete) {
       utils.Sleep(2000).then(() => {
@@ -75,8 +61,8 @@ export const VacancyDetailPage = () => {
       });
     }
   }, [dataVacancyDelete]);
-
-  const formHandlerDelete = async (e, id) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerDelete = async (e, id) => {
     e.preventDefault();
     const form = {
       "Action-type": "VACANCY_DELETE",
@@ -84,40 +70,32 @@ export const VacancyDetailPage = () => {
     };
     dispatch(actions.vacancyDeleteAction(form));
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={false}
-        title={"Описание вакансии"}
-        description={"страница подробного описания вакансии"}
-      />
-      <main className="container  ">
-        <div className="">
-          {components.StoreStatusComponent(
-            userDetailsStore,
-            "userDetailsStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {components.StoreStatusComponent(
-            vacancyDetailStore,
-            "vacancyDetailStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {components.StoreStatusComponent(
-            vacancyDeleteStore,
-            "vacancyDeleteStore",
-            true,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        {components.StoreStatusComponent(
+          userDetailsStore,
+          "userDetailsStore",
+          false,
+          "",
+          constants.DEBUG_CONSTANT
+        )}
+        {components.StoreStatusComponent(
+          vacancyDetailStore,
+          "vacancyDetailStore",
+          false,
+          "",
+          constants.DEBUG_CONSTANT
+        )}
+        {components.StoreStatusComponent(
+          vacancyDeleteStore,
+          "vacancyDeleteStore",
+          true,
+          "",
+          constants.DEBUG_CONSTANT
+        )}
         <div className="btn-group p-1 m-0 text-start w-100">
           <Link to={"/vacancy_list"} className="btn btn-sm btn-primary">
             {"<="} назад к списку
@@ -143,7 +121,7 @@ export const VacancyDetailPage = () => {
             utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
               <button
                 className="btn btn-sm btn-danger"
-                onClick={(e) => formHandlerDelete(e, dataVacancyDetail.id)}
+                onClick={(e) => handlerDelete(e, dataVacancyDetail.id)}
               >
                 удалить эту вакансию
               </button>
@@ -276,6 +254,6 @@ export const VacancyDetailPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

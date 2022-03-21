@@ -1,41 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const ChangeProfilePage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [email, setEmail] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
   const [secretAnswer, setSecretAnswer] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
     // load: loadUserDetails,
@@ -43,6 +28,7 @@ export const ChangeProfilePage = () => {
     // error: errorUserDetails,
     // fail: failUserDetails,
   } = userDetailsStore;
+  //////////////////////////////////////////////////////////
   const userChangeStore = useSelector((state) => state.userChangeStore);
   const {
     // load: loadUserChange,
@@ -50,7 +36,7 @@ export const ChangeProfilePage = () => {
     // error: errorUserChange,
     // fail: failUserChange,
   } = userChangeStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataUserDetails && dataUserDetails["user_model"]) {
       if (dataUserDetails["user_model"]["email_field"]) {
@@ -79,7 +65,7 @@ export const ChangeProfilePage = () => {
       setPassword2("");
     }
   }, [dispatch, dataUserDetails]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserChange) {
       utils.Sleep(1000).then(() => {
@@ -88,8 +74,8 @@ export const ChangeProfilePage = () => {
       });
     }
   }, [dispatch, dataUserChange, navigate]);
-
-  const formHandlerSubmit = (e) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHANGE",
@@ -101,52 +87,44 @@ export const ChangeProfilePage = () => {
     };
     dispatch(actions.userChangeAction(form));
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={false}
-        title={"Изменение профиля"}
-        description={"страница редактирования Вашего личного профиля"}
-      />
-      <main className="container  ">
-        <div className="">
-          <components.StoreStatusComponent
-            storeStatus={userDetailsStore}
-            key={"userDetailsStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={false}
-            loadText={""}
-            showData={false}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-          <components.StoreStatusComponent
-            storeStatus={userChangeStore}
-            key={"userChangeStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={true}
-            dataText={"Данные успешно изменены!"}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        <components.StoreStatusComponent
+          storeStatus={userDetailsStore}
+          key={"userDetailsStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={false}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        <components.StoreStatusComponent
+          storeStatus={userChangeStore}
+          key={"userChangeStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={true}
+          dataText={"Данные успешно изменены!"}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         <div>
           <div className="">
             <h6 className="text-danger lead">
               Внимание, без правильного заполнения обязательных данных Вас будет
               перенаправлять на эту страницу постоянно!
             </h6>
-            <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
+            <form className="text-center p-1 m-1" onSubmit={handlerSubmit}>
               <div>
                 <label className="form-control-sm m-1 lead">
                   Введите секретный вопрос для восстановления доступа:
@@ -306,6 +284,6 @@ export const ChangeProfilePage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

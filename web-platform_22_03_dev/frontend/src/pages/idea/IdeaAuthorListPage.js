@@ -58,12 +58,7 @@ export const IdeaAuthorListPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <body>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Лучшие авторы"}
-        description={"лучшие авторы идей в банке идей"}
-      />
+      <components.HeaderComponent />
       <main>
         <div className="accordion accordion-flush shadow m-0 p-0 mb-2">
           <div className="accordion-item custom-background-transparent-low m-0 p-0">

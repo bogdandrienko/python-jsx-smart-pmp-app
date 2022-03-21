@@ -198,12 +198,7 @@ export const IdeaModerateChangePage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <body>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Модерация идеи"}
-        description={"модерация идеи в банке идей"}
-      />
+      <components.HeaderComponent />
       <main className="container">
         <div className="btn-group m-0 p-1 text-start w-100">
           <Link
@@ -273,7 +268,7 @@ export const IdeaModerateChangePage = () => {
                           Комментарий:
                           <input
                             type="text"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={moderateComment}
                             placeholder="вводите сюда комментарий..."
                             minLength="0"
@@ -492,7 +487,7 @@ export const IdeaModerateChangePage = () => {
                       Название:
                       <input
                         type="text"
-                        className="form-control form-control-sm m-0 p-1"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={name}
                         placeholder="введите название тут..."
                         required
@@ -514,7 +509,7 @@ export const IdeaModerateChangePage = () => {
                       Место изменения:
                       <input
                         type="text"
-                        className="form-control form-control-sm m-0 p-1"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={place}
                         placeholder="введите место изменения тут..."
                         required
@@ -535,7 +530,7 @@ export const IdeaModerateChangePage = () => {
                     <label className="w-100 form-control-sm m-0 p-1">
                       Описание:
                       <textarea
-                        className="form-control form-control-sm m-0 p-1"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={description}
                         required
                         placeholder="введите описание тут..."

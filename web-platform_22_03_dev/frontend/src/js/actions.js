@@ -1,5 +1,4 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React from "react";
 import axios from "axios";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
@@ -332,6 +331,61 @@ export const notificationCreateAction =
       }
       dispatch({
         type: constants.NOTIFICATION_CREATE_FAIL_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+export const notificationDeleteAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: constants.NOTIFICATION_DELETE_LOAD_CONSTANT,
+      });
+      const {
+        userLoginStore: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        formData.append(key, value);
+      });
+      const { data } = await axios({
+        url: "/api/auth/user/notification/",
+        method: "POST",
+        timeout: 10000,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userLogin.token}`,
+        },
+        data: formData,
+      });
+      if (data["response"]) {
+        const response = data["response"];
+        dispatch({
+          type: constants.NOTIFICATION_DELETE_DATA_CONSTANT,
+          payload: response,
+        });
+      } else {
+        const response = data["error"];
+        dispatch({
+          type: constants.NOTIFICATION_DELETE_ERROR_CONSTANT,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.statusText &&
+        error.response.statusText === "Unauthorized" &&
+        error.response.statusText === "Request Entity Too Large"
+      ) {
+        dispatch(userLogoutAction());
+      }
+      dispatch({
+        type: constants.NOTIFICATION_DELETE_FAIL_CONSTANT,
         payload:
           error.response && error.response.data.detail
             ? error.response.data.detail

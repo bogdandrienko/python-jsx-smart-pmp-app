@@ -1,35 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { Link, useNavigate, useParams } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const VacancyChangePage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [qualification, qualificationSet] = useState("");
   const [rank, rankSet] = useState("");
   const [image, imageSet] = useState(null);
@@ -40,7 +24,7 @@ export const VacancyChangePage = () => {
   const [experience, experienceSet] = useState("");
   const [schedule, scheduleSet] = useState("");
   const [description, descriptionSet] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore);
   const {
     load: loadVacancyDetail,
@@ -48,6 +32,7 @@ export const VacancyChangePage = () => {
     // error: errorVacancyDetail,
     // fail: failVacancyDetail,
   } = vacancyDetailStore;
+  //////////////////////////////////////////////////////////
   const vacancyDeleteStore = useSelector((state) => state.vacancyDeleteStore);
   const {
     // load: loadVacancyDelete,
@@ -55,6 +40,7 @@ export const VacancyChangePage = () => {
     // error: errorVacancyDelete,
     // fail: failVacancyDelete,
   } = vacancyDeleteStore;
+  //////////////////////////////////////////////////////////
   const vacancyChangeStore = useSelector((state) => state.vacancyChangeStore);
   const {
     // load: loadVacancyCreate,
@@ -62,7 +48,7 @@ export const VacancyChangePage = () => {
     // error: errorVacancyCreate,
     // fail: failVacancyCreate,
   } = vacancyChangeStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataVacancyChange) {
       utils.Sleep(2000).then(() => {
@@ -72,7 +58,7 @@ export const VacancyChangePage = () => {
       });
     }
   }, [dataVacancyChange]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (
       dataVacancyDetail &&
@@ -82,7 +68,7 @@ export const VacancyChangePage = () => {
       dispatch({ type: constants.VACANCY_DETAIL_RESET_CONSTANT });
     }
   }, [dispatch, id]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataVacancyDetail) {
       qualificationSet(dataVacancyDetail["qualification_field"]);
@@ -103,8 +89,8 @@ export const VacancyChangePage = () => {
       }
     }
   }, [dispatch, id, dataVacancyDetail]);
-
-  const formHandlerSubmit = (e) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "VACANCY_CHANGE",
@@ -121,48 +107,40 @@ export const VacancyChangePage = () => {
     };
     dispatch(actions.vacancyChangeAction(form));
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Изменить вакансию"}
-        description={"страница с формой для изменения вакансии"}
-      />
-      <main className="container text-center">
+    <body>
+      <components.HeaderComponent />
+      <main>
         <div className="btn-group p-1 m-0 text-start w-100">
           <Link to={"/vacancy_list"} className="btn btn-sm btn-primary">
             {"<="} назад к списку
           </Link>
         </div>
-        <div className="">
-          {components.StoreStatusComponent(
-            vacancyDetailStore,
-            "vacancyDetailStore",
-            false,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {components.StoreStatusComponent(
-            vacancyChangeStore,
-            "vacancyChangeStore",
-            true,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-          {components.StoreStatusComponent(
-            vacancyDeleteStore,
-            "vacancyDeleteStore",
-            true,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-        </div>
+        {components.StoreStatusComponent(
+          vacancyDetailStore,
+          "vacancyDetailStore",
+          false,
+          "",
+          constants.DEBUG_CONSTANT
+        )}
+        {components.StoreStatusComponent(
+          vacancyChangeStore,
+          "vacancyChangeStore",
+          true,
+          "",
+          constants.DEBUG_CONSTANT
+        )}
+        {components.StoreStatusComponent(
+          vacancyDeleteStore,
+          "vacancyDeleteStore",
+          true,
+          "",
+          constants.DEBUG_CONSTANT
+        )}
         <div className="container-fluid">
           <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
-            <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+            <form autoComplete="on" className="" onSubmit={handlerSubmit}>
               <div className="">
                 <h6 className="lead">Редактировать вакансию</h6>
               </div>
@@ -361,6 +339,6 @@ export const VacancyChangePage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

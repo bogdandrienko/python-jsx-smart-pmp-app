@@ -1,35 +1,18 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const VacancyCreatePage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [qualification, qualificationSet] = useState("");
   const [rank, rankSet] = useState("");
   const [image, imageSet] = useState(null);
@@ -38,7 +21,7 @@ export const VacancyCreatePage = () => {
   const [experience, experienceSet] = useState("");
   const [schedule, scheduleSet] = useState("");
   const [description, descriptionSet] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const vacancyCreateStore = useSelector((state) => state.vacancyCreateStore);
   const {
     // load: loadVacancyCreate,
@@ -46,7 +29,7 @@ export const VacancyCreatePage = () => {
     // error: errorVacancyCreate,
     // fail: failVacancyCreate,
   } = vacancyCreateStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataVacancyCreate) {
       utils.Sleep(2000).then(() => {
@@ -56,8 +39,8 @@ export const VacancyCreatePage = () => {
       });
     }
   }, [dataVacancyCreate]);
-
-  const formHandlerSubmit = (e) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "VACANCY_CREATE",
@@ -72,26 +55,18 @@ export const VacancyCreatePage = () => {
     };
     dispatch(actions.vacancyCreateAction(form));
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Создать вакансию"}
-        description={"страница с формой для создания новой свободной вакансии"}
-      />
-      <main className="container">
-        <div className="">
-          {components.StoreStatusComponent(
-            vacancyCreateStore,
-            "vacancyCreateStore",
-            true,
-            "",
-            constants.DEBUG_CONSTANT
-          )}
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        {components.StoreStatusComponent(
+          vacancyCreateStore,
+          "vacancyCreateStore",
+          true,
+          "",
+          constants.DEBUG_CONSTANT
+        )}
         <div className="btn-group p-1 m-0 text-start w-100">
           <Link to={"/vacancy_list"} className="btn btn-sm btn-primary">
             {"<="} назад к списку
@@ -100,7 +75,7 @@ export const VacancyCreatePage = () => {
         {!dataVacancyCreate && (
           <div className="container-fluid">
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
-              <form autoComplete="on" className="" onSubmit={formHandlerSubmit}>
+              <form autoComplete="on" className="" onSubmit={handlerSubmit}>
                 <div className="">
                   <h6 className="lead">Свободная вакансия</h6>
                 </div>
@@ -281,6 +256,6 @@ export const VacancyCreatePage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

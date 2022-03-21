@@ -2113,7 +2113,7 @@ class GroupModel(models.Model):
         db_table = 'group_extend_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field[0:30]}'
+        return f'{self.name_char_field[0:30]} {self.name_slug_field[0:30]}'
 
 
 @receiver(post_save, sender=Group)
@@ -2159,6 +2159,42 @@ class NotificationModel(models.Model):
         to=UserModel,
         on_delete=models.SET_NULL,
         related_name='notification_author_foreign_key_field',
+    )
+    notification_model_foreign_key_field = models.ForeignKey(
+        db_column='notification_model_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='notification_model_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Группа',
+        help_text='<small class="text-muted">notification_model_foreign_key_field</small><hr><br>',
+
+        to=GroupModel,
+        on_delete=models.SET_NULL,
+        related_name='notification_model_foreign_key_field',
+    )
+    notification_target_foreign_key_field = models.ForeignKey(
+        db_column='notification_target_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='notification_target_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Цель',
+        help_text='<small class="text-muted">notification_target_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='notification_target_foreign_key_field',
     )
     name_char_field = models.CharField(
         db_column='name_char_field_db_column',
@@ -2222,7 +2258,7 @@ class NotificationModel(models.Model):
         editable=True,
         blank=True,
         null=False,
-        default=False,
+        default=True,
         verbose_name='Видимость идеи в общем списке',
         help_text='<small class="text-muted">visibility_boolean_field</small><hr><br>',
     )

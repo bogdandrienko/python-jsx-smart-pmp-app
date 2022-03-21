@@ -1,5 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React from "react";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
 ///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
@@ -74,6 +72,31 @@ export const CheckPageAccess = (userDetailsStore, location) => {
     });
   });
   return access;
+};
+///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+export const GetInfoPage = (location) => {
+  let title = "Домашняя страница";
+  let description = "основная страница веб платформы";
+  let logic = true;
+  let redirect = false;
+  constants.modules.forEach(function (module, index, array) {
+    module.Sections.forEach(function (section, index, array) {
+      section.Links.forEach(function (link, index, array) {
+        if (link.Link.split("/")[1] === location.pathname.split("/")[1]) {
+          title = link.Title;
+          description = link.Description;
+          logic = link.Logic;
+          redirect = link.Redirect;
+        }
+      });
+    });
+  });
+  return {
+    title: title,
+    description: description,
+    logic: logic,
+    redirect: redirect,
+  };
 };
 ///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
 export const GetStaticFile = (path = "") => {

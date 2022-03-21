@@ -1,35 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { Link, useNavigate, useParams } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const ResumeDetailPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const resumeDetailStore = useSelector((state) => state.resumeDetailStore);
   const {
@@ -38,6 +22,7 @@ export const ResumeDetailPage = () => {
     // error: errorResumeDetail,
     // fail: failResumeDetail,
   } = resumeDetailStore;
+  //////////////////////////////////////////////////////////
   const resumeDeleteStore = useSelector((state) => state.resumeDeleteStore);
   const {
     // load: loadResumeDelete,
@@ -45,7 +30,7 @@ export const ResumeDetailPage = () => {
     // error: errorResumeDelete,
     // fail: failResumeDelete,
   } = resumeDeleteStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (
       dataResumeDetail &&
@@ -55,7 +40,7 @@ export const ResumeDetailPage = () => {
       dispatch({ type: constants.RESUME_DETAIL_RESET_CONSTANT });
     }
   }, [dispatch, id]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataResumeDetail && !loadResumeDetail) {
       const form = {
@@ -65,7 +50,7 @@ export const ResumeDetailPage = () => {
       dispatch(actions.resumeDetailAction(form));
     }
   }, [dispatch, id, dataResumeDetail, loadResumeDetail]);
-
+  //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataResumeDelete) {
       utils.Sleep(2000).then(() => {
@@ -74,9 +59,9 @@ export const ResumeDetailPage = () => {
         navigate("/resume_list");
       });
     }
-  }, [dataResumeDelete]);
-
-  const formHandlerDelete = async (e, id) => {
+  }, [dataResumeDelete, dispatch, navigate]);
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerDelete = async (e, id) => {
     e.preventDefault();
     const form = {
       "Action-type": "RESUME_DELETE",
@@ -84,58 +69,50 @@ export const ResumeDetailPage = () => {
     };
     dispatch(actions.resumeDeleteAction(form));
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Описание резюме"}
-        description={"страница подробного описания резюме"}
-      />
-      <main className="container  ">
-        <div className="">
-          <components.StoreStatusComponent
-            storeStatus={userDetailsStore}
-            key={"userDetailsStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={false}
-            loadText={""}
-            showData={false}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-          <components.StoreStatusComponent
-            storeStatus={resumeDetailStore}
-            key={"resumeDetailStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={false}
-            loadText={""}
-            showData={false}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-          <components.StoreStatusComponent
-            storeStatus={resumeDeleteStore}
-            key={"resumeDeleteStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={true}
-            dataText={"Данные успешно получены!"}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        <components.StoreStatusComponent
+          storeStatus={userDetailsStore}
+          key={"userDetailsStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={false}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        <components.StoreStatusComponent
+          storeStatus={resumeDetailStore}
+          key={"resumeDetailStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={false}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        <components.StoreStatusComponent
+          storeStatus={resumeDeleteStore}
+          key={"resumeDeleteStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={true}
+          dataText={"Данные успешно получены!"}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         <div className="btn-group p-1 m-0 text-start w-100">
           <Link to={"/resume_list"} className="btn btn-sm btn-primary">
             {"<="} назад к списку
@@ -144,7 +121,7 @@ export const ResumeDetailPage = () => {
             utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
               <button
                 className="btn btn-sm btn-danger"
-                onClick={(e) => formHandlerDelete(e, dataResumeDetail.id)}
+                onClick={(e) => handlerDelete(e, dataResumeDetail.id)}
               >
                 удалить это резюме
               </button>
@@ -312,6 +289,6 @@ export const ResumeDetailPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

@@ -46,14 +46,7 @@ export const IdeaSelfListPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <body>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Список идей на доработку"}
-        description={
-          "список идей в банке идей для доработки с комментарием от модератора с возможностью поиска и фильтрации"
-        }
-      />
+      <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
           storeStatus={ideaListStore}
@@ -152,7 +145,7 @@ export const IdeaSelfListPage = () => {
                           Место изменения:
                           <input
                             type="text"
-                            className="form-control form-control-sm m-0 p-1"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             defaultValue={utils.GetSliceString(
                               object["place_char_field"],
                               50
@@ -169,7 +162,7 @@ export const IdeaSelfListPage = () => {
                         <label className="form-control-sm w-100 m-0 p-1">
                           Описание:
                           <textarea
-                            className="form-control form-control-sm m-0 p-1"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             defaultValue={utils.GetSliceString(
                               object["description_text_field"],
                               50

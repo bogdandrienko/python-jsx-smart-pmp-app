@@ -41,7 +41,6 @@ class DjangoClass:
                 print("\n\n")
                 print(f"request_path: {request_instance.path}")
                 print(f"datetime: {DateTimeUtils.get_current_datetime()}")
-                print("\n")
                 print(f"request_method: {request_instance.method}")
                 print(f"request_action_type: {request_instance.action_type}")
                 print(f"request_user: {request_instance.user}")

@@ -1,5 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React from "react";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
 ///////////////////////////////////////////////////////////////////////////////////////TODO default export const reducer
@@ -117,6 +115,29 @@ export const notificationCreateReducer = (state = {}, action = null) => {
     case constants.NOTIFICATION_CREATE_FAIL_CONSTANT:
       return { load: false, fail: action.payload };
     case constants.NOTIFICATION_CREATE_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
+///////////////////////////////////////////////////////////////////////////////////////TODO default export const reducer
+export const notificationDeleteReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.NOTIFICATION_DELETE_LOAD_CONSTANT:
+      return { load: true };
+    case constants.NOTIFICATION_DELETE_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.NOTIFICATION_DELETE_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.NOTIFICATION_DELETE_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.NOTIFICATION_DELETE_RESET_CONSTANT:
       return {};
     default:
       return state;

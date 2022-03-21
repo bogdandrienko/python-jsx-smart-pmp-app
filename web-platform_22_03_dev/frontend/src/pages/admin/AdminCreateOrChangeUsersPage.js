@@ -1,35 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const AdminCreateOrChangeUsersPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [changeUser, setChangeUser] = useState(
     "Изменять уже существующего пользователя"
   );
@@ -40,7 +22,7 @@ export const AdminCreateOrChangeUsersPage = () => {
     "Добавлять новые группы доступа к предыдущим"
   );
   const [additionalExcel, setAdditionalExcel] = useState(null);
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const adminCreateOrChangeUsersStore = useSelector(
     (state) => state.adminCreateOrChangeUsersStore
   );
@@ -50,10 +32,10 @@ export const AdminCreateOrChangeUsersPage = () => {
     // error: errorRationalCreate,
     // fail: failRationalCreate,
   } = adminCreateOrChangeUsersStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataRationalCreate) {
-      utils.Sleep(5000).then(() => {
+      utils.Sleep(2000).then(() => {
         dispatch({
           type: constants.ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT,
         });
@@ -64,9 +46,11 @@ export const AdminCreateOrChangeUsersPage = () => {
       });
     }
   }, [dataRationalCreate]);
-
-  const formHandlerSubmit = (e) => {
-    e.preventDefault();
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerSubmit = (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     const form = {
       "Action-type": "CREATE_OR_CHANGE_USERS",
       changeUser: changeUser,
@@ -76,34 +60,24 @@ export const AdminCreateOrChangeUsersPage = () => {
     };
     dispatch(actions.adminCreateOrChangeUsersAction(form));
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Создание или изменение пользователей"}
-        description={
-          " форму с полями и настройками для создание или изменения пользователей"
-        }
-      />
-      <main className="container  ">
-        <div className="">
-          <components.StoreStatusComponent
-            storeStatus={adminCreateOrChangeUsersStore}
-            key={"adminCreateOrChangeUsersStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={true}
-            dataText={"Данные успешно отправлены!"}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        <components.StoreStatusComponent
+          storeStatus={adminCreateOrChangeUsersStore}
+          key={"adminCreateOrChangeUsersStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={true}
+          dataText={"Данные успешно отправлены!"}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         {!dataRationalCreate && (
           <div className="container-fluid text-center">
             <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
@@ -116,7 +90,7 @@ export const AdminCreateOrChangeUsersPage = () => {
                   name="RATIONAL_CREATE"
                   autoComplete="on"
                   className="text-center"
-                  onSubmit={formHandlerSubmit}
+                  onSubmit={handlerSubmit}
                 >
                   <div>
                     <div className="">
@@ -241,6 +215,6 @@ export const AdminCreateOrChangeUsersPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

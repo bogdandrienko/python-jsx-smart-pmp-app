@@ -1,41 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const AdminChangeUserPasswordPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [captcha, captchaSet] = useState("");
   const [username, usernameSet] = useState("");
   const [success, successSet] = useState(false);
   const [password, passwordSet] = useState("");
   const [password2, password2Set] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const adminChangeUserPasswordStore = useSelector(
     (state) => state.adminChangeUserPasswordStore
   );
@@ -45,7 +31,7 @@ export const AdminChangeUserPasswordPage = () => {
     // error: errorAdminChangeUserPassword,
     // fail: failAdminChangeUserPassword,
   } = adminChangeUserPasswordStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataAdminChangeUserPassword) {
       if (dataAdminChangeUserPassword["success"]) {
@@ -61,8 +47,10 @@ export const AdminChangeUserPasswordPage = () => {
     }
   }, [navigate, dataAdminChangeUserPassword, dispatch]);
 
-  const formHandlerSubmitCheckUser = (e) => {
-    e.preventDefault();
+  const handlerCheckUserSubmit = (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     if (captcha !== "") {
       const form = {
         "Action-type": "CHECK_USER",
@@ -72,8 +60,10 @@ export const AdminChangeUserPasswordPage = () => {
     }
   };
 
-  const formHandlerSubmitChangeUserPassword = (e) => {
-    e.preventDefault();
+  const handlerChangeUserPasswordSubmit = (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     if (success) {
       const form = {
         "Action-type": "CHANGE_USER_PASSWORD",
@@ -90,34 +80,27 @@ export const AdminChangeUserPasswordPage = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Изменение пароля выбранного пользователя"}
-        description={"страница редактирования пароля от выбранного аккаунта"}
-      />
-      <main className="container  ">
-        <div className="">
-          <components.StoreStatusComponent
-            storeStatus={adminChangeUserPasswordStore}
-            key={"adminChangeUserPasswordStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={true}
-            dataText={"Пользователь найден или пароль успешно изменён!"}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-          {!captcha && (
-            <components.MessageComponent variant="danger">
-              Пройдите проверку на робота!
-            </components.MessageComponent>
-          )}
-        </div>
+    <body>
+      <components.HeaderComponent />
+      <main>
+        <components.StoreStatusComponent
+          storeStatus={adminChangeUserPasswordStore}
+          key={"adminChangeUserPasswordStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={true}
+          dataText={"Пользователь найден или пароль успешно изменён!"}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        {!captcha && (
+          <components.MessageComponent variant="danger">
+            Пройдите проверку на робота!
+          </components.MessageComponent>
+        )}
         {!success ? (
           <div>
             <div className="form-control">
@@ -128,7 +111,7 @@ export const AdminChangeUserPasswordPage = () => {
                 name="account_login"
                 autoComplete="on"
                 className="text-center p-1 m-1"
-                onSubmit={formHandlerSubmitCheckUser}
+                onSubmit={handlerCheckUserSubmit}
               >
                 <div>
                   <label className="m-1">
@@ -201,7 +184,7 @@ export const AdminChangeUserPasswordPage = () => {
             name="account_login"
             autoComplete="on"
             className="text-center p-1 m-1"
-            onSubmit={formHandlerSubmitChangeUserPassword}
+            onSubmit={handlerChangeUserPasswordSubmit}
           >
             <div>
               <label className="form-control-sm m-1 lead">
@@ -305,6 +288,6 @@ export const AdminChangeUserPasswordPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

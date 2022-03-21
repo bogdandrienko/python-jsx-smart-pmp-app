@@ -22,7 +22,6 @@ import { SalaryPage } from "../pages/salary/SalaryPage";
 import { AdminChangeUserPasswordPage } from "../pages/admin/AdminChangeUserPasswordPage";
 import { AdminCreateOrChangeUsersPage } from "../pages/admin/AdminCreateOrChangeUsersPage";
 import { AdminExportUsersPage } from "../pages/admin/AdminExportUsersPage";
-import { AdminChangeUserActivityPage } from "../pages/admin/AdminChangeUserActivityPage";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { RationalTemplatePage } from "../pages/rational/RationalTemplatePage";
 import { RationalCreatePage } from "../pages/rational/RationalCreatePage";
@@ -62,9 +61,9 @@ export const App = () => {
         <Route path="/change_profile" element={<ChangeProfilePage />} />
         <Route path="/change_password" element={<ChangePasswordPage />} />
         <Route path="/recover_password" element={<RecoverPasswordPage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/notification_list" element={<NotificationListPage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route
           path="/admin_change_user_password"
           element={<AdminChangeUserPasswordPage />}
@@ -74,17 +73,13 @@ export const App = () => {
           element={<AdminCreateOrChangeUsersPage />}
         />
         <Route path="/admin_export_users" element={<AdminExportUsersPage />} />
-        <Route
-          path="/admin_change_user_activity"
-          element={<AdminChangeUserActivityPage />}
-        />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/news" element={<NewsPage />} />
         <Route path="/video_study" element={<VideoStudyPage />} />
         <Route path="/text_study" element={<TextStudyPage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/salary" element={<SalaryPage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/rational_template" element={<RationalTemplatePage />} />
         <Route path="/rational_create" element={<RationalCreatePage />} />
         <Route
@@ -95,7 +90,7 @@ export const App = () => {
           path="/rational_moderate_detail/:id"
           element={<RationalModerateDetailPage />}
         />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/idea_template" element={<IdeaTemplatePage />} />
         <Route path="/idea_create" element={<IdeaCreatePage />} />
         <Route path="/idea_list" element={<IdeaListPage />} />
@@ -109,18 +104,17 @@ export const App = () => {
         <Route path="/idea_change/:id" element={<IdeaChangePage />} />
         <Route path="/idea_rating" element={<IdeaRatingListPage />} />
         <Route path="/idea_author_list" element={<IdeaAuthorListPage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/vacancy_list" element={<VacancyListPage />} />
         <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />
         <Route path="/vacancy_create" element={<VacancyCreatePage />} />
         <Route path="/vacancy_change/:id" element={<VacancyChangePage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/resume_create/:id" element={<ResumeCreatePage />} />
         <Route path="/resume_list" element={<ResumeListPage />} />
         <Route path="/resume_detail/:id" element={<ResumeDetailPage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         <Route path="/terminal" element={<TerminalRebootPage />} />
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       </Routes>
     </Router>
   );

@@ -436,6 +436,8 @@ class NotificationModelAdmin(admin.ModelAdmin):
 
     list_display = (
         "notification_author_foreign_key_field",
+        "notification_model_foreign_key_field",
+        "notification_target_foreign_key_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -445,6 +447,8 @@ class NotificationModelAdmin(admin.ModelAdmin):
     )
     list_display_links = (
         "notification_author_foreign_key_field",
+        "notification_model_foreign_key_field",
+        "notification_target_foreign_key_field",
         "name_char_field",
     )
     list_editable = (
@@ -452,6 +456,8 @@ class NotificationModelAdmin(admin.ModelAdmin):
     )
     list_filter = (
         "notification_author_foreign_key_field",
+        "notification_model_foreign_key_field",
+        "notification_target_foreign_key_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -462,6 +468,8 @@ class NotificationModelAdmin(admin.ModelAdmin):
     fieldsets = (
         ("Основная информация", {"fields": (
             "notification_author_foreign_key_field",
+            "notification_model_foreign_key_field",
+            "notification_target_foreign_key_field",
             "name_char_field",
             "place_char_field",
             "description_text_field",
@@ -473,6 +481,8 @@ class NotificationModelAdmin(admin.ModelAdmin):
     )
     search_fields = [
         "notification_author_foreign_key_field",
+        "notification_model_foreign_key_field",
+        "notification_target_foreign_key_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -687,7 +697,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
         ("Дополнительные данные", {"fields": (
             "visibility_boolean_field",
             "created_datetime_field",
-        "register_datetime_field",
+            "register_datetime_field",
         )}),
     )
     search_fields = [

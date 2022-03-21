@@ -612,6 +612,9 @@ def api_auth_user_notification(request):
 
                     backend_models.NotificationModel.objects.create(
                         notification_author_foreign_key_field=req_inst.user_model,
+                        notification_target_foreign_key_field=backend_models.UserModel.objects.get(
+                            user_foreign_key_field=User.objects.get(username="Bogdan")
+                        ),
                         name_char_field=name,
                         place_char_field=place,
                         description_text_field=description,
@@ -624,26 +627,44 @@ def api_auth_user_notification(request):
                         request=request, error=error, print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "NOTIFICATION_DELETE":
+                try:
+                    _id = req_inst.get_value("id")
+
+                    obj = backend_models.NotificationModel.objects.get(id=_id)
+                    obj.visibility_boolean_field = False
+                    obj.save()
+
+                    response = {"response": "Успешно удалено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_LIST":
                 try:
-                    # name = req_inst.get_value("name")
-                    # place = req_inst.get_value("place")
-                    # description = req_inst.get_value("description")
-                    #
-                    # backend_models.NotificationModel.objects.create(
-                    #     notification_author_foreign_key_field=req_inst.user_model,
-                    #     name_char_field=name,
-                    #     place_char_field=place,
-                    #     description_text_field=description,
-                    # )
 
-                    objects = [
-                        {"Жалоба на комментарий в банке идей!", "123", "не активно"},
-                        {"Жалоба на идею в банке идей!", "312", "активно"},
-                        {"Ваша идея успешно прошла модерацию", "123", "активно"},
-                    ]
+                    objects = backend_models.NotificationModel.objects.filter(
+                        notification_model_foreign_key_field=None,
+                        notification_target_foreign_key_field=req_inst.user_model,
+                        visibility_boolean_field=True
+                    )
 
-                    response = {"response": objects}
+                    serializer = backend_serializers.NotificationModelSerializer(objects, many=True).data
+
+                    group_models = backend_models.GroupModel.objects.filter(user_many_to_many_field=req_inst.user_model)
+                    objects = backend_models.NotificationModel.objects.filter(
+                        notification_model_foreign_key_field__in=group_models,
+                        notification_target_foreign_key_field=None,
+                        visibility_boolean_field=True
+                    )
+
+                    serializer1 = backend_serializers.NotificationModelSerializer(objects, many=True).data
+                    serializer = serializer + serializer1
+
+                    response = {"response": serializer}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -1986,6 +2007,16 @@ def api_auth_idea(request):
                         description_text_field=description,
                         status_moderate_char_field=status_moderate,
                     )
+                    backend_models.NotificationModel.objects.create(
+                        notification_author_foreign_key_field=req_inst.user_model,
+                        notification_model_foreign_key_field=backend_models.GroupModel.objects.get(
+                            name_slug_field="idea_moderator"
+                        ),
+                        name_char_field="Создана новая идея",
+                        place_char_field="банк идей",
+                        description_text_field=f"название: {name}",
+                    )
+
                     response = {"response": "Идея успешно отправлена на модерацию!"}
                     # print(f"response: {response}")
                     return Response(response)
@@ -2065,6 +2096,40 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_total_rating()["rate"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "отметкам рейтинга (наибольшие в начале)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([
+                                    backend_models.RatingIdeaModel.objects.filter(
+                                        rating_idea_foreign_key_field=obj
+                                    ).count(),
+                                    obj
+                                ])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "отметкам рейтинга (наибольшие в конце)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([
+                                    backend_models.RatingIdeaModel.objects.filter(
+                                        rating_idea_foreign_key_field=obj
+                                    ).count(),
+                                    obj
+                                ])
 
                             def sort_rating(val):
                                 return val[0]
@@ -2164,6 +2229,16 @@ def api_auth_idea(request):
                     obj.register_datetime_field = timezone.now()
                     obj.save()
 
+                    backend_models.NotificationModel.objects.create(
+                        notification_author_foreign_key_field=req_inst.user_model,
+                        notification_model_foreign_key_field=backend_models.GroupModel.objects.get(
+                            name_slug_field="idea_moderator"
+                        ),
+                        name_char_field="Отредактирована идея",
+                        place_char_field="банк идей",
+                        description_text_field=f"название: {obj.name_char_field}",
+                    )
+
                     response = {"response": "Успешно изменено!"}
                     # print(f"response: {response}")
                     return Response(response)
@@ -2184,6 +2259,34 @@ def api_auth_idea(request):
                     obj.comment_moderate_char_field = moderate_comment
                     obj.register_datetime_field = timezone.now()
                     obj.save()
+
+                    if moderate == "принято" or moderate == "на доработку":
+                        message = "Действия с Вашей идеей"
+                        if moderate == "принято":
+                            message = "Ваша идея успешно принята и открыта в общем доступе!"
+                        if moderate == "на доработку":
+                            message = "Ваша идея отправлена на доработку! Проверьте список идей на доработку и " \
+                                      "исправьте её!"
+                        backend_models.NotificationModel.objects.create(
+                            notification_author_foreign_key_field=req_inst.user_model,
+                            notification_target_foreign_key_field=obj.idea_author_foreign_key_field,
+                            name_char_field=message,
+                            place_char_field="банк идей",
+                            description_text_field=f"название: {obj.name_char_field}",
+                        )
+                    elif moderate == "скрыто":
+                        message = "Действия с Вашей идеей"
+                        if moderate == "скрыто":
+                            message = "Автор скрыл свою идею!"
+                        backend_models.NotificationModel.objects.create(
+                            notification_author_foreign_key_field=req_inst.user_model,
+                            notification_model_foreign_key_field=backend_models.GroupModel.objects.get(
+                                name_slug_field="idea_moderator"
+                            ),
+                            name_char_field=message,
+                            place_char_field="банк идей",
+                            description_text_field=f"название: {obj.name_char_field}",
+                        )
 
                     response = {"response": "Модерация успешно прошла!"}
                     # print(f"response: {response}")

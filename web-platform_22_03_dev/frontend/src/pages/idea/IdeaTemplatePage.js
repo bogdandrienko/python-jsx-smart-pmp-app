@@ -74,7 +74,7 @@ export const IdeaTemplatePage = () => {
                   Место изменения:
                   <input
                     type="text"
-                    className="form-control form-control-sm m-0 p-1"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     defaultValue="Глобально(всё предприятие)"
                     readOnly={true}
                     placeholder="введите место изменения тут..."
@@ -88,7 +88,7 @@ export const IdeaTemplatePage = () => {
                 <label className="form-control-sm w-100 m-0 p-1">
                   Описание:
                   <textarea
-                    className="form-control form-control-sm m-0 p-1"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     defaultValue="Предлагаю разработать веб-платформу с модульной системой, которая будет включать: расчётные листы, отпуска, рационализаторство и проектную деятельность, чат и многое другое."
                     readOnly={true}
                     required

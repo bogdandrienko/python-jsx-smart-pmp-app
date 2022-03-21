@@ -140,14 +140,18 @@ class CommentIdeaModelSerializer(serializers.ModelSerializer):
 
 
 class VacancyModelSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = backend_models.VacancyModel
         fields = '__all__'
 
 
-class ResumeModelSerializer(serializers.ModelSerializer):
+class NotificationModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = backend_models.NotificationModel
+        fields = '__all__'
 
+
+class ResumeModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = backend_models.ResumeModel
         fields = '__all__'

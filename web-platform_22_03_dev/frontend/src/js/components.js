@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Navbar,
@@ -16,16 +16,16 @@ import * as constants from "./constants";
 import * as utils from "./utils";
 import * as actions from "./actions";
 /////////////////////////////////////////////////////////////////////////////////////TODO default export const component
-export const HeaderComponent = ({
-  logic = true,
-  redirect = true,
-  title = "",
-  description = "",
-}) => {
+export const HeaderComponent = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  const { title, description, logic, redirect } = utils.GetInfoPage(location);
+  const [firstRefreshUserDetails, firstRefreshUserDetailsSet] = useState(true);
+  const [firstRefreshNotification, firstRefreshNotificationSet] =
+    useState(true);
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userLoginStore = useSelector((state) => state.userLoginStore);
   const {
@@ -39,18 +39,44 @@ export const HeaderComponent = ({
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
-    error: errorUserDetails,
+    // error: errorUserDetails,
     // fail: failUserDetails,
   } = userDetailsStore;
+  //////////////////////////////////////////////////////////
+  const notificationListStore = useSelector(
+    (state) => state.notificationListStore
+  );
+  const {
+    // load: loadNotificationList,
+    data: dataNotificationList,
+    // error: errorNotificationList,
+    // fail: failNotificationList,
+  } = notificationListStore;
   //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
-    if (logic) {
+    if (!dataUserDetails) {
       const form = {
         "Action-type": "USER_DETAIL",
       };
       dispatch(actions.userDetailsAction(form));
+    } else {
+      if (firstRefreshUserDetails && logic) {
+        firstRefreshUserDetailsSet(false);
+        dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
+      }
+      if (!utils.CheckPageAccess(userDetailsStore, location) && redirect) {
+        navigate("/");
+      }
     }
-  }, [dispatch, logic]);
+  }, [
+    dataUserDetails,
+    dispatch,
+    firstRefreshUserDetails,
+    logic,
+    location,
+    redirect,
+    navigate,
+  ]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (logic) {
@@ -75,22 +101,28 @@ export const HeaderComponent = ({
       }
     }
   }, [
-    dataUserLogin,
-    location.pathname,
-    navigate,
-    dispatch,
     logic,
-    errorUserDetails,
+    dataUserLogin,
+    location,
+    redirect,
+    dispatch,
+    navigate,
     dataUserDetails,
   ]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (userDetailsStore) {
-      if (!utils.CheckPageAccess(userDetailsStore, location) && redirect) {
-        navigate("/home");
+    if (!dataNotificationList) {
+      const form = {
+        "Action-type": "NOTIFICATION_LIST",
+      };
+      dispatch(actions.notificationListAction(form));
+    } else {
+      if (firstRefreshNotification) {
+        firstRefreshNotificationSet(false);
+        dispatch({ type: constants.NOTIFICATION_LIST_RESET_CONSTANT });
       }
     }
-  }, []);
+  }, [dataNotificationList, dispatch, firstRefreshNotification]);
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <header className="header navbar-fixed-top pb-3">
@@ -102,6 +134,9 @@ export const HeaderComponent = ({
           <a className="navbar-brand" href="/">
             Домашняя
           </a>
+          {dataNotificationList && dataNotificationList.length > 0 && (
+            <span className="badge bg-danger rounded-pill m-0 p-2">!</span>
+          )}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -110,9 +145,23 @@ export const HeaderComponent = ({
                   utils.CheckAccess(userDetailsStore, module.Access) && (
                     <NavDropdown
                       key={module_i}
-                      title={module.Header}
+                      title={
+                        module.Header !== "Профиль" ? (
+                          module.Header
+                        ) : (
+                          <span className="">
+                            {module.Header}{" "}
+                            {dataNotificationList &&
+                              dataNotificationList.length > 0 && (
+                                <span className="badge bg-danger rounded-pill m-0 p-2">
+                                  {dataNotificationList.length}
+                                </span>
+                              )}
+                          </span>
+                        )
+                      }
                       id="basic-nav-dropdown"
-                      className="btn btn-light m-1 p-0"
+                      className="btn btn-light bg-opacity-75 m-1 p-0"
                     >
                       {module.Sections.map(
                         (section, section_i) =>
@@ -121,7 +170,7 @@ export const HeaderComponent = ({
                             section.Access
                           ) && (
                             <li key={section_i}>
-                              <strong className="dropdown-header text-center m-1 p-0">
+                              <strong className="dropdown-header text-center bg-opacity-75 m-1 p-0">
                                 {section.Header}
                               </strong>
                               {section.Links.map((link, link_i) =>
@@ -134,8 +183,8 @@ export const HeaderComponent = ({
                                         key={link_i}
                                         className={
                                           link.Active
-                                            ? "dropdown-item m-1 p-0"
-                                            : "disabled dropdown-item m-1 p-0"
+                                            ? "dropdown-item bg-opacity-75 m-1 p-0"
+                                            : "disabled dropdown-item bg-opacity-75 m-1 p-0"
                                         }
                                         href={link.Link}
                                         target="_self"
@@ -153,12 +202,20 @@ export const HeaderComponent = ({
                                         to={link.Link}
                                         className={
                                           link.Active
-                                            ? "m-1 p-1"
-                                            : "disabled m-1 p-1"
+                                            ? "bg-opacity-75 m-1 p-1"
+                                            : "bg-opacity-75 disabled m-1 p-1"
                                         }
                                       >
-                                        <Nav.Link className="">
+                                        <Nav.Link className={link.Style}>
                                           {link.Header}
+                                          {link.Header === "Уведомления" &&
+                                            dataNotificationList &&
+                                            dataNotificationList.length > 0 && (
+                                              <span className="badge bg-danger rounded-pill bg-opacity-75 m-0 p-2">
+                                                {" "}
+                                                {dataNotificationList.length}
+                                              </span>
+                                            )}
                                         </Nav.Link>
                                       </LinkContainer>
                                     )
@@ -214,7 +271,10 @@ export const FooterComponent = () => {
       <div className="">
         <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
           <li className="m-1">
-            <a className="btn btn-sm btn-outline-secondary text-white" href="#">
+            <a
+              className="btn btn-sm btn-outline-secondary text-white"
+              href="/#"
+            >
               <i className="fa fa-arrow-up">{"  "} вверх</i>
               {"  "}
               <i className="fa fa-arrow-up"> </i>
@@ -383,11 +443,6 @@ export const StoreStatusComponent = ({
   showFail = true,
   failText = "",
 }) => {
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
   /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
   const {
     load: loadStatus,
@@ -400,7 +455,7 @@ export const StoreStatusComponent = ({
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div key={keyStatus} className="m-0 p-0 my-1">
+    <div key={keyStatus} className="m-0 p-0">
       {showLoad && loadStatus && (
         <div className="row justify-content-center m-0 p-0">
           {loadText !== "" ? (
@@ -480,42 +535,40 @@ export const MessageComponent = ({ variant, children }) => {
 };
 /////////////////////////////////////////////////////////////////////////////////////TODO default export const component
 export const ModulesComponent = () => {
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
-  const dispatch = useDispatch();
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  //////////////////////////////////////////////////////////
+  const notificationListStore = useSelector(
+    (state) => state.notificationListStore
+  );
   const {
-    // load: loadUserDetails,
-    data: dataUserDetails,
-    error: errorUserDetails,
-    // fail: failUserDetails,
-  } = userDetailsStore;
-  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
-  useEffect(() => {
-    if (!dataUserDetails) {
-      dispatch(actions.userDetailsAction());
-    }
-  }, [dispatch]);
+    // load: loadNotificationList,
+    data: dataNotificationList,
+    // error: errorNotificationList,
+    // fail: failNotificationList,
+  } = notificationListStore;
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
       {constants.modules && (
         <div>
-          <h2>Модули:</h2>
-          <div className="container-fluid">
-            <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+          <h6 className="display-6 text-center card-header bg-light bg-opacity-100">
+            Модули:
+          </h6>
+          <div className="container-fluid m-0 p-0">
+            <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-0 p-0">
               {constants.modules.map(
                 (module, module_i) =>
                   utils.CheckAccess(userDetailsStore, module.Access) &&
                   module.ShowInModules && (
-                    <div key={module_i} className="border shadow text-center  ">
-                      <div className="card-header m-0 p-0 lead">
+                    <div key={module_i} className="text-center m-0 p-1">
+                      <div className="lead card-header border shadow bg-light bg-opacity-100 custom-background-transparent-hard m-0 p-0">
                         {module["Header"]}
                       </div>
-                      <div className="text-center">
+                      <div className="text-center m-0 p-0">
                         <img
                           src={module["Image"]}
-                          className="img-fluid w-25"
+                          className="img-fluid w-25 m-0 p-0"
                           alt="id"
                         />
                       </div>
@@ -528,29 +581,29 @@ export const ModulesComponent = () => {
                               ) && (
                                 <div
                                   key={section_i}
-                                  className="card-body m-0 p-0 text-end  "
+                                  className="card-body text-end m-0 p-1"
                                 >
                                   <div className="card">
-                                    <li className="list-group-item list-group-item-action active disabled d-flex  ">
+                                    <li className="list-group-item list-group-item-action active disabled d-flex m-0 p-1">
                                       <div className="">
                                         <img
                                           src={section["Image"]}
-                                          className="img-fluid w-25"
+                                          className="img-fluid w-25 m-0 p-0"
                                           alt="id"
                                         />
                                       </div>
                                       <LinkContainer
                                         to="#"
-                                        className="disabled"
+                                        className="disabled m-0 p-0"
                                       >
                                         <Nav.Link>
-                                          <small className="fw-bold text-light">
+                                          <small className="fw-bold text-light m-0 p-0">
                                             {section["Header"]}
                                           </small>
                                         </Nav.Link>
                                       </LinkContainer>
                                     </li>
-                                    <ul className="list-group-flush   m-1">
+                                    <ul className="list-group-flush m-0 p-0">
                                       {section["Links"]
                                         ? section["Links"].map((link, link_i) =>
                                             link["Active"]
@@ -561,15 +614,15 @@ export const ModulesComponent = () => {
                                                 link.ShowLink && (
                                                   <li
                                                     key={link_i}
-                                                    className="list-group-item list-group-item-action  "
+                                                    className="list-group-item list-group-item-action m-0 p-0"
                                                   >
                                                     {link.ExternalLink ? (
                                                       <a
                                                         key={link_i}
                                                         className={
                                                           link["Active"]
-                                                            ? "text-dark dropdown-item"
-                                                            : "disabled"
+                                                            ? "text-dark dropdown-item m-0 p-0"
+                                                            : "disabled m-0 p-1"
                                                         }
                                                         href={link["Link"]}
                                                         target="_self"
@@ -581,8 +634,20 @@ export const ModulesComponent = () => {
                                                         to={link["Link"]}
                                                       >
                                                         <Nav.Link>
-                                                          <small className="text-dark">
+                                                          <small className="text-dark m-0 p-0">
                                                             {link["Header"]}
+                                                            {"  "}
+                                                            {link.Header ===
+                                                              "Уведомления" &&
+                                                              dataNotificationList &&
+                                                              dataNotificationList.length >
+                                                                0 && (
+                                                                <span className="badge bg-danger rounded-pill m-0 p-2">
+                                                                  {
+                                                                    dataNotificationList.length
+                                                                  }
+                                                                </span>
+                                                              )}
                                                           </small>
                                                         </Nav.Link>
                                                       </LinkContainer>
@@ -596,7 +661,7 @@ export const ModulesComponent = () => {
                                                 link.ShowLink && (
                                                   <li
                                                     key={link_i}
-                                                    className="list-group-item list-group-item-action disabled   m-1"
+                                                    className="list-group-item list-group-item-action disabled m-0 p-0"
                                                   >
                                                     <LinkContainer
                                                       to={
@@ -604,12 +669,12 @@ export const ModulesComponent = () => {
                                                           ? link["Link"]
                                                           : "#"
                                                       }
-                                                      className="disabled"
+                                                      className="disabled m-0 p-0"
                                                     >
                                                       <Nav.Link>
-                                                        <small className="text-muted">
+                                                        <small className="text-muted m-0 p-0">
                                                           {link["Header"]} (
-                                                          <small className="text-danger">
+                                                          <small className="text-danger m-0 p-0">
                                                             В РАЗРАБОТКЕ
                                                           </small>
                                                           )
@@ -703,5 +768,312 @@ export const NewsComponent = (count = 100) => {
         ))}
       </div>
     </div>
+  );
+};
+
+export const RationalComponent = ({ object, shortView = false }) => {
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <div
+      className={
+        shortView ? "card list-group-item-action shadow  " : "card shadow  "
+      }
+    >
+      <div className="card-header m-0 p-0   bg-opacity-10 bg-primary">
+        <h6 className="lead fw-bold">
+          {object["name_char_field"]}{" "}
+          {utils.CheckAccess(userDetailsStore, "rational_admin") && (
+            <small className="text-danger">
+              [{utils.GetSliceString(object["status_moderate_char_field"], 30)}]
+            </small>
+          )}
+        </h6>
+      </div>
+      <div className="card-body m-0 p-0  ">
+        <label className="form-control-sm m-1">
+          Подразделение:
+          <select
+            id="subdivision"
+            name="subdivision"
+            required
+            className="form-control form-control-sm"
+          >
+            <option value="">{object["subdivision_char_field"]}</option>
+          </select>
+        </label>
+        <label className="form-control-sm m-1">
+          Зарегистрировано за №{" "}
+          <strong className="btn btn-light disabled">
+            {object["number_char_field"]}
+          </strong>
+        </label>
+      </div>
+
+      <div className="card-body m-0 p-0  ">
+        <label className="form-control-sm m-1">
+          Сфера:
+          <select
+            id="sphere"
+            name="sphere"
+            required
+            className="form-control form-control-sm"
+          >
+            <option value="">{object["sphere_char_field"]}</option>
+          </select>
+        </label>
+        <label className="form-control-sm m-1">
+          Категория:
+          <select
+            id="category"
+            name="category"
+            required
+            className="form-control form-control-sm"
+          >
+            <option value="">{object["category_char_field"]}</option>
+          </select>
+        </label>
+      </div>
+      <div className="card-body m-0 p-0  ">
+        <img
+          src={utils.GetStaticFile(object["avatar_image_field"])}
+          className={
+            shortView
+              ? "card-img-top img-fluid w-25"
+              : "card-img-top img-fluid w-100"
+          }
+          alt="id"
+        />
+      </div>
+      <div className="card-body m-0 p-0  ">
+        <label className="w-100 form-control-sm">
+          Место внедрения:
+          <input
+            type="text"
+            id="name_char_field"
+            name="name_char_field"
+            required
+            placeholder="Цех / участок / отдел / лаборатория и т.п."
+            defaultValue={object["place_char_field"]}
+            readOnly={true}
+            minLength="1"
+            maxLength="100"
+            className="form-control form-control-sm"
+          />
+        </label>
+      </div>
+      <div className="card-body m-0 p-0  ">
+        <label className="w-100 form-control-sm m-1">
+          Описание:
+          <textarea
+            required
+            placeholder="Описание"
+            defaultValue={
+              !shortView
+                ? utils.GetSliceString(object["description_text_field"], 50)
+                : object["description_text_field"]
+            }
+            readOnly={true}
+            minLength="1"
+            maxLength="5000"
+            rows="3"
+            className="form-control form-control-sm"
+          />
+        </label>
+      </div>
+      {!shortView && (
+        <div className="card-body m-0 p-0  ">
+          <label className="form-control-sm m-1">
+            Word файл-приложение:
+            <a
+              className="btn btn-sm btn-primary m-1"
+              href={utils.GetStaticFile(object["additional_word_file_field"])}
+            >
+              Скачать документ
+            </a>
+          </label>
+          <label className="form-control-sm m-1">
+            Pdf файл-приложение:
+            <a
+              className="btn btn-sm btn-danger m-1"
+              href={utils.GetStaticFile(object["additional_pdf_file_field"])}
+            >
+              Скачать документ
+            </a>
+          </label>
+          <label className="form-control-sm m-1">
+            Excel файл-приложение:
+            <a
+              className="btn btn-sm btn-success m-1"
+              href={utils.GetStaticFile(object["additional_excel_file_field"])}
+            >
+              Скачать документ
+            </a>
+          </label>
+        </div>
+      )}
+      <div className="card-body m-0 p-0  ">
+        <Link to={`#`} className="text-decoration-none btn btn-sm btn-warning">
+          Автор: {object["user_model"]["last_name_char_field"]}{" "}
+          {object["user_model"]["first_name_char_field"]}{" "}
+          {object["user_model"]["patronymic_char_field"]}
+        </Link>
+      </div>
+      {!shortView && (
+        <label className="w-100 form-control-sm m-1">
+          Участники:
+          {object["user1_char_field"] &&
+            object["user1_char_field"].length > 1 && (
+              <input
+                type="text"
+                value={object["user1_char_field"]}
+                placeholder="участник № 1"
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {object["user2_char_field"] &&
+            object["user2_char_field"].length > 1 && (
+              <input
+                type="text"
+                value={object["user2_char_field"]}
+                placeholder="участник № 2"
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {object["user3_char_field"] &&
+            object["user3_char_field"].length > 1 && (
+              <input
+                type="text"
+                value={object["user3_char_field"]}
+                placeholder="участник № 3"
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {object["user4_char_field"] &&
+            object["user4_char_field"].length > 1 && (
+              <input
+                type="text"
+                value={object["user4_char_field"]}
+                placeholder="участник № 4"
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+          {object["user5_char_field"] &&
+            object["user5_char_field"].length > 1 && (
+              <input
+                type="text"
+                value={object["user5_char_field"]}
+                placeholder="участник № 5"
+                minLength="0"
+                maxLength="200"
+                className="form-control form-control-sm"
+              />
+            )}
+        </label>
+      )}
+      <div className="card-body m-0 p-0  ">
+        <label className="text-muted border p-1 m-1">
+          подано:{" "}
+          <p className=" ">
+            {utils.GetCleanDateTime(object["created_datetime_field"], true)}
+          </p>
+        </label>
+        <label className="text-muted border p-1 m-1">
+          зарегистрировано:{" "}
+          <p className=" ">
+            {utils.GetCleanDateTime(object["register_datetime_field"], true)}
+          </p>
+        </label>
+      </div>
+      {shortView && (
+        <div className="card-header m-0 p-0  ">
+          <Link
+            className="btn btn-sm btn-primary w-100"
+            to={`/rational_detail/${object.id}`}
+          >
+            Подробнее
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const SalaryTableComponent = ({ tab = {} }) => {
+  let header = tab[0];
+  let thead_array = [];
+  for (let i in tab[1]["Fields"]) {
+    if (
+      tab[1]["Fields"][i] !== "ВсегоДни" &&
+      tab[1]["Fields"][i] !== "ВсегоЧасы"
+    ) {
+      thead_array.push(tab[1]["Fields"][i]);
+    }
+  }
+  let tbody_array = [];
+  for (let i in tab[1]) {
+    if (i !== "Fields") {
+      let local_tbody_array = [];
+      for (let j in tab[1][i]) {
+        if (j !== "ВсегоДни" && j !== "ВсегоЧасы") {
+          local_tbody_array.push(tab[1][i][j]);
+        }
+      }
+      tbody_array.push(local_tbody_array);
+    }
+  }
+  function getValue(value) {
+    if (typeof value === "number") {
+      return value.toFixed(2);
+    } else {
+      return value;
+    }
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <li className="m-1">
+      <h6 className="lead fw-bold bold">{header}</h6>
+      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+        <thead>
+          <tr>
+            {thead_array.map((thead, index_h) => (
+              <th key={index_h} className="text-center">
+                {thead}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {tbody_array.map((tbody, index_i) => (
+            <tr key={index_i}>
+              {tbody.slice(0, 1).map((body, index_j) => (
+                <td key={index_j} className="text-start">
+                  {body}
+                </td>
+              ))}
+              {tbody.slice(1, -1).map((body, index_j) => (
+                <td key={index_j} className="text-end">
+                  {body ? body : ""}
+                </td>
+              ))}
+              {tbody.slice(-1).map((body, index_j) => (
+                <td key={index_j} className="text-end">
+                  {body ? getValue(body) : ""}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </li>
   );
 };

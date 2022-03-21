@@ -67,12 +67,7 @@ export const IdeaRatingListPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <body>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Зал славы банка идей"}
-        description={"зал славы банка идей"}
-      />
+      <components.HeaderComponent />
       <main>
         <div className="accordion accordion-flush shadow m-0 p-0 mb-2">
           <div className="accordion-item custom-background-transparent-low m-0 p-0">
@@ -147,6 +142,12 @@ export const IdeaRatingListPage = () => {
                               </option>
                               <option value="рейтингу (популярные в конце)">
                                 рейтингу (популярные в конце)
+                              </option>
+                              <option value="отметкам рейтинга (наибольшие в начале)">
+                                отметкам рейтинга (наибольшие в начале)
+                              </option>
+                              <option value="отметкам рейтинга (наибольшие в конце)">
+                                отметкам рейтинга (наибольшие в конце)
                               </option>
                               <option value="комментариям (наибольшие в начале)">
                                 комментариям (наибольшие в начале)
@@ -289,7 +290,7 @@ export const IdeaRatingListPage = () => {
                           Место изменения:
                           <input
                             type="text"
-                            className="form-control form-control-sm m-0 p-1"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             defaultValue={utils.GetSliceString(
                               object["place_char_field"],
                               50
@@ -306,7 +307,7 @@ export const IdeaRatingListPage = () => {
                         <label className="form-control-sm w-100 m-0 p-1">
                           Описание:
                           <textarea
-                            className="form-control form-control-sm m-0 p-1"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             defaultValue={utils.GetSliceString(
                               object["description_text_field"],
                               50

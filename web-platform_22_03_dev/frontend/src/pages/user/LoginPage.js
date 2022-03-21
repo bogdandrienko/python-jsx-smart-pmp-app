@@ -1,39 +1,23 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const LoginPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [username, usernameSet] = useState("");
   const [password, passwordSet] = useState("");
   const [captcha, captchaSet] = useState("");
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userLoginStore = useSelector((state) => state.userLoginStore);
   const {
     // load: loadUserLogin,
@@ -41,17 +25,19 @@ export const LoginPage = () => {
     // error: errorUserLogin,
     // fail: failUserLogin,
   } = userLoginStore;
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataUserLogin) {
-      utils.Sleep(1000).then(() => {
+      utils.Sleep(2000).then(() => {
         navigate("/news");
       });
     }
   }, [navigate, dataUserLogin]);
-
-  const formHandlerSubmit = (e) => {
-    e.preventDefault();
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerLoginSubmit = (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     if (captcha && captcha !== "") {
       const form = {
         "Action-type": "USER_LOGIN",
@@ -61,131 +47,130 @@ export const LoginPage = () => {
       dispatch(actions.userLoginAction(form));
     }
   };
-
+  //////////////////////////////////////////////////////////
+  const handlerLoginReset = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
+    usernameSet("");
+    passwordSet("");
+  };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Вход в систему"}
-        description={"страница для входа в систему"}
-      />
-      <main className="container  ">
-        <div className="">
-          <components.StoreStatusComponent
-            storeStatus={userLoginStore}
-            key={"userLoginStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={true}
-            dataText={"Вы успешно вошли!"}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-          {!captcha && (
-            <components.MessageComponent variant="danger">
-              Пройдите проверку на робота!
-            </components.MessageComponent>
-          )}
-        </div>
-        <div className="">
-          <form className="text-center p-1 m-1" onSubmit={formHandlerSubmit}>
-            <div>
-              <label className="form-control-sm m-1 lead">
-                Введите Ваш ИИН:
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  id="username"
-                  value={username}
-                  placeholder="введите сюда ИИН..."
-                  required
-                  onChange={(e) => usernameSet(e.target.value)}
-                  minLength="12"
-                  maxLength="12"
+    <body>
+      <components.HeaderComponent />
+      <main>
+        <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
+          <form className="m-0 p-0" onSubmit={handlerLoginSubmit}>
+            <div className="card shadow custom-background-transparent-low m-0 p-0">
+              {!captcha && (
+                <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                  Пройдите проверку на робота!
+                </div>
+              )}
+              <div className="card-header m-0 p-0">
+                <components.StoreStatusComponent
+                  storeStatus={userLoginStore}
+                  key={"userLoginStore"}
+                  consoleLog={constants.DEBUG_CONSTANT}
+                  showLoad={true}
+                  loadText={""}
+                  showData={true}
+                  dataText={"Вы успешно вошли!"}
+                  showError={true}
+                  errorText={""}
+                  showFail={true}
+                  failText={""}
                 />
-                <p>
-                  <small className="text-danger">
-                    * обязательно
-                    <small className="text-muted">
-                      {" "}
-                      * количество символов: 12
+              </div>
+              <div className="card-body m-0 p-0">
+                <div className="m-0 p-1">
+                  <label className="form-control-sm w-75 m-0 p-1">
+                    Введите Ваш ИИН:
+                    <input
+                      type="text"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      value={username}
+                      placeholder="введите ИИН тут..."
+                      required
+                      minLength="12"
+                      maxLength="12"
+                      onChange={(e) => usernameSet(e.target.value)}
+                    />
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: 12 символов
+                      </small>
                     </small>
-                  </small>
-                </p>
-              </label>
-              <label className="form-control-sm m-1 lead">
-                Введите пароль для входа в аккаунт:
-                <input
-                  type="password"
-                  className="form-control form-control-sm"
-                  id="password"
-                  value={password}
-                  placeholder="введите сюда пароль..."
-                  required
-                  onChange={(e) => passwordSet(e.target.value)}
-                  minLength="8"
-                  maxLength="32"
-                />
-                <p className="m-0 p-0">
-                  <small className="text-danger">
-                    * обязательно
-                    <small className="text-muted">
-                      {" "}
-                      * количество символов: от 8 до 32
+                  </label>
+                  <label className="form-control-sm w-75 m-0 p-1">
+                    Введите пароль от аккаунта:
+                    <input
+                      type="password"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      id="password"
+                      value={password}
+                      placeholder="введите пароль тут..."
+                      required
+                      minLength="8"
+                      maxLength="16"
+                      onChange={(e) => passwordSet(e.target.value)}
+                    />
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: от 8 до 16 символов
+                      </small>
                     </small>
-                  </small>
-                </p>
-              </label>
-              <label className="m-1">
-                <ReCAPTCHA
-                  sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                  onChange={(e) => captchaSet(e)}
-                />
-              </label>
-            </div>
-            <hr />
-            <div className="container">
-              <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
-                <button
-                  type="submit"
-                  className="btn btn-sm btn-primary p-2 m-1"
-                >
-                  Войти в систему
-                </button>
-                <button
-                  type="reset"
-                  className="btn btn-sm btn-warning p-2 m-1"
-                  onClick={(e) => {
-                    passwordSet("");
-                    usernameSet("");
-                  }}
-                >
-                  Сбросить данные
-                </button>
-                <button
-                  type="reset"
-                  onClick={(e) => utils.ChangePasswordVisibility(["password"])}
-                  className="btn btn-sm btn-danger p-2 m-1"
-                >
-                  Видимость пароля
-                </button>
-                <Link
-                  to="/recover_password"
-                  className="btn btn-sm btn-success p-2 m-1"
-                >
-                  Восстановить доступ к аккаунту
-                </Link>
-              </ul>
+                  </label>
+                  <label className="m-0 p-1">
+                    <ReCAPTCHA
+                      sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
+                      onChange={(e) => captchaSet(e)}
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="card-footer m-0 p-0">
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
+                  <button
+                    className="btn btn-sm btn-primary m-1 p-2"
+                    type="submit"
+                  >
+                    отправить данные
+                  </button>
+                  <button
+                    className="btn btn-sm btn-warning m-1 p-2"
+                    type="reset"
+                    onClick={(e) => handlerLoginReset(e)}
+                  >
+                    сбросить данные
+                  </button>
+                  <button
+                    type="reset"
+                    onClick={(e) =>
+                      utils.ChangePasswordVisibility(["password"])
+                    }
+                    className="btn btn-sm btn-danger m-1 p-2"
+                  >
+                    Видимость пароля
+                  </button>
+                  <Link
+                    to="/recover_password"
+                    className="btn btn-sm btn-success m-1 p-2"
+                  >
+                    Восстановить доступ к аккаунту
+                  </Link>
+                </ul>
+              </div>
             </div>
           </form>
-        </div>
+        </ul>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };

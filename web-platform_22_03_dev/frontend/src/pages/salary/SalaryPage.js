@@ -1,38 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
-import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
-
-import SalaryTableComponent from "./SalaryTableComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const SalaryPage = () => {
-  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const salaryUserStore = useSelector((state) => state.salaryUserStore);
   const {
     load: loadSalaryUser,
@@ -40,10 +17,8 @@ export const SalaryPage = () => {
     // error: errorSalaryUser,
     // fail: failSalaryUser,
   } = salaryUserStore;
-
-  useEffect(() => {}, [dispatch]);
-
-  const formHandlerSubmit = async () => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerSubmit = async () => {
     let month_ = document.getElementById("month").value;
     if (month_.length <= 1) {
       month_ = "0" + month_;
@@ -55,17 +30,11 @@ export const SalaryPage = () => {
     };
     dispatch(actions.salaryUserAction(form));
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <components.HeaderComponent
-        logic={true}
-        redirect={true}
-        title={"Расчётный лист"}
-        description={"страница выгрузки Вашего расчётного листа"}
-      />
-      <main className="container">
+    <body>
+      <components.HeaderComponent />
+      <main>
         <div className="">
           <form className="">
             <div className="input-group m-0">
@@ -101,7 +70,7 @@ export const SalaryPage = () => {
               </select>
               {!loadSalaryUser && (
                 <button
-                  onClick={formHandlerSubmit}
+                  onClick={handlerSubmit}
                   className="btn btn-sm btn-primary"
                   type="button"
                 >
@@ -210,7 +179,7 @@ export const SalaryPage = () => {
                     </table>
                   </li>
                   {dataSalaryUser["tables"].map((tab, index) => (
-                    <SalaryTableComponent key={index} tab={tab} />
+                    <components.SalaryTableComponent key={index} tab={tab} />
                   ))}
                 </ul>
               </div>
@@ -219,6 +188,6 @@ export const SalaryPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </div>
+    </body>
   );
 };
