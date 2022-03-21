@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,44 +14,37 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const VacancyDetailPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const userDetailsAuthStore = useSelector(
-    (state) => state.userDetailsAuthStore
-  ); // store.js
-  const vacancyDetailAnyStore = useSelector(
-    (state) => state.vacancyDetailAnyStore
-  ); // store.js
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore);
   const {
     load: loadVacancyDetail,
     data: dataVacancyDetail,
     // error: errorVacancyDetail,
     // fail: failVacancyDetail,
-  } = vacancyDetailAnyStore;
-  const vacancyDeleteAuthStore = useSelector(
-    (state) => state.vacancyDeleteAuthStore
-  ); // store.js
+  } = vacancyDetailStore;
+  const vacancyDeleteStore = useSelector((state) => state.vacancyDeleteStore);
   const {
     // load: loadVacancyDelete,
     data: dataVacancyDelete,
     // error: errorVacancyDelete,
     // fail: failVacancyDelete,
-  } = vacancyDeleteAuthStore;
+  } = vacancyDeleteStore;
 
   useEffect(() => {
     if (
@@ -91,9 +85,10 @@ export const VacancyDetailPage = () => {
     dispatch(actions.vacancyDeleteAction(form));
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={false}
         title={"Описание вакансии"}
@@ -101,23 +96,23 @@ export const VacancyDetailPage = () => {
       />
       <main className="container  ">
         <div className="">
-          {StoreStatusComponent(
-            userDetailsAuthStore,
-            "userDetailsAuthStore",
+          {components.StoreStatusComponent(
+            userDetailsStore,
+            "userDetailsStore",
             false,
             "",
             constants.DEBUG_CONSTANT
           )}
-          {StoreStatusComponent(
-            vacancyDetailAnyStore,
-            "vacancyDetailAnyStore",
+          {components.StoreStatusComponent(
+            vacancyDetailStore,
+            "vacancyDetailStore",
             false,
             "",
             constants.DEBUG_CONSTANT
           )}
-          {StoreStatusComponent(
-            vacancyDeleteAuthStore,
-            "vacancyDeleteAuthStore",
+          {components.StoreStatusComponent(
+            vacancyDeleteStore,
+            "vacancyDeleteStore",
             true,
             "",
             constants.DEBUG_CONSTANT
@@ -136,7 +131,7 @@ export const VacancyDetailPage = () => {
             </Link>
           )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
               <Link
                 to={`/vacancy_change/${dataVacancyDetail.id}`}
                 className="btn btn-sm btn-warning"
@@ -145,7 +140,7 @@ export const VacancyDetailPage = () => {
               </Link>
             )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
               <button
                 className="btn btn-sm btn-danger"
                 onClick={(e) => formHandlerDelete(e, dataVacancyDetail.id)}
@@ -154,7 +149,7 @@ export const VacancyDetailPage = () => {
               </button>
             )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
               <Link to={`/vacancy_create`} className="btn btn-sm btn-secondary">
                 создать новую вакансию
               </Link>
@@ -280,7 +275,7 @@ export const VacancyDetailPage = () => {
           </div>
         )}
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

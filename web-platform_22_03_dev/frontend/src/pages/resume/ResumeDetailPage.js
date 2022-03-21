@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,44 +14,37 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const ResumeDetailPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const userDetailsAuthStore = useSelector(
-    (state) => state.userDetailsAuthStore
-  ); // store.js
-  const resumeDetailAuthStore = useSelector(
-    (state) => state.resumeDetailAuthStore
-  ); // store.js
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const resumeDetailStore = useSelector((state) => state.resumeDetailStore);
   const {
     load: loadResumeDetail,
     data: dataResumeDetail,
     // error: errorResumeDetail,
     // fail: failResumeDetail,
-  } = resumeDetailAuthStore;
-  const resumeDeleteAuthStore = useSelector(
-    (state) => state.resumeDeleteAuthStore
-  ); // store.js
+  } = resumeDetailStore;
+  const resumeDeleteStore = useSelector((state) => state.resumeDeleteStore);
   const {
     // load: loadResumeDelete,
     data: dataResumeDelete,
     // error: errorResumeDelete,
     // fail: failResumeDelete,
-  } = resumeDeleteAuthStore;
+  } = resumeDeleteStore;
 
   useEffect(() => {
     if (
@@ -91,9 +85,10 @@ export const ResumeDetailPage = () => {
     dispatch(actions.resumeDeleteAction(form));
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Описание резюме"}
@@ -101,9 +96,9 @@ export const ResumeDetailPage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={userDetailsAuthStore}
-            key={"userDetailsAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={userDetailsStore}
+            key={"userDetailsStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={false}
             loadText={""}
@@ -114,9 +109,9 @@ export const ResumeDetailPage = () => {
             showFail={true}
             failText={""}
           />
-          <StoreStatusComponent
-            storeStatus={resumeDetailAuthStore}
-            key={"resumeDetailAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={resumeDetailStore}
+            key={"resumeDetailStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={false}
             loadText={""}
@@ -127,9 +122,9 @@ export const ResumeDetailPage = () => {
             showFail={true}
             failText={""}
           />
-          <StoreStatusComponent
-            storeStatus={resumeDeleteAuthStore}
-            key={"resumeDeleteAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={resumeDeleteStore}
+            key={"resumeDeleteStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -146,7 +141,7 @@ export const ResumeDetailPage = () => {
             {"<="} назад к списку
           </Link>
           {dataResumeDetail &&
-            utils.CheckAccess(userDetailsAuthStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
               <button
                 className="btn btn-sm btn-danger"
                 onClick={(e) => formHandlerDelete(e, dataResumeDetail.id)}
@@ -316,7 +311,7 @@ export const ResumeDetailPage = () => {
           </div>
         )}
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

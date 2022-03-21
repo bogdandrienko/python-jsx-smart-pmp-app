@@ -77,6 +77,17 @@ export const NOTIFICATION_CREATE_FAIL_CONSTANT =
 export const NOTIFICATION_CREATE_RESET_CONSTANT =
   "NOTIFICATION_CREATE_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const NOTIFICATION_LIST_LOAD_CONSTANT =
+  "NOTIFICATION_LIST_LOAD_CONSTANT";
+export const NOTIFICATION_LIST_DATA_CONSTANT =
+  "NOTIFICATION_LIST_DATA_CONSTANT";
+export const NOTIFICATION_LIST_ERROR_CONSTANT =
+  "NOTIFICATION_LIST_ERROR_CONSTANT";
+export const NOTIFICATION_LIST_FAIL_CONSTANT =
+  "NOTIFICATION_LIST_FAIL_CONSTANT";
+export const NOTIFICATION_LIST_RESET_CONSTANT =
+  "NOTIFICATION_LIST_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_SALARY_LOAD_CONSTANT = "USER_SALARY_LOAD_CONSTANT";
 export const USER_SALARY_DATA_CONSTANT = "USER_SALARY_DATA_CONSTANT";
 export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
@@ -142,6 +153,17 @@ export const IDEA_COMMENT_CREATE_FAIL_CONSTANT =
 export const IDEA_COMMENT_CREATE_RESET_CONSTANT =
   "IDEA_COMMENT_CREATE_RESET_CONSTANT";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const IDEA_COMMENT_DELETE_LOAD_CONSTANT =
+  "IDEA_COMMENT_DELETE_LOAD_CONSTANT";
+export const IDEA_COMMENT_DELETE_DATA_CONSTANT =
+  "IDEA_COMMENT_DELETE_DATA_CONSTANT";
+export const IDEA_COMMENT_DELETE_ERROR_CONSTANT =
+  "IDEA_COMMENT_DELETE_ERROR_CONSTANT";
+export const IDEA_COMMENT_DELETE_FAIL_CONSTANT =
+  "IDEA_COMMENT_DELETE_FAIL_CONSTANT";
+export const IDEA_COMMENT_DELETE_RESET_CONSTANT =
+  "IDEA_COMMENT_DELETE_RESET_CONSTANT";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_COMMENT_LIST_LOAD_CONSTANT =
   "IDEA_COMMENT_LIST_LOAD_CONSTANT";
 export const IDEA_COMMENT_LIST_DATA_CONSTANT =
@@ -163,6 +185,15 @@ export const IDEA_RATING_CREATE_FAIL_CONSTANT =
   "IDEA_RATING_CREATE_FAIL_CONSTANT";
 export const IDEA_RATING_CREATE_RESET_CONSTANT =
   "IDEA_RATING_CREATE_RESET_CONSTANT";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+export const IDEA_AUTHOR_LIST_LOAD_CONSTANT = "IDEA_AUTHOR_LIST_LOAD_CONSTANT";
+export const IDEA_AUTHOR_LIST_DATA_CONSTANT =
+  "IDEA_RATING_CREATE_DATA_CONSTANT";
+export const IDEA_AUTHOR_LIST_ERROR_CONSTANT =
+  "IDEA_AUTHOR_LIST_ERROR_CONSTANT";
+export const IDEA_AUTHOR_LIST_FAIL_CONSTANT = "IDEA_AUTHOR_LIST_FAIL_CONSTANT";
+export const IDEA_AUTHOR_LIST_RESET_CONSTANT =
+  "IDEA_AUTHOR_LIST_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const VACANCY_LIST_LOAD_CONSTANT = "VACANCY_LIST_LOAD_CONSTANT";
 export const VACANCY_LIST_DATA_CONSTANT = "VACANCY_LIST_DATA_CONSTANT";
@@ -280,7 +311,7 @@ export const news = [
   {
     Title: "Расчётный лист:",
     Status: "active",
-    Link: "/news",
+    Link: "/salary",
     Description: "возможность выгрузки расчётного листа для основных",
     Helps: "",
     Danger: "контрактники пока не включены",
@@ -305,29 +336,6 @@ export const modules = [
             Access: "user",
             Active: false,
             Link: "#",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-          {
-            Header: "Glass",
-            Access: "moderator",
-            Active: true,
-            Link: "/glass",
-            ExternalLink: false,
-            ShowLink: true,
-          },
-        ],
-      },
-      {
-        Header: "Терминалы скуд",
-        Access: "moderator",
-        Image: "/static/img/modules.png",
-        Links: [
-          {
-            Header: "Перезагрузка",
-            Access: "moderator",
-            Active: true,
-            Link: "/terminal",
             ExternalLink: false,
             ShowLink: true,
           },
@@ -468,6 +476,14 @@ export const modules = [
         Image: "/static/img/modules.png",
         Links: [
           {
+            Header: "Заблокировать пользователя",
+            Access: "moderator",
+            Active: true,
+            Link: "/admin_change_user_activity",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
             Header: "Смена пароля пользователя",
             Access: "moderator",
             Active: true,
@@ -493,6 +509,21 @@ export const modules = [
           },
         ],
       },
+      {
+        Header: "Терминалы скуд",
+        Access: "moderator",
+        Image: "/static/img/modules.png",
+        Links: [
+          {
+            Header: "Перезагрузка",
+            Access: "moderator",
+            Active: true,
+            Link: "/terminal",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+        ],
+      },
     ],
   },
   {
@@ -512,6 +543,14 @@ export const modules = [
             Access: "user",
             Active: true,
             Link: "/home",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Уведомления",
+            Access: "user",
+            Active: true,
+            Link: "/notification_list",
             ExternalLink: false,
             ShowLink: true,
           },
@@ -654,7 +693,7 @@ export const modules = [
             Header: "Модерация подробности идеи [модератор] [скрыто]",
             Access: "idea_moderator",
             Active: true,
-            Link: "/idea_moderate_detail/0",
+            Link: "/idea_moderate_change/0",
             ExternalLink: false,
             ShowLink: false,
           },
@@ -689,6 +728,22 @@ export const modules = [
             Link: "/idea_change/0",
             ExternalLink: false,
             ShowLink: false,
+          },
+          {
+            Header: "Зал славы банка идей",
+            Access: "user",
+            Active: true,
+            Link: "/idea_rating",
+            ExternalLink: false,
+            ShowLink: true,
+          },
+          {
+            Header: "Лучшие авторы банка идей",
+            Access: "user",
+            Active: true,
+            Link: "/idea_author_list",
+            ExternalLink: false,
+            ShowLink: true,
           },
         ],
       },

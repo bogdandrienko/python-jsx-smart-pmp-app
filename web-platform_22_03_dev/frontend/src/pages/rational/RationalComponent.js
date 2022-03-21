@@ -13,21 +13,23 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const RationalComponent = ({ object, shortView = false }) => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const userDetailsAuthStore = useSelector(
-    (state) => state.userDetailsAuthStore
-  ); // store.js
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div
       className={
@@ -37,7 +39,7 @@ const RationalComponent = ({ object, shortView = false }) => {
       <div className="card-header m-0 p-0   bg-opacity-10 bg-primary">
         <h6 className="lead fw-bold">
           {object["name_char_field"]}{" "}
-          {utils.CheckAccess(userDetailsAuthStore, "rational_admin") && (
+          {utils.CheckAccess(userDetailsStore, "rational_admin") && (
             <small className="text-danger">
               [{utils.GetSliceString(object["status_moderate_char_field"], 30)}]
             </small>

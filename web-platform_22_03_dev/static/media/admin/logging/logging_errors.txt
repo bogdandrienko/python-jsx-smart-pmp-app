@@ -20,3 +20,69 @@ Bogdan, 127.0.0.1, /api/auth/terminal/, POST, 2022-03-17 09:24:44.137677, [WinEr
 , 127.0.0.1, /, GET, 2022-03-17 13:09:11.387563, index.html
 
 , 127.0.0.1, /, GET, 2022-03-17 13:09:17.540116, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-19 13:20:21.785499, division by zero
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-19 13:22:58.361318, division by zero
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-19 13:32:55.002999, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-19 13:33:02.384900, index.html
+
+Bogdan, 127.0.0.1, /api/auth/salary/, POST, 2022-03-19 17:31:04.913187, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /api/auth/salary/, POST, 2022-03-19 21:23:25.470135, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /api/auth/salary/, POST, 2022-03-19 21:25:51.884754, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /api/auth/salary/, POST, 2022-03-19 21:26:29.639491, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /api/auth/salary/, POST, 2022-03-19 21:52:42.588887, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-20 08:29:45.725547, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-20 13:55:57.658259, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-20 13:56:03.939615, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-20 18:29:52.635487, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-20 18:30:03.864545, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-20 18:30:35.825126, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-20 18:30:53.765024, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-20 18:31:08.684542, CommentIdeaModel matching query does not exist.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 11:16:36.479787, 'list' object has no attribute 'filter'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 11:17:56.173259, delete() takes 1 positional argument but 2 were given
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 11:19:26.633949, delete() takes 1 positional argument but 2 were given
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 11:20:49.728794, delete() takes 1 positional argument but 2 were given
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 11:21:41.582941, delete() takes 1 positional argument but 2 were given
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 11:22:06.723325, delete() takes 1 positional argument but 2 were given
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-21 11:38:32.523645, index.html
+
+Bogdan, 127.0.0.1, /, GET, 2022-03-21 11:38:39.675688, index.html
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 12:12:38.048503, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 12:12:38.072532, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 12:13:07.093198, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 12:13:07.091199, Field 'id' expected a number but got 'undefined'.
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 12:40:03.614073, could not convert string to float: '26:.2f'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 12:52:58.586282, local variable 'objects' referenced before assignment
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 13:07:29.030521, 'dict' object has no attribute 'get_total_rating'
+
+Bogdan, 127.0.0.1, /api/auth/idea/, POST, 2022-03-21 13:07:53.581180, 'dict' object has no attribute 'get_total_rating'

@@ -514,7 +514,6 @@ class RationalModelAdmin(admin.ModelAdmin):
 
         "visibility_boolean_field",
         "created_datetime_field",
-        "register_datetime_field",
     )
     list_display_links = (
         "author_foreign_key_field",
@@ -553,7 +552,6 @@ class RationalModelAdmin(admin.ModelAdmin):
 
         "visibility_boolean_field",
         "created_datetime_field",
-        "register_datetime_field",
     )
     fieldsets = (
         ("Основная информация", {"fields": (
@@ -587,7 +585,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         ("Дополнительные данные", {"fields": (
             "visibility_boolean_field",
             "created_datetime_field",
-            "register_datetime_field",
         )}),
     )
     search_fields = [
@@ -617,7 +614,6 @@ class RationalModelAdmin(admin.ModelAdmin):
 
         "visibility_boolean_field",
         "created_datetime_field",
-        "register_datetime_field",
     ]
 
 
@@ -652,6 +648,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
+        "register_datetime_field",
     )
     list_filter = (
         "idea_author_foreign_key_field",
@@ -690,7 +687,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
         ("Дополнительные данные", {"fields": (
             "visibility_boolean_field",
             "created_datetime_field",
-            "register_datetime_field",
+        "register_datetime_field",
         )}),
     )
     search_fields = [
@@ -722,7 +719,6 @@ class RatingIdeaModelAdmin(admin.ModelAdmin):
         "rating_idea_foreign_key_field",
         "rating_idea_author_foreign_key_field",
         "rating_integer_field",
-        "datetime_field",
     )
     list_display_links = (
         "rating_idea_foreign_key_field",
@@ -735,7 +731,6 @@ class RatingIdeaModelAdmin(admin.ModelAdmin):
         "rating_idea_foreign_key_field",
         "rating_idea_author_foreign_key_field",
         "rating_integer_field",
-        "datetime_field",
     )
     fieldsets = (
         ("Основная информация", {"fields": (
@@ -744,7 +739,6 @@ class RatingIdeaModelAdmin(admin.ModelAdmin):
             "rating_integer_field",
         )}),
         ("Дополнительные данные", {"fields": (
-            "datetime_field",
         )}),
     )
     search_fields = [

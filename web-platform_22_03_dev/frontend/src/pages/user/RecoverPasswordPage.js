@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,22 +14,21 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const RecoverPasswordPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [captcha, captchaSet] = useState("");
   const [username, setUsername] = useState("");
@@ -40,15 +40,15 @@ export const RecoverPasswordPage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userRecoverPasswordAnyStore = useSelector(
-    (state) => state.userRecoverPasswordAnyStore
-  ); // store.js
+  const userRecoverPasswordStore = useSelector(
+    (state) => state.userRecoverPasswordStore
+  );
   const {
     // load: loadUserRecoverPassword,
     data: dataUserRecoverPassword,
     // error: errorUserRecoverPassword,
     // fail: failUserRecoverPassword,
-  } = userRecoverPasswordAnyStore;
+  } = userRecoverPasswordStore;
 
   const formHandlerSubmitFindUser = (e) => {
     e.preventDefault();
@@ -128,9 +128,10 @@ export const RecoverPasswordPage = () => {
     }
   }, [dataUserRecoverPassword]);
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={false}
         title={"Восстановление пароля"}
@@ -138,9 +139,9 @@ export const RecoverPasswordPage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={userRecoverPasswordAnyStore}
-            key={"userRecoverPasswordAnyStore"}
+          <components.StoreStatusComponent
+            storeStatus={userRecoverPasswordStore}
+            key={"userRecoverPasswordStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -154,9 +155,9 @@ export const RecoverPasswordPage = () => {
             failText={""}
           />
           {!captcha && (
-            <MessageComponent variant="danger">
+            <components.MessageComponent variant="danger">
               Пройдите проверку на робота!
-            </MessageComponent>
+            </components.MessageComponent>
           )}
         </div>
         <div className="m-1">
@@ -463,7 +464,7 @@ export const RecoverPasswordPage = () => {
           )}
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

@@ -1,124 +1,103 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { Link } from "react-router-dom";
+import { Container, Navbar, Nav } from "react-bootstrap";
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const IdeaListPage = () => {
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  const [firstRefresh, firstRefreshSet] = useState(true);
   const [detailView, detailViewSet] = useState(true);
   const [subdivision, subdivisionSet] = useState("");
   const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
   const [author, authorSet] = useState("");
   const [search, searchSet] = useState("");
-  const [sort, sortSet] = useState("дате публикации (сначала свежие)");
-  const [moderate, moderateSet] = useState("принято");
-
-  const ideaListAuthStore = useSelector((state) => state.ideaListAuthStore); // store.js
+  const [sort, sortSet] = useState("дате публикации (свежие в начале)");
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
+  const userListAllStore = useSelector((state) => state.userListAllStore);
   const {
-    load: loadIdeaList,
-    data: dataIdeaList,
-    // error: errorIdeaList,
-    // fail: failIdeaList,
-  } = ideaListAuthStore;
-  const userListAllAuthStore = useSelector(
-    (state) => state.userListAllAuthStore
-  ); // store.js
-  const {
-    load: loadUserListAll,
+    // load: loadUserListAll,
     data: dataUserListAll,
     // error: errorUserListAll,
     // fail: failUserListAll,
-  } = userListAllAuthStore;
-
-  const resetState = () => {
+  } = userListAllStore;
+  //////////////////////////////////////////////////////////
+  const ideaListStore = useSelector((state) => state.ideaListStore);
+  const {
+    // load: loadIdeaList,
+    data: dataIdeaList,
+    // error: errorIdeaList,
+    // fail: failIdeaList,
+  } = ideaListStore;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
+  const resetState = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
-    dispatch({ type: constants.IDEA_DETAIL_RESET_CONSTANT });
   };
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
-    if (!dataIdeaList) {
-      const form = {
-        "Action-type": "IDEA_LIST",
-        subdivision: subdivision,
-        category: category,
-        author: author,
-        search: search,
-        sort: sort,
-        moderate: moderate,
-      };
-      dispatch(actions.ideaListAction(form));
-    } else {
-      let needReload = false;
-      dataIdeaList.forEach(function (object, index, array) {
-        if (object["status_moderate_char_field"] !== "принято") {
-          needReload = true;
-        }
-      });
-      if (needReload) {
-        dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
-      }
-    }
-  }, [dispatch, dataIdeaList, loadIdeaList]);
-
-  useEffect(() => {
-    if (!dataUserListAll && !loadUserListAll) {
+    if (!dataUserListAll) {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
       dispatch(actions.userListAllAction(form));
     }
-  }, [dispatch, dataUserListAll, loadUserListAll]);
-
-  const formHandlerSubmit = async (e) => {
+  }, [dataUserListAll, dispatch]);
+  //////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (!dataIdeaList) {
+      const form = {
+        "Action-type": "IDEA_LIST",
+        subdivision: subdivision,
+        sphere: sphere,
+        category: category,
+        author: author,
+        search: search,
+        sort: sort,
+        moderate: "принято",
+      };
+      dispatch(actions.ideaListAction(form));
+    } else {
+      if (firstRefresh) {
+        firstRefreshSet(false);
+        resetState();
+      }
+    }
+  }, [dataIdeaList, dispatch, firstRefresh]);
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerSubmit = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
     resetState();
   };
-
-  const formHandlerReset = async (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerReset = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
     subdivisionSet("");
+    sphereSet("");
     categorySet("");
     authorSet("");
     searchSet("");
-    sortSet("дате публикации (сначала свежие)");
-    dispatch({
-      type: constants.IDEA_LIST_RESET_CONSTANT,
-    });
+    sortSet("дате публикации (свежие в начале)");
+    resetState();
   };
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <HeaderComponent
+    <body>
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Список идей"}
@@ -126,12 +105,12 @@ export const IdeaListPage = () => {
           "список идей в банке идей с возможностью поиска и фильтрации"
         }
       />
-      <main className="container">
-        <div className="accordion accordion-flush shadow card my-2">
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="headingOne">
+      <main>
+        <div className="accordion accordion-flush shadow m-0 p-0 mb-2">
+          <div className="accordion-item custom-background-transparent-low m-0 p-0">
+            <h2 className="accordion-header m-0 p-0" id="headingOne">
               <button
-                className="accordion-button bg-success bg-opacity-10"
+                className="accordion-button bg-success bg-opacity-10 m-0 p-3"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseOne"
@@ -139,9 +118,9 @@ export const IdeaListPage = () => {
                 aria-controls="collapseOne"
                 onClick={(e) => utils.ChangeAccordionCollapse(["collapseOne"])}
               >
-                <h4 className="lead fw-bold text-success">
+                <h4 className="lead fw-bold text-success m-0 p-0">
                   Фильтрация, поиск и сортировка{" "}
-                  <small className="text-muted">
+                  <small className="text-muted m-0 p-0">
                     (нажмите сюда, для переключения)
                   </small>
                 </h4>
@@ -153,99 +132,140 @@ export const IdeaListPage = () => {
               aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
-              <ul className="justify-content-center">
-                <form className="" onSubmit={formHandlerSubmit}>
-                  <div className="card shadow text-center p-0">
-                    <div className="card-header">
-                      <label className="lead">
+              <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
+                <form className="m-0 p-0" onSubmit={handlerSubmit}>
+                  <div className="card shadow custom-background-transparent-hard m-0 p-0">
+                    <div className="card-header m-0 p-0">
+                      <label className="lead m-0 p-1">
                         Выберите нужные настройки фильтрации и сортировки, затем
                         нажмите кнопку{" "}
-                        <p className="fw-bold text-primary">"фильтровать"</p>
+                        <p className="fw-bold text-primary m-0 p-0">
+                          "фильтровать"
+                        </p>
                       </label>
-                      <label className="form-control-sm form-switch">
+                      <label className="form-control-sm form-switch m-0 p-1">
                         Детальное отображение:
                         <input
                           type="checkbox"
-                          className="form-check-input m-1"
+                          className="form-check-input m-0 p-1"
                           id="flexSwitchCheckDefault"
                           defaultChecked={detailView}
                           onClick={(e) => detailViewSet(!detailView)}
                         />
                       </label>
                     </div>
-                    <div className="card-body">
-                      <div>
-                        <label className="form-control-sm">
+                    <div className="card-body m-0 p-0">
+                      <div className="m-0 p-0">
+                        <label className="form-control-sm m-0 p-1">
                           Подразделение:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm m-0 p-1"
                             value={subdivision}
                             onChange={(e) => subdivisionSet(e.target.value)}
                           >
-                            <option value="">все варианты</option>
-                            <option value="автотранспортное предприятие">
+                            <option className="m-0 p-0" value="">
+                              все варианты
+                            </option>
+                            <option
+                              className="m-0 p-0"
+                              value="автотранспортное предприятие"
+                            >
                               автотранспортное предприятие
                             </option>
-                            <option value="горно-транспортный комплекс">
+                            <option
+                              className="m-0 p-0"
+                              value="горно-транспортный комплекс"
+                            >
                               горно-транспортный комплекс
                             </option>
-                            <option value="обогатительный комплекс">
+                            <option
+                              className="m-0 p-0"
+                              value="обогатительный комплекс"
+                            >
                               обогатительный комплекс
                             </option>
-                            <option value="управление">
+                            <option className="m-0 p-0" value="управление">
                               управление предприятия
                             </option>
-                            <option value="энергоуправление">
+                            <option
+                              className="m-0 p-0"
+                              value="энергоуправление"
+                            >
                               энергоуправление
                             </option>
                           </select>
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm m-0 p-1">
                           Сфера:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm m-0 p-1"
                             value={sphere}
                             onChange={(e) => sphereSet(e.target.value)}
                           >
-                            <option value="">все варианты</option>
-                            <option value="технологическая">
+                            <option className="m-0 p-0" value="">
+                              все варианты
+                            </option>
+                            <option className="m-0 p-0" value="технологическая">
                               технологическая
                             </option>
-                            <option value="не технологическая">
+                            <option
+                              className="m-0 p-0"
+                              value="не технологическая"
+                            >
                               не технологическая
                             </option>
                           </select>
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm m-0 p-1">
                           Категория:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm m-0 p-1"
                             value={category}
                             onChange={(e) => categorySet(e.target.value)}
                           >
-                            <option value="">все варианты</option>
-                            <option value="индустрия 4.0">индустрия 4.0</option>
-                            <option value="инвестиции">инвестиции</option>
-                            <option value="инновации">инновации</option>
-                            <option value="модернизация">модернизация</option>
-                            <option value="экология">экология</option>
-                            <option value="спорт/культура">
+                            <option className="m-0 p-0" value="">
+                              все варианты
+                            </option>
+                            <option className="m-0 p-0" value="индустрия 4.0">
+                              индустрия 4.0
+                            </option>
+                            <option className="m-0 p-0" value="инвестиции">
+                              инвестиции
+                            </option>
+                            <option className="m-0 p-0" value="инновации">
+                              инновации
+                            </option>
+                            <option className="m-0 p-0" value="модернизация">
+                              модернизация
+                            </option>
+                            <option className="m-0 p-0" value="экология">
+                              экология
+                            </option>
+                            <option className="m-0 p-0" value="спорт/культура">
                               спорт/культура
                             </option>
-                            <option value="другое">другое</option>
+                            <option className="m-0 p-0" value="другое">
+                              другое
+                            </option>
                           </select>
                         </label>
                         {dataUserListAll && (
-                          <label className="form-control-sm">
+                          <label className="form-control-sm m-0 p-1">
                             Автор:
                             <select
-                              className="form-control form-control-sm"
+                              className="form-control form-control-sm m-0 p-1"
                               value={author}
                               onChange={(e) => authorSet(e.target.value)}
                             >
-                              <option value="">все варианты</option>
+                              <option className="m-0 p-0" value="">
+                                все варианты
+                              </option>
                               {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
+                                <option
+                                  key={index}
+                                  value={user}
+                                  className="m-0 p-0"
+                                >
                                   {user}
                                 </option>
                               ))}
@@ -253,74 +273,65 @@ export const IdeaListPage = () => {
                           </label>
                         )}
                       </div>
-                      <div>
-                        <StoreStatusComponent
-                          storeStatus={userListAllAuthStore}
-                          keyStatus={"userListAllAuthStore"}
-                          consoleLog={constants.DEBUG_CONSTANT}
-                          showLoad={true}
-                          loadText={""}
-                          showData={false}
-                          dataText={""}
-                          showError={true}
-                          errorText={""}
-                          showFail={true}
-                          failText={""}
-                        />
-                      </div>
-                      <div>
-                        <label className="w-75 form-control-sm">
+                      <components.StoreStatusComponent
+                        storeStatus={userListAllStore}
+                        keyStatus={"userListAllStore"}
+                        consoleLog={constants.DEBUG_CONSTANT}
+                        showLoad={true}
+                        loadText={""}
+                        showData={false}
+                        dataText={""}
+                        showError={true}
+                        errorText={""}
+                        showFail={true}
+                        failText={""}
+                      />
+                      <div className="m-0 p-0">
+                        <label className="form-control-sm w-75 m-0 p-1">
                           Поле поиска по части названия:
                           <input
                             type="text"
-                            className="form-control"
-                            placeholder="введите часть названия тут..."
+                            className="form-control m-0 p-1"
                             value={search}
+                            placeholder="введите часть названия тут..."
                             onChange={(e) => searchSet(e.target.value)}
                           />
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm m-0 p-1">
                           Сортировка по:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm m-0 p-1"
                             value={sort}
                             onChange={(e) => sortSet(e.target.value)}
                           >
-                            <option value="дате публикации (сначала свежие)">
-                              дате публикации (сначала свежие)
+                            <option value="дате публикации (свежие в начале)">
+                              дате публикации (свежие в начале)
                             </option>
-                            <option value="дате публикации (сначала старые)">
-                              дате публикации (сначала старые)
+                            <option value="дате публикации (свежие в конце)">
+                              дате публикации (свежие в конце)
                             </option>
-                            <option value="названию (С начала алфавита)">
-                              названию (С начала алфавита)
+                            <option value="названию (с начала алфавита)">
+                              названию (с начала алфавита)
                             </option>
-                            <option value="названию (С конца алфавита)">
-                              названию (С конца алфавита)
-                            </option>
-                            <option value="рейтингу (Популярные в начале)">
-                              рейтингу (Популярные в начале)
-                            </option>
-                            <option value="рейтингу (Популярные в конце)">
-                              рейтингу (Популярные в конце)
+                            <option value="названию (с конца алфавита)">
+                              названию (с конца алфавита
                             </option>
                           </select>
                         </label>
                       </div>
                     </div>
-                    <div className="card-footer">
-                      <hr />
-                      <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                    <div className="card-footer m-0 p-0">
+                      <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                         <button
-                          className="btn btn-sm btn-primary m-1 p-1"
+                          className="btn btn-sm btn-primary m-1 p-2"
                           type="submit"
                         >
-                          фильтровать
+                          фильтровать идеи
                         </button>
                         <button
-                          className="btn btn-sm btn-warning m-1 p-1"
+                          className="btn btn-sm btn-warning m-1 p-2"
                           type="reset"
-                          onClick={(e) => formHandlerReset(e)}
+                          onClick={(e) => handlerReset(e)}
                         >
                           сбросить фильтры
                         </button>
@@ -332,9 +343,9 @@ export const IdeaListPage = () => {
             </div>
           </div>
         </div>
-        <StoreStatusComponent
-          storeStatus={ideaListAuthStore}
-          keyStatus={"ideaListAuthStore"}
+        <components.StoreStatusComponent
+          storeStatus={ideaListStore}
+          keyStatus={"ideaListStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}
@@ -346,25 +357,25 @@ export const IdeaListPage = () => {
           failText={""}
         />
         {!dataIdeaList || dataIdeaList.length < 1 ? (
-          <div className="my-1">
-            <MessageComponent variant={"danger"}>
+          <div className="m-0 p-0 my-1">
+            <components.MessageComponent variant={"danger"}>
               Ничего не найдено! Попробуйте изменить условия фильтрации и/или
               очистить строку поиска.
-            </MessageComponent>
+            </components.MessageComponent>
           </div>
         ) : !detailView ? (
-          <div className="bg-opacity-10 bg-primary shadow my-1">
+          <div className="card shadow m-0 p-0 my-1">
             {dataIdeaList.map((object, index) => (
               <Link
                 key={index}
                 to={`/idea_detail/${object.id}`}
-                className="text-decoration-none"
+                className="text-decoration-none m-0 p-0"
               >
-                <li className="border list-group-item-action text-start small">
+                <li className="border list-group-item-action small m-0 p-1">
                   {utils.GetSliceString(object["name_char_field"], 20)}
                   {" | "}
                   {utils.GetCleanDateTime(
-                    object["created_datetime_field"],
+                    object["register_datetime_field"],
                     true
                   )}
                   {" | "}
@@ -381,362 +392,372 @@ export const IdeaListPage = () => {
             ))}
           </div>
         ) : (
-          <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 justify-content-center shadow m-0 p-0 ">
+          <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
             {dataIdeaList.map((object, index) => (
-              <Link
-                key={index}
-                to={`/idea_detail/${object.id}`}
-                className="text-decoration-none text-dark m-0 p-1 col-sm-12 col-md-6 col-lg-4"
-              >
-                <div className="card shadow text-center p-0">
-                  <div className="card-header bg-warning bg-opacity-10">
-                    <h6 className="lead fw-bold">
-                      {object["name_char_field"]}
-                    </h6>
-                  </div>
-                  <div className="card-body">
-                    <div>
-                      <label className="form-control-sm">
-                        Подразделение:
-                        <select
-                          className="form-control form-control-sm"
-                          required
-                        >
-                          <option value="">
-                            {object["subdivision_char_field"]}
-                          </option>
-                        </select>
-                      </label>
-                      <label className="form-control-sm">
-                        Сфера:
-                        <select
-                          className="form-control form-control-sm"
-                          required
-                        >
-                          <option value="">
-                            {object["sphere_char_field"]}
-                          </option>
-                        </select>
-                      </label>
-                      <label className="form-control-sm">
-                        Категория:
-                        <select
-                          className="form-control form-control-sm"
-                          required
-                        >
-                          <option value="">
-                            {object["category_char_field"]}
-                          </option>
-                        </select>
-                      </label>
+              <div key={index} className="col-sm-12 col-md-6 col-lg-4 m-0 p-1">
+                <Link
+                  to={`/idea_detail/${object.id}`}
+                  className="text-decoration-none text-dark m-0 p-0"
+                >
+                  <div className="card shadow custom-background-transparent-low m-0 p-0">
+                    <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
+                      <h6 className="lead fw-bold m-0 p-0">
+                        {object["name_char_field"]}
+                      </h6>
                     </div>
-                    <div>
-                      <img
-                        src={
-                          object["avatar_image_field"]
-                            ? utils.GetStaticFile(object["avatar_image_field"])
-                            : utils.GetStaticFile(
-                                "/media/default/idea/default_idea.jpg"
-                              )
-                        }
-                        className="card-img-top img-fluid w-50"
-                        alt="изображение отсутствует"
-                      />
-                    </div>
-                    <div>
-                      <label className="form-control-sm w-50">
-                        Место изменения:
-                        <input
-                          type="text"
-                          className="form-control form-control-sm"
-                          defaultValue={utils.GetSliceString(
-                            object["place_char_field"],
-                            50
-                          )}
-                          readOnly={true}
-                          placeholder="введите место изменения тут..."
-                          required
-                          minLength="1"
-                          maxLength="100"
+                    <div className="card-body m-0 p-0">
+                      <div className="m-0 p-0">
+                        <label className="form-control-sm m-0 p-1">
+                          Подразделение:
+                          <select
+                            className="form-control form-control-sm m-0 p-2"
+                            required
+                          >
+                            <option className="m-0 p-0" value="">
+                              {object["subdivision_char_field"]}
+                            </option>
+                          </select>
+                        </label>
+                        <label className="form-control-sm m-0 p-1">
+                          Сфера:
+                          <select
+                            className="form-control form-control-sm m-0 p-2"
+                            required
+                          >
+                            <option className="m-0 p-0" value="">
+                              {object["sphere_char_field"]}
+                            </option>
+                          </select>
+                        </label>
+                        <label className="form-control-sm m-0 p-1">
+                          Категория:
+                          <select
+                            className="form-control form-control-sm m-0 p-2"
+                            required
+                          >
+                            <option className="m-0 p-0" value="">
+                              {object["category_char_field"]}
+                            </option>
+                          </select>
+                        </label>
+                      </div>
+                      <div className="m-0 p-0">
+                        <img
+                          src={
+                            object["avatar_image_field"]
+                              ? utils.GetStaticFile(
+                                  object["avatar_image_field"]
+                                )
+                              : utils.GetStaticFile(
+                                  "/media/default/idea/default_idea.jpg"
+                                )
+                          }
+                          className="img-fluid img-thumbnail w-50 m-1 p-0"
+                          alt="изображение отсутствует"
                         />
-                      </label>
+                      </div>
+                      <div className="m-0 p-0">
+                        <label className="form-control-sm w-50 m-0 p-1">
+                          Место изменения:
+                          <input
+                            type="text"
+                            className="form-control form-control-sm m-0 p-1"
+                            defaultValue={utils.GetSliceString(
+                              object["place_char_field"],
+                              50
+                            )}
+                            readOnly={true}
+                            placeholder="введите место изменения тут..."
+                            required
+                            minLength="1"
+                            maxLength="100"
+                          />
+                        </label>
+                      </div>
+                      <div className="m-0 p-0">
+                        <label className="form-control-sm w-100 m-0 p-1">
+                          Описание:
+                          <textarea
+                            className="form-control form-control-sm m-0 p-1"
+                            defaultValue={utils.GetSliceString(
+                              object["description_text_field"],
+                              50
+                            )}
+                            readOnly={true}
+                            required
+                            placeholder="введите описание тут..."
+                            minLength="1"
+                            maxLength="3000"
+                            rows="3"
+                          />
+                        </label>
+                      </div>
+                      <div className="m-0 p-0">
+                        <Link
+                          to={`#`}
+                          className="btn btn-sm btn-warning m-0 p-2"
+                        >
+                          Автор: {object["user_model"]["last_name_char_field"]}{" "}
+                          {object["user_model"]["first_name_char_field"]}{" "}
+                          {object["user_model"]["position_char_field"]}
+                        </Link>
+                      </div>
+                      <div className="d-flex justify-content-between m-1 p-0">
+                        <label className="text-muted border m-0 p-2">
+                          подано:{" "}
+                          <p className="m-0">
+                            {utils.GetCleanDateTime(
+                              object["created_datetime_field"],
+                              true
+                            )}
+                          </p>
+                        </label>
+                        <label className="text-muted border m-1 p-2">
+                          зарегистрировано:{" "}
+                          <p className="m-0 p-0">
+                            {utils.GetCleanDateTime(
+                              object["register_datetime_field"],
+                              true
+                            )}
+                          </p>
+                        </label>
+                      </div>
                     </div>
-                    <div>
-                      <label className="form-control-sm w-100">
-                        Описание:
-                        <textarea
-                          className="form-control form-control-sm"
-                          defaultValue={utils.GetSliceString(
-                            object["description_text_field"],
-                            50
-                          )}
-                          readOnly={true}
-                          required
-                          placeholder="введите описание тут..."
-                          minLength="1"
-                          maxLength="3000"
-                          rows="3"
-                        />
-                      </label>
+                    <div className="card-footer m-0 p-1">
+                      <div className="d-flex justify-content-between m-0 p-1">
+                        <span
+                          className={
+                            object["total_rating"]["rate"] > 7
+                              ? "text-success m-0 p-1"
+                              : object["total_rating"]["rate"] > 4
+                              ? "text-warning m-0 p-1"
+                              : "text-danger m-0 p-1"
+                          }
+                        >
+                          Рейтинг
+                        </span>
+                        <Navbar className="text-center m-0 p-0">
+                          <Container className="m-0 p-0">
+                            <Nav className="me-auto m-0 p-0">
+                              <p
+                                className={
+                                  object["total_rating"]["rate"] > 7
+                                    ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
+                                    : object["total_rating"]["rate"] > 4
+                                    ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
+                                    : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
+                                }
+                              >
+                                {utils.GetSliceString(
+                                  object["total_rating"]["rate"],
+                                  3,
+                                  false
+                                )}
+                                <small className="align-text-top m-0 p-0">
+                                  {" \\ " + object["total_rating"]["count"]}
+                                </small>
+                              </p>
+                            </Nav>
+                          </Container>
+                        </Navbar>
+                        <span className="m-0 p-1">
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 1
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 0.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 2
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 1.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 3
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 2.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 4
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 3.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 5
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 4.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 6
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 5.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 7
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 6.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 8
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 7.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 9
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 8.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                          <i
+                            style={{
+                              color:
+                                object["total_rating"]["rate"] > 7
+                                  ? "#00ff00"
+                                  : object["total_rating"]["rate"] > 4
+                                  ? "#ffaa00"
+                                  : "#ff0000",
+                            }}
+                            className={
+                              object["total_rating"]["rate"] >= 10
+                                ? "fas fa-star m-0 p-0"
+                                : object["total_rating"]["rate"] >= 9.5
+                                ? "fas fa-star-half-alt m-0 p-0"
+                                : "far fa-star m-0 p-0"
+                            }
+                          />
+                        </span>
+                      </div>
+                      <div className="d-flex justify-content-between m-0 p-1">
+                        <span className="text-secondary m-0 p-1">
+                          Комментарии
+                        </span>
+                        <span className="badge bg-secondary rounded-pill m-0 p-2">
+                          {object["comment_count"]}
+                        </span>
+                      </div>
                     </div>
-                    <div>
+                    <div className="m-0 p-0">
                       <Link
-                        to={`#`}
-                        className="text-decoration-none btn btn-sm btn-warning"
+                        className="btn btn-sm btn-primary w-100 m-0 p-1"
+                        to={`/idea_detail/${object.id}`}
                       >
-                        Автор: {object["user_model"]["last_name_char_field"]}{" "}
-                        {object["user_model"]["first_name_char_field"]}{" "}
-                        {object["user_model"]["position_char_field"]}
+                        подробнее
                       </Link>
                     </div>
-                    <div>
-                      <label className="text-muted border p-1 m-1">
-                        подано:{" "}
-                        <p className="m-0 p-0">
-                          {utils.GetCleanDateTime(
-                            object["created_datetime_field"],
-                            true
-                          )}
-                        </p>
-                      </label>
-                      <label className="text-muted border p-1 m-1">
-                        зарегистрировано:{" "}
-                        <p className="m-0 p-0">
-                          {utils.GetCleanDateTime(
-                            object["register_datetime_field"],
-                            true
-                          )}
-                        </p>
-                      </label>
-                    </div>
                   </div>
-                  <div className="card-footer">
-                    <div className="d-flex justify-content-between p-1">
-                      <span
-                        className={
-                          object["total_rating"]["rate"] > 7
-                            ? "text-success"
-                            : object["total_rating"]["rate"] > 4
-                            ? "text-warning"
-                            : "text-danger"
-                        }
-                      >
-                        Рейтинг
-                      </span>
-                      <span>
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 1
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 0.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 2
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 1.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 3
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 2.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 4
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 3.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 5
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 4.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 6
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 5.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 7
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 6.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 8
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 7.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 9
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 8.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                        <i
-                          style={{
-                            color:
-                              object["total_rating"]["rate"] > 7
-                                ? "#00ff00"
-                                : object["total_rating"]["rate"] > 4
-                                ? "#ffaa00"
-                                : "#ff0000",
-                          }}
-                          className={
-                            object["total_rating"]["rate"] >= 10
-                              ? "fas fa-star"
-                              : object["total_rating"]["rate"] >= 9.5
-                              ? "fas fa-star-half-alt"
-                              : "far fa-star"
-                          }
-                        />
-                      </span>
-                      <span
-                        className={
-                          object["total_rating"]["rate"] > 7
-                            ? "badge bg-success rounded-pill"
-                            : object["total_rating"]["rate"] > 4
-                            ? "badge bg-warning rounded-pill"
-                            : "badge bg-danger rounded-pill"
-                        }
-                      >
-                        {utils.GetSliceString(
-                          object["total_rating"]["rate"],
-                          3,
-                          false
-                        )}
-                        {" \\  "}
-                        <small className="text-uppercase">
-                          {object["total_rating"]["count"]}
-                        </small>
-                      </span>
-                    </div>
-                    <div className="d-flex justify-content-between p-1">
-                      <span className="text-secondary">Комментарии</span>
-                      <span className="badge bg-secondary rounded-pill">
-                        {object["comment_count"]}
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <Link
-                      className="btn btn-sm btn-primary w-100"
-                      to={`/idea_detail/${object.id}`}
-                    >
-                      Подробнее
-                    </Link>
-                  </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
           </ul>
         )}
       </main>
-      <FooterComponent />
-    </div>
+      <components.FooterComponent />
+    </body>
   );
 };

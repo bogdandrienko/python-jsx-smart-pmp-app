@@ -1,19 +1,42 @@
+body{
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-image: url("../../public/static/img/background.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 main{
     min-height: 73vh;
+    margin-right: auto;
+    margin-left: auto;
     padding: 0 !important;
 }
-
-ul{
-  padding: 0 !important;
+@media (min-width: 576px) {
+  main {
+    max-width: 540px;
+  }
 }
-
-h3{
-  padding: 1rem 0;
+@media (min-width: 768px) {
+  main {
+    max-width: 720px;
+  }
 }
-
-.rating span{
-  padding: 0.1em;
-  margin: 0.1em;
+@media (min-width: 992px) {
+  main {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  main {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  main {
+    max-width: 1320px;
+  }
 }
 
 .custom-margin-padding-0{
@@ -62,4 +85,26 @@ h3{
     backdrop-filter: blur(5px) !important;
     transform-style: preserve-3d !important;
     transform: perspective(800px) !important;
+}
+
+.custom-background{
+  background-image: url("../../public/static/img/background.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.custom-background-transparent-none{
+    background: rgba( 255, 255, 255, 1.0 ) !important;
+}
+
+.custom-background-transparent-low{
+    background: rgba( 255, 255, 255, 0.95 ) !important;
+}
+
+.custom-background-transparent-middle{
+    background: rgba( 255, 255, 255, 0.85 ) !important;
+}
+
+.custom-background-transparent-hard{
+    background: rgba( 255, 255, 255, 0.10 ) !important;
 }

@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('rest_framework.urls')),
     path('api/auth/router/', include(router.urls)),
-    path('api/auth/routes/', backend_views.api_auth_routes, name='api_routes'),
+    path('api/auth/routes/', backend_views.api_auth_routes, name='api_auth_routes'),
     ####################################################################################################################
     path('api/any/user/login/', backend_views.api_any_login_user, name='api_any_login_user'),
     path('api/auth/user/detail/', backend_views.api_auth_user_detail, name='api_auth_user_detail'),
@@ -40,6 +40,8 @@ urlpatterns = [
     path('api/auth/user/temp_all/', backend_views.api_get_all_users_with_temp_password,
          name='api_get_all_users_with_temp_password'),
     ####################################################################################################################
+    path('api/auth/terminal/', backend_views.api_auth_terminal, name='api_auth_terminal'),
+    ####################################################################################################################
     path('api/auth/salary/', backend_views.api_auth_salary, name='api_auth_salary'),
     ####################################################################################################################
     path('api/auth/rational/', backend_views.api_auth_rational, name='api_auth_rational'),
@@ -50,8 +52,6 @@ urlpatterns = [
     path('api/auth/vacancy/', backend_views.api_auth_vacancy, name='api_auth_vacancy'),
     path('api/any/resume/', backend_views.api_any_resume, name='api_any_resume'),
     path('api/auth/resume/', backend_views.api_auth_resume, name='api_auth_resume'),
-    ####################################################################################################################
-    path('api/auth/terminal/', backend_views.api_auth_terminal, name='api_auth_terminal'),
     ####################################################################################################################
 ]
 

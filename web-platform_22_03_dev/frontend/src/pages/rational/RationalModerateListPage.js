@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,60 +14,54 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
+
 import RationalComponent from "./RationalComponent";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const RationalModerateListPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [detailView, detailViewSet] = useState(true);
   const [subdivision, subdivisionSet] = useState("");
   const [category, categorySet] = useState("");
   const [author, authorSet] = useState("");
   const [search, searchSet] = useState("");
-  const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
+  const [sort, sortSet] = useState("дате публикации (свежие в начале)");
   const [moderate, moderateSet] = useState("");
 
-  const userListAllAuthStore = useSelector(
-    (state) => state.userListAllAuthStore
-  ); // store.js
+  const userListAllStore = useSelector((state) => state.userListAllStore);
   const {
     // load: loadUserListAll,
     data: dataUserListAll,
     // error: errorUserListAll,
     // fail: failUserListAll,
-  } = userListAllAuthStore;
-  const rationalListAuthStore = useSelector(
-    (state) => state.rationalListAuthStore
-  ); // store.js
+  } = userListAllStore;
+  const rationalListStore = useSelector((state) => state.rationalListStore);
   const {
     load: loadRationalList,
     data: dataRationalList,
     // error: errorRationalList,
     // fail: failRationalList,
-  } = rationalListAuthStore;
-  const userDetailsAuthStore = useSelector(
-    (state) => state.userDetailsAuthStore
-  ); // store.js
+  } = rationalListStore;
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
     load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsAuthStore;
+  } = userDetailsStore;
 
   const getData = () => {
     const form = {
@@ -112,24 +107,18 @@ export const RationalModerateListPage = () => {
   useEffect(() => {
     if (dataUserDetails) {
       if (
-        utils.CheckAccess(
-          userDetailsAuthStore,
-          "rational_moderator_no_tech_post"
-        )
+        utils.CheckAccess(userDetailsStore, "rational_moderator_no_tech_post")
       ) {
         moderateSet("Постнетехмодерация");
       } else {
         if (
-          utils.CheckAccess(
-            userDetailsAuthStore,
-            "rational_moderator_tech_post"
-          )
+          utils.CheckAccess(userDetailsStore, "rational_moderator_tech_post")
         ) {
           moderateSet("Посттехмодерация");
         } else {
           if (
             utils.CheckAccess(
-              userDetailsAuthStore,
+              userDetailsStore,
               "rational_moderator_tech_pre_atp"
             )
           ) {
@@ -138,7 +127,7 @@ export const RationalModerateListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsAuthStore,
+              userDetailsStore,
               "rational_moderator_tech_pre_gtk"
             )
           ) {
@@ -147,7 +136,7 @@ export const RationalModerateListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsAuthStore,
+              userDetailsStore,
               "rational_moderator_tech_pre_ok"
             )
           ) {
@@ -156,7 +145,7 @@ export const RationalModerateListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsAuthStore,
+              userDetailsStore,
               "rational_moderator_tech_pre_uprav"
             )
           ) {
@@ -165,7 +154,7 @@ export const RationalModerateListPage = () => {
           }
           if (
             utils.CheckAccess(
-              userDetailsAuthStore,
+              userDetailsStore,
               "rational_moderator_tech_pre_energouprav"
             )
           ) {
@@ -187,13 +176,14 @@ export const RationalModerateListPage = () => {
     categorySet("");
     authorSet("");
     searchSet("");
-    sortSet("Дате публикации (сначала свежие)");
+    sortSet("дате публикации (свежие в начале)");
     getData();
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Модерация рационализаторских предложений"}
@@ -201,9 +191,9 @@ export const RationalModerateListPage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={userListAllAuthStore}
-            key={"userListAllAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={userListAllStore}
+            key={"userListAllStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={false}
             loadText={""}
@@ -214,9 +204,9 @@ export const RationalModerateListPage = () => {
             showFail={true}
             failText={""}
           />
-          <StoreStatusComponent
-            storeStatus={rationalListAuthStore}
-            key={"rationalListAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={rationalListStore}
+            key={"rationalListStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={false}
             loadText={""}
@@ -250,13 +240,13 @@ export const RationalModerateListPage = () => {
                   </label>
                 </div>
                 <div className="">
-                  {utils.CheckAccess(userDetailsAuthStore, "rational_admin") ||
+                  {utils.CheckAccess(userDetailsStore, "rational_admin") ||
                   utils.CheckAccess(
-                    userDetailsAuthStore,
+                    userDetailsStore,
                     "rational_moderator_no_tech_post"
                   ) ||
                   utils.CheckAccess(
-                    userDetailsAuthStore,
+                    userDetailsStore,
                     "rational_moderator_tech_post"
                   ) ? (
                     <label className="form-control-sm m-1">
@@ -319,10 +309,7 @@ export const RationalModerateListPage = () => {
                       </select>
                     </label>
                   )}
-                  {utils.CheckAccess(
-                    userDetailsAuthStore,
-                    "rational_admin"
-                  ) && (
+                  {utils.CheckAccess(userDetailsStore, "rational_admin") && (
                     <label className="form-control-sm m-1">
                       Статус:
                       <select
@@ -364,17 +351,17 @@ export const RationalModerateListPage = () => {
                       value={sort}
                       onChange={(e) => sortSet(e.target.value)}
                     >
-                      <option value="Дате публикации (сначала свежие)">
-                        Дате публикации (сначала свежие)
+                      <option value="дате публикации (свежие в начале)">
+                        дате публикации (свежие в начале)
                       </option>
-                      <option value="Дате публикации (сначала старые)">
-                        Дате публикации (сначала старые)
+                      <option value="дате публикации (свежие в конце)">
+                        дате публикации (свежие в конце)
                       </option>
-                      <option value="Названию (С начала алфавита)">
-                        Названию (С начала алфавита)
+                      <option value="названию (с начала алфавита)">
+                        названию (с начала алфавита)
                       </option>
-                      <option value="Названию (С конца алфавита)">
-                        Названию (С конца алфавита)
+                      <option value="названию (с конца алфавита">
+                        названию (с конца алфавита
                       </option>
                     </select>
                   </label>
@@ -395,10 +382,10 @@ export const RationalModerateListPage = () => {
             </ul>
           </div>
           {!dataRationalList || dataRationalList.length < 1 ? (
-            <MessageComponent variant={"danger"}>
+            <components.MessageComponent variant={"danger"}>
               Рац. предложения не найдены! Попробуйте изменить условия
               фильтрации или очистить строку поиска.
-            </MessageComponent>
+            </components.MessageComponent>
           ) : !detailView ? (
             <ul className="bg-opacity-10 bg-primary shadow">
               {dataRationalList.map((rational, index) => (
@@ -453,7 +440,7 @@ export const RationalModerateListPage = () => {
           )}
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

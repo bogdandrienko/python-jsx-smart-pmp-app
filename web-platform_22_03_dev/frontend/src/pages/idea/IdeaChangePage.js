@@ -1,35 +1,21 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Container, Navbar, Nav } from "react-bootstrap";
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const IdeaChangePage = () => {
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const id = useParams().id;
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  const [firstRefresh, firstRefreshSet] = useState(true);
   const [subdivision, subdivisionSet] = useState("");
   const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
@@ -38,27 +24,43 @@ export const IdeaChangePage = () => {
   const [name, nameSet] = useState("");
   const [place, placeSet] = useState("");
   const [description, descriptionSet] = useState("");
-  const [moderate, moderateSet] = useState("на модерации");
-  const [moderateComment, moderateCommentSet] = useState(
-    "автор внёс изменения"
-  );
-
-  const ideaDetailAuthStore = useSelector((state) => state.ideaDetailAuthStore); // store.js
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
+  const ideaDetailStore = useSelector((state) => state.ideaDetailStore);
   const {
-    load: loadIdeaDetail,
+    // load: loadIdeaDetail,
     data: dataIdeaDetail,
     // error: errorIdeaDetail,
     // fail: failIdeaDetail,
-  } = ideaDetailAuthStore;
-  const ideaChangeAuthStore = useSelector((state) => state.ideaChangeAuthStore); // store.js
+  } = ideaDetailStore;
+  //////////////////////////////////////////////////////////
+  const ideaChangeStore = useSelector((state) => state.ideaChangeStore);
   const {
     // load: loadIdeaChange,
     data: dataIdeaChange,
     // error: errorIdeaChange,
     // fail: failIdeaChange,
-  } = ideaChangeAuthStore;
-
-  const resetState = () => {
+  } = ideaChangeStore;
+  //////////////////////////////////////////////////////////
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const {
+    // load: loadUserDetails,
+    data: dataUserDetails,
+    // error: errorUserDetails,
+    // fail: failUserDetails,
+  } = userDetailsStore;
+  //////////////////////////////////////////////////////////
+  const ideaModerateStore = useSelector((state) => state.ideaModerateStore);
+  const {
+    load: loadIdeaModerate,
+    data: dataIdeaModerate,
+    // error: errorIdeaModerate,
+    // fail: failIdeaModerate,
+  } = ideaModerateStore;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
+  const resetState = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     clearImageSet(false);
     dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
     dispatch({ type: constants.IDEA_DETAIL_RESET_CONSTANT });
@@ -69,39 +71,48 @@ export const IdeaChangePage = () => {
       type: constants.IDEA_CHANGE_RESET_CONSTANT,
     });
   };
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
-    if (
-      dataIdeaDetail &&
-      !loadIdeaDetail &&
-      (dataIdeaDetail.id !== undefined || dataIdeaDetail.id !== id)
-    ) {
-      resetState();
-    }
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    if (!dataIdeaDetail && !loadIdeaDetail) {
+    if (!dataIdeaDetail) {
       const form = {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
       dispatch(actions.ideaDetailAction(form));
+    } else {
+      if (firstRefresh) {
+        firstRefreshSet(false);
+        resetState();
+      } else {
+        subdivisionSet(dataIdeaDetail["subdivision_char_field"]);
+        sphereSet(dataIdeaDetail["sphere_char_field"]);
+        categorySet(dataIdeaDetail["category_char_field"]);
+        avatarSet(null);
+        nameSet(dataIdeaDetail["name_char_field"]);
+        placeSet(dataIdeaDetail["place_char_field"]);
+        descriptionSet(dataIdeaDetail["description_text_field"]);
+      }
     }
-  }, [dispatch, id, dataIdeaDetail]);
-
+  }, [dataIdeaDetail, id, dispatch, firstRefreshSet]);
+  //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (dataIdeaDetail) {
-      subdivisionSet(dataIdeaDetail["subdivision_char_field"]);
-      sphereSet(dataIdeaDetail["sphere_char_field"]);
-      categorySet(dataIdeaDetail["category_char_field"]);
-      avatarSet(null);
-      nameSet(dataIdeaDetail["name_char_field"]);
-      placeSet(dataIdeaDetail["place_char_field"]);
-      descriptionSet(dataIdeaDetail["description_text_field"]);
+    if (dataIdeaChange) {
+      utils.Sleep(2000).then(() => {
+        resetState();
+        navigate("/idea_self_list");
+      });
     }
-  }, [dispatch, id, dataIdeaDetail]);
-
+  }, [dataIdeaChange, navigate]);
+  //////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (dataIdeaModerate) {
+      utils.Sleep(50).then(() => {
+        navigate("/idea_self_list");
+        resetState();
+      });
+    }
+  }, [dataIdeaModerate, navigate]);
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerChangeSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -117,49 +128,83 @@ export const IdeaChangePage = () => {
       name: name,
       place: place,
       description: description,
-      moderate: moderate,
-      moderateComment: moderateComment,
+      moderate: "на модерации",
+      moderateComment: "автор внёс изменения",
     };
     dispatch(actions.ideaChangeAction(form));
   };
-
-  useEffect(() => {
-    if (dataIdeaChange) {
-      utils.Sleep(3000).then(() => {
-        resetState();
-        navigate("/idea_self_list");
-      });
-    }
-  }, [dataIdeaChange]);
-
-  const handlerReset = async (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerChangeReset = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
     resetState();
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  //////////////////////////////////////////////////////////
+  const handlerHideSubmit = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
+    const form = {
+      "Action-type": "IDEA_MODERATE",
+      id: id,
+      moderate: "скрыто",
+      moderateComment: "скрыто автором",
+    };
+    let isConfirm = window.confirm("Вы действительно хотите скрыть свою идею?");
+    if (isConfirm) {
+      dispatch(actions.ideaModerateAction(form));
+    }
+  };
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div className="m-0 p-0">
-      <HeaderComponent
+    <body>
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Модерация идеи"}
         description={"изменение идеи в банке идей"}
       />
-      <main className="container">
-        <div className="btn-group m-0 p-1 text-start w-100">
+      <main>
+        <div className="btn-group text-start w-100 m-0 p-0">
           <Link
             to={"/idea_self_list"}
             className="btn btn-sm btn-primary m-1 p-2"
           >
             {"<="} назад к списку
           </Link>
+          <components.StoreStatusComponent
+            storeStatus={userDetailsStore}
+            keyStatus={"userDetailsStore"}
+            consoleLog={constants.DEBUG_CONSTANT}
+            showLoad={true}
+            loadText={""}
+            showData={false}
+            dataText={""}
+            showError={true}
+            errorText={""}
+            showFail={true}
+            failText={""}
+          />
+          {dataUserDetails &&
+            !loadIdeaModerate &&
+            dataUserDetails["user_model"]["id"] &&
+            dataIdeaDetail &&
+            dataIdeaDetail["user_model"]["id"] &&
+            dataUserDetails["user_model"]["id"] ===
+              dataIdeaDetail["user_model"]["id"] && (
+              <button
+                type="button"
+                className="btn btn-sm btn-warning m-1 p-2"
+                onClick={handlerHideSubmit}
+              >
+                скрыть
+              </button>
+            )}
         </div>
-        <StoreStatusComponent
-          storeStatus={ideaDetailAuthStore}
-          keyStatus={"ideaDetailAuthStore"}
+        <components.StoreStatusComponent
+          storeStatus={ideaDetailStore}
+          keyStatus={"ideaDetailStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}
@@ -170,141 +215,162 @@ export const IdeaChangePage = () => {
           showFail={true}
           failText={""}
         />
-        <StoreStatusComponent
-          storeStatus={ideaChangeAuthStore}
-          keyStatus={"ideaChangeAuthStore"}
-          consoleLog={constants.DEBUG_CONSTANT}
-          showLoad={true}
-          loadText={""}
-          showData={true}
-          dataText={""}
-          showError={true}
-          errorText={""}
-          showFail={true}
-          failText={""}
-        />
         {dataIdeaDetail && (
-          <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center">
-            <form className="" onSubmit={handlerChangeSubmit}>
-              <div className="card shadow text-center">
-                <div className="card-header bg-success bg-opacity-10">
-                  <h6 className="lead fw-bold">
+          <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center m-0 p-1">
+            <form className="m-0 p-0" onSubmit={handlerChangeSubmit}>
+              <div className="card shadow custom-background-transparent-low m-0 p-0">
+                <div className="card-header bg-success bg-opacity-10 m-0 p-3">
+                  <h6 className="lead fw-bold m-0 p-0">
                     {dataIdeaDetail["name_char_field"]}
                   </h6>
-                  <p className="text-danger small m-0 p-0">
-                    {" [ "}
-                    {utils.GetSliceString(
-                      dataIdeaDetail["status_moderate_char_field"],
-                      30
-                    )}
-                    {" : "}
+                  <h6 className="text-danger lead small m-0 p-0">
+                    {" [ комментарий модератора: "}
                     {utils.GetSliceString(
                       dataIdeaDetail["comment_moderate_char_field"],
                       30
                     )}
                     {" ]"}
-                  </p>
+                  </h6>
                 </div>
-                <div className="card-body">
-                  <div>
-                    <label className="form-control-sm">
+                <div className="card-body m-0 p-0">
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm m-0 p-1">
                       Подразделение:
                       <select
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm m-0 p-1"
                         value={subdivision}
                         required
                         onChange={(e) => subdivisionSet(e.target.value)}
                       >
-                        <option value="">не указано</option>
-                        <option value="автотранспортное предприятие">
+                        <option className="m-0 p-0" value="">
+                          не указано
+                        </option>
+                        <option
+                          className="m-0 p-0"
+                          value="автотранспортное предприятие"
+                        >
                           автотранспортное предприятие
                         </option>
-                        <option value="горно-транспортный комплекс">
+                        <option
+                          className="m-0 p-0"
+                          value="горно-транспортный комплекс"
+                        >
                           горно-транспортный комплекс
                         </option>
-                        <option value="обогатительный комплекс">
+                        <option
+                          className="m-0 p-0"
+                          value="обогатительный комплекс"
+                        >
                           обогатительный комплекс
                         </option>
-                        <option value="управление">
+                        <option className="m-0 p-0" value="управление">
                           управление предприятия
                         </option>
-                        <option value="энергоуправление">
+                        <option className="m-0 p-0" value="энергоуправление">
                           энергоуправление
                         </option>
                       </select>
-                      <small className="text-danger">* обязательно</small>
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                      </small>
                     </label>
-                    <label className="form-control-sm">
+                    <label className="form-control-sm m-0 p-1">
                       Сфера:
                       <select
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm m-0 p-1"
                         value={sphere}
                         required
                         onChange={(e) => sphereSet(e.target.value)}
                       >
-                        <option value="">не указано</option>
-                        <option value="технологическая">технологическая</option>
-                        <option value="не технологическая">
+                        <option className="m-0 p-0" value="">
+                          не указано
+                        </option>
+                        <option className="m-0 p-0" value="технологическая">
+                          технологическая
+                        </option>
+                        <option className="m-0 p-0" value="не технологическая">
                           не технологическая
                         </option>
                       </select>
-                      <small className="text-danger">* обязательно</small>
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                      </small>
                     </label>
-                    <label className="form-control-sm">
+                    <label className="form-control-sm m-0 p-1">
                       Категория:
                       <select
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm m-0 p-1"
                         value={category}
                         required
                         onChange={(e) => categorySet(e.target.value)}
                       >
-                        <option value="">не указано</option>
-                        <option value="индустрия 4.0">индустрия 4.0</option>
-                        <option value="инвестиции">инвестиции</option>
-                        <option value="инновации">инновации</option>
-                        <option value="модернизация">модернизация</option>
-                        <option value="экология">экология</option>
-                        <option value="спорт/культура">спорт/культура</option>
-                        <option value="другое">другое</option>
+                        <option className="m-0 p-0" value="">
+                          не указано
+                        </option>
+                        <option className="m-0 p-0" value="индустрия 4.0">
+                          индустрия 4.0
+                        </option>
+                        <option className="m-0 p-0" value="инвестиции">
+                          инвестиции
+                        </option>
+                        <option className="m-0 p-0" value="инновации">
+                          инновации
+                        </option>
+                        <option className="m-0 p-0" value="модернизация">
+                          модернизация
+                        </option>
+                        <option className="m-0 p-0" value="экология">
+                          экология
+                        </option>
+                        <option className="m-0 p-0" value="спорт/культура">
+                          спорт/культура
+                        </option>
+                        <option className="m-0 p-0" value="другое">
+                          другое
+                        </option>
                       </select>
-                      <small className="text-danger">* обязательно</small>
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                      </small>
                     </label>
                   </div>
-                  <div>
+                  <div className="m-0 p-1">
                     <img
                       src={utils.GetStaticFile(
                         dataIdeaDetail["avatar_image_field"]
                       )}
-                      className="card-img-top img-fluid w-25"
+                      className="card-img-top img-fluid w-25 m-0 p-1"
                       alt="изображение отсутствует"
                     />
-                    <label className="form-control-sm form-switch m-1">
+                    <label className="form-control-sm form-switch m-0 p-1">
                       Удалить текущее изображение:
                       <input
                         type="checkbox"
-                        className="form-check-input m-1"
+                        className="form-check-input m-0 p-1"
                         id="flexSwitchCheckDefault"
                         defaultChecked={clearImage}
                         onClick={(e) => clearImageSet(!clearImage)}
                       />
                     </label>
-                    <label className="form-control-sm">
+                    <label className="form-control-sm m-0 p-1">
                       Аватарка-заставка:
                       <input
                         type="file"
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm m-0 p-1"
                         accept=".jpg, .png"
                         onChange={(e) => avatarSet(e.target.files[0])}
                       />
-                      <small className="text-muted">* не обязательно</small>
+                      <small className="text-muted m-0 p-0">
+                        * не обязательно
+                      </small>
                     </label>
                   </div>
-                  <div>
-                    <label className="form-control-sm w-75">
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm w-75 m-0 p-1">
                       Название:
                       <input
                         type="text"
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm m-0 p-1"
                         value={name}
                         placeholder="введите название тут..."
                         required
@@ -312,21 +378,21 @@ export const IdeaChangePage = () => {
                         maxLength="200"
                         onChange={(e) => nameSet(e.target.value)}
                       />
-                      <small className="text-danger">
+                      <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-muted">
+                        <small className="text-muted m-0 p-0">
                           {" "}
                           * длина: не более 200 символов
                         </small>
                       </small>
                     </label>
                   </div>
-                  <div>
-                    <label className="w-50 form-control-sm">
+                  <div className="m-0 p-1">
+                    <label className="w-50 form-control-sm m-0 p-1">
                       Место изменения:
                       <input
                         type="text"
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm m-0 p-1"
                         value={place}
                         placeholder="введите место изменения тут..."
                         required
@@ -334,20 +400,20 @@ export const IdeaChangePage = () => {
                         maxLength="100"
                         onChange={(e) => placeSet(e.target.value)}
                       />
-                      <small className="text-danger">
+                      <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-muted">
+                        <small className="text-muted m-0 p-0">
                           {" "}
                           * длина: не более 100 символов
                         </small>
                       </small>
                     </label>
                   </div>
-                  <div>
-                    <label className="w-100 form-control-sm">
+                  <div className="m-0 p-1">
+                    <label className="w-100 form-control-sm m-0 p-1">
                       Описание:
                       <textarea
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm m-0 p-1"
                         value={description}
                         required
                         placeholder="введите описание тут..."
@@ -356,29 +422,261 @@ export const IdeaChangePage = () => {
                         rows="3"
                         onChange={(e) => descriptionSet(e.target.value)}
                       />
-                      <small className="text-danger">
+                      <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-muted">
+                        <small className="text-muted m-0 p-0">
                           {" "}
                           * длина: не более 3000 символов
                         </small>
                       </small>
                     </label>
                   </div>
+                  <div className="card-footer m-0 p-1">
+                    <div className="d-flex justify-content-between m-0 p-1">
+                      <span
+                        className={
+                          dataIdeaDetail["total_rating"]["rate"] > 7
+                            ? "text-success"
+                            : dataIdeaDetail["total_rating"]["rate"] > 4
+                            ? "text-warning"
+                            : "text-danger"
+                        }
+                      >
+                        Рейтинг
+                      </span>
+                      <Navbar className="text-center m-0 p-0">
+                        <Container className="m-0 p-0">
+                          <Nav className="me-auto m-0 p-0">
+                            <p
+                              className={
+                                dataIdeaDetail["total_rating"]["rate"] > 7
+                                  ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
+                                  : dataIdeaDetail["total_rating"]["rate"] > 4
+                                  ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
+                                  : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
+                              }
+                            >
+                              {utils.GetSliceString(
+                                dataIdeaDetail["total_rating"]["rate"],
+                                3,
+                                false
+                              )}
+                              <small className="align-text-top m-0 p-0">
+                                {" \\ " +
+                                  dataIdeaDetail["total_rating"]["count"]}
+                              </small>
+                            </p>
+                          </Nav>
+                        </Container>
+                      </Navbar>
+                      <span>
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 1
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 0.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 2
+                              ? "fas fa- m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 1.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 3
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 2.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 4
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 3.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 5
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 4.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 6
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 5.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 7
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 6.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 8
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 7.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 9
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 8.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                        <i
+                          style={{
+                            color:
+                              dataIdeaDetail["total_rating"]["rate"] > 7
+                                ? "#00ff00"
+                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                ? "#ffaa00"
+                                : "#ff0000",
+                          }}
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] >= 10
+                              ? "fas fa-star m-0 p-0"
+                              : dataIdeaDetail["total_rating"]["rate"] >= 9.5
+                              ? "fas fa-star-half-alt m-0 p-0"
+                              : "far fa-star m-0 p-0"
+                          }
+                        />
+                      </span>
+                    </div>
+                    <div className="d-flex justify-content-between m-0 p-1">
+                      <span className="text-secondary m-0 p-1">
+                        Комментарии
+                      </span>
+                      <span className="badge bg-secondary rounded-pill m-0 p-1">
+                        {dataIdeaDetail["comment_count"]}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="card-footer">
-                  <hr />
-                  <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                <div className="card-footer m-0 p-0">
+                  <components.StoreStatusComponent
+                    storeStatus={ideaChangeStore}
+                    keyStatus={"ideaChangeStore"}
+                    consoleLog={constants.DEBUG_CONSTANT}
+                    showLoad={true}
+                    loadText={""}
+                    showData={true}
+                    dataText={""}
+                    showError={true}
+                    errorText={""}
+                    showFail={true}
+                    failText={""}
+                  />
+                  <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                     <button
-                      className="btn btn-sm btn-primary m-1 p-1"
+                      className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
-                      отправить данные
+                      заменить данные
                     </button>
                     <button
-                      className="btn btn-sm btn-warning m-1 p-1"
+                      className="btn btn-sm btn-warning m-1 p-2"
                       type="reset"
-                      onClick={(e) => handlerReset(e)}
+                      onClick={(e) => handlerChangeReset(e)}
                     >
                       сбросить данные
                     </button>
@@ -389,7 +687,7 @@ export const IdeaChangePage = () => {
           </ul>
         )}
       </main>
-      <FooterComponent />
-    </div>
+      <components.FooterComponent />
+    </body>
   );
 };

@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,22 +14,21 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const AdminChangeUserPasswordPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [captcha, captchaSet] = useState("");
   const [username, usernameSet] = useState("");
@@ -36,15 +36,15 @@ export const AdminChangeUserPasswordPage = () => {
   const [password, passwordSet] = useState("");
   const [password2, password2Set] = useState("");
 
-  const adminChangeUserPasswordAuthStore = useSelector(
-    (state) => state.adminChangeUserPasswordAuthStore
-  ); // store.js
+  const adminChangeUserPasswordStore = useSelector(
+    (state) => state.adminChangeUserPasswordStore
+  );
   const {
     // load: loadAdminChangeUserPassword,
     data: dataAdminChangeUserPassword,
     // error: errorAdminChangeUserPassword,
     // fail: failAdminChangeUserPassword,
-  } = adminChangeUserPasswordAuthStore;
+  } = adminChangeUserPasswordStore;
 
   useEffect(() => {
     if (dataAdminChangeUserPassword) {
@@ -88,9 +88,10 @@ export const AdminChangeUserPasswordPage = () => {
     }
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Изменение пароля выбранного пользователя"}
@@ -98,9 +99,9 @@ export const AdminChangeUserPasswordPage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={adminChangeUserPasswordAuthStore}
-            key={"adminChangeUserPasswordAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={adminChangeUserPasswordStore}
+            key={"adminChangeUserPasswordStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -112,9 +113,9 @@ export const AdminChangeUserPasswordPage = () => {
             failText={""}
           />
           {!captcha && (
-            <MessageComponent variant="danger">
+            <components.MessageComponent variant="danger">
               Пройдите проверку на робота!
-            </MessageComponent>
+            </components.MessageComponent>
           )}
         </div>
         {!success ? (
@@ -303,7 +304,7 @@ export const AdminChangeUserPasswordPage = () => {
           </form>
         )}
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

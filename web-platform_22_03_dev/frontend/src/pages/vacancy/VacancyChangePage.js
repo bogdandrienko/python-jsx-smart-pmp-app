@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,22 +14,21 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const VacancyChangePage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [qualification, qualificationSet] = useState("");
   const [rank, rankSet] = useState("");
@@ -41,33 +41,27 @@ export const VacancyChangePage = () => {
   const [schedule, scheduleSet] = useState("");
   const [description, descriptionSet] = useState("");
 
-  const vacancyDetailAnyStore = useSelector(
-    (state) => state.vacancyDetailAnyStore
-  ); // store.js
+  const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore);
   const {
     load: loadVacancyDetail,
     data: dataVacancyDetail,
     // error: errorVacancyDetail,
     // fail: failVacancyDetail,
-  } = vacancyDetailAnyStore;
-  const vacancyDeleteAuthStore = useSelector(
-    (state) => state.vacancyDeleteAuthStore
-  ); // store.js
+  } = vacancyDetailStore;
+  const vacancyDeleteStore = useSelector((state) => state.vacancyDeleteStore);
   const {
     // load: loadVacancyDelete,
     data: dataVacancyDelete,
     // error: errorVacancyDelete,
     // fail: failVacancyDelete,
-  } = vacancyDeleteAuthStore;
-  const vacancyChangeAuthStore = useSelector(
-    (state) => state.vacancyChangeAuthStore
-  ); // store.js
+  } = vacancyDeleteStore;
+  const vacancyChangeStore = useSelector((state) => state.vacancyChangeStore);
   const {
     // load: loadVacancyCreate,
     data: dataVacancyChange,
     // error: errorVacancyCreate,
     // fail: failVacancyCreate,
-  } = vacancyChangeAuthStore;
+  } = vacancyChangeStore;
 
   useEffect(() => {
     if (dataVacancyChange) {
@@ -128,9 +122,10 @@ export const VacancyChangePage = () => {
     dispatch(actions.vacancyChangeAction(form));
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Изменить вакансию"}
@@ -143,23 +138,23 @@ export const VacancyChangePage = () => {
           </Link>
         </div>
         <div className="">
-          {StoreStatusComponent(
-            vacancyDetailAnyStore,
-            "vacancyDetailAnyStore",
+          {components.StoreStatusComponent(
+            vacancyDetailStore,
+            "vacancyDetailStore",
             false,
             "",
             constants.DEBUG_CONSTANT
           )}
-          {StoreStatusComponent(
-            vacancyChangeAuthStore,
-            "vacancyChangeAuthStore",
+          {components.StoreStatusComponent(
+            vacancyChangeStore,
+            "vacancyChangeStore",
             true,
             "",
             constants.DEBUG_CONSTANT
           )}
-          {StoreStatusComponent(
-            vacancyDeleteAuthStore,
-            "vacancyDeleteAuthStore",
+          {components.StoreStatusComponent(
+            vacancyDeleteStore,
+            "vacancyDeleteStore",
             true,
             "",
             constants.DEBUG_CONSTANT
@@ -365,7 +360,7 @@ export const VacancyChangePage = () => {
           </ul>
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

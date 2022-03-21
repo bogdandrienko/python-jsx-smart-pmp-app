@@ -339,8 +339,7 @@ class DjangoClass:
             date = datetime.datetime.now().strftime("%Y%m%d")
             date_base64 = base64.b64encode(str(date).encode()).decode()
             url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
-            relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-            h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_users")
+            h = httplib2.Http(os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_users")
             _login = 'Web_adm_1c'
             password = '159159qqww!'
             h.add_credentials(_login, password)
@@ -474,24 +473,6 @@ class DjangoClass:
                     action_model = backend_models.ActionModel.objects.get_or_create(access_slug_field=grp)[0]
                     group_model.action_many_to_many_field.add(action_model)
                     group_model.save()
-
-                    # try:
-                    #     group = Group.objects.get(name=grp)
-                    #     group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
-                    #     group_model.user_many_to_many_field.add(
-                    #         backend_models.UserModel.objects.get(
-                    #             user_foreign_key_field=User.objects.get(username="Bogdan")
-                    #         )
-                    #     )
-                    # except Exception as error:
-                    #     group = Group.objects.create(name=grp)
-                    #     group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
-                    #     group_model.name_char_field = grp
-                    #     group_model.name_slug_field = grp
-                    #     action_model = backend_models.ActionModel.objects.get_or_create(access_slug_field=grp)[0]
-                    #     group_model.action_many_to_many_field.add(action_model)
-                    #     group_model.save()
-
             except Exception as error__:
                 print(error__)
             ############################################################################################################
@@ -596,7 +577,7 @@ class DateTimeUtils:
 class DirPathFolderPathClass:
     @staticmethod
     def create_folder_in_this_dir(folder_name='new_folder', current_path=os.path.dirname(os.path.abspath('__file__'))):
-        full_path = current_path + f'\\{folder_name}'
+        full_path = current_path + f'/{folder_name}'
         try:
             os.makedirs(full_path)
         except Exception as error:

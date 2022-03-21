@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,32 +14,31 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const AdminExportUsersPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const adminExportUsersAuthStore = useSelector(
-    (state) => state.adminExportUsersAuthStore
-  ); // store.js
+  const adminExportUsersStore = useSelector(
+    (state) => state.adminExportUsersStore
+  );
   const {
     load: loadExportUsers,
     data: dataExportUsers,
     // error: errorExportUsers,
     // fail: failExportUsers,
-  } = adminExportUsersAuthStore;
+  } = adminExportUsersStore;
 
   const formHandlerSubmit = (e) => {
     e.preventDefault();
@@ -48,9 +48,10 @@ export const AdminExportUsersPage = () => {
     dispatch(actions.adminExportUsersAction(form));
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Экспорт пользователей"}
@@ -58,9 +59,9 @@ export const AdminExportUsersPage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={adminExportUsersAuthStore}
-            key={"adminExportUsersAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={adminExportUsersStore}
+            key={"adminExportUsersStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -103,7 +104,7 @@ export const AdminExportUsersPage = () => {
           )}
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

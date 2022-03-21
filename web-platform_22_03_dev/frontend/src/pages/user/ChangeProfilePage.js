@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,22 +14,21 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const ChangeProfilePage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [email, setEmail] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
@@ -36,22 +36,20 @@ export const ChangeProfilePage = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const userDetailsAuthStore = useSelector(
-    (state) => state.userDetailsAuthStore
-  ); // store.js
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsAuthStore;
-  const userChangeAuthStore = useSelector((state) => state.userChangeAuthStore); // store.js
+  } = userDetailsStore;
+  const userChangeStore = useSelector((state) => state.userChangeStore);
   const {
     // load: loadUserChange,
     data: dataUserChange,
     // error: errorUserChange,
     // fail: failUserChange,
-  } = userChangeAuthStore;
+  } = userChangeStore;
 
   useEffect(() => {
     if (dataUserDetails && dataUserDetails["user_model"]) {
@@ -104,9 +102,10 @@ export const ChangeProfilePage = () => {
     dispatch(actions.userChangeAction(form));
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={false}
         title={"Изменение профиля"}
@@ -114,9 +113,9 @@ export const ChangeProfilePage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={userDetailsAuthStore}
-            key={"userDetailsAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={userDetailsStore}
+            key={"userDetailsStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={false}
             loadText={""}
@@ -127,9 +126,9 @@ export const ChangeProfilePage = () => {
             showFail={true}
             failText={""}
           />
-          <StoreStatusComponent
-            storeStatus={userChangeAuthStore}
-            key={"userChangeAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={userChangeStore}
+            key={"userChangeStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -306,7 +305,7 @@ export const ChangeProfilePage = () => {
           </div>
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

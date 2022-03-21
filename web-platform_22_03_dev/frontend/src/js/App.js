@@ -1,25 +1,28 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import "../css/App.css";
 import "../css/bootstrap_5.1.3/bootstrap.min.css";
 import "../css/font_awesome_6_0_0/css/all.min.css";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////TODO default exported pages
 import { HomePage } from "../pages/base/HomePage";
+import { VideoStudyPage } from "../pages/study/VideoStudyPage";
+import { TextStudyPage } from "../pages/study/TextStudyPage";
+import { NewsPage } from "../pages/base/NewsPage";
+import { NotificationListPage } from "../pages/base/NotificationListPage";
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { LoginPage } from "../pages/user/LoginPage";
 import { LogoutPage } from "../pages/user/LogoutPage";
 import { ChangeProfilePage } from "../pages/user/ChangeProfilePage";
 import { ChangePasswordPage } from "../pages/user/ChangePasswordPage";
 import { RecoverPasswordPage } from "../pages/user/RecoverPasswordPage";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-import { NewsPage } from "../pages/base/NewsPage";
-import { VideoStudyPage } from "../pages/study/VideoStudyPage";
-import { TextStudyPage } from "../pages/study/TextStudyPage";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { SalaryPage } from "../pages/salary/SalaryPage";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { AdminChangeUserPasswordPage } from "../pages/admin/AdminChangeUserPasswordPage";
 import { AdminCreateOrChangeUsersPage } from "../pages/admin/AdminCreateOrChangeUsersPage";
 import { AdminExportUsersPage } from "../pages/admin/AdminExportUsersPage";
+import { AdminChangeUserActivityPage } from "../pages/admin/AdminChangeUserActivityPage";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { RationalTemplatePage } from "../pages/rational/RationalTemplatePage";
 import { RationalCreatePage } from "../pages/rational/RationalCreatePage";
@@ -31,9 +34,11 @@ import { IdeaCreatePage } from "../pages/idea/IdeaCreatePage";
 import { IdeaListPage } from "../pages/idea/IdeaListPage";
 import { IdeaDetailPage } from "../pages/idea/IdeaDetailPage";
 import { IdeaModerateListPage } from "../pages/idea/IdeaModerateListPage";
-import { IdeaModerateDetailPage } from "../pages/idea/IdeaModerateDetailPage";
+import { IdeaModerateChangePage } from "../pages/idea/IdeaModerateChangePage";
 import { IdeaSelfListPage } from "../pages/idea/IdeaSelfListPage";
 import { IdeaChangePage } from "../pages/idea/IdeaChangePage";
+import { IdeaRatingListPage } from "../pages/idea/IdeaRatingListPage";
+import { IdeaAuthorListPage } from "../pages/idea/IdeaAuthorListPage";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { VacancyListPage } from "../pages/vacancy/VacancyListPage";
 import { VacancyCreatePage } from "../pages/vacancy/VacancyCreatePage";
@@ -43,11 +48,9 @@ import { VacancyDetailPage } from "../pages/vacancy/VacancyDetailPage";
 import { ResumeListPage } from "../pages/resume/ResumeListPage";
 import { ResumeCreatePage } from "../pages/resume/ResumeCreatePage";
 import { ResumeDetailPage } from "../pages/resume/ResumeDetailPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 import { TerminalRebootPage } from "../pages/terminal/TerminalRebootPage";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const App = () => {
   return (
     <Router>
@@ -60,6 +63,8 @@ export const App = () => {
         <Route path="/change_password" element={<ChangePasswordPage />} />
         <Route path="/recover_password" element={<RecoverPasswordPage />} />
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <Route path="/notification_list" element={<NotificationListPage />} />
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         <Route
           path="/admin_change_user_password"
           element={<AdminChangeUserPasswordPage />}
@@ -69,6 +74,10 @@ export const App = () => {
           element={<AdminCreateOrChangeUsersPage />}
         />
         <Route path="/admin_export_users" element={<AdminExportUsersPage />} />
+        <Route
+          path="/admin_change_user_activity"
+          element={<AdminChangeUserActivityPage />}
+        />
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         <Route path="/news" element={<NewsPage />} />
         <Route path="/video_study" element={<VideoStudyPage />} />
@@ -93,11 +102,13 @@ export const App = () => {
         <Route path="/idea_detail/:id" element={<IdeaDetailPage />} />
         <Route path="/idea_moderate_list" element={<IdeaModerateListPage />} />
         <Route
-          path="/idea_moderate_detail/:id"
-          element={<IdeaModerateDetailPage />}
+          path="/idea_moderate_change/:id"
+          element={<IdeaModerateChangePage />}
         />
         <Route path="/idea_self_list" element={<IdeaSelfListPage />} />
         <Route path="/idea_change/:id" element={<IdeaChangePage />} />
+        <Route path="/idea_rating" element={<IdeaRatingListPage />} />
+        <Route path="/idea_author_list" element={<IdeaAuthorListPage />} />
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         <Route path="/vacancy_list" element={<VacancyListPage />} />
         <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />

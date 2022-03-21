@@ -1,12 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+import React from "react";
 import axios from "axios";
-/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom settings
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userLoginAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -44,7 +44,8 @@ export const userLoginAction = (form) => async (dispatch) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -57,8 +58,8 @@ export const userLoginAction = (form) => async (dispatch) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const userLogoutAction = () => (dispatch) => {
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+export const userLogoutAction = () => async (dispatch) => {
   localStorage.removeItem("userToken");
   localStorage.removeItem("userToken");
   dispatch({ type: constants.USER_LOGIN_RESET_CONSTANT });
@@ -67,52 +68,19 @@ export const userLogoutAction = () => (dispatch) => {
   dispatch({ type: constants.USER_RECOVER_PASSWORD_RESET_CONSTANT });
   dispatch({ type: constants.USER_SALARY_RESET_CONSTANT });
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userDetailsAction = (form) => async (dispatch, getState) => {
-  try {
-    /// valid action
-    const config = {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${userLogin.token}`,
-    };
-    const { data } = await axios.put(
-      "/api/auth/user/detail/",
-      {
-        color: "red",
-        count: 12,
-      },
-      config
-    );
-    const { data } = await axios({
-      url: "/api/auth/user/detail/",
-      method: "POST",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userLogin.token}`,
-      },
-      data: formData,
-    });
-  } catch (error) {
-    /// error action
-    console.log("error: ", error);
-    console.log("error.response: ", error.response);
-    console.log("error.response.statusText: ", error.response.statusText);
-    console.log("error.message: ", error.message);
-  }
-
   try {
     dispatch({
       type: constants.USER_DETAILS_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
       formData.append(key, value);
     });
-
     const { data } = await axios({
       url: "/api/auth/user/detail/",
       method: "POST",
@@ -143,7 +111,8 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -156,14 +125,14 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userChangeAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.USER_CHANGE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -197,7 +166,8 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -210,7 +180,7 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userRecoverPasswordAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -246,7 +216,8 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -259,14 +230,14 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userListAllAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.USER_LIST_ALL_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -299,7 +270,8 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -312,7 +284,116 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+export const notificationCreateAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: constants.NOTIFICATION_CREATE_LOAD_CONSTANT,
+      });
+      const {
+        userLoginStore: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        formData.append(key, value);
+      });
+      const { data } = await axios({
+        url: "/api/auth/user/notification/",
+        method: "POST",
+        timeout: 10000,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userLogin.token}`,
+        },
+        data: formData,
+      });
+      if (data["response"]) {
+        const response = data["response"];
+        dispatch({
+          type: constants.NOTIFICATION_CREATE_DATA_CONSTANT,
+          payload: response,
+        });
+      } else {
+        const response = data["error"];
+        dispatch({
+          type: constants.NOTIFICATION_CREATE_ERROR_CONSTANT,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.statusText &&
+        error.response.statusText === "Unauthorized" &&
+        error.response.statusText === "Request Entity Too Large"
+      ) {
+        dispatch(userLogoutAction());
+      }
+      dispatch({
+        type: constants.NOTIFICATION_CREATE_FAIL_CONSTANT,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+export const notificationListAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.NOTIFICATION_LIST_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/user/notification/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.NOTIFICATION_LIST_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.NOTIFICATION_LIST_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
+    ) {
+      dispatch(userLogoutAction());
+    }
+    dispatch({
+      type: constants.NOTIFICATION_LIST_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const adminChangeUserPasswordAction =
   (form) => async (dispatch, getState) => {
     try {
@@ -320,7 +401,7 @@ export const adminChangeUserPasswordAction =
         type: constants.ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
       });
       const {
-        userLoginAnyStore: { data: userLogin },
+        userLoginStore: { data: userLogin },
       } = getState();
       const formData = new FormData();
       Object.entries(form).map(([key, value]) => {
@@ -353,7 +434,8 @@ export const adminChangeUserPasswordAction =
       if (
         error.response &&
         error.response.statusText &&
-        error.response.statusText === "Unauthorized"
+        error.response.statusText === "Unauthorized" &&
+        error.response.statusText === "Request Entity Too Large"
       ) {
         dispatch(userLogoutAction());
       }
@@ -366,7 +448,7 @@ export const adminChangeUserPasswordAction =
       });
     }
   };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const adminCreateOrChangeUsersAction =
   (form) => async (dispatch, getState) => {
     try {
@@ -374,7 +456,7 @@ export const adminCreateOrChangeUsersAction =
         type: constants.ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
       });
       const {
-        userLoginAnyStore: { data: userLogin },
+        userLoginStore: { data: userLogin },
       } = getState();
       const formData = new FormData();
       Object.entries(form).map(([key, value]) => {
@@ -383,7 +465,7 @@ export const adminCreateOrChangeUsersAction =
       const { data } = await axios({
         url: "/api/auth/admin/create_or_change_users/",
         method: "POST",
-        timeout: 100000,
+        timeout: 500000,
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${userLogin.token}`,
@@ -407,7 +489,8 @@ export const adminCreateOrChangeUsersAction =
       if (
         error.response &&
         error.response.statusText &&
-        error.response.statusText === "Unauthorized"
+        error.response.statusText === "Unauthorized" &&
+        error.response.statusText === "Request Entity Too Large"
       ) {
         dispatch(userLogoutAction());
       }
@@ -420,14 +503,14 @@ export const adminCreateOrChangeUsersAction =
       });
     }
   };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const adminExportUsersAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.ADMIN_EXPORT_USERS_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -460,7 +543,8 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -473,67 +557,14 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const notificationAction = (form) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: constants.NOTIFICATION_CREATE_LOAD_CONSTANT,
-    });
-    const {
-      userLoginAnyStore: { data: userLogin },
-    } = getState();
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      formData.append(key, value);
-    });
-    const { data } = await axios({
-      url: "/api/auth/user/notification/",
-      method: "POST",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userLogin.token}`,
-      },
-      data: formData,
-    });
-    if (data["response"]) {
-      const response = data["response"];
-      dispatch({
-        type: constants.NOTIFICATION_CREATE_DATA_CONSTANT,
-        payload: response,
-      });
-    } else {
-      const response = data["error"];
-      dispatch({
-        type: constants.NOTIFICATION_CREATE_ERROR_CONSTANT,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    if (
-      error.response &&
-      error.response.statusText &&
-      error.response.statusText === "Unauthorized"
-    ) {
-      dispatch(userLogoutAction());
-    }
-    dispatch({
-      type: constants.NOTIFICATION_CREATE_FAIL_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const salaryUserAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.USER_SALARY_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -585,7 +616,8 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -598,14 +630,14 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const rationalCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.RATIONAL_CREATE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -638,7 +670,8 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -651,14 +684,14 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const rationalListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.RATIONAL_LIST_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -691,7 +724,8 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -704,14 +738,14 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const rationalDetailAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.RATIONAL_DETAIL_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -744,7 +778,8 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -757,14 +792,14 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_CREATE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -797,7 +832,8 @@ export const ideaCreateAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -810,14 +846,14 @@ export const ideaCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_LIST_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -850,7 +886,8 @@ export const ideaListAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -863,14 +900,14 @@ export const ideaListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaDetailAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_DETAIL_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -903,7 +940,8 @@ export const ideaDetailAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -916,14 +954,14 @@ export const ideaDetailAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaChangeAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_CHANGE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -956,7 +994,8 @@ export const ideaChangeAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -969,14 +1008,14 @@ export const ideaChangeAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaModerateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_MODERATE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1009,7 +1048,8 @@ export const ideaModerateAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1022,14 +1062,14 @@ export const ideaModerateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_COMMENT_CREATE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1062,7 +1102,8 @@ export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1075,14 +1116,68 @@ export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+export const ideaCommentDeleteAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.IDEA_COMMENT_DELETE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/idea/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.IDEA_COMMENT_DELETE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.IDEA_COMMENT_DELETE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
+    ) {
+      dispatch(userLogoutAction());
+    }
+    dispatch({
+      type: constants.IDEA_COMMENT_DELETE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaCommentListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_COMMENT_LIST_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1115,7 +1210,8 @@ export const ideaCommentListAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1128,14 +1224,14 @@ export const ideaCommentListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.IDEA_RATING_CREATE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1168,7 +1264,8 @@ export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1181,14 +1278,68 @@ export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+export const ideaAuthorListAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.IDEA_AUTHOR_LIST_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/idea/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.IDEA_AUTHOR_LIST_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.IDEA_AUTHOR_LIST_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
+    ) {
+      dispatch(userLogoutAction());
+    }
+    dispatch({
+      type: constants.IDEA_AUTHOR_LIST_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.VACANCY_CREATE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1221,7 +1372,8 @@ export const vacancyCreateAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1234,7 +1386,7 @@ export const vacancyCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyListAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -1270,7 +1422,8 @@ export const vacancyListAction = (form) => async (dispatch) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1283,7 +1436,7 @@ export const vacancyListAction = (form) => async (dispatch) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyDetailAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -1319,7 +1472,8 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1332,14 +1486,14 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.VACANCY_DELETE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1372,7 +1526,8 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1385,14 +1540,14 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyChangeAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.VACANCY_CHANGE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1425,7 +1580,8 @@ export const vacancyChangeAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1438,7 +1594,7 @@ export const vacancyChangeAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const resumeCreateAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -1474,7 +1630,8 @@ export const resumeCreateAction = (form) => async (dispatch) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1487,14 +1644,14 @@ export const resumeCreateAction = (form) => async (dispatch) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const resumeListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.RESUME_LIST_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1527,7 +1684,8 @@ export const resumeListAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1540,14 +1698,14 @@ export const resumeListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const resumeDetailAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.RESUME_DETAIL_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1580,7 +1738,8 @@ export const resumeDetailAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1593,14 +1752,14 @@ export const resumeDetailAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const resumeDeleteAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.RESUME_DELETE_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1633,7 +1792,8 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1646,14 +1806,14 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const terminalRebootAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
       type: constants.TERMINAL_REBOOT_LOAD_CONSTANT,
     });
     const {
-      userLoginAnyStore: { data: userLogin },
+      userLoginStore: { data: userLogin },
     } = getState();
     const formData = new FormData();
     Object.entries(form).map(([key, value]) => {
@@ -1687,7 +1847,8 @@ export const terminalRebootAction = (form) => async (dispatch, getState) => {
     if (
       error.response &&
       error.response.statusText &&
-      error.response.statusText === "Unauthorized"
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
     ) {
       dispatch(userLogoutAction());
     }
@@ -1700,4 +1861,4 @@ export const terminalRebootAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////TODO default export const action

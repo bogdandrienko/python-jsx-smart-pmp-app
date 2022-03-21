@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,29 +14,24 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import ModulesComponent from "./ModulesComponent";
-import NewsComponent from "./NewsComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const HomePage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
-      <HeaderComponent
+    <body>
+      <components.HeaderComponent
         logic={true}
         redirect={false}
         title={"Домашняя страница"}
@@ -44,16 +40,16 @@ export const HomePage = () => {
       <main className="container">
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
           <div className="embed-responsive embed-responsive-16by9">
-            <div className="btn-group p-1 m-0 text-start w-100">
+            <div className="btn-group m-0 p-0 text-start w-100">
               <Link
                 to={"/video_study"}
-                className="btn btn-sm btn-warning p-2 m-1"
+                className="btn btn-sm btn-warning m-1 p-1"
               >
                 Инструкции в видео формате
               </Link>
               <Link
                 to={"/text_study"}
-                className="btn btn-sm btn-primary p-2 m-1"
+                className="btn btn-sm btn-primary m-1 p-1"
               >
                 Инструкции в текстовом формате
               </Link>
@@ -71,14 +67,14 @@ export const HomePage = () => {
             </div>
           </div>
           <div className="">
-            <NewsComponent count={9} />
+            <components.NewsComponent count={9} />
           </div>
         </div>
         <div>
-          <ModulesComponent />
+          <components.ModulesComponent />
         </div>
       </main>
-      <FooterComponent />
-    </div>
+      <components.FooterComponent />
+    </body>
   );
 };

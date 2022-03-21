@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,38 +14,37 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const ResumeListPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [detailView, detailViewSet] = useState(true);
   const [education, educationSet] = useState("");
   const [experience, experienceSet] = useState("");
   const [sex, sexSet] = useState("");
-  const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
+  const [sort, sortSet] = useState("дате публикации (свежие в начале)");
   const [searchQualification, searchQualificationSet] = useState("");
   const [searchLastName, searchLastNameSet] = useState("");
 
-  const resumeListAuthStore = useSelector((state) => state.resumeListAuthStore); // store.js
+  const resumeListStore = useSelector((state) => state.resumeListStore);
   const {
     load: loadResumeList,
     data: dataResumeList,
     // error: errorResumeList,
     // fail: failResumeList,
-  } = resumeListAuthStore;
+  } = resumeListStore;
 
   const getData = () => {
     const form = {
@@ -78,15 +78,16 @@ export const ResumeListPage = () => {
     educationSet("");
     experienceSet("");
     sexSet("");
-    sortSet("Дате публикации (сначала свежие)");
+    sortSet("дате публикации (свежие в начале)");
     searchQualificationSet("");
     searchLastNameSet("");
     getData();
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Список резюме"}
@@ -96,9 +97,9 @@ export const ResumeListPage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={resumeListAuthStore}
-            key={"resumeListAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={resumeListStore}
+            key={"resumeListStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={false}
             loadText={""}
@@ -212,17 +213,17 @@ export const ResumeListPage = () => {
                     value={sort}
                     onChange={(e) => sortSet(e.target.value)}
                   >
-                    <option value="Дате публикации (сначала свежие)">
-                      Дате публикации (сначала свежие)
+                    <option value="дате публикации (свежие в начале)">
+                      дате публикации (свежие в начале)
                     </option>
-                    <option value="Дате публикации (сначала старые)">
-                      Дате публикации (сначала старые)
+                    <option value="дате публикации (свежие в конце)">
+                      дате публикации (свежие в конце)
                     </option>
-                    <option value="Названию вакансии (С начала алфавита)">
-                      Названию вакансии (С начала алфавита)
+                    <option value="названию (с начала алфавита)">
+                      названию (с начала алфавита)
                     </option>
-                    <option value="Названию вакансии (С конца алфавита)">
-                      Названию вакансии (С конца алфавита)
+                    <option value="названию (с конца алфавита)">
+                      названию (с конца алфавита)
                     </option>
                   </select>
                 </label>
@@ -244,10 +245,10 @@ export const ResumeListPage = () => {
         </div>
         <div className="container-fluid  ">
           {!dataResumeList || dataResumeList.length < 1 ? (
-            <MessageComponent variant={"danger"}>
+            <components.MessageComponent variant={"danger"}>
               Вакансии не найдены! Попробуйте изменить условия фильтрации или
               очистить строку поиска.
-            </MessageComponent>
+            </components.MessageComponent>
           ) : !detailView ? (
             <ul className="bg-opacity-10 bg-primary shadow">
               {dataResumeList.map((resume, index) => (
@@ -433,7 +434,7 @@ export const ResumeListPage = () => {
           )}
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

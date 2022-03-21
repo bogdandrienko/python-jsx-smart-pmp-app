@@ -1,95 +1,84 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
-import ReactPlayer from "react-player";
-import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Container, Navbar, Nav } from "react-bootstrap";
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const IdeaDetailPage = () => {
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const id = useParams().id;
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  const [firstRefresh, firstRefreshSet] = useState(true);
   const [comment, commentSet] = useState("");
-
-  const ideaDetailAuthStore = useSelector((state) => state.ideaDetailAuthStore); // store.js
-  const {
-    load: loadIdeaDetail,
-    data: dataIdeaDetail,
-    // error: errorIdeaDetail,
-    // fail: failIdeaDetail,
-  } = ideaDetailAuthStore;
-  const ideaCommentListAuthStore = useSelector(
-    (state) => state.ideaCommentListAuthStore
-  ); // store.js
-  const {
-    load: loadIdeaCommentList,
-    data: dataIdeaCommentList,
-    // error: errorIdeaCommentList,
-    // fail: failIdeaCommentList,
-  } = ideaCommentListAuthStore;
-  const ideaCommentCreateAuthStore = useSelector(
-    (state) => state.ideaCommentCreateAuthStore
-  ); // store.js
-  const {
-    // load: loadIdeaCommentCreate,
-    data: dataIdeaCommentCreate,
-    // error: errorIdeaCommentCreate,
-    // fail: failIdeaCommentCreate,
-  } = ideaCommentCreateAuthStore;
-  const ideaRatingCreateAuthStore = useSelector(
-    (state) => state.ideaRatingCreateAuthStore
-  ); // store.js
-  const {
-    // load: loadIdeaRatingCreate,
-    data: dataIdeaRatingCreate,
-    // error: errorIdeaRatingCreate,
-    // fail: failIdeaRatingCreate,
-  } = ideaRatingCreateAuthStore;
-  const notificationCreateAnyStore = useSelector(
-    (state) => state.notificationCreateAnyStore
-  ); // store.js
-  const ideaModerateAuthStore = useSelector(
-    (state) => state.ideaModerateAuthStore
-  ); // store.js
-  const {
-    // load: loadIdeaModerate,
-    data: dataIdeaModerate,
-    // error: errorIdeaModerate,
-    // fail: failIdeaModerate,
-  } = ideaModerateAuthStore;
-  const userDetailsAuthStore = useSelector(
-    (state) => state.userDetailsAuthStore
-  ); // store.js
+  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsAuthStore;
-
-  const resetState = () => {
-    dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
+  } = userDetailsStore;
+  //////////////////////////////////////////////////////////
+  const ideaDetailStore = useSelector((state) => state.ideaDetailStore);
+  const {
+    // load: loadIdeaDetail,
+    data: dataIdeaDetail,
+    // error: errorIdeaDetail,
+    // fail: failIdeaDetail,
+  } = ideaDetailStore;
+  //////////////////////////////////////////////////////////
+  const ideaCommentListStore = useSelector(
+    (state) => state.ideaCommentListStore
+  );
+  const {
+    // load: loadIdeaCommentList,
+    data: dataIdeaCommentList,
+    // error: errorIdeaCommentList,
+    // fail: failIdeaCommentList,
+  } = ideaCommentListStore;
+  //////////////////////////////////////////////////////////
+  const ideaCommentCreateStore = useSelector(
+    (state) => state.ideaCommentCreateStore
+  );
+  const {
+    // load: loadIdeaCommentCreate,
+    data: dataIdeaCommentCreate,
+    // error: errorIdeaCommentCreate,
+    // fail: failIdeaCommentCreate,
+  } = ideaCommentCreateStore;
+  //////////////////////////////////////////////////////////
+  const ideaRatingCreateStore = useSelector(
+    (state) => state.ideaRatingCreateStore
+  );
+  const {
+    // load: loadIdeaRatingCreate,
+    data: dataIdeaRatingCreate,
+    // error: errorIdeaRatingCreate,
+    // fail: failIdeaRatingCreate,
+  } = ideaRatingCreateStore;
+  //////////////////////////////////////////////////////////
+  const notificationCreateStore = useSelector(
+    (state) => state.notificationCreateStore
+  );
+  const ideaModerateStore = useSelector((state) => state.ideaModerateStore);
+  const {
+    load: loadIdeaModerate,
+    data: dataIdeaModerate,
+    // error: errorIdeaModerate,
+    // fail: failIdeaModerate,
+  } = ideaModerateStore;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
+  const resetState = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     dispatch({ type: constants.IDEA_DETAIL_RESET_CONSTANT });
     dispatch({
       type: constants.IDEA_COMMENT_LIST_RESET_CONSTANT,
@@ -104,38 +93,59 @@ export const IdeaDetailPage = () => {
       type: constants.IDEA_MODERATE_RESET_CONSTANT,
     });
   };
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
-    if (
-      dataIdeaDetail &&
-      !loadIdeaDetail &&
-      (dataIdeaDetail.id !== undefined || dataIdeaDetail.id !== id)
-    ) {
-      resetState();
-    }
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    if (!dataIdeaDetail && !loadIdeaDetail) {
+    if (!dataIdeaDetail) {
       const form = {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
       dispatch(actions.ideaDetailAction(form));
+    } else {
+      if (firstRefresh) {
+        firstRefreshSet(false);
+        resetState();
+      }
     }
-  }, [dispatch, id, dataIdeaDetail]);
-
+  }, [dataIdeaDetail, id, dispatch, firstRefresh]);
+  //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (!dataIdeaCommentList && !loadIdeaCommentList) {
+    if (!dataIdeaCommentList) {
       const form = {
         "Action-type": "IDEA_COMMENT_LIST",
         id: id,
       };
       dispatch(actions.ideaCommentListAction(form));
     }
-  }, [dispatch, id, dataIdeaCommentList, loadIdeaCommentList]);
-
-  const formHandlerCommentCreateSubmit = async (e) => {
+  }, [dataIdeaCommentList, id, dispatch]);
+  //////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (dataIdeaCommentCreate) {
+      utils.Sleep(50).then(() => {
+        commentSet("");
+        resetState();
+      });
+    }
+  }, [dataIdeaCommentCreate]);
+  //////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (dataIdeaRatingCreate) {
+      utils.Sleep(50).then(() => {
+        resetState();
+      });
+    }
+  }, [dataIdeaRatingCreate]);
+  //////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (dataIdeaModerate) {
+      utils.Sleep(50).then(() => {
+        navigate("/idea_list");
+        resetState();
+      });
+    }
+  }, [dataIdeaModerate, navigate]);
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  const handlerCommentCreateSubmit = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
@@ -146,17 +156,8 @@ export const IdeaDetailPage = () => {
     };
     dispatch(actions.ideaCommentCreateAction(form));
   };
-
-  useEffect(() => {
-    if (dataIdeaCommentCreate) {
-      utils.Sleep(100).then(() => {
-        commentSet("");
-        resetState();
-      });
-    }
-  }, [dataIdeaCommentCreate]);
-
-  const formHandlerRatingSubmit = async (value) => {
+  //////////////////////////////////////////////////////////
+  const handlerRatingSubmit = async (value) => {
     const form = {
       "Action-type": "IDEA_RATING_CREATE",
       id: id,
@@ -180,20 +181,8 @@ export const IdeaDetailPage = () => {
       dispatch(actions.ideaRatingCreateAction(form));
     }
   };
-
-  useEffect(() => {
-    if (dataIdeaRatingCreate) {
-      utils.Sleep(200).then(() => {
-        resetState();
-      });
-    }
-  }, [dataIdeaRatingCreate]);
-
-  const formHandlerNotificationSubmit = async ({
-    name,
-    place,
-    description,
-  }) => {
+  //////////////////////////////////////////////////////////
+  const handlerNotificationSubmit = async ({ name, place, description }) => {
     const form = {
       "Action-type": "NOTIFICATION_CREATE",
       name: name,
@@ -202,11 +191,11 @@ export const IdeaDetailPage = () => {
     };
     let isConfirm = window.confirm(name);
     if (isConfirm) {
-      dispatch(actions.notificationAction(form));
+      dispatch(actions.notificationCreateAction(form));
     }
   };
-
-  const formHandlerHideSubmit = (e) => {
+  //////////////////////////////////////////////////////////
+  const handlerHideSubmit = (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
@@ -221,47 +210,36 @@ export const IdeaDetailPage = () => {
       dispatch(actions.ideaModerateAction(form));
     }
   };
-
-  useEffect(() => {
-    if (dataIdeaModerate) {
-      utils.Sleep(200).then(() => {
-        navigate("/idea_list");
-        resetState();
-      });
-    }
-  }, [dataIdeaModerate]);
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div className="m-0 p-0">
-      <HeaderComponent
+    <body>
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Подробности идеи"}
         description={"подробная информацию об идеи в банке идей"}
       />
-      <main className="container">
-        <div>
-          <StoreStatusComponent
-            storeStatus={notificationCreateAnyStore}
-            keyStatus={"notificationCreateAnyStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={false}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-        </div>
-        <div className="btn-group m-0 p-1 text-start w-100">
+      <main>
+        <components.StoreStatusComponent
+          storeStatus={notificationCreateStore}
+          keyStatus={"notificationCreateStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        <div className="btn-group text-start w-100 m-0 p-0">
           <Link to={"/idea_list"} className="btn btn-sm btn-primary m-1 p-2">
             {"<="} назад к списку
           </Link>
-          <StoreStatusComponent
-            storeStatus={userDetailsAuthStore}
-            keyStatus={"userDetailsAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={userDetailsStore}
+            keyStatus={"userDetailsStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -273,6 +251,7 @@ export const IdeaDetailPage = () => {
             failText={""}
           />
           {dataUserDetails &&
+            !loadIdeaModerate &&
             dataUserDetails["user_model"]["id"] &&
             dataIdeaDetail &&
             dataIdeaDetail["user_model"]["id"] &&
@@ -281,7 +260,7 @@ export const IdeaDetailPage = () => {
               <button
                 type="button"
                 className="btn btn-sm btn-warning m-1 p-2"
-                onClick={formHandlerHideSubmit}
+                onClick={handlerHideSubmit}
               >
                 скрыть
               </button>
@@ -290,7 +269,7 @@ export const IdeaDetailPage = () => {
             type="button"
             className="btn btn-sm btn-outline-danger m-1 p-2"
             onClick={(e) =>
-              formHandlerNotificationSubmit({
+              handlerNotificationSubmit({
                 name: "жалоба на идею в банке идей",
                 place: `id идеи: ${id}`,
                 description: "",
@@ -300,9 +279,9 @@ export const IdeaDetailPage = () => {
             пожаловаться
           </button>
         </div>
-        <StoreStatusComponent
-          storeStatus={ideaDetailAuthStore}
-          keyStatus={"ideaDetailAuthStore"}
+        <components.StoreStatusComponent
+          storeStatus={ideaDetailStore}
+          keyStatus={"ideaDetailStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}
@@ -314,41 +293,50 @@ export const IdeaDetailPage = () => {
           failText={""}
         />
         {dataIdeaDetail && (
-          <div className="card shadow">
-            <div className="card shadow text-center p-0">
-              <div className="card-header bg-warning bg-opacity-10">
-                <h6 className="lead fw-bold">
+          <div className="m-0 p-0">
+            <div className="card shadow custom-background-transparent-low text-center p-0">
+              <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
+                <h6 className="lead fw-bold m-0 p-0">
                   {dataIdeaDetail["name_char_field"]}
                 </h6>
               </div>
-              <div className="card-body">
-                <div>
-                  <label className="form-control-sm">
+              <div className="card-body m-0 p-0">
+                <div className="m-0 p-0">
+                  <label className="form-control-sm m-0 p-1">
                     Подразделение:
-                    <select className="form-control form-control-sm" required>
-                      <option value="">
+                    <select
+                      className="form-control form-control-sm m-0 p-2"
+                      required
+                    >
+                      <option className="m-0 p-0" value="">
                         {dataIdeaDetail["subdivision_char_field"]}
                       </option>
                     </select>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm m-0 p-1">
                     Сфера:
-                    <select className="form-control form-control-sm" required>
-                      <option value="">
+                    <select
+                      className="form-control form-control-sm m-0 p-2"
+                      required
+                    >
+                      <option className="m-0 p-0" value="">
                         {dataIdeaDetail["sphere_char_field"]}
                       </option>
                     </select>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm m-0 p-1">
                     Категория:
-                    <select className="form-control form-control-sm" required>
-                      <option value="">
+                    <select
+                      className="form-control form-control-sm m-0 p-2"
+                      required
+                    >
+                      <option className="m-0 p-0" value="">
                         {dataIdeaDetail["category_char_field"]}
                       </option>
                     </select>
                   </label>
                 </div>
-                <div>
+                <div className="m-0 p-0">
                   <img
                     src={
                       dataIdeaDetail["avatar_image_field"]
@@ -359,16 +347,16 @@ export const IdeaDetailPage = () => {
                             "/media/default/idea/default_idea.jpg"
                           )
                     }
-                    className="card-img-top img-fluid w-75"
+                    className="img-fluid img-thumbnail w-75 m-1 p-0"
                     alt="изображение отсутствует"
                   />
                 </div>
-                <div>
-                  <label className="form-control-sm w-50">
+                <div className="m-0 p-0">
+                  <label className="form-control-sm w-50 m-0 p-1">
                     Место изменения:
                     <input
                       type="text"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm m-0 p-1"
                       defaultValue={utils.GetSliceString(
                         dataIdeaDetail["place_char_field"],
                         50
@@ -381,11 +369,11 @@ export const IdeaDetailPage = () => {
                     />
                   </label>
                 </div>
-                <div>
-                  <label className="form-control-sm w-100">
+                <div className="m-0 p-0">
+                  <label className="form-control-sm w-100 m-0 p-1">
                     Описание:
                     <textarea
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm m-0 p-1"
                       defaultValue={utils.GetSliceString(
                         dataIdeaDetail["description_text_field"],
                         50
@@ -399,28 +387,25 @@ export const IdeaDetailPage = () => {
                     />
                   </label>
                 </div>
-                <div>
-                  <Link
-                    to={`#`}
-                    className="text-decoration-none btn btn-sm btn-warning"
-                  >
+                <div className="m-0 p-0">
+                  <Link to={`#`} className="btn btn-sm btn-warning m-0 p-2">
                     Автор:{" "}
                     {dataIdeaDetail["user_model"]["last_name_char_field"]}{" "}
                     {dataIdeaDetail["user_model"]["first_name_char_field"]}{" "}
                     {dataIdeaDetail["user_model"]["position_char_field"]}
                   </Link>
                 </div>
-                <div>
-                  <label className="text-muted border p-1 m-1">
+                <div className="d-flex justify-content-between m-1 p-0">
+                  <label className="text-muted border m-0 p-2">
                     подано:{" "}
-                    <p className="m-0 p-0">
+                    <p className="m-0">
                       {utils.GetCleanDateTime(
                         dataIdeaDetail["created_datetime_field"],
                         true
                       )}
                     </p>
                   </label>
-                  <label className="text-muted border p-1 m-1">
+                  <label className="text-muted border m-1 p-2">
                     зарегистрировано:{" "}
                     <p className="m-0 p-0">
                       {utils.GetCleanDateTime(
@@ -431,13 +416,10 @@ export const IdeaDetailPage = () => {
                   </label>
                 </div>
               </div>
-              <div className="card-footer">
-                <div>
-                  <div>Нажмите на одну из 10 звезд для оценки идеи:</div>
-                </div>
-                <StoreStatusComponent
-                  storeStatus={ideaRatingCreateAuthStore}
-                  keyStatus={"ideaRatingCreateAuthStore"}
+              <div className="card-footer m-0 p-1">
+                <components.StoreStatusComponent
+                  storeStatus={ideaRatingCreateStore}
+                  keyStatus={"ideaRatingCreateStore"}
                   consoleLog={constants.DEBUG_CONSTANT}
                   showLoad={true}
                   loadText={""}
@@ -448,19 +430,44 @@ export const IdeaDetailPage = () => {
                   showFail={true}
                   failText={""}
                 />
-                <div className="d-flex justify-content-between p-1">
+                <div className="d-flex justify-content-between m-0 p-1">
                   <span
                     className={
                       dataIdeaDetail["total_rating"]["rate"] > 7
-                        ? "text-success"
+                        ? "text-success m-0 p-1"
                         : dataIdeaDetail["total_rating"]["rate"] > 4
-                        ? "text-warning"
-                        : "text-danger"
+                        ? "text-warning m-0 p-1"
+                        : "text-danger m-0 p-1"
                     }
                   >
                     Рейтинг
                   </span>
-                  <span>
+                  <Navbar className="text-center m-0 p-0">
+                    <Container className="m-0 p-0">
+                      <Nav className="me-auto m-0 p-0">
+                        <p
+                          className={
+                            dataIdeaDetail["total_rating"]["rate"] > 7
+                              ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
+                              : dataIdeaDetail["total_rating"]["rate"] > 4
+                              ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
+                              : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
+                          }
+                        >
+                          {utils.GetSliceString(
+                            dataIdeaDetail["total_rating"]["rate"],
+                            3,
+                            false
+                          )}
+                          <small className="align-text-top m-0 p-0">
+                            {" \\ " + dataIdeaDetail["total_rating"]["count"]}
+                          </small>
+                        </p>
+                      </Nav>
+                    </Container>
+                  </Navbar>
+                  <span className="m-0 p-1">
+                    <div>Нажмите на одну из 10 звезд для оценки идеи:</div>
                     <i
                       style={{
                         color:
@@ -472,12 +479,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 1
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 0.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(1)}
+                      onClick={(e) => handlerRatingSubmit(1)}
                     />
                     <i
                       style={{
@@ -490,12 +497,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 2
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 1.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(2)}
+                      onClick={(e) => handlerRatingSubmit(2)}
                     />
                     <i
                       style={{
@@ -508,12 +515,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 3
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 2.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(3)}
+                      onClick={(e) => handlerRatingSubmit(3)}
                     />
                     <i
                       style={{
@@ -526,12 +533,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 4
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 3.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(4)}
+                      onClick={(e) => handlerRatingSubmit(4)}
                     />
                     <i
                       style={{
@@ -544,12 +551,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 5
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 4.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(5)}
+                      onClick={(e) => handlerRatingSubmit(5)}
                     />
                     <i
                       style={{
@@ -562,12 +569,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 6
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 5.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(6)}
+                      onClick={(e) => handlerRatingSubmit(6)}
                     />
                     <i
                       style={{
@@ -580,12 +587,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 7
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 6.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(7)}
+                      onClick={(e) => handlerRatingSubmit(7)}
                     />
                     <i
                       style={{
@@ -598,12 +605,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 8
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 7.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(8)}
+                      onClick={(e) => handlerRatingSubmit(8)}
                     />
                     <i
                       style={{
@@ -616,12 +623,12 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 9
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 8.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(9)}
+                      onClick={(e) => handlerRatingSubmit(9)}
                     />
                     <i
                       style={{
@@ -634,143 +641,126 @@ export const IdeaDetailPage = () => {
                       }}
                       className={
                         dataIdeaDetail["total_rating"]["rate"] >= 10
-                          ? "fas fa-star btn m-0 p-0"
+                          ? "btn fas fa-star m-0 p-0"
                           : dataIdeaDetail["total_rating"]["rate"] >= 9.5
-                          ? "fas fa-star-half-alt btn m-0 p-0"
-                          : "far fa-star btn m-0 p-0"
+                          ? "btn fas fa-star-half-alt m-0 p-0"
+                          : "btn far fa-star m-0 p-0"
                       }
-                      onClick={(e) => formHandlerRatingSubmit(10)}
+                      onClick={(e) => handlerRatingSubmit(10)}
                     />
                   </span>
-                  <span
-                    className={
-                      dataIdeaDetail["total_rating"]["rate"] > 7
-                        ? "badge bg-success rounded-pill"
-                        : dataIdeaDetail["total_rating"]["rate"] > 4
-                        ? "badge bg-warning rounded-pill"
-                        : "badge bg-danger rounded-pill"
-                    }
-                  >
-                    {utils.GetSliceString(
-                      dataIdeaDetail["total_rating"]["rate"],
-                      3,
-                      false
-                    )}
-                    {" \\  "}
-                    <small className="text-uppercase">
-                      {dataIdeaDetail["total_rating"]["count"]}
-                    </small>
-                  </span>
                 </div>
-                <div className="d-flex justify-content-between p-1">
-                  <span className="text-secondary">Комментарии</span>
-                  <span className="badge bg-secondary rounded-pill">
+                <div className="d-flex justify-content-between m-0 p-1">
+                  <span className="text-secondary m-0 p-1">Комментарии</span>
+                  <span className="badge bg-secondary rounded-pill m-0 p-2">
                     {dataIdeaDetail["comment_count"]}
                   </span>
                 </div>
               </div>
-            </div>
-            <div className="card p-2">
-              <div className="order-md-last">
-                <StoreStatusComponent
-                  storeStatus={ideaCommentCreateAuthStore}
-                  keyStatus={"ideaCommentCreateAuthStore"}
-                  consoleLog={constants.DEBUG_CONSTANT}
-                  showLoad={true}
-                  loadText={""}
-                  showData={false}
-                  dataText={""}
-                  showError={true}
-                  errorText={""}
-                  showFail={true}
-                  failText={""}
-                />
-                <div className="m-0 p-0 my-2">
-                  <form
-                    className="card"
-                    onSubmit={formHandlerCommentCreateSubmit}
-                  >
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={comment}
-                        required
-                        placeholder="введите комментарий тут..."
-                        minLength="1"
-                        maxLength="200"
-                        onChange={(e) => commentSet(e.target.value)}
-                      />
-                      <button type="submit" className="btn btn-secondary">
-                        отправить
-                      </button>
+              <div className="card-footer m-0 p-0">
+                <div className="card m-0 p-2">
+                  <div className="order-md-last m-0 p-0">
+                    <div className="m-0 p-0 my-2">
+                      <form
+                        className="card"
+                        onSubmit={handlerCommentCreateSubmit}
+                      >
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={comment}
+                            required
+                            placeholder="введите комментарий тут..."
+                            minLength="1"
+                            maxLength="200"
+                            onChange={(e) => commentSet(e.target.value)}
+                          />
+                          <button type="submit" className="btn btn-secondary">
+                            отправить
+                          </button>
+                        </div>
+                      </form>
                     </div>
-                  </form>
-                </div>
-                <StoreStatusComponent
-                  storeStatus={ideaCommentListAuthStore}
-                  keyStatus={"ideaCommentListAuthStore"}
-                  consoleLog={constants.DEBUG_CONSTANT}
-                  showLoad={true}
-                  loadText={""}
-                  showData={false}
-                  dataText={""}
-                  showError={true}
-                  errorText={""}
-                  showFail={true}
-                  failText={""}
-                />
-                {!dataIdeaCommentList ||
-                (dataIdeaCommentList && dataIdeaCommentList.length) < 1 ? (
-                  <div className="my-1">
-                    <MessageComponent variant={"warning"}>
-                      Комментарии не найдены!
-                    </MessageComponent>
+                    <components.StoreStatusComponent
+                      storeStatus={ideaCommentCreateStore}
+                      keyStatus={"ideaCommentCreateStore"}
+                      consoleLog={constants.DEBUG_CONSTANT}
+                      showLoad={true}
+                      loadText={""}
+                      showData={false}
+                      dataText={""}
+                      showError={true}
+                      errorText={""}
+                      showFail={true}
+                      failText={""}
+                    />
+                    <components.StoreStatusComponent
+                      storeStatus={ideaCommentListStore}
+                      keyStatus={"ideaCommentListStore"}
+                      consoleLog={constants.DEBUG_CONSTANT}
+                      showLoad={true}
+                      loadText={""}
+                      showData={false}
+                      dataText={""}
+                      showError={true}
+                      errorText={""}
+                      showFail={true}
+                      failText={""}
+                    />
+                    {!dataIdeaCommentList ||
+                    (dataIdeaCommentList && dataIdeaCommentList.length) < 1 ? (
+                      <div className="my-1">
+                        <components.MessageComponent variant={"warning"}>
+                          Комментарии не найдены!
+                        </components.MessageComponent>
+                      </div>
+                    ) : (
+                      <ul className="list-group m-0 p-0">
+                        {dataIdeaCommentList.map((object, index) => (
+                          <li className="list-group-item m-0 p-1">
+                            <div className="d-flex justify-content-between m-0 p-0">
+                              <h6 className="btn btn-outline-warning m-0 p-2">
+                                {object["user_model"]["last_name_char_field"]}{" "}
+                                {object["user_model"]["first_name_char_field"]}
+                              </h6>
+                              <span className="text-muted m-0 p-0">
+                                {utils.GetCleanDateTime(
+                                  object["datetime_field"],
+                                  true
+                                )}
+                                <button
+                                  type="button"
+                                  className="btn btn-sm btn-outline-danger m-1 p-1"
+                                  onClick={(e) =>
+                                    handlerNotificationSubmit({
+                                      name: "жалоба на комментарий к идеи в банке идей",
+                                      place: `id идеи: ${id}, id комментария: ${object["id"]}`,
+                                      description: "",
+                                    })
+                                  }
+                                >
+                                  пожаловаться
+                                </button>
+                              </span>
+                            </div>
+                            <div className="d-flex justify-content-center m-0 p-1">
+                              <small className="text-muted m-0 p-1">
+                                {object["comment_text_field"]}
+                              </small>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                ) : (
-                  <ul className="list-group">
-                    {dataIdeaCommentList.map((object, index) => (
-                      <li className="list-group-item">
-                        <div className="d-flex justify-content-between p-1">
-                          <h6 className="">
-                            {object["user_model"]["last_name_char_field"]}{" "}
-                            {object["user_model"]["first_name_char_field"]}
-                          </h6>
-                          <span className="text-muted">
-                            {utils.GetCleanDateTime(
-                              object["datetime_field"],
-                              true
-                            )}
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-outline-danger m-1 p-1"
-                              onClick={(e) =>
-                                formHandlerNotificationSubmit({
-                                  name: "жалоба на комментарий к идеи в банке идей",
-                                  place: `id идеи: ${id}, id комментария: ${object["id"]}`,
-                                  description: "",
-                                })
-                              }
-                            >
-                              пожаловаться
-                            </button>
-                          </span>
-                        </div>
-                        <div className="d-flex justify-content-center p-1">
-                          <small className="text-muted">
-                            {object["comment_text_field"]}
-                          </small>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                </div>
               </div>
             </div>
           </div>
         )}
       </main>
-      <FooterComponent />
-    </div>
+      <components.FooterComponent />
+    </body>
   );
 };

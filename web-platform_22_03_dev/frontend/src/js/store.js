@@ -1,66 +1,66 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+import React from "react";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as reducers from "./reducers";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////TODO combineReducers
 const globalReducer = combineReducers({
+  userLoginStore: reducers.userLoginReducer,
+  userDetailsStore: reducers.userDetailsReducer,
+  userChangeStore: reducers.userChangeReducer,
+  userRecoverPasswordStore: reducers.userRecoverPasswordReducer,
+  userListAllStore: reducers.userListAllReducer,
+  notificationCreateStore: reducers.notificationCreateReducer,
+  notificationListStore: reducers.notificationListReducer,
   /////////////////////////////////////////////////////////////////////////////
-  userLoginAnyStore: reducers.userLoginReducer,
-  userDetailsAuthStore: reducers.userDetailsReducer,
-  userChangeAuthStore: reducers.userChangeReducer,
-  userRecoverPasswordAnyStore: reducers.userRecoverPasswordReducer,
-  userListAllAuthStore: reducers.userListAllReducer,
-  notificationCreateAnyStore: reducers.notificationCreateReducer,
+  adminChangeUserPasswordStore: reducers.adminChangeUserPasswordReducer,
+  adminCreateOrChangeUsersStore: reducers.adminCreateOrChangeUsersReducer,
+  adminExportUsersStore: reducers.adminExportUsersReducer,
   /////////////////////////////////////////////////////////////////////////////
-  adminChangeUserPasswordAuthStore: reducers.adminChangeUserPasswordReducer,
-  adminCreateOrChangeUsersAuthStore: reducers.adminCreateOrChangeUsersReducer,
-  adminExportUsersAuthStore: reducers.adminExportUsersReducer,
+  salaryUserStore: reducers.salaryUserReducer,
   /////////////////////////////////////////////////////////////////////////////
-  salaryUserAuthStore: reducers.salaryUserReducer,
+  rationalCreateStore: reducers.rationalCreateReducer,
+  rationalListStore: reducers.rationalListReducer,
+  rationalDetailStore: reducers.rationalDetailReducer,
   /////////////////////////////////////////////////////////////////////////////
-  rationalCreateAuthStore: reducers.rationalCreateReducer,
-  rationalListAuthStore: reducers.rationalListReducer,
-  rationalDetailAuthStore: reducers.rationalDetailReducer,
+  ideaCreateStore: reducers.ideaCreateReducer,
+  ideaListStore: reducers.ideaListReducer,
+  ideaDetailStore: reducers.ideaDetailReducer,
+  ideaChangeStore: reducers.ideaChangeReducer,
+  ideaModerateStore: reducers.ideaModerateReducer,
+  ideaCommentCreateStore: reducers.ideaCommentCreateReducer,
+  ideaCommentDeleteStore: reducers.ideaCommentDeleteReducer,
+  ideaCommentListStore: reducers.ideaCommentListReducer,
+  ideaRatingCreateStore: reducers.ideaRatingCreateReducer,
+  ideaAuthorListStore: reducers.ideaAuthorListReducer,
   /////////////////////////////////////////////////////////////////////////////
-  ideaCreateAuthStore: reducers.ideaCreateReducer,
-  ideaListAuthStore: reducers.ideaListReducer,
-  ideaDetailAuthStore: reducers.ideaDetailReducer,
-  ideaChangeAuthStore: reducers.ideaChangeReducer,
-  ideaModerateAuthStore: reducers.ideaModerateReducer,
-  ideaCommentCreateAuthStore: reducers.ideaCommentCreateReducer,
-  ideaCommentListAuthStore: reducers.ideaCommentListReducer,
-  ideaRatingCreateAuthStore: reducers.ideaRatingCreateReducer,
+  vacancyListStore: reducers.vacancyCreateReducer,
+  vacancyDetailStore: reducers.vacancyListReducer,
+  vacancyCreateStore: reducers.vacancyDetailReducer,
+  vacancyChangeStore: reducers.vacancyChangeReducer,
+  vacancyDeleteStore: reducers.vacancyDeleteReducer,
   /////////////////////////////////////////////////////////////////////////////
-  vacancyListAuthStore: reducers.vacancyCreateReducer,
-  vacancyDetailAnyStore: reducers.vacancyListReducer,
-  vacancyCreateAnyStore: reducers.vacancyDetailReducer,
-  vacancyChangeAuthStore: reducers.vacancyChangeReducer,
-  vacancyDeleteAuthStore: reducers.vacancyDeleteReducer,
-  /////////////////////////////////////////////////////////////////////////////
-  resumeListAuthStore: reducers.resumeListReducer,
-  resumeDetailAuthStore: reducers.resumeDetailReducer,
-  resumeCreateAnyStore: reducers.resumeCreateReducer,
-  resumeDeleteAuthStore: reducers.resumeDeleteReducer,
-  /////////////////////////////////////////////////////////////////////////////
+  resumeListStore: reducers.resumeListReducer,
+  resumeDetailStore: reducers.resumeDetailReducer,
+  resumeCreateStore: reducers.resumeCreateReducer,
+  resumeDeleteStore: reducers.resumeDeleteReducer,
 });
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////TODO localStorage
 const userTokenFromStorage = localStorage.getItem("userToken")
   ? JSON.parse(localStorage.getItem("userToken"))
   : null;
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////TODO initial state
 const initialState = {
-  userLoginAnyStore: { data: userTokenFromStorage },
+  userLoginStore: { data: userTokenFromStorage },
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////TODO middleware
 const middleware = [thunk];
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO store
 const store = createStore(
   globalReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 export default store;
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

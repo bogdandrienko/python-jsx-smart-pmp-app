@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,34 +14,33 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const LoginPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [username, usernameSet] = useState("");
   const [password, passwordSet] = useState("");
   const [captcha, captchaSet] = useState("");
 
-  const userLoginAnyStore = useSelector((state) => state.userLoginAnyStore); // store.js
+  const userLoginStore = useSelector((state) => state.userLoginStore);
   const {
     // load: loadUserLogin,
     data: dataUserLogin,
     // error: errorUserLogin,
     // fail: failUserLogin,
-  } = userLoginAnyStore;
+  } = userLoginStore;
 
   useEffect(() => {
     if (dataUserLogin) {
@@ -62,9 +62,10 @@ export const LoginPage = () => {
     }
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Вход в систему"}
@@ -72,9 +73,9 @@ export const LoginPage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={userLoginAnyStore}
-            key={"userLoginAnyStore"}
+          <components.StoreStatusComponent
+            storeStatus={userLoginStore}
+            key={"userLoginStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -86,9 +87,9 @@ export const LoginPage = () => {
             failText={""}
           />
           {!captcha && (
-            <MessageComponent variant="danger">
+            <components.MessageComponent variant="danger">
               Пройдите проверку на робота!
-            </MessageComponent>
+            </components.MessageComponent>
           )}
         </div>
         <div className="">
@@ -184,7 +185,7 @@ export const LoginPage = () => {
           </form>
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

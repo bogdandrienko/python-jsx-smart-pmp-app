@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,22 +14,21 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const RationalCreatePage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [subdivision, subdivisionSet] = useState("");
   const [sphere, sphereSet] = useState("");
@@ -51,24 +51,20 @@ export const RationalCreatePage = () => {
   const [user5, user5Set] = useState("");
   const [user5Perc, user5PercSet] = useState("");
 
-  const userListAllAuthStore = useSelector(
-    (state) => state.userListAllAuthStore
-  ); // store.js
+  const userListAllStore = useSelector((state) => state.userListAllStore);
   const {
     load: loadUserListAll,
     data: dataUserListAll,
     error: errorUserListAll,
     fail: failUserListAll,
-  } = userListAllAuthStore;
-  const rationalCreateAuthStore = useSelector(
-    (state) => state.rationalCreateAuthStore
-  ); // store.js
+  } = userListAllStore;
+  const rationalCreateStore = useSelector((state) => state.rationalCreateStore);
   const {
     // load: loadRationalCreate,
     data: dataRationalCreate,
     // error: errorRationalCreate,
     // fail: failRationalCreate,
-  } = rationalCreateAuthStore;
+  } = rationalCreateStore;
 
   useEffect(() => {
     if (
@@ -114,18 +110,19 @@ export const RationalCreatePage = () => {
       additionalWord: additionalWord,
       additionalPdf: additionalPdf,
       additionalExcel: additionalExcel,
-      user1: user1 + " " + user1Perc,
-      user2: user2 + " " + user2Perc,
-      user3: user3 + " " + user3Perc,
-      user4: user4 + " " + user4Perc,
-      user5: user5 + " " + user5Perc,
+      user1: user1 + " " + user1Perc + "%",
+      user2: user2 + " " + user2Perc + "%",
+      user3: user3 + " " + user3Perc + "%",
+      user4: user4 + " " + user4Perc + "%",
+      user5: user5 + " " + user5Perc + "%",
     };
     dispatch(actions.rationalCreateAction(form));
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={true}
         title={"Подача рационализаторского предложения"}
@@ -135,9 +132,9 @@ export const RationalCreatePage = () => {
       />
       <main className="container  ">
         <div className="">
-          <StoreStatusComponent
-            storeStatus={userListAllAuthStore}
-            key={"userListAllAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={userListAllStore}
+            key={"userListAllStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={false}
             loadText={""}
@@ -148,9 +145,9 @@ export const RationalCreatePage = () => {
             showFail={true}
             failText={""}
           />
-          <StoreStatusComponent
-            storeStatus={rationalCreateAuthStore}
-            key={"rationalCreateAuthStore"}
+          <components.StoreStatusComponent
+            storeStatus={rationalCreateStore}
+            key={"rationalCreateStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}
@@ -394,13 +391,13 @@ export const RationalCreatePage = () => {
                           <label className="form-control-sm">
                             % Вклада 1 участника
                             <input
-                              type="text"
+                              type="number"
                               className="form-control form-control-sm"
                               value={user1Perc}
                               required
                               placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="4"
+                              min="0"
+                              max="100"
                               onChange={(e) => user1PercSet(e.target.value)}
                             />
                           </label>
@@ -411,7 +408,6 @@ export const RationalCreatePage = () => {
                             <select
                               className="form-control form-control-sm"
                               value={user2}
-                              required
                               onChange={(e) => user2Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -425,13 +421,12 @@ export const RationalCreatePage = () => {
                           <label className="form-control-sm">
                             % Вклада 2 участника
                             <input
-                              type="text"
+                              type="number"
                               className="form-control form-control-sm"
                               value={user2Perc}
-                              required
                               placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="4"
+                              min="0"
+                              max="100"
                               onChange={(e) => user2PercSet(e.target.value)}
                             />
                           </label>
@@ -442,7 +437,6 @@ export const RationalCreatePage = () => {
                             <select
                               className="form-control form-control-sm"
                               value={user3}
-                              required
                               onChange={(e) => user3Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -456,13 +450,12 @@ export const RationalCreatePage = () => {
                           <label className="form-control-sm">
                             % Вклада 3 участника
                             <input
-                              type="text"
+                              type="number"
                               className="form-control form-control-sm"
                               value={user3Perc}
-                              required
                               placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="4"
+                              min="0"
+                              max="100"
                               onChange={(e) => user3PercSet(e.target.value)}
                             />
                           </label>
@@ -473,7 +466,6 @@ export const RationalCreatePage = () => {
                             <select
                               className="form-control form-control-sm"
                               value={user4}
-                              required
                               onChange={(e) => user4Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -487,13 +479,12 @@ export const RationalCreatePage = () => {
                           <label className="form-control-sm">
                             % Вклада 4 участника
                             <input
-                              type="text"
+                              type="number"
                               className="form-control form-control-sm"
                               value={user4Perc}
-                              required
                               placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="4"
+                              min="0"
+                              max="100"
                               onChange={(e) => user4PercSet(e.target.value)}
                             />
                           </label>
@@ -504,7 +495,6 @@ export const RationalCreatePage = () => {
                             <select
                               className="form-control form-control-sm"
                               value={user5}
-                              required
                               onChange={(e) => user5Set(e.target.value)}
                             >
                               <option value="">Не выбрано</option>
@@ -518,13 +508,12 @@ export const RationalCreatePage = () => {
                           <label className="form-control-sm">
                             % Вклада 5 участника
                             <input
-                              type="text"
+                              type="number"
                               className="form-control form-control-sm"
                               value={user5Perc}
-                              required
                               placeholder="пример: 70%"
-                              minLength="0"
-                              maxLength="4"
+                              min="0"
+                              max="100"
                               onChange={(e) => user5PercSet(e.target.value)}
                             />
                           </label>
@@ -587,7 +576,7 @@ export const RationalCreatePage = () => {
           )}
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

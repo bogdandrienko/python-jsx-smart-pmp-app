@@ -14,6 +14,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group, update_last_login
 from django.core.mail import send_mail
 from django.shortcuts import render
+from django.utils import timezone
 from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from openpyxl.utils import get_column_letter
 from rest_framework import viewsets, permissions
@@ -260,7 +261,6 @@ def api_auth_user_detail(request):
         req_inst = backend_service.DjangoClass.TemplateClass.request(
             request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
         )
-
         # Methods
         if req_inst.method == "POST":
             # Actions
@@ -624,6 +624,33 @@ def api_auth_user_notification(request):
                         request=request, error=error, print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "NOTIFICATION_LIST":
+                try:
+                    # name = req_inst.get_value("name")
+                    # place = req_inst.get_value("place")
+                    # description = req_inst.get_value("description")
+                    #
+                    # backend_models.NotificationModel.objects.create(
+                    #     notification_author_foreign_key_field=req_inst.user_model,
+                    #     name_char_field=name,
+                    #     place_char_field=place,
+                    #     description_text_field=description,
+                    # )
+
+                    objects = [
+                        {"Жалоба на комментарий в банке идей!", "123", "не активно"},
+                        {"Жалоба на идею в банке идей!", "312", "активно"},
+                        {"Ваша идея успешно прошла модерацию", "123", "активно"},
+                    ]
+
+                    response = {"response": objects}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
@@ -731,121 +758,118 @@ def api_auth_admin_create_or_change_users(request):
                     change_user_password = request.data.get("changeUserPassword")
                     clear_user_groups = request.data.get("clearUserGroups")
 
-                    def create_users():
-                        def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
-                            if isinstance(_col, int):
-                                _col = get_column_letter(_col)
-                            if isinstance(_row, str):
-                                _row = str(_row)
-                            value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
-                            if value.lower() == "none":
-                                return ""
-                            elif value.lower() == "true":
-                                return True
-                            elif value.lower() == "false":
-                                return False
-                            else:
-                                return value
+                    def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
+                        if isinstance(_col, int):
+                            _col = get_column_letter(_col)
+                        if isinstance(_row, str):
+                            _row = str(_row)
+                        value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
+                        if value.lower() == "none":
+                            return ""
+                        elif value.lower() == "true":
+                            return True
+                        elif value.lower() == "false":
+                            return False
+                        else:
+                            return value
 
-                        workbook = openpyxl.load_workbook(additional_excel)
-                        sheet = workbook.active
-                        max_rows = sheet.max_row
-                        max_cols = sheet.max_column
-                        for row in range(1 + 1, max_rows + 1):
-                            subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
-                            workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
-                            department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
-                            last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
-                            first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
-                            patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
-                            personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
-                            position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
-                            category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
-                            username = get_value(_col="J", _row=row, _sheet=sheet)
-                            password_slug_field = get_value(_col="K", _row=row, _sheet=sheet)
-                            is_active = get_value(_col="L", _row=row, _sheet=sheet)
-                            is_staff = get_value(_col="M", _row=row, _sheet=sheet)
-                            is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
-                            is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
-                            groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
-                            email_field = get_value(_col="Q", _row=row, _sheet=sheet)
-                            secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
-                            secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
+                    workbook = openpyxl.load_workbook(additional_excel)
+                    sheet = workbook.active
+                    max_rows = sheet.max_row
+                    max_cols = sheet.max_column
+                    for row in range(1 + 1, max_rows + 1):
+                        subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
+                        workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
+                        department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
+                        last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
+                        first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
+                        patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
+                        personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
+                        position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
+                        category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
+                        username = get_value(_col="J", _row=row, _sheet=sheet)
+                        password_slug_field = get_value(_col="K", _row=row, _sheet=sheet)
+                        is_active = get_value(_col="L", _row=row, _sheet=sheet)
+                        is_staff = get_value(_col="M", _row=row, _sheet=sheet)
+                        is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
+                        is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
+                        groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
+                        email_field = get_value(_col="Q", _row=row, _sheet=sheet)
+                        secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
+                        secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
 
-                            if len(username) < 1:
+                        if len(username) < 1:
+                            continue
+
+                        try:
+                            user = User.objects.get(username=username)
+                            if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
                                 continue
+                            new_user = False
+                        except Exception as error:
+                            user = User.objects.create(
+                                username=username,
+                                password=make_password(password=password_slug_field),
+                                is_active=True
+                            )
+                            new_user = True
 
-                            try:
-                                user = User.objects.get(username=username)
-                                if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
-                                    continue
-                                new_user = False
-                            except Exception as error:
-                                user = User.objects.create(
-                                    username=username,
-                                    password=make_password(password=password_slug_field),
-                                    is_active=True
-                                )
-                                new_user = True
+                        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
 
-                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-
-                            if new_user:
+                        if new_user:
+                            user_model.password_slug_field = password_slug_field
+                        else:
+                            if change_user_password == "Изменять пароль уже существующего пользователя":
+                                user.password = make_password(password=password_slug_field)
                                 user_model.password_slug_field = password_slug_field
-                            else:
-                                if change_user_password == "Изменять пароль уже существующего пользователя":
-                                    user.password = make_password(password=password_slug_field)
-                                    user_model.password_slug_field = password_slug_field
 
-                            user.is_staff = is_staff
-                            user.is_superuser = is_superuser
-                            user_model.activity_boolean_field = is_active
-                            user_model.email_field = email_field
-                            user.email = email_field
-                            user_model.secret_question_char_field = secret_question_char_field
-                            user_model.secret_answer_char_field = secret_answer_char_field
-                            user_model.is_temp_password = is_temp_password
-                            user_model.last_name_char_field = last_name_char_field
-                            user.last_name = last_name_char_field
-                            user_model.first_name_char_field = first_name_char_field
-                            user.first_name = first_name_char_field
-                            user_model.patronymic_char_field = patronymic_char_field
-                            user_model.personnel_number_slug_field = personnel_number_slug_field
-                            user_model.subdivision_char_field = subdivision_char_field
-                            user_model.workshop_service_char_field = workshop_service_char_field
-                            user_model.department_site_char_field = department_site_char_field
-                            user_model.position_char_field = position_char_field
-                            user_model.category_char_field = category_char_field
-                            user_model.save()
-                            user.save()
+                        user.is_staff = is_staff
+                        user.is_superuser = is_superuser
+                        user_model.activity_boolean_field = is_active
+                        user_model.email_field = email_field
+                        user.email = email_field
+                        user_model.secret_question_char_field = secret_question_char_field
+                        user_model.secret_answer_char_field = secret_answer_char_field
+                        user_model.is_temp_password = is_temp_password
+                        user_model.last_name_char_field = last_name_char_field
+                        user.last_name = last_name_char_field
+                        user_model.first_name_char_field = first_name_char_field
+                        user.first_name = first_name_char_field
+                        user_model.patronymic_char_field = patronymic_char_field
+                        user_model.personnel_number_slug_field = personnel_number_slug_field
+                        user_model.subdivision_char_field = subdivision_char_field
+                        user_model.workshop_service_char_field = workshop_service_char_field
+                        user_model.department_site_char_field = department_site_char_field
+                        user_model.position_char_field = position_char_field
+                        user_model.category_char_field = category_char_field
+                        user_model.save()
+                        user.save()
 
-                            if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
-                                for group in backend_models.GroupModel.objects.filter(
-                                        user_many_to_many_field=user_model):
-                                    try:
-                                        group.user_many_to_many_field.remove(user_model)
-                                    except Exception as error:
-                                        pass
+                        if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
+                            for group in backend_models.GroupModel.objects.filter(
+                                    user_many_to_many_field=user_model):
+                                try:
+                                    group.user_many_to_many_field.remove(user_model)
+                                except Exception as error:
+                                    pass
 
-                            groups = [group.strip() for group in str(groups).lower().strip().split(',')]
-                            for group in groups:
-                                if len(group) > 0:
-                                    group_object = Group.objects.get_or_create(name=group)[0]
-                                    try:
-                                        group_model = backend_models.GroupModel.objects.get(
-                                            group_foreign_key_field=group_object
-                                        )
-                                    except Exception as error:
-                                        group_model = backend_models.GroupModel.objects.create(
-                                            group_foreign_key_field=group_object,
-                                            name_char_field=group,
-                                            name_slug_field=group,
-                                        )
-                                    group_model.user_many_to_many_field.add(user_model)
+                        groups = [group.strip() for group in str(groups).lower().strip().split(',')]
+                        for group in groups:
+                            if len(group) > 0:
+                                group_object = Group.objects.get_or_create(name=group)[0]
+                                try:
+                                    group_model = backend_models.GroupModel.objects.get(
+                                        group_foreign_key_field=group_object
+                                    )
+                                except Exception as error:
+                                    group_model = backend_models.GroupModel.objects.create(
+                                        group_foreign_key_field=group_object,
+                                        name_char_field=group,
+                                        name_slug_field=group,
+                                    )
+                                group_model.user_many_to_many_field.add(user_model)
+                        if backend_settings.DEBUG:
                             print(username)
-
-                    create_users()
-                    # threading.Thread(target=create_users, args=()).start()
                     return Response({"response": "Пользователи успешно созданы/изменены."})
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(
@@ -1133,8 +1157,9 @@ def api_auth_salary(request):
                     iin_base64 = base64.b64encode(str(iin).encode()).decode()
                     date_base64 = base64.b64encode(f'{req_inst.get_value("dateTime", strip=True)}'.encode()).decode()
                     url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
-                    relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-                    h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\get_salary_data")
+                    h = httplib2.Http(
+                        os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_salary_data"
+                    )
                     _login = 'Web_adm_1c'
                     password = '159159qqww!'
                     h.add_credentials(_login, password)
@@ -1740,11 +1765,30 @@ def api_auth_rational(request):
                     additional_pdf = req_inst.get_value("additionalPdf")
                     additional_excel = req_inst.get_value("additionalExcel")
                     user1 = req_inst.get_value("user1")
+                    if user1.find("%") < 0:
+                        user1 += "%"
+                    if len(user1) < 7:
+                        user1 = None
                     user2 = req_inst.get_value("user2")
+                    if user2.find("%") < 0:
+                        user2 += "%"
+                    if len(user2) < 7:
+                        user2 = None
                     user3 = req_inst.get_value("user3")
+                    if user3.find("%") < 0:
+                        user3 += "%"
+                    if len(user3) < 7:
+                        user3 = None
                     user4 = req_inst.get_value("user4")
+                    if user4.find("%") < 0:
+                        user4 += "%"
+                    if len(user4) < 7:
+                        user4 = None
                     user5 = req_inst.get_value("user5")
-
+                    if user5.find("%") < 0:
+                        user5 += "%"
+                    if len(user5) < 7:
+                        user5 = None
                     if sphere == "Технологическая":
                         status_moderate = "Предтехмодерация"
                     else:
@@ -1952,14 +1996,25 @@ def api_auth_idea(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_LIST":
                 try:
-                    subdivision = request.data.get("subdivision")
-                    category = request.data.get("category")
-                    author = request.data.get("author")
-                    search = request.data.get("search")
-                    sort = request.data.get("sort")
-                    moderate = request.data.get("moderate")
+                    subdivision = req_inst.get_value("subdivision")
+                    sphere = req_inst.get_value("sphere")
+                    category = req_inst.get_value("category")
+                    author = req_inst.get_value("author")
+                    search = req_inst.get_value("search")
+                    sort = req_inst.get_value("sort")
+                    moderate = req_inst.get_value("moderate")
+                    only_month = req_inst.get_value("onlyMonth")
 
-                    objects = backend_models.IdeaModel.objects.all().order_by("-created_datetime_field")
+                    objects = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
+                    if only_month:
+                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                        local_objects = []
+                        for obj in objects:
+                            if (obj.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                                    >= now:
+                                local_objects.append(obj.id)
+                        objects = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
+                            order_by("-register_datetime_field")
 
                     # search
                     if search:
@@ -1968,15 +2023,17 @@ def api_auth_idea(request):
                     # filter
                     if subdivision:
                         objects = objects.filter(subdivision_char_field=subdivision)
+                    if sphere:
+                        objects = objects.filter(sphere_char_field=sphere)
                     if category:
                         objects = objects.filter(category_char_field=category)
                     if author:
-                        ath = (str(author).split(" ")[-2]).strip()
-                        print("ath: ", ath)
-
-                        author = backend_models.UserModel.objects.get(
-                            personnel_number_slug_field=(str(author).split(" ")[-2]).strip()
-                        )
+                        if author == "self":
+                            author = req_inst.user_model
+                        else:
+                            author = backend_models.UserModel.objects.get(
+                                personnel_number_slug_field=(str(author).split(" ")[-2]).strip()
+                            )
                         objects = objects.filter(idea_author_foreign_key_field=author)
 
                     if moderate:
@@ -1984,15 +2041,15 @@ def api_auth_idea(request):
 
                     # sort
                     if sort:
-                        if sort == "дате публикации (сначала свежие)":
-                            objects = objects.order_by("-created_datetime_field")
-                        elif sort == "дате публикации (сначала старые)":
-                            objects = objects.order_by("created_datetime_field")
-                        elif sort == "названию (С начала алфавита)":
+                        if sort == "дате публикации (свежие в начале)":
+                            objects = objects.order_by("-register_datetime_field")
+                        elif sort == "дате публикации (свежие в конце)":
+                            objects = objects.order_by("register_datetime_field")
+                        elif sort == "названию (с начала алфавита)":
                             objects = objects.order_by("name_char_field")
-                        elif sort == "названию (С конца алфавита)":
+                        elif sort == "названию (с конца алфавита)":
                             objects = objects.order_by("-name_char_field")
-                        elif sort == "рейтингу (Популярные в начале)":
+                        elif sort == "рейтингу (популярные в начале)":
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_total_rating()["rate"], obj])
@@ -2004,10 +2061,34 @@ def api_auth_idea(request):
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
-                        elif sort == "рейтингу (Популярные в конце)":
+                        elif sort == "рейтингу (популярные в конце)":
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_total_rating()["rate"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "комментариям (наибольшие в начале)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj.get_comment_count(), obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "комментариям (наибольшие в конце)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj.get_comment_count(), obj])
 
                             def sort_rating(val):
                                 return val[0]
@@ -2080,6 +2161,7 @@ def api_auth_idea(request):
                     if moderate_comment and obj.comment_moderate_char_field != moderate_comment:
                         obj.comment_moderate_char_field = moderate_comment
 
+                    obj.register_datetime_field = timezone.now()
                     obj.save()
 
                     response = {"response": "Успешно изменено!"}
@@ -2100,6 +2182,7 @@ def api_auth_idea(request):
                     obj.status_moderate_char_field = moderate
                     obj.idea_moderate_foreign_key_field = req_inst.user_model
                     obj.comment_moderate_char_field = moderate_comment
+                    obj.register_datetime_field = timezone.now()
                     obj.save()
 
                     response = {"response": "Модерация успешно прошла!"}
@@ -2123,6 +2206,21 @@ def api_auth_idea(request):
                         comment_text_field=comment,
                     )
                     response = {"response": "Комментарий успешно создан!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_COMMENT_DELETE":
+                try:
+                    comment_id = request.data.get("commentId")
+
+                    backend_models.CommentIdeaModel.objects.get(
+                        id=comment_id,
+                    ).delete()
+                    response = {"response": "Комментарий успешно удалён!"}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -2161,6 +2259,151 @@ def api_auth_idea(request):
                         order_by("-datetime_field")
                     serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True)
                     response = {"response": serializer.data}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_AUTHOR_LIST":
+                try:
+
+                    sort = req_inst.get_value("sort")
+                    only_month = req_inst.get_value("onlyMonth")
+
+                    authors = []
+                    ideas = backend_models.IdeaModel.objects.filter(status_moderate_char_field="принято").\
+                        order_by("-register_datetime_field")
+                    if only_month:
+                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                        local_objects = []
+                        for obj in ideas:
+                            if (obj.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                                    >= now:
+                                local_objects.append(obj.id)
+                        ideas = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
+                            order_by("-register_datetime_field")
+
+                    for idea in ideas:
+                        authors.append(idea.idea_author_foreign_key_field)
+                    authors = set(authors)
+
+                    objects = []
+                    for auth in authors:
+                        ideas = backend_models.IdeaModel.objects.filter(
+                            idea_author_foreign_key_field=auth, status_moderate_char_field="принято"
+                        )
+                        idea_count = ideas.count()
+                        idea_rating = 0
+                        idea_rating_count = 0
+                        idea_comment_count = 0
+                        for idea in ideas:
+                            ratings = backend_models.RatingIdeaModel.objects.filter(rating_idea_foreign_key_field=idea)
+                            for rate in ratings:
+                                idea_rating += rate.rating_integer_field
+                            idea_rating_count += ratings.count()
+                            idea_comment_count = backend_models.CommentIdeaModel.objects.filter(
+                                comment_idea_foreign_key_field=idea
+                            ).count()
+                        objects.append({
+                            "username": f"{auth.last_name_char_field} {auth.first_name_char_field}",
+                            "idea_count": idea_count, "idea_rating": round(idea_rating/idea_rating_count, 1),
+                            "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
+                        })
+
+                    # sort
+                    if sort:
+                        if sort == "количеству (наибольшие в начале)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_count"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "количеству (наибольшие в конце)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_count"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "рейтингу (популярные в начале)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_rating"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "рейтингу (популярные в конце)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_rating"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "отметкам рейтинга (наибольшие в начале)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_rating_count"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "отметкам рейтинга (наибольшие в конце)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_rating_count"], obj])
+
+                            def sort_rating(val):
+                                return val[0]
+
+                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "комментариям (наибольшие в начале)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_comment_count"], obj])
+                            objects_arr.sort(key=lambda x: x[0], reverse=True)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+                        elif sort == "комментариям (наибольшие в конце)":
+                            objects_arr = []
+                            for obj in objects:
+                                objects_arr.append([obj["idea_comment_count"], obj])
+                            objects_arr.sort(key=lambda x: x[0], reverse=False)
+                            objects = []
+                            for obj in objects_arr:
+                                objects.append(obj[1])
+
+                    response = {"response": objects}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
@@ -2572,8 +2815,9 @@ def api_auth_terminal(request):
 
                     def reboot(_ip):
                         url = f"http://{ip}/ISAPI/System/reboot"
-                        relative_path = os.path.dirname(os.path.abspath('__file__')) + '\\'
-                        h = httplib2.Http(relative_path + "\\static\\media\\data\\temp\\reboot_terminal")
+                        h = httplib2.Http(
+                            os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/reboot_terminal"
+                        )
                         _login = 'admin'
                         password = 'snrg2017'
                         h.add_credentials(_login, password)

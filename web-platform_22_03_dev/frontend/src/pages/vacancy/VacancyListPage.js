@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -13,42 +14,37 @@ import { LinkContainer } from "react-router-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import ReactPlayer from "react-player";
 import axios from "axios";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import HeaderComponent from "../base/HeaderComponent";
-import FooterComponent from "../base/FooterComponent";
-import StoreStatusComponent from "../base/StoreStatusComponent";
-import MessageComponent from "../base/MessageComponent";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////components
 
+//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const VacancyListPage = () => {
+  //react hooks variables///////////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const id = useParams().id;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [detailView, detailViewSet] = useState(true);
   const [sphere, sphereSet] = useState("");
   const [education, educationSet] = useState("");
   const [experience, experienceSet] = useState("");
-  const [sort, sortSet] = useState("Дате публикации (сначала свежие)");
+  const [sort, sortSet] = useState("дате публикации (свежие в начале)");
   const [search, searchSet] = useState("");
 
-  const userDetailsAuthStore = useSelector(
-    (state) => state.userDetailsAuthStore
-  ); // store.js
-  const vacancyListAuthStore = useSelector(
-    (state) => state.vacancyListAuthStore
-  ); // store.js
+  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const vacancyListStore = useSelector((state) => state.vacancyListStore);
   const {
     load: loadVacancyList,
     data: dataVacancyList,
     // error: errorVacancyList,
     // fail: failVacancyList,
-  } = vacancyListAuthStore;
+  } = vacancyListStore;
 
   const getData = () => {
     const form = {
@@ -81,14 +77,15 @@ export const VacancyListPage = () => {
     sphereSet("");
     educationSet("");
     experienceSet("");
-    sortSet("Дате публикации (сначала свежие)");
+    sortSet("дате публикации (свежие в начале)");
     searchSet("");
     getData();
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
-      <HeaderComponent
+      <components.HeaderComponent
         logic={true}
         redirect={false}
         title={"Список вакансий"}
@@ -98,16 +95,16 @@ export const VacancyListPage = () => {
       />
       <main className="container  ">
         <div className="">
-          {StoreStatusComponent(
-            userDetailsAuthStore,
-            "userDetailsAuthStore",
+          {components.StoreStatusComponent(
+            userDetailsStore,
+            "userDetailsStore",
             false,
             "Данные успешно получены!",
             constants.DEBUG_CONSTANT
           )}
-          {StoreStatusComponent(
-            vacancyListAuthStore,
-            "vacancyListAuthStore",
+          {components.StoreStatusComponent(
+            vacancyListStore,
+            "vacancyListStore",
             false,
             "Данные успешно получены!",
             constants.DEBUG_CONSTANT
@@ -207,17 +204,17 @@ export const VacancyListPage = () => {
                     value={sort}
                     onChange={(e) => sortSet(e.target.value)}
                   >
-                    <option value="Дате публикации (сначала свежие)">
-                      Дате публикации (сначала свежие)
+                    <option value="дате публикации (свежие в начале)">
+                      дате публикации (свежие в начале)
                     </option>
-                    <option value="Дате публикации (сначала старые)">
-                      Дате публикации (сначала старые)
+                    <option value="дате публикации (свежие в конце)">
+                      дате публикации (свежие в конце)
                     </option>
-                    <option value="Названию (С начала алфавита)">
-                      Названию (С начала алфавита)
+                    <option value="названию (с начала алфавита)">
+                      названию (с начала алфавита)
                     </option>
-                    <option value="Названию (С конца алфавита)">
-                      Названию (С конца алфавита)
+                    <option value="названию (с конца алфавита)">
+                      названию (с конца алфавита)
                     </option>
                   </select>
                 </label>
@@ -239,10 +236,7 @@ export const VacancyListPage = () => {
                 >
                   отправить резюме
                 </Link>
-                {utils.CheckAccess(
-                  userDetailsAuthStore,
-                  "moderator_vacancies"
-                ) && (
+                {utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
                   <Link
                     to={`/vacancy_create`}
                     className="btn btn-sm btn-secondary"
@@ -423,14 +417,14 @@ export const VacancyListPage = () => {
               </div>
             )
           ) : (
-            <MessageComponent variant={"danger"}>
+            <components.MessageComponent variant={"danger"}>
               Вакансии не найдены! Попробуйте изменить условия фильтрации или
               очистить строку поиска.
-            </MessageComponent>
+            </components.MessageComponent>
           )}
         </div>
       </main>
-      <FooterComponent />
+      <components.FooterComponent />
     </div>
   );
 };

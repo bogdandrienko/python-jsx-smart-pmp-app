@@ -2956,11 +2956,11 @@ class IdeaModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        # default=timezone.now,
+        default=timezone.now,
         verbose_name='Дата регистрации',
         help_text='<small class="text-muted">register_datetime_field</small><hr><br>',
 
-        auto_now=True,
+        auto_now=False,
         auto_now_add=False,
     )
 
@@ -2983,11 +2983,26 @@ class IdeaModel(models.Model):
         obj = IdeaModel.objects.get(id=self.id)
         rating = 0
         ratings = RatingIdeaModel.objects.filter(rating_idea_foreign_key_field=obj)
+        users = []
+        if ratings.count() <= 0:
+            return {"rate": 0, "count": 0, "users": users}
         for rate in ratings:
             rating += rate.rating_integer_field
-        if ratings.count() > 0:
-            return {"rate": float(rating/ratings.count()), "count": int(ratings.count())}
-        return {"rate": 0, "count": 0}
+            users.append(f"{rate.rating_idea_author_foreign_key_field.last_name_char_field} "
+                         f"{rate.rating_idea_author_foreign_key_field.first_name_char_field} "
+                         f"| {rate.rating_integer_field}")
+        return {"rate": float(rating/ratings.count()), "count": int(ratings.count()), "users": users}
+
+
+# @receiver(post_save, sender=IdeaModel)
+# def update_idea_model(sender, instance, created, **kwargs):
+#     if created is False:
+#         try:
+#             idea = IdeaModel.objects.get(id=instance.id)
+#             idea.register_datetime_field = timezone.now()
+#             idea.save()
+#         except Exception as error:
+#             print(f"error = {error}")
 
 
 class RatingIdeaModel(models.Model):
