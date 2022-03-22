@@ -55,19 +55,6 @@ export const ChangePasswordPage = () => {
     <body>
       <components.HeaderComponent />
       <main>
-        <components.StoreStatusComponent
-          storeStatus={userChangeStore}
-          key={"userChangeStore"}
-          consoleLog={constants.DEBUG_CONSTANT}
-          showLoad={true}
-          loadText={""}
-          showData={true}
-          dataText={"Данные успешно изменены!"}
-          showError={true}
-          errorText={""}
-          showFail={true}
-          failText={""}
-        />
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
           <form className="m-0 p-0" onSubmit={handlerChangeSubmit}>
             <div className="card shadow custom-background-transparent-low m-0 p-0">

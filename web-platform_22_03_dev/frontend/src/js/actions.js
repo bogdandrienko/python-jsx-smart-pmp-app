@@ -5,7 +5,7 @@ import * as constants from "./constants";
 ////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom settings
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+////////////////////////////////////////////////////////////////////////////////////////////////////////TODO base action
 export const userLoginAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -16,7 +16,7 @@ export const userLoginAction = (form) => async (dispatch) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/any/user/login/",
+      url: "/api/any/user/",
       method: "POST",
       timeout: 5000,
       headers: {
@@ -57,7 +57,6 @@ export const userLoginAction = (form) => async (dispatch) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userLogoutAction = () => async (dispatch) => {
   localStorage.removeItem("userToken");
   localStorage.removeItem("userToken");
@@ -67,7 +66,6 @@ export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: constants.USER_RECOVER_PASSWORD_RESET_CONSTANT });
   dispatch({ type: constants.USER_SALARY_RESET_CONSTANT });
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userDetailsAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -81,7 +79,7 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/auth/user/detail/",
+      url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -124,7 +122,6 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userChangeAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -138,7 +135,7 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/auth/user/change/",
+      url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -179,7 +176,6 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userRecoverPasswordAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -190,7 +186,7 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/any/user/recover/",
+      url: "/api/any/user/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -229,7 +225,6 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const userListAllAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -243,7 +238,7 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/auth/user/list_all/",
+      url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -283,7 +278,7 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const notificationCreateAction =
   (form) => async (dispatch, getState) => {
     try {
@@ -298,7 +293,7 @@ export const notificationCreateAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/auth/user/notification/",
+        url: "/api/auth/user/",
         method: "POST",
         timeout: 10000,
         headers: {
@@ -338,7 +333,6 @@ export const notificationCreateAction =
       });
     }
   };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const notificationDeleteAction =
   (form) => async (dispatch, getState) => {
     try {
@@ -353,7 +347,7 @@ export const notificationDeleteAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/auth/user/notification/",
+        url: "/api/auth/user/",
         method: "POST",
         timeout: 10000,
         headers: {
@@ -393,7 +387,6 @@ export const notificationDeleteAction =
       });
     }
   };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const notificationListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -407,7 +400,7 @@ export const notificationListAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/auth/user/notification/",
+      url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -447,7 +440,7 @@ export const notificationListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+///////////////////////////////////////////////////////////////////////////////////////////////////////TODO admin action
 export const adminChangeUserPasswordAction =
   (form) => async (dispatch, getState) => {
     try {
@@ -462,7 +455,7 @@ export const adminChangeUserPasswordAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/auth/admin/change_user_password/",
+        url: "/api/auth/admin/",
         method: "POST",
         timeout: 10000,
         headers: {
@@ -502,7 +495,6 @@ export const adminChangeUserPasswordAction =
       });
     }
   };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const adminCreateOrChangeUsersAction =
   (form) => async (dispatch, getState) => {
     try {
@@ -517,7 +509,7 @@ export const adminCreateOrChangeUsersAction =
         formData.append(key, value);
       });
       const { data } = await axios({
-        url: "/api/auth/admin/create_or_change_users/",
+        url: "/api/auth/admin/",
         method: "POST",
         timeout: 500000,
         headers: {
@@ -557,7 +549,6 @@ export const adminCreateOrChangeUsersAction =
       });
     }
   };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const adminExportUsersAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -571,7 +562,7 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
       formData.append(key, value);
     });
     const { data } = await axios({
-      url: "/api/auth/admin/export_users/",
+      url: "/api/auth/admin/",
       method: "POST",
       timeout: 10000,
       headers: {
@@ -611,7 +602,62 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const terminalRebootAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.TERMINAL_REBOOT_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    const { data } = await axios({
+      url: "/api/auth/admin/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.TERMINAL_REBOOT_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.TERMINAL_REBOOT_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
+    ) {
+      dispatch(userLogoutAction());
+    }
+    dispatch({
+      type: constants.TERMINAL_REBOOT_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom action
 export const salaryUserAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -684,169 +730,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
-export const rationalCreateAction = (form) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: constants.RATIONAL_CREATE_LOAD_CONSTANT,
-    });
-    const {
-      userLoginStore: { data: userLogin },
-    } = getState();
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      formData.append(key, value);
-    });
-    const { data } = await axios({
-      url: "/api/auth/rational/",
-      method: "POST",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userLogin.token}`,
-      },
-      data: formData,
-    });
-    if (data["response"]) {
-      const response = data["response"];
-      dispatch({
-        type: constants.RATIONAL_CREATE_DATA_CONSTANT,
-        payload: response,
-      });
-    } else {
-      const response = data["error"];
-      dispatch({
-        type: constants.RATIONAL_CREATE_ERROR_CONSTANT,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    if (
-      error.response &&
-      error.response.statusText &&
-      error.response.statusText === "Unauthorized" &&
-      error.response.statusText === "Request Entity Too Large"
-    ) {
-      dispatch(userLogoutAction());
-    }
-    dispatch({
-      type: constants.RATIONAL_CREATE_FAIL_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
-export const rationalListAction = (form) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: constants.RATIONAL_LIST_LOAD_CONSTANT,
-    });
-    const {
-      userLoginStore: { data: userLogin },
-    } = getState();
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      formData.append(key, value);
-    });
-    const { data } = await axios({
-      url: "/api/auth/rational/",
-      method: "POST",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userLogin.token}`,
-      },
-      data: formData,
-    });
-    if (data["response"]) {
-      const response = data["response"];
-      dispatch({
-        type: constants.RATIONAL_LIST_DATA_CONSTANT,
-        payload: response,
-      });
-    } else {
-      const response = data["error"];
-      dispatch({
-        type: constants.RATIONAL_LIST_ERROR_CONSTANT,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    if (
-      error.response &&
-      error.response.statusText &&
-      error.response.statusText === "Unauthorized" &&
-      error.response.statusText === "Request Entity Too Large"
-    ) {
-      dispatch(userLogoutAction());
-    }
-    dispatch({
-      type: constants.RATIONAL_LIST_FAIL_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
-export const rationalDetailAction = (form) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: constants.RATIONAL_DETAIL_LOAD_CONSTANT,
-    });
-    const {
-      userLoginStore: { data: userLogin },
-    } = getState();
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      formData.append(key, value);
-    });
-    const { data } = await axios({
-      url: "/api/auth/rational/",
-      method: "POST",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userLogin.token}`,
-      },
-      data: formData,
-    });
-    if (data["response"]) {
-      const response = data["response"];
-      dispatch({
-        type: constants.RATIONAL_DETAIL_DATA_CONSTANT,
-        payload: response,
-      });
-    } else {
-      const response = data["error"];
-      dispatch({
-        type: constants.RATIONAL_DETAIL_ERROR_CONSTANT,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    if (
-      error.response &&
-      error.response.statusText &&
-      error.response.statusText === "Unauthorized" &&
-      error.response.statusText === "Request Entity Too Large"
-    ) {
-      dispatch(userLogoutAction());
-    }
-    dispatch({
-      type: constants.RATIONAL_DETAIL_FAIL_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ideaCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -900,7 +784,6 @@ export const ideaCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -954,7 +837,6 @@ export const ideaListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaDetailAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1008,7 +890,6 @@ export const ideaDetailAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaChangeAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1062,7 +943,6 @@ export const ideaChangeAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaModerateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1116,7 +996,6 @@ export const ideaModerateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1170,7 +1049,6 @@ export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaCommentDeleteAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1224,7 +1102,6 @@ export const ideaCommentDeleteAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaCommentListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1278,7 +1155,6 @@ export const ideaCommentListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1332,7 +1208,6 @@ export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const ideaAuthorListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1386,7 +1261,167 @@ export const ideaAuthorListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+////////////////////////////////////////////////////////////////////////////////////////////////////////TODO test action
+export const rationalCreateAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.RATIONAL_CREATE_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/rational/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RATIONAL_CREATE_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RATIONAL_CREATE_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
+    ) {
+      dispatch(userLogoutAction());
+    }
+    dispatch({
+      type: constants.RATIONAL_CREATE_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+export const rationalListAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.RATIONAL_LIST_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/rational/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RATIONAL_LIST_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RATIONAL_LIST_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
+    ) {
+      dispatch(userLogoutAction());
+    }
+    dispatch({
+      type: constants.RATIONAL_LIST_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+export const rationalDetailAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.RATIONAL_DETAIL_LOAD_CONSTANT,
+    });
+    const {
+      userLoginStore: { data: userLogin },
+    } = getState();
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    const { data } = await axios({
+      url: "/api/auth/rational/",
+      method: "POST",
+      timeout: 10000,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userLogin.token}`,
+      },
+      data: formData,
+    });
+    if (data["response"]) {
+      const response = data["response"];
+      dispatch({
+        type: constants.RATIONAL_DETAIL_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data["error"];
+      dispatch({
+        type: constants.RATIONAL_DETAIL_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    if (
+      error.response &&
+      error.response.statusText &&
+      error.response.statusText === "Unauthorized" &&
+      error.response.statusText === "Request Entity Too Large"
+    ) {
+      dispatch(userLogoutAction());
+    }
+    dispatch({
+      type: constants.RATIONAL_DETAIL_FAIL_CONSTANT,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const vacancyCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1440,7 +1475,6 @@ export const vacancyCreateAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyListAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -1490,7 +1524,6 @@ export const vacancyListAction = (form) => async (dispatch) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyDetailAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -1540,7 +1573,6 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1594,7 +1626,6 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const vacancyChangeAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1648,7 +1679,7 @@ export const vacancyChangeAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const resumeCreateAction = (form) => async (dispatch) => {
   try {
     dispatch({
@@ -1698,7 +1729,6 @@ export const resumeCreateAction = (form) => async (dispatch) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const resumeListAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1752,7 +1782,6 @@ export const resumeListAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const resumeDetailAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1806,7 +1835,6 @@ export const resumeDetailAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
 export const resumeDeleteAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -1860,59 +1888,3 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action
-export const terminalRebootAction = (form) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: constants.TERMINAL_REBOOT_LOAD_CONSTANT,
-    });
-    const {
-      userLoginStore: { data: userLogin },
-    } = getState();
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      formData.append(key, value);
-    });
-
-    const { data } = await axios({
-      url: "/api/auth/terminal/",
-      method: "POST",
-      timeout: 10000,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userLogin.token}`,
-      },
-      data: formData,
-    });
-    if (data["response"]) {
-      const response = data["response"];
-      dispatch({
-        type: constants.TERMINAL_REBOOT_DATA_CONSTANT,
-        payload: response,
-      });
-    } else {
-      const response = data["error"];
-      dispatch({
-        type: constants.TERMINAL_REBOOT_ERROR_CONSTANT,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    if (
-      error.response &&
-      error.response.statusText &&
-      error.response.statusText === "Unauthorized" &&
-      error.response.statusText === "Request Entity Too Large"
-    ) {
-      dispatch(userLogoutAction());
-    }
-    dispatch({
-      type: constants.TERMINAL_REBOOT_FAIL_CONSTANT,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    });
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////TODO default export const action

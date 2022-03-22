@@ -287,7 +287,7 @@ export const IdeaDetailPage = () => {
           showFail={true}
           failText={""}
         />
-        {dataIdeaDetail && (
+        {dataIdeaDetail && !dataIdeaModerate && !loadIdeaModerate && (
           <div className="m-0 p-0">
             <div className="card shadow custom-background-transparent-low text-center p-0">
               <div className="card-header bg-warning bg-opacity-10 m-0 p-3">

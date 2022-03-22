@@ -15,7 +15,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import * as constants from "./constants";
 import * as utils from "./utils";
 import * as actions from "./actions";
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
+////////////////////////////////////////////////////////////////////////////////////////////////////TODO base components
 export const HeaderComponent = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
@@ -263,7 +263,7 @@ export const HeaderComponent = () => {
     </header>
   );
 };
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const FooterComponent = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
@@ -426,111 +426,7 @@ export const FooterComponent = () => {
     </footer>
   );
 };
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
-export const StoreStatusComponent = ({
-  storeStatus,
-  keyStatus = "StoreStatus",
-  consoleLog = false,
-  showLoad = true,
-  loadText = "",
-  showData = true,
-  dataText = "",
-  showError = true,
-  errorText = "",
-  showFail = true,
-  failText = "",
-}) => {
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
-  const {
-    load: loadStatus,
-    data: dataStatus,
-    error: errorStatus,
-    fail: failStatus,
-  } = storeStatus;
-  if (consoleLog) {
-    console.log(`${keyStatus}`, storeStatus);
-  }
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
-  return (
-    <div key={keyStatus} className="m-0 p-0">
-      {showLoad && loadStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          {loadText !== "" ? (
-            <Alert variant={"secondary"} className="text-center m-0 p-1">
-              {loadText}
-            </Alert>
-          ) : (
-            <Spinner
-              animation="border"
-              role="status"
-              style={{
-                height: "50px",
-                width: "50px",
-                margin: "auto",
-                display: "block",
-              }}
-              className="text-center m-0 p-0"
-            >
-              <small className="m-0 p-0">ждите</small>
-              <span className="sr-only m-0 p-1" />
-            </Spinner>
-          )}
-        </div>
-      )}
-      {showData && dataStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"success"} className="text-center m-0 p-1">
-            {dataText !== "" ? dataText : dataStatus}
-          </Alert>
-        </div>
-      )}
-      {showError && errorStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"danger"} className="text-center m-0 p-1">
-            {errorText !== "" ? errorText : errorStatus}
-          </Alert>
-        </div>
-      )}
-      {showFail && failStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"warning"} className="text-center m-0 p-1">
-            {failText !== "" ? failText : failStatus}
-          </Alert>
-        </div>
-      )}
-    </div>
-  );
-};
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
-export const LoaderComponent = () => {
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
-  return (
-    <Spinner
-      animation="border"
-      role="status"
-      style={{
-        height: "50px",
-        width: "50px",
-        margin: "auto",
-        display: "block",
-      }}
-    >
-      ЖДИТЕ<span className="sr-only">ЖДИТЕ</span>
-    </Spinner>
-  );
-};
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
-export const MessageComponent = ({ variant, children }) => {
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
-  return (
-    <div className="row justify-content-center m-0 p-1">
-      <Alert variant={variant} className="text-center m-0 p-1">
-        {children}
-      </Alert>
-    </div>
-  );
-};
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ModulesComponent = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
@@ -698,7 +594,111 @@ export const ModulesComponent = () => {
     </div>
   );
 };
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const StoreStatusComponent = ({
+  storeStatus,
+  keyStatus = "StoreStatus",
+  consoleLog = false,
+  showLoad = true,
+  loadText = "",
+  showData = true,
+  dataText = "",
+  showError = true,
+  errorText = "",
+  showFail = true,
+  failText = "",
+}) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
+  const {
+    load: loadStatus,
+    data: dataStatus,
+    error: errorStatus,
+    fail: failStatus,
+  } = storeStatus;
+  if (consoleLog) {
+    console.log(`${keyStatus}`, storeStatus);
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <div key={keyStatus} className="m-0 p-0">
+      {showLoad && loadStatus && (
+        <div className="row justify-content-center m-0 p-0">
+          {loadText !== "" ? (
+            <Alert variant={"secondary"} className="text-center m-0 p-1">
+              {loadText}
+            </Alert>
+          ) : (
+            <Spinner
+              animation="border"
+              role="status"
+              style={{
+                height: "50px",
+                width: "50px",
+                margin: "auto",
+                display: "block",
+              }}
+              className="text-center m-0 p-0"
+            >
+              <small className="m-0 p-0">ждите</small>
+              <span className="sr-only m-0 p-1" />
+            </Spinner>
+          )}
+        </div>
+      )}
+      {showData && dataStatus && (
+        <div className="row justify-content-center m-0 p-0">
+          <Alert variant={"success"} className="text-center m-0 p-1">
+            {dataText !== "" ? dataText : dataStatus}
+          </Alert>
+        </div>
+      )}
+      {showError && errorStatus && (
+        <div className="row justify-content-center m-0 p-0">
+          <Alert variant={"danger"} className="text-center m-0 p-1">
+            {errorText !== "" ? errorText : errorStatus}
+          </Alert>
+        </div>
+      )}
+      {showFail && failStatus && (
+        <div className="row justify-content-center m-0 p-0">
+          <Alert variant={"warning"} className="text-center m-0 p-1">
+            {failText !== "" ? failText : failStatus}
+          </Alert>
+        </div>
+      )}
+    </div>
+  );
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////TODO custom components
+export const LoaderComponent = () => {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <Spinner
+      animation="border"
+      role="status"
+      style={{
+        height: "50px",
+        width: "50px",
+        margin: "auto",
+        display: "block",
+      }}
+    >
+      ЖДИТЕ<span className="sr-only">ЖДИТЕ</span>
+    </Spinner>
+  );
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const MessageComponent = ({ variant, children }) => {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <div className="row justify-content-center m-0 p-1">
+      <Alert variant={variant} className="text-center m-0 p-1">
+        {children}
+      </Alert>
+    </div>
+  );
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const NewsComponent = (count = 100) => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
@@ -767,7 +767,132 @@ export const NewsComponent = (count = 100) => {
     </div>
   );
 };
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const SalaryTableComponent = ({ tab = {} }) => {
+  let header = tab[0];
+  let thead_array = [];
+  for (let i in tab[1]["Fields"]) {
+    if (
+      tab[1]["Fields"][i] !== "ВсегоДни" &&
+      tab[1]["Fields"][i] !== "ВсегоЧасы"
+    ) {
+      thead_array.push(tab[1]["Fields"][i]);
+    }
+  }
+  let tbody_array = [];
+  for (let i in tab[1]) {
+    if (i !== "Fields") {
+      let local_tbody_array = [];
+      for (let j in tab[1][i]) {
+        if (j !== "ВсегоДни" && j !== "ВсегоЧасы") {
+          local_tbody_array.push(tab[1][i][j]);
+        }
+      }
+      tbody_array.push(local_tbody_array);
+    }
+  }
+  function getValue(value) {
+    if (typeof value === "number") {
+      return value.toFixed(2);
+    } else {
+      return value;
+    }
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <li className="m-1">
+      <h6 className="lead fw-bold bold">{header}</h6>
+      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+        <thead>
+          <tr>
+            {thead_array.map((thead, index_h) => (
+              <th key={index_h} className="text-center">
+                {thead}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {tbody_array.map((tbody, index_i) => (
+            <tr key={index_i}>
+              {tbody.slice(0, 1).map((body, index_j) => (
+                <td key={index_j} className="text-start">
+                  {body}
+                </td>
+              ))}
+              {tbody.slice(1, -1).map((body, index_j) => (
+                <td key={index_j} className="text-end">
+                  {body ? body : ""}
+                </td>
+              ))}
+              {tbody.slice(-1).map((body, index_j) => (
+                <td key={index_j} className="text-end">
+                  {body ? getValue(body) : ""}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </li>
+  );
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const AccordionComponent = ({
+  key_target,
+  isCollapse = true,
+  title,
+  text_style = "text-danger",
+  header_style = "bg-danger bg-opacity-10",
+  body_style = "bg-danger bg-opacity-10",
+  children,
+}) => {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <div className="m-0 p-1">
+      <div className="accordion m-0 p-0" id="accordionExample">
+        <div className="accordion-item custom-background-transparent-middle m-0 p-0">
+          <h2
+            className="accordion-header custom-background-transparent-low m-0 p-0"
+            id="accordion_heading_1"
+          >
+            <button
+              className={`accordion-button m-0 p-0 ${header_style}`}
+              type="button"
+              data-bs-toggle=""
+              data-bs-target={`#${key_target}`}
+              aria-expanded="false"
+              aria-controls={key_target}
+              onClick={(e) => utils.ChangeAccordionCollapse([key_target])}
+            >
+              <h6 className={`lead m-0 p-3 ${text_style}`}>
+                {title}{" "}
+                <small className="text-muted m-0 p-0">
+                  (нажмите сюда, для переключения)
+                </small>
+              </h6>
+            </button>
+          </h2>
+          <div
+            id={key_target}
+            className={
+              isCollapse
+                ? "accordion-collapse collapse m-0 p-0"
+                : "accordion-collapse m-0 p-0"
+            }
+            aria-labelledby={key_target}
+            data-bs-parent="#accordionExample"
+          >
+            <div className={`accordion-body m-0 p-0 ${body_style}`}>
+              {children}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////TODO test components
 export const RationalComponent = ({ object, shortView = false }) => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
@@ -1001,131 +1126,6 @@ export const RationalComponent = ({ object, shortView = false }) => {
           </Link>
         </div>
       )}
-    </div>
-  );
-};
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
-export const SalaryTableComponent = ({ tab = {} }) => {
-  let header = tab[0];
-  let thead_array = [];
-  for (let i in tab[1]["Fields"]) {
-    if (
-      tab[1]["Fields"][i] !== "ВсегоДни" &&
-      tab[1]["Fields"][i] !== "ВсегоЧасы"
-    ) {
-      thead_array.push(tab[1]["Fields"][i]);
-    }
-  }
-  let tbody_array = [];
-  for (let i in tab[1]) {
-    if (i !== "Fields") {
-      let local_tbody_array = [];
-      for (let j in tab[1][i]) {
-        if (j !== "ВсегоДни" && j !== "ВсегоЧасы") {
-          local_tbody_array.push(tab[1][i][j]);
-        }
-      }
-      tbody_array.push(local_tbody_array);
-    }
-  }
-  function getValue(value) {
-    if (typeof value === "number") {
-      return value.toFixed(2);
-    } else {
-      return value;
-    }
-  }
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
-  return (
-    <li className="m-1">
-      <h6 className="lead fw-bold bold">{header}</h6>
-      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
-        <thead>
-          <tr>
-            {thead_array.map((thead, index_h) => (
-              <th key={index_h} className="text-center">
-                {thead}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {tbody_array.map((tbody, index_i) => (
-            <tr key={index_i}>
-              {tbody.slice(0, 1).map((body, index_j) => (
-                <td key={index_j} className="text-start">
-                  {body}
-                </td>
-              ))}
-              {tbody.slice(1, -1).map((body, index_j) => (
-                <td key={index_j} className="text-end">
-                  {body ? body : ""}
-                </td>
-              ))}
-              {tbody.slice(-1).map((body, index_j) => (
-                <td key={index_j} className="text-end">
-                  {body ? getValue(body) : ""}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </li>
-  );
-};
-/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
-export const AccordionComponent = ({
-  key_target,
-  isCollapse = true,
-  title,
-  text_style = "text-danger",
-  header_style = "bg-danger bg-opacity-10",
-  body_style = "bg-danger bg-opacity-10",
-  children,
-}) => {
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
-  return (
-    <div className="m-0 p-1">
-      <div className="accordion m-0 p-0" id="accordionExample">
-        <div className="accordion-item custom-background-transparent-middle m-0 p-0">
-          <h2
-            className="accordion-header custom-background-transparent-low m-0 p-0"
-            id="accordion_heading_1"
-          >
-            <button
-              className={`accordion-button m-0 p-0 ${header_style}`}
-              type="button"
-              data-bs-toggle=""
-              data-bs-target={`#${key_target}`}
-              aria-expanded="false"
-              aria-controls={key_target}
-              onClick={(e) => utils.ChangeAccordionCollapse([key_target])}
-            >
-              <h6 className={`lead m-0 p-3 ${text_style}`}>
-                {title}{" "}
-                <small className="text-muted m-0 p-0">
-                  (нажмите сюда, для переключения)
-                </small>
-              </h6>
-            </button>
-          </h2>
-          <div
-            id={key_target}
-            className={
-              isCollapse
-                ? "accordion-collapse collapse m-0 p-0"
-                : "accordion-collapse m-0 p-0"
-            }
-            aria-labelledby={key_target}
-            data-bs-parent="#accordionExample"
-          >
-            <div className={`accordion-body m-0 p-0 ${body_style}`}>
-              {children}
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

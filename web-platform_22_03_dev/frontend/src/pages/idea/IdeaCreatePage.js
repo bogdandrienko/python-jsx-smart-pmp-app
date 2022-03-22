@@ -21,7 +21,7 @@ export const IdeaCreatePage = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const ideaCreateStore = useSelector((state) => state.ideaCreateStore);
   const {
-    // load: loadIdeaCreate,
+    load: loadIdeaCreate,
     data: dataIdeaCreate,
     // error: errorIdeaCreate,
     // fail: failIdeaCreate,
@@ -85,7 +85,20 @@ export const IdeaCreatePage = () => {
     <body>
       <components.HeaderComponent />
       <main>
-        {!dataIdeaCreate && (
+        <components.StoreStatusComponent
+          storeStatus={ideaCreateStore}
+          keyStatus={"ideaCreateStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={true}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        {!dataIdeaCreate && !loadIdeaCreate && (
           <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
             <form className="m-0 p-0" onSubmit={handlerCreateSubmit}>
               <div className="card shadow custom-background-transparent-low m-0 p-0">
@@ -304,6 +317,7 @@ export const IdeaCreatePage = () => {
                                 latin: true,
                                 cyrillic: true,
                                 space: true,
+                                punctuationMarks: true,
                               }),
                               ""
                             )
@@ -321,19 +335,6 @@ export const IdeaCreatePage = () => {
                   </div>
                 </div>
                 <div className="card-footer m-0 p-0">
-                  <components.StoreStatusComponent
-                    storeStatus={ideaCreateStore}
-                    keyStatus={"ideaCreateStore"}
-                    consoleLog={constants.DEBUG_CONSTANT}
-                    showLoad={true}
-                    loadText={""}
-                    showData={true}
-                    dataText={""}
-                    showError={true}
-                    errorText={""}
-                    showFail={true}
-                    failText={""}
-                  />
                   <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                     <button
                       className="btn btn-sm btn-primary m-1 p-2"

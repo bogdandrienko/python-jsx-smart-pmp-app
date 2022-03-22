@@ -42,7 +42,7 @@ export const RationalCreatePage = () => {
   //////////////////////////////////////////////////////////
   const rationalCreateStore = useSelector((state) => state.rationalCreateStore);
   const {
-    // load: loadRationalCreate,
+    load: loadRationalCreate,
     data: dataRationalCreate,
     // error: errorRationalCreate,
     // fail: failRationalCreate,
@@ -132,19 +132,6 @@ export const RationalCreatePage = () => {
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
-          storeStatus={userListAllStore}
-          key={"userListAllStore"}
-          consoleLog={constants.DEBUG_CONSTANT}
-          showLoad={false}
-          loadText={""}
-          showData={false}
-          dataText={""}
-          showError={true}
-          errorText={""}
-          showFail={true}
-          failText={""}
-        />
-        <components.StoreStatusComponent
           storeStatus={rationalCreateStore}
           key={"rationalCreateStore"}
           consoleLog={constants.DEBUG_CONSTANT}
@@ -157,491 +144,500 @@ export const RationalCreatePage = () => {
           showFail={true}
           failText={""}
         />
-        <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
-          <form className="m-0 p-0" onSubmit={handlerCreateSubmit}>
-            <div className="card shadow custom-background-transparent-low m-0 p-0">
-              <div className="card-header bg-success bg-opacity-10 m-0 p-3">
-                <h6 className="lead fw-bold m-0 p-0">ЗАЯВЛЕНИЕ</h6>
-                <h6 className="lead m-0 p-0">
-                  на рационализаторское предложение
-                </h6>
-              </div>
-              <div className="card-body m-0 p-0">
-                <div className="d-flex justify-content-between m-0 p-1">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Подразделение:
-                    <select
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={subdivision}
-                      required
-                      onChange={(e) => subdivisionSet(e.target.value)}
-                    >
-                      <option className="m-0 p-0" value="">
-                        не указано
-                      </option>
-                      <option
-                        className="m-0 p-0"
-                        value="автотранспортное предприятие"
+        {!dataRationalCreate && !loadRationalCreate && (
+          <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
+            <form className="m-0 p-0" onSubmit={handlerCreateSubmit}>
+              <div className="card shadow custom-background-transparent-low m-0 p-0">
+                <div className="card-header bg-success bg-opacity-10 m-0 p-3">
+                  <h6 className="lead fw-bold m-0 p-0">ЗАЯВЛЕНИЕ</h6>
+                  <h6 className="lead m-0 p-0">
+                    на рационализаторское предложение
+                  </h6>
+                </div>
+                <div className="card-body m-0 p-0">
+                  <div className="d-flex justify-content-between m-0 p-1">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Подразделение:
+                      <select
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={subdivision}
+                        required
+                        onChange={(e) => subdivisionSet(e.target.value)}
                       >
-                        автотранспортное предприятие
-                      </option>
-                      <option
-                        className="m-0 p-0"
-                        value="горно-транспортный комплекс"
-                      >
-                        горно-транспортный комплекс
-                      </option>
-                      <option
-                        className="m-0 p-0"
-                        value="обогатительный комплекс"
-                      >
-                        обогатительный комплекс
-                      </option>
-                      <option className="m-0 p-0" value="управление">
-                        управление предприятия
-                      </option>
-                      <option className="m-0 p-0" value="энергоуправление">
-                        энергоуправление
-                      </option>
-                    </select>
-                    <small className="text-danger m-0 p-0">* обязательно</small>
-                  </label>
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Зарегистрировано за №{" "}
-                    <strong className="btn btn-light">XXX</strong> от
-                    <small className="text-warning"> текущей </small>даты
-                    <p>
-                      <small className="text-success">
-                        * номер будет создан автоматически
+                        <option className="m-0 p-0" value="">
+                          не указано
+                        </option>
+                        <option
+                          className="m-0 p-0"
+                          value="автотранспортное предприятие"
+                        >
+                          автотранспортное предприятие
+                        </option>
+                        <option
+                          className="m-0 p-0"
+                          value="горно-транспортный комплекс"
+                        >
+                          горно-транспортный комплекс
+                        </option>
+                        <option
+                          className="m-0 p-0"
+                          value="обогатительный комплекс"
+                        >
+                          обогатительный комплекс
+                        </option>
+                        <option className="m-0 p-0" value="управление">
+                          управление предприятия
+                        </option>
+                        <option className="m-0 p-0" value="энергоуправление">
+                          энергоуправление
+                        </option>
+                      </select>
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
                       </small>
+                    </label>
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Зарегистрировано за №{" "}
+                      <strong className="btn btn-light">XXX</strong> от
+                      <small className="text-warning"> текущей </small>даты
+                      <p>
+                        <small className="text-success">
+                          * номер будет создан автоматически
+                        </small>
+                      </p>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Сфера:
+                      <select
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={sphere}
+                        required
+                        onChange={(e) => sphereSet(e.target.value)}
+                      >
+                        <option className="m-0 p-0" value="">
+                          не указано
+                        </option>
+                        <option className="m-0 p-0" value="технологическая">
+                          технологическая
+                        </option>
+                        <option className="m-0 p-0" value="не технологическая">
+                          не технологическая
+                        </option>
+                      </select>
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                      </small>
+                    </label>
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Категория:
+                      <select
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={category}
+                        required
+                        onChange={(e) => categorySet(e.target.value)}
+                      >
+                        <option className="m-0 p-0" value="">
+                          не указано
+                        </option>
+                        <option className="m-0 p-0" value="индустрия 4.0">
+                          индустрия 4.0
+                        </option>
+                        <option className="m-0 p-0" value="инвестиции">
+                          инвестиции
+                        </option>
+                        <option className="m-0 p-0" value="инновации">
+                          инновации
+                        </option>
+                        <option className="m-0 p-0" value="модернизация">
+                          модернизация
+                        </option>
+                        <option className="m-0 p-0" value="экология">
+                          экология
+                        </option>
+                        <option className="m-0 p-0" value="спорт/культура">
+                          спорт/культура
+                        </option>
+                        <option className="m-0 p-0" value="другое">
+                          другое
+                        </option>
+                      </select>
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                      </small>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Аватарка-заставка:
+                      <input
+                        type="file"
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        accept=".jpg, .png"
+                        onChange={(e) => avatarSet(e.target.files[0])}
+                      />
+                      <small className="text-muted m-0 p-0">
+                        * не обязательно
+                      </small>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm text-center w-75 m-0 p-1">
+                      Название:
+                      <input
+                        type="text"
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={name}
+                        placeholder="введите название тут..."
+                        required
+                        minLength="1"
+                        maxLength="200"
+                        onChange={(e) =>
+                          nameSet(
+                            e.target.value.replace(
+                              utils.GetRegexType({
+                                numbers: true,
+                                cyrillic: true,
+                                space: true,
+                              }),
+                              ""
+                            )
+                          )
+                        }
+                      />
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                        <small className="text-warning m-0 p-0">
+                          {" "}
+                          * только кириллические буквы и цифры
+                        </small>
+                        <small className="text-muted m-0 p-0">
+                          {" "}
+                          * длина: не более 200 символов
+                        </small>
+                      </small>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="w-50 form-control-sm m-0 p-1">
+                      Место внедрения:
+                      <input
+                        type="text"
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={place}
+                        placeholder="введите место внедрения тут..."
+                        required
+                        minLength="1"
+                        maxLength="100"
+                        onChange={(e) =>
+                          placeSet(
+                            e.target.value.replace(
+                              utils.GetRegexType({
+                                numbers: true,
+                                cyrillic: true,
+                                space: true,
+                              }),
+                              ""
+                            )
+                          )
+                        }
+                      />
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                        <small className="text-warning m-0 p-0">
+                          {" "}
+                          * только кириллические буквы и цифры
+                        </small>
+                        <small className="text-muted m-0 p-0">
+                          {" "}
+                          * длина: не более 100 символов
+                        </small>
+                      </small>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="w-100 form-control-sm m-0 p-1">
+                      Описание:
+                      <textarea
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={description}
+                        required
+                        placeholder="введите описание тут..."
+                        minLength="1"
+                        maxLength="3000"
+                        rows="3"
+                        onChange={(e) =>
+                          descriptionSet(
+                            e.target.value.replace(
+                              utils.GetRegexType({
+                                numbers: true,
+                                latin: true,
+                                cyrillic: true,
+                                space: true,
+                                punctuationMarks: true,
+                              }),
+                              ""
+                            )
+                          )
+                        }
+                      />
+                      <small className="text-danger m-0 p-0">
+                        * обязательно
+                        <small className="text-muted m-0 p-0">
+                          {" "}
+                          * длина: не более 3000 символов
+                        </small>
+                      </small>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Word файл-приложение:
+                      <input
+                        type="file"
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        accept=".docx, .doc"
+                        onChange={(e) => additionalWordSet(e.target.files[0])}
+                      />
+                      <small className="text-muted">* не обязательно</small>
+                    </label>
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Pdf файл-приложение:
+                      <input
+                        type="file"
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        accept=".pdf"
+                        onChange={(e) => additionalPdfSet(e.target.files[0])}
+                      />
+                      <small className="text-muted">* не обязательно</small>
+                    </label>
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Excel файл-приложение:
+                      <input
+                        type="file"
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        accept=".xlsx, .xls"
+                        onChange={(e) => additionalExcelSet(e.target.files[0])}
+                      />
+                      <small className="text-muted">* не обязательно</small>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <p className="text-danger m-0 p-1">
+                      Я(мы) утверждаю(ем), что являюсь(ся) автором(и) данного
+                      предложения. Мне(нам) также известно, что в случае
+                      признания предложения коммерческой тайной подразделения,
+                      я(мы) обязан не разглашать его сущность.
                     </p>
-                  </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Участники:
+                      <p className="m-0 p-1">
+                        <small className="fw-bold">
+                          (Фамилия Имя Отчество) (Табельный номер) (Вклад в рац.
+                          предложение) %
+                        </small>
+                      </p>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      <components.StoreStatusComponent
+                        storeStatus={userListAllStore}
+                        key={"userListAllStore"}
+                        consoleLog={constants.DEBUG_CONSTANT}
+                        showLoad={true}
+                        loadText={""}
+                        showData={false}
+                        dataText={""}
+                        showError={true}
+                        errorText={""}
+                        showFail={true}
+                        failText={""}
+                      />
+                      {dataUserListAll && (
+                        <div className="m-0 p-1">
+                          <div className="m-0 p-1">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              участник №1:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user1}
+                                required
+                                onChange={(e) => user1Set(e.target.value)}
+                              >
+                                <option value="">Не выбрано</option>
+                                {dataUserListAll.map((user, index) => (
+                                  <option key={index} value={user}>
+                                    {user}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="form-control-sm text-center m-0 p-1">
+                              % Вклада 1 участника
+                              <input
+                                type="number"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user1Perc}
+                                required
+                                placeholder="пример: 70%"
+                                min="0"
+                                max="100"
+                                onChange={(e) => user1PercSet(e.target.value)}
+                              />
+                            </label>
+                          </div>
+                          <div className="m-0 p-1">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              участник №2:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user2}
+                                onChange={(e) => user2Set(e.target.value)}
+                              >
+                                <option value="">Не выбрано</option>
+                                {dataUserListAll.map((user, index) => (
+                                  <option key={index} value={user}>
+                                    {user}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="form-control-sm text-center m-0 p-1">
+                              % Вклада 2 участника
+                              <input
+                                type="number"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user2Perc}
+                                placeholder="пример: 70%"
+                                min="0"
+                                max="100"
+                                onChange={(e) => user2PercSet(e.target.value)}
+                              />
+                            </label>
+                          </div>
+                          <div className="m-0 p-1">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              участник №3:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user3}
+                                onChange={(e) => user3Set(e.target.value)}
+                              >
+                                <option value="">Не выбрано</option>
+                                {dataUserListAll.map((user, index) => (
+                                  <option key={index} value={user}>
+                                    {user}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="form-control-sm text-center m-0 p-1">
+                              % Вклада 3 участника
+                              <input
+                                type="number"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user3Perc}
+                                placeholder="пример: 70%"
+                                min="0"
+                                max="100"
+                                onChange={(e) => user3PercSet(e.target.value)}
+                              />
+                            </label>
+                          </div>
+                          <div className="m-0 p-1">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              участник №4:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user4}
+                                onChange={(e) => user4Set(e.target.value)}
+                              >
+                                <option value="">Не выбрано</option>
+                                {dataUserListAll.map((user, index) => (
+                                  <option key={index} value={user}>
+                                    {user}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="form-control-sm text-center m-0 p-1">
+                              % Вклада 4 участника
+                              <input
+                                type="number"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user4Perc}
+                                placeholder="пример: 70%"
+                                min="0"
+                                max="100"
+                                onChange={(e) => user4PercSet(e.target.value)}
+                              />
+                            </label>
+                          </div>
+                          <div className="m-0 p-1">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              участник №5:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user5}
+                                onChange={(e) => user5Set(e.target.value)}
+                              >
+                                <option value="">Не выбрано</option>
+                                {dataUserListAll.map((user, index) => (
+                                  <option key={index} value={user}>
+                                    {user}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="form-control-sm text-center m-0 p-1">
+                              % Вклада 5 участника
+                              <input
+                                type="number"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={user5Perc}
+                                placeholder="пример: 70%"
+                                min="0"
+                                max="100"
+                                onChange={(e) => user5PercSet(e.target.value)}
+                              />
+                            </label>
+                          </div>
+                        </div>
+                      )}
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <small className="text-muted">
+                      * общая сумма вклада всех участников не должна превышать
+                      100%
+                    </small>
+                  </div>
                 </div>
-                <div className="m-0 p-1">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Сфера:
-                    <select
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={sphere}
-                      required
-                      onChange={(e) => sphereSet(e.target.value)}
+                <div className="card-footer m-0 p-0">
+                  <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
+                    <button
+                      className="btn btn-sm btn-primary m-1 p-2"
+                      type="submit"
                     >
-                      <option className="m-0 p-0" value="">
-                        не указано
-                      </option>
-                      <option className="m-0 p-0" value="технологическая">
-                        технологическая
-                      </option>
-                      <option className="m-0 p-0" value="не технологическая">
-                        не технологическая
-                      </option>
-                    </select>
-                    <small className="text-danger m-0 p-0">* обязательно</small>
-                  </label>
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Категория:
-                    <select
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={category}
-                      required
-                      onChange={(e) => categorySet(e.target.value)}
+                      отправить данные
+                    </button>
+                    <button
+                      className="btn btn-sm btn-warning m-1 p-2"
+                      type="reset"
+                      onClick={(e) => handlerCreateReset(e)}
                     >
-                      <option className="m-0 p-0" value="">
-                        не указано
-                      </option>
-                      <option className="m-0 p-0" value="индустрия 4.0">
-                        индустрия 4.0
-                      </option>
-                      <option className="m-0 p-0" value="инвестиции">
-                        инвестиции
-                      </option>
-                      <option className="m-0 p-0" value="инновации">
-                        инновации
-                      </option>
-                      <option className="m-0 p-0" value="модернизация">
-                        модернизация
-                      </option>
-                      <option className="m-0 p-0" value="экология">
-                        экология
-                      </option>
-                      <option className="m-0 p-0" value="спорт/культура">
-                        спорт/культура
-                      </option>
-                      <option className="m-0 p-0" value="другое">
-                        другое
-                      </option>
-                    </select>
-                    <small className="text-danger m-0 p-0">* обязательно</small>
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Аватарка-заставка:
-                    <input
-                      type="file"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      accept=".jpg, .png"
-                      onChange={(e) => avatarSet(e.target.files[0])}
-                    />
-                    <small className="text-muted m-0 p-0">
-                      * не обязательно
-                    </small>
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <label className="form-control-sm text-center w-75 m-0 p-1">
-                    Название:
-                    <input
-                      type="text"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={name}
-                      placeholder="введите название тут..."
-                      required
-                      minLength="1"
-                      maxLength="200"
-                      onChange={(e) =>
-                        nameSet(
-                          e.target.value.replace(
-                            utils.GetRegexType({
-                              numbers: true,
-                              cyrillic: true,
-                              space: true,
-                            }),
-                            ""
-                          )
-                        )
-                      }
-                    />
-                    <small className="text-danger m-0 p-0">
-                      * обязательно
-                      <small className="text-warning m-0 p-0">
-                        {" "}
-                        * только кириллические буквы и цифры
-                      </small>
-                      <small className="text-muted m-0 p-0">
-                        {" "}
-                        * длина: не более 200 символов
-                      </small>
-                    </small>
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <label className="w-50 form-control-sm m-0 p-1">
-                    Место внедрения:
-                    <input
-                      type="text"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={place}
-                      placeholder="введите место внедрения тут..."
-                      required
-                      minLength="1"
-                      maxLength="100"
-                      onChange={(e) =>
-                        placeSet(
-                          e.target.value.replace(
-                            utils.GetRegexType({
-                              numbers: true,
-                              cyrillic: true,
-                              space: true,
-                            }),
-                            ""
-                          )
-                        )
-                      }
-                    />
-                    <small className="text-danger m-0 p-0">
-                      * обязательно
-                      <small className="text-warning m-0 p-0">
-                        {" "}
-                        * только кириллические буквы и цифры
-                      </small>
-                      <small className="text-muted m-0 p-0">
-                        {" "}
-                        * длина: не более 100 символов
-                      </small>
-                    </small>
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <label className="w-100 form-control-sm m-0 p-1">
-                    Описание:
-                    <textarea
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={description}
-                      required
-                      placeholder="введите описание тут..."
-                      minLength="1"
-                      maxLength="3000"
-                      rows="3"
-                      onChange={(e) =>
-                        descriptionSet(
-                          e.target.value.replace(
-                            utils.GetRegexType({
-                              numbers: true,
-                              latin: true,
-                              cyrillic: true,
-                              space: true,
-                            }),
-                            ""
-                          )
-                        )
-                      }
-                    />
-                    <small className="text-danger m-0 p-0">
-                      * обязательно
-                      <small className="text-muted m-0 p-0">
-                        {" "}
-                        * длина: не более 3000 символов
-                      </small>
-                    </small>
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Word файл-приложение:
-                    <input
-                      type="file"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      accept=".docx, .doc"
-                      onChange={(e) => additionalWordSet(e.target.files[0])}
-                    />
-                    <small className="text-muted">* не обязательно</small>
-                  </label>
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Pdf файл-приложение:
-                    <input
-                      type="file"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      accept=".pdf"
-                      onChange={(e) => additionalPdfSet(e.target.files[0])}
-                    />
-                    <small className="text-muted">* не обязательно</small>
-                  </label>
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Excel файл-приложение:
-                    <input
-                      type="file"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      accept=".xlsx, .xls"
-                      onChange={(e) => additionalExcelSet(e.target.files[0])}
-                    />
-                    <small className="text-muted">* не обязательно</small>
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <p className="text-danger m-0 p-1">
-                    Я(мы) утверждаю(ем), что являюсь(ся) автором(и) данного
-                    предложения. Мне(нам) также известно, что в случае признания
-                    предложения коммерческой тайной подразделения, я(мы) обязан
-                    не разглашать его сущность.
-                  </p>
-                </div>
-                <div className="m-0 p-1">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Участники:
-                    <p className="m-0 p-1">
-                      <small className="fw-bold">
-                        (Фамилия Имя Отчество) (Табельный номер) (Вклад в рац.
-                        предложение) %
-                      </small>
-                    </p>
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    {dataUserListAll && (
-                      <div className="m-0 p-1">
-                        <div className="m-0 p-1">
-                          <label className="form-control-sm text-center m-0 p-1">
-                            участник №1:
-                            <select
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user1}
-                              required
-                              onChange={(e) => user1Set(e.target.value)}
-                            >
-                              <option value="">Не выбрано</option>
-                              {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
-                                  {user}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="form-control-sm text-center m-0 p-1">
-                            % Вклада 1 участника
-                            <input
-                              type="number"
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user1Perc}
-                              required
-                              placeholder="пример: 70%"
-                              min="0"
-                              max="100"
-                              onChange={(e) => user1PercSet(e.target.value)}
-                            />
-                          </label>
-                        </div>
-                        <div className="m-0 p-1">
-                          <label className="form-control-sm text-center m-0 p-1">
-                            участник №2:
-                            <select
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user2}
-                              onChange={(e) => user2Set(e.target.value)}
-                            >
-                              <option value="">Не выбрано</option>
-                              {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
-                                  {user}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="form-control-sm text-center m-0 p-1">
-                            % Вклада 2 участника
-                            <input
-                              type="number"
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user2Perc}
-                              placeholder="пример: 70%"
-                              min="0"
-                              max="100"
-                              onChange={(e) => user2PercSet(e.target.value)}
-                            />
-                          </label>
-                        </div>
-                        <div className="m-0 p-1">
-                          <label className="form-control-sm text-center m-0 p-1">
-                            участник №3:
-                            <select
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user3}
-                              onChange={(e) => user3Set(e.target.value)}
-                            >
-                              <option value="">Не выбрано</option>
-                              {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
-                                  {user}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="form-control-sm text-center m-0 p-1">
-                            % Вклада 3 участника
-                            <input
-                              type="number"
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user3Perc}
-                              placeholder="пример: 70%"
-                              min="0"
-                              max="100"
-                              onChange={(e) => user3PercSet(e.target.value)}
-                            />
-                          </label>
-                        </div>
-                        <div className="m-0 p-1">
-                          <label className="form-control-sm text-center m-0 p-1">
-                            участник №4:
-                            <select
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user4}
-                              onChange={(e) => user4Set(e.target.value)}
-                            >
-                              <option value="">Не выбрано</option>
-                              {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
-                                  {user}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="form-control-sm text-center m-0 p-1">
-                            % Вклада 4 участника
-                            <input
-                              type="number"
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user4Perc}
-                              placeholder="пример: 70%"
-                              min="0"
-                              max="100"
-                              onChange={(e) => user4PercSet(e.target.value)}
-                            />
-                          </label>
-                        </div>
-                        <div className="m-0 p-1">
-                          <label className="form-control-sm text-center m-0 p-1">
-                            участник №5:
-                            <select
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user5}
-                              onChange={(e) => user5Set(e.target.value)}
-                            >
-                              <option value="">Не выбрано</option>
-                              {dataUserListAll.map((user, index) => (
-                                <option key={index} value={user}>
-                                  {user}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="form-control-sm text-center m-0 p-1">
-                            % Вклада 5 участника
-                            <input
-                              type="number"
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={user5Perc}
-                              placeholder="пример: 70%"
-                              min="0"
-                              max="100"
-                              onChange={(e) => user5PercSet(e.target.value)}
-                            />
-                          </label>
-                        </div>
-                      </div>
-                    )}
-                  </label>
-                </div>
-                <div className="m-0 p-1">
-                  <small className="text-muted">
-                    * общая сумма вклада всех участников не должна превышать
-                    100%
-                  </small>
+                      сбросить данные
+                    </button>
+                  </ul>
                 </div>
               </div>
-              <div className="card-footer m-0 p-0">
-                <components.StoreStatusComponent
-                  storeStatus={rationalCreateStore}
-                  keyStatus={"rationalCreateStore"}
-                  consoleLog={constants.DEBUG_CONSTANT}
-                  showLoad={true}
-                  loadText={""}
-                  showData={true}
-                  dataText={""}
-                  showError={true}
-                  errorText={""}
-                  showFail={true}
-                  failText={""}
-                />
-                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-                  <button
-                    className="btn btn-sm btn-primary m-1 p-2"
-                    type="submit"
-                  >
-                    отправить данные
-                  </button>
-                  <button
-                    className="btn btn-sm btn-warning m-1 p-2"
-                    type="reset"
-                    onClick={(e) => handlerCreateReset(e)}
-                  >
-                    сбросить данные
-                  </button>
-                </ul>
-              </div>
-            </div>
-          </form>
-        </ul>
+            </form>
+          </ul>
+        )}
       </main>
       <components.FooterComponent />
     </body>

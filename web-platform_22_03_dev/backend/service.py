@@ -1,3 +1,4 @@
+# #################################################################################################TODO download modules
 import base64
 import datetime
 import hashlib
@@ -10,13 +11,14 @@ import httplib2
 import openpyxl
 from openpyxl.utils import get_column_letter
 from typing import Union
-
+# ###################################################################################################TODO django modules
 from django.contrib.auth.models import User, Group
 from django.core.handlers.wsgi import WSGIRequest
-
+# ###################################################################################################TODO custom modules
 from backend import models as backend_models
 
 
+# #####################################################################################################TODO base service
 class DjangoClass:
     class TemplateClass:
         @staticmethod
@@ -543,6 +545,7 @@ class DjangoClass:
             return True
 
 
+# ###################################################################################################TODO custom service
 class DateTimeUtils:
     @staticmethod
     def get_current_datetime():

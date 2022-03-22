@@ -1,16 +1,20 @@
+# ###################################################################################################TODO django modules
 from django.contrib.auth.models import User, Group
+# ######################################################################################################TODO drf modules
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-
+# ###################################################################################################TODO custom modules
 from backend import models as backend_models
 
 
+# #########################################################################################TODO example model serializer
 class ExamplesModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = backend_models.ExamplesModel
         fields = '__all__'
 
 
+# ############################################################################################TODO base model serializer
 class UserSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
     group_model = serializers.SerializerMethodField(read_only=True)
@@ -71,21 +75,13 @@ class GroupModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class RationalModelSerializer(serializers.ModelSerializer):
-    user_model = serializers.SerializerMethodField(read_only=True)
-
+class NotificationModelSerializer(serializers.ModelSerializer):
     class Meta:
-        model = backend_models.RationalModel
+        model = backend_models.NotificationModel
         fields = '__all__'
 
-    def get_user_model(self, obj):
-        user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
-        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
-        if not user_model_serializer.data:
-            user_model_serializer = {'data': None}
-        return user_model_serializer.data
 
-
+# ##########################################################################################TODO custom model serializer
 class IdeaModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
     comment_count = serializers.SerializerMethodField(read_only=True)
@@ -96,7 +92,7 @@ class IdeaModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_user_model(self, obj):
-        user_model = backend_models.UserModel.objects.get(id=obj.idea_author_foreign_key_field.id)
+        user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
         user_model_serializer = UserModelSerializer(instance=user_model, many=False)
         if not user_model_serializer.data:
             user_model_serializer = {'data': None}
@@ -117,7 +113,7 @@ class RatingIdeaModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_user_model(self, obj):
-        user_model = backend_models.UserModel.objects.get(id=obj.rating_idea_author_foreign_key_field.id)
+        user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
         user_model_serializer = UserModelSerializer(instance=user_model, many=False)
         if not user_model_serializer.data:
             user_model_serializer = {'data': None}
@@ -132,7 +128,23 @@ class CommentIdeaModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_user_model(self, obj):
-        user_model = backend_models.UserModel.objects.get(id=obj.comment_idea_author_foreign_key_field.id)
+        user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
+        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+        if not user_model_serializer.data:
+            user_model_serializer = {'data': None}
+        return user_model_serializer.data
+
+
+# ############################################################################################TODO test model serializer
+class RationalModelSerializer(serializers.ModelSerializer):
+    user_model = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = backend_models.RationalModel
+        fields = '__all__'
+
+    def get_user_model(self, obj):
+        user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
         user_model_serializer = UserModelSerializer(instance=user_model, many=False)
         if not user_model_serializer.data:
             user_model_serializer = {'data': None}
@@ -142,12 +154,6 @@ class CommentIdeaModelSerializer(serializers.ModelSerializer):
 class VacancyModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = backend_models.VacancyModel
-        fields = '__all__'
-
-
-class NotificationModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = backend_models.NotificationModel
         fields = '__all__'
 
 

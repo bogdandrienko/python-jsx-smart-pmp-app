@@ -1,3 +1,4 @@
+# ###################################################################################################TODO django modules
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
@@ -5,8 +6,11 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
     FileExtensionValidator, DecimalValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+# ###################################################################################################TODO custom modules
+from backend import service as backend_service
 
 
+# ####################################################################################################TODO example model
 class ExamplesModel(models.Model):
     """
     Модель, которая содержит подробное описание и максимум настроек каждого типа поля django
@@ -28,7 +32,7 @@ class ExamplesModel(models.Model):
         unique_for_month=False,  # Error with JSON serialize
         unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(1), MaxLengthValidator(1024), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -38,7 +42,7 @@ class ExamplesModel(models.Model):
         help_text='<small class="text-muted">Бинарные данные (сохранять без преписки b"), example: '
                   '"OTcwODAxMzUxMTc5"</small><hr><br>',
 
-        max_length=1024,
+        max_length=500,
     )
     boolean_field = models.BooleanField(
         db_column='boolean_field_db_column',
@@ -88,7 +92,7 @@ class ExamplesModel(models.Model):
         unique_for_month=False,  # Error with JSON serialize
         unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -97,7 +101,7 @@ class ExamplesModel(models.Model):
         verbose_name='char_field',
         help_text='<small class="text-muted">Небольшая срока текста, example: "текст, текст"</small><hr><br>',
 
-        max_length=64,
+        max_length=500,
         # db_collation='char_field_db_collation'
     )
     text_field = models.TextField(
@@ -110,7 +114,7 @@ class ExamplesModel(models.Model):
         unique_for_month=False,  # Error with JSON serialize
         unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
@@ -119,7 +123,7 @@ class ExamplesModel(models.Model):
         verbose_name='text_field',
         help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
 
-        max_length=512,
+        max_length=5000,
         # db_collation='text_field_db_collation'
     )
     slug_field = models.SlugField(
@@ -132,7 +136,7 @@ class ExamplesModel(models.Model):
         unique_for_month=False,  # Error with JSON serialize
         unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(50), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -155,7 +159,7 @@ class ExamplesModel(models.Model):
         unique_for_month=False,  # Error with JSON serialize
         unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -177,7 +181,7 @@ class ExamplesModel(models.Model):
         unique_for_month=False,  # Error with JSON serialize
         unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(200), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -199,7 +203,7 @@ class ExamplesModel(models.Model):
         unique_for_month=False,  # Error with JSON serialize
         unique_for_year=False,  # Error with JSON serialize
         # choices=LIST_DB_VIEW_CHOICES,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -458,7 +462,7 @@ class ExamplesModel(models.Model):
 
         to=User,
         on_delete=models.CASCADE,
-        related_name='foreign_key_field',
+        related_name='examples_foreign_key_field',
         # limit_choices_to={'is_staff': True},
         # related_query_name='foreign_key_field',
         # to_field='foreign_key_field',
@@ -487,7 +491,7 @@ class ExamplesModel(models.Model):
 
         to=User,
         on_delete=models.CASCADE,
-        related_name='one_to_one_field',
+        related_name='examples_one_to_one_field',
         # related_query_name='foreignkey_field',
         # limit_choices_to={'is_staff': True},
         # db_constraint=True,
@@ -513,7 +517,7 @@ class ExamplesModel(models.Model):
                   '(username="Bogdan")"</small><hr><br>',
 
         to=User,
-        related_name='many_to_many_field',
+        related_name='examples_many_to_many_field',
         # related_query_name='foreignkey_field',
         # limit_choices_to={'is_staff': True},
         # symmetrical=True,
@@ -756,7 +760,7 @@ class ExamplesModel(models.Model):
             # automatically prepopulate a SlugField based on the value of some backend value. You can do this
             # automatically in the admin using prepopulated_fields.
             slug_field = models.SlugField(
-                validators=[MinLengthValidator(1), MaxLengthValidator(50), ],
+                validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
                 max_length=50,
                 # Required. The maximum length (in characters) of the field. The max_length is enforced at the
                 # database level and in Django’s validation using MaxLengthValidator.
@@ -775,8 +779,8 @@ class ExamplesModel(models.Model):
             # default form widget for this field is a TextInput. CharField has two extra arguments:
             # CharField.max_length¶ and CharField.db_collation¶.
             email_field = models.EmailField(
-                validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
-                max_length=254,
+                validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+                max_length=500,
                 # Required. The maximum length (in characters) of the field. The max_length is enforced at the
                 # database level and in Django’s validation using MaxLengthValidator.
             )
@@ -791,8 +795,8 @@ class ExamplesModel(models.Model):
             # Like all CharField subclasses, URLField takes the optional max_length argument. If you don’t specify
             # max_length, a default of 200 is used.
             url_field = models.URLField(
-                validators=[MinLengthValidator(1), MaxLengthValidator(200), ],
-                max_length=200,
+                validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+                max_length=500,
                 # Required. The maximum length (in characters) of the field. The max_length is enforced at the
                 # database level and in Django’s validation using MaxLengthValidator.
             )
@@ -1157,7 +1161,7 @@ class ExamplesModel(models.Model):
                 # ModelForm or the admin (by default, all objects in the queryset are available to choose).
                 # Either a dictionary, a Q object, or a callable returning a dictionary or Q object can be used.
 
-                related_name='foreignkey_field',
+                related_name='examples_foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
                 # See the related objects documentation for a full explanation and example. NoteComponent that you
@@ -1253,7 +1257,7 @@ class ExamplesModel(models.Model):
                 # Take no action. If your database backend enforces referential integrity, this will cause an
                 # IntegrityError unless you manually add an SQL ON DELETE constraint to the database field.
 
-                related_name='foreignkey_field',
+                related_name='examples_foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
                 # See the related objects documentation for a full explanation and example. NoteComponent that you
@@ -1338,7 +1342,7 @@ class ExamplesModel(models.Model):
                 # Relationships defined this way on abstract models are resolved when the model is subclassed
                 # as a concrete model and are not relative to the abstract model’s app_label
 
-                related_name='foreignkey_field',
+                related_name='examples_foreignkey_field',
                 # The name to use for the relation from the related object back to this one. It’s also the default
                 # value for related_query_name (the name to use for the reverse filter name from the target model).
                 # See the related objects documentation for a full explanation and example. NoteComponent that you
@@ -1408,7 +1412,7 @@ class ExamplesModel(models.Model):
         app_label = 'backend'
         ordering = ('-id',)
         verbose_name = 'Шаблон'
-        verbose_name_plural = 'Admin Шаблоны'
+        verbose_name_plural = 'Admin 0, Шаблоны'
         db_table = 'example_admin_model_table'
 
     def __str__(self):
@@ -1418,143 +1422,7 @@ class ExamplesModel(models.Model):
         return self.id
 
 
-class LoggingModel(models.Model):
-    """
-    Модель, которая содержит логирование действий и ошибок django
-    """
-
-    username_slug_field = models.SlugField(
-        db_column='username_slug_field_db_column',
-        db_index=True,
-        db_tablespace='username_slug_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique_for_date=False,  # Error with JSON serialize
-        unique_for_month=False,  # Error with JSON serialize
-        unique_for_year=False,  # Error with JSON serialize
-        validators=[MinLengthValidator(0), MaxLengthValidator(12), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Имя пользователя',
-        help_text='<small class="text-muted">Тут отображается идентификатор пользователя, например: </small><hr><br>',
-
-        max_length=12,
-        allow_unicode=False,
-    )
-    ip_genericipaddress_field = models.GenericIPAddressField(
-        db_column='ip_genericipaddress_field_field_db_column',
-        db_index=True,
-        db_tablespace='ip_genericipaddress_field_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(12), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='Ip адрес клиента',
-        help_text='<small class="text-muted">Строка содержащая ip-адрес, example: '
-                  '"127.0.0.1"</small><hr><br>',
-
-        protocol='both',
-        unpack_ipv4=False,
-    )
-    request_path_slug_field = models.SlugField(
-        db_column='request_path_slug_field_field_db_column',
-        db_index=True,
-        db_tablespace='request_path_slug_field_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Действие пользователя',
-        help_text='<small class="text-muted">Строка содержащая путь обращения, example: '
-                  '"https://.../home/"</small><hr><br>',
-
-        max_length=128,
-        allow_unicode=False,
-    )
-    request_method_slug_field = models.SlugField(
-        db_column='request_method_slug_field_field_db_column',
-        db_index=True,
-        db_tablespace='request_method_slug_field_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(4), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Метод запроса',
-        help_text='<small class="text-muted">GET: просмотр страницы, POST: отправка данных из формы</small><hr><br>',
-
-        max_length=4,
-        allow_unicode=False,
-    )
-    error_text_field = models.TextField(
-        db_column='error_text_field_db_column',
-        db_index=True,
-        db_tablespace='error_text_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default="error: ",
-        verbose_name='Текст ошибки и/или исключения',
-        help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
-
-        max_length=512,
-    )
-    datetime_field = models.DateTimeField(
-        db_column='datetime_field_db_column',
-        db_index=True,
-        db_tablespace='datetime_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=timezone.now,
-        verbose_name='Дата и время записи',
-        help_text='<small class="text-muted">Дата и время, example: "31.12.2021Т23:59:59"</small><hr><br>',
-
-        auto_now=False,
-        auto_now_add=False,
-    )
-
-    class Meta:
-        app_label = 'backend'
-        ordering = ('-datetime_field',)
-        verbose_name = 'Лог'
-        verbose_name_plural = 'Admin Логи'
-        db_table = 'logging_admin_model_table'
-
-    def __str__(self):
-        if self.username_slug_field:
-            try:
-                username = User.objects.get(username=self.username_slug_field)
-            except Exception as error:
-                error = f'error = {error}'
-                username = ''
-                print(error)
-        else:
-            username = ''
-        return f'{self.datetime_field} {username} {self.request_path_slug_field}'
-
-
+# ######################################################################################################TODO base models
 class UserModel(models.Model):
     """
     Модель, которая содержит расширение для стандартной модели пользователя веб-платформы
@@ -1585,7 +1453,7 @@ class UserModel(models.Model):
         db_tablespace='password_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(8), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1594,7 +1462,7 @@ class UserModel(models.Model):
         verbose_name='Пароль от аккаунта пользователя',
         help_text='<small class="text-muted">password_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     activity_boolean_field = models.BooleanField(
         db_column='activity_boolean_field_db_column',
@@ -1616,7 +1484,7 @@ class UserModel(models.Model):
         db_tablespace='email_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(1), MaxLengthValidator(254), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1626,7 +1494,7 @@ class UserModel(models.Model):
         help_text='<small class="text-muted">Строка содержащая почту, example: "bogdandrienko@gmail.com"'
                   '</small><hr><br>',
 
-        max_length=254,
+        max_length=500,
     )
     secret_question_char_field = models.CharField(
         db_column='secret_question_char_field_db_column',
@@ -1634,7 +1502,7 @@ class UserModel(models.Model):
         db_tablespace='secret_question_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1643,7 +1511,7 @@ class UserModel(models.Model):
         verbose_name='Секретный вопрос',
         help_text='<small class="text-muted">secret_question_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     secret_answer_char_field = models.CharField(
         db_column='secret_answer_char_field_db_column',
@@ -1651,7 +1519,7 @@ class UserModel(models.Model):
         db_tablespace='secret_answer_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1660,7 +1528,7 @@ class UserModel(models.Model):
         verbose_name='Секретный ответ',
         help_text='<small class="text-muted">secret_answer_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     temp_password_boolean_field = models.BooleanField(
         db_column='temp_password_boolean_field_db_column',
@@ -1682,7 +1550,7 @@ class UserModel(models.Model):
         db_tablespace='last_name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1691,7 +1559,7 @@ class UserModel(models.Model):
         verbose_name='Фамилия',
         help_text='<small class="text-muted">last_name_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     first_name_char_field = models.CharField(
         db_column='first_char_field_db_column',
@@ -1699,7 +1567,7 @@ class UserModel(models.Model):
         db_tablespace='first_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1708,7 +1576,7 @@ class UserModel(models.Model):
         verbose_name='Имя',
         help_text='<small class="text-muted">first_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     patronymic_char_field = models.CharField(
         db_column='patronymic_char_field_db_column',
@@ -1716,7 +1584,7 @@ class UserModel(models.Model):
         db_tablespace='patronymic_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1725,7 +1593,7 @@ class UserModel(models.Model):
         verbose_name='Отчество',
         help_text='<small class="text-muted">patronymic_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     personnel_number_slug_field = models.SlugField(
         db_column='personnel_number_slug_field_db_column',
@@ -1733,7 +1601,7 @@ class UserModel(models.Model):
         db_tablespace='personnel_number_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1742,7 +1610,7 @@ class UserModel(models.Model):
         verbose_name='Табельный номер',
         help_text='<small class="text-muted">personnel_number_slug_field</small><hr><br>',
 
-        max_length=32,
+        max_length=500,
         allow_unicode=False,
     )
     subdivision_char_field = models.CharField(
@@ -1751,7 +1619,7 @@ class UserModel(models.Model):
         db_tablespace='subdivision_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1760,7 +1628,7 @@ class UserModel(models.Model):
         verbose_name='Подразделение',
         help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     workshop_service_char_field = models.CharField(
         db_column='workshop_service_char_field_db_column',
@@ -1768,7 +1636,7 @@ class UserModel(models.Model):
         db_tablespace='workshop_service_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1777,7 +1645,7 @@ class UserModel(models.Model):
         verbose_name='Цех/Служба',
         help_text='<small class="text-muted">workshop_service_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     department_site_char_field = models.CharField(
         db_column='department_site_char_field_db_column',
@@ -1785,7 +1653,7 @@ class UserModel(models.Model):
         db_tablespace='department_site_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1794,7 +1662,7 @@ class UserModel(models.Model):
         verbose_name='Отдел/Участок',
         help_text='<small class="text-muted">department_site_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     position_char_field = models.CharField(
         db_column='position_char_field_db_column',
@@ -1802,7 +1670,7 @@ class UserModel(models.Model):
         db_tablespace='position_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1811,7 +1679,7 @@ class UserModel(models.Model):
         verbose_name='Должность',
         help_text='<small class="text-muted">position_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     category_char_field = models.CharField(
         db_column='category_char_field_db_column',
@@ -1819,7 +1687,7 @@ class UserModel(models.Model):
         db_tablespace='category_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(64), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1828,7 +1696,7 @@ class UserModel(models.Model):
         verbose_name='Категория',
         help_text='<small class="text-muted">category_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     education_text_field = models.TextField(
         db_column='education_text_field_db_column',
@@ -1836,7 +1704,7 @@ class UserModel(models.Model):
         db_tablespace='education_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1845,7 +1713,7 @@ class UserModel(models.Model):
         verbose_name='Образование',
         help_text='<small class="text-muted">education_text_field</small><hr><br>',
 
-        max_length=1024,
+        max_length=5000,
     )
     achievements_text_field = models.TextField(
         db_column='achievements_text_field_db_column',
@@ -1853,7 +1721,7 @@ class UserModel(models.Model):
         db_tablespace='achievements_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1862,7 +1730,7 @@ class UserModel(models.Model):
         verbose_name='Достижения',
         help_text='<small class="text-muted">achievements_text_field</small><hr><br>',
 
-        max_length=1024,
+        max_length=5000,
     )
     biography_text_field = models.TextField(
         db_column='biography_text_field_db_column',
@@ -1870,7 +1738,7 @@ class UserModel(models.Model):
         db_tablespace='biography_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1879,7 +1747,7 @@ class UserModel(models.Model):
         verbose_name='Биография',
         help_text='<small class="text-muted">biography_text_field</small><hr><br>',
 
-        max_length=1024,
+        max_length=5000,
     )
     hobbies_text_field = models.TextField(
         db_column='hobbies_text_field_db_column',
@@ -1887,7 +1755,7 @@ class UserModel(models.Model):
         db_tablespace='hobbies_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1896,12 +1764,12 @@ class UserModel(models.Model):
         verbose_name='Увлечения',
         help_text='<small class="text-muted">hobbies_text_field</small><hr><br>',
 
-        max_length=1024,
+        max_length=5000,
     )
-    image_field = models.ImageField(
-        db_column='image_field_db_column',
+    avatar_image_field = models.ImageField(
+        db_column='avatar_image_field_db_column',
         db_index=True,
-        db_tablespace='image_field_db_tablespace',
+        db_tablespace='avatar_image_field_db_tablespace',
         error_messages=False,
         validators=[FileExtensionValidator(['jpg', 'png'])],
         unique=False,
@@ -1910,7 +1778,7 @@ class UserModel(models.Model):
         null=True,
         default='uploads/account/default_avatar.jpg',
         verbose_name='Изображение профиля пользователя',
-        help_text='<small class="text-muted">image_field_db_column</small><hr><br>',
+        help_text='<small class="text-muted">avatar_image_field_db_column</small><hr><br>',
 
         upload_to='uploads/admin/account/avatar',
         max_length=200,
@@ -1919,8 +1787,8 @@ class UserModel(models.Model):
     class Meta:
         app_label = 'backend'
         ordering = ('last_name_char_field', 'first_name_char_field', 'patronymic_char_field',)
-        verbose_name = 'Пользователь расширенный'
-        verbose_name_plural = 'Admin Пользователи расширение'
+        verbose_name = 'Пользователь расширение'
+        verbose_name_plural = 'Admin 1, Пользователи расширение'
         db_table = 'user_extend_model_table'
 
     def __str__(self):
@@ -1928,7 +1796,7 @@ class UserModel(models.Model):
             activity = 'Активен'
         else:
             activity = 'Неактивен'
-        return f'{self.last_name_char_field} | {self.first_name_char_field} | active:{activity} | ' \
+        return f'{self.last_name_char_field} | {self.first_name_char_field} | {activity} | ' \
                f'{self.personnel_number_slug_field} | {self.position_char_field} | {self.id} | ' \
                f'{self.user_foreign_key_field.username}'
 
@@ -1942,7 +1810,9 @@ def create_user_model(sender, instance, created, **kwargs):
         try:
             UserModel.objects.get_or_create(user_foreign_key_field=instance)
         except Exception as error:
-            print(f"error = {error}")
+            backend_service.DjangoClass.LoggingClass.error_local(
+                error=error, function_error="create_user_model"
+            )
 
 
 @receiver(post_save, sender=UserModel)
@@ -1951,7 +1821,9 @@ def create_user(sender, instance, created, **kwargs):
         try:
             User.objects.get_or_create(username=str(instance.user_foreign_key_field.username))
         except Exception as error:
-            print(f"error = {error}")
+            backend_service.DjangoClass.LoggingClass.error_local(
+                error=error, function_error="create_user_model"
+            )
 
 
 class ActionModel(models.Model):
@@ -1965,7 +1837,7 @@ class ActionModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -1975,7 +1847,7 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
                   '"Модератор отдела ОУПиБП"</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
     access_slug_field = models.SlugField(
         db_column='access_slug_field_db_column',
@@ -1983,7 +1855,7 @@ class ActionModel(models.Model):
         db_tablespace='access_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=True,
         editable=True,
         blank=True,
@@ -1993,19 +1865,19 @@ class ActionModel(models.Model):
         help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
                   '"moderator_oupibp"</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
         allow_unicode=False,
     )
 
     class Meta:
         app_label = 'backend'
         ordering = ('name_char_field', 'access_slug_field')
-        verbose_name = 'Admin Действие'
-        verbose_name_plural = 'Admin Действия'
+        verbose_name = 'Действие'
+        verbose_name_plural = 'Admin 3, Действия'
         db_table = 'action_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field[0:30]} | {self.access_slug_field[0:30]}'
+        return f'{self.name_char_field} | {self.access_slug_field}'
 
 
 class GroupModel(models.Model):
@@ -2019,7 +1891,7 @@ class GroupModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2029,7 +1901,7 @@ class GroupModel(models.Model):
         help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
                   '"Модератор отдела ОУПиБП"</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
     group_foreign_key_field = models.ForeignKey(
         db_column='group_foreign_key_field_db_column',
@@ -2056,7 +1928,7 @@ class GroupModel(models.Model):
         db_tablespace='name_slug_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=True,
         editable=True,
         blank=True,
@@ -2066,7 +1938,7 @@ class GroupModel(models.Model):
         help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
                   '"moderator_oupibp"</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
         allow_unicode=False,
     )
     user_many_to_many_field = models.ManyToManyField(
@@ -2084,7 +1956,7 @@ class GroupModel(models.Model):
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
 
         to=UserModel,
-        related_name='user_many_to_many_field',
+        related_name='group_user_many_to_many_field',
     )
     action_many_to_many_field = models.ManyToManyField(
         db_column='path_many_to_many_field_db_column',
@@ -2101,18 +1973,18 @@ class GroupModel(models.Model):
                   '"to=User.objects.get(username="Bogdan")"</small><hr><br>',
 
         to=ActionModel,
-        related_name='action_many_to_many_field',
+        related_name='group_action_many_to_many_field',
     )
 
     class Meta:
         app_label = 'backend'
         ordering = ('name_char_field', 'name_slug_field')
         verbose_name = 'Группа расширенная'
-        verbose_name_plural = 'Admin Группы расширение'
+        verbose_name_plural = 'Admin 2, Группы расширение'
         db_table = 'group_extend_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field[0:30]} {self.name_slug_field[0:30]}'
+        return f'{self.name_char_field} {self.name_slug_field}'
 
 
 @receiver(post_save, sender=Group)
@@ -2124,7 +1996,9 @@ def create_group_model(sender, instance, created, **kwargs):
                 name_slug_field=instance.name,
             )
         except Exception as error:
-            print(f"error = {error}")
+            backend_service.DjangoClass.LoggingClass.error_local(
+                error=error, function_error="create_user_model"
+            )
 
 
 @receiver(post_save, sender=GroupModel)
@@ -2133,7 +2007,144 @@ def create_group(sender, instance, created, **kwargs):
         try:
             Group.objects.get_or_create(name=str(instance.group_foreign_key_field.name))
         except Exception as error:
-            print(f"error = {error}")
+            backend_service.DjangoClass.LoggingClass.error_local(
+                error=error, function_error="create_user_model"
+            )
+
+
+class LoggingModel(models.Model):
+    """
+    Модель, которая содержит логирование действий и ошибок django
+    """
+
+    username_slug_field = models.SlugField(
+        db_column='username_slug_field_db_column',
+        db_index=True,
+        db_tablespace='username_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Имя пользователя',
+        help_text='<small class="text-muted">Тут отображается идентификатор пользователя, например: </small><hr><br>',
+
+        max_length=500,
+        allow_unicode=False,
+    )
+    ip_genericipaddress_field = models.GenericIPAddressField(
+        db_column='ip_genericipaddress_field_field_db_column',
+        db_index=True,
+        db_tablespace='ip_genericipaddress_field_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Ip адрес клиента',
+        help_text='<small class="text-muted">Строка содержащая ip-адрес, example: '
+                  '"127.0.0.1"</small><hr><br>',
+
+        max_length=500,
+        protocol='both',
+        unpack_ipv4=False,
+    )
+    request_path_slug_field = models.SlugField(
+        db_column='request_path_slug_field_field_db_column',
+        db_index=True,
+        db_tablespace='request_path_slug_field_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Действие пользователя',
+        help_text='<small class="text-muted">Строка содержащая путь обращения, example: '
+                  '"https://.../home/"</small><hr><br>',
+
+        max_length=500,
+        allow_unicode=False,
+    )
+    request_method_slug_field = models.SlugField(
+        db_column='request_method_slug_field_field_db_column',
+        db_index=True,
+        db_tablespace='request_method_slug_field_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Метод запроса',
+        help_text='<small class="text-muted">GET: просмотр страницы, POST: отправка данных из формы</small><hr><br>',
+
+        max_length=500,
+        allow_unicode=False,
+    )
+    error_text_field = models.TextField(
+        db_column='error_text_field_db_column',
+        db_index=True,
+        db_tablespace='error_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="error: ",
+        verbose_name='Текст ошибки и/или исключения',
+        help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
+
+        max_length=5000,
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата и время записи',
+        help_text='<small class="text-muted">Дата и время, example: "31.12.2021Т23:59:59"</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-datetime_field',)
+        verbose_name = 'Лог'
+        verbose_name_plural = 'Admin 4, Логи'
+        db_table = 'logging_admin_model_table'
+
+    def __str__(self):
+        if self.username_slug_field:
+            try:
+                username = User.objects.get(username=self.username_slug_field)
+            except Exception as error:
+                error = f'error = {error}'
+                username = ''
+                print(error)
+        else:
+            username = ''
+        return f'{self.datetime_field} {username} {self.request_path_slug_field}'
 
 
 class NotificationModel(models.Model):
@@ -2141,10 +2152,10 @@ class NotificationModel(models.Model):
     Notification Model
     """
 
-    notification_author_foreign_key_field = models.ForeignKey(
-        db_column='notification_author_foreign_key_field_db_column',
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='notification_author_foreign_key_field_db_tablespace',
+        db_tablespace='author_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -2153,16 +2164,16 @@ class NotificationModel(models.Model):
         null=True,
         default=None,
         verbose_name='Автор',
-        help_text='<small class="text-muted">notification_author_foreign_key_field</small><hr><br>',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
-        related_name='notification_author_foreign_key_field',
+        related_name='notification_author_foreign_key_field'
     )
-    notification_model_foreign_key_field = models.ForeignKey(
-        db_column='notification_model_foreign_key_field_db_column',
+    model_foreign_key_field = models.ForeignKey(
+        db_column='model_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='notification_model_foreign_key_field_db_tablespace',
+        db_tablespace='model_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -2171,16 +2182,16 @@ class NotificationModel(models.Model):
         null=True,
         default=None,
         verbose_name='Группа',
-        help_text='<small class="text-muted">notification_model_foreign_key_field</small><hr><br>',
+        help_text='<small class="text-muted">model_foreign_key_field</small><hr><br>',
 
         to=GroupModel,
         on_delete=models.SET_NULL,
         related_name='notification_model_foreign_key_field',
     )
-    notification_target_foreign_key_field = models.ForeignKey(
-        db_column='notification_target_foreign_key_field_db_column',
+    target_foreign_key_field = models.ForeignKey(
+        db_column='target_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='notification_target_foreign_key_field_db_tablespace',
+        db_tablespace='target_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -2189,7 +2200,7 @@ class NotificationModel(models.Model):
         null=True,
         default=None,
         verbose_name='Цель',
-        help_text='<small class="text-muted">notification_target_foreign_key_field</small><hr><br>',
+        help_text='<small class="text-muted">target_foreign_key_field</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
@@ -2201,7 +2212,7 @@ class NotificationModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(200), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2210,7 +2221,7 @@ class NotificationModel(models.Model):
         verbose_name='Название рац. предложения',
         help_text='<small class="text-muted">name_char_field</small><hr><br>',
 
-        max_length=200,
+        max_length=500,
     )
     place_char_field = models.CharField(
         db_column='place_char_field_db_column',
@@ -2218,7 +2229,7 @@ class NotificationModel(models.Model):
         db_tablespace='place_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(100), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2227,7 +2238,7 @@ class NotificationModel(models.Model):
         verbose_name='Предполагаемое место внедрения',
         help_text='<small class="text-muted">place_char_field</small><hr><br>',
 
-        max_length=100,
+        max_length=500,
     )
     description_text_field = models.TextField(
         db_column='description_text_field_db_column',
@@ -2235,7 +2246,7 @@ class NotificationModel(models.Model):
         db_tablespace='description_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(3000), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2244,9 +2255,8 @@ class NotificationModel(models.Model):
         verbose_name='Описание',
         help_text='<small class="text-muted">description_text_field</small><hr><br>',
 
-        max_length=3000,
+        max_length=5000,
     )
-
     visibility_boolean_field = models.BooleanField(
         db_column='visibility_boolean_field_db_column',
         db_index=True,
@@ -2299,14 +2309,18 @@ class NotificationModel(models.Model):
     class Meta:
         app_label = 'backend'
         ordering = ('-created_datetime_field',)
-        verbose_name = 'Уведомления'
-        verbose_name_plural = 'Admin, Уведомления'
+        verbose_name = 'Уведомление'
+        verbose_name_plural = 'Admin 5, Уведомления'
         db_table = 'notification_model_table'
 
+    def __str__(self):
+        return f'{self.name_char_field} {self.place_char_field} {self.description_text_field}'
 
-class RationalModel(models.Model):
+
+# ####################################################################################################TODO custom models
+class IdeaModel(models.Model):
     """
-    Rational Model
+    Idea Model
     """
 
     author_foreign_key_field = models.ForeignKey(
@@ -2325,24 +2339,7 @@ class RationalModel(models.Model):
 
         to=UserModel,
         on_delete=models.SET_NULL,
-        related_name='author_foreign_key_field',
-    )
-    number_char_field = models.CharField(
-        db_column='number_char_field_db_column',
-        db_index=True,
-        db_tablespace='number_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='number_char_field',
-        help_text='<small class="text-muted">number_char_field</small><hr><br>',
-
-        max_length=512,
+        related_name='idea_author_foreign_key_field',
     )
     subdivision_char_field = models.CharField(
         db_column='subdivision_char_field_db_column',
@@ -2350,7 +2347,7 @@ class RationalModel(models.Model):
         db_tablespace='subdivision_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2359,7 +2356,7 @@ class RationalModel(models.Model):
         verbose_name='Наименование структурного подразделения',
         help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
     sphere_char_field = models.CharField(
         db_column='sphere_char_field_db_column',
@@ -2367,7 +2364,7 @@ class RationalModel(models.Model):
         db_tablespace='sphere_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2376,7 +2373,7 @@ class RationalModel(models.Model):
         verbose_name='Сфера рационализаторского предложения',
         help_text='<small class="text-muted">sphere_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
     category_char_field = models.CharField(
         db_column='category_char_field_db_column',
@@ -2384,7 +2381,7 @@ class RationalModel(models.Model):
         db_tablespace='category_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2393,7 +2390,7 @@ class RationalModel(models.Model):
         verbose_name='Категория',
         help_text='<small class="text-muted">category_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
     avatar_image_field = models.ImageField(
         db_column='avatar_image_field_db_column',
@@ -2418,7 +2415,7 @@ class RationalModel(models.Model):
         db_tablespace='name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(250), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2427,7 +2424,473 @@ class RationalModel(models.Model):
         verbose_name='Название рац. предложения',
         help_text='<small class="text-muted">name_char_field</small><hr><br>',
 
-        max_length=250,
+        max_length=500,
+    )
+    place_char_field = models.CharField(
+        db_column='place_char_field_db_column',
+        db_index=True,
+        db_tablespace='place_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Предполагаемое место внедрения',
+        help_text='<small class="text-muted">place_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    description_text_field = models.TextField(
+        db_column='description_text_field_db_column',
+        db_index=True,
+        db_tablespace='description_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Описание',
+        help_text='<small class="text-muted">description_text_field</small><hr><br>',
+
+        max_length=5000,
+    )
+    status_moderate_char_field = models.CharField(
+        db_column='status_moderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='status_moderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name='status_moderate_char_field',
+        help_text='<small class="text-muted">status_moderate_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    moderate_foreign_key_field = models.ForeignKey(
+        db_column='moderate_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='moderate_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='moderate_foreign_key_field',
+        help_text='<small class="text-muted">moderate_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='idea_moderate_foreign_key_field',
+    )
+    comment_moderate_char_field = models.CharField(
+        db_column='comment_moderate_char_field_db_column',
+        db_index=True,
+        db_tablespace='comment_moderate_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='comment_moderate_char_field',
+        help_text='<small class="text-muted">comment_moderate_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    visibility_boolean_field = models.BooleanField(
+        db_column='visibility_boolean_field_db_column',
+        db_index=True,
+        db_tablespace='visibility_boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=False,
+        verbose_name='Видимость идеи в общем списке',
+        help_text='<small class="text-muted">visibility_boolean_field</small><hr><br>',
+    )
+    created_datetime_field = models.DateTimeField(
+        db_column='created_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='created_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата создания',
+        help_text='<small class="text-muted">created_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    register_datetime_field = models.DateTimeField(
+        db_column='register_datetime_field_db_column',
+        db_index=True,
+        db_tablespace='register_datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата регистрации',
+        help_text='<small class="text-muted">register_datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-created_datetime_field',)
+        verbose_name = 'Идея'
+        verbose_name_plural = 'Банк идей 1, Идеи'
+        db_table = 'idea_model_table'
+
+    def __str__(self):
+        return f'{self.name_char_field} : {self.category_char_field}: ' \
+               f'{self.status_moderate_char_field} : {self.author_foreign_key_field}'
+
+    def get_comment_count(self):
+        obj = IdeaModel.objects.get(id=self.id)
+        return int(CommentIdeaModel.objects.filter(idea_foreign_key_field=obj).count())
+
+    def get_total_rating(self):
+        obj = IdeaModel.objects.get(id=self.id)
+        rating = 0
+        ratings = RatingIdeaModel.objects.filter(idea_foreign_key_field=obj)
+        users = []
+        if ratings.count() <= 0:
+            return {"rate": 0, "count": 0, "users": users}
+        for rate in ratings:
+            rating += rate.rating_integer_field
+            users.append(f"{rate.author_foreign_key_field.last_name_char_field} "
+                         f"{rate.author_foreign_key_field.first_name_char_field} "
+                         f"| {rate.rating_integer_field}")
+
+        return {"rate": float(rating / ratings.count()), "count": int(ratings.count()), "users": users}
+
+
+class RatingIdeaModel(models.Model):
+    """
+    RatingIdeaModel
+    """
+
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='rating_author_foreign_key_field',
+    )
+    idea_foreign_key_field = models.ForeignKey(
+        db_column='idea_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='idea_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Идея',
+        help_text='<small class="text-muted">idea_foreign_key_field</small><hr><br>',
+
+        to=IdeaModel,
+        on_delete=models.SET_NULL,
+        related_name='rating_idea_foreign_key_field',
+    )
+    rating_integer_field = models.IntegerField(
+        db_column='rating_integer_field_db_column',
+        db_index=True,
+        db_tablespace='rating_integer_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinValueValidator(0), MaxValueValidator(10), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='Оценка',
+        help_text='<small class="text-muted">rating_integer_field</small><hr><br>',
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        # default=timezone.now,
+        verbose_name='Дата и время создания',
+        help_text='<small class="text-muted">datetime_field</small><hr><br>',
+
+        auto_now=True,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-id',)
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = 'Банк идей 2, Рейтинги'
+        db_table = 'rating_idea_model_table'
+
+    def __str__(self):
+        return f'{self.idea_foreign_key_field} :: {self.author_foreign_key_field} :: ' \
+               f'{self.rating_integer_field} :: {self.datetime_field}'
+
+
+class CommentIdeaModel(models.Model):
+    """
+    CommentIdeaModel
+    """
+
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='comment_author_foreign_key_field',
+    )
+    idea_foreign_key_field = models.ForeignKey(
+        db_column='idea_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='idea_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Идея',
+        help_text='<small class="text-muted">idea_foreign_key_field</small><hr><br>',
+
+        to=IdeaModel,
+        on_delete=models.SET_NULL,
+        related_name='comment_idea_foreign_key_field',
+    )
+    comment_text_field = models.TextField(
+        db_column='comment_text_field_db_column',
+        db_index=True,
+        db_tablespace='comment_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Комментарий',
+        help_text='<small class="text-muted">comment_text_field</small><hr><br>',
+
+        max_length=5000,
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        # default=timezone.now,
+        verbose_name='Дата создания',
+        help_text='<small class="text-muted">datetime_field</small><hr><br>',
+
+        auto_now=True,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-id',)
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Банк идей 3, Комментарии'
+        db_table = 'comment_idea_model_table'
+
+    def __str__(self):
+        return f'{self.idea_foreign_key_field} :: {self.idea_foreign_key_field} :: ' \
+               f'{self.comment_text_field}... :: {self.datetime_field}'
+
+
+# ######################################################################################################TODO test models
+class RationalModel(models.Model):
+    """
+    Rational Model
+    """
+
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор рационализаторского предложения',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='rational_author_foreign_key_field',
+    )
+    number_char_field = models.CharField(
+        db_column='number_char_field_db_column',
+        db_index=True,
+        db_tablespace='number_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='number_char_field',
+        help_text='<small class="text-muted">number_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    subdivision_char_field = models.CharField(
+        db_column='subdivision_char_field_db_column',
+        db_index=True,
+        db_tablespace='subdivision_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Наименование структурного подразделения',
+        help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    sphere_char_field = models.CharField(
+        db_column='sphere_char_field_db_column',
+        db_index=True,
+        db_tablespace='sphere_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Сфера рационализаторского предложения',
+        help_text='<small class="text-muted">sphere_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    category_char_field = models.CharField(
+        db_column='category_char_field_db_column',
+        db_index=True,
+        db_tablespace='category_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Категория',
+        help_text='<small class="text-muted">category_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    avatar_image_field = models.ImageField(
+        db_column='avatar_image_field_db_column',
+        db_index=True,
+        db_tablespace='avatar_image_field_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='uploads/rational/default_rational.jpg',
+        verbose_name='Аватарка-заставка для идеи',
+        help_text='<small class="text-muted">>avatar_image_field</small><hr><br>',
+
+        upload_to='uploads/rational/avatar/',
+        max_length=200,
+    )
+    name_char_field = models.CharField(
+        db_column='name_char_field_db_column',
+        db_index=True,
+        db_tablespace='name_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название рац. предложения',
+        help_text='<small class="text-muted">name_char_field</small><hr><br>',
+
+        max_length=500,
     )
     place_char_field = models.CharField(
         db_column='place_char_field_db_column',
@@ -2520,7 +2983,7 @@ class RationalModel(models.Model):
         db_tablespace='user1_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2529,7 +2992,7 @@ class RationalModel(models.Model):
         verbose_name='user1_char_field',
         help_text='<small class="text-muted">user1_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
     user2_char_field = models.CharField(
         db_column='user2_char_field_db_column',
@@ -2537,7 +3000,7 @@ class RationalModel(models.Model):
         db_tablespace='user2_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2546,7 +3009,7 @@ class RationalModel(models.Model):
         verbose_name='user2_char_field',
         help_text='<small class="text-muted">user2_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
     user3_char_field = models.CharField(
         db_column='user3_char_field_db_column',
@@ -2554,7 +3017,7 @@ class RationalModel(models.Model):
         db_tablespace='user3_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2563,7 +3026,7 @@ class RationalModel(models.Model):
         verbose_name='user3_char_field',
         help_text='<small class="text-muted">user3_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
     user4_char_field = models.CharField(
         db_column='user4_char_field_db_column',
@@ -2571,7 +3034,7 @@ class RationalModel(models.Model):
         db_tablespace='user4_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2580,7 +3043,7 @@ class RationalModel(models.Model):
         verbose_name='user4_char_field',
         help_text='<small class="text-muted">user4_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
     user5_char_field = models.CharField(
         db_column='user5_char_field_db_column',
@@ -2588,7 +3051,7 @@ class RationalModel(models.Model):
         db_tablespace='user5_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2597,7 +3060,7 @@ class RationalModel(models.Model):
         verbose_name='user5_char_field',
         help_text='<small class="text-muted">user5_char_field</small><hr><br>',
 
-        max_length=512,
+        max_length=500,
     )
 
     ####################################################################################################################
@@ -2607,7 +3070,7 @@ class RationalModel(models.Model):
         db_tablespace='status_moderate_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2616,12 +3079,12 @@ class RationalModel(models.Model):
         verbose_name='status_moderate_char_field',
         help_text='<small class="text-muted">status_moderate_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
-    premoderate_foreign_key_field_1 = models.ForeignKey(
-        db_column='premoderate_foreign_key_field_1_db_column',
+    premoderate_foreign_key_field = models.ForeignKey(
+        db_column='premoderate_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='premoderate_foreign_key_field_1_db_tablespace',
+        db_tablespace='premoderate_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -2629,12 +3092,12 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default=None,
-        verbose_name='premoderate_foreign_key_field_1',
-        help_text='<small class="text-muted">premoderate_foreign_key_field_1</small><hr><br>',
+        verbose_name='premoderate_foreign_key_field',
+        help_text='<small class="text-muted">premoderate_foreign_key_field</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
-        related_name='premoderate_foreign_key_field_1',
+        related_name='rational_premoderate_foreign_key_field',
     )
     comment_premoderate_char_field = models.CharField(
         db_column='comment_premoderate_char_field_db_column',
@@ -2642,7 +3105,7 @@ class RationalModel(models.Model):
         db_tablespace='comment_premoderate_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2651,12 +3114,12 @@ class RationalModel(models.Model):
         verbose_name='comment_premoderate_char_field',
         help_text='<small class="text-muted">comment_premoderate_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
-    postmoderate_foreign_key_field_2 = models.ForeignKey(
-        db_column='postmoderate_foreign_key_field_2_db_column',
+    postmoderate_foreign_key_field = models.ForeignKey(
+        db_column='postmoderate_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='postmoderate_foreign_key_field_2_db_tablespace',
+        db_tablespace='postmoderate_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -2664,12 +3127,12 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default=None,
-        verbose_name='postmoderate_foreign_key_field_2',
-        help_text='<small class="text-muted">postmoderate_foreign_key_field_2</small><hr><br>',
+        verbose_name='postmoderate_foreign_key_field',
+        help_text='<small class="text-muted">postmoderate_foreign_key_field</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
-        related_name='postmoderate_foreign_key_field_2',
+        related_name='rational_postmoderate_foreign_key_field',
     )
     comment_postmoderate_char_field = models.CharField(
         db_column='comment_postmoderate_char_field_db_column',
@@ -2677,7 +3140,7 @@ class RationalModel(models.Model):
         db_tablespace='comment_postmoderate_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
@@ -2686,9 +3149,8 @@ class RationalModel(models.Model):
         verbose_name='comment_postmoderate_char_field',
         help_text='<small class="text-muted">comment_postmoderate_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
-
     ####################################################################################################################
 
     visibility_boolean_field = models.BooleanField(
@@ -2744,23 +3206,23 @@ class RationalModel(models.Model):
         app_label = 'backend'
         ordering = ('-created_datetime_field',)
         verbose_name = 'Рационализаторское предложение'
-        verbose_name_plural = 'Rational Рационализаторские предложения'
+        verbose_name_plural = 'Rational 1, Рационализаторские предложения'
         db_table = 'rational_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field} : {self.category_char_field}: {self.status_moderate_char_field} : ' \
-               f'{self.author_foreign_key_field}'
+        return f'{self.name_char_field} : {self.category_char_field}: ' \
+               f'{self.status_moderate_char_field} : {self.author_foreign_key_field}'
 
 
-class IdeaModel(models.Model):
+class VacancyModel(models.Model):
     """
-    Idea Model
+    Vacancy Model
     """
 
-    idea_author_foreign_key_field = models.ForeignKey(
-        db_column='idea_author_foreign_key_field_db_column',
+    author_foreign_key_field = models.ForeignKey(
+        db_column='author_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='idea_author_foreign_key_field_db_tablespace',
+        db_tablespace='author_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -2768,63 +3230,29 @@ class IdeaModel(models.Model):
         blank=True,
         null=True,
         default=None,
-        verbose_name='Автор рационализаторского предложения',
-        help_text='<small class="text-muted">idea_author_foreign_key_field</small><hr><br>',
+        verbose_name='author_foreign_key_field',
+        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
-        related_name='idea_author_foreign_key_field',
+        related_name='vacancy_author_foreign_key_field',
     )
-    subdivision_char_field = models.CharField(
-        db_column='subdivision_char_field_db_column',
+    qualification_char_field = models.CharField(
+        db_column='qualification_char_field_db_column',
         db_index=True,
-        db_tablespace='subdivision_char_field_db_tablespace',
+        db_tablespace='qualification_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='Наименование структурного подразделения',
-        help_text='<small class="text-muted">subdivision_char_field</small><hr><br>',
+        verbose_name='qualification_char_field',
+        help_text='<small class="text-muted">qualification_char_field</small><hr><br>',
 
-        max_length=128,
-    )
-    sphere_char_field = models.CharField(
-        db_column='sphere_char_field_db_column',
-        db_index=True,
-        db_tablespace='sphere_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Сфера рационализаторского предложения',
-        help_text='<small class="text-muted">sphere_char_field</small><hr><br>',
-
-        max_length=128,
-    )
-    category_char_field = models.CharField(
-        db_column='category_char_field_db_column',
-        db_index=True,
-        db_tablespace='category_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Категория',
-        help_text='<small class="text-muted">category_char_field</small><hr><br>',
-
-        max_length=128,
+        max_length=500,
     )
     avatar_image_field = models.ImageField(
         db_column='avatar_image_field_db_column',
@@ -2836,133 +3264,12 @@ class IdeaModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default='uploads/rational/default_rational.jpg',
-        verbose_name='Аватарка-заставка для идеи',
-        help_text='<small class="text-muted">>avatar_image_field</small><hr><br>',
+        default='uploads/vacancy/default_vacancy.jpg',
+        verbose_name='avatar_image_field',
+        help_text='<small class="text-muted">avatar_image_field</small><hr><br>',
 
-        upload_to='uploads/rational/avatar/',
+        upload_to='uploads/vacancy/image/',
         max_length=200,
-    )
-    name_char_field = models.CharField(
-        db_column='name_char_field_db_column',
-        db_index=True,
-        db_tablespace='name_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(200), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Название рац. предложения',
-        help_text='<small class="text-muted">name_char_field</small><hr><br>',
-
-        max_length=200,
-    )
-    place_char_field = models.CharField(
-        db_column='place_char_field_db_column',
-        db_index=True,
-        db_tablespace='place_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(100), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Предполагаемое место внедрения',
-        help_text='<small class="text-muted">place_char_field</small><hr><br>',
-
-        max_length=100,
-    )
-    description_text_field = models.TextField(
-        db_column='description_text_field_db_column',
-        db_index=True,
-        db_tablespace='description_text_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(3000), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Описание',
-        help_text='<small class="text-muted">description_text_field</small><hr><br>',
-
-        max_length=3000,
-    )
-
-    ####################################################################################################################
-    status_moderate_char_field = models.CharField(
-        db_column='status_moderate_char_field_db_column',
-        db_index=True,
-        db_tablespace='status_moderate_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default="",
-        verbose_name='status_moderate_char_field',
-        help_text='<small class="text-muted">status_moderate_char_field</small><hr><br>',
-
-        max_length=128,
-    )
-    idea_moderate_foreign_key_field = models.ForeignKey(
-        db_column='idea_moderate_foreign_key_field_db_column',
-        db_index=True,
-        db_tablespace='idea_moderate_foreign_key_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='idea_moderate_foreign_key_field',
-        help_text='<small class="text-muted">idea_moderate_foreign_key_field</small><hr><br>',
-
-        to=UserModel,
-        on_delete=models.SET_NULL,
-        related_name='idea_moderate_foreign_key_field',
-    )
-    comment_moderate_char_field = models.CharField(
-        db_column='comment_moderate_char_field_db_column',
-        db_index=True,
-        db_tablespace='comment_moderate_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(200), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='comment_moderate_char_field',
-        help_text='<small class="text-muted">comment_moderate_char_field</small><hr><br>',
-
-        max_length=200,
-    )
-    ####################################################################################################################
-
-    visibility_boolean_field = models.BooleanField(
-        db_column='visibility_boolean_field_db_column',
-        db_index=True,
-        db_tablespace='visibility_boolean_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=False,
-        default=False,
-        verbose_name='Видимость идеи в общем списке',
-        help_text='<small class="text-muted">visibility_boolean_field</small><hr><br>',
     )
     created_datetime_field = models.DateTimeField(
         db_column='created_datetime_field_db_column',
@@ -2975,201 +3282,16 @@ class IdeaModel(models.Model):
         blank=True,
         null=True,
         default=timezone.now,
-        verbose_name='Дата создания',
+        verbose_name='created_datetime_field',
         help_text='<small class="text-muted">created_datetime_field</small><hr><br>',
 
         auto_now=False,
         auto_now_add=False,
     )
-    register_datetime_field = models.DateTimeField(
-        db_column='register_datetime_field_db_column',
+    sphere_char_field = models.CharField(
+        db_column='sphere_char_field_db_column',
         db_index=True,
-        db_tablespace='register_datetime_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=timezone.now,
-        verbose_name='Дата регистрации',
-        help_text='<small class="text-muted">register_datetime_field</small><hr><br>',
-
-        auto_now=False,
-        auto_now_add=False,
-    )
-
-    class Meta:
-        app_label = 'backend'
-        ordering = ('-created_datetime_field',)
-        verbose_name = 'Идея'
-        verbose_name_plural = 'Банк идей, идеи'
-        db_table = 'idea_model_table'
-
-    def __str__(self):
-        return f'{self.name_char_field} : {self.category_char_field}: {self.status_moderate_char_field} : ' \
-               f'{self.idea_author_foreign_key_field}'
-
-    def get_comment_count(self):
-        obj = IdeaModel.objects.get(id=self.id)
-        return int(CommentIdeaModel.objects.filter(comment_idea_foreign_key_field=obj).count())
-
-    def get_total_rating(self):
-        obj = IdeaModel.objects.get(id=self.id)
-        rating = 0
-        ratings = RatingIdeaModel.objects.filter(rating_idea_foreign_key_field=obj)
-        users = []
-        if ratings.count() <= 0:
-            return {"rate": 0, "count": 0, "users": users}
-        for rate in ratings:
-            rating += rate.rating_integer_field
-            users.append(f"{rate.rating_idea_author_foreign_key_field.last_name_char_field} "
-                         f"{rate.rating_idea_author_foreign_key_field.first_name_char_field} "
-                         f"| {rate.rating_integer_field}")
-
-        return {"rate": float(rating/ratings.count()), "count": int(ratings.count()), "users": users}
-
-
-# @receiver(post_save, sender=IdeaModel)
-# def update_idea_model(sender, instance, created, **kwargs):
-#     if created is False:
-#         try:
-#             idea = IdeaModel.objects.get(id=instance.id)
-#             idea.register_datetime_field = timezone.now()
-#             idea.save()
-#         except Exception as error:
-#             print(f"error = {error}")
-
-
-class RatingIdeaModel(models.Model):
-    """
-    RatingIdeaModel
-    """
-    rating_idea_foreign_key_field = models.ForeignKey(
-        db_column='rating_idea_foreign_key_field_db_column',
-        db_index=True,
-        db_tablespace='rating_idea_foreign_key_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='Идея',
-        help_text='<small class="text-muted">rating_idea_foreign_key_field</small><hr><br>',
-
-        to=IdeaModel,
-        on_delete=models.SET_NULL,
-        related_name='rating_idea_foreign_key_field',
-    )
-    rating_idea_author_foreign_key_field = models.ForeignKey(
-        db_column='rating_idea_author_foreign_key_field_db_column',
-        db_index=True,
-        db_tablespace='rating_idea_author_foreign_key_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='Автор',
-        help_text='<small class="text-muted">rating_idea_author_foreign_key_field</small><hr><br>',
-
-        to=UserModel,
-        on_delete=models.SET_NULL,
-        related_name='rating_idea_author_foreign_key_field',
-    )
-    rating_integer_field = models.IntegerField(
-        db_column='rating_integer_field_db_column',
-        db_index=True,
-        db_tablespace='rating_integer_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinValueValidator(0), MaxValueValidator(10), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=0,
-        verbose_name='Оценка',
-        help_text='<small class="text-muted">rating_integer_field</small><hr><br>',
-    )
-    datetime_field = models.DateTimeField(
-        db_column='datetime_field_db_column',
-        db_index=True,
-        db_tablespace='datetime_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        # default=timezone.now,
-        verbose_name='Дата и время создания',
-        help_text='<small class="text-muted">datetime_field</small><hr><br>',
-
-        auto_now=True,
-        auto_now_add=False,
-    )
-
-    class Meta:
-        app_label = 'backend'
-        ordering = ('-id',)
-        verbose_name = 'Рейтинг идеи'
-        verbose_name_plural = 'Банк идей, рейтинги'
-        db_table = 'rating_idea_model_table'
-
-    def __str__(self):
-        return f'{self.rating_idea_foreign_key_field} :: {self.rating_idea_author_foreign_key_field} :: ' \
-               f'{self.rating_integer_field} :: {self.datetime_field}'
-
-
-class CommentIdeaModel(models.Model):
-    """
-    CommentIdeaModel
-    """
-    comment_idea_foreign_key_field = models.ForeignKey(
-        db_column='comment_idea_foreign_key_field_db_column',
-        db_index=True,
-        db_tablespace='comment_idea_foreign_key_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='Идея',
-        help_text='<small class="text-muted">comment_idea_foreign_key_field</small><hr><br>',
-
-        to=IdeaModel,
-        on_delete=models.SET_NULL,
-        related_name='comment_idea_foreign_key_field',
-    )
-    comment_idea_author_foreign_key_field = models.ForeignKey(
-        db_column='comment_idea_author_foreign_key_field_db_column',
-        db_index=True,
-        db_tablespace='comment_idea_author_foreign_key_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='Автор',
-        help_text='<small class="text-muted">comment_idea_author_foreign_key_field</small><hr><br>',
-
-        to=UserModel,
-        on_delete=models.SET_NULL,
-        related_name='comment_idea_author_foreign_key_field',
-    )
-    comment_text_field = models.TextField(
-        db_column='comment_text_field_db_column',
-        db_index=True,
-        db_tablespace='comment_text_field_db_tablespace',
+        db_tablespace='sphere_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
@@ -3178,227 +3300,107 @@ class CommentIdeaModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Комментарий',
-        help_text='<small class="text-muted">comment_text_field</small><hr><br>',
+        verbose_name='sphere_char_field',
+        help_text='<small class="text-muted">sphere_char_field</small><hr><br>',
 
         max_length=500,
     )
-    datetime_field = models.DateTimeField(
-        db_column='datetime_field_db_column',
+    education_char_field = models.CharField(
+        db_column='education_char_field_db_column',
         db_index=True,
-        db_tablespace='datetime_field_db_tablespace',
+        db_tablespace='education_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
-        # default=timezone.now,
-        verbose_name='Дата создания',
-        help_text='<small class="text-muted">datetime_field</small><hr><br>',
+        default='',
+        verbose_name='education_char_field',
+        help_text='<small class="text-muted">education_char_field</small><hr><br>',
 
-        auto_now=True,
-        auto_now_add=False,
+        max_length=500,
+    )
+    rank_char_field = models.CharField(
+        db_column='rank_char_field_db_column',
+        db_index=True,
+        db_tablespace='rank_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='rank_char_field',
+        help_text='<small class="text-muted">rank_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    experience_char_field = models.CharField(
+        db_column='experience_char_field_db_column',
+        db_index=True,
+        db_tablespace='experience_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='experience_char_field',
+        help_text='<small class="text-muted">experience_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    schedule_char_field = models.CharField(
+        db_column='schedule_char_field_db_column',
+        db_index=True,
+        db_tablespace='schedule_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='schedule_char_field',
+        help_text='<small class="text-muted">schedule_char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    description_text_field = models.TextField(
+        db_column='description_text_field_db_column',
+        db_index=True,
+        db_tablespace='description_text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='description_text_field',
+        help_text='<small class="text-muted">description_text_field</small><hr><br>',
+
+        max_length=5000,
     )
 
     class Meta:
         app_label = 'backend'
-        ordering = ('-id',)
-        verbose_name = 'Комментарий идеи'
-        verbose_name_plural = 'Банк идей, комментарии'
-        db_table = 'comment_idea_model_table'
-
-    def __str__(self):
-        return f'{self.comment_idea_foreign_key_field} :: {self.comment_idea_foreign_key_field} :: ' \
-               f'{self.comment_text_field[:20]}... :: {self.datetime_field}'
-
-
-class VacancyModel(models.Model):
-    """
-    Vacancy Model
-    """
-
-    author_field = models.ForeignKey(
-        db_column='author_field_db_column',
-        db_index=True,
-        db_tablespace='author_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='author_field',
-        help_text='<small class="text-muted">author_field</small><hr><br>',
-
-        to=UserModel,
-        on_delete=models.SET_NULL,
-        related_name='author_field',
-    )
-    qualification_field = models.CharField(
-        db_column='qualification_field_db_column',
-        db_index=True,
-        db_tablespace='qualification_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='qualification_field',
-        help_text='<small class="text-muted">qualification_field</small><hr><br>',
-
-        max_length=256,
-    )
-    image_field = models.ImageField(
-        db_column='image_field_db_column',
-        db_index=True,
-        db_tablespace='image_field_db_tablespace',
-        error_messages=False,
-        validators=[FileExtensionValidator(['jpg', 'png'])],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='uploads/vacancy/default_vacancy.jpg',
-        verbose_name='image_field',
-        help_text='<small class="text-muted">>image_field</small><hr><br>',
-
-        upload_to='uploads/vacancy/image/',
-        max_length=200,
-    )
-    datetime_field = models.DateTimeField(
-        db_column='datetime_field_db_column',
-        db_index=True,
-        db_tablespace='datetime_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=timezone.now,
-        verbose_name='datetime_field',
-        help_text='<small class="text-muted">datetime_field</small><hr><br>',
-
-        auto_now=False,
-        auto_now_add=False,
-    )
-    sphere_field = models.CharField(
-        db_column='sphere_field_db_column',
-        db_index=True,
-        db_tablespace='sphere_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='sphere_field',
-        help_text='<small class="text-muted">sphere_field</small><hr><br>',
-
-        max_length=128,
-    )
-    education_field = models.CharField(
-        db_column='education_field_db_column',
-        db_index=True,
-        db_tablespace='education_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='education_field',
-        help_text='<small class="text-muted">education_field</small><hr><br>',
-
-        max_length=128,
-    )
-    rank_field = models.CharField(
-        db_column='rank_field_db_column',
-        db_index=True,
-        db_tablespace='rank_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='rank_field',
-        help_text='<small class="text-muted">rank_field</small><hr><br>',
-
-        max_length=32,
-    )
-    experience_field = models.CharField(
-        db_column='experience_field_db_column',
-        db_index=True,
-        db_tablespace='experience_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='experience_field',
-        help_text='<small class="text-muted">experience_field</small><hr><br>',
-
-        max_length=128,
-    )
-    schedule_field = models.CharField(
-        db_column='schedule_field_db_column',
-        db_index=True,
-        db_tablespace='schedule_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='schedule_field',
-        help_text='<small class="text-muted">schedule_field</small><hr><br>',
-
-        max_length=128,
-    )
-    description_field = models.TextField(
-        db_column='description_field_db_column',
-        db_index=True,
-        db_tablespace='description_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(512), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='description_field',
-        help_text='<small class="text-muted">description_field</small><hr><br>',
-
-        max_length=512,
-    )
-
-    class Meta:
-        app_label = 'backend'
-        ordering = ('-datetime_field',)
+        ordering = ('-created_datetime_field',)
         verbose_name = 'Вакансия'
-        verbose_name_plural = 'Вакансии'
+        verbose_name_plural = 'Vacancy 1, Вакансии'
         db_table = 'vacancy_model_table'
 
     def __str__(self):
-        return f'{self.qualification_field} : {self.datetime_field} : {self.author_field}'
+        return f'{self.qualification_char_field} : {self.created_datetime_field} : ' \
+               f'{self.author_foreign_key_field}'
 
 
 class ResumeModel(models.Model):
@@ -3406,78 +3408,78 @@ class ResumeModel(models.Model):
     Resume Model
     """
 
-    qualification_field = models.CharField(
-        db_column='qualification_field_db_column',
+    qualification_char_field = models.CharField(
+        db_column='qualification_char_field_db_column',
         db_index=True,
-        db_tablespace='qualification_field_db_tablespace',
+        db_tablespace='qualification_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='qualification_field',
-        help_text='<small class="text-muted">qualification_field</small><hr><br>',
+        verbose_name='qualification_char_field',
+        help_text='<small class="text-muted">qualification_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
-    last_name_field = models.CharField(
-        db_column='last_name_field_db_column',
+    last_name_char_field = models.CharField(
+        db_column='last_name_char_field_db_column',
         db_index=True,
-        db_tablespace='last_name_field_db_tablespace',
+        db_tablespace='last_name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='last_name_field',
-        help_text='<small class="text-muted">last_name_field</small><hr><br>',
+        verbose_name='last_name_char_field',
+        help_text='<small class="text-muted">last_name_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
-    first_name_field = models.CharField(
-        db_column='first_name_field_db_column',
+    first_name_char_field = models.CharField(
+        db_column='first_name_char_field_db_column',
         db_index=True,
-        db_tablespace='first_name_field_db_tablespace',
+        db_tablespace='first_name_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='first_name_field',
-        help_text='<small class="text-muted">first_name_field</small><hr><br>',
+        verbose_name='first_name_char_field',
+        help_text='<small class="text-muted">first_name_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
-    patronymic_field = models.CharField(
-        db_column='patronymic_field_db_column',
+    patronymic_char_field = models.CharField(
+        db_column='patronymic_char_field_db_column',
         db_index=True,
-        db_tablespace='patronymic_field_db_tablespace',
+        db_tablespace='patronymic_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(256), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='patronymic_field',
-        help_text='<small class="text-muted">patronymic_field</small><hr><br>',
+        verbose_name='patronymic_char_field',
+        help_text='<small class="text-muted">patronymic_char_field</small><hr><br>',
 
-        max_length=256,
+        max_length=500,
     )
-    image_field = models.ImageField(
-        db_column='image_field_db_column',
+    avatar_image_field = models.ImageField(
+        db_column='avatar_image_field_db_column',
         db_index=True,
-        db_tablespace='image_field_db_tablespace',
+        db_tablespace='avatar_image_field_db_tablespace',
         error_messages=False,
         validators=[FileExtensionValidator(['jpg', 'png'])],
         unique=False,
@@ -3485,16 +3487,16 @@ class ResumeModel(models.Model):
         blank=True,
         null=True,
         default='uploads/vacancy/default_vacancy.jpg',
-        verbose_name='image_field',
-        help_text='<small class="text-muted">>image_field</small><hr><br>',
+        verbose_name='avatar_image_field',
+        help_text='<small class="text-muted">>avatar_image_field</small><hr><br>',
 
         upload_to='uploads/vacancy/image/',
-        max_length=200,
+        max_length=500,
     )
-    datetime_birth_field = models.DateTimeField(
-        db_column='datetime_birth_field_db_column',
+    birth_datetime_field = models.DateTimeField(
+        db_column='birth_datetime_field_db_column',
         db_index=True,
-        db_tablespace='datetime_birth_field_db_tablespace',
+        db_tablespace='birth_datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -3502,16 +3504,16 @@ class ResumeModel(models.Model):
         blank=True,
         null=True,
         default=timezone.now,
-        verbose_name='datetime_birth_field',
-        help_text='<small class="text-muted">datetime_birth_field</small><hr><br>',
+        verbose_name='birth_datetime_field',
+        help_text='<small class="text-muted">birth_datetime_field</small><hr><br>',
 
         auto_now=False,
         auto_now_add=False,
     )
-    datetime_create_field = models.DateTimeField(
-        db_column='datetime_create_field_db_column',
+    create_datetime_field = models.DateTimeField(
+        db_column='create_datetime_field_db_column',
         db_index=True,
-        db_tablespace='datetime_create_field_db_tablespace',
+        db_tablespace='create_datetime_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -3519,88 +3521,88 @@ class ResumeModel(models.Model):
         blank=True,
         null=True,
         default=timezone.now,
-        verbose_name='datetime_create_field',
-        help_text='<small class="text-muted">datetime_create_field</small><hr><br>',
+        verbose_name='create_datetime_field',
+        help_text='<small class="text-muted">create_datetime_field</small><hr><br>',
 
         auto_now=False,
         auto_now_add=False,
     )
-    education_field = models.CharField(
-        db_column='education_field_db_column',
+    education_char_field = models.CharField(
+        db_column='education_char_field_db_column',
         db_index=True,
-        db_tablespace='education_field_db_tablespace',
+        db_tablespace='education_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='education_field',
-        help_text='<small class="text-muted">education_field</small><hr><br>',
+        verbose_name='education_char_field',
+        help_text='<small class="text-muted">education_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
-    experience_field = models.CharField(
-        db_column='experience_field_db_column',
+    experience_char_field = models.CharField(
+        db_column='experience_char_field_db_column',
         db_index=True,
-        db_tablespace='experience_field_db_tablespace',
+        db_tablespace='experience_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(128), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='experience_field',
-        help_text='<small class="text-muted">experience_field</small><hr><br>',
+        verbose_name='experience_char_field',
+        help_text='<small class="text-muted">experience_char_field</small><hr><br>',
 
-        max_length=128,
+        max_length=500,
     )
-    sex_field = models.CharField(
-        db_column='sex_field_db_column',
+    sex_char_field = models.CharField(
+        db_column='sex_char_field_db_column',
         db_index=True,
-        db_tablespace='sex_field_db_tablespace',
+        db_tablespace='sex_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(32), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='sex_field',
-        help_text='<small class="text-muted">sex_field</small><hr><br>',
+        verbose_name='sex_char_field',
+        help_text='<small class="text-muted">sex_char_field</small><hr><br>',
 
-        max_length=32,
+        max_length=500,
     )
-    contact_data_field = models.TextField(
-        db_column='contact_data_field_db_column',
+    contact_data_text_field = models.TextField(
+        db_column='contact_data_text_field_db_column',
         db_index=True,
-        db_tablespace='contact_data_field_db_tablespace',
+        db_tablespace='contact_data_text_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(250), ],
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
         default='',
-        verbose_name='contact_data_field',
-        help_text='<small class="text-muted">contact_data_field</small><hr><br>',
+        verbose_name='contact_data_text_field',
+        help_text='<small class="text-muted">contact_data_text_field</small><hr><br>',
 
-        max_length=250,
+        max_length=5000,
     )
 
     class Meta:
         app_label = 'backend'
-        ordering = ('-datetime_create_field',)
+        ordering = ('-create_datetime_field',)
         verbose_name = 'Резюме'
-        verbose_name_plural = 'Резюме'
+        verbose_name_plural = 'Vacancy 2, Резюме'
         db_table = 'resume_model_table'
 
     def __str__(self):
-        return f'{self.qualification_field} : {self.last_name_field} : {self.first_name_field} : ' \
-               f'{self.datetime_create_field}'
+        return f'{self.qualification_char_field} : {self.last_name_char_field} : ' \
+               f'{self.first_name_char_field} : {self.create_datetime_field}'

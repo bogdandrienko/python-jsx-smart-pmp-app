@@ -136,6 +136,7 @@ export const RationalModerateDetailPage = () => {
                           numbers: true,
                           cyrillic: true,
                           space: true,
+                          punctuationMarks: true,
                         }),
                         ""
                       )

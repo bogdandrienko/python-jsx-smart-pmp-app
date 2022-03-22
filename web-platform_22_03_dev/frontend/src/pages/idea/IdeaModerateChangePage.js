@@ -572,6 +572,7 @@ export const IdeaModerateChangePage = () => {
                                 latin: true,
                                 cyrillic: true,
                                 space: true,
+                                punctuationMarks: true,
                               }),
                               ""
                             )

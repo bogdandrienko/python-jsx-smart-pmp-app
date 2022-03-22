@@ -1,10 +1,17 @@
-from rest_framework_simplejwt import token_blacklist
-
+# ###################################################################################################TODO django modules
 from django.contrib import admin
-
+# ######################################################################################################TODO drf modules
+from rest_framework_simplejwt import token_blacklist
+# ###################################################################################################TODO custom modules
 from backend import models as backend_models
 
+# #################################################################################################TODO default settings
+admin.site.site_header = 'Панель управления'  # default: "Django Administration"
+admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
+admin.site.site_title = 'Администрирование'  # default: "Django site admin"
 
+
+# ##############################################################################################TODO example model admin
 class ExamplesModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'ExamplesModel' на панели администратора
@@ -158,10 +165,231 @@ class ExamplesModelAdmin(admin.ModelAdmin):
     # inlines         = [ExamplesModelInline]
 
 
+admin.site.register(backend_models.ExamplesModel, ExamplesModelAdmin)
+
+
+# #################################################################################################TODO base model admin
+class UserModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'UserModel' на панели администратора
+    """
+
+    list_display = (
+        'user_foreign_key_field',
+        'password_char_field',
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'temp_password_boolean_field',
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'avatar_image_field',
+    )
+    list_display_links = (
+        'user_foreign_key_field',
+        'email_field',
+    )
+    list_editable = (
+        'password_char_field',
+        'activity_boolean_field',
+    )
+    list_filter = (
+        'user_foreign_key_field',
+        'password_char_field',
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'temp_password_boolean_field',
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'avatar_image_field',
+    )
+    fieldsets = (
+        ('Данные авторизации пользователя', {'fields': (
+            'user_foreign_key_field',
+            'password_char_field',
+        )}),
+        ('Технические данные пользователя', {'fields': (
+            'activity_boolean_field',
+            'email_field',
+            'secret_question_char_field',
+            'secret_answer_char_field',
+            'temp_password_boolean_field',
+        )}),
+        ('Первичные данные пользователя', {'fields': (
+            'last_name_char_field',
+            'first_name_char_field',
+            'patronymic_char_field',
+        )}),
+        ('Вторичные данные пользователя', {'fields': (
+            'personnel_number_slug_field',
+            'subdivision_char_field',
+            'workshop_service_char_field',
+            'department_site_char_field',
+            'position_char_field',
+            'category_char_field',
+        )}),
+        ('Личные данные пользователя', {'fields': (
+            'education_text_field',
+            'achievements_text_field',
+            'biography_text_field',
+            'hobbies_text_field',
+            'avatar_image_field',
+        )}),
+    )
+    search_fields = [
+        'user_foreign_key_field',
+        'password_char_field',
+        'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'temp_password_boolean_field',
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        'personnel_number_slug_field',
+        'subdivision_char_field',
+        'workshop_service_char_field',
+        'department_site_char_field',
+        'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'avatar_image_field',
+    ]
+
+
+admin.site.register(backend_models.UserModel, UserModelAdmin)
+
+
+class ActionModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
+    """
+
+    list_display = (
+        'name_char_field',
+        'access_slug_field',
+    )
+    list_display_links = (
+        'name_char_field',
+        'access_slug_field',
+    )
+    list_editable = (
+    )
+    list_filter = (
+        'name_char_field',
+        'access_slug_field',
+    )
+    fieldsets = (
+        ('Имя отображения', {'fields': (
+            'name_char_field',
+        )}),
+        ('Имя валидации', {'fields': (
+            'access_slug_field',
+        )}),
+    )
+    search_fields = [
+        'name_char_field',
+        'access_slug_field',
+    ]
+
+
+admin.site.register(backend_models.ActionModel, ActionModelAdmin)
+
+
+class GroupModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'GroupModel' на панели администратора
+    """
+
+    list_display = (
+        'name_char_field',
+        'group_foreign_key_field',
+        'name_slug_field',
+    )
+    list_display_links = (
+        'name_char_field',
+        'name_slug_field',
+    )
+    list_editable = (
+        'group_foreign_key_field',
+    )
+    list_filter = (
+        'name_char_field',
+        'group_foreign_key_field',
+        'name_slug_field',
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    )
+    filter_horizontal = (
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    )
+    fieldsets = (
+        ('Имя отображения', {'fields': (
+            'name_char_field',
+        )}),
+        ('Группа', {'fields': (
+            'group_foreign_key_field',
+        )}),
+        ('Имя валидации', {'fields': (
+            'name_slug_field',
+        )}),
+        ('Пользователи', {'fields': (
+            'user_many_to_many_field',
+        )}),
+        ('Действия', {'fields': (
+            'action_many_to_many_field',
+        )}),
+    )
+    search_fields = [
+        'name_char_field',
+        'group_foreign_key_field',
+        'name_slug_field',
+        'user_many_to_many_field',
+        'action_many_to_many_field',
+    ]
+
+
+admin.site.register(backend_models.GroupModel, GroupModelAdmin)
+
+
 class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
 
     def has_delete_permission(self, *args, **kwargs):
         return True  # or whatever logic you want
+
+
+admin.site.unregister(token_blacklist.models.OutstandingToken)
+admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
 
 
 class LoggingModelAdmin(admin.ModelAdmin):
@@ -225,208 +453,7 @@ class LoggingModelAdmin(admin.ModelAdmin):
     ]
 
 
-class UserModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'UserModel' на панели администратора
-    """
-
-    list_display = (
-        'user_foreign_key_field',
-        'password_char_field',
-        'activity_boolean_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'temp_password_boolean_field',
-        'last_name_char_field',
-        'first_name_char_field',
-        'patronymic_char_field',
-        'personnel_number_slug_field',
-        'subdivision_char_field',
-        'workshop_service_char_field',
-        'department_site_char_field',
-        'position_char_field',
-        'category_char_field',
-        'education_text_field',
-        'achievements_text_field',
-        'biography_text_field',
-        'hobbies_text_field',
-        'image_field',
-    )
-    list_display_links = (
-        'user_foreign_key_field',
-        'email_field',
-    )
-    list_editable = (
-        'password_char_field',
-        'activity_boolean_field',
-    )
-    list_filter = (
-        'user_foreign_key_field',
-        'password_char_field',
-        'activity_boolean_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'temp_password_boolean_field',
-        'last_name_char_field',
-        'first_name_char_field',
-        'patronymic_char_field',
-        'personnel_number_slug_field',
-        'subdivision_char_field',
-        'workshop_service_char_field',
-        'department_site_char_field',
-        'position_char_field',
-        'category_char_field',
-        'education_text_field',
-        'achievements_text_field',
-        'biography_text_field',
-        'hobbies_text_field',
-        'image_field',
-    )
-    fieldsets = (
-        ('Данные авторизации пользователя', {'fields': (
-            'user_foreign_key_field',
-            'password_char_field',
-        )}),
-        ('Технические данные пользователя', {'fields': (
-            'activity_boolean_field',
-            'email_field',
-            'secret_question_char_field',
-            'secret_answer_char_field',
-            'temp_password_boolean_field',
-        )}),
-        ('Первичные данные пользователя', {'fields': (
-            'last_name_char_field',
-            'first_name_char_field',
-            'patronymic_char_field',
-        )}),
-        ('Вторичные данные пользователя', {'fields': (
-            'personnel_number_slug_field',
-            'subdivision_char_field',
-            'workshop_service_char_field',
-            'department_site_char_field',
-            'position_char_field',
-            'category_char_field',
-        )}),
-        ('Личные данные пользователя', {'fields': (
-            'education_text_field',
-            'achievements_text_field',
-            'biography_text_field',
-            'hobbies_text_field',
-            'image_field',
-        )}),
-    )
-    search_fields = [
-        'user_foreign_key_field',
-        'password_char_field',
-        'activity_boolean_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'temp_password_boolean_field',
-        'last_name_char_field',
-        'first_name_char_field',
-        'patronymic_char_field',
-        'personnel_number_slug_field',
-        'subdivision_char_field',
-        'workshop_service_char_field',
-        'department_site_char_field',
-        'position_char_field',
-        'category_char_field',
-        'education_text_field',
-        'achievements_text_field',
-        'biography_text_field',
-        'hobbies_text_field',
-        'image_field',
-    ]
-
-
-class ActionModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'ActionModel' на панели администратора
-    """
-
-    list_display = (
-        'name_char_field',
-        'access_slug_field',
-    )
-    list_display_links = (
-        'name_char_field',
-        'access_slug_field',
-    )
-    list_editable = (
-    )
-    list_filter = (
-        'name_char_field',
-        'access_slug_field',
-    )
-    fieldsets = (
-        ('Имя отображения', {'fields': (
-            'name_char_field',
-        )}),
-        ('Имя валидации', {'fields': (
-            'access_slug_field',
-        )}),
-    )
-    search_fields = [
-        'name_char_field',
-        'access_slug_field',
-    ]
-
-
-class GroupModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'GroupModel' на панели администратора
-    """
-
-    list_display = (
-        'name_char_field',
-        'group_foreign_key_field',
-        'name_slug_field',
-    )
-    list_display_links = (
-        'name_char_field',
-        'name_slug_field',
-    )
-    list_editable = (
-        'group_foreign_key_field',
-    )
-    list_filter = (
-        'name_char_field',
-        'group_foreign_key_field',
-        'name_slug_field',
-        'user_many_to_many_field',
-        'action_many_to_many_field',
-    )
-    filter_horizontal = (
-        'user_many_to_many_field',
-        'action_many_to_many_field',
-    )
-    fieldsets = (
-        ('Имя отображения', {'fields': (
-            'name_char_field',
-        )}),
-        ('Группа', {'fields': (
-            'group_foreign_key_field',
-        )}),
-        ('Имя валидации', {'fields': (
-            'name_slug_field',
-        )}),
-        ('Пользователи', {'fields': (
-            'user_many_to_many_field',
-        )}),
-        ('Действия', {'fields': (
-            'action_many_to_many_field',
-        )}),
-    )
-    search_fields = [
-        'name_char_field',
-        'group_foreign_key_field',
-        'name_slug_field',
-        'user_many_to_many_field',
-        'action_many_to_many_field',
-    ]
+admin.site.register(backend_models.LoggingModel, LoggingModelAdmin)
 
 
 class NotificationModelAdmin(admin.ModelAdmin):
@@ -435,9 +462,9 @@ class NotificationModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        "notification_author_foreign_key_field",
-        "notification_model_foreign_key_field",
-        "notification_target_foreign_key_field",
+        "author_foreign_key_field",
+        "model_foreign_key_field",
+        "target_foreign_key_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -446,18 +473,18 @@ class NotificationModelAdmin(admin.ModelAdmin):
         "created_datetime_field",
     )
     list_display_links = (
-        "notification_author_foreign_key_field",
-        "notification_model_foreign_key_field",
-        "notification_target_foreign_key_field",
+        "author_foreign_key_field",
+        "model_foreign_key_field",
+        "target_foreign_key_field",
         "name_char_field",
     )
     list_editable = (
         "visibility_boolean_field",
     )
     list_filter = (
-        "notification_author_foreign_key_field",
-        "notification_model_foreign_key_field",
-        "notification_target_foreign_key_field",
+        "author_foreign_key_field",
+        "model_foreign_key_field",
+        "target_foreign_key_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -467,9 +494,9 @@ class NotificationModelAdmin(admin.ModelAdmin):
     )
     fieldsets = (
         ("Основная информация", {"fields": (
-            "notification_author_foreign_key_field",
-            "notification_model_foreign_key_field",
-            "notification_target_foreign_key_field",
+            "author_foreign_key_field",
+            "model_foreign_key_field",
+            "target_foreign_key_field",
             "name_char_field",
             "place_char_field",
             "description_text_field",
@@ -480,9 +507,9 @@ class NotificationModelAdmin(admin.ModelAdmin):
         )}),
     )
     search_fields = [
-        "notification_author_foreign_key_field",
-        "notification_model_foreign_key_field",
-        "notification_target_foreign_key_field",
+        "author_foreign_key_field",
+        "model_foreign_key_field",
+        "target_foreign_key_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -492,6 +519,194 @@ class NotificationModelAdmin(admin.ModelAdmin):
     ]
 
 
+admin.site.register(backend_models.NotificationModel, NotificationModelAdmin)
+
+
+# ###############################################################################################TODO custom model admin
+class IdeaModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'IdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "author_foreign_key_field",
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "moderate_foreign_key_field",
+        "comment_moderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    )
+    list_display_links = (
+        "author_foreign_key_field",
+    )
+    list_editable = (
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "register_datetime_field",
+    )
+    list_filter = (
+        "author_foreign_key_field",
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "moderate_foreign_key_field",
+        "comment_moderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "author_foreign_key_field",
+            "status_moderate_char_field",
+            "subdivision_char_field",
+            "sphere_char_field",
+            "category_char_field",
+            "avatar_image_field",
+            "name_char_field",
+            "place_char_field",
+            "description_text_field",
+        )}),
+        ("Модерация", {"fields": (
+            "moderate_foreign_key_field",
+            "comment_moderate_char_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+            "visibility_boolean_field",
+            "created_datetime_field",
+            "register_datetime_field",
+        )}),
+    )
+    search_fields = [
+        "author_foreign_key_field",
+        "status_moderate_char_field",
+        "subdivision_char_field",
+        "sphere_char_field",
+        "category_char_field",
+        "avatar_image_field",
+        "name_char_field",
+        "place_char_field",
+        "description_text_field",
+
+        "moderate_foreign_key_field",
+        "comment_moderate_char_field",
+
+        "visibility_boolean_field",
+        "created_datetime_field",
+        "register_datetime_field",
+    ]
+
+
+admin.site.register(backend_models.IdeaModel, IdeaModelAdmin)
+
+
+class RatingIdeaModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'RatingIdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+        "rating_integer_field",
+    )
+    list_display_links = (
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+    )
+    list_editable = (
+        "rating_integer_field",
+    )
+    list_filter = (
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+        "rating_integer_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "idea_foreign_key_field",
+            "author_foreign_key_field",
+            "rating_integer_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+        )}),
+    )
+    search_fields = [
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+        "rating_integer_field",
+        "datetime_field",
+    ]
+
+
+admin.site.register(backend_models.RatingIdeaModel, RatingIdeaModelAdmin)
+
+
+class CommentIdeaModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'CommentIdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+        "comment_text_field",
+        "datetime_field",
+    )
+    list_display_links = (
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+    )
+    list_editable = (
+        "comment_text_field",
+    )
+    list_filter = (
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+        "comment_text_field",
+        "datetime_field",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "idea_foreign_key_field",
+            "author_foreign_key_field",
+            "comment_text_field",
+        )}),
+        ("Дополнительные данные", {"fields": (
+            "datetime_field",
+        )}),
+    )
+    search_fields = [
+        "idea_foreign_key_field",
+        "author_foreign_key_field",
+        "comment_text_field",
+        "datetime_field",
+    ]
+
+
+admin.site.register(backend_models.CommentIdeaModel, CommentIdeaModelAdmin)
+
+
+# #################################################################################################TODO test model admin
 class RationalModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'RationalModel' на панели администратора
@@ -517,9 +732,9 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user4_char_field",
         "user5_char_field",
 
-        "premoderate_foreign_key_field_1",
+        "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
-        "postmoderate_foreign_key_field_2",
+        "postmoderate_foreign_key_field",
         "comment_postmoderate_char_field",
 
         "visibility_boolean_field",
@@ -555,9 +770,9 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user4_char_field",
         "user5_char_field",
 
-        "premoderate_foreign_key_field_1",
+        "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
-        "postmoderate_foreign_key_field_2",
+        "postmoderate_foreign_key_field",
         "comment_postmoderate_char_field",
 
         "visibility_boolean_field",
@@ -585,11 +800,11 @@ class RationalModelAdmin(admin.ModelAdmin):
             "user5_char_field",
         )}),
         ("Предмодерация", {"fields": (
-            "premoderate_foreign_key_field_1",
+            "premoderate_foreign_key_field",
             "comment_premoderate_char_field",
         )}),
         ("Постмодерация", {"fields": (
-            "postmoderate_foreign_key_field_2",
+            "postmoderate_foreign_key_field",
             "comment_postmoderate_char_field",
         )}),
         ("Дополнительные данные", {"fields": (
@@ -617,9 +832,9 @@ class RationalModelAdmin(admin.ModelAdmin):
         "user4_char_field",
         "user5_char_field",
 
-        "premoderate_foreign_key_field_1",
+        "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
-        "postmoderate_foreign_key_field_2",
+        "postmoderate_foreign_key_field",
         "comment_postmoderate_char_field",
 
         "visibility_boolean_field",
@@ -627,178 +842,7 @@ class RationalModelAdmin(admin.ModelAdmin):
     ]
 
 
-class IdeaModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'IdeaModel' на панели администратора
-    """
-
-    list_display = (
-        "idea_author_foreign_key_field",
-        "status_moderate_char_field",
-        "subdivision_char_field",
-        "sphere_char_field",
-        "category_char_field",
-        "avatar_image_field",
-        "name_char_field",
-        "place_char_field",
-        "description_text_field",
-
-        "idea_moderate_foreign_key_field",
-        "comment_moderate_char_field",
-
-        "visibility_boolean_field",
-        "created_datetime_field",
-        "register_datetime_field",
-    )
-    list_display_links = (
-        "idea_author_foreign_key_field",
-    )
-    list_editable = (
-        "status_moderate_char_field",
-        "subdivision_char_field",
-        "sphere_char_field",
-        "category_char_field",
-        "register_datetime_field",
-    )
-    list_filter = (
-        "idea_author_foreign_key_field",
-        "status_moderate_char_field",
-        "subdivision_char_field",
-        "sphere_char_field",
-        "category_char_field",
-        "avatar_image_field",
-        "name_char_field",
-        "place_char_field",
-        "description_text_field",
-
-        "idea_moderate_foreign_key_field",
-        "comment_moderate_char_field",
-
-        "visibility_boolean_field",
-        "created_datetime_field",
-        "register_datetime_field",
-    )
-    fieldsets = (
-        ("Основная информация", {"fields": (
-            "idea_author_foreign_key_field",
-            "status_moderate_char_field",
-            "subdivision_char_field",
-            "sphere_char_field",
-            "category_char_field",
-            "avatar_image_field",
-            "name_char_field",
-            "place_char_field",
-            "description_text_field",
-        )}),
-        ("Модерация", {"fields": (
-            "idea_moderate_foreign_key_field",
-            "comment_moderate_char_field",
-        )}),
-        ("Дополнительные данные", {"fields": (
-            "visibility_boolean_field",
-            "created_datetime_field",
-            "register_datetime_field",
-        )}),
-    )
-    search_fields = [
-        "idea_author_foreign_key_field",
-        "status_moderate_char_field",
-        "subdivision_char_field",
-        "sphere_char_field",
-        "category_char_field",
-        "avatar_image_field",
-        "name_char_field",
-        "place_char_field",
-        "description_text_field",
-
-        "idea_moderate_foreign_key_field",
-        "comment_moderate_char_field",
-
-        "visibility_boolean_field",
-        "created_datetime_field",
-        "register_datetime_field",
-    ]
-
-
-class RatingIdeaModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'RatingIdeaModel' на панели администратора
-    """
-
-    list_display = (
-        "rating_idea_foreign_key_field",
-        "rating_idea_author_foreign_key_field",
-        "rating_integer_field",
-    )
-    list_display_links = (
-        "rating_idea_foreign_key_field",
-        "rating_idea_author_foreign_key_field",
-    )
-    list_editable = (
-        "rating_integer_field",
-    )
-    list_filter = (
-        "rating_idea_foreign_key_field",
-        "rating_idea_author_foreign_key_field",
-        "rating_integer_field",
-    )
-    fieldsets = (
-        ("Основная информация", {"fields": (
-            "rating_idea_foreign_key_field",
-            "rating_idea_author_foreign_key_field",
-            "rating_integer_field",
-        )}),
-        ("Дополнительные данные", {"fields": (
-        )}),
-    )
-    search_fields = [
-        "rating_idea_foreign_key_field",
-        "rating_idea_author_foreign_key_field",
-        "rating_integer_field",
-        "datetime_field",
-    ]
-
-
-class CommentIdeaModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'CommentIdeaModel' на панели администратора
-    """
-
-    list_display = (
-        "comment_idea_foreign_key_field",
-        "comment_idea_author_foreign_key_field",
-        "comment_text_field",
-        "datetime_field",
-    )
-    list_display_links = (
-        "comment_idea_foreign_key_field",
-        "comment_idea_author_foreign_key_field",
-    )
-    list_editable = (
-        "comment_text_field",
-    )
-    list_filter = (
-        "comment_idea_foreign_key_field",
-        "comment_idea_author_foreign_key_field",
-        "comment_text_field",
-        "datetime_field",
-    )
-    fieldsets = (
-        ("Основная информация", {"fields": (
-            "comment_idea_foreign_key_field",
-            "comment_idea_author_foreign_key_field",
-            "comment_text_field",
-        )}),
-        ("Дополнительные данные", {"fields": (
-            "datetime_field",
-        )}),
-    )
-    search_fields = [
-        "comment_idea_foreign_key_field",
-        "comment_idea_author_foreign_key_field",
-        "comment_text_field",
-        "datetime_field",
-    ]
+admin.site.register(backend_models.RationalModel, RationalModelAdmin)
 
 
 class VacancyModelAdmin(admin.ModelAdmin):
@@ -807,61 +851,64 @@ class VacancyModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        "author_field",
-        "qualification_field",
-        "image_field",
-        "datetime_field",
-        "sphere_field",
-        "education_field",
-        "rank_field",
-        "experience_field",
-        "schedule_field",
-        "description_field",
+        "author_foreign_key_field",
+        "qualification_char_field",
+        "avatar_image_field",
+        "created_datetime_field",
+        "sphere_char_field",
+        "education_char_field",
+        "rank_char_field",
+        "experience_char_field",
+        "schedule_char_field",
+        "description_text_field",
     )
     list_display_links = (
-        "author_field",
+        "author_foreign_key_field",
     )
     list_editable = (
-        "qualification_field",
+        "qualification_char_field",
     )
     list_filter = (
-        "author_field",
-        "qualification_field",
-        "image_field",
-        "datetime_field",
-        "sphere_field",
-        "education_field",
-        "rank_field",
-        "experience_field",
-        "schedule_field",
-        "description_field",
+        "author_foreign_key_field",
+        "qualification_char_field",
+        "avatar_image_field",
+        "created_datetime_field",
+        "sphere_char_field",
+        "education_char_field",
+        "rank_char_field",
+        "experience_char_field",
+        "schedule_char_field",
+        "description_text_field",
     )
     fieldsets = (
         ("Основная информация", {"fields": (
-            "author_field",
-            "qualification_field",
-            "image_field",
-            "datetime_field",
-            "sphere_field",
-            "education_field",
-            "rank_field",
-            "experience_field",
-            "schedule_field",
-            "description_field",
+            "author_foreign_key_field",
+            "qualification_char_field",
+            "avatar_image_field",
+            "created_datetime_field",
+            "sphere_char_field",
+            "education_char_field",
+            "rank_char_field",
+            "experience_char_field",
+            "schedule_char_field",
+            "description_text_field",
         )}),
     )
     search_fields = [
-        "author_field",
-        "qualification_field",
-        "image_field",
-        "datetime_field",
-        "sphere_field",
-        "education_field",
-        "rank_field",
-        "experience_field",
-        "schedule_field",
-        "description_field",
+        "author_foreign_key_field",
+        "qualification_char_field",
+        "avatar_image_field",
+        "created_datetime_field",
+        "sphere_char_field",
+        "education_char_field",
+        "rank_char_field",
+        "experience_char_field",
+        "schedule_char_field",
+        "description_text_field",
     ]
+
+
+admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)
 
 
 class ResumeModelAdmin(admin.ModelAdmin):
@@ -870,81 +917,64 @@ class ResumeModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        "qualification_field",
-        "last_name_field",
-        "first_name_field",
-        "patronymic_field",
-        "image_field",
-        "datetime_birth_field",
-        "education_field",
-        "experience_field",
-        "sex_field",
+        "qualification_char_field",
+        "last_name_char_field",
+        "first_name_char_field",
+        "patronymic_char_field",
+        "avatar_image_field",
+        "birth_datetime_field",
+        "education_char_field",
+        "experience_char_field",
+        "sex_char_field",
     )
     list_display_links = (
-        "qualification_field",
-        "last_name_field",
-        "first_name_field",
+        "qualification_char_field",
+        "last_name_char_field",
+        "first_name_char_field",
     )
     list_editable = (
-        "education_field",
-        "experience_field",
-        "sex_field",
+        "education_char_field",
+        "experience_char_field",
+        "sex_char_field",
     )
     list_filter = (
-        "qualification_field",
-        "last_name_field",
-        "first_name_field",
-        "patronymic_field",
-        "image_field",
-        "datetime_birth_field",
-        "education_field",
-        "experience_field",
-        "sex_field",
-        "contact_data_field",
+        "qualification_char_field",
+        "last_name_char_field",
+        "first_name_char_field",
+        "patronymic_char_field",
+        "avatar_image_field",
+        "birth_datetime_field",
+        "education_char_field",
+        "experience_char_field",
+        "sex_char_field",
+        "contact_data_text_field",
     )
     fieldsets = (
         ("Основная информация", {"fields": (
-            "qualification_field",
-            "last_name_field",
-            "first_name_field",
-            "patronymic_field",
-            "image_field",
-            "datetime_birth_field",
-            "education_field",
-            "experience_field",
-            "sex_field",
-            "contact_data_field",
+            "qualification_char_field",
+            "last_name_char_field",
+            "first_name_char_field",
+            "patronymic_char_field",
+            "avatar_image_field",
+            "birth_datetime_field",
+            "education_char_field",
+            "experience_char_field",
+            "sex_char_field",
+            "contact_data_text_field",
         )}),
     )
     search_fields = [
-        "qualification_field",
-        "last_name_field",
-        "first_name_field",
-        "patronymic_field",
-        "image_field",
-        "datetime_birth_field",
-        "education_field",
-        "experience_field",
-        "sex_field",
-        "contact_data_field",
+        "qualification_char_field",
+        "last_name_char_field",
+        "first_name_char_field",
+        "patronymic_char_field",
+        "avatar_image_field",
+        "birth_datetime_field",
+        "education_char_field",
+        "experience_char_field",
+        "sex_char_field",
+        "contact_data_text_field",
     ]
 
 
-admin.site.site_header = 'Панель управления'  # default: "Django Administration"
-admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
-admin.site.site_title = 'Администрирование'  # default: "Django site admin"
-
-admin.site.register(backend_models.ExamplesModel, ExamplesModelAdmin)
-admin.site.unregister(token_blacklist.models.OutstandingToken)
-admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
-admin.site.register(backend_models.LoggingModel, LoggingModelAdmin)
-admin.site.register(backend_models.UserModel, UserModelAdmin)
-admin.site.register(backend_models.ActionModel, ActionModelAdmin)
-admin.site.register(backend_models.GroupModel, GroupModelAdmin)
-admin.site.register(backend_models.NotificationModel, NotificationModelAdmin)
-admin.site.register(backend_models.RationalModel, RationalModelAdmin)
-admin.site.register(backend_models.IdeaModel, IdeaModelAdmin)
-admin.site.register(backend_models.RatingIdeaModel, RatingIdeaModelAdmin)
-admin.site.register(backend_models.CommentIdeaModel, CommentIdeaModelAdmin)
-admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)
 admin.site.register(backend_models.ResumeModel, ResumeModelAdmin)

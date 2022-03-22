@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+/////////////////////////////////////////////////////////////////////////////////////////////////////////TODO base utils
 export const CheckAccess = (userDetailsStore, slug) => {
   try {
     const {
@@ -36,7 +36,7 @@ export const CheckAccess = (userDetailsStore, slug) => {
     return false;
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const CheckPageAccess = (userDetailsStore, location) => {
   const {
     // load: loadUserDetails,
@@ -73,7 +73,7 @@ export const CheckPageAccess = (userDetailsStore, location) => {
   });
   return access;
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetInfoPage = (location) => {
   let title = "Домашняя страница";
   let description = "основная страница веб платформы";
@@ -98,7 +98,7 @@ export const GetInfoPage = (location) => {
     redirect: redirect,
   };
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+///////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom utils
 export const GetStaticFile = (path = "") => {
   try {
     if (path === "null" || path === "/media/null" || path == null) {
@@ -112,7 +112,7 @@ export const GetStaticFile = (path = "") => {
     return "";
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetCleanDateTime = (dateTime, withTime = true) => {
   try {
     const date = dateTime.split("T")[0];
@@ -129,7 +129,7 @@ export const GetCleanDateTime = (dateTime, withTime = true) => {
     return "";
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetSliceString = (string = "", length = 30, withDots = true) => {
   try {
     if (string == null) {
@@ -151,7 +151,7 @@ export const GetSliceString = (string = "", length = 30, withDots = true) => {
     return "";
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const Sleep = (time = 1000) => {
   try {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -162,7 +162,7 @@ export const Sleep = (time = 1000) => {
     return null;
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ChangePasswordVisibility = (objects = [""]) => {
   try {
     objects.forEach(function (object, index, array) {
@@ -178,7 +178,7 @@ export const ChangePasswordVisibility = (objects = [""]) => {
     return null;
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ChangeAccordionCollapse = (objects = [""]) => {
   try {
     objects.forEach(function (object, index, array) {
@@ -196,7 +196,7 @@ export const ChangeAccordionCollapse = (objects = [""]) => {
     return null;
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ChangeObjectsByIdVisibility = (objects = [""]) => {
   try {
     objects.forEach(function (object, index, array) {
@@ -211,7 +211,7 @@ export const ChangeObjectsByIdVisibility = (objects = [""]) => {
     return null;
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetRegexType = ({
   numbers = false,
   latin = false,
@@ -219,6 +219,7 @@ export const GetRegexType = ({
   onlyLowerLetters = false,
   lowerSpace = false,
   space = false,
+  punctuationMarks = false,
   email = false,
 }) => {
   //  /[^А-Яа-я_]/gi - только кириллица и "_"
@@ -239,9 +240,9 @@ export const GetRegexType = ({
     }
     if (cyrillic) {
       if (onlyLowerLetters) {
-        regex = regex + "а-я";
+        regex = regex + "а-яё";
       } else {
-        regex = regex + "А-Яа-я";
+        regex = regex + "А-ЯЁа-яё";
       }
     }
     if (lowerSpace) {
@@ -249,6 +250,9 @@ export const GetRegexType = ({
     }
     if (space) {
       regex = regex + " ";
+    }
+    if (punctuationMarks) {
+      regex = regex + "_-:;.,!?";
     }
     if (email) {
       regex = regex + "@.";
@@ -261,4 +265,3 @@ export const GetRegexType = ({
     return new RegExp(`[^_]`, "g");
   }
 };
-///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
