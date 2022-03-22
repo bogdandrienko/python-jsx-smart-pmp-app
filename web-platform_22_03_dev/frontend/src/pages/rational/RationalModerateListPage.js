@@ -201,7 +201,7 @@ export const RationalModerateListPage = () => {
                     нажмите кнопку{" "}
                     <p className="fw-bold text-primary">"фильтровать"</p>
                   </label>
-                  <label className="form-control-sm form-switch m-1">
+                  <label className="form-control-sm form-switch text-center m-0 p-1">
                     Детальное отображение:
                     <input
                       type="checkbox"
@@ -222,10 +222,10 @@ export const RationalModerateListPage = () => {
                     userDetailsStore,
                     "rational_moderator_tech_post"
                   ) ? (
-                    <label className="form-control-sm m-1">
+                    <label className="form-control-sm text-center m-0 p-1">
                       Подразделение:
                       <select
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={subdivision}
                         onChange={(e) => subdivisionSet(e.target.value)}
                       >
@@ -250,10 +250,10 @@ export const RationalModerateListPage = () => {
                   ) : (
                     ""
                   )}
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Категория:
                     <select
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={category}
                       onChange={(e) => categorySet(e.target.value)}
                     >
@@ -266,10 +266,10 @@ export const RationalModerateListPage = () => {
                     </select>
                   </label>
                   {dataUserListAll && (
-                    <label className="form-control-sm m-1">
+                    <label className="form-control-sm text-center m-0 p-1">
                       Автор:
                       <select
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={author}
                         onChange={(e) => authorSet(e.target.value)}
                       >
@@ -283,10 +283,10 @@ export const RationalModerateListPage = () => {
                     </label>
                   )}
                   {utils.CheckAccess(userDetailsStore, "rational_admin") && (
-                    <label className="form-control-sm m-1">
+                    <label className="form-control-sm text-center m-0 p-1">
                       Статус:
                       <select
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={moderate}
                         onChange={(e) => moderateSet(e.target.value)}
                       >
@@ -314,13 +314,24 @@ export const RationalModerateListPage = () => {
                       className="form-control"
                       placeholder="вводите часть названия тут..."
                       value={search}
-                      onChange={(e) => searchSet(e.target.value)}
+                      onChange={(e) =>
+                        searchSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              cyrillic: true,
+                              space: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
                   </label>
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Сортировка по:
                     <select
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={sort}
                       onChange={(e) => sortSet(e.target.value)}
                     >

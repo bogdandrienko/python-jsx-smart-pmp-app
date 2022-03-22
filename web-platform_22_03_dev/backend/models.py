@@ -1579,10 +1579,10 @@ class UserModel(models.Model):
         on_delete=models.CASCADE,
         related_name='user_foreign_key_field',
     )
-    password_slug_field = models.SlugField(
-        db_column='password_slug_field_db_column',
+    password_char_field = models.CharField(
+        db_column='password_char_field_db_column',
         db_index=True,
-        db_tablespace='password_slug_field_db_tablespace',
+        db_tablespace='password_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(8), MaxLengthValidator(128), ],
@@ -1592,10 +1592,9 @@ class UserModel(models.Model):
         null=True,
         default='',
         verbose_name='Пароль от аккаунта пользователя',
-        help_text='<small class="text-muted">password_slug_field</small><hr><br>',
+        help_text='<small class="text-muted">password_char_field</small><hr><br>',
 
         max_length=128,
-        allow_unicode=False,
     )
     activity_boolean_field = models.BooleanField(
         db_column='activity_boolean_field_db_column',
@@ -3027,6 +3026,7 @@ class IdeaModel(models.Model):
             users.append(f"{rate.rating_idea_author_foreign_key_field.last_name_char_field} "
                          f"{rate.rating_idea_author_foreign_key_field.first_name_char_field} "
                          f"| {rate.rating_integer_field}")
+
         return {"rate": float(rating/ratings.count()), "count": int(ratings.count()), "users": users}
 
 

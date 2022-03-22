@@ -85,7 +85,7 @@ export const LoginPage = () => {
               </div>
               <div className="card-body m-0 p-0">
                 <div className="m-0 p-1">
-                  <label className="form-control-sm w-75 m-0 p-1">
+                  <label className="form-control-sm text-center w-75 m-0 p-1">
                     Введите Ваш ИИН:
                     <input
                       type="text"
@@ -95,17 +95,29 @@ export const LoginPage = () => {
                       required
                       minLength="12"
                       maxLength="12"
-                      onChange={(e) => usernameSet(e.target.value)}
+                      onChange={(e) =>
+                        usernameSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({ numbers: true }),
+                            ""
+                          )
+                        )
+                      }
+                      autoComplete="current-username"
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только цифры
+                      </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
                         * длина: 12 символов
                       </small>
                     </small>
                   </label>
-                  <label className="form-control-sm w-75 m-0 p-1">
+                  <label className="form-control-sm text-center w-75 m-0 p-1">
                     Введите пароль от аккаунта:
                     <input
                       type="password"
@@ -114,12 +126,28 @@ export const LoginPage = () => {
                       value={password}
                       placeholder="введите пароль тут..."
                       required
+                      onChange={(e) =>
+                        passwordSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              latin: true,
+                              lowerSpace: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      autoComplete="current-password"
                       minLength="8"
                       maxLength="16"
-                      onChange={(e) => passwordSet(e.target.value)}
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только латинские буквы и цифры
+                      </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
                         * длина: от 8 до 16 символов

@@ -89,17 +89,17 @@ export const VacancyCreatePage = () => {
                       minLength="1"
                       maxLength="256"
                       placeholder="вводите квалификацию тут..."
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => qualificationSet(e.target.value)}
                     />
-                    <small className="text-danger">* обязательно</small>
-                    <p className="">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
                         длина: не более 256 символов
                       </small>
-                    </p>
+                    </small>
                   </label>
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Разряд:
                     <input
                       type="text"
@@ -107,7 +107,7 @@ export const VacancyCreatePage = () => {
                       value={rank}
                       minLength="1"
                       maxLength="32"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => rankSet(e.target.value)}
                     />
                     <small className="text-secondary">* не обязательно</small>
@@ -120,22 +120,22 @@ export const VacancyCreatePage = () => {
                 </div>
                 <br />
                 <div className="">
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Изображение:
                     <input
                       type="file"
                       accept=".jpg, .png"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => imageSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Сфера:
                     <select
                       value={sphere}
                       required
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => sphereSet(e.target.value)}
                     >
                       <option value="">не выбрано</option>
@@ -149,12 +149,12 @@ export const VacancyCreatePage = () => {
                 </div>
                 <br />
                 <div className="">
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Образование:
                     <select
                       value={education}
                       required
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => educationSet(e.target.value)}
                     >
                       <option value="">не выбрано</option>
@@ -169,12 +169,12 @@ export const VacancyCreatePage = () => {
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Опыт:
                     <select
                       value={experience}
                       required
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => experienceSet(e.target.value)}
                     >
                       <option value="">не выбрано</option>
@@ -189,12 +189,12 @@ export const VacancyCreatePage = () => {
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     График:
                     <select
                       value={schedule}
                       required
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => scheduleSet(e.target.value)}
                     >
                       <option value="">не выбрано</option>
@@ -218,7 +218,7 @@ export const VacancyCreatePage = () => {
                       minLength="1"
                       maxLength="512"
                       rows="2"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => descriptionSet(e.target.value)}
                     />
                     <small className="text-secondary">* не обязательно</small>

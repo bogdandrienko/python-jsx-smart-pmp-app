@@ -94,10 +94,10 @@ export const IdeaCreatePage = () => {
               </div>
               <div className="card-body m-0 p-0">
                 <div className="m-0 p-1">
-                  <label className="form-control-sm m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Подразделение:
                     <select
-                      className="form-control form-control-sm m-0 p-1"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={subdivision}
                       required
                       onChange={(e) => subdivisionSet(e.target.value)}
@@ -132,10 +132,10 @@ export const IdeaCreatePage = () => {
                     </select>
                     <small className="text-danger m-0 p-0">* обязательно</small>
                   </label>
-                  <label className="form-control-sm m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Сфера:
                     <select
-                      className="form-control form-control-sm m-0 p-1"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={sphere}
                       required
                       onChange={(e) => sphereSet(e.target.value)}
@@ -152,10 +152,10 @@ export const IdeaCreatePage = () => {
                     </select>
                     <small className="text-danger m-0 p-0">* обязательно</small>
                   </label>
-                  <label className="form-control-sm m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Категория:
                     <select
-                      className="form-control form-control-sm m-0 p-1"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={category}
                       required
                       onChange={(e) => categorySet(e.target.value)}
@@ -189,11 +189,11 @@ export const IdeaCreatePage = () => {
                   </label>
                 </div>
                 <div className="m-0 p-1">
-                  <label className="form-control-sm m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Аватарка-заставка:
                     <input
                       type="file"
-                      className="form-control form-control-sm m-0 p-1"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       accept=".jpg, .png"
                       onChange={(e) => avatarSet(e.target.files[0])}
                     />
@@ -203,7 +203,7 @@ export const IdeaCreatePage = () => {
                   </label>
                 </div>
                 <div className="m-0 p-1">
-                  <label className="form-control-sm w-75 m-0 p-1">
+                  <label className="form-control-sm text-center w-75 m-0 p-1">
                     Название:
                     <input
                       type="text"
@@ -213,10 +213,25 @@ export const IdeaCreatePage = () => {
                       required
                       minLength="1"
                       maxLength="200"
-                      onChange={(e) => nameSet(e.target.value)}
+                      onChange={(e) =>
+                        nameSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              cyrillic: true,
+                              space: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только кириллические буквы и цифры
+                      </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
                         * длина: не более 200 символов
@@ -235,10 +250,25 @@ export const IdeaCreatePage = () => {
                       required
                       minLength="1"
                       maxLength="100"
-                      onChange={(e) => placeSet(e.target.value)}
+                      onChange={(e) =>
+                        placeSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              cyrillic: true,
+                              space: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только кириллические буквы и цифры
+                      </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
                         * длина: не более 100 символов
@@ -257,7 +287,19 @@ export const IdeaCreatePage = () => {
                       minLength="1"
                       maxLength="3000"
                       rows="3"
-                      onChange={(e) => descriptionSet(e.target.value)}
+                      onChange={(e) =>
+                        descriptionSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              latin: true,
+                              cyrillic: true,
+                              space: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно

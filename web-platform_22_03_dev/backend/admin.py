@@ -232,7 +232,7 @@ class UserModelAdmin(admin.ModelAdmin):
 
     list_display = (
         'user_foreign_key_field',
-        'password_slug_field',
+        'password_char_field',
         'activity_boolean_field',
         'email_field',
         'secret_question_char_field',
@@ -258,12 +258,12 @@ class UserModelAdmin(admin.ModelAdmin):
         'email_field',
     )
     list_editable = (
-        'password_slug_field',
+        'password_char_field',
         'activity_boolean_field',
     )
     list_filter = (
         'user_foreign_key_field',
-        'password_slug_field',
+        'password_char_field',
         'activity_boolean_field',
         'email_field',
         'secret_question_char_field',
@@ -287,7 +287,7 @@ class UserModelAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Данные авторизации пользователя', {'fields': (
             'user_foreign_key_field',
-            'password_slug_field',
+            'password_char_field',
         )}),
         ('Технические данные пользователя', {'fields': (
             'activity_boolean_field',
@@ -319,7 +319,7 @@ class UserModelAdmin(admin.ModelAdmin):
     )
     search_fields = [
         'user_foreign_key_field',
-        'password_slug_field',
+        'password_char_field',
         'activity_boolean_field',
         'email_field',
         'secret_question_char_field',

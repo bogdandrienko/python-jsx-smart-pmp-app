@@ -303,45 +303,34 @@ def api_auth_user_change(request):
                 try:
                     password = req_inst.get_value("password", strip=True)
                     password2 = req_inst.get_value("password2", strip=True)
+                    secret_question = req_inst.get_value("secretQuestion", strip=True)
+                    secret_answer = req_inst.get_value("secretAnswer", strip=True)
+                    email = req_inst.get_value("email", strip=True)
+
+                    user = User.objects.get(id=req_inst.user.id)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+
                     if len(password) < 1:
-                        return Response({"error": "Пароли пустые!"})
-                    if password != password2:
+                        return Response({"error": "Пароль пустой!"})
+                    elif password != password2:
                         return Response({"error": "Пароли не совпадают!"})
-                    if password == req_inst.user_model.password_slug_field:
-                        return Response({"error": "Пароль соответствует предыдущему!"})
-                    req_inst.user.set_password(password)
-                    req_inst.user.save()
-                    req_inst.user_model.password_slug_field = password
-                    req_inst.user_model.temp_password_boolean_field = False
-                    try:
-                        if req_inst.get_value("email", strip=True) and req_inst.get_value("email", strip=True) != \
-                                req_inst.user_model.email_field:
-                            req_inst.user_model.email_field = req_inst.get_value("email", strip=True)
-                    except Exception as error:
-                        backend_service.DjangoClass.LoggingClass.error(
-                            request=request, error=error, print_error=backend_settings.DEBUG
-                        )
-                    try:
-                        if req_inst.get_value("secretQuestion", strip=True) and \
-                                req_inst.get_value("secretQuestion", strip=True) != \
-                                req_inst.user_model.secret_question_char_field:
-                            req_inst.user_model.secret_question_char_field = \
-                                req_inst.get_value("secretQuestion", strip=True)
-                    except Exception as error:
-                        backend_service.DjangoClass.LoggingClass.error(
-                            request=request, error=error, print_error=backend_settings.DEBUG
-                        )
-                    try:
-                        if req_inst.get_value("secretAnswer", strip=True) and \
-                                req_inst.get_value("secretAnswer", strip=True) != \
-                                req_inst.user_model.secret_answer_char_field:
-                            req_inst.user_model.secret_answer_char_field = \
-                                req_inst.get_value("secretAnswer", strip=True)
-                    except Exception as error:
-                        backend_service.DjangoClass.LoggingClass.error(
-                            request=request, error=error, print_error=backend_settings.DEBUG
-                        )
-                    req_inst.user_model.save()
+                    elif password == user_model.password_char_field:
+                        return Response({"error": "Пароль такой же как и предыдущий!"})
+                    else:
+                        user.set_password(password)
+                        user.save()
+                        user_model.password_char_field = password
+                        user_model.temp_password_boolean_field = False
+                        user_model.save()
+                    if secret_question and secret_question != user_model.secret_question_char_field:
+                        user_model.secret_question_char_field = secret_question
+                        user_model.save()
+                    if secret_answer and secret_answer != user_model.secret_answer_char_field:
+                        user_model.secret_answer_char_field = secret_answer
+                        user_model.save()
+                    if email and email != user_model.email_field:
+                        user_model.email_field = email
+                        user_model.save()
                     return Response({"response": "Изменение успешно проведено."})
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(
@@ -420,7 +409,7 @@ def api_any_user_recover(request):
 
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    password = str(user_model.password_slug_field)
+                    password = str(user_model.password_char_field)
                     email_ = str(user_model.email_field)
 
                     now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
@@ -483,7 +472,7 @@ def api_any_user_recover(request):
 
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    password = str(user_model.password_slug_field)
+                    password = str(user_model.password_char_field)
 
                     decrypt_text = backend_service.EncryptingClass.decrypt_text(recover_password, '31284')
                     text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
@@ -516,10 +505,10 @@ def api_any_user_recover(request):
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
 
-                    if password == password2 and password != str(user_model.password_slug_field).strip():
+                    if password == password2 and password != str(user_model.password_char_field).strip():
                         user.set_password(password)
                         user.save()
-                        user_model.password_slug_field = password
+                        user_model.password_char_field = password
                         user_model.temp_password_boolean_field = False
                         user_model.save()
                         return Response({"response": {
@@ -613,7 +602,7 @@ def api_auth_user_notification(request):
                     backend_models.NotificationModel.objects.create(
                         notification_author_foreign_key_field=req_inst.user_model,
                         notification_target_foreign_key_field=backend_models.UserModel.objects.get(
-                            user_foreign_key_field=User.objects.get(username="Bogdan")
+                            user_foreign_key_field=User.objects.get(username="000000000000")
                         ),
                         name_char_field=name,
                         place_char_field=place,
@@ -624,7 +613,8 @@ def api_auth_user_notification(request):
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
+                        request=request, error=error, action_name="NOTIFICATION_CREATE",
+                        print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_DELETE":
@@ -721,10 +711,10 @@ def api_auth_admin_change_user_password(request):
 
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    if password == password2 and password != str(user_model.password_slug_field).strip():
+                    if password == password2 and password != str(user_model.password_char_field).strip():
                         user.set_password(password)
                         user.save()
-                        user_model.password_slug_field = password
+                        user_model.password_char_field = password
                         user_model.temp_password_boolean_field = False
                         user_model.secret_question_char_field = ""
                         user_model.secret_answer_char_field = ""
@@ -809,7 +799,7 @@ def api_auth_admin_create_or_change_users(request):
                         position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
                         category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
                         username = get_value(_col="J", _row=row, _sheet=sheet)
-                        password_slug_field = get_value(_col="K", _row=row, _sheet=sheet)
+                        password_char_field = get_value(_col="K", _row=row, _sheet=sheet)
                         is_active = get_value(_col="L", _row=row, _sheet=sheet)
                         is_staff = get_value(_col="M", _row=row, _sheet=sheet)
                         is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
@@ -830,7 +820,7 @@ def api_auth_admin_create_or_change_users(request):
                         except Exception as error:
                             user = User.objects.create(
                                 username=username,
-                                password=make_password(password=password_slug_field),
+                                password=make_password(password=password_char_field),
                                 is_active=True
                             )
                             new_user = True
@@ -838,11 +828,11 @@ def api_auth_admin_create_or_change_users(request):
                         user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
 
                         if new_user:
-                            user_model.password_slug_field = password_slug_field
+                            user_model.password_char_field = password_char_field
                         else:
                             if change_user_password == "Изменять пароль уже существующего пользователя":
-                                user.password = make_password(password=password_slug_field)
-                                user_model.password_slug_field = password_slug_field
+                                user.password = make_password(password=password_char_field)
+                                user_model.password_char_field = password_char_field
 
                         user.is_staff = is_staff
                         user.is_superuser = is_superuser
@@ -1010,8 +1000,8 @@ def api_auth_admin_export_users(request):
                             username = user.username
                             set_value(_col="J", _row=_index, _value=username, _sheet=sheet)
 
-                            password_slug_field = user_model.password_slug_field
-                            set_value(_col="K", _row=_index, _value=password_slug_field, _sheet=sheet)
+                            password_char_field = user_model.password_char_field
+                            set_value(_col="K", _row=_index, _value=password_char_field, _sheet=sheet)
 
                             is_active = user_model.activity_boolean_field
                             set_value(_col="L", _row=_index, _value=is_active, _sheet=sheet)
@@ -1121,7 +1111,7 @@ def api_get_all_users_with_temp_password(request):
                                         str(user_model.user_foreign_key_field.username)[::-1].encode()
                                     ).decode()}""":
                                         base64.b64encode(
-                                            str(f"12{user_model.password_slug_field}345").encode()).decode()
+                                            str(f"12{user_model.password_char_field}345").encode()).decode()
                                 }
                             )
                     # for obj in objects:
@@ -1173,7 +1163,7 @@ def api_auth_salary(request):
                     key_hash = str(hash_key_obj.hexdigest().strip().upper())
                     key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
                     iin = req_inst.user.username
-                    if str(iin).lower() == 'bogdan':
+                    if str(iin).lower() == '000000000000':
                         iin = 970801351179
                     iin_base64 = base64.b64encode(str(iin).encode()).decode()
                     date_base64 = base64.b64encode(f'{req_inst.get_value("dateTime", strip=True)}'.encode()).decode()
@@ -2376,7 +2366,7 @@ def api_auth_idea(request):
                     only_month = req_inst.get_value("onlyMonth")
 
                     authors = []
-                    ideas = backend_models.IdeaModel.objects.filter(status_moderate_char_field="принято").\
+                    ideas = backend_models.IdeaModel.objects.filter(status_moderate_char_field="принято"). \
                         order_by("-register_datetime_field")
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
@@ -2409,9 +2399,11 @@ def api_auth_idea(request):
                             idea_comment_count = backend_models.CommentIdeaModel.objects.filter(
                                 comment_idea_foreign_key_field=idea
                             ).count()
+                        if idea_rating_count == 0:
+                            idea_rating_count = 1
                         objects.append({
                             "username": f"{auth.last_name_char_field} {auth.first_name_char_field}",
-                            "idea_count": idea_count, "idea_rating": round(idea_rating/idea_rating_count, 1),
+                            "idea_count": idea_count, "idea_rating": round(idea_rating / idea_rating_count, 1),
                             "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
                         })
 

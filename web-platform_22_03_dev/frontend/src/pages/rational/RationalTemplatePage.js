@@ -21,13 +21,16 @@ export const RationalTemplatePage = () => {
               </div>
               <div className="card-body m-0 p-0">
                 <div className="m-0 p-0">
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Подразделение:
-                    <select className="form-control form-control-sm" required>
+                    <select
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      required
+                    >
                       <option value="">энергоуправление</option>
                     </select>
                   </label>
-                  <label className="form-control-sm m-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Зарегистрировано за №{" "}
                     <strong className="btn btn-light disabled">
                       000-01-03-2020
@@ -35,15 +38,21 @@ export const RationalTemplatePage = () => {
                   </label>
                 </div>
                 <div className="m-0 p-0">
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Сфера:
-                    <select className="form-control form-control-sm" required>
+                    <select
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      required
+                    >
                       <option value="">не технологическая</option>
                     </select>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Категория:
-                    <select className="form-control form-control-sm" required>
+                    <select
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      required
+                    >
                       <option value="">инновации</option>
                     </select>
                   </label>
@@ -63,7 +72,7 @@ export const RationalTemplatePage = () => {
                   Место внедрения:
                   <input
                     type="text"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     defaultValue="Учебный центр АО 'Костанайские Минералы'"
                     readOnly={true}
                     placeholder="введите место внедрения тут..."
@@ -77,7 +86,7 @@ export const RationalTemplatePage = () => {
                 <label className="w-100 form-control-sm">
                   Описание:
                   <textarea
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     defaultValue="Предлагаю разработать симулятор виртуальной реальности для обучения персонала особо опасным действиям в условиях, приближенных к реальности."
                     readOnly={true}
                     required
@@ -89,19 +98,19 @@ export const RationalTemplatePage = () => {
                 </label>
               </div>
               <div className="card-body m-0 p-0">
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Word файл-приложение:
                   <a className="btn btn-sm btn-primary m-1" href="">
                     Скачать документ
                   </a>
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Pdf файл-приложение:
                   <a className="btn btn-sm btn-danger m-1" href="">
                     Скачать документ
                   </a>
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Excel файл-приложение:
                   <a className="btn btn-sm btn-success m-1" href="">
                     Скачать документ
@@ -121,7 +130,7 @@ export const RationalTemplatePage = () => {
                   Участники:
                   <input
                     type="text"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     defaultValue="Иванов Иван Иванович 931778 70%"
                     readOnly={true}
                     placeholder="участник № 1"
@@ -130,7 +139,7 @@ export const RationalTemplatePage = () => {
                   />
                   <input
                     type="text"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     defaultValue="Иванов Иван Николаевич 931779 30%"
                     readOnly={true}
                     placeholder="участник № 2"

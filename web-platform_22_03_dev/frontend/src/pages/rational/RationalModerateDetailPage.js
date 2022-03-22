@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
 //////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
 export const RationalModerateDetailPage = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
@@ -105,11 +106,11 @@ export const RationalModerateDetailPage = () => {
           <form autoComplete="on" className="" onSubmit={handlerSubmit}>
             <div className="bg-danger bg-opacity-10">
               <h4 className="lead fw-bold">Модерация</h4>
-              <label className="form-control-sm m-1">
+              <label className="form-control-sm text-center m-0 p-1">
                 Заключение:
                 <select
                   required
-                  className="form-control form-control-sm"
+                  className="form-control form-control-sm text-center m-0 p-1"
                   value={moderate}
                   onChange={(e) => moderateSet(e.target.value)}
                 >
@@ -127,8 +128,19 @@ export const RationalModerateDetailPage = () => {
                   placeholder="пример: дополнить описание"
                   minLength="0"
                   maxLength="256"
-                  className="form-control form-control-sm"
-                  onChange={(e) => commentSet(e.target.value)}
+                  className="form-control form-control-sm text-center m-0 p-1"
+                  onChange={(e) =>
+                    commentSet(
+                      e.target.value.replace(
+                        utils.GetRegexType({
+                          numbers: true,
+                          cyrillic: true,
+                          space: true,
+                        }),
+                        ""
+                      )
+                    )
+                  }
                 />
                 <small className="text-muted">* не обязательно</small>
               </label>

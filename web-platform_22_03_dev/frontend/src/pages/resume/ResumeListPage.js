@@ -104,7 +104,7 @@ export const ResumeListPage = () => {
                   нажмите кнопку{" "}
                   <p className="fw-bold text-primary">"фильтровать вакансии"</p>
                 </label>
-                <label className="form-control-sm form-switch m-1">
+                <label className="form-control-sm form-switch text-center m-0 p-1">
                   Детальное отображение:
                   <input
                     type="checkbox"
@@ -116,12 +116,12 @@ export const ResumeListPage = () => {
                 </label>
               </div>
               <div className="">
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Образование:
                   <select
                     id="education"
                     name="education"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={education}
                     onChange={(e) => educationSet(e.target.value)}
                   >
@@ -136,12 +136,12 @@ export const ResumeListPage = () => {
                     <option value="Среднее">Среднее</option>
                   </select>
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Опыт:
                   <select
                     id="experience"
                     name="experience"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={experience}
                     onChange={(e) => experienceSet(e.target.value)}
                   >
@@ -154,11 +154,11 @@ export const ResumeListPage = () => {
                     <option value="более 6 лет">более 6 лет</option>
                   </select>
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Пол:
                   <select
                     value={sex}
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     onChange={(e) => sexSet(e.target.value)}
                   >
                     <option value="">все варианты</option>
@@ -169,13 +169,26 @@ export const ResumeListPage = () => {
               </div>
               <div className="">
                 <label className="w-75 form-control-sm m-1">
-                  Поле поиска по части вакансии или квалификации:
+                  Поле поиска по части названия:
                   <input
                     type="text"
-                    className="form-control"
-                    placeholder="вводите часть вакансии или квалификации тут..."
+                    className="form-control form-control-sm text-center m-0 p-1"
+                    placeholder="вводите часть названия тут..."
+                    minLength="1"
+                    maxLength="100"
                     value={searchQualification}
-                    onChange={(e) => searchQualificationSet(e.target.value)}
+                    onChange={(e) =>
+                      searchQualificationSet(
+                        e.target.value.replace(
+                          utils.GetRegexType({
+                            numbers: true,
+                            cyrillic: true,
+                            space: true,
+                          }),
+                          ""
+                        )
+                      )
+                    }
                   />
                 </label>
                 <label className="w-75 form-control-sm m-1">
@@ -184,16 +197,29 @@ export const ResumeListPage = () => {
                     type="text"
                     className="form-control"
                     placeholder="вводите часть фамилии тут..."
+                    minLength="1"
+                    maxLength="100"
                     value={searchLastName}
-                    onChange={(e) => searchLastNameSet(e.target.value)}
+                    onChange={(e) =>
+                      searchLastNameSet(
+                        e.target.value.replace(
+                          utils.GetRegexType({
+                            numbers: true,
+                            cyrillic: true,
+                            space: true,
+                          }),
+                          ""
+                        )
+                      )
+                    }
                   />
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Сортировка вакансий по:
                   <select
                     id="sort"
                     name="sort"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={sort}
                     onChange={(e) => sortSet(e.target.value)}
                   >

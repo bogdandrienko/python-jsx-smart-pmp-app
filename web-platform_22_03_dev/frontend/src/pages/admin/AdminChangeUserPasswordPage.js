@@ -122,7 +122,7 @@ export const AdminChangeUserPasswordPage = () => {
                   </label>
                 </div>
                 <div>
-                  <label className="form-control-sm m-1 lead">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Введите ИИН пользователя для смены пароля:
                     <input
                       type="text"
@@ -134,16 +134,19 @@ export const AdminChangeUserPasswordPage = () => {
                       onChange={(e) => usernameSet(e.target.value)}
                       minLength="12"
                       maxLength="12"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                     />
-                    <p>
-                      <small className="text-danger">* обязательно</small>
-                      <p>
-                        <small className="text-muted">
-                          количество символов: 12
-                        </small>
-                      </p>
-                    </p>
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только цифры
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: 12 символов
+                      </small>
+                    </small>
                   </label>
                 </div>
                 <hr />
@@ -187,13 +190,8 @@ export const AdminChangeUserPasswordPage = () => {
             onSubmit={handlerChangeUserPasswordSubmit}
           >
             <div>
-              <label className="form-control-sm m-1 lead">
+              <label className="form-control-sm text-center m-0 p-1">
                 Введите пароль для входа в аккаунт:
-                <p>
-                  <small className="text-danger">
-                    Только латинские буквы и цифры!
-                  </small>
-                </p>
                 <input
                   type="password"
                   id="password"
@@ -204,26 +202,24 @@ export const AdminChangeUserPasswordPage = () => {
                   onChange={(e) => passwordSet(e.target.value)}
                   minLength="8"
                   maxLength="32"
-                  className="form-control form-control-sm"
+                  className="form-control form-control-sm text-center m-0 p-1"
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
-                <p>
-                  <small className="text-danger">* обязательно</small>
-                  <p>
-                    <small className="text-muted">
-                      количество символов: от 8 до 32
-                    </small>
-                  </p>
-                </p>
-              </label>
-              <label className="form-control-sm m-1 lead">
-                Повторите новый пароль:
-                <p>
-                  <small className="text-danger">
-                    Только латинские буквы и цифры!
+                <small className="text-danger m-0 p-0">
+                  * обязательно
+                  <small className="text-warning m-0 p-0">
+                    {" "}
+                    * только латинские буквы и цифры
                   </small>
-                </p>
+                  <small className="text-muted m-0 p-0">
+                    {" "}
+                    * длина: от 8 до 16 символов
+                  </small>
+                </small>
+              </label>
+              <label className="form-control-sm text-center m-0 p-1">
+                Повторите новый пароль:
                 <input
                   type="password"
                   id="password2"
@@ -233,19 +229,22 @@ export const AdminChangeUserPasswordPage = () => {
                   value={password2}
                   onChange={(e) => password2Set(e.target.value)}
                   minLength="8"
-                  maxLength="32"
-                  className="form-control form-control-sm"
+                  maxLength="16"
+                  className="form-control form-control-sm text-center m-0 p-1"
                   autoComplete="none"
                   aria-autocomplete="none"
                 />
-                <p>
-                  <small className="text-danger">* обязательно</small>
-                  <p>
-                    <small className="text-muted">
-                      количество символов: от 8 до 32
-                    </small>
-                  </p>
-                </p>
+                <small className="text-danger m-0 p-0">
+                  * обязательно
+                  <small className="text-warning m-0 p-0">
+                    {" "}
+                    * только латинские буквы и цифры
+                  </small>
+                  <small className="text-muted m-0 p-0">
+                    {" "}
+                    * длина: от 8 до 16 символов
+                  </small>
+                </small>
               </label>
             </div>
             <hr />

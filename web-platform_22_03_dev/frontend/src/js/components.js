@@ -271,10 +271,7 @@ export const FooterComponent = () => {
       <div className="">
         <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
           <li className="m-1">
-            <a
-              className="btn btn-sm btn-outline-secondary text-white"
-              href="/#"
-            >
+            <a className="btn btn-sm btn-outline-secondary text-white" href="#">
               <i className="fa fa-arrow-up">{"  "} вверх</i>
               {"  "}
               <i className="fa fa-arrow-up"> </i>

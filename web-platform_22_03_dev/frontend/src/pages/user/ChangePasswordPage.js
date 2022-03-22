@@ -13,8 +13,8 @@ export const ChangePasswordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [password, passwordSet] = useState("");
+  const [password2, password2Set] = useState("");
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userChangeStore = useSelector((state) => state.userChangeStore);
   const {
@@ -33,7 +33,7 @@ export const ChangePasswordPage = () => {
     }
   }, [navigate, dataUserChange, dispatch]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
-  const handlerSubmit = (e) => {
+  const handlerChangeSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHANGE",
@@ -41,6 +41,14 @@ export const ChangePasswordPage = () => {
       password2: password2,
     };
     dispatch(actions.userChangeAction(form));
+  };
+  //////////////////////////////////////////////////////////
+  const handlerChangeReset = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
+    passwordSet("");
+    password2Set("");
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
@@ -60,100 +68,131 @@ export const ChangePasswordPage = () => {
           showFail={true}
           failText={""}
         />
-        <div>
-          <div className="form-control">
-            <form className="text-center p-1 m-1" onSubmit={handlerSubmit}>
-              <div>
-                <label className="form-control-sm">
-                  Введите пароль для входа в аккаунт:
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      Только латинские буквы и цифры!
-                    </small>
-                  </p>
-                  <input
-                    type="password"
-                    id="password"
-                    className="form-control form-control-sm"
-                    value={password}
-                    placeholder="введите сюда новый пароль..."
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                    minLength="8"
-                    maxLength="32"
-                  />
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      * обязательно
-                      <small className="text-muted">
-                        {" "}
-                        * количество символов: от 8 до 32
-                      </small>
-                    </small>
-                  </p>
-                </label>
-                <label className="form-control-sm">
-                  Повторите новый пароль:
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      Только латинские буквы и цифры!
-                    </small>
-                  </p>
-                  <input
-                    type="password"
-                    id="password2"
-                    className="form-control form-control-sm"
-                    value={password2}
-                    placeholder="введите сюда новый пароль..."
-                    required
-                    onChange={(e) => setPassword2(e.target.value)}
-                    minLength="8"
-                    maxLength="32"
-                  />
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      * обязательно
-                      <small className="text-muted">
-                        {" "}
-                        * количество символов: от 8 до 32
-                      </small>
-                    </small>
-                  </p>
-                </label>
+        <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
+          <form className="m-0 p-0" onSubmit={handlerChangeSubmit}>
+            <div className="card shadow custom-background-transparent-low m-0 p-0">
+              <div className="card-header m-0 p-0">
+                <components.StoreStatusComponent
+                  storeStatus={userChangeStore}
+                  key={"userChangeStore"}
+                  consoleLog={constants.DEBUG_CONSTANT}
+                  showLoad={true}
+                  loadText={""}
+                  showData={true}
+                  dataText={"Данные успешно изменены!"}
+                  showError={true}
+                  errorText={""}
+                  showFail={true}
+                  failText={""}
+                />
               </div>
-              <hr />
-              <div className="container">
-                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+              <div className="card-body m-0 p-0">
+                <div className="m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Введите пароль для входа в аккаунт:
+                    <input
+                      type="password"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      id="password"
+                      value={password}
+                      placeholder="введите новый пароль тут..."
+                      required
+                      onChange={(e) =>
+                        passwordSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              latin: true,
+                              lowerSpace: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      minLength="8"
+                      maxLength="16"
+                      autoComplete="off"
+                    />
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только латинские буквы и цифры
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: от 8 до 16 символов
+                      </small>
+                    </small>
+                  </label>
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Повторите новый пароль:
+                    <input
+                      type="password"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      id="password2"
+                      value={password2}
+                      placeholder="введите новый пароль тут..."
+                      required
+                      onChange={(e) =>
+                        password2Set(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              latin: true,
+                              lowerSpace: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      minLength="8"
+                      maxLength="16"
+                      autoComplete="off"
+                    />
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только латинские буквы и цифры
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: от 8 до 16 символов
+                      </small>
+                    </small>
+                  </label>
+                </div>
+              </div>
+              <div className="card-footer m-0 p-0">
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                   <button
+                    className="btn btn-sm btn-primary m-1 p-2"
                     type="submit"
-                    className="btn btn-sm btn-primary p-2 m-1"
                   >
                     Сохранить новые данные
                   </button>
                   <button
-                    type="button"
-                    onClick={(e) => {
-                      setPassword("");
-                      setPassword2("");
-                    }}
-                    className="btn btn-sm btn-warning p-2 m-1"
+                    className="btn btn-sm btn-warning m-1 p-2"
+                    type="reset"
+                    onClick={(e) => handlerChangeReset(e)}
                   >
-                    Сбросить данные
+                    сбросить данные
                   </button>
                   <button
-                    type="button"
+                    type="reset"
                     onClick={(e) =>
                       utils.ChangePasswordVisibility(["password", "password2"])
                     }
-                    className="btn btn-sm btn-danger p-2 m-1"
+                    className="btn btn-sm btn-danger m-1 p-2"
                   >
                     Видимость пароля
                   </button>
                 </ul>
               </div>
-            </form>
-          </div>
-        </div>
+            </div>
+          </form>
+        </ul>
       </main>
       <components.FooterComponent />
     </body>

@@ -144,10 +144,10 @@ export const RationalCreatePage = () => {
               </div>
               <br />
               <div className="">
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Подразделение:
                   <select
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={subdivision}
                     required
                     onChange={(e) => subdivisionSet(e.target.value)}
@@ -167,7 +167,7 @@ export const RationalCreatePage = () => {
                   </select>
                   <small className="text-danger">* обязательно</small>
                 </label>
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Зарегистрировано за №{" "}
                   <strong className="btn btn-light">XXX</strong> от
                   <small className="text-warning"> текущей </small>даты
@@ -179,10 +179,10 @@ export const RationalCreatePage = () => {
                 </label>
               </div>
               <div className="">
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Сфера:
                   <select
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={sphere}
                     required
                     onChange={(e) => sphereSet(e.target.value)}
@@ -195,10 +195,10 @@ export const RationalCreatePage = () => {
                   </select>
                   <small className="text-danger">* обязательно</small>
                 </label>
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Категория:
                   <select
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={category}
                     required
                     onChange={(e) => categorySet(e.target.value)}
@@ -212,11 +212,11 @@ export const RationalCreatePage = () => {
                   </select>
                   <small className="text-danger">* обязательно</small>
                 </label>
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Аватарка-заставка:
                   <input
                     type="file"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     accept=".jpg, .png"
                     onChange={(e) => avatarSet(e.target.files[0])}
                   />
@@ -228,20 +228,36 @@ export const RationalCreatePage = () => {
                   Название:
                   <input
                     type="text"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={name}
                     placeholder="введите название тут..."
                     required
                     minLength="1"
                     maxLength="250"
-                    onChange={(e) => nameSet(e.target.value)}
+                    onChange={(e) =>
+                      nameSet(
+                        e.target.value.replace(
+                          utils.GetRegexType({
+                            numbers: true,
+                            cyrillic: true,
+                            space: true,
+                          }),
+                          ""
+                        )
+                      )
+                    }
                   />
-                  <small className="text-danger">* обязательно</small>
-                  <p className="">
-                    <small className="text-muted">
-                      длина: не более 250 символов
+                  <small className="text-danger m-0 p-0">
+                    * обязательно
+                    <small className="text-warning m-0 p-0">
+                      {" "}
+                      * только кириллические буквы и цифры
                     </small>
-                  </p>
+                    <small className="text-muted m-0 p-0">
+                      {" "}
+                      * длина: не более 250 символов
+                    </small>
+                  </small>
                 </label>
               </div>
               <div className="">
@@ -249,27 +265,43 @@ export const RationalCreatePage = () => {
                   Место внедрения:
                   <input
                     type="text"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={place}
                     required
-                    placeholder="Цех / участок / отдел / лаборатория и т.п."
+                    placeholder="введите место тут..."
                     minLength="1"
                     maxLength="500"
-                    onChange={(e) => placeSet(e.target.value)}
+                    onChange={(e) =>
+                      placeSet(
+                        e.target.value.replace(
+                          utils.GetRegexType({
+                            numbers: true,
+                            cyrillic: true,
+                            space: true,
+                          }),
+                          ""
+                        )
+                      )
+                    }
                   />
-                  <small className="text-danger">* обязательно</small>
-                  <p className="">
-                    <small className="text-muted">
-                      длина: не более 500 символов
+                  <small className="text-danger m-0 p-0">
+                    * обязательно
+                    <small className="text-warning m-0 p-0">
+                      {" "}
+                      * только кириллические буквы и цифры
                     </small>
-                  </p>
+                    <small className="text-muted m-0 p-0">
+                      {" "}
+                      * длина: не более 500 символов
+                    </small>
+                  </small>
                 </label>
               </div>
               <div className="">
                 <label className="w-100 form-control-sm">
                   Описание:
                   <textarea
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={description}
                     required
                     placeholder="Полное описание"
@@ -287,31 +319,31 @@ export const RationalCreatePage = () => {
                 </label>
               </div>
               <div className="">
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Word файл-приложение:
                   <input
                     type="file"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     accept=".docx, .doc"
                     onChange={(e) => additionalWordSet(e.target.files[0])}
                   />
                   <small className="text-muted">* не обязательно</small>
                 </label>
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Pdf файл-приложение:
                   <input
                     type="file"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     accept=".pdf"
                     onChange={(e) => additionalPdfSet(e.target.files[0])}
                   />
                   <small className="text-muted">* не обязательно</small>
                 </label>
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Excel файл-приложение:
                   <input
                     type="file"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     accept=".xlsx, .xls"
                     onChange={(e) => additionalExcelSet(e.target.files[0])}
                   />
@@ -328,7 +360,7 @@ export const RationalCreatePage = () => {
                 </p>
               </div>
               <div className="">
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   Участники:
                   <p>
                     <small className="fw-bold">
@@ -339,14 +371,14 @@ export const RationalCreatePage = () => {
                 </label>
               </div>
               <div className="">
-                <label className="form-control-sm">
+                <label className="form-control-sm text-center m-0 p-1">
                   {dataUserListAll && (
                     <div>
                       <div className="">
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           участник №1:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user1}
                             required
                             onChange={(e) => user1Set(e.target.value)}
@@ -359,11 +391,11 @@ export const RationalCreatePage = () => {
                             ))}
                           </select>
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           % Вклада 1 участника
                           <input
                             type="number"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user1Perc}
                             required
                             placeholder="пример: 70%"
@@ -374,10 +406,10 @@ export const RationalCreatePage = () => {
                         </label>
                       </div>
                       <div className="">
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           участник №2:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user2}
                             onChange={(e) => user2Set(e.target.value)}
                           >
@@ -389,11 +421,11 @@ export const RationalCreatePage = () => {
                             ))}
                           </select>
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           % Вклада 2 участника
                           <input
                             type="number"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user2Perc}
                             placeholder="пример: 70%"
                             min="0"
@@ -403,10 +435,10 @@ export const RationalCreatePage = () => {
                         </label>
                       </div>
                       <div className="">
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           участник №3:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user3}
                             onChange={(e) => user3Set(e.target.value)}
                           >
@@ -418,11 +450,11 @@ export const RationalCreatePage = () => {
                             ))}
                           </select>
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           % Вклада 3 участника
                           <input
                             type="number"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user3Perc}
                             placeholder="пример: 70%"
                             min="0"
@@ -432,10 +464,10 @@ export const RationalCreatePage = () => {
                         </label>
                       </div>
                       <div className="">
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           участник №4:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user4}
                             onChange={(e) => user4Set(e.target.value)}
                           >
@@ -447,11 +479,11 @@ export const RationalCreatePage = () => {
                             ))}
                           </select>
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           % Вклада 4 участника
                           <input
                             type="number"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user4Perc}
                             placeholder="пример: 70%"
                             min="0"
@@ -461,10 +493,10 @@ export const RationalCreatePage = () => {
                         </label>
                       </div>
                       <div className="">
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           участник №5:
                           <select
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user5}
                             onChange={(e) => user5Set(e.target.value)}
                           >
@@ -476,11 +508,11 @@ export const RationalCreatePage = () => {
                             ))}
                           </select>
                         </label>
-                        <label className="form-control-sm">
+                        <label className="form-control-sm text-center m-0 p-1">
                           % Вклада 5 участника
                           <input
                             type="number"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={user5Perc}
                             placeholder="пример: 70%"
                             min="0"

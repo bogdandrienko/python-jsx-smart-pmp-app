@@ -38,15 +38,10 @@ class DjangoClass:
             ############################################################################################################
             request_instance = DjangoClass.DRFClass.RequestClass(request=request)
             if print_req:
-                print("\n\n")
-                print(f"request_path: {request_instance.path}")
-                print(f"datetime: {DateTimeUtils.get_current_datetime()}")
-                print(f"request_method: {request_instance.method}")
-                print(f"request_action_type: {request_instance.action_type}")
-                print(f"request_user: {request_instance.user}")
-                print(f"request.data: {request_instance.data}")
-                print(f"request_body: {request_instance.body}")
-                print("\n\n")
+                print(f"\n\nrequest_path: {request_instance.path}\ndatetime: {DateTimeUtils.get_current_datetime()}"
+                      f"\nrequest_method: {request_instance.method}"
+                      f"\nrequest_action_type: {request_instance.action_type}\nrequest_user: {request_instance.user}"
+                      f"\nrequest.data: {request_instance.data}\nrequest_body: {request_instance.body}")
             ############################################################################################################
 
             return request_instance
@@ -96,7 +91,10 @@ class DjangoClass:
         @staticmethod
         def error(request, error, print_error=False):
             if print_error:
-                print(f"\nerror: \n{error}\n")
+                req_inst = DjangoClass.TemplateClass.request(
+                    request=request, log=True, schedule=True, print_req=False
+                )
+                print(f"\n\nerror path: {req_inst.path}\nerror action_type: {req_inst.action_type}\nerror: \n{error}")
             # for k, v in request.META.items():
             #     print(f'\n{k}: {v}')
             username = request.user.username
@@ -465,7 +463,7 @@ class DjangoClass:
                     group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
                     group_model.user_many_to_many_field.add(
                         backend_models.UserModel.objects.get(
-                            user_foreign_key_field=User.objects.get(username="Bogdan")
+                            user_foreign_key_field=User.objects.get(username="000000000000")
                         )
                     )
                     group_model.name_slug_field = grp
@@ -478,7 +476,7 @@ class DjangoClass:
 
             # create default superuser
             ############################################################################################################
-            username_ = 'Bogdan'
+            username_ = '000000000000'
             password_ = '31284bogdan'
             try:
                 user = User.objects.get(username=username_)

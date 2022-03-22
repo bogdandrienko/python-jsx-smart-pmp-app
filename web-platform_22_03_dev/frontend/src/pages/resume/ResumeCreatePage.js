@@ -149,19 +149,35 @@ export const ResumeCreatePage = () => {
                       value={qualification}
                       minLength="1"
                       maxLength="128"
-                      className="form-control form-control-sm"
-                      onChange={(e) => qualificationSet(e.target.value)}
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      onChange={(e) =>
+                        qualificationSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              cyrillic: true,
+                              space: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
-                    <small className="text-danger">* обязательно</small>
-                    <p className="">
-                      <small className="text-muted">
-                        длина: не более 128 символов
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только кириллические буквы и цифры
                       </small>
-                    </p>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: не более 500 символов
+                      </small>
+                    </small>
                   </label>
                 </div>
                 <div className="">
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Фамилия:
                     <input
                       type="text"
@@ -172,17 +188,31 @@ export const ResumeCreatePage = () => {
                       value={lastName}
                       minLength="1"
                       maxLength="64"
-                      className="form-control form-control-sm"
-                      onChange={(e) => lastNameSet(e.target.value)}
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      onChange={(e) =>
+                        lastNameSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              cyrillic: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
-                    <small className="text-danger">* обязательно</small>
-                    <p className="">
-                      <small className="text-muted">
-                        длина: не более 64 символов
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только кириллические буквы
                       </small>
-                    </p>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: не более 64 символов
+                      </small>
+                    </small>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Имя:
                     <input
                       type="text"
@@ -193,51 +223,79 @@ export const ResumeCreatePage = () => {
                       value={firstName}
                       minLength="1"
                       maxLength="64"
-                      className="form-control form-control-sm"
-                      onChange={(e) => firstNameSet(e.target.value)}
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      onChange={(e) =>
+                        firstNameSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              cyrillic: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
-                    <small className="text-danger">* обязательно</small>
-                    <p className="">
-                      <small className="text-muted">
-                        длина: не более 64 символов
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только кириллические буквы
                       </small>
-                    </p>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: не более 64 символов
+                      </small>
+                    </small>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Отчество:
                     <input
                       type="text"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={patronymic}
                       placeholder="вводите отчество тут..."
                       minLength="1"
                       maxLength="64"
                       required
-                      onChange={(e) => patronymicSet(e.target.value)}
+                      onChange={(e) =>
+                        patronymicSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              cyrillic: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
                     />
-                    <small className="text-muted">* не обязательно</small>
-                    <p className="">
-                      <small className="text-muted">
-                        длина: не более 64 символов
+                    <small className="text-muted m-0 p-0">
+                      * не обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только кириллические буквы
                       </small>
-                    </p>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: не более 64 символов
+                      </small>
+                    </small>
                   </label>
                 </div>
                 <div className="">
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Изображение:
                     <input
                       type="file"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) => imageSet(e.target.files[0])}
                     />
                     <small className="text-muted">* не обязательно</small>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Дата рождения:
                     <input
                       type="datetime-local"
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={birthDate}
                       required
                       onChange={(e) => birthDateSet(e.target.value)}
@@ -246,10 +304,10 @@ export const ResumeCreatePage = () => {
                   </label>
                 </div>
                 <div className="">
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Образование:
                     <select
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={education}
                       required
                       onChange={(e) => educationSet(e.target.value)}
@@ -266,10 +324,10 @@ export const ResumeCreatePage = () => {
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Опыт:
                     <select
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={experience}
                       required
                       onChange={(e) => experienceSet(e.target.value)}
@@ -284,10 +342,10 @@ export const ResumeCreatePage = () => {
                     </select>
                     <small className="text-danger">* обязательно</small>
                   </label>
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Пол:
                     <select
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={sex}
                       required
                       onChange={(e) => sexSet(e.target.value)}
@@ -304,7 +362,7 @@ export const ResumeCreatePage = () => {
                   <label className="w-75 form-control-sm">
                     Контактные данные:
                     <textarea
-                      className="form-control form-control-sm"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       value={contactData}
                       placeholder="вводите контактные данные тут..."
                       minLength="5"
@@ -313,12 +371,12 @@ export const ResumeCreatePage = () => {
                       required
                       onChange={(e) => contactDataSet(e.target.value)}
                     />
-                    <small className="text-danger">* обязательно</small>
-                    <p className="">
+                    <small className="text-danger">
+                      * обязательно
                       <small className="text-muted">
                         длина: не более 250 символов
                       </small>
-                    </p>
+                    </small>
                   </label>
                 </div>
                 <br />

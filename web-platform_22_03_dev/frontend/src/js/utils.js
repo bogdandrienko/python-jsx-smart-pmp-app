@@ -212,3 +212,53 @@ export const ChangeObjectsByIdVisibility = (objects = [""]) => {
   }
 };
 ///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility
+export const GetRegexType = ({
+  numbers = false,
+  latin = false,
+  cyrillic = false,
+  onlyLowerLetters = false,
+  lowerSpace = false,
+  space = false,
+  email = false,
+}) => {
+  //  /[^А-Яа-я_]/gi - только кириллица и "_"
+  // /[^A-Za-z0-9_]/gi - только латиница, цифры и "_"
+  // /[^A-Za-z]/gi - только латиница
+  // /[^0-9]/gi - только цифры
+  try {
+    let regex = "";
+    if (numbers) {
+      regex = regex + "0-9";
+    }
+    if (latin) {
+      if (onlyLowerLetters) {
+        regex = regex + "a-z";
+      } else {
+        regex = regex + "A-Za-z";
+      }
+    }
+    if (cyrillic) {
+      if (onlyLowerLetters) {
+        regex = regex + "а-я";
+      } else {
+        regex = regex + "А-Яа-я";
+      }
+    }
+    if (lowerSpace) {
+      regex = regex + "_";
+    }
+    if (space) {
+      regex = regex + " ";
+    }
+    if (email) {
+      regex = regex + "@.";
+    }
+    return new RegExp(`[^${regex}]`, "g");
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return new RegExp(`[^_]`, "g");
+  }
+};
+///////////////////////////////////////////////////////////////////////////////////////TODO default export const utility

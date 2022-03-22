@@ -92,7 +92,7 @@ export const VacancyListPage = () => {
                   нажмите кнопку{" "}
                   <p className="fw-bold text-primary">"фильтровать вакансии"</p>
                 </label>
-                <label className="form-control-sm form-switch m-1">
+                <label className="form-control-sm form-switch text-center m-0 p-1">
                   Детальное отображение:
                   <input
                     type="checkbox"
@@ -104,11 +104,11 @@ export const VacancyListPage = () => {
                 </label>
               </div>
               <div className="">
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Сфера:
                   <select
                     value={sphere}
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     onChange={(e) => sphereSet(e.target.value)}
                   >
                     <option value="">все варианты</option>
@@ -118,12 +118,12 @@ export const VacancyListPage = () => {
                     </option>
                   </select>
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Образование:
                   <select
                     id="education"
                     name="education"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={education}
                     onChange={(e) => educationSet(e.target.value)}
                   >
@@ -138,12 +138,12 @@ export const VacancyListPage = () => {
                     <option value="Среднее">Среднее</option>
                   </select>
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Опыт:
                   <select
                     id="experience"
                     name="experience"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={experience}
                     onChange={(e) => experienceSet(e.target.value)}
                   >
@@ -168,12 +168,12 @@ export const VacancyListPage = () => {
                     onChange={(e) => searchSet(e.target.value)}
                   />
                 </label>
-                <label className="form-control-sm m-1">
+                <label className="form-control-sm text-center m-0 p-1">
                   Сортировка по:
                   <select
                     id="sort"
                     name="sort"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-center m-0 p-1"
                     value={sort}
                     onChange={(e) => sortSet(e.target.value)}
                   >

@@ -106,13 +106,13 @@ export const AdminCreateOrChangeUsersPage = () => {
                         </a>
                       </div>
                       <div>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm text-center m-0 p-1">
                           Что делать с уже существующими пользователями:
                           <select
                             id="changeUser"
                             name="changeUser"
                             required
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={changeUser}
                             onChange={(e) => setChangeUser(e.target.value)}
                           >
@@ -125,13 +125,13 @@ export const AdminCreateOrChangeUsersPage = () => {
                           </select>
                           <small className="text-danger">* обязательно</small>
                         </label>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm text-center m-0 p-1">
                           Что делать с паролем уже существующего пользователя:
                           <select
                             id="changeUserPassword"
                             name="changeUserPassword"
                             required
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={changeUserPassword}
                             onChange={(e) =>
                               setChangeUserPassword(e.target.value)
@@ -146,13 +146,13 @@ export const AdminCreateOrChangeUsersPage = () => {
                           </select>
                           <small className="text-danger">* обязательно</small>
                         </label>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm text-center m-0 p-1">
                           Что делать с группами уже существующего пользователя:
                           <select
                             id="clearUserGroups"
                             name="clearUserGroups"
                             required
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             value={clearUserGroups}
                             onChange={(e) => setClearUserGroups(e.target.value)}
                           >
@@ -168,7 +168,7 @@ export const AdminCreateOrChangeUsersPage = () => {
                       </div>
                       <br />
                       <div>
-                        <label className="form-control-sm m-1">
+                        <label className="form-control-sm text-center m-0 p-1">
                           Excel файл с пользователями:
                           <input
                             type="file"
@@ -176,7 +176,7 @@ export const AdminCreateOrChangeUsersPage = () => {
                             name="AdditionalExcel"
                             required
                             accept=".xlsx, .xls"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm text-center m-0 p-1"
                             onChange={(e) =>
                               setAdditionalExcel(e.target.files[0])
                             }

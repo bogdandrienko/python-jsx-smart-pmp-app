@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
@@ -12,14 +12,12 @@ export const ChangeProfilePage = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
   /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
-  const [email, setEmail] = useState("");
-  const [secretQuestion, setSecretQuestion] = useState("");
-  const [secretAnswer, setSecretAnswer] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [secretQuestion, secretQuestionSet] = useState("");
+  const [secretAnswer, secretAnswerSet] = useState("");
+  const [email, emailSet] = useState("");
+  const [password, passwordSet] = useState("");
+  const [password2, password2Set] = useState("");
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const {
@@ -39,30 +37,30 @@ export const ChangeProfilePage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataUserDetails && dataUserDetails["user_model"]) {
-      if (dataUserDetails["user_model"]["email_field"]) {
-        setEmail(dataUserDetails["user_model"]["email_field"]);
-      }
       if (dataUserDetails["user_model"]["secret_question_char_field"]) {
-        setSecretQuestion(
+        secretQuestionSet(
           dataUserDetails["user_model"]["secret_question_char_field"]
         );
       }
       if (dataUserDetails["user_model"]["secret_answer_char_field"]) {
-        setSecretAnswer(
+        secretAnswerSet(
           dataUserDetails["user_model"]["secret_answer_char_field"]
         );
       }
+      if (dataUserDetails["user_model"]["email_field"]) {
+        emailSet(dataUserDetails["user_model"]["email_field"]);
+      }
       if (dataUserDetails["user_model"]["password_slug_field"]) {
-        setPassword("");
-        setPassword2("");
+        passwordSet("");
+        password2Set("");
       }
     } else {
       const form = {
         "Action-type": "USER_DETAIL",
       };
       dispatch(actions.userDetailsAction(form));
-      setPassword("");
-      setPassword2("");
+      passwordSet("");
+      password2Set("");
     }
   }, [dispatch, dataUserDetails]);
   //////////////////////////////////////////////////////////
@@ -75,7 +73,7 @@ export const ChangeProfilePage = () => {
     }
   }, [dispatch, dataUserChange, navigate]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
-  const handlerSubmit = (e) => {
+  const handlerChangeSubmit = (e) => {
     e.preventDefault();
     const form = {
       "Action-type": "CHANGE",
@@ -86,6 +84,17 @@ export const ChangeProfilePage = () => {
       password2: password2,
     };
     dispatch(actions.userChangeAction(form));
+  };
+  //////////////////////////////////////////////////////////
+  const handlerChangeReset = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
+    secretQuestionSet("");
+    secretAnswerSet("");
+    emailSet("");
+    passwordSet("");
+    password2Set("");
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
@@ -105,183 +114,238 @@ export const ChangeProfilePage = () => {
           showFail={true}
           failText={""}
         />
-        <components.StoreStatusComponent
-          storeStatus={userChangeStore}
-          key={"userChangeStore"}
-          consoleLog={constants.DEBUG_CONSTANT}
-          showLoad={true}
-          loadText={""}
-          showData={true}
-          dataText={"Данные успешно изменены!"}
-          showError={true}
-          errorText={""}
-          showFail={true}
-          failText={""}
-        />
-        <div>
-          <div className="">
-            <h6 className="text-danger lead">
-              Внимание, без правильного заполнения обязательных данных Вас будет
-              перенаправлять на эту страницу постоянно!
-            </h6>
-            <form className="text-center p-1 m-1" onSubmit={handlerSubmit}>
-              <div>
-                <label className="form-control-sm m-1 lead">
-                  Введите секретный вопрос для восстановления доступа:
-                  <input
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={secretQuestion}
-                    placeholder="введите сюда секретный вопрос..."
-                    required
-                    onChange={(e) => setSecretQuestion(e.target.value)}
-                    minLength="6"
-                    maxLength="32"
-                  />
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      * обязательно
-                      <small className="text-muted">
-                        {" "}
-                        * количество символов: от 6 до 32
-                      </small>
-                    </small>
-                  </p>
-                </label>
-                <label className="form-control-sm m-1 lead">
-                  Введите ответ на секретный вопрос:
-                  <input
-                    type="text"
-                    className="form-control form-control-sm"
-                    value={secretAnswer}
-                    placeholder="введите сюда секретный ответ..."
-                    required
-                    onChange={(e) => setSecretAnswer(e.target.value)}
-                    minLength="4"
-                    maxLength="32"
-                  />
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      * обязательно
-                      <small className="text-muted">
-                        {" "}
-                        * количество символов: от 4 до 32
-                      </small>
-                    </small>
-                  </p>
-                </label>
+        <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
+          <form className="m-0 p-0" onSubmit={handlerChangeSubmit}>
+            <div className="card shadow custom-background-transparent-low m-0 p-0">
+              <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                Внимание, без правильного заполнения обязательных данных Вас
+                будет перенаправлять на эту страницу постоянно!
               </div>
-              <div>
-                <label className="form-control-sm m-1 lead">
-                  Почта для восстановления доступа:
-                  <input
-                    type="email"
-                    className="form-control form-control-sm"
-                    value={email}
-                    placeholder="введите сюда почту..."
-                    onChange={(e) => setEmail(e.target.value)}
-                    minLength="1"
-                    maxLength="128"
-                  />
-                  <p className="m-0 p-0">
-                    <small className="text-success">* не обязательно</small>
-                  </p>
-                </label>
+              <div className="card-header m-0 p-0">
+                <components.StoreStatusComponent
+                  storeStatus={userChangeStore}
+                  key={"userChangeStore"}
+                  consoleLog={constants.DEBUG_CONSTANT}
+                  showLoad={true}
+                  loadText={""}
+                  showData={true}
+                  dataText={"Данные успешно изменены!"}
+                  showError={true}
+                  errorText={""}
+                  showFail={true}
+                  failText={""}
+                />
               </div>
-              <div>
-                <label className="form-control-sm m-1 lead">
-                  Введите пароль для входа в аккаунт:
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      Только латинские буквы и цифры!
-                    </small>
-                  </p>
-                  <input
-                    type="password"
-                    className="form-control form-control-sm"
-                    id="password"
-                    value={password}
-                    placeholder="введите сюда новый пароль..."
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                    minLength="8"
-                    maxLength="32"
-                  />
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
+              <div className="card-body m-0 p-0">
+                <div className="m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Введите секретный вопрос для восстановления доступа:
+                    <input
+                      type="text"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      value={secretQuestion}
+                      placeholder="введите секретный вопрос тут..."
+                      required
+                      onChange={(e) =>
+                        secretQuestionSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              cyrillic: true,
+                              space: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      minLength="6"
+                      maxLength="32"
+                    />
+                    <small className="text-danger m-0 p-0">
                       * обязательно
-                      <small className="text-muted">
+                      <small className="text-warning m-0 p-0">
                         {" "}
-                        * количество символов: от 8 до 32
+                        * только кириллические буквы и цифры
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: от 6 до 32 символов
                       </small>
                     </small>
-                  </p>
-                </label>
-                <label className="form-control-sm m-1 lead">
-                  Повторите новый пароль:
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
-                      Только латинские буквы и цифры!
-                    </small>
-                  </p>
-                  <input
-                    type="password"
-                    className="form-control form-control-sm"
-                    id="password2"
-                    value={password2}
-                    placeholder="введите сюда новый пароль..."
-                    required
-                    onChange={(e) => setPassword2(e.target.value)}
-                    minLength="8"
-                    maxLength="32"
-                  />
-                  <p className="m-0 p-0">
-                    <small className="text-danger">
+                  </label>
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Введите ответ на секретный вопрос:
+                    <input
+                      type="text"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      value={secretAnswer}
+                      placeholder="введите секретный ответ тут..."
+                      required
+                      onChange={(e) =>
+                        secretAnswerSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              cyrillic: true,
+                              onlyLowerLetters: true,
+                              space: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      minLength="4"
+                      maxLength="32"
+                    />
+                    <small className="text-danger m-0 p-0">
                       * обязательно
-                      <small className="text-muted">
+                      <small className="text-warning m-0 p-0">
                         {" "}
-                        * количество символов: от 8 до 32
+                        * только маленькие кириллические буквы и цифры
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: от 4 до 32 символов
                       </small>
                     </small>
-                  </p>
-                </label>
+                  </label>
+                </div>
+                <div className="m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Почта для восстановления доступа:
+                    <input
+                      type="email"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      value={email}
+                      placeholder="введите почту тут..."
+                      onChange={(e) =>
+                        emailSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              latin: true,
+                              lowerSpace: true,
+                              email: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      minLength="1"
+                      maxLength="150"
+                      autoComplete="off"
+                    />
+                    <small className="text-muted m-0 p-0">
+                      * не обязательно
+                    </small>
+                  </label>
+                </div>
+                <div className="m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Введите пароль для входа в аккаунт:
+                    <input
+                      type="password"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      id="password"
+                      value={password}
+                      placeholder="введите новый пароль тут..."
+                      required
+                      onChange={(e) =>
+                        passwordSet(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              latin: true,
+                              lowerSpace: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      minLength="8"
+                      maxLength="16"
+                      autoComplete="off"
+                    />
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только латинские буквы и цифры
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: от 8 до 16 символов
+                      </small>
+                    </small>
+                  </label>
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Повторите новый пароль:
+                    <input
+                      type="password"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      id="password2"
+                      value={password2}
+                      placeholder="введите новый пароль тут..."
+                      required
+                      onChange={(e) =>
+                        password2Set(
+                          e.target.value.replace(
+                            utils.GetRegexType({
+                              numbers: true,
+                              latin: true,
+                              lowerSpace: true,
+                            }),
+                            ""
+                          )
+                        )
+                      }
+                      minLength="8"
+                      maxLength="16"
+                      autoComplete="off"
+                    />
+                    <small className="text-danger m-0 p-0">
+                      * обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только латинские буквы и цифры
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: от 8 до 16 символов
+                      </small>
+                    </small>
+                  </label>
+                </div>
               </div>
-              <hr />
-              <div className="container">
-                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+              <div className="card-footer m-0 p-0">
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                   <button
+                    className="btn btn-sm btn-primary m-1 p-2"
                     type="submit"
-                    className="btn btn-sm btn-primary p-2 m-1"
                   >
                     Сохранить новые данные
                   </button>
                   <button
-                    type="button"
-                    onClick={(e) => {
-                      setEmail("");
-                      setSecretQuestion("");
-                      setSecretAnswer("");
-                      setPassword("");
-                      setPassword2("");
-                    }}
-                    className="btn btn-sm btn-warning p-2 m-1"
+                    className="btn btn-sm btn-warning m-1 p-2"
+                    type="reset"
+                    onClick={(e) => handlerChangeReset(e)}
                   >
-                    Сбросить данные
+                    сбросить данные
                   </button>
                   <button
-                    type="button"
+                    type="reset"
                     onClick={(e) =>
                       utils.ChangePasswordVisibility(["password", "password2"])
                     }
-                    className="btn btn-sm btn-danger p-2 m-1"
+                    className="btn btn-sm btn-danger m-1 p-2"
                   >
                     Видимость пароля
                   </button>
                 </ul>
               </div>
-            </form>
-          </div>
-        </div>
+            </div>
+          </form>
+        </ul>
       </main>
       <components.FooterComponent />
     </body>

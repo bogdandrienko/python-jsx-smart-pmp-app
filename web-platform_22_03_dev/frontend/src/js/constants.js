@@ -731,7 +731,7 @@ export const modules = [
             Title: "Восстановление пароля",
             Description: "страница восстановления доступа к Вашему аккаунту",
             Logic: true,
-            Redirect: true,
+            Redirect: false,
             Style: "",
           },
           {

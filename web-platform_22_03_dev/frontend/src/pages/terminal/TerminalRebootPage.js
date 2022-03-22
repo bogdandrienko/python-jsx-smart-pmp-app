@@ -60,11 +60,11 @@ export const TerminalRebootPage = () => {
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
               <form className="m-0 p-0" onSubmit={handlerRestartSubmit}>
                 <div className="card-body m-0 p-0">
-                  <label className="form-control-sm">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Точка:
                     <div className="input-group">
                       <select
-                        className="form-control form-control-sm"
+                        className="form-control form-control-sm text-center m-0 p-1"
                         value={ip}
                         required
                         onChange={(e) => ipSet(e.target.value)}

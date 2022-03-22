@@ -297,10 +297,10 @@ export const IdeaDetailPage = () => {
               </div>
               <div className="card-body m-0 p-0">
                 <div className="m-0 p-0">
-                  <label className="form-control-sm m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Подразделение:
                     <select
-                      className="form-control form-control-sm m-0 p-2"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       required
                     >
                       <option className="m-0 p-0" value="">
@@ -308,10 +308,10 @@ export const IdeaDetailPage = () => {
                       </option>
                     </select>
                   </label>
-                  <label className="form-control-sm m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Сфера:
                     <select
-                      className="form-control form-control-sm m-0 p-2"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       required
                     >
                       <option className="m-0 p-0" value="">
@@ -319,10 +319,10 @@ export const IdeaDetailPage = () => {
                       </option>
                     </select>
                   </label>
-                  <label className="form-control-sm m-0 p-1">
+                  <label className="form-control-sm text-center m-0 p-1">
                     Категория:
                     <select
-                      className="form-control form-control-sm m-0 p-2"
+                      className="form-control form-control-sm text-center m-0 p-1"
                       required
                     >
                       <option className="m-0 p-0" value="">
@@ -347,7 +347,7 @@ export const IdeaDetailPage = () => {
                   />
                 </div>
                 <div className="m-0 p-0">
-                  <label className="form-control-sm w-50 m-0 p-1">
+                  <label className="form-control-sm text-center w-50 m-0 p-1">
                     Место изменения:
                     <input
                       type="text"
@@ -365,7 +365,7 @@ export const IdeaDetailPage = () => {
                   </label>
                 </div>
                 <div className="m-0 p-0">
-                  <label className="form-control-sm w-100 m-0 p-1">
+                  <label className="form-control-sm text-center w-100 m-0 p-1">
                     Описание:
                     <textarea
                       className="form-control form-control-sm text-center m-0 p-1"
@@ -669,7 +669,18 @@ export const IdeaDetailPage = () => {
                             placeholder="введите комментарий тут..."
                             minLength="1"
                             maxLength="200"
-                            onChange={(e) => commentSet(e.target.value)}
+                            onChange={(e) =>
+                              commentSet(
+                                e.target.value.replace(
+                                  utils.GetRegexType({
+                                    numbers: true,
+                                    cyrillic: true,
+                                    space: true,
+                                  }),
+                                  ""
+                                )
+                              )
+                            }
                           />
                           <button type="submit" className="btn btn-secondary">
                             отправить
