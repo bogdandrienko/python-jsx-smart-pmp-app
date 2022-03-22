@@ -69,20 +69,32 @@ export const VacancyListPage = () => {
     <body>
       <components.HeaderComponent />
       <main>
-        {components.StoreStatusComponent(
-          userDetailsStore,
-          "userDetailsStore",
-          false,
-          "Данные успешно получены!",
-          constants.DEBUG_CONSTANT
-        )}
-        {components.StoreStatusComponent(
-          vacancyListStore,
-          "vacancyListStore",
-          false,
-          "Данные успешно получены!",
-          constants.DEBUG_CONSTANT
-        )}
+        <components.StoreStatusComponent
+          storeStatus={userDetailsStore}
+          keyStatus={"userDetailsStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        <components.StoreStatusComponent
+          storeStatus={vacancyListStore}
+          keyStatus={"vacancyListStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         <div className="container-fluid form-control bg-opacity-10 bg-success">
           <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
             <form autoComplete="on" className="" onSubmit={handlerSubmit}>

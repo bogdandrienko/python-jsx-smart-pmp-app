@@ -165,34 +165,15 @@ export const RationalModerateListPage = () => {
     <body>
       <components.HeaderComponent />
       <main>
-        <components.StoreStatusComponent
-          storeStatus={userListAllStore}
-          key={"userListAllStore"}
-          consoleLog={constants.DEBUG_CONSTANT}
-          showLoad={false}
-          loadText={""}
-          showData={false}
-          dataText={""}
-          showError={true}
-          errorText={""}
-          showFail={true}
-          failText={""}
-        />
-        <components.StoreStatusComponent
-          storeStatus={rationalListStore}
-          key={"rationalListStore"}
-          consoleLog={constants.DEBUG_CONSTANT}
-          showLoad={false}
-          loadText={""}
-          showData={false}
-          dataText={""}
-          showError={true}
-          errorText={""}
-          showFail={true}
-          failText={""}
-        />
-        <div className="">
-          <div className="container-fluid form-control bg-opacity-10 bg-success">
+        <components.AccordionComponent
+          key_target={"accordion1"}
+          isCollapse={true}
+          title={"Фильтрация, поиск и сортировка:"}
+          text_style="text-success"
+          header_style="bg-success bg-opacity-10 custom-background-transparent-low"
+          body_style="bg-light bg-opacity-10 custom-background-transparent-low"
+        >
+          {
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
               <form autoComplete="on" className="" onSubmit={handlerSubmit}>
                 <div className="">
@@ -282,6 +263,19 @@ export const RationalModerateListPage = () => {
                       </select>
                     </label>
                   )}
+                  <components.StoreStatusComponent
+                    storeStatus={userListAllStore}
+                    key={"userListAllStore"}
+                    consoleLog={constants.DEBUG_CONSTANT}
+                    showLoad={false}
+                    loadText={""}
+                    showData={false}
+                    dataText={""}
+                    showError={true}
+                    errorText={""}
+                    showFail={true}
+                    failText={""}
+                  />
                   {utils.CheckAccess(userDetailsStore, "rational_admin") && (
                     <label className="form-control-sm text-center m-0 p-1">
                       Статус:
@@ -364,65 +358,75 @@ export const RationalModerateListPage = () => {
                 </div>
               </form>
             </ul>
+          }
+        </components.AccordionComponent>
+        <components.StoreStatusComponent
+          storeStatus={rationalListStore}
+          key={"rationalListStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={false}
+          loadText={""}
+          showData={false}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
+        {!dataRationalList || dataRationalList.length < 1 ? (
+          <components.MessageComponent variant={"danger"}>
+            Рац. предложения не найдены! Попробуйте изменить условия фильтрации
+            или очистить строку поиска.
+          </components.MessageComponent>
+        ) : !detailView ? (
+          <ul className="bg-opacity-10 bg-primary shadow">
+            {dataRationalList.map((rational, index) => (
+              <Link
+                key={index}
+                to={`/rational_moderate_detail/${rational.id}`}
+                className="text-decoration-none"
+              >
+                <li className="lead border list-group-item-action">
+                  {utils.GetSliceString(rational["name_char_field"], 20)}
+                  {" | "}
+                  {utils.GetSliceString(rational["number_char_field"], 20)}
+                  {" | "}
+                  {utils.GetSliceString(rational["subdivision_char_field"], 30)}
+                  {" | "}
+                  {utils.GetSliceString(
+                    rational["user_model"]["last_name_char_field"],
+                    30
+                  )}{" "}
+                  {utils.GetSliceString(
+                    rational["user_model"]["first_name_char_field"],
+                    30
+                  )}
+                  {" | "}
+                  {utils.GetSliceString(
+                    rational["status_moderate_char_field"],
+                    30
+                  )}
+                </li>
+              </Link>
+            ))}
+          </ul>
+        ) : (
+          <div className="row justify-content-center  ">
+            {dataRationalList.map((rational, index) => (
+              <Link
+                key={index}
+                to={`/rational_moderate_detail/${rational.id}`}
+                className="text-decoration-none text-center p-2 m-0 col-md-6"
+              >
+                <components.RationalComponent
+                  key={index}
+                  object={rational}
+                  shortView={true}
+                />
+              </Link>
+            ))}
           </div>
-          {!dataRationalList || dataRationalList.length < 1 ? (
-            <components.MessageComponent variant={"danger"}>
-              Рац. предложения не найдены! Попробуйте изменить условия
-              фильтрации или очистить строку поиска.
-            </components.MessageComponent>
-          ) : !detailView ? (
-            <ul className="bg-opacity-10 bg-primary shadow">
-              {dataRationalList.map((rational, index) => (
-                <Link
-                  key={index}
-                  to={`/rational_moderate_detail/${rational.id}`}
-                  className="text-decoration-none"
-                >
-                  <li className="lead border list-group-item-action">
-                    {utils.GetSliceString(rational["name_char_field"], 20)}
-                    {" | "}
-                    {utils.GetSliceString(rational["number_char_field"], 20)}
-                    {" | "}
-                    {utils.GetSliceString(
-                      rational["subdivision_char_field"],
-                      30
-                    )}
-                    {" | "}
-                    {utils.GetSliceString(
-                      rational["user_model"]["last_name_char_field"],
-                      30
-                    )}{" "}
-                    {utils.GetSliceString(
-                      rational["user_model"]["first_name_char_field"],
-                      30
-                    )}
-                    {" | "}
-                    {utils.GetSliceString(
-                      rational["status_moderate_char_field"],
-                      30
-                    )}
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          ) : (
-            <div className="row justify-content-center  ">
-              {dataRationalList.map((rational, index) => (
-                <Link
-                  key={index}
-                  to={`/rational_moderate_detail/${rational.id}`}
-                  className="text-decoration-none text-center p-2 m-0 col-md-6"
-                >
-                  <components.RationalComponent
-                    key={index}
-                    object={rational}
-                    shortView={true}
-                  />
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+        )}
       </main>
       <components.FooterComponent />
     </body>

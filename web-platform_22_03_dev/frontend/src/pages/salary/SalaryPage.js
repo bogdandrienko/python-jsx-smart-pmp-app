@@ -173,8 +173,8 @@ export const SalaryPage = () => {
                 key_target={"accordion1"}
                 isCollapse={true}
                 title={"Вспомогательная информация:"}
-                text_style="text-success"
-                header_style="bg-success bg-opacity-10 custom-background-transparent-low"
+                text_style="text-warning"
+                header_style="bg-warning bg-opacity-10 custom-background-transparent-low"
                 body_style="bg-light bg-opacity-10 custom-background-transparent-low"
               >
                 {

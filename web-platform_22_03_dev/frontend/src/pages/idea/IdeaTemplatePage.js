@@ -104,7 +104,7 @@ export const IdeaTemplatePage = () => {
                   Автор: Андриенко Богдан Техник-программист
                 </Link>
               </div>
-              <div className="d-flex justify-content-between m-1 p-0">
+              <div className="d-flex justify-content-between m-0 p-1">
                 <label className="text-muted border m-0 p-2">
                   подано: <p className="m-0">15-02-2021 11:00</p>
                 </label>

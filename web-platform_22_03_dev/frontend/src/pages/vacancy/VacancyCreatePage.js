@@ -60,13 +60,19 @@ export const VacancyCreatePage = () => {
     <body>
       <components.HeaderComponent />
       <main>
-        {components.StoreStatusComponent(
-          vacancyCreateStore,
-          "vacancyCreateStore",
-          true,
-          "",
-          constants.DEBUG_CONSTANT
-        )}
+        <components.StoreStatusComponent
+          storeStatus={vacancyCreateStore}
+          keyStatus={"vacancyCreateStore"}
+          consoleLog={constants.DEBUG_CONSTANT}
+          showLoad={true}
+          loadText={""}
+          showData={true}
+          dataText={""}
+          showError={true}
+          errorText={""}
+          showFail={true}
+          failText={""}
+        />
         <div className="btn-group p-1 m-0 text-start w-100">
           <Link to={"/vacancy_list"} className="btn btn-sm btn-primary">
             {"<="} назад к списку
