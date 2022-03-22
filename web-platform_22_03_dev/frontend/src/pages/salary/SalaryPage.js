@@ -134,10 +134,10 @@ export const SalaryPage = () => {
           failText={""}
         />
         {dataSalaryUser && (
-          <div className="bg-light custom-background-transparent-low">
-            <div>
+          <div className="bg-light custom-background-transparent-low text-center m-0 p-1">
+            <div className="text-center m-0 p-1">
               <a
-                className="btn btn-sm btn-success m-0"
+                className="btn btn-sm btn-success text-center m-0 p-1"
                 href={`/${dataSalaryUser["excel_path"]}`}
               >
                 Скачать excel-документ
@@ -169,57 +169,68 @@ export const SalaryPage = () => {
                   </table>
                 </li>
               </ul>
-              <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                <li className="m-0">
-                  <h6 className="lead fw-bold bold">
-                    Вспомогательная информация
-                  </h6>
-                  <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
-                    <thead>
-                      <tr>
-                        <th className="text-center">Тип</th>
-                        <th className="text-center">Значение</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {dataSalaryUser["headers"]
-                        .slice(0, 8)
-                        .map((head, index) => (
-                          <tr key={index}>
-                            <td className="text-start">{head[0]}</td>
-                            <td className="text-end">{head[1]}</td>
+              <components.AccordionComponent
+                key_target={"accordion1"}
+                isCollapse={true}
+                title={"Вспомогательная информация:"}
+                text_style="text-success"
+                header_style="bg-success bg-opacity-10 custom-background-transparent-low"
+                body_style="bg-light bg-opacity-10 custom-background-transparent-low"
+              >
+                {
+                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
+                    <li className="m-0">
+                      <h6 className="lead fw-bold bold">
+                        Вспомогательная информация
+                      </h6>
+                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                          <tr>
+                            <th className="text-center">Тип</th>
+                            <th className="text-center">Значение</th>
                           </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </li>
-                <li className="m-0">
-                  <h6 className="lead fw-bold bold">
-                    Вспомогательная информация
-                  </h6>
-                  <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
-                    <thead>
-                      <tr>
-                        <th className="text-center">Тип</th>
-                        <th className="text-center">Значение</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {dataSalaryUser["headers"]
-                        .slice(8, -2)
-                        .map((head, index) => (
-                          <tr key={index}>
-                            <td className="text-start">{head[0]}</td>
-                            <td className="text-end">{head[1]}</td>
+                        </thead>
+                        <tbody>
+                          {dataSalaryUser["headers"]
+                            .slice(0, 8)
+                            .map((head, index) => (
+                              <tr key={index}>
+                                <td className="text-start">{head[0]}</td>
+                                <td className="text-end">{head[1]}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </li>
+                    <li className="m-0">
+                      <h6 className="lead fw-bold bold">
+                        Вспомогательная информация
+                      </h6>
+                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                        <thead>
+                          <tr>
+                            <th className="text-center">Тип</th>
+                            <th className="text-center">Значение</th>
                           </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </li>
-                {dataSalaryUser["tables"].map((tab, index) => (
-                  <components.SalaryTableComponent key={index} tab={tab} />
-                ))}
-              </ul>
+                        </thead>
+                        <tbody>
+                          {dataSalaryUser["headers"]
+                            .slice(8, -2)
+                            .map((head, index) => (
+                              <tr key={index}>
+                                <td className="text-start">{head[0]}</td>
+                                <td className="text-end">{head[1]}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </li>
+                    {dataSalaryUser["tables"].map((tab, index) => (
+                      <components.SalaryTableComponent key={index} tab={tab} />
+                    ))}
+                  </ul>
+                }
+              </components.AccordionComponent>
             </div>
           </div>
         )}

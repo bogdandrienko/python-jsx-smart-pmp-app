@@ -10,8 +10,8 @@ export const VideoStudyPage = () => {
     <body>
       <components.HeaderComponent />
       <main>
-        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
-          <div className="embed-responsive embed-responsive-16by9">
+        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 justify-content-center text-center shadow m-0 p-0">
+          <div className="embed-responsive embed-responsive-16by9 custom-background-transparent-middle">
             <small className="lead fw-bold">Первый вход в систему:</small>
             <div className="player-wrapper">
               <ReactPlayer
@@ -24,7 +24,7 @@ export const VideoStudyPage = () => {
               />
             </div>
           </div>
-          <div className="embed-responsive embed-responsive-16by9">
+          <div className="embed-responsive embed-responsive-16by9 custom-background-transparent-low">
             <small className="lead fw-bold">Выгрузка расчётного листа:</small>
             <div className="player-wrapper">
               <ReactPlayer

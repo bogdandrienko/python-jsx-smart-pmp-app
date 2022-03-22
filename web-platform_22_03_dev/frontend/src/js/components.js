@@ -546,13 +546,13 @@ export const ModulesComponent = () => {
   } = notificationListStore;
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div>
+    <div className="m-0 p-0">
       {constants.modules && (
-        <div>
-          <h6 className="display-6 text-center card-header bg-light bg-opacity-100">
+        <div className="m-0 p-0">
+          <h6 className="display-6 text-center card-header bg-light bg-opacity-100 m-0 p-1">
             Модули:
           </h6>
-          <div className="container-fluid m-0 p-0">
+          <div className="m-0 p-0">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-0 p-0">
               {constants.modules.map(
                 (module, module_i) =>
@@ -562,7 +562,7 @@ export const ModulesComponent = () => {
                       <div className="lead card-header border shadow bg-light bg-opacity-100 custom-background-transparent-hard m-0 p-0">
                         {module["Header"]}
                       </div>
-                      <div className="text-center m-0 p-0">
+                      <div className="text-center custom-background-transparent-middle m-0 p-0">
                         <img
                           src={module["Image"]}
                           className="img-fluid w-25 m-0 p-0"
@@ -578,7 +578,7 @@ export const ModulesComponent = () => {
                               ) && (
                                 <div
                                   key={section_i}
-                                  className="card-body text-end m-0 p-1"
+                                  className="card-body text-end m-0 p-0"
                                 >
                                   <div className="card">
                                     <li className="list-group-item list-group-item-action active disabled d-flex m-0 p-1">
@@ -767,7 +767,7 @@ export const NewsComponent = (count = 100) => {
     </div>
   );
 };
-
+/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
 export const RationalComponent = ({ object, shortView = false }) => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
@@ -1004,7 +1004,7 @@ export const RationalComponent = ({ object, shortView = false }) => {
     </div>
   );
 };
-
+/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
 export const SalaryTableComponent = ({ tab = {} }) => {
   let header = tab[0];
   let thead_array = [];
@@ -1072,5 +1072,60 @@ export const SalaryTableComponent = ({ tab = {} }) => {
         </tbody>
       </table>
     </li>
+  );
+};
+/////////////////////////////////////////////////////////////////////////////////////TODO default export const component
+export const AccordionComponent = ({
+  key_target,
+  isCollapse = true,
+  title,
+  text_style = "text-danger",
+  header_style = "bg-danger bg-opacity-10",
+  body_style = "bg-danger bg-opacity-10",
+  children,
+}) => {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  return (
+    <div className="m-0 p-1">
+      <div className="accordion m-0 p-0" id="accordionExample">
+        <div className="accordion-item custom-background-transparent-middle m-0 p-0">
+          <h2
+            className="accordion-header custom-background-transparent-low m-0 p-0"
+            id="accordion_heading_1"
+          >
+            <button
+              className={`accordion-button m-0 p-0 ${header_style}`}
+              type="button"
+              data-bs-toggle=""
+              data-bs-target={`#${key_target}`}
+              aria-expanded="false"
+              aria-controls={key_target}
+              onClick={(e) => utils.ChangeAccordionCollapse([key_target])}
+            >
+              <h6 className={`lead m-0 p-3 ${text_style}`}>
+                {title}{" "}
+                <small className="text-muted m-0 p-0">
+                  (нажмите сюда, для переключения)
+                </small>
+              </h6>
+            </button>
+          </h2>
+          <div
+            id={key_target}
+            className={
+              isCollapse
+                ? "accordion-collapse collapse m-0 p-0"
+                : "accordion-collapse m-0 p-0"
+            }
+            aria-labelledby={key_target}
+            data-bs-parent="#accordionExample"
+          >
+            <div className={`accordion-body m-0 p-0 ${body_style}`}>
+              {children}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

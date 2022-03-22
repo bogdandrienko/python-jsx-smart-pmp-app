@@ -184,9 +184,9 @@ export const ChangeAccordionCollapse = (objects = [""]) => {
     objects.forEach(function (object, index, array) {
       const obj = document.getElementById(object);
       const classname =
-        obj.getAttribute("class") === "accordion-collapse collapse"
-          ? "accordion-collapse"
-          : "accordion-collapse collapse";
+        obj.getAttribute("class") === "accordion-collapse collapse m-0 p-0"
+          ? "accordion-collapse m-0 p-0"
+          : "accordion-collapse collapse m-0 p-0";
       obj.setAttribute("class", classname);
     });
   } catch (error) {

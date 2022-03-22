@@ -69,109 +69,91 @@ export const IdeaRatingListPage = () => {
     <body>
       <components.HeaderComponent />
       <main>
-        <div className="accordion accordion-flush shadow m-0 p-0 mb-2">
-          <div className="accordion-item custom-background-transparent-low m-0 p-0">
-            <h2 className="accordion-header m-0 p-0" id="headingOne">
-              <button
-                className="accordion-button bg-success bg-opacity-10 m-0 p-3"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="false"
-                aria-controls="collapseOne"
-                onClick={(e) => utils.ChangeAccordionCollapse(["collapseOne"])}
-              >
-                <h4 className="lead fw-bold text-success m-0 p-0">
-                  Фильтрация, поиск и сортировка{" "}
-                  <small className="text-muted m-0 p-0">
-                    (нажмите сюда, для переключения)
-                  </small>
-                </h4>
-              </button>
-            </h2>
-            <div
-              id="collapseOne"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
-            >
-              <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
-                <form className="m-0 p-0" onSubmit={handlerSubmit}>
-                  <div className="card shadow custom-background-transparent-hard m-0 p-0">
-                    <div className="card-header m-0 p-0">
-                      <label className="lead m-0 p-1">
-                        Выберите нужные настройки фильтрации и сортировки, затем
-                        нажмите кнопку{" "}
-                        <p className="fw-bold text-primary m-0 p-0">
-                          "фильтровать"
-                        </p>
-                      </label>
+        <components.AccordionComponent
+          key_target={"accordion1"}
+          isCollapse={true}
+          title={"Фильтрация, поиск и сортировка:"}
+          text_style="text-success"
+          header_style="bg-success bg-opacity-10 custom-background-transparent-low"
+          body_style="bg-light bg-opacity-10 custom-background-transparent-low"
+        >
+          {
+            <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
+              <form className="m-0 p-0" onSubmit={handlerSubmit}>
+                <div className="card shadow custom-background-transparent-hard m-0 p-0">
+                  <div className="card-header m-0 p-0">
+                    <label className="lead m-0 p-1">
+                      Выберите нужные настройки фильтрации и сортировки, затем
+                      нажмите кнопку{" "}
+                      <p className="fw-bold text-primary m-0 p-0">
+                        "фильтровать"
+                      </p>
+                    </label>
+                    <label className="form-control-sm form-switch text-center m-0 p-1">
+                      Детальное отображение:
+                      <input
+                        type="checkbox"
+                        className="form-check-input m-0 p-1"
+                        id="flexSwitchCheckDefault"
+                        defaultChecked={detailView}
+                        onClick={(e) => detailViewSet(!detailView)}
+                      />
+                    </label>
+                  </div>
+                  <div className="card-body m-0 p-0">
+                    <div className="m-0 p-0">
                       <label className="form-control-sm form-switch text-center m-0 p-1">
-                        Детальное отображение:
+                        Сводка только за последний месяц:
                         <input
                           type="checkbox"
                           className="form-check-input m-0 p-1"
                           id="flexSwitchCheckDefault"
-                          defaultChecked={detailView}
-                          onClick={(e) => detailViewSet(!detailView)}
+                          defaultChecked={onlyMonth}
+                          onClick={(e) => onlyMonthSet(!onlyMonth)}
                         />
                       </label>
-                    </div>
-                    <div className="card-body m-0 p-0">
-                      <div className="m-0 p-0">
-                        <label className="form-control-sm form-switch text-center m-0 p-1">
-                          Сводка только за последний месяц:
-                          <input
-                            type="checkbox"
-                            className="form-check-input m-0 p-1"
-                            id="flexSwitchCheckDefault"
-                            defaultChecked={onlyMonth}
-                            onClick={(e) => onlyMonthSet(!onlyMonth)}
-                          />
-                        </label>
-                        <label className="form-control-sm text-center m-0 p-1">
-                          Сортировка по:
-                          <div className="input-group">
-                            <select
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              value={sort}
-                              onChange={(e) => sortSet(e.target.value)}
-                            >
-                              <option value="рейтингу (популярные в начале)">
-                                рейтингу (популярные в начале)
-                              </option>
-                              <option value="рейтингу (популярные в конце)">
-                                рейтингу (популярные в конце)
-                              </option>
-                              <option value="отметкам рейтинга (наибольшие в начале)">
-                                отметкам рейтинга (наибольшие в начале)
-                              </option>
-                              <option value="отметкам рейтинга (наибольшие в конце)">
-                                отметкам рейтинга (наибольшие в конце)
-                              </option>
-                              <option value="комментариям (наибольшие в начале)">
-                                комментариям (наибольшие в начале)
-                              </option>
-                              <option value="комментариям (наибольшие в конце)">
-                                комментариям (наибольшие в конце)
-                              </option>
-                            </select>
-                            <button
-                              className="btn btn-sm btn-primary m-0 p-2"
-                              type="submit"
-                            >
-                              фильтровать идеи
-                            </button>
-                          </div>
-                        </label>
-                      </div>
+                      <label className="form-control-sm text-center m-0 p-1">
+                        Сортировка по:
+                        <div className="input-group">
+                          <select
+                            className="form-control form-control-sm text-center m-0 p-1"
+                            value={sort}
+                            onChange={(e) => sortSet(e.target.value)}
+                          >
+                            <option value="рейтингу (популярные в начале)">
+                              рейтингу (популярные в начале)
+                            </option>
+                            <option value="рейтингу (популярные в конце)">
+                              рейтингу (популярные в конце)
+                            </option>
+                            <option value="отметкам рейтинга (наибольшие в начале)">
+                              отметкам рейтинга (наибольшие в начале)
+                            </option>
+                            <option value="отметкам рейтинга (наибольшие в конце)">
+                              отметкам рейтинга (наибольшие в конце)
+                            </option>
+                            <option value="комментариям (наибольшие в начале)">
+                              комментариям (наибольшие в начале)
+                            </option>
+                            <option value="комментариям (наибольшие в конце)">
+                              комментариям (наибольшие в конце)
+                            </option>
+                          </select>
+                          <button
+                            className="btn btn-sm btn-primary m-0 p-2"
+                            type="submit"
+                          >
+                            фильтровать идеи
+                          </button>
+                        </div>
+                      </label>
                     </div>
                   </div>
-                </form>
-              </ul>
-            </div>
-          </div>
-        </div>
+                </div>
+              </form>
+            </ul>
+          }
+        </components.AccordionComponent>
         <components.StoreStatusComponent
           storeStatus={ideaListStore}
           keyStatus={"ideaListStore"}

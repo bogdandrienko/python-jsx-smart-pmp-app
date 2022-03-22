@@ -208,127 +208,109 @@ export const IdeaModerateChangePage = () => {
             {"<="} назад к списку
           </Link>
         </div>
-        <div className="accordion accordion-flush shadow m-0 p-0 mb-2">
-          <div className="accordion-item custom-background-transparent-low m-0 p-0">
-            <h2 className="accordion-header m-0 p-0" id="headingOne">
-              <button
-                className="accordion-button bg-danger bg-opacity-10 m-0 p-3"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="false"
-                aria-controls="collapseOne"
-                onClick={(e) => utils.ChangeAccordionCollapse(["collapseOne"])}
-              >
-                <h4 className="lead fw-bold text-danger m-0 p-0">
-                  Модерация{" "}
-                  <small className="text-muted m-0 p-0">
-                    (нажмите сюда, для переключения)
-                  </small>
-                </h4>
-              </button>
-            </h2>
-            <div
-              id="collapseOne"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
-            >
-              <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
-                <form className="m-0 p-0" onSubmit={handlerModerateSubmit}>
-                  <div className="card shadow custom-background-transparent-hard m-0 p-0">
-                    <div className="card-header m-0 p-0">
-                      <label className="lead m-0 p-1">
-                        Выберите заключение по идеи{" "}
-                        <p className="fw-bold text-secondary m-0 p-0">
-                          заполните комментарий "на доработку", чтобы автор идеи
-                          его увидел
-                        </p>
-                      </label>
-                    </div>
-                    <div className="card-body m-0 p-0">
-                      <label className="form-control-sm text-center m-0 p-1">
-                        Заключение:
-                        <select
-                          required
-                          className="form-control form-control-sm text-center m-0 p-1"
-                          value={moderate}
-                          onChange={(e) => moderateSet(e.target.value)}
-                        >
-                          <option value="">не выбрано</option>
-                          <option value="на модерации">на модерации</option>
-                          <option value="на доработку">на доработку</option>
-                          <option value="скрыто">скрыто</option>
-                          <option value="принято">принято</option>
-                        </select>
-                        <small className="text-danger">* обязательно</small>
-                      </label>
-                      {moderate === "на доработку" && (
-                        <label className="w-75 form-control-sm">
-                          Комментарий:
-                          <input
-                            type="text"
-                            className="form-control form-control-sm text-center m-0 p-1"
-                            value={moderateComment}
-                            placeholder="вводите комментарий тут..."
-                            minLength="1"
-                            maxLength="200"
-                            onChange={(e) =>
-                              moderateCommentSet(
-                                e.target.value.replace(
-                                  utils.GetRegexType({
-                                    numbers: true,
-                                    cyrillic: true,
-                                    space: true,
-                                  }),
-                                  ""
-                                )
-                              )
-                            }
-                          />
-                          <small className="text-danger m-0 p-0">
-                            * обязательно
-                            <small className="text-warning m-0 p-0">
-                              {" "}
-                              * только кириллические буквы и цифры
-                            </small>
-                            <small className="text-muted m-0 p-0">
-                              {" "}
-                              * длина: не более 200 символов
-                            </small>
-                          </small>
-                        </label>
-                      )}
-                    </div>
-                    <components.StoreStatusComponent
-                      storeStatus={ideaModerateStore}
-                      keyStatus={"ideaModerateStore"}
-                      consoleLog={constants.DEBUG_CONSTANT}
-                      showLoad={true}
-                      loadText={""}
-                      showData={true}
-                      dataText={""}
-                      showError={true}
-                      errorText={""}
-                      showFail={true}
-                      failText={""}
-                    />
-                    <div className="card-footer m-0 p-0">
-                      <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-                        <button
-                          className="btn btn-sm btn-danger m-1 p-2"
-                          type="submit"
-                        >
-                          вынести заключение
-                        </button>
-                      </ul>
-                    </div>
+        <components.AccordionComponent
+          key_target={"accordion1"}
+          isCollapse={true}
+          title={"Модерация:"}
+          text_style="text-danger"
+          header_style="bg-danger bg-opacity-10 custom-background-transparent-low"
+          body_style="bg-light bg-opacity-10 custom-background-transparent-low"
+        >
+          {
+            <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
+              <form className="m-0 p-0" onSubmit={handlerModerateSubmit}>
+                <div className="card shadow custom-background-transparent-hard m-0 p-0">
+                  <div className="card-header m-0 p-0">
+                    <label className="lead m-0 p-1">
+                      Выберите заключение по идеи{" "}
+                      <p className="fw-bold text-secondary m-0 p-0">
+                        заполните комментарий "на доработку", чтобы автор идеи
+                        его увидел
+                      </p>
+                    </label>
                   </div>
-                </form>
-              </ul>
-            </div>
-          </div>
-        </div>
+                  <div className="card-body m-0 p-0">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Заключение:
+                      <select
+                        required
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={moderate}
+                        onChange={(e) => moderateSet(e.target.value)}
+                      >
+                        <option value="">не выбрано</option>
+                        <option value="на модерации">на модерации</option>
+                        <option value="на доработку">на доработку</option>
+                        <option value="скрыто">скрыто</option>
+                        <option value="принято">принято</option>
+                      </select>
+                      <small className="text-danger">* обязательно</small>
+                    </label>
+                    {moderate === "на доработку" && (
+                      <label className="w-75 form-control-sm">
+                        Комментарий:
+                        <input
+                          type="text"
+                          className="form-control form-control-sm text-center m-0 p-1"
+                          value={moderateComment}
+                          placeholder="вводите комментарий тут..."
+                          minLength="1"
+                          maxLength="200"
+                          onChange={(e) =>
+                            moderateCommentSet(
+                              e.target.value.replace(
+                                utils.GetRegexType({
+                                  numbers: true,
+                                  cyrillic: true,
+                                  space: true,
+                                }),
+                                ""
+                              )
+                            )
+                          }
+                        />
+                        <small className="text-danger m-0 p-0">
+                          * обязательно
+                          <small className="text-warning m-0 p-0">
+                            {" "}
+                            * только кириллические буквы и цифры
+                          </small>
+                          <small className="text-muted m-0 p-0">
+                            {" "}
+                            * длина: не более 200 символов
+                          </small>
+                        </small>
+                      </label>
+                    )}
+                  </div>
+                  <components.StoreStatusComponent
+                    storeStatus={ideaModerateStore}
+                    keyStatus={"ideaModerateStore"}
+                    consoleLog={constants.DEBUG_CONSTANT}
+                    showLoad={true}
+                    loadText={""}
+                    showData={true}
+                    dataText={""}
+                    showError={true}
+                    errorText={""}
+                    showFail={true}
+                    failText={""}
+                  />
+                  <div className="card-footer m-0 p-0">
+                    <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
+                      <button
+                        className="btn btn-sm btn-danger m-1 p-2"
+                        type="submit"
+                      >
+                        вынести заключение
+                      </button>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+            </ul>
+          }
+        </components.AccordionComponent>
         <components.StoreStatusComponent
           storeStatus={ideaDetailStore}
           keyStatus={"ideaDetailStore"}
