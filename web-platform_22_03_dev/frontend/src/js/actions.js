@@ -673,7 +673,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
       error.response.statusText === "Unauthorized" &&
       error.response.statusText === "Request Entity Too Large"
     ) {
-      dispatch(userLogoutAction());
+      // dispatch(userLogoutAction());
     }
     dispatch({
       type: constants.USER_SALARY_FAIL_CONSTANT,

@@ -1175,6 +1175,7 @@ def api_auth_salary(request):
                     password = '159159qqww!'
                     h.add_credentials(_login, password)
                     response, content = h.request(url)
+
                     data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:
@@ -1192,6 +1193,7 @@ def api_auth_salary(request):
                     ###############################################
 
                     json_data = json.loads(data)
+
                     try:
                         json_data["global_objects"]["3.Доходы в натуральной форме"]
                     except Exception as error:

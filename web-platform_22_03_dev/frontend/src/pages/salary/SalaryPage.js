@@ -21,7 +21,10 @@ export const SalaryPage = () => {
     // fail: failSalaryUser,
   } = salaryUserStore;
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
-  const handlerSubmit = async () => {
+  const handlerSubmit = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {}
     const form = {
       "Action-type": "USER_SALARY",
       dateTime: `${year}${month > 9 ? month : "0" + month}`,
@@ -116,6 +119,7 @@ export const SalaryPage = () => {
             </div>
           </form>
         </ul>
+        <hr />
         <components.StoreStatusComponent
           storeStatus={salaryUserStore}
           key={"salaryUserStore"}
@@ -130,7 +134,7 @@ export const SalaryPage = () => {
           failText={""}
         />
         {dataSalaryUser && (
-          <div>
+          <div className="bg-light custom-background-transparent-low">
             <div>
               <a
                 className="btn btn-sm btn-success m-0"
