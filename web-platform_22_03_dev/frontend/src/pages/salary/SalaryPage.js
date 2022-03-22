@@ -24,7 +24,7 @@ export const SalaryPage = () => {
   const handlerSubmit = async () => {
     const form = {
       "Action-type": "USER_SALARY",
-      dateTime: `${year}${month}`,
+      dateTime: `${year}${month > 9 ? month : "0" + month}`,
     };
     dispatch(actions.salaryUserAction(form));
   };
