@@ -140,6 +140,19 @@ export const HeaderComponent = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
+              <StoreStatusComponent
+                storeStatus={userDetailsStore}
+                keyStatus={"userDetailsStore"}
+                consoleLog={constants.DEBUG_CONSTANT}
+                showLoad={true}
+                loadText={""}
+                showData={false}
+                dataText={""}
+                showError={true}
+                errorText={""}
+                showFail={true}
+                failText={""}
+              />
               {constants.modules.map(
                 (module, module_i) =>
                   utils.CheckAccess(userDetailsStore, module.Access) && (
@@ -449,6 +462,19 @@ export const ModulesComponent = () => {
             Модули:
           </h6>
           <div className="m-0 p-0">
+            <StoreStatusComponent
+              storeStatus={userDetailsStore}
+              keyStatus={"userDetailsStore"}
+              consoleLog={constants.DEBUG_CONSTANT}
+              showLoad={true}
+              loadText={""}
+              showData={false}
+              dataText={""}
+              showError={true}
+              errorText={""}
+              showFail={true}
+              failText={""}
+            />
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-0 p-0">
               {constants.modules.map(
                 (module, module_i) =>

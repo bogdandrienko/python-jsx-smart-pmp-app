@@ -95,7 +95,7 @@ export const ResumeCreatePage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -406,6 +406,6 @@ export const ResumeCreatePage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

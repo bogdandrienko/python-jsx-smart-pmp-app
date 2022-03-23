@@ -57,7 +57,7 @@ export const VacancyCreatePage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -262,6 +262,6 @@ export const VacancyCreatePage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

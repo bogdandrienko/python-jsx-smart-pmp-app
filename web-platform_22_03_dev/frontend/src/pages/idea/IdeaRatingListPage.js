@@ -66,7 +66,7 @@ export const IdeaRatingListPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.AccordionComponent
@@ -574,6 +574,6 @@ export const IdeaRatingListPage = () => {
           ))}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

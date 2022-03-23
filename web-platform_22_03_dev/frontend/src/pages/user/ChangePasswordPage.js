@@ -52,7 +52,7 @@ export const ChangePasswordPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
@@ -182,6 +182,6 @@ export const ChangePasswordPage = () => {
         </ul>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

@@ -158,7 +158,7 @@ export const IdeaChangePage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <div className="btn-group text-start w-100 m-0 p-0">
@@ -726,6 +726,6 @@ export const IdeaChangePage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

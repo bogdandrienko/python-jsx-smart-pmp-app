@@ -1,5 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
+import * as actions from "./actions";
+import { userLogoutAction } from "./actions";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO base utils
 export const CheckAccess = (userDetailsStore, slug) => {
   try {
@@ -72,6 +74,62 @@ export const CheckPageAccess = (userDetailsStore, location) => {
     });
   });
   return access;
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ActionsFormDataUtility = ({ form, getState = null }) => {
+  try {
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    if (getState) {
+      const {
+        userLoginStore: { data: userLogin },
+      } = getState();
+      return { formData: formData, userLogin: userLogin };
+    }
+    return { formData: formData };
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log("ActionsFormDataUtilityError: ", error);
+    }
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ActionsFailUtility = ({ dispatch, error }) => {
+  try {
+    if (constants.DEBUG_CONSTANT) {
+      console.log("fail: ", error);
+    }
+    if (error) {
+      let status = error.message
+        ? error.message
+        : error.response.data.detail
+        ? error.response.data.detail
+        : error.response.status;
+      if (constants.DEBUG_CONSTANT) {
+        console.log("status: ", status);
+      }
+      if (status.slice(0, 7) === "timeout") {
+        status = "timeout";
+      }
+      switch (status) {
+        case 401 || "Authentication credentials were not provided.":
+          dispatch(actions.userLogoutAction());
+          return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
+        case 413 || "Request Entity Too Large":
+          return "Ваш файл слишком большой! Измените его размер и перезагрузите страницу перед отправкой.";
+        case "timeout":
+          return "Превышено время ожидания! Попробуйте повторить действие или ожидайте исправления.";
+        default:
+          return "Неизвестная ошибка! Обратитесь к администратору.";
+      }
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log("ActionsFailUtilityError: ", error);
+    }
+  }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetInfoPage = (location) => {

@@ -45,7 +45,7 @@ export const IdeaSelfListPage = () => {
   }, [dataIdeaList, dispatch, firstRefresh]);
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -444,6 +444,6 @@ export const IdeaSelfListPage = () => {
           ))}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

@@ -212,7 +212,7 @@ export const IdeaDetailPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -767,6 +767,6 @@ export const IdeaDetailPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

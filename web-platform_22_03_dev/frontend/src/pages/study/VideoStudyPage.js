@@ -7,7 +7,7 @@ import * as components from "../../js/components";
 export const VideoStudyPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 justify-content-center text-center shadow m-0 p-0">
@@ -40,6 +40,6 @@ export const VideoStudyPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

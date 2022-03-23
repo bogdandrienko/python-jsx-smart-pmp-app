@@ -60,7 +60,7 @@ export const RationalModerateDetailPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent
         logic={true}
         redirect={true}
@@ -170,6 +170,6 @@ export const RationalModerateDetailPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

@@ -71,7 +71,7 @@ export const ResumeDetailPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -289,6 +289,6 @@ export const ResumeDetailPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

@@ -67,7 +67,7 @@ def index(request):
 
 # ###########################################################################################################TODO routes
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
-@permission_classes([BasicAuthentication])
+@authentication_classes([BasicAuthentication])
 def api_auth_routes(request):
     """
     routes django-rest-framework

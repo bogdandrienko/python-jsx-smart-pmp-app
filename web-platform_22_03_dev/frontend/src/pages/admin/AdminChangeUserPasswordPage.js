@@ -80,7 +80,7 @@ export const AdminChangeUserPasswordPage = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -287,6 +287,6 @@ export const AdminChangeUserPasswordPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

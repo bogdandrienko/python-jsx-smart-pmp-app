@@ -49,7 +49,7 @@ export const TerminalRebootPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <div className="card m-0 p-0">
@@ -96,6 +96,6 @@ export const TerminalRebootPage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

@@ -8,7 +8,7 @@ import * as components from "../../js/components";
 export const HomePage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 m-0 p-1">
@@ -50,6 +50,6 @@ export const HomePage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

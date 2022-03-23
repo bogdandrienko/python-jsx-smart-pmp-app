@@ -197,7 +197,7 @@ export const IdeaModerateChangePage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main className="container">
         <div className="btn-group m-0 p-1 text-start w-100">
@@ -966,6 +966,6 @@ export const IdeaModerateChangePage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

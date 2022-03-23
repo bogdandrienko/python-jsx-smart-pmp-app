@@ -33,7 +33,7 @@ export const SalaryPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
@@ -59,12 +59,7 @@ export const SalaryPage = () => {
                       <option className="m-0 p-0" value="2">
                         Февраль
                       </option>
-                      <option
-                        className="m-0 p-0"
-                        value="3"
-                        defaultValue
-                        selected
-                      >
+                      <option className="m-0 p-0" value="3">
                         Март
                       </option>
                       <option className="m-0 p-0" value="4">
@@ -236,6 +231,6 @@ export const SalaryPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

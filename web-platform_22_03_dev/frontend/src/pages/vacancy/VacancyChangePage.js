@@ -109,7 +109,7 @@ export const VacancyChangePage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <div className="btn-group p-1 m-0 text-start w-100">
@@ -355,6 +355,6 @@ export const VacancyChangePage = () => {
         </div>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

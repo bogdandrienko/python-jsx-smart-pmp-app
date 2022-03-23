@@ -9,7 +9,7 @@ import * as utils from "../../js/utils";
 export const IdeaTemplatePage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent
         logic={true}
         redirect={true}
@@ -217,6 +217,6 @@ export const IdeaTemplatePage = () => {
         </ul>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

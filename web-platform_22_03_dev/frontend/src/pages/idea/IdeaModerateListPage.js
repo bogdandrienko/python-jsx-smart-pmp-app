@@ -97,7 +97,7 @@ export const IdeaModerateListPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.AccordionComponent
@@ -791,6 +791,6 @@ export const IdeaModerateListPage = () => {
           ))}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

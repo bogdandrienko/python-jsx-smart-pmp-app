@@ -6,12 +6,12 @@ import * as components from "../../js/components";
 export const NewsPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.NewsComponent count={100} />
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

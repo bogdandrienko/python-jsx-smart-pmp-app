@@ -57,7 +57,7 @@ export const IdeaAuthorListPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.AccordionComponent
@@ -254,6 +254,6 @@ export const IdeaAuthorListPage = () => {
           ))}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

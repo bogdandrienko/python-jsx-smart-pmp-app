@@ -7,7 +7,7 @@ import * as utils from "../../js/utils";
 export const TextStudyPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.AccordionComponent
@@ -32,7 +32,7 @@ export const TextStudyPage = () => {
               </li>
               <li className="text-start m-0 p-1">
                 Обновите Ваш браузер до последней доступной версии!
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   Компьютер:
                   <img
                     src="/static/study/input_0_0.png"
@@ -40,7 +40,7 @@ export const TextStudyPage = () => {
                     alt="id"
                   />
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   Мобильный вид:
                   <img
                     src="/static/study/input_0_1.jpg"
@@ -83,7 +83,7 @@ export const TextStudyPage = () => {
                     входа.
                   </small>
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/input_1.png"
                     className="w-100"
@@ -102,7 +102,7 @@ export const TextStudyPage = () => {
                     Вашего расчётного листа.
                   </small>
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/input_2.png"
                     className="w-100"
@@ -124,14 +124,12 @@ export const TextStudyPage = () => {
                   <small className="text-danger">
                     Пароль должен состоять только из латинских букв и цифр!
                   </small>
-                  <p>
-                    <small className="text-danger">
-                      Внимание, первый пароль является временным, его необходимо
-                      заменить!
-                    </small>
-                  </p>
+                  <small className="text-danger">
+                    Внимание, первый пароль является временным, его необходимо
+                    заменить!
+                  </small>
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/input_3.png"
                     className="w-100"
@@ -149,7 +147,7 @@ export const TextStudyPage = () => {
               <li className="text-start m-0 p-1">
                 Для быстрого доступа к сайту можно сделать закладку и перенести
                 её для быстрого доступа.
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   Компьютеры:
                   <img
                     src="/static/study/input_4_1.png"
@@ -157,7 +155,7 @@ export const TextStudyPage = () => {
                     alt="id"
                   />
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   Мобильный вид:
                   <img
                     src="/static/study/input_4_2.png"
@@ -208,7 +206,7 @@ export const TextStudyPage = () => {
                 Войдите в систему, а затем нажмите на кнопку "Выгрузка
                 расчётного листа" в пунктe "Бухгалтерия / Сектор расчёта
                 заработной платы" на верхней панели.
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/salary_1.png"
                     className="w-100"
@@ -232,7 +230,7 @@ export const TextStudyPage = () => {
                     перерасчёта периода.
                   </small>
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/salary_2.png"
                     className="w-100"
@@ -254,7 +252,7 @@ export const TextStudyPage = () => {
                     секунд)!
                   </small>
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/salary_3.png"
                     className="w-100"
@@ -278,7 +276,7 @@ export const TextStudyPage = () => {
                     excel-формате, для распечатки!
                   </small>
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/salary_4.png"
                     className="w-100"
@@ -290,7 +288,7 @@ export const TextStudyPage = () => {
                     Данные в excel-формате. Внимание, изменение ячеек запрещено!
                   </small>
                 </p>
-                <p className="text-center">
+                <p className="text-center m-0 p-1">
                   <img
                     src="/static/study/salary_5.png"
                     className="w-50"
@@ -310,6 +308,6 @@ export const TextStudyPage = () => {
         </components.AccordionComponent>
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

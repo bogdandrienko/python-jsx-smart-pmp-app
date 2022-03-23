@@ -162,7 +162,7 @@ export const RationalModerateListPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.AccordionComponent
@@ -429,6 +429,6 @@ export const RationalModerateListPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };

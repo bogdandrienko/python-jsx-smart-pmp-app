@@ -62,7 +62,7 @@ export const AdminCreateOrChangeUsersPage = () => {
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <body>
+    <div>
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -215,6 +215,6 @@ export const AdminCreateOrChangeUsersPage = () => {
         )}
       </main>
       <components.FooterComponent />
-    </body>
+    </div>
   );
 };
