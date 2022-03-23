@@ -197,24 +197,6 @@ export const RecoverPasswordPage = () => {
                       >
                         Проверить идентификатор
                       </button>
-                      <button
-                        type="reset"
-                        className="btn btn-sm btn-danger m-1 p-2"
-                        onClick={(e) =>
-                          utils.ChangePasswordVisibility([
-                            "password",
-                            "password2",
-                          ])
-                        }
-                      >
-                        Видимость пароля
-                      </button>
-                      <Link
-                        to="/recover_password"
-                        className="btn btn-sm btn-success m-1 p-2"
-                      >
-                        Восстановить доступ к аккаунту
-                      </Link>
                     </ul>
                   </div>
                 </div>

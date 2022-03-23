@@ -488,6 +488,51 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     });
   }
 };
+export const adminChangeUserActivityAction =
+  (form) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: constants.ADMIN_CHANGE_USER_ACTIVITY_LOAD_CONSTANT,
+      });
+      const {
+        userLoginStore: { data: userLogin },
+      } = getState();
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        formData.append(key, value);
+      });
+      if (userLogin !== null) {
+        const { data } = await axios({
+          url: "/api/auth/admin/",
+          method: "POST",
+          timeout: 10000,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userLogin.token}`,
+          },
+          data: formData,
+        });
+        if (data["response"]) {
+          const response = data["response"];
+          dispatch({
+            type: constants.ADMIN_CHANGE_USER_ACTIVITY_DATA_CONSTANT,
+            payload: response,
+          });
+        } else {
+          const response = data["error"];
+          dispatch({
+            type: constants.ADMIN_CHANGE_USER_ACTIVITY_ERROR_CONSTANT,
+            payload: response,
+          });
+        }
+      }
+    } catch (error) {
+      dispatch({
+        type: constants.ADMIN_CHANGE_USER_ACTIVITY_FAIL_CONSTANT,
+        payload: utils.ActionsFailUtility({ dispatch: dispatch, error: error }),
+      });
+    }
+  };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const terminalRebootAction = (form) => async (dispatch, getState) => {
   try {

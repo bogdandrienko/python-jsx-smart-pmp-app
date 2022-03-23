@@ -227,6 +227,28 @@ export const adminExportUsersReducer = (state = {}, action = null) => {
       return state;
   }
 };
+export const adminChangeUserActivityReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.ADMIN_CHANGE_USER_ACTIVITY_LOAD_CONSTANT:
+      return { load: true };
+    case constants.ADMIN_CHANGE_USER_ACTIVITY_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.ADMIN_CHANGE_USER_ACTIVITY_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.ADMIN_CHANGE_USER_ACTIVITY_FAIL_CONSTANT:
+      return { load: false, fail: action.payload };
+    case constants.ADMIN_CHANGE_USER_ACTIVITY_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const terminalRebootReducer = (state = {}, action = null) => {
   switch (action.type) {

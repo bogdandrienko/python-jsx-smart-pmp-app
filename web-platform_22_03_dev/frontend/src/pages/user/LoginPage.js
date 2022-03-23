@@ -168,7 +168,7 @@ export const LoginPage = () => {
                     className="btn btn-sm btn-primary m-1 p-2"
                     type="submit"
                   >
-                    отправить данные
+                    войти в систему
                   </button>
                   <button
                     className="btn btn-sm btn-warning m-1 p-2"

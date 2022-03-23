@@ -22,6 +22,7 @@ import { SalaryPage } from "../pages/salary/SalaryPage";
 import { AdminChangeUserPasswordPage } from "../pages/admin/AdminChangeUserPasswordPage";
 import { AdminCreateOrChangeUsersPage } from "../pages/admin/AdminCreateOrChangeUsersPage";
 import { AdminExportUsersPage } from "../pages/admin/AdminExportUsersPage";
+import { AdminChangeUserActivityPage } from "../pages/admin/AdminChangeUserActivityPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { RationalTemplatePage } from "../pages/rational/RationalTemplatePage";
 import { RationalCreatePage } from "../pages/rational/RationalCreatePage";
@@ -73,6 +74,10 @@ export const App = () => {
           element={<AdminCreateOrChangeUsersPage />}
         />
         <Route path="/admin_export_users" element={<AdminExportUsersPage />} />
+        <Route
+          path="/admin_change_user_activity"
+          element={<AdminChangeUserActivityPage />}
+        />
 
         <Route path="/news" element={<NewsPage />} />
         <Route path="/video_study" element={<VideoStudyPage />} />

@@ -1,7 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
 import * as actions from "./actions";
-import { userLogoutAction } from "./actions";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO base utils
 export const CheckAccess = (userDetailsStore, slug) => {
   try {
@@ -280,10 +279,6 @@ export const GetRegexType = ({
   punctuationMarks = false,
   email = false,
 }) => {
-  //  /[^А-Яа-я_]/gi - только кириллица и "_"
-  // /[^A-Za-z0-9_]/gi - только латиница, цифры и "_"
-  // /[^A-Za-z]/gi - только латиница
-  // /[^0-9]/gi - только цифры
   try {
     let regex = "";
     if (numbers) {
@@ -310,7 +305,7 @@ export const GetRegexType = ({
       regex = regex + " ";
     }
     if (punctuationMarks) {
-      regex = regex + "_-:;.,!?";
+      regex = regex + "-:;.,!?_";
     }
     if (email) {
       regex = regex + "@.";

@@ -937,6 +937,28 @@ def api_auth_admin(request):
                         request=request, error=error, print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "ACTIVITY_USER":
+                try:
+                    username = req_inst.get_value("username", strip=True)
+                    active = req_inst.get_value("active")
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    if active:
+                        user_model.activity_boolean_field = True
+                        user_model.save()
+                    else:
+                        user_model.activity_boolean_field = False
+                        user_model.save()
+
+                    response = {"response": "Успешно изменено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:

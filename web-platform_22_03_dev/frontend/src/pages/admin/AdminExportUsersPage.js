@@ -47,34 +47,42 @@ export const AdminExportUsersPage = () => {
           showFail={true}
           failText={""}
         />
-        <div className="input-group m-1">
-          {!loadExportUsers && (
-            <form
-              method="POST"
-              target="_self"
-              encType="multipart/form-data"
-              name="EXPORT_USERS"
-              autoComplete="on"
-              className="w-100"
-              onSubmit={handlerSubmit}
-            >
-              <button className="btn btn-sm btn-primary" type="submit">
-                получить
-              </button>
+        {!loadExportUsers && (
+          <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
+            <form className="m-0 p-0" onSubmit={handlerSubmit}>
+              <div className="card shadow custom-background-transparent-low m-0 p-0">
+                <div className="card-footer m-0 p-0">
+                  <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
+                    <button
+                      className="btn btn-sm btn-primary m-1 p-2"
+                      type="submit"
+                    >
+                      получить данные
+                    </button>
+                  </ul>
+                </div>
+              </div>
             </form>
-          )}
-        </div>
-        <hr />
+          </ul>
+        )}
         <div>
           {dataExportUsers && (
-            <div>
-              <a
-                className="btn btn-sm btn-success m-1"
-                href={`/${dataExportUsers["excel"]}`}
-              >
-                Скачать excel-документ
-              </a>
-            </div>
+            <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
+              <form className="m-0 p-0" onSubmit={handlerSubmit}>
+                <div className="card shadow custom-background-transparent-low m-0 p-0">
+                  <div className="card-footer m-0 p-0">
+                    <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
+                      <a
+                        className="btn btn-sm btn-success m-0 p-1"
+                        href={`/${dataExportUsers["excel"]}`}
+                      >
+                        Скачать excel-документ
+                      </a>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+            </ul>
           )}
         </div>
       </main>

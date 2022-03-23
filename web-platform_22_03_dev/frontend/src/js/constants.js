@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO debug
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////TODO constants
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -68,6 +68,17 @@ export const ADMIN_EXPORT_USERS_FAIL_CONSTANT =
   "ADMIN_EXPORT_USERS_FAIL_CONSTANT";
 export const ADMIN_EXPORT_USERS_RESET_CONSTANT =
   "ADMIN_EXPORT_USERS_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_CHANGE_USER_ACTIVITY_LOAD_CONSTANT =
+  "ADMIN_CHANGE_USER_ACTIVITY_LOAD_CONSTANT";
+export const ADMIN_CHANGE_USER_ACTIVITY_DATA_CONSTANT =
+  "ADMIN_CHANGE_USER_ACTIVITY_DATA_CONSTANT";
+export const ADMIN_CHANGE_USER_ACTIVITY_ERROR_CONSTANT =
+  "ADMIN_CHANGE_USER_ACTIVITY_ERROR_CONSTANT";
+export const ADMIN_CHANGE_USER_ACTIVITY_FAIL_CONSTANT =
+  "ADMIN_CHANGE_USER_ACTIVITY_FAIL_CONSTANT";
+export const ADMIN_CHANGE_USER_ACTIVITY_RESET_CONSTANT =
+  "ADMIN_CHANGE_USER_ACTIVITY_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const NOTIFICATION_CREATE_LOAD_CONSTANT =
   "NOTIFICATION_CREATE_LOAD_CONSTANT";
@@ -597,6 +608,19 @@ export const modules = [
             ShowLink: true,
             Title: "Экспорт пользователей",
             Description: "функционал выгрузки всех пользователей системы",
+            Logic: true,
+            Redirect: true,
+            Style: "",
+          },
+          {
+            Header: "Забанить/разбанить пользователя",
+            Access: "moderator",
+            Active: true,
+            Link: "/admin_change_user_activity",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Забанить/разбанить пользователя",
+            Description: "функционал бана/разбана пользователя системы",
             Logic: true,
             Redirect: true,
             Style: "",
