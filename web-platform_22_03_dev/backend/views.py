@@ -959,6 +959,44 @@ def api_auth_admin(request):
                         request=request, error=error, print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "TERMINAL_REBOOT":
+                try:
+                    ips = req_inst.get_value("ips")
+                    # ips = "192.168.15.136,192.168.15.134,192.168.15.132"
+                    arr = [str(str(x).strip()) for x in ips.split(",")]
+
+                    def reboot(_ip):
+                        url = "htt" + f"p://{ip}/ISAPI/System/reboot"
+                        h = httplib2.Http(
+                            os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/reboot_terminal"
+                        )
+                        _login = 'admin'
+                        password = 'snrg2017'
+                        h.add_credentials(_login, password)
+                        headers = {
+                            'Content-type': 'text/plain;charset=UTF-8',
+                            'Accept-Encoding': 'gzip, deflate',
+                            'Accept-Language': 'de,en-US;q=0.7,en;q=0.3',
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 '
+                                          'Firefox/75.0',
+                        }
+                        response_, content = h.request(uri=url, method="PUT", headers=headers)
+                        print(content)
+
+                    for ip in arr:
+                        if len(str(ip)) < 3:
+                            continue
+                        with ThreadPoolExecutor() as executor:
+                            executor.submit(reboot, ip)
+
+                    response = {"response": "Успешно перезагружено!"}
+                    # print(f"response: {response}")
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(
+                        request=request, error=error, print_error=backend_settings.DEBUG
+                    )
+                    return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
@@ -1013,48 +1051,6 @@ def api_basic_admin(request):
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(
                         request=request, error=error, print_error=True
-                    )
-                    return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
-        if req_inst.method == "POST":
-            # Actions
-            if req_inst.action_type == "TERMINAL_REBOOT":
-                try:
-                    ips = req_inst.get_value("ips")
-                    # ips = "192.168.15.136,192.168.15.134,192.168.15.132"
-                    arr = [str(str(x).strip()) for x in ips.split(",")]
-
-                    def reboot(_ip):
-                        url = "htt" + f"p://{ip}/ISAPI/System/reboot"
-                        h = httplib2.Http(
-                            os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/reboot_terminal"
-                        )
-                        _login = 'admin'
-                        password = 'snrg2017'
-                        h.add_credentials(_login, password)
-                        headers = {
-                            'Content-type': 'text/plain;charset=UTF-8',
-                            'Accept-Encoding': 'gzip, deflate',
-                            'Accept-Language': 'de,en-US;q=0.7,en;q=0.3',
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 '
-                                          'Firefox/75.0',
-                        }
-                        response_, content = h.request(uri=url, method="PUT", headers=headers)
-                        print(content)
-
-                    for ip in arr:
-                        if len(str(ip)) < 3:
-                            continue
-                        with ThreadPoolExecutor() as executor:
-                            executor.submit(reboot, ip)
-
-                    response = {"response": "Успешно перезагружено!"}
-                    # print(f"response: {response}")
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
                     )
                     return Response({"error": "Произошла ошибка!"})
             else:

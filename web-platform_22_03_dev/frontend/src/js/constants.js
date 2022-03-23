@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO debug
-export const DEBUG_CONSTANT = false;
+export const DEBUG_CONSTANT = true;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////TODO constants
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -1076,12 +1076,12 @@ export const terminals = [
   {
     Header: "АТП, вход",
     Name: "2_in_atp",
-    Ip: "192.168.1.209",
+    Ip: "192.168.8.220",
   },
   {
     Header: "АТП, выход",
     Name: "2_out_atp",
-    Ip: "192.168.1.210",
+    Ip: "192.168.8.221",
   },
   {
     Header: "ОК, вход 1",
