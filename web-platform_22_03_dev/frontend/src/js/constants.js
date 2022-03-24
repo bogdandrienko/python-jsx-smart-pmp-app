@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO debug
-export const DEBUG_CONSTANT = false;
+export const DEBUG_CONSTANT = true;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////TODO constants
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -370,37 +370,6 @@ export const modules = [
         ],
       },
       {
-        Header: "Рационализаторство",
-        Access: "user",
-        Image:
-          "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
-        Links: [
-          {
-            Header: "Модератор рац. предложений [модератор]",
-            Access: [
-              "rational_admin",
-              "rational_moderator_tech_pre_atp",
-              "rational_moderator_tech_pre_energouprav",
-              "rational_moderator_tech_pre_gtk",
-              "rational_moderator_tech_pre_ok",
-              "rational_moderator_tech_pre_uprav",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_tech_post",
-            ],
-            Active: true,
-            Link: "/rational_moderate_list",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Модерация рационализаторских предложений",
-            Description: "страница модерации рационализаторских предложений",
-            Logic: true,
-            Redirect: true,
-            Style: "",
-          },
-        ],
-      },
-      {
         Header: "Отдел кадров",
         Access: "superuser",
         Image:
@@ -418,6 +387,7 @@ export const modules = [
               "страница доступных вакансий с возможностью поиска и фильтрации",
             Logic: true,
             Redirect: false,
+            Style: "",
           },
           {
             Header: "Подробности вакансии [скрыто]",
@@ -430,6 +400,7 @@ export const modules = [
             Description: "страница подробного описания вакансии",
             Logic: true,
             Redirect: false,
+            Style: "",
           },
           {
             Header: "Создать новую вакансию",
@@ -469,6 +440,7 @@ export const modules = [
             Description: "страница для отклика на вакансию и отправки резюме",
             Logic: true,
             Redirect: false,
+            Style: "",
           },
           {
             Header: "Список резюме",
@@ -672,6 +644,7 @@ export const modules = [
             Description: "основная страница веб платформы",
             Logic: true,
             Redirect: false,
+            Style: "",
           },
           {
             Header: "Уведомления",
@@ -705,6 +678,7 @@ export const modules = [
             Description: "страница редактирования Вашего личного профиля",
             Logic: true,
             Redirect: false,
+            Style: "",
           },
           {
             Header: "Изменить пароль",
@@ -786,6 +760,7 @@ export const modules = [
               "страница с видео инструкциями по функционалу веб-платформы",
             Logic: true,
             Redirect: false,
+            Style: "",
           },
           {
             Header: "Текстовые инструкции",
@@ -799,6 +774,7 @@ export const modules = [
               "страница с текстовыми инструкциями по функционалу веб-платформы",
             Logic: true,
             Redirect: false,
+            Style: "",
           },
         ],
       },
@@ -830,6 +806,64 @@ export const modules = [
     Image: "/static/img/modules/3_module_progress/module_progress.png",
     ShowInModules: true,
     Sections: [
+      {
+        Header: "Рационализаторство",
+        Access: "user",
+        Image:
+          "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
+        Links: [
+          {
+            Header: "Пример (шаблон) рационализаторского предложения",
+            Access: "user",
+            Active: true,
+            Link: "/rational_template",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Пример (шаблон) рационализаторского предложения",
+            Description: "пример (шаблон) рационализаторского предложения",
+            Logic: true,
+            Redirect: true,
+            Style: "text-secondary",
+          },
+          {
+            Header: "Подать новое рационализаторское предложение",
+            Access: "user",
+            Active: true,
+            Link: "/rational_create",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Подача рационализаторского предложения",
+            Description:
+              "форма с полями для заполнения и подачи рационализаторского предложения",
+            Logic: true,
+            Redirect: true,
+            Style: "text-success",
+          },
+          {
+            Header: "Модерация рационализаторских предложений [модератор]",
+            Access: [
+              "rational_admin",
+              "rational_moderator_tech_pre_atp",
+              "rational_moderator_tech_pre_energouprav",
+              "rational_moderator_tech_pre_gtk",
+              "rational_moderator_tech_pre_ok",
+              "rational_moderator_tech_pre_uprav",
+              "rational_moderator_no_tech_post",
+              "rational_moderator_no_tech_post",
+              "rational_moderator_tech_post",
+            ],
+            Active: true,
+            Link: "/rational_moderate_list",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Модерация рационализаторских предложений",
+            Description: "страница модерации рационализаторских предложений",
+            Logic: true,
+            Redirect: true,
+            Style: "text-danger",
+          },
+        ],
+      },
       {
         Header: "Банк идей",
         Access: "user",
@@ -968,64 +1002,6 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-muted",
-          },
-        ],
-      },
-      {
-        Header: "Рационализаторство",
-        Access: "user",
-        Image:
-          "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
-        Links: [
-          {
-            Header: "Пример (шаблон) рационализаторского предложения",
-            Access: "user",
-            Active: true,
-            Link: "/rational_template",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Пример (шаблон) рационализаторского предложения",
-            Description: "пример (шаблон) рационализаторского предложения",
-            Logic: true,
-            Redirect: true,
-            Style: "text-secondary",
-          },
-          {
-            Header: "Подать новое рационализаторское предложение",
-            Access: "user",
-            Active: true,
-            Link: "/rational_create",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Подача рационализаторского предложения",
-            Description:
-              "форма с полями для заполнения и подачи рационализаторского предложения",
-            Logic: true,
-            Redirect: true,
-            Style: "text-success",
-          },
-          {
-            Header: "Модерация рационализаторских предложений [модератор]",
-            Access: [
-              "rational_admin",
-              "rational_moderator_tech_pre_atp",
-              "rational_moderator_tech_pre_energouprav",
-              "rational_moderator_tech_pre_gtk",
-              "rational_moderator_tech_pre_ok",
-              "rational_moderator_tech_pre_uprav",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_tech_post",
-            ],
-            Active: true,
-            Link: "/rational_moderate_list",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Модерация рационализаторских предложений",
-            Description: "страница модерации рационализаторских предложений",
-            Logic: true,
-            Redirect: true,
-            Style: "text-danger",
           },
         ],
       },

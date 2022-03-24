@@ -126,7 +126,7 @@ export const IdeaModerateChangePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaModerate) {
-      utils.Sleep(50).then(() => {
+      utils.Sleep(10).then(() => {
         resetState();
       });
     }
@@ -134,7 +134,7 @@ export const IdeaModerateChangePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaChange) {
-      utils.Sleep(50).then(() => {
+      utils.Sleep(10).then(() => {
         resetState();
       });
     }
@@ -142,7 +142,7 @@ export const IdeaModerateChangePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaCommentDelete) {
-      utils.Sleep(50).then(() => {
+      utils.Sleep(10).then(() => {
         resetState();
       });
     }
@@ -438,6 +438,9 @@ export const IdeaModerateChangePage = () => {
                         </option>
                         <option className="m-0 p-0" value="спорт/культура">
                           спорт/культура
+                        </option>
+                        <option className="m-0 p-0" value="социальное/персонал">
+                          социальное/персонал
                         </option>
                         <option className="m-0 p-0" value="другое">
                           другое
@@ -945,7 +948,7 @@ export const IdeaModerateChangePage = () => {
                                     })
                                   }
                                 >
-                                  удалить
+                                  удалить комментарий
                                 </button>
                               </span>
                             </div>

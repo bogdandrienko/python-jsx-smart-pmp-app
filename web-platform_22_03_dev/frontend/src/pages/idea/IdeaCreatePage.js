@@ -44,7 +44,7 @@ export const IdeaCreatePage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataIdeaCreate) {
-      utils.Sleep(3000).then(() => {
+      utils.Sleep(2000).then(() => {
         resetState();
         handlerCreateReset();
       });
@@ -200,6 +200,9 @@ export const IdeaCreatePage = () => {
                         </option>
                         <option className="m-0 p-0" value="спорт/культура">
                           спорт/культура
+                        </option>
+                        <option className="m-0 p-0" value="социальное/персонал">
+                          социальное/персонал
                         </option>
                         <option className="m-0 p-0" value="другое">
                           другое

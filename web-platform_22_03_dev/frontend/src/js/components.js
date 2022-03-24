@@ -125,21 +125,24 @@ export const HeaderComponent = () => {
   }, [dataNotificationList, dispatch, firstRefreshNotification]);
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <header className="header navbar-fixed-top pb-3">
-      <Navbar expand="lg" className="text-center">
+    <header className="header navbar-fixed-top m-0 p-0 pb-3">
+      <Navbar expand="lg" className="m-0 p-0">
         <Container>
-          <a className="w-25" href="https://km.kz/">
-            <img src="/static/img/logo.png" className="w-25" alt="id" />
+          <a className="w-25 m-0 p-0" href="https://km.kz/">
+            <img src="/static/img/logo.png" className="w-25 m-0 p-0" alt="id" />
           </a>
-          <a className="navbar-brand" href="/">
+          <a className="btn btn-outline-light navbar-brand m-0 p-2" href="/">
             Домашняя
           </a>
           {dataNotificationList && dataNotificationList.length > 0 && (
-            <span className="badge bg-danger rounded-pill m-0 p-2">!</span>
+            <span className="badge bg-danger rounded-pill m-0 p-2 mx-3">
+              {" "}
+              !{" "}
+            </span>
           )}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+          <Navbar.Collapse id="basic-navbar-nav" className="m-0 p-0">
+            <Nav className="me-auto m-0 p-0">
               {constants.modules.map(
                 (module, module_i) =>
                   utils.CheckAccess(userDetailsStore, module.Access) && (
@@ -149,7 +152,7 @@ export const HeaderComponent = () => {
                         module.Header !== "Профиль" ? (
                           module.Header
                         ) : (
-                          <span className="">
+                          <span className="m-0 p-0">
                             {module.Header}{" "}
                             {dataNotificationList &&
                               dataNotificationList.length > 0 && (
@@ -161,7 +164,7 @@ export const HeaderComponent = () => {
                         )
                       }
                       id="basic-nav-dropdown"
-                      className="btn btn-light bg-opacity-75 m-1 p-0"
+                      className="btn custom-background-transparent-low-middle m-1 p-0"
                     >
                       {module.Sections.map(
                         (section, section_i) =>
@@ -169,8 +172,8 @@ export const HeaderComponent = () => {
                             userDetailsStore,
                             section.Access
                           ) && (
-                            <li key={section_i}>
-                              <strong className="dropdown-header text-center bg-opacity-75 m-1 p-0">
+                            <li key={section_i} className="m-0 p-1">
+                              <strong className="dropdown-header text-center m-0 p-0">
                                 {section.Header}
                               </strong>
                               {section.Links.map((link, link_i) =>
@@ -183,11 +186,11 @@ export const HeaderComponent = () => {
                                         key={link_i}
                                         className={
                                           link.Active
-                                            ? "dropdown-item bg-opacity-75 m-1 p-0"
-                                            : "disabled dropdown-item bg-opacity-75 m-1 p-0"
+                                            ? "dropdown-item m-0 p-1"
+                                            : "disabled dropdown-item m-0 p-1"
                                         }
                                         href={link.Link}
-                                        target="_self"
+                                        target="_blank"
                                       >
                                         {link.Header}
                                       </a>
@@ -202,17 +205,18 @@ export const HeaderComponent = () => {
                                         to={link.Link}
                                         className={
                                           link.Active
-                                            ? "bg-opacity-75 m-1 p-1"
-                                            : "bg-opacity-75 disabled m-1 p-1"
+                                            ? "custom-hover m-0 p-0"
+                                            : "disabled custom-hover m-0 p-0"
                                         }
                                       >
-                                        <Nav.Link className={link.Style}>
-                                          {link.Header}
+                                        <Nav.Link
+                                          className={`${link.Style} m-0 p-1`}
+                                        >
+                                          {link.Header}{" "}
                                           {link.Header === "Уведомления" &&
                                             dataNotificationList &&
                                             dataNotificationList.length > 0 && (
-                                              <span className="badge bg-danger rounded-pill bg-opacity-75 m-0 p-2">
-                                                {" "}
+                                              <span className="badge bg-danger rounded-pill m-0 p-2">
                                                 {dataNotificationList.length}
                                               </span>
                                             )}
@@ -220,7 +224,7 @@ export const HeaderComponent = () => {
                                       </LinkContainer>
                                     )
                               )}
-                              <NavDropdown.Divider className="" />
+                              <NavDropdown.Divider className="m-0 p-0" />
                             </li>
                           )
                       )}
@@ -228,18 +232,21 @@ export const HeaderComponent = () => {
                   )
               )}
               {dataUserLogin ? (
-                <LinkContainer to="/logout">
-                  <Nav.Link>
-                    <button className="btn btn-sm btn-danger">
-                      Выйти <i className="fa-solid fa-user" />
+                <LinkContainer
+                  to="/logout"
+                  className="text-center m-0 p-1 mx-1"
+                >
+                  <Nav.Link className="m-0 p-0">
+                    <button className="btn btn-sm btn-danger m-0 p-1">
+                      Выйти <i className="fa-solid fa-user m-0 p-0" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>
               ) : (
-                <LinkContainer to="/login">
-                  <Nav.Link>
-                    <button className="btn btn-sm btn-primary">
-                      Войти <i className="fa-solid fa-user" />
+                <LinkContainer to="/login" className="text-center m-0 p-1 mx-1">
+                  <Nav.Link className="m-0 p-0">
+                    <button className="btn btn-sm btn-primary m-0 p-1">
+                      Войти <i className="fa-solid fa-user m-0 p-0" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>
@@ -249,10 +256,10 @@ export const HeaderComponent = () => {
         </Container>
       </Navbar>
       {title !== "" && description !== "" && (
-        <div className="container p-0">
-          <div className="card shadow custom-background-transparent-middle">
+        <div className="container p-1">
+          <div className="card shadow custom-background-transparent-middle m-0 p-0">
             <div className="card-header bg-primary bg-opacity-10 m-0 p-1">
-              <small className="display-6 fw-normal">{title}</small>
+              <small className="display-6 fw-normal m-0 p-1">{title}</small>
             </div>
             <div className="card-body m-0 p-1">
               <p className="lead fw-normal m-0 p-1">{description}</p>
@@ -526,8 +533,14 @@ export const ModulesComponent = () => {
                                                       <LinkContainer
                                                         to={link["Link"]}
                                                       >
-                                                        <Nav.Link>
-                                                          <small className="text-dark m-0 p-0">
+                                                        <Nav.Link className="m-0 p-1">
+                                                          <small
+                                                            className={
+                                                              link.Style !== ""
+                                                                ? `${link.Style} m-0 p-1`
+                                                                : "text-dark m-0 p-1"
+                                                            }
+                                                          >
                                                             {link["Header"]}
                                                             {"  "}
                                                             {link.Header ===
@@ -640,7 +653,7 @@ export const StoreStatusComponent = ({
               className="text-center m-0 p-0"
             >
               <small className="m-0 p-0">ждите</small>
-              <span className="sr-only m-0 p-1" />
+              <span className="sr-only m-0 p-0" />
             </Spinner>
           )}
         </div>
@@ -702,20 +715,20 @@ export const MessageComponent = ({ variant, children }) => {
 export const NewsComponent = (count = 100) => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <div className="card list-group list-group-item-action list-group-flush custom-background-blured-95">
-      <div className="border-bottom scrollarea">
-        <LinkContainer to="/news" className=" ">
+    <div className="card list-group list-group-item-action list-group-flush custom-background-transparent-low-middle m-0 p-0">
+      <div className="border-bottom scrollarea m-0 p-0">
+        <LinkContainer to="/news" className="m-0 p-0">
           <Nav.Link className="m-0 p-0">
             <div
-              className="list-group-item active m-0 p-2 lh-tight shadow"
+              className="list-group-item active shadow m-0 p-2"
               aria-current="true"
             >
-              <div className="d-flex w-100 align-items-center justify-content-between">
-                <strong className="mb-1 lead">Лента</strong>
-                <strong className="text-warning">Свежие сверху</strong>
+              <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
+                <strong className="lead m-0 p-0 mb-1">Лента</strong>
+                <strong className="text-warning m-0 p-0">Свежие сверху</strong>
               </div>
               {count.count <= 9 && (
-                <div className="col-10 mb-1 small">
+                <div className="small m-0 p-0 mb-1">
                   нажмите сюда для просмотра всех изменений
                 </div>
               )}
@@ -723,41 +736,47 @@ export const NewsComponent = (count = 100) => {
           </Nav.Link>
         </LinkContainer>
         {constants.news.slice(0, count.count).map((news_elem, index) => (
-          <div key={index}>
+          <div key={index} className="custom-hover m-0 p-0">
             <Link
               to={news_elem.Link}
               className={
                 news_elem.Status !== "active"
-                  ? "list-group-item list-group-item-action py-1 lh-tight bg-secondary bg-opacity-10"
-                  : "list-group-item list-group-item-action py-1 lh-tight bg-success bg-opacity-10"
+                  ? "list-group-item list-group-item-action bg-secondary bg-opacity-10 m-0 p-1"
+                  : "list-group-item list-group-item-action bg-success bg-opacity-10 m-0 p-1"
               }
             >
-              <div className="d-flex w-100 align-items-center justify-content-between">
-                <strong className="mb-1">
+              <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
+                <strong className="m-0 p-0 mb-1">
                   {news_elem.Title}
                   {news_elem.Link !== "#" && (
-                    <small className="text-primary"> (ссылка)</small>
+                    <small className="text-primary m-0 p-0"> (ссылка)</small>
                   )}
                 </strong>
-                <small className="text-muted">
+                <small className="text-muted m-0 p-0">
                   {news_elem.Status !== "active" ? (
-                    <strong className="text-secondary text-start">
+                    <strong className="text-secondary text-start m-0 p-0">
                       (в разработке)
                     </strong>
                   ) : (
-                    <strong className="text-success text-start">
+                    <strong className="text-success text-start m-0 p-0">
                       (завершено)
                     </strong>
                   )}
                 </small>
               </div>
-              <div className="col-10 mb-1 small">
+              <div className="small m-0 p-0">
                 {news_elem.Description}
                 {news_elem.Helps && (
-                  <small className="text-secondary"> ({news_elem.Helps})</small>
+                  <small className="text-secondary m-0 p-0">
+                    {" "}
+                    ({news_elem.Helps})
+                  </small>
                 )}
                 {news_elem.Danger && (
-                  <small className="text-danger"> ({news_elem.Danger})</small>
+                  <small className="text-danger m-0 p-0">
+                    {" "}
+                    ({news_elem.Danger})
+                  </small>
                 )}
               </div>
             </Link>

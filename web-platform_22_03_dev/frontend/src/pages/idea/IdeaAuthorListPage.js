@@ -180,16 +180,16 @@ export const IdeaAuthorListPage = () => {
                   to={`/idea_detail/${object.id}`}
                   className="text-decoration-none m-0 p-0"
                 >
-                  <li className="border list-group-item-action small m-0 p-1">
+                  <li className="border list-group-item-action text-start small m-0 p-1">
                     {utils.GetSliceString(object["username"], 20)}
-                    {" | количество идей: "}
-                    {utils.GetSliceString(object["idea_count"], 20)}
-                    {" | общий рейтинг: "}
-                    {utils.GetSliceString(object["idea_rating"], 20)}
-                    {" | количество отметок: "}
-                    {utils.GetSliceString(object["idea_rating_count"], 20)}
-                    {" | количество комментариев: "}
-                    {utils.GetSliceString(object["idea_comment_count"], 20)}
+                    {" | количество идей: " +
+                      utils.GetSliceString(object["idea_count"], 20)}
+                    {" | общий рейтинг: " +
+                      utils.GetSliceString(object["idea_rating"], 20)}
+                    {" | количество отметок: " +
+                      utils.GetSliceString(object["idea_rating_count"], 20)}
+                    {" | количество комментариев: " +
+                      utils.GetSliceString(object["idea_comment_count"], 20)}
                   </li>
                 </Link>
               ))}

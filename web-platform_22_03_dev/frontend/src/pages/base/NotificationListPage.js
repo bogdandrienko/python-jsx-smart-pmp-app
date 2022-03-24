@@ -91,9 +91,9 @@ export const NotificationListPage = () => {
           failText={""}
         />
         {dataNotificationList && (
-          <table className="table table-sm table-hover table-borderless table-striped custom-background-transparent-low border shadow m-0 p-0">
-            <tbody>
-              <tr className="border bg-primary bg-opacity-10">
+          <table className="table table-sm table-hover table-borderless table-striped custom-background-transparent-middle border shadow m-0 p-0">
+            <tbody className="text-center">
+              <tr className="border text-center bg-primary bg-opacity-10">
                 <td className="fw-bold small">дата и время</td>
                 <td className="fw-bold small">название</td>
                 <td className="fw-bold small">место</td>
@@ -101,7 +101,10 @@ export const NotificationListPage = () => {
                 <td className="fw-bold small" />
               </tr>
               {dataNotificationList.map((object, index) => (
-                <tr key={index} className="">
+                <tr
+                  key={index}
+                  className="bg-warning text-center bg-opacity-10"
+                >
                   <td className="">
                     {utils.GetCleanDateTime(
                       object["created_datetime_field"],

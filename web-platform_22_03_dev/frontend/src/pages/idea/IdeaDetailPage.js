@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
@@ -17,14 +17,6 @@ export const IdeaDetailPage = () => {
   /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [firstRefresh, firstRefreshSet] = useState(true);
   const [comment, commentSet] = useState("");
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
-  const {
-    // load: loadUserDetails,
-    data: dataUserDetails,
-    // error: errorUserDetails,
-    // fail: failUserDetails,
-  } = userDetailsStore;
   //////////////////////////////////////////////////////////
   const ideaDetailStore = useSelector((state) => state.ideaDetailStore);
   const {
@@ -67,13 +59,6 @@ export const IdeaDetailPage = () => {
   const notificationCreateStore = useSelector(
     (state) => state.notificationCreateStore
   );
-  const ideaModerateStore = useSelector((state) => state.ideaModerateStore);
-  const {
-    load: loadIdeaModerate,
-    data: dataIdeaModerate,
-    // error: errorIdeaModerate,
-    // fail: failIdeaModerate,
-  } = ideaModerateStore;
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
   const resetState = async (e) => {
     try {
@@ -121,7 +106,7 @@ export const IdeaDetailPage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaCommentCreate) {
-      utils.Sleep(50).then(() => {
+      utils.Sleep(10).then(() => {
         commentSet("");
         resetState();
       });
@@ -130,20 +115,11 @@ export const IdeaDetailPage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaRatingCreate) {
-      utils.Sleep(50).then(() => {
+      utils.Sleep(10).then(() => {
         resetState();
       });
     }
   }, [dataIdeaRatingCreate]);
-  //////////////////////////////////////////////////////////
-  useEffect(() => {
-    if (dataIdeaModerate) {
-      utils.Sleep(50).then(() => {
-        navigate("/idea_list");
-        resetState();
-      });
-    }
-  }, [dataIdeaModerate, navigate]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerCommentCreateSubmit = async (e) => {
     try {
@@ -194,22 +170,6 @@ export const IdeaDetailPage = () => {
       dispatch(actions.notificationCreateAction(form));
     }
   };
-  //////////////////////////////////////////////////////////
-  const handlerHideSubmit = (e) => {
-    try {
-      e.preventDefault();
-    } catch (error) {}
-    const form = {
-      "Action-type": "IDEA_MODERATE",
-      id: id,
-      moderate: "скрыто",
-      moderateComment: "скрыто автором",
-    };
-    let isConfirm = window.confirm("Вы действительно хотите скрыть свою идею?");
-    if (isConfirm) {
-      dispatch(actions.ideaModerateAction(form));
-    }
-  };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>
@@ -232,34 +192,6 @@ export const IdeaDetailPage = () => {
           <Link to={"/idea_list"} className="btn btn-sm btn-primary m-1 p-2">
             {"<="} назад к списку
           </Link>
-          <components.StoreStatusComponent
-            storeStatus={userDetailsStore}
-            keyStatus={"userDetailsStore"}
-            consoleLog={constants.DEBUG_CONSTANT}
-            showLoad={true}
-            loadText={""}
-            showData={false}
-            dataText={""}
-            showError={true}
-            errorText={""}
-            showFail={true}
-            failText={""}
-          />
-          {dataUserDetails &&
-            !loadIdeaModerate &&
-            dataUserDetails["user_model"]["id"] &&
-            dataIdeaDetail &&
-            dataIdeaDetail["user_model"]["id"] &&
-            dataUserDetails["user_model"]["id"] ===
-              dataIdeaDetail["user_model"]["id"] && (
-              <button
-                type="button"
-                className="btn btn-sm btn-warning m-1 p-2"
-                onClick={handlerHideSubmit}
-              >
-                скрыть
-              </button>
-            )}
           <button
             type="button"
             className="btn btn-sm btn-outline-danger m-1 p-2"
@@ -271,7 +203,7 @@ export const IdeaDetailPage = () => {
               })
             }
           >
-            пожаловаться
+            жалоба на идею
           </button>
         </div>
         <components.StoreStatusComponent
@@ -287,7 +219,7 @@ export const IdeaDetailPage = () => {
           showFail={true}
           failText={""}
         />
-        {dataIdeaDetail && !dataIdeaModerate && !loadIdeaModerate && (
+        {dataIdeaDetail && (
           <div className="m-0 p-0">
             <div className="card shadow custom-background-transparent-low text-center p-0">
               <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
@@ -439,25 +371,44 @@ export const IdeaDetailPage = () => {
                   </span>
                   <Navbar className="text-center m-0 p-0">
                     <Container className="m-0 p-0">
-                      <Nav className="me-auto m-0 p-0">
-                        <p
+                      <Nav className="me-auto dropdown m-0 p-0">
+                        <NavDropdown
+                          title={
+                            utils.GetSliceString(
+                              dataIdeaDetail["total_rating"]["rate"],
+                              3,
+                              false
+                            ) +
+                            " /  " +
+                            dataIdeaDetail["total_rating"]["count"]
+                          }
                           className={
                             dataIdeaDetail["total_rating"]["rate"] > 7
-                              ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
+                              ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
                               : dataIdeaDetail["total_rating"]["rate"] > 4
-                              ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
-                              : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
+                              ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill"
+                              : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill"
                           }
                         >
-                          {utils.GetSliceString(
-                            dataIdeaDetail["total_rating"]["rate"],
-                            3,
-                            false
-                          )}
-                          <small className="align-text-top m-0 p-0">
-                            {" \\ " + dataIdeaDetail["total_rating"]["count"]}
-                          </small>
-                        </p>
+                          <ul className="m-0 p-0">
+                            {dataIdeaDetail["total_rating"]["users"].map(
+                              (object, index) => (
+                                <li
+                                  key={index}
+                                  className={
+                                    object.split("|")[1] > 7
+                                      ? "list-group-item bg-success bg-opacity-10"
+                                      : object.split("|")[1] > 4
+                                      ? "list-group-item bg-warning bg-opacity-10"
+                                      : "list-group-item bg-danger bg-opacity-10"
+                                  }
+                                >
+                                  <small className="">{object}</small>
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </NavDropdown>
                       </Nav>
                     </Container>
                   </Navbar>
@@ -746,7 +697,7 @@ export const IdeaDetailPage = () => {
                                     })
                                   }
                                 >
-                                  пожаловаться
+                                  жалоба на комментарий
                                 </button>
                               </span>
                             </div>

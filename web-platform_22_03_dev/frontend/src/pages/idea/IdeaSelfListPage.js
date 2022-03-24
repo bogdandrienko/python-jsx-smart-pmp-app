@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
@@ -227,25 +227,44 @@ export const IdeaSelfListPage = () => {
                           </span>
                           <Navbar className="text-center m-0 p-0">
                             <Container className="m-0 p-0">
-                              <Nav className="me-auto m-0 p-0">
-                                <p
+                              <Nav className="me-auto dropdown m-0 p-0">
+                                <NavDropdown
+                                  title={
+                                    utils.GetSliceString(
+                                      object["total_rating"]["rate"],
+                                      3,
+                                      false
+                                    ) +
+                                    " /  " +
+                                    object["total_rating"]["count"]
+                                  }
                                   className={
                                     object["total_rating"]["rate"] > 7
-                                      ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
+                                      ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
                                       : object["total_rating"]["rate"] > 4
-                                      ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
-                                      : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
+                                      ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill"
+                                      : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill"
                                   }
                                 >
-                                  {utils.GetSliceString(
-                                    object["total_rating"]["rate"],
-                                    3,
-                                    false
-                                  )}
-                                  <small className="align-text-top m-0 p-0">
-                                    {" \\ " + object["total_rating"]["count"]}
-                                  </small>
-                                </p>
+                                  <ul className="m-0 p-0">
+                                    {object["total_rating"]["users"].map(
+                                      (object2, index) => (
+                                        <li
+                                          key={index}
+                                          className={
+                                            object2.split("|")[1] > 7
+                                              ? "list-group-item bg-success bg-opacity-10"
+                                              : object2.split("|")[1] > 4
+                                              ? "list-group-item bg-warning bg-opacity-10"
+                                              : "list-group-item bg-danger bg-opacity-10"
+                                          }
+                                        >
+                                          <small className="">{object2}</small>
+                                        </li>
+                                      )
+                                    )}
+                                  </ul>
+                                </NavDropdown>
                               </Nav>
                             </Container>
                           </Navbar>

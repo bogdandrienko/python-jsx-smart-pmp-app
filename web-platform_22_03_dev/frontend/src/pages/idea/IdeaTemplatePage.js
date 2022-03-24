@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
 import * as utils from "../../js/utils";
@@ -118,13 +118,17 @@ export const IdeaTemplatePage = () => {
                 <span className="text-success m-0 p-1">Рейтинг</span>
                 <Navbar className="text-center m-0 p-0">
                   <Container className="m-0 p-0">
-                    <Nav className="me-auto m-0 p-0">
-                      <p className="btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2">
-                        10
-                        <small className="align-text-top m-0 p-0">
-                          {" \\ 1"}
-                        </small>
-                      </p>
+                    <Nav className="me-auto dropdown m-0 p-0">
+                      <NavDropdown
+                        title="10 /  1"
+                        className="btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
+                      >
+                        <ul className="m-0 p-0">
+                          <li className="list-group-item bg-success bg-opacity-10">
+                            <small className="">Андриенко Богдан | 10</small>
+                          </li>
+                        </ul>
+                      </NavDropdown>
                     </Nav>
                   </Container>
                 </Navbar>

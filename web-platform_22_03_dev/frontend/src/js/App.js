@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "../css/App.css";
 import "../css/bootstrap_5.1.3/bootstrap.min.css";
 import "../css/font_awesome_6_0_0/css/all.min.css";
+import "../css/font_zen/style.css";
 /////////////////////////////////////////////////////////////////////////////////////////////TODO default exported pages
 import { HomePage } from "../pages/base/HomePage";
 import { VideoStudyPage } from "../pages/study/VideoStudyPage";
