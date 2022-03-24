@@ -161,7 +161,9 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
         status = "timeout";
       }
       switch (status) {
-        case 401 || "Authentication credentials were not provided.":
+        case 401 ||
+          "Authentication credentials were not provided." ||
+          "Unauthorized":
           dispatch(actions.userLogoutAction());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case 413 || "Request Entity Too Large":
