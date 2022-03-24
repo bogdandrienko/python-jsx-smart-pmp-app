@@ -339,7 +339,7 @@ export const RecoverPasswordPage = () => {
                           <button
                             type="button"
                             onClick={handlerSubmitSendEmail}
-                            className="btn btn-sm btn-danger p-2 m-1"
+                            className="btn btn-sm btn-danger p-2 m-0 p-1"
                           >
                             Отправить код на почту
                           </button>

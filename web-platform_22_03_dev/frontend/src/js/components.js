@@ -270,14 +270,14 @@ export const FooterComponent = () => {
     <footer className="footer m-0 p-0 pt-3">
       <div className="">
         <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
-          <li className="m-1">
+          <li className="m-0 p-1">
             <a className="btn btn-sm btn-outline-secondary text-white" href="#">
               <i className="fa fa-arrow-up">{"  "} вверх</i>
               {"  "}
               <i className="fa fa-arrow-up"> </i>
             </a>
           </li>
-          <li className="m-1">
+          <li className="m-0 p-1">
             <Navbar className="dropup m-0 p-0">
               <NavDropdown
                 title={
@@ -377,7 +377,7 @@ export const FooterComponent = () => {
               </NavDropdown>
             </Navbar>
           </li>
-          <li className="m-1">
+          <li className="m-0 p-1">
             <Navbar className="dropup text-dark m-0 p-0">
               <NavDropdown
                 title={
@@ -800,7 +800,7 @@ export const SalaryTableComponent = ({ tab = {} }) => {
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
-    <li className="m-1">
+    <li className="m-0 p-1">
       <h6 className="lead fw-bold bold">{header}</h6>
       <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
         <thead>
@@ -913,8 +913,8 @@ export const RationalComponent = ({ object, shortView = false }) => {
           )}
         </h6>
       </div>
-      <div className="card-body m-0 p-0  ">
-        <label className="form-control-sm m-1">
+      <div className="card-body m-0 p-0">
+        <label className="form-control-sm m-0 p-0">
           Подразделение:
           <select
             id="subdivision"
@@ -925,7 +925,7 @@ export const RationalComponent = ({ object, shortView = false }) => {
             <option value="">{object["subdivision_char_field"]}</option>
           </select>
         </label>
-        <label className="form-control-sm m-1">
+        <label className="form-control-sm m-0 p-0">
           Зарегистрировано за №{" "}
           <strong className="btn btn-light disabled">
             {object["number_char_field"]}
@@ -934,7 +934,7 @@ export const RationalComponent = ({ object, shortView = false }) => {
       </div>
 
       <div className="card-body m-0 p-0  ">
-        <label className="form-control-sm m-1">
+        <label className="form-control-sm m-0 p-1">
           Сфера:
           <select
             id="sphere"
@@ -945,7 +945,7 @@ export const RationalComponent = ({ object, shortView = false }) => {
             <option value="">{object["sphere_char_field"]}</option>
           </select>
         </label>
-        <label className="form-control-sm m-1">
+        <label className="form-control-sm m-0 p-1">
           Категория:
           <select
             id="category"
@@ -986,7 +986,7 @@ export const RationalComponent = ({ object, shortView = false }) => {
         </label>
       </div>
       <div className="card-body m-0 p-0  ">
-        <label className="w-100 form-control-sm m-1">
+        <label className="w-100 form-control-sm m-0 p-1">
           Описание:
           <textarea
             required
@@ -1006,28 +1006,28 @@ export const RationalComponent = ({ object, shortView = false }) => {
       </div>
       {!shortView && (
         <div className="card-body m-0 p-0  ">
-          <label className="form-control-sm m-1">
+          <label className="form-control-sm m-0 p-1">
             Word файл-приложение:
             <a
-              className="btn btn-sm btn-primary m-1"
+              className="btn btn-sm btn-primary m-0 p-1"
               href={utils.GetStaticFile(object["additional_word_file_field"])}
             >
               Скачать документ
             </a>
           </label>
-          <label className="form-control-sm m-1">
+          <label className="form-control-sm m-0 p-1">
             Pdf файл-приложение:
             <a
-              className="btn btn-sm btn-danger m-1"
+              className="btn btn-sm btn-danger m-0 p-1"
               href={utils.GetStaticFile(object["additional_pdf_file_field"])}
             >
               Скачать документ
             </a>
           </label>
-          <label className="form-control-sm m-1">
+          <label className="form-control-sm m-0 p-1">
             Excel файл-приложение:
             <a
-              className="btn btn-sm btn-success m-1"
+              className="btn btn-sm btn-success m-0 p-1"
               href={utils.GetStaticFile(object["additional_excel_file_field"])}
             >
               Скачать документ
@@ -1043,7 +1043,7 @@ export const RationalComponent = ({ object, shortView = false }) => {
         </Link>
       </div>
       {!shortView && (
-        <label className="w-100 form-control-sm m-1">
+        <label className="w-100 form-control-sm m-0 p-1">
           Участники:
           {object["user1_char_field"] &&
             object["user1_char_field"].length > 1 && (
@@ -1103,13 +1103,13 @@ export const RationalComponent = ({ object, shortView = false }) => {
         </label>
       )}
       <div className="card-body m-0 p-0  ">
-        <label className="text-muted border p-1 m-1">
+        <label className="text-muted border p-1 m-0 p-1">
           подано:{" "}
           <p className=" ">
             {utils.GetCleanDateTime(object["created_datetime_field"], true)}
           </p>
         </label>
-        <label className="text-muted border p-1 m-1">
+        <label className="text-muted border p-1 m-0 p-1">
           зарегистрировано:{" "}
           <p className=" ">
             {utils.GetCleanDateTime(object["register_datetime_field"], true)}

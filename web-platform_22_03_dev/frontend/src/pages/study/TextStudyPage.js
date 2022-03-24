@@ -195,7 +195,7 @@ export const TextStudyPage = () => {
               <li className="text-start m-0 p-1">
                 <div>
                   <a
-                    className="btn btn-sm btn-outline-primary m-1"
+                    className="btn btn-sm btn-outline-primary m-0 p-1"
                     href="/static/study/salary.pdf"
                   >
                     Скачать инструкцию в pdf-формате

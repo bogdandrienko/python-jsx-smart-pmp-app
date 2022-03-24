@@ -36,7 +36,7 @@ export const SalaryPage = () => {
     <div>
       <components.HeaderComponent />
       <main>
-        <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
+        <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center custom-background-transparent-low shadow m-0 p-1">
           <form className="m-0 p-0" onSubmit={handlerSubmit}>
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               <div className="card-header m-0 p-0">
@@ -45,10 +45,10 @@ export const SalaryPage = () => {
               </div>
               <div className="card-body m-0 p-0">
                 <div className="m-0 p-1">
-                  <div className="form-control-sm input-group text-center m-0 p-1">
+                  <div className="form-control-sm input-group text-center m-0 p-0">
                     <select
                       id="month"
-                      className="form-control form-control-sm text-center m-0 p-1"
+                      className="form-control form-control-sm text-center m-0 p-0"
                       value={month}
                       required
                       onChange={(e) => monthSet(e.target.value)}
@@ -91,7 +91,7 @@ export const SalaryPage = () => {
                       </option>
                     </select>
                     <select
-                      className="form-control form-control-sm text-center m-0 p-1"
+                      className="form-control form-control-sm text-center m-0 p-0"
                       value={year}
                       required
                       onChange={(e) => yearSet(e.target.value)}

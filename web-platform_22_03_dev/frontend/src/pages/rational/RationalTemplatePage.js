@@ -105,19 +105,19 @@ export const RationalTemplatePage = () => {
               <div className="m-0 p-0">
                 <label className="form-control-sm text-center m-0 p-1">
                   Word файл-приложение:
-                  <a className="btn btn-sm btn-primary m-1" href="">
+                  <a className="btn btn-sm btn-primary m-0 p-1" href="">
                     Скачать документ
                   </a>
                 </label>
                 <label className="form-control-sm text-center m-0 p-1">
                   Pdf файл-приложение:
-                  <a className="btn btn-sm btn-danger m-1" href="">
+                  <a className="btn btn-sm btn-danger m-0 p-1" href="">
                     Скачать документ
                   </a>
                 </label>
                 <label className="form-control-sm text-center m-0 p-1">
                   Excel файл-приложение:
-                  <a className="btn btn-sm btn-success m-1" href="">
+                  <a className="btn btn-sm btn-success m-0 p-1" href="">
                     Скачать документ
                   </a>
                 </label>

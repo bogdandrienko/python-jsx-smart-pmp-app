@@ -186,7 +186,7 @@ export const RationalModerateListPage = () => {
                     Детальное отображение:
                     <input
                       type="checkbox"
-                      className="form-check-input m-1"
+                      className="form-check-input m-0 p-1"
                       id="flexSwitchCheckDefault"
                       defaultChecked={detailView}
                       onClick={(e) => detailViewSet(!detailView)}

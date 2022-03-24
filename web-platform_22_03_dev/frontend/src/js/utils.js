@@ -1,6 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as constants from "./constants";
 import * as actions from "./actions";
+import axios from "axios";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO base utils
 export const CheckAccess = (userDetailsStore, slug) => {
   try {
@@ -73,6 +74,53 @@ export const CheckPageAccess = (userDetailsStore, location) => {
     });
   });
   return access;
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ActionsAxiosUtility = async ({
+  url = "",
+  method = "GET",
+  timeout = 10000,
+  form,
+  getState = null,
+}) => {
+  try {
+    const formData = new FormData();
+    Object.entries(form).map(([key, value]) => {
+      formData.append(key, value);
+    });
+    if (getState) {
+      const {
+        userLoginStore: { data: userLogin },
+      } = getState();
+      if (userLogin !== null) {
+        const { data } = await axios({
+          url: url,
+          method: method,
+          timeout: timeout,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userLogin.token}`,
+          },
+          data: formData,
+        });
+        return { data: data };
+      }
+    }
+    const { data } = await axios({
+      url: url,
+      method: method,
+      timeout: timeout,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+    return { data: data };
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log("ActionsFormDataUtilityError: ", error);
+    }
+  }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ActionsFormDataUtility = ({ form, getState = null }) => {

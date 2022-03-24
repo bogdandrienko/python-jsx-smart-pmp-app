@@ -597,7 +597,7 @@ export const IdeaModerateChangePage = () => {
                     </Link>
                   </div>
                   <div className="d-flex justify-content-between m-0 p-1">
-                    <label className="text-muted border p-1 m-1">
+                    <label className="text-muted border p-1 m-0 p-1">
                       подано:{" "}
                       <p className="m-0 p-0">
                         {utils.GetCleanDateTime(
@@ -606,7 +606,7 @@ export const IdeaModerateChangePage = () => {
                         )}
                       </p>
                     </label>
-                    <label className="text-muted border p-1 m-1">
+                    <label className="text-muted border p-1 m-0 p-1">
                       зарегистрировано:{" "}
                       <p className="m-0 p-0">
                         {utils.GetCleanDateTime(

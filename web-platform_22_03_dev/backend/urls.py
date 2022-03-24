@@ -32,7 +32,7 @@ urlpatterns = [
     path('api/auth/user/', backend_views.api_auth_user, name='api_auth_user'),
     # ########################################################################################################TODO admin
     path('api/auth/admin/', backend_views.api_auth_admin, name='api_auth_admin'),
-    path('api/basic/admin/', backend_views.api_basic_admin, name='api_basic_admin'),
+    path('api/basic/admin/user_temp/', backend_views.api_basic_admin_user_temp, name='api_basic_admin_user_temp'),
     # ##################################################################################################TODO custom urls
     path('api/auth/salary/', backend_views.api_auth_salary, name='api_auth_salary'),
     path('api/auth/idea/', backend_views.api_auth_idea, name='api_auth_idea'),
@@ -42,13 +42,10 @@ urlpatterns = [
     path('api/auth/vacancy/', backend_views.api_auth_vacancy, name='api_auth_vacancy'),
     path('api/any/resume/', backend_views.api_any_resume, name='api_any_resume'),
     path('api/auth/resume/', backend_views.api_auth_resume, name='api_auth_resume'),
-    ####################################################################################################################
 ]
 
 # ###################################################################################TODO redirect from reboot react app
 urlpatterns += [re_path(r'^.*$', lambda request: redirect('', permanent=False), name='redirect')]
-########################################################################################################################
-
 # #################################################################################################TODO default settings
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

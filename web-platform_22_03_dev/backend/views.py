@@ -1010,7 +1010,7 @@ def api_auth_admin(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @authentication_classes([BasicAuthentication])
-def api_basic_admin(request):
+def api_basic_admin_user_temp(request):
     """
     basic admin django-rest-framework
     """
@@ -1024,45 +1024,41 @@ def api_basic_admin(request):
         # Methods
         if req_inst.method == "GET":
             # Actions
-            if req_inst.action_type == "":
-                try:
-                    user_models = backend_models.UserModel.objects.filter(
-                        temp_password_boolean_field=True,
-                        activity_boolean_field=True
-                    )
-                    if not request.user.is_superuser:
-                        return Response({"error": "Your user in not superuser."})
-                    objects = []
-                    for user_model in user_models:
-                        if not user_model.user_foreign_key_field.is_superuser:
-                            objects.append(
-                                {
-                                    f"""{base64.b64encode(
-                                        str(user_model.user_foreign_key_field.username)[::-1].encode()
-                                    ).decode()}""":
-                                        base64.b64encode(
-                                            str(f"12{user_model.password_char_field}345").encode()).decode()
-                                }
-                            )
-                    # for obj in objects:
-                    #     for key, value in obj.items():
-                    #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
-                    return Response({"response": objects})
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=True
-                    )
-                    return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
+            try:
+                user_models = backend_models.UserModel.objects.filter(
+                    temp_password_boolean_field=True,
+                    activity_boolean_field=True
+                )
+                if not request.user.is_superuser:
+                    return Response({"error": "Your user in not superuser."})
+                objects = []
+                for user_model in user_models:
+                    if not user_model.user_foreign_key_field.is_superuser:
+                        objects.append(
+                            {
+                                f"""{base64.b64encode(
+                                    str(user_model.user_foreign_key_field.username)[::-1].encode()
+                                ).decode()}""":
+                                    base64.b64encode(
+                                        str(f"12{user_model.password_char_field}345").encode()).decode()
+                            }
+                        )
+                # for obj in objects:
+                #     for key, value in obj.items():
+                #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
+                return Response({"response": objects})
+            except Exception as error:
+                backend_service.DjangoClass.LoggingClass.error(
+                    request=request, error=error, print_error=True
+                )
+                return Response({"error": "Произошла ошибка!"})
         else:
-            return Response({"error": "This method not allowed for this endpoint."})
+            return Response({"error": "Этот метод не реализован для этой точки доступа."})
     except Exception as error:
         backend_service.DjangoClass.LoggingClass.error(
             request=request, error=error, print_error=backend_settings.DEBUG
         )
         return render(request, "backend/404.html")
-
 
 # #####################################################################################################TODO custom views
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])

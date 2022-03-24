@@ -86,7 +86,7 @@ export const VacancyCreatePage = () => {
                   <h6 className="lead">Свободная вакансия</h6>
                 </div>
                 <div className="">
-                  <label className="w-50 form-control-sm m-1">
+                  <label className="w-50 form-control-sm m-0 p-1">
                     Квалификация:
                     <input
                       type="text"
@@ -214,7 +214,7 @@ export const VacancyCreatePage = () => {
                 </div>
                 <br />
                 <div className="">
-                  <label className="w-75 form-control-sm m-1">
+                  <label className="w-75 form-control-sm m-0 p-1">
                     Описание:
                     <textarea
                       id="short_description_char_field"
@@ -238,7 +238,7 @@ export const VacancyCreatePage = () => {
                 <br />
                 <div className="container-fluid text-center">
                   <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                    <li className="m-1">
+                    <li className="m-0 p-1">
                       <button
                         className="btn btn-sm btn-outline-primary"
                         type="submit"
@@ -246,7 +246,7 @@ export const VacancyCreatePage = () => {
                         Отправить
                       </button>
                     </li>
-                    <li className="m-1">
+                    <li className="m-0 p-1">
                       <button
                         className="btn btn-sm btn-outline-warning"
                         type="reset"

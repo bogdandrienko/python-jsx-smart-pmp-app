@@ -108,7 +108,7 @@ export const VacancyListPage = () => {
                   Детальное отображение:
                   <input
                     type="checkbox"
-                    className="form-check-input m-1"
+                    className="form-check-input m-0 p-1"
                     id="flexSwitchCheckDefault"
                     defaultChecked={detailView}
                     onClick={(e) => detailViewSet(!detailView)}
@@ -169,8 +169,8 @@ export const VacancyListPage = () => {
                   </select>
                 </label>
               </div>
-              <div className="">
-                <label className="w-75 form-control-sm m-1">
+              <div className="m-0 p-1">
+                <label className="w-75 form-control-sm m-0 p-1">
                   Поле поиска по части названия или квалификации:
                   <input
                     type="text"

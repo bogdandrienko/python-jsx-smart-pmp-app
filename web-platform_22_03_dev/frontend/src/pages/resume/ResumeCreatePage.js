@@ -382,7 +382,7 @@ export const ResumeCreatePage = () => {
                 <br />
                 <div className="container-fluid text-center">
                   <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                    <li className="m-1">
+                    <li className="m-0 p-1">
                       <button
                         type="submit"
                         className="btn btn-sm btn-outline-primary"
@@ -390,7 +390,7 @@ export const ResumeCreatePage = () => {
                         Отправить
                       </button>
                     </li>
-                    <li className="m-1">
+                    <li className="m-0 p-1">
                       <button
                         type="reset"
                         className="btn btn-sm btn-outline-warning"
