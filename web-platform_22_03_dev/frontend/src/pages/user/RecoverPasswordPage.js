@@ -237,7 +237,6 @@ export const RecoverPasswordPage = () => {
                                       numbers: true,
                                       latin: true,
                                       cyrillic: true,
-                                      onlyLowerLetters: true,
                                       space: true,
                                     }),
                                     ""
@@ -251,7 +250,7 @@ export const RecoverPasswordPage = () => {
                               * обязательно
                               <small className="text-warning m-0 p-0">
                                 {" "}
-                                * только маленькие кириллические буквы и цифры
+                                * только кириллица
                               </small>
                               <small className="text-muted m-0 p-0">
                                 {" "}
@@ -388,7 +387,7 @@ export const RecoverPasswordPage = () => {
                           * обязательно
                           <small className="text-warning m-0 p-0">
                             {" "}
-                            * только латинские буквы и цифры
+                            * только латиница
                           </small>
                           <small className="text-muted m-0 p-0">
                             {" "}
@@ -425,7 +424,7 @@ export const RecoverPasswordPage = () => {
                           * обязательно
                           <small className="text-warning m-0 p-0">
                             {" "}
-                            * только латинские буквы и цифры
+                            * только латиница
                           </small>
                           <small className="text-muted m-0 p-0">
                             {" "}

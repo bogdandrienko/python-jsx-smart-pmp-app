@@ -24,6 +24,11 @@ class DjangoClass:
         @staticmethod
         def request(request, log=False, schedule=False, print_req=False):
 
+            # Settings
+            ############################################################################################################
+            threading.Thread(target=DjangoClass.DefaultSettingsClass.check_settings, args=(request,)).start()
+            ############################################################################################################
+
             # Logging
             ############################################################################################################
             if log:
@@ -326,7 +331,7 @@ class DjangoClass:
 
     class SchedulerClass:
         @staticmethod
-        def update_users():
+        def scheduler_personal_1c():
             key = UtilsClass.create_encrypted_password(
                 _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                 _length=10
@@ -444,105 +449,176 @@ class DjangoClass:
             return json_data
 
         @staticmethod
-        def scheduler(request):
+        def scheduler_default_superusers(users=None):
+            print("users: ", users)
+            if users is None:
+                users = [["000000000000", "31284bogdan"], ]
+            for user_obj in users:
+                print("user_obj: ", user_obj)
+                username_ = user_obj[0]
+                password_ = user_obj[1]
+                try:
+                    User.objects.get(username=username_)
+                except Exception as error__:
+                    user = User.objects.create(username=username_)
+                    user.set_password(password_)
+                    user.is_staff = True
+                    user.is_superuser = True
+                    user.save()
+                    user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                    user_model.password_char_field = password_
+                    user_model.save()
 
-            # create default groups
-            ############################################################################################################
-            try:
-                # base
+        @staticmethod
+        def scheduler_default_groups(groups=None):
+            if groups is None:
                 groups = ["user", "moderator", "superuser"]
-                # rational
-                groups += ["rational_admin", "rational_moderator_tech_pre_atp", "rational_moderator_tech_pre_gtk",
-                           "rational_moderator_tech_pre_ok", "rational_moderator_tech_pre_uprav",
-                           "rational_moderator_tech_pre_energouprav", "rational_moderator_tech_post",
-                           "rational_moderator_no_tech_post"]
-                # idea
-                groups += ["idea_moderator"]
-                # tests
-                groups += ["moderator_vacancy"]
-                for grp in groups:
-                    group = Group.objects.get_or_create(name=grp)[0]
-                    group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
-                    group_model.user_many_to_many_field.add(
-                        backend_models.UserModel.objects.get(
-                            user_foreign_key_field=User.objects.get(username="000000000000")
-                        )
-                    )
-                    group_model.name_slug_field = grp
+            for grp in groups:
+                try:
                     action_model = backend_models.ActionModel.objects.get_or_create(access_slug_field=grp)[0]
+                    group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field=grp)[0]
                     group_model.action_many_to_many_field.add(action_model)
                     group_model.save()
-            except Exception as error__:
-                print(error__)
-            ############################################################################################################
+                except Exception as error:
+                    pass
 
-            # create default superuser
-            ############################################################################################################
-            username_ = '000000000000'
-            password_ = '31284bogdan'
-            try:
-                user = User.objects.get(username=username_)
-            except Exception as error__:
-                print(error__)
-                user = User.objects.create(username=username_)
-                user.set_password(password_)
-                user.is_staff = True
-                user.is_superuser = True
-                user.save()
-            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-            user_model.password_slug_field = password_
-            user_model.save()
-            try:
-                groups = ["user", "moderator", "superuser"]
-                for grp in groups:
-                    try:
-                        group = Group.objects.get(name=grp)
-                        group_model = backend_models.GroupModel.objects.get_or_create(group_foreign_key_field=group)[0]
-                        group_model.user_many_to_many_field.add(user_model)
-                    except Exception as error:
-                        pass
-            except Exception as error__:
-                print(error__)
-            ############################################################################################################
-
-            # create superuser 'Web_adm_1c'
-            ############################################################################################################
-            username_ = 'Web_adm_1c'
-            password_ = '159159qqww!'
-            try:
-                user = User.objects.get(username=username_)
-            except Exception as error__:
-                print(error__)
-                user = User.objects.create(username=username_)
-                user.set_password(password_)
-                user.is_staff = True
-                user.is_superuser = True
-                user.save()
-                user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                user_model.password_slug_field = password_
-                user_model.save()
-            ############################################################################################################
+        @staticmethod
+        def scheduler(request):
 
             # api/update_users/
             ############################################################################################################
-            try:
-                now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
-                update = True
-                for dat in backend_models.LoggingModel.objects.filter(
-                        request_path_slug_field='/api/update_users/'
-                ):
-                    if (dat.datetime_field + datetime.timedelta(hours=24)).strftime('%Y-%m-%d %H:%M') >= now:
-                        update = False
-                        break
-                if update:
-                    request.path = '/api/update_users/'
-                    DjangoClass.LoggingClass.action(request=request)
-                    threading.Thread(target=DjangoClass.SchedulerClass.update_users, args=()).start()
-            except Exception as error:
-                print(error)
+            # try:
+            #     now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+            #     update = True
+            #     for dat in backend_models.LoggingModel.objects.filter(
+            #             request_path_slug_field='/api/update_users/'
+            #     ):
+            #         if (dat.datetime_field + datetime.timedelta(hours=24)).strftime('%Y-%m-%d %H:%M') >= now:
+            #             update = False
+            #             break
+            #     if update:
+            #         request.path = '/api/update_users/'
+            #         DjangoClass.LoggingClass.action(request=request)
+            #         threading.Thread(target=DjangoClass.SchedulerClass.update_users, args=()).start()
+            # except Exception as error:
+            #     print(error)
             ############################################################################################################
 
             return True
+
+    class DefaultSettingsClass:
+
+        @staticmethod
+        def check_settings(request):
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="actions_logging")
+                if obj.boolean_field:
+                    pass
+            except Exception as error:
+                backend_models.SettingsModel.objects.create(
+                    type_slug_field="actions_logging",
+                    char_field="Логирование действий: вкл/выкл(boolean_field)",
+                    boolean_field=True
+                )
+
+            try:
+                backend_models.SettingsModel.objects.get(type_slug_field="actions_print")
+            except Exception as error:
+                backend_models.SettingsModel.objects.create(
+                    type_slug_field="actions_print",
+                    char_field="Вывод в консоль действий, вкл/выкл(boolean_field)",
+                    boolean_field=True
+                )
+
+            try:
+                backend_models.SettingsModel.objects.get(type_slug_field="error_logging")
+            except Exception as error:
+                backend_models.SettingsModel.objects.create(
+                    type_slug_field="error_logging",
+                    char_field="Логирование ошибок: вкл/выкл(boolean_field)",
+                    boolean_field=True
+                )
+
+            try:
+                backend_models.SettingsModel.objects.get(type_slug_field="error_print")
+            except Exception as error:
+                backend_models.SettingsModel.objects.create(
+                    type_slug_field="error_print",
+                    char_field="Вывод в консоль ошибок, вкл/выкл(boolean_field)",
+                    boolean_field=True
+                )
+
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="scheduler_personal_1c")
+                if obj.boolean_field:
+                    pass
+                    objects = backend_models.LoggingModel.objects.filter(
+                        request_path_slug_field='/scheduler_personal_1c/'
+                    )
+                    if ((objects[objects.count() - 1].datetime_field +
+                         datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime('%Y-%m-%d %H:%M')
+                            >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')):
+                        print(
+                            (objects[objects.count() - 1].datetime_field +
+                             datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime('%Y-%m-%d %H:%M')
+                        )
+                        print((datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'))
+                        request.path = '/scheduler_personal_1c/'
+                        DjangoClass.LoggingClass.action(request=request)
+                        threading.Thread(target=DjangoClass.SchedulerClass.scheduler_personal_1c, args=()).start()
+            except Exception as error:
+                backend_models.SettingsModel.objects.create(
+                    type_slug_field="scheduler_personal_1c",
+                    char_field="Планировщик обновления персонала из 1С",
+                    text_field="http://192.168.1.10/KM_1C/hs/iden/change/ | Web_adm_1c | 159159qqww!",
+                    integer_field=60,
+                    boolean_field=True,
+                )
+
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="scheduler_default_superusers")
+                if obj.boolean_field:
+                    users_strings = str(obj.text_field).strip().split("|")
+                    users = []
+                    for user_strings in users_strings:
+                        users.append([str(x).strip() for x in str(user_strings).strip().split(",") if len(x) > 1])
+                    threading.Thread(
+                        target=DjangoClass.SchedulerClass.scheduler_default_superusers, args=(users,)
+                    ).start()
+                    obj.boolean_field = False
+                    obj.save()
+            except Exception as error:
+                backend_models.SettingsModel.objects.create(
+                    type_slug_field="scheduler_default_superusers",
+                    char_field="Планировщик создания стандартных суперпользователей",
+                    text_field="000000000000, 31284bogdan | Web_adm_1c, 159159qqww!",
+                    boolean_field=True
+                )
+
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="scheduler_default_groups")
+                if obj.boolean_field:
+                    groups = [str(x).strip() for x in str(obj.text_field).strip().split(",") if len(x) > 1]
+                    threading.Thread(
+                        target=DjangoClass.SchedulerClass.scheduler_default_groups, args=(groups,)
+                    ).start()
+                    obj.boolean_field = False
+                    obj.save()
+            except Exception as error:
+                backend_models.SettingsModel.objects.create(
+                    type_slug_field="scheduler_default_groups",
+                    char_field="Планировщик создания стандартных групп",
+                    text_field="user, moderator, superuser, idea_moderator, moderator_vacancy",
+                    boolean_field=True
+                )
+                #     groups += ["rational_admin", "rational_moderator_tech_pre_atp", "rational_moderator_tech_pre_gtk",
+                #                "rational_moderator_tech_pre_ok", "rational_moderator_tech_pre_uprav",
+                #                "rational_moderator_tech_pre_energouprav", "rational_moderator_tech_post",
+                #                "rational_moderator_no_tech_post"]
+
+        @staticmethod
+        def get_print_value():
+            pass
 
 
 # ###################################################################################################TODO custom service

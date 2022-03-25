@@ -165,7 +165,7 @@ export const ChangeProfilePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллические буквы и цифры
+                        * только кириллица
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -187,7 +187,6 @@ export const ChangeProfilePage = () => {
                             utils.GetRegexType({
                               numbers: true,
                               cyrillic: true,
-                              onlyLowerLetters: true,
                               space: true,
                             }),
                             ""
@@ -201,7 +200,7 @@ export const ChangeProfilePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только маленькие кириллические буквы и цифры
+                        * только кириллица
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -270,7 +269,7 @@ export const ChangeProfilePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латинские буквы и цифры
+                        * только латиница
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -307,7 +306,7 @@ export const ChangeProfilePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латинские буквы и цифры
+                        * только латиница
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}

@@ -104,7 +104,7 @@ export const ChangePasswordPage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латинские буквы и цифры
+                        * только латиница
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -141,7 +141,7 @@ export const ChangePasswordPage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латинские буквы и цифры
+                        * только латиница
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}

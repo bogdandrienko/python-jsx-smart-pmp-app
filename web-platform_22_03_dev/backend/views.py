@@ -763,18 +763,10 @@ def api_auth_admin(request):
 
                         groups = [group.strip() for group in str(groups).lower().strip().split(',')]
                         for group in groups:
-                            if len(group) > 0:
-                                group_object = Group.objects.get_or_create(name=group)[0]
-                                try:
-                                    group_model = backend_models.GroupModel.objects.get(
-                                        group_foreign_key_field=group_object
-                                    )
-                                except Exception as error:
-                                    group_model = backend_models.GroupModel.objects.create(
-                                        group_foreign_key_field=group_object,
-                                        name_char_field=group,
-                                        name_slug_field=group,
-                                    )
+                            if len(group) > 1:
+                                group_model = backend_models.GroupModel.objects.get_or_create(
+                                    name_slug_field=group,
+                                )[0]
                                 group_model.user_many_to_many_field.add(user_model)
                         if backend_settings.DEBUG:
                             print(username)

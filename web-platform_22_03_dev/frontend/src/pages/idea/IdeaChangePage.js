@@ -233,10 +233,7 @@ export const IdeaChangePage = () => {
                   </h6>
                   <h6 className="text-danger lead small m-0 p-0">
                     {" [ комментарий модератора: "}
-                    {utils.GetSliceString(
-                      dataIdeaDetail["comment_moderate_char_field"],
-                      30
-                    )}
+                    {dataIdeaDetail["comment_moderate_char_field"]}
                     {" ]"}
                   </h6>
                 </div>
@@ -394,6 +391,7 @@ export const IdeaChangePage = () => {
                                 numbers: true,
                                 cyrillic: true,
                                 space: true,
+                                punctuationMarks: true,
                               }),
                               ""
                             )
@@ -404,7 +402,7 @@ export const IdeaChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллические буквы и цифры
+                          * только кириллица
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
@@ -431,6 +429,7 @@ export const IdeaChangePage = () => {
                                 numbers: true,
                                 cyrillic: true,
                                 space: true,
+                                punctuationMarks: true,
                               }),
                               ""
                             )
@@ -441,7 +440,7 @@ export const IdeaChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллические буквы и цифры
+                          * только кириллица
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}

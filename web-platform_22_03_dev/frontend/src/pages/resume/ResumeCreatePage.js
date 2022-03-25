@@ -167,7 +167,7 @@ export const ResumeCreatePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллические буквы и цифры
+                        * только кириллица
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -204,7 +204,7 @@ export const ResumeCreatePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллические буквы
+                        * только кириллица
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -239,7 +239,7 @@ export const ResumeCreatePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллические буквы
+                        * только кириллица
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -272,7 +272,7 @@ export const ResumeCreatePage = () => {
                       * не обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллические буквы
+                        * только кириллица
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}

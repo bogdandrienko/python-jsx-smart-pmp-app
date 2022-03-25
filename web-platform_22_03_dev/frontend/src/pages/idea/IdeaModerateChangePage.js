@@ -273,7 +273,7 @@ export const IdeaModerateChangePage = () => {
                           * обязательно
                           <small className="text-warning m-0 p-0">
                             {" "}
-                            * только кириллические буквы и цифры
+                            * только кириллица
                           </small>
                           <small className="text-muted m-0 p-0">
                             {" "}
@@ -500,6 +500,7 @@ export const IdeaModerateChangePage = () => {
                                 numbers: true,
                                 cyrillic: true,
                                 space: true,
+                                punctuationMarks: true,
                               }),
                               ""
                             )
@@ -510,7 +511,7 @@ export const IdeaModerateChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллические буквы и цифры
+                          * только кириллица
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
@@ -537,6 +538,7 @@ export const IdeaModerateChangePage = () => {
                                 numbers: true,
                                 cyrillic: true,
                                 space: true,
+                                punctuationMarks: true,
                               }),
                               ""
                             )
@@ -547,7 +549,7 @@ export const IdeaModerateChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллические буквы и цифры
+                          * только кириллица
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}

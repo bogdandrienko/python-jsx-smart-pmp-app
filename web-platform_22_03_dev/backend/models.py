@@ -1831,24 +1831,6 @@ class ActionModel(models.Model):
     Модель, которая содержит объект для валидации и проверки на доступ действия веб-платформы
     """
 
-    name_char_field = models.CharField(
-        db_column='name_char_field_db_column',
-        db_index=True,
-        db_tablespace='name_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Имя действия для отображения',
-        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
-                  '"Модератор отдела ОУПиБП"</small><hr><br>',
-
-        max_length=500,
-    )
     access_slug_field = models.SlugField(
         db_column='access_slug_field_db_column',
         db_index=True,
@@ -1861,9 +1843,8 @@ class ActionModel(models.Model):
         blank=True,
         null=True,
         default='',
-        verbose_name='Имя действия для валидации и ссылок',
-        help_text='<small class="text-muted underline">латинница, нижний регистр, без пробелов, например: '
-                  '"moderator_oupibp"</small><hr><br>',
+        verbose_name='access_slug_field',
+        help_text='<small class="text-muted underline">access_slug_field</small><hr><br>',
 
         max_length=500,
         allow_unicode=False,
@@ -1871,13 +1852,13 @@ class ActionModel(models.Model):
 
     class Meta:
         app_label = 'backend'
-        ordering = ('name_char_field', 'access_slug_field')
+        ordering = ('access_slug_field', )
         verbose_name = 'Действие'
         verbose_name_plural = 'Admin 3, Действия'
         db_table = 'action_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field} | {self.access_slug_field}'
+        return f'{self.access_slug_field}'
 
 
 class GroupModel(models.Model):
@@ -1885,43 +1866,6 @@ class GroupModel(models.Model):
     Модель, которая содержит расширение для стандартной модели групп пользователей веб-платформы
     """
 
-    name_char_field = models.CharField(
-        db_column='name_char_field_db_column',
-        db_index=True,
-        db_tablespace='name_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Имя группы для отображения',
-        help_text='<small class="text-muted underline">кириллица, любой регистр, можно с пробелами, например: '
-                  '"Модератор отдела ОУПиБП"</small><hr><br>',
-
-        max_length=500,
-    )
-    group_foreign_key_field = models.ForeignKey(
-        db_column='group_foreign_key_field_db_column',
-        db_index=True,
-        db_tablespace='group_foreign_key_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default=None,
-        verbose_name='Группа:',
-        help_text='<small class="text-muted">Связь, с какой-либо группой, example: "to=Group.objects.get'
-                  '(name="User")"</small><hr><br>',
-
-        to=Group,
-        on_delete=models.SET_NULL,
-        related_name='group_foreign_key_field',
-    )
     name_slug_field = models.SlugField(
         db_column='name_slug_field_db_column',
         db_index=True,
@@ -1978,38 +1922,174 @@ class GroupModel(models.Model):
 
     class Meta:
         app_label = 'backend'
-        ordering = ('name_char_field', 'name_slug_field')
+        ordering = ('name_slug_field',)
         verbose_name = 'Группа расширенная'
         verbose_name_plural = 'Admin 2, Группы расширение'
         db_table = 'group_extend_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field} {self.name_slug_field}'
+        return f'{self.name_slug_field}'
 
 
-@receiver(post_save, sender=Group)
-def create_group_model(sender, instance, created, **kwargs):
-    if created:
-        try:
-            GroupModel.objects.get_or_create(
-                group_foreign_key_field=instance,
-                name_slug_field=instance.name,
-            )
-        except Exception as error:
-            backend_service.DjangoClass.LoggingClass.error_local(
-                error=error, function_error="create_user_model"
-            )
+class SettingsModel(models.Model):
+    """
+    Модель, которая содержит стандартные настройки django
+    """
 
+    LIST_DB_VIEW_CHOICES = [
+        ('actions_logging', 'Логирование действий'),
+        ('actions_print', 'Вывод действий в консоль'),
 
-@receiver(post_save, sender=GroupModel)
-def create_group(sender, instance, created, **kwargs):
-    if created:
-        try:
-            Group.objects.get_or_create(name=str(instance.group_foreign_key_field.name))
-        except Exception as error:
-            backend_service.DjangoClass.LoggingClass.error_local(
-                error=error, function_error="create_user_model"
-            )
+        ('error_logging', 'Логирование ошибок'),
+        ('error_print', 'Вывод в консоль действий'),
+
+        ('scheduler_personal_1c', 'Планировщик обновления персонала из 1С'),
+        ('scheduler_default_superusers', 'Планировщик создания стандартных суперпользователей'),
+        ('scheduler_default_groups', 'Планировщик создания стандартных групп'),
+    ]
+    type_slug_field = models.SlugField(
+        db_column='type_slug_field_db_column',
+        db_index=True,
+        db_tablespace='type_slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        choices=LIST_DB_VIEW_CHOICES,
+        unique=True,
+        editable=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name='type_slug_field',
+        help_text='<small class="text-muted">type_slug_field</small><hr><br>',
+
+        max_length=500,
+        allow_unicode=False,
+    )
+
+    char_field = models.CharField(
+        db_column='char_field_db_column',
+        db_index=True,
+        db_tablespace='char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='char_field',
+        help_text='<small class="text-muted">char_field</small><hr><br>',
+
+        max_length=500,
+    )
+    slug_field = models.SlugField(
+        db_column='slug_field_db_column',
+        db_index=True,
+        db_tablespace='slug_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(500), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name='slug_field',
+        help_text='<small class="text-muted">slug_field</small><hr><br>',
+
+        max_length=500,
+        allow_unicode=False,
+    )
+    text_field = models.TextField(
+        db_column='text_field_db_column',
+        db_index=True,
+        db_tablespace='text_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(5000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name='text_field',
+        help_text='<small class="text-muted">text_field</small><hr><br>',
+
+        max_length=5000,
+    )
+    integer_field = models.IntegerField(
+        db_column='integer_field_db_column',
+        db_index=True,
+        db_tablespace='integer_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinValueValidator(0), MaxValueValidator(9999), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0,
+        verbose_name='integer_field',
+        help_text='<small class="text-muted">integer_field</small><hr><br>',
+    )
+    float_field = models.FloatField(
+        db_column='float_field_db_column',
+        db_index=True,
+        db_tablespace='float_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinValueValidator(-1000), MaxValueValidator(1000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=0.0,
+        verbose_name='float_field',
+        help_text='<small class="text-muted">float_field</small><hr><br>',
+    )
+    boolean_field = models.BooleanField(
+        db_column='boolean_field_db_column',
+        db_index=True,
+        db_tablespace='boolean_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=False,
+        default=True,
+        verbose_name='boolean_field',
+        help_text='<small class="text-muted">boolean_field</small><hr><br>',
+    )
+    datetime_field = models.DateTimeField(
+        db_column='datetime_field_db_column',
+        db_index=True,
+        db_tablespace='datetime_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='datetime_field',
+        help_text='<small class="text-muted">datetime_field</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-type_slug_field',)
+        verbose_name = 'Настройка'
+        verbose_name_plural = 'Admin 4, Настройки'
+        db_table = 'settings_admin_model_table'
+
+    def __str__(self):
+        return f'{self.type_slug_field}'
 
 
 class LoggingModel(models.Model):
@@ -2131,7 +2211,7 @@ class LoggingModel(models.Model):
         app_label = 'backend'
         ordering = ('-datetime_field',)
         verbose_name = 'Лог'
-        verbose_name_plural = 'Admin 4, Логи'
+        verbose_name_plural = 'Admin 5, Логи'
         db_table = 'logging_admin_model_table'
 
     def __str__(self):
@@ -2310,7 +2390,7 @@ class NotificationModel(models.Model):
         app_label = 'backend'
         ordering = ('-created_datetime_field',)
         verbose_name = 'Уведомление'
-        verbose_name_plural = 'Admin 5, Уведомления'
+        verbose_name_plural = 'Admin 6, Уведомления'
         db_table = 'notification_model_table'
 
     def __str__(self):

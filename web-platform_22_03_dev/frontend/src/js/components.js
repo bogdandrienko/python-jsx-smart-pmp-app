@@ -301,25 +301,19 @@ export const FooterComponent = () => {
                     className="dropdown-item"
                     href="https://km.kz/"
                   >
-                    km.kz
+                    KM KZ
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     className="dropdown-item"
                     href="https://www.km-open.online/"
                   >
-                    km-open.online
+                    KM OPEN
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     className="dropdown-item"
                     href="https://web.cplus.kz/"
                   >
-                    web.cplus.kz
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    className="dropdown-item"
-                    href="https://chrysotile.kz/"
-                  >
-                    chrysotile.kz
+                    KM QR
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </li>
@@ -348,6 +342,22 @@ export const FooterComponent = () => {
                     href="https://www.youtube.com/watch?v=GT9q0WWGH44&ab_channel=%D0%9A%D0%BE%D1%81%D1%82%D0%B0%D0%BD%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B5%D0%9C%D0%B8%D0%BD%D0%B5%D1%80%D0%B0%D0%BB%D1%8B"
                   >
                     youtube
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                </li>
+                <li>
+                  <strong className="dropdown-header">Газета "Хризотил"</strong>
+                  <NavDropdown.Item
+                    className="dropdown-item"
+                    href="https://www.instagram.com/gazetakm/"
+                  >
+                    instagram
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    className="dropdown-item"
+                    href="https://chrysotile.kz/"
+                  >
+                    сайт
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </li>

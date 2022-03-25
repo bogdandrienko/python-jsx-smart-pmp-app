@@ -295,29 +295,22 @@ class ActionModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        'name_char_field',
         'access_slug_field',
     )
     list_display_links = (
-        'name_char_field',
         'access_slug_field',
     )
     list_editable = (
     )
     list_filter = (
-        'name_char_field',
         'access_slug_field',
     )
     fieldsets = (
-        ('Имя отображения', {'fields': (
-            'name_char_field',
-        )}),
         ('Имя валидации', {'fields': (
             'access_slug_field',
         )}),
     )
     search_fields = [
-        'name_char_field',
         'access_slug_field',
     ]
 
@@ -331,20 +324,12 @@ class GroupModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        'name_char_field',
-        'group_foreign_key_field',
         'name_slug_field',
     )
     list_display_links = (
-        'name_char_field',
         'name_slug_field',
     )
-    list_editable = (
-        'group_foreign_key_field',
-    )
     list_filter = (
-        'name_char_field',
-        'group_foreign_key_field',
         'name_slug_field',
         'user_many_to_many_field',
         'action_many_to_many_field',
@@ -354,12 +339,6 @@ class GroupModelAdmin(admin.ModelAdmin):
         'action_many_to_many_field',
     )
     fieldsets = (
-        ('Имя отображения', {'fields': (
-            'name_char_field',
-        )}),
-        ('Группа', {'fields': (
-            'group_foreign_key_field',
-        )}),
         ('Имя валидации', {'fields': (
             'name_slug_field',
         )}),
@@ -371,8 +350,6 @@ class GroupModelAdmin(admin.ModelAdmin):
         )}),
     )
     search_fields = [
-        'name_char_field',
-        'group_foreign_key_field',
         'name_slug_field',
         'user_many_to_many_field',
         'action_many_to_many_field',
@@ -390,6 +367,64 @@ class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
 
 admin.site.unregister(token_blacklist.models.OutstandingToken)
 admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
+
+
+class SettingsModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'SettingsModel' на панели администратора
+    """
+
+    list_display = (
+        'type_slug_field',
+        'char_field',
+        'slug_field',
+        'text_field',
+        'integer_field',
+        'float_field',
+        'boolean_field',
+        'datetime_field',
+    )
+    list_display_links = (
+        'type_slug_field',
+    )
+    list_editable = (
+        'boolean_field',
+    )
+    list_filter = (
+        'type_slug_field',
+        'char_field',
+        'slug_field',
+        'text_field',
+        'integer_field',
+        'float_field',
+        'boolean_field',
+        'datetime_field',
+    )
+    fieldsets = (
+        ('Основное', {'fields': (
+            'type_slug_field',
+            'char_field',
+            'slug_field',
+            'text_field',
+            'integer_field',
+            'float_field',
+            'boolean_field',
+            'datetime_field',
+        )}),
+    )
+    search_fields = [
+        'type_slug_field',
+        'char_field',
+        'slug_field',
+        'text_field',
+        'integer_field',
+        'float_field',
+        'boolean_field',
+        'datetime_field',
+    ]
+
+
+admin.site.register(backend_models.SettingsModel, SettingsModelAdmin)
 
 
 class LoggingModelAdmin(admin.ModelAdmin):

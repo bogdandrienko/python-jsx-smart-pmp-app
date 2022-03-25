@@ -284,10 +284,7 @@ export const IdeaDetailPage = () => {
                     <input
                       type="text"
                       className="form-control form-control-sm text-center m-0 p-1"
-                      defaultValue={utils.GetSliceString(
-                        dataIdeaDetail["place_char_field"],
-                        50
-                      )}
+                      defaultValue={dataIdeaDetail["place_char_field"]}
                       readOnly={true}
                       placeholder="введите место изменения тут..."
                       required
@@ -301,10 +298,7 @@ export const IdeaDetailPage = () => {
                     Описание:
                     <textarea
                       className="form-control form-control-sm text-center m-0 p-1"
-                      defaultValue={utils.GetSliceString(
-                        dataIdeaDetail["description_text_field"],
-                        50
-                      )}
+                      defaultValue={dataIdeaDetail["description_text_field"]}
                       readOnly={true}
                       required
                       placeholder="введите описание тут..."
