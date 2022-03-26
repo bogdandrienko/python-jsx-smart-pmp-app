@@ -49,24 +49,13 @@ export const RationalCreatePage = () => {
   } = rationalCreateStore;
   //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
-    if (
-      !dataUserListAll &&
-      !loadUserListAll &&
-      !errorUserListAll &&
-      !failUserListAll
-    ) {
+    if (!dataUserListAll && !errorUserListAll && !failUserListAll) {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
       dispatch(actions.userListAllAction(form));
     }
-  }, [
-    dispatch,
-    dataUserListAll,
-    loadUserListAll,
-    errorUserListAll,
-    failUserListAll,
-  ]);
+  }, [dataUserListAll, errorUserListAll, failUserListAll]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataRationalCreate) {

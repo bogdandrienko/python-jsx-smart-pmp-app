@@ -51,26 +51,13 @@ export const RationalModerateListPage = () => {
       };
       dispatch(actions.userListAllAction(form));
     }
-  }, [dispatch, dataUserListAll]);
+  }, [dataUserListAll]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (
-      !dataRationalList &&
-      !loadRationalList &&
-      dataUserDetails &&
-      !loadUserDetails &&
-      dataUserListAll
-    ) {
+    if (!dataRationalList && dataUserDetails && dataUserListAll) {
       getData();
     }
-  }, [
-    dispatch,
-    dataRationalList,
-    loadRationalList,
-    dataUserDetails,
-    loadUserDetails,
-    dataUserListAll,
-  ]);
+  }, [dataRationalList, dataUserDetails, dataUserListAll]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserDetails) {
@@ -132,7 +119,7 @@ export const RationalModerateListPage = () => {
         }
       }
     }
-  }, [dispatch, dataUserDetails]);
+  }, [dataUserDetails]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const getData = () => {
     const form = {

@@ -23,7 +23,7 @@ export const VacancyListPage = () => {
   //////////////////////////////////////////////////////////
   const vacancyListStore = useSelector((state) => state.vacancyListStore);
   const {
-    load: loadVacancyList,
+    // load: loadVacancyList,
     data: dataVacancyList,
     // error: errorVacancyList,
     // fail: failVacancyList,
@@ -32,9 +32,7 @@ export const VacancyListPage = () => {
   useEffect(() => {
     if (dataVacancyList) {
     } else {
-      if (!loadVacancyList) {
-        getData();
-      }
+      getData();
     }
   }, [dataVacancyList]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
@@ -221,7 +219,7 @@ export const VacancyListPage = () => {
                 >
                   отправить резюме
                 </Link>
-                {utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+                {utils.CheckAccess(userDetailsStore, "moderator_vacancy") && (
                   <Link
                     to={`/vacancy_create`}
                     className="btn btn-sm btn-secondary"

@@ -28,22 +28,21 @@ export const RationalModerateDetailPage = () => {
   useEffect(() => {
     if (
       dataRationalDetail &&
-      dataRationalDetail.id !== undefined &&
-      id !== dataRationalDetail.id
+      (dataRationalDetail.id !== undefined || dataRationalDetail.id !== id)
     ) {
       dispatch({ type: constants.RATIONAL_DETAIL_RESET_CONSTANT });
     }
-  }, [dispatch, id]);
+  }, [dataRationalDetail, id]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (!dataRationalDetail && !loadRationalDetail) {
+    if (!dataRationalDetail) {
       const form = {
         "Action-type": "RATIONAL_DETAIL",
         id: id,
       };
       dispatch(actions.rationalDetailAction(form));
     }
-  }, [dispatch, id, dataRationalDetail, loadRationalDetail]);
+  }, [dataRationalDetail]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerSubmit = (e) => {
     e.preventDefault();

@@ -53,7 +53,7 @@ export const IdeaModerateListPage = () => {
       };
       dispatch(actions.userListAllAction(form));
     }
-  }, [dataUserListAll, dispatch]);
+  }, [dataUserListAll]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataIdeaList) {
@@ -74,7 +74,7 @@ export const IdeaModerateListPage = () => {
         resetState();
       }
     }
-  }, [dataIdeaList, dispatch, firstRefresh]);
+  }, [dataIdeaList, firstRefresh]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerSubmit = async (e) => {
     try {

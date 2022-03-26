@@ -52,7 +52,7 @@ export const NotificationListPage = () => {
         resetState();
       }
     }
-  }, [dataNotificationList, dispatch, firstRefresh]);
+  }, [dataNotificationList, firstRefresh]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataNotificationDelete) {

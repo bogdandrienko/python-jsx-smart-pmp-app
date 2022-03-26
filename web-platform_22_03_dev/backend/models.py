@@ -1815,17 +1815,6 @@ def create_user_model(sender, instance, created, **kwargs):
             )
 
 
-@receiver(post_save, sender=UserModel)
-def create_user(sender, instance, created, **kwargs):
-    if created:
-        try:
-            User.objects.get_or_create(username=str(instance.user_foreign_key_field.username))
-        except Exception as error:
-            backend_service.DjangoClass.LoggingClass.error_local(
-                error=error, function_error="create_user_model"
-            )
-
-
 class ActionModel(models.Model):
     """
     Модель, которая содержит объект для валидации и проверки на доступ действия веб-платформы
@@ -1937,11 +1926,11 @@ class SettingsModel(models.Model):
     """
 
     LIST_DB_VIEW_CHOICES = [
-        ('actions_logging', 'Логирование действий'),
-        ('actions_print', 'Вывод действий в консоль'),
+        ('action_logging', 'Логирование действий'),
+        ('action_print', 'Вывод действий в консоль'),
 
         ('error_logging', 'Логирование ошибок'),
-        ('error_print', 'Вывод в консоль действий'),
+        ('error_print', 'Вывод ошибок в консоль'),
 
         ('scheduler_personal_1c', 'Планировщик обновления персонала из 1С'),
         ('scheduler_default_superusers', 'Планировщик создания стандартных суперпользователей'),
@@ -2183,7 +2172,7 @@ class LoggingModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        default="error: ",
+        default="",
         verbose_name='Текст ошибки и/или исключения',
         help_text='<small class="text-muted">Много текста, example: "текст, текст..."</small><hr><br>',
 
@@ -2219,9 +2208,7 @@ class LoggingModel(models.Model):
             try:
                 username = User.objects.get(username=self.username_slug_field)
             except Exception as error:
-                error = f'error = {error}'
                 username = ''
-                print(error)
         else:
             username = ''
         return f'{self.datetime_field} {username} {self.request_path_slug_field}'

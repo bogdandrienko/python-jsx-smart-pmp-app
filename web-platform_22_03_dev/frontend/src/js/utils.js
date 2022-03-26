@@ -76,7 +76,7 @@ export const CheckPageAccess = (userDetailsStore, location) => {
   return access;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ActionsAxiosUtility = async ({
+export const ActionsAxiosUtility = ({
   url = "",
   method = "GET",
   timeout = 10000,
@@ -93,7 +93,7 @@ export const ActionsAxiosUtility = async ({
         userLoginStore: { data: userLogin },
       } = getState();
       if (userLogin !== null) {
-        const { data } = await axios({
+        const config = {
           url: url,
           method: method,
           timeout: timeout,
@@ -102,40 +102,23 @@ export const ActionsAxiosUtility = async ({
             Authorization: `Bearer ${userLogin.token}`,
           },
           data: formData,
-        });
-        return { data: data };
+        };
+        return { config };
+      } else {
+        return { config: null };
       }
+    } else {
+      const config = {
+        url: url,
+        method: method,
+        timeout: timeout,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      };
+      return { config };
     }
-    const { data } = await axios({
-      url: url,
-      method: method,
-      timeout: timeout,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      data: formData,
-    });
-    return { data: data };
-  } catch (error) {
-    if (constants.DEBUG_CONSTANT) {
-      console.log("ActionsFormDataUtilityError: ", error);
-    }
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ActionsFormDataUtility = ({ form, getState = null }) => {
-  try {
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      formData.append(key, value);
-    });
-    if (getState) {
-      const {
-        userLoginStore: { data: userLogin },
-      } = getState();
-      return { formData: formData, userLogin: userLogin };
-    }
-    return { formData: formData };
   } catch (error) {
     if (constants.DEBUG_CONSTANT) {
       console.log("ActionsFormDataUtilityError: ", error);
@@ -149,24 +132,22 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
       console.log("fail: ", error);
     }
     if (error) {
-      let status = error.message
-        ? error.message
-        : error.response.data.detail
-        ? error.response.data.detail
-        : error.response.status;
+      let status = error.response.status
+        ? error.response.status
+        : error.response.message
+        ? error.response.message
+        : error.response.data.detail;
       if (constants.DEBUG_CONSTANT) {
         console.log("status: ", status);
       }
-      if (status.slice(0, 7) === "timeout") {
+      if ((status + "_").slice(0, 7) === "timeout") {
         status = "timeout";
       }
       switch (status) {
-        case 401 ||
-          "Authentication credentials were not provided." ||
-          "Unauthorized":
+        case 401:
           dispatch(actions.userLogoutAction());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
-        case 413 || "Request Entity Too Large":
+        case 413:
           return "Ваш файл слишком большой! Измените его размер и перезагрузите страницу перед отправкой.";
         case "timeout":
           return "Превышено время ожидания! Попробуйте повторить действие или ожидайте исправления.";

@@ -68,15 +68,7 @@ export const HeaderComponent = () => {
         navigate("/");
       }
     }
-  }, [
-    dataUserDetails,
-    dispatch,
-    firstRefreshUserDetails,
-    logic,
-    location,
-    redirect,
-    navigate,
-  ]);
+  }, [dispatch, firstRefreshUserDetails, logic, location, redirect, navigate]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (logic) {
@@ -122,7 +114,7 @@ export const HeaderComponent = () => {
         dispatch({ type: constants.NOTIFICATION_LIST_RESET_CONSTANT });
       }
     }
-  }, [dataNotificationList, dispatch, firstRefreshNotification]);
+  }, [dispatch, firstRefreshNotification]);
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <header className="header navbar-fixed-top m-0 p-0 pb-3">

@@ -12,7 +12,7 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 from typing import Union
 # ###################################################################################################TODO django modules
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest
 # ###################################################################################################TODO custom modules
 from backend import models as backend_models
@@ -20,10 +20,85 @@ from backend import models as backend_models
 
 # #####################################################################################################TODO base service
 class DjangoClass:
+    class LoggingClass:
+        @staticmethod
+        def error(request, error):
+            if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                print(f"\n\nusername: {req_inst.user}"
+                      f"\nip: {req_inst.ip}"
+                      f"\nrequest_path: {req_inst.path}"
+                      f"\nrequest_method: {req_inst.method}"
+                      f"\nrequest_action_type: {req_inst.action_type}"
+                      f"\nerror: {error}")
+
+            if DjangoClass.DefaultSettingsClass.get_error_logging_value():
+                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                backend_models.LoggingModel.objects.create(
+                    username_slug_field=req_inst.user,
+                    ip_genericipaddress_field=req_inst.ip,
+                    request_path_slug_field=req_inst.path,
+                    request_method_slug_field=req_inst.method + " | " + req_inst.action_type,
+                    error_text_field=f'error: {error}'
+                )
+                text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type, error,
+                        datetime.datetime.now()]
+                string = ''
+                for val in text:
+                    string = string + f', {val}'
+                with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
+                    log.write(f'\n{string[2:]}\n')
+
+        @staticmethod
+        def error_local(error, function_error):
+            if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                print(f"\n\nrequest_path: error_local"
+                      f"\nrequest_method: {function_error}"
+                      f"\nerror: {error}")
+
+            if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
+                backend_models.LoggingModel.objects.create(
+                    request_path_slug_field="error_local",
+                    request_method_slug_field=function_error,
+                    error_text_field=f'error: {error}'
+                )
+                text = ["error_local", function_error, error, datetime.datetime.now()]
+                string = ''
+                for val in text:
+                    string = string + f', {val}'
+                with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
+                    log.write(f'\n{string[2:]}\n')
+
+        @staticmethod
+        def action(request):
+            if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                request_instance = DjangoClass.DRFClass.RequestClass(request=request)
+                print(f"\n\n{DateTimeUtils.get_current_datetime()}"
+                      f"\nrequest_path: {request_instance.path}"
+                      f"\nrequest_action_type: {request_instance.action_type}"
+                      f"\nrequest_user: {request_instance.user}"
+                      f"\nrequest.data: {request_instance.data}")
+
+            if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
+                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                backend_models.LoggingModel.objects.create(
+                    username_slug_field=req_inst.user,
+                    ip_genericipaddress_field=req_inst.ip,
+                    request_path_slug_field=req_inst.path,
+                    request_method_slug_field=req_inst.method + " | " + req_inst.action_type,
+                    error_text_field=f'-'
+                )
+                text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type,
+                        datetime.datetime.now()]
+                string = ''
+                for val in text:
+                    string = string + f', {val}'
+                with open('static/media/admin/logging/logging_actions.txt', 'a') as log:
+                    log.write(f'\n{string[2:]}\n')
+
     class TemplateClass:
         @staticmethod
-        def request(request, log=False, schedule=False, print_req=False):
-
+        def request(request):
             # Settings
             ############################################################################################################
             threading.Thread(target=DjangoClass.DefaultSettingsClass.check_settings, args=(request,)).start()
@@ -31,193 +106,15 @@ class DjangoClass:
 
             # Logging
             ############################################################################################################
-            if log:
-                threading.Thread(target=DjangoClass.LoggingClass.action, args=(request,)).start()
-            ############################################################################################################
-
-            # Scheduler
-            ############################################################################################################
-            if schedule:
-                threading.Thread(target=DjangoClass.SchedulerClass.scheduler, args=(request,)).start()
+            threading.Thread(target=DjangoClass.LoggingClass.action, args=(request,)).start()
             ############################################################################################################
 
             # Request
             ############################################################################################################
             request_instance = DjangoClass.DRFClass.RequestClass(request=request)
-            if print_req:
-                print(f"\n\nrequest_path: {request_instance.path}\ndatetime: {DateTimeUtils.get_current_datetime()}"
-                      f"\nrequest_method: {request_instance.method}"
-                      f"\nrequest_action_type: {request_instance.action_type}\nrequest_user: {request_instance.user}"
-                      f"\nrequest.data: {request_instance.data}\nrequest_body: {request_instance.body}")
             ############################################################################################################
 
             return request_instance
-
-    class AuthorizationClass:
-        @staticmethod
-        def try_to_access(request, access: str):
-            DjangoClass.LoggingClass.action(request=request)
-            # if str(request.META.get("REMOTE_ADDR")) == '192.168.1.202':
-            #     return 'django_local'
-            if access == 'only_logging':
-                return False
-            if request.user.is_authenticated:
-                try:
-                    user = User.objects.get(username=request.user.username)
-                    user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                    if user.is_superuser:
-                        return False
-                    if user_model.activity_boolean_field is False:
-                        return 'django_account_logout'
-                    else:
-                        if user_model.email_field and user_model.secret_question_char_field and \
-                                user_model.secret_answer_char_field:
-                            try:
-                                action_model = backend_models.ActionModel.objects.get(name_slug_field=access)
-                                if action_model:
-                                    groups = backend_models.GroupModel.objects.filter(
-                                        user_many_to_many_field=user_model,
-                                        action_many_to_many_field=action_model,
-                                    )
-                                    if groups:
-                                        return False
-                                    else:
-                                        return 'django_home'
-                            except Exception as error:
-                                print(error)
-                                return 'django_home'
-                        else:
-                            return 'django_account_change_password'
-                except Exception as error:
-                    print(error)
-                    return 'django_home'
-            else:
-                return 'django_account_login'
-
-    class LoggingClass:
-        @staticmethod
-        def error(request, error, print_error=False):
-            if print_error:
-                req_inst = DjangoClass.TemplateClass.request(
-                    request=request, log=True, schedule=True, print_req=False
-                )
-                print(f"\n\nerror path: {req_inst.path}\nerror action_type: {req_inst.action_type}\nerror: \n{error}")
-            # for k, v in request.META.items():
-            #     print(f'\n{k}: {v}')
-            username = request.user.username
-            ip = request.META.get("REMOTE_ADDR")
-            request_path = request.path
-            request_method = request.method
-            datetime_now = datetime.datetime.now()
-            backend_models.LoggingModel.objects.create(
-                username_slug_field=username,
-                ip_genericipaddress_field=ip,
-                request_path_slug_field=request_path,
-                request_method_slug_field=request_method,
-                error_text_field=f'error: {error}'
-            )
-            text = [username, ip, request_path, request_method, datetime_now, error]
-            string = ''
-            for val in text:
-                string = string + f', {val}'
-            with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
-                log.write(f'\n{string[2:]}\n')
-
-        @staticmethod
-        def error_local(error, function_error):
-            datetime_now = datetime.datetime.now()
-            backend_models.LoggingModel.objects.create(username='', ip='', request_path=function_error,
-                                                       request_method='', error=error)
-            text = [function_error, datetime_now, error]
-            string = ''
-            for val in text:
-                string = string + f', {val}'
-            with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
-                log.write(f'\n{string[2:]}\n')
-
-        @staticmethod
-        def action(request):
-            # for k, v in request.META.items():
-            #     print(f'\n{k}: {v}')
-            username = request.user.username
-            ip = request.META.get("REMOTE_ADDR")
-            request_path = request.path
-            request_method = request.method
-            datetime_now = datetime.datetime.now()
-            backend_models.LoggingModel.objects.create(
-                username_slug_field=username,
-                ip_genericipaddress_field=ip,
-                request_path_slug_field=request_path,
-                request_method_slug_field=request_method,
-                error_text_field='successful'
-            )
-            text = [username, ip, request_path, request_method, datetime_now]
-            string = ''
-            for val in text:
-                string = string + f', {val}'
-            with open('static/media/admin/logging/logging_actions.txt', 'a') as log:
-                log.write(f'\n{string[2:]}\n')
-
-    class AccountClass:
-        @staticmethod
-        def create_django_encrypt_password(password: str):
-            try:
-                user = User.objects.get_or_create(username='sha256')[0]
-                user.set_password(password)
-                encrypt_password = user.password
-                backend_models.UserModel.objects.get(user_foreign_key_field=user).delete()
-                user.delete()
-                return encrypt_password
-            except Exception as error:
-                DjangoClass.LoggingClass.error_local(error=error, function_error='get_sha256_password')
-                return False
-
-        @staticmethod
-        def create_password_from_chars(chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                                       length=8, need_temp=False):
-            password = ''
-            for i in range(1, length + 1):
-                password += random.choice(chars)
-            if need_temp:
-                return 'temp_' + password
-            else:
-                return password
-
-    class RequestClass:
-        @staticmethod
-        def get_value(request: WSGIRequest, key: str, none_is_error=False, strip=True):
-            if none_is_error:
-                # If key not have is Exception Error
-                value = request.POST[key]
-            else:
-                # If key not have value is None
-                value = request.POST.get(key)
-            if strip and value:
-                value.strip()
-            return value
-
-        @staticmethod
-        def get_check(request: WSGIRequest, key: str, none_is_error=False):
-            if none_is_error:
-                # If key not have is Exception Error
-                value = request.POST[key]
-            else:
-                # If key not have value is None
-                value = request.POST.get(key)
-            if value is None:
-                return False
-            else:
-                return True
-
-        @staticmethod
-        def get_file(request: WSGIRequest, key: str, none_is_error=False):
-            if none_is_error:
-                # If key not have is Exception Error
-                file = request.FILES[key]
-            else:
-                # If key not have value is None
-                file = request.FILES.get(key)
-            return file
 
     class DRFClass:
         class RequestClass:
@@ -292,240 +189,90 @@ class DjangoClass:
                         else:
                             return self.data[key]
                 except Exception as error:
-                    if except_error:
-                        DjangoClass.LoggingClass.error(request=self.request, error=error, print_error=True)
-                    else:
-                        return None
-
-        @staticmethod
-        def request_utils(request):
-            try:
-                request_method = str(request.method).upper()
-            except Exception as error:
-                print(error)
-                DjangoClass.LoggingClass.error(request=request, error=error)
-                request_method = None
-
-            try:
-                request_action_type = str(request.data["Action-type"]).upper()
-            except Exception as error:
-                print(error)
-                DjangoClass.LoggingClass.error(request=request, error=error)
-                request_action_type = None
-
-            try:
-                request_user = User.objects.get(username=str(request.user.username))
-            except Exception as error:
-                print(error)
-                DjangoClass.LoggingClass.error(request=request, error=error)
-                request_user = None
-
-            try:
-                request_body = request.data["body"]
-            except Exception as error:
-                print(error)
-                DjangoClass.LoggingClass.error(request=request, error=error)
-                request_body = None
-
-            return [request_method, request_action_type, request_user, request_body]
-
-    class SchedulerClass:
-        @staticmethod
-        def scheduler_personal_1c():
-            key = UtilsClass.create_encrypted_password(
-                _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                _length=10
-            )
-            hash_key_obj = hashlib.sha256()
-            hash_key_obj.update(key.encode('utf-8'))
-            key_hash = str(hash_key_obj.hexdigest().strip().upper())
-            key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
-            date = datetime.datetime.now().strftime("%Y%m%d")
-            date_base64 = base64.b64encode(str(date).encode()).decode()
-            url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
-            h = httplib2.Http(os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_users")
-            _login = 'Web_adm_1c'
-            password = '159159qqww!'
-            h.add_credentials(_login, password)
-            response_, content = h.request(url)
-            json_data = json.loads(
-                UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-            )
-
-            class Worker:
-                def __init__(self, date_time_: str, status_: str, username_: str, last_name_: str, first_name_: str,
-                             patronymic_: str, personnel_number_: str, subdivision_: str, workshop_service_: str,
-                             department_site_: str, position_: str, category_: str):
-                    self.date_time_ = date_time_
-                    self.status_ = status_
-                    self.username_ = username_
-                    self.last_name_ = last_name_
-                    self.first_name_ = first_name_
-                    self.patronymic_ = patronymic_
-                    self.personnel_number_ = personnel_number_
-                    self.subdivision_ = subdivision_
-                    self.workshop_service_ = workshop_service_
-                    self.department_site_ = department_site_
-                    self.position_ = position_
-                    self.category_ = category_
-
-                @staticmethod
-                def get_value(dict_: dict, user_, key_: str):
-                    try:
-                        value = dict_["global_objects"][user_][key_]
-                        return value
-                    except Exception as error__:
-                        print(error__)
-                        return ''
-
-            for user in json_data["global_objects"]:
-                worker = Worker(
-                    date_time_=Worker.get_value(dict_=json_data, user_=user, key_="Период"),
-                    status_=Worker.get_value(dict_=json_data, user_=user, key_="Статус"),
-                    username_=Worker.get_value(dict_=json_data, user_=user, key_="ИИН"),
-                    last_name_=Worker.get_value(dict_=json_data, user_=user, key_="Фамилия"),
-                    first_name_=Worker.get_value(dict_=json_data, user_=user, key_="Имя"),
-                    patronymic_=Worker.get_value(dict_=json_data, user_=user, key_="Отчество"),
-                    personnel_number_=Worker.get_value(dict_=json_data, user_=user, key_="ТабельныйНомер"),
-                    subdivision_=Worker.get_value(dict_=json_data, user_=user, key_="Подразделение"),
-                    workshop_service_=Worker.get_value(dict_=json_data, user_=user, key_="Цех_Служба"),
-                    department_site_=Worker.get_value(dict_=json_data, user_=user, key_="Отдел_Участок"),
-                    position_=Worker.get_value(dict_=json_data, user_=user, key_="Должность"),
-                    category_=Worker.get_value(dict_=json_data, user_=user, key_="Категория")
-                )
-                print(worker.username_)
-                try:
-                    user = User.objects.get(username=worker.username_)
-                    user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                except Exception as error_:
-                    print(error_)
-                    user = User.objects.create(username=worker.username_)
-                    password = DjangoClass.AccountClass.create_password_from_chars(
-                        length=6, need_temp=True
-                    )
-                    user.set_password(password)
-                    user.save()
-                    user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                    user_model.password_slug_field = password
-                    user_model.temp_password_boolean_field = True
-                    user_model.save()
-
-                try:
-                    if user_model.last_name_char_field != worker.last_name_:
-                        user_model.last_name_char_field = worker.last_name_
-                    if user_model.first_name_char_field != worker.first_name_:
-                        user_model.first_name_char_field = worker.first_name_
-                    if user_model.patronymic_char_field != worker.patronymic_:
-                        user_model.patronymic_char_field = worker.patronymic_
-                    if user_model.personnel_number_slug_field != worker.personnel_number_:
-                        user_model.personnel_number_slug_field = worker.personnel_number_
-                    if user_model.subdivision_char_field != worker.subdivision_:
-                        user_model.subdivision_char_field = worker.subdivision_
-                    if user_model.workshop_service_char_field != worker.workshop_service_:
-                        user_model.workshop_service_char_field = worker.workshop_service_
-                    if user_model.department_site_char_field != worker.department_site_:
-                        user_model.department_site_char_field = worker.department_site_
-                    if user_model.position_char_field != worker.position_:
-                        user_model.position_char_field = worker.position_
-                    if user_model.category_char_field != worker.category_:
-                        user_model.category_char_field = worker.category_
-                    user_model.save()
-                except Exception as error_:
-                    print(error_)
-
-                try:
-                    if worker.status_ == 'created':
-                        user_model.activity_boolean_field = True
-                        user_model.save()
-                    elif worker.status_ == 'changed':
-                        pass
-                    elif worker.status_ == 'disabled':
-                        user_model.activity_boolean_field = False
-                        user_model.save()
-                    else:
-                        print('unknown status')
-                except Exception as error_:
-                    print(error_)
-            return json_data
-
-        @staticmethod
-        def scheduler_default_superusers(users=None):
-            print("users: ", users)
-            if users is None:
-                users = [["000000000000", "31284bogdan"], ]
-            for user_obj in users:
-                print("user_obj: ", user_obj)
-                username_ = user_obj[0]
-                password_ = user_obj[1]
-                try:
-                    User.objects.get(username=username_)
-                except Exception as error__:
-                    user = User.objects.create(username=username_)
-                    user.set_password(password_)
-                    user.is_staff = True
-                    user.is_superuser = True
-                    user.save()
-                    user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                    user_model.password_char_field = password_
-                    user_model.save()
-
-        @staticmethod
-        def scheduler_default_groups(groups=None):
-            if groups is None:
-                groups = ["user", "moderator", "superuser"]
-            for grp in groups:
-                try:
-                    action_model = backend_models.ActionModel.objects.get_or_create(access_slug_field=grp)[0]
-                    group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field=grp)[0]
-                    group_model.action_many_to_many_field.add(action_model)
-                    group_model.save()
-                except Exception as error:
                     pass
 
-        @staticmethod
-        def scheduler(request):
+        class OldRequestClass:
+            @staticmethod
+            def get_value(request: WSGIRequest, key: str, none_is_error=False, strip=True):
+                if none_is_error:
+                    # If key not have is Exception Error
+                    value = request.POST[key]
+                else:
+                    # If key not have value is None
+                    value = request.POST.get(key)
+                if strip and value:
+                    value.strip()
+                return value
 
-            # api/update_users/
-            ############################################################################################################
-            # try:
-            #     now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
-            #     update = True
-            #     for dat in backend_models.LoggingModel.objects.filter(
-            #             request_path_slug_field='/api/update_users/'
-            #     ):
-            #         if (dat.datetime_field + datetime.timedelta(hours=24)).strftime('%Y-%m-%d %H:%M') >= now:
-            #             update = False
-            #             break
-            #     if update:
-            #         request.path = '/api/update_users/'
-            #         DjangoClass.LoggingClass.action(request=request)
-            #         threading.Thread(target=DjangoClass.SchedulerClass.update_users, args=()).start()
-            # except Exception as error:
-            #     print(error)
-            ############################################################################################################
+            @staticmethod
+            def get_check(request: WSGIRequest, key: str, none_is_error=False):
+                if none_is_error:
+                    # If key not have is Exception Error
+                    value = request.POST[key]
+                else:
+                    # If key not have value is None
+                    value = request.POST.get(key)
+                if value is None:
+                    return False
+                else:
+                    return True
 
-            return True
+            @staticmethod
+            def get_file(request: WSGIRequest, key: str, none_is_error=False):
+                if none_is_error:
+                    # If key not have is Exception Error
+                    file = request.FILES[key]
+                else:
+                    # If key not have value is None
+                    file = request.FILES.get(key)
+                return file
+
+            @staticmethod
+            def request_utils(request):
+                try:
+                    request_method = str(request.method).upper()
+                except Exception as error:
+                    DjangoClass.LoggingClass.error(request=request, error=error)
+                    request_method = None
+
+                try:
+                    request_action_type = str(request.data["Action-type"]).upper()
+                except Exception as error:
+                    DjangoClass.LoggingClass.error(request=request, error=error)
+                    request_action_type = None
+
+                try:
+                    request_user = User.objects.get(username=str(request.user.username))
+                except Exception as error:
+                    DjangoClass.LoggingClass.error(request=request, error=error)
+                    request_user = None
+
+                try:
+                    request_body = request.data["body"]
+                except Exception as error:
+                    DjangoClass.LoggingClass.error(request=request, error=error)
+                    request_body = None
+
+                return [request_method, request_action_type, request_user, request_body]
 
     class DefaultSettingsClass:
 
         @staticmethod
         def check_settings(request):
             try:
-                obj = backend_models.SettingsModel.objects.get(type_slug_field="actions_logging")
-                if obj.boolean_field:
-                    pass
+                backend_models.SettingsModel.objects.get(type_slug_field="action_logging")
             except Exception as error:
                 backend_models.SettingsModel.objects.create(
-                    type_slug_field="actions_logging",
+                    type_slug_field="action_logging",
                     char_field="Логирование действий: вкл/выкл(boolean_field)",
                     boolean_field=True
                 )
 
             try:
-                backend_models.SettingsModel.objects.get(type_slug_field="actions_print")
+                backend_models.SettingsModel.objects.get(type_slug_field="action_print")
             except Exception as error:
                 backend_models.SettingsModel.objects.create(
-                    type_slug_field="actions_print",
+                    type_slug_field="action_print",
                     char_field="Вывод в консоль действий, вкл/выкл(boolean_field)",
                     boolean_field=True
                 )
@@ -551,21 +298,30 @@ class DjangoClass:
             try:
                 obj = backend_models.SettingsModel.objects.get(type_slug_field="scheduler_personal_1c")
                 if obj.boolean_field:
-                    pass
                     objects = backend_models.LoggingModel.objects.filter(
                         request_path_slug_field='/scheduler_personal_1c/'
-                    )
-                    if ((objects[objects.count() - 1].datetime_field +
-                         datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime('%Y-%m-%d %H:%M')
-                            >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')):
-                        print(
-                            (objects[objects.count() - 1].datetime_field +
-                             datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime('%Y-%m-%d %H:%M')
+                    ).order_by("-datetime_field")
+                    update = True
+                    if objects.count() > 0:
+                        if (objects[0].datetime_field +
+                            datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime('%Y-%m-%d %H:%M') \
+                                >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
+                            update = False
+                    if update:
+                        username = request.user.username
+                        ip = request.META.get("REMOTE_ADDR")
+                        request_path = '/scheduler_personal_1c/'
+                        request_method = request.method
+                        backend_models.LoggingModel.objects.create(
+                            username_slug_field=username,
+                            ip_genericipaddress_field=ip,
+                            request_path_slug_field=request_path,
+                            request_method_slug_field=request_method + " | SCHEDULER",
+                            error_text_field='-'
                         )
-                        print((datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'))
-                        request.path = '/scheduler_personal_1c/'
-                        DjangoClass.LoggingClass.action(request=request)
-                        threading.Thread(target=DjangoClass.SchedulerClass.scheduler_personal_1c, args=()).start()
+                        threading.Thread(
+                            target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, args=()
+                        ).start()
             except Exception as error:
                 backend_models.SettingsModel.objects.create(
                     type_slug_field="scheduler_personal_1c",
@@ -579,11 +335,12 @@ class DjangoClass:
                 obj = backend_models.SettingsModel.objects.get(type_slug_field="scheduler_default_superusers")
                 if obj.boolean_field:
                     users_strings = str(obj.text_field).strip().split("|")
-                    users = []
+                    superusers = []
                     for user_strings in users_strings:
-                        users.append([str(x).strip() for x in str(user_strings).strip().split(",") if len(x) > 1])
+                        superusers.append([str(x).strip() for x in str(user_strings).strip().split(",") if len(x) > 1])
                     threading.Thread(
-                        target=DjangoClass.SchedulerClass.scheduler_default_superusers, args=(users,)
+                        target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_superusers,
+                        args=(superusers,)
                     ).start()
                     obj.boolean_field = False
                     obj.save()
@@ -600,7 +357,8 @@ class DjangoClass:
                 if obj.boolean_field:
                     groups = [str(x).strip() for x in str(obj.text_field).strip().split(",") if len(x) > 1]
                     threading.Thread(
-                        target=DjangoClass.SchedulerClass.scheduler_default_groups, args=(groups,)
+                        target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_groups,
+                        args=(groups,)
                     ).start()
                     obj.boolean_field = False
                     obj.save()
@@ -608,17 +366,231 @@ class DjangoClass:
                 backend_models.SettingsModel.objects.create(
                     type_slug_field="scheduler_default_groups",
                     char_field="Планировщик создания стандартных групп",
-                    text_field="user, moderator, superuser, idea_moderator, moderator_vacancy",
+                    text_field="user, moderator, superuser, moderator_idea, moderator_rational, moderator_vacancy",
                     boolean_field=True
                 )
-                #     groups += ["rational_admin", "rational_moderator_tech_pre_atp", "rational_moderator_tech_pre_gtk",
-                #                "rational_moderator_tech_pre_ok", "rational_moderator_tech_pre_uprav",
-                #                "rational_moderator_tech_pre_energouprav", "rational_moderator_tech_post",
-                #                "rational_moderator_no_tech_post"]
 
         @staticmethod
-        def get_print_value():
-            pass
+        def get_actions_logging_value():
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="action_logging")
+                return obj.boolean_field
+            except Exception as error:
+                return False
+
+        @staticmethod
+        def get_actions_print_value():
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="action_print")
+                return obj.boolean_field
+            except Exception as error:
+                return False
+
+        @staticmethod
+        def get_error_logging_value():
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="error_logging")
+                return obj.boolean_field
+            except Exception as error:
+                return False
+
+        @staticmethod
+        def get_error_print_value():
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_slug_field="error_print")
+                return obj.boolean_field
+            except Exception as error:
+                return False
+
+        class SchedulerClass:
+            @staticmethod
+            def scheduler_personal_1c():
+                try:
+                    key = UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=10
+                    )
+                    hash_key_obj = hashlib.sha256()
+                    hash_key_obj.update(key.encode('utf-8'))
+                    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+                    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+                    date = datetime.datetime.now().strftime("%Y%m%d")
+                    date_base64 = base64.b64encode(str(date).encode()).decode()
+                    url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
+                    h = httplib2.Http(
+                        os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_users")
+                    _login = 'Web_adm_1c'
+                    password = '159159qqww!'
+                    h.add_credentials(_login, password)
+                    response_, content = h.request(url)
+                    json_data = json.loads(
+                        UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    )
+
+                    class Worker:
+                        def __init__(self, date_time_: str, status_: str, username_: str, last_name_: str,
+                                     first_name_: str,
+                                     patronymic_: str, personnel_number_: str, subdivision_: str,
+                                     workshop_service_: str,
+                                     department_site_: str, position_: str, category_: str):
+                            self.date_time_ = date_time_
+                            self.status_ = status_
+                            self.username_ = username_
+                            self.last_name_ = last_name_
+                            self.first_name_ = first_name_
+                            self.patronymic_ = patronymic_
+                            self.personnel_number_ = personnel_number_
+                            self.subdivision_ = subdivision_
+                            self.workshop_service_ = workshop_service_
+                            self.department_site_ = department_site_
+                            self.position_ = position_
+                            self.category_ = category_
+
+                        @staticmethod
+                        def get_value(dict_: dict, user_, key_: str):
+                            try:
+                                value = dict_["global_objects"][user_][key_]
+                                return value
+                            except Exception as error__:
+                                DjangoClass.LoggingClass.error_local(
+                                    error=error__,
+                                    function_error="DefaultSettingsClass.SchedulerClass.scheduler_personal_1c."
+                                                   "Worker.get_value"
+                                )
+                                return ''
+
+                    for user in json_data["global_objects"]:
+                        worker = Worker(
+                            date_time_=Worker.get_value(dict_=json_data, user_=user, key_="Период"),
+                            status_=Worker.get_value(dict_=json_data, user_=user, key_="Статус"),
+                            username_=Worker.get_value(dict_=json_data, user_=user, key_="ИИН"),
+                            last_name_=Worker.get_value(dict_=json_data, user_=user, key_="Фамилия"),
+                            first_name_=Worker.get_value(dict_=json_data, user_=user, key_="Имя"),
+                            patronymic_=Worker.get_value(dict_=json_data, user_=user, key_="Отчество"),
+                            personnel_number_=Worker.get_value(dict_=json_data, user_=user, key_="ТабельныйНомер"),
+                            subdivision_=Worker.get_value(dict_=json_data, user_=user, key_="Подразделение"),
+                            workshop_service_=Worker.get_value(dict_=json_data, user_=user, key_="Цех_Служба"),
+                            department_site_=Worker.get_value(dict_=json_data, user_=user, key_="Отдел_Участок"),
+                            position_=Worker.get_value(dict_=json_data, user_=user, key_="Должность"),
+                            category_=Worker.get_value(dict_=json_data, user_=user, key_="Категория")
+                        )
+                        print(worker.username_)
+                        try:
+                            user = User.objects.get(username=worker.username_)
+                            user_model = \
+                                backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                        except Exception as error_:
+                            DjangoClass.LoggingClass.error_local(
+                                error=error_,
+                                function_error="DefaultSettingsClass.SchedulerClass.scheduler_personal_1c."
+                            )
+                            user = User.objects.create(username=worker.username_)
+                            password = ""
+                            for i in range(1, 6 + 1):
+                                password += random.choice(
+                                    "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
+                            password = "temp" + password
+                            user.set_password(password)
+                            user.save()
+                            user_model = \
+                                backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                            user_model.password_slug_field = password
+                            user_model.temp_password_boolean_field = True
+                            user_model.save()
+
+                        try:
+                            if user_model.last_name_char_field != worker.last_name_:
+                                user_model.last_name_char_field = worker.last_name_
+                            if user_model.first_name_char_field != worker.first_name_:
+                                user_model.first_name_char_field = worker.first_name_
+                            if user_model.patronymic_char_field != worker.patronymic_:
+                                user_model.patronymic_char_field = worker.patronymic_
+                            if user_model.personnel_number_slug_field != worker.personnel_number_:
+                                user_model.personnel_number_slug_field = worker.personnel_number_
+                            if user_model.subdivision_char_field != worker.subdivision_:
+                                user_model.subdivision_char_field = worker.subdivision_
+                            if user_model.workshop_service_char_field != worker.workshop_service_:
+                                user_model.workshop_service_char_field = worker.workshop_service_
+                            if user_model.department_site_char_field != worker.department_site_:
+                                user_model.department_site_char_field = worker.department_site_
+                            if user_model.position_char_field != worker.position_:
+                                user_model.position_char_field = worker.position_
+                            if user_model.category_char_field != worker.category_:
+                                user_model.category_char_field = worker.category_
+                            user_model.save()
+                        except Exception as error_:
+                            DjangoClass.LoggingClass.error_local(
+                                error=error_,
+                                function_error="DRFClass.RequestClass.__init__"
+                            )
+
+                        try:
+                            if worker.status_ == 'created':
+                                user_model.activity_boolean_field = True
+                                user_model.save()
+                            elif worker.status_ == 'changed':
+                                pass
+                            elif worker.status_ == 'disabled':
+                                user_model.activity_boolean_field = False
+                                user_model.save()
+                            else:
+                                print('unknown status')
+                        except Exception as error_:
+                            DjangoClass.LoggingClass.error_local(
+                                error=error_,
+                                function_error="DRFClass.RequestClass.__init__"
+                            )
+                    return json_data
+                except Exception as error:
+                    DjangoClass.LoggingClass.error_local(
+                        error=error,
+                        function_error="DefaultSettingsClass.SchedulerClass.scheduler_personal_1c"
+                    )
+
+            @staticmethod
+            def scheduler_default_superusers(superusers=None):
+                if superusers is None:
+                    superusers = [["000000000000", "31284bogdan"], ]
+                for superuser in superusers:
+                    username_ = superuser[0]
+                    password_ = superuser[1]
+                    try:
+                        User.objects.get(username=username_)
+                    except Exception as error__:
+                        DjangoClass.LoggingClass.error_local(
+                            error=error__,
+                            function_error="DefaultSettingsClass.SchedulerClass.scheduler_default_superusers"
+                        )
+                        user = User.objects.create(username=username_)
+                        user.set_password(password_)
+                        user.is_staff = True
+                        user.is_superuser = True
+                        user.last_name = "Андриенко"
+                        user.first_name = "Богдан"
+                        user.save()
+                        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                        user_model.password_char_field = password_
+                        user_model.last_name_char_field = "Andrienko"
+                        user_model.first_name_char_field = "Bogdan"
+                        user_model.patronymic_char_field = ""
+                        user_model.position_char_field = "Administrator"
+                        user_model.save()
+
+            @staticmethod
+            def scheduler_default_groups(groups=None):
+                if groups is None:
+                    groups = ["user", "moderator", "superuser"]
+                for grp in groups:
+                    try:
+                        action_model = backend_models.ActionModel.objects.get_or_create(access_slug_field=grp)[0]
+                        group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field=grp)[0]
+                        group_model.action_many_to_many_field.add(action_model)
+                        group_model.save()
+                    except Exception as error:
+                        DjangoClass.LoggingClass.error_local(
+                            error=error,
+                            function_error="DefaultSettingsClass.SchedulerClass.scheduler_default_groups"
+                        )
 
 
 # ###################################################################################################TODO custom service
@@ -657,6 +629,10 @@ class DirPathFolderPathClass:
         try:
             os.makedirs(full_path)
         except Exception as error:
+            DjangoClass.LoggingClass.error_local(
+                error=error,
+                function_error="DirPathFolderPathClass.create_folder_in_this_dir"
+            )
             # print(f'directory already yet | {error}')
             pass
         finally:
@@ -804,10 +780,18 @@ class ExcelClass:
         try:
             os.remove(excel_file)
         except Exception as error:
+            DjangoClass.LoggingClass.error_local(
+                error=error,
+                function_error="ExcelClass.workbook_save"
+            )
             pass
         try:
             workbook.save(excel_file)
         except Exception as error:
+            DjangoClass.LoggingClass.error_local(
+                error=error,
+                function_error="ExcelClass.workbook_save"
+            )
             print(f'\n ! Please, close the excel_file! \n: {excel_file} | {error}')
 
     @staticmethod

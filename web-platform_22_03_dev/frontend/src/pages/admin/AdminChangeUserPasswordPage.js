@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
@@ -12,7 +11,6 @@ import * as utils from "../../js/utils";
 export const AdminChangeUserPasswordPage = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [captcha, captchaSet] = useState("");
   const [username, usernameSet] = useState("");
@@ -43,7 +41,7 @@ export const AdminChangeUserPasswordPage = () => {
         usernameSet("");
       }
     }
-  }, [navigate, dataAdminChangeUserPassword, dispatch]);
+  }, [dataAdminChangeUserPassword]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerCheckUserSubmit = (e) => {
     try {

@@ -44,13 +44,12 @@ export const ResumeCreatePage = () => {
   useEffect(() => {
     if (
       dataVacancyDetail &&
-      dataVacancyDetail.id !== undefined &&
-      id !== dataVacancyDetail.id
+      (dataVacancyDetail.id !== undefined || dataVacancyDetail.id !== id)
     ) {
       dispatch({ type: constants.VACANCY_DETAIL_RESET_CONSTANT });
     } else {
     }
-  }, [dispatch, id]);
+  }, [dataVacancyDetail, id]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataResumeCreate) {
@@ -66,15 +65,13 @@ export const ResumeCreatePage = () => {
     if (dataVacancyDetail) {
       qualificationSet(dataVacancyDetail["qualification_field"]);
     } else {
-      if (!loadVacancyDetail) {
-        const form = {
-          "Action-type": "VACANCY_DETAIL",
-          id: id,
-        };
-        dispatch(actions.vacancyDetailAction(form));
-      }
+      const form = {
+        "Action-type": "VACANCY_DETAIL",
+        id: id,
+      };
+      dispatch(actions.vacancyDetailAction(form));
     }
-  }, [dispatch, id, dataVacancyDetail]);
+  }, [dataVacancyDetail]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerSubmit = (e) => {
     e.preventDefault();

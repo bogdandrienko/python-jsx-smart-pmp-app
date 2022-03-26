@@ -62,7 +62,7 @@ export const ChangeProfilePage = () => {
       passwordSet("");
       password2Set("");
     }
-  }, [dispatch, dataUserDetails]);
+  }, [dataUserDetails]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserChange) {
@@ -71,7 +71,7 @@ export const ChangeProfilePage = () => {
         navigate("/login");
       });
     }
-  }, [dispatch, dataUserChange, navigate]);
+  }, [dataUserChange]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerChangeSubmit = (e) => {
     e.preventDefault();

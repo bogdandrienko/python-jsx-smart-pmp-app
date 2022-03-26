@@ -93,7 +93,7 @@ export const IdeaChangePage = () => {
         descriptionSet(dataIdeaDetail["description_text_field"]);
       }
     }
-  }, [dataIdeaDetail, id, dispatch, firstRefreshSet]);
+  }, [dataIdeaDetail, firstRefreshSet]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaChange) {
@@ -102,7 +102,7 @@ export const IdeaChangePage = () => {
         navigate("/idea_self_list");
       });
     }
-  }, [dataIdeaChange, navigate]);
+  }, [dataIdeaChange]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaModerate) {
@@ -111,7 +111,7 @@ export const IdeaChangePage = () => {
         resetState();
       });
     }
-  }, [dataIdeaModerate, navigate]);
+  }, [dataIdeaModerate]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerChangeSubmit = async (e) => {
     try {

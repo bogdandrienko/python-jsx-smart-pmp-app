@@ -176,12 +176,7 @@ class UserModelAdmin(admin.ModelAdmin):
 
     list_display = (
         'user_foreign_key_field',
-        'password_char_field',
         'activity_boolean_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'temp_password_boolean_field',
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
@@ -190,29 +185,20 @@ class UserModelAdmin(admin.ModelAdmin):
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
-        'category_char_field',
-        'education_text_field',
-        'achievements_text_field',
-        'biography_text_field',
-        'hobbies_text_field',
-        'avatar_image_field',
     )
     list_display_links = (
         'user_foreign_key_field',
-        'email_field',
+        'last_name_char_field',
+        'first_name_char_field',
+        'patronymic_char_field',
+        'personnel_number_slug_field',
     )
     list_editable = (
-        'password_char_field',
         'activity_boolean_field',
     )
     list_filter = (
         'user_foreign_key_field',
-        'password_char_field',
         'activity_boolean_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'temp_password_boolean_field',
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
@@ -221,24 +207,13 @@ class UserModelAdmin(admin.ModelAdmin):
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
-        'category_char_field',
-        'education_text_field',
-        'achievements_text_field',
-        'biography_text_field',
-        'hobbies_text_field',
-        'avatar_image_field',
     )
     fieldsets = (
         ('Данные авторизации пользователя', {'fields': (
             'user_foreign_key_field',
-            'password_char_field',
         )}),
         ('Технические данные пользователя', {'fields': (
             'activity_boolean_field',
-            'email_field',
-            'secret_question_char_field',
-            'secret_answer_char_field',
-            'temp_password_boolean_field',
         )}),
         ('Первичные данные пользователя', {'fields': (
             'last_name_char_field',
@@ -251,24 +226,11 @@ class UserModelAdmin(admin.ModelAdmin):
             'workshop_service_char_field',
             'department_site_char_field',
             'position_char_field',
-            'category_char_field',
-        )}),
-        ('Личные данные пользователя', {'fields': (
-            'education_text_field',
-            'achievements_text_field',
-            'biography_text_field',
-            'hobbies_text_field',
-            'avatar_image_field',
         )}),
     )
     search_fields = [
         'user_foreign_key_field',
-        'password_char_field',
         'activity_boolean_field',
-        'email_field',
-        'secret_question_char_field',
-        'secret_answer_char_field',
-        'temp_password_boolean_field',
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
@@ -277,12 +239,6 @@ class UserModelAdmin(admin.ModelAdmin):
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
-        'category_char_field',
-        'education_text_field',
-        'achievements_text_field',
-        'biography_text_field',
-        'hobbies_text_field',
-        'avatar_image_field',
     ]
 
 
@@ -362,7 +318,7 @@ admin.site.register(backend_models.GroupModel, GroupModelAdmin)
 class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
 
     def has_delete_permission(self, *args, **kwargs):
-        return True  # or whatever logic you want
+        return True
 
 
 admin.site.unregister(token_blacklist.models.OutstandingToken)
@@ -444,11 +400,9 @@ class LoggingModelAdmin(admin.ModelAdmin):
         'username_slug_field',
         'ip_genericipaddress_field',
         'request_path_slug_field',
+        'request_method_slug_field',
     )
     list_editable = (
-        'request_method_slug_field',
-        'error_text_field',
-        'datetime_field'
     )
     list_filter = (
         'username_slug_field',

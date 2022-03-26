@@ -13,7 +13,7 @@ export const LogoutPage = () => {
   useEffect(() => {
     dispatch(actions.userLogoutAction());
     navigate("/login");
-  }, [dispatch, navigate]);
+  }, [dispatch]);
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return <div>.</div>;
 };

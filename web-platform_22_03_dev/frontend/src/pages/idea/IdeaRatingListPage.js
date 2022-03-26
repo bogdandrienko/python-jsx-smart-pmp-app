@@ -48,20 +48,12 @@ export const IdeaRatingListPage = () => {
         resetState();
       }
     }
-  }, [dataIdeaList, dispatch, firstRefresh]);
+  }, [dataIdeaList, firstRefresh]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerSubmit = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
-    resetState();
-  };
-  //////////////////////////////////////////////////////////
-  const handlerReset = async (e) => {
-    try {
-      e.preventDefault();
-    } catch (error) {}
-    sortSet("дате публикации (свежие в начале)");
     resetState();
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page

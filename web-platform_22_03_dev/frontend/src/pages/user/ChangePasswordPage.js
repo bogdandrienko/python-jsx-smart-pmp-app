@@ -31,7 +31,7 @@ export const ChangePasswordPage = () => {
         navigate("/login");
       });
     }
-  }, [navigate, dataUserChange, dispatch]);
+  }, [dataUserChange]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerChangeSubmit = (e) => {
     e.preventDefault();

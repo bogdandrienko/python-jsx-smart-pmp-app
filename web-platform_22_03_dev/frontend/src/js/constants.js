@@ -344,19 +344,19 @@ export const news = [
 export const modules = [
   {
     Header: "Разработка",
-    Access: "superuser",
+    Access: ["superuser"],
     Image: "/static/img/modules.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "web version",
-        Access: "user",
+        Access: ["user"],
         Image:
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
             Header: "10.03.22 00:31",
-            Access: "user",
+            Access: ["user"],
             Active: false,
             Link: "#",
             ExternalLink: false,
@@ -371,13 +371,13 @@ export const modules = [
       },
       {
         Header: "Отдел кадров",
-        Access: "superuser",
+        Access: ["superuser"],
         Image:
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
             Header: "Список свободных вакансий",
-            Access: "superuser",
+            Access: ["superuser"],
             Active: true,
             Link: "/vacancy_list",
             ExternalLink: false,
@@ -391,7 +391,7 @@ export const modules = [
           },
           {
             Header: "Подробности вакансии [скрыто]",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/vacancy_detail/0",
             ExternalLink: false,
@@ -404,7 +404,7 @@ export const modules = [
           },
           {
             Header: "Создать новую вакансию",
-            Access: "superuser",
+            Access: ["superuser"],
             Active: true,
             Link: "/vacancy_create",
             ExternalLink: false,
@@ -418,7 +418,7 @@ export const modules = [
           },
           {
             Header: "Изменить вакансию [скрыто]",
-            Access: "superuser",
+            Access: ["superuser"],
             Active: true,
             Link: "/vacancy_change/0",
             ExternalLink: false,
@@ -431,7 +431,7 @@ export const modules = [
           },
           {
             Header: "Отправить резюме",
-            Access: "superuser",
+            Access: ["superuser"],
             Active: true,
             Link: "/resume_create/0",
             ExternalLink: false,
@@ -444,7 +444,7 @@ export const modules = [
           },
           {
             Header: "Список резюме",
-            Access: "superuser",
+            Access: ["superuser"],
             Active: true,
             Link: "/resume_list",
             ExternalLink: false,
@@ -458,7 +458,7 @@ export const modules = [
           },
           {
             Header: "Подробности резюме [скрыто]",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/resume_detail/0",
             ExternalLink: false,
@@ -475,18 +475,18 @@ export const modules = [
   },
   {
     Header: "Модератор",
-    Access: "moderator",
+    Access: ["moderator"],
     Image: "/static/img/modules.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "Основной функционал",
-        Access: "moderator",
+        Access: ["moderator"],
         Image: "/static/img/modules.png",
         Links: [
           {
             Header: "Панель Администрирования",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "/admin/",
             ExternalLink: true,
@@ -499,7 +499,7 @@ export const modules = [
           },
           {
             Header: "Api Django rest_framework",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "/api/auth/routes/",
             ExternalLink: true,
@@ -512,7 +512,7 @@ export const modules = [
           },
           {
             Header: "127.0.0.1:3000",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "http://127.0.0.1:3000/",
             ExternalLink: true,
@@ -525,7 +525,7 @@ export const modules = [
           },
           {
             Header: "127.0.0.1:8000",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "http://127.0.0.1:8000/",
             ExternalLink: true,
@@ -540,12 +540,12 @@ export const modules = [
       },
       {
         Header: "Аккаунты",
-        Access: "moderator",
+        Access: ["moderator"],
         Image: "/static/img/modules.png",
         Links: [
           {
             Header: "Смена пароля пользователя",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "/admin_change_user_password",
             ExternalLink: false,
@@ -559,7 +559,7 @@ export const modules = [
           },
           {
             Header: "Создать/изменить пользователей",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "/admin_create_or_change_users",
             ExternalLink: false,
@@ -573,7 +573,7 @@ export const modules = [
           },
           {
             Header: "Выгрузить список пользователей",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "/admin_export_users",
             ExternalLink: false,
@@ -586,7 +586,7 @@ export const modules = [
           },
           {
             Header: "Забанить/разбанить пользователя",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "/admin_change_user_activity",
             ExternalLink: false,
@@ -601,12 +601,12 @@ export const modules = [
       },
       {
         Header: "Терминалы скуд",
-        Access: "moderator",
+        Access: ["moderator"],
         Image: "/static/img/modules.png",
         Links: [
           {
             Header: "Перезагрузка",
-            Access: "moderator",
+            Access: ["moderator"],
             Active: true,
             Link: "/terminal",
             ExternalLink: false,
@@ -623,19 +623,19 @@ export const modules = [
   },
   {
     Header: "Профиль",
-    Access: "user",
+    Access: ["user"],
     Image: "/static/img/modules/1_module_profile/module_profile.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Основной функционал",
-        Access: "user",
+        Access: ["user"],
         Image:
           "/static/img/modules/1_module_profile/section_main/section_main.png",
         Links: [
           {
             Header: "Домашняя страница",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/",
             ExternalLink: false,
@@ -648,7 +648,7 @@ export const modules = [
           },
           {
             Header: "Уведомления",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/notification_list",
             ExternalLink: false,
@@ -663,13 +663,13 @@ export const modules = [
       },
       {
         Header: "Личный профиль",
-        Access: "user",
+        Access: ["user"],
         Image:
           "/static/img/modules/1_module_profile/section_self_profile/section_self_profile.png",
         Links: [
           {
             Header: "Изменить профиль",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/change_profile",
             ExternalLink: false,
@@ -682,7 +682,7 @@ export const modules = [
           },
           {
             Header: "Изменить пароль",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/change_password",
             ExternalLink: false,
@@ -695,7 +695,7 @@ export const modules = [
           },
           {
             Header: "Восстановить пароль",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/recover_password",
             ExternalLink: false,
@@ -708,7 +708,7 @@ export const modules = [
           },
           {
             Header: "Войти",
-            Access: "all",
+            Access: ["all"],
             Active: true,
             Link: "/login",
             ExternalLink: false,
@@ -721,7 +721,7 @@ export const modules = [
           },
           {
             Header: "Выйти",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/logout",
             ExternalLink: false,
@@ -738,19 +738,19 @@ export const modules = [
   },
   {
     Header: "Общее",
-    Access: "all",
+    Access: ["all"],
     Image: "/static/img/modules.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Обучение",
-        Access: "all",
+        Access: ["all"],
         Image:
           "/static/img/modules/2_module_news/section_study/section_study.png",
         Links: [
           {
             Header: "Видео-инструкции",
-            Access: "all",
+            Access: ["all"],
             Active: true,
             Link: "/video_study",
             ExternalLink: false,
@@ -764,7 +764,7 @@ export const modules = [
           },
           {
             Header: "Текстовые инструкции",
-            Access: "all",
+            Access: ["all"],
             Active: true,
             Link: "/text_study",
             ExternalLink: false,
@@ -780,12 +780,12 @@ export const modules = [
       },
       {
         Header: "Информация",
-        Access: "user",
+        Access: ["user"],
         Image: "/static/img/modules/2_module_news/module_news.png",
         Links: [
           {
             Header: "Новости платформы",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/news",
             ExternalLink: false,
@@ -798,7 +798,7 @@ export const modules = [
           },
           {
             Header: "Зал славы участников",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_author_list",
             ExternalLink: false,
@@ -815,19 +815,19 @@ export const modules = [
   },
   {
     Header: "Развитие",
-    Access: "user",
+    Access: ["user"],
     Image: "/static/img/modules/3_module_progress/module_progress.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Рационализаторство",
-        Access: "user",
+        Access: ["user"],
         Image:
           "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
         Links: [
           {
             Header: "Пример (шаблон) рационализаторского предложения",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/rational_template",
             ExternalLink: false,
@@ -840,7 +840,7 @@ export const modules = [
           },
           {
             Header: "Подать новое рационализаторское предложение",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/rational_create",
             ExternalLink: false,
@@ -854,17 +854,7 @@ export const modules = [
           },
           {
             Header: "Модерация рационализаторских предложений [модератор]",
-            Access: [
-              "rational_admin",
-              "rational_moderator_tech_pre_atp",
-              "rational_moderator_tech_pre_energouprav",
-              "rational_moderator_tech_pre_gtk",
-              "rational_moderator_tech_pre_ok",
-              "rational_moderator_tech_pre_uprav",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_no_tech_post",
-              "rational_moderator_tech_post",
-            ],
+            Access: ["moderator_rational"],
             Active: true,
             Link: "/rational_moderate_list",
             ExternalLink: false,
@@ -879,13 +869,13 @@ export const modules = [
       },
       {
         Header: "Банк идей",
-        Access: "user",
+        Access: ["user"],
         Image:
           "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
         Links: [
           {
             Header: "Пример (шаблон) идеи",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_template",
             ExternalLink: false,
@@ -898,7 +888,7 @@ export const modules = [
           },
           {
             Header: "Подать новую идею",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_create",
             ExternalLink: false,
@@ -911,7 +901,7 @@ export const modules = [
           },
           {
             Header: "Мои идеи на доработку",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_self_list",
             ExternalLink: false,
@@ -925,7 +915,7 @@ export const modules = [
           },
           {
             Header: "Редактировать свою идею [скрыто]",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_change/0",
             ExternalLink: false,
@@ -938,7 +928,7 @@ export const modules = [
           },
           {
             Header: "Список идей",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_list",
             ExternalLink: false,
@@ -952,7 +942,7 @@ export const modules = [
           },
           {
             Header: "Подробности идеи [скрыто]",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_detail/0",
             ExternalLink: false,
@@ -965,7 +955,7 @@ export const modules = [
           },
           {
             Header: "Лучшие идеи в банке",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/idea_rating",
             ExternalLink: false,
@@ -978,7 +968,7 @@ export const modules = [
           },
           {
             Header: "Модерация идей [модератор]",
-            Access: "idea_moderator",
+            Access: ["moderator_idea"],
             Active: true,
             Link: "/idea_moderate_list",
             ExternalLink: false,
@@ -992,7 +982,7 @@ export const modules = [
           },
           {
             Header: "Модерация подробности идеи [модератор] [скрыто]",
-            Access: "idea_moderator",
+            Access: ["moderator_idea"],
             Active: true,
             Link: "/idea_moderate_change/0",
             ExternalLink: false,
@@ -1009,19 +999,19 @@ export const modules = [
   },
   {
     Header: "Бухгалтерия",
-    Access: "user",
+    Access: ["user"],
     Image: "/static/img/modules/4_module_buhgalteria/module_buhgalteria.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Сектор расчёта заработной платы",
-        Access: "user",
+        Access: ["user"],
         Image:
           "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
         Links: [
           {
             Header: "Выгрузка расчётного листа",
-            Access: "user",
+            Access: ["user"],
             Active: true,
             Link: "/salary",
             ExternalLink: false,

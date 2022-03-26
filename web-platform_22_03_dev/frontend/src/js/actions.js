@@ -13,12 +13,13 @@ export const userLoginAction = (form) => async (dispatch) => {
     dispatch({
       type: constants.USER_LOGIN_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/user/",
       method: "POST",
       timeout: 10000,
       form: form,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -55,13 +56,14 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.USER_DETAILS_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -90,13 +92,14 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.USER_CHANGE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -123,12 +126,13 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
     dispatch({
       type: constants.USER_RECOVER_PASSWORD_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       form: form,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -154,13 +158,14 @@ export const userListAllAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.USER_LIST_ALL_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -188,13 +193,14 @@ export const notificationCreateAction =
       dispatch({
         type: constants.NOTIFICATION_CREATE_LOAD_CONSTANT,
       });
-      const { data: data } = await utils.ActionsAxiosUtility({
+      const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/user/",
         method: "POST",
         timeout: 10000,
         form: form,
         getState: getState,
       });
+      const { data } = await axios(config);
       if (data["response"]) {
         const response = data["response"];
         dispatch({
@@ -221,13 +227,14 @@ export const notificationDeleteAction =
       dispatch({
         type: constants.NOTIFICATION_DELETE_LOAD_CONSTANT,
       });
-      const { data: data } = await utils.ActionsAxiosUtility({
+      const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/user/",
         method: "POST",
         timeout: 10000,
         form: form,
         getState: getState,
       });
+      const { data } = await axios(config);
       if (data["response"]) {
         const response = data["response"];
         dispatch({
@@ -253,13 +260,14 @@ export const notificationListAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.NOTIFICATION_LIST_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -287,13 +295,14 @@ export const adminChangeUserPasswordAction =
       dispatch({
         type: constants.ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT,
       });
-      const { data: data } = await utils.ActionsAxiosUtility({
+      const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/admin/",
         method: "POST",
         timeout: 10000,
         form: form,
         getState: getState,
       });
+      const { data } = await axios(config);
       if (data["response"]) {
         const response = data["response"];
         dispatch({
@@ -320,13 +329,14 @@ export const adminCreateOrChangeUsersAction =
       dispatch({
         type: constants.ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT,
       });
-      const { data: data } = await utils.ActionsAxiosUtility({
+      const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/admin/",
         method: "POST",
         timeout: 500000,
         form: form,
         getState: getState,
       });
+      const { data } = await axios(config);
       if (data["response"]) {
         const response = data["response"];
         dispatch({
@@ -352,13 +362,14 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.ADMIN_EXPORT_USERS_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/admin/",
       method: "POST",
       timeout: 20000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -385,13 +396,14 @@ export const adminChangeUserActivityAction =
       dispatch({
         type: constants.ADMIN_CHANGE_USER_ACTIVITY_LOAD_CONSTANT,
       });
-      const { data: data } = await utils.ActionsAxiosUtility({
+      const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/admin/",
         method: "POST",
         timeout: 10000,
         form: form,
         getState: getState,
       });
+      const { data } = await axios(config);
       if (data["response"]) {
         const response = data["response"];
         dispatch({
@@ -418,13 +430,14 @@ export const terminalRebootAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.TERMINAL_REBOOT_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/admin/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -451,13 +464,14 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.USER_SALARY_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/salary/",
       method: "POST",
-      timeout: 10000,
+      timeout: 50000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       const headers = [];
@@ -503,13 +517,14 @@ export const ideaCreateAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_CREATE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -535,18 +550,14 @@ export const ideaListAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_LIST_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
-    const { formData: formData, userLogin: userLogin } =
-      utils.ActionsFormDataUtility({
-        form: form,
-        getState: getState,
-      });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -572,13 +583,14 @@ export const ideaDetailAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_DETAIL_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -604,13 +616,14 @@ export const ideaChangeAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_CHANGE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -636,13 +649,14 @@ export const ideaModerateAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_MODERATE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -668,13 +682,14 @@ export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_COMMENT_CREATE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -700,13 +715,14 @@ export const ideaCommentDeleteAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_COMMENT_DELETE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -732,13 +748,14 @@ export const ideaCommentListAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_COMMENT_LIST_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -764,13 +781,14 @@ export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_RATING_CREATE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -796,13 +814,14 @@ export const ideaAuthorListAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.IDEA_AUTHOR_LIST_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -829,13 +848,14 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.RATIONAL_CREATE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -861,13 +881,14 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.RATIONAL_LIST_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -893,13 +914,14 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.RATIONAL_DETAIL_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -926,13 +948,14 @@ export const vacancyCreateAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.VACANCY_CREATE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -958,12 +981,13 @@ export const vacancyListAction = (form) => async (dispatch) => {
     dispatch({
       type: constants.VACANCY_LIST_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/vacancy/",
       method: "POST",
       timeout: 10000,
       form: form,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -989,12 +1013,13 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
     dispatch({
       type: constants.VACANCY_DETAIL_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/vacancy/",
       method: "POST",
       timeout: 10000,
       form: form,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -1020,13 +1045,14 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.VACANCY_DELETE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/vacancy/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -1052,13 +1078,14 @@ export const vacancyChangeAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.VACANCY_CHANGE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/vacancy/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -1085,12 +1112,13 @@ export const resumeCreateAction = (form) => async (dispatch) => {
     dispatch({
       type: constants.RESUME_CREATE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/resume/",
       method: "POST",
       timeout: 10000,
       form: form,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -1116,13 +1144,14 @@ export const resumeListAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.RESUME_LIST_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -1148,13 +1177,14 @@ export const resumeDetailAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.RESUME_DETAIL_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({
@@ -1180,13 +1210,14 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
     dispatch({
       type: constants.RESUME_DELETE_LOAD_CONSTANT,
     });
-    const { data: data } = await utils.ActionsAxiosUtility({
+    const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
       timeout: 10000,
       form: form,
       getState: getState,
     });
+    const { data } = await axios(config);
     if (data["response"]) {
       const response = data["response"];
       dispatch({

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 /////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
 import * as components from "../../js/components";
@@ -12,7 +12,6 @@ import * as utils from "../../js/utils";
 export const IdeaDetailPage = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const id = useParams().id;
   /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
   const [firstRefresh, firstRefreshSet] = useState(true);
@@ -92,7 +91,7 @@ export const IdeaDetailPage = () => {
         resetState();
       }
     }
-  }, [dataIdeaDetail, id, dispatch, firstRefresh]);
+  }, [dataIdeaDetail, firstRefresh]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataIdeaCommentList) {
@@ -102,7 +101,7 @@ export const IdeaDetailPage = () => {
       };
       dispatch(actions.ideaCommentListAction(form));
     }
-  }, [dataIdeaCommentList, id, dispatch]);
+  }, [dataIdeaCommentList]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaCommentCreate) {

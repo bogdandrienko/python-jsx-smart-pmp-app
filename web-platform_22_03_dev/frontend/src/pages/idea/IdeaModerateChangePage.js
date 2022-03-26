@@ -112,7 +112,7 @@ export const IdeaModerateChangePage = () => {
         descriptionSet(dataIdeaDetail["description_text_field"]);
       }
     }
-  }, [dataIdeaDetail, id, dispatch, firstRefreshSet]);
+  }, [dataIdeaDetail, firstRefreshSet]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataIdeaCommentList) {
@@ -122,7 +122,7 @@ export const IdeaModerateChangePage = () => {
       };
       dispatch(actions.ideaCommentListAction(form));
     }
-  }, [dataIdeaCommentList, id, dispatch]);
+  }, [dataIdeaCommentList]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaModerate) {

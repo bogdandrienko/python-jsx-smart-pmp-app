@@ -42,7 +42,7 @@ export const IdeaSelfListPage = () => {
         resetState();
       }
     }
-  }, [dataIdeaList, dispatch, firstRefresh]);
+  }, [dataIdeaList, firstRefresh]);
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div>

@@ -38,9 +38,7 @@ def index(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "GET":
@@ -50,18 +48,14 @@ def index(request):
                     context = {}
                     return render(request, 'index.html', context)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return render(request, "backend/404.html")
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -75,9 +69,7 @@ def api_auth_routes(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "GET":
@@ -142,18 +134,14 @@ def api_auth_routes(request):
                     ]
                     return Response({"response": _routes})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -186,9 +174,7 @@ def api_any_user(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -203,8 +189,8 @@ def api_any_user(request):
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method,
-                            error_text_field=f'action: LOGIN'
+                            request_method_slug_field=req_inst.method + "| LOGIN",
+                            error_text_field=f'-'
                     ):
                         if (dat.datetime_field + datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') \
                                 >= now:
@@ -214,8 +200,8 @@ def api_any_user(request):
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method,
-                            error_text_field=f'action: LOGIN'
+                            request_method_slug_field=req_inst.method + "| LOGIN",
+                            error_text_field=f'-'
                         )
                         is_authenticated = authenticate(username=username, password=password)
                         if is_authenticated is not None:
@@ -239,9 +225,7 @@ def api_any_user(request):
                     else:
                         return Response({"error": "Внимание, попыток входа можно совершать не более 20 в час!"})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "FIND_USER":
                 try:
@@ -258,9 +242,7 @@ def api_any_user(request):
                         "success": False
                     }})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Пользователя не существует или произошла ошибка!"})
             if req_inst.action_type == "CHECK_ANSWER":
                 try:
@@ -277,10 +259,7 @@ def api_any_user(request):
                     else:
                         return Response({"error": "Ответ не верный!"})
                 except Exception as error:
-                    print(error)
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "SEND_EMAIL_PASSWORD":
                 try:
@@ -297,8 +276,8 @@ def api_any_user(request):
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method,
-                            error_text_field=f'action: SEND_EMAIL_PASSWORD'
+                            request_method_slug_field=req_inst.method + " | SEND_EMAIL_PASSWORD",
+                            error_text_field="-",
                     ):
                         if (dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') \
                                 >= now:
@@ -309,8 +288,8 @@ def api_any_user(request):
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method,
-                            error_text_field=f'action: SEND_EMAIL_PASSWORD'
+                            request_method_slug_field=req_inst.method + " | SEND_EMAIL_PASSWORD",
+                            error_text_field="-",
                         )
 
                         text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
@@ -340,9 +319,7 @@ def api_any_user(request):
                     else:
                         return Response({"error": f"Внимание, отправлять письмо можно не чаще раза в 3 минуты!"})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHECK_EMAIL_PASSWORD":
                 try:
@@ -371,9 +348,7 @@ def api_any_user(request):
                     else:
                         return Response({"error": f"Код не верный!"})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_PASSWORD":
                 try:
@@ -397,18 +372,14 @@ def api_any_user(request):
                     else:
                         return Response({"error": f"Пароли не совпадают или старый пароль идентичный!"})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -421,9 +392,7 @@ def api_auth_user(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -432,9 +401,7 @@ def api_auth_user(request):
                 try:
                     return Response({"response": backend_serializers.UserSerializer(req_inst.user, many=False).data})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE":
                 try:
@@ -470,9 +437,7 @@ def api_auth_user(request):
                         user_model.save()
                     return Response({"response": "Изменение успешно проведено."})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_PASSWORD":
                 try:
@@ -496,9 +461,7 @@ def api_auth_user(request):
                     else:
                         return Response({"error": f"Пароли не совпадают или старый пароль идентичный!"})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "USER_LIST_ALL":
                 try:
@@ -513,9 +476,7 @@ def api_auth_user(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_CREATE":
                 try:
@@ -536,9 +497,7 @@ def api_auth_user(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_DELETE":
                 try:
@@ -552,9 +511,7 @@ def api_auth_user(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_LIST":
                 try:
@@ -581,18 +538,14 @@ def api_auth_user(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -606,9 +559,7 @@ def api_auth_admin(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -623,9 +574,7 @@ def api_auth_admin(request):
                         "success": True
                     }})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_USER_PASSWORD":
                 try:
@@ -651,9 +600,7 @@ def api_auth_admin(request):
                     else:
                         return Response({"error": f"Пароли не совпадают или старый пароль идентичный!"})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CREATE_OR_CHANGE_USERS":
                 try:
@@ -715,6 +662,7 @@ def api_auth_admin(request):
                                 continue
                             new_user = False
                         except Exception as error:
+                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                             user = User.objects.create(
                                 username=username,
                                 password=make_password(password=password_char_field),
@@ -759,7 +707,7 @@ def api_auth_admin(request):
                                 try:
                                     group.user_many_to_many_field.remove(user_model)
                                 except Exception as error:
-                                    pass
+                                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
 
                         groups = [group.strip() for group in str(groups).lower().strip().split(',')]
                         for group in groups:
@@ -772,9 +720,7 @@ def api_auth_admin(request):
                             print(username)
                     return Response({"response": "Пользователи успешно созданы/изменены."})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "EXPORT_USERS":
                 try:
@@ -811,7 +757,7 @@ def api_auth_admin(request):
                                 if date != date_file:
                                     os.remove(f'{path}/{file}')
                             except Exception as error:
-                                print(error)
+                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     #######################################################
 
                     users = User.objects.filter(is_superuser=False)
@@ -895,7 +841,7 @@ def api_auth_admin(request):
                             set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
 
                         except Exception as error:
-                            print(error)
+                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
 
                     # Set font
                     #######################################################
@@ -925,9 +871,7 @@ def api_auth_admin(request):
                     )
                     return Response({"response": {"excel": f"static/{path}/{file_name}"}})
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "ACTIVITY_USER":
                 try:
@@ -947,24 +891,18 @@ def api_auth_admin(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "TERMINAL_REBOOT":
                 try:
-                    ips = req_inst.get_value("ips")
-                    # ips = "192.168.15.136,192.168.15.134,192.168.15.132"
-                    arr = [str(str(x).strip()) for x in ips.split(",")]
-
                     def reboot(_ip):
                         url = "htt" + f"p://{ip}/ISAPI/System/reboot"
                         h = httplib2.Http(
                             os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/reboot_terminal"
                         )
-                        _login = 'admin'
-                        password = 'snrg2017'
-                        h.add_credentials(_login, password)
+                        login_ = 'admin'
+                        password_ = 'snrg2017'
+                        h.add_credentials(login_, password_)
                         headers = {
                             'Content-type': 'text/plain;charset=UTF-8',
                             'Accept-Encoding': 'gzip, deflate',
@@ -975,7 +913,7 @@ def api_auth_admin(request):
                         response_, content = h.request(uri=url, method="PUT", headers=headers)
                         print(content)
 
-                    for ip in arr:
+                    for ip in [str(str(x).strip()) for x in req_inst.get_value("ips").split(",")]:
                         if len(str(ip)) < 3:
                             continue
                         with ThreadPoolExecutor() as executor:
@@ -985,18 +923,14 @@ def api_auth_admin(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -1009,9 +943,7 @@ def api_basic_admin_user_temp(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "GET":
@@ -1040,17 +972,14 @@ def api_basic_admin_user_temp(request):
                 #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
                 return Response({"response": objects})
             except Exception as error:
-                backend_service.DjangoClass.LoggingClass.error(
-                    request=request, error=error, print_error=True
-                )
+                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                 return Response({"error": "Произошла ошибка!"})
         else:
             return Response({"error": "Этот метод не реализован для этой точки доступа."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
+
 
 # #####################################################################################################TODO custom views
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
@@ -1062,9 +991,7 @@ def api_auth_salary(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -1116,7 +1043,7 @@ def api_auth_salary(request):
                     try:
                         json_data["global_objects"]["3.Доходы в натуральной форме"]
                     except Exception as error:
-                        print(error)
+                        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                         json_data["global_objects"]["3.Доходы в натуральной форме"] = {
                             "Fields": {
                                 "1": "Вид",
@@ -1156,8 +1083,8 @@ def api_auth_salary(request):
                                         json_data['global_objects'][table][f'{__key}']['Сумма'] = return_float_value(
                                             _summ_local)
                                         _summ += _summ_local
-                                    except Exception as _error:
-                                        print(_error)
+                                    except Exception as error_:
+                                        backend_service.DjangoClass.LoggingClass.error(request=request, error=error_)
                             json_data['global_objects'][table]['Ends'] = {
                                 'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
                                 'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
@@ -1171,8 +1098,8 @@ def api_auth_salary(request):
                                         json_data['global_objects'][table][f'{__key}']['Сумма'] = return_float_value(
                                             _summ_local)
                                         _summ += _summ_local
-                                    except Exception as _error:
-                                        print(_error)
+                                    except Exception as error_:
+                                        backend_service.DjangoClass.LoggingClass.error(request=request, error=error_)
                             json_data['global_objects'][table]['Ends'] = {
                                 'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
                             }
@@ -1212,7 +1139,7 @@ def api_auth_salary(request):
                                     if date != date_file:
                                         os.remove(f'{path}/{file}')
                                 except Exception as error:
-                                    print(error)
+                                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                         #######################################################
 
                         # Create 'TitleComponent'
@@ -1638,26 +1565,20 @@ def api_auth_salary(request):
                         )
                         json_data["excel_path"] = f"static/{path}/{file_name}"
                     except Exception as error:
-                        backend_service.DjangoClass.LoggingClass.error(
-                            request=request, error=error, print_error=backend_settings.DEBUG
-                        )
+                        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                         json_data["excel_path"] = ''
                     response = {"response": json_data}
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -1670,9 +1591,7 @@ def api_auth_idea(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -1702,7 +1621,7 @@ def api_auth_idea(request):
                     backend_models.NotificationModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
                         model_foreign_key_field=backend_models.GroupModel.objects.get(
-                            name_slug_field="idea_moderator"
+                            name_slug_field="moderator_idea"
                         ),
                         name_char_field="Создана новая идея",
                         place_char_field="банк идей",
@@ -1713,9 +1632,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_LIST":
                 try:
@@ -1860,9 +1777,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_DETAIL":
                 try:
@@ -1876,9 +1791,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_CHANGE":
                 try:
@@ -1924,7 +1837,7 @@ def api_auth_idea(request):
                     backend_models.NotificationModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
                         model_foreign_key_field=backend_models.GroupModel.objects.get(
-                            name_slug_field="idea_moderator"
+                            name_slug_field="moderator_idea"
                         ),
                         name_char_field="Отредактирована идея",
                         place_char_field="банк идей",
@@ -1935,9 +1848,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_MODERATE":
                 try:
@@ -1973,7 +1884,7 @@ def api_auth_idea(request):
                         backend_models.NotificationModel.objects.create(
                             author_foreign_key_field=req_inst.user_model,
                             model_foreign_key_field=backend_models.GroupModel.objects.get(
-                                name_slug_field="idea_moderator"
+                                name_slug_field="moderator_idea"
                             ),
                             name_char_field=message,
                             place_char_field="банк идей",
@@ -1984,9 +1895,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_CREATE":
                 try:
@@ -2004,9 +1913,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_DELETE":
                 try:
@@ -2019,9 +1926,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_LIST":
                 try:
@@ -2035,9 +1940,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_RATING_CREATE":
                 try:
@@ -2057,9 +1960,7 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_AUTHOR_LIST":
                 try:
@@ -2204,17 +2105,13 @@ def api_auth_idea(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2228,9 +2125,7 @@ def api_auth_rational(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -2308,9 +2203,7 @@ def api_auth_rational(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             elif req_inst.action_type == "RATIONAL_LIST":
                 try:
@@ -2357,9 +2250,7 @@ def api_auth_rational(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             elif req_inst.action_type == "RATIONAL_DETAIL":
                 try:
@@ -2373,9 +2264,7 @@ def api_auth_rational(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             elif req_inst.action_type == "RATIONAL_MODERATE":
                 try:
@@ -2423,18 +2312,14 @@ def api_auth_rational(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2447,9 +2332,7 @@ def api_any_vacancy(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -2488,9 +2371,7 @@ def api_any_vacancy(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "VACANCY_DETAIL":
                 try:
@@ -2505,18 +2386,14 @@ def api_any_vacancy(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2529,9 +2406,7 @@ def api_auth_vacancy(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -2567,9 +2442,7 @@ def api_auth_vacancy(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "VACANCY_CHANGE":
                 try:
@@ -2617,9 +2490,7 @@ def api_auth_vacancy(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "VACANCY_DELETE":
                 try:
@@ -2629,18 +2500,14 @@ def api_auth_vacancy(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2653,9 +2520,7 @@ def api_any_resume(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -2695,18 +2560,14 @@ def api_any_resume(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2719,9 +2580,7 @@ def api_auth_resume(request):
 
     try:
         # Request
-        req_inst = backend_service.DjangoClass.TemplateClass.request(
-            request=request, log=True, schedule=True, print_req=backend_settings.DEBUG
-        )
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
 
         # Methods
         if req_inst.method == "POST":
@@ -2764,9 +2623,7 @@ def api_auth_resume(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RESUME_DETAIL":
                 try:
@@ -2781,9 +2638,7 @@ def api_auth_resume(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RESUME_DELETE":
                 try:
@@ -2793,16 +2648,12 @@ def api_auth_resume(request):
                     # print(f"response: {response}")
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(
-                        request=request, error=error, print_error=backend_settings.DEBUG
-                    )
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(
-            request=request, error=error, print_error=backend_settings.DEBUG
-        )
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")

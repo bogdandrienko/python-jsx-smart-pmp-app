@@ -32,7 +32,7 @@ export const LoginPage = () => {
         navigate("/news");
       });
     }
-  }, [navigate, dataUserLogin]);
+  }, [dataUserLogin]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerLoginSubmit = (e) => {
     try {

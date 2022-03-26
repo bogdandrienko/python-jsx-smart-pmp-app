@@ -748,3 +748,159 @@
 000000000000, 127.0.0.1, /, GET, 2022-03-25 16:57:28.103509, index.html
 
 000000000000, 127.0.0.1, /, GET, 2022-03-25 16:57:32.175401, index.html
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.840221
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.872218
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.886219
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.900219
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.928219
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.959219
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.973220
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:04.986218
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:05.014219
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:05.028224
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:05.042220
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:05.055218
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:05.069218
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:05.081218
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:05.126219
+
+000000000000, 127.0.0.1, /, GET, , index.html, 2022-03-26 11:34:05.137217
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.194921
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.210919
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.223919
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.238919
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.252850
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.265849
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.278849
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.293849
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.306862
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.320857
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.333858
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.347857
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.361857
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.375857
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:08.401857
+
+000000000000, 127.0.0.1, /, GET, , index.html, 2022-03-26 11:34:08.413857
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.388072
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.404071
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.417071
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.432074
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.446070
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.459072
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.473070
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.500071
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.516072
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.528073
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.542071
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.556070
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.571071
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.597072
+
+, , error_local, DRFClass.RequestClass.__init__, 'WSGIRequest' object has no attribute 'data', 2022-03-26 11:34:11.610070
+
+000000000000, 127.0.0.1, /, GET, , index.html, 2022-03-26 11:34:11.622071
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:49:05.143696
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:49:07.143905
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:49:16.085545
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:50:19.943731
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:50:23.590065
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:50:25.214387
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:50:58.093809
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:53:30.438516
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:53:35.134863
+
+, , error_local, check_settings, UNIQUE constraint failed: settings_admin_model_table.type_slug_field_db_column, 2022-03-26 11:53:37.600473
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:36:24.285154
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:39:07.675020
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:39:37.514300
+
+000000000000, 127.0.0.1, /api/auth/idea/, POST, IDEA_LIST, 'onlyMonth', 2022-03-26 13:40:51.925443
+
+000000000000, 127.0.0.1, /api/auth/idea/, POST, IDEA_LIST, 'onlyMonth', 2022-03-26 13:40:51.986445
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:42:14.483567
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:42:52.257950
+
+000000000000, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:43:00.267777
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:47:12.931948
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:48:38.097234
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:48:55.456829
+
+000000000000, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:50:05.869072
+
+, , error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:50:24.396376
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:52:22.646853
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_default_superusers, User matching query does not exist., 2022-03-26 13:53:23.644295
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_default_superusers, User matching query does not exist., 2022-03-26 13:53:24.053466
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 13:53:44.649913
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 14:18:06.108484
+
+000000000000, 127.0.0.1, /api/auth/idea/, POST, IDEA_CREATE, GroupModel matching query does not exist., 2022-03-26 15:05:32.830392
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal_1c, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-26 15:18:39.760953

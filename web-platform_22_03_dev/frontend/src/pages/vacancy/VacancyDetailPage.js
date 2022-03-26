@@ -18,7 +18,7 @@ export const VacancyDetailPage = () => {
   //////////////////////////////////////////////////////////
   const vacancyDetailStore = useSelector((state) => state.vacancyDetailStore);
   const {
-    load: loadVacancyDetail,
+    // load: loadVacancyDetail,
     data: dataVacancyDetail,
     // error: errorVacancyDetail,
     // fail: failVacancyDetail,
@@ -35,22 +35,21 @@ export const VacancyDetailPage = () => {
   useEffect(() => {
     if (
       dataVacancyDetail &&
-      dataVacancyDetail.id !== undefined &&
-      id !== dataVacancyDetail.id
+      (dataVacancyDetail.id !== undefined || dataVacancyDetail.id !== id)
     ) {
       dispatch({ type: constants.VACANCY_DETAIL_RESET_CONSTANT });
     }
-  }, [dispatch, id]);
+  }, [dataVacancyDetail, id]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (!dataVacancyDetail && !loadVacancyDetail) {
+    if (!dataVacancyDetail) {
       const form = {
         "Action-type": "VACANCY_DETAIL",
         id: id,
       };
       dispatch(actions.vacancyDetailAction(form));
     }
-  }, [dispatch, id, dataVacancyDetail, loadVacancyDetail]);
+  }, [dataVacancyDetail]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataVacancyDelete) {
@@ -109,7 +108,7 @@ export const VacancyDetailPage = () => {
             </Link>
           )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancy") && (
               <Link
                 to={`/vacancy_change/${dataVacancyDetail.id}`}
                 className="btn btn-sm btn-warning"
@@ -118,7 +117,7 @@ export const VacancyDetailPage = () => {
               </Link>
             )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancy") && (
               <button
                 className="btn btn-sm btn-danger"
                 onClick={(e) => handlerDelete(e, dataVacancyDetail.id)}
@@ -127,7 +126,7 @@ export const VacancyDetailPage = () => {
               </button>
             )}
           {dataVacancyDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancy") && (
               <Link to={`/vacancy_create`} className="btn btn-sm btn-secondary">
                 создать новую вакансию
               </Link>

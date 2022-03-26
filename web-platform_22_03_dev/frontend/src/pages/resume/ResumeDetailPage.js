@@ -17,7 +17,7 @@ export const ResumeDetailPage = () => {
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
   const resumeDetailStore = useSelector((state) => state.resumeDetailStore);
   const {
-    load: loadResumeDetail,
+    // load: loadResumeDetail,
     data: dataResumeDetail,
     // error: errorResumeDetail,
     // fail: failResumeDetail,
@@ -34,22 +34,21 @@ export const ResumeDetailPage = () => {
   useEffect(() => {
     if (
       dataResumeDetail &&
-      dataResumeDetail.id !== undefined &&
-      id !== dataResumeDetail.id
+      (dataResumeDetail.id !== undefined || dataResumeDetail.id !== id)
     ) {
       dispatch({ type: constants.RESUME_DETAIL_RESET_CONSTANT });
     }
-  }, [dispatch, id]);
+  }, [dataResumeDetail, id]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (!dataResumeDetail && !loadResumeDetail) {
+    if (!dataResumeDetail) {
       const form = {
         "Action-type": "RESUME_DETAIL",
         id: id,
       };
       dispatch(actions.resumeDetailAction(form));
     }
-  }, [dispatch, id, dataResumeDetail, loadResumeDetail]);
+  }, [dataResumeDetail]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataResumeDelete) {
@@ -59,7 +58,7 @@ export const ResumeDetailPage = () => {
         navigate("/resume_list");
       });
     }
-  }, [dataResumeDelete, dispatch, navigate]);
+  }, [dataResumeDelete]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerDelete = async (e, id) => {
     e.preventDefault();
@@ -118,7 +117,7 @@ export const ResumeDetailPage = () => {
             {"<="} назад к списку
           </Link>
           {dataResumeDetail &&
-            utils.CheckAccess(userDetailsStore, "moderator_vacancies") && (
+            utils.CheckAccess(userDetailsStore, "moderator_vacancy") && (
               <button
                 className="btn btn-sm btn-danger"
                 onClick={(e) => handlerDelete(e, dataResumeDetail.id)}

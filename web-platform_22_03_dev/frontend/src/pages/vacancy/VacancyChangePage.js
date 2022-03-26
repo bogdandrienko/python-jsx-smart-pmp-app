@@ -17,7 +17,6 @@ export const VacancyChangePage = () => {
   const [qualification, qualificationSet] = useState("");
   const [rank, rankSet] = useState("");
   const [image, imageSet] = useState(null);
-  const [currentImage, currentImageSet] = useState("");
   const [clearImage, clearImageSet] = useState(false);
   const [sphere, sphereSet] = useState("");
   const [education, educationSet] = useState("");
@@ -62,12 +61,11 @@ export const VacancyChangePage = () => {
   useEffect(() => {
     if (
       dataVacancyDetail &&
-      dataVacancyDetail.id !== undefined &&
-      id !== dataVacancyDetail.id
+      (dataVacancyDetail.id !== undefined || dataVacancyDetail.id !== id)
     ) {
       dispatch({ type: constants.VACANCY_DETAIL_RESET_CONSTANT });
     }
-  }, [dispatch, id]);
+  }, [dataVacancyDetail, id]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataVacancyDetail) {
@@ -80,15 +78,13 @@ export const VacancyChangePage = () => {
       clearImageSet(false);
       descriptionSet(dataVacancyDetail["description_field"]);
     } else {
-      if (!loadVacancyDetail) {
-        const form = {
-          "Action-type": "VACANCY_DETAIL",
-          id: id,
-        };
-        dispatch(actions.vacancyDetailAction(form));
-      }
+      const form = {
+        "Action-type": "VACANCY_DETAIL",
+        id: id,
+      };
+      dispatch(actions.vacancyDetailAction(form));
     }
-  }, [dispatch, id, dataVacancyDetail]);
+  }, [dataVacancyDetail]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -203,11 +199,7 @@ export const VacancyChangePage = () => {
               <div className="">
                 <label className="form-control-sm text-center m-0 p-1">
                   Текущее изображение:
-                  <img
-                    src={utils.GetStaticFile(currentImage)}
-                    className="img-fluid w-25"
-                    alt="изображение"
-                  />
+                  <img src={""} className="img-fluid w-25" alt="изображение" />
                   <small className="text-muted">* не обязательно</small>
                 </label>
                 <label className="form-control-sm form-switch text-center m-0 p-1">

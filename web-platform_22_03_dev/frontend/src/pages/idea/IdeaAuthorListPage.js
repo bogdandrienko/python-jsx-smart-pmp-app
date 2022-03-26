@@ -47,7 +47,7 @@ export const IdeaAuthorListPage = () => {
         resetState();
       }
     }
-  }, [dataIdeaAuthorList, dispatch, firstRefresh]);
+  }, [dataIdeaAuthorList, firstRefresh]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
   const handlerSubmit = async (e) => {
     try {
