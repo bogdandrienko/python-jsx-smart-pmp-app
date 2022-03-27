@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO debug
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////TODO constants
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -286,7 +286,7 @@ export const news = [
     Status: "disable",
     Link: "#",
     Description:
-      "расширение личного профиля: дополнительные данные, статистика, достижения...",
+      "расширение личного профиля: дополнительные данные, статистика, достижения",
     Helps: "",
     Danger: "",
   },
@@ -300,33 +300,26 @@ export const news = [
   },
   {
     Title: "Рационализаторские предложения:",
-    Status: "disable",
-    Link: "#",
+    Status: "active",
+    Link: "/rational_create",
     Description:
-      "весь функционал для рац. предложений: подача, пред/пост модерация, комментирование, рейтинги, списки лидеров...",
+      "шаблон и подача рац. предложений, модерация и общий список с рейтингами и комментариями",
     Helps: "",
     Danger: "",
   },
   {
-    Title: "Информация:",
+    Title: "Банк идей:",
     Status: "active",
-    Link: "/news",
-    Description: "страница с информацией по веб-платформе",
-    Helps: "материал будет своевременно обновляться",
+    Link: "/idea_create",
+    Description:
+      "подача и редактирование, шаблон, модерация, комментирование, рейтинги, списки лидеров...",
+    Helps: "",
     Danger: "",
   },
   {
-    Title: "Видео-инструкции:",
+    Title: "Инструкции: видео и текстовые",
     Status: "active",
     Link: "/video_study",
-    Description: "страница с инструкциями в формате видео с ссылками на ютюб",
-    Helps: "материал будет своевременно обновляться",
-    Danger: "",
-  },
-  {
-    Title: "Текстовые инструкции:",
-    Status: "active",
-    Link: "/text_study",
     Description: "страница с информацией по веб-платформе",
     Helps: "материал будет своевременно обновляться",
     Danger: "",
@@ -335,7 +328,8 @@ export const news = [
     Title: "Расчётный лист:",
     Status: "active",
     Link: "/salary",
-    Description: "возможность выгрузки расчётного листа для основных",
+    Description:
+      "возможность выгрузки расчётного листа для основных работников",
     Helps: "",
     Danger: "контрактники пока не включены",
   },
@@ -355,7 +349,7 @@ export const modules = [
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
-            Header: "10.03.22 00:31",
+            Header: "27.03.22 16:16",
             Access: ["user"],
             Active: false,
             Link: "#",
@@ -365,7 +359,7 @@ export const modules = [
             Description: "Пример (шаблон) идеи",
             Logic: true,
             Redirect: true,
-            Style: "text-dark",
+            Style: "text-secondary",
           },
         ],
       },
@@ -716,7 +710,7 @@ export const modules = [
             Title: "Вход в систему",
             Description: "страница для входа в систему",
             Logic: true,
-            Redirect: true,
+            Redirect: false,
             Style: "text-dark",
           },
           {
@@ -729,7 +723,7 @@ export const modules = [
             Title: "Пример (шаблон) идеи",
             Description: "Пример (шаблон) идеи",
             Logic: true,
-            Redirect: true,
+            Redirect: false,
             Style: "text-dark",
           },
         ],

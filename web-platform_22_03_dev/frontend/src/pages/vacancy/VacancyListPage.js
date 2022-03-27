@@ -274,8 +274,9 @@ export const VacancyListPage = () => {
                           <div className="card-body m-0 p-0 col-md-6  ">
                             <table className="table table-sm table-hover table-borderless table-striped  ">
                               <tbody>
-                                {vacancy["datetime_field"] !== "" &&
-                                  vacancy["datetime_field"] !== null && (
+                                {vacancy["created_datetime_field"] !== "" &&
+                                  vacancy["created_datetime_field"] !==
+                                    null && (
                                     <tr className="">
                                       <td className="fw-bold text-secondary text-start">
                                         Опубликовано:
@@ -283,7 +284,7 @@ export const VacancyListPage = () => {
                                       <td className="small text-end">
                                         {utils.GetSliceString(
                                           utils.GetCleanDateTime(
-                                            vacancy["datetime_field"],
+                                            vacancy["created_datetime_field"],
                                             true
                                           ),
                                           30

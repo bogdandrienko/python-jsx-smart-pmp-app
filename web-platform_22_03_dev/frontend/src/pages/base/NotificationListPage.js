@@ -56,7 +56,7 @@ export const NotificationListPage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataNotificationDelete) {
-      utils.Sleep(50).then(() => {
+      utils.Sleep(10).then(() => {
         resetState();
       });
     }
@@ -91,33 +91,46 @@ export const NotificationListPage = () => {
           failText={""}
         />
         {dataNotificationList && (
-          <table className="table table-sm table-hover table-borderless table-striped custom-background-transparent-middle border shadow m-0 p-0">
-            <tbody className="text-center">
-              <tr className="border text-center bg-primary bg-opacity-10">
-                <td className="fw-bold small">дата и время</td>
-                <td className="fw-bold small">название</td>
-                <td className="fw-bold small">место</td>
-                <td className="fw-bold small">описание</td>
-                <td className="fw-bold small" />
+          <table className="table table-sm table-hover table-borderless table-striped border border-1 border-dark shadow custom-background-transparent-middle m-0 p-0">
+            <tbody className="text-center m-0 p-0">
+              <tr className="border border-1 border-dark text-center bg-primary bg-opacity-10 m-0 p-0">
+                <td className="fw-bold small m-0 p-1">дата и время</td>
+                <td className="fw-bold small m-0 p-1">автор</td>
+                <td className="fw-bold small m-0 p-1">название</td>
+                <td className="fw-bold small m-0 p-1">место</td>
+                <td className="fw-bold small m-0 p-1">описание</td>
+                <td className="small m-0 p-1" />
               </tr>
               {dataNotificationList.map((object, index) => (
                 <tr
                   key={index}
-                  className="bg-warning text-center bg-opacity-10"
+                  className="text-center bg-light bg-opacity-10 m-0 p-0"
                 >
-                  <td className="">
+                  <td className="small m-0 p-0">
                     {utils.GetCleanDateTime(
                       object["created_datetime_field"],
                       true
                     )}
                   </td>
-                  <td className="">{object["name_char_field"]}</td>
-                  <td className="">{object["place_char_field"]}</td>
-                  <td className="">{object["description_text_field"]}</td>
-                  <td className="">
+                  <td className="small m-0 p-0">
+                    {object["author_foreign_key_field"]["last_name_char_field"]}{" "}
+                    {
+                      object["author_foreign_key_field"][
+                        "first_name_char_field"
+                      ]
+                    }
+                  </td>
+                  <td className="small m-0 p-0">{object["name_char_field"]}</td>
+                  <td className="small m-0 p-0">
+                    {object["place_char_field"]}
+                  </td>
+                  <td className="small m-0 p-0">
+                    {object["description_text_field"]}
+                  </td>
+                  <td className="small m-0 p-0">
                     <button
                       type="button"
-                      className="btn btn-sm btn-outline-danger m-1 p-2"
+                      className="btn btn-sm btn-outline-danger m-1 p-1"
                       onClick={(e) =>
                         handlerNotificationDeleteSubmit({
                           id: `${object.id}`,

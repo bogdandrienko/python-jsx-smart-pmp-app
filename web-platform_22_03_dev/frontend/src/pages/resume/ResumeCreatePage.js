@@ -139,13 +139,11 @@ export const ResumeCreatePage = () => {
                     Вакансия:
                     <input
                       type="text"
-                      id="name_char_field"
-                      name="name_char_field"
                       required
                       placeholder="вводите вакансия тут..."
                       value={qualification}
                       minLength="1"
-                      maxLength="128"
+                      maxLength="300"
                       className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) =>
                         qualificationSet(
@@ -164,11 +162,11 @@ export const ResumeCreatePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллица
+                        * только кириллица, цифры и пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
-                        * длина: не более 500 символов
+                        * длина: не более 300 символов
                       </small>
                     </small>
                   </label>
@@ -178,13 +176,11 @@ export const ResumeCreatePage = () => {
                     Фамилия:
                     <input
                       type="text"
-                      id="name_char_field"
-                      name="name_char_field"
                       required
                       placeholder="вводите фамилию тут..."
                       value={lastName}
                       minLength="1"
-                      maxLength="64"
+                      maxLength="300"
                       className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) =>
                         lastNameSet(
@@ -205,7 +201,7 @@ export const ResumeCreatePage = () => {
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
-                        * длина: не более 64 символов
+                        * длина: не более 300 символов
                       </small>
                     </small>
                   </label>
@@ -219,7 +215,7 @@ export const ResumeCreatePage = () => {
                       placeholder="вводите имя тут..."
                       value={firstName}
                       minLength="1"
-                      maxLength="64"
+                      maxLength="300"
                       className="form-control form-control-sm text-center m-0 p-1"
                       onChange={(e) =>
                         firstNameSet(
@@ -240,7 +236,7 @@ export const ResumeCreatePage = () => {
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
-                        * длина: не более 64 символов
+                        * длина: не более 300 символов
                       </small>
                     </small>
                   </label>
@@ -252,7 +248,7 @@ export const ResumeCreatePage = () => {
                       value={patronymic}
                       placeholder="вводите отчество тут..."
                       minLength="1"
-                      maxLength="64"
+                      maxLength="300"
                       required
                       onChange={(e) =>
                         patronymicSet(
@@ -273,7 +269,7 @@ export const ResumeCreatePage = () => {
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
-                        * длина: не более 64 символов
+                        * длина: не более 300 символов
                       </small>
                     </small>
                   </label>
@@ -363,7 +359,7 @@ export const ResumeCreatePage = () => {
                       value={contactData}
                       placeholder="вводите контактные данные тут..."
                       minLength="5"
-                      maxLength="250"
+                      maxLength="3000"
                       rows="2"
                       required
                       onChange={(e) => contactDataSet(e.target.value)}
@@ -371,7 +367,7 @@ export const ResumeCreatePage = () => {
                     <small className="text-danger">
                       * обязательно
                       <small className="text-muted">
-                        длина: не более 250 символов
+                        * длина: не более 3000 символов
                       </small>
                     </small>
                   </label>

@@ -134,7 +134,7 @@ export const IdeaModerateChangePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaChange) {
-      utils.Sleep(10).then(() => {
+      utils.Sleep(2000).then(() => {
         resetState();
       });
     }
@@ -255,7 +255,7 @@ export const IdeaModerateChangePage = () => {
                           value={moderateComment}
                           placeholder="вводите комментарий тут..."
                           minLength="1"
-                          maxLength="200"
+                          maxLength="300"
                           onChange={(e) =>
                             moderateCommentSet(
                               e.target.value.replace(
@@ -273,11 +273,11 @@ export const IdeaModerateChangePage = () => {
                           * обязательно
                           <small className="text-warning m-0 p-0">
                             {" "}
-                            * только кириллица
+                            * только кириллица, цифры и пробел
                           </small>
                           <small className="text-muted m-0 p-0">
                             {" "}
-                            * длина: не более 200 символов
+                            * длина: не более 300 символов
                           </small>
                         </small>
                       </label>
@@ -453,9 +453,7 @@ export const IdeaModerateChangePage = () => {
                   </div>
                   <div className="m-0 p-1">
                     <img
-                      src={utils.GetStaticFile(
-                        dataIdeaDetail["avatar_image_field"]
-                      )}
+                      src={utils.GetStaticFile(dataIdeaDetail["image_field"])}
                       className="card-img-top img-fluid w-25 m-0 p-1"
                       alt="изображение отсутствует"
                     />
@@ -492,7 +490,7 @@ export const IdeaModerateChangePage = () => {
                         placeholder="введите название тут..."
                         required
                         minLength="1"
-                        maxLength="200"
+                        maxLength="300"
                         onChange={(e) =>
                           nameSet(
                             e.target.value.replace(
@@ -511,11 +509,11 @@ export const IdeaModerateChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 200 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>
@@ -530,7 +528,7 @@ export const IdeaModerateChangePage = () => {
                         placeholder="введите место изменения тут..."
                         required
                         minLength="1"
-                        maxLength="100"
+                        maxLength="300"
                         onChange={(e) =>
                           placeSet(
                             e.target.value.replace(
@@ -549,11 +547,11 @@ export const IdeaModerateChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 200 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>
@@ -661,9 +659,9 @@ export const IdeaModerateChangePage = () => {
                                     <li
                                       key={index}
                                       className={
-                                        object.split("|")[1] > 7
+                                        object.split(":")[1] > 7
                                           ? "list-group-item bg-success bg-opacity-10"
-                                          : object.split("|")[1] > 4
+                                          : object.split(":")[1] > 4
                                           ? "list-group-item bg-warning bg-opacity-10"
                                           : "list-group-item bg-danger bg-opacity-10"
                                       }
@@ -938,7 +936,7 @@ export const IdeaModerateChangePage = () => {
                               </h6>
                               <span className="text-muted m-0 p-0">
                                 {utils.GetCleanDateTime(
-                                  object["datetime_field"],
+                                  object["created_datetime_field"],
                                   true
                                 )}
                                 <button

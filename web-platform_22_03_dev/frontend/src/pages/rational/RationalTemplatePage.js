@@ -83,7 +83,7 @@ export const RationalTemplatePage = () => {
                     placeholder="введите место внедрения тут..."
                     required
                     minLength="1"
-                    maxLength="100"
+                    maxLength="300"
                   />
                 </label>
               </div>
@@ -137,7 +137,7 @@ export const RationalTemplatePage = () => {
                     readOnly={true}
                     placeholder="участник № 1"
                     minLength="0"
-                    maxLength="200"
+                    maxLength="300"
                   />
                   <input
                     type="text"
@@ -146,7 +146,7 @@ export const RationalTemplatePage = () => {
                     readOnly={true}
                     placeholder="участник № 2"
                     minLength="0"
-                    maxLength="200"
+                    maxLength="300"
                   />
                 </label>
               </div>

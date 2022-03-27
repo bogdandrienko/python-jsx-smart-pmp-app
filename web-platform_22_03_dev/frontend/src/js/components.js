@@ -68,7 +68,15 @@ export const HeaderComponent = () => {
         navigate("/");
       }
     }
-  }, [dispatch, firstRefreshUserDetails, logic, location, redirect, navigate]);
+  }, [
+    dataUserDetails,
+    dispatch,
+    firstRefreshUserDetails,
+    logic,
+    location,
+    redirect,
+    navigate,
+  ]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (logic) {
@@ -229,16 +237,16 @@ export const HeaderComponent = () => {
                   className="text-center m-0 p-1 mx-1"
                 >
                   <Nav.Link className="m-0 p-0">
-                    <button className="btn btn-sm btn-danger m-0 p-1">
-                      Выйти <i className="fa-solid fa-user m-0 p-0" />
+                    <button className="btn btn-sm btn-danger m-0 p-2">
+                      Выйти <i className="fa-solid fa-user m-0 p-1" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>
               ) : (
                 <LinkContainer to="/login" className="text-center m-0 p-1 mx-1">
                   <Nav.Link className="m-0 p-0">
-                    <button className="btn btn-sm btn-primary m-0 p-1">
-                      Войти <i className="fa-solid fa-user m-0 p-0" />
+                    <button className="btn btn-sm btn-primary m-0 p-2">
+                      Войти <i className="fa-solid fa-user m-0 p-1" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>
@@ -714,7 +722,7 @@ export const MessageComponent = ({ variant, children }) => {
   );
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const NewsComponent = (count = 100) => {
+export const NewsComponent = ({ count = 100 }) => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
   return (
     <div className="card list-group list-group-item-action list-group-flush custom-background-transparent-low-middle m-0 p-0">
@@ -729,7 +737,7 @@ export const NewsComponent = (count = 100) => {
                 <strong className="lead m-0 p-0 mb-1">Лента</strong>
                 <strong className="text-warning m-0 p-0">Свежие сверху</strong>
               </div>
-              {count.count <= 9 && (
+              {count !== 100 && (
                 <div className="small m-0 p-0 mb-1">
                   нажмите сюда для просмотра всех изменений
                 </div>
@@ -737,7 +745,7 @@ export const NewsComponent = (count = 100) => {
             </div>
           </Nav.Link>
         </LinkContainer>
-        {constants.news.slice(0, count.count).map((news_elem, index) => (
+        {constants.news.slice(0, count).map((news_elem, index) => (
           <div key={index} className="custom-hover m-0 p-0">
             <Link
               to={news_elem.Link}
@@ -748,7 +756,7 @@ export const NewsComponent = (count = 100) => {
               }
             >
               <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
-                <strong className="m-0 p-0 mb-1">
+                <strong className="m-0 p-0">
                   {news_elem.Title}
                   {news_elem.Link !== "#" && (
                     <small className="text-primary m-0 p-0"> (ссылка)</small>

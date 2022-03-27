@@ -152,15 +152,16 @@ export const VacancyDetailPage = () => {
                   <div className="card-body m-0 p-0 col-md-6  ">
                     <table className="table table-sm table-hover table-borderless table-striped  ">
                       <tbody>
-                        {dataVacancyDetail["datetime_field"] !== "" &&
-                          dataVacancyDetail["datetime_field"] !== null && (
+                        {dataVacancyDetail["created_datetime_field"] !== "" &&
+                          dataVacancyDetail["created_datetime_field"] !==
+                            null && (
                             <tr className="">
                               <td className="fw-bold text-secondary text-start">
                                 Опубликовано:
                               </td>
                               <td className="small text-end">
                                 {utils.GetCleanDateTime(
-                                  dataVacancyDetail["datetime_field"],
+                                  dataVacancyDetail["created_datetime_field"],
                                   true
                                 )}
                               </td>

@@ -26,7 +26,7 @@ export const ChangePasswordPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataUserChange) {
-      utils.Sleep(1000).then(() => {
+      utils.Sleep(2000).then(() => {
         dispatch(actions.userLogoutAction());
         navigate("/login");
       });
@@ -104,7 +104,7 @@ export const ChangePasswordPage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латиница
+                        * только латиница, цифры и нижний пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -141,7 +141,7 @@ export const ChangePasswordPage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латиница
+                        * только латиница, цифры и нижний пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}

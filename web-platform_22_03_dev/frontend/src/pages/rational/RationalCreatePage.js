@@ -59,7 +59,7 @@ export const RationalCreatePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataRationalCreate) {
-      utils.Sleep(5000).then(() => {
+      utils.Sleep(2000).then(() => {
         dispatch({
           type: constants.RATIONAL_CREATE_RESET_CONSTANT,
         });
@@ -281,7 +281,7 @@ export const RationalCreatePage = () => {
                         placeholder="введите название тут..."
                         required
                         minLength="1"
-                        maxLength="200"
+                        maxLength="300"
                         onChange={(e) =>
                           nameSet(
                             e.target.value.replace(
@@ -300,11 +300,11 @@ export const RationalCreatePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 200 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>
@@ -319,7 +319,7 @@ export const RationalCreatePage = () => {
                         placeholder="введите место внедрения тут..."
                         required
                         minLength="1"
-                        maxLength="100"
+                        maxLength="300"
                         onChange={(e) =>
                           placeSet(
                             e.target.value.replace(
@@ -338,11 +338,11 @@ export const RationalCreatePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 100 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>
@@ -475,7 +475,7 @@ export const RationalCreatePage = () => {
                                 value={user1Perc}
                                 required
                                 placeholder="пример: 70%"
-                                min="0"
+                                min="1"
                                 max="100"
                                 onChange={(e) => user1PercSet(e.target.value)}
                               />
@@ -504,7 +504,7 @@ export const RationalCreatePage = () => {
                                 className="form-control form-control-sm text-center m-0 p-1"
                                 value={user2Perc}
                                 placeholder="пример: 70%"
-                                min="0"
+                                min="1"
                                 max="100"
                                 onChange={(e) => user2PercSet(e.target.value)}
                               />

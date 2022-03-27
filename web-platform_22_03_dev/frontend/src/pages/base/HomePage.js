@@ -42,7 +42,7 @@ export const HomePage = () => {
             </div>
           </div>
           <div className="m-0 p-1">
-            <components.NewsComponent count={9} />
+            <components.NewsComponent count={6} />
           </div>
         </div>
         <div>

@@ -237,7 +237,7 @@ export const IdeaCreatePage = () => {
                         placeholder="введите название тут..."
                         required
                         minLength="1"
-                        maxLength="200"
+                        maxLength="300"
                         onChange={(e) =>
                           nameSet(
                             e.target.value.replace(
@@ -256,11 +256,11 @@ export const IdeaCreatePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 200 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>
@@ -275,7 +275,7 @@ export const IdeaCreatePage = () => {
                         placeholder="введите место изменения тут..."
                         required
                         minLength="1"
-                        maxLength="100"
+                        maxLength="300"
                         onChange={(e) =>
                           placeSet(
                             e.target.value.replace(
@@ -294,11 +294,11 @@ export const IdeaCreatePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 100 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>

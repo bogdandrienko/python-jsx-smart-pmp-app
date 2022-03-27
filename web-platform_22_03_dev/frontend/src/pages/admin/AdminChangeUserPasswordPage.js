@@ -30,16 +30,19 @@ export const AdminChangeUserPasswordPage = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
   useEffect(() => {
     if (dataAdminChangeUserPassword) {
-      if (dataAdminChangeUserPassword["success"]) {
-        successSet(dataAdminChangeUserPassword["success"]);
-      } else {
-        successSet(false);
-      }
-      if (dataAdminChangeUserPassword["username"]) {
-        usernameSet(dataAdminChangeUserPassword["username"]);
-      } else {
-        usernameSet("");
-      }
+      utils.Sleep(2000).then(() => {
+        dispatch({ type: constants.ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
+        if (dataAdminChangeUserPassword["success"]) {
+          successSet(dataAdminChangeUserPassword["success"]);
+        } else {
+          successSet(false);
+        }
+        if (dataAdminChangeUserPassword["username"]) {
+          usernameSet(dataAdminChangeUserPassword["username"]);
+        } else {
+          usernameSet("");
+        }
+      });
     }
   }, [dataAdminChangeUserPassword]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
@@ -68,9 +71,6 @@ export const AdminChangeUserPasswordPage = () => {
         password2: password2,
       };
       dispatch(actions.adminChangeUserPasswordAction(form));
-      utils.Sleep(5000).then(() => {
-        dispatch({ type: constants.ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
-      });
     }
   };
   //////////////////////////////////////////////////////////
@@ -201,7 +201,7 @@ export const AdminChangeUserPasswordPage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только латиница
+                          * только латиница, цифры и нижний пробел
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
@@ -238,7 +238,7 @@ export const AdminChangeUserPasswordPage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только латиница
+                          * только латиница, цифры и нижний пробел
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}

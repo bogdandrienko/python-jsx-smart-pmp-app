@@ -191,19 +191,21 @@ export const IdeaDetailPage = () => {
           <Link to={"/idea_list"} className="btn btn-sm btn-primary m-1 p-2">
             {"<="} назад к списку
           </Link>
-          <button
-            type="button"
-            className="btn btn-sm btn-outline-danger m-1 p-2"
-            onClick={(e) =>
-              handlerNotificationSubmit({
-                name: "жалоба на идею в банке идей",
-                place: `id идеи: ${id}`,
-                description: "",
-              })
-            }
-          >
-            жалоба на идею
-          </button>
+          {dataIdeaDetail && (
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-danger m-1 p-2"
+              onClick={(e) =>
+                handlerNotificationSubmit({
+                  name: "жалоба на идею в банке идей",
+                  place: "банк идей",
+                  description: `название: ${dataIdeaDetail["name_char_field"]}`,
+                })
+              }
+            >
+              жалоба на идею
+            </button>
+          )}
         </div>
         <components.StoreStatusComponent
           storeStatus={ideaDetailStore}
@@ -265,10 +267,8 @@ export const IdeaDetailPage = () => {
                 <div className="m-0 p-0">
                   <img
                     src={
-                      dataIdeaDetail["avatar_image_field"]
-                        ? utils.GetStaticFile(
-                            dataIdeaDetail["avatar_image_field"]
-                          )
+                      dataIdeaDetail["image_field"]
+                        ? utils.GetStaticFile(dataIdeaDetail["image_field"])
                         : utils.GetStaticFile(
                             "/media/default/idea/default_idea.jpg"
                           )
@@ -288,7 +288,7 @@ export const IdeaDetailPage = () => {
                       placeholder="введите место изменения тут..."
                       required
                       minLength="1"
-                      maxLength="100"
+                      maxLength="300"
                     />
                   </label>
                 </div>
@@ -389,9 +389,9 @@ export const IdeaDetailPage = () => {
                                 <li
                                   key={index}
                                   className={
-                                    object.split("|")[1] > 7
+                                    object.split(":")[1] > 7
                                       ? "list-group-item bg-success bg-opacity-10"
-                                      : object.split("|")[1] > 4
+                                      : object.split(":")[1] > 4
                                       ? "list-group-item bg-warning bg-opacity-10"
                                       : "list-group-item bg-danger bg-opacity-10"
                                   }
@@ -612,7 +612,7 @@ export const IdeaDetailPage = () => {
                             required
                             placeholder="введите комментарий тут..."
                             minLength="1"
-                            maxLength="200"
+                            maxLength="300"
                             onChange={(e) =>
                               commentSet(
                                 e.target.value.replace(
@@ -676,7 +676,7 @@ export const IdeaDetailPage = () => {
                               </h6>
                               <span className="text-muted m-0 p-0">
                                 {utils.GetCleanDateTime(
-                                  object["datetime_field"],
+                                  object["created_datetime_field"],
                                   true
                                 )}
                                 <button
@@ -684,9 +684,30 @@ export const IdeaDetailPage = () => {
                                   className="btn btn-sm btn-outline-danger m-1 p-1"
                                   onClick={(e) =>
                                     handlerNotificationSubmit({
-                                      name: "жалоба на комментарий к идеи в банке идей",
-                                      place: `id идеи: ${id}, id комментария: ${object["id"]}`,
-                                      description: "",
+                                      name: "жалоба на комментарий в банке идей",
+                                      place: "банк идей",
+                                      description: `название: ${
+                                        dataIdeaDetail["name_char_field"]
+                                      } (${
+                                        dataIdeaDetail["user_model"][
+                                          "last_name_char_field"
+                                        ]
+                                      } ${
+                                        dataIdeaDetail["user_model"][
+                                          "first_name_char_field"
+                                        ]
+                                      }), комментарий: ${utils.GetCleanDateTime(
+                                        object["created_datetime_field"],
+                                        true
+                                      )} (${
+                                        object["user_model"][
+                                          "last_name_char_field"
+                                        ]
+                                      } ${
+                                        object["user_model"][
+                                          "first_name_char_field"
+                                        ]
+                                      })`,
                                     })
                                   }
                                 >

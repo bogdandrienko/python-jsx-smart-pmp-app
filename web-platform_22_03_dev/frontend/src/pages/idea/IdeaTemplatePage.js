@@ -80,7 +80,7 @@ export const IdeaTemplatePage = () => {
                     placeholder="введите место изменения тут..."
                     required
                     minLength="1"
-                    maxLength="100"
+                    maxLength="300"
                   />
                 </label>
               </div>

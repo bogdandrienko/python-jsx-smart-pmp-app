@@ -174,9 +174,38 @@ class UserModelAdmin(admin.ModelAdmin):
     Настройки отображения, фильтрации и поиска модели:'UserModel' на панели администратора
     """
 
+    # list_display = (
+    #     'user_foreign_key_field',
+    # )
+    # list_display_links = (
+    #     'user_foreign_key_field',
+    # )
+    # list_editable = (
+    #     'user_foreign_key_field',
+    # )
+    # list_filter = (
+    #     'user_foreign_key_field',
+    # )
+    # filter_horizontal = (
+    #     'user_many_to_many_field',
+    # )
+    # fieldsets = (
+    #     ('Основное', {'fields': (
+    #         'user_foreign_key_field',
+    #     )}),
+    # )
+    # search_fields = [
+    #     'user_foreign_key_field',
+    # ]
+
     list_display = (
         'user_foreign_key_field',
+        'password_char_field',
         'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'temp_password_boolean_field',
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
@@ -185,20 +214,31 @@ class UserModelAdmin(admin.ModelAdmin):
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
     )
     list_display_links = (
         'user_foreign_key_field',
+        'password_char_field',
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
-        'personnel_number_slug_field',
     )
     list_editable = (
         'activity_boolean_field',
     )
     list_filter = (
         'user_foreign_key_field',
+        'password_char_field',
         'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'temp_password_boolean_field',
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
@@ -207,30 +247,48 @@ class UserModelAdmin(admin.ModelAdmin):
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
+    )
+    filter_horizontal = (
     )
     fieldsets = (
-        ('Данные авторизации пользователя', {'fields': (
+        ('Основное', {'fields': (
             'user_foreign_key_field',
-        )}),
-        ('Технические данные пользователя', {'fields': (
+            'password_char_field',
             'activity_boolean_field',
-        )}),
-        ('Первичные данные пользователя', {'fields': (
+            'email_field',
+            'secret_question_char_field',
+            'secret_answer_char_field',
+            'temp_password_boolean_field',
             'last_name_char_field',
             'first_name_char_field',
             'patronymic_char_field',
-        )}),
-        ('Вторичные данные пользователя', {'fields': (
             'personnel_number_slug_field',
             'subdivision_char_field',
             'workshop_service_char_field',
             'department_site_char_field',
             'position_char_field',
+            'category_char_field',
+            'education_text_field',
+            'achievements_text_field',
+            'biography_text_field',
+            'hobbies_text_field',
+            'image_field',
         )}),
     )
     search_fields = [
         'user_foreign_key_field',
+        'password_char_field',
         'activity_boolean_field',
+        'email_field',
+        'secret_question_char_field',
+        'secret_answer_char_field',
+        'temp_password_boolean_field',
         'last_name_char_field',
         'first_name_char_field',
         'patronymic_char_field',
@@ -239,6 +297,12 @@ class UserModelAdmin(admin.ModelAdmin):
         'workshop_service_char_field',
         'department_site_char_field',
         'position_char_field',
+        'category_char_field',
+        'education_text_field',
+        'achievements_text_field',
+        'biography_text_field',
+        'hobbies_text_field',
+        'image_field',
     ]
 
 
@@ -251,23 +315,25 @@ class ActionModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        'access_slug_field',
+        'action_slug_field',
     )
     list_display_links = (
-        'access_slug_field',
+        'action_slug_field',
     )
     list_editable = (
     )
     list_filter = (
-        'access_slug_field',
+        'action_slug_field',
+    )
+    filter_horizontal = (
     )
     fieldsets = (
-        ('Имя валидации', {'fields': (
-            'access_slug_field',
+        ('Основное', {'fields': (
+            'action_slug_field',
         )}),
     )
     search_fields = [
-        'access_slug_field',
+        'action_slug_field',
     ]
 
 
@@ -285,6 +351,8 @@ class GroupModelAdmin(admin.ModelAdmin):
     list_display_links = (
         'name_slug_field',
     )
+    list_editable = (
+    )
     list_filter = (
         'name_slug_field',
         'user_many_to_many_field',
@@ -295,13 +363,9 @@ class GroupModelAdmin(admin.ModelAdmin):
         'action_many_to_many_field',
     )
     fieldsets = (
-        ('Имя валидации', {'fields': (
+        ('Основное', {'fields': (
             'name_slug_field',
-        )}),
-        ('Пользователи', {'fields': (
             'user_many_to_many_field',
-        )}),
-        ('Действия', {'fields': (
             'action_many_to_many_field',
         )}),
     )
@@ -331,52 +395,54 @@ class SettingsModelAdmin(admin.ModelAdmin):
     """
 
     list_display = (
-        'type_slug_field',
+        'type_char_field',
         'char_field',
         'slug_field',
         'text_field',
         'integer_field',
         'float_field',
         'boolean_field',
-        'datetime_field',
+        'created_datetime_field',
     )
     list_display_links = (
-        'type_slug_field',
+        'type_char_field',
+        'char_field',
+        'slug_field',
     )
     list_editable = (
         'boolean_field',
     )
     list_filter = (
-        'type_slug_field',
+        'type_char_field',
         'char_field',
         'slug_field',
         'text_field',
         'integer_field',
         'float_field',
         'boolean_field',
-        'datetime_field',
+        'created_datetime_field',
     )
     fieldsets = (
         ('Основное', {'fields': (
-            'type_slug_field',
+            'type_char_field',
             'char_field',
             'slug_field',
             'text_field',
             'integer_field',
             'float_field',
             'boolean_field',
-            'datetime_field',
+            'created_datetime_field',
         )}),
     )
     search_fields = [
-        'type_slug_field',
+        'type_char_field',
         'char_field',
         'slug_field',
         'text_field',
         'integer_field',
         'float_field',
         'boolean_field',
-        'datetime_field',
+        'created_datetime_field',
     ]
 
 
@@ -394,7 +460,7 @@ class LoggingModelAdmin(admin.ModelAdmin):
         'request_path_slug_field',
         'request_method_slug_field',
         'error_text_field',
-        'datetime_field'
+        'created_datetime_field'
     )
     list_display_links = (
         'username_slug_field',
@@ -410,26 +476,16 @@ class LoggingModelAdmin(admin.ModelAdmin):
         'request_path_slug_field',
         'request_method_slug_field',
         'error_text_field',
-        'datetime_field'
+        'created_datetime_field'
     )
     fieldsets = (
-        ('Имя пользователя', {'fields': (
+        ('Основное', {'fields': (
             'username_slug_field',
-        )}),
-        ('Ip адрес клиента', {'fields': (
             'ip_genericipaddress_field',
-        )}),
-        ('Действие пользователя', {'fields': (
             'request_path_slug_field',
-        )}),
-        ('Метод запроса', {'fields': (
             'request_method_slug_field',
-        )}),
-        ('Текст ошибки и/или исключения', {'fields': (
             'error_text_field',
-        )}),
-        ('Дата и время записи', {'fields': (
-            'datetime_field',
+            'created_datetime_field',
         )}),
     )
     search_fields = [
@@ -438,7 +494,7 @@ class LoggingModelAdmin(admin.ModelAdmin):
         'request_path_slug_field',
         'request_method_slug_field',
         'error_text_field',
-        'datetime_field'
+        'created_datetime_field'
     ]
 
 
@@ -457,15 +513,16 @@ class NotificationModelAdmin(admin.ModelAdmin):
         "name_char_field",
         "place_char_field",
         "description_text_field",
-
         "visibility_boolean_field",
         "created_datetime_field",
+        "hide_datetime_field",
     )
     list_display_links = (
         "author_foreign_key_field",
         "model_foreign_key_field",
         "target_foreign_key_field",
         "name_char_field",
+        "place_char_field",
     )
     list_editable = (
         "visibility_boolean_field",
@@ -477,22 +534,21 @@ class NotificationModelAdmin(admin.ModelAdmin):
         "name_char_field",
         "place_char_field",
         "description_text_field",
-
         "visibility_boolean_field",
         "created_datetime_field",
+        "hide_datetime_field",
     )
     fieldsets = (
-        ("Основная информация", {"fields": (
+        ("Основное", {"fields": (
             "author_foreign_key_field",
             "model_foreign_key_field",
             "target_foreign_key_field",
             "name_char_field",
             "place_char_field",
             "description_text_field",
-        )}),
-        ("Дополнительные данные", {"fields": (
             "visibility_boolean_field",
             "created_datetime_field",
+            "hide_datetime_field",
         )}),
     )
     search_fields = [
@@ -502,9 +558,9 @@ class NotificationModelAdmin(admin.ModelAdmin):
         "name_char_field",
         "place_char_field",
         "description_text_field",
-
         "visibility_boolean_field",
         "created_datetime_field",
+        "hide_datetime_field",
     ]
 
 
@@ -523,7 +579,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
-        "avatar_image_field",
+        "image_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -551,7 +607,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
-        "avatar_image_field",
+        "image_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -570,7 +626,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
             "subdivision_char_field",
             "sphere_char_field",
             "category_char_field",
-            "avatar_image_field",
+            "image_field",
             "name_char_field",
             "place_char_field",
             "description_text_field",
@@ -591,7 +647,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
-        "avatar_image_field",
+        "image_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
@@ -643,7 +699,7 @@ class RatingIdeaModelAdmin(admin.ModelAdmin):
         "idea_foreign_key_field",
         "author_foreign_key_field",
         "rating_integer_field",
-        "datetime_field",
+        "created_datetime_field",
     ]
 
 
@@ -659,7 +715,7 @@ class CommentIdeaModelAdmin(admin.ModelAdmin):
         "idea_foreign_key_field",
         "author_foreign_key_field",
         "comment_text_field",
-        "datetime_field",
+        "created_datetime_field",
     )
     list_display_links = (
         "idea_foreign_key_field",
@@ -672,7 +728,7 @@ class CommentIdeaModelAdmin(admin.ModelAdmin):
         "idea_foreign_key_field",
         "author_foreign_key_field",
         "comment_text_field",
-        "datetime_field",
+        "created_datetime_field",
     )
     fieldsets = (
         ("Основная информация", {"fields": (
@@ -681,14 +737,14 @@ class CommentIdeaModelAdmin(admin.ModelAdmin):
             "comment_text_field",
         )}),
         ("Дополнительные данные", {"fields": (
-            "datetime_field",
+            "created_datetime_field",
         )}),
     )
     search_fields = [
         "idea_foreign_key_field",
         "author_foreign_key_field",
         "comment_text_field",
-        "datetime_field",
+        "created_datetime_field",
     ]
 
 
@@ -708,18 +764,18 @@ class RationalModelAdmin(admin.ModelAdmin):
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
-        "avatar_image_field",
+        "image_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
         "additional_word_file_field",
         "additional_pdf_file_field",
         "additional_excel_file_field",
-        "user1_char_field",
-        "user2_char_field",
-        "user3_char_field",
-        "user4_char_field",
-        "user5_char_field",
+        "author_1_char_field",
+        "author_2_char_field",
+        "author_3_char_field",
+        "author_4_char_field",
+        "author_5_char_field",
 
         "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
@@ -746,18 +802,18 @@ class RationalModelAdmin(admin.ModelAdmin):
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
-        "avatar_image_field",
+        "image_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
         "additional_word_file_field",
         "additional_pdf_file_field",
         "additional_excel_file_field",
-        "user1_char_field",
-        "user2_char_field",
-        "user3_char_field",
-        "user4_char_field",
-        "user5_char_field",
+        "author_1_char_field",
+        "author_2_char_field",
+        "author_3_char_field",
+        "author_4_char_field",
+        "author_5_char_field",
 
         "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
@@ -775,18 +831,18 @@ class RationalModelAdmin(admin.ModelAdmin):
             "subdivision_char_field",
             "sphere_char_field",
             "category_char_field",
-            "avatar_image_field",
+            "image_field",
             "name_char_field",
             "place_char_field",
             "description_text_field",
             "additional_word_file_field",
             "additional_pdf_file_field",
             "additional_excel_file_field",
-            "user1_char_field",
-            "user2_char_field",
-            "user3_char_field",
-            "user4_char_field",
-            "user5_char_field",
+            "author_1_char_field",
+            "author_2_char_field",
+            "author_3_char_field",
+            "author_4_char_field",
+            "author_5_char_field",
         )}),
         ("Предмодерация", {"fields": (
             "premoderate_foreign_key_field",
@@ -808,18 +864,18 @@ class RationalModelAdmin(admin.ModelAdmin):
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
-        "avatar_image_field",
+        "image_field",
         "name_char_field",
         "place_char_field",
         "description_text_field",
         "additional_word_file_field",
         "additional_pdf_file_field",
         "additional_excel_file_field",
-        "user1_char_field",
-        "user2_char_field",
-        "user3_char_field",
-        "user4_char_field",
-        "user5_char_field",
+        "author_1_char_field",
+        "author_2_char_field",
+        "author_3_char_field",
+        "author_4_char_field",
+        "author_5_char_field",
 
         "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
@@ -842,7 +898,7 @@ class VacancyModelAdmin(admin.ModelAdmin):
     list_display = (
         "author_foreign_key_field",
         "qualification_char_field",
-        "avatar_image_field",
+        "image_field",
         "created_datetime_field",
         "sphere_char_field",
         "education_char_field",
@@ -860,7 +916,7 @@ class VacancyModelAdmin(admin.ModelAdmin):
     list_filter = (
         "author_foreign_key_field",
         "qualification_char_field",
-        "avatar_image_field",
+        "image_field",
         "created_datetime_field",
         "sphere_char_field",
         "education_char_field",
@@ -873,7 +929,7 @@ class VacancyModelAdmin(admin.ModelAdmin):
         ("Основная информация", {"fields": (
             "author_foreign_key_field",
             "qualification_char_field",
-            "avatar_image_field",
+            "image_field",
             "created_datetime_field",
             "sphere_char_field",
             "education_char_field",
@@ -886,7 +942,7 @@ class VacancyModelAdmin(admin.ModelAdmin):
     search_fields = [
         "author_foreign_key_field",
         "qualification_char_field",
-        "avatar_image_field",
+        "image_field",
         "created_datetime_field",
         "sphere_char_field",
         "education_char_field",
@@ -910,7 +966,7 @@ class ResumeModelAdmin(admin.ModelAdmin):
         "last_name_char_field",
         "first_name_char_field",
         "patronymic_char_field",
-        "avatar_image_field",
+        "image_field",
         "birth_datetime_field",
         "education_char_field",
         "experience_char_field",
@@ -931,7 +987,7 @@ class ResumeModelAdmin(admin.ModelAdmin):
         "last_name_char_field",
         "first_name_char_field",
         "patronymic_char_field",
-        "avatar_image_field",
+        "image_field",
         "birth_datetime_field",
         "education_char_field",
         "experience_char_field",
@@ -944,7 +1000,7 @@ class ResumeModelAdmin(admin.ModelAdmin):
             "last_name_char_field",
             "first_name_char_field",
             "patronymic_char_field",
-            "avatar_image_field",
+            "image_field",
             "birth_datetime_field",
             "education_char_field",
             "experience_char_field",
@@ -957,7 +1013,7 @@ class ResumeModelAdmin(admin.ModelAdmin):
         "last_name_char_field",
         "first_name_char_field",
         "patronymic_char_field",
-        "avatar_image_field",
+        "image_field",
         "birth_datetime_field",
         "education_char_field",
         "experience_char_field",

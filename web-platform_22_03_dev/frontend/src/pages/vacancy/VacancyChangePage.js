@@ -149,7 +149,7 @@ export const VacancyChangePage = () => {
                     value={qualification}
                     required
                     minLength="1"
-                    maxLength="256"
+                    maxLength="300"
                     placeholder="вводите квалификацию тут..."
                     onChange={(e) =>
                       qualificationSet(
@@ -168,11 +168,11 @@ export const VacancyChangePage = () => {
                     * обязательно
                     <small className="text-warning m-0 p-0">
                       {" "}
-                      * только кириллица
+                      * только кириллица, цифры и пробел
                     </small>
                     <small className="text-muted m-0 p-0">
                       {" "}
-                      * длина: не более 256 символов
+                      * длина: не более 300 символов
                     </small>
                   </small>
                 </label>
@@ -183,16 +183,32 @@ export const VacancyChangePage = () => {
                     placeholder="вводите разряд тут..."
                     value={rank}
                     minLength="1"
-                    maxLength="32"
+                    maxLength="300"
                     className="form-control form-control-sm text-center m-0 p-1"
-                    onChange={(e) => rankSet(e.target.value)}
+                    onChange={(e) =>
+                      rankSet(
+                        e.target.value.replace(
+                          utils.GetRegexType({
+                            numbers: true,
+                            cyrillic: true,
+                            space: true,
+                          }),
+                          ""
+                        )
+                      )
+                    }
                   />
-                  <small className="text-secondary">* не обязательно</small>
-                  <p className="">
-                    <small className="text-muted">
-                      длина: не более 32 символов
+                  <small className="text-secondary m-0 p-0">
+                    * не обязательно
+                    <small className="text-warning m-0 p-0">
+                      {" "}
+                      * только кириллица, цифры и пробел
                     </small>
-                  </p>
+                    <small className="text-muted m-0 p-0">
+                      {" "}
+                      * длина: не более 300 символов
+                    </small>
+                  </small>
                 </label>
               </div>
               <br />
@@ -308,7 +324,7 @@ export const VacancyChangePage = () => {
                     placeholder="вводите описание тут..."
                     value={description}
                     minLength="1"
-                    maxLength="512"
+                    maxLength="3000"
                     rows="2"
                     className="form-control form-control-sm text-center m-0 p-1"
                     onChange={(e) => descriptionSet(e.target.value)}
@@ -316,7 +332,7 @@ export const VacancyChangePage = () => {
                   <small className="text-secondary">* не обязательно</small>
                   <p className="">
                     <small className="text-muted">
-                      длина: не более 512 символов
+                      * длина: не более 3000 символов
                     </small>
                   </p>
                 </label>

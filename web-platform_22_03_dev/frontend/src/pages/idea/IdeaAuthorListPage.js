@@ -177,7 +177,7 @@ export const IdeaAuthorListPage = () => {
               {dataIdeaAuthorList.map((object, index) => (
                 <Link
                   key={index}
-                  to={`/idea_detail/${object.id}`}
+                  to={`#`}
                   className="text-decoration-none m-0 p-0"
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
@@ -202,10 +202,27 @@ export const IdeaAuthorListPage = () => {
                     to={`#`}
                     className="text-decoration-none text-dark m-0 p-0"
                   >
-                    <div className="card shadow custom-background-transparent-low m-0 p-0">
+                    <div className="card shadow custom-background-transparent-middle m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
                           {object["username"]}
+                        </h6>
+                      </div>
+                      <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
+                        <h6 className="lead fw-bold m-0 p-0">
+                          <div className="m-0 p-0">
+                            <img
+                              src={
+                                object["image_field"]
+                                  ? utils.GetStaticFile(object["image_field"])
+                                  : utils.GetStaticFile(
+                                      "/media/default/account/default_avatar.jpg"
+                                    )
+                              }
+                              className="img-fluid img-thumbnail w-75 m-1 p-0"
+                              alt="изображение отсутствует"
+                            />
+                          </div>
                         </h6>
                       </div>
                       <div className="card-body m-0 p-0">

@@ -235,7 +235,6 @@ export const RecoverPasswordPage = () => {
                                   e.target.value.replace(
                                     utils.GetRegexType({
                                       numbers: true,
-                                      latin: true,
                                       cyrillic: true,
                                       space: true,
                                     }),
@@ -250,7 +249,7 @@ export const RecoverPasswordPage = () => {
                               * обязательно
                               <small className="text-warning m-0 p-0">
                                 {" "}
-                                * только кириллица
+                                * только кириллица, цифры и пробел
                               </small>
                               <small className="text-muted m-0 p-0">
                                 {" "}
@@ -307,7 +306,7 @@ export const RecoverPasswordPage = () => {
                                 recoverPasswordSet(e.target.value)
                               }
                               minLength="1"
-                              maxLength="64"
+                              maxLength="300"
                               className="form-control form-control-sm text-center m-0 p-1"
                             />
                             <small className="text-danger m-0 p-0">
@@ -318,7 +317,7 @@ export const RecoverPasswordPage = () => {
                               </small>
                               <small className="text-muted m-0 p-0">
                                 {" "}
-                                * длина: от 1 до 64 символов
+                                * длина: не более 300 символов
                               </small>
                             </small>
                             <p className="text-danger m-0 p-0">
@@ -387,7 +386,7 @@ export const RecoverPasswordPage = () => {
                           * обязательно
                           <small className="text-warning m-0 p-0">
                             {" "}
-                            * только латиница
+                            * только латиница, цифры и нижний пробел
                           </small>
                           <small className="text-muted m-0 p-0">
                             {" "}
@@ -424,7 +423,7 @@ export const RecoverPasswordPage = () => {
                           * обязательно
                           <small className="text-warning m-0 p-0">
                             {" "}
-                            * только латиница
+                            * только латиница, цифры и нижний пробел
                           </small>
                           <small className="text-muted m-0 p-0">
                             {" "}

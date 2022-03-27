@@ -344,9 +344,7 @@ export const IdeaChangePage = () => {
                   </div>
                   <div className="m-0 p-1">
                     <img
-                      src={utils.GetStaticFile(
-                        dataIdeaDetail["avatar_image_field"]
-                      )}
+                      src={utils.GetStaticFile(dataIdeaDetail["image_field"])}
                       className="card-img-top img-fluid w-25 m-0 p-1"
                       alt="изображение отсутствует"
                     />
@@ -383,7 +381,7 @@ export const IdeaChangePage = () => {
                         placeholder="введите название тут..."
                         required
                         minLength="1"
-                        maxLength="200"
+                        maxLength="300"
                         onChange={(e) =>
                           nameSet(
                             e.target.value.replace(
@@ -402,11 +400,11 @@ export const IdeaChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 200 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>
@@ -421,7 +419,7 @@ export const IdeaChangePage = () => {
                         placeholder="введите место изменения тут..."
                         required
                         minLength="1"
-                        maxLength="100"
+                        maxLength="300"
                         onChange={(e) =>
                           placeSet(
                             e.target.value.replace(
@@ -440,11 +438,11 @@ export const IdeaChangePage = () => {
                         * обязательно
                         <small className="text-warning m-0 p-0">
                           {" "}
-                          * только кириллица
+                          * только кириллица, цифры, пробел и знаки препинания
                         </small>
                         <small className="text-muted m-0 p-0">
                           {" "}
-                          * длина: не более 200 символов
+                          * длина: не более 300 символов
                         </small>
                       </small>
                     </label>
@@ -524,9 +522,9 @@ export const IdeaChangePage = () => {
                                     <li
                                       key={index}
                                       className={
-                                        object.split("|")[1] > 7
+                                        object.split(":")[1] > 7
                                           ? "list-group-item bg-success bg-opacity-10"
-                                          : object.split("|")[1] > 4
+                                          : object.split(":")[1] > 4
                                           ? "list-group-item bg-warning bg-opacity-10"
                                           : "list-group-item bg-danger bg-opacity-10"
                                       }

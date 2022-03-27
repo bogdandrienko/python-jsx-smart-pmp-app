@@ -125,8 +125,8 @@ export const RationalModerateDetailPage = () => {
                   type="text"
                   value={comment}
                   placeholder="пример: дополнить описание"
-                  minLength="0"
-                  maxLength="256"
+                  minLength="1"
+                  maxLength="300"
                   className="form-control form-control-sm text-center m-0 p-1"
                   onChange={(e) =>
                     commentSet(
@@ -142,7 +142,17 @@ export const RationalModerateDetailPage = () => {
                     )
                   }
                 />
-                <small className="text-muted">* не обязательно</small>
+                <small className="text-muted m-0 p-0">
+                  * не обязательно
+                  <small className="text-warning m-0 p-0">
+                    {" "}
+                    * только кириллица, цифры, пробел и знаки препинания
+                  </small>
+                  <small className="text-muted m-0 p-0">
+                    {" "}
+                    * длина: не более 300 символов
+                  </small>
+                </small>
               </label>
               <div className="container-fluid text-center">
                 <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">

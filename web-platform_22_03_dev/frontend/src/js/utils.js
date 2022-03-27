@@ -11,7 +11,7 @@ export const CheckAccess = (userDetailsStore, slug) => {
       // error: errorUserDetails,
       // fail: failUserDetails,
     } = userDetailsStore;
-    if (slug === "all") {
+    if (slug === "all" || slug.includes("all")) {
       return true;
     }
     if (dataUserDetails) {
@@ -63,7 +63,10 @@ export const CheckPageAccess = (userDetailsStore, location) => {
           } else {
             if (dataUserDetails && dataUserDetails["group_model"]) {
               link.Access.forEach(function (object, index, array) {
-                if (dataUserDetails["group_model"].includes(object)) {
+                if (
+                  dataUserDetails["group_model"].includes(object) ||
+                  object === "all"
+                ) {
                   access = true;
                 }
               });
@@ -104,21 +107,18 @@ export const ActionsAxiosUtility = ({
           data: formData,
         };
         return { config };
-      } else {
-        return { config: null };
       }
-    } else {
-      const config = {
-        url: url,
-        method: method,
-        timeout: timeout,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        data: formData,
-      };
-      return { config };
     }
+    const config = {
+      url: url,
+      method: method,
+      timeout: timeout,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    };
+    return { config };
   } catch (error) {
     if (constants.DEBUG_CONSTANT) {
       console.log("ActionsFormDataUtilityError: ", error);
@@ -140,7 +140,7 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
       if (constants.DEBUG_CONSTANT) {
         console.log("status: ", status);
       }
-      if ((status + "_").slice(0, 7) === "timeout") {
+      if (status && `${status}___________`.slice(0, 7) === "timeout") {
         status = "timeout";
       }
       switch (status) {
@@ -149,6 +149,9 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case 413:
           return "Ваш файл слишком большой! Измените его размер и перезагрузите страницу перед отправкой.";
+        case 500:
+          dispatch(actions.userLogoutAction());
+          return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case "timeout":
           return "Превышено время ожидания! Попробуйте повторить действие или ожидайте исправления.";
         default:

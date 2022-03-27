@@ -146,7 +146,7 @@ export const LoginPage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латиница
+                        * только латиница, цифры и нижний пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}

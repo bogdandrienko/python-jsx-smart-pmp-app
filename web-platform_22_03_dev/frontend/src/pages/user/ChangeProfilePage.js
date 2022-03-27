@@ -66,7 +66,7 @@ export const ChangeProfilePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserChange) {
-      utils.Sleep(1000).then(() => {
+      utils.Sleep(2000).then(() => {
         dispatch(actions.userLogoutAction());
         navigate("/login");
       });
@@ -158,18 +158,18 @@ export const ChangeProfilePage = () => {
                           )
                         )
                       }
-                      minLength="6"
+                      minLength="4"
                       maxLength="32"
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллица
+                        * только кириллица, цифры и пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
-                        * длина: от 6 до 32 символов
+                        * длина: от 4 до 32 символов
                       </small>
                     </small>
                   </label>
@@ -200,7 +200,7 @@ export const ChangeProfilePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только кириллица
+                        * только кириллица, цифры и пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -231,11 +231,19 @@ export const ChangeProfilePage = () => {
                         )
                       }
                       minLength="1"
-                      maxLength="150"
+                      maxLength="300"
                       autoComplete="off"
                     />
                     <small className="text-muted m-0 p-0">
                       * не обязательно
+                      <small className="text-warning m-0 p-0">
+                        {" "}
+                        * только латиница, цифры, нижний пробел и знаки почты
+                      </small>
+                      <small className="text-muted m-0 p-0">
+                        {" "}
+                        * длина: не более 300 символов
+                      </small>
                     </small>
                   </label>
                 </div>
@@ -269,7 +277,7 @@ export const ChangeProfilePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латиница
+                        * только латиница, цифры и нижний пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}
@@ -306,7 +314,7 @@ export const ChangeProfilePage = () => {
                       * обязательно
                       <small className="text-warning m-0 p-0">
                         {" "}
-                        * только латиница
+                        * только латиница, цифры и нижний пробел
                       </small>
                       <small className="text-muted m-0 p-0">
                         {" "}

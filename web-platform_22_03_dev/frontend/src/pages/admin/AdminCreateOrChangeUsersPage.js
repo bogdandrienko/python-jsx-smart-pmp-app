@@ -91,13 +91,26 @@ export const AdminCreateOrChangeUsersPage = () => {
             <form className="m-0 p-0" onSubmit={handlerSubmit}>
               <div className="card shadow custom-background-transparent-low m-0 p-0">
                 <div className="card-header lead bg-opacity-10 m-0 p-1">
-                  Скачать шаблон для заполнения и проверки формата полей
-                  <a
-                    className="btn btn-sm btn-success m-0 p-1"
-                    href="/static/media/admin/account/create_users.xlsx"
-                  >
-                    Скачать excel-документ
-                  </a>
+                  <div className="d-flex justify-content-between m-0 p-1">
+                    <div className="m-0 p-1">
+                      Скачать шаблон для заполнения и проверки формата полей
+                      <a
+                        className="btn btn-sm btn-success m-0 p-1"
+                        href="/static/media/default/admin/account/create_users.xlsx"
+                      >
+                        Скачать excel-документ
+                      </a>
+                    </div>
+                    <div className="m-0 p-1">
+                      Скачать шаблон создания всех пользователей (чистый)
+                      <a
+                        className="btn btn-sm btn-success m-0 p-1"
+                        href="/static/media/default/admin/account/create_old_users.xlsx"
+                      >
+                        Скачать excel-документ
+                      </a>
+                    </div>
+                  </div>
                 </div>
                 <div className="card-body m-0 p-0">
                   <div className="m-0 p-1">

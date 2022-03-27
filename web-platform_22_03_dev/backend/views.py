@@ -183,7 +183,6 @@ def api_any_user(request):
                 try:
                     username = req_inst.get_value("username")
                     password = req_inst.get_value("password")
-                    now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                     access_count = 0
                     for dat in backend_models.LoggingModel.objects.filter(
                             username_slug_field=username,
@@ -192,8 +191,9 @@ def api_any_user(request):
                             request_method_slug_field=req_inst.method + "| LOGIN",
                             error_text_field=f'-'
                     ):
-                        if (dat.datetime_field + datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') \
-                                >= now:
+                        if (dat.created_datetime_field +
+                            datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') \
+                                >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
                             access_count += 1
                     if access_count < 20:
                         backend_models.LoggingModel.objects.create(
@@ -270,7 +270,6 @@ def api_any_user(request):
                     password = str(user_model.password_char_field)
                     email_ = str(user_model.email_field)
 
-                    now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                     access_count = 0
                     for dat in backend_models.LoggingModel.objects.filter(
                             username_slug_field=username,
@@ -279,8 +278,9 @@ def api_any_user(request):
                             request_method_slug_field=req_inst.method + " | SEND_EMAIL_PASSWORD",
                             error_text_field="-",
                     ):
-                        if (dat.datetime_field + datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') \
-                                >= now:
+                        if (dat.created_datetime_field +
+                            datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') \
+                                >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
                             access_count += 1
 
                     if access_count < 1:
@@ -482,13 +482,15 @@ def api_auth_user(request):
                 try:
                     name = req_inst.get_value("name")
                     place = req_inst.get_value("place")
+                    if place == "банк идей":
+                        model = backend_models.GroupModel.objects.get(name_slug_field="moderator_idea")
+                    else:
+                        model = backend_models.GroupModel.objects.get(name_slug_field="moderator")
                     description = req_inst.get_value("description")
 
                     backend_models.NotificationModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
-                        target_foreign_key_field=backend_models.UserModel.objects.get(
-                            user_foreign_key_field=User.objects.get(username="000000000000")
-                        ),
+                        model_foreign_key_field=model,
                         name_char_field=name,
                         place_char_field=place,
                         description_text_field=description,
@@ -505,6 +507,7 @@ def api_auth_user(request):
 
                     obj = backend_models.NotificationModel.objects.get(id=_id)
                     obj.visibility_boolean_field = False
+                    obj.hide_datetime_field = datetime.datetime.now()
                     obj.save()
 
                     response = {"response": "Успешно удалено!"}
@@ -529,7 +532,7 @@ def api_auth_user(request):
                         model_foreign_key_field__in=group_models,
                         target_foreign_key_field=None,
                         visibility_boolean_field=True
-                    )
+                    ).order_by("-hide_datetime_field")
 
                     serializer1 = backend_serializers.NotificationModelSerializer(objects, many=True).data
                     serializer = serializer + serializer1
@@ -1612,7 +1615,7 @@ def api_auth_idea(request):
                         subdivision_char_field=subdivision,
                         sphere_char_field=sphere,
                         category_char_field=category,
-                        avatar_image_field=avatar,
+                        image_field=avatar,
                         name_char_field=name,
                         place_char_field=place,
                         description_text_field=description,
@@ -1817,9 +1820,9 @@ def api_auth_idea(request):
                     if category and obj.category_char_field != category:
                         obj.category_char_field = category
                     if clear_image:
-                        obj.avatar_image_field = None
-                    if avatar and obj.avatar_image_field != avatar:
-                        obj.avatar_image_field = avatar
+                        obj.image_field = None
+                    if avatar and obj.image_field != avatar:
+                        obj.image_field = avatar
                     if name and obj.name_char_field != name:
                         obj.name_char_field = name
                     if place and obj.place_char_field != place:
@@ -1834,15 +1837,16 @@ def api_auth_idea(request):
                     obj.register_datetime_field = timezone.now()
                     obj.save()
 
-                    backend_models.NotificationModel.objects.create(
-                        author_foreign_key_field=req_inst.user_model,
-                        model_foreign_key_field=backend_models.GroupModel.objects.get(
-                            name_slug_field="moderator_idea"
-                        ),
-                        name_char_field="Отредактирована идея",
-                        place_char_field="банк идей",
-                        description_text_field=f"название: {obj.name_char_field}",
-                    )
+                    if req_inst.user_model == obj.author_foreign_key_field:
+                        backend_models.NotificationModel.objects.create(
+                            author_foreign_key_field=req_inst.user_model,
+                            model_foreign_key_field=backend_models.GroupModel.objects.get(
+                                name_slug_field="moderator_idea"
+                            ),
+                            name_char_field="Идея отредактирована автором",
+                            place_char_field="банк идей",
+                            description_text_field=f"название: {obj.name_char_field}",
+                        )
 
                     response = {"response": "Успешно изменено!"}
                     # print(f"response: {response}")
@@ -1934,7 +1938,7 @@ def api_auth_idea(request):
 
                     obj = backend_models.IdeaModel.objects.get(id=_id)
                     objects = backend_models.CommentIdeaModel.objects.filter(idea_foreign_key_field=obj). \
-                        order_by("-datetime_field")
+                        order_by("-created_datetime_field")
                     serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")
@@ -1954,7 +1958,7 @@ def api_auth_idea(request):
                     rating_obj.save()
 
                     objects = backend_models.CommentIdeaModel.objects.filter(idea_foreign_key_field=obj). \
-                        order_by("-datetime_field")
+                        order_by("-created_datetime_field")
                     serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True)
                     response = {"response": serializer.data}
                     # print(f"response: {response}")
@@ -2185,18 +2189,18 @@ def api_auth_rational(request):
                         subdivision_char_field=subdivision,
                         sphere_char_field=sphere,
                         category_char_field=category,
-                        avatar_image_field=avatar,
+                        image_field=avatar,
                         name_char_field=name,
                         place_char_field=place,
                         description_text_field=description,
                         additional_word_file_field=additional_word,
                         additional_pdf_file_field=additional_pdf,
                         additional_excel_file_field=additional_excel,
-                        user1_char_field=user1,
-                        user2_char_field=user2,
-                        user3_char_field=user3,
-                        user4_char_field=user4,
-                        user5_char_field=user5,
+                        author_1_char_field=user1,
+                        author_2_char_field=user2,
+                        author_3_char_field=user3,
+                        author_4_char_field=user4,
+                        author_5_char_field=user5,
                         status_moderate_char_field=status_moderate,
                     )
                     response = {"response": "Рационализаторское предложение успешно отправлено на модерацию!"}
@@ -2434,7 +2438,7 @@ def api_auth_vacancy(request):
                         education_char_field=education,
                         experience_char_field=experience,
                         schedule_char_field=schedule,
-                        avatar_image_field=image,
+                        image_field=image,
                         description_text_field=description,
                     )
 
@@ -2478,9 +2482,9 @@ def api_auth_vacancy(request):
                     if schedule and vacancy.schedule_char_field != schedule:
                         vacancy.schedule_char_field = schedule
                     if clear_image:
-                        vacancy.avatar_image_field = None
-                    if image and vacancy.avatar_image_field != image:
-                        vacancy.avatar_image_field = image
+                        vacancy.image_field = None
+                    if image and vacancy.image_field != image:
+                        vacancy.image_field = image
                     if description and vacancy.description_text_field != description:
                         vacancy.description_text_field = description
 
@@ -2548,7 +2552,7 @@ def api_any_resume(request):
                         last_name_char_field=last_name,
                         first_name_char_field=first_name,
                         patronymic_char_field=patronymic,
-                        avatar_image_field=image,
+                        image_field=image,
                         birth_datetime_field=birth_date,
                         education_char_field=education,
                         experience_char_field=experience,

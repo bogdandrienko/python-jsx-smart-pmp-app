@@ -105,8 +105,6 @@ export const ResumeListPage = () => {
                 <label className="form-control-sm text-center m-0 p-1">
                   Образование:
                   <select
-                    id="education"
-                    name="education"
                     className="form-control form-control-sm text-center m-0 p-1"
                     value={education}
                     onChange={(e) => educationSet(e.target.value)}
@@ -125,8 +123,6 @@ export const ResumeListPage = () => {
                 <label className="form-control-sm text-center m-0 p-1">
                   Опыт:
                   <select
-                    id="experience"
-                    name="experience"
                     className="form-control form-control-sm text-center m-0 p-1"
                     value={experience}
                     onChange={(e) => experienceSet(e.target.value)}
@@ -161,7 +157,7 @@ export const ResumeListPage = () => {
                     className="form-control form-control-sm text-center m-0 p-1"
                     placeholder="вводите часть названия тут..."
                     minLength="1"
-                    maxLength="100"
+                    maxLength="300"
                     value={searchQualification}
                     onChange={(e) =>
                       searchQualificationSet(
@@ -184,7 +180,7 @@ export const ResumeListPage = () => {
                     className="form-control"
                     placeholder="вводите часть фамилии тут..."
                     minLength="1"
-                    maxLength="100"
+                    maxLength="300"
                     value={searchLastName}
                     onChange={(e) =>
                       searchLastNameSet(
@@ -203,8 +199,6 @@ export const ResumeListPage = () => {
                 <label className="form-control-sm text-center m-0 p-1">
                   Сортировка вакансий по:
                   <select
-                    id="sort"
-                    name="sort"
                     className="form-control form-control-sm text-center m-0 p-1"
                     value={sort}
                     onChange={(e) => sortSet(e.target.value)}

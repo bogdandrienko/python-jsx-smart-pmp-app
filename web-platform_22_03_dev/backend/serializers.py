@@ -39,7 +39,7 @@ class UserSerializer(serializers.ModelSerializer):
         for group in group_model:
             action_model = group.action_many_to_many_field.all()
             for action in action_model:
-                actions.append(action.access_slug_field)
+                actions.append(action.action_slug_field)
         if len(actions) < 1:
             actions = ['']
         return actions
@@ -76,9 +76,43 @@ class GroupModelSerializer(serializers.ModelSerializer):
 
 
 class NotificationModelSerializer(serializers.ModelSerializer):
+    author_foreign_key_field = serializers.SerializerMethodField(read_only=True)
+    model_foreign_key_field = serializers.SerializerMethodField(read_only=True)
+    target_foreign_key_field = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = backend_models.NotificationModel
         fields = '__all__'
+
+    def get_author_foreign_key_field(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
+            user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+            if not user_model_serializer.data:
+                user_model_serializer = {'data': None}
+            return user_model_serializer.data
+        except Exception as error:
+            return None
+
+    def get_model_foreign_key_field(self, obj):
+        try:
+            group_model = backend_models.GroupModel.objects.get(id=obj.model_foreign_key_field.id)
+            group_model_serializer = GroupModelSerializer(instance=group_model, many=False)
+            if not group_model_serializer.data:
+                group_model_serializer = {'data': None}
+            return group_model_serializer.data
+        except Exception as error:
+            return None
+
+    def get_target_foreign_key_field(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.target_foreign_key_field.id)
+            user_model_serializer = UserModelSerializer(instance=user_model, many=False)
+            if not user_model_serializer.data:
+                user_model_serializer = {'data': None}
+            return user_model_serializer.data
+        except Exception as error:
+            return None
 
 
 # ##########################################################################################TODO custom model serializer

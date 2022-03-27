@@ -132,10 +132,8 @@ export const IdeaSelfListPage = () => {
                         <div className="m-0 p-0">
                           <img
                             src={
-                              object["avatar_image_field"]
-                                ? utils.GetStaticFile(
-                                    object["avatar_image_field"]
-                                  )
+                              object["image_field"]
+                                ? utils.GetStaticFile(object["image_field"])
                                 : utils.GetStaticFile(
                                     "/media/default/idea/default_idea.jpg"
                                   )
@@ -158,7 +156,7 @@ export const IdeaSelfListPage = () => {
                               placeholder="введите место изменения тут..."
                               required
                               minLength="1"
-                              maxLength="100"
+                              maxLength="300"
                             />
                           </label>
                         </div>
@@ -252,9 +250,9 @@ export const IdeaSelfListPage = () => {
                                         <li
                                           key={index}
                                           className={
-                                            object2.split("|")[1] > 7
+                                            object2.split(":")[1] > 7
                                               ? "list-group-item bg-success bg-opacity-10"
-                                              : object2.split("|")[1] > 4
+                                              : object2.split(":")[1] > 4
                                               ? "list-group-item bg-warning bg-opacity-10"
                                               : "list-group-item bg-danger bg-opacity-10"
                                           }
