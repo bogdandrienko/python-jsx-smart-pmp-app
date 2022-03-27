@@ -402,6 +402,14 @@ class DjangoClass:
             except Exception as error:
                 return False
 
+        @staticmethod
+        def get_salary_value():
+            try:
+                obj = backend_models.SettingsModel.objects.get(type_char_field="scheduler_personal")
+                return [x.strip for x in str(obj.text_field).strip().split("|")]
+            except Exception as error:
+                return False
+
         class SchedulerClass:
             @staticmethod
             def scheduler_personal():
@@ -416,11 +424,12 @@ class DjangoClass:
                     key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
                     date = datetime.datetime.now().strftime("%Y%m%d")
                     date_base64 = base64.b64encode(str(date).encode()).decode()
-                    url = f'http://192.168.1.10/KM_1C/hs/iden/change/{date_base64}_{key_hash_base64}'
+                    get_salary_value = DjangoClass.DefaultSettingsClass.get_salary_value()
+                    url = f'{get_salary_value[0]}{date_base64}_{key_hash_base64}'
                     h = httplib2.Http(
                         os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_users")
-                    _login = 'Web_adm_1c'
-                    password = '159159qqww!'
+                    _login = f'{get_salary_value[1]}'
+                    password = f'{get_salary_value[2]}'
                     h.add_credentials(_login, password)
                     response_, content = h.request(url)
                     json_data = json.loads(

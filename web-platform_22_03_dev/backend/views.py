@@ -1016,8 +1016,8 @@ def api_auth_salary(request):
                         os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_salary_data"
                     )
                     _login = 'Web_adm_1c'
-                    password = '159159qqww!'
-                    h.add_credentials(_login, password)
+                    _password = '159159qqww!'
+                    h.add_credentials(_login, _password)
                     response, content = h.request(url)
 
                     data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
