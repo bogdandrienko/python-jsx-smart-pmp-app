@@ -656,7 +656,7 @@ def api_auth_admin(request):
                         secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
                         secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
 
-                        if len(username) < 1:
+                        if len(username) <= 1:
                             continue
 
                         try:
@@ -665,11 +665,9 @@ def api_auth_admin(request):
                                 continue
                             new_user = False
                         except Exception as error:
-                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                             user = User.objects.create(
                                 username=username,
                                 password=make_password(password=password_char_field),
-                                is_active=True
                             )
                             new_user = True
 
@@ -705,8 +703,7 @@ def api_auth_admin(request):
                         user.save()
 
                         if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
-                            for group in backend_models.GroupModel.objects.filter(
-                                    user_many_to_many_field=user_model):
+                            for group in backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model):
                                 try:
                                     group.user_many_to_many_field.remove(user_model)
                                 except Exception as error:
@@ -715,9 +712,7 @@ def api_auth_admin(request):
                         groups = [group.strip() for group in str(groups).lower().strip().split(',')]
                         for group in groups:
                             if len(group) > 1:
-                                group_model = backend_models.GroupModel.objects.get_or_create(
-                                    name_slug_field=group,
-                                )[0]
+                                group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field=group)[0]
                                 group_model.user_many_to_many_field.add(user_model)
                         if backend_settings.DEBUG:
                             print(username)
