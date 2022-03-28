@@ -37,7 +37,7 @@
     {% include 'components/aborted.html' %}
 {% else %}
     <div class="container">
-        <form action="{% url 'idea_change' idea.id %}"
+        <form action="{% url 'backend_native:django_idea_change' idea.id %}"
                   method="POST"
                   target="_self"
                   enctype="multipart/form-data"

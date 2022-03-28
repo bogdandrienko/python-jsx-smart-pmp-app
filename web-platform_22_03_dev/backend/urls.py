@@ -47,7 +47,7 @@ urlpatterns = [
 ]
 
 # ###################################################################################TODO redirect from reboot react app
-urlpatterns += [re_path(r'^.*$', lambda request: redirect('', permanent=False), name='redirect')]
+# urlpatterns += [re_path(r'^.*$', lambda request: redirect('', permanent=False), name='redirect')]
 # #################################################################################################TODO default settings
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

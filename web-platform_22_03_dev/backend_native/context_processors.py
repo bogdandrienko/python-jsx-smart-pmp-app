@@ -21,4 +21,6 @@ def user_counter(request):
     except Exception as error:
         backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         errors = -1
+
+    return dict(notifications=backend_models.UserModel.objects.all().count(), errors=12)
     return dict(notifications=notifications, errors=errors)
