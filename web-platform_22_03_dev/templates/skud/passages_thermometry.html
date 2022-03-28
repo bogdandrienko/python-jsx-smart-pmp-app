@@ -1,0 +1,124 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Выгрузка термометрии
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Выгрузка термометрии
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит записи о термометрии.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+    {% include 'components/success.html' %}
+{% elif response == -1 %}
+    {% include 'components/aborted.html' %}
+{% else %}
+    <div class="container">
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <div class="d-block">
+                <form class="form-control" action="{% url 'passages_thermometry' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="d-flex text-lg-start">
+                        <label class="d-flex text-lg-start" for="party">Дата и время, <strong>начало диапазона</strong></label>
+                        <input class="form-control" type="date" required="" placeholder="" value="2021-07-30" name="date_start"><br>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="d-flex text-lg-start">
+                        <label class="d-flex text-lg-start" for="party">Дата и время, <strong>конец диапазона</strong></label>
+                        <input class="form-control" type="date" required="" placeholder="" value="2021-12-31" name="date_end"><br>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="check">
+                        <label class="form-check-label" for="flexCheckDefault">Включить ограничение выгрузки по идентификатору?</label>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <label class="d-flex text-lg-start" for="party">id, данные которого необходимо выгрузить</label>
+                    <input class="form-control text-lg-start" type="number" required="" placeholder="931777" value="931777" name="personid">
+                    <br>
+                    <hr>
+                    <br>
+                    <button class="btn btn-lg btn-outline-primary form-control" type="submit">Подтвердить</button>
+                </form>
+            </div>
+        </div>
+        {% if data %}
+            {% include 'components/table.html' %}
+            <div class="pricing-header px-2 py-2 pt-md-2 pb-md-4 mx-auto text-center">
+                <h1 class="display-4">Текущие данные.</h1>
+                <p class="lead">Ниже расположены данные, соответствующие текущему значению.</p>
+                <div class="d-block">
+                    <div class="border-dark table-bordered">
+                        <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-lg table-sm">
+                            <thead>
+                                <tr>
+                                    {% for arr_2 in data.0 %}
+                                        {% if forloop.counter == 2 %}
+                                            <th width="480">{{ arr_2 }}</th>
+                                        {% elif forloop.counter == 4 %}
+                                            <th width="720">{{ arr_2 }}</th>
+                                        {% else %}
+                                            <th>{{ arr_2 }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for arr_1 in data.1 %}
+                                    <tr>
+                                        {% for arr_2 in arr_1 %}
+                                            <td>
+                                                {{ arr_2 }}
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            {% include 'components/aborted.html' %}
+        {% endif %}
+    </div>
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

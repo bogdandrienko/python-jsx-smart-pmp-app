@@ -49,6 +49,7 @@ def idea_create(request):
                 addiction_file_field=addiction_file_field,
                 visibility_boolean_field=False,
             )
+
             response = 1
         context = {
             'response': response,

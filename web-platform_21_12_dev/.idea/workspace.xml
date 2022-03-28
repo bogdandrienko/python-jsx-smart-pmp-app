@@ -2,20 +2,103 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3bbcadc-d872-4431-8ed9-561e41ab5286" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/templatetags/access_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/templatetags/access_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_api/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/backend_native/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/django_project/templates/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/example/backend/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/example/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/example/templates/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/example/templates/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/example/templates/navbar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/lin_0_create.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/lin_0_run_ip.443.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/lin_0_run_ip.8000.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/lin_1_run_local.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/lin_2_create.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/lin_3_env.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/lin_4_pip_update.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_0_run_ip.80.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_0_run_ip.88.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_0_run_ip.89.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_10_pip_install.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_11_pip_freeze.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_12_npx_create_react_app.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_13_npm_install.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_14_npm_start.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_15_npm_run_build.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_16_git.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_1_run_ip.8000.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_2_env.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_3_create_new_project.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_4_create_django.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_5_create_app.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_6_create_superuser.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_7_migrates.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_8_collect_static.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PREFABS/wheatherapp-project-custom/scripts/win_9_pip_update.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_0_create.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_0_run_ip.443.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_0_run_ip.80.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_0_run_ip.88.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_0_run_ip.89.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_12_npx_create_react_app.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_13_npm_install.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_14_npm_start.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_15_npm_run_build.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_16_git.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_1_run_ip.8000.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/backend_native/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/static/media/data/temp/get_salary_data/192.168.1.10KM_1ChszprlOTcwODAxMzUxMTc5_NTYxM0U0OTNFRDFGOEUyMENGNUU3RjdFRDc3MEU1NjdGNUQ5OD,d630954e11796b6ba5abb7a4cf375555" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/static/media/data/temp/salary/salary_uKYaYRwfLjIgRqFSdFIE5ULU_2022-03-28.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0002_loggingmodel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0003_moduleorcomponentmodel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0004_rename_moduleorcomponentmodel_modulesmodel_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_admin/migrations/0005_actionmodel_usermodel_notificationmodel_groupmodel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_django/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_django/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_django/migrations/0002_delete_examplesmodel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_django/migrations/0003_delete_loggingmodel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_django/migrations/0004_delete_moduleorcomponentmodel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_django/migrations/0005_remove_groupmodel_action_many_to_many_field_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/app_settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/app_settings/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_0_run_ip.8000.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_0_run_ip.8000.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_1_run_local.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_1_run_local.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_2_create.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_2_create.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_3_env.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_3_env.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_4_pip_update.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/lin_4_pip_update.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_2_env.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_2_env.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_3_create_new_project.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_3_create_new_project.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_4_create_django.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_4_create_django.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_6_create_superuser.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/scripts/win_6_create_superuser.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_actions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/static/media/admin/logging/logging_errors.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/module.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/module.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/components/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_01_dev/templates/idea/idea_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/static/css/main.a69ce0e7.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/static/css/main.a69ce0e7.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/static/js/main.046f4c14.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/static/js/main.046f4c14.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/frontend/build/static/js/main.046f4c14.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/static/media/admin/logging/logging_actions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/static/media/admin/logging/logging_actions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-platform_22_03_dev/static/media/admin/logging/logging_errors.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../web-platform_22_03_dev/static/media/admin/logging/logging_errors.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +107,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2220jGTn2Uzgz6MPqwkgBzZu0l6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -115,6 +201,7 @@
       <workItem from="1639305236656" duration="329000" />
       <workItem from="1639311937267" duration="1835000" />
       <workItem from="1639723262785" duration="366000" />
+      <workItem from="1648453829514" duration="636000" />
     </task>
     <servers />
   </component>
@@ -131,7 +218,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

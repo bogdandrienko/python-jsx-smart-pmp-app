@@ -1,0 +1,85 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load access_tag %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Главная страница
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Главная страница
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Главная страница веб-платформы.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+<div class="container">
+    <div class="border shadow text-center">
+        <div class="card-img align-content-center">
+            {% access_tag 'django_module_modules' as django_module_modules %}
+            {% if django_module_modules %}
+                <a href="{% url 'django_module_or_component' 'module_modules' %}">
+            {% else %}
+                <a href="{% url 'django_account_login' %}">
+            {% endif %}
+                    <img src="{% static 'img/modules.png' %}" class="card-img-top img-fluid" alt="id" style="width: 256px;">
+                </a>
+        </div>
+        <div class="card-body">
+            {% access_tag 'django_module_modules' as django_module_modules %}
+            {% if django_module_modules %}
+                <a href="{% url 'django_module_or_component' 'module_modules' %}" class="text-decoration-none">
+            {% else %}
+                <a href="{% url 'django_account_login' %}" class="text-decoration-none">
+            {% endif %}
+                    <h6 class="fst-italic text-uppercase text-dark">Модули</h6>
+                </a>
+        </div>
+        <div class="card-header">
+            {% access_tag 'django_module_modules' as django_module_modules %}
+            {% if django_module_modules %}
+                <a href="{% url 'django_module_or_component' 'module_modules' %}" class="text-decoration-none">
+            {% else %}
+                <a href="{% url 'django_account_login' %}" class="text-decoration-none">
+            {% endif %}
+                    <small class="text-muted text-lowercase">перейти ко всем модулям веб-платформы.</small>
+                </a>
+        </div>
+    </div>
+</div>
+<div class="container text-center">
+    <small class="lead fw-bold">Первый вход в систему:</small>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" width="75%"  height="75%" src="https://www.youtube.com/embed/WlC8iXpn2vA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen controls></iframe>
+    </div>
+</div>
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

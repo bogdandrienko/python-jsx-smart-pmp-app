@@ -9,6 +9,7 @@ import threading
 import time
 import httplib2
 import openpyxl
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from openpyxl.utils import get_column_letter
 from typing import Union
 # ###################################################################################################TODO django modules
@@ -600,6 +601,18 @@ class DjangoClass:
                             function_error="DefaultSettingsClass.SchedulerClass.scheduler_default_groups"
                         )
 
+    class PaginationClass:
+        @staticmethod
+        def paginate(request, objects, num_page):
+            paginator = Paginator(objects, num_page)
+            pages = request.GET.get('page')
+            try:
+                page = paginator.page(pages)
+            except PageNotAnInteger:
+                page = paginator.page(1)
+            except EmptyPage:
+                page = paginator.page(paginator.num_pages)
+            return page
 
 # ###################################################################################################TODO custom service
 class DateTimeUtils:

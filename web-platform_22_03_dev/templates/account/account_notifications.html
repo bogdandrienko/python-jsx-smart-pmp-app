@@ -1,0 +1,175 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Уведомления
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Уведомления
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит уведомления от других пользователей по категориям.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+    {% include 'components/success.html' %}
+{% elif response == -1 %}
+    {% include 'components/aborted.html' %}
+{% else %}
+    <div class="text-center">
+        <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+            <li class="m-1">
+                <a class="btn btn-lg btn-outline-primary" type="button" href="{% url 'account_notification' 'All' %}">Все типы</a>
+            </li>
+            {% for type in types %}
+                <li class="m-1">
+                    {% if forloop.counter == 0 %}
+                        <a class="btn btn-lg btn-outline-success" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% elif forloop.counter == 1 %}
+                        <a class="btn btn-lg btn-outline-danger" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% elif forloop.counter == 2 %}
+                        <a class="btn btn-lg btn-outline-warning" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% elif forloop.counter == 3 %}
+                        <a class="btn btn-lg btn-outline-success" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% else %}
+                        <a class="btn btn-lg btn-outline-secondary" type="button" href="{% url 'account_notification' type.0 %}">{{ type.1 }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if page %}
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+        <div class="text-center">
+            <h1 class="display-6">Данные</h1>
+            <p class="lead">Текущие данные ниже в таблице:</p>
+            <hr/>
+        </div>
+        <table class="table table-bordered table-dark table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="1" class="text-center">Заголовок уведомления</th>
+                    <th scope="col" colspan="1" class="text-center">Текст уведомления</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notification in page %}
+                    <tr>
+                        <td colspan="1" class="align-bottom text-center">
+                            <div>
+                                {{ notification.name_char_field }}
+                            </div>
+                            <div class="btn-group">
+                                <form class="" action="{% url 'account_delete_or_change_notification' notification.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text"
+                                           id="type_action"
+                                           name="type_action"
+                                           required=""
+                                           placeholder=""
+                                           value="change"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <input type="text"
+                                           id="hidden"
+                                           name="hidden"
+                                           required=""
+                                           placeholder=""
+                                           {% if notification.status_boolean_field %}
+                                                value="false"
+                                           {% else %}
+                                                value="true"
+                                           {% endif %}
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                   {% if notification.status_boolean_field %}
+                                        <div class="container text-center">
+                                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                                <div class="m-1">
+                                                    <button href=""
+                                                            type="submit"
+                                                            class="btn btn-lg btn-outline-warning form-control"
+                                                    >Активировать</button>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                   {% else %}
+                                        <div class="container text-center">
+                                            <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                                <div class="m-1">
+                                                    <button href=""
+                                                            type="submit"
+                                                            class="btn btn-lg btn-outline-success form-control"
+                                                    >Деактивировать</button>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                   {% endif %}
+                                </form>
+                                <form class="" action="{% url 'account_delete_or_change_notification' notification.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text"
+                                           id="type_action"
+                                           name="type_action"
+                                           required=""
+                                           placeholder=""
+                                           value="delete"
+                                           class="form-control form-control-lg d-none"
+                                    />
+                                    <div class="container text-center">
+                                        <ul class="container-fluid btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center">
+                                            <div class="m-1">
+                                                <button href=""
+                                                        type="submit"
+                                                        class="btn btn-lg btn-outline-danger form-control"
+                                                >Удалить</button>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                        <td colspan="1" class="align-bottom text-center">{{ notification.text_field }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="container d-flex justify-content-center align-self-center">
+            {% include 'components/paginator.html' %}
+        </div>
+    {% else %}
+        {% include 'components/aborted.html' %}
+    {% endif %}
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

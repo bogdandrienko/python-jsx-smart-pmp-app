@@ -1,0 +1,166 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% load access_tag %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Личный профиль
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Личный профиль
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит подробную информацию о пользователе.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == -1 %}
+
+    {% include 'components/aborted.html' %}
+
+{% else %}
+
+    <div class="container">
+
+        {% if user == request.user %}
+
+            <div class="text-end">
+                <a href="{% url 'account_change_profile' %}" class="btn btn-danger btn-lg">Изменить личный профиль</a>
+            </div>
+
+        {% else %}
+
+            <div class="text-end">
+
+                {% access_tag 'account_create_notification' as account_create_notification %}
+                {% if account_create_notification %}
+
+                    <form class="" action="{% url 'account_create_notification' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text"
+                               id="type_slug_field"
+                               name="type_slug_field"
+                               required=""
+                               placeholder=""
+                               value="notifications"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <input type="text"
+                               id="name_char_field"
+                               name="name_char_field"
+                               required=""
+                               placeholder=""
+                               value="Жалоба на пользователя"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <input type="text"
+                               id="text_field"
+                               name="text_field"
+                               required=""
+                               placeholder=""
+                               value="[ Пользователь: {{ request.user }} ] | [ id пользователя: {{ user.id }} ] | [ имя пользователя: {{ user.username }} ]"
+                               class="form-control form-control-lg d-none"
+                        />
+                        <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться</button>
+                    </form>
+
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="row">
+        <div class="text-center">
+        {% if user_model.image_field.url %}
+            <img src="{{ user_model.image_field.url }}" class="bd-placeholder-img img-fluid" width="512px" alt="{{ user_model.first_name_char_field }}">
+        {% else %}
+            <img src="{% static 'media/uploads/account/avatar/default_avatar.jpg' %}" class="bd-placeholder-img img-fluid" width="256px" height="100%" alt="default">
+        {% endif %}
+
+        {% if user_model.last_name_char_field or user_model.first_name_char_field or user_model.patronymic_char_field %}
+            <h2>
+                {% if user_model.last_name_char_field %}{{ user_model.last_name_char_field }} {% endif %}
+                {% if user_model.first_name_char_field %}{{ user_model.first_name_char_field }} {% endif %}
+                {% if user_model.patronymic_char_field %}{{ user_model.patronymic_char_field }} {% endif %}
+            </h2>
+        {% else %}
+            <h2>Данные аккаунта не заполнены</h2>
+        {% endif %}
+
+        {% if user_model.position_char_field %}
+            <p class="lead">{{ user_model.position_char_field }}</p>
+        {% endif %}
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <div class="p-4 text-secondary">
+                <h4>Дата регистрации</h4>
+                <ol class="list-unstyled mb-0">
+                    <li>
+                        <p>{{ user.date_joined }}</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-7 col-lg-8">
+            <div>
+                <h1 class="blog-post-title text-center">Подробная информация:</h1>
+            </div>
+            <article class="blog-post text-end">
+                <div>
+                    <h2 class="blog-post-title">Образование:</h2>
+                    <p>{{ user_model.education_text_field }}</p>
+                </div>
+                <hr>
+                <div>
+                    <h2 class="blog-post-title">Достижения:</h2>
+                    <p>{{ user_model.achievements_text_field }}</p>
+                </div>
+                <hr>
+                <div>
+                    <h2 class="blog-post-title">Биография:</h2>
+                    <p>{{ user_model.biography_text_field }}</p>
+                </div>
+                <hr>
+                <div>
+                    <h2 class="blog-post-title">Хобби:</h2>
+                    <p>{{ user_model.hobbies_text_field }}</p>
+                </div>
+                <hr>
+            </article>
+        </div>
+    </div>
+
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

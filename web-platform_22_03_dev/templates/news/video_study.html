@@ -1,0 +1,64 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Обучающие видеоролики
+{% endblock title %}
+
+<!-- Style -->   
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Обучающие видеоролики
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Все обучающие видеоролики.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+    {% include 'components/success.html' %}
+{% elif response == -1 %}
+    {% include 'components/aborted.html' %}
+{% else %}
+    <div class="container text-center">
+        <div class="container-fluid text-center m-1">
+            <small class="lead fw-bold">Первый вход в систему:</small>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" width="80%"  height="80%" src="https://www.youtube.com/embed/WlC8iXpn2vA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen controls></iframe>
+            </div>
+        </div>
+        <div class="container-fluid text-center m-1">
+            <small class="lead fw-bold">Выгрузка расчётного листа:</small>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" width="80%"  height="80%" src="https://www.youtube.com/embed/vd1tG-Qa_YQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen controls></iframe>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}

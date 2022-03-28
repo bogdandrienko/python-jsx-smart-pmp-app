@@ -17,6 +17,8 @@ router.register(prefix=r'groups', viewset=backend_views.GroupViewSet, basename='
 
 # ########################################################################################################TODO base urls
 urlpatterns = [
+    # #######################################################################################################TODO resume
+    path('django/', include('backend_native.urls')),
     # ########################################################################################################TODO index
     path('', backend_views.index, name=''),
     path('', backend_views.index, name='index'),

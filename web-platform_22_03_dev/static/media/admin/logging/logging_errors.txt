@@ -1,0 +1,94 @@
+
+None, 2.57.98.123, /, GET, , index.html, 2022-03-28 02:07:21.785674
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, Only absolute URIs are allowed. uri = <built-in%20method%20strip%20of%20str%20object%20at%200x000001CF2FFD7990>MjAyMjAzMjg=_NTlFMTIwOTA5OEM1ODJDNkI0NjZDRTQyNUM0RjJBRTM0NTFCRkFERTcwNTMyNjRCQTZDNjE3RjgyRjYzOEIyMw==, 2022-03-28 02:07:21.830554
+
+None, 2.57.98.123, /, GET, , index.html, 2022-03-28 02:07:28.157639
+
+None, 2.57.98.123, /, GET, , index.html, 2022-03-28 02:07:34.314110
+
+None, 2.57.98.123, /, GET, , index.html, 2022-03-28 02:07:40.466151
+
+None, 2.57.98.123, /, GET, , index.html, 2022-03-28 02:07:43.194522
+
+None, 2.57.98.123, /, GET, , index.html, 2022-03-28 02:07:49.319894
+
+None, 2.57.98.123, /, GET, , index.html, 2022-03-28 02:07:51.259484
+
+000000000000, 2.57.98.123, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-28 02:08:41.834387
+
+000000000000, 2.57.98.123, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-28 02:08:41.854432
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_84UIFukNiaCLMXyL9YFa1QkX_2022-03-28.xlsx', 2022-03-28 02:08:41.881300
+
+970801351179, 2.57.98.123, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-28 02:10:27.700422
+
+970801351179, 2.57.98.123, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-28 02:10:27.715467
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_kv8VbxEV1FYG14BKSZ7OcdPN_2022-03-28.xlsx', 2022-03-28 02:10:27.745681
+
+970801351179, 2.57.98.123, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-28 02:12:30.591722
+
+970801351179, 2.57.98.123, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-28 02:12:30.606204
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_uKYaYRwfLjIgRqFSdFIE5ULU_2022-03-28.xlsx', 2022-03-28 02:12:30.635210
+
+000000000000, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-28 02:15:25.691969
+
+000000000000, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-28 02:15:25.728017
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_Ji5TitHhFO6tZUBUkywdsaMz_2022-03-28.xlsx', 2022-03-28 02:15:25.769307
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, Only absolute URIs are allowed. uri = <built-in%20method%20strip%20of%20str%20object%20at%200x0000015CBCD9DDB0>MjAyMjAzMjg=_M0I0MDU0NTZBNTk1MkYyODQ2QzEyNUY4NjFDMzFDODg0MUQ2QkU5OEY5M0YwMTZCMERCMkU0RDNDQ0I0NkI0MA==, 2022-03-28 03:08:06.473206
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, Only absolute URIs are allowed. uri = <built-in%20method%20strip%20of%20str%20object%20at%200x00000223177882D0>MjAyMjAzMjg=_RDE1MjFENjhDOTcwMTk1QjZEQjI1QTFCRjMyMUE1OEZCMEUyQTZEOEI2OUVFQTQ4MDczREVGNjgxOTc2RkMxQQ==, 2022-03-28 14:18:37.470043
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:34:44.994790
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:34:45.408295
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:34:46.919672
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:34:47.358789
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:34:47.644502
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:35:16.530868
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:35:17.396485
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:35:17.843755
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:35:18.104622
+
+None, 192.168.1.202, /django/idea/, GET, , User matching query does not exist., 2022-03-28 14:35:18.392403
+
+None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-03-28 14:36:23.162195
+
+None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-03-28 14:36:23.224141
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:36:54.490760
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:37:12.534814
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:37:31.880462
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:37:35.820489
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:37:36.963609
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:37:43.431472
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:38:15.358053
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:38:15.773227
+
+None, 192.168.1.202, /django/idea_list/, GET, , User matching query does not exist., 2022-03-28 14:38:26.636441
+
+None, 192.168.1.202, /admin/login/, GET, , User matching query does not exist., 2022-03-28 14:38:38.901377
+
+None, 192.168.1.202, /admin/login/, POST, , User matching query does not exist., 2022-03-28 14:38:42.529608
+
+None, 192.168.1.202, /admin/login/, POST, , User matching query does not exist., 2022-03-28 14:38:50.495580
+
+None, 192.168.1.202, /admin/login/, POST, , User matching query does not exist., 2022-03-28 14:38:54.193779

@@ -1,0 +1,83 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+<!-- Head -->
+{% block head %}
+    {% include 'components/navbar.html' %}
+{% endblock head %}
+
+<!-- Title -->
+{% block title %}
+    Вакансии комбината
+{% endblock title %}
+
+<!-- Style -->
+{% block style %}{% endblock style %}
+
+<!-- Header -->
+{% block header %}
+    Вакансии комбината
+{% endblock header %}
+
+<!-- Description -->
+{% block description %}
+    Эта страница содержит информацию об открытых вакансиях на комбинате.
+{% endblock description %}
+
+<!-- Main -->
+{% block main %}
+
+
+
+{% if response == 1 %}
+    {% include 'components/success.html' %}
+    <div class="container text-center">
+        <div class="pricing-header text-center">
+            <div class="d-block">
+                <div class="border-dark table-bordered">
+                    <table class="table table-bordered border-dark table-striped table-hover table-responsive col-form-label-lg table-lg">
+                        <thead>
+                            <tr>
+                                {% for arr_1 in data.0 %}
+                                    <th>{{ arr_1 }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for arr_1 in data.1 %}
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-primary text-center" href="{{ arr_1.1 }}">{{ arr_1.0 }}</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif response == -1 %}
+    {% include 'components/aborted.html' %}
+{% else %}
+    <div class="container text-center">
+        <div class="container-fluid">
+            <form class="" action="{% url 'career' %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-lg btn-outline-primary form-control" type="submit">Получить вакансии</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+
+
+{% endblock main %}
+
+<!-- Footer -->
+{% block footer %}
+    {% include 'components/footer.html' %}
+{% endblock footer %}
+
+<!-- Script -->
+{% block script %}{% endblock script %}
