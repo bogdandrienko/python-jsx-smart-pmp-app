@@ -1912,9 +1912,11 @@ class SettingsModel(models.Model):
 
     LIST_DB_VIEW_CHOICES = [
         ("logging_action", 'Логирование действий',),
-        ("print_action", 'Вывод действий в консоль',),
+        ("print_action", 'Вывод в консоль действий',),
         ("logging_error", 'Логирование ошибок',),
-        ("print_error", 'Вывод ошибок в консоль',),
+        ("print_error", 'Вывод в консоль ошибок',),
+        ("logging_response", 'Логирование ответов',),
+        ("print_response", 'Вывод в консоль ответов',),
         ("scheduler_personal", 'Планировщик обновления персонала из 1С', ),
         ("scheduler_superuser", 'Планировщик создания стандартных суперпользователей',),
         ("scheduler_group", 'Планировщик создания стандартных групп',),

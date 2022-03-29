@@ -18,7 +18,7 @@ export const RationalModerateListPage = () => {
   const [author, authorSet] = useState("");
   const [search, searchSet] = useState("");
   const [sort, sortSet] = useState("дате публикации (свежие в начале)");
-  const [moderate, moderateSet] = useState("");
+  const [moderate, moderateSet] = useState("на модерации");
   ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
   const userListAllStore = useSelector((state) => state.userListAllStore);
   const {
@@ -61,63 +61,6 @@ export const RationalModerateListPage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserDetails) {
-      if (
-        utils.CheckAccess(userDetailsStore, "rational_moderator_no_tech_post")
-      ) {
-        moderateSet("Постнетехмодерация");
-      } else {
-        if (
-          utils.CheckAccess(userDetailsStore, "rational_moderator_tech_post")
-        ) {
-          moderateSet("Посттехмодерация");
-        } else {
-          if (
-            utils.CheckAccess(
-              userDetailsStore,
-              "rational_moderator_tech_pre_atp"
-            )
-          ) {
-            moderateSet("Предтехмодерация");
-            subdivisionSet("Автотранспортное предприятие");
-          }
-          if (
-            utils.CheckAccess(
-              userDetailsStore,
-              "rational_moderator_tech_pre_gtk"
-            )
-          ) {
-            moderateSet("Предтехмодерация");
-            subdivisionSet("Горно-транспортный комплекс");
-          }
-          if (
-            utils.CheckAccess(
-              userDetailsStore,
-              "rational_moderator_tech_pre_ok"
-            )
-          ) {
-            moderateSet("Предтехмодерация");
-            subdivisionSet("Обогатительный комплекс");
-          }
-          if (
-            utils.CheckAccess(
-              userDetailsStore,
-              "rational_moderator_tech_pre_uprav"
-            )
-          ) {
-            moderateSet("Предтехмодерация");
-            subdivisionSet("Управление предприятия");
-          }
-          if (
-            utils.CheckAccess(
-              userDetailsStore,
-              "rational_moderator_tech_pre_energouprav"
-            )
-          ) {
-            moderateSet("Предтехмодерация");
-            subdivisionSet("Энергоуправление");
-          }
-        }
-      }
     }
   }, [dataUserDetails]);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
@@ -181,15 +124,39 @@ export const RationalModerateListPage = () => {
                   </label>
                 </div>
                 <div className="">
-                  {utils.CheckAccess(userDetailsStore, "rational_admin") ||
-                  utils.CheckAccess(
+                  {utils.CheckAccess(
                     userDetailsStore,
-                    "rational_moderator_no_tech_post"
-                  ) ||
-                  utils.CheckAccess(
+                    "moderator_rational"
+                  ) && (
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Статус:
+                      <select
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={moderate}
+                        onChange={(e) => moderateSet(e.target.value)}
+                      >
+                        <option className="m-0 p-0" value="">
+                          все варианты
+                        </option>
+                        <option className="m-0 p-0" value="на модерации">
+                          на модерации
+                        </option>
+                        <option className="m-0 p-0" value="на доработку">
+                          на доработку
+                        </option>
+                        <option className="m-0 p-0" value="скрыто">
+                          скрыто
+                        </option>
+                        <option className="m-0 p-0" value="принято">
+                          принято
+                        </option>
+                      </select>
+                    </label>
+                  )}
+                  {utils.CheckAccess(
                     userDetailsStore,
-                    "rational_moderator_tech_post"
-                  ) ? (
+                    "moderator_rational"
+                  ) && (
                     <label className="form-control-sm text-center m-0 p-1">
                       Подразделение:
                       <select
@@ -198,25 +165,23 @@ export const RationalModerateListPage = () => {
                         onChange={(e) => subdivisionSet(e.target.value)}
                       >
                         <option value="">все варианты</option>
-                        <option value="Автотранспортное предприятие">
-                          Автотранспортное предприятие
+                        <option value="автотранспортное предприятие">
+                          автотранспортное предприятие
                         </option>
-                        <option value="Горно-транспортный комплекс">
-                          Горно-транспортный комплекс
+                        <option value="горно-транспортный комплекс">
+                          горно-транспортный комплекс
                         </option>
-                        <option value="Обогатительный комплекс">
-                          Обогатительный комплекс
+                        <option value="обогатительный комплекс">
+                          обогатительный комплекс
                         </option>
-                        <option value="Управление">
-                          Управление предприятия
+                        <option value="управление предприятия">
+                          управление предприятия
                         </option>
-                        <option value="Энергоуправление">
-                          Энергоуправление
+                        <option value="энергоуправление">
+                          энергоуправление
                         </option>
                       </select>
                     </label>
-                  ) : (
-                    ""
                   )}
                   <label className="form-control-sm text-center m-0 p-1">
                     Категория:

@@ -139,7 +139,10 @@ export const IdeaCreatePage = () => {
                         >
                           обогатительный комплекс
                         </option>
-                        <option className="m-0 p-0" value="управление">
+                        <option
+                          className="m-0 p-0"
+                          value="управление предприятия"
+                        >
                           управление предприятия
                         </option>
                         <option className="m-0 p-0" value="энергоуправление">

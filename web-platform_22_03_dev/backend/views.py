@@ -37,16 +37,17 @@ def index(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "GET":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "":
                 try:
-                    context = {}
-                    return render(request, 'index.html', context)
+                    response = {"response": "Данные успешно получены!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return render(request, 'index.html', response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return render(request, "backend/404.html")
@@ -68,15 +69,14 @@ def api_auth_routes(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "GET":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "":
                 try:
-                    _routes = [
+                    response = {"response": [
                         {
                             'Endpoints': '$BASEPATH$/router/',
                             'methods': 'GET, HEAD, OPTIONS',
@@ -131,8 +131,10 @@ def api_auth_routes(request):
                             'helps': '''$BASEPATH$/note_api/-1/''',
                             'code': '''...'''
                         },
-                    ]
-                    return Response({"response": _routes})
+                    ]}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
@@ -173,35 +175,36 @@ def api_any_user(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "USER_LOGIN":
                 try:
+                    # TODO get_value ###################################################################################
                     username = req_inst.get_value("username")
                     password = req_inst.get_value("password")
+                    # TODO actions #####################################################################################
                     access_count = 0
-                    for dat in backend_models.LoggingModel.objects.filter(
+                    for log in backend_models.LoggingModel.objects.filter(
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method + "| LOGIN",
-                            error_text_field=f'-'
+                            request_method_slug_field=f"{req_inst.method} | {req_inst.action_type}",
+                            error_text_field="-"
                     ):
-                        if (dat.created_datetime_field +
-                            datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') \
-                                >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
+                        if (log.created_datetime_field +
+                            datetime.timedelta(hours=6, minutes=59)).strftime('%Y-%m-%d %H:%M') >= \
+                                (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
                             access_count += 1
                     if access_count < 20:
                         backend_models.LoggingModel.objects.create(
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method + "| LOGIN",
-                            error_text_field=f'-'
+                            request_method_slug_field=f"{req_inst.method} | {req_inst.action_type}",
+                            error_text_field="-"
                         )
                         is_authenticated = authenticate(username=username, password=password)
                         if is_authenticated is not None:
@@ -218,159 +221,183 @@ def api_any_user(request):
                                 "username": str(user.username),
                                 "name": str(f'{user_model.last_name_char_field} {user_model.first_name_char_field}'),
                             }}
-                            # print(f"response: ", response)
-                            return Response(response)
                         else:
-                            return Response({"error": "Внимание, данные не совпадают!"})
+                            response = {"error": "Внимание, данные не совпадают!"}
                     else:
-                        return Response({"error": "Внимание, попыток входа можно совершать не более 20 в час!"})
+                        response = {"error": "Внимание, попыток входа можно совершать не более 20 в час!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "FIND_USER":
                 try:
-                    username = req_inst.get_value("username", strip=True)
-
-                    user = User.objects.get(username=username)
-                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    if user_model.temp_password_boolean_field:
-                        return Response({"error": {"Пользователь ещё ни разу не менял пароль!"}})
-                    return Response({"response": {
-                        "username": str(user.username),
-                        "secretQuestion": str(user_model.secret_question_char_field),
-                        "email": str(user_model.email_field),
-                        "success": False
-                    }})
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    # TODO actions #####################################################################################
+                    try:
+                        user_model = backend_models.UserModel.objects.get(
+                            user_foreign_key_field=User.objects.get(username=username)
+                        )
+                        if user_model.temp_password_boolean_field:
+                            response = {"error": {"Пользователь ещё ни разу не менял пароль!"}}
+                        else:
+                            response = {"response": {
+                                "username": str(user_model.user_foreign_key_field.username),
+                                "secretQuestion": str(user_model.secret_question_char_field),
+                                "email": str(user_model.email_field),
+                                "success": False
+                            }}
+                    except Exception as error:
+                        response = {"error": "Пользователя не существует или произошла ошибка!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Пользователя не существует или произошла ошибка!"})
+                    return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHECK_ANSWER":
                 try:
-                    username = req_inst.get_value("username", strip=True)
-                    secret_answer_char_field = req_inst.get_value("secretAnswer", strip=True)
-                    user = User.objects.get(username=username)
-                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    secret_answer_char_field = req_inst.get_value("secretAnswer")
+                    # TODO actions #####################################################################################
+                    user_model = backend_models.UserModel.objects.get(
+                        user_foreign_key_field=User.objects.get(username=username)
+                    )
                     if str(secret_answer_char_field).strip().lower() == \
                             str(user_model.secret_answer_char_field).strip().lower():
-                        return Response({"response": {
-                            "username": user.username,
+                        response = {"response": {
+                            "username": user_model.user_foreign_key_field.username,
                             "success": True
-                        }})
+                        }}
                     else:
-                        return Response({"error": "Ответ не верный!"})
+                        response = {"error": "Секретный ответ не совпадает!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "SEND_EMAIL_PASSWORD":
                 try:
-                    username = req_inst.get_value("username", strip=True)
-
-                    user = User.objects.get(username=username)
-                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    password = str(user_model.password_char_field)
-                    email_ = str(user_model.email_field)
-
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    # TODO actions #####################################################################################
+                    user_model = backend_models.UserModel.objects.get(
+                        user_foreign_key_field=User.objects.get(username=username)
+                    )
                     access_count = 0
-                    for dat in backend_models.LoggingModel.objects.filter(
+                    for log in backend_models.LoggingModel.objects.filter(
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method + " | SEND_EMAIL_PASSWORD",
+                            request_method_slug_field=f"{req_inst.method} | {req_inst.action_type}",
                             error_text_field="-",
                     ):
-                        if (dat.created_datetime_field +
-                            datetime.timedelta(hours=6, minutes=1)).strftime('%Y-%m-%d %H:%M') \
+                        if (log.created_datetime_field +
+                            datetime.timedelta(hours=6, minutes=3)).strftime('%Y-%m-%d %H:%M') \
                                 >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
                             access_count += 1
-
                     if access_count < 1:
                         backend_models.LoggingModel.objects.create(
                             username_slug_field=username,
                             ip_genericipaddress_field=req_inst.ip,
                             request_path_slug_field=req_inst.path,
-                            request_method_slug_field=req_inst.method + " | SEND_EMAIL_PASSWORD",
+                            request_method_slug_field=f"{req_inst.method} | {req_inst.action_type}",
                             error_text_field="-",
                         )
-
-                        text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
-                               f"{str(user_model.user_foreign_key_field)}{password}"
+                        text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_" \
+                               f"{user_model.password_char_field[-1]} {str(user_model.user_foreign_key_field)}" \
+                               f"{user_model.password_char_field}"
                         encrypt_text = backend_service.EncryptingClass.encrypt_text(
                             text,
                             '31284'
                         )
-
                         subject = 'Восстановление пароля от веб платформы'
                         message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
                                     f'перейдите по ссылке: https://web.km.kz/recover_password => ' \
-                                    f'восстановление пароля, введите Ваш идентификатор и затем в окне почты ' \
+                                    f'восстановление пароля, введите Ваш ИИН и затем в окне почты ' \
                                     f'введите код (без кавычек): "{encrypt_text}". Внимание, этот код действует ' \
                                     f'в течении часа с момента отправки!'
-                        from_email = 'web@km.kz'
-                        to_email = email_
-                        if subject and message_s and to_email:
-                            send_mail(subject, message_s, from_email, [to_email, ''], fail_silently=False)
-
-                        return Response({"response": {
-                            "username": str(user.username),
-                            "secret_question_char_field": str(user_model.secret_question_char_field),
-                            "email_field": str(user_model.email_field),
-                            "success": False
-                        }})
+                        if subject and message_s and user_model.email_field:
+                            send_mail(
+                                subject,
+                                message_s,
+                                "web.km.kz",
+                                [user_model.email_field, ''],
+                                fail_silently=False
+                            )
+                        response = {
+                            "response":
+                                {"username": str(user_model.user_foreign_key_field.username),
+                                 "secret_question_char_field": str(user_model.secret_question_char_field),
+                                 "email_field": str(user_model.email_field),
+                                 "success": False}
+                        }
                     else:
-                        return Response({"error": f"Внимание, отправлять письмо можно не чаще раза в 3 минуты!"})
+                        response = {"error": "Внимание, отправлять письмо можно не чаще раза в 3 минуты!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHECK_EMAIL_PASSWORD":
                 try:
-                    username = req_inst.get_value("username", strip=True)
-                    recover_password = req_inst.get_value("recoverPassword", strip=True)
-
-                    user = User.objects.get(username=username)
-                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    password = str(user_model.password_char_field)
-
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    recover_password = req_inst.get_value("recoverPassword")
+                    # TODO actions #####################################################################################
+                    user_model = backend_models.UserModel.objects.get(
+                        user_foreign_key_field=User.objects.get(username=username)
+                    )
                     decrypt_text = backend_service.EncryptingClass.decrypt_text(recover_password, '31284')
-                    text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{password[-1]}" \
-                           f"{str(user_model.user_foreign_key_field)}{password}"
-
+                    text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{user_model.password_char_field[-1]}" \
+                           f"{str(user_model.user_foreign_key_field)}{user_model.password_char_field}"
                     time1 = int(decrypt_text.split('_')[0].split('T')[1])
                     time2 = int(text.split('_')[0].split('T')[1])
-
                     if time1 - time2 > -60:
                         if str(decrypt_text.split('_')[1]).strip() == str(text.split('_')[1]).strip():
-                            return Response({"response": {
-                                "username": user.username,
+                            response = {"response": {
+                                "username": user_model.user_foreign_key_field.username,
                                 "success": True
-                            }})
+                            }}
                         else:
-                            return Response({"error": f"Код не верный!"})
+                            response = {"error": "Код не верный!"}
                     else:
-                        return Response({"error": f"Код не верный!"})
+                        response = {"error": "Код не верный или просрочен!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_PASSWORD":
                 try:
-                    username = req_inst.get_value("username", strip=True)
-                    password = req_inst.get_value("password", strip=True)
-                    password2 = req_inst.get_value("password2", strip=True)
-
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    password = req_inst.get_value("password")
+                    password2 = req_inst.get_value("password2")
+                    # TODO actions #####################################################################################
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-
                     if password == password2 and password != str(user_model.password_char_field).strip():
                         user.set_password(password)
                         user.save()
                         user_model.password_char_field = password
                         user_model.temp_password_boolean_field = False
                         user_model.save()
-                        return Response({"response": {
+                        response = {"response": {
                             "username": user.username,
                             "success": False
-                        }})
+                        }}
                     else:
-                        return Response({"error": f"Пароли не совпадают или старый пароль идентичный!"})
+                        response = {"error": "Пароли не совпадают или старый пароль идентичный!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
@@ -391,81 +418,92 @@ def api_auth_user(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "USER_DETAIL":
                 try:
-                    return Response({"response": backend_serializers.UserSerializer(req_inst.user, many=False).data})
+                    # TODO actions #####################################################################################
+                    response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE":
                 try:
-                    password = req_inst.get_value("password", strip=True)
-                    password2 = req_inst.get_value("password2", strip=True)
-                    secret_question = req_inst.get_value("secretQuestion", strip=True)
-                    secret_answer = req_inst.get_value("secretAnswer", strip=True)
-                    email = req_inst.get_value("email", strip=True)
-
+                    # TODO get_value ###################################################################################
+                    password = req_inst.get_value("password")
+                    password2 = req_inst.get_value("password2")
+                    secret_question = req_inst.get_value("secretQuestion")
+                    secret_answer = req_inst.get_value("secretAnswer")
+                    email = req_inst.get_value("email")
+                    # TODO actions #####################################################################################
                     user = User.objects.get(id=req_inst.user.id)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-
                     if len(password) < 1:
-                        return Response({"error": "Пароль пустой!"})
+                        response = {"error": "Пароль пустой!"}
                     elif password != password2:
-                        return Response({"error": "Пароли не совпадают!"})
+                        response = {"error": "Пароли не совпадают!"}
                     elif password == user_model.password_char_field:
-                        return Response({"error": "Пароль такой же как и предыдущий!"})
+                        response = {"error": "Пароль такой же как и предыдущий!"}
                     else:
                         user.set_password(password)
                         user.save()
                         user_model.password_char_field = password
                         user_model.temp_password_boolean_field = False
                         user_model.save()
-                    if secret_question and secret_question != user_model.secret_question_char_field:
-                        user_model.secret_question_char_field = secret_question
-                        user_model.save()
-                    if secret_answer and secret_answer != user_model.secret_answer_char_field:
-                        user_model.secret_answer_char_field = secret_answer
-                        user_model.save()
-                    if email and email != user_model.email_field:
-                        user_model.email_field = email
-                        user_model.save()
-                    return Response({"response": "Изменение успешно проведено."})
+                        if secret_question and secret_question != user_model.secret_question_char_field:
+                            user_model.secret_question_char_field = secret_question
+                            user_model.save()
+                        if secret_answer and secret_answer != user_model.secret_answer_char_field:
+                            user_model.secret_answer_char_field = secret_answer
+                            user_model.save()
+                        if email and email != user_model.email_field:
+                            user_model.email_field = email
+                            user_model.save()
+                        response = {"response": "Изменение успешно проведено."}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_PASSWORD":
                 try:
-                    username = req_inst.get_value("username", strip=True)
-                    password = req_inst.get_value("password", strip=True)
-                    password2 = req_inst.get_value("password2", strip=True)
-
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    password = req_inst.get_value("password")
+                    password2 = req_inst.get_value("password2")
+                    # TODO actions #####################################################################################
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-
                     if password == password2 and password != str(user_model.password_char_field).strip():
                         user.set_password(password)
                         user.save()
                         user_model.password_char_field = password
                         user_model.temp_password_boolean_field = False
                         user_model.save()
-                        return Response({"response": {
+                        response = {"response": {
                             "username": user.username,
                             "success": False
-                        }})
+                        }}
                     else:
-                        return Response({"error": f"Пароли не совпадают или старый пароль идентичный!"})
+                        response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "USER_LIST_ALL":
                 try:
+                    # TODO get_value ###################################################################################
                     user_models = backend_models.UserModel.objects.order_by("last_name_char_field")
+                    # TODO actions #####################################################################################
                     users = []
                     for user_model in user_models:
                         if user_model.user_foreign_key_field.is_superuser:
@@ -473,21 +511,23 @@ def api_auth_user(request):
                         users.append(f"{user_model.last_name_char_field} {user_model.first_name_char_field} "
                                      f"{user_model.personnel_number_slug_field} ")
                     response = {"response": users}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_CREATE":
                 try:
+                    # TODO get_value ###################################################################################
                     name = req_inst.get_value("name")
                     place = req_inst.get_value("place")
+                    # TODO actions #####################################################################################
                     if place == "банк идей":
                         model = backend_models.GroupModel.objects.get(name_slug_field="moderator_idea")
                     else:
                         model = backend_models.GroupModel.objects.get(name_slug_field="moderator")
                     description = req_inst.get_value("description")
-
                     backend_models.NotificationModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
                         model_foreign_key_field=model,
@@ -496,49 +536,47 @@ def api_auth_user(request):
                         description_text_field=description,
                     )
                     response = {"response": "Успешно отправлено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_DELETE":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
-
+                    # TODO actions #####################################################################################
                     obj = backend_models.NotificationModel.objects.get(id=_id)
                     obj.visibility_boolean_field = False
                     obj.hide_datetime_field = datetime.datetime.now()
                     obj.save()
-
                     response = {"response": "Успешно удалено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_LIST":
                 try:
-
+                    # TODO actions #####################################################################################
                     objects = backend_models.NotificationModel.objects.filter(
                         model_foreign_key_field=None,
                         target_foreign_key_field=req_inst.user_model,
-                        visibility_boolean_field=True
+                        visibility_boolean_field=True,
                     )
-
                     serializer = backend_serializers.NotificationModelSerializer(objects, many=True).data
-
                     group_models = backend_models.GroupModel.objects.filter(user_many_to_many_field=req_inst.user_model)
                     objects = backend_models.NotificationModel.objects.filter(
                         model_foreign_key_field__in=group_models,
                         target_foreign_key_field=None,
-                        visibility_boolean_field=True
+                        visibility_boolean_field=True,
                     ).order_by("-hide_datetime_field")
-
                     serializer1 = backend_serializers.NotificationModelSerializer(objects, many=True).data
-                    serializer = serializer + serializer1
-
-                    response = {"response": serializer}
-                    # print(f"response: {response}")
+                    response = {"response": serializer + serializer1}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -561,30 +599,34 @@ def api_auth_admin(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "CHECK_USER":
                 try:
-                    username = req_inst.get_value("username", strip=True)
-
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    # TODO actions #####################################################################################
                     user = User.objects.get(username=username)
-                    return Response({"response": {
+                    response = {"response": {
                         "username": str(user.username),
                         "success": True
-                    }})
+                    }}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_USER_PASSWORD":
                 try:
-                    username = request.data.get("username")
-                    password = str(request.data.get("password")).strip()
-                    password2 = str(request.data.get("password2")).strip()
-
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
+                    password = req_inst.get_value("password")
+                    password2 = req_inst.get_value("password2")
+                    # TODO actions #####################################################################################
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
                     if password == password2 and password != str(user_model.password_char_field).strip():
@@ -596,146 +638,140 @@ def api_auth_admin(request):
                         user_model.secret_answer_char_field = ""
                         user_model.email_field = ""
                         user_model.save()
-                        return Response({"response": {
+                        response = {"response": {
                             "username": str(user.username),
                             "success": False
-                        }})
+                        }}
                     else:
-                        return Response({"error": f"Пароли не совпадают или старый пароль идентичный!"})
+                        response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CREATE_OR_CHANGE_USERS":
                 try:
+                    # TODO get_value ###################################################################################
                     additional_excel = req_inst.get_value("additionalExcel")
+                    # TODO actions #####################################################################################
+                    if additional_excel:
+                        change_user = req_inst.get_value("changeUser")
+                        change_user_password = req_inst.get_value("changeUserPassword")
+                        clear_user_groups = req_inst.get_value("clearUserGroups")
 
-                    if additional_excel is False:
-                        return Response({"error": "Ошибка чтения файла!"})
+                        def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
+                            if isinstance(_col, int):
+                                _col = get_column_letter(_col)
+                            if isinstance(_row, str):
+                                _row = str(_row)
+                            _value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
+                            if _value.lower() == "none":
+                                return ""
+                            elif _value.lower() == "true":
+                                return True
+                            elif _value.lower() == "false":
+                                return False
+                            else:
+                                return _value
 
-                    change_user = request.data.get("changeUser")
-                    change_user_password = request.data.get("changeUserPassword")
-                    clear_user_groups = request.data.get("clearUserGroups")
+                        workbook = openpyxl.load_workbook(additional_excel)
+                        sheet = workbook.active
+                        max_rows = sheet.max_row
+                        for row in range(1 + 1, max_rows + 1):
+                            subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
+                            workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
+                            department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
+                            last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
+                            first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
+                            patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
+                            personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
+                            position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
+                            category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
+                            username = get_value(_col="J", _row=row, _sheet=sheet)
+                            password_char_field = get_value(_col="K", _row=row, _sheet=sheet)
+                            is_active = get_value(_col="L", _row=row, _sheet=sheet)
+                            is_staff = get_value(_col="M", _row=row, _sheet=sheet)
+                            is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
+                            is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
+                            groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
+                            email_field = get_value(_col="Q", _row=row, _sheet=sheet)
+                            secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
+                            secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
 
-                    def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
-                        if isinstance(_col, int):
-                            _col = get_column_letter(_col)
-                        if isinstance(_row, str):
-                            _row = str(_row)
-                        _value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
-                        if _value.lower() == "none":
-                            return ""
-                        elif _value.lower() == "true":
-                            return True
-                        elif _value.lower() == "false":
-                            return False
-                        else:
-                            return _value
-
-                    workbook = openpyxl.load_workbook(additional_excel)
-                    sheet = workbook.active
-                    max_rows = sheet.max_row
-                    # max_cols = sheet.max_column
-                    for row in range(1 + 1, max_rows + 1):
-                        subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
-                        workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
-                        department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
-                        last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
-                        first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
-                        patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
-                        personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
-                        position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
-                        category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
-                        username = get_value(_col="J", _row=row, _sheet=sheet)
-                        password_char_field = get_value(_col="K", _row=row, _sheet=sheet)
-                        is_active = get_value(_col="L", _row=row, _sheet=sheet)
-                        is_staff = get_value(_col="M", _row=row, _sheet=sheet)
-                        is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
-                        is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
-                        groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
-                        email_field = get_value(_col="Q", _row=row, _sheet=sheet)
-                        secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
-                        secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
-
-                        if len(username) <= 1:
-                            continue
-
-                        try:
-                            user = User.objects.get(username=username)
-                            if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                            if len(username) <= 1:
                                 continue
-                            new_user = False
-                        except Exception as error:
-                            user = User.objects.create(
-                                username=username,
-                                password=make_password(password=password_char_field),
-                            )
-                            new_user = True
 
-                        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                            try:
+                                user = User.objects.get(username=username)
+                                if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                                    continue
+                                new_user = False
+                            except Exception as error:
+                                user = User.objects.create(
+                                    username=username,
+                                    password=make_password(password=password_char_field),
+                                )
+                                new_user = True
 
-                        if new_user:
-                            user_model.password_char_field = password_char_field
-                        else:
-                            if change_user_password == "Изменять пароль уже существующего пользователя":
-                                user.password = make_password(password=password_char_field)
+                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+
+                            if new_user:
                                 user_model.password_char_field = password_char_field
+                            else:
+                                if change_user_password == "Изменять пароль уже существующего пользователя":
+                                    user.password = make_password(password=password_char_field)
+                                    user_model.password_char_field = password_char_field
 
-                        user.is_staff = is_staff
-                        user.is_superuser = is_superuser
-                        user_model.activity_boolean_field = is_active
-                        user_model.email_field = email_field
-                        user.email = email_field
-                        user_model.secret_question_char_field = secret_question_char_field
-                        user_model.secret_answer_char_field = secret_answer_char_field
-                        user_model.is_temp_password = is_temp_password
-                        user_model.last_name_char_field = last_name_char_field
-                        user.last_name = last_name_char_field
-                        user_model.first_name_char_field = first_name_char_field
-                        user.first_name = first_name_char_field
-                        user_model.patronymic_char_field = patronymic_char_field
-                        user_model.personnel_number_slug_field = personnel_number_slug_field
-                        user_model.subdivision_char_field = subdivision_char_field
-                        user_model.workshop_service_char_field = workshop_service_char_field
-                        user_model.department_site_char_field = department_site_char_field
-                        user_model.position_char_field = position_char_field
-                        user_model.category_char_field = category_char_field
-                        user_model.save()
-                        user.save()
+                            user.is_staff = is_staff
+                            user.is_superuser = is_superuser
+                            user_model.activity_boolean_field = is_active
+                            user_model.email_field = email_field
+                            user.email = email_field
+                            user_model.secret_question_char_field = secret_question_char_field
+                            user_model.secret_answer_char_field = secret_answer_char_field
+                            user_model.is_temp_password = is_temp_password
+                            user_model.last_name_char_field = last_name_char_field
+                            user.last_name = last_name_char_field
+                            user_model.first_name_char_field = first_name_char_field
+                            user.first_name = first_name_char_field
+                            user_model.patronymic_char_field = patronymic_char_field
+                            user_model.personnel_number_slug_field = personnel_number_slug_field
+                            user_model.subdivision_char_field = subdivision_char_field
+                            user_model.workshop_service_char_field = workshop_service_char_field
+                            user_model.department_site_char_field = department_site_char_field
+                            user_model.position_char_field = position_char_field
+                            user_model.category_char_field = category_char_field
+                            user_model.save()
+                            user.save()
 
-                        if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
-                            for group in backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model):
-                                try:
-                                    group.user_many_to_many_field.remove(user_model)
-                                except Exception as error:
-                                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-
-                        groups = [group.strip() for group in str(groups).lower().strip().split(',')]
-                        for group in groups:
-                            if len(group) > 1:
-                                group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field=group)[0]
-                                group_model.user_many_to_many_field.add(user_model)
-                        if backend_settings.DEBUG:
-                            print(username)
-                    return Response({"response": "Пользователи успешно созданы/изменены."})
+                            if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
+                                for group in backend_models.GroupModel.objects.filter(
+                                        user_many_to_many_field=user_model):
+                                    try:
+                                        group.user_many_to_many_field.remove(user_model)
+                                    except Exception as error:
+                                        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                            groups = [group.strip() for group in str(groups).lower().strip().split(',')]
+                            for group in groups:
+                                if len(group) > 1:
+                                    group_model = \
+                                        backend_models.GroupModel.objects.get_or_create(name_slug_field=group)[0]
+                                    group_model.user_many_to_many_field.add(user_model)
+                            if backend_settings.DEBUG:
+                                print(username)
+                        response = {"response": "Пользователи успешно созданы/изменены."}
+                    else:
+                        response = {"error": "Ошибка чтения файла!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "EXPORT_USERS":
                 try:
-                    def set_value(_col: Union[str, int], _row: Union[str, int], _value, _sheet):
-                        if isinstance(_col, int):
-                            _col = get_column_letter(_col)
-                        if isinstance(_row, str):
-                            _row = str(_row)
-                        if isinstance(_value, bool):
-                            if _value:
-                                _value = "true"
-                            else:
-                                _value = "false"
-                        if _value is None:
-                            _value = ""
-                        _sheet[str(_col).upper() + str(_row)] = str(_value)
-
+                    # TODO actions #####################################################################################
                     key = backend_service.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=24
@@ -759,6 +795,20 @@ def api_auth_admin(request):
                     #######################################################
 
                     users = User.objects.filter(is_superuser=False)
+
+                    def set_value(_col: Union[str, int], _row: Union[str, int], _value, _sheet):
+                        if isinstance(_col, int):
+                            _col = get_column_letter(_col)
+                        if isinstance(_row, str):
+                            _row = str(_row)
+                        if isinstance(_value, bool):
+                            if _value:
+                                _value = "true"
+                            else:
+                                _value = "false"
+                        if _value is None:
+                            _value = ""
+                        _sheet[str(_col).upper() + str(_row)] = str(_value)
 
                     titles = ['Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Фамилия', 'Имя', 'Отчество',
                               'Табельный номер', 'Должность', 'Категория работника', 'Имя пользователя',
@@ -837,10 +887,8 @@ def api_auth_admin(request):
 
                             secret_answer_char_field = user_model.secret_answer_char_field
                             set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
-
                         except Exception as error:
                             backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-
                     # Set font
                     #######################################################
                     font_b = Font(name='Arial', size=8, bold=False)
@@ -867,32 +915,42 @@ def api_auth_admin(request):
                         workbook=workbook,
                         excel_file=f"static/{path}/{file_name}"
                     )
-                    return Response({"response": {"excel": f"static/{path}/{file_name}"}})
+                    response = {"response": {"excel": f"static/{path}/{file_name}"}}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "ACTIVITY_USER":
                 try:
-                    username = req_inst.get_value("username", strip=True)
+                    # TODO get_value ###################################################################################
+                    username = req_inst.get_value("username")
                     active = req_inst.get_value("active")
-
-                    user = User.objects.get(username=username)
-                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    # TODO actions #####################################################################################
+                    user_model = backend_models.UserModel.objects.get(
+                        user_foreign_key_field=User.objects.get(username=username)
+                    )
                     if active:
                         user_model.activity_boolean_field = True
                         user_model.save()
                     else:
                         user_model.activity_boolean_field = False
                         user_model.save()
-
                     response = {"response": "Успешно изменено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "TERMINAL_REBOOT":
                 try:
+                    # TODO get_value ###################################################################################
+                    ips = req_inst.get_value("ips")
+
+                    # TODO actions #####################################################################################
+
                     def reboot(_ip):
                         url = "htt" + f"p://{ip}/ISAPI/System/reboot"
                         h = httplib2.Http(
@@ -911,14 +969,14 @@ def api_auth_admin(request):
                         response_, content = h.request(uri=url, method="PUT", headers=headers)
                         print(content)
 
-                    for ip in [str(str(x).strip()) for x in req_inst.get_value("ips").split(",")]:
+                    for ip in [str(str(x).strip()) for x in ips.split(",")]:
                         if len(str(ip)) < 3:
                             continue
                         with ThreadPoolExecutor() as executor:
                             executor.submit(reboot, ip)
-
                     response = {"response": "Успешно перезагружено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -940,35 +998,39 @@ def api_basic_admin_user_temp(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "GET":
-            # Actions
+            # TODO Actions #############################################################################################
             try:
+                # TODO actions #########################################################################################
                 user_models = backend_models.UserModel.objects.filter(
                     temp_password_boolean_field=True,
                     activity_boolean_field=True
                 )
                 if not request.user.is_superuser:
-                    return Response({"error": "Your user in not superuser."})
-                objects = []
-                for user_model in user_models:
-                    if not user_model.user_foreign_key_field.is_superuser:
-                        objects.append(
-                            {
-                                f"""{base64.b64encode(
-                                    str(user_model.user_foreign_key_field.username)[::-1].encode()
-                                ).decode()}""":
-                                    base64.b64encode(
-                                        str(f"12{user_model.password_char_field}345").encode()).decode()
-                            }
-                        )
-                # for obj in objects:
-                #     for key, value in obj.items():
-                #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
-                return Response({"response": objects})
+                    response = {"error": "Your user in not superuser."}
+                else:
+                    objects = []
+                    for user_model in user_models:
+                        if not user_model.user_foreign_key_field.is_superuser:
+                            objects.append(
+                                {
+                                    f"""{base64.b64encode(
+                                        str(user_model.user_foreign_key_field.username)[::-1].encode()
+                                    ).decode()}""":
+                                        base64.b64encode(
+                                            str(f"12{user_model.password_char_field}345").encode()).decode()
+                                }
+                            )
+                    # for obj in objects:
+                    #     for key, value in obj.items():
+                    #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
+                    response = {"response": objects}
+                # TODO response ########################################################################################
+                backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                return Response(response)
             except Exception as error:
                 backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                 return Response({"error": "Произошла ошибка!"})
@@ -988,16 +1050,15 @@ def api_auth_salary(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "USER_SALARY":
                 try:
+                    # TODO actions #####################################################################################
                     # Get json response from 1c
-                    ####################################################################################################
                     key = backend_service.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=10
@@ -1010,7 +1071,7 @@ def api_auth_salary(request):
                     if str(iin).lower() == '000000000000':
                         iin = 970801351179
                     iin_base64 = base64.b64encode(str(iin).encode()).decode()
-                    date_base64 = base64.b64encode(f'{req_inst.get_value("dateTime", strip=True)}'.encode()).decode()
+                    date_base64 = base64.b64encode(f'{req_inst.get_value("dateTime")}'.encode()).decode()
                     url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
                     h = httplib2.Http(
                         os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_salary_data"
@@ -1029,12 +1090,10 @@ def api_auth_salary(request):
                             return Response({"error": f"Произошла ошибка!"})
 
                     # Get local test json response from 1c
-                    #############################################
                     # Временное чтение файла для отладки без доступа к 1С
                     # with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
                     #     data = json.load(file)
                     #     time.sleep(3)
-                    ###############################################
 
                     json_data = json.loads(data)
 
@@ -1050,23 +1109,17 @@ def api_auth_salary(request):
                             },
                         }
 
-                    ####################################################################################################
-
                     # Return pretty integer and float value
-                    ####################################################################################################
                     def return_float_value(_value):
                         if isinstance(_value, int) or isinstance(_value, float):
                             if len(f'{_value:.2f}') < 10:
                                 _value = f'{_value:.2f}'[:-6] + ' ' + f'{_value:.2f}'[-6:]
                             else:
-                                _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + f'{_value:.2f}'[
-                                                                                                     -6:]
+                                _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + \
+                                         f'{_value:.2f}'[-6:]
                         return _value
 
-                    ####################################################################################################
-
                     # Create 'Ends' and pretty integer and float value
-                    ####################################################################################################
                     def create_ends(table: str, extracols=False):
                         if extracols:
                             _days = 0
@@ -1107,466 +1160,452 @@ def api_auth_salary(request):
                     create_ends(table='3.Доходы в натуральной форме', extracols=False)
                     create_ends(table='4.Выплачено', extracols=False)
                     create_ends(table='5.Налоговые вычеты', extracols=False)
-                    ####################################################################################################
 
                     # pretty integer and float value in headers
-                    ####################################################################################################
                     for _key in json_data.keys():
                         if _key != 'global_objects':
                             json_data[_key] = return_float_value(json_data[_key])
-                    ####################################################################################################
-                    try:
-                        # create excel
-                        ################################################################################################
-                        key = backend_service.UtilsClass.create_encrypted_password(
-                            _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                            _length=24
-                        )
-                        date = backend_service.DateTimeUtils.get_current_date()
-                        path = 'media/data/temp/salary'
-                        file_name = f"salary_{key}_{date}.xlsx"
-                        workbook = backend_service.ExcelClass.workbook_create()
-                        sheet = backend_service.ExcelClass.workbook_activate(workbook)
 
-                        # Delete old files
-                        #######################################################
-                        for root, dirs, files in os.walk(f"static/{path}", topdown=True):
-                            for file in files:
-                                try:
-                                    date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
-                                    if date != date_file:
-                                        os.remove(f'{path}/{file}')
-                                except Exception as error:
-                                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                        #######################################################
+                    # create excel
+                    key = backend_service.UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=24
+                    )
+                    date = backend_service.DateTimeUtils.get_current_date()
+                    path = 'media/data/temp/salary'
+                    file_name = f"salary_{key}_{date}.xlsx"
+                    workbook = backend_service.ExcelClass.workbook_create()
+                    sheet = backend_service.ExcelClass.workbook_activate(workbook)
 
-                        # Create 'TitleComponent'
-                        #######################################################
+                    # Delete old files
+                    for root, dirs, files in os.walk(f"static/{path}", topdown=True):
+                        for file in files:
+                            try:
+                                date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
+                                if date != date_file:
+                                    os.remove(f'{path}/{file}')
+                            except Exception as error:
+                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+
+                    # Create 'TitleComponent'
+                    backend_service.ExcelClass.set_sheet_value(
+                        col=1,
+                        row=1,
+                        value='РАСЧЕТНЫЙ ЛИСТ',
+                        sheet=sheet
+                    )
+                    sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8)
+                    #######################################################
+
+                    # Create 'Headers'
+                    header_arr = []
+                    for key, value in json_data.items():
+                        if key != 'global_objects' and key != 'Долг за организацией на начало месяца' \
+                                and key != 'Долг за организацией на конец месяца':
+                            header_arr.append(f'{key}: {value}')
+
+                    header_len_devide = len(header_arr) - 8
+                    if header_len_devide % 2 != 0:
+                        header_len_devide += 1
+
+                    row_i_1 = 1 + 1
+                    for header in header_arr[0:4]:
+                        col_i = 1
                         backend_service.ExcelClass.set_sheet_value(
-                            col=1,
-                            row=1,
-                            value='РАСЧЕТНЫЙ ЛИСТ',
+                            col=col_i,
+                            row=row_i_1,
+                            value=header,
                             sheet=sheet
                         )
-                        sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8)
-                        #######################################################
+                        sheet.merge_cells(start_row=row_i_1, start_column=col_i, end_row=row_i_1,
+                                          end_column=col_i + 4)
+                        row_i_1 += 1
 
-                        # Create 'Headers'
-                        #######################################################
-                        header_arr = []
-                        for key, value in json_data.items():
-                            if key != 'global_objects' and key != 'Долг за организацией на начало месяца' \
-                                    and key != 'Долг за организацией на конец месяца':
-                                header_arr.append(f'{key}: {value}')
+                    row_i_2 = 1 + 1
+                    for header in header_arr[4:8]:
+                        col_i = 6
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_2,
+                            value=header,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=row_i_2, start_column=col_i, end_row=row_i_2,
+                                          end_column=col_i + 2)
+                        row_i_2 += 1
 
-                        header_len_devide = len(header_arr) - 8
-                        if header_len_devide % 2 != 0:
-                            header_len_devide += 1
+                    row_i_3 = row_i_1
+                    for header in header_arr[8:8 + header_len_devide // 2]:
+                        col_i = 1
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_3,
+                            value=header,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=row_i_3, start_column=col_i, end_row=row_i_3,
+                                          end_column=col_i + 4)
+                        row_i_3 += 1
 
-                        row_i_1 = 1 + 1
-                        for header in header_arr[0:4]:
-                            col_i = 1
-                            backend_service.ExcelClass.set_sheet_value(
-                                col=col_i,
-                                row=row_i_1,
-                                value=header,
-                                sheet=sheet
-                            )
-                            sheet.merge_cells(start_row=row_i_1, start_column=col_i, end_row=row_i_1,
-                                              end_column=col_i + 4)
-                            row_i_1 += 1
+                    row_i_4 = row_i_2
+                    for header in header_arr[8 + header_len_devide // 2:]:
+                        col_i = 6
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=row_i_4,
+                            value=header,
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=row_i_4, start_column=col_i, end_row=row_i_4,
+                                          end_column=col_i + 2)
+                        row_i_4 += 1
+                    header_low_row = row_i_4
 
-                        row_i_2 = 1 + 1
-                        for header in header_arr[4:8]:
-                            col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
-                                col=col_i,
-                                row=row_i_2,
-                                value=header,
-                                sheet=sheet
-                            )
-                            sheet.merge_cells(start_row=row_i_2, start_column=col_i, end_row=row_i_2,
-                                              end_column=col_i + 2)
-                            row_i_2 += 1
+                    #######################################################
 
-                        row_i_3 = row_i_1
-                        for header in header_arr[8:8 + header_len_devide // 2]:
-                            col_i = 1
-                            backend_service.ExcelClass.set_sheet_value(
-                                col=col_i,
-                                row=row_i_3,
-                                value=header,
-                                sheet=sheet
-                            )
-                            sheet.merge_cells(start_row=row_i_3, start_column=col_i, end_row=row_i_3,
-                                              end_column=col_i + 4)
-                            row_i_3 += 1
-
-                        row_i_4 = row_i_2
-                        for header in header_arr[8 + header_len_devide // 2:]:
-                            col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
-                                col=col_i,
-                                row=row_i_4,
-                                value=header,
-                                sheet=sheet
-                            )
-                            sheet.merge_cells(start_row=row_i_4, start_column=col_i, end_row=row_i_4,
-                                              end_column=col_i + 2)
-                            row_i_4 += 1
-                        header_low_row = row_i_4
-
-                        #######################################################
-
-                        # Create 'Bodyes'
-                        #######################################################
-                        def create_bodyes(table: str, extracols=False):
-                            bodyes_arr = [[table]]
-                            for __key, _value in json_data['global_objects'][table].items():
-                                local_bodyes_arr = []
-                                for ___key, __value in json_data['global_objects'][table][__key].items():
-                                    if extracols:
-                                        if ___key != '6' and ___key != '7' and \
-                                                ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
-                                            local_bodyes_arr.append(__value)
-                                    else:
+                    # Create 'Bodyes'
+                    def create_bodyes(table: str, extracols=False):
+                        bodyes_arr = [[table]]
+                        for __key, _value in json_data['global_objects'][table].items():
+                            local_bodyes_arr = []
+                            for ___key, __value in json_data['global_objects'][table][__key].items():
+                                if extracols:
+                                    if ___key != '6' and ___key != '7' and \
+                                            ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
                                         local_bodyes_arr.append(__value)
-                                bodyes_arr.append(local_bodyes_arr)
-                            return bodyes_arr
+                                else:
+                                    local_bodyes_arr.append(__value)
+                            bodyes_arr.append(local_bodyes_arr)
+                        return bodyes_arr
 
-                        bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
-                        bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
-                        bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
-                        bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
-                        bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
+                    bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
+                    bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
+                    bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
+                    bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
+                    bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
 
-                        bold_arr = []
+                    bold_arr = []
 
-                        body_low_row_1 = header_low_row
-                        bold_arr.append(body_low_row_1)
-                        sheet.merge_cells(start_row=body_low_row_1, start_column=1, end_row=body_low_row_1,
-                                          end_column=1 + 4)
-                        for body in bodyes_arr_1:
-                            col_i = 1
-                            for value in body:
-                                if isinstance(value, int) and value == 0:
-                                    value = ''
-                                backend_service.ExcelClass.set_sheet_value(
-                                    col=col_i,
-                                    row=body_low_row_1,
-                                    value=value,
-                                    sheet=sheet
-                                )
-                                col_i += 1
-                            body_low_row_1 += 1
-
-                        body_low_row_2 = header_low_row
-                        bold_arr.append(body_low_row_2)
-                        sheet.merge_cells(start_row=body_low_row_2, start_column=6, end_row=body_low_row_2,
-                                          end_column=6 + 2)
-                        for body in bodyes_arr_2:
-                            col_i = 6
-                            for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
-                                    col=col_i,
-                                    row=body_low_row_2,
-                                    value=value,
-                                    sheet=sheet
-                                )
-                                col_i += 1
-                            body_low_row_2 += 1
-
-                        if body_low_row_1 >= body_low_row_2:
-                            body_low_row_3 = body_low_row_1
-                            body_low_row_4 = body_low_row_1
-                        else:
-                            body_low_row_3 = body_low_row_2
-                            body_low_row_4 = body_low_row_2
-
-                        bold_arr.append(body_low_row_3)
-                        sheet.merge_cells(start_row=body_low_row_3, start_column=1, end_row=body_low_row_3,
-                                          end_column=1 + 4)
-                        for body in bodyes_arr_3:
-                            col_i = 1
-                            for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
-                                    col=col_i,
-                                    row=body_low_row_3,
-                                    value=value,
-                                    sheet=sheet
-                                )
-                                col_i += 1
-                            body_low_row_3 += 1
-
-                        bold_arr.append(body_low_row_4)
-                        sheet.merge_cells(start_row=body_low_row_4, start_column=6, end_row=body_low_row_4,
-                                          end_column=6 + 2)
-                        for body in bodyes_arr_4:
-                            col_i = 6
-                            for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
-                                    col=col_i,
-                                    row=body_low_row_4,
-                                    value=value,
-                                    sheet=sheet
-                                )
-                                col_i += 1
-                            body_low_row_4 += 1
-
-                        if body_low_row_3 >= body_low_row_4:
-                            body_low_row_5 = body_low_row_3
-                            body_low_row_6 = body_low_row_3
-                        else:
-                            body_low_row_5 = body_low_row_4
-                            body_low_row_6 = body_low_row_4
-
-                        bold_arr.append(body_low_row_5)
-                        sheet.merge_cells(start_row=body_low_row_5, start_column=1, end_row=body_low_row_5,
-                                          end_column=1 + 4)
-                        for body in bodyes_arr_5:
-                            col_i = 1
-                            for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
-                                    col=col_i,
-                                    row=body_low_row_5,
-                                    value=value,
-                                    sheet=sheet
-                                )
-                                col_i += 1
-                            body_low_row_5 += 1
-
-                        lowest = [
-                            f'Долг за организацией на начало месяца: '
-                            f'{json_data["Долг за организацией на начало месяца"]}',
-                            f'Долг за организацией на конец месяца: '
-                            f'{json_data["Долг за организацией на конец месяца"]}',
-                        ]
-
-                        bold_arr.append(body_low_row_6)
-                        for body in ['.', 'Вид', *lowest]:
-                            col_i = 6
+                    body_low_row_1 = header_low_row
+                    bold_arr.append(body_low_row_1)
+                    sheet.merge_cells(start_row=body_low_row_1, start_column=1, end_row=body_low_row_1,
+                                      end_column=1 + 4)
+                    for body in bodyes_arr_1:
+                        col_i = 1
+                        for value in body:
+                            if isinstance(value, int) and value == 0:
+                                value = ''
                             backend_service.ExcelClass.set_sheet_value(
                                 col=col_i,
-                                row=body_low_row_6,
-                                value=body,
+                                row=body_low_row_1,
+                                value=value,
                                 sheet=sheet
                             )
-                            sheet.merge_cells(start_row=body_low_row_6, start_column=col_i, end_row=body_low_row_6,
-                                              end_column=col_i + 2)
-                            body_low_row_6 += 1
+                            col_i += 1
+                        body_low_row_1 += 1
 
-                        if body_low_row_6 >= body_low_row_5:
-                            body_low_row = body_low_row_6
-                        else:
-                            body_low_row = body_low_row_5
+                    body_low_row_2 = header_low_row
+                    bold_arr.append(body_low_row_2)
+                    sheet.merge_cells(start_row=body_low_row_2, start_column=6, end_row=body_low_row_2,
+                                      end_column=6 + 2)
+                    for body in bodyes_arr_2:
+                        col_i = 6
+                        for value in body:
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_2,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_2 += 1
 
-                        if body_low_row_1 >= body_low_row_2:
-                            body_color_2 = body_low_row_1
-                        else:
-                            body_color_2 = body_low_row_2
-                        if body_low_row_3 >= body_low_row_4:
-                            body_color_3 = body_low_row_3
-                        else:
-                            body_color_3 = body_low_row_4
-                        #######################################################
+                    if body_low_row_1 >= body_low_row_2:
+                        body_low_row_3 = body_low_row_1
+                        body_low_row_4 = body_low_row_1
+                    else:
+                        body_low_row_3 = body_low_row_2
+                        body_low_row_4 = body_low_row_2
 
-                        # Set fonts
-                        #######################################################
-                        font_headers = Font(name='Arial', size=8, bold=False)
-                        for row in range(1, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                                cell = sheet[f'{col}{row}']
-                                cell.font = font_headers
+                    bold_arr.append(body_low_row_3)
+                    sheet.merge_cells(start_row=body_low_row_3, start_column=1, end_row=body_low_row_3,
+                                      end_column=1 + 4)
+                    for body in bodyes_arr_3:
+                        col_i = 1
+                        for value in body:
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_3,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_3 += 1
 
-                        font_bodyes = Font(name='Arial', size=7, bold=False)
-                        for row in range(header_low_row, body_low_row + 1):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                                cell = sheet[f'{col}{row}']
-                                cell.font = font_bodyes
+                    bold_arr.append(body_low_row_4)
+                    sheet.merge_cells(start_row=body_low_row_4, start_column=6, end_row=body_low_row_4,
+                                      end_column=6 + 2)
+                    for body in bodyes_arr_4:
+                        col_i = 6
+                        for value in body:
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_4,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_4 += 1
 
-                        font_tables = Font(name='Arial', size=8, bold=True)
-                        for row in [header_low_row, body_color_2, body_color_3]:
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                                cell = sheet[f'{col}{row}']
-                                cell.font = font_tables
-                        #######################################################
+                    if body_low_row_3 >= body_low_row_4:
+                        body_low_row_5 = body_low_row_3
+                        body_low_row_6 = body_low_row_3
+                    else:
+                        body_low_row_5 = body_low_row_4
+                        body_low_row_6 = body_low_row_4
 
-                        # Set aligments
-                        #######################################################
-                        # wrap_text = Alignment(wrap_text=True)
-                        # shrink_to_fit = Alignment(shrink_to_fit=True)
-                        aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True,
-                                                    shrink_to_fit=True)
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                            cell = sheet[f'{col}{1}']
-                            cell.alignment = aligment_center
-                        aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True,
-                                                  shrink_to_fit=True)
-                        for row in range(2, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                                cell = sheet[f'{col}{row}']
-                                cell.alignment = aligment_left
+                    bold_arr.append(body_low_row_5)
+                    sheet.merge_cells(start_row=body_low_row_5, start_column=1, end_row=body_low_row_5,
+                                      end_column=1 + 4)
+                    for body in bodyes_arr_5:
+                        col_i = 1
+                        for value in body:
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_5,
+                                value=value,
+                                sheet=sheet
+                            )
+                            col_i += 1
+                        body_low_row_5 += 1
 
-                        aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True,
-                                                   shrink_to_fit=True)
-                        for row in range(header_low_row, body_low_row + 1):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                                cell = sheet[f'{col}{row}']
-                                if col == 'A' or col == 'F':
-                                    cell.alignment = aligment_left
-                                elif col == 'E' or col == 'H':
-                                    cell.alignment = aligment_right
-                                else:
-                                    cell.alignment = aligment_center
-                        #######################################################
+                    lowest = [
+                        f'Долг за организацией на начало месяца: '
+                        f'{json_data["Долг за организацией на начало месяца"]}',
+                        f'Долг за организацией на конец месяца: '
+                        f'{json_data["Долг за организацией на конец месяца"]}',
+                    ]
 
-                        # Set borders
-                        #######################################################
-                        side_medium = Side(border_style="thin", color="FF808080")
-                        # side_think = Side(border_style="thin", color="FF808080")
-                        border_horizontal_middle = Border(
-                            top=side_medium,
-                            # left=side_medium,
-                            # right=side_medium,
-                            # bottom=side_medium
+                    bold_arr.append(body_low_row_6)
+                    for body in ['.', 'Вид', *lowest]:
+                        col_i = 6
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=col_i,
+                            row=body_low_row_6,
+                            value=body,
+                            sheet=sheet
                         )
-                        border_vertical_middle = Border(
-                            # top=side_think,
-                            left=side_medium,
-                            # right=side_think,
-                            # bottom=side_think
-                        )
-                        border_vertical_light = Border(
-                            # top=side_think,
-                            left=side_medium,
-                            # right=side_think,
-                            # bottom=side_think
-                        )
-                        for row in range(header_low_row, body_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                                if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
-                                    pass
-                                else:
-                                    cell = sheet[f'{col}{row}']
-                                    cell.border = border_vertical_light
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(1)}{row}']
-                            cell.border = border_vertical_middle
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(6)}{row}']
-                            cell.border = border_vertical_middle
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(9)}{row}']
-                            cell.border = border_vertical_middle
-                        side_think = Side(border_style="dotted", color="FF808080")
-                        # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick',
-                        # 'medium', 'dashDot','dashDotDot', 'hair', 'mediumDashDot', 'slantDashDot'}
-                        border_think = Border(
-                            top=side_think,
-                            left=side_think,
-                            right=side_think,
-                            bottom=side_think
-                        )
-                        for row in range(1, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                                cell = sheet[f'{col}{row}']
-                                cell.border = border_think
-                        side_medium = Side(border_style="thin", color="FF808080")
-                        border_medium = Border(
-                            top=side_medium,
-                            left=side_medium,
-                            right=side_medium,
-                            bottom=side_medium
-                        )
+                        sheet.merge_cells(start_row=body_low_row_6, start_column=col_i, end_row=body_low_row_6,
+                                          end_column=col_i + 2)
+                        body_low_row_6 += 1
+
+                    if body_low_row_6 >= body_low_row_5:
+                        body_low_row = body_low_row_6
+                    else:
+                        body_low_row = body_low_row_5
+
+                    if body_low_row_1 >= body_low_row_2:
+                        body_color_2 = body_low_row_1
+                    else:
+                        body_color_2 = body_low_row_2
+                    if body_low_row_3 >= body_low_row_4:
+                        body_color_3 = body_low_row_3
+                    else:
+                        body_color_3 = body_low_row_4
+                    #######################################################
+
+                    # Set fonts
+                    #######################################################
+                    font_headers = Font(name='Arial', size=8, bold=False)
+                    for row in range(1, header_low_row):
                         for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                            for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
-                                cell = sheet[f'{col}{row - 1}']
-                                cell.border = border_medium
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_headers
+
+                    font_bodyes = Font(name='Arial', size=7, bold=False)
+                    for row in range(header_low_row, body_low_row + 1):
                         for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                            cell = sheet[f'{col}{body_low_row}']
-                            cell.border = border_horizontal_middle
-                        #######################################################
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_bodyes
 
-                        # Colored styles
-                        #######################################################
-                        color_green = PatternFill(fgColor="E6E6FF", fill_type="solid")
+                    font_tables = Font(name='Arial', size=8, bold=True)
+                    for row in [header_low_row, body_color_2, body_color_3]:
                         for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                            for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
-                                cell = sheet[f'{col}{row}']
-                                cell.fill = color_green
-                                cell = sheet[f'{col}{row - 1}']
-                                cell.border = border_medium
-                        color_yellow = PatternFill(fgColor="d0ffd8", fill_type="solid")
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
-                            cell = sheet[f'{col}{body_low_row_1 - 1}']
-                            cell.fill = color_yellow
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_tables
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
-                            cell = sheet[f'{col}{body_low_row_2 - 1}']
-                            cell.fill = color_yellow
-
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
-                            cell = sheet[f'{col}{body_low_row_3 - 1}']
-                            cell.fill = color_yellow
-                            cell.fill = color_yellow
-
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
-                            cell = sheet[f'{col}{body_low_row_4 - 1}']
-                            cell.fill = color_yellow
-
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
-                            cell = sheet[f'{col}{body_low_row_5 - 1}']
-                            cell.fill = color_yellow
-                            cell.fill = color_yellow
-
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
-                            cell = sheet[f'{col}{body_low_row_6 - 1}']
-                            cell.fill = color_yellow
-
-                        #######################################################
-
-                        # Height and width styles
-                        #######################################################
+                    # Set aligments
+                    # wrap_text = Alignment(wrap_text=True)
+                    # shrink_to_fit = Alignment(shrink_to_fit=True)
+                    aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True,
+                                                shrink_to_fit=True)
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        cell = sheet[f'{col}{1}']
+                        cell.alignment = aligment_center
+                    aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True,
+                                              shrink_to_fit=True)
+                    for row in range(2, header_low_row):
                         for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
-                            width = 1
-                            for row in range(1, body_low_row + 1):
-                                cell = sheet[f'{col}{row}']
-                                value = len(str(cell.value))
-                                if value > width:
-                                    width = value
+                            cell = sheet[f'{col}{row}']
+                            cell.alignment = aligment_left
+
+                    aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True,
+                                               shrink_to_fit=True)
+                    for row in range(header_low_row, body_low_row + 1):
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
                             if col == 'A' or col == 'F':
-                                width = width / 2
-                            sheet.column_dimensions[col].height = 1
-                            sheet.column_dimensions[col].width = round((width * 0.95), 3)
-                        #######################################################
+                                cell.alignment = aligment_left
+                            elif col == 'E' or col == 'H':
+                                cell.alignment = aligment_right
+                            else:
+                                cell.alignment = aligment_center
 
-                        # Set global page and book settings
-                        #######################################################
-                        sheet.page_setup.orientation = sheet.ORIENTATION_PORTRAIT
-                        sheet.page_setup.paperSize = sheet.PAPERSIZE_LETTER
-                        sheet.page_margins.left = 0.05
-                        sheet.page_margins.right = 0.05
-                        sheet.page_margins.header = 0.1
-                        sheet.page_margins.bottom = 0.2
-                        sheet.page_margins.footer = 0.2
-                        sheet.page_margins.top = 0.1
-                        sheet.print_options.horizontalCentered = True
-                        # sheet.print_options.verticalCentered = True
-                        sheet.page_setup.fitToHeight = 1
-                        sheet.page_setup.scale = 80
-                        sheet.page_setup.fitToHeight = 1
-                        sheet.page_setup.fitToWidth = 1
-                        sheet.protection.password = key + '_1'
-                        sheet.protection.sheet = True
-                        sheet.protection.enable()
-                        #######################################################
-                        backend_service.ExcelClass.workbook_save(
-                            workbook=workbook,
-                            excel_file=f"static/{path}/{file_name}"
-                        )
-                        json_data["excel_path"] = f"static/{path}/{file_name}"
-                    except Exception as error:
-                        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                        json_data["excel_path"] = ''
+                    # Set borders
+                    side_medium = Side(border_style="thin", color="FF808080")
+                    # side_think = Side(border_style="thin", color="FF808080")
+                    border_horizontal_middle = Border(
+                        top=side_medium,
+                        # left=side_medium,
+                        # right=side_medium,
+                        # bottom=side_medium
+                    )
+                    border_vertical_middle = Border(
+                        # top=side_think,
+                        left=side_medium,
+                        # right=side_think,
+                        # bottom=side_think
+                    )
+                    border_vertical_light = Border(
+                        # top=side_think,
+                        left=side_medium,
+                        # right=side_think,
+                        # bottom=side_think
+                    )
+                    for row in range(header_low_row, body_low_row):
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
+                                pass
+                            else:
+                                cell = sheet[f'{col}{row}']
+                                cell.border = border_vertical_light
+                        cell = sheet[f'{backend_service.ExcelClass.get_column_letter(1)}{row}']
+                        cell.border = border_vertical_middle
+                        cell = sheet[f'{backend_service.ExcelClass.get_column_letter(6)}{row}']
+                        cell.border = border_vertical_middle
+                        cell = sheet[f'{backend_service.ExcelClass.get_column_letter(9)}{row}']
+                        cell.border = border_vertical_middle
+                    side_think = Side(border_style="dotted", color="FF808080")
+                    # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick',
+                    # 'medium', 'dashDot','dashDotDot', 'hair', 'mediumDashDot', 'slantDashDot'}
+                    border_think = Border(
+                        top=side_think,
+                        left=side_think,
+                        right=side_think,
+                        bottom=side_think
+                    )
+                    for row in range(1, header_low_row):
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.border = border_think
+                    side_medium = Side(border_style="thin", color="FF808080")
+                    border_medium = Border(
+                        top=side_medium,
+                        left=side_medium,
+                        right=side_medium,
+                        bottom=side_medium
+                    )
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                            cell = sheet[f'{col}{row - 1}']
+                            cell.border = border_medium
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row}']
+                        cell.border = border_horizontal_middle
+                    #######################################################
+
+                    # Colored styles
+                    #######################################################
+                    color_green = PatternFill(fgColor="E6E6FF", fill_type="solid")
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                            cell = sheet[f'{col}{row}']
+                            cell.fill = color_green
+                            cell = sheet[f'{col}{row - 1}']
+                            cell.border = border_medium
+                    color_yellow = PatternFill(fgColor="d0ffd8", fill_type="solid")
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_1 - 1}']
+                        cell.fill = color_yellow
+
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_2 - 1}']
+                        cell.fill = color_yellow
+
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_3 - 1}']
+                        cell.fill = color_yellow
+                        cell.fill = color_yellow
+
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_4 - 1}']
+                        cell.fill = color_yellow
+
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_5 - 1}']
+                        cell.fill = color_yellow
+                        cell.fill = color_yellow
+
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        cell = sheet[f'{col}{body_low_row_6 - 1}']
+                        cell.fill = color_yellow
+
+                    #######################################################
+
+                    # Height and width styles
+                    #######################################################
+                    for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        width = 1
+                        for row in range(1, body_low_row + 1):
+                            cell = sheet[f'{col}{row}']
+                            value = len(str(cell.value))
+                            if value > width:
+                                width = value
+                        if col == 'A' or col == 'F':
+                            width = width / 2
+                        sheet.column_dimensions[col].height = 1
+                        sheet.column_dimensions[col].width = round((width * 0.95), 3)
+                    #######################################################
+
+                    # Set global page and book settings
+                    #######################################################
+                    sheet.page_setup.orientation = sheet.ORIENTATION_PORTRAIT
+                    sheet.page_setup.paperSize = sheet.PAPERSIZE_LETTER
+                    sheet.page_margins.left = 0.05
+                    sheet.page_margins.right = 0.05
+                    sheet.page_margins.header = 0.1
+                    sheet.page_margins.bottom = 0.2
+                    sheet.page_margins.footer = 0.2
+                    sheet.page_margins.top = 0.1
+                    sheet.print_options.horizontalCentered = True
+                    # sheet.print_options.verticalCentered = True
+                    sheet.page_setup.fitToHeight = 1
+                    sheet.page_setup.scale = 80
+                    sheet.page_setup.fitToHeight = 1
+                    sheet.page_setup.fitToWidth = 1
+                    sheet.protection.password = key + '_1'
+                    sheet.protection.sheet = True
+                    sheet.protection.enable()
+                    #######################################################
+                    backend_service.ExcelClass.workbook_save(
+                        workbook=workbook,
+                        excel_file=f"static/{path}/{file_name}"
+                    )
+                    json_data["excel_path"] = f"static/{path}/{file_name}"
+
                     response = {"response": json_data}
-                    # print(f"response: {response}")
+                    # TODO response ###################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -1588,15 +1627,14 @@ def api_auth_idea(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "IDEA_CREATE":
                 try:
-                    status_moderate = "на модерации"
+                    # TODO get_value ###################################################################################
                     subdivision = req_inst.get_value("subdivision")
                     sphere = req_inst.get_value("sphere")
                     category = req_inst.get_value("category")
@@ -1604,7 +1642,7 @@ def api_auth_idea(request):
                     name = req_inst.get_value("name")
                     place = req_inst.get_value("place")
                     description = req_inst.get_value("description")
-
+                    # TODO actions #####################################################################################
                     backend_models.IdeaModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
                         subdivision_char_field=subdivision,
@@ -1614,7 +1652,7 @@ def api_auth_idea(request):
                         name_char_field=name,
                         place_char_field=place,
                         description_text_field=description,
-                        status_moderate_char_field=status_moderate,
+                        status_moderate_char_field="на модерации",
                     )
                     backend_models.NotificationModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
@@ -1625,15 +1663,16 @@ def api_auth_idea(request):
                         place_char_field="банк идей",
                         description_text_field=f"название: {name}",
                     )
-
                     response = {"response": "Идея успешно отправлена на модерацию!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_LIST":
                 try:
+                    # TODO get_value ###################################################################################
                     subdivision = req_inst.get_value("subdivision")
                     sphere = req_inst.get_value("sphere")
                     category = req_inst.get_value("category")
@@ -1642,7 +1681,7 @@ def api_auth_idea(request):
                     sort = req_inst.get_value("sort")
                     moderate = req_inst.get_value("moderate")
                     only_month = req_inst.get_value("onlyMonth")
-
+                    # TODO actions #####################################################################################
                     objects = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
@@ -1653,11 +1692,9 @@ def api_auth_idea(request):
                                 local_objects.append(obj.id)
                         objects = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
                             order_by("-register_datetime_field")
-
                     # search
                     if search:
                         objects = objects.filter(name_char_field__icontains=search)
-
                     # filter
                     if subdivision:
                         objects = objects.filter(subdivision_char_field=subdivision)
@@ -1673,10 +1710,8 @@ def api_auth_idea(request):
                                 personnel_number_slug_field=(str(author).split(" ")[-2]).strip()
                             )
                         objects = objects.filter(author_foreign_key_field=author)
-
                     if moderate:
                         objects = objects.filter(status_moderate_char_field=moderate)
-
                     # sort
                     if sort:
                         if sort == "дате публикации (свежие в начале)":
@@ -1692,10 +1727,7 @@ def api_auth_idea(request):
                             for obj in objects:
                                 objects_arr.append([obj.get_total_rating()["rate"], obj])
 
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects_arr.sort(key=lambda x: x[0], reverse=True)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -1703,11 +1735,7 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_total_rating()["rate"], obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects_arr.sort(key=lambda x: x[0], reverse=False)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -1720,11 +1748,7 @@ def api_auth_idea(request):
                                     ).count(),
                                     obj
                                 ])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects_arr.sort(key=lambda x: x[0], reverse=True)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -1737,11 +1761,7 @@ def api_auth_idea(request):
                                     ).count(),
                                     obj
                                 ])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects_arr.sort(key=lambda x: x[0], reverse=False)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -1749,11 +1769,7 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_comment_count(), obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects_arr.sort(key=lambda x: x[0], reverse=True)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -1761,38 +1777,38 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj.get_comment_count(), obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects_arr.sort(key=lambda x: x[0], reverse=False)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
-
-                    serializer = backend_serializers.IdeaModelSerializer(instance=objects, many=True)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.IdeaModelSerializer(instance=objects, many=True).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_DETAIL":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
+                    # TODO actions #####################################################################################
                     if _id:
                         rational = backend_models.IdeaModel.objects.get(id=_id)
                     else:
                         rational = backend_models.IdeaModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.IdeaModelSerializer(instance=rational, many=False)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.IdeaModelSerializer(instance=rational, many=False).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_CHANGE":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
                     subdivision = req_inst.get_value("subdivision")
                     sphere = req_inst.get_value("sphere")
@@ -1802,12 +1818,10 @@ def api_auth_idea(request):
                     name = req_inst.get_value("name")
                     place = req_inst.get_value("place")
                     description = req_inst.get_value("description")
-
                     moderate = req_inst.get_value("moderate")
                     moderate_comment = req_inst.get_value("moderateComment")
-
+                    # TODO actions #####################################################################################
                     obj = backend_models.IdeaModel.objects.get(id=_id)
-
                     if subdivision and obj.subdivision_char_field != subdivision:
                         obj.subdivision_char_field = subdivision
                     if sphere and obj.sphere_char_field != sphere:
@@ -1828,10 +1842,8 @@ def api_auth_idea(request):
                         obj.status_moderate_char_field = moderate
                     if moderate_comment and obj.comment_moderate_char_field != moderate_comment:
                         obj.comment_moderate_char_field = moderate_comment
-
                     obj.register_datetime_field = timezone.now()
                     obj.save()
-
                     if req_inst.user_model == obj.author_foreign_key_field:
                         backend_models.NotificationModel.objects.create(
                             author_foreign_key_field=req_inst.user_model,
@@ -1842,26 +1854,26 @@ def api_auth_idea(request):
                             place_char_field="банк идей",
                             description_text_field=f"название: {obj.name_char_field}",
                         )
-
                     response = {"response": "Успешно изменено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_MODERATE":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
                     moderate = req_inst.get_value("moderate")
                     moderate_comment = req_inst.get_value("moderateComment")
-
+                    # TODO actions #####################################################################################
                     obj = backend_models.IdeaModel.objects.get(id=_id)
                     obj.status_moderate_char_field = moderate
                     obj.moderate_foreign_key_field = req_inst.user_model
                     obj.comment_moderate_char_field = moderate_comment
                     obj.register_datetime_field = timezone.now()
                     obj.save()
-
                     if moderate == "принято" or moderate == "на доработку":
                         message = "Действия с Вашей идеей"
                         if moderate == "принято":
@@ -1889,87 +1901,95 @@ def api_auth_idea(request):
                             place_char_field="банк идей",
                             description_text_field=f"название: {obj.name_char_field}",
                         )
-
                     response = {"response": "Модерация успешно прошла!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_CREATE":
                 try:
-                    _id = request.data.get("id")
+                    # TODO get_value ###################################################################################
+                    _id = req_inst.get_value("id")
                     comment = req_inst.get_value("comment")
-
+                    # TODO actions #####################################################################################
                     obj = backend_models.IdeaModel.objects.get(id=_id)
-
                     backend_models.CommentIdeaModel.objects.create(
                         idea_foreign_key_field=obj,
                         author_foreign_key_field=req_inst.user_model,
                         comment_text_field=comment,
                     )
                     response = {"response": "Комментарий успешно создан!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_DELETE":
                 try:
-                    comment_id = request.data.get("commentId")
-
+                    # TODO get_value ###################################################################################
+                    comment_id = req_inst.get_value("commentId")
+                    # TODO actions #####################################################################################
                     backend_models.CommentIdeaModel.objects.get(
                         id=comment_id,
                     ).delete()
                     response = {"response": "Комментарий успешно удалён!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_LIST":
                 try:
-                    _id = request.data.get("id")
-
+                    # TODO get_value ###################################################################################
+                    _id = req_inst.get_value("id")
+                    # TODO actions #####################################################################################
                     obj = backend_models.IdeaModel.objects.get(id=_id)
                     objects = backend_models.CommentIdeaModel.objects.filter(idea_foreign_key_field=obj). \
                         order_by("-created_datetime_field")
-                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_RATING_CREATE":
                 try:
-                    _id = request.data.get("id")
-                    rating = request.data.get("rating")
-
+                    # TODO get_value ###################################################################################
+                    _id = req_inst.get_value("id")
+                    rating = req_inst.get_value("rating")
+                    # TODO actions #####################################################################################
                     obj = backend_models.IdeaModel.objects.get(id=_id)
                     rating_obj = backend_models.RatingIdeaModel.objects.get_or_create(
                         idea_foreign_key_field=obj, author_foreign_key_field=req_inst.user_model)[0]
                     rating_obj.rating_integer_field = rating
                     rating_obj.save()
-
-                    objects = backend_models.CommentIdeaModel.objects.filter(idea_foreign_key_field=obj). \
-                        order_by("-created_datetime_field")
-                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    objects = backend_models.CommentIdeaModel.objects.filter(
+                        idea_foreign_key_field=obj
+                    ).order_by("-created_datetime_field")
+                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_AUTHOR_LIST":
                 try:
-
+                    # TODO get_value ###################################################################################
                     sort = req_inst.get_value("sort")
                     only_month = req_inst.get_value("onlyMonth")
-
+                    # TODO actions #####################################################################################
                     authors = []
-                    ideas = backend_models.IdeaModel.objects.filter(status_moderate_char_field="принято"). \
-                        order_by("-register_datetime_field")
+                    ideas = backend_models.IdeaModel.objects.filter(
+                        status_moderate_char_field="принято"
+                    ).order_by("-register_datetime_field")
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                         local_objects = []
@@ -1979,11 +1999,9 @@ def api_auth_idea(request):
                                 local_objects.append(obj.id)
                         ideas = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
                             order_by("-register_datetime_field")
-
                     for idea in ideas:
                         authors.append(idea.author_foreign_key_field)
                     authors = set(authors)
-
                     objects = []
                     for auth in authors:
                         ideas = backend_models.IdeaModel.objects.filter(
@@ -2008,18 +2026,13 @@ def api_auth_idea(request):
                             "idea_count": idea_count, "idea_rating": round(idea_rating / idea_rating_count, 1),
                             "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
                         })
-
                     # sort
                     if sort:
                         if sort == "количеству (наибольшие в начале)":
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj["idea_count"], obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects_arr.sort(key=lambda x: x[0], reverse=True)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -2027,11 +2040,7 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj["idea_count"], obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects_arr.sort(key=lambda x: x[0], reverse=False)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -2039,11 +2048,7 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj["idea_rating"], obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects_arr.sort(key=lambda x: x[0], reverse=True)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -2051,11 +2056,7 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj["idea_rating"], obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects_arr.sort(key=lambda x: x[0], reverse=False)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -2063,11 +2064,7 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj["idea_rating_count"], obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=True)
+                            objects_arr.sort(key=lambda x: x[0], reverse=True)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -2075,11 +2072,7 @@ def api_auth_idea(request):
                             objects_arr = []
                             for obj in objects:
                                 objects_arr.append([obj["idea_rating_count"], obj])
-
-                            def sort_rating(val):
-                                return val[0]
-
-                            objects_arr.sort(key=sort_rating, reverse=False)
+                            objects_arr.sort(key=lambda x: x[0], reverse=False)
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
@@ -2099,9 +2092,9 @@ def api_auth_idea(request):
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
-
                     response = {"response": objects}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -2123,21 +2116,14 @@ def api_auth_rational(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "RATIONAL_CREATE":
                 try:
-                    author = backend_models.UserModel.objects.get(user_foreign_key_field=req_inst.user)
-                    count = backend_models.RationalModel.objects.order_by('-id')
-                    if len(count) > 0:
-                        count = count[0].id + 1
-                    else:
-                        count = 1
-                    number = f"{count}_{backend_service.DateTimeUtils.get_current_date()}"
+                    # TODO get_value ###################################################################################
                     subdivision = req_inst.get_value("subdivision")
                     sphere = req_inst.get_value("sphere")
                     category = req_inst.get_value("category")
@@ -2149,37 +2135,52 @@ def api_auth_rational(request):
                     additional_pdf = req_inst.get_value("additionalPdf")
                     additional_excel = req_inst.get_value("additionalExcel")
                     user1 = req_inst.get_value("user1")
-                    if user1.find("%") < 0:
-                        user1 += "%"
-                    if len(user1) < 7:
-                        user1 = None
                     user2 = req_inst.get_value("user2")
-                    if user2.find("%") < 0:
-                        user2 += "%"
-                    if len(user2) < 7:
-                        user2 = None
                     user3 = req_inst.get_value("user3")
-                    if user3.find("%") < 0:
-                        user3 += "%"
-                    if len(user3) < 7:
-                        user3 = None
                     user4 = req_inst.get_value("user4")
-                    if user4.find("%") < 0:
-                        user4 += "%"
-                    if len(user4) < 7:
-                        user4 = None
                     user5 = req_inst.get_value("user5")
-                    if user5.find("%") < 0:
-                        user5 += "%"
-                    if len(user5) < 7:
-                        user5 = None
-                    if sphere == "Технологическая":
-                        status_moderate = "Предтехмодерация"
+                    # TODO actions #####################################################################################
+                    count = backend_models.RationalModel.objects.order_by('-id')
+                    if len(count) > 0:
+                        count = count[0].id + 1
                     else:
-                        status_moderate = "Постнетехмодерация"
-
+                        count = 1
+                    number = f"{count}_{backend_service.DateTimeUtils.get_current_date()}"
+                    if user1.find("%") < 0 and len(user1) < 7:
+                        user1 += "%"
+                    else:
+                        user1 = None
+                    if user2.find("%") < 0 and len(user2) < 7:
+                        user2 += "%"
+                    else:
+                        user2 = None
+                    if user3.find("%") < 0 and len(user3) < 7:
+                        user3 += "%"
+                    else:
+                        user3 = None
+                    if user4.find("%") < 0 and len(user4) < 7:
+                        user4 += "%"
+                    else:
+                        user4 = None
+                    if user5.find("%") < 0 and len(user5) < 7:
+                        user5 += "%"
+                    else:
+                        user5 = None
+                    if subdivision == "автотранспортное предприятие":
+                        name_slug_field = "moderator_rational_atp"
+                    elif subdivision == "горно-транспортный комплекс":
+                        name_slug_field = "moderator_rational_gtk"
+                    elif subdivision == "обогатительный комплекс":
+                        name_slug_field = "moderator_rational_ok"
+                    elif subdivision == "управление предприятия":
+                        name_slug_field = "moderator_rational_upravlenie"
+                    elif subdivision == "энергоуправление":
+                        name_slug_field = "moderator_rational_energoupravlenie"
+                    else:
+                        name_slug_field = "moderator_rational"
+                    # TODO create ######################################################################################
                     backend_models.RationalModel.objects.create(
-                        author_foreign_key_field=author,
+                        author_foreign_key_field=req_inst.user_model,
                         number_char_field=number,
                         subdivision_char_field=subdivision,
                         sphere_char_field=sphere,
@@ -2196,29 +2197,61 @@ def api_auth_rational(request):
                         author_3_char_field=user3,
                         author_4_char_field=user4,
                         author_5_char_field=user5,
-                        status_moderate_char_field=status_moderate,
+                        status_moderate_char_field="на модерации",
                     )
-                    response = {"response": "Рационализаторское предложение успешно отправлено на модерацию!"}
-                    # print(f"response: {response}")
+                    backend_models.NotificationModel.objects.create(
+                        author_foreign_key_field=req_inst.user_model,
+                        model_foreign_key_field=backend_models.GroupModel.objects.get(
+                            name_slug_field=name_slug_field
+                        ),
+                        name_char_field="Создано новое рационализаторское предложение",
+                        place_char_field="рационализаторство",
+                        description_text_field=f"название: {name}",
+                    )
+                    response = {"response": "Успешно отправлено на модерацию!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            elif req_inst.action_type == "RATIONAL_LIST":
+                return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "RATIONAL_LIST":
                 try:
-                    subdivision = request.data.get("subdivision")
-                    category = request.data.get("category")
-                    author = request.data.get("author")
-                    search = request.data.get("search")
-                    sort = request.data.get("sort")
-                    moderate = request.data.get("moderate")
+                    # TODO get_value ###################################################################################
+                    subdivision = req_inst.get_value("subdivision")
+                    category = req_inst.get_value("category")
+                    author = req_inst.get_value("author")
+                    search = req_inst.get_value("search")
+                    sort = req_inst.get_value("sort")
+                    moderate = req_inst.get_value("moderate")
+                    # TODO actions #####################################################################################
 
+                    def check_access(slug):
+                        if backend_models.GroupModel.objects.filter(
+                                user_many_to_many_field=req_inst.user_model,
+                                name_slug_field=str(slug)
+                        ).count() > 0:
+                            return True
+                        else:
+                            return False
+
+                    if check_access("moderator_rational") is False:
+                        if check_access("moderator_rational_atp"):
+                            subdivision = "автотранспортное предприятие"
+                        elif check_access("moderator_rational_gtk"):
+                            subdivision = "горно-транспортный комплекс"
+                        elif check_access("moderator_rational_ok"):
+                            subdivision = "обогатительный комплекс"
+                        elif check_access("moderator_rational_upravlenie"):
+                            subdivision = "управление предприятия"
+                        elif check_access("moderator_rational_energoupravlenie"):
+                            subdivision = "энергоуправление"
+                        else:
+                            moderate = "принято"
                     objects = backend_models.RationalModel.objects.all().order_by("-created_datetime_field")
-
                     # search
                     if search:
                         objects = objects.filter(name_char_field__icontains=search)
-
                     # filter
                     if subdivision:
                         objects = objects.filter(subdivision_char_field=subdivision)
@@ -2229,10 +2262,8 @@ def api_auth_rational(request):
                             personnel_number_slug_field=str(author).split(" ")[-2]
                         )
                         objects = objects.filter(author_foreign_key_field=author)
-
                     if moderate:
                         objects = objects.filter(status_moderate_char_field=moderate)
-
                     # sort
                     if sort:
                         if sort == "Дате публикации (сначала свежие)":
@@ -2243,41 +2274,39 @@ def api_auth_rational(request):
                             objects = objects.order_by("name_char_field")
                         elif sort == "Названию (С конца алфавита)":
                             objects = objects.order_by("-name_char_field")
-
-                    serializer = backend_serializers.RationalModelSerializer(instance=objects, many=True)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.RationalModelSerializer(instance=objects, many=True).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            elif req_inst.action_type == "RATIONAL_DETAIL":
+            if req_inst.action_type == "RATIONAL_DETAIL":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
+                    # TODO actions #####################################################################################
                     if _id:
                         rational = backend_models.RationalModel.objects.get(id=_id)
                     else:
                         rational = backend_models.RationalModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.RationalModelSerializer(instance=rational, many=False)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.RationalModelSerializer(instance=rational, many=False).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            elif req_inst.action_type == "RATIONAL_MODERATE":
+            if req_inst.action_type == "RATIONAL_MODERATE":
                 try:
+                    # TODO get_value ###################################################################################
                     rational_id = req_inst.get_value("rationalId")
-                    print("rational_id: ", rational_id)
                     moderate = req_inst.get_value("moderate")
-                    print("moderate: ", moderate)
                     comment = req_inst.get_value("comment")
-                    print("comment: ", comment)
-                    user_model = req_inst.user_model
-                    print("user_model: ", user_model)
-
+                    # TODO actions #####################################################################################
                     rational = backend_models.RationalModel.objects.get(id=rational_id)
-
                     if rational.status_moderate_char_field == "Предтехмодерация":
                         if moderate == "Принято":
                             rational.status_moderate_char_field = "Посттехмодерация"
@@ -2306,15 +2335,14 @@ def api_auth_rational(request):
                             rational.postmoderate_foreign_key_field = req_inst.user_model
                             rational.comment_postmoderate_char_field = comment
                     rational.save()
-
                     response = {"response": "Успешно"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
+            return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
@@ -2330,22 +2358,21 @@ def api_any_vacancy(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "VACANCY_LIST":
                 try:
+                    # TODO get_value ###################################################################################
                     sphere = req_inst.get_value("sphere")
                     education = req_inst.get_value("education")
                     experience = req_inst.get_value("experience")
                     sort = req_inst.get_value("sort")
                     search = req_inst.get_value("search")
-
+                    # TODO actions #####################################################################################
                     objects = backend_models.VacancyModel.objects.all().order_by("-id")
-
                     if sphere:
                         objects = objects.filter(sphere_char_field=sphere)
                     if education:
@@ -2361,28 +2388,29 @@ def api_any_vacancy(request):
                             objects = objects.order_by("qualification_char_field")
                         elif sort == "Названию (С конца алфавита)":
                             objects = objects.order_by("-qualification_char_field")
-
                     if search:
                         objects = objects.filter(qualification_char_field__icontains=search)
-
-                    serializer = backend_serializers.VacancyModelSerializer(instance=objects, many=True)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.VacancyModelSerializer(instance=objects, many=True).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "VACANCY_DETAIL":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
-
+                    # TODO actions #####################################################################################
                     if _id:
                         vacancy = backend_models.VacancyModel.objects.get(id=_id)
                     else:
                         vacancy = backend_models.VacancyModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.VacancyModelSerializer(instance=vacancy, many=False)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.VacancyModelSerializer(instance=vacancy, many=False).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -2404,14 +2432,14 @@ def api_auth_vacancy(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "VACANCY_CREATE":
                 try:
+                    # TODO get_value ###################################################################################
                     qualification = req_inst.get_value("qualification")
                     rank = req_inst.get_value("rank")
                     sphere = req_inst.get_value("sphere")
@@ -2419,12 +2447,12 @@ def api_auth_vacancy(request):
                     experience = req_inst.get_value("experience")
                     schedule = req_inst.get_value("schedule")
                     image = req_inst.get_value("image")
+                    description = req_inst.get_value("description")
+                    # TODO actions #####################################################################################
                     if image and image != "null":
                         pass
                     else:
                         image = None
-                    description = req_inst.get_value("description")
-
                     backend_models.VacancyModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
                         qualification_char_field=qualification,
@@ -2436,15 +2464,16 @@ def api_auth_vacancy(request):
                         image_field=image,
                         description_text_field=description,
                     )
-
                     response = {"response": "Успешно создано!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "VACANCY_CHANGE":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
                     qualification = req_inst.get_value("qualification")
                     rank = req_inst.get_value("rank")
@@ -2453,15 +2482,14 @@ def api_auth_vacancy(request):
                     experience = req_inst.get_value("experience")
                     schedule = req_inst.get_value("schedule")
                     image = req_inst.get_value("image")
+                    clear_image = req_inst.get_value("clearImage")
+                    description = req_inst.get_value("description")
+                    # TODO actions #####################################################################################
                     if image and image != "null":
                         pass
                     else:
                         image = None
-                    clear_image = req_inst.get_value("clearImage")
-                    description = req_inst.get_value("description")
-
                     vacancy = backend_models.VacancyModel.objects.get(id=_id)
-
                     if req_inst.user_model and vacancy.author_foreign_key_field != req_inst.user_model:
                         vacancy.author_foreign_key_field = req_inst.user_model
                     if qualification and vacancy.qualification_char_field != qualification:
@@ -2482,21 +2510,23 @@ def api_auth_vacancy(request):
                         vacancy.image_field = image
                     if description and vacancy.description_text_field != description:
                         vacancy.description_text_field = description
-
                     vacancy.save()
-
                     response = {"response": "Успешно изменено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "VACANCY_DELETE":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
+                    # TODO actions #####################################################################################
                     backend_models.VacancyModel.objects.get(id=_id).delete()
                     response = {"response": "Успешно удалено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -2518,30 +2548,29 @@ def api_any_resume(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "RESUME_CREATE":
                 try:
-
+                    # TODO get_value ###################################################################################
                     qualification = req_inst.get_value("qualification")
                     last_name = req_inst.get_value("lastName")
                     first_name = req_inst.get_value("firstName")
                     patronymic = req_inst.get_value("patronymic")
                     image = req_inst.get_value("image")
-                    if image and image != "null":
-                        pass
-                    else:
-                        image = None
                     birth_date = req_inst.get_value("birthDate")
                     education = req_inst.get_value("education")
                     experience = req_inst.get_value("experience")
                     sex = req_inst.get_value("sex")
                     contact_data = req_inst.get_value("contactData")
-
+                    # TODO actions #####################################################################################
+                    if image and image != "null":
+                        pass
+                    else:
+                        image = None
                     backend_models.ResumeModel.objects.create(
                         qualification_char_field=qualification,
                         last_name_char_field=last_name,
@@ -2554,9 +2583,9 @@ def api_any_resume(request):
                         sex_char_field=sex,
                         contact_data_text_field=contact_data,
                     )
-
                     response = {"response": "Ваше резюме успешно сохранено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -2578,24 +2607,22 @@ def api_auth_resume(request):
     """
 
     try:
-        # Request
+        # TODO Request #################################################################################################
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-
-        # Methods
+        # TODO Methods #################################################################################################
         if req_inst.method == "POST":
-            # Actions
+            # TODO Actions #############################################################################################
             if req_inst.action_type == "RESUME_LIST":
                 try:
-
+                    # TODO get_value ###################################################################################
                     education = req_inst.get_value("education")
                     experience = req_inst.get_value("experience")
                     sex = req_inst.get_value("sex")
                     sort = req_inst.get_value("sort")
                     search_qualification = req_inst.get_value("searchQualification")
                     search_last_name = req_inst.get_value("searchLastName")
-
+                    # TODO actions #####################################################################################
                     resume_list = backend_models.ResumeModel.objects.all().order_by("-id")
-
                     if education:
                         resume_list = resume_list.filter(education_char_field=education)
                     if experience:
@@ -2611,40 +2638,44 @@ def api_auth_resume(request):
                             resume_list = resume_list.order_by("qualification_char_field")
                         elif sort == "Названию вакансии (С конца алфавита)":
                             resume_list = resume_list.order_by("-qualification_char_field")
-
                     if search_qualification:
                         resume_list = resume_list.filter(qualification_char_field__icontains=search_qualification)
                     if search_last_name:
                         resume_list = resume_list.filter(last_name_char_field__icontains=search_last_name)
-
-                    serializer = backend_serializers.ResumeModelSerializer(instance=resume_list, many=True)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.ResumeModelSerializer(instance=resume_list, many=True).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RESUME_DETAIL":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
-
+                    # TODO actions #####################################################################################
                     if _id:
                         vacancy = backend_models.ResumeModel.objects.get(id=_id)
                     else:
                         vacancy = backend_models.ResumeModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.ResumeModelSerializer(instance=vacancy, many=False)
-                    response = {"response": serializer.data}
-                    # print(f"response: {response}")
+                    serializer = backend_serializers.ResumeModelSerializer(instance=vacancy, many=False).data
+                    response = {"response": serializer}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RESUME_DELETE":
                 try:
+                    # TODO get_value ###################################################################################
                     _id = req_inst.get_value("id")
+                    # TODO actions #####################################################################################
                     backend_models.ResumeModel.objects.get(id=_id).delete()
                     response = {"response": "Успешно удалено!"}
-                    # print(f"response: {response}")
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)

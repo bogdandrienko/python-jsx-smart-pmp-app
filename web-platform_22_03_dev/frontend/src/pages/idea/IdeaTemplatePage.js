@@ -33,7 +33,7 @@ export const IdeaTemplatePage = () => {
                     required
                   >
                     <option className="m-0 p-0" value="">
-                      управление
+                      управление предприятия
                     </option>
                   </select>
                 </label>

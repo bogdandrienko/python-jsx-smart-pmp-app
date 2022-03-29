@@ -848,7 +848,14 @@ export const modules = [
           },
           {
             Header: "Модерация рационализаторских предложений [модератор]",
-            Access: ["moderator_rational"],
+            Access: [
+              "moderator_rational",
+              "moderator_rational_atp",
+              "moderator_rational_gtk",
+              "moderator_rational_ok",
+              "moderator_rational_upravlenie",
+              "moderator_rational_energoupravlenie",
+            ],
             Active: true,
             Link: "/rational_moderate_list",
             ExternalLink: false,

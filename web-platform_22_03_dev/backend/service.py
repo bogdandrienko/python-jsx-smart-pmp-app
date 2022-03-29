@@ -9,10 +9,10 @@ import threading
 import time
 import httplib2
 import openpyxl
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from openpyxl.utils import get_column_letter
 from typing import Union
 # ###################################################################################################TODO django modules
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest
 # ###################################################################################################TODO custom modules
@@ -39,7 +39,7 @@ class DjangoClass:
                     username_slug_field=req_inst.user,
                     ip_genericipaddress_field=req_inst.ip,
                     request_path_slug_field=req_inst.path,
-                    request_method_slug_field=req_inst.method + " | " + req_inst.action_type,
+                    request_method_slug_field=f"ERROR | {req_inst.method} | {req_inst.action_type}",
                     error_text_field=f'error: {error}'
                 )
                 text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type, error,
@@ -86,7 +86,7 @@ class DjangoClass:
                     username_slug_field=req_inst.user,
                     ip_genericipaddress_field=req_inst.ip,
                     request_path_slug_field=req_inst.path,
-                    request_method_slug_field=req_inst.method + " | " + req_inst.action_type,
+                    request_method_slug_field=f"ACTION | {req_inst.method} | {req_inst.action_type}",
                     error_text_field=f'-'
                 )
                 text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type,
@@ -97,25 +97,46 @@ class DjangoClass:
                 with open('static/media/admin/logging/logging_actions.txt', 'a') as log:
                     log.write(f'\n{string[2:]}\n')
 
+        @staticmethod
+        def response(request, response):
+            if DjangoClass.DefaultSettingsClass.get_response_print_value():
+                request_instance = DjangoClass.DRFClass.RequestClass(request=request)
+                print(f"\n\n{DateTimeUtils.get_current_datetime()}"
+                      f"\nrequest_path: {request_instance.path}"
+                      f"\nrequest_action_type: {request_instance.action_type}"
+                      f"\nrequest_user: {request_instance.user}"
+                      f"\nrequest.data: {request_instance.data}"
+                      f"\nrequest.response: {response}")
+
+            if DjangoClass.DefaultSettingsClass.get_response_logging_value():
+                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                backend_models.LoggingModel.objects.create(
+                    username_slug_field=req_inst.user,
+                    ip_genericipaddress_field=req_inst.ip,
+                    request_path_slug_field=req_inst.path,
+                    request_method_slug_field=f"RESPONSE | {req_inst.method} | {req_inst.action_type}",
+                    error_text_field=f'response {response}'
+                )
+                text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type,
+                        datetime.datetime.now()]
+                string = ''
+                for val in text:
+                    string = string + f', {val}'
+                with open('static/media/admin/logging/logging_response.txt', 'a') as log:
+                    log.write(f'\n{string[2:]}\n')
+
     class TemplateClass:
         @staticmethod
         def request(request):
-            # Settings
-            ############################################################################################################
             threading.Thread(target=DjangoClass.DefaultSettingsClass.check_settings, args=(request,)).start()
-            ############################################################################################################
-
-            # Logging
-            ############################################################################################################
             threading.Thread(target=DjangoClass.LoggingClass.action, args=(request,)).start()
-            ############################################################################################################
-
-            # Request
-            ############################################################################################################
             request_instance = DjangoClass.DRFClass.RequestClass(request=request)
-            ############################################################################################################
 
             return request_instance
+
+        @staticmethod
+        def response(request, response):
+            threading.Thread(target=DjangoClass.LoggingClass.response, args=(request, response, )).start()
 
     class DRFClass:
         class RequestClass:
@@ -261,120 +282,171 @@ class DjangoClass:
         @staticmethod
         def check_settings(request):
             try:
-                backend_models.SettingsModel.objects.get(type_char_field="logging_action")
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_action")
+                if obj.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="logging_action",
+                        char_field="Логирование действий: вкл/выкл(boolean_field)",
+                        boolean_field=True
+                    )
             except Exception as error:
-                backend_models.SettingsModel.objects.create(
-                    type_char_field="logging_action",
-                    char_field="Логирование действий: вкл/выкл(boolean_field)",
-                    boolean_field=True
-                )
+                print(error)
 
             try:
-                backend_models.SettingsModel.objects.get(type_char_field="print_action")
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="print_action")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="print_action",
+                        char_field="Вывод в консоль действий, вкл/выкл(boolean_field)",
+                        boolean_field=False
+                    )
             except Exception as error:
-                backend_models.SettingsModel.objects.create(
-                    type_char_field="print_action",
-                    char_field="Вывод в консоль действий, вкл/выкл(boolean_field)",
-                    boolean_field=True
-                )
+                print(error)
 
             try:
-                backend_models.SettingsModel.objects.get(type_char_field="logging_error")
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="logging_error")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="logging_error",
+                        char_field="Логирование ошибок, вкл/выкл(boolean_field)",
+                        boolean_field=True
+                    )
             except Exception as error:
-                backend_models.SettingsModel.objects.create(
-                    type_char_field="logging_error",
-                    char_field="Логирование ошибок: вкл/выкл(boolean_field)",
-                    boolean_field=True
-                )
+                print(error)
 
             try:
-                backend_models.SettingsModel.objects.get(type_char_field="print_error")
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="print_error")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="print_error",
+                        char_field="Вывод в консоль ошибок, вкл/выкл(boolean_field)",
+                        boolean_field=False
+                    )
             except Exception as error:
-                backend_models.SettingsModel.objects.create(
-                    type_char_field="print_error",
-                    char_field="Вывод в консоль ошибок, вкл/выкл(boolean_field)",
-                    boolean_field=True
-                )
+                print(error)
 
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="scheduler_personal")
-                if obj.boolean_field:
-                    try:
-                        objects = backend_models.LoggingModel.objects.filter(
-                            request_path_slug_field="/scheduler_personal/"
-                        )
-                        update = True
-                        if objects.count() > 0:
-                            if (objects[0].created_datetime_field +
-                                datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime('%Y-%m-%d %H:%M') >= \
-                                    (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
-                                update = False
-                        if update:
-                            req_inst = DjangoClass.DRFClass.RequestClass(request=request)
-                            backend_models.LoggingModel.objects.create(
-                                username_slug_field=req_inst.user,
-                                ip_genericipaddress_field=req_inst.ip,
-                                request_path_slug_field="/scheduler_personal/",
-                                request_method_slug_field=req_inst.method + " | SCHEDULER",
-                                error_text_field=f'-'
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="logging_response")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="logging_response",
+                        char_field="Логирование ответов, вкл/выкл(boolean_field)",
+                        boolean_field=False
+                    )
+            except Exception as error:
+                print(error)
+
+            try:
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="print_response")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="print_response",
+                        char_field="Вывод в консоль ответов, вкл/выкл(boolean_field)",
+                        boolean_field=False
+                    )
+            except Exception as error:
+                print(error)
+
+            try:
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_personal")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="scheduler_personal",
+                        char_field="Планировщик обновления персонала из 1С",
+                        text_field="http://192.168.1.10/KM_1C/hs/iden/change/ | Web_adm_1c | 159159qqww!",
+                        integer_field=60,
+                        boolean_field=True
+                    )
+                else:
+                    obj = objects[0]
+                    if obj.boolean_field:
+                        try:
+                            objects = backend_models.LoggingModel.objects.filter(
+                                request_path_slug_field="/scheduler_personal/"
                             )
-                            threading.Thread(
-                                target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_personal, args=()
-                            ).start()
-                    except Exception as error:
-                        DjangoClass.LoggingClass.error(request=request, error=error)
+                            update = True
+                            if objects.count() > 0:
+                                if (objects[0].created_datetime_field +
+                                    datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime(
+                                    '%Y-%m-%d %H:%M') >= \
+                                        (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
+                                    update = False
+                            if update:
+                                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                                backend_models.LoggingModel.objects.create(
+                                    username_slug_field=req_inst.user,
+                                    ip_genericipaddress_field=req_inst.ip,
+                                    request_path_slug_field="/scheduler_personal/",
+                                    request_method_slug_field=req_inst.method + " | SCHEDULER",
+                                    error_text_field=f'-'
+                                )
+                                threading.Thread(
+                                    target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_personal, args=()
+                                ).start()
+                        except Exception as error:
+                            DjangoClass.LoggingClass.error(request=request, error=error)
             except Exception as error:
-                backend_models.SettingsModel.objects.create(
-                    type_char_field="scheduler_personal",
-                    char_field="Планировщик обновления персонала из 1С",
-                    text_field="http://192.168.1.10/KM_1C/hs/iden/change/ | Web_adm_1c | 159159qqww!",
-                    integer_field=60,
-                    boolean_field=True
-                )
+                print(error)
 
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="scheduler_superuser")
-                if obj.boolean_field:
-                    users_strings = str(obj.text_field).strip().split("|")
-                    superusers = []
-                    for user_strings in users_strings:
-                        superusers.append([str(x).strip() for x in str(user_strings).strip().split(",") if len(x) > 1])
-                    threading.Thread(
-                        target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_superusers,
-                        args=(superusers,)
-                    ).start()
-                    obj.boolean_field = False
-                    obj.save()
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_superuser")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="scheduler_superuser",
+                        char_field="Планировщик создания стандартных суперпользователей",
+                        text_field="000000000000, 31284bogdan | Web_adm_1c, 159159qqww!",
+                        boolean_field=True
+                    )
+                else:
+                    obj = objects[0]
+                    if obj.boolean_field:
+                        users_strings = str(obj.text_field).strip().split("|")
+                        superusers = []
+                        for user_strings in users_strings:
+                            superusers.append(
+                                [str(x).strip() for x in str(user_strings).strip().split(",") if len(x) > 1])
+                        threading.Thread(
+                            target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_superusers,
+                            args=(superusers,)
+                        ).start()
+                        obj.boolean_field = False
+                        obj.save()
             except Exception as error:
-                backend_models.SettingsModel.objects.create(
-                    type_char_field="scheduler_superuser",
-                    char_field="Планировщик создания стандартных суперпользователей",
-                    text_field="000000000000, 31284bogdan | Web_adm_1c, 159159qqww!",
-                    boolean_field=True
-                )
+                print(error)
 
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="scheduler_group")
-                if obj.boolean_field:
-                    groups = [str(x).strip() for x in str(obj.text_field).strip().split(",") if len(x) > 1]
-                    threading.Thread(
-                        target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_groups,
-                        args=(groups,)
-                    ).start()
-                    obj.boolean_field = False
-                    obj.save()
+                objects = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_group")
+                if objects.count() < 1:
+                    backend_models.SettingsModel.objects.create(
+                        type_char_field="scheduler_group",
+                        char_field="Планировщик создания стандартных групп",
+                        text_field="user, moderator, superuser, " +
+
+                                   "moderator_idea, moderator_vacancy, " +
+
+                                   "moderator_rational, moderator_rational_atp, moderator_rational_gtk, "
+                                   "moderator_rational_ok, moderator_rational_upravlenie, "
+                                   "moderator_rational_energoupravlenie, " +
+                                   "",
+                        boolean_field=True
+                    )
+                else:
+                    obj = objects[0]
+                    if obj.boolean_field:
+                        groups = [str(x).strip() for x in str(obj.text_field).strip().split(",") if len(x) > 1]
+                        threading.Thread(
+                            target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_groups,
+                            args=(groups,)
+                        ).start()
+                        obj.boolean_field = False
+                        obj.save()
             except Exception as error:
-                backend_models.SettingsModel.objects.create(
-                    type_char_field="scheduler_group",
-                    char_field="Планировщик создания стандартных групп",
-                    text_field="user, moderator, superuser, moderator_idea, moderator_rational, moderator_vacancy",
-                    boolean_field=True
-                )
+                print(error)
 
         @staticmethod
         def get_actions_logging_value():
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="logging_action")
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_action")[0]
                 return obj.boolean_field
             except Exception as error:
                 return False
@@ -382,7 +454,7 @@ class DjangoClass:
         @staticmethod
         def get_actions_print_value():
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="print_action")
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="print_action")[0]
                 return obj.boolean_field
             except Exception as error:
                 return False
@@ -390,7 +462,7 @@ class DjangoClass:
         @staticmethod
         def get_error_logging_value():
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="logging_error")
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_error")[0]
                 return obj.boolean_field
             except Exception as error:
                 return False
@@ -398,7 +470,23 @@ class DjangoClass:
         @staticmethod
         def get_error_print_value():
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="print_error")
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="print_error")[0]
+                return obj.boolean_field
+            except Exception as error:
+                return False
+
+        @staticmethod
+        def get_response_logging_value():
+            try:
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_response")[0]
+                return obj.boolean_field
+            except Exception as error:
+                return False
+
+        @staticmethod
+        def get_response_print_value():
+            try:
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="print_response")[0]
                 return obj.boolean_field
             except Exception as error:
                 return False
@@ -406,8 +494,11 @@ class DjangoClass:
         @staticmethod
         def get_salary_value():
             try:
-                obj = backend_models.SettingsModel.objects.get(type_char_field="scheduler_personal")
-                return [x.strip for x in str(obj.text_field).strip().split("|")]
+                obj = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_personal")[0]
+                objects = []
+                for x in str(obj.text_field).strip().split("|"):
+                    objects.append(str(x).strip())
+                return objects
             except Exception as error:
                 return False
 
@@ -613,6 +704,7 @@ class DjangoClass:
             except EmptyPage:
                 page = paginator.page(paginator.num_pages)
             return page
+
 
 # ###################################################################################################TODO custom service
 class DateTimeUtils:

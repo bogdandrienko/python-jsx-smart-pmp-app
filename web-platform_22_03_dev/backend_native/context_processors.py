@@ -7,8 +7,8 @@ def user_counter(request):
     try:
         user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=User.objects.get(id=request.user.id))[0]
         notifications = backend_models.NotificationModel.objects.filter(
-            user_foreign_key_field=user_model,
-            status_boolean_field=False,
+            author_foreign_key_field=user_model,
+            visibility_boolean_field=False,
         ).count()
     except Exception as error:
         backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
