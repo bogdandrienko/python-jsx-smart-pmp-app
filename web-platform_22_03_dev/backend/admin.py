@@ -1,17 +1,17 @@
-# ###################################################################################################TODO django modules
+# TODO django modules ##################################################################################################
 from django.contrib import admin
-# ######################################################################################################TODO drf modules
+# TODO drf modules #####################################################################################################
 from rest_framework_simplejwt import token_blacklist
-# ###################################################################################################TODO custom modules
+# TODO custom modules ##################################################################################################
 from backend import models as backend_models
 
-# #################################################################################################TODO default settings
+# TODO default settings ################################################################################################
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Администрирование'  # default: "Django site admin"
 
 
-# ##############################################################################################TODO example model admin
+# TODO example model admin #############################################################################################
 class ExamplesModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'ExamplesModel' на панели администратора
@@ -168,7 +168,7 @@ class ExamplesModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.ExamplesModel, ExamplesModelAdmin)
 
 
-# #################################################################################################TODO base model admin
+# TODO base model admin ################################################################################################
 class UserModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'UserModel' на панели администратора
@@ -567,7 +567,7 @@ class NotificationModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.NotificationModel, NotificationModelAdmin)
 
 
-# ###############################################################################################TODO custom model admin
+# TODO custom model admin ##############################################################################################
 class IdeaModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'IdeaModel' на панели администратора
@@ -751,7 +751,7 @@ class CommentIdeaModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.CommentIdeaModel, CommentIdeaModelAdmin)
 
 
-# #################################################################################################TODO test model admin
+# TODO test model admin ################################################################################################
 class RationalModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'RationalModel' на панели администратора
@@ -762,7 +762,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         "number_char_field",
         "status_moderate_char_field",
         "subdivision_char_field",
-        "sphere_char_field",
         "category_char_field",
         "image_field",
         "name_char_field",
@@ -792,7 +791,6 @@ class RationalModelAdmin(admin.ModelAdmin):
     list_editable = (
         "status_moderate_char_field",
         "subdivision_char_field",
-        "sphere_char_field",
         "category_char_field",
     )
     list_filter = (
@@ -800,7 +798,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         "number_char_field",
         "status_moderate_char_field",
         "subdivision_char_field",
-        "sphere_char_field",
         "category_char_field",
         "image_field",
         "name_char_field",
@@ -829,7 +826,6 @@ class RationalModelAdmin(admin.ModelAdmin):
             "number_char_field",
             "status_moderate_char_field",
             "subdivision_char_field",
-            "sphere_char_field",
             "category_char_field",
             "image_field",
             "name_char_field",
@@ -862,7 +858,6 @@ class RationalModelAdmin(admin.ModelAdmin):
         "number_char_field",
         "status_moderate_char_field",
         "subdivision_char_field",
-        "sphere_char_field",
         "category_char_field",
         "image_field",
         "name_char_field",

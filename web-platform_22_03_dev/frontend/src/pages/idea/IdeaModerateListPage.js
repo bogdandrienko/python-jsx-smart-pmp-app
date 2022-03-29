@@ -1,35 +1,36 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
+// TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaModerateListPage = () => {
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
+  // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   const [firstRefresh, firstRefreshSet] = useState(true);
+  //////////////////////////////////////////////////////////
   const [detailView, detailViewSet] = useState(true);
+  const [moderate, moderateSet] = useState("на модерации");
   const [subdivision, subdivisionSet] = useState("");
   const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
   const [author, authorSet] = useState("");
   const [search, searchSet] = useState("");
   const [sort, sortSet] = useState("дате публикации (свежие в начале)");
-  const [moderate, moderateSet] = useState("на модерации");
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
-  const userListAllStore = useSelector((state) => state.userListAllStore);
+  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
+  const UserListStore = useSelector((state) => state.UserListStore);
   const {
-    // load: loadUserListAll,
-    data: dataUserListAll,
-    // error: errorUserListAll,
-    // fail: failUserListAll,
-  } = userListAllStore;
+    // load: loadUserList,
+    data: dataUserList,
+    // error: errorUserList,
+    // fail: failUserList,
+  } = UserListStore;
   //////////////////////////////////////////////////////////
   const ideaListStore = useSelector((state) => state.ideaListStore);
   const {
@@ -38,22 +39,22 @@ export const IdeaModerateListPage = () => {
     // error: errorIdeaList,
     // fail: failIdeaList,
   } = ideaListStore;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
+  // TODO reset state //////////////////////////////////////////////////////////////////////////////////////////////////
   const resetState = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
     dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
+  // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
-    if (!dataUserListAll) {
+    if (!dataUserList) {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.userListAllAction(form));
+      dispatch(actions.UserListAction(form));
     }
-  }, [dataUserListAll]);
+  }, [dataUserList]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataIdeaList) {
@@ -75,7 +76,7 @@ export const IdeaModerateListPage = () => {
       }
     }
   }, [dataIdeaList, firstRefresh]);
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
   const handlerSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -87,6 +88,7 @@ export const IdeaModerateListPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
+    moderateSet("на модерации");
     subdivisionSet("");
     sphereSet("");
     categorySet("");
@@ -95,7 +97,7 @@ export const IdeaModerateListPage = () => {
     sortSet("дате публикации (свежие в начале)");
     resetState();
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       <components.HeaderComponent />
@@ -256,7 +258,7 @@ export const IdeaModerateListPage = () => {
                           </option>
                         </select>
                       </label>
-                      {dataUserListAll && (
+                      {dataUserList && (
                         <label className="form-control-sm text-center m-0 p-1">
                           Автор:
                           <select
@@ -267,7 +269,7 @@ export const IdeaModerateListPage = () => {
                             <option className="m-0 p-0" value="">
                               все варианты
                             </option>
-                            {dataUserListAll.map((user, index) => (
+                            {dataUserList.map((user, index) => (
                               <option
                                 key={index}
                                 value={user}
@@ -281,8 +283,8 @@ export const IdeaModerateListPage = () => {
                       )}
                     </div>
                     <components.StoreStatusComponent
-                      storeStatus={userListAllStore}
-                      keyStatus={"userListAllStore"}
+                      storeStatus={UserListStore}
+                      keyStatus={"UserListStore"}
                       consoleLog={constants.DEBUG_CONSTANT}
                       showLoad={true}
                       loadText={""}

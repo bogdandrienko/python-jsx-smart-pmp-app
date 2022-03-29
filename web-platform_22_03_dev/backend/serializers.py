@@ -1,20 +1,20 @@
-# ###################################################################################################TODO django modules
+# TODO django modules ##################################################################################################
 from django.contrib.auth.models import User, Group
-# ######################################################################################################TODO drf modules
+# TODO drf modules #####################################################################################################
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-# ###################################################################################################TODO custom modules
+# TODO custom modules ##################################################################################################
 from backend import models as backend_models
 
 
-# #########################################################################################TODO example model serializer
+# TODO example model serializer ########################################################################################
 class ExamplesModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = backend_models.ExamplesModel
         fields = '__all__'
 
 
-# ############################################################################################TODO base model serializer
+# TODO base model serializer ###########################################################################################
 class UserSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
     group_model = serializers.SerializerMethodField(read_only=True)
@@ -115,7 +115,7 @@ class NotificationModelSerializer(serializers.ModelSerializer):
             return None
 
 
-# ##########################################################################################TODO custom model serializer
+# TODO custom model serializer #########################################################################################
 class IdeaModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
     comment_count = serializers.SerializerMethodField(read_only=True)
@@ -169,7 +169,7 @@ class CommentIdeaModelSerializer(serializers.ModelSerializer):
         return user_model_serializer.data
 
 
-# ############################################################################################TODO test model serializer
+# TODO test model serializer ###########################################################################################
 class RationalModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
 

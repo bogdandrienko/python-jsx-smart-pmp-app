@@ -1,21 +1,22 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
+// TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaChangePage = () => {
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
+  // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useParams().id;
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   const [firstRefresh, firstRefreshSet] = useState(true);
+  //////////////////////////////////////////////////////////
   const [subdivision, subdivisionSet] = useState("");
   const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
@@ -24,7 +25,7 @@ export const IdeaChangePage = () => {
   const [name, nameSet] = useState("");
   const [place, placeSet] = useState("");
   const [description, descriptionSet] = useState("");
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
+  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
   const ideaDetailStore = useSelector((state) => state.ideaDetailStore);
   const {
     // load: loadIdeaDetail,
@@ -56,13 +57,12 @@ export const IdeaChangePage = () => {
     // error: errorIdeaModerate,
     // fail: failIdeaModerate,
   } = ideaModerateStore;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
+  // TODO reset state //////////////////////////////////////////////////////////////////////////////////////////////////
   const resetState = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
     clearImageSet(false);
-    dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
     dispatch({ type: constants.IDEA_DETAIL_RESET_CONSTANT });
     dispatch({
       type: constants.IDEA_MODERATE_RESET_CONSTANT,
@@ -71,7 +71,7 @@ export const IdeaChangePage = () => {
       type: constants.IDEA_CHANGE_RESET_CONSTANT,
     });
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
+  // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataIdeaDetail) {
       const form = {
@@ -97,22 +97,22 @@ export const IdeaChangePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaChange) {
-      utils.Sleep(2000).then(() => {
-        resetState();
+      utils.Sleep(10).then(() => {
         navigate("/idea_self_list");
+        resetState();
       });
     }
   }, [dataIdeaChange]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaModerate) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         navigate("/idea_self_list");
         resetState();
       });
     }
   }, [dataIdeaModerate]);
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
   const handlerChangeSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -156,7 +156,7 @@ export const IdeaChangePage = () => {
       dispatch(actions.ideaModerateAction(form));
     }
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       <components.HeaderComponent />
@@ -730,7 +730,7 @@ export const IdeaChangePage = () => {
                       className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
-                      заменить данные
+                      отправить на модерацию
                     </button>
                     <button
                       className="btn btn-sm btn-warning m-1 p-2"

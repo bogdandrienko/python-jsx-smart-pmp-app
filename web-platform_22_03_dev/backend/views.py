@@ -1,4 +1,4 @@
-# #################################################################################################TODO download modules
+# TODO download modules ################################################################################################
 import base64
 import datetime
 import hashlib
@@ -10,26 +10,26 @@ import httplib2
 import openpyxl
 from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from openpyxl.utils import get_column_letter
-# ###################################################################################################TODO django modules
+# TODO django modules ##################################################################################################
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group, update_last_login
 from django.core.mail import send_mail
 from django.shortcuts import render
 from django.utils import timezone
-# ######################################################################################################TODO drf modules
+# TODO drf modules #####################################################################################################
 from rest_framework import viewsets, permissions
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-# ###################################################################################################TODO custom modules
+# TODO custom modules ##################################################################################################
 from backend import models as backend_models, serializers as backend_serializers, service as backend_service, \
     settings as backend_settings
 
 
-# ############################################################################################################TODO index
+# TODO index ###########################################################################################################
 @permission_classes([AllowAny])
 def index(request):
     """
@@ -60,7 +60,7 @@ def index(request):
         return render(request, "backend/404.html")
 
 
-# ###########################################################################################################TODO routes
+# TODO routes ##########################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @authentication_classes([BasicAuthentication])
 def api_auth_routes(request):
@@ -147,7 +147,7 @@ def api_auth_routes(request):
         return render(request, "backend/404.html")
 
 
-# ########################################################################################################TODO view sets
+# TODO view sets #######################################################################################################
 class ExamplesModelViewSet(viewsets.ModelViewSet):
     queryset = backend_models.ExamplesModel.objects.all()
     serializer_class = backend_serializers.ExamplesModelSerializer
@@ -166,7 +166,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
-# #######################################################################################################TODO base views
+# TODO base views ######################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
 def api_any_user(request):
@@ -590,7 +590,7 @@ def api_auth_user(request):
         return render(request, "backend/404.html")
 
 
-# ######################################################################################################TODO admin views
+# TODO admin views #####################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_admin(request):
@@ -1041,7 +1041,7 @@ def api_basic_admin_user_temp(request):
         return render(request, "backend/404.html")
 
 
-# #####################################################################################################TODO custom views
+# TODO custom views ####################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_salary(request):
@@ -1673,15 +1673,18 @@ def api_auth_idea(request):
             if req_inst.action_type == "IDEA_LIST":
                 try:
                     # TODO get_value ###################################################################################
+                    moderate = req_inst.get_value("moderate")
                     subdivision = req_inst.get_value("subdivision")
                     sphere = req_inst.get_value("sphere")
                     category = req_inst.get_value("category")
                     author = req_inst.get_value("author")
                     search = req_inst.get_value("search")
                     sort = req_inst.get_value("sort")
-                    moderate = req_inst.get_value("moderate")
+
                     only_month = req_inst.get_value("onlyMonth")
                     # TODO actions #####################################################################################
+
+                    # TODO onlyMonth
                     objects = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
@@ -1692,10 +1695,12 @@ def api_auth_idea(request):
                                 local_objects.append(obj.id)
                         objects = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
                             order_by("-register_datetime_field")
-                    # search
+
+                    # TODO search
                     if search:
                         objects = objects.filter(name_char_field__icontains=search)
-                    # filter
+
+                    # TODO filter
                     if subdivision:
                         objects = objects.filter(subdivision_char_field=subdivision)
                     if sphere:
@@ -1712,7 +1717,8 @@ def api_auth_idea(request):
                         objects = objects.filter(author_foreign_key_field=author)
                     if moderate:
                         objects = objects.filter(status_moderate_char_field=moderate)
-                    # sort
+
+                    # TODO sort
                     if sort:
                         if sort == "дате публикации (свежие в начале)":
                             objects = objects.order_by("-register_datetime_field")
@@ -1781,6 +1787,8 @@ def api_auth_idea(request):
                             objects = []
                             for obj in objects_arr:
                                 objects.append(obj[1])
+
+                    # TODO serialize
                     serializer = backend_serializers.IdeaModelSerializer(instance=objects, many=True).data
                     response = {"response": serializer}
                     # TODO response ####################################################################################
@@ -2107,7 +2115,7 @@ def api_auth_idea(request):
         return render(request, "backend/404.html")
 
 
-# #######################################################################################################TODO test views
+# TODO test views ######################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_rational(request):
@@ -2125,7 +2133,6 @@ def api_auth_rational(request):
                 try:
                     # TODO get_value ###################################################################################
                     subdivision = req_inst.get_value("subdivision")
-                    sphere = req_inst.get_value("sphere")
                     category = req_inst.get_value("category")
                     avatar = req_inst.get_value("avatar")
                     name = req_inst.get_value("name")
@@ -2146,25 +2153,16 @@ def api_auth_rational(request):
                     else:
                         count = 1
                     number = f"{count}_{backend_service.DateTimeUtils.get_current_date()}"
-                    if user1.find("%") < 0 and len(user1) < 7:
-                        user1 += "%"
-                    else:
-                        user1 = None
-                    if user2.find("%") < 0 and len(user2) < 7:
-                        user2 += "%"
-                    else:
+                    user1 = f"{req_inst.user_model.last_name_char_field} " \
+                            f"{req_inst.user_model.first_name_char_field} " \
+                            f"{req_inst.user_model.personnel_number_slug_field} {user1}"
+                    if len(user2) < 7:
                         user2 = None
-                    if user3.find("%") < 0 and len(user3) < 7:
-                        user3 += "%"
-                    else:
+                    if len(user3) < 7:
                         user3 = None
-                    if user4.find("%") < 0 and len(user4) < 7:
-                        user4 += "%"
-                    else:
+                    if len(user4) < 7:
                         user4 = None
-                    if user5.find("%") < 0 and len(user5) < 7:
-                        user5 += "%"
-                    else:
+                    if len(user5) < 7:
                         user5 = None
                     if subdivision == "автотранспортное предприятие":
                         name_slug_field = "moderator_rational_atp"
@@ -2183,7 +2181,6 @@ def api_auth_rational(request):
                         author_foreign_key_field=req_inst.user_model,
                         number_char_field=number,
                         subdivision_char_field=subdivision,
-                        sphere_char_field=sphere,
                         category_char_field=category,
                         image_field=avatar,
                         name_char_field=name,
@@ -2218,41 +2215,32 @@ def api_auth_rational(request):
             if req_inst.action_type == "RATIONAL_LIST":
                 try:
                     # TODO get_value ###################################################################################
+                    moderate = req_inst.get_value("moderate")
                     subdivision = req_inst.get_value("subdivision")
                     category = req_inst.get_value("category")
                     author = req_inst.get_value("author")
                     search = req_inst.get_value("search")
                     sort = req_inst.get_value("sort")
-                    moderate = req_inst.get_value("moderate")
+
+                    only_month = req_inst.get_value("onlyMonth")
                     # TODO actions #####################################################################################
+                    # TODO onlyMonth
+                    objects = backend_models.RationalModel.objects.all().order_by("-register_datetime_field")
+                    if only_month:
+                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                        local_objects = []
+                        for obj in objects:
+                            if (obj.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                                    >= now:
+                                local_objects.append(obj.id)
+                        objects = backend_models.RationalModel.objects.filter(id__in=local_objects). \
+                            order_by("-register_datetime_field")
 
-                    def check_access(slug):
-                        if backend_models.GroupModel.objects.filter(
-                                user_many_to_many_field=req_inst.user_model,
-                                name_slug_field=str(slug)
-                        ).count() > 0:
-                            return True
-                        else:
-                            return False
-
-                    if check_access("moderator_rational") is False:
-                        if check_access("moderator_rational_atp"):
-                            subdivision = "автотранспортное предприятие"
-                        elif check_access("moderator_rational_gtk"):
-                            subdivision = "горно-транспортный комплекс"
-                        elif check_access("moderator_rational_ok"):
-                            subdivision = "обогатительный комплекс"
-                        elif check_access("moderator_rational_upravlenie"):
-                            subdivision = "управление предприятия"
-                        elif check_access("moderator_rational_energoupravlenie"):
-                            subdivision = "энергоуправление"
-                        else:
-                            moderate = "принято"
-                    objects = backend_models.RationalModel.objects.all().order_by("-created_datetime_field")
-                    # search
+                    # TODO search
                     if search:
                         objects = objects.filter(name_char_field__icontains=search)
-                    # filter
+
+                    # TODO filter
                     if subdivision:
                         objects = objects.filter(subdivision_char_field=subdivision)
                     if category:
@@ -2264,16 +2252,31 @@ def api_auth_rational(request):
                         objects = objects.filter(author_foreign_key_field=author)
                     if moderate:
                         objects = objects.filter(status_moderate_char_field=moderate)
-                    # sort
+
+                    # TODO sort
                     if sort:
-                        if sort == "Дате публикации (сначала свежие)":
-                            objects = objects.order_by("-created_datetime_field")
-                        elif sort == "Дате публикации (сначала старые)":
-                            objects = objects.order_by("created_datetime_field")
-                        elif sort == "Названию (С начала алфавита)":
+                        if sort == "дате публикации (сначала свежие)":
+                            objects = objects.order_by("-register_datetime_field")
+                        elif sort == "дате публикации (сначала старые)":
+                            objects = objects.order_by("register_datetime_field")
+                        elif sort == "названию (с начала алфавита)":
                             objects = objects.order_by("name_char_field")
-                        elif sort == "Названию (С конца алфавита)":
+                        elif sort == "названию (с конца алфавита)":
                             objects = objects.order_by("-name_char_field")
+                        elif sort == "рейтингу (популярные в начале)":
+                            pass
+                        elif sort == "рейтингу (популярные в конце)":
+                            pass
+                        elif sort == "отметкам рейтинга (наибольшие в начале)":
+                            pass
+                        elif sort == "отметкам рейтинга (наибольшие в конце)":
+                            pass
+                        elif sort == "комментариям (наибольшие в начале)":
+                            pass
+                        elif sort == "комментариям (наибольшие в конце)":
+                            pass
+
+                    # TODO serialize
                     serializer = backend_serializers.RationalModelSerializer(instance=objects, many=True).data
                     response = {"response": serializer}
                     # TODO response ####################################################################################

@@ -1,4 +1,4 @@
-# #################################################################################################TODO download modules
+# TODO download modules ################################################################################################
 import base64
 import datetime
 import hashlib
@@ -11,15 +11,15 @@ import httplib2
 import openpyxl
 from openpyxl.utils import get_column_letter
 from typing import Union
-# ###################################################################################################TODO django modules
+# TODO django modules ##################################################################################################
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest
-# ###################################################################################################TODO custom modules
+# TODO custom modules ##################################################################################################
 from backend import models as backend_models
 
 
-# #####################################################################################################TODO base service
+# TODO base service ####################################################################################################
 class DjangoClass:
     class LoggingClass:
         @staticmethod
@@ -136,7 +136,7 @@ class DjangoClass:
 
         @staticmethod
         def response(request, response):
-            threading.Thread(target=DjangoClass.LoggingClass.response, args=(request, response, )).start()
+            threading.Thread(target=DjangoClass.LoggingClass.response, args=(request, response,)).start()
 
     class DRFClass:
         class RequestClass:
@@ -705,8 +705,18 @@ class DjangoClass:
                 page = paginator.page(paginator.num_pages)
             return page
 
+    @staticmethod
+    def check_access(user_model, slug=""):
+        if backend_models.GroupModel.objects.filter(
+                user_many_to_many_field=user_model,
+                name_slug_field=slug
+        ).count() > 0:
+            return True
+        else:
+            return False
 
-# ###################################################################################################TODO custom service
+
+# TODO custom service ##################################################################################################
 class DateTimeUtils:
     @staticmethod
     def get_current_datetime():

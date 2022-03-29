@@ -1,4 +1,4 @@
-# ###################################################################################################TODO django modules
+# TODO django modules ##################################################################################################
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
@@ -6,11 +6,11 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
     FileExtensionValidator, DecimalValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-# ###################################################################################################TODO custom modules
+# TODO custom modules ##################################################################################################
 from backend import service as backend_service
 
 
-# ####################################################################################################TODO example model
+# TODO example model ###################################################################################################
 class ExamplesModel(models.Model):
     """
     Модель, которая содержит подробное описание и максимум настроек каждого типа поля django
@@ -1415,7 +1415,7 @@ class ExamplesModel(models.Model):
         return self.id
 
 
-# ######################################################################################################TODO base models
+# TODO base models #####################################################################################################
 class UserModel(models.Model):
     """
     Модель, которая содержит расширение для стандартной модели пользователя веб-платформы
@@ -1917,7 +1917,7 @@ class SettingsModel(models.Model):
         ("print_error", 'Вывод в консоль ошибок',),
         ("logging_response", 'Логирование ответов',),
         ("print_response", 'Вывод в консоль ответов',),
-        ("scheduler_personal", 'Планировщик обновления персонала из 1С', ),
+        ("scheduler_personal", 'Планировщик обновления персонала из 1С',),
         ("scheduler_superuser", 'Планировщик создания стандартных суперпользователей',),
         ("scheduler_group", 'Планировщик создания стандартных групп',),
     ]
@@ -2365,7 +2365,7 @@ class NotificationModel(models.Model):
         return f"{self.name_char_field} | {self.place_char_field} | {self.description_text_field}"
 
 
-# ####################################################################################################TODO custom models
+# TODO custom models ###################################################################################################
 class IdeaModel(models.Model):
     """
     IdeaModel
@@ -2812,7 +2812,7 @@ class CommentIdeaModel(models.Model):
                f"{self.created_datetime_field}"
 
 
-# ######################################################################################################TODO test models
+# TODO test models #####################################################################################################
 class RationalModel(models.Model):
     """
     RationalModel
@@ -2866,23 +2866,6 @@ class RationalModel(models.Model):
         null=True,
         default='',
         verbose_name='Подразделение',
-        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
-
-        max_length=300,
-    )
-    sphere_char_field = models.CharField(
-        db_column='sphere_char_field_db_column',
-        db_index=True,
-        db_tablespace='sphere_char_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
-        unique=False,
-        editable=True,
-        blank=True,
-        null=True,
-        default='',
-        verbose_name='Сфера',
         help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
 
         max_length=300,

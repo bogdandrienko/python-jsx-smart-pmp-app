@@ -1,31 +1,33 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
+// TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaModerateChangePage = () => {
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
+  // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   const id = useParams().id;
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   const [firstRefresh, firstRefreshSet] = useState(true);
+  //////////////////////////////////////////////////////////
+  const [moderate, moderateSet] = useState("");
+  const [moderateComment, moderateCommentSet] = useState("");
+
   const [subdivision, subdivisionSet] = useState("");
   const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
-  const [avatar, avatarSet] = useState(null);
   const [clearImage, clearImageSet] = useState(false);
+  const [avatar, avatarSet] = useState(null);
   const [name, nameSet] = useState("");
   const [place, placeSet] = useState("");
   const [description, descriptionSet] = useState("");
-  const [moderate, moderateSet] = useState("");
-  const [moderateComment, moderateCommentSet] = useState("");
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
+  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
   const ideaDetailStore = useSelector((state) => state.ideaDetailStore);
   const {
     // load: loadIdeaDetail,
@@ -69,13 +71,12 @@ export const IdeaModerateChangePage = () => {
     // error: errorIdeaCommentDelete,
     // fail: failIdeaCommentDelete,
   } = ideaCommentDeleteStore;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
+  // TODO reset state //////////////////////////////////////////////////////////////////////////////////////////////////
   const resetState = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}
     clearImageSet(false);
-    dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
     dispatch({ type: constants.IDEA_DETAIL_RESET_CONSTANT });
     dispatch({
       type: constants.IDEA_MODERATE_RESET_CONSTANT,
@@ -90,7 +91,7 @@ export const IdeaModerateChangePage = () => {
       type: constants.IDEA_COMMENT_DELETE_RESET_CONSTANT,
     });
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
+  // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataIdeaDetail) {
       const form = {
@@ -134,7 +135,7 @@ export const IdeaModerateChangePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaChange) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         resetState();
       });
     }
@@ -147,7 +148,7 @@ export const IdeaModerateChangePage = () => {
       });
     }
   }, [dataIdeaCommentDelete]);
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
   const handlerModerateSubmit = (e) => {
     e.preventDefault();
     const form = {
@@ -195,7 +196,7 @@ export const IdeaModerateChangePage = () => {
       dispatch(actions.ideaCommentDeleteAction(form));
     }
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       <components.HeaderComponent />

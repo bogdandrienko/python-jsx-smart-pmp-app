@@ -1,16 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
+// TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaCreatePage = () => {
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
+  // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   const [subdivision, subdivisionSet] = useState("");
   const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
@@ -18,7 +18,7 @@ export const IdeaCreatePage = () => {
   const [name, nameSet] = useState("");
   const [place, placeSet] = useState("");
   const [description, descriptionSet] = useState("");
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
+  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
   const ideaCreateStore = useSelector((state) => state.ideaCreateStore);
   const {
     load: loadIdeaCreate,
@@ -26,7 +26,7 @@ export const IdeaCreatePage = () => {
     // error: errorIdeaCreate,
     // fail: failIdeaCreate,
   } = ideaCreateStore;
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO reset state
+  // TODO reset state //////////////////////////////////////////////////////////////////////////////////////////////////
   const resetState = async (e) => {
     try {
       e.preventDefault();
@@ -34,23 +34,17 @@ export const IdeaCreatePage = () => {
     dispatch({
       type: constants.IDEA_CREATE_RESET_CONSTANT,
     });
-    dispatch({
-      type: constants.IDEA_LIST_RESET_CONSTANT,
-    });
-    dispatch({
-      type: constants.IDEA_DETAIL_RESET_CONSTANT,
-    });
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
+  // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaCreate) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(3000).then(() => {
         resetState();
         handlerCreateReset();
       });
     }
   }, [dataIdeaCreate]);
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
   const handlerCreateSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -80,7 +74,7 @@ export const IdeaCreatePage = () => {
     placeSet("");
     descriptionSet("");
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       <components.HeaderComponent />
@@ -109,7 +103,7 @@ export const IdeaCreatePage = () => {
                   </h6>
                 </div>
                 <div className="card-body m-0 p-0">
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
                       Подразделение:
                       <select
@@ -216,7 +210,7 @@ export const IdeaCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
                       Аватарка-заставка:
                       <input
@@ -230,7 +224,7 @@ export const IdeaCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center w-75 m-0 p-1">
                       Название:
                       <input
@@ -268,7 +262,7 @@ export const IdeaCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="w-50 form-control-sm m-0 p-1">
                       Место изменения:
                       <input
@@ -306,7 +300,7 @@ export const IdeaCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="w-100 form-control-sm m-0 p-1">
                       Описание:
                       <textarea

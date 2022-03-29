@@ -1,18 +1,17 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
+// TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const RationalCreatePage = () => {
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react hooks variables
+  // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO custom variables
+  // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   const [subdivision, subdivisionSet] = useState("");
-  const [sphere, sphereSet] = useState("");
   const [category, categorySet] = useState("");
   const [avatar, avatarSet] = useState(null);
   const [name, nameSet] = useState("");
@@ -21,8 +20,8 @@ export const RationalCreatePage = () => {
   const [additionalWord, additionalWordSet] = useState(null);
   const [additionalPdf, additionalPdfSet] = useState(null);
   const [additionalExcel, additionalExcelSet] = useState(null);
-  const [user1, user1Set] = useState("");
-  const [user1Perc, user1PercSet] = useState("");
+  const [user1, user1Set] = useState("Вы");
+  const [user1Perc, user1PercSet] = useState("100");
   const [user2, user2Set] = useState("");
   const [user2Perc, user2PercSet] = useState("");
   const [user3, user3Set] = useState("");
@@ -31,14 +30,14 @@ export const RationalCreatePage = () => {
   const [user4Perc, user4PercSet] = useState("");
   const [user5, user5Set] = useState("");
   const [user5Perc, user5PercSet] = useState("");
-  ////////////////////////////////////////////////////////////////////////////////////////////TODO react store variables
-  const userListAllStore = useSelector((state) => state.userListAllStore);
+  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
+  const UserListStore = useSelector((state) => state.UserListStore);
   const {
-    load: loadUserListAll,
-    data: dataUserListAll,
-    error: errorUserListAll,
-    fail: failUserListAll,
-  } = userListAllStore;
+    load: loadUserList,
+    data: dataUserList,
+    error: errorUserList,
+    fail: failUserList,
+  } = UserListStore;
   //////////////////////////////////////////////////////////
   const rationalCreateStore = useSelector((state) => state.rationalCreateStore);
   const {
@@ -47,15 +46,15 @@ export const RationalCreatePage = () => {
     // error: errorRationalCreate,
     // fail: failRationalCreate,
   } = rationalCreateStore;
-  //////////////////////////////////////////////////////////////////////////////////////////////////TODO useEffect hooks
+  // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
-    if (!dataUserListAll && !errorUserListAll && !failUserListAll) {
+    if (!dataUserList && !errorUserList && !failUserList) {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.userListAllAction(form));
+      dispatch(actions.UserListAction(form));
     }
-  }, [dataUserListAll, errorUserListAll, failUserListAll]);
+  }, [dataUserList, errorUserList, failUserList]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataRationalCreate) {
@@ -63,16 +62,18 @@ export const RationalCreatePage = () => {
         dispatch({
           type: constants.RATIONAL_CREATE_RESET_CONSTANT,
         });
+        handlerCreateReset();
       });
     }
   }, [dataRationalCreate]);
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////TODO handlers
+  // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
   const handlerCreateSubmit = (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+    } catch (error) {}
     const form = {
       "Action-type": "RATIONAL_CREATE",
       subdivision: subdivision,
-      sphere: sphere,
       category: category,
       avatar: avatar,
       name: name,
@@ -81,11 +82,11 @@ export const RationalCreatePage = () => {
       additionalWord: additionalWord,
       additionalPdf: additionalPdf,
       additionalExcel: additionalExcel,
-      user1: user1 + " " + user1Perc + "%",
-      user2: user2 + " " + user2Perc + "%",
-      user3: user3 + " " + user3Perc + "%",
-      user4: user4 + " " + user4Perc + "%",
-      user5: user5 + " " + user5Perc + "%",
+      user1: `${user1Perc}%`,
+      user2: `${user2} ${user2Perc}%`,
+      user3: `${user3} ${user3Perc}%`,
+      user4: `${user4} ${user4Perc}%`,
+      user5: `${user5} ${user5Perc}%`,
     };
     dispatch(actions.rationalCreateAction(form));
   };
@@ -95,17 +96,16 @@ export const RationalCreatePage = () => {
       e.preventDefault();
     } catch (error) {}
     subdivisionSet("");
-    sphereSet("");
     categorySet("");
-    avatarSet("");
+    avatarSet(null);
     nameSet("");
     placeSet("");
     descriptionSet("");
-    additionalWordSet("");
-    additionalPdfSet("");
-    additionalExcelSet("");
-    user1Set("");
-    user1PercSet("");
+    additionalWordSet(null);
+    additionalPdfSet(null);
+    additionalExcelSet(null);
+    user1Set("Вы");
+    user1PercSet("100");
     user2Set("");
     user2PercSet("");
     user3Set("");
@@ -115,7 +115,7 @@ export const RationalCreatePage = () => {
     user5Set("");
     user5PercSet("");
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////////TODO return page
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       <components.HeaderComponent />
@@ -144,7 +144,7 @@ export const RationalCreatePage = () => {
                   </h6>
                 </div>
                 <div className="card-body m-0 p-0">
-                  <div className="d-flex justify-content-between m-0 p-1">
+                  <div className="d-flex justify-content-between m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
                       Подразделение:
                       <select
@@ -199,29 +199,7 @@ export const RationalCreatePage = () => {
                       </p>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
-                    <label className="form-control-sm text-center m-0 p-1">
-                      Сфера:
-                      <select
-                        className="form-control form-control-sm text-center m-0 p-1"
-                        value={sphere}
-                        required
-                        onChange={(e) => sphereSet(e.target.value)}
-                      >
-                        <option className="m-0 p-0" value="">
-                          не указано
-                        </option>
-                        <option className="m-0 p-0" value="технологическая">
-                          технологическая
-                        </option>
-                        <option className="m-0 p-0" value="не технологическая">
-                          не технологическая
-                        </option>
-                      </select>
-                      <small className="text-danger m-0 p-0">
-                        * обязательно
-                      </small>
-                    </label>
+                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
                       Категория:
                       <select
@@ -260,7 +238,7 @@ export const RationalCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
                       Аватарка-заставка:
                       <input
@@ -274,7 +252,7 @@ export const RationalCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center w-75 m-0 p-1">
                       Название:
                       <input
@@ -312,7 +290,7 @@ export const RationalCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="w-50 form-control-sm m-0 p-1">
                       Место внедрения:
                       <input
@@ -350,7 +328,7 @@ export const RationalCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="w-100 form-control-sm m-0 p-1">
                       Описание:
                       <textarea
@@ -385,7 +363,7 @@ export const RationalCreatePage = () => {
                       </small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
+                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
                       Word файл-приложение:
                       <input
@@ -417,18 +395,18 @@ export const RationalCreatePage = () => {
                       <small className="text-muted">* не обязательно</small>
                     </label>
                   </div>
-                  <div className="m-0 p-1">
-                    <p className="text-danger m-0 p-1">
+                  <div className="m-0 p-0">
+                    <p className="text-danger m-0 p-0">
                       Я(мы) утверждаю(ем), что являюсь(ся) автором(и) данного
                       предложения. Мне(нам) также известно, что в случае
                       признания предложения коммерческой тайной подразделения,
                       я(мы) обязан не разглашать его сущность.
                     </p>
                   </div>
-                  <div className="m-0 p-1">
-                    <label className="form-control-sm text-center m-0 p-1">
+                  <div className="m-0 p-0">
+                    <label className="form-control-sm text-center m-0 p-0">
                       Участники:
-                      <p className="m-0 p-1">
+                      <p className="m-0 p-0">
                         <small className="fw-bold">
                           (Фамилия Имя Отчество) (Табельный номер) (Вклад в рац.
                           предложение) %
@@ -439,8 +417,8 @@ export const RationalCreatePage = () => {
                   <div className="m-0 p-1">
                     <label className="form-control-sm text-center m-0 p-1">
                       <components.StoreStatusComponent
-                        storeStatus={userListAllStore}
-                        key={"userListAllStore"}
+                        storeStatus={UserListStore}
+                        key={"UserListStore"}
                         consoleLog={constants.DEBUG_CONSTANT}
                         showLoad={true}
                         loadText={""}
@@ -451,9 +429,9 @@ export const RationalCreatePage = () => {
                         showFail={true}
                         failText={""}
                       />
-                      {dataUserListAll && (
-                        <div className="m-0 p-1">
-                          <div className="m-0 p-1">
+                      {dataUserList && (
+                        <div className="m-0 p-0">
+                          <div className="m-0 p-0">
                             <label className="form-control-sm text-center m-0 p-1">
                               участник №1:
                               <select
@@ -462,12 +440,7 @@ export const RationalCreatePage = () => {
                                 required
                                 onChange={(e) => user1Set(e.target.value)}
                               >
-                                <option value="">Не выбрано</option>
-                                {dataUserListAll.map((user, index) => (
-                                  <option key={index} value={user}>
-                                    {user}
-                                  </option>
-                                ))}
+                                <option value="Вы">Вы</option>
                               </select>
                             </label>
                             <label className="form-control-sm text-center m-0 p-1">
@@ -484,7 +457,7 @@ export const RationalCreatePage = () => {
                               />
                             </label>
                           </div>
-                          <div className="m-0 p-1">
+                          <div className="m-0 p-0">
                             <label className="form-control-sm text-center m-0 p-1">
                               участник №2:
                               <select
@@ -493,27 +466,30 @@ export const RationalCreatePage = () => {
                                 onChange={(e) => user2Set(e.target.value)}
                               >
                                 <option value="">Не выбрано</option>
-                                {dataUserListAll.map((user, index) => (
+                                {dataUserList.map((user, index) => (
                                   <option key={index} value={user}>
                                     {user}
                                   </option>
                                 ))}
                               </select>
                             </label>
-                            <label className="form-control-sm text-center m-0 p-1">
-                              % Вклада 2 участника
-                              <input
-                                type="number"
-                                className="form-control form-control-sm text-center m-0 p-1"
-                                value={user2Perc}
-                                placeholder="пример: 70%"
-                                min="1"
-                                max="100"
-                                onChange={(e) => user2PercSet(e.target.value)}
-                              />
-                            </label>
+                            {user2 && (
+                              <label className="form-control-sm text-center m-0 p-1">
+                                % Вклада 2 участника
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm text-center m-0 p-1"
+                                  value={user2Perc}
+                                  required
+                                  placeholder="пример: 70%"
+                                  min="1"
+                                  max="100"
+                                  onChange={(e) => user2PercSet(e.target.value)}
+                                />
+                              </label>
+                            )}
                           </div>
-                          <div className="m-0 p-1">
+                          <div className="m-0 p-0">
                             <label className="form-control-sm text-center m-0 p-1">
                               участник №3:
                               <select
@@ -522,27 +498,30 @@ export const RationalCreatePage = () => {
                                 onChange={(e) => user3Set(e.target.value)}
                               >
                                 <option value="">Не выбрано</option>
-                                {dataUserListAll.map((user, index) => (
+                                {dataUserList.map((user, index) => (
                                   <option key={index} value={user}>
                                     {user}
                                   </option>
                                 ))}
                               </select>
                             </label>
-                            <label className="form-control-sm text-center m-0 p-1">
-                              % Вклада 3 участника
-                              <input
-                                type="number"
-                                className="form-control form-control-sm text-center m-0 p-1"
-                                value={user3Perc}
-                                placeholder="пример: 70%"
-                                min="0"
-                                max="100"
-                                onChange={(e) => user3PercSet(e.target.value)}
-                              />
-                            </label>
+                            {user3 && (
+                              <label className="form-control-sm text-center m-0 p-1">
+                                % Вклада 3 участника
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm text-center m-0 p-1"
+                                  value={user3Perc}
+                                  required
+                                  placeholder="пример: 70%"
+                                  min="0"
+                                  max="100"
+                                  onChange={(e) => user3PercSet(e.target.value)}
+                                />
+                              </label>
+                            )}
                           </div>
-                          <div className="m-0 p-1">
+                          <div className="m-0 p-0">
                             <label className="form-control-sm text-center m-0 p-1">
                               участник №4:
                               <select
@@ -551,27 +530,30 @@ export const RationalCreatePage = () => {
                                 onChange={(e) => user4Set(e.target.value)}
                               >
                                 <option value="">Не выбрано</option>
-                                {dataUserListAll.map((user, index) => (
+                                {dataUserList.map((user, index) => (
                                   <option key={index} value={user}>
                                     {user}
                                   </option>
                                 ))}
                               </select>
                             </label>
-                            <label className="form-control-sm text-center m-0 p-1">
-                              % Вклада 4 участника
-                              <input
-                                type="number"
-                                className="form-control form-control-sm text-center m-0 p-1"
-                                value={user4Perc}
-                                placeholder="пример: 70%"
-                                min="0"
-                                max="100"
-                                onChange={(e) => user4PercSet(e.target.value)}
-                              />
-                            </label>
+                            {user4 && (
+                              <label className="form-control-sm text-center m-0 p-1">
+                                % Вклада 4 участника
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm text-center m-0 p-1"
+                                  value={user4Perc}
+                                  required
+                                  placeholder="пример: 70%"
+                                  min="0"
+                                  max="100"
+                                  onChange={(e) => user4PercSet(e.target.value)}
+                                />
+                              </label>
+                            )}
                           </div>
-                          <div className="m-0 p-1">
+                          <div className="m-0 p-0">
                             <label className="form-control-sm text-center m-0 p-1">
                               участник №5:
                               <select
@@ -580,35 +562,38 @@ export const RationalCreatePage = () => {
                                 onChange={(e) => user5Set(e.target.value)}
                               >
                                 <option value="">Не выбрано</option>
-                                {dataUserListAll.map((user, index) => (
+                                {dataUserList.map((user, index) => (
                                   <option key={index} value={user}>
                                     {user}
                                   </option>
                                 ))}
                               </select>
                             </label>
-                            <label className="form-control-sm text-center m-0 p-1">
-                              % Вклада 5 участника
-                              <input
-                                type="number"
-                                className="form-control form-control-sm text-center m-0 p-1"
-                                value={user5Perc}
-                                placeholder="пример: 70%"
-                                min="0"
-                                max="100"
-                                onChange={(e) => user5PercSet(e.target.value)}
-                              />
-                            </label>
+                            {user5 && (
+                              <label className="form-control-sm text-center m-0 p-1">
+                                % Вклада 5 участника
+                                <input
+                                  type="number"
+                                  className="form-control form-control-sm text-center m-0 p-1"
+                                  value={user5Perc}
+                                  required
+                                  placeholder="пример: 70%"
+                                  min="0"
+                                  max="100"
+                                  onChange={(e) => user5PercSet(e.target.value)}
+                                />
+                              </label>
+                            )}
                           </div>
                         </div>
                       )}
                     </label>
-                  </div>
-                  <div className="m-0 p-1">
-                    <small className="text-muted">
-                      * общая сумма вклада всех участников не должна превышать
-                      100%
-                    </small>
+                    <div className="m-0 p-0">
+                      <small className="text-muted">
+                        * общая сумма вклада всех участников не должна превышать
+                        100%
+                      </small>
+                    </div>
                   </div>
                 </div>
                 <div className="card-footer m-0 p-0">

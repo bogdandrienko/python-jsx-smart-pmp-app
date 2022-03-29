@@ -1,11 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import "../css/App.css";
 import "../css/bootstrap_5.1.3/bootstrap.min.css";
 import "../css/font_awesome_6_0_0/css/all.min.css";
 import "../css/font_zen/style.css";
-/////////////////////////////////////////////////////////////////////////////////////////////TODO default exported pages
+// TODO default exported pages /////////////////////////////////////////////////////////////////////////////////////////
 import { HomePage } from "../pages/base/HomePage";
 import { VideoStudyPage } from "../pages/study/VideoStudyPage";
 import { TextStudyPage } from "../pages/study/TextStudyPage";
@@ -28,7 +28,6 @@ import { AdminChangeUserActivityPage } from "../pages/admin/AdminChangeUserActiv
 import { RationalTemplatePage } from "../pages/rational/RationalTemplatePage";
 import { RationalCreatePage } from "../pages/rational/RationalCreatePage";
 import { RationalModerateListPage } from "../pages/rational/RationalModerateListPage";
-import { RationalModerateDetailPage } from "../pages/rational/RationalModerateDetailPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { IdeaTemplatePage } from "../pages/idea/IdeaTemplatePage";
 import { IdeaCreatePage } from "../pages/idea/IdeaCreatePage";
@@ -51,7 +50,7 @@ import { ResumeCreatePage } from "../pages/resume/ResumeCreatePage";
 import { ResumeDetailPage } from "../pages/resume/ResumeDetailPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { TerminalRebootPage } from "../pages/terminal/TerminalRebootPage";
-//////////////////////////////////////////////////////////////////////////////////////////TODO default export const page
+// TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const App = () => {
   return (
     <Router>
@@ -86,17 +85,6 @@ export const App = () => {
 
         <Route path="/salary" element={<SalaryPage />} />
 
-        <Route path="/rational_template" element={<RationalTemplatePage />} />
-        <Route path="/rational_create" element={<RationalCreatePage />} />
-        <Route
-          path="/rational_moderate_list"
-          element={<RationalModerateListPage />}
-        />
-        <Route
-          path="/rational_moderate_detail/:id"
-          element={<RationalModerateDetailPage />}
-        />
-
         <Route path="/idea_template" element={<IdeaTemplatePage />} />
         <Route path="/idea_create" element={<IdeaCreatePage />} />
         <Route path="/idea_list" element={<IdeaListPage />} />
@@ -110,6 +98,13 @@ export const App = () => {
         <Route path="/idea_change/:id" element={<IdeaChangePage />} />
         <Route path="/idea_rating" element={<IdeaRatingListPage />} />
         <Route path="/idea_author_list" element={<IdeaAuthorListPage />} />
+
+        <Route path="/rational_template" element={<RationalTemplatePage />} />
+        <Route path="/rational_create" element={<RationalCreatePage />} />
+        <Route
+          path="/rational_moderate_list"
+          element={<RationalModerateListPage />}
+        />
 
         <Route path="/vacancy_list" element={<VacancyListPage />} />
         <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />

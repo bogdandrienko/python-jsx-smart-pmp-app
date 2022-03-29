@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "./constants";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////TODO base reducer
 export const userLoginReducer = (state = {}, action = null) => {
@@ -71,7 +71,7 @@ export const userRecoverPasswordReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const userListAllReducer = (state = {}, action = null) => {
+export const UserListReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.USER_LIST_ALL_LOAD_CONSTANT:
       return { load: true };

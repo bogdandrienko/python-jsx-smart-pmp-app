@@ -1,8 +1,8 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////TODO download modules
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-/////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom modules
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as reducers from "./reducers";
 import { adminChangeUserActivityReducer } from "./reducers";
 ////////////////////////////////////////////////////////////////////////////////////////////////////TODO combineReducers
@@ -11,7 +11,7 @@ const globalReducer = combineReducers({
   userDetailsStore: reducers.userDetailsReducer,
   userChangeStore: reducers.userChangeReducer,
   userRecoverPasswordStore: reducers.userRecoverPasswordReducer,
-  userListAllStore: reducers.userListAllReducer,
+  UserListStore: reducers.UserListReducer,
   notificationCreateStore: reducers.notificationCreateReducer,
   notificationDeleteStore: reducers.notificationDeleteReducer,
   notificationListStore: reducers.notificationListReducer,
