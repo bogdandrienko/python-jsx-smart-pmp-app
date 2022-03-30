@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO debug
-export const DEBUG_CONSTANT = false;
+export const DEBUG_CONSTANT = true;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////TODO constants
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -118,6 +118,12 @@ export const USER_SALARY_DATA_CONSTANT = "USER_SALARY_DATA_CONSTANT";
 export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
 export const USER_SALARY_FAIL_CONSTANT = "USER_SALARY_FAIL_CONSTANT";
 export const USER_SALARY_RESET_CONSTANT = "USER_SALARY_RESET_CONSTANT";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const USER_VACATION_LOAD_CONSTANT = "USER_VACATION_LOAD_CONSTANT";
+export const USER_VACATION_DATA_CONSTANT = "USER_VACATION_DATA_CONSTANT";
+export const USER_VACATION_ERROR_CONSTANT = "USER_VACATION_ERROR_CONSTANT";
+export const USER_VACATION_FAIL_CONSTANT = "USER_VACATION_FAIL_CONSTANT";
+export const USER_VACATION_RESET_CONSTANT = "USER_VACATION_RESET_CONSTANT";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const RATIONAL_CREATE_LOAD_CONSTANT = "RATIONAL_CREATE_LOAD_CONSTANT";
 export const RATIONAL_CREATE_DATA_CONSTANT = "RATIONAL_CREATE_DATA_CONSTANT";
@@ -337,6 +343,40 @@ export const modules = [
         Image:
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
+          {
+            Header: "30.03.22 15:30",
+            Access: ["user"],
+            Active: false,
+            Link: "#",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Пример (шаблон) идеи",
+            Description: "Пример (шаблон) идеи",
+            Logic: true,
+            Redirect: true,
+            Style: "text-secondary",
+          },
+        ],
+      },
+      {
+        Header: "Отдел кадров",
+        Access: ["user"],
+        Image:
+          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+        Links: [
+          {
+            Header: "Выгрузка данных по отпуску",
+            Access: ["user"],
+            Active: true,
+            Link: "/vacation",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Отпуск",
+            Description: "страница с данными по отпуску за выбранный период",
+            Logic: true,
+            Redirect: false,
+            Style: "text-dark",
+          },
           {
             Header: "27.03.22 16:16",
             Access: ["user"],

@@ -19,6 +19,7 @@ import { ChangePasswordPage } from "../pages/user/ChangePasswordPage";
 import { RecoverPasswordPage } from "../pages/user/RecoverPasswordPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { SalaryPage } from "../pages/salary/SalaryPage";
+import { VacationPage } from "../pages/vacation/VacationPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { AdminChangeUserPasswordPage } from "../pages/admin/AdminChangeUserPasswordPage";
 import { AdminCreateOrChangeUsersPage } from "../pages/admin/AdminCreateOrChangeUsersPage";
@@ -84,6 +85,7 @@ export const App = () => {
         <Route path="/text_study" element={<TextStudyPage />} />
 
         <Route path="/salary" element={<SalaryPage />} />
+        <Route path="/vacation" element={<VacationPage />} />
 
         <Route path="/idea_template" element={<IdeaTemplatePage />} />
         <Route path="/idea_create" element={<IdeaCreatePage />} />

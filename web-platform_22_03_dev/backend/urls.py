@@ -37,6 +37,7 @@ urlpatterns = [
     path('api/basic/admin/user_temp/', backend_views.api_basic_admin_user_temp, name='api_basic_admin_user_temp'),
     # TODO custom urls #################################################################################################
     path('api/auth/salary/', backend_views.api_auth_salary, name='api_auth_salary'),
+    path('api/auth/vacation/', backend_views.api_auth_vacation, name='api_auth_vacation'),
     path('api/auth/idea/', backend_views.api_auth_idea, name='api_auth_idea'),
     # TODO test urls ###################################################################################################
     path('api/auth/rational/', backend_views.api_auth_rational, name='api_auth_rational'),

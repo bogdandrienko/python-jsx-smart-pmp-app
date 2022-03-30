@@ -586,7 +586,8 @@ class DjangoClass:
                             password = ""
                             for i in range(1, 6 + 1):
                                 password += random.choice(
-                                    "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
+                                    "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                                )
                             password = "temp" + password
                             user.set_password(password)
                             user.save()

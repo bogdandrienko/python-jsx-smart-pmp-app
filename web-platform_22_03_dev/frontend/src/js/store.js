@@ -22,6 +22,7 @@ const globalReducer = combineReducers({
   adminChangeUserActivityStore: reducers.adminChangeUserActivityReducer,
   /////////////////////////////////////////////////////////////////////////////
   salaryUserStore: reducers.salaryUserReducer,
+  vacationUserStore: reducers.vacationUserReducer,
   /////////////////////////////////////////////////////////////////////////////
   rationalCreateStore: reducers.rationalCreateReducer,
   rationalListStore: reducers.rationalListReducer,

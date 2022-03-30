@@ -511,6 +511,40 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const vacationUserAction = (form) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: constants.USER_VACATION_LOAD_CONSTANT,
+    });
+    const { config } = utils.ActionsAxiosUtility({
+      url: "/api/auth/vacation/",
+      method: "POST",
+      timeout: 15000,
+      form: form,
+      getState: getState,
+    });
+    const { data } = await axios(config);
+    if (data.response) {
+      const response = data.response;
+      dispatch({
+        type: constants.USER_VACATION_DATA_CONSTANT,
+        payload: response,
+      });
+    } else {
+      const response = data.error;
+      dispatch({
+        type: constants.USER_VACATION_ERROR_CONSTANT,
+        payload: response,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: constants.USER_VACATION_FAIL_CONSTANT,
+      payload: utils.ActionsFailUtility({ dispatch: dispatch, error: error }),
+    });
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ideaCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({

@@ -298,6 +298,31 @@ export const salaryUserReducer = (state = {}, action = null) => {
       return state;
   }
 };
+export const vacationUserReducer = (state = {}, action = null) => {
+  switch (action.type) {
+    case constants.USER_VACATION_LOAD_CONSTANT:
+      return { load: true };
+    case constants.USER_VACATION_DATA_CONSTANT:
+      return {
+        load: false,
+        data: action.payload,
+      };
+    case constants.USER_VACATION_ERROR_CONSTANT:
+      return {
+        load: false,
+        error: action.payload,
+      };
+    case constants.USER_VACATION_FAIL_CONSTANT:
+      return {
+        load: false,
+        fail: action.payload,
+      };
+    case constants.USER_VACATION_RESET_CONSTANT:
+      return {};
+    default:
+      return state;
+  }
+};
 ///////////////////////////////////////////////////////////////////////////////////////TODO default export const reducer
 export const ideaCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
