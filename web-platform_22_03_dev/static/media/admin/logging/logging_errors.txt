@@ -144,3 +144,19 @@ error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный ф
 970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:55:04.661497
 
 error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_DdMsb22sYOcWrkVjJ9MIutKM_2022-03-30.xlsx', 2022-03-30 20:55:04.686984
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:48:48.430248
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_default_superusers, User matching query does not exist., 2022-03-30 21:48:53.511443
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-03-30 21:49:01.974565
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:49:02.122565
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-30 21:49:14.047851
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:49:50.763106
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-03-30 21:50:00.053078
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:50:00.165566

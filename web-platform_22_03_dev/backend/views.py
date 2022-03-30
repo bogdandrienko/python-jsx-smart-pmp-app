@@ -689,88 +689,98 @@ def api_auth_admin(request):
                         sheet = workbook.active
                         max_rows = sheet.max_row
                         for row in range(1 + 1, max_rows + 1):
-                            subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
-                            workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
-                            department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
-                            last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
-                            first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
-                            patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
-                            personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
-                            position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
-                            category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
-                            username = get_value(_col="J", _row=row, _sheet=sheet)
-                            password_char_field = get_value(_col="K", _row=row, _sheet=sheet)
-                            is_active = get_value(_col="L", _row=row, _sheet=sheet)
-                            is_staff = get_value(_col="M", _row=row, _sheet=sheet)
-                            is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
-                            is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
-                            groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
-                            email_field = get_value(_col="Q", _row=row, _sheet=sheet)
-                            secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
-                            secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
-
-                            if len(username) <= 1:
-                                continue
-
                             try:
-                                user = User.objects.get(username=username)
-                                if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                                subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
+                                workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
+                                department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
+                                last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
+                                first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
+                                patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
+                                personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
+                                position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
+                                category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
+                                username = get_value(_col="J", _row=row, _sheet=sheet)
+                                password_char_field = get_value(_col="K", _row=row, _sheet=sheet)
+                                is_active = get_value(_col="L", _row=row, _sheet=sheet)
+                                is_staff = get_value(_col="M", _row=row, _sheet=sheet)
+                                is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
+                                is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
+                                groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
+                                email_field = get_value(_col="Q", _row=row, _sheet=sheet)
+                                secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
+                                secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
+
+                                if len(username) <= 1:
                                     continue
-                                new_user = False
-                            except Exception as error:
-                                user = User.objects.create(
-                                    username=username,
-                                    password=make_password(password=password_char_field),
-                                )
-                                new_user = True
 
-                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                                try:
+                                    user = User.objects.get(username=username)
+                                    if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                                        continue
+                                    new_user = False
+                                except Exception as error:
+                                    user = User.objects.create(
+                                        username=username,
+                                        password=make_password(password=password_char_field),
+                                    )
+                                    new_user = True
 
-                            if new_user:
-                                user_model.password_char_field = password_char_field
-                            else:
-                                if change_user_password == "Изменять пароль уже существующего пользователя":
-                                    user.password = make_password(password=password_char_field)
+                                user_model = backend_models.UserModel.objects.get_or_create(
+                                    user_foreign_key_field=user
+                                )[0]
+
+                                if new_user:
                                     user_model.password_char_field = password_char_field
+                                else:
+                                    if change_user_password == "Изменять пароль уже существующего пользователя":
+                                        user.password = make_password(password=password_char_field)
+                                        user_model.password_char_field = password_char_field
 
-                            user.is_staff = is_staff
-                            user.is_superuser = is_superuser
-                            user_model.activity_boolean_field = is_active
-                            user_model.email_field = email_field
-                            user.email = email_field
-                            user_model.secret_question_char_field = secret_question_char_field
-                            user_model.secret_answer_char_field = secret_answer_char_field
-                            user_model.is_temp_password = is_temp_password
-                            user_model.last_name_char_field = last_name_char_field
-                            user.last_name = last_name_char_field
-                            user_model.first_name_char_field = first_name_char_field
-                            user.first_name = first_name_char_field
-                            user_model.patronymic_char_field = patronymic_char_field
-                            user_model.personnel_number_slug_field = personnel_number_slug_field
-                            user_model.subdivision_char_field = subdivision_char_field
-                            user_model.workshop_service_char_field = workshop_service_char_field
-                            user_model.department_site_char_field = department_site_char_field
-                            user_model.position_char_field = position_char_field
-                            user_model.category_char_field = category_char_field
-                            user_model.save()
-                            user.save()
+                                user.is_staff = is_staff
+                                user.is_superuser = is_superuser
+                                user.email = email_field
+                                user.last_name = last_name_char_field
+                                user.first_name = first_name_char_field
+                                user.save()
 
-                            if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
-                                for group in backend_models.GroupModel.objects.filter(
-                                        user_many_to_many_field=user_model
-                                ):
-                                    try:
-                                        group.user_many_to_many_field.remove(user_model)
-                                    except Exception as error:
-                                        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                            groups = [group.strip() for group in str(groups).lower().strip().split(',')]
-                            for group in groups:
-                                if len(group) > 1:
-                                    group_model = \
-                                        backend_models.GroupModel.objects.get_or_create(name_slug_field=group)[0]
-                                    group_model.user_many_to_many_field.add(user_model)
-                            if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                                print(username)
+                                user_model.activity_boolean_field = is_active
+                                user_model.email_field = email_field
+                                user_model.secret_question_char_field = secret_question_char_field
+                                user_model.secret_answer_char_field = secret_answer_char_field
+                                user_model.temp_password_boolean_field = is_temp_password
+                                user_model.last_name_char_field = last_name_char_field
+                                user_model.first_name_char_field = first_name_char_field
+                                user_model.patronymic_char_field = patronymic_char_field
+                                user_model.personnel_number_slug_field = personnel_number_slug_field
+                                user_model.subdivision_char_field = subdivision_char_field
+                                user_model.workshop_service_char_field = workshop_service_char_field
+                                user_model.department_site_char_field = department_site_char_field
+                                user_model.position_char_field = position_char_field
+                                user_model.category_char_field = category_char_field
+                                user_model.save()
+
+                                if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
+                                    for group in backend_models.GroupModel.objects.filter(
+                                            user_many_to_many_field=user_model
+                                    ):
+                                        try:
+                                            group.user_many_to_many_field.remove(user_model)
+                                        except Exception as error:
+                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                groups = [group.strip() for group in str(groups).lower().strip().split(',')]
+                                for group in groups:
+                                    if len(group) > 1:
+                                        try:
+                                            group_model = backend_models.GroupModel.objects.get_or_create(
+                                                name_slug_field=group
+                                            )[0]
+                                            group_model.user_many_to_many_field.add(user_model)
+                                        except Exception as error:
+                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                                    print(username)
+                            except Exception as error:
+                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                         response = {"response": "Пользователи успешно созданы/изменены."}
                     else:
                         response = {"error": "Ошибка чтения файла!"}

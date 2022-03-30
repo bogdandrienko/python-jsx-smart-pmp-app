@@ -360,40 +360,6 @@ export const modules = [
       },
       {
         Header: "Отдел кадров",
-        Access: ["user"],
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
-        Links: [
-          {
-            Header: "Выгрузка данных по отпуску",
-            Access: ["user"],
-            Active: true,
-            Link: "/vacation",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Отпуск",
-            Description: "страница с данными по отпуску за выбранный период",
-            Logic: true,
-            Redirect: false,
-            Style: "text-dark",
-          },
-          {
-            Header: "27.03.22 16:16",
-            Access: ["user"],
-            Active: false,
-            Link: "#",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Пример (шаблон) идеи",
-            Description: "Пример (шаблон) идеи",
-            Logic: true,
-            Redirect: true,
-            Style: "text-secondary",
-          },
-        ],
-      },
-      {
-        Header: "Отдел кадров",
         Access: ["superuser"],
         Image:
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
@@ -1050,7 +1016,36 @@ export const modules = [
             Description: "страница выгрузки Вашего расчётного листа",
             Logic: true,
             Redirect: true,
-            Style: "text-warning",
+            Style: "text-dark",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    Header: "СУП",
+    Access: ["user"],
+    Image: "/static/img/modules/4_module_buhgalteria/module_buhgalteria.png",
+    ShowInModules: true,
+    Sections: [
+      {
+        Header: "Отдел кадров",
+        Access: ["user"],
+        Image:
+          "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
+        Links: [
+          {
+            Header: "Выгрузка данных по отпуску",
+            Access: ["user"],
+            Active: true,
+            Link: "/vacation",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Отпуск",
+            Description: "страница с данными по отпуску за выбранный период",
+            Logic: true,
+            Redirect: false,
+            Style: "text-dark",
           },
         ],
       },

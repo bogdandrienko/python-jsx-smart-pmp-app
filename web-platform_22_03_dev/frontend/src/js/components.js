@@ -759,7 +759,10 @@ export const NewsComponent = ({ count = 100 }) => {
                 <strong className="m-0 p-0">
                   {news_elem.Title}
                   {news_elem.Link !== "#" && (
-                    <small className="text-primary m-0 p-0"> (ссылка)</small>
+                    <small className="custom-color-primary-1 m-0 p-0">
+                      {" "}
+                      (ссылка)
+                    </small>
                   )}
                 </strong>
                 <small className="text-muted m-0 p-0">
