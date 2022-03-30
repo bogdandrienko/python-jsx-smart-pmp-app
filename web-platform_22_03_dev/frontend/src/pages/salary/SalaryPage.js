@@ -128,33 +128,33 @@ export const SalaryPage = () => {
           failText={""}
         />
         {dataSalaryUser && (
-          <div className="bg-light custom-background-transparent-low text-center m-0 p-1">
+          <div className="bg-light custom-background-transparent-low text-center m-0 p-0">
             <div className="text-center m-0 p-1">
               <a
-                className="btn btn-sm btn-success text-center m-0 p-1"
+                className="btn btn-sm btn-success text-center m-0 p-2"
                 href={`/${dataSalaryUser["excelPath"]}`}
               >
                 Скачать excel-документ
               </a>
             </div>
             <div>
-              <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                <li className="m-0">
+              <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
+                <li className="m-0 p-0 my-1">
                   <h6 className="lead fw-bold bold">Основная информация</h6>
                   <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
-                    <thead>
-                      <tr>
-                        <th className="text-center w-50">Тип</th>
-                        <th className="text-center">Значение</th>
+                    <thead className="m-0 p-0">
+                      <tr className="m-0 p-0">
+                        <th className="text-center w-50 m-0 p-0">Тип</th>
+                        <th className="text-center m-0 p-0">Значение</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="m-0 p-0">
                       {dataSalaryUser["headers"]
                         .slice(-2)
                         .map((head, index) => (
-                          <tr key={index}>
-                            <td className="text-start">{head[0]}</td>
-                            <td className="text-end table-active fw-bold">
+                          <tr key={index} className="m-0 p-0">
+                            <td className="text-start m-0 p-0">{head[0]}</td>
+                            <td className="text-end table-active fw-bold m-0 p-0">
                               {head[1]}
                             </td>
                           </tr>
@@ -172,48 +172,52 @@ export const SalaryPage = () => {
                 body_style="bg-light bg-opacity-10 custom-background-transparent-low"
               >
                 {
-                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
-                    <li className="m-0">
-                      <h6 className="lead fw-bold bold">
+                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
+                    <li className="m-0 p-0 my-1">
+                      <h6 className="lead fw-bold bold m-0 p-0 mb-1">
                         Вспомогательная информация
                       </h6>
-                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
-                        <thead>
-                          <tr>
-                            <th className="text-center w-50">Тип</th>
-                            <th className="text-center">Значение</th>
+                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
+                        <thead className="m-0 p-0">
+                          <tr className="m-0 p-0">
+                            <th className="text-center w-50 m-0 p-0">Тип</th>
+                            <th className="text-center m-0 p-0">Значение</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="m-0 p-0">
                           {dataSalaryUser["headers"]
                             .slice(0, 8)
                             .map((head, index) => (
-                              <tr key={index}>
-                                <td className="text-start">{head[0]}</td>
-                                <td className="text-end">{head[1]}</td>
+                              <tr key={index} className="m-0 p-0">
+                                <td className="text-start m-0 p-0">
+                                  {head[0]}
+                                </td>
+                                <td className="text-end m-0 p-0">{head[1]}</td>
                               </tr>
                             ))}
                         </tbody>
                       </table>
                     </li>
-                    <li className="m-0">
-                      <h6 className="lead fw-bold bold">
+                    <li className="m-0 p-0 my-1">
+                      <h6 className="lead fw-bold bold m-0 p-0 mb-1">
                         Вспомогательная информация
                       </h6>
-                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
-                        <thead>
-                          <tr>
-                            <th className="text-center w-50">Тип</th>
-                            <th className="text-center">Значение</th>
+                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
+                        <thead className="m-0 p-0">
+                          <tr className="m-0 p-0">
+                            <th className="text-center w-50 m-0 p-0">Тип</th>
+                            <th className="text-center m-0 p-0">Значение</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="m-0 p-0">
                           {dataSalaryUser["headers"]
                             .slice(8, -2)
                             .map((head, index) => (
                               <tr key={index}>
-                                <td className="text-start">{head[0]}</td>
-                                <td className="text-end">{head[1]}</td>
+                                <td className="text-start m-0 p-0">
+                                  {head[0]}
+                                </td>
+                                <td className="text-end m-0 p-0">{head[1]}</td>
                               </tr>
                             ))}
                         </tbody>
