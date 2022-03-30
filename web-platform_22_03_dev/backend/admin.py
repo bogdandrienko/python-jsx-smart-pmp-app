@@ -575,7 +575,6 @@ class IdeaModelAdmin(admin.ModelAdmin):
 
     list_display = (
         "author_foreign_key_field",
-        "status_moderate_char_field",
         "subdivision_char_field",
         "sphere_char_field",
         "category_char_field",
@@ -583,11 +582,9 @@ class IdeaModelAdmin(admin.ModelAdmin):
         "name_char_field",
         "place_char_field",
         "description_text_field",
-
-        "moderate_foreign_key_field",
+        "status_moderate_char_field",
+        "moderate_author_foreign_key_field",
         "comment_moderate_char_field",
-
-        "visibility_boolean_field",
         "created_datetime_field",
         "register_datetime_field",
     )
@@ -612,10 +609,9 @@ class IdeaModelAdmin(admin.ModelAdmin):
         "place_char_field",
         "description_text_field",
 
-        "moderate_foreign_key_field",
+        "moderate_author_foreign_key_field",
         "comment_moderate_char_field",
 
-        "visibility_boolean_field",
         "created_datetime_field",
         "register_datetime_field",
     )
@@ -630,13 +626,8 @@ class IdeaModelAdmin(admin.ModelAdmin):
             "name_char_field",
             "place_char_field",
             "description_text_field",
-        )}),
-        ("Модерация", {"fields": (
-            "moderate_foreign_key_field",
+            "moderate_author_foreign_key_field",
             "comment_moderate_char_field",
-        )}),
-        ("Дополнительные данные", {"fields": (
-            "visibility_boolean_field",
             "created_datetime_field",
             "register_datetime_field",
         )}),
@@ -652,10 +643,9 @@ class IdeaModelAdmin(admin.ModelAdmin):
         "place_char_field",
         "description_text_field",
 
-        "moderate_foreign_key_field",
+        "moderate_author_foreign_key_field",
         "comment_moderate_char_field",
 
-        "visibility_boolean_field",
         "created_datetime_field",
         "register_datetime_field",
     ]
@@ -664,7 +654,7 @@ class IdeaModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.IdeaModel, IdeaModelAdmin)
 
 
-class RatingIdeaModelAdmin(admin.ModelAdmin):
+class IdeaRatingModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'RatingIdeaModel' на панели администратора
     """
@@ -703,10 +693,10 @@ class RatingIdeaModelAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(backend_models.RatingIdeaModel, RatingIdeaModelAdmin)
+admin.site.register(backend_models.IdeaRatingModel, IdeaRatingModelAdmin)
 
 
-class CommentIdeaModelAdmin(admin.ModelAdmin):
+class IdeaCommentModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'CommentIdeaModel' на панели администратора
     """
@@ -731,7 +721,7 @@ class CommentIdeaModelAdmin(admin.ModelAdmin):
         "created_datetime_field",
     )
     fieldsets = (
-        ("Основная информация", {"fields": (
+        ("Основное", {"fields": (
             "idea_foreign_key_field",
             "author_foreign_key_field",
             "comment_text_field",
@@ -748,7 +738,7 @@ class CommentIdeaModelAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(backend_models.CommentIdeaModel, CommentIdeaModelAdmin)
+admin.site.register(backend_models.IdeaCommentModel, IdeaCommentModelAdmin)
 
 
 # TODO test model admin ################################################################################################
@@ -770,19 +760,24 @@ class RationalModelAdmin(admin.ModelAdmin):
         "additional_word_file_field",
         "additional_pdf_file_field",
         "additional_excel_file_field",
-        "author_1_char_field",
-        "author_2_char_field",
-        "author_3_char_field",
-        "author_4_char_field",
-        "author_5_char_field",
+        "author_1_foreign_key_field",
+        "author_1_perc_char_field",
+        "author_2_foreign_key_field",
+        "author_2_perc_char_field",
+        "author_3_foreign_key_field",
+        "author_3_perc_char_field",
+        "author_4_foreign_key_field",
+        "author_4_perc_char_field",
+        "author_5_foreign_key_field",
+        "author_5_perc_char_field",
 
         "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
         "postmoderate_foreign_key_field",
         "comment_postmoderate_char_field",
 
-        "visibility_boolean_field",
         "created_datetime_field",
+        "register_datetime_field",
     )
     list_display_links = (
         "author_foreign_key_field",
@@ -806,19 +801,24 @@ class RationalModelAdmin(admin.ModelAdmin):
         "additional_word_file_field",
         "additional_pdf_file_field",
         "additional_excel_file_field",
-        "author_1_char_field",
-        "author_2_char_field",
-        "author_3_char_field",
-        "author_4_char_field",
-        "author_5_char_field",
+        "author_1_foreign_key_field",
+        "author_1_perc_char_field",
+        "author_2_foreign_key_field",
+        "author_2_perc_char_field",
+        "author_3_foreign_key_field",
+        "author_3_perc_char_field",
+        "author_4_foreign_key_field",
+        "author_4_perc_char_field",
+        "author_5_foreign_key_field",
+        "author_5_perc_char_field",
 
         "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
         "postmoderate_foreign_key_field",
         "comment_postmoderate_char_field",
 
-        "visibility_boolean_field",
         "created_datetime_field",
+        "register_datetime_field",
     )
     fieldsets = (
         ("Основная информация", {"fields": (
@@ -834,11 +834,16 @@ class RationalModelAdmin(admin.ModelAdmin):
             "additional_word_file_field",
             "additional_pdf_file_field",
             "additional_excel_file_field",
-            "author_1_char_field",
-            "author_2_char_field",
-            "author_3_char_field",
-            "author_4_char_field",
-            "author_5_char_field",
+            "author_1_foreign_key_field",
+            "author_1_perc_char_field",
+            "author_2_foreign_key_field",
+            "author_2_perc_char_field",
+            "author_3_foreign_key_field",
+            "author_3_perc_char_field",
+            "author_4_foreign_key_field",
+            "author_4_perc_char_field",
+            "author_5_foreign_key_field",
+            "author_5_perc_char_field",
         )}),
         ("Предмодерация", {"fields": (
             "premoderate_foreign_key_field",
@@ -849,8 +854,8 @@ class RationalModelAdmin(admin.ModelAdmin):
             "comment_postmoderate_char_field",
         )}),
         ("Дополнительные данные", {"fields": (
-            "visibility_boolean_field",
             "created_datetime_field",
+            "register_datetime_field",
         )}),
     )
     search_fields = [
@@ -866,19 +871,24 @@ class RationalModelAdmin(admin.ModelAdmin):
         "additional_word_file_field",
         "additional_pdf_file_field",
         "additional_excel_file_field",
-        "author_1_char_field",
-        "author_2_char_field",
-        "author_3_char_field",
-        "author_4_char_field",
-        "author_5_char_field",
+        "author_1_foreign_key_field",
+        "author_1_perc_char_field",
+        "author_2_foreign_key_field",
+        "author_2_perc_char_field",
+        "author_3_foreign_key_field",
+        "author_3_perc_char_field",
+        "author_4_foreign_key_field",
+        "author_4_perc_char_field",
+        "author_5_foreign_key_field",
+        "author_5_perc_char_field",
 
         "premoderate_foreign_key_field",
         "comment_premoderate_char_field",
         "postmoderate_foreign_key_field",
         "comment_postmoderate_char_field",
 
-        "visibility_boolean_field",
         "created_datetime_field",
+        "register_datetime_field",
     ]
 
 

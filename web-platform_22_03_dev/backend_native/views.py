@@ -231,7 +231,7 @@ def idea_rating(request):
         ideas = IdeaTestModel.objects.filter(author_foreign_key_field=author)
         total_rating = 0
         for idea in ideas:
-            total_rating += idea.get_total_rating()
+            total_rating += idea.get_ratings()
         user_counts.append(
             {'author': author, 'count': ideas.count(), 'rating': total_rating}
         )

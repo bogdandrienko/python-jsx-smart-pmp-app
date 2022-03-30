@@ -56,7 +56,7 @@ export const NotificationListPage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataNotificationDelete) {
-      utils.Sleep(1000).then(() => {
+      utils.Sleep(10).then(() => {
         resetState();
       });
     }

@@ -181,7 +181,12 @@ export const IdeaAuthorListPage = () => {
                   className="text-decoration-none m-0 p-0"
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
-                    {utils.GetSliceString(object["username"], 20)}
+                    {utils.GetSliceString(
+                      object["user_model"]["last_name_char_field"] +
+                        " " +
+                        object["user_model"]["first_name_char_field"],
+                      50
+                    )}
                     {" | количество идей: " +
                       utils.GetSliceString(object["idea_count"], 20)}
                     {" | общий рейтинг: " +
@@ -205,7 +210,12 @@ export const IdeaAuthorListPage = () => {
                     <div className="card shadow custom-background-transparent-middle m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
-                          {object["username"]}
+                          {utils.GetSliceString(
+                            object["user_model"]["last_name_char_field"] +
+                              " " +
+                              object["user_model"]["first_name_char_field"],
+                            50
+                          )}
                         </h6>
                       </div>
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">

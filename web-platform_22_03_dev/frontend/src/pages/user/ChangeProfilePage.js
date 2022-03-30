@@ -66,7 +66,7 @@ export const ChangeProfilePage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserChange) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         dispatch(actions.userLogoutAction());
         navigate("/login");
       });

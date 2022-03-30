@@ -34,7 +34,6 @@ const globalReducer = combineReducers({
   ideaModerateStore: reducers.ideaModerateReducer,
   ideaCommentCreateStore: reducers.ideaCommentCreateReducer,
   ideaCommentDeleteStore: reducers.ideaCommentDeleteReducer,
-  ideaCommentListStore: reducers.ideaCommentListReducer,
   ideaRatingCreateStore: reducers.ideaRatingCreateReducer,
   ideaAuthorListStore: reducers.ideaAuthorListReducer,
   /////////////////////////////////////////////////////////////////////////////

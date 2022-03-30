@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO debug
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////TODO constants
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -188,17 +188,6 @@ export const IDEA_COMMENT_DELETE_FAIL_CONSTANT =
   "IDEA_COMMENT_DELETE_FAIL_CONSTANT";
 export const IDEA_COMMENT_DELETE_RESET_CONSTANT =
   "IDEA_COMMENT_DELETE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_COMMENT_LIST_LOAD_CONSTANT =
-  "IDEA_COMMENT_LIST_LOAD_CONSTANT";
-export const IDEA_COMMENT_LIST_DATA_CONSTANT =
-  "IDEA_COMMENT_LIST_DATA_CONSTANT";
-export const IDEA_COMMENT_LIST_ERROR_CONSTANT =
-  "IDEA_COMMENT_LIST_ERROR_CONSTANT";
-export const IDEA_COMMENT_LIST_FAIL_CONSTANT =
-  "IDEA_COMMENT_LIST_FAIL_CONSTANT";
-export const IDEA_COMMENT_LIST_RESET_CONSTANT =
-  "IDEA_COMMENT_LIST_RESET_CONSTANT";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 export const IDEA_RATING_CREATE_LOAD_CONSTANT =
   "IDEA_RATING_CREATE_LOAD_CONSTANT";

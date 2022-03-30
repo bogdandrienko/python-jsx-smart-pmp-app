@@ -3,7 +3,6 @@ import axios from "axios";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "./constants";
 import * as utils from "./utils";
-import { ActionsAxiosUtility } from "./utils";
 // TODO custom settings ////////////////////////////////////////////////////////////////////////////////////////////////
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -16,12 +15,12 @@ export const userLoginAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.USER_LOGIN_DATA_CONSTANT,
         payload: response,
@@ -29,7 +28,7 @@ export const userLoginAction = (form) => async (dispatch) => {
       localStorage.setItem("userToken", JSON.stringify(response));
       dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.USER_LOGIN_ERROR_CONSTANT,
         payload: response,
@@ -59,13 +58,13 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.USER_DETAILS_DATA_CONSTANT,
         payload: response,
@@ -74,7 +73,7 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
       dispatch({ type: constants.USER_RECOVER_PASSWORD_RESET_CONSTANT });
       dispatch({ type: constants.USER_SALARY_RESET_CONSTANT });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.USER_DETAILS_ERROR_CONSTANT,
         payload: response,
@@ -95,20 +94,20 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.USER_CHANGE_DATA_CONSTANT,
         payload: response,
       });
       dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.USER_CHANGE_ERROR_CONSTANT,
         payload: response,
@@ -127,20 +126,20 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
       type: constants.USER_RECOVER_PASSWORD_LOAD_CONSTANT,
     });
     const { config } = utils.ActionsAxiosUtility({
-      url: "/api/auth/user/",
+      url: "/api/any/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.USER_RECOVER_PASSWORD_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.USER_RECOVER_PASSWORD_ERROR_CONSTANT,
         payload: response,
@@ -161,19 +160,19 @@ export const UserListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.USER_LIST_ALL_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.USER_LIST_ALL_ERROR_CONSTANT,
         payload: response,
@@ -196,19 +195,19 @@ export const notificationCreateAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/user/",
         method: "POST",
-        timeout: 10000,
+        timeout: 15000,
         form: form,
         getState: getState,
       });
       const { data } = await axios(config);
-      if (data["response"]) {
-        const response = data["response"];
+      if (data.response) {
+        const response = data.response;
         dispatch({
           type: constants.NOTIFICATION_CREATE_DATA_CONSTANT,
           payload: response,
         });
       } else {
-        const response = data["error"];
+        const response = data.error;
         dispatch({
           type: constants.NOTIFICATION_CREATE_ERROR_CONSTANT,
           payload: response,
@@ -230,19 +229,19 @@ export const notificationDeleteAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/user/",
         method: "POST",
-        timeout: 10000,
+        timeout: 15000,
         form: form,
         getState: getState,
       });
       const { data } = await axios(config);
-      if (data["response"]) {
-        const response = data["response"];
+      if (data.response) {
+        const response = data.response;
         dispatch({
           type: constants.NOTIFICATION_DELETE_DATA_CONSTANT,
           payload: response,
         });
       } else {
-        const response = data["error"];
+        const response = data.error;
         dispatch({
           type: constants.NOTIFICATION_DELETE_ERROR_CONSTANT,
           payload: response,
@@ -263,19 +262,19 @@ export const notificationListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.NOTIFICATION_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.NOTIFICATION_LIST_ERROR_CONSTANT,
         payload: response,
@@ -298,19 +297,19 @@ export const adminChangeUserPasswordAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/admin/",
         method: "POST",
-        timeout: 10000,
+        timeout: 15000,
         form: form,
         getState: getState,
       });
       const { data } = await axios(config);
-      if (data["response"]) {
-        const response = data["response"];
+      if (data.response) {
+        const response = data.response;
         dispatch({
           type: constants.ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT,
           payload: response,
         });
       } else {
-        const response = data["error"];
+        const response = data.error;
         dispatch({
           type: constants.ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT,
           payload: response,
@@ -337,14 +336,14 @@ export const adminCreateOrChangeUsersAction =
         getState: getState,
       });
       const { data } = await axios(config);
-      if (data["response"]) {
-        const response = data["response"];
+      if (data.response) {
+        const response = data.response;
         dispatch({
           type: constants.ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT,
           payload: response,
         });
       } else {
-        const response = data["error"];
+        const response = data.error;
         dispatch({
           type: constants.ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT,
           payload: response,
@@ -370,14 +369,14 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.ADMIN_EXPORT_USERS_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.ADMIN_EXPORT_USERS_ERROR_CONSTANT,
         payload: response,
@@ -399,19 +398,19 @@ export const adminChangeUserActivityAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/admin/",
         method: "POST",
-        timeout: 10000,
+        timeout: 15000,
         form: form,
         getState: getState,
       });
       const { data } = await axios(config);
-      if (data["response"]) {
-        const response = data["response"];
+      if (data.response) {
+        const response = data.response;
         dispatch({
           type: constants.ADMIN_CHANGE_USER_ACTIVITY_DATA_CONSTANT,
           payload: response,
         });
       } else {
-        const response = data["error"];
+        const response = data.error;
         dispatch({
           type: constants.ADMIN_CHANGE_USER_ACTIVITY_ERROR_CONSTANT,
           payload: response,
@@ -433,19 +432,19 @@ export const terminalRebootAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/admin/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.TERMINAL_REBOOT_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.TERMINAL_REBOOT_ERROR_CONSTANT,
         payload: response,
@@ -472,8 +471,8 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       const headers = [];
       for (let i in response) {
         if (i !== "global_objects" && i !== "excel_path") {
@@ -492,13 +491,13 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
         "5.Налоговые вычеты",
         response["global_objects"]["5.Налоговые вычеты"],
       ]);
-      const excel_path = response["excel_path"];
+      const excelPath = response["excel_path"];
       dispatch({
         type: constants.USER_SALARY_DATA_CONSTANT,
-        payload: { excel_path: excel_path, headers: headers, tables: tables },
+        payload: { excelPath: excelPath, headers: headers, tables: tables },
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.USER_SALARY_ERROR_CONSTANT,
         payload: response,
@@ -520,19 +519,19 @@ export const ideaCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_CREATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_CREATE_ERROR_CONSTANT,
         payload: response,
@@ -553,19 +552,19 @@ export const ideaListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_LIST_ERROR_CONSTANT,
         payload: response,
@@ -586,19 +585,19 @@ export const ideaDetailAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_DETAIL_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_DETAIL_ERROR_CONSTANT,
         payload: response,
@@ -619,19 +618,19 @@ export const ideaChangeAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_CHANGE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_CHANGE_ERROR_CONSTANT,
         payload: response,
@@ -652,19 +651,19 @@ export const ideaModerateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_MODERATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_MODERATE_ERROR_CONSTANT,
         payload: response,
@@ -685,19 +684,19 @@ export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_COMMENT_CREATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_COMMENT_CREATE_ERROR_CONSTANT,
         payload: response,
@@ -718,19 +717,19 @@ export const ideaCommentDeleteAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_COMMENT_DELETE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_COMMENT_DELETE_ERROR_CONSTANT,
         payload: response,
@@ -743,39 +742,6 @@ export const ideaCommentDeleteAction = (form) => async (dispatch, getState) => {
     });
   }
 };
-export const ideaCommentListAction = (form) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: constants.IDEA_COMMENT_LIST_LOAD_CONSTANT,
-    });
-    const { config } = utils.ActionsAxiosUtility({
-      url: "/api/auth/idea/",
-      method: "POST",
-      timeout: 10000,
-      form: form,
-      getState: getState,
-    });
-    const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
-      dispatch({
-        type: constants.IDEA_COMMENT_LIST_DATA_CONSTANT,
-        payload: response,
-      });
-    } else {
-      const response = data["error"];
-      dispatch({
-        type: constants.IDEA_COMMENT_LIST_ERROR_CONSTANT,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    dispatch({
-      type: constants.IDEA_COMMENT_LIST_FAIL_CONSTANT,
-      payload: utils.ActionsFailUtility({ dispatch: dispatch, error: error }),
-    });
-  }
-};
 export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -784,19 +750,19 @@ export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_RATING_CREATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_RATING_CREATE_ERROR_CONSTANT,
         payload: response,
@@ -817,19 +783,19 @@ export const ideaAuthorListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.IDEA_AUTHOR_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.IDEA_AUTHOR_LIST_ERROR_CONSTANT,
         payload: response,
@@ -851,19 +817,19 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.RATIONAL_CREATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.RATIONAL_CREATE_ERROR_CONSTANT,
         payload: response,
@@ -884,19 +850,19 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.RATIONAL_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.RATIONAL_LIST_ERROR_CONSTANT,
         payload: response,
@@ -917,19 +883,19 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.RATIONAL_DETAIL_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.RATIONAL_DETAIL_ERROR_CONSTANT,
         payload: response,
@@ -951,19 +917,19 @@ export const vacancyCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.VACANCY_CREATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.VACANCY_CREATE_ERROR_CONSTANT,
         payload: response,
@@ -984,18 +950,18 @@ export const vacancyListAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.VACANCY_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.VACANCY_LIST_ERROR_CONSTANT,
         payload: response,
@@ -1016,18 +982,18 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.VACANCY_DETAIL_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.VACANCY_DETAIL_ERROR_CONSTANT,
         payload: response,
@@ -1048,19 +1014,19 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.VACANCY_DELETE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.VACANCY_DELETE_ERROR_CONSTANT,
         payload: response,
@@ -1081,19 +1047,19 @@ export const vacancyChangeAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.VACANCY_CHANGE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.VACANCY_CHANGE_ERROR_CONSTANT,
         payload: response,
@@ -1115,18 +1081,18 @@ export const resumeCreateAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.RESUME_CREATE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.RESUME_CREATE_ERROR_CONSTANT,
         payload: response,
@@ -1147,19 +1113,19 @@ export const resumeListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.RESUME_LIST_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.RESUME_LIST_ERROR_CONSTANT,
         payload: response,
@@ -1180,19 +1146,19 @@ export const resumeDetailAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.RESUME_DETAIL_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.RESUME_DETAIL_ERROR_CONSTANT,
         payload: response,
@@ -1213,19 +1179,19 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 15000,
       form: form,
       getState: getState,
     });
     const { data } = await axios(config);
-    if (data["response"]) {
-      const response = data["response"];
+    if (data.response) {
+      const response = data.response;
       dispatch({
         type: constants.RESUME_DELETE_DATA_CONSTANT,
         payload: response,
       });
     } else {
-      const response = data["error"];
+      const response = data.error;
       dispatch({
         type: constants.RESUME_DELETE_ERROR_CONSTANT,
         payload: response,

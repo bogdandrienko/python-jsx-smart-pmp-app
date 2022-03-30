@@ -52,16 +52,6 @@ export const IdeaModerateChangePage = () => {
     // fail: failIdeaChange,
   } = ideaChangeStore;
   //////////////////////////////////////////////////////////
-  const ideaCommentListStore = useSelector(
-    (state) => state.ideaCommentListStore
-  );
-  const {
-    // load: loadIdeaCommentList,
-    data: dataIdeaCommentList,
-    // error: errorIdeaCommentList,
-    // fail: failIdeaCommentList,
-  } = ideaCommentListStore;
-  //////////////////////////////////////////////////////////
   const ideaCommentDeleteStore = useSelector(
     (state) => state.ideaCommentDeleteStore
   );
@@ -83,9 +73,6 @@ export const IdeaModerateChangePage = () => {
     });
     dispatch({
       type: constants.IDEA_CHANGE_RESET_CONSTANT,
-    });
-    dispatch({
-      type: constants.IDEA_COMMENT_LIST_RESET_CONSTANT,
     });
     dispatch({
       type: constants.IDEA_COMMENT_DELETE_RESET_CONSTANT,
@@ -114,16 +101,6 @@ export const IdeaModerateChangePage = () => {
       }
     }
   }, [dataIdeaDetail, firstRefreshSet]);
-  //////////////////////////////////////////////////////////
-  useEffect(() => {
-    if (!dataIdeaCommentList) {
-      const form = {
-        "Action-type": "IDEA_COMMENT_LIST",
-        id: id,
-      };
-      dispatch(actions.ideaCommentListAction(form));
-    }
-  }, [dataIdeaCommentList]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaModerate) {
@@ -627,72 +604,81 @@ export const IdeaModerateChangePage = () => {
                     <div className="d-flex justify-content-between m-0 p-1">
                       <span
                         className={
-                          dataIdeaDetail["total_rating"]["rate"] > 7
+                          dataIdeaDetail["ratings"]["rate"] > 7
                             ? "text-success"
-                            : dataIdeaDetail["total_rating"]["rate"] > 4
+                            : dataIdeaDetail["ratings"]["rate"] > 4
                             ? "text-warning"
                             : "text-danger"
                         }
                       >
                         Рейтинг
                       </span>
-                      <Navbar className="text-center m-0 p-0">
-                        <Container className="m-0 p-0">
-                          <Nav className="me-auto dropdown m-0 p-0">
-                            <NavDropdown
-                              title={
-                                utils.GetSliceString(
-                                  dataIdeaDetail["total_rating"]["rate"],
-                                  3,
-                                  false
-                                ) +
-                                " /  " +
-                                dataIdeaDetail["total_rating"]["count"]
-                              }
-                              className={
-                                dataIdeaDetail["total_rating"]["rate"] > 7
-                                  ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
-                                  : dataIdeaDetail["total_rating"]["rate"] > 4
-                                  ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill"
-                                  : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill"
-                              }
-                            >
-                              <ul className="m-0 p-0">
-                                {dataIdeaDetail["total_rating"]["users"].map(
-                                  (object, index) => (
-                                    <li
-                                      key={index}
-                                      className={
-                                        object.split(":")[1] > 7
-                                          ? "list-group-item bg-success bg-opacity-10"
-                                          : object.split(":")[1] > 4
-                                          ? "list-group-item bg-warning bg-opacity-10"
-                                          : "list-group-item bg-danger bg-opacity-10"
-                                      }
-                                    >
-                                      <small className="">{object}</small>
-                                    </li>
-                                  )
-                                )}
-                              </ul>
-                            </NavDropdown>
-                          </Nav>
-                        </Container>
-                      </Navbar>
+                      {dataIdeaDetail["ratings"] &&
+                      dataIdeaDetail["ratings"]["ratings"].length > 0 ? (
+                        <Navbar className="text-center m-0 p-0">
+                          <Container className="m-0 p-0">
+                            <Nav className="me-auto dropdown m-0 p-0">
+                              <NavDropdown
+                                title={
+                                  utils.GetSliceString(
+                                    dataIdeaDetail["ratings"]["rate"],
+                                    3,
+                                    false
+                                  ) +
+                                  " /  " +
+                                  dataIdeaDetail["ratings"]["count"]
+                                }
+                                className={
+                                  dataIdeaDetail["ratings"]["rate"] > 7
+                                    ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
+                                    : dataIdeaDetail["ratings"]["rate"] > 4
+                                    ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill"
+                                    : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill"
+                                }
+                              >
+                                <ul className="m-0 p-0">
+                                  {dataIdeaDetail["ratings"]["ratings"].map(
+                                    (object, index) => (
+                                      <li
+                                        key={index}
+                                        className={
+                                          object["rating_integer_field"] > 7
+                                            ? "list-group-item bg-success bg-opacity-10"
+                                            : object["rating_integer_field"] > 4
+                                            ? "list-group-item bg-warning bg-opacity-10"
+                                            : "list-group-item bg-danger bg-opacity-10"
+                                        }
+                                      >
+                                        <small className="">{object}</small>
+                                      </li>
+                                    )
+                                  )}
+                                </ul>
+                              </NavDropdown>
+                            </Nav>
+                          </Container>
+                        </Navbar>
+                      ) : (
+                        <div className="m-0 p-1">
+                          <span className="btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2">
+                            {"0  / 0"}
+                          </span>
+                        </div>
+                      )}
                       <span>
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 1
+                            dataIdeaDetail["ratings"]["rate"] >= 1
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 0.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 0.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -700,16 +686,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 2
+                            dataIdeaDetail["ratings"]["rate"] >= 2
                               ? "fas fa- m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 1.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 1.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -717,16 +703,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 3
+                            dataIdeaDetail["ratings"]["rate"] >= 3
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 2.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 2.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -734,16 +720,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 4
+                            dataIdeaDetail["ratings"]["rate"] >= 4
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 3.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 3.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -751,16 +737,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 5
+                            dataIdeaDetail["ratings"]["rate"] >= 5
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 4.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 4.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -768,16 +754,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 6
+                            dataIdeaDetail["ratings"]["rate"] >= 6
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 5.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 5.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -785,16 +771,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 7
+                            dataIdeaDetail["ratings"]["rate"] >= 7
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 6.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 6.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -802,16 +788,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 8
+                            dataIdeaDetail["ratings"]["rate"] >= 8
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 7.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 7.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -819,16 +805,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 9
+                            dataIdeaDetail["ratings"]["rate"] >= 9
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 8.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 8.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -836,16 +822,16 @@ export const IdeaModerateChangePage = () => {
                         <i
                           style={{
                             color:
-                              dataIdeaDetail["total_rating"]["rate"] > 7
+                              dataIdeaDetail["ratings"]["rate"] > 7
                                 ? "#00ff00"
-                                : dataIdeaDetail["total_rating"]["rate"] > 4
+                                : dataIdeaDetail["ratings"]["rate"] > 4
                                 ? "#ffaa00"
                                 : "#ff0000",
                           }}
                           className={
-                            dataIdeaDetail["total_rating"]["rate"] >= 10
+                            dataIdeaDetail["ratings"]["rate"] >= 10
                               ? "fas fa-star m-0 p-0"
-                              : dataIdeaDetail["total_rating"]["rate"] >= 9.5
+                              : dataIdeaDetail["ratings"]["rate"] >= 9.5
                               ? "fas fa-star-half-alt m-0 p-0"
                               : "far fa-star m-0 p-0"
                           }
@@ -857,7 +843,7 @@ export const IdeaModerateChangePage = () => {
                         Комментарии
                       </span>
                       <span className="badge bg-secondary rounded-pill m-0 p-1">
-                        {dataIdeaDetail["comment_count"]}
+                        {dataIdeaDetail["comments"]["count"]}
                       </span>
                     </div>
                   </div>
@@ -897,19 +883,6 @@ export const IdeaModerateChangePage = () => {
                 <div className="card m-0 p-2">
                   <div className="order-md-last m-0 p-0">
                     <components.StoreStatusComponent
-                      storeStatus={ideaCommentListStore}
-                      keyStatus={"ideaCommentListStore"}
-                      consoleLog={constants.DEBUG_CONSTANT}
-                      showLoad={true}
-                      loadText={""}
-                      showData={false}
-                      dataText={""}
-                      showError={true}
-                      errorText={""}
-                      showFail={true}
-                      failText={""}
-                    />
-                    <components.StoreStatusComponent
                       storeStatus={ideaCommentDeleteStore}
                       keyStatus={"ideaCommentDeleteStore"}
                       consoleLog={constants.DEBUG_CONSTANT}
@@ -922,8 +895,9 @@ export const IdeaModerateChangePage = () => {
                       showFail={true}
                       failText={""}
                     />
-                    {!dataIdeaCommentList ||
-                    (dataIdeaCommentList && dataIdeaCommentList.length) < 1 ? (
+                    {!dataIdeaDetail["comments"] ||
+                    (dataIdeaDetail["comments"]["comments"] &&
+                      dataIdeaDetail["comments"]["comments"].length) < 1 ? (
                       <div className="my-1">
                         <components.MessageComponent variant={"warning"}>
                           Комментарии не найдены!
@@ -931,38 +905,44 @@ export const IdeaModerateChangePage = () => {
                       </div>
                     ) : (
                       <ul className="list-group m-0 p-0">
-                        {dataIdeaCommentList.map((object, index) => (
-                          <li className="list-group-item m-0 p-1">
-                            <div className="d-flex justify-content-between m-0 p-0">
-                              <h6 className="btn btn-outline-warning m-0 p-2">
-                                {object["user_model"]["last_name_char_field"]}{" "}
-                                {object["user_model"]["first_name_char_field"]}
-                              </h6>
-                              <span className="text-muted m-0 p-0">
-                                {utils.GetCleanDateTime(
-                                  object["created_datetime_field"],
-                                  true
-                                )}
-                                <button
-                                  type="button"
-                                  className="btn btn-sm btn-outline-danger m-1 p-1"
-                                  onClick={(e) =>
-                                    handlerCommentDelete({
-                                      commentId: object["id"],
-                                    })
+                        {dataIdeaDetail["comments"]["comments"].map(
+                          (object, index) => (
+                            <li className="list-group-item m-0 p-1">
+                              <div className="d-flex justify-content-between m-0 p-0">
+                                <h6 className="btn btn-outline-warning m-0 p-2">
+                                  {object["user_model"]["last_name_char_field"]}{" "}
+                                  {
+                                    object["user_model"][
+                                      "first_name_char_field"
+                                    ]
                                   }
-                                >
-                                  удалить комментарий
-                                </button>
-                              </span>
-                            </div>
-                            <div className="d-flex justify-content-center m-0 p-1">
-                              <small className="text-muted m-0 p-1">
-                                {object["comment_text_field"]}
-                              </small>
-                            </div>
-                          </li>
-                        ))}
+                                </h6>
+                                <span className="text-muted m-0 p-0">
+                                  {utils.GetCleanDateTime(
+                                    object["created_datetime_field"],
+                                    true
+                                  )}
+                                  <button
+                                    type="button"
+                                    className="btn btn-sm btn-outline-danger m-1 p-1"
+                                    onClick={(e) =>
+                                      handlerCommentDelete({
+                                        commentId: object["id"],
+                                      })
+                                    }
+                                  >
+                                    удалить комментарий
+                                  </button>
+                                </span>
+                              </div>
+                              <div className="d-flex justify-content-center m-0 p-1">
+                                <small className="text-muted m-0 p-1">
+                                  {object["comment_text_field"]}
+                                </small>
+                              </div>
+                            </li>
+                          )
+                        )}
                       </ul>
                     )}
                   </div>

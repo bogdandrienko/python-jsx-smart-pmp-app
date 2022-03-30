@@ -308,7 +308,7 @@ def api_any_user(request):
                             request_method_slug_field=f"{req_inst.method} | {req_inst.action_type}",
                             error_text_field="-",
                         )
-                        text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_" \
+                        text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M')}_" \
                                f"{user_model.password_char_field[-1]} {str(user_model.user_foreign_key_field)}" \
                                f"{user_model.password_char_field}"
                         encrypt_text = backend_service.EncryptingClass.encrypt_text(
@@ -317,15 +317,15 @@ def api_any_user(request):
                         )
                         subject = 'Восстановление пароля от веб платформы'
                         message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-                                    f'перейдите по ссылке: https://web.km.kz/recover_password => ' \
-                                    f'восстановление пароля, введите Ваш ИИН и затем в окне почты ' \
-                                    f'введите код (без кавычек): "{encrypt_text}". Внимание, этот код действует ' \
-                                    f'в течении часа с момента отправки!'
+                                    f'перейдите по ссылке: https://web.km.kz/ => войти => ' \
+                                    f'восстановить доступ к аккаунту => введите Ваш ИИН и затем в окне восстановления' \
+                                    f' через почту введите этот код восстановления (без кавычек): "{encrypt_text}". ' \
+                                    f'Внимание! Этот код действует в течении часа с момента отправки!'
                         if subject and message_s and user_model.email_field:
                             send_mail(
                                 subject,
                                 message_s,
-                                "web.km.kz",
+                                "kostanayminerals@web.km.kz",
                                 [user_model.email_field, ''],
                                 fail_silently=False
                             )
@@ -353,11 +353,20 @@ def api_any_user(request):
                     user_model = backend_models.UserModel.objects.get(
                         user_foreign_key_field=User.objects.get(username=username)
                     )
-                    decrypt_text = backend_service.EncryptingClass.decrypt_text(recover_password, '31284')
-                    text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H%M')}_{user_model.password_char_field[-1]}" \
-                           f"{str(user_model.user_foreign_key_field)}{user_model.password_char_field}"
-                    time1 = int(decrypt_text.split('_')[0].split('T')[1])
-                    time2 = int(text.split('_')[0].split('T')[1])
+                    decrypt_text = backend_service.EncryptingClass.decrypt_text(
+                        recover_password, user_model.password_char_field
+                    )
+                    text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M')}_" \
+                           f"{user_model.password_char_field[-1]}" \
+                           f" {str(user_model.user_foreign_key_field)}{user_model.password_char_field} "
+                    time1 = int(
+                        decrypt_text.split('_')[0].split('T')[1].split(":")[0] +
+                        decrypt_text.split('_')[0].split('T')[1].split(":")[1]
+                    )
+                    time2 = int(
+                        text.split('_')[0].split('T')[1].split(":")[0] +
+                        text.split('_')[0].split('T')[1].split(":")[1]
+                    )
                     if time1 - time2 > -60:
                         if str(decrypt_text.split('_')[1]).strip() == str(text.split('_')[1]).strip():
                             response = {"response": {
@@ -502,7 +511,9 @@ def api_auth_user(request):
             if req_inst.action_type == "USER_LIST_ALL":
                 try:
                     # TODO get_value ###################################################################################
-                    user_models = backend_models.UserModel.objects.order_by("last_name_char_field")
+                    user_models = backend_models.UserModel.objects.filter(
+                        activity_boolean_field=True
+                    ).order_by("last_name_char_field")
                     # TODO actions #####################################################################################
                     users = []
                     for user_model in user_models:
@@ -654,12 +665,11 @@ def api_auth_admin(request):
                 try:
                     # TODO get_value ###################################################################################
                     additional_excel = req_inst.get_value("additionalExcel")
+                    change_user = req_inst.get_value("changeUser")
+                    change_user_password = req_inst.get_value("changeUserPassword")
+                    clear_user_groups = req_inst.get_value("clearUserGroups")
                     # TODO actions #####################################################################################
                     if additional_excel:
-                        change_user = req_inst.get_value("changeUser")
-                        change_user_password = req_inst.get_value("changeUserPassword")
-                        clear_user_groups = req_inst.get_value("clearUserGroups")
-
                         def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
                             if isinstance(_col, int):
                                 _col = get_column_letter(_col)
@@ -747,7 +757,8 @@ def api_auth_admin(request):
 
                             if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
                                 for group in backend_models.GroupModel.objects.filter(
-                                        user_many_to_many_field=user_model):
+                                        user_many_to_many_field=user_model
+                                ):
                                     try:
                                         group.user_many_to_many_field.remove(user_model)
                                     except Exception as error:
@@ -758,7 +769,7 @@ def api_auth_admin(request):
                                     group_model = \
                                         backend_models.GroupModel.objects.get_or_create(name_slug_field=group)[0]
                                     group_model.user_many_to_many_field.add(user_model)
-                            if backend_settings.DEBUG:
+                            if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
                                 print(username)
                         response = {"response": "Пользователи успешно созданы/изменены."}
                     else:
@@ -1642,6 +1653,7 @@ def api_auth_idea(request):
                     name = req_inst.get_value("name")
                     place = req_inst.get_value("place")
                     description = req_inst.get_value("description")
+                    moderate = req_inst.get_value("moderate")
                     # TODO actions #####################################################################################
                     backend_models.IdeaModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
@@ -1652,18 +1664,18 @@ def api_auth_idea(request):
                         name_char_field=name,
                         place_char_field=place,
                         description_text_field=description,
-                        status_moderate_char_field="на модерации",
+                        status_moderate_char_field=moderate,
                     )
                     backend_models.NotificationModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
                         model_foreign_key_field=backend_models.GroupModel.objects.get(
                             name_slug_field="moderator_idea"
                         ),
-                        name_char_field="Создана новая идея",
+                        name_char_field=f"Создана новая идея",
                         place_char_field="банк идей",
-                        description_text_field=f"название: {name}",
+                        description_text_field=f"название идеи: {name}",
                     )
-                    response = {"response": "Идея успешно отправлена на модерацию!"}
+                    response = {"response": "Успешно отправлено на модерацию!"}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -1683,30 +1695,27 @@ def api_auth_idea(request):
 
                     only_month = req_inst.get_value("onlyMonth")
                     # TODO actions #####################################################################################
-
                     # TODO onlyMonth
-                    objects = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
+                    ideas = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                         local_objects = []
-                        for obj in objects:
-                            if (obj.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                        for idea in ideas:
+                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
                                     >= now:
-                                local_objects.append(obj.id)
-                        objects = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
+                                local_objects.append(idea.id)
+                        ideas = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
                             order_by("-register_datetime_field")
-
                     # TODO search
                     if search:
-                        objects = objects.filter(name_char_field__icontains=search)
-
+                        ideas = ideas.filter(name_char_field__icontains=search)
                     # TODO filter
                     if subdivision:
-                        objects = objects.filter(subdivision_char_field=subdivision)
+                        ideas = ideas.filter(subdivision_char_field=subdivision)
                     if sphere:
-                        objects = objects.filter(sphere_char_field=sphere)
+                        ideas = ideas.filter(sphere_char_field=sphere)
                     if category:
-                        objects = objects.filter(category_char_field=category)
+                        ideas = ideas.filter(category_char_field=category)
                     if author:
                         if author == "self":
                             author = req_inst.user_model
@@ -1714,82 +1723,89 @@ def api_auth_idea(request):
                             author = backend_models.UserModel.objects.get(
                                 personnel_number_slug_field=(str(author).split(" ")[-2]).strip()
                             )
-                        objects = objects.filter(author_foreign_key_field=author)
+                        ideas = ideas.filter(author_foreign_key_field=author)
                     if moderate:
-                        objects = objects.filter(status_moderate_char_field=moderate)
-
+                        ideas = ideas.filter(status_moderate_char_field=moderate)
                     # TODO sort
                     if sort:
                         if sort == "дате публикации (свежие в начале)":
-                            objects = objects.order_by("-register_datetime_field")
+                            ideas = ideas.order_by("-register_datetime_field")
                         elif sort == "дате публикации (свежие в конце)":
-                            objects = objects.order_by("register_datetime_field")
+                            ideas = ideas.order_by("register_datetime_field")
                         elif sort == "названию (с начала алфавита)":
-                            objects = objects.order_by("name_char_field")
+                            ideas = ideas.order_by("name_char_field")
                         elif sort == "названию (с конца алфавита)":
-                            objects = objects.order_by("-name_char_field")
+                            ideas = ideas.order_by("-name_char_field")
                         elif sort == "рейтингу (популярные в начале)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj.get_total_rating()["rate"], obj])
-
-                            objects_arr.sort(key=lambda x: x[0], reverse=True)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                if ratings.count() <= 0:
+                                    rate = 0
+                                else:
+                                    rate = 0
+                                    for i in ratings:
+                                        rate += i.rating_integer_field
+                                    rate = round(rate / ideas.count(), 2)
+                                ideas_arr.append([rate, idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "рейтингу (популярные в конце)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj.get_total_rating()["rate"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=False)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                if ratings.count() <= 0:
+                                    rate = 0
+                                else:
+                                    rate = 0
+                                    for i in ratings:
+                                        rate += i.rating_integer_field
+                                    rate = round(rate / ideas.count(), 2)
+                                ideas_arr.append([rate, idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "отметкам рейтинга (наибольшие в начале)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([
-                                    backend_models.RatingIdeaModel.objects.filter(
-                                        idea_foreign_key_field=obj
-                                    ).count(),
-                                    obj
-                                ])
-                            objects_arr.sort(key=lambda x: x[0], reverse=True)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([ratings.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "отметкам рейтинга (наибольшие в конце)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([
-                                    backend_models.RatingIdeaModel.objects.filter(
-                                        idea_foreign_key_field=obj
-                                    ).count(),
-                                    obj
-                                ])
-                            objects_arr.sort(key=lambda x: x[0], reverse=False)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([ratings.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "комментариям (наибольшие в начале)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj.get_comment_count(), obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=True)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                comments = backend_models.IdeaCommentModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([comments.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "комментариям (наибольшие в конце)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj.get_comment_count(), obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=False)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
-
+                            ideas_arr = []
+                            for idea in ideas:
+                                comments = backend_models.IdeaCommentModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([comments.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
                     # TODO serialize
-                    serializer = backend_serializers.IdeaModelSerializer(instance=objects, many=True).data
+                    serializer = backend_serializers.IdeaModelSerializer(instance=ideas, many=True).data
                     response = {"response": serializer}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
@@ -1829,30 +1845,30 @@ def api_auth_idea(request):
                     moderate = req_inst.get_value("moderate")
                     moderate_comment = req_inst.get_value("moderateComment")
                     # TODO actions #####################################################################################
-                    obj = backend_models.IdeaModel.objects.get(id=_id)
-                    if subdivision and obj.subdivision_char_field != subdivision:
-                        obj.subdivision_char_field = subdivision
-                    if sphere and obj.sphere_char_field != sphere:
-                        obj.sphere_char_field = sphere
-                    if category and obj.category_char_field != category:
-                        obj.category_char_field = category
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    if subdivision and idea.subdivision_char_field != subdivision:
+                        idea.subdivision_char_field = subdivision
+                    if sphere and idea.sphere_char_field != sphere:
+                        idea.sphere_char_field = sphere
+                    if category and idea.category_char_field != category:
+                        idea.category_char_field = category
                     if clear_image:
-                        obj.image_field = None
-                    if avatar and obj.image_field != avatar:
-                        obj.image_field = avatar
-                    if name and obj.name_char_field != name:
-                        obj.name_char_field = name
-                    if place and obj.place_char_field != place:
-                        obj.place_char_field = place
-                    if description and obj.description_text_field != description:
-                        obj.description_text_field = description
-                    if moderate and obj.status_moderate_char_field != moderate:
-                        obj.status_moderate_char_field = moderate
-                    if moderate_comment and obj.comment_moderate_char_field != moderate_comment:
-                        obj.comment_moderate_char_field = moderate_comment
-                    obj.register_datetime_field = timezone.now()
-                    obj.save()
-                    if req_inst.user_model == obj.author_foreign_key_field:
+                        idea.image_field = None
+                    if avatar and idea.image_field != avatar:
+                        idea.image_field = avatar
+                    if name and idea.name_char_field != name:
+                        idea.name_char_field = name
+                    if place and idea.place_char_field != place:
+                        idea.place_char_field = place
+                    if description and idea.description_text_field != description:
+                        idea.description_text_field = description
+                    if moderate and idea.status_moderate_char_field != moderate:
+                        idea.status_moderate_char_field = moderate
+                    if moderate_comment and idea.comment_moderate_char_field != moderate_comment:
+                        idea.comment_moderate_char_field = moderate_comment
+                    idea.register_datetime_field = timezone.now()
+                    idea.save()
+                    if req_inst.user_model == idea.author_foreign_key_field:
                         backend_models.NotificationModel.objects.create(
                             author_foreign_key_field=req_inst.user_model,
                             model_foreign_key_field=backend_models.GroupModel.objects.get(
@@ -1860,9 +1876,9 @@ def api_auth_idea(request):
                             ),
                             name_char_field="Идея отредактирована автором",
                             place_char_field="банк идей",
-                            description_text_field=f"название: {obj.name_char_field}",
+                            description_text_field=f"название идеи: {idea.name_char_field}",
                         )
-                    response = {"response": "Успешно изменено!"}
+                    response = {"response": "успешно изменено!"}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -1876,12 +1892,12 @@ def api_auth_idea(request):
                     moderate = req_inst.get_value("moderate")
                     moderate_comment = req_inst.get_value("moderateComment")
                     # TODO actions #####################################################################################
-                    obj = backend_models.IdeaModel.objects.get(id=_id)
-                    obj.status_moderate_char_field = moderate
-                    obj.moderate_foreign_key_field = req_inst.user_model
-                    obj.comment_moderate_char_field = moderate_comment
-                    obj.register_datetime_field = timezone.now()
-                    obj.save()
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    idea.status_moderate_char_field = moderate
+                    idea.moderate_foreign_key_field = req_inst.user_model
+                    idea.comment_moderate_char_field = moderate_comment
+                    idea.register_datetime_field = timezone.now()
+                    idea.save()
                     if moderate == "принято" or moderate == "на доработку":
                         message = "Действия с Вашей идеей"
                         if moderate == "принято":
@@ -1891,10 +1907,10 @@ def api_auth_idea(request):
                                       "исправьте её!"
                         backend_models.NotificationModel.objects.create(
                             author_foreign_key_field=req_inst.user_model,
-                            target_foreign_key_field=obj.author_foreign_key_field,
+                            target_foreign_key_field=idea.author_foreign_key_field,
                             name_char_field=message,
                             place_char_field="банк идей",
-                            description_text_field=f"название: {obj.name_char_field}",
+                            description_text_field=f"название идеи: {idea.name_char_field}",
                         )
                     elif moderate == "скрыто":
                         message = "Действия с Вашей идеей"
@@ -1907,9 +1923,9 @@ def api_auth_idea(request):
                             ),
                             name_char_field=message,
                             place_char_field="банк идей",
-                            description_text_field=f"название: {obj.name_char_field}",
+                            description_text_field=f"название идеи: {idea.name_char_field}",
                         )
-                    response = {"response": "Модерация успешно прошла!"}
+                    response = {"response": "Модерация прошла успешно!"}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -1922,9 +1938,9 @@ def api_auth_idea(request):
                     _id = req_inst.get_value("id")
                     comment = req_inst.get_value("comment")
                     # TODO actions #####################################################################################
-                    obj = backend_models.IdeaModel.objects.get(id=_id)
-                    backend_models.CommentIdeaModel.objects.create(
-                        idea_foreign_key_field=obj,
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    backend_models.IdeaCommentModel.objects.create(
+                        idea_foreign_key_field=idea,
                         author_foreign_key_field=req_inst.user_model,
                         comment_text_field=comment,
                     )
@@ -1940,26 +1956,10 @@ def api_auth_idea(request):
                     # TODO get_value ###################################################################################
                     comment_id = req_inst.get_value("commentId")
                     # TODO actions #####################################################################################
-                    backend_models.CommentIdeaModel.objects.get(
+                    backend_models.IdeaCommentModel.objects.get(
                         id=comment_id,
                     ).delete()
                     response = {"response": "Комментарий успешно удалён!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_COMMENT_LIST":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    # TODO actions #####################################################################################
-                    obj = backend_models.IdeaModel.objects.get(id=_id)
-                    objects = backend_models.CommentIdeaModel.objects.filter(idea_foreign_key_field=obj). \
-                        order_by("-created_datetime_field")
-                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True).data
-                    response = {"response": serializer}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -1972,15 +1972,15 @@ def api_auth_idea(request):
                     _id = req_inst.get_value("id")
                     rating = req_inst.get_value("rating")
                     # TODO actions #####################################################################################
-                    obj = backend_models.IdeaModel.objects.get(id=_id)
-                    rating_obj = backend_models.RatingIdeaModel.objects.get_or_create(
-                        idea_foreign_key_field=obj, author_foreign_key_field=req_inst.user_model)[0]
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    rating_obj = backend_models.IdeaRatingModel.objects.get_or_create(
+                        idea_foreign_key_field=idea, author_foreign_key_field=req_inst.user_model)[0]
                     rating_obj.rating_integer_field = rating
                     rating_obj.save()
-                    objects = backend_models.CommentIdeaModel.objects.filter(
-                        idea_foreign_key_field=obj
+                    ideas = backend_models.IdeaCommentModel.objects.filter(
+                        idea_foreign_key_field=idea
                     ).order_by("-created_datetime_field")
-                    serializer = backend_serializers.CommentIdeaModelSerializer(instance=objects, many=True).data
+                    serializer = backend_serializers.IdeaCommentModelSerializer(instance=ideas, many=True).data
                     response = {"response": serializer}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
@@ -2001,106 +2001,92 @@ def api_auth_idea(request):
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                         local_objects = []
-                        for obj in ideas:
-                            if (obj.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                        for idea in ideas:
+                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
                                     >= now:
-                                local_objects.append(obj.id)
-                        ideas = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
-                            order_by("-register_datetime_field")
+                                local_objects.append(idea.id)
+                        ideas = backend_models.IdeaModel.objects.filter(
+                            id__in=local_objects
+                        ).order_by("-register_datetime_field")
                     for idea in ideas:
                         authors.append(idea.author_foreign_key_field)
                     authors = set(authors)
-                    objects = []
-                    for auth in authors:
-                        ideas = backend_models.IdeaModel.objects.filter(
-                            author_foreign_key_field=auth, status_moderate_char_field="принято"
+                    ideas = []
+                    for author in authors:
+                        ideas_arr = backend_models.IdeaModel.objects.filter(
+                            author_foreign_key_field=author, status_moderate_char_field="принято"
                         )
-                        idea_count = ideas.count()
+                        idea_count = ideas_arr.count()
                         idea_rating = 0
                         idea_rating_count = 0
                         idea_comment_count = 0
-                        for idea in ideas:
-                            ratings = backend_models.RatingIdeaModel.objects.filter(idea_foreign_key_field=idea)
+                        for idea in ideas_arr:
+                            ratings = backend_models.IdeaRatingModel.objects.filter(idea_foreign_key_field=idea)
                             for rate in ratings:
                                 idea_rating += rate.rating_integer_field
                             idea_rating_count += ratings.count()
-                            idea_comment_count = backend_models.CommentIdeaModel.objects.filter(
+                            idea_comment_count = backend_models.IdeaCommentModel.objects.filter(
                                 idea_foreign_key_field=idea
                             ).count()
                         if idea_rating_count == 0:
                             idea_rating_count = 1
-                        objects.append({
-                            "username": f"{auth.last_name_char_field} {auth.first_name_char_field}",
-                            "idea_count": idea_count, "idea_rating": round(idea_rating / idea_rating_count, 1),
+                        serialized_user = backend_serializers.UserModelSerializer(instance=author, many=False).data
+                        ideas.append({
+                            "user_model": serialized_user,
+                            "idea_count": idea_count, "idea_rating": round(idea_rating / idea_rating_count, 2),
                             "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
                         })
                     # sort
                     if sort:
                         if sort == "количеству (наибольшие в начале)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_count"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=True)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "количеству (наибольшие в конце)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_count"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=False)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "рейтингу (популярные в начале)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_rating"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=True)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "рейтингу (популярные в конце)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_rating"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=False)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "отметкам рейтинга (наибольшие в начале)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_rating_count"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=True)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "отметкам рейтинга (наибольшие в конце)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_rating_count"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=False)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "комментариям (наибольшие в начале)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_comment_count"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=True)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
                         elif sort == "комментариям (наибольшие в конце)":
-                            objects_arr = []
-                            for obj in objects:
-                                objects_arr.append([obj["idea_comment_count"], obj])
-                            objects_arr.sort(key=lambda x: x[0], reverse=False)
-                            objects = []
-                            for obj in objects_arr:
-                                objects.append(obj[1])
-                    response = {"response": objects}
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                    response = {"response": ideas}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -2203,7 +2189,7 @@ def api_auth_rational(request):
                         ),
                         name_char_field="Создано новое рационализаторское предложение",
                         place_char_field="рационализаторство",
-                        description_text_field=f"название: {name}",
+                        description_text_field=f"название рац. предложения: {name}",
                     )
                     response = {"response": "Успешно отправлено на модерацию!"}
                     # TODO response ####################################################################################

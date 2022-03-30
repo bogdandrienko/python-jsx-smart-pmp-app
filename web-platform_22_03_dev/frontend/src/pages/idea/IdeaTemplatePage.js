@@ -21,7 +21,7 @@ export const IdeaTemplatePage = () => {
           <div className="card shadow custom-background-transparent-low m-0 p-0">
             <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
               <h6 className="lead fw-bold m-0 p-0">
-                Веб-платформа управления изменениями
+                Веб платформа управления изменениями
               </h6>
             </div>
             <div className="card-body m-0 p-0">
@@ -75,7 +75,7 @@ export const IdeaTemplatePage = () => {
                   <input
                     type="text"
                     className="form-control form-control-sm text-center m-0 p-1"
-                    defaultValue="Глобально(всё предприятие)"
+                    defaultValue="Всё предприятие"
                     readOnly={true}
                     placeholder="введите место изменения тут..."
                     required
@@ -125,7 +125,7 @@ export const IdeaTemplatePage = () => {
                       >
                         <ul className="m-0 p-0">
                           <li className="list-group-item bg-success bg-opacity-10">
-                            <small className="">Андриенко Богдан | 10</small>
+                            <small className="">Андриенко Богдан : 10</small>
                           </li>
                         </ul>
                       </NavDropdown>

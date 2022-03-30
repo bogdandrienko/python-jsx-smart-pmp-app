@@ -453,28 +453,6 @@ export const ideaCommentDeleteReducer = (state = {}, action = null) => {
       return state;
   }
 };
-export const ideaCommentListReducer = (state = {}, action = null) => {
-  switch (action.type) {
-    case constants.IDEA_COMMENT_LIST_LOAD_CONSTANT:
-      return { load: true };
-    case constants.IDEA_COMMENT_LIST_DATA_CONSTANT:
-      return {
-        load: false,
-        data: action.payload,
-      };
-    case constants.IDEA_COMMENT_LIST_ERROR_CONSTANT:
-      return {
-        load: false,
-        error: action.payload,
-      };
-    case constants.IDEA_COMMENT_LIST_FAIL_CONSTANT:
-      return { load: false, fail: action.payload };
-    case constants.IDEA_COMMENT_LIST_RESET_CONSTANT:
-      return {};
-    default:
-      return state;
-  }
-};
 export const ideaRatingCreateReducer = (state = {}, action = null) => {
   switch (action.type) {
     case constants.IDEA_RATING_CREATE_LOAD_CONSTANT:

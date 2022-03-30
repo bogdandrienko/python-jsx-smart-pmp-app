@@ -575,16 +575,13 @@ class DjangoClass:
                             position_=Worker.get_value(dict_=json_data, user_=user, key_="Должность"),
                             category_=Worker.get_value(dict_=json_data, user_=user, key_="Категория")
                         )
-                        print(worker.username_)
+                        if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                            print(worker.username_)
                         try:
                             user = User.objects.get(username=worker.username_)
                             user_model = \
                                 backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
                         except Exception as error_:
-                            DjangoClass.LoggingClass.error_local(
-                                error=error_,
-                                function_error="DefaultSettingsClass.SchedulerClass.scheduler_personal."
-                            )
                             user = User.objects.create(username=worker.username_)
                             password = ""
                             for i in range(1, 6 + 1):
@@ -620,10 +617,13 @@ class DjangoClass:
                                 user_model.category_char_field = worker.category_
                             user_model.save()
                         except Exception as error_:
-                            DjangoClass.LoggingClass.error_local(
-                                error=error_,
-                                function_error="DRFClass.RequestClass.__init__"
-                            )
+                            pass
+
+                        try:
+                            model = backend_models.GroupModel.objects.get_or_create(name_slug_field="user")[0]
+                            model.user_many_to_many_field.add(user_model)
+                        except Exception as error_:
+                            pass
 
                         try:
                             if worker.status_ == 'created':
@@ -637,10 +637,7 @@ class DjangoClass:
                             else:
                                 print('unknown status')
                         except Exception as error_:
-                            DjangoClass.LoggingClass.error_local(
-                                error=error_,
-                                function_error="DRFClass.RequestClass.__init__"
-                            )
+                            pass
                 except Exception as error:
                     DjangoClass.LoggingClass.error_local(
                         error=error,

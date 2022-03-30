@@ -18,6 +18,7 @@ export const IdeaCreatePage = () => {
   const [name, nameSet] = useState("");
   const [place, placeSet] = useState("");
   const [description, descriptionSet] = useState("");
+  const [moderate, moderateSet] = useState("на модерации");
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
   const ideaCreateStore = useSelector((state) => state.ideaCreateStore);
   const {
@@ -58,6 +59,7 @@ export const IdeaCreatePage = () => {
       name: name,
       place: place,
       description: description,
+      moderate: moderate,
     };
     dispatch(actions.ideaCreateAction(form));
   };

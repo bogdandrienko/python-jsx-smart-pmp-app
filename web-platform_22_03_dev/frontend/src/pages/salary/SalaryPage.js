@@ -132,7 +132,7 @@ export const SalaryPage = () => {
             <div className="text-center m-0 p-1">
               <a
                 className="btn btn-sm btn-success text-center m-0 p-1"
-                href={`/${dataSalaryUser["excel_path"]}`}
+                href={`/${dataSalaryUser["excelPath"]}`}
               >
                 Скачать excel-документ
               </a>

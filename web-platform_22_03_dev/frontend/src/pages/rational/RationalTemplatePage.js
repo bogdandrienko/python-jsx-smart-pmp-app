@@ -175,7 +175,7 @@ export const RationalTemplatePage = () => {
                       >
                         <ul className="m-0 p-0">
                           <li className="list-group-item bg-success bg-opacity-10">
-                            <small className="">Андриенко Богдан | 10</small>
+                            <small className="">Андриенко Богдан : 10</small>
                           </li>
                         </ul>
                       </NavDropdown>

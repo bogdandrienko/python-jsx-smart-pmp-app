@@ -118,8 +118,8 @@ class NotificationModelSerializer(serializers.ModelSerializer):
 # TODO custom model serializer #########################################################################################
 class IdeaModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
-    comment_count = serializers.SerializerMethodField(read_only=True)
-    total_rating = serializers.SerializerMethodField(read_only=True)
+    comments = serializers.SerializerMethodField(read_only=True)
+    ratings = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = backend_models.IdeaModel
@@ -127,23 +127,45 @@ class IdeaModelSerializer(serializers.ModelSerializer):
 
     def get_user_model(self, obj):
         user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
-        user_model_serializer = UserModelSerializer(instance=user_model, many=False)
-        if not user_model_serializer.data:
-            user_model_serializer = {'data': None}
-        return user_model_serializer.data
+        user_model_serializer = UserModelSerializer(instance=user_model, many=False).data
+        if not user_model_serializer:
+            response = None
+        else:
+            response = user_model_serializer
+        return response
 
-    def get_comment_count(self, obj):
-        return obj.get_comment_count()
+    def get_comments(self, obj):
+        objects = backend_models.IdeaCommentModel.objects.filter(
+            idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
+        )
+        if objects.count() <= 0:
+            response = {"count": 0, "comments": []}
+        else:
+            serialized_objects = IdeaCommentModelSerializer(instance=objects, many=True).data
+            response = {"comments": serialized_objects, "count": objects.count()}
+        return response
 
-    def get_total_rating(self, obj):
-        return obj.get_total_rating()
+    def get_ratings(self, obj):
+        objects = backend_models.IdeaRatingModel.objects.filter(
+            idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
+        )
+        if objects.count() <= 0:
+            response = {"ratings": [], "count": 0, "rate": 0}
+        else:
+            rate = 0
+            for i in objects:
+                rate += i.rating_integer_field
+            rate = round(rate / objects.count(), 2)
+            serialized_objects = IdeaRatingModelSerializer(instance=objects, many=True).data
+            response = {"ratings": serialized_objects, "count": objects.count(), "rate": rate}
+        return response
 
 
-class RatingIdeaModelSerializer(serializers.ModelSerializer):
+class IdeaRatingModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
-        model = backend_models.RatingIdeaModel
+        model = backend_models.IdeaRatingModel
         fields = '__all__'
 
     def get_user_model(self, obj):
@@ -154,11 +176,11 @@ class RatingIdeaModelSerializer(serializers.ModelSerializer):
         return user_model_serializer.data
 
 
-class CommentIdeaModelSerializer(serializers.ModelSerializer):
+class IdeaCommentModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
-        model = backend_models.CommentIdeaModel
+        model = backend_models.IdeaCommentModel
         fields = '__all__'
 
     def get_user_model(self, obj):

@@ -181,8 +181,6 @@ export const AdminCreateOrChangeUsersPage = () => {
                       Excel файл с пользователями:
                       <input
                         type="file"
-                        id="AdditionalExcel"
-                        name="AdditionalExcel"
                         required
                         accept=".xlsx, .xls"
                         className="form-control form-control-sm text-center m-0 p-1"

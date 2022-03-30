@@ -1,21 +1,16 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-import { adminChangeUserActivityAction } from "../../js/actions";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const AdminChangeUserActivityPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = useParams().id;
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   const [captcha, captchaSet] = useState("");
   const [active, activeSet] = useState(false);
@@ -62,7 +57,7 @@ export const AdminChangeUserActivityPage = () => {
           showFail={true}
           failText={""}
         />
-        {!dataAdminChangeUserActivity && !loadAdminChangeUserActivity && (
+        {!loadAdminChangeUserActivity && (
           <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
             <form className="m-0 p-0" onSubmit={handlerCheckUserSubmit}>
               <div className="card shadow custom-background-transparent-low m-0 p-0">

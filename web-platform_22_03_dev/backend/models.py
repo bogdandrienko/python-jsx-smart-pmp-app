@@ -7,7 +7,6 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, MinVa
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 # TODO custom modules ##################################################################################################
-from backend import service as backend_service
 
 
 # TODO example model ###################################################################################################
@@ -1800,7 +1799,7 @@ def create_user_model(sender, instance, created, **kwargs):
         try:
             UserModel.objects.get_or_create(user_foreign_key_field=instance)
         except Exception as error:
-            backend_service.DjangoClass.LoggingClass.error_local(error=error, function_error="create_user_model")
+            pass
 
 
 class ActionModel(models.Model):
@@ -2525,10 +2524,10 @@ class IdeaModel(models.Model):
 
         max_length=300,
     )
-    moderate_foreign_key_field = models.ForeignKey(
-        db_column='moderate_foreign_key_field_db_column',
+    moderate_author_foreign_key_field = models.ForeignKey(
+        db_column='moderate_author_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='moderate_foreign_key_field_db_tablespace',
+        db_tablespace='moderate_author_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique=False,
@@ -2541,7 +2540,7 @@ class IdeaModel(models.Model):
 
         to=UserModel,
         on_delete=models.SET_NULL,
-        related_name='idea_moderate_foreign_key_field',
+        related_name='idea_moderate_author_foreign_key_field',
     )
     comment_moderate_char_field = models.CharField(
         db_column='comment_moderate_char_field_db_column',
@@ -2559,20 +2558,6 @@ class IdeaModel(models.Model):
         help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
 
         max_length=300,
-    )
-    visibility_boolean_field = models.BooleanField(
-        db_column='visibility_boolean_field_db_column',
-        db_index=True,
-        db_tablespace='visibility_boolean_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=False,
-        default=False,
-        verbose_name='Видимость',
-        help_text='<small class="text-muted">boolean_field</small><hr><br>',
     )
     created_datetime_field = models.DateTimeField(
         db_column='created_datetime_field_db_column',
@@ -2620,25 +2605,8 @@ class IdeaModel(models.Model):
         return f"{self.name_char_field} | {self.category_char_field} | {self.status_moderate_char_field} | " \
                f"{self.author_foreign_key_field}"
 
-    def get_comment_count(self):
-        obj = IdeaModel.objects.get(id=self.id)
-        return int(CommentIdeaModel.objects.filter(idea_foreign_key_field=obj).count())
 
-    def get_total_rating(self):
-        ratings = RatingIdeaModel.objects.filter(idea_foreign_key_field=IdeaModel.objects.get(id=self.id))
-        if ratings.count() <= 0:
-            return {"rate": 0, "count": 0, "users": []}
-        rating = 0
-        users = []
-        for rate in ratings:
-            rating += rate.rating_integer_field
-            users.append(f"{rate.author_foreign_key_field.last_name_char_field} "
-                         f"{rate.author_foreign_key_field.first_name_char_field} : {rate.rating_integer_field}")
-
-        return {"rate": float(rating / ratings.count()), "count": int(ratings.count()), "users": users}
-
-
-class RatingIdeaModel(models.Model):
+class IdeaRatingModel(models.Model):
     """
     RatingIdeaModel
     """
@@ -2724,7 +2692,7 @@ class RatingIdeaModel(models.Model):
                f"{self.created_datetime_field}"
 
 
-class CommentIdeaModel(models.Model):
+class IdeaCommentModel(models.Model):
     """
     CommentIdeaModel
     """
@@ -3006,27 +2974,28 @@ class RationalModel(models.Model):
         upload_to='uploads/rational/files/',
         max_length=200,
     )
-    author_1_char_field = models.CharField(
-        db_column='author_1_char_field_db_column',
+    author_1_foreign_key_field = models.ForeignKey(
+        db_column='author_1_foreign_key_field_db_column',
         db_index=True,
-        db_tablespace='author_1_char_field_db_tablespace',
+        db_tablespace='author_1_foreign_key_field_db_tablespace',
         error_messages=False,
         primary_key=False,
-        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
         unique=False,
         editable=True,
         blank=True,
         null=True,
-        default='',
+        default=None,
         verbose_name='Автор 1',
-        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+        help_text='<small class="text-muted">UserModel: foreign_key_field</small><hr><br>',
 
-        max_length=300,
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='rational_author_1_foreign_key_field',
     )
-    author_2_char_field = models.CharField(
-        db_column='author_2_char_field_db_column',
+    author_1_perc_char_field = models.CharField(
+        db_column='author_1_perc_char_field_db_column',
         db_index=True,
-        db_tablespace='author_2_char_field_db_tablespace',
+        db_tablespace='author_1_perc_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
@@ -3035,15 +3004,33 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
+        verbose_name='Вклад автора 1',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    author_2_foreign_key_field = models.ForeignKey(
+        db_column='author_2_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_2_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
         verbose_name='Автор 2',
-        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+        help_text='<small class="text-muted">UserModel: foreign_key_field</small><hr><br>',
 
-        max_length=300,
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='rational_author_2_foreign_key_field',
     )
-    author_3_char_field = models.CharField(
-        db_column='author_3_char_field_db_column',
+    author_2_perc_char_field = models.CharField(
+        db_column='author_2_perc_char_field_db_column',
         db_index=True,
-        db_tablespace='author_3_char_field_db_tablespace',
+        db_tablespace='author_2_perc_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
@@ -3052,15 +3039,33 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
+        verbose_name='Вклад автора 2',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    author_3_foreign_key_field = models.ForeignKey(
+        db_column='author_3_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_3_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
         verbose_name='Автор 3',
-        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+        help_text='<small class="text-muted">UserModel: foreign_key_field</small><hr><br>',
 
-        max_length=300,
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='rational_author_3_foreign_key_field',
     )
-    author_4_char_field = models.CharField(
-        db_column='author_4_char_field_db_column',
+    author_3_perc_char_field = models.CharField(
+        db_column='author_3_perc_char_field_db_column',
         db_index=True,
-        db_tablespace='author_4_char_field_db_tablespace',
+        db_tablespace='author_3_perc_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
@@ -3069,15 +3074,33 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
+        verbose_name='Вклад автора 3',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    author_4_foreign_key_field = models.ForeignKey(
+        db_column='author_4_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_4_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
         verbose_name='Автор 4',
-        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+        help_text='<small class="text-muted">UserModel: foreign_key_field</small><hr><br>',
 
-        max_length=300,
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='rational_author_4_foreign_key_field',
     )
-    author_5_char_field = models.CharField(
-        db_column='author_5_char_field_db_column',
+    author_4_perc_char_field = models.CharField(
+        db_column='author_4_perc_char_field_db_column',
         db_index=True,
-        db_tablespace='author_5_char_field_db_tablespace',
+        db_tablespace='author_4_perc_char_field_db_tablespace',
         error_messages=False,
         primary_key=False,
         validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
@@ -3086,7 +3109,42 @@ class RationalModel(models.Model):
         blank=True,
         null=True,
         default='',
+        verbose_name='Вклад автора 4',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    author_5_foreign_key_field = models.ForeignKey(
+        db_column='author_5_foreign_key_field_db_column',
+        db_index=True,
+        db_tablespace='author_5_foreign_key_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
         verbose_name='Автор 5',
+        help_text='<small class="text-muted">UserModel: foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='rational_author_5_foreign_key_field',
+    )
+    author_5_perc_char_field = models.CharField(
+        db_column='author_5_perc_char_field_db_column',
+        db_index=True,
+        db_tablespace='author_5_perc_char_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Вклад автора 5',
         help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
 
         max_length=300,
@@ -3181,21 +3239,6 @@ class RationalModel(models.Model):
         max_length=300,
     )
     ####################################################################################################################
-
-    visibility_boolean_field = models.BooleanField(
-        db_column='visibility_boolean_field_db_column',
-        db_index=True,
-        db_tablespace='visibility_boolean_field_db_tablespace',
-        error_messages=False,
-        primary_key=False,
-        unique=False,
-        editable=True,
-        blank=True,
-        null=False,
-        default=False,
-        verbose_name='Видимость',
-        help_text='<small class="text-muted">boolean_field</small><hr><br>',
-    )
     created_datetime_field = models.DateTimeField(
         db_column='created_datetime_field_db_column',
         db_index=True,
@@ -3223,19 +3266,19 @@ class RationalModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        # default=timezone.now,
+        default=timezone.now,
         verbose_name='Дата и время регистрации',
         help_text='<small class="text-muted">datetime_field</small><hr><br>',
 
         auto_now=False,
-        auto_now_add=True,
+        auto_now_add=False,
     )
 
     class Meta:
         app_label = 'backend'
         ordering = ('-created_datetime_field',)
         verbose_name = 'Рационализаторское предложение'
-        verbose_name_plural = 'Rational 1, Рационализаторские предложения'
+        verbose_name_plural = 'Рационализаторство 1, Рационализаторские предложения'
         db_table = 'rational_model_table'
 
     def __str__(self):

@@ -332,14 +332,14 @@ export const RecoverPasswordPage = () => {
                             className="btn btn-sm btn-primary m-1 p-2"
                             type="submit"
                           >
-                            Проверить код
+                            проверить код
                           </button>
                           <button
                             type="button"
                             onClick={handlerSubmitSendEmail}
-                            className="btn btn-sm btn-danger p-2 m-0 p-1"
+                            className="btn btn-sm btn-danger m-1 p-2"
                           >
-                            Отправить код на почту
+                            отправить код на почту
                           </button>
                         </ul>
                       </div>
