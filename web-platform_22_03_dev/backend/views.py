@@ -787,6 +787,7 @@ def api_auth_admin(request):
                                             backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                                 if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
                                     print(username)
+                                    print(row)
                             except Exception as error:
                                 backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                         response = {"response": "Пользователи успешно созданы/изменены."}

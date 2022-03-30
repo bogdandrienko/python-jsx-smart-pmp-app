@@ -560,7 +560,7 @@ class DjangoClass:
                                                    "Worker.get_value"
                                 )
                                 return ''
-
+                    index = 0
                     for user in json_data["global_objects"]:
                         worker = Worker(
                             date_time_=Worker.get_value(dict_=json_data, user_=user, key_="Период"),
@@ -648,8 +648,10 @@ class DjangoClass:
                             group_model.user_many_to_many_field.add(user_model)
                         except Exception as error_:
                             pass
+                        index += 1
                         if DjangoClass.DefaultSettingsClass.get_actions_print_value():
                             print(worker.username_)
+                            print(index)
                 except Exception as error:
                     DjangoClass.LoggingClass.error_local(
                         error=error,
