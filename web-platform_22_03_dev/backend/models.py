@@ -1787,10 +1787,7 @@ class UserModel(models.Model):
             activity = 'Неактивен'
         return f'{self.last_name_char_field} | {self.first_name_char_field} | {activity} | ' \
                f'{self.personnel_number_slug_field} | {self.position_char_field} | {self.id} | ' \
-               f'{self.user_foreign_key_field.username}'
-
-    def get_iin(self):
-        return int(self.user_foreign_key_field.username)
+               f'{self.user_foreign_key_field}'
 
 
 @receiver(post_save, sender=User)

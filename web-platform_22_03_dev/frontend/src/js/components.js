@@ -832,7 +832,7 @@ export const SalaryTableComponent = ({ tab = {} }) => {
   }
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <li className="m-0 p-0 my-1">
+    <li className="m-0 p-1 my-1">
       <h6 className="lead fw-bold bold m-0 p-0">{header}</h6>
       <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
         <thead className="m-0 p-0 mb-1">
@@ -842,8 +842,8 @@ export const SalaryTableComponent = ({ tab = {} }) => {
                 key={index_h}
                 className={
                   index_h === 0
-                    ? "text-center w-50 m-0 p-0"
-                    : "text-center m-0 p-0"
+                    ? "text-center w-50 m-0 p-p-1"
+                    : "text-center m-0 p-p-1"
                 }
               >
                 {thead}
@@ -855,17 +855,22 @@ export const SalaryTableComponent = ({ tab = {} }) => {
           {tbody_array.map((tbody, index_i) => (
             <tr key={index_i} className="m-0 p-0">
               {tbody.slice(0, 1).map((body, index_j) => (
-                <td key={index_j} className="text-start m-0 p-0">
+                <td key={index_j} className="text-start m-0 p-1">
                   {body}
                 </td>
               ))}
               {tbody.slice(1, -1).map((body, index_j) => (
-                <td key={index_j} className="text-end m-0 p-0">
+                <td key={index_j} className="text-end m-0 p-1">
                   {body ? body : ""}
                 </td>
               ))}
               {tbody.slice(-1).map((body, index_j) => (
-                <td key={index_j} className="text-end m-0 p-0">
+                <td
+                  key={index_j}
+                  className={
+                    index_j === 0 ? "text-end m-0 p-0" : "text-end m-0 p-1"
+                  }
+                >
                   {body ? getValue(body) : ""}
                 </td>
               ))}

@@ -688,6 +688,9 @@ def api_auth_admin(request):
                         workbook = openpyxl.load_workbook(additional_excel)
                         sheet = workbook.active
                         max_rows = sheet.max_row
+
+                        print("start create users")
+
                         for row in range(1 + 1, max_rows + 1):
                             try:
                                 subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
@@ -725,9 +728,14 @@ def api_auth_admin(request):
                                     )
                                     new_user = True
 
-                                user_model = backend_models.UserModel.objects.get_or_create(
-                                    user_foreign_key_field=user
-                                )[0]
+                                try:
+                                    user_model = backend_models.UserModel.objects.get(
+                                        user_foreign_key_field=user
+                                    )
+                                except Exception as error:
+                                    user_model = backend_models.UserModel.objects.create(
+                                        user_foreign_key_field=user
+                                    )
 
                                 if new_user:
                                     user_model.password_char_field = password_char_field

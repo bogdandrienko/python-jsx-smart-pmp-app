@@ -9,6 +9,7 @@ import threading
 import time
 import httplib2
 import openpyxl
+from django.contrib.auth.hashers import make_password
 from openpyxl.utils import get_column_letter
 from typing import Union
 # TODO django modules ##################################################################################################
@@ -575,70 +576,80 @@ class DjangoClass:
                             position_=Worker.get_value(dict_=json_data, user_=user, key_="Должность"),
                             category_=Worker.get_value(dict_=json_data, user_=user, key_="Категория")
                         )
-                        if DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                            print(worker.username_)
+
+                        if len(worker.username_) <= 1:
+                            continue
+
+                        password = ""
                         try:
                             user = User.objects.get(username=worker.username_)
-                            user_model = \
-                                backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+                            if user.is_superuser:
+                                continue
+                            new_user = False
                         except Exception as error_:
-                            user = User.objects.create(username=worker.username_)
-                            password = ""
                             for i in range(1, 6 + 1):
                                 password += random.choice(
                                     "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
                                 )
                             password = "temp" + password
-                            user.set_password(password)
-                            user.save()
-                            user_model = \
-                                backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                            user_model.password_slug_field = password
-                            user_model.temp_password_boolean_field = True
-                            user_model.save()
+                            user = User.objects.create(
+                                username=worker.username_,
+                                password=make_password(password=password),
+                            )
+                            new_user = True
 
                         try:
-                            if user_model.last_name_char_field != worker.last_name_:
-                                user_model.last_name_char_field = worker.last_name_
-                            if user_model.first_name_char_field != worker.first_name_:
-                                user_model.first_name_char_field = worker.first_name_
-                            if user_model.patronymic_char_field != worker.patronymic_:
-                                user_model.patronymic_char_field = worker.patronymic_
-                            if user_model.personnel_number_slug_field != worker.personnel_number_:
-                                user_model.personnel_number_slug_field = worker.personnel_number_
-                            if user_model.subdivision_char_field != worker.subdivision_:
-                                user_model.subdivision_char_field = worker.subdivision_
-                            if user_model.workshop_service_char_field != worker.workshop_service_:
-                                user_model.workshop_service_char_field = worker.workshop_service_
-                            if user_model.department_site_char_field != worker.department_site_:
-                                user_model.department_site_char_field = worker.department_site_
-                            if user_model.position_char_field != worker.position_:
-                                user_model.position_char_field = worker.position_
-                            if user_model.category_char_field != worker.category_:
-                                user_model.category_char_field = worker.category_
-                            user_model.save()
-                        except Exception as error_:
-                            pass
+                            user_model = backend_models.UserModel.objects.get(
+                                user_foreign_key_field=user
+                            )
+                        except Exception as error:
+                            user_model = backend_models.UserModel.objects.create(
+                                user_foreign_key_field=user
+                            )
 
-                        try:
-                            model = backend_models.GroupModel.objects.get_or_create(name_slug_field="user")[0]
-                            model.user_many_to_many_field.add(user_model)
-                        except Exception as error_:
-                            pass
+                        if new_user:
+                            user_model.password_char_field = password
 
+                        if user.last_name != worker.last_name_:
+                            user.last_name = worker.last_name_
+                        if user.first_name != worker.first_name_:
+                            user.first_name = worker.first_name_
+                        user.save()
+
+                        if worker.status_ == 'created':
+                            user_model.activity_boolean_field = True
+                        elif worker.status_ == 'changed':
+                            user_model.activity_boolean_field = True
+                        elif worker.status_ == 'disabled':
+                            user_model.activity_boolean_field = False
+                        else:
+                            user_model.activity_boolean_field = False
+                        if user_model.last_name_char_field != worker.last_name_:
+                            user_model.last_name_char_field = worker.last_name_
+                        if user_model.first_name_char_field != worker.first_name_:
+                            user_model.first_name_char_field = worker.first_name_
+                        if user_model.patronymic_char_field != worker.patronymic_:
+                            user_model.patronymic_char_field = worker.patronymic_
+                        if user_model.personnel_number_slug_field != worker.personnel_number_:
+                            user_model.personnel_number_slug_field = worker.personnel_number_
+                        if user_model.subdivision_char_field != worker.subdivision_:
+                            user_model.subdivision_char_field = worker.subdivision_
+                        if user_model.workshop_service_char_field != worker.workshop_service_:
+                            user_model.workshop_service_char_field = worker.workshop_service_
+                        if user_model.department_site_char_field != worker.department_site_:
+                            user_model.department_site_char_field = worker.department_site_
+                        if user_model.position_char_field != worker.position_:
+                            user_model.position_char_field = worker.position_
+                        if user_model.category_char_field != worker.category_:
+                            user_model.category_char_field = worker.category_
+                        user_model.save()
                         try:
-                            if worker.status_ == 'created':
-                                user_model.activity_boolean_field = True
-                                user_model.save()
-                            elif worker.status_ == 'changed':
-                                pass
-                            elif worker.status_ == 'disabled':
-                                user_model.activity_boolean_field = False
-                                user_model.save()
-                            else:
-                                print('unknown status')
+                            group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field="user")[0]
+                            group_model.user_many_to_many_field.add(user_model)
                         except Exception as error_:
                             pass
+                        if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                            print(worker.username_)
                 except Exception as error:
                     DjangoClass.LoggingClass.error_local(
                         error=error,
