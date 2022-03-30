@@ -275,7 +275,7 @@ export const FooterComponent = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <footer className="footer m-0 p-0 pt-3">
-      <div className="">
+      <div className="m-0 p-0">
         <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
           <li className="m-0 p-1">
             <a className="btn btn-sm btn-outline-secondary text-white" href="#">
@@ -835,7 +835,10 @@ export const SalaryTableComponent = ({ tab = {} }) => {
         <thead>
           <tr>
             {thead_array.map((thead, index_h) => (
-              <th key={index_h} className="text-center">
+              <th
+                key={index_h}
+                className={index_h === 0 ? "text-center w-50" : "text-center"}
+              >
                 {thead}
               </th>
             ))}

@@ -141,10 +141,10 @@ export const SalaryPage = () => {
               <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center">
                 <li className="m-0">
                   <h6 className="lead fw-bold bold">Основная информация</h6>
-                  <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
+                  <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
                     <thead>
                       <tr>
-                        <th className="text-center">Тип</th>
+                        <th className="text-center w-50">Тип</th>
                         <th className="text-center">Значение</th>
                       </tr>
                     </thead>
@@ -180,7 +180,7 @@ export const SalaryPage = () => {
                       <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
                         <thead>
                           <tr>
-                            <th className="text-center">Тип</th>
+                            <th className="text-center w-50">Тип</th>
                             <th className="text-center">Значение</th>
                           </tr>
                         </thead>
@@ -203,7 +203,7 @@ export const SalaryPage = () => {
                       <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small">
                         <thead>
                           <tr>
-                            <th className="text-center">Тип</th>
+                            <th className="text-center w-50">Тип</th>
                             <th className="text-center">Значение</th>
                           </tr>
                         </thead>

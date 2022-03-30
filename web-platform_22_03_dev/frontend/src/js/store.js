@@ -4,7 +4,6 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as reducers from "./reducers";
-import { adminChangeUserActivityReducer } from "./reducers";
 ////////////////////////////////////////////////////////////////////////////////////////////////////TODO combineReducers
 const globalReducer = combineReducers({
   userLoginStore: reducers.userLoginReducer,

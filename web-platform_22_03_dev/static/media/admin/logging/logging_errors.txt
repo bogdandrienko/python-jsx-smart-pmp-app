@@ -24,3 +24,15 @@
 970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:19:13.266979
 
 970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:26:02.732127
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 19:36:37.073403
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-03-30 19:36:48.853035
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 19:36:49.016828
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-30 19:36:58.066286
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-03-30 20:10:03.658348
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 20:10:03.798374
