@@ -144,6 +144,7 @@ export const RecoverPasswordPage = () => {
                 <div className="card shadow custom-background-transparent-low m-0 p-0">
                   {!captcha && (
                     <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                      <i className="fa-solid fa-robot m-0 p-1" />
                       Пройдите проверку на робота!
                     </div>
                   )}
@@ -195,7 +196,8 @@ export const RecoverPasswordPage = () => {
                         className="btn btn-sm btn-primary m-1 p-2"
                         type="submit"
                       >
-                        Проверить идентификатор
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
+                        проверить ИИН
                       </button>
                     </ul>
                   </div>
@@ -218,9 +220,12 @@ export const RecoverPasswordPage = () => {
                         <div className="m-0 p-1">
                           <label className="form-control-sm text-center m-0 p-1">
                             <div className="text-danger">
-                              Секретный вопрос: '
-                              <small className="custom-color-warning-1 fw-bold">{`${secretQuestion}`}</small>
-                              '
+                              <i className="fa-solid fa-question-circle m-0 p-1" />
+                              Секретный вопрос:
+                              <small className="custom-color-warning-1 fw-bold">
+                                <i className="fa-solid fa-message m-0 p-1" />'
+                                {`${secretQuestion}`}'
+                              </small>
                             </div>
                             <input
                               type="text"
@@ -265,7 +270,8 @@ export const RecoverPasswordPage = () => {
                             className="btn btn-sm btn-primary m-1 p-2"
                             type="submit"
                           >
-                            Проверить ответ
+                            <i className="fa-solid fa-circle-check m-0 p-1" />
+                            проверить ответ
                           </button>
                         </ul>
                       </div>
@@ -294,6 +300,7 @@ export const RecoverPasswordPage = () => {
                       <div className="card-body m-0 p-0">
                         <div className="m-0 p-1">
                           <label className="form-control-sm text-center m-0 p-1">
+                            <i className="fa-solid fa-unlock m-0 p-1" />
                             Код восстановления отправленный на почту
                             <input
                               type="text"
@@ -332,6 +339,7 @@ export const RecoverPasswordPage = () => {
                             className="btn btn-sm btn-primary m-1 p-2"
                             type="submit"
                           >
+                            <i className="fa-solid fa-circle-check m-0 p-1" />
                             проверить код
                           </button>
                           <button
@@ -339,6 +347,7 @@ export const RecoverPasswordPage = () => {
                             onClick={handlerSubmitSendEmail}
                             className="btn btn-sm btn-danger m-1 p-2"
                           >
+                            <i className="fa-solid fa-envelope m-0 p-1" />
                             отправить код на почту
                           </button>
                         </ul>
@@ -358,30 +367,41 @@ export const RecoverPasswordPage = () => {
                   <div className="card-body m-0 p-0">
                     <div className="m-0 p-1">
                       <label className="form-control-sm text-center m-0 p-1">
+                        <i className="fa-solid fa-key m-0 p-1" />
                         Введите пароль для входа в аккаунт:
-                        <input
-                          type="password"
-                          className="form-control form-control-sm text-center m-0 p-1"
-                          id="password"
-                          value={password}
-                          placeholder="введите новый пароль тут..."
-                          required
-                          onChange={(e) =>
-                            passwordSet(
-                              e.target.value.replace(
-                                utils.GetRegexType({
-                                  numbers: true,
-                                  latin: true,
-                                  lowerSpace: true,
-                                }),
-                                ""
+                        <div className="input-group form-control-sm m-0 p-1">
+                          <input
+                            type="password"
+                            className="form-control form-control-sm text-center m-0 p-1"
+                            id="password"
+                            value={password}
+                            placeholder="введите новый пароль тут..."
+                            required
+                            onChange={(e) =>
+                              passwordSet(
+                                e.target.value.replace(
+                                  utils.GetRegexType({
+                                    numbers: true,
+                                    latin: true,
+                                    lowerSpace: true,
+                                  }),
+                                  ""
+                                )
                               )
-                            )
-                          }
-                          minLength="8"
-                          maxLength="16"
-                          autoComplete="off"
-                        />
+                            }
+                            minLength="8"
+                            maxLength="16"
+                            autoComplete="off"
+                          />
+                          <span className="">
+                            <i
+                              className="fa-solid fa-eye btn btn-outline-secondary m-0 p-3"
+                              onClick={(e) =>
+                                utils.ChangePasswordVisibility(["password"])
+                              }
+                            />
+                          </span>
+                        </div>
                         <small className="text-danger m-0 p-0">
                           * обязательно
                           <small className="custom-color-warning-1 m-0 p-0">
@@ -395,30 +415,41 @@ export const RecoverPasswordPage = () => {
                         </small>
                       </label>
                       <label className="form-control-sm text-center m-0 p-1">
+                        <i className="fa-solid fa-key m-0 p-1" />
                         Повторите новый пароль:
-                        <input
-                          type="password"
-                          className="form-control form-control-sm text-center m-0 p-1"
-                          id="password2"
-                          value={password2}
-                          placeholder="введите новый пароль тут..."
-                          required
-                          onChange={(e) =>
-                            password2Set(
-                              e.target.value.replace(
-                                utils.GetRegexType({
-                                  numbers: true,
-                                  latin: true,
-                                  lowerSpace: true,
-                                }),
-                                ""
+                        <div className="input-group form-control-sm m-0 p-1">
+                          <input
+                            type="password"
+                            className="form-control form-control-sm text-center m-0 p-1"
+                            id="password2"
+                            value={password2}
+                            placeholder="введите новый пароль тут..."
+                            required
+                            onChange={(e) =>
+                              password2Set(
+                                e.target.value.replace(
+                                  utils.GetRegexType({
+                                    numbers: true,
+                                    latin: true,
+                                    lowerSpace: true,
+                                  }),
+                                  ""
+                                )
                               )
-                            )
-                          }
-                          minLength="8"
-                          maxLength="16"
-                          autoComplete="off"
-                        />
+                            }
+                            minLength="8"
+                            maxLength="16"
+                            autoComplete="off"
+                          />
+                          <span className="">
+                            <i
+                              className="fa-solid fa-eye btn btn-outline-secondary m-0 p-3"
+                              onClick={(e) =>
+                                utils.ChangePasswordVisibility(["password2"])
+                              }
+                            />
+                          </span>
+                        </div>
                         <small className="text-danger m-0 p-0">
                           * обязательно
                           <small className="custom-color-warning-1 m-0 p-0">
@@ -439,26 +470,16 @@ export const RecoverPasswordPage = () => {
                         className="btn btn-sm btn-primary m-1 p-2"
                         type="submit"
                       >
-                        Сохранить новые данные
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
+                        сохранить новые данные
                       </button>
                       <button
                         className="btn btn-sm btn-warning m-1 p-2"
                         type="reset"
                         onClick={(e) => handlerRecoverPasswordReset(e)}
                       >
+                        <i className="fa-solid fa-pen-nib m-0 p-1" />
                         сбросить данные
-                      </button>
-                      <button
-                        type="reset"
-                        onClick={(e) =>
-                          utils.ChangePasswordVisibility([
-                            "password",
-                            "password2",
-                          ])
-                        }
-                        className="btn btn-sm btn-danger m-1 p-2"
-                      >
-                        Видимость пароля
                       </button>
                     </ul>
                   </div>

@@ -63,7 +63,12 @@ export const IdeaAuthorListPage = () => {
         <components.AccordionComponent
           key_target={"accordion1"}
           isCollapse={true}
-          title={"Фильтрация, поиск и сортировка:"}
+          title={
+            <span>
+              <i className="fa-solid fa-filter" /> Фильтрация, поиск и
+              сортировка:
+            </span>
+          }
           text_style="text-success"
           header_style="bg-success bg-opacity-10 custom-background-transparent-low"
           body_style="bg-light bg-opacity-10 custom-background-transparent-low"
@@ -74,8 +79,8 @@ export const IdeaAuthorListPage = () => {
                 <div className="card shadow custom-background-transparent-hard m-0 p-0">
                   <div className="card-header m-0 p-0">
                     <label className="lead m-0 p-1">
-                      Выберите нужные настройки фильтрации и сортировки, затем
-                      нажмите кнопку{" "}
+                      <i className="fa-solid fa-filter" /> Выберите нужные
+                      настройки фильтрации и сортировки, затем нажмите кнопку{" "}
                       <p className="fw-bold text-primary m-0 p-0">
                         "фильтровать"
                       </p>
@@ -140,6 +145,7 @@ export const IdeaAuthorListPage = () => {
                             className="btn btn-sm btn-primary m-0 p-2"
                             type="submit"
                           >
+                            <i className="fa-solid fa-circle-check m-0 p-1" />
                             обновить рейтинги
                           </button>
                         </div>
@@ -174,7 +180,7 @@ export const IdeaAuthorListPage = () => {
             </div>
           ) : !detailView ? (
             <div className="card shadow m-0 p-0 my-1">
-              {dataIdeaAuthorList.map((object, index) => (
+              {dataIdeaAuthorList.map((author, index) => (
                 <Link
                   key={index}
                   to={`#`}
@@ -182,26 +188,26 @@ export const IdeaAuthorListPage = () => {
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
                     {utils.GetSliceString(
-                      object["user_model"]["last_name_char_field"] +
+                      author["user_model"]["last_name_char_field"] +
                         " " +
-                        object["user_model"]["first_name_char_field"],
+                        author["user_model"]["first_name_char_field"],
                       50
                     )}
                     {" | количество идей: " +
-                      utils.GetSliceString(object["idea_count"], 20)}
+                      utils.GetSliceString(author["idea_count"], 20)}
                     {" | общий рейтинг: " +
-                      utils.GetSliceString(object["idea_rating"], 20)}
+                      utils.GetSliceString(author["idea_rating"], 20)}
                     {" | количество отметок: " +
-                      utils.GetSliceString(object["idea_rating_count"], 20)}
+                      utils.GetSliceString(author["idea_rating_count"], 20)}
                     {" | количество комментариев: " +
-                      utils.GetSliceString(object["idea_comment_count"], 20)}
+                      utils.GetSliceString(author["idea_comment_count"], 20)}
                   </li>
                 </Link>
               ))}
             </div>
           ) : (
             <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
-              {dataIdeaAuthorList.map((object, index) => (
+              {dataIdeaAuthorList.map((author, index) => (
                 <div key={index} className="col-sm-6 col-md-4 col-lg-3 m-0 p-1">
                   <Link
                     to={`#`}
@@ -211,9 +217,9 @@ export const IdeaAuthorListPage = () => {
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
                           {utils.GetSliceString(
-                            object["user_model"]["last_name_char_field"] +
+                            author["user_model"]["last_name_char_field"] +
                               " " +
-                              object["user_model"]["first_name_char_field"],
+                              author["user_model"]["first_name_char_field"],
                             50
                           )}
                         </h6>
@@ -223,8 +229,8 @@ export const IdeaAuthorListPage = () => {
                           <div className="m-0 p-0">
                             <img
                               src={
-                                object["image_field"]
-                                  ? utils.GetStaticFile(object["image_field"])
+                                author["image_field"]
+                                  ? utils.GetStaticFile(author["image_field"])
                                   : utils.GetStaticFile(
                                       "/media/default/account/default_avatar.jpg"
                                     )
@@ -243,7 +249,7 @@ export const IdeaAuthorListPage = () => {
                                 Количество идей:
                               </td>
                               <td className="small text-end">
-                                {object["idea_count"]}
+                                {author["idea_count"]}
                               </td>
                             </tr>
                             <tr className="">
@@ -251,7 +257,7 @@ export const IdeaAuthorListPage = () => {
                                 Общий рейтинг:
                               </td>
                               <td className="small text-end">
-                                {object["idea_rating"]}
+                                {author["idea_rating"]}
                               </td>
                             </tr>
                             <tr className="">
@@ -259,7 +265,7 @@ export const IdeaAuthorListPage = () => {
                                 Количество отметок:
                               </td>
                               <td className="small text-end">
-                                {object["idea_rating_count"]}
+                                {author["idea_rating_count"]}
                               </td>
                             </tr>
                             <tr className="">
@@ -267,7 +273,7 @@ export const IdeaAuthorListPage = () => {
                                 Количество комментариев:
                               </td>
                               <td className="small text-end">
-                                {object["idea_comment_count"]}
+                                {author["idea_comment_count"]}
                               </td>
                             </tr>
                           </tbody>

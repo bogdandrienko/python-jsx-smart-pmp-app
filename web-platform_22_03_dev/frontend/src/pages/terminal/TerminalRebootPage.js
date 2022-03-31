@@ -70,20 +70,22 @@ export const TerminalRebootPage = () => {
                         onChange={(e) => ipSet(e.target.value)}
                       >
                         <option value="">не указано</option>
-                        {constants.terminals.map((object, index) => (
-                          <option value={object.Ip}>{object.Header}</option>
+                        {constants.terminals.map((terminal, index) => (
+                          <option value={terminal.Ip}>{terminal.Header}</option>
                         ))}
                       </select>
                       <button
                         className="btn btn-sm btn-outline-danger m-1 p-1"
                         type="submit"
                       >
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
                         перезагрузить выбранное устройство
                       </button>
                       <button
                         className="btn btn-sm btn-danger m-1 p-1"
                         onClick={handlerRestartAllSubmit}
                       >
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
                         перезагрузить все устройства
                       </button>
                     </div>

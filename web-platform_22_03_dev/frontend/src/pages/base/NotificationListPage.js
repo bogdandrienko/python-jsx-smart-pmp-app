@@ -101,31 +101,37 @@ export const NotificationListPage = () => {
                 <td className="fw-bold small m-0 p-1">описание</td>
                 <td className="small m-0 p-1" />
               </tr>
-              {dataNotificationList.map((object, index) => (
+              {dataNotificationList.map((notification, index) => (
                 <tr
                   key={index}
                   className="text-center bg-light bg-opacity-10 m-0 p-0"
                 >
                   <td className="small m-0 p-0">
                     {utils.GetCleanDateTime(
-                      object["created_datetime_field"],
+                      notification["created_datetime_field"],
                       true
                     )}
                   </td>
                   <td className="small m-0 p-0">
-                    {object["author_foreign_key_field"]["last_name_char_field"]}{" "}
                     {
-                      object["author_foreign_key_field"][
+                      notification["author_foreign_key_field"][
+                        "last_name_char_field"
+                      ]
+                    }{" "}
+                    {
+                      notification["author_foreign_key_field"][
                         "first_name_char_field"
                       ]
                     }
                   </td>
-                  <td className="small m-0 p-0">{object["name_char_field"]}</td>
                   <td className="small m-0 p-0">
-                    {object["place_char_field"]}
+                    {notification["name_char_field"]}
                   </td>
                   <td className="small m-0 p-0">
-                    {object["description_text_field"]}
+                    {notification["place_char_field"]}
+                  </td>
+                  <td className="small m-0 p-0">
+                    {notification["description_text_field"]}
                   </td>
                   <td className="small m-0 p-0">
                     <button
@@ -133,7 +139,7 @@ export const NotificationListPage = () => {
                       className="btn btn-sm btn-outline-danger m-1 p-1"
                       onClick={(e) =>
                         handlerNotificationDeleteSubmit({
-                          id: `${object.id}`,
+                          id: `${notification.id}`,
                         })
                       }
                     >

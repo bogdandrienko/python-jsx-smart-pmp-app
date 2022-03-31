@@ -122,5 +122,9 @@ main{
 }
 
 .custom-color-warning-1 {
+  color: #d3b315;
+}
+
+.custom-color-warning-2 {
   color: #d3a015;
 }

@@ -48,7 +48,6 @@ export const VacationPage = () => {
               <div className="card-body text-center m-0 p-1">
                 <div className="form-control-sm input-group d-flex justify-content-between text-center m-0 p-0">
                   <label className="form-control-sm text-center w-50 m-0 p-1">
-                    Дата формирования:
                     <input
                       type="date"
                       className="form-control form-control-sm text-center m-0 p-1"
@@ -58,10 +57,10 @@ export const VacationPage = () => {
                       required
                       onChange={(e) => dateTimeSet(e.target.value)}
                     />
-                    <small className="text-danger">* обязательно</small>
                   </label>
                   {!loadVacationUser && (
                     <button type="submit" className="btn btn-sm btn-primary">
+                      <i className="fa-solid fa-circle-check m-0 p-1" />
                       сформировать
                     </button>
                   )}

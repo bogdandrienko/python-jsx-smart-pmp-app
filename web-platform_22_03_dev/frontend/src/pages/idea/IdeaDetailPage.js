@@ -182,7 +182,8 @@ export const IdeaDetailPage = () => {
                 })
               }
             >
-              жалоба на идею
+              <i className="fa-solid fa-skull-crossbones m-0 p-1" />
+              жалоба
             </button>
           )}
         </div>
@@ -583,9 +584,10 @@ export const IdeaDetailPage = () => {
                 </div>
                 <div className="d-flex justify-content-between m-0 p-1">
                   <span className="text-secondary m-0 p-1">Комментарии</span>
-                  <span className="badge bg-secondary rounded-pill m-0 p-2">
+                  <i className="fa-solid fa-comment m-0 p-1">
+                    {" "}
                     {dataIdeaDetail["comments"]["count"]}
-                  </span>
+                  </i>
                 </div>
               </div>
               <div className="card-footer m-0 p-0">
@@ -620,6 +622,7 @@ export const IdeaDetailPage = () => {
                             }
                           />
                           <button type="submit" className="btn btn-secondary">
+                            <i className="fa-solid fa-circle-check m-0 p-1" />
                             отправить
                           </button>
                         </div>
@@ -697,7 +700,8 @@ export const IdeaDetailPage = () => {
                                       })
                                     }
                                   >
-                                    жалоба на комментарий
+                                    <i className="fa-solid fa-skull-crossbones m-0 p-1" />
+                                    жалоба
                                   </button>
                                 </span>
                               </div>

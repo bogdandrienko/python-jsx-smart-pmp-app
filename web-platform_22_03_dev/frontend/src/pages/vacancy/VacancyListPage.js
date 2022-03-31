@@ -211,7 +211,8 @@ export const VacancyListPage = () => {
                   type="button"
                   onClick={handlerReset}
                 >
-                  сбросить фильтры
+                  <i className="fa-solid fa-pen-nib m-0 p-1" />
+                  сбросить данные
                 </button>
                 <Link
                   to={`/resume_create/0`}

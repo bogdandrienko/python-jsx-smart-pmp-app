@@ -369,6 +369,7 @@ export const RationalCreatePage = () => {
                   </div>
                   <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
+                      <i className="fa-solid fa-file m-0 p-1" />
                       Word файл-приложение:
                       <input
                         type="file"
@@ -379,6 +380,7 @@ export const RationalCreatePage = () => {
                       <small className="text-muted">* не обязательно</small>
                     </label>
                     <label className="form-control-sm text-center m-0 p-1">
+                      <i className="fa-solid fa-file m-0 p-1" />
                       Pdf файл-приложение:
                       <input
                         type="file"
@@ -389,6 +391,7 @@ export const RationalCreatePage = () => {
                       <small className="text-muted">* не обязательно</small>
                     </label>
                     <label className="form-control-sm text-center m-0 p-1">
+                      <i className="fa-solid fa-file m-0 p-1" />
                       Excel файл-приложение:
                       <input
                         type="file"
@@ -606,6 +609,7 @@ export const RationalCreatePage = () => {
                       className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
+                      <i className="fa-solid fa-circle-check m-0 p-1" />
                       отправить данные
                     </button>
                     <button
@@ -613,6 +617,7 @@ export const RationalCreatePage = () => {
                       type="reset"
                       onClick={(e) => handlerCreateReset(e)}
                     >
+                      <i className="fa-solid fa-pen-nib m-0 p-1" />
                       сбросить данные
                     </button>
                   </ul>

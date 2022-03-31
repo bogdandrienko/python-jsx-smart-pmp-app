@@ -57,6 +57,7 @@ export const AdminExportUsersPage = () => {
                       className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
+                      <i className="fa-solid fa-circle-check m-0 p-1" />
                       получить данные
                     </button>
                   </ul>

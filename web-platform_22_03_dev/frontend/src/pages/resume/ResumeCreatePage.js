@@ -378,7 +378,8 @@ export const ResumeCreatePage = () => {
                         type="submit"
                         className="btn btn-sm btn-outline-primary"
                       >
-                        Отправить
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
+                        отправить
                       </button>
                     </li>
                     <li className="m-0 p-1">
@@ -386,7 +387,7 @@ export const ResumeCreatePage = () => {
                         type="reset"
                         className="btn btn-sm btn-outline-warning"
                       >
-                        Сбросить все данные
+                        сбросить все данные
                       </button>
                     </li>
                   </ul>

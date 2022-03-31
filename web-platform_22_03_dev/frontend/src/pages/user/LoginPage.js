@@ -28,7 +28,7 @@ export const LoginPage = () => {
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserLogin) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         navigate("/news");
       });
     }
@@ -65,6 +65,7 @@ export const LoginPage = () => {
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               {!captcha && (
                 <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                  <i className="fa-solid fa-robot m-0 p-1" />
                   Пройдите проверку на робота!
                 </div>
               )}
@@ -86,6 +87,7 @@ export const LoginPage = () => {
               <div className="card-body m-0 p-0">
                 <div className="m-0 p-1">
                   <label className="form-control-sm text-center w-75 m-0 p-1">
+                    <i className="fa-solid fa-id-card m-0 p-1" />
                     Введите Ваш ИИН:
                     <input
                       type="text"
@@ -118,30 +120,41 @@ export const LoginPage = () => {
                     </small>
                   </label>
                   <label className="form-control-sm text-center w-75 m-0 p-1">
+                    <i className="fa-solid fa-key m-0 p-1" />
                     Введите пароль от аккаунта:
-                    <input
-                      type="password"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      id="password"
-                      value={password}
-                      placeholder="введите пароль тут..."
-                      required
-                      onChange={(e) =>
-                        passwordSet(
-                          e.target.value.replace(
-                            utils.GetRegexType({
-                              numbers: true,
-                              latin: true,
-                              lowerSpace: true,
-                            }),
-                            ""
+                    <div className="input-group form-control-sm m-0 p-1">
+                      <input
+                        type="password"
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        id="password"
+                        value={password}
+                        placeholder="введите пароль тут..."
+                        required
+                        onChange={(e) =>
+                          passwordSet(
+                            e.target.value.replace(
+                              utils.GetRegexType({
+                                numbers: true,
+                                latin: true,
+                                lowerSpace: true,
+                              }),
+                              ""
+                            )
                           )
-                        )
-                      }
-                      autoComplete="current-password"
-                      minLength="8"
-                      maxLength="16"
-                    />
+                        }
+                        autoComplete="current-password"
+                        minLength="8"
+                        maxLength="16"
+                      />
+                      <span className="">
+                        <i
+                          className="fa-solid fa-eye-low-vision btn btn-outline-secondary m-0 p-3"
+                          onClick={(e) =>
+                            utils.ChangePasswordVisibility(["password"])
+                          }
+                        />
+                      </span>
+                    </div>
                     <small className="text-danger m-0 p-0">
                       * обязательно
                       <small className="custom-color-warning-1 m-0 p-0">
@@ -168,6 +181,7 @@ export const LoginPage = () => {
                     className="btn btn-sm btn-primary m-1 p-2"
                     type="submit"
                   >
+                    <i className="fa-solid fa-circle-check m-0 p-1" />
                     войти в систему
                   </button>
                   <button
@@ -175,21 +189,16 @@ export const LoginPage = () => {
                     type="reset"
                     onClick={(e) => handlerLoginReset(e)}
                   >
+                    <i className="fa-solid fa-pen-nib m-0 p-1" />
                     сбросить данные
                   </button>
-                  <button
-                    type="reset"
-                    onClick={(e) =>
-                      utils.ChangePasswordVisibility(["password"])
-                    }
-                    className="btn btn-sm btn-danger m-1 p-2"
-                  >
-                    Видимость пароля
-                  </button>
+                </ul>
+                <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                   <Link
                     to="/recover_password"
                     className="btn btn-sm btn-success m-1 p-2"
                   >
+                    <i className="fa-solid fa-universal-access m-0 p-1" />
                     Восстановить доступ к аккаунту
                   </Link>
                 </ul>

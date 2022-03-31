@@ -1,5 +1,5 @@
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 // TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -355,6 +355,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-secondary",
+            LinkIcon: "fa-solid fa-circle-info m-0 p-1",
           },
         ],
       },
@@ -377,6 +378,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Подробности вакансии [скрыто]",
@@ -390,6 +392,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Создать новую вакансию",
@@ -404,6 +407,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Изменить вакансию [скрыто]",
@@ -417,6 +421,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Отправить резюме",
@@ -430,6 +435,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Список резюме",
@@ -444,6 +450,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Подробности резюме [скрыто]",
@@ -457,6 +464,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
         ],
       },
@@ -485,6 +493,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Api Django rest_framework",
@@ -498,6 +507,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "127.0.0.1:3000",
@@ -511,6 +521,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "127.0.0.1:8000",
@@ -524,6 +535,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
         ],
       },
@@ -545,6 +557,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Создать/изменить пользователей",
@@ -559,6 +572,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Выгрузить список пользователей",
@@ -572,6 +586,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Забанить/разбанить пользователя",
@@ -585,6 +600,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
         ],
       },
@@ -605,6 +621,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
         ],
       },
@@ -634,6 +651,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-earth-asia m-0 p-1",
           },
           {
             Header: "Уведомления",
@@ -647,6 +665,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-bell m-0 p-1",
           },
         ],
       },
@@ -668,6 +687,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-id-card m-0 p-1",
           },
           {
             Header: "Изменить пароль",
@@ -681,6 +701,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-key m-0 p-1",
           },
           {
             Header: "Восстановить пароль",
@@ -694,6 +715,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-universal-access m-0 p-1",
           },
           {
             Header: "Войти",
@@ -706,7 +728,8 @@ export const modules = [
             Description: "страница для входа в систему",
             Logic: true,
             Redirect: false,
-            Style: "text-dark",
+            Style: "text-primary",
+            LinkIcon: "fa-solid fa-arrow-right-to-bracket m-0 p-1",
           },
           {
             Header: "Выйти",
@@ -719,7 +742,8 @@ export const modules = [
             Description: "Пример (шаблон) идеи",
             Logic: true,
             Redirect: false,
-            Style: "text-dark",
+            Style: "text-danger",
+            LinkIcon: "fa-solid fa-door-open m-0 p-1",
           },
         ],
       },
@@ -750,6 +774,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-brands fa-sistrix m-0 p-1",
           },
           {
             Header: "Текстовые инструкции",
@@ -764,6 +789,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-brands fa-sistrix m-0 p-1",
           },
         ],
       },
@@ -783,7 +809,8 @@ export const modules = [
             Description: "страница новостей веб-платформы",
             Logic: true,
             Redirect: true,
-            Style: "text-dark",
+            Style: "text-secondary",
+            LinkIcon: "fa-solid fa-newspaper m-0 p-1",
           },
           {
             Header: "Зал славы участников",
@@ -797,6 +824,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "custom-color-warning-1",
+            LinkIcon: "fa-solid fa-list-ol m-0 p-1",
           },
         ],
       },
@@ -826,6 +854,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-secondary",
+            LinkIcon: "fa-solid fa-circle-info m-0 p-1",
           },
           {
             Header: "Подать новое рационализаторское предложение",
@@ -840,6 +869,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-success",
+            LinkIcon: "fa-solid fa-circle-plus m-0 p-1",
           },
           {
             Header: "Модерация рационализаторских предложений [модератор]",
@@ -860,6 +890,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-danger",
+            LinkIcon: "fa-solid fa-screwdriver-wrench m-0 p-1",
           },
         ],
       },
@@ -881,6 +912,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-secondary",
+            LinkIcon: "fa-solid fa-circle-info m-0 p-1",
           },
           {
             Header: "Подать новую идею",
@@ -894,6 +926,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-success",
+            LinkIcon: "fa-solid fa-circle-plus m-0 p-1",
           },
           {
             Header: "Мои идеи на доработку",
@@ -908,6 +941,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-danger",
+            LinkIcon: "fa-solid fa-screwdriver-wrench m-0 p-1",
           },
           {
             Header: "Редактировать свою идею [скрыто]",
@@ -921,6 +955,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Список идей",
@@ -934,7 +969,8 @@ export const modules = [
               "список идей в банке идей с возможностью поиска и фильтрации",
             Logic: true,
             Redirect: true,
-            Style: "text-dark",
+            Style: "text-primary",
+            LinkIcon: "fa-solid fa-list m-0 p-1",
           },
           {
             Header: "Подробности идеи [скрыто]",
@@ -948,6 +984,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
           {
             Header: "Лучшие идеи в банке",
@@ -961,6 +998,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "custom-color-warning-1",
+            LinkIcon: "fa-solid fa-list-ol m-0 p-1",
           },
           {
             Header: "Модерация идей [модератор]",
@@ -975,6 +1013,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-danger",
+            LinkIcon: "fa-solid fa-screwdriver-wrench m-0 p-1",
           },
           {
             Header: "Модерация подробности идеи [модератор] [скрыто]",
@@ -988,6 +1027,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
         ],
       },
@@ -1017,6 +1057,7 @@ export const modules = [
             Logic: true,
             Redirect: true,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-calculator m-0 p-1",
           },
         ],
       },
@@ -1046,6 +1087,7 @@ export const modules = [
             Logic: true,
             Redirect: false,
             Style: "text-dark",
+            LinkIcon: "fa-solid fa-rectangle-list m-0 p-1",
           },
         ],
       },

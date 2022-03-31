@@ -135,10 +135,7 @@ export const HeaderComponent = () => {
             Домашняя
           </a>
           {dataNotificationList && dataNotificationList.length > 0 && (
-            <span className="badge bg-danger rounded-pill m-0 p-2 mx-3">
-              {" "}
-              !{" "}
-            </span>
+            <i className="fa-solid fa-bell text-danger m-0 p-2" />
           )}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="m-0 p-0">
@@ -156,7 +153,8 @@ export const HeaderComponent = () => {
                             {module.Header}{" "}
                             {dataNotificationList &&
                               dataNotificationList.length > 0 && (
-                                <span className="badge bg-danger rounded-pill m-0 p-2">
+                                <span className="badge rounded-pill text-danger m-0 p-1">
+                                  <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                   {dataNotificationList.length}
                                 </span>
                               )}
@@ -192,6 +190,7 @@ export const HeaderComponent = () => {
                                         href={link.Link}
                                         target="_blank"
                                       >
+                                        <i className={link.LinkIcon} />
                                         {link.Header}
                                       </a>
                                     )
@@ -212,11 +211,13 @@ export const HeaderComponent = () => {
                                         <Nav.Link
                                           className={`${link.Style} m-0 p-1`}
                                         >
+                                          <i className={link.LinkIcon} />
                                           {link.Header}{" "}
                                           {link.Header === "Уведомления" &&
                                             dataNotificationList &&
                                             dataNotificationList.length > 0 && (
-                                              <span className="badge bg-danger rounded-pill m-0 p-2">
+                                              <span className="badge rounded-pill text-danger m-0 p-1">
+                                                <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                 {dataNotificationList.length}
                                               </span>
                                             )}
@@ -238,7 +239,7 @@ export const HeaderComponent = () => {
                 >
                   <Nav.Link className="m-0 p-0">
                     <button className="btn btn-sm btn-danger m-0 p-2">
-                      Выйти <i className="fa-solid fa-user m-0 p-1" />
+                      Выйти <i className="fa-solid fa-door-open m-0 p-1" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>
@@ -246,7 +247,10 @@ export const HeaderComponent = () => {
                 <LinkContainer to="/login" className="text-center m-0 p-1 mx-1">
                   <Nav.Link className="m-0 p-0">
                     <button className="btn btn-sm btn-primary m-0 p-2">
-                      Войти <i className="fa-solid fa-user m-0 p-1" />
+                      Войти{" "}
+                      <i className="fa-solid fa-user m-0 p-1">
+                        <i className="fa-solid fa-arrow-right-to-bracket m-0 p-1" />
+                      </i>
                     </button>
                   </Nav.Link>
                 </LinkContainer>
@@ -290,6 +294,7 @@ export const FooterComponent = () => {
                 title={
                   <span className="btn-outline-primary text-white">
                     Наши Ссылки
+                    <i className="fa-solid fa-circle-info m-0 p-1" />
                   </span>
                 }
                 id="basic-nav-dropdown-1"
@@ -400,6 +405,7 @@ export const FooterComponent = () => {
                 title={
                   <span className="btn-outline-danger text-white">
                     По всем вопросам!
+                    <i className="fa-solid fa-truck-medical m-0 p-1" />
                   </span>
                 }
                 id="basic-nav-dropdown-2"
@@ -537,6 +543,11 @@ export const ModulesComponent = () => {
                                                         href={link["Link"]}
                                                         target="_self"
                                                       >
+                                                        <i
+                                                          className={
+                                                            link.LinkIcon
+                                                          }
+                                                        />
                                                         {link["Header"]}
                                                       </a>
                                                     ) : (
@@ -551,6 +562,11 @@ export const ModulesComponent = () => {
                                                                 : "text-dark m-0 p-1"
                                                             }
                                                           >
+                                                            <i
+                                                              className={
+                                                                link.LinkIcon
+                                                              }
+                                                            />
                                                             {link["Header"]}
                                                             {"  "}
                                                             {link.Header ===
@@ -558,7 +574,8 @@ export const ModulesComponent = () => {
                                                               dataNotificationList &&
                                                               dataNotificationList.length >
                                                                 0 && (
-                                                                <span className="badge bg-danger rounded-pill m-0 p-2">
+                                                                <span className="badge rounded-pill text-danger m-0 p-1">
+                                                                  <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                                   {
                                                                     dataNotificationList.length
                                                                   }
@@ -734,7 +751,10 @@ export const NewsComponent = ({ count = 100 }) => {
               aria-current="true"
             >
               <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
-                <strong className="lead m-0 p-0 mb-1">Лента</strong>
+                <strong className="lead m-0 p-0 mb-1">
+                  <i className="fa-solid fa-newspaper m-0 p-1" />
+                  Лента
+                </strong>
                 <strong className="custom-color-warning-1 m-0 p-0">
                   Свежие сверху
                 </strong>

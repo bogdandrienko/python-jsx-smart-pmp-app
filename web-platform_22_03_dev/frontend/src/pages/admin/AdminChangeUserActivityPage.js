@@ -63,6 +63,7 @@ export const AdminChangeUserActivityPage = () => {
               <div className="card shadow custom-background-transparent-low m-0 p-0">
                 {!captcha && (
                   <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                    <i className="fa-solid fa-robot m-0 p-1" />
                     Пройдите проверку на робота!
                   </div>
                 )}
@@ -128,6 +129,7 @@ export const AdminChangeUserActivityPage = () => {
                       className="btn btn-sm btn-danger m-1 p-2"
                       type="submit"
                     >
+                      <i className="fa-solid fa-circle-check m-0 p-1" />
                       изменить статус
                     </button>
                   </ul>

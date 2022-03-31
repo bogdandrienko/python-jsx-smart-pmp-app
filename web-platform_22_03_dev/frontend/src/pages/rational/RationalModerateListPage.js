@@ -373,6 +373,7 @@ export const RationalModerateListPage = () => {
                         className="btn btn-sm btn-primary m-1 p-2"
                         type="submit"
                       >
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
                         фильтровать идеи
                       </button>
                       <button
@@ -380,6 +381,7 @@ export const RationalModerateListPage = () => {
                         type="reset"
                         onClick={(e) => handlerReset(e)}
                       >
+                        <i className="fa-solid fa-pen-nib m-0 p-1" />
                         сбросить фильтры
                       </button>
                     </ul>
@@ -412,32 +414,32 @@ export const RationalModerateListPage = () => {
             </div>
           ) : !detailView ? (
             <div className="card shadow m-0 p-0 my-1">
-              {dataRationalList.map((object, index) => (
+              {dataRationalList.map((rational, index) => (
                 <Link
                   key={index}
                   to={`#`}
                   className="text-decoration-none m-0 p-0"
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
-                    {utils.GetSliceString(object["name_char_field"], 30)}
+                    {utils.GetSliceString(rational["name_char_field"], 30)}
                     {utils.GetCleanDateTime(
-                      " | " + object["register_datetime_field"],
+                      " | " + rational["register_datetime_field"],
                       true
                     )}
                     {utils.GetSliceString(
-                      " | " + object["user_model"]["last_name_char_field"],
+                      " | " + rational["user_model"]["last_name_char_field"],
                       20
                     )}
                     {utils.GetSliceString(
-                      " " + object["user_model"]["first_name_char_field"],
+                      " " + rational["user_model"]["first_name_char_field"],
                       20
                     )}
                     {utils.GetSliceString(
-                      " | " + object["status_moderate_char_field"],
+                      " | " + rational["status_moderate_char_field"],
                       20
                     )}
                     {utils.GetSliceString(
-                      " : " + object["comment_moderate_char_field"],
+                      " : " + rational["comment_moderate_char_field"],
                       20
                     )}
                   </li>
@@ -446,7 +448,7 @@ export const RationalModerateListPage = () => {
             </div>
           ) : (
             <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
-              {dataRationalList.map((object, index) => (
+              {dataRationalList.map((rational, index) => (
                 <div
                   key={index}
                   className="col-sm-12 col-md-12 col-lg-6 m-0 p-1"
@@ -458,17 +460,20 @@ export const RationalModerateListPage = () => {
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
-                          {utils.GetSliceString(object["name_char_field"], 30)}
+                          {utils.GetSliceString(
+                            rational["name_char_field"],
+                            30
+                          )}
                         </h6>
                         <h6 className="text-danger lead small m-0 p-0">
                           {" [ "}
                           {utils.GetSliceString(
-                            object["status_moderate_char_field"],
+                            rational["status_moderate_char_field"],
                             30
                           )}
                           {" : "}
                           {utils.GetSliceString(
-                            object["comment_moderate_char_field"],
+                            rational["comment_moderate_char_field"],
                             30
                           )}
                           {" ]"}
@@ -483,14 +488,14 @@ export const RationalModerateListPage = () => {
                               required
                             >
                               <option className="m-0 p-0" value="">
-                                {object["subdivision_char_field"]}
+                                {rational["subdivision_char_field"]}
                               </option>
                             </select>
                           </label>
                           <label className="form-control-sm text-center m-0 p-1">
                             Зарегистрировано за №
                             <strong className="btn btn-light disabled">
-                              {`${object["number_char_field"]}`}
+                              {`${rational["number_char_field"]}`}
                             </strong>
                           </label>
                         </div>
@@ -502,7 +507,7 @@ export const RationalModerateListPage = () => {
                               required
                             >
                               <option className="m-0 p-0" value="">
-                                {object["category_char_field"]}
+                                {rational["category_char_field"]}
                               </option>
                             </select>
                           </label>
@@ -510,8 +515,8 @@ export const RationalModerateListPage = () => {
                         <div className="m-0 p-0">
                           <img
                             src={
-                              object["image_field"]
-                                ? utils.GetStaticFile(object["image_field"])
+                              rational["image_field"]
+                                ? utils.GetStaticFile(rational["image_field"])
                                 : utils.GetStaticFile(
                                     "/media/default/idea/default_idea.jpg"
                                   )
@@ -527,7 +532,7 @@ export const RationalModerateListPage = () => {
                               type="text"
                               className="form-control form-control-sm text-center m-0 p-1"
                               defaultValue={utils.GetSliceString(
-                                object["place_char_field"],
+                                rational["place_char_field"],
                                 50
                               )}
                               readOnly={true}
@@ -544,7 +549,7 @@ export const RationalModerateListPage = () => {
                             <textarea
                               className="form-control form-control-sm text-center m-0 p-1"
                               defaultValue={utils.GetSliceString(
-                                object["description_text_field"],
+                                rational["description_text_field"],
                                 100
                               )}
                               readOnly={true}
@@ -557,39 +562,39 @@ export const RationalModerateListPage = () => {
                           </label>
                         </div>
                         <div className="m-0 p-0">
-                          {object["additional_word_file_field"] && (
+                          {rational["additional_word_file_field"] && (
                             <label className="form-control-sm text-center m-0 p-1">
                               Word файл-приложение:
                               <a
                                 className="btn btn-sm btn-primary m-0 p-1"
                                 href={utils.GetStaticFile(
-                                  `${object["additional_word_file_field"]}`
+                                  `${rational["additional_word_file_field"]}`
                                 )}
                               >
                                 Скачать документ
                               </a>
                             </label>
                           )}
-                          {object["additional_pdf_file_field"] && (
+                          {rational["additional_pdf_file_field"] && (
                             <label className="form-control-sm text-center m-0 p-1">
                               Pdf файл-приложение:
                               <a
                                 className="btn btn-sm btn-danger m-0 p-1"
                                 href={utils.GetStaticFile(
-                                  `${object["additional_pdf_file_field"]}`
+                                  `${rational["additional_pdf_file_field"]}`
                                 )}
                               >
                                 Скачать документ
                               </a>
                             </label>
                           )}
-                          {object["additional_excel_file_field"] && (
+                          {rational["additional_excel_file_field"] && (
                             <label className="form-control-sm text-center m-0 p-1">
                               Excel файл-приложение:
                               <a
                                 className="btn btn-sm btn-success m-0 p-1"
                                 href={utils.GetStaticFile(
-                                  `${object["additional_excel_file_field"]}`
+                                  `${rational["additional_excel_file_field"]}`
                                 )}
                               >
                                 Скачать документ
@@ -603,9 +608,9 @@ export const RationalModerateListPage = () => {
                             className="btn btn-sm btn-warning m-0 p-2"
                           >
                             Автор:{" "}
-                            {object["user_model"]["last_name_char_field"]}{" "}
-                            {object["user_model"]["first_name_char_field"]}{" "}
-                            {object["user_model"]["position_char_field"]}
+                            {rational["user_model"]["last_name_char_field"]}{" "}
+                            {rational["user_model"]["first_name_char_field"]}{" "}
+                            {rational["user_model"]["position_char_field"]}
                           </Link>
                         </div>
                         <div className="d-flex justify-content-between m-1 p-0">
@@ -613,7 +618,7 @@ export const RationalModerateListPage = () => {
                             подано:{" "}
                             <p className="m-0">
                               {utils.GetCleanDateTime(
-                                object["created_datetime_field"],
+                                rational["created_datetime_field"],
                                 true
                               )}
                             </p>
@@ -622,7 +627,7 @@ export const RationalModerateListPage = () => {
                             зарегистрировано:{" "}
                             <p className="m-0 p-0">
                               {utils.GetCleanDateTime(
-                                object["register_datetime_field"],
+                                rational["register_datetime_field"],
                                 true
                               )}
                             </p>

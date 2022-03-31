@@ -281,6 +281,7 @@ export const IdeaModerateChangePage = () => {
                         className="btn btn-sm btn-danger m-1 p-2"
                         type="submit"
                       >
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
                         вынести заключение
                       </button>
                     </ul>
@@ -843,9 +844,10 @@ export const IdeaModerateChangePage = () => {
                       <span className="text-secondary m-0 p-1">
                         Комментарии
                       </span>
-                      <span className="badge bg-secondary rounded-pill m-0 p-1">
+                      <i className="fa-solid fa-comment m-0 p-1">
+                        {" "}
                         {dataIdeaDetail["comments"]["count"]}
-                      </span>
+                      </i>
                     </div>
                   </div>
                 </div>
@@ -868,6 +870,7 @@ export const IdeaModerateChangePage = () => {
                       className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
+                      <i className="fa-solid fa-circle-check m-0 p-1" />
                       заменить данные
                     </button>
                     <button
@@ -875,6 +878,7 @@ export const IdeaModerateChangePage = () => {
                       type="reset"
                       onClick={(e) => handlerChangeReset(e)}
                     >
+                      <i className="fa-solid fa-pen-nib m-0 p-1" />
                       сбросить данные
                     </button>
                   </ul>

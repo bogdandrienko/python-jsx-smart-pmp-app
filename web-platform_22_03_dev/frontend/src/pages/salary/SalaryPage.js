@@ -104,6 +104,7 @@ export const SalaryPage = () => {
                     </select>
                     {!loadSalaryUser && (
                       <button type="submit" className="btn btn-sm btn-primary">
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
                         получить
                       </button>
                     )}
@@ -140,7 +141,10 @@ export const SalaryPage = () => {
             <div className="bg-light bg-opacity-10 custom-background-transparent-low text-center m-0 p-0">
               <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center custom-background-transparent-low m-0 p-0">
                 <li className="m-0 p-1 my-1">
-                  <h6 className="lead fw-bold bold">Краткая информация</h6>
+                  <h6 className="lead fw-bold bold">
+                    Краткая информация
+                    <i className="fa-solid fa-credit-card m-0 p-1" />
+                  </h6>
                   <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
                     <thead className="m-0 p-0">
                       <tr className="m-0 p-0">

@@ -104,7 +104,12 @@ export const IdeaListPage = () => {
         <components.AccordionComponent
           key_target={"accordion1"}
           isCollapse={true}
-          title={"Фильтрация, поиск и сортировка:"}
+          title={
+            <span>
+              <i className="fa-solid fa-filter" /> Фильтрация, поиск и
+              сортировка:
+            </span>
+          }
           text_style="text-success"
           header_style="bg-success bg-opacity-10 custom-background-transparent-low"
           body_style="bg-light bg-opacity-10 custom-background-transparent-low"
@@ -115,8 +120,8 @@ export const IdeaListPage = () => {
                 <div className="card shadow custom-background-transparent-hard m-0 p-0">
                   <div className="card-header m-0 p-0">
                     <label className="lead m-0 p-1">
-                      Выберите нужные настройки фильтрации и сортировки, затем
-                      нажмите кнопку{" "}
+                      <i className="fa-solid fa-filter" /> Выберите нужные
+                      настройки фильтрации и сортировки, затем нажмите кнопку{" "}
                       <p className="fw-bold text-primary m-0 p-0">
                         "фильтровать"
                       </p>
@@ -322,6 +327,7 @@ export const IdeaListPage = () => {
                         className="btn btn-sm btn-primary m-1 p-2"
                         type="submit"
                       >
+                        <i className="fa-solid fa-circle-check m-0 p-1" />
                         фильтровать идеи
                       </button>
                       <button
@@ -329,6 +335,7 @@ export const IdeaListPage = () => {
                         type="reset"
                         onClick={(e) => handlerReset(e)}
                       >
+                        <i className="fa-solid fa-pen-nib m-0 p-1" />
                         сбросить фильтры
                       </button>
                     </ul>
@@ -361,24 +368,24 @@ export const IdeaListPage = () => {
             </div>
           ) : !detailView ? (
             <div className="card shadow m-0 p-0 my-1">
-              {dataIdeaList.map((object, index) => (
+              {dataIdeaList.map((idea, index) => (
                 <Link
                   key={index}
-                  to={`/idea_detail/${object.id}`}
+                  to={`/idea_detail/${idea.id}`}
                   className="text-decoration-none m-0 p-0"
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
-                    {utils.GetSliceString(object["name_char_field"], 30)}
+                    {utils.GetSliceString(idea["name_char_field"], 30)}
                     {utils.GetCleanDateTime(
-                      " | " + object["register_datetime_field"],
+                      " | " + idea["register_datetime_field"],
                       true
                     )}
                     {utils.GetSliceString(
-                      " | " + object["user_model"]["last_name_char_field"],
+                      " | " + idea["user_model"]["last_name_char_field"],
                       20
                     )}
                     {utils.GetSliceString(
-                      " " + object["user_model"]["first_name_char_field"],
+                      " " + idea["user_model"]["first_name_char_field"],
                       20
                     )}
                   </li>
@@ -387,19 +394,19 @@ export const IdeaListPage = () => {
             </div>
           ) : (
             <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
-              {dataIdeaList.map((object, index) => (
+              {dataIdeaList.map((idea, index) => (
                 <div
                   key={index}
                   className="col-sm-12 col-md-6 col-lg-4 m-0 p-1"
                 >
                   <Link
-                    to={`/idea_detail/${object.id}`}
+                    to={`/idea_detail/${idea.id}`}
                     className="text-decoration-none text-dark m-0 p-0"
                   >
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
-                          {utils.GetSliceString(object["name_char_field"], 30)}
+                          {utils.GetSliceString(idea["name_char_field"], 30)}
                         </h6>
                       </div>
                       <div className="card-body m-0 p-0">
@@ -411,7 +418,7 @@ export const IdeaListPage = () => {
                               required
                             >
                               <option className="m-0 p-0" value="">
-                                {object["subdivision_char_field"]}
+                                {idea["subdivision_char_field"]}
                               </option>
                             </select>
                           </label>
@@ -422,7 +429,7 @@ export const IdeaListPage = () => {
                               required
                             >
                               <option className="m-0 p-0" value="">
-                                {object["sphere_char_field"]}
+                                {idea["sphere_char_field"]}
                               </option>
                             </select>
                           </label>
@@ -433,7 +440,7 @@ export const IdeaListPage = () => {
                               required
                             >
                               <option className="m-0 p-0" value="">
-                                {object["category_char_field"]}
+                                {idea["category_char_field"]}
                               </option>
                             </select>
                           </label>
@@ -441,8 +448,8 @@ export const IdeaListPage = () => {
                         <div className="m-0 p-0">
                           <img
                             src={
-                              object["image_field"]
-                                ? utils.GetStaticFile(object["image_field"])
+                              idea["image_field"]
+                                ? utils.GetStaticFile(idea["image_field"])
                                 : utils.GetStaticFile(
                                     "/media/default/idea/default_idea.jpg"
                                   )
@@ -458,7 +465,7 @@ export const IdeaListPage = () => {
                               type="text"
                               className="form-control form-control-sm text-center m-0 p-1"
                               defaultValue={utils.GetSliceString(
-                                object["place_char_field"],
+                                idea["place_char_field"],
                                 50
                               )}
                               readOnly={true}
@@ -475,7 +482,7 @@ export const IdeaListPage = () => {
                             <textarea
                               className="form-control form-control-sm text-center m-0 p-1"
                               defaultValue={utils.GetSliceString(
-                                object["description_text_field"],
+                                idea["description_text_field"],
                                 100
                               )}
                               readOnly={true}
@@ -492,10 +499,9 @@ export const IdeaListPage = () => {
                             to={`#`}
                             className="btn btn-sm btn-warning m-0 p-2"
                           >
-                            Автор:{" "}
-                            {object["user_model"]["last_name_char_field"]}{" "}
-                            {object["user_model"]["first_name_char_field"]}{" "}
-                            {object["user_model"]["position_char_field"]}
+                            Автор: {idea["user_model"]["last_name_char_field"]}{" "}
+                            {idea["user_model"]["first_name_char_field"]}{" "}
+                            {idea["user_model"]["position_char_field"]}
                           </Link>
                         </div>
                         <div className="d-flex justify-content-between m-1 p-0">
@@ -503,7 +509,7 @@ export const IdeaListPage = () => {
                             подано:{" "}
                             <p className="m-0">
                               {utils.GetCleanDateTime(
-                                object["created_datetime_field"],
+                                idea["created_datetime_field"],
                                 true
                               )}
                             </p>
@@ -512,7 +518,7 @@ export const IdeaListPage = () => {
                             зарегистрировано:{" "}
                             <p className="m-0 p-0">
                               {utils.GetCleanDateTime(
-                                object["register_datetime_field"],
+                                idea["register_datetime_field"],
                                 true
                               )}
                             </p>
@@ -523,9 +529,9 @@ export const IdeaListPage = () => {
                         <div className="d-flex justify-content-between m-0 p-1">
                           <span
                             className={
-                              object["ratings"]["rate"] > 7
+                              idea["ratings"]["rate"] > 7
                                 ? "text-success m-0 p-1"
-                                : object["ratings"]["rate"] > 4
+                                : idea["ratings"]["rate"] > 4
                                 ? "custom-color-warning-1 m-0 p-1"
                                 : "text-danger m-0 p-1"
                             }
@@ -534,23 +540,23 @@ export const IdeaListPage = () => {
                           </span>
                           <div className="m-0 p-1">
                             <span className="btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2">
-                              {`${object["ratings"]["rate"]}  / ${object["ratings"]["count"]}`}
+                              {`${idea["ratings"]["rate"]}  / ${idea["ratings"]["count"]}`}
                             </span>
                           </div>
                           <span className="m-0 p-1">
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 1
+                                idea["ratings"]["rate"] >= 1
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 0.5
+                                  : idea["ratings"]["rate"] >= 0.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -558,16 +564,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 2
+                                idea["ratings"]["rate"] >= 2
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 1.5
+                                  : idea["ratings"]["rate"] >= 1.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -575,16 +581,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 3
+                                idea["ratings"]["rate"] >= 3
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 2.5
+                                  : idea["ratings"]["rate"] >= 2.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -592,16 +598,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 4
+                                idea["ratings"]["rate"] >= 4
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 3.5
+                                  : idea["ratings"]["rate"] >= 3.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -609,16 +615,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 5
+                                idea["ratings"]["rate"] >= 5
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 4.5
+                                  : idea["ratings"]["rate"] >= 4.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -626,16 +632,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 6
+                                idea["ratings"]["rate"] >= 6
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 5.5
+                                  : idea["ratings"]["rate"] >= 5.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -643,16 +649,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 7
+                                idea["ratings"]["rate"] >= 7
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 6.5
+                                  : idea["ratings"]["rate"] >= 6.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -660,16 +666,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 8
+                                idea["ratings"]["rate"] >= 8
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 7.5
+                                  : idea["ratings"]["rate"] >= 7.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -677,16 +683,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 9
+                                idea["ratings"]["rate"] >= 9
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 8.5
+                                  : idea["ratings"]["rate"] >= 8.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -694,16 +700,16 @@ export const IdeaListPage = () => {
                             <i
                               style={{
                                 color:
-                                  object["ratings"]["rate"] > 7
+                                  idea["ratings"]["rate"] > 7
                                     ? "#00ff00"
-                                    : object["ratings"]["rate"] > 4
+                                    : idea["ratings"]["rate"] > 4
                                     ? "#ffaa00"
                                     : "#ff0000",
                               }}
                               className={
-                                object["ratings"]["rate"] >= 10
+                                idea["ratings"]["rate"] >= 10
                                   ? "fas fa-star m-0 p-0"
-                                  : object["ratings"]["rate"] >= 9.5
+                                  : idea["ratings"]["rate"] >= 9.5
                                   ? "fas fa-star-half-alt m-0 p-0"
                                   : "far fa-star m-0 p-0"
                               }
@@ -714,15 +720,16 @@ export const IdeaListPage = () => {
                           <span className="text-secondary m-0 p-1">
                             Комментарии
                           </span>
-                          <span className="badge bg-secondary rounded-pill m-0 p-2">
-                            {object["comments"]["count"]}
-                          </span>
+                          <i className="fa-solid fa-comment m-0 p-1">
+                            {" "}
+                            {idea["comments"]["count"]}
+                          </i>
                         </div>
                       </div>
                       <div className="m-0 p-0">
                         <Link
                           className="btn btn-sm btn-primary w-100 m-0 p-1"
-                          to={`/idea_detail/${object.id}`}
+                          to={`/idea_detail/${idea.id}`}
                         >
                           подробнее
                         </Link>

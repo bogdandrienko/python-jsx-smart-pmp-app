@@ -196,6 +196,7 @@ export const AdminCreateOrChangeUsersPage = () => {
                       className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
+                      <i className="fa-solid fa-circle-check m-0 p-1" />
                       отправить данные
                     </button>
                     <button
@@ -203,6 +204,7 @@ export const AdminCreateOrChangeUsersPage = () => {
                       type="reset"
                       onClick={(e) => handlerRecoverPasswordReset(e)}
                     >
+                      <i className="fa-solid fa-pen-nib m-0 p-1" />
                       сбросить данные
                     </button>
                   </ul>

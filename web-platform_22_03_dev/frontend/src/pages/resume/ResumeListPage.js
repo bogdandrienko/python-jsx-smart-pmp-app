@@ -222,6 +222,7 @@ export const ResumeListPage = () => {
               </div>
               <div className="btn-group p-1 m-0 text-start w-100">
                 <button className="btn btn-sm btn-primary" type="submit">
+                  <i className="fa-solid fa-circle-check m-0 p-1" />
                   фильтровать вакансии
                 </button>
                 <button
@@ -229,7 +230,8 @@ export const ResumeListPage = () => {
                   type="button"
                   onClick={handlerReset}
                 >
-                  сбросить фильтры
+                  <i className="fa-solid fa-pen-nib m-0 p-1" />
+                  сбросить данные
                 </button>
               </div>
             </form>
