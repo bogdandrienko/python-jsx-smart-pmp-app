@@ -385,7 +385,7 @@ export const VacancyListPage = () => {
                                       <td className="small text-end">
                                         {utils.GetSliceString(
                                           vacancy["description_field"],
-                                          30
+                                          100
                                         )}
                                       </td>
                                     </tr>

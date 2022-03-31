@@ -166,6 +166,7 @@ export const ResumeListPage = () => {
                             numbers: true,
                             cyrillic: true,
                             space: true,
+                            punctuationMarks: true,
                           }),
                           ""
                         )
@@ -189,6 +190,7 @@ export const ResumeListPage = () => {
                             numbers: true,
                             cyrillic: true,
                             space: true,
+                            punctuationMarks: true,
                           }),
                           ""
                         )

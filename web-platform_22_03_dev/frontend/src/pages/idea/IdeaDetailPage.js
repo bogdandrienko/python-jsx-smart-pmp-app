@@ -137,14 +137,14 @@ export const IdeaDetailPage = () => {
   };
   //////////////////////////////////////////////////////////
   const handlerNotificationSubmit = async ({ name, place, description }) => {
-    const form = {
-      "Action-type": "NOTIFICATION_CREATE",
-      name: name,
-      place: place,
-      description: description,
-    };
-    let isConfirm = window.confirm(name);
-    if (isConfirm) {
+    let prompt = window.prompt("Причина жалобы?", "Нарушение норм приличия!");
+    if (prompt) {
+      const form = {
+        "Action-type": "NOTIFICATION_CREATE",
+        name: name,
+        place: place,
+        description: description + `, причина: ${prompt}`,
+      };
       dispatch(actions.notificationCreateAction(form));
     }
   };
@@ -335,7 +335,7 @@ export const IdeaDetailPage = () => {
                       dataIdeaDetail["ratings"]["rate"] > 7
                         ? "text-success m-0 p-1"
                         : dataIdeaDetail["ratings"]["rate"] > 4
-                        ? "text-warning m-0 p-1"
+                        ? "custom-color-warning-1 m-0 p-1"
                         : "text-danger m-0 p-1"
                     }
                   >
@@ -612,6 +612,7 @@ export const IdeaDetailPage = () => {
                                     numbers: true,
                                     cyrillic: true,
                                     space: true,
+                                    punctuationMarks: true,
                                   }),
                                   ""
                                 )

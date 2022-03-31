@@ -110,7 +110,7 @@ export const AdminChangeUserActivityPage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только цифры
                         </small>

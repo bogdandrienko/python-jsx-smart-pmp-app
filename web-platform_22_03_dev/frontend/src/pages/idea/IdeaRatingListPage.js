@@ -178,7 +178,7 @@ export const IdeaRatingListPage = () => {
                   className="text-decoration-none m-0 p-0"
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
-                    {utils.GetSliceString(object["name_char_field"], 20)}
+                    {utils.GetSliceString(object["name_char_field"], 30)}
                     {utils.GetCleanDateTime(
                       " | " + object["register_datetime_field"],
                       true
@@ -209,7 +209,7 @@ export const IdeaRatingListPage = () => {
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
-                          {object["name_char_field"]}
+                          {utils.GetSliceString(object["name_char_field"], 30)}
                         </h6>
                       </div>
                       <div className="card-body m-0 p-0">
@@ -286,7 +286,7 @@ export const IdeaRatingListPage = () => {
                               className="form-control form-control-sm text-center m-0 p-1"
                               defaultValue={utils.GetSliceString(
                                 object["description_text_field"],
-                                50
+                                100
                               )}
                               readOnly={true}
                               required
@@ -336,7 +336,7 @@ export const IdeaRatingListPage = () => {
                               object["ratings"]["rate"] > 7
                                 ? "text-success m-0 p-1"
                                 : object["ratings"]["rate"] > 4
-                                ? "text-warning m-0 p-1"
+                                ? "custom-color-warning-1 m-0 p-1"
                                 : "text-danger m-0 p-1"
                             }
                           >

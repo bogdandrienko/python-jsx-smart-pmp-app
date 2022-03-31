@@ -352,3 +352,30 @@ export const GetRegexType = ({
     return new RegExp(`[^_]`, "g");
   }
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GetCurrentDate = (withTime = true, yearAppend = 0) => {
+  try {
+    const today = new Date();
+    let year = today.getFullYear() + yearAppend;
+    let month = today.getMonth() + 1;
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    let day = today.getDate();
+    if (day < 10) {
+      day = `0${day}`;
+    }
+    let time = today.getTime();
+    if (withTime) {
+      return `${year}-${month}-${day}T${time}`;
+    } else {
+      console.log("GetCurrentDate", `${year}-${month}-${day}`);
+      return `${year}-${month}-${day}`;
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};

@@ -89,7 +89,7 @@ export const IdeaSelfListPage = () => {
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
-                          {object["name_char_field"]}
+                          {utils.GetSliceString(object["name_char_field"], 30)}
                         </h6>
                         <h6 className="text-danger lead small m-0 p-0">
                           {" [ комментарий модератора: "}
@@ -174,7 +174,7 @@ export const IdeaSelfListPage = () => {
                               className="form-control form-control-sm text-center m-0 p-1"
                               defaultValue={utils.GetSliceString(
                                 object["description_text_field"],
-                                50
+                                100
                               )}
                               readOnly={true}
                               required
@@ -224,7 +224,7 @@ export const IdeaSelfListPage = () => {
                               object["ratings"]["rate"] > 7
                                 ? "text-success m-0 p-1"
                                 : object["ratings"]["rate"] > 4
-                                ? "text-warning m-0 p-1"
+                                ? "custom-color-warning-1 m-0 p-1"
                                 : "text-danger m-0 p-1"
                             }
                           >

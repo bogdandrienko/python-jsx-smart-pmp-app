@@ -241,6 +241,7 @@ export const IdeaModerateChangePage = () => {
                                   numbers: true,
                                   cyrillic: true,
                                   space: true,
+                                  punctuationMarks: true,
                                 }),
                                 ""
                               )
@@ -249,7 +250,7 @@ export const IdeaModerateChangePage = () => {
                         />
                         <small className="text-danger m-0 p-0">
                           * обязательно
-                          <small className="text-warning m-0 p-0">
+                          <small className="custom-color-warning-1 m-0 p-0">
                             {" "}
                             * только кириллица, цифры и пробел
                           </small>
@@ -488,7 +489,7 @@ export const IdeaModerateChangePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>
@@ -526,7 +527,7 @@ export const IdeaModerateChangePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>
@@ -607,7 +608,7 @@ export const IdeaModerateChangePage = () => {
                           dataIdeaDetail["ratings"]["rate"] > 7
                             ? "text-success"
                             : dataIdeaDetail["ratings"]["rate"] > 4
-                            ? "text-warning"
+                            ? "custom-color-warning-1"
                             : "text-danger"
                         }
                       >

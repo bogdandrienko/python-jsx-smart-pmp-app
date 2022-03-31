@@ -1,6 +1,6 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO debug
+// TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const DEBUG_CONSTANT = true;
-//////////////////////////////////////////////////////////////////////////////////////////////////////////TODO constants
+// TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
 export const USER_LOGIN_ERROR_CONSTANT = "USER_LOGIN_ERROR_CONSTANT";
@@ -274,7 +274,7 @@ export const TERMINAL_REBOOT_DATA_CONSTANT = "TERMINAL_REBOOT_DATA_CONSTANT";
 export const TERMINAL_REBOOT_ERROR_CONSTANT = "TERMINAL_REBOOT_ERROR_CONSTANT";
 export const TERMINAL_REBOOT_FAIL_CONSTANT = "TERMINAL_REBOOT_FAIL_CONSTANT";
 export const TERMINAL_REBOOT_RESET_CONSTANT = "TERMINAL_REBOOT_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO news
+// TODO news ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const news = [
   {
     Title: "Личный профиль:",
@@ -282,14 +282,6 @@ export const news = [
     Link: "#",
     Description:
       "расширение личного профиля: дополнительные данные, статистика, достижения",
-    Helps: "",
-    Danger: "",
-  },
-  {
-    Title: "Отпуска:",
-    Status: "disable",
-    Link: "#",
-    Description: "выдача данных по отпускам для работника за выбранный период",
     Helps: "",
     Danger: "",
   },
@@ -320,6 +312,14 @@ export const news = [
     Danger: "",
   },
   {
+    Title: "Отпуска:",
+    Status: "active",
+    Link: "/vacation",
+    Description: "выдача данных по отпускам для работника за выбранный период",
+    Helps: "",
+    Danger: "",
+  },
+  {
     Title: "Расчётный лист:",
     Status: "active",
     Link: "/salary",
@@ -329,7 +329,7 @@ export const news = [
     Danger: "контрактники пока не включены",
   },
 ];
-////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO modules
+// TODO modules ////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const modules = [
   {
     Header: "Разработка",
@@ -339,13 +339,13 @@ export const modules = [
     Sections: [
       {
         Header: "web version",
-        Access: ["user"],
+        Access: ["superuser"],
         Image:
           "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
         Links: [
           {
-            Header: "30.03.22 15:30",
-            Access: ["user"],
+            Header: "31.03.22 12:00",
+            Access: ["superuser"],
             Active: false,
             Link: "#",
             ExternalLink: false,
@@ -796,7 +796,7 @@ export const modules = [
             Description: "лучшие авторы и самые активные участники",
             Logic: true,
             Redirect: true,
-            Style: "text-warning",
+            Style: "custom-color-warning-1",
           },
         ],
       },
@@ -960,7 +960,7 @@ export const modules = [
             Description: "лучшие идеи банка идей",
             Logic: true,
             Redirect: true,
-            Style: "text-warning",
+            Style: "custom-color-warning-1",
           },
           {
             Header: "Модерация идей [модератор]",
@@ -1025,14 +1025,14 @@ export const modules = [
   {
     Header: "СУП",
     Access: ["user"],
-    Image: "/static/img/modules/4_module_buhgalteria/module_buhgalteria.png",
+    Image: "/static/img/modules/5_module_human_resourse/module_hr.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Отдел кадров",
         Access: ["user"],
         Image:
-          "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
+          "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
         Links: [
           {
             Header: "Выгрузка данных по отпуску",
@@ -1052,7 +1052,7 @@ export const modules = [
     ],
   },
 ];
-//////////////////////////////////////////////////////////////////////////////////////////////////////////TODO terminals
+// TODO terminals //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const terminals = [
   {
     Header: "Управление, вход",
@@ -1150,4 +1150,3 @@ export const terminals = [
     Ip: "192.168.19.253",
   },
 ];
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

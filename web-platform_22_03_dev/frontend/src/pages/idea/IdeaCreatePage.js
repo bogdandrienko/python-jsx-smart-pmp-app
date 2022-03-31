@@ -50,18 +50,23 @@ export const IdeaCreatePage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    const form = {
-      "Action-type": "IDEA_CREATE",
-      subdivision: subdivision,
-      sphere: sphere,
-      category: category,
-      avatar: avatar,
-      name: name,
-      place: place,
-      description: description,
-      moderate: moderate,
-    };
-    dispatch(actions.ideaCreateAction(form));
+    let confirm = window.confirm(
+      "Вы завершили заполнение и хотите отправить эту идею на модерацию?"
+    );
+    if (confirm) {
+      const form = {
+        "Action-type": "IDEA_CREATE",
+        subdivision: subdivision,
+        sphere: sphere,
+        category: category,
+        avatar: avatar,
+        name: name,
+        place: place,
+        description: description,
+        moderate: moderate,
+      };
+      dispatch(actions.ideaCreateAction(form));
+    }
   };
   //////////////////////////////////////////////////////////
   const handlerCreateReset = async (e) => {
@@ -253,7 +258,7 @@ export const IdeaCreatePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>
@@ -291,7 +296,7 @@ export const IdeaCreatePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>

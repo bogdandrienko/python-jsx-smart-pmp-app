@@ -5,14 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const VacationPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
-  const [month, monthSet] = useState("3");
-  const [year, yearSet] = useState("2022");
-  const [dateTime, dateTimeSet] = useState("2021-03-30");
+  const [dateTime, dateTimeSet] = useState(utils.GetCurrentDate(false));
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
   const vacationUserStore = useSelector((state) => state.vacationUserStore);
   const {
@@ -26,10 +25,11 @@ export const VacationPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    console.log("dateTime: ", dateTime);
     const form = {
       "Action-type": "USER_VACATION",
-      dateTime: dateTime,
+      dateTime: `${dateTime.split("-")[0]}${dateTime.split("-")[1]}${
+        dateTime.split("-")[2]
+      }`,
     };
     dispatch(actions.vacationUserAction(form));
   };
@@ -39,21 +39,21 @@ export const VacationPage = () => {
       <components.HeaderComponent />
       <main>
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
-          <form className="m-0 p-0" onSubmit={handlerSubmit}>
-            <div className="card shadow custom-background-transparent-low m-0 p-0">
-              <div className="card-header m-0 p-0">
-                Выберите день, на который нужно сформировать данные и нажмите "
-                <span className="text-primary">сформировать</span>"
+          <form className="text-center m-0 p-0" onSubmit={handlerSubmit}>
+            <div className="card shadow custom-background-transparent-low text-center m-0 p-0">
+              <div className="card-header text-center m-0 p-0">
+                Выберите дату и нажмите "
+                <span className="text-primary text-center">сформировать</span>"
               </div>
-              <div className="card-body m-0 p-0">
+              <div className="card-body text-center m-0 p-1">
                 <div className="form-control-sm input-group d-flex justify-content-between text-center m-0 p-0">
-                  <label className="form-control-sm text-center w-75 m-0 p-1">
+                  <label className="form-control-sm text-center w-50 m-0 p-1">
                     Дата формирования:
                     <input
                       type="date"
                       className="form-control form-control-sm text-center m-0 p-1"
-                      min="2021-01-01"
-                      max="2023-01-01"
+                      min={utils.GetCurrentDate(false)}
+                      max={utils.GetCurrentDate(false, 1)}
                       value={dateTime}
                       required
                       onChange={(e) => dateTimeSet(e.target.value)}
@@ -77,7 +77,7 @@ export const VacationPage = () => {
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}
-          showData={true}
+          showData={false}
           dataText={"Данные успешно получены!"}
           showError={true}
           errorText={""}
@@ -85,8 +85,80 @@ export const VacationPage = () => {
           failText={""}
         />
         {dataVacationUser && (
-          <div className="bg-light custom-background-transparent-low text-center m-0 p-1">
-            <div className="text-center m-0 p-1">{dataVacationUser}</div>
+          <div className="bg-light bg-opacity-10 custom-background-transparent-low-middle">
+            <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center custom-background-transparent-low-middle m-0 p-0">
+              <li className="m-0 p-1 my-1">
+                <h6 className="lead fw-bold bold text-center m-0 p-0">
+                  Данные по отпуску
+                </h6>
+                <table className="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
+                  <thead className="m-0 p-0">
+                    <tr className="m-0 p-0">
+                      <th className="text-center w-50 m-0 p-1">Тип</th>
+                      <th className="text-center m-0 p-1">Значение</th>
+                    </tr>
+                  </thead>
+                  <tbody className="m-0 p-0">
+                    {dataVacationUser["headers"].map((head, index) => (
+                      <tr key={index}>
+                        <td className="text-start m-0 p-1">{head[0]}</td>
+                        <td
+                          className={
+                            index === 4
+                              ? "text-end text-success fw-bold m-0 p-1"
+                              : "text-end m-0 p-1"
+                          }
+                        >
+                          {head[1]}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+            {dataVacationUser["tables"] &&
+              dataVacationUser["tables"].length > 0 && (
+                <components.AccordionComponent
+                  key_target={"accordion1"}
+                  isCollapse={true}
+                  title={"Запланированный отпуск :"}
+                  text_style="text-primary"
+                  header_style="bg-primary bg-opacity-10 custom-background-transparent-low-middle"
+                  body_style="bg-light bg-opacity-10 custom-background-transparent-low-middle"
+                >
+                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center bg-light bg-opacity-50 custom-background-transparent-low-middle m-0 p-0">
+                    {dataVacationUser["tables"].map((table, index) => (
+                      <li
+                        key={index}
+                        className="bg-light bg-opacity-10 custom-background-transparent-low-middle m-0 p-1 my-1"
+                      >
+                        <h6 className="lead fw-bold bold text-center">
+                          {dataVacationUser["tables"].length > 1
+                            ? table[0]
+                            : `${table[0]}`.slice(0, 10)}
+                        </h6>
+                        <table className="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-secondary custom-background-transparent-low-middle small m-0 p-0">
+                          <thead className="m-0 p-0">
+                            <tr className="m-0 p-0">
+                              <th className="text-center w-50 m-0 p-1">Тип</th>
+                              <th className="text-center m-0 p-1">Значение</th>
+                            </tr>
+                          </thead>
+                          <tbody className="m-0 p-0">
+                            {table.slice(1).map((tab, index) => (
+                              <tr key={index} className="m-0 p-0">
+                                <td className="text-start m-0 p-1">{tab[0]}</td>
+                                <td className="text-end m-0 p-1">{tab[1]}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </li>
+                    ))}
+                  </ul>
+                </components.AccordionComponent>
+              )}
           </div>
         )}
       </main>

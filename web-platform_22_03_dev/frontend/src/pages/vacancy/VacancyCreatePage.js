@@ -103,6 +103,7 @@ export const VacancyCreatePage = () => {
                               numbers: true,
                               cyrillic: true,
                               lowerSpace: true,
+                              punctuationMarks: true,
                             }),
                             ""
                           )
@@ -111,7 +112,7 @@ export const VacancyCreatePage = () => {
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
-                      <small className="text-warning m-0 p-0">
+                      <small className="custom-color-warning-1 m-0 p-0">
                         {" "}
                         * только кириллица, цифры и пробел
                       </small>
@@ -137,6 +138,7 @@ export const VacancyCreatePage = () => {
                               numbers: true,
                               cyrillic: true,
                               space: true,
+                              punctuationMarks: true,
                             }),
                             ""
                           )
@@ -145,7 +147,7 @@ export const VacancyCreatePage = () => {
                     />
                     <small className="text-secondary m-0 p-0">
                       * не обязательно
-                      <small className="text-warning m-0 p-0">
+                      <small className="custom-color-warning-1 m-0 p-0">
                         {" "}
                         * только кириллица, цифры и пробел
                       </small>

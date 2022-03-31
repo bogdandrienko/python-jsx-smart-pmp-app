@@ -1680,13 +1680,13 @@ def api_auth_vacation(request):
                     key_hash = str(hash_key_obj.hexdigest().strip().upper())
                     key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
                     iin = req_inst.user.username
-                    if str(iin).lower() == '000000000000':
+                    if str(iin).lower() == '000000000000' or str(iin).lower() == 'bogdan':
                         iin = 970801351179
                     iin_base64 = base64.b64encode(str(iin).encode()).decode()
                     date_base64 = base64.b64encode(f'{date_time}'.encode()).decode()
-                    # http://192.168.1.158//Tanya_perenos/hs/pers/u_vacation/780616450151/20220101
-                    # url = f'http://192.168.1.10/KM_1C/hs/pers/u_vacation/{iin_base64}_{key_hash_base64}/{date_base64}'
-                    url = f'http://192.168.1.10/KM_1C/hs/pers/u_vacation/{iin_base64}/{date_base64}'
+                    # url = f'http://192.168.1.158/Tanya_perenos/hs/pers/u_vacation/{iin_base64}_
+                    # {key_hash_base64}/{date_base64}'
+                    url = f'http://192.168.1.10/KM_1C/hs/pers/u_vacation/{iin_base64}_{key_hash_base64}/{date_base64}'
                     h = httplib2.Http(
                         os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_vacation_data"
                     )
@@ -1695,9 +1695,10 @@ def api_auth_vacation(request):
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
 
-                    print("content.decode(): ", content.decode()[1:])
-
                     data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+
+                    print("data: ", data)
+
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:
                         return Response({"error": f"{data.split('send')[1].strip()}"})
@@ -1705,7 +1706,64 @@ def api_auth_vacation(request):
                     for error_word in error_word_list:
                         if data.find(error_word.lower()) >= 0:
                             return Response({"error": f"Произошла ошибка!"})
+
+                    headers = []
+                    tables = []
+                    for key, value in json_data.items():
+                        try:
+                            if key != "global_objects":
+                                try:
+                                    if key == "Работник":
+                                        headers.append(["Работник", value])
+                                    elif key == "Подразделение":
+                                        headers.append(["Место работы", value])
+                                    elif key == "Должность":
+                                        headers.append(["Должность", value])
+                                    elif key == "На дату":
+                                        headers.append(["Дни отпуска на дату - ", value])
+                                    elif key == "Фактически заработанные дни":
+                                        headers.append([
+                                            "Количество дней неиспользованного отпуска на выбранную дату",
+                                            value
+                                        ])
+                                    else:
+                                        headers.append([key, value])
+                                except Exception as error:
+                                    pass
+                            else:
+                                for key_, value_ in json_data["global_objects"].items():
+                                    tab = []
+                                    for key__, value__ in json_data["global_objects"][key_].items():
+                                        try:
+                                            if key__ == "По графику ":
+                                                tab.append(["По графику: ", value__])
+                                            elif key__ == "Период":
+                                                tab.append(["Дата начала", value__[0:11]])
+                                            elif key__ == "ДатаОкончания":
+                                                tab.append(["Дата окончания", value__[0:11]])
+                                            elif key__ == "ДнейОтпуска":
+                                                tab.append(["Запланированные дни отпуска", value__])
+                                            elif key__ == "Рабочий год":
+                                                tab.append(["Год", value__])
+                                            else:
+                                                tab.append([key__, value__])
+                                        except Exception as error:
+                                            pass
+                                    tables.append(tab)
+                        except Exception as error:
+                            pass
+                    print("headers: ", headers)
+                    print("tables: ", tables)
+
+                    json_data = {
+                        "headers": headers,
+                        "tables": tables,
+                    }
+
                     response = {"response": json_data}
+
+                    print("response: ", response)
+
                     # TODO response ###################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)

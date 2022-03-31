@@ -735,7 +735,9 @@ export const NewsComponent = ({ count = 100 }) => {
             >
               <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
                 <strong className="lead m-0 p-0 mb-1">Лента</strong>
-                <strong className="text-warning m-0 p-0">Свежие сверху</strong>
+                <strong className="custom-color-warning-1 m-0 p-0">
+                  Свежие сверху
+                </strong>
               </div>
               {count !== 100 && (
                 <div className="small m-0 p-0 mb-1">
@@ -832,9 +834,9 @@ export const SalaryTableComponent = ({ tab = {} }) => {
   }
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <li className="m-0 p-1 my-1">
+    <li className="col-12 col-md-6 col-lg-6 m-0 p-1 my-1">
       <h6 className="lead fw-bold bold m-0 p-0">{header}</h6>
-      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
+      <table className="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
         <thead className="m-0 p-0 mb-1">
           <tr className="m-0 p-0">
             {thead_array.map((thead, index_h) => (

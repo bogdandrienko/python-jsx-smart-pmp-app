@@ -177,7 +177,7 @@ export const RecoverPasswordPage = () => {
                         />
                         <small className="text-danger m-0 p-0">
                           * обязательно
-                          <small className="text-warning m-0 p-0">
+                          <small className="custom-color-warning-1 m-0 p-0">
                             {" "}
                             * только цифры
                           </small>
@@ -219,7 +219,7 @@ export const RecoverPasswordPage = () => {
                           <label className="form-control-sm text-center m-0 p-1">
                             <div className="text-danger">
                               Секретный вопрос: '
-                              <small className="text-warning fw-bold">{`${secretQuestion}`}</small>
+                              <small className="custom-color-warning-1 fw-bold">{`${secretQuestion}`}</small>
                               '
                             </div>
                             <input
@@ -247,7 +247,7 @@ export const RecoverPasswordPage = () => {
                             />
                             <small className="text-danger m-0 p-0">
                               * обязательно
-                              <small className="text-warning m-0 p-0">
+                              <small className="custom-color-warning-1 m-0 p-0">
                                 {" "}
                                 * только кириллица, цифры и пробел
                               </small>
@@ -285,7 +285,7 @@ export const RecoverPasswordPage = () => {
                       </div>
                       <div className="card-header bg-secondary bg-opacity-10 text-muted m-0 p-1">
                         Часть почты, куда будет отправлено письмо: '
-                        <small className="text-warning">
+                        <small className="custom-color-warning-1">
                           {email &&
                             `${email.slice(0, 4)} ... ${email.slice(-5)}`}
                         </small>
@@ -311,7 +311,7 @@ export const RecoverPasswordPage = () => {
                             />
                             <small className="text-danger m-0 p-0">
                               * обязательно
-                              <small className="text-warning m-0 p-0">
+                              <small className="custom-color-warning-1 m-0 p-0">
                                 {" "}
                                 * вводить без кавычек
                               </small>
@@ -384,7 +384,7 @@ export const RecoverPasswordPage = () => {
                         />
                         <small className="text-danger m-0 p-0">
                           * обязательно
-                          <small className="text-warning m-0 p-0">
+                          <small className="custom-color-warning-1 m-0 p-0">
                             {" "}
                             * только латиница, цифры и нижний пробел
                           </small>
@@ -421,7 +421,7 @@ export const RecoverPasswordPage = () => {
                         />
                         <small className="text-danger m-0 p-0">
                           * обязательно
-                          <small className="text-warning m-0 p-0">
+                          <small className="custom-color-warning-1 m-0 p-0">
                             {" "}
                             * только латиница, цифры и нижний пробел
                           </small>

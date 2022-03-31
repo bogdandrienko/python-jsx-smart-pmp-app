@@ -1,350 +1,50 @@
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, Expecting value: line 1 column 1 (char 0), 2022-03-30 16:14:39.033117
+None, 65.49.20.68, /, GET, , User matching query does not exist., 2022-03-31 13:36:08.976959
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:15:10.166218
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 15:44:56.847776
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:15:46.667566
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 15:44:56.862669
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:16:14.898564
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_sAnH7tgNWWof6ugU2xMYdUn7_2022-03-31.xlsx', 2022-03-31 15:44:56.890335
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:16:42.872235
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 15:50:20.094766
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:16:56.159726
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 15:50:20.134626
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:16:57.729342
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_DX1s9RrXdMgrHoJv7B3z7aOn_2022-03-31.xlsx', 2022-03-31 15:50:20.160558
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:17:17.382303
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 15:59:59.738523
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:17:26.535830
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 15:59:59.756310
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:17:39.375746
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_BPHr14wJrxzAp0F0RJEQtAGc_2022-03-31.xlsx', 2022-03-31 15:59:59.806536
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:17:43.128650
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 16:14:24.542019
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:19:13.266979
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 16:14:24.566879
 
-970801351179, 127.0.0.1, /api/auth/vacation/, POST, USER_VACATION, chr() arg not in range(0x110000), 2022-03-30 16:26:02.732127
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_dts1V74GCos3WsYZPpX7SSVK_2022-03-31.xlsx', 2022-03-31 16:14:24.593306
 
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 19:36:37.073403
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 16:16:47.943330
 
-None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-03-30 19:36:48.853035
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 16:16:47.957537
 
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 19:36:49.016828
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_GV0plo3HxByA26MvXYzIBvL2_2022-03-31.xlsx', 2022-03-31 16:16:47.985975
 
-error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-30 19:36:58.066286
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 16:17:43.595508
 
-None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-03-30 20:10:03.658348
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 16:17:43.611307
 
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 20:10:03.798374
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_0t0tC0ai8c4DLlAWB1AyfPYs_2022-03-31.xlsx', 2022-03-31 16:17:43.639570
 
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:41:32.738092
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 16:19:28.901309
 
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 20:41:52.988292
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 16:19:28.919975
 
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:41:53.667971
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_XIN4pjAfz9N89YWZkIM5BS30_2022-03-31.xlsx', 2022-03-31 16:19:28.967240
 
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_ndaIMthMYtksCG1b4B8V4NV9_2022-03-30.xlsx', 2022-03-30 20:41:53.777930
+000000000000, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-31 16:45:37.271121
 
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:42:58.458062
+000000000000, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-31 16:45:37.298579
 
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:44:39.065981
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 20:45:11.042055
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:45:11.058543
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_OjX8SsBHuqSEFIvhz6AE8qlZ_2022-03-30.xlsx', 2022-03-30 20:45:11.084783
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:50:49.856296
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 20:51:04.710531
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:51:04.726961
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_niruM2agfwqIIn0MbFOOUSgl_2022-03-30.xlsx', 2022-03-30 20:51:04.755727
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 20:51:09.316642
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:51:09.332596
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_zUeiSSZcyjK2cjiZ1zhD7yuG_2022-03-30.xlsx', 2022-03-30 20:51:09.360949
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:52:54.062020
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 20:53:06.484137
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:53:06.524593
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_lc6nQQEkS2FBF7C0nLTjQr9s_2022-03-30.xlsx', 2022-03-30 20:53:06.552694
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:27.560909
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:27.575712
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:30.061952
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:30.077909
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:31.050314
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:31.113174
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:32.317788
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:32.334743
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:33.797243
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:33.813200
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:34.613147
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:34.629104
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:36.087651
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:36.103608
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:36.844630
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:36.860588
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:38.375481
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:38.390464
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:39.055665
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:39.070625
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:40.710271
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:40.725231
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:41.205925
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:41.222880
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 20:54:43.070816
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:43.087771
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:43.465013
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 20:54:45.483997
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 20:54:57.654430
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:54:57.670641
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_2pLFbopruBsh3UiHcSlWPGcE_2022-03-30.xlsx', 2022-03-30 20:54:57.703201
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 20:55:04.644435
-
-970801351179, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 20:55:04.661497
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_DdMsb22sYOcWrkVjJ9MIutKM_2022-03-30.xlsx', 2022-03-30 20:55:04.686984
-
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:48:48.430248
-
-error_local, DefaultSettingsClass.SchedulerClass.scheduler_default_superusers, User matching query does not exist., 2022-03-30 21:48:53.511443
-
-None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-03-30 21:49:01.974565
-
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:49:02.122565
-
-error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-03-30 21:49:14.047851
-
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:49:50.763106
-
-None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-03-30 21:50:00.053078
-
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 21:50:00.165566
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 22:06:14.757116
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 22:06:23.033200
-
-None, 2.57.98.31, /admin/login/, GET, , User matching query does not exist., 2022-03-30 22:06:38.794927
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 22:06:39.354257
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 22:06:42.847397
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 22:06:42.863190
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_Hz0pawv2PCBa81lvLso2KxdB_2022-03-30.xlsx', 2022-03-30 22:06:42.890240
-
-None, 167.94.145.60, /, GET, , User matching query does not exist., 2022-03-30 22:20:28.625274
-
-None, 167.94.145.60, /, GET, , User matching query does not exist., 2022-03-30 22:20:28.895552
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:24:40.509485
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:27:04.724106
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:27:05.676057
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:27:56.686077
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:30:36.296415
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:30:43.162897
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:43:10.943089
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:45:35.012000
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:45:35.611582
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:48:14.980835
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:50:38.701885
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:50:39.825233
-
-None, 5.227.123.18, /, GET, , User matching query does not exist., 2022-03-30 22:53:46.738818
-
-error_local, DefaultSettingsClass.SchedulerClass.scheduler_default_superusers, User matching query does not exist., 2022-03-30 22:54:57.393714
-
-error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, UNIQUE constraint failed: auth_user.username, 2022-03-30 22:55:12.137863
-
-None, 2.57.98.31, /admin/login/, GET, , User matching query does not exist., 2022-03-30 22:55:30.755400
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 22:55:31.191472
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:03:31.307348
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 23:04:28.175128
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 23:04:28.222002
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_Xtaz1GautNIMuxlzjVZD10xI_2022-03-30.xlsx', 2022-03-30 23:04:28.249928
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:04:34.329856
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:04:34.346819
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:04:36.483284
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:04:36.584912
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:06.234930
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:06:07.974964
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:07.992262
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:06:10.252851
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:10.267811
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:06:12.464919
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:12.481873
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:06:14.800874
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:14.821818
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:06:16.977607
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:16.991570
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:06:19.207651
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:19.222612
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:06:21.367381
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:21.384318
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:06:22.263465
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 23:06:32.801318
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 23:06:32.818205
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_8UqVhRxq1fpVySMyjnHWEULk_2022-03-30.xlsx', 2022-03-30 23:06:32.846609
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:07:26.484693
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:26.500671
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:07:28.844621
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:28.881523
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:07:31.051723
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:31.065686
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:07:33.297207
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:33.313162
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:07:35.600983
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:35.617947
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:07:37.795629
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:37.809592
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:07:39.964058
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:39.981011
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:07:42.141724
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 23:07:56.962544
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 23:07:56.977769
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_cn2a6qsPccMeZ9Y7vMYV8dqC_2022-03-30.xlsx', 2022-03-30 23:07:57.005795
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:10:15.767542
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:10:15.783500
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:10:17.994423
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:10:18.010381
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:10:20.120204
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:10:20.148158
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:10:22.390099
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:10:22.407053
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:10:24.529494
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:10:24.546460
-
-None, 2.57.98.31, /, GET, , index.html, 2022-03-30 23:10:26.705679
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:10:26.721659
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:10:28.859310
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 23:10:44.201232
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 23:10:44.217961
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_Gi4N9E2ZAxdgXv5Es9ZCecTY_2022-03-30.xlsx', 2022-03-30 23:10:44.248246
-
-None, 2.57.98.31, /, GET, , User matching query does not exist., 2022-03-30 23:12:42.764359
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-03-30 23:12:53.797333
-
-000000000000, 2.57.98.31, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-03-30 23:12:53.830493
-
-error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_8prYPF2bibKooQSYx0npGFUM_2022-03-30.xlsx', 2022-03-30 23:12:53.857389
-
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 23:14:56.483510
-
-None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-03-30 23:15:32.616494
-
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-03-30 23:15:32.852615
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_k1iSKBpHU7vyfuwSGWZBEXod_2022-03-31.xlsx', 2022-03-31 16:45:37.325629

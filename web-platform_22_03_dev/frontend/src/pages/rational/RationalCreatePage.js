@@ -191,7 +191,11 @@ export const RationalCreatePage = () => {
                     <label className="form-control-sm text-center m-0 p-1">
                       Зарегистрировано за №{" "}
                       <strong className="btn btn-light">XXX</strong> от
-                      <small className="text-warning"> текущей </small>даты
+                      <small className="custom-color-warning-1">
+                        {" "}
+                        текущей{" "}
+                      </small>
+                      даты
                       <p>
                         <small className="text-success">
                           * номер будет создан автоматически
@@ -279,7 +283,7 @@ export const RationalCreatePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>
@@ -317,7 +321,7 @@ export const RationalCreatePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>

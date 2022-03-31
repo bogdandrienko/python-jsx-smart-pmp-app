@@ -160,7 +160,7 @@ export const ResumeCreatePage = () => {
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
-                      <small className="text-warning m-0 p-0">
+                      <small className="custom-color-warning-1 m-0 p-0">
                         {" "}
                         * только кириллица, цифры и пробел
                       </small>
@@ -195,7 +195,7 @@ export const ResumeCreatePage = () => {
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
-                      <small className="text-warning m-0 p-0">
+                      <small className="custom-color-warning-1 m-0 p-0">
                         {" "}
                         * только кириллица
                       </small>
@@ -209,8 +209,6 @@ export const ResumeCreatePage = () => {
                     Имя:
                     <input
                       type="text"
-                      id="name_char_field"
-                      name="name_char_field"
                       required
                       placeholder="вводите имя тут..."
                       value={firstName}
@@ -230,7 +228,7 @@ export const ResumeCreatePage = () => {
                     />
                     <small className="text-danger m-0 p-0">
                       * обязательно
-                      <small className="text-warning m-0 p-0">
+                      <small className="custom-color-warning-1 m-0 p-0">
                         {" "}
                         * только кириллица
                       </small>
@@ -263,7 +261,7 @@ export const ResumeCreatePage = () => {
                     />
                     <small className="text-muted m-0 p-0">
                       * не обязательно
-                      <small className="text-warning m-0 p-0">
+                      <small className="custom-color-warning-1 m-0 p-0">
                         {" "}
                         * только кириллица
                       </small>

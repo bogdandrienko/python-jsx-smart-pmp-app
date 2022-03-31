@@ -128,8 +128,8 @@ export const SalaryPage = () => {
           failText={""}
         />
         {dataSalaryUser && (
-          <div className="bg-light custom-background-transparent-low text-center m-0 p-0">
-            <div className="text-center m-0 p-1">
+          <div className="bg-light bg-opacity-10 custom-background-transparent-low text-center m-0 p-0">
+            <div className="text-center custom-background-transparent-low m-0 p-1">
               <a
                 className="btn btn-sm btn-success text-center m-0 p-2"
                 href={`/${dataSalaryUser["excelPath"]}`}
@@ -137,10 +137,10 @@ export const SalaryPage = () => {
                 Скачать excel-документ
               </a>
             </div>
-            <div>
-              <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
+            <div className="bg-light bg-opacity-10 custom-background-transparent-low text-center m-0 p-0">
+              <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center custom-background-transparent-low m-0 p-0">
                 <li className="m-0 p-1 my-1">
-                  <h6 className="lead fw-bold bold">Основная информация</h6>
+                  <h6 className="lead fw-bold bold">Краткая информация</h6>
                   <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
                     <thead className="m-0 p-0">
                       <tr className="m-0 p-0">
@@ -153,8 +153,18 @@ export const SalaryPage = () => {
                         .slice(-2)
                         .map((head, index) => (
                           <tr key={index} className="m-0 p-0">
-                            <td className="text-start m-0 p-1">{head[0]}</td>
-                            <td className="text-end table-active fw-bold m-0 p-1">
+                            <td className="text-start m-0 p-1">
+                              {index === 1
+                                ? "Выплата за текущий месяц"
+                                : "Выплата за предыдущий месяц"}
+                            </td>
+                            <td
+                              className={
+                                index === 1
+                                  ? "text-end table-active fw-bold text-success m-0 p-1"
+                                  : "text-end m-0 p-1"
+                              }
+                            >
                               {head[1]}
                             </td>
                           </tr>
@@ -166,67 +176,84 @@ export const SalaryPage = () => {
               <components.AccordionComponent
                 key_target={"accordion1"}
                 isCollapse={true}
-                title={"Вспомогательная информация:"}
-                text_style="text-warning"
-                header_style="bg-warning bg-opacity-10 custom-background-transparent-low"
+                title={"Подробная информация : "}
+                text_style="text-primary"
+                header_style="bg-primary bg-opacity-10 custom-background-transparent-low"
                 body_style="bg-light bg-opacity-10 custom-background-transparent-low"
               >
                 {
-                  <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
-                    <li className="m-0 p-1 my-1">
-                      <h6 className="lead fw-bold bold m-0 p-0 mb-1">
-                        Вспомогательная информация
-                      </h6>
-                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
-                        <thead className="m-0 p-0">
-                          <tr className="m-0 p-0">
-                            <th className="text-center w-50 m-0 p-1">Тип</th>
-                            <th className="text-center m-0 p-1">Значение</th>
-                          </tr>
-                        </thead>
-                        <tbody className="m-0 p-0">
-                          {dataSalaryUser["headers"]
-                            .slice(0, 8)
-                            .map((head, index) => (
-                              <tr key={index} className="m-0 p-0">
-                                <td className="text-start m-0 p-1">
-                                  {head[0]}
-                                </td>
-                                <td className="text-end m-0 p-1">{head[1]}</td>
-                              </tr>
-                            ))}
-                        </tbody>
-                      </table>
-                    </li>
-                    <li className="m-0 p-1 my-1">
-                      <h6 className="lead fw-bold bold m-0 p-0 mb-1">
-                        Вспомогательная информация
-                      </h6>
-                      <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
-                        <thead className="m-0 p-0">
-                          <tr className="m-0 p-0">
-                            <th className="text-center w-50 m-0 p-1">Тип</th>
-                            <th className="text-center m-0 p-1">Значение</th>
-                          </tr>
-                        </thead>
-                        <tbody className="m-0 p-0">
-                          {dataSalaryUser["headers"]
-                            .slice(8, -2)
-                            .map((head, index) => (
-                              <tr key={index}>
-                                <td className="text-start m-0 p-1">
-                                  {head[0]}
-                                </td>
-                                <td className="text-end m-0 p-1">{head[1]}</td>
-                              </tr>
-                            ))}
-                        </tbody>
-                      </table>
-                    </li>
-                    {dataSalaryUser["tables"].map((tab, index) => (
-                      <components.SalaryTableComponent key={index} tab={tab} />
-                    ))}
-                  </ul>
+                  <div>
+                    <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
+                      <li className="m-0 p-1 my-1">
+                        <h6 className="lead fw-bold bold m-0 p-0 mb-1">
+                          Вспомогательная информация
+                        </h6>
+                        <table className="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
+                          <thead className="m-0 p-0">
+                            <tr className="m-0 p-0">
+                              <th className="text-center w-50 m-0 p-1">Тип</th>
+                              <th className="text-center m-0 p-1">Значение</th>
+                            </tr>
+                          </thead>
+                          <tbody className="m-0 p-0">
+                            {dataSalaryUser["headers"]
+                              .slice(5, -2)
+                              .map((head, index) => (
+                                <tr key={index} className="m-0 p-0">
+                                  <td className="text-start m-0 p-1">
+                                    {head[0]}
+                                  </td>
+                                  <td className="text-end m-0 p-1">
+                                    {head[1]}
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      </li>
+                    </ul>
+                    <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center bg-light bg-opacity-50 custom-background-transparent-low m-0 p-0">
+                      {dataSalaryUser["tables"].map((tab, index) => (
+                        <components.SalaryTableComponent
+                          key={index}
+                          tab={tab}
+                        />
+                      ))}
+                      <li className="col-12 col-md-6 col-lg-6 m-0 p-1 my-1">
+                        <h6 className="lead fw-bold bold">
+                          Основная информация
+                        </h6>
+                        <table className="table table-sm table-condensed table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
+                          <thead className="m-0 p-0">
+                            <tr className="m-0 p-0">
+                              <th className="text-center w-50 m-0 p-1">Тип</th>
+                              <th className="text-center m-0 p-1">Значение</th>
+                            </tr>
+                          </thead>
+                          <tbody className="m-0 p-0">
+                            {dataSalaryUser["headers"]
+                              .slice(-2)
+                              .map((head, index) => (
+                                <tr key={index} className="m-0 p-0">
+                                  <td className="text-start m-0 p-1">
+                                    {head[0]}
+                                  </td>
+                                  <td
+                                    className={
+                                      index === 1
+                                        ? "text-end table-active fw-bold text-success m-0 p-1"
+                                        : "text-end m-0 p-1"
+                                    }
+                                  >
+                                    {head[1]}
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      </li>
+                    </ul>
+                  </div>
                 }
               </components.AccordionComponent>
             </div>

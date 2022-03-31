@@ -186,7 +186,7 @@ export const TextStudyPage = () => {
           key_target={"accordion2"}
           isCollapse={true}
           title={"Выгрузка расчётного листа:"}
-          text_style="text-warning"
+          text_style="custom-color-warning-1"
           header_style="bg-warning bg-opacity-10 custom-background-transparent-low"
           body_style="bg-light bg-opacity-10 custom-background-transparent-low"
         >

@@ -401,7 +401,7 @@ export const IdeaChangePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>
@@ -439,7 +439,7 @@ export const IdeaChangePage = () => {
                       />
                       <small className="text-danger m-0 p-0">
                         * обязательно
-                        <small className="text-warning m-0 p-0">
+                        <small className="custom-color-warning-1 m-0 p-0">
                           {" "}
                           * только кириллица, цифры, пробел и знаки препинания
                         </small>
@@ -492,7 +492,7 @@ export const IdeaChangePage = () => {
                           dataIdeaDetail["ratings"]["rate"] > 7
                             ? "text-success"
                             : dataIdeaDetail["ratings"]["rate"] > 4
-                            ? "text-warning"
+                            ? "custom-color-warning-1"
                             : "text-danger"
                         }
                       >
