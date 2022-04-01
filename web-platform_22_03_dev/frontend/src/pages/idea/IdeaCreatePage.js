@@ -39,7 +39,7 @@ export const IdeaCreatePage = () => {
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataIdeaCreate) {
-      utils.Sleep(3000).then(() => {
+      utils.Sleep(2000).then(() => {
         resetState();
         handlerCreateReset();
       });
@@ -219,7 +219,6 @@ export const IdeaCreatePage = () => {
                   </div>
                   <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
-                      <i className="fa-solid fa-file m-0 p-1" />
                       Аватарка-заставка:
                       <input
                         type="file"

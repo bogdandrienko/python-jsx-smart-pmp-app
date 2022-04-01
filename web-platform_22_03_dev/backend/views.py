@@ -1133,7 +1133,6 @@ def api_auth_salary(request):
                         try:
                             json_data["global_objects"]["3.Доходы в натуральной форме"]
                         except Exception as error:
-                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                             json_data["global_objects"]["3.Доходы в натуральной форме"] = {
                                 "Fields": {
                                     "1": "Вид",
@@ -1218,7 +1217,7 @@ def api_auth_salary(request):
                                     if date != date_file:
                                         os.remove(f'{path}/{file}')
                                 except Exception as error:
-                                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                    pass
 
                         # Create 'TitleComponent'
                         backend_service.ExcelClass.set_sheet_value(

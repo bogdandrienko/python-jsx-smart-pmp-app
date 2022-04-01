@@ -140,7 +140,7 @@ export const SalaryPage = () => {
             </div>
             <div className="bg-light bg-opacity-10 custom-background-transparent-low text-center m-0 p-0">
               <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center custom-background-transparent-low m-0 p-0">
-                <li className="m-0 p-1 my-1">
+                <li className="m-0 p-0 my-1">
                   <h6 className="lead fw-bold bold">
                     Краткая информация
                     <i className="fa-solid fa-credit-card m-0 p-1" />
@@ -187,7 +187,7 @@ export const SalaryPage = () => {
               >
                 {
                   <div>
-                    <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-0">
+                    <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-3">
                       <li className="m-0 p-1 my-1">
                         <h6 className="lead fw-bold bold m-0 p-0 mb-1">
                           Вспомогательная информация
@@ -223,7 +223,7 @@ export const SalaryPage = () => {
                           tab={tab}
                         />
                       ))}
-                      <li className="col-12 col-md-6 col-lg-6 m-0 p-1 my-1">
+                      <li className="col-12 col-md-6 col-lg-6 m-0 p-3 my-1">
                         <h6 className="lead fw-bold bold">
                           Основная информация
                         </h6>

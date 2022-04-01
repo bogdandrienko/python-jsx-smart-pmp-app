@@ -30,7 +30,7 @@ export const AdminChangeUserPasswordPage = () => {
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataAdminChangeUserPassword) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         dispatch({ type: constants.ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT });
         if (dataAdminChangeUserPassword["success"]) {
           successSet(dataAdminChangeUserPassword["success"]);
@@ -205,7 +205,7 @@ export const AdminChangeUserPasswordPage = () => {
                           <i
                             className="fa-solid fa-eye btn btn-outline-secondary m-0 p-3"
                             onClick={(e) =>
-                              utils.ChangePasswordVisibility(["password2"])
+                              utils.ChangePasswordVisibility(["password"])
                             }
                           />
                         </span>
@@ -223,30 +223,41 @@ export const AdminChangeUserPasswordPage = () => {
                       </small>
                     </label>
                     <label className="form-control-sm text-center m-0 p-1">
+                      <i className="fa-solid fa-key m-0 p-1" />
                       Повторите новый пароль:
-                      <input
-                        type="password"
-                        className="form-control form-control-sm text-center m-0 p-1"
-                        id="password2"
-                        value={password2}
-                        placeholder="введите новый пароль тут..."
-                        required
-                        onChange={(e) =>
-                          password2Set(
-                            e.target.value.replace(
-                              utils.GetRegexType({
-                                numbers: true,
-                                latin: true,
-                                lowerSpace: true,
-                              }),
-                              ""
+                      <div className="input-group form-control-sm m-0 p-1">
+                        <input
+                          type="password"
+                          className="form-control form-control-sm text-center m-0 p-1"
+                          id="password2"
+                          value={password2}
+                          placeholder="введите новый пароль тут..."
+                          required
+                          onChange={(e) =>
+                            password2Set(
+                              e.target.value.replace(
+                                utils.GetRegexType({
+                                  numbers: true,
+                                  latin: true,
+                                  lowerSpace: true,
+                                }),
+                                ""
+                              )
                             )
-                          )
-                        }
-                        minLength="8"
-                        maxLength="16"
-                        autoComplete="off"
-                      />
+                          }
+                          minLength="8"
+                          maxLength="16"
+                          autoComplete="off"
+                        />
+                        <span className="">
+                          <i
+                            className="fa-solid fa-eye btn btn-outline-secondary m-0 p-3"
+                            onClick={(e) =>
+                              utils.ChangePasswordVisibility(["password2"])
+                            }
+                          />
+                        </span>
+                      </div>
                       <small className="text-danger m-0 p-0">
                         * обязательно
                         <small className="custom-color-warning-1 m-0 p-0">

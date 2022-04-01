@@ -52,7 +52,7 @@ export const ResumeDetailPage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataResumeDelete) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         dispatch({ type: constants.RESUME_LIST_RESET_CONSTANT });
         dispatch({ type: constants.RESUME_DELETE_RESET_CONSTANT });
         navigate("/resume_list");

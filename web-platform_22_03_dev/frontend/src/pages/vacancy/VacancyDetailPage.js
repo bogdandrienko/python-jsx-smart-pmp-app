@@ -53,7 +53,7 @@ export const VacancyDetailPage = () => {
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataVacancyDelete) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         dispatch({ type: constants.VACANCY_LIST_RESET_CONSTANT });
         dispatch({ type: constants.VACANCY_DELETE_RESET_CONSTANT });
         navigate("/vacancy_list");

@@ -369,7 +369,6 @@ export const GetCurrentDate = (withTime = true, yearAppend = 0) => {
     if (withTime) {
       return `${year}-${month}-${day}T${time}`;
     } else {
-      console.log("GetCurrentDate", `${year}-${month}-${day}`);
       return `${year}-${month}-${day}`;
     }
   } catch (error) {

@@ -1,0 +1,34 @@
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-01 09:06:42.939093
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-01 09:06:48.883277
+
+000000000000, 127.0.0.1, /api/auth/admin/, POST, EXPORT_USERS, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-01 09:21:02.820683
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/users/users_bvMPo6dBCDEBMXP4GXzwlu8R_2022-04-01.xlsx', 2022-04-01 09:21:06.851662
+
+000000000000, 127.0.0.1, /api/auth/admin/, POST, EXPORT_USERS, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-01 09:22:22.872018
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/users/users_Vg5AJJsQ9PgkdeugxQEWrGIJ_2022-04-01.xlsx', 2022-04-01 09:22:27.176265
+
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-04-01 11:50:48.020730
+
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-04-01 11:50:48.038418
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_AYPvXY0b4rUMxBYUPI46tPsP_2022-04-01.xlsx', 2022-04-01 11:50:48.064534
+
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-04-01 15:22:02.276928
+
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-04-01 15:22:02.293048
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_OXNtLJNDlLrWKdUY1gkDHubh_2022-04-01.xlsx', 2022-04-01 15:22:02.326919
+
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, '3.Доходы в натуральной форме', 2022-04-01 15:26:07.767998
+
+970801351179, 127.0.0.1, /api/auth/salary/, POST, USER_SALARY, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/salary/__init__', 2022-04-01 15:26:07.784264
+
+error_local, ExcelClass.workbook_save, [WinError 2] Не удается найти указанный файл: 'static/media/data/temp/salary/salary_QCPISdwepVCzT5lML11zzzQ0_2022-04-01.xlsx', 2022-04-01 15:26:07.814537
+
+None, 162.142.125.7, /, GET, , User matching query does not exist., 2022-04-01 16:26:35.999637
+
+None, 162.142.125.7, /, GET, , User matching query does not exist., 2022-04-01 16:26:36.555168

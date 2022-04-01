@@ -118,13 +118,13 @@ main{
 }
 
 .custom-color-primary-1 {
-  color: #2f19ff;
+  color: #2f19ff !important;
 }
 
 .custom-color-warning-1 {
-  color: #d3b315;
+  color: #c27d00 !important;
 }
 
 .custom-color-warning-2 {
-  color: #d3a015;
+  color: #be7b00 !important;
 }

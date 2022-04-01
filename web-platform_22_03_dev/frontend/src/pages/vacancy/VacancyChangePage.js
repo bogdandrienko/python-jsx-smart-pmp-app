@@ -50,7 +50,7 @@ export const VacancyChangePage = () => {
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataVacancyChange) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         dispatch({ type: constants.VACANCY_CHANGE_RESET_CONSTANT });
         dispatch({ type: constants.VACANCY_LIST_RESET_CONSTANT });
         navigate("/vacancy_list");

@@ -81,15 +81,19 @@ export const HeaderComponent = () => {
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
-        dispatch(actions.userLogoutAction());
-        navigate("/login");
+        utils.Sleep(10).then(() => {
+          dispatch(actions.userLogoutAction());
+          navigate("/login");
+        });
       } else {
         if (dataUserDetails && dataUserDetails["user_model"]) {
           if (
             dataUserDetails["user_model"]["activity_boolean_field"] === false
           ) {
-            dispatch(actions.userLogoutAction());
-            navigate("/login");
+            utils.Sleep(10).then(() => {
+              dispatch(actions.userLogoutAction());
+              navigate("/login");
+            });
           }
           if (
             !dataUserDetails["user_model"]["secret_question_char_field"] ||
@@ -132,6 +136,7 @@ export const HeaderComponent = () => {
             <img src="/static/img/logo.png" className="w-25 m-0 p-0" alt="id" />
           </a>
           <a className="btn btn-outline-light navbar-brand m-0 p-2" href="/">
+            <i className="fa-solid fa-earth-asia m-0 p-1" />
             Домашняя
           </a>
           {dataNotificationList && dataNotificationList.length > 0 && (
@@ -209,7 +214,12 @@ export const HeaderComponent = () => {
                                         }
                                       >
                                         <Nav.Link
-                                          className={`${link.Style} m-0 p-1`}
+                                          className={
+                                            link.Style ===
+                                            "custom-color-warning-1"
+                                              ? `custom-color-warning-2 m-0 p-1`
+                                              : `${link.Style} m-0 p-1`
+                                          }
                                         >
                                           <i className={link.LinkIcon} />
                                           {link.Header}{" "}
@@ -854,8 +864,8 @@ export const SalaryTableComponent = ({ tab = {} }) => {
   }
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <li className="col-12 col-md-6 col-lg-6 m-0 p-1 my-1">
-      <h6 className="lead fw-bold bold m-0 p-0">{header}</h6>
+    <li className="col-12 col-md-6 col-lg-6 m-0 p-3 my-1">
+      <h6 className="lead fw-bold bold m-0 p-0">{header.slice(2)}</h6>
       <table className="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
         <thead className="m-0 p-0 mb-1">
           <tr className="m-0 p-0">
@@ -863,8 +873,8 @@ export const SalaryTableComponent = ({ tab = {} }) => {
               <th
                 key={index_h}
                 className={
-                  index_h === 0
-                    ? "text-center w-50 m-0 p-p-1"
+                  index_h === 4
+                    ? "text-center w-25 m-0 p-p-1"
                     : "text-center m-0 p-p-1"
                 }
               >

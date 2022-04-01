@@ -103,9 +103,11 @@ export const VacationPage = () => {
                         <td className="text-start m-0 p-1">{head[0]}</td>
                         <td
                           className={
-                            index === 4
+                            index !== 4
+                              ? "text-end m-0 p-1"
+                              : head[1] >= 0
                               ? "text-end text-success fw-bold m-0 p-1"
-                              : "text-end m-0 p-1"
+                              : "text-end text-danger fw-bold m-0 p-1"
                           }
                         >
                           {head[1]}

@@ -1,5 +1,5 @@
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = false;
+export const DEBUG_CONSTANT = true;
 // TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -858,7 +858,14 @@ export const modules = [
           },
           {
             Header: "Подать новое рационализаторское предложение",
-            Access: ["user"],
+            Access: [
+              "moderator_rational",
+              "moderator_rational_atp",
+              "moderator_rational_gtk",
+              "moderator_rational_ok",
+              "moderator_rational_upravlenie",
+              "moderator_rational_energoupravlenie",
+            ],
             Active: true,
             Link: "/rational_create",
             ExternalLink: false,
@@ -1085,7 +1092,7 @@ export const modules = [
             Title: "Отпуск",
             Description: "страница с данными по отпуску за выбранный период",
             Logic: true,
-            Redirect: false,
+            Redirect: true,
             Style: "text-dark",
             LinkIcon: "fa-solid fa-rectangle-list m-0 p-1",
           },

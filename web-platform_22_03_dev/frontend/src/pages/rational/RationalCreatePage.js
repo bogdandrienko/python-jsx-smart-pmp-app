@@ -369,7 +369,6 @@ export const RationalCreatePage = () => {
                   </div>
                   <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
-                      <i className="fa-solid fa-file m-0 p-1" />
                       Word файл-приложение:
                       <input
                         type="file"
@@ -380,7 +379,6 @@ export const RationalCreatePage = () => {
                       <small className="text-muted">* не обязательно</small>
                     </label>
                     <label className="form-control-sm text-center m-0 p-1">
-                      <i className="fa-solid fa-file m-0 p-1" />
                       Pdf файл-приложение:
                       <input
                         type="file"
@@ -391,7 +389,6 @@ export const RationalCreatePage = () => {
                       <small className="text-muted">* не обязательно</small>
                     </label>
                     <label className="form-control-sm text-center m-0 p-1">
-                      <i className="fa-solid fa-file m-0 p-1" />
                       Excel файл-приложение:
                       <input
                         type="file"

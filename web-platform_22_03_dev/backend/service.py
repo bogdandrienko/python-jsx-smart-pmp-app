@@ -255,25 +255,21 @@ class DjangoClass:
                 try:
                     request_method = str(request.method).upper()
                 except Exception as error:
-                    DjangoClass.LoggingClass.error(request=request, error=error)
                     request_method = None
 
                 try:
                     request_action_type = str(request.data["Action-type"]).upper()
                 except Exception as error:
-                    DjangoClass.LoggingClass.error(request=request, error=error)
                     request_action_type = None
 
                 try:
                     request_user = User.objects.get(username=str(request.user.username))
                 except Exception as error:
-                    DjangoClass.LoggingClass.error(request=request, error=error)
                     request_user = None
 
                 try:
                     request_body = request.data["body"]
                 except Exception as error:
-                    DjangoClass.LoggingClass.error(request=request, error=error)
                     request_body = None
 
                 return [request_method, request_action_type, request_user, request_body]
@@ -663,21 +659,18 @@ class DjangoClass:
                 if superusers is None:
                     superusers = [["000000000000", "31284bogdan"], ]
                 for superuser in superusers:
-                    username_ = superuser[0]
-                    password_ = superuser[1]
                     try:
-                        User.objects.get(username=username_)
-                    except Exception as error__:
-                        DjangoClass.LoggingClass.error_local(
-                            error=error__,
-                            function_error="DefaultSettingsClass.SchedulerClass.scheduler_default_superusers"
-                        )
-                        user = User.objects.create(username=username_)
+                        username_ = superuser[0]
+                        password_ = superuser[1]
+                        try:
+                            user = User.objects.get(username=username_)
+                        except Exception as error__:
+                            user = User.objects.create(username=username_)
                         user.set_password(password_)
                         user.is_staff = True
                         user.is_superuser = True
-                        user.last_name = "Андриенко"
-                        user.first_name = "Богдан"
+                        user.last_name = "Andrienko"
+                        user.first_name = "Bogdan"
                         user.save()
                         user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
                         user_model.password_char_field = password_
@@ -686,6 +679,11 @@ class DjangoClass:
                         user_model.patronymic_char_field = ""
                         user_model.position_char_field = "Administrator"
                         user_model.save()
+                    except Exception as error__:
+                        DjangoClass.LoggingClass.error_local(
+                            error=error__,
+                            function_error="DefaultSettingsClass.SchedulerClass.scheduler_default_superusers"
+                        )
 
             @staticmethod
             def scheduler_default_groups(groups=None):

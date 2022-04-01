@@ -34,7 +34,7 @@ export const AdminCreateOrChangeUsersPage = () => {
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataRationalCreate) {
-      utils.Sleep(2000).then(() => {
+      utils.Sleep(10).then(() => {
         dispatch({
           type: constants.ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT,
         });
