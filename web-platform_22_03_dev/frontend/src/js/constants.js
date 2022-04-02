@@ -1,5 +1,5 @@
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 // TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -334,7 +334,7 @@ export const modules = [
   {
     Header: "Разработка",
     Access: ["superuser"],
-    Image: "/static/img/modules.png",
+    Image: "/static/img/earth.png",
     ShowInModules: false,
     Sections: [
       {
@@ -473,13 +473,13 @@ export const modules = [
   {
     Header: "Модератор",
     Access: ["moderator"],
-    Image: "/static/img/modules.png",
+    Image: "/static/img/earth.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "Основной функционал",
         Access: ["moderator"],
-        Image: "/static/img/modules.png",
+        Image: "/static/img/earth.png",
         Links: [
           {
             Header: "Панель Администрирования",
@@ -542,7 +542,7 @@ export const modules = [
       {
         Header: "Аккаунты",
         Access: ["moderator"],
-        Image: "/static/img/modules.png",
+        Image: "/static/img/earth.png",
         Links: [
           {
             Header: "Смена пароля пользователя",
@@ -607,7 +607,7 @@ export const modules = [
       {
         Header: "Терминалы скуд",
         Access: ["moderator"],
-        Image: "/static/img/modules.png",
+        Image: "/static/img/earth.png",
         Links: [
           {
             Header: "Перезагрузка",
@@ -752,7 +752,7 @@ export const modules = [
   {
     Header: "Общее",
     Access: ["all"],
-    Image: "/static/img/modules.png",
+    Image: "/static/img/earth.png",
     ShowInModules: true,
     Sections: [
       {

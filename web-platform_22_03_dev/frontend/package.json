@@ -1,7 +1,8 @@
 {
-  "name": "shop",
+  "name": "web-platform",
   "proxy": "http://127.0.0.1:8000",
   "version": "0.1.0",
+  "description": "web-platform with Django and React",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -23,6 +24,12 @@
     "redux-thunk": "^2.4.1",
     "web-vitals": "^2.1.4"
   },
+  "babel": {
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -38,15 +45,18 @@
   },
   "browserslist": {
     "production": [
-      "last 3 version",
-      ">0.1%",
-      "not dead",
-      "not op_mini all"
+      "cover 99.5%",
+      "last 10 version",
+      "last 5 years",
+      "> 0.1%",
+      "not dead"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "cover 99.5%",
+      "last 10 version",
+      "last 5 years",
+      "> 0.1%",
+      "not dead"
     ]
   }
 }
