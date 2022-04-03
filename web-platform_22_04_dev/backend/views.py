@@ -941,10 +941,13 @@ def api_auth_admin(request):
                         sheet.column_dimensions[col].width = round((width * 0.95), 3)
                     #######################################################
 
-                    backend_service.ExcelClass.workbook_save(
-                        workbook=workbook,
-                        excel_file=f"static/{path}/{file_name}"
-                    )
+                    try:
+                        backend_service.ExcelClass.workbook_save(
+                            workbook=workbook,
+                            excel_file=f"static/{path}/{file_name}"
+                        )
+                    except Exception as error:
+                        pass
                     response = {"response": {"excel": f"static/{path}/{file_name}"}}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
@@ -1632,10 +1635,13 @@ def api_auth_salary(request):
                         sheet.protection.sheet = True
                         sheet.protection.enable()
                         #######################################################
-                        backend_service.ExcelClass.workbook_save(
-                            workbook=workbook,
-                            excel_file=f"static/{path}/{file_name}"
-                        )
+                        try:
+                            backend_service.ExcelClass.workbook_save(
+                                workbook=workbook,
+                                excel_file=f"static/{path}/{file_name}"
+                            )
+                        except Exception as error:
+                            pass
                         json_data["excel_path"] = f"static/{path}/{file_name}"
 
                         response = {"response": json_data}
