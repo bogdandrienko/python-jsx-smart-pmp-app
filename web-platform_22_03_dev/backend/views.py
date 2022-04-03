@@ -1113,6 +1113,9 @@ def api_auth_salary(request):
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
 
+                    print("content: ", content)
+                    print("response: ", response)
+
                     data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:

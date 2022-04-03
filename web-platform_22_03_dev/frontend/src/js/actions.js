@@ -49,6 +49,7 @@ export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: constants.USER_CHANGE_RESET_CONSTANT });
   dispatch({ type: constants.USER_RECOVER_PASSWORD_RESET_CONSTANT });
   dispatch({ type: constants.USER_SALARY_RESET_CONSTANT });
+  dispatch({ type: constants.USER_VACATION_RESET_CONSTANT });
 };
 export const userDetailsAction = (form) => async (dispatch, getState) => {
   try {
