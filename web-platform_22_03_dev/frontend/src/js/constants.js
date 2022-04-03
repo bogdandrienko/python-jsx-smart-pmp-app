@@ -323,7 +323,7 @@ export const news = [
   {
     Title: "Расчётный лист:",
     Status: "active",
-    Link: "/salary",
+    Link: "/4_buhgalteria",
     Description: "выгрузка Вашего расчётного листа за выбранный период",
     Helps: "",
     Danger: "'контрактникам' выгрузка недоступна!",
