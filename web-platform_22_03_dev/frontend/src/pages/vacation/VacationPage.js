@@ -35,7 +35,7 @@ export const VacationPage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
@@ -122,7 +122,7 @@ export const VacationPage = () => {
               dataVacationUser["tables"].length > 0 && (
                 <components.AccordionComponent
                   key_target={"accordion1"}
-                  isCollapse={true}
+                  isCollapse={false}
                   title={"Запланированный отпуск :"}
                   text_style="text-primary"
                   header_style="bg-primary bg-opacity-10 custom-background-transparent-low-middle"

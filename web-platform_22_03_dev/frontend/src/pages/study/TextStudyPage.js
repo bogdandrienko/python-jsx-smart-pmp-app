@@ -7,7 +7,7 @@ import * as utils from "../../js/utils";
 export const TextStudyPage = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <components.AccordionComponent
@@ -193,7 +193,7 @@ export const TextStudyPage = () => {
           {
             <ol className="nav m-0 p-1">
               <li className="text-start m-0 p-1">
-                <div>
+                <div className="m-0 p-0">
                   <a
                     className="btn btn-sm btn-outline-primary m-0 p-1"
                     href="/static/study/salary.pdf"

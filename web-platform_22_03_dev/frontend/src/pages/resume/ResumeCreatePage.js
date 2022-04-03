@@ -92,7 +92,7 @@ export const ResumeCreatePage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -130,11 +130,11 @@ export const ResumeCreatePage = () => {
           <div className="container-fluid">
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
               <form autoComplete="on" className="" onSubmit={handlerSubmit}>
-                <div className="">
+                <div className="m-0 p-0">
                   <h6 className="lead">Отправить резюме</h6>
                 </div>
                 <br />
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="w-50 form-control-sm">
                     Вакансия:
                     <input
@@ -171,7 +171,7 @@ export const ResumeCreatePage = () => {
                     </small>
                   </label>
                 </div>
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="form-control-sm text-center m-0 p-1">
                     Фамилия:
                     <input
@@ -272,7 +272,7 @@ export const ResumeCreatePage = () => {
                     </small>
                   </label>
                 </div>
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="form-control-sm text-center m-0 p-1">
                     Изображение:
                     <input
@@ -294,7 +294,7 @@ export const ResumeCreatePage = () => {
                     <small className="text-danger">* обязательно</small>
                   </label>
                 </div>
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="form-control-sm text-center m-0 p-1">
                     Образование:
                     <select
@@ -349,7 +349,7 @@ export const ResumeCreatePage = () => {
                   </label>
                 </div>
                 <br />
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="w-75 form-control-sm">
                     Контактные данные:
                     <textarea

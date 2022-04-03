@@ -57,7 +57,7 @@ export const VacancyCreatePage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -82,10 +82,10 @@ export const VacancyCreatePage = () => {
           <div className="container-fluid">
             <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
               <form autoComplete="on" className="" onSubmit={handlerSubmit}>
-                <div className="">
+                <div className="m-0 p-0">
                   <h6 className="lead">Свободная вакансия</h6>
                 </div>
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="w-50 form-control-sm m-0 p-1">
                     Квалификация:
                     <input
@@ -159,7 +159,7 @@ export const VacancyCreatePage = () => {
                   </label>
                 </div>
                 <br />
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="form-control-sm text-center m-0 p-1">
                     Изображение:
                     <input
@@ -188,7 +188,7 @@ export const VacancyCreatePage = () => {
                   </label>
                 </div>
                 <br />
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="form-control-sm text-center m-0 p-1">
                     Образование:
                     <select
@@ -247,7 +247,7 @@ export const VacancyCreatePage = () => {
                   </label>
                 </div>
                 <br />
-                <div className="">
+                <div className="m-0 p-0">
                   <label className="w-75 form-control-sm m-0 p-1">
                     Описание:
                     <textarea

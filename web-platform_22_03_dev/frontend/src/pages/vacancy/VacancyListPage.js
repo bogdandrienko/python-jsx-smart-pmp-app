@@ -64,7 +64,7 @@ export const VacancyListPage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -96,7 +96,7 @@ export const VacancyListPage = () => {
         <div className="container-fluid form-control bg-opacity-10 bg-success">
           <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
             <form autoComplete="on" className="" onSubmit={handlerSubmit}>
-              <div className="">
+              <div className="m-0 p-0">
                 <label className="lead">
                   Выберите нужные настройки фильтрации и сортировки, затем
                   нажмите кнопку{" "}
@@ -113,7 +113,7 @@ export const VacancyListPage = () => {
                   />
                 </label>
               </div>
-              <div className="">
+              <div className="m-0 p-0">
                 <label className="form-control-sm text-center m-0 p-1">
                   Сфера:
                   <select

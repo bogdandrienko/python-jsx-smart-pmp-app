@@ -33,7 +33,7 @@ export const SalaryPage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
@@ -179,14 +179,14 @@ export const SalaryPage = () => {
               </ul>
               <components.AccordionComponent
                 key_target={"accordion1"}
-                isCollapse={true}
+                isCollapse={false}
                 title={"Подробная информация : "}
                 text_style="text-primary"
                 header_style="bg-primary bg-opacity-10 custom-background-transparent-low"
                 body_style="bg-light bg-opacity-10 custom-background-transparent-low"
               >
                 {
-                  <div>
+                  <div className="m-0 p-0">
                     <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center m-0 p-3">
                       <li className="m-0 p-1 my-1">
                         <h6 className="lead fw-bold bold m-0 p-0 mb-1">

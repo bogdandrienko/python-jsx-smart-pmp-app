@@ -22,7 +22,9 @@ export const HeaderComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
-  const { title, description, logic, redirect } = utils.GetInfoPage(location);
+  const { title, description, logic, redirect } = utils.GetInfoPage(
+    location.pathname
+  );
   const [firstRefreshUserDetails, firstRefreshUserDetailsSet] = useState(true);
   const [firstRefreshNotification, firstRefreshNotificationSet] =
     useState(true);
@@ -64,7 +66,10 @@ export const HeaderComponent = () => {
         firstRefreshUserDetailsSet(false);
         dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
       }
-      if (!utils.CheckPageAccess(userDetailsStore, location) && redirect) {
+      if (
+        !utils.CheckPageAccess(userDetailsStore, location.pathname) &&
+        redirect
+      ) {
         navigate("/");
       }
     }
@@ -73,7 +78,7 @@ export const HeaderComponent = () => {
     dispatch,
     firstRefreshUserDetails,
     logic,
-    location,
+    location.pathname,
     redirect,
     navigate,
   ]);
@@ -81,19 +86,23 @@ export const HeaderComponent = () => {
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
-        utils.Sleep(10).then(() => {
-          dispatch(actions.userLogoutAction());
-          navigate("/login");
+        utils.Sleep(50).then(() => {
+          if (
+            dataUserLogin == null &&
+            location.pathname !== "/login" &&
+            redirect
+          ) {
+            dispatch(actions.userLogoutAction());
+            navigate("/login");
+          }
         });
       } else {
         if (dataUserDetails && dataUserDetails["user_model"]) {
           if (
             dataUserDetails["user_model"]["activity_boolean_field"] === false
           ) {
-            utils.Sleep(10).then(() => {
-              dispatch(actions.userLogoutAction());
-              navigate("/login");
-            });
+            dispatch(actions.userLogoutAction());
+            navigate("/login");
           }
           if (
             !dataUserDetails["user_model"]["secret_question_char_field"] ||
@@ -104,15 +113,7 @@ export const HeaderComponent = () => {
         }
       }
     }
-  }, [
-    logic,
-    dataUserLogin,
-    location,
-    redirect,
-    dispatch,
-    navigate,
-    dataUserDetails,
-  ]);
+  }, [logic, location.pathname, redirect, dispatch, navigate]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
     if (!dataNotificationList) {
@@ -510,11 +511,11 @@ export const ModulesComponent = () => {
                                   className="card-body text-end m-0 p-0"
                                 >
                                   <div className="card">
-                                    <li className="list-group-item list-group-item-action active disabled d-flex m-0 p-1">
-                                      <div className="">
+                                    <li className="list-group-item list-group-item-action active disabled bg-primary bg-opacity-75 d-flex m-0 p-1">
+                                      <div className="m-0 p-0">
                                         <img
                                           src={section["Image"]}
-                                          className="img-fluid w-25 m-0 p-0"
+                                          className="img-fluid w-25 m-0 p-2"
                                           alt="id"
                                         />
                                       </div>
@@ -765,13 +766,11 @@ export const NewsComponent = ({ count = 100 }) => {
                   <i className="fa-solid fa-newspaper m-0 p-1" />
                   Лента
                 </strong>
-                <strong className="custom-color-warning-1 m-0 p-0">
-                  Свежие сверху
-                </strong>
+                <strong className="text-warning m-0 p-0">Свежие сверху</strong>
               </div>
               {count !== 100 && (
                 <div className="small m-0 p-0 mb-1">
-                  нажмите сюда для просмотра всех изменений
+                  (нажмите сюда для просмотра всех изменений)
                 </div>
               )}
             </div>
@@ -793,7 +792,7 @@ export const NewsComponent = ({ count = 100 }) => {
                   {news_elem.Link !== "#" && (
                     <small className="custom-color-primary-1 m-0 p-0">
                       {" "}
-                      (ссылка)
+                      (нажмите сюда для перехода)
                     </small>
                   )}
                 </strong>

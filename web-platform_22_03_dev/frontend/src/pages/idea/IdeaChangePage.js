@@ -158,7 +158,7 @@ export const IdeaChangePage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <div className="btn-group text-start w-100 m-0 p-0">

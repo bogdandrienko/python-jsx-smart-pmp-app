@@ -175,7 +175,7 @@ export const IdeaModerateChangePage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main className="container">
         <div className="btn-group m-0 p-1 text-start w-100">

@@ -150,7 +150,7 @@ export const IdeaDetailPage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -183,7 +183,7 @@ export const IdeaDetailPage = () => {
               }
             >
               <i className="fa-solid fa-skull-crossbones m-0 p-1" />
-              жалоба
+              жалоба на идею
             </button>
           )}
         </div>
@@ -399,7 +399,9 @@ export const IdeaDetailPage = () => {
                     </div>
                   )}
                   <span className="m-0 p-1">
-                    <div>Нажмите на одну из 10 звезд для оценки идеи:</div>
+                    <div className="m-0 p-0">
+                      Нажмите на одну из 10 звезд для оценки идеи:
+                    </div>
                     <i
                       style={{
                         color:
@@ -701,7 +703,7 @@ export const IdeaDetailPage = () => {
                                     }
                                   >
                                     <i className="fa-solid fa-skull-crossbones m-0 p-1" />
-                                    жалоба
+                                    жалоба на комментарий
                                   </button>
                                 </span>
                               </div>

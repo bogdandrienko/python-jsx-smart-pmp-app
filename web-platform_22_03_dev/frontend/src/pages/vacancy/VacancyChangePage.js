@@ -105,7 +105,7 @@ export const VacancyChangePage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <div className="btn-group p-1 m-0 text-start w-100">
@@ -137,10 +137,10 @@ export const VacancyChangePage = () => {
         <div className="container-fluid">
           <ul className="row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center  ">
             <form autoComplete="on" className="" onSubmit={handlerSubmit}>
-              <div className="">
+              <div className="m-0 p-0">
                 <h6 className="lead">Редактировать вакансию</h6>
               </div>
-              <div className="">
+              <div className="m-0 p-0">
                 <label className="w-50 form-control-sm m-0 p-1">
                   Квалификация:
                   <input
@@ -214,7 +214,7 @@ export const VacancyChangePage = () => {
                 </label>
               </div>
               <br />
-              <div className="">
+              <div className="m-0 p-0">
                 <label className="form-control-sm text-center m-0 p-1">
                   Текущее изображение:
                   <img src={""} className="img-fluid w-25" alt="изображение" />
@@ -231,7 +231,7 @@ export const VacancyChangePage = () => {
                   />
                 </label>
               </div>
-              <div className="">
+              <div className="m-0 p-0">
                 <label className="form-control-sm text-center m-0 p-1">
                   Изображение:
                   <input
@@ -260,7 +260,7 @@ export const VacancyChangePage = () => {
                 </label>
               </div>
               <br />
-              <div className="">
+              <div className="m-0 p-0">
                 <label className="form-control-sm text-center m-0 p-1">
                   Образование:
                   <select
@@ -317,7 +317,7 @@ export const VacancyChangePage = () => {
                 </label>
               </div>
               <br />
-              <div className="">
+              <div className="m-0 p-0">
                 <label className="w-75 form-control-sm m-0 p-1">
                   Описание:
                   <textarea

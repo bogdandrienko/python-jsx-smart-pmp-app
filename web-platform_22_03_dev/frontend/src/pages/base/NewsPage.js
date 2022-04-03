@@ -6,7 +6,7 @@ import * as components from "../../js/components";
 export const NewsPage = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <components.NewsComponent count={100} />

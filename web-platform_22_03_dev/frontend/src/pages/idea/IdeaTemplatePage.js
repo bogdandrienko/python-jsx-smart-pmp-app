@@ -9,7 +9,7 @@ import * as utils from "../../js/utils";
 export const IdeaTemplatePage = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent
         logic={true}
         redirect={true}

@@ -587,7 +587,7 @@ class DjangoClass:
                                 password += random.choice(
                                     "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
                                 )
-                            password = "temp" + password
+                            password = "temp_" + password
                             user = User.objects.create(
                                 username=worker.username_,
                                 password=make_password(password=password),

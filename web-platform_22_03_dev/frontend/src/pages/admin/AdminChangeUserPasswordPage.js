@@ -12,7 +12,6 @@ export const AdminChangeUserPasswordPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
-  const [captcha, captchaSet] = useState("");
   const [username, usernameSet] = useState("");
   const [success, successSet] = useState(false);
   const [password, passwordSet] = useState("");
@@ -50,13 +49,11 @@ export const AdminChangeUserPasswordPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    if (captcha !== "") {
-      const form = {
-        "Action-type": "CHECK_USER",
-        username: username,
-      };
-      dispatch(actions.adminChangeUserPasswordAction(form));
-    }
+    const form = {
+      "Action-type": "CHECK_USER",
+      username: username,
+    };
+    dispatch(actions.adminChangeUserPasswordAction(form));
   };
   //////////////////////////////////////////////////////////
   const handlerChangeUserPasswordSubmit = (e) => {
@@ -83,7 +80,7 @@ export const AdminChangeUserPasswordPage = () => {
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
+    <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
@@ -103,20 +100,8 @@ export const AdminChangeUserPasswordPage = () => {
           <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
             <form className="m-0 p-0" onSubmit={handlerCheckUserSubmit}>
               <div className="card shadow custom-background-transparent-low m-0 p-0">
-                {!captcha && (
-                  <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
-                    <i className="fa-solid fa-robot m-0 p-1" />
-                    Пройдите проверку на робота!
-                  </div>
-                )}
                 <div className="card-body m-0 p-0">
                   <div className="m-0 p-1">
-                    <label className="m-0 p-1">
-                      <ReCAPTCHA
-                        sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                        onChange={(e) => captchaSet(e)}
-                      />
-                    </label>
                     <label className="form-control-sm text-center w-75 m-0 p-1">
                       Введите ИИН пользователя для смены пароля:
                       <input

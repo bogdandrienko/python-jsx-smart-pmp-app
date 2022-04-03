@@ -39,7 +39,7 @@ export const CheckAccess = (userDetailsStore, slug) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const CheckPageAccess = (userDetailsStore, location) => {
+export const CheckPageAccess = (userDetailsStore, path) => {
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
@@ -50,24 +50,31 @@ export const CheckPageAccess = (userDetailsStore, location) => {
   constants.modules.forEach(function (module, index, array) {
     module.Sections.forEach(function (section, index, array) {
       section.Links.forEach(function (link, index, array) {
-        if (link.Link.split("/")[1] === location.pathname.split("/")[1]) {
+        if (link.Link.split("/")[1] === path.split("/")[1]) {
           if (typeof link.Access === "string") {
             if (link.Access === "all") {
               access = true;
+              return true;
             }
             if (dataUserDetails && dataUserDetails["group_model"]) {
-              if (dataUserDetails["group_model"].includes(link.Access)) {
+              if (
+                dataUserDetails["group_model"].includes("superuser") ||
+                dataUserDetails["group_model"].includes(link.Access)
+              ) {
                 access = true;
+                return true;
               }
             }
           } else {
+            if (link.Access.includes("all")) {
+              access = true;
+              return true;
+            }
             if (dataUserDetails && dataUserDetails["group_model"]) {
               link.Access.forEach(function (object, index, array) {
-                if (
-                  dataUserDetails["group_model"].includes(object) ||
-                  object === "all"
-                ) {
+                if (dataUserDetails["group_model"].includes(object)) {
                   access = true;
+                  return true;
                 }
               });
             }
@@ -165,7 +172,7 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const GetInfoPage = (location) => {
+export const GetInfoPage = (path) => {
   let title = "Домашняя страница";
   let description = "основная страница веб платформы";
   let logic = true;
@@ -173,7 +180,7 @@ export const GetInfoPage = (location) => {
   constants.modules.forEach(function (module, index, array) {
     module.Sections.forEach(function (section, index, array) {
       section.Links.forEach(function (link, index, array) {
-        if (link.Link.split("/")[1] === location.pathname.split("/")[1]) {
+        if (link.Link.split("/")[1] === path.split("/")[1]) {
           title = link.Title;
           description = link.Description;
           logic = link.Logic;
