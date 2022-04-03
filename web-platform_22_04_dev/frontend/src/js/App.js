@@ -13,6 +13,7 @@ import { VacancyChangePage } from "../pages/0_develop/VacancyChangePage";
 import { VacancyCreatePage } from "../pages/0_develop/VacancyCreatePage";
 import { VacancyDetailPage } from "../pages/0_develop/VacancyDetailPage";
 import { VacancyListPage } from "../pages/0_develop/VacancyListPage";
+import { TestPage } from "../pages/0_develop/TestPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { AdminChangeUserActivityPage } from "../pages/0_moderator/AdminChangeUserActivityPage";
 import { AdminChangeUserPasswordPage } from "../pages/0_moderator/AdminChangeUserPasswordPage";
@@ -61,6 +62,7 @@ export const App = () => {
         <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />
         <Route path="/vacancy_create" element={<VacancyCreatePage />} />
         <Route path="/vacancy_change/:id" element={<VacancyChangePage />} />
+        <Route path="/test" element={<TestPage />} />
 
         <Route
           path="/admin_change_user_password"

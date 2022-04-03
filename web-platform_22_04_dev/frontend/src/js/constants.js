@@ -1,5 +1,5 @@
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 // TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -355,6 +355,21 @@ export const modules = [
             Redirect: false,
             Style: "text-secondary",
             LinkIcon: "fa-solid fa-circle-info m-0 p-1",
+          },
+          {
+            Header: "Test",
+            Access: ["superuser"],
+            Active: true,
+            Link: "/test",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Test",
+            Description:
+              "test",
+            Logic: true,
+            Redirect: true,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
         ],
       },
