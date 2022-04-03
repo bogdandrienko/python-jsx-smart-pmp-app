@@ -334,14 +334,13 @@ export const modules = [
   {
     Header: "Разработка",
     Access: ["superuser"],
-    Image: "/static/img/earth.png",
+    Image: "/static/img/modules/earth.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "web version",
         Access: ["superuser"],
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+        Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "03.04.22 12:00",
@@ -362,8 +361,7 @@ export const modules = [
       {
         Header: "Отдел кадров",
         Access: ["superuser"],
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/component_vacansies.png",
+        Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "Список свободных вакансий",
@@ -473,13 +471,13 @@ export const modules = [
   {
     Header: "Модератор",
     Access: ["moderator"],
-    Image: "/static/img/earth.png",
+    Image: "/static/img/modules/earth.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "Основной функционал",
         Access: ["moderator"],
-        Image: "/static/img/earth.png",
+        Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "Панель Администрирования",
@@ -542,7 +540,7 @@ export const modules = [
       {
         Header: "Аккаунты",
         Access: ["moderator"],
-        Image: "/static/img/earth.png",
+        Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "Сброс пароля пользователя",
@@ -607,7 +605,7 @@ export const modules = [
       {
         Header: "Терминалы скуд",
         Access: ["moderator"],
-        Image: "/static/img/earth.png",
+        Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "Перезагрузка терминалов",
@@ -636,8 +634,7 @@ export const modules = [
       {
         Header: "Личный профиль",
         Access: ["user"],
-        Image:
-          "/static/img/modules/1_module_profile/section_self_profile/section_self_profile.png",
+        Image: "/static/img/modules/1_module_profile/section_self_profile.png",
         Links: [
           {
             Header: "Уведомления",
@@ -731,13 +728,13 @@ export const modules = [
   {
     Header: "Общее",
     Access: ["all"],
-    Image: "/static/img/earth.png",
+    Image: "/static/img/modules/2_module_main/module_main.png",
     ShowInModules: true,
     Sections: [
       {
-        Header: "Основное",
+        Header: "Новости",
         Access: ["user"],
-        Image: "/static/img/modules/2_module_news/module_news.png",
+        Image: "/static/img/modules/2_module_main/section_news.png",
         Links: [
           {
             Header: "Домашняя страница",
@@ -773,8 +770,7 @@ export const modules = [
       {
         Header: "Обучение",
         Access: ["all"],
-        Image:
-          "/static/img/modules/2_module_news/section_study/section_study.png",
+        Image: "/static/img/modules/2_module_main/section_study.png",
         Links: [
           {
             Header: "Видео инструкции",
@@ -811,7 +807,7 @@ export const modules = [
       {
         Header: "Лучшие пользователи",
         Access: ["user"],
-        Image: "/static/img/modules/2_module_news/module_news.png",
+        Image: "/static/img/modules/2_module_main/section_ratings.png",
         Links: [
           {
             Header: "Зал славы",
@@ -840,8 +836,7 @@ export const modules = [
       {
         Header: "Рационализаторство",
         Access: ["user"],
-        Image:
-          "/static/img/modules/3_module_progress/2_section_rational/sectional_rational.png",
+        Image: "/static/img/modules/3_module_progress/sectional_rational.png",
         Links: [
           {
             Header: "Пример (шаблон) рационализаторского предложения",
@@ -906,8 +901,7 @@ export const modules = [
       {
         Header: "Банк идей",
         Access: ["user"],
-        Image:
-          "/static/img/modules/3_module_progress/1_section_idea/section_idea.png",
+        Image: "/static/img/modules/3_module_progress/section_idea.png",
         Links: [
           {
             Header: "Пример (шаблон) идеи",
@@ -1051,8 +1045,7 @@ export const modules = [
       {
         Header: "Сектор расчёта заработной платы",
         Access: ["user"],
-        Image:
-          "/static/img/modules/4_module_buhgalteria/1_section_zarplata/section_zarplata.png",
+        Image: "/static/img/modules/4_module_buhgalteria/section_zarplata.png",
         Links: [
           {
             Header: "Выгрузка расчётного листа",
@@ -1076,14 +1069,13 @@ export const modules = [
   {
     Header: "СУП",
     Access: ["user"],
-    Image: "/static/img/modules/5_module_human_resourse/module_hr.png",
+    Image: "/static/img/modules/5_module_sup/module_sup.png",
     ShowInModules: true,
     Sections: [
       {
         Header: "Отдел кадров",
         Access: ["user"],
-        Image:
-          "/static/img/modules/5_module_human_resourse/1_section_hr/section_hr.png",
+        Image: "/static/img/modules/5_module_sup/section_hr.png",
         Links: [
           {
             Header: "Выгрузка данных по отпуску",

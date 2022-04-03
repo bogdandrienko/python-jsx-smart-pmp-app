@@ -2,7 +2,7 @@ body{
     min-height: 100vh;
     margin: 0 !important;
     padding: 0 !important;
-    background-image: url("../../public/static/img/background_image.jpg");
+    background-image: url("../../public/static/img/global_background_image.jpg");
     background-attachment: fixed;
     background-size: cover;
     font-family: Zen Kaku Gothic Antique, sans-serif !important;

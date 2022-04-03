@@ -134,7 +134,7 @@ export const HeaderComponent = () => {
       <Navbar expand="lg" className="m-0 p-0">
         <Container>
           <a className="w-25 m-0 p-0" href="https://km.kz/">
-            <img src="/static/img/logo.png" className="w-25 m-0 p-0" alt="id" />
+            <img src="/static/img/logo.svg" className="w-25 m-0 p-0" alt="id" />
           </a>
           <a className="btn btn-outline-light navbar-brand m-0 p-2" href="/">
             <i className="fa-solid fa-earth-asia m-0 p-1" />
@@ -476,7 +476,7 @@ export const ModulesComponent = () => {
   } = notificationListStore;
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div className="m-0 p-0">
+    <div className="shadow text-center m-0 p-0">
       {constants.modules && (
         <div className="m-0 p-0">
           <h6 className="display-6 text-center card-header bg-light bg-opacity-100 m-0 p-1">
@@ -515,13 +515,13 @@ export const ModulesComponent = () => {
                                       <div className="m-0 p-0">
                                         <img
                                           src={section["Image"]}
-                                          className="img-fluid w-25 m-0 p-2"
+                                          className="img-fluid w-25 m-0 p-0"
                                           alt="id"
                                         />
                                       </div>
                                       <LinkContainer
                                         to="#"
-                                        className="disabled m-0 p-0"
+                                        className="disabled m-0 p-3"
                                       >
                                         <Nav.Link>
                                           <small className="fw-bold text-light m-0 p-0">

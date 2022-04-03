@@ -123,7 +123,7 @@ class DjangoClass:
                 string = ''
                 for val in text:
                     string = string + f', {val}'
-                with open('static/media/admin/logging/logging_response.txt', 'a') as log:
+                with open('static/media/admin/logging/logging_responses.txt', 'a') as log:
                     log.write(f'\n{string[2:]}\n')
 
     class TemplateClass:
