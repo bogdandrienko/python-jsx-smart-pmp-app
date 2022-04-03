@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.82add6f8.css",
-    "main.js": "/static/js/main.41dfc058.js",
+    "main.css": "/static/css/main.084c61fb.css",
+    "main.js": "/static/js/main.c6eb6e35.js",
     "static/media/ZenKakuGothicAntique-Medium.ttf": "/static/media/ZenKakuGothicAntique-Medium.0f514c8bdb538f2ec950.ttf",
     "static/media/ZenKakuGothicAntique-Medium.woff": "/static/media/ZenKakuGothicAntique-Medium.f615986dbd2ec1702fee.woff",
     "static/media/ZenKakuGothicAntique-Medium.woff2": "/static/media/ZenKakuGothicAntique-Medium.e6e3406424a97ff0e2f3.woff2",
@@ -15,11 +15,11 @@
     "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.52eba2c567c521b8d58a.ttf",
     "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.3d503f89ccaf1b224aa5.woff2",
     "index.html": "/index.html",
-    "main.82add6f8.css.map": "/static/css/main.82add6f8.css.map",
-    "main.41dfc058.js.map": "/static/js/main.41dfc058.js.map"
+    "main.084c61fb.css.map": "/static/css/main.084c61fb.css.map",
+    "main.c6eb6e35.js.map": "/static/js/main.c6eb6e35.js.map"
   },
   "entrypoints": [
-    "static/css/main.82add6f8.css",
-    "static/js/main.41dfc058.js"
+    "static/css/main.084c61fb.css",
+    "static/js/main.c6eb6e35.js"
   ]
 }

@@ -1,5 +1,5 @@
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 // TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -323,7 +323,7 @@ export const news = [
   {
     Title: "Расчётный лист:",
     Status: "active",
-    Link: "/4_buhgalteria",
+    Link: "/salary",
     Description: "выгрузка Вашего расчётного листа за выбранный период",
     Helps: "",
     Danger: "'контрактникам' выгрузка недоступна!",
