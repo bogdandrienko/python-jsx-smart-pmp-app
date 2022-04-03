@@ -1207,7 +1207,7 @@ def api_auth_salary(request):
                             _length=24
                         )
                         date = backend_service.DateTimeUtils.get_current_date()
-                        path = 'media/data/temp/4_buhgalteria'
+                        path = 'media/data/temp/salary'
                         file_name = f"salary_{key}_{date}.xlsx"
                         workbook = backend_service.ExcelClass.workbook_create()
                         sheet = backend_service.ExcelClass.workbook_activate(workbook)
