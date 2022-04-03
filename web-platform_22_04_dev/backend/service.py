@@ -912,18 +912,10 @@ class ExcelClass:
         try:
             os.remove(excel_file)
         except Exception as error:
-            DjangoClass.LoggingClass.error_local(
-                error=error,
-                function_error="ExcelClass.workbook_save"
-            )
             pass
         try:
             workbook.save(excel_file)
         except Exception as error:
-            DjangoClass.LoggingClass.error_local(
-                error=error,
-                function_error="ExcelClass.workbook_save"
-            )
             print(f'\n ! Please, close the excel_file! \n: {excel_file} | {error}')
 
     @staticmethod
