@@ -1,0 +1,62 @@
+{
+  "name": "web-platform",
+  "proxy": "http://127.0.0.1:8000",
+  "version": "0.1.0",
+  "description": "web-platform with Django and React",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.25.0",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.1.1",
+    "react-dom": "^17.0.2",
+    "react-google-recaptcha": "^2.1.0",
+    "react-player": "^2.9.0",
+    "react-redux": "^7.2.6",
+    "react-router-bootstrap": "^0.26.0",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "web-vitals": "^2.1.4"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ]
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build_move": "react-scripts build && move build ../static",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "cover 99.5%",
+      "last 10 version",
+      "last 5 years",
+      "> 0.1%",
+      "not dead"
+    ],
+    "development": [
+      "cover 99.5%",
+      "last 10 version",
+      "last 5 years",
+      "> 0.1%",
+      "not dead"
+    ]
+  }
+}
