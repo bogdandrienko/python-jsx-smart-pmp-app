@@ -5,13 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
+import { GetCurrentDay } from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const SalaryPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
-  const [month, monthSet] = useState("3");
-  const [year, yearSet] = useState("2022");
+  const [month, monthSet] = useState(
+    utils.GetCurrentDay(false) < 10
+      ? utils.GetCurrentMonth(false, -2)
+      : utils.GetCurrentMonth(false, -1)
+  );
+  const [year, yearSet] = useState(utils.GetCurrentYear(0));
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
   const salaryUserStore = useSelector((state) => state.salaryUserStore);
   const {
@@ -100,6 +106,9 @@ export const SalaryPage = () => {
                       </option>
                       <option className="m-0 p-0" value="2022">
                         2022
+                      </option>
+                      <option className="m-0 p-0" value="2023">
+                        2023
                       </option>
                     </select>
                     {!loadSalaryUser && (

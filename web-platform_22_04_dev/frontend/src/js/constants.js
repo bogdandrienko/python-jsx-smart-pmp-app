@@ -1,5 +1,5 @@
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = false;
+export const DEBUG_CONSTANT = true;
 // TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -364,8 +364,7 @@ export const modules = [
             ExternalLink: false,
             ShowLink: true,
             Title: "Test",
-            Description:
-              "test",
+            Description: "test",
             Logic: true,
             Redirect: true,
             Style: "text-dark",

@@ -15,7 +15,7 @@ export const userLoginAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
     });
     const { data } = await axios(config);
@@ -59,7 +59,7 @@ export const userDetailsAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -95,7 +95,7 @@ export const userChangeAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -129,7 +129,7 @@ export const userRecoverPasswordAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
     });
     const { data } = await axios(config);
@@ -161,7 +161,7 @@ export const UserListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -196,7 +196,7 @@ export const notificationCreateAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/user/",
         method: "POST",
-        timeout: 10000,
+        timeout: 20000,
         form: form,
         getState: getState,
       });
@@ -230,7 +230,7 @@ export const notificationDeleteAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/user/",
         method: "POST",
-        timeout: 10000,
+        timeout: 20000,
         form: form,
         getState: getState,
       });
@@ -263,7 +263,7 @@ export const notificationListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/user/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -298,7 +298,7 @@ export const adminChangeUserPasswordAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/admin/",
         method: "POST",
-        timeout: 10000,
+        timeout: 20000,
         form: form,
         getState: getState,
       });
@@ -365,7 +365,7 @@ export const adminExportUsersAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/admin/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -399,7 +399,7 @@ export const adminChangeUserActivityAction =
       const { config } = utils.ActionsAxiosUtility({
         url: "/api/auth/admin/",
         method: "POST",
-        timeout: 10000,
+        timeout: 20000,
         form: form,
         getState: getState,
       });
@@ -433,7 +433,7 @@ export const terminalRebootAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/admin/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -467,7 +467,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/salary/",
       method: "POST",
-      timeout: 20000,
+      timeout: 30000,
       form: form,
       getState: getState,
     });
@@ -520,7 +520,7 @@ export const vacationUserAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/vacation/",
       method: "POST",
-      timeout: 15000,
+      timeout: 25000,
       form: form,
       getState: getState,
     });
@@ -554,7 +554,7 @@ export const ideaCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -587,7 +587,7 @@ export const ideaListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -620,7 +620,7 @@ export const ideaDetailAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -653,7 +653,7 @@ export const ideaChangeAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -686,7 +686,7 @@ export const ideaModerateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -719,7 +719,7 @@ export const ideaCommentCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -752,7 +752,7 @@ export const ideaCommentDeleteAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -785,7 +785,7 @@ export const ideaRatingCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -818,7 +818,7 @@ export const ideaAuthorListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/idea/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -852,7 +852,7 @@ export const rationalCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -885,7 +885,7 @@ export const rationalListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -918,7 +918,7 @@ export const rationalDetailAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -952,7 +952,7 @@ export const vacancyCreateAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/rational/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -985,7 +985,7 @@ export const vacancyListAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
     });
     const { data } = await axios(config);
@@ -1017,7 +1017,7 @@ export const vacancyDetailAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
     });
     const { data } = await axios(config);
@@ -1049,7 +1049,7 @@ export const vacancyDeleteAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -1082,7 +1082,7 @@ export const vacancyChangeAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/vacancy/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -1116,7 +1116,7 @@ export const resumeCreateAction = (form) => async (dispatch) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/any/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
     });
     const { data } = await axios(config);
@@ -1148,7 +1148,7 @@ export const resumeListAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -1181,7 +1181,7 @@ export const resumeDetailAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });
@@ -1214,7 +1214,7 @@ export const resumeDeleteAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/resume/",
       method: "POST",
-      timeout: 10000,
+      timeout: 20000,
       form: form,
       getState: getState,
     });

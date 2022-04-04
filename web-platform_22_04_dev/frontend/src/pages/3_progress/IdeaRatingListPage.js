@@ -348,7 +348,15 @@ export const IdeaRatingListPage = () => {
                             Рейтинг
                           </span>
                           <div className="m-0 p-1">
-                            <span className="btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2">
+                            <span
+                              className={
+                                idea["ratings"]["rate"] > 7
+                                  ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
+                                  : idea["ratings"]["rate"] > 4
+                                  ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
+                                  : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
+                              }
+                            >
                               {`${idea["ratings"]["rate"]}  / ${idea["ratings"]["count"]}`}
                             </span>
                           </div>

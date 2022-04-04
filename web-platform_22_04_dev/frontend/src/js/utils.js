@@ -385,3 +385,62 @@ export const GetCurrentDate = (withTime = true, yearAppend = 0) => {
     return null;
   }
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GetCurrentYear = (yearAppend = 0) => {
+  try {
+    const today = new Date();
+    let year = today.getFullYear() + yearAppend;
+    return `${year}`;
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GetCurrentMonth = (withZero = false, yearMonth = 0) => {
+  try {
+    const today = new Date();
+    let month = today.getMonth() + 1 + yearMonth;
+    if (month > 12) {
+      month = month - 12;
+    }
+    if (month < 0) {
+      month = month + 12;
+    }
+    if (withZero) {
+      if (month < 10) {
+        month = `0${month}`;
+      }
+      return `${month}`;
+    } else {
+      return `${month}`;
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GetCurrentDay = (withZero = false) => {
+  try {
+    const today = new Date();
+    let day = today.getDay();
+    if (withZero) {
+      if (day < 10) {
+        day = `0${day}`;
+      }
+      return `${day}`;
+    } else {
+      return `${day}`;
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};

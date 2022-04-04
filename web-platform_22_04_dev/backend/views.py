@@ -1133,13 +1133,57 @@ def api_auth_salary(request):
                         # with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
                         #     data = json.load(file)
                         #     time.sleep(3)
-
                         json_data = json.loads(data)
 
+                        try:
+                            json_data["global_objects"]["1.Начислено"]
+                        except Exception as error:
+                            json_data["global_objects"]["1.Начислено"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Дни",
+                                    "4": "Период",
+                                    "5": "Часы",
+                                    "6": "ВсегоДни",
+                                    "7": "ВсегоЧасы",
+                                    "8": "Сумма"
+                                },
+                            }
+                        try:
+                            json_data["global_objects"]["2.Удержано"]
+                        except Exception as error:
+                            json_data["global_objects"]["2.Удержано"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Сумма"
+                                },
+                            }
                         try:
                             json_data["global_objects"]["3.Доходы в натуральной форме"]
                         except Exception as error:
                             json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Сумма"
+                                },
+                            }
+                        try:
+                            json_data["global_objects"]["4.Выплачено"]
+                        except Exception as error:
+                            json_data["global_objects"]["4.Выплачено"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Сумма"
+                                },
+                            }
+                        try:
+                            json_data["global_objects"]["5.Налоговые вычеты"]
+                        except Exception as error:
+                            json_data["global_objects"]["5.Налоговые вычеты"] = {
                                 "Fields": {
                                     "1": "Вид",
                                     "2": "Период",
@@ -1678,7 +1722,6 @@ def api_auth_vacation(request):
                     # TODO get_value ###################################################################################
                     date_time = req_inst.get_value("dateTime")
                     # TODO actions #####################################################################################
-                    # Get json response from 1c
                     key = backend_service.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=10
@@ -1692,8 +1735,6 @@ def api_auth_vacation(request):
                         iin = 970801351179
                     iin_base64 = base64.b64encode(str(iin).encode()).decode()
                     date_base64 = base64.b64encode(f'{date_time}'.encode()).decode()
-                    # url = f'http://192.168.1.158/Tanya_perenos/hs/pers/u_vacation/{iin_base64}_
-                    # {key_hash_base64}/{date_base64}'
                     url = f'http://192.168.1.10/KM_1C/hs/pers/u_vacation/{iin_base64}_{key_hash_base64}/{date_base64}'
                     h = httplib2.Http(
                         os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_vacation_data"
@@ -1704,9 +1745,6 @@ def api_auth_vacation(request):
                     response, content = h.request(url)
 
                     data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
-
-                    print("data: ", data)
-
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:
                         return Response({"error": f"{data.split('send')[1].strip()}"})
@@ -1760,18 +1798,11 @@ def api_auth_vacation(request):
                                     tables.append(tab)
                         except Exception as error:
                             pass
-                    print("headers: ", headers)
-                    print("tables: ", tables)
-
                     json_data = {
                         "headers": headers,
                         "tables": tables,
                     }
-
                     response = {"response": json_data}
-
-                    print("response: ", response)
-
                     # TODO response ###################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)

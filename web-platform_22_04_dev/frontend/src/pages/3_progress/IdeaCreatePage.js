@@ -6,6 +6,7 @@ import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
+import { Link } from "react-router-dom";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaCreatePage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +87,26 @@ export const IdeaCreatePage = () => {
     <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
+        <components.AccordionComponent
+          key_target={"accordion1"}
+          isCollapse={false}
+          title={"Регламент подачи:"}
+          text_style="custom-color-warning-1"
+          header_style="bg-warning bg-opacity-10 custom-background-transparent-low"
+          body_style="bg-light bg-opacity-10 custom-background-transparent-low"
+        >
+          {
+            <div className="text-center m-0 p-4">
+              <ol className="text-start m-0 p-0">
+                <li className="m-0 p-1">S</li>
+                <li className="m-0 p-1">M</li>
+                <li className="m-0 p-1">A</li>
+                <li className="m-0 p-1">R</li>
+                <li className="m-0 p-1">T</li>
+              </ol>
+            </div>
+          }
+        </components.AccordionComponent>
         <components.StoreStatusComponent
           storeStatus={ideaCreateStore}
           keyStatus={"ideaCreateStore"}

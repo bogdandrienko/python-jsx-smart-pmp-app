@@ -177,7 +177,7 @@ class DjangoClass:
                 except Exception as error:
                     self.method = "GET"
                 try:
-                    self.action_type = str(request.data["Action-type"]).upper()
+                    self.action_type = str(request.data.get("Action-type")).upper()
                 except Exception as error:
                     self.action_type = ""
                 try:
@@ -194,23 +194,23 @@ class DjangoClass:
                 except Exception as error:
                     self.data = None
                 try:
-                    self.body = request.data["body"]
+                    self.body = request.data.get("body")
                 except Exception as error:
                     self.body = None
 
             def get_value(self, key: str, except_error=False, strip=False):
                 try:
-                    if self.data[key] == "null":
+                    if self.data.get(key) == "null":
                         return None
-                    elif self.data[key] == "true":
+                    elif self.data.get(key) == "true":
                         return True
-                    elif self.data[key] == "false":
+                    elif self.data.get(key) == "false":
                         return False
                     else:
                         if strip:
-                            return str(self.data[key]).strip()
+                            return str(self.data.get(key)).strip()
                         else:
-                            return self.data[key]
+                            return self.data.get(key)
                 except Exception as error:
                     pass
 
@@ -351,7 +351,7 @@ class DjangoClass:
                         type_char_field="scheduler_personal",
                         char_field="Планировщик обновления персонала из 1С",
                         text_field="http://192.168.1.10/KM_1C/hs/iden/change/ | Web_adm_1c | 159159qqww!",
-                        integer_field=60,
+                        integer_field=360,
                         boolean_field=True
                     )
                 else:
