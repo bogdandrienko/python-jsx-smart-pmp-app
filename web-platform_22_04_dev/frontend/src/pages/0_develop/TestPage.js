@@ -11,7 +11,7 @@ export const TestPage = () => {
   let number = 5; // изменяемая переменная
   const number2 = 5; // не изменяемая переменная
 
-  // javascript:document.getElementsByClassName("video-stream html5-main-video")[0].playbackRate = 3.0;
+  // javascript:document.getElementsByClassName("video-stream html5-main-video")[0].playbackRate = 2.5;
 
   // alert(1)
 
